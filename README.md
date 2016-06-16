@@ -1,2 +1,1 @@
-# FFXI
-Gearswap luas
+Xelltrix sucks!
