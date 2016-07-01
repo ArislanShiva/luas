@@ -58,10 +58,8 @@ function user_setup()
 	gear.default.weaponskill_waist = gear.ElementalBelt
 
 	-- Additional local binds
-	send_command('bind ^` input /ja "Steal" <me>')
+	send_command('bind ^` gs c cycle treasuremode')
 	send_command('bind !` input /ja "Flee" <me>')
-	send_command('bind ^= gs c cycle treasuremode')
-	send_command('bind !- gs c cycle targetmode')
 	send_command('bind ^, input /ja "Spectral Jig" <me>')
 
 	select_default_macro_book()
@@ -71,8 +69,6 @@ end
 function user_unload()
 	send_command('unbind ^`')
 	send_command('unbind !`')
-	send_command('unbind ^=')
-	send_command('unbind !-')
 	send_command('unbind ^,')
 end
 
@@ -95,6 +91,7 @@ function init_gear_sets()
 		}
 
 	sets.buff['Sneak Attack'] = {
+		ammo="Expeditious Pinion",
 		head="Dampening Tam",
 		body="Adhemar Jacket", 
 		hands="Adhemar Wristbands",
@@ -109,6 +106,7 @@ function init_gear_sets()
 		}
 
 	sets.buff['Trick Attack'] = {
+		ammo="Expeditious Pinion",
 		head="Pillager's Bonnet +1",
 		body="Adhemar Jacket", 
 		hands="Pillager's Armlets +1",
@@ -154,12 +152,14 @@ function init_gear_sets()
 		}
 
 	sets.precast.JA['Steal'] = {
+		ammo="Barathrum",
 		head="Asn. Bonnet +2",
 		hands="Pillager's Armlets +1",
 		legs="Pillager's Culottes +1",
 		}
 
 	sets.precast.JA['Despoil'] = {
+		ammo="Barathrum",
 		legs="Raider's Culottes +1",
 		feet="Skulk. Poulaines +1",
 		}
@@ -227,7 +227,7 @@ function init_gear_sets()
 
 
 	sets.precast.WS['Exenterator'] = set_combine(sets.precast.WS, {
-		ammo="Ginsen",
+		ammo="Expeditious Pinion",
 		head="Adhemar Bonnet",
 		legs=gear.Herc_TA_legs,
 		feet=gear.Herc_TA_feet,
@@ -249,11 +249,12 @@ function init_gear_sets()
 		})
 
 	sets.precast.WS['Evisceration'] = set_combine(sets.precast.WS, {
-		ammo="Falcon Eye",
+		ammo="Expeditious Pinion",
 		head="Adhemar Bonnet",
 		})
 
 	sets.precast.WS['Evisceration'].Acc = set_combine(sets.precast.WS['Evisceration'], {
+		ammo="Falcon Eye",
 		head="Dampening Tam",
 		body=gear.Herc_TA_body,
 		hands=gear.Herc_TA_hands,
@@ -265,7 +266,9 @@ function init_gear_sets()
 		})
 
 	sets.precast.WS["Rudra's Storm"] = set_combine(sets.precast.WS, {
+		ammo="Expeditious Pinion",
 		neck="Caro Necklace",
+		waist="Grunfeld Rope",
 		})
 
 	sets.precast.WS["Rudra's Storm"].Acc = set_combine(sets.precast.WS["Rudra's Storm"], {
@@ -409,8 +412,8 @@ function init_gear_sets()
 		legs="Samnuha Tights",
 		feet=gear.Taeon_DW_feet,
 		neck="Charis Necklace",
-		ear1="Dudgeon Earring",
-		ear2="Heartseeker Earring",
+		ear1="Eabani Earring",
+		ear2="Suppanomimi",
 		ring1="Petrov Ring",
 		ring2="Epona's Ring",
 		back="Canny Cape",
@@ -427,7 +430,7 @@ function init_gear_sets()
 	sets.engaged.MidAcc = set_combine(sets.engaged.LowAcc, {
 		legs=gear.Herc_TA_legs,
 		ear1="Cessance Earring",
-		ear2="Zennaroi Earring",
+		ear2="Brutal Earring",
 		ring2="Ramuh Ring +1",
 		back="Ground. Mantle +1",
 		})
@@ -436,6 +439,7 @@ function init_gear_sets()
 		legs="Adhemar Kecks",
 		neck="Erudit. Necklace",
 		ear1="Digni. Earring",
+		ear2="Zennaroi Earring",
 		ring1="Ramuh Ring +1",
 		waist="Olseni Belt",
 		})
@@ -614,7 +618,6 @@ function get_custom_wsmode(spell, spellMap, defaut_wsmode)
 	return wsmode
 end
 
-
 -- Called any time we attempt to handle automatic gear equips (ie: engaged or idle gear).
 function job_handle_equipping_gear(playerStatus, eventArgs)
 	-- Check that ranged slot is locked, if necessary
@@ -673,14 +676,6 @@ function display_current_job_state(eventArgs)
 	
 	if state.Kiting.value == true then
 		msg = msg .. ', Kiting'
-	end
-
-	if state.PCTargetMode.value ~= 'default' then
-		msg = msg .. ', Target PC: '..state.PCTargetMode.value
-	end
-
-	if state.SelectNPCTargets.value == true then
-		msg = msg .. ', Target NPCs'
 	end
 	
 	msg = msg .. ', TH: ' .. state.TreasureMode.value

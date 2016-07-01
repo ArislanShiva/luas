@@ -62,9 +62,11 @@ function init_gear_sets()
 
 	sets.precast.FC = {
 	--	/SCH --10
+		main="Sucellus", --5
+		sub="Genmei Shield",
 		ammo="Sapience Orb", --2
 		head="Vanya Hood", --10
-		body="Shango Robe", --8
+		body="Inyanga Jubbah +1", --13
 		hands="Gende. Gages +1", --7
 		legs="Artsieq Hose", --5
 		feet="Regal Pumps +1", --7
@@ -73,7 +75,7 @@ function init_gear_sets()
 		ear2="Loquacious Earring", --2
 		ring1="Prolix Ring", --2
 		ring2="Weather. Ring", --5
-		back="Swith Cape +1", --3
+		back="Alaunus's Cape", --10
 		waist="Witful Belt", --3/(2)
 		}
 		
@@ -86,24 +88,20 @@ function init_gear_sets()
 	sets.precast.FC['Healing Magic'] = set_combine(sets.precast.FC, {
 		main="Vadose Rod",
 		sub="Sors Shield",
-		ammo="Impatiens",
 		legs="Ebers Pant. +1",
 		})
 
 	sets.precast.FC.StatusRemoval = sets.precast.FC['Healing Magic']
 
 	sets.precast.FC.Cure = set_combine(sets.precast.FC['Healing Magic'], {
-		ammo="Impatiens", --(2)
 		main="Vadose Rod", --5
 		sub="Sors Shield", --5
-		ammo="Impatiens", --(2)
 		head="Piety Cap +1", --13
 		legs="Ebers Pant. +1", --13
 		feet="Vanya Clogs", --15
 		ear1="Nourish. Earring +1", --4
 		ear2="Mendi. Earring", --5
 		ring1="Lebeche Ring", --(2)
-		back="Pahtli Cape", --8
 		})
 
 	sets.precast.FC.Curaga = sets.precast.FC.Cure
@@ -131,7 +129,7 @@ function init_gear_sets()
 		ear1="Moonshade Earring",
 		ear2="Ishvara Earring",
 		ring1="Ramuh Ring +1",
-		ring2="Rufescent Ring",
+		ring2="Ramuh Ring +1",
 		waist=gear.ElementalBelt,
 		}	
 
@@ -139,7 +137,7 @@ function init_gear_sets()
 	
 	sets.midcast.FC = {
 		head="Piety Cap +1",
-		body="Ebers Bliaud +1",
+		body="Inyanga Jubbah +1",
 		hands="Fanatic Gloves",
 		legs="Ebers Pant. +1",
 		feet="Vanya Clogs",
@@ -153,26 +151,31 @@ function init_gear_sets()
 	-- Cure sets
 
 	sets.midcast.CureSolace = {
-		main="Queller Rod", --10(+2)/(-10)
+		main="Queller Rod", --15(+2)/(-15)
 		sub="Sors Shield", --3/(-5)
 		ammo="Leisure Musk +1", --0/(-4)
-		head="Gende. Caubeen +1", --14/(-8)
+		head="Gende. Caubeen +1", --15/(-8)
 		body="Ebers Bliaud +1",
-		hands="Telchine Gloves", --10
+		hands="Theo. Mitts +1", --0/(-5)
 		legs="Ebers Pant. +1",
-		feet="Vanya Clogs", --10
+		feet="Kaykaus Boots", --10/(-10)
 		neck="Incanter's Torque",
 		ear1="Nourish. Earring +1", --7
 		ear2="Glorious Earring", -- (+2)/(-5)
 		ring1="Lebeche Ring", --3/(-5)
 		ring2="Haoma's Ring",
-		back="Mending Cape", --4/(-6)
+		back="Alaunus's Cape",
 		waist="Bishop's Sash",
 		}
 
 	sets.midcast.Cure = sets.midcast.CureSolace
 
-	sets.midcast.Curaga = set_combine(sets.midcast.CureSolace, {
+	sets.midcast.CureWeather = set_combine(sets.midcast.Cure, {
+		main="Chatoyant Staff",
+		waist=gear.ElementalObi,
+		})
+
+	sets.midcast.Curaga = set_combine(sets.midcast.Cure, {
 		ring1="Levia. Ring +1",
 		ring2="Levia. Ring +1",
 		waist="Luminary Sash",
@@ -229,6 +232,20 @@ function init_gear_sets()
 		waist="Olympus Sash",
 		}
 
+	sets.midcast.Regen = set_combine(sets.midcast['Enhancing Magic'], {
+		main="Bolelabunga",
+		sub="Genmei Shield",
+		head="Inyanga Tiara +1",
+		body="Piety Briault +1",
+		hands="Ebers Mitts +1",
+		legs="Theo. Pant. +1",
+		})
+	
+	sets.midcast.Refresh = set_combine(sets.midcast['Enhancing Magic'], {
+		waist="Gishdubar Sash",
+		back="Grapevine Cape",
+		})
+
 	sets.midcast.Stoneskin = set_combine(sets.midcast['Enhancing Magic'], {
 		neck="Nodens Gorget",
 		waist="Siegel Sash",
@@ -254,16 +271,6 @@ function init_gear_sets()
 		feet="Ebers Duckbills +1"
 		})
 
-	sets.midcast.Regen = set_combine(sets.midcast['Enhancing Magic'], {
-		main="Bolelabunga",
-		sub="Genmei Shield",
-		head="Inyanga Tiara +1",
-		body="Piety Briault +1",
-		hands="Ebers Mitts +1",
-		legs="Theo. Pant. +1",
-		})
-
-
 	sets.midcast.Protectra = set_combine(sets.midcast['Enhancing Magic'], {
 		ring1="Sheltered Ring",
 		})
@@ -272,10 +279,10 @@ function init_gear_sets()
 
 
 	sets.midcast['Divine Magic'] = {
-		main="Lehbrailg +2",
+		main="Grioavolr",
 		sub="Mephitis Grip",
 		ammo="Pemphredo Tathlum",
-		body="Witching Robe",
+		body="Vanya Robe",
 		hands="Fanatic Gloves",
 		feet="Medium's Sabots",
 		neck="Incanter's Torque",
@@ -288,7 +295,7 @@ function init_gear_sets()
 		}
 
 	sets.midcast['Dark Magic'] = {
-		main="Lehbrailg +2",
+		main="Grioavolr",
 		sub="Mephitis Grip",
 		ammo="Pemphredo Tathlum",
 		head="Telchine Cap",
@@ -307,11 +314,11 @@ function init_gear_sets()
 
 	-- Custom spell classes
 	sets.midcast.MndEnfeebles = {
-		main="Lehbrailg +2",
+		main="Grioavolr",
 		sub="Mephitis Grip",
 		ammo="Hydrocera",
 		head="Befouled Crown",
-		body="Vanya Robe",
+		body="Inyanga Jubbah +1",
 		hands="Inyan. Dastanas +1",
 		legs="Assid. Pants +1",
 		feet="Medium's Sabots",
@@ -320,16 +327,16 @@ function init_gear_sets()
 		ear2="Digni. Earring",
 		ring1="Globidonta Ring",
 		ring2="Levia. Ring +1",
-		back="Aurist's Cape +1",
+		back="Alaunus's Cape",
 		waist="Luminary Sash",
 		}
 
 	sets.midcast.IntEnfeebles = {
-		main="Lehbrailg +2",
+		main="Grioavolr",
 		sub="Mephitis Grip",
 		ammo="Pemphredo Tathlum",
 		head="Befouled Crown",
-		body="Shango Robe",
+		body="Inyanga Jubbah +1",
 		hands="Inyan. Dastanas +1",
 		legs="Assid. Pants +1",
 		feet="Medium's Sabots",
@@ -383,6 +390,7 @@ function init_gear_sets()
 		body="Vanya Robe",
 		hands="Gende. Gages +1",
 		legs="Artsieq Hose",
+		feet="Ebers Duckbills +1",
 		ear1="Genmei Earring",
 		neck="Loricate Torque +1",
 		ring1="Defending Ring",
@@ -392,8 +400,9 @@ function init_gear_sets()
 
 	sets.idle.MDT = set_combine(sets.idle, {
 		head="Inyanga Tiara +1",
-		body="Vanya Robe",
+		body="Inyanga Jubbah +1",
 		hands="Inyan. Dastanas +1",
+		feet="Ebers Duckbills +1",
 		neck="Loricate Torque +1",
 		ear1="Etiolation Earring",
 		ring1="Defending Ring",
@@ -426,6 +435,7 @@ function init_gear_sets()
 		body="Vanya Robe", --1
 		hands="Gende. Gages +1", --4
 		legs="Artsieq Hose", --5
+		feet="Ebers Duckbills +1",
 		neck="Loricate Torque +1", --6
 		ear1="Genmei Earring", --2
 		ring1="Defending Ring", --10
@@ -435,8 +445,9 @@ function init_gear_sets()
 
 	sets.defense.MDT = {
 		head="Inyanga Tiara +1", --4
-		body="Vanya Robe", --1
+		body="Inyanga Jubbah +1", --7
 		hands="Inyan. Dastanas +1", --3
+		feet="Ebers Duckbills +1",
 		neck="Loricate Torque +1", --6
 		ear1="Etiolation Earring", --3
 		ring1="Defending Ring", --10
@@ -507,7 +518,13 @@ function job_post_midcast(spell, action, spellMap, eventArgs)
 	-- Apply Divine Caress boosting items as highest priority over other gear, if applicable.
 	if spellMap == 'StatusRemoval' and buffactive['Divine Caress'] then
 		equip(sets.buff['Divine Caress'])
-	end
+	elseif default_spell_map == 'Cure' or default_spell_map == 'Curaga' then
+		if default_spell_map == 'Cure' or default_spell_map == 'Curaga' then
+			if world.weather_element == 'Light' then
+				return 'CureWeather'
+			end
+		end
+    end
 end
 
 -------------------------------------------------------------------------------------------------------------------

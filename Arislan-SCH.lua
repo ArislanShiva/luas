@@ -48,7 +48,7 @@ end
 
 -- Setup vars that are user-dependent.  Can override this function in a sidecar file.
 function user_setup()
-	state.OffenseMode:options('None', 'Normal', 'Refresh')
+	state.OffenseMode:options('None', 'Normal')
 	state.CastingMode:options('Normal', 'Seidr', 'Resistant')
 	state.IdleMode:options('Normal', 'PDT', 'MDT')
 	
@@ -57,7 +57,7 @@ function user_setup()
 
     gear.default.weaponskill_waist = "Windbuffet Belt +1"	
 	gear.default.obi_waist = "Yamabuki-no-Obi"
-	gear.default.obi_back = "Bookworm's Cape"
+	gear.default.obi_back = "Lugh's Cape"
 	gear.MPCoat = "Seidr Cotehardie"
 
 	-- Additional local binds
@@ -143,7 +143,6 @@ function init_gear_sets()
 	sets.precast.FC.Cure = set_combine(sets.precast.FC, {
 		main="Vadose Rod", --5
 		sub="Sors Shield", --5
-		ammo="Impatiens", --(3)
 		feet="Vanya Clogs", --15
 		ear1="Mendi. Earring", --5
 		ring1="Lebeche Ring", --(2)
@@ -222,11 +221,11 @@ function init_gear_sets()
 		main="Tamaxchi", --22/(-10)
 		sub="Sors Shield", --3/(-5)
 		ammo="Leisure Musk +1", --0/(-4)
-		head="Gende. Caubeen +1", --14/(-8)
+		head="Gende. Caubeen +1", --15/(-8)
 		body="Vanya Robe", --7/(-6)
 		hands="Telchine Gloves", --10
 		legs="Gyve Trousers", --10
-		feet="Medium's Sabots", --12
+		feet="Kaykaus Boots", --10/(-10)
 		neck="Incanter's Torque",
 		ear1="Mendi. Earring", --5
 		ear2="Loquac. Earring",
@@ -235,8 +234,8 @@ function init_gear_sets()
 		back="Oretan. Cape +1", --6
 		waist="Bishop's Sash",
 		}
-	
-	sets.midcast.CureWithLightWeather = set_combine(sets.midcast.Cure, {
+
+	sets.midcast.CureWeather = set_combine(sets.midcast.Cure, {
 		main="Chatoyant Staff",
 		})
 	
@@ -245,23 +244,6 @@ function init_gear_sets()
 		ring2="Levia. Ring +1",
 		waist="Luminary Sash",
 		})
-	
-	sets.midcast.Regen = {
-		main="Bolelabunga",
-		sub="Genmei Shield",
-		head="Arbatel Bonnet +1",
-		head="Telchine Cap",
-		body="Telchine Chas.",
-		hands="Telchine Gloves",
-		legs="Acad. Pants +1",
-		feet="Telchine Pigaches",
-		neck="Incanter's Torque",
-		ear2="Andoaa Earring",
-		ring1="Levia. Ring +1",
-		ring2="Levia. Ring +1",
-		back="Lugh's Cape",
-		waist="Olympus Sash",
-		}
 	
 	sets.midcast.StatusRemoval = {
 		main="Tamaxchi",
@@ -300,6 +282,19 @@ function init_gear_sets()
 		waist="Olympus Sash",
 		}
 	
+	sets.midcast.Regen = set_combine(sets.midcast['Enhancing Magic'], {
+		main="Bolelabunga",
+		sub="Genmei Shield",
+		head="Arbatel Bonnet +1",
+		body="Telchine Chas.",
+		back="Lugh's Cape",
+		})
+	
+	sets.midcast.Refresh = set_combine(sets.midcast['Enhancing Magic'], {
+		waist="Gishdubar Sash",
+		back="Grapevine Cape",
+		})
+		
 	sets.midcast.Stoneskin = set_combine(sets.midcast['Enhancing Magic'], {
 		legs="Acad. Pants +1",
 		neck="Nodens Gorget",
@@ -489,6 +484,7 @@ function init_gear_sets()
 		body="Vanya Robe",
 		hands="Gende. Gages +1",
 		legs="Artsieq Hose",
+		feet="Arbatel Loafers +1",
 		neck="Loricate Torque +1",
 		ear1="Genmei Earring",
 		ring1="Defending Ring",
@@ -501,6 +497,7 @@ function init_gear_sets()
 		body="Vanya Robe",
 		hands="Gende. Gages +1",
 		legs="Gyve Trousers",
+		feet="Arbatel Loafers +1",
 		neck="Loricate Torque +1",
 		ear1="Etiolation Earring",
 		ring1="Defending Ring",
@@ -516,7 +513,7 @@ function init_gear_sets()
 		legs="Merlinic Shalwar",
 		ear1="Barkaro. Earring",
 		ear2="Friomisi Earring",
-		ring1="Levia. Ring +1",
+		ring1="Shiva Ring +1",
 		ring2="Shiva Ring +1",
 		back="Lugh's Cape",
 		})
@@ -537,6 +534,7 @@ function init_gear_sets()
 		body="Vanya Robe", --1
 		hands="Gende. Gages +1", --4
 		legs="Artsieq Hose", --5
+		feet="Arbatel Loafers +1",
  		neck="Loricate Torque +1", --6
 		ear1="Genmei Earring", --2
 		ring1="Defending Ring", --10
@@ -549,6 +547,7 @@ function init_gear_sets()
 		body="Vanya Robe", --1
 		hands="Gende. Gages +1", --3
 		legs="Gyve Trousers", --2
+		feet="Arbatel Loafers +1",
 		neck="Loricate Torque +1", --6
 		ear1="Etiolation Earring", --3
 		ring1="Defending Ring", --10
@@ -579,19 +578,17 @@ function init_gear_sets()
 		back="Aurist's Cape +1",
 		}
 	
-	sets.engaged.Refresh = sets.idle
-	
 	------------------------------------------------------------------------------------------------
 	---------------------------------------- Special Sets ------------------------------------------
 	------------------------------------------------------------------------------------------------
 	
 	sets.magic_burst = { -- Staff 10
+		body="Merlinic Jubbah", --10
 		hands="Amalric Gages", --(5)
 		legs="Merlinic Shalwar", --6
 		feet="Merlinic Crackows", --11
 		neck="Mizu. Kubikazari", --10
-		ring1="Locus Ring", --5
-		ring2="Mujin Band", --(5)
+		ring1="Mujin Band", --(5)
 		}
 	
 	sets.buff['Ebullience'] = {head="Arbatel Bonnet +1"}
@@ -669,7 +666,7 @@ function job_get_spell_map(spell, default_spell_map)
 	if spell.action_type == 'Magic' then
 		if default_spell_map == 'Cure' or default_spell_map == 'Curaga' then
 			if world.weather_element == 'Light' then
-				return 'CureWithLightWeather'
+				return 'CureWeather'
 			end
 		elseif spell.skill == 'Enfeebling Magic' then
 			if spell.type == 'WhiteMagic' then

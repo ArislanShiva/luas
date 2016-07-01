@@ -17,7 +17,7 @@ function job_setup()
 end
 
 -------------------------------------------------------------------------------------------------------------------
--- User setup functions for this job.  Recommend that these be overridden in a sidecar file.
+-- User setup functions for this job.  Recommend that these be overridden in a sidecar file.
 -------------------------------------------------------------------------------------------------------------------
 
 -- Setup vars that are user-dependent.  Can override this function in a sidecar file.
@@ -223,7 +223,18 @@ function init_gear_sets()
 		back="Fi Follet Cape +1",
 		waist="Olympus Sash",
 		}
+		
+	sets.midcast.Regen = set_combine(sets.midcast['Enhancing Magic'], {
+		main="Bolelabunga",
+		sub="Genmei Shield",
+		body="Telchine Chas.",
+		})
 	
+	sets.midcast.Refresh = set_combine(sets.midcast['Enhancing Magic'], {
+		waist="Gishdubar Sash",
+		back="Grapevine Cape",
+		})
+			
 	sets.midcast.Stoneskin = set_combine(sets.midcast['Enhancing Magic'], {
 		neck="Nodens Gorget",
 		waist="Siegel Sash",
@@ -241,7 +252,7 @@ function init_gear_sets()
 	sets.midcast.Shellra = sets.midcast.Protectra
 
 	sets.midcast.MndEnfeebles = {
-		main="Lehbrailg +2",
+		main="Grioavolr",
 		sub="Mephitis Grip",
 		head="Amalric Coif",
 		body="Vanya Robe",
@@ -258,7 +269,7 @@ function init_gear_sets()
 		} -- MND/Magic accuracy
 	
 	sets.midcast.IntEnfeebles = {
-		main="Lehbrailg +2",
+		main="Grioavolr",
 		sub="Mephitis Grip",
 --		ammo="Pemphredo Tathlum",
 		head="Amalric Coif",
@@ -276,7 +287,7 @@ function init_gear_sets()
 		} -- INT/Magic accuracy
 
 	sets.midcast['Dark Magic'] = {
-		main="Lehbrailg +2",
+		main="Grioavolr",
 		sub="Mephitis Grip",
 		head="Amalric Coif",
 		body="Psycloth Vest",
@@ -325,7 +336,7 @@ function init_gear_sets()
 		}
 
 	sets.midcast['Elemental Magic'].Resistant = set_combine(sets.midcast['Elemental Magic'], {
-		main="Lehbrailg +2",
+		main="Grioavolr",
 		sub="Niobid Strap",
 		legs="Azimuth Tights +1",
 		neck="Sanctity Necklace",
@@ -334,7 +345,7 @@ function init_gear_sets()
 		waist="Yamabuki-no-Obi",
 		})
 
-	sets.midcast.GeoNukes = set_combine(sets.midcast['Elemental Magic'].Resistant, {
+	sets.midcast.GeoElem = set_combine(sets.midcast['Elemental Magic'].Resistant, {
   		main="Solstice",
 		sub="Culminus",
 		ring1="Fenrir Ring +1",
@@ -346,7 +357,9 @@ function init_gear_sets()
 		neck="Sanctity Necklace",
 		})
 
-	sets.midcast.GeoNukes.Seidr = set_combine(sets.midcast['Elemental Magic'].Seidr, {
+	sets.midcast.GeoElem.Seidr = set_combine(sets.midcast['Elemental Magic'].Seidr, {
+  		main="Solstice",
+		sub="Culminus",		
 		body="Seidr Cotehardie",
 		neck="Sanctity Necklace",
 		ring1="Fenrir Ring +1",
@@ -413,21 +426,23 @@ function init_gear_sets()
 	sets.idle.Weak = sets.idle.PDT
 
 	-- .Pet sets are for when Luopan is present.
-	sets.idle.Pet = set_combine(sets.idle, {
-  		main="Sucellus",
+	sets.idle.Pet = set_combine(sets.idle, { 
+		-- dt/regen --
+  		main="Sucellus", --3/3
 		sub="Genmei Shield",
-		head="Azimuth Hood +1",
-		body="Telchine Chas.",
-		hands="Geo. Mitaines +1",
-		legs="Psycloth Lappas",
-		ear1="Handler's Earring",
-		ear2="Handler's Earring +1",
-		back="Nantosuelta's Cape",
-		waist="Isa Belt"
+		range="Dunna", --5/0
+		head="Azimuth Hood +1", --3/0
+		body="Telchine Chas.", --0/1
+		hands="Geo. Mitaines +1", --11/0
+		legs="Psycloth Lappas", --4/0
+		feet="Telchine Pigaches", --0/3
+		ear1="Handler's Earring", --3*/0
+		ear2="Handler's Earring +1", --4*/0
+		back="Nantosuelta's Cape", --0/10
+		waist="Isa Belt" --3/1
 		})
 
 	sets.idle.PDT.Pet = set_combine(sets.idle.Pet, {
-		feet="Azimuth Gaiters +1",
 		neck="Loricate Torque +1",
 		ring1="Defending Ring",
 		ring2="Gelatinous Ring +1",
@@ -436,8 +451,6 @@ function init_gear_sets()
 		})
 
 	sets.idle.MDT.Pet = set_combine(sets.idle.Pet, {
-		body="Vanya Robe",
-		feet="Azimuth Gaiters +1",
 		neck="Loricate Torque +1",
 		ring1="Defending Ring",
 		back="Nantosuelta's Cape",
@@ -525,13 +538,12 @@ function init_gear_sets()
 	--------------------------------------
 
 	sets.magic_burst = {
+		body="Merlinic Jubbah", --10
 		hands="Amalric Gages", --(5)
 		legs="Merlinic Shalwar", --6
 		feet="Merlinic Crackows", --11
 		neck="Mizu. Kubikazari", --10
-		ear2="Static Earring", --5
-		ring1="Locus Ring", --5
-		ring2="Mujin Band", --(5)
+		ring1="Mujin Band", --(5)
 		back="Seshaw Cape", --5
 		}
 
@@ -607,6 +619,10 @@ function job_get_spell_map(spell, default_spell_map)
 		elseif spell.skill == 'Geomancy' then
 			if spell.english:startswith('Indi') then
 				return 'Indi'
+			end
+		elseif spell.skill == 'Elemental Magic' then
+			if spellMap == 'GeoElem' then
+				return 'GeoElem'
 			end
 		end
 	end

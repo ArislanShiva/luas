@@ -253,6 +253,7 @@ function init_gear_sets()
 		legs="Samnuha Tights",
 		ear1="Cessance Earring",
 		ear2="Brutal Earring",
+		ring1="Ifrit Ring +1",
 		ring2="Shukuyu Ring",
 		})
 		
@@ -264,6 +265,7 @@ function init_gear_sets()
 		legs="Adhemar Kecks",
 		ear2="Zennaroi Earring",
 		ring1="Ramuh Ring +1",
+		ring2="Ramuh Ring +1",
 		})
 
 	sets.precast.WS['Evisceration'] = set_combine(sets.precast.WS, {
@@ -286,6 +288,7 @@ function init_gear_sets()
 		ammo="Charis Feather",
 		neck="Caro Necklace",
 		ring2="Ramuh Ring +1",
+		waist="Grunfeld Rope",
 		})
 
 	sets.precast.WS["Rudra's Storm"].Acc = set_combine(sets.precast.WS["Rudra's Storm"], {
@@ -426,8 +429,8 @@ function init_gear_sets()
 		legs="Samnuha Tights",
 		feet=gear.Taeon_DW_feet,
 		neck="Charis Necklace",
-		ear1="Dudgeon Earring",
-		ear2="Heartseeker Earring",
+		ear1="Eabani Earring",
+		ear2="Suppanomimi",
 		ring1="Petrov Ring",
 		ring2="Epona's Ring",
 		back="Senuna's Mantle",
@@ -444,7 +447,6 @@ function init_gear_sets()
 	sets.engaged.MidAcc = set_combine(sets.engaged.LowAcc, {
 		legs=gear.Herc_TA_legs,
 		ear1="Cessance Earring",
-		ear2="Zennaroi Earring",
 		ring2="Ramuh Ring +1",
 		})
 
@@ -452,6 +454,7 @@ function init_gear_sets()
 		legs="Adhemar Kecks",
 		neck="Subtlety Spec.",
 		ear1="Digni. Earring",
+		ear2="Zennaroi Earring",
 		ring1="Ramuh Ring +1",
 		waist="Olseni Belt",
 		})

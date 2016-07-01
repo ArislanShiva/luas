@@ -184,7 +184,7 @@ function init_gear_sets()
 		ammo=gear.RAbullet,
 		head="Aurore Beret +1", --5
 		body="Lak. Frac +1",
-		hands="Lanun Gants +1", --9
+		hands="Carmine Fin. Ga. +1", --8
 		legs="Adhemar Kecks", --9
 		feet="Wurrukatte Boots", --6
 		back="Navarch's Mantle", --6.5
@@ -198,7 +198,7 @@ function init_gear_sets()
 		ammo=gear.WSbullet,
 		head="Pursuer's Beret",
 		body="Chasseur's Frac +1",
-		hands="Chasseur's Gants +1",
+		hands="Carmine Fin. Ga. +1",
 		legs="Pursuer's Pants",
 		feet="Adhemar Gamashes",		
 		neck=gear.ElementalGorget,
@@ -221,6 +221,7 @@ function init_gear_sets()
 		head="Chass. Tricorne +1",
 		hands="Floral Gauntlets",
 		feet=gear.Taeon_RA_feet,		
+		neck="Bilious Torque",
 		ring1="Cacoethic Ring +1",
 		})
 
@@ -228,7 +229,7 @@ function init_gear_sets()
 		ammo=gear.MAbullet,
 		head=gear.Herc_MAB_head,
 		body="Samnuha Coat",
-		hands="Carmine Fin. Ga.",
+		hands="Carmine Fin. Ga. +1",
 		legs=gear.Herc_MAB_legs,
 		feet=gear.Herc_MAB_feet,
 		neck="Sanctity Necklace",
@@ -244,7 +245,7 @@ function init_gear_sets()
 		ammo=gear.MAbullet,
 		head="Pixie Hairpin +1",
 		body="Samnuha Coat",
-		hands="Pursuer's Cuffs",
+		hands="Carmine Fin. Ga. +1",
 		legs=gear.Herc_MAB_legs,
 		feet=gear.Herc_MAB_feet,
 		neck="Sanctity Necklace",
@@ -282,8 +283,7 @@ function init_gear_sets()
 		head="Lilitu Headpiece",
 		legs=gear.Herc_TA_legs,
 		neck="Caro Necklace",
-		ear1="Ishvara Earring",
-		ring1="Rufescent Ring",
+		ring1="Ifrit Ring +1",
 		ring2="Shukuyu Ring",
 		waist="Prosilio Belt +1",
 		})
@@ -322,7 +322,7 @@ function init_gear_sets()
 		ammo=gear.QDbullet,
 		head=gear.Herc_MAB_head,
 		body="Samnuha Coat",
-		hands="Carmine Fin. Ga.",
+		hands="Carmine Fin. Ga. +1",
 		legs=gear.Herc_MAB_legs,
 --		feet=gear.Herc_MAB_feet,
 		feet="Chass. Bottes +1",
@@ -353,7 +353,7 @@ function init_gear_sets()
 		ammo=gear.RAbullet,	
 		head="Pursuer's Beret",
 		body="Chasseur's Frac +1",
-		hands="Chasseur's Gants +1",
+		hands="Carmine Fin. Ga. +1",
 		legs="Pursuer's Pants",
 		feet="Adhemar Gamashes",
 		neck="Marked Gorget",
@@ -370,6 +370,7 @@ function init_gear_sets()
 		head="Chass. Tricorne +1",
 		hands="Floral Gauntlets",
 		legs="Pursuer's Pants",
+		neck="Bilious Torque",
 		ring1="Cacoethic Ring +1",
 		waist="Eschan Stone",
 		})
@@ -391,7 +392,7 @@ function init_gear_sets()
 		ammo=gear.RAbullet,
 		head="Dampening Tam",
 		body="Mekosu. Harness",
-		hands="Chasseur's Gants +1",
+		hands="Carmine Fin. Ga. +1",
 		legs="Carmine Cuisses +1",
 		feet=gear.Herc_TA_feet,
 		neck="Sanctity Necklace",
@@ -424,12 +425,9 @@ function init_gear_sets()
 		})
 
 	sets.idle.Town = set_combine(sets.idle, {
-		body="Chasseur's Frac +1",
-		hands="Chasseur's Gants +1",
-		feet="Chass. Bottes +1",
-		neck="Marked Gorget",
-		ear1="Enervating Earring",
-		ear2="Neritic Earring",
+		body="Lanun Frac +1",
+		ear1="Eabani Earring",
+		ear2="Suppanomimi",
 		ring1="Garuda Ring +1",
 		ring2="Garuda Ring +1",
 		back=gear.COR_WS_Cape,
@@ -477,8 +475,8 @@ function init_gear_sets()
 		legs="Samnuha Tights",
 		feet=gear.Taeon_DW_feet,
 		neck="Lissome Necklace",
-		ear1="Dudgeon Earring",
-		ear2="Heartseeker Earring",
+		ear1="Eabani Earring",
+		ear2="Suppanomimi",
 		ring1="Petrov Ring",
 		ring2="Epona's Ring",
 		back=gear.COR_TP_Cape,
@@ -493,14 +491,14 @@ function init_gear_sets()
 	sets.engaged.MidAcc = set_combine(sets.engaged.LowAcc, {
 		legs="Carmine Cuisses +1",
 		ear1="Cessance Earring",
-		ear2="Zennaroi Earring",
 		ring2="Ramuh Ring +1",
 		})
 
 	sets.engaged.HighAcc = set_combine(sets.engaged.MidAcc, {
 		legs="Carmine Cuisses +1",
-		neck="Subtlety Spec.",
+		neck="Decimus Torque",
 		ear1="Digni. Earring",
+		ear2="Zennaroi Earring",
 		ring1="Ramuh Ring +1",
 		waist="Olseni Belt",
 		})
@@ -518,8 +516,8 @@ function init_gear_sets()
 		legs="Samnuha Tights",
 		feet=gear.Herc_TA_feet,
 		neck="Lissome Necklace",
-		ear1="Cessance Earring",
-		ear2="Brutal Earring",
+		ear1="Eabani Earring",
+		ear2="Suppanomimi",
 		ring1="Petrov Ring",
 		ring2="Epona's Ring",
 		back=gear.COR_TP_Cape,
@@ -534,14 +532,15 @@ function init_gear_sets()
 
 	sets.engaged.HighHaste.MidAcc = set_combine(sets.engaged.HighHaste.LowAcc, {
 		legs="Adhemar Kecks",
-		ear2="Zennaroi Earring",
+		ear1="Cessance Earring",
 		ring2="Ramuh Ring +1",
 		})
 
 	sets.engaged.HighHaste.HighAcc = set_combine(sets.engaged.HighHaste.MidAcc, {
 		legs="Carmine Cuisses +1",
-		neck="Subtlety Spec.",
+		neck="Decimus Torque",
 		ear1="Digni. Earring",
+		ear2="Zennaroi Earring",
 		ring1="Ramuh Ring +1",
 		waist="Olseni Belt",
 		})
@@ -559,8 +558,8 @@ function init_gear_sets()
 		legs="Samnuha Tights",
 		feet=gear.Herc_TA_feet,
 		neck="Lissome Necklace",
-		ear1="Cessance Earring",
-		ear2="Brutal Earring",
+		ear1="Eabani Earring",
+		ear2="Suppanomimi",
 		ring1="Petrov Ring",
 		ring2="Epona's Ring",
 		back=gear.COR_TP_Cape,
@@ -575,14 +574,15 @@ function init_gear_sets()
 
 	sets.engaged.MaxHaste.MidAcc = set_combine(sets.engaged.MaxHaste.LowAcc, {
 		legs="Adhemar Kecks",
-		ear2="Zennaroi Earring",
+		ear1="Cessance Earring",
 		ring2="Ramuh Ring +1",
 		})
 
 	sets.engaged.MaxHaste.HighAcc = set_combine(sets.engaged.MaxHaste.MidAcc, {
 		legs="Carmine Cuisses +1",
-		neck="Subtlety Spec.",
+		neck="Decimus Torque",
 		ear1="Digni. Earring",
+		ear2="Zennaroi Earring",
 		ring1="Ramuh Ring +1",
 		waist="Olseni Belt",
 		})

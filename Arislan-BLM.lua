@@ -37,6 +37,7 @@ function user_setup()
 	send_command('bind !` gs c toggle MagicBurst')
 	send_command('bind @` gs c toggle DeathMode')
 	send_command('bind !o input /ma "Shock Spikes" <me>')
+	send_command('bind !p input /ma "Warp II" <stpc>')
 	send_command('bind ^, input /ma Sneak <stpc>')
 	send_command('bind ^. input /ma Invisible <stpc>')
 
@@ -49,6 +50,7 @@ function user_unload()
 	send_command('unbind !`')
 	send_command('unbind @`')
 	send_command('unbind !o')
+	send_command('unbind !p')
 	send_command('unbind ^,')
 	send_command('unbind !.')
 end
@@ -118,7 +120,6 @@ function init_gear_sets()
 		})
 
 	sets.precast.FC.Cure = set_combine(sets.precast.FC, {
-		ammo="Impatiens", --(3)
 		main="Vadose Rod", --5
 		sub="Sors Shield", --5
 		feet="Vanya Clogs", --15
@@ -140,16 +141,16 @@ function init_gear_sets()
 		sub="Elder's Grip +1",
 		ammo="Ghastly Tathlum +1",
 		head="Pixie Hairpin +1",
-		body="Amalric Doublet",
-		hands="Amalric Gages",
+		body="Merlinic Jubbah", --10
+		hands="Amalric Gages", --(5)
 		legs="Amalric Slops",
-		feet="Merlinic Crackows",
-		neck="Mizu. Kubikazari",
+		feet="Merlinic Crackows", --11
+		neck="Mizu. Kubikazari", --10
 		ear1="Barkaro. Earring",
-		ear2="Static Earring",
+		ear2="Static Earring", --5
 		ring1="Mephitas's Ring +1",
 		ring2="Archon Ring",
-		back=gear.BLM_Death_Cape,
+		back=gear.BLM_Death_Cape, --5
 		waist=gear.ElementalObi,
 		}
 
@@ -260,6 +261,17 @@ function init_gear_sets()
 		back="Fi Follet Cape +1",
 		waist="Olympus Sash",
 		}
+
+	sets.midcast.Regen = set_combine(sets.midcast['Enhancing Magic'], {
+		main="Bolelabunga",
+		sub="Genmei Shield",
+		body="Telchine Chas.",
+		})
+	
+	sets.midcast.Refresh = set_combine(sets.midcast['Enhancing Magic'], {
+		waist="Gishdubar Sash",
+		back="Grapevine Cape",
+		})
 	
 	sets.midcast.Stoneskin = set_combine(sets.midcast['Enhancing Magic'], {
 		neck="Nodens Gorget",
@@ -278,7 +290,7 @@ function init_gear_sets()
 	sets.midcast.Shellra = sets.midcast.Protectra
 
 	sets.midcast.MndEnfeebles = {
-		main="Lehbrailg +2",
+		main="Grioavolr",
 		sub="Mephitis Grip",
 		ammo="Hydrocera",
 		head="Amalric Coif",
@@ -296,7 +308,7 @@ function init_gear_sets()
 		} -- MND/Magic accuracy
 
 	sets.midcast.IntEnfeebles = {
-		main="Lehbrailg +2",
+		main="Grioavolr",
 		sub="Mephitis Grip",
 		ammo="Pemphredo Tathlum",
 		head="Amalric Coif",
@@ -316,7 +328,7 @@ function init_gear_sets()
 	sets.midcast.ElementalEnfeeble = sets.midcast.IntEnfeebles
 
 	sets.midcast['Dark Magic'] = {
-		main="Lehbrailg +2",
+		main="Grioavolr",
 		sub="Mephitis Grip",
 		ammo="Pemphredo Tathlum",
 		head="Amalric Coif",
@@ -524,13 +536,12 @@ function init_gear_sets()
 
 
 	sets.magic_burst = { 
+		body="Merlinic Jubbah", --10
 		hands="Amalric Gages", --(5)
 		legs="Merlinic Shalwar", --6
 		feet="Merlinic Crackows", --11
 		neck="Mizu. Kubikazari", --10
-		ear2="Static Earring", --5
-		ring1="Locus Ring", --5
-		ring2="Mujin Band", --(5)
+		ring1="Mujin Band", --(5)
 		back=gear.BLM_Elem_Cape, --5
 		} 
 
@@ -594,13 +605,13 @@ function job_aftercast(spell, action, spellMap, eventArgs)
 	if not spell.interrupted then
 		if spell.english == 'Death' then
 			state.DeathMode:reset()
-			enable('ammo', 'head', 'neck', 'ear1', 'ear2', 'body', 'hands', 'ring1', 'ring2', 'back', 'waist', 'legs', 'feet')
+			enable('ammo','head','neck','ear1','ear2','body','hands','ring1','ring2','back','waist','legs','feet')
 		end
 		-- Lock feet after using Mana Wall.
 		if spell.english == 'Mana Wall' then
-			enable('feet', 'back')
+			enable('feet','back')
 			equip(sets.buff['Mana Wall'])
-			disable('feet' 'back')
+			disable('feet','back')
 		end 
 	end
 end
@@ -615,7 +626,7 @@ end
 function job_buff_change(buff, gain)
 	-- Unlock feet when Mana Wall buff is lost.
     if buff == "Mana Wall" and not gain then
-		enable('feet' 'back')
+		enable('feet','back')
 		handle_equipping_gear(player.status)
 	end
 end
@@ -653,9 +664,9 @@ end
 function customize_idle_set(idleSet)
 	if state.DeathMode.current == 'on' then
 		equip(sets.precast.Death)
-		disable('ammo', 'head', 'neck', 'ear1', 'ear2', 'body', 'hands', 'ring1', 'ring2', 'back', 'waist', 'legs', 'feet')
+		disable('ammo','head','neck','ear1','ear2','body','hands','ring1','ring2','back','waist','legs','feet')
 	else
-		enable('ammo', 'head', 'neck', 'ear1', 'ear2', 'body', 'hands', 'ring1', 'ring2', 'back', 'waist', 'legs', 'feet')
+		enable('ammo','head','neck','ear1','ear2','body','hands','ring1','ring2','back','waist','legs','feet')
 	end
 	if player.mpp < 51 then
 		idleSet = set_combine(idleSet, sets.latent_refresh)

@@ -108,7 +108,7 @@ function init_gear_sets()
 	sets.precast.RA = {
 		head="Amini Gapette +1", --7
 		body="Amini Caban +1",
-		hands="Carmine Fin. Ga.", --7
+		hands="Carmine Fin. Ga. +1", --8
 		legs="Adhemar Kecks", --9
 		feet="Wurrukatte Boots", --6
 		back="Lutian Cape",
@@ -121,7 +121,7 @@ function init_gear_sets()
 	sets.precast.WS = {
 		head=gear.Taeon_RA_head,
 		body=gear.Taeon_RA_body,
-		hands="Kobo Kote",
+		hands="Carmine Fin. Ga. +1",
 		legs="Pursuer's Pants",
 		feet="Adhemar Gamashes",
 		neck="Ocachi Gorget",
@@ -134,6 +134,7 @@ function init_gear_sets()
 		}
 
 	sets.precast.WS.Acc = set_combine(sets.precast.WS, {
+		hands="Kobo Kote",
 		legs="Pursuer's Pants",
 		neck="Marked Gorget",
 		waist="Yemaya Belt",
@@ -142,20 +143,20 @@ function init_gear_sets()
 	-- Specific weaponskill sets.  Uses the base set if an appropriate WSMod version isn't found.
 
 	sets.precast.WS['Empyreal Arrow'] = set_combine(sets.precast.WS, {
-		hands="Kobo Kote",
 		neck=gear.ElementalGorget,
 		})
 
 	sets.precast.WS['Empyreal Arrow'].Acc = set_combine(sets.precast.WS['Empyreal Arrow'], {
+		hands="Kobo Kote",
 		waist="Yemaya Belt",
 		})
 
 	sets.precast.WS['Apex Arrow'] = set_combine(sets.precast.WS, {
-		hands="Kobo Kote",
 		neck=gear.ElementalGorget,
 		})
 
 	sets.precast.WS['Apex Arrow'].Acc = set_combine(sets.precast.WS['Apex Arrow'], {
+		hands="Kobo Kote",
 		ring1="Cacoethic Ring +1",
 		waist="Yemaya Belt",
 		})
@@ -175,7 +176,6 @@ function init_gear_sets()
 		})
 
 	sets.precast.WS["Last Stand"] = {
-		hands="Kobo Kote",
 		feet="Amini Bottillons +1",
 		neck=gear.ElementalGorget,
 		ring1="Garuda Ring +1",
@@ -183,13 +183,14 @@ function init_gear_sets()
 		}
 
 	sets.precast.WS['Last Stand'].Acc = set_combine(sets.precast.WS['Last Stand'], {
+		hands="Kobo Kote",
 		ring1="Cacoethic Ring +1",
 		})
 		
 	sets.precast.WS["Trueflight"] = {
 		head=gear.Herc_MAB_head,
 		body="Gyve Doublet",
-		hands="Carmine Fin. Ga.",
+		hands="Carmine Fin. Ga. +1",
 		legs=gear.Herc_MAB_legs,
 		feet=gear.Herc_MAB_feet,		
 		neck="Sanctity Necklace",
@@ -212,7 +213,8 @@ function init_gear_sets()
 		neck=gear.ElementalGorget,
 		ear1="Moonshade Earring",
 		ear2="Ishvara Earring",
-		ring1="Shukuyu Ring",
+		ring1="Ifrit Ring +1",
+		ring2="Shukuyu Ring",
 		back="Bleating Mantle",
 		waist=gear.ElementalBelt,
 		}
@@ -256,27 +258,28 @@ function init_gear_sets()
 	sets.midcast.RA = {
 		head="Pursuer's Beret",
 		body="Amini Caban +1",
-		hands="Kobo Kote",
+		hands="Carmine Fin. Ga. +1",
 		legs="Pursuer's Pants",
 		feet="Adhemar Gamashes",
 		neck="Marked Gorget",
 		ear1="Enervating Earring",
 		ear2="Neritic Earring",
 		ring1="Garuda Ring +1",
-		ring2="Garuda Ring +1",
+		ring2="Ifrit Ring +1",
 		back="Lutian Cape",
 		waist="Yemaya Belt",
 		}
 	
 	sets.midcast.RA.Acc = set_combine(sets.midcast.RA, {
 		head="Amini Gapette +1",
+		hands="Kobo Kote",
 		neck="Yarak Torque",
 		ring1="Cacoethic Ring +1",
+		ring2="Garuda Ring +1",
 		})
 		
 	sets.midcast.RA.Fodder = set_combine(sets.midcast.RA, {
 		head="Arcadian Beret +1",
-		hands="Pursuer's Cuffs",
 		neck="Ocachi Gorget",
 		waist="Ponente Sash",
 		})
@@ -288,12 +291,12 @@ function init_gear_sets()
 	sets.midcast.RA.Doomsday.Acc = set_combine(sets.midcast.RA.Doomsday, {
 		head=gear.Taeon_RA_head,
 		feet="Amini Bottillons +1",	
+		neck="Bilious Torque",
 		ring1="Cacoethic Ring +1",
 		})
 
 	sets.midcast.RA.Doomsday.Fodder = set_combine(sets.midcast.RA.Doomsday, {
 		head="Arcadian Beret +1",
-		hands="Pursuer's Cuffs",
 		neck="Ocachi Gorget",
 		waist="Ponente Sash",
 		})
@@ -310,8 +313,8 @@ function init_gear_sets()
 	-- Idle sets
 	sets.idle = {
 		head="Amini Gapette +1",
-		body="Amini Caban +1",
-		hands="Kobo Kote",
+		body="Mekosu. Harness",
+		hands="Carmine Fin. Ga. +1",
 		legs="Carmine Cuisses +1",
 		feet="Amini Bottillons +1",
 		neck="Sanctity Necklace",
@@ -343,6 +346,7 @@ function init_gear_sets()
 		})
 		
 	sets.idle.Town = set_combine(sets.idle, {
+		body="Gyve Doublet",
 		neck="Marked Gorget",
 		ear1="Enervating Earring",
 		ear2="Neritic Earring",
@@ -387,8 +391,8 @@ function init_gear_sets()
 		legs="Samnuha Tights",
 		feet=gear.Taeon_DW_feet,
 		neck="Lissome Necklace",
-		ear1="Dudgeon Earring",
-		ear2="Heartseeker Earring",
+		ear1="Eabani Earring",
+		ear2="Suppanomimi",
 		ring1="Petrov Ring",
 		ring2="Epona's Ring",
 		back="Letalis Mantle",
@@ -404,7 +408,7 @@ function init_gear_sets()
 	sets.engaged.MidAcc = set_combine(sets.engaged.LowAcc, {
 		legs="Adhemar Kecks",
 		ear1="Cessance Earring",
-		ear2="Zennaroi Earring",
+		ear2="Brutal Earring",
 		ring2="Ramuh Ring +1",
 		back="Ground. Mantle +1",
 		})
@@ -413,6 +417,7 @@ function init_gear_sets()
 		legs="Carmine Cuisses +1",
 		neck="Erudit. Necklace",
 		ear1="Digni. Earring",
+		ear2="Zennaroi Earring",
 		ring1="Ramuh Ring +1",
 		waist="Olseni Belt",
 		})
@@ -430,8 +435,8 @@ function init_gear_sets()
 		legs="Samnuha Tights",
 		feet=gear.Herc_TA_feet,
 		neck="Lissome Necklace",
-		ear1="Cessance Earring",
-		ear2="Brutal Earring",
+		ear1="Eabani Earring",
+		ear2="Suppanomimi",
 		ring1="Petrov Ring",
 		ring2="Epona's Ring",
 		back="Letalis Mantle",
@@ -446,7 +451,7 @@ function init_gear_sets()
 
 	sets.engaged.HighHaste.MidAcc = set_combine(sets.engaged.HighHaste.LowAcc, {
 		legs="Adhemar Kecks",
-		ear2="Zennaroi Earring",
+		ear1="Cessance Earring",
 		ring2="Ramuh Ring +1",
 		back="Ground. Mantle +1",
 		})
@@ -455,6 +460,7 @@ function init_gear_sets()
 		legs="Carmine Cuisses +1",
 		neck="Erudit. Necklace",
 		ear1="Digni. Earring",
+		ear2="Zennaroi Earring",
 		ring1="Ramuh Ring +1",
 		waist="Olseni Belt",
 		})
@@ -472,8 +478,8 @@ function init_gear_sets()
 		legs="Samnuha Tights",
 		feet=gear.Herc_TA_feet,
 		neck="Lissome Necklace",
-		ear1="Cessance Earring",
-		ear2="Brutal Earring",
+		ear2="Suppanomimi",
+		ring1="Petrov Ring",
 		ring1="Petrov Ring",
 		ring2="Epona's Ring",
 		back="Letalis Mantle",
@@ -488,7 +494,7 @@ function init_gear_sets()
 
 	sets.engaged.MaxHaste.MidAcc = set_combine(sets.engaged.MaxHaste.LowAcc, {
 		legs="Adhemar Kecks",
-		ear2="Zennaroi Earring",
+		ear1="Cessance Earring",
 		ring2="Ramuh Ring +1",
 		back="Ground. Mantle +1",
 		})
@@ -497,6 +503,7 @@ function init_gear_sets()
 		legs="Carmine Cuisses +1",
 		neck="Erudit. Necklace",
 		ear1="Digni. Earring",
+		ear2="Zennaroi Earring",
 		ring1="Ramuh Ring +1",
 		waist="Olseni Belt",
 		})
