@@ -176,6 +176,7 @@ function init_gear_sets()
 		})
 
 	sets.midcast.Curaga = set_combine(sets.midcast.Cure, {
+		body="Kaykaus Bliaut", --5(+3)
 		ring1="Levia. Ring +1",
 		ring2="Levia. Ring +1",
 		waist="Luminary Sash",

@@ -222,7 +222,7 @@ function init_gear_sets()
 		sub="Sors Shield", --3/(-5)
 		ammo="Leisure Musk +1", --0/(-4)
 		head="Gende. Caubeen +1", --15/(-8)
-		body="Vanya Robe", --7/(-6)
+		body="Kaykaus Bliaut", --5(+3)
 		hands="Telchine Gloves", --10
 		legs="Gyve Trousers", --10
 		feet="Kaykaus Boots", --10/(-10)

@@ -102,7 +102,7 @@ function init_gear_sets()
 		ear2="Heartseeker Earring",
 		ring1="Ramuh Ring +1",
 		ring2="Ramuh Ring +1",
-		back="Bleating Mantle",
+		back="Ground. Mantle +1",
 		}
 
 	sets.buff['Trick Attack'] = {
@@ -216,7 +216,7 @@ function init_gear_sets()
 		ear2="Ishvara Earring",
 		ring1="Ramuh Ring +1",
 		ring2="Ramuh Ring +1",
-		back="Bleating Mantle",
+		back="Ground. Mantle +1",
 		waist=gear.ElementalBelt,
 		} -- default set
 
