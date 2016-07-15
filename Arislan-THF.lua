@@ -111,7 +111,7 @@ function init_gear_sets()
 		body="Adhemar Jacket", 
 		hands="Pillager's Armlets +1",
 		legs="Pillager's Culottes +1",
-		feet="Skulk. Poulaines +1",
+		feet="Meg. Jam. +1",
 		neck="Pentalagus Charm",
 		ear1="Dudgeon Earring",
 		ear2="Heartseeker Earring",
@@ -208,7 +208,7 @@ function init_gear_sets()
 		ammo="Focal Orb",
 		head="Lilitu Headpiece",
 		body="Adhemar Jacket",
-		hands="Adhemar Wristbands",
+		hands="Meg. Gloves +1",
 		legs="Lustratio Subligar",
 		feet="Lustratio Leggings",
 		neck=gear.ElementalGorget,
@@ -222,14 +222,13 @@ function init_gear_sets()
 
 	sets.precast.WS.Acc = set_combine(sets.precast.WS, {
 		legs="Adhemar Kecks",
-		ring1="Cacoethic Ring +1",
 		})
 
 
 	sets.precast.WS['Exenterator'] = set_combine(sets.precast.WS, {
 		ammo="Expeditious Pinion",
 		head="Adhemar Bonnet",
-		legs=gear.Herc_TA_legs,
+		legs="Meg. Chausses +1",
 		feet=gear.Herc_TA_feet,
 		ear1="Cessance Earring",
 		ear2="Brutal Earring",
@@ -241,8 +240,6 @@ function init_gear_sets()
 		ammo="Falcon Eye",
 		head="Dampening Tam",
 		body=gear.Herc_TA_body,
-		hands=gear.Herc_TA_hands,
-		legs="Adhemar Kecks",
 		ear2="Zennaroi Earring",
 		ring1="Ramuh Ring +1",
 		back="Ground. Mantle +1",
@@ -257,8 +254,7 @@ function init_gear_sets()
 		ammo="Falcon Eye",
 		head="Dampening Tam",
 		body=gear.Herc_TA_body,
-		hands=gear.Herc_TA_hands,
-		legs="Adhemar Kecks",
+		legs="Meg. Chausses +1",
 		feet=gear.Herc_TA_feet,
 		ear2="Zennaroi Earring",
 		ring1="Ramuh Ring +1",
@@ -273,7 +269,7 @@ function init_gear_sets()
 
 	sets.precast.WS["Rudra's Storm"].Acc = set_combine(sets.precast.WS["Rudra's Storm"], {
 		ammo="Falcon Eye",
-		legs="Adhemar Kecks",
+		legs="Meg. Chausses +1",
 		})
 
 	sets.precast.WS['Mandalic Stab'] = sets.precast.WS["Rudra's Storm"]
@@ -341,11 +337,15 @@ function init_gear_sets()
 		}
 
 	sets.idle.PDT = set_combine (sets.idle, {
-		hands=gear.Herc_TA_hands,
+		head="Meghanada Visor +1",
+		body="Meg. Cuirie +1",
+		hands="Meg. Gloves +1",
+		legs="Meg. Chausses +1",
+		feet="Meg. Jam. +1",
 		neck="Loricate Torque +1", 
 		ear1="Genmei Earring",
 		ring1="Defending Ring",
-		ring2="Gelatinous Ring +1", --7
+		ring2="Gelatinous Ring +1",
 		back="Solemnity Cape",
 		waist="Flume Belt",
 		})
@@ -360,7 +360,7 @@ function init_gear_sets()
 
 	sets.idle.Town = set_combine(sets.idle, {
 		body="Adhemar Jacket",
-		neck="Erudit. Necklace",
+		neck="Combatant's Torque",
 		ear1="Cessance Earring",
 		ear2="Brutal Earring",
 		ring1="Ramuh Ring +1",
@@ -375,7 +375,11 @@ function init_gear_sets()
 	-- Defense sets
 
 	sets.defense.PDT = {
-		hands=gear.Herc_TA_hands, --2
+		head="Meghanada Visor +1", --4
+		body="Meg. Cuirie +1", --7
+		hands="Meg. Gloves +1", --3
+		legs="Meg. Chausses +1", --5
+		feet="Meg. Jam. +1", --2
 		neck="Loricate Torque +1", --6
 		ear1="Genmei Earring", --2
 		ring1="Defending Ring", --10
@@ -428,7 +432,8 @@ function init_gear_sets()
 		})
 
 	sets.engaged.MidAcc = set_combine(sets.engaged.LowAcc, {
-		legs=gear.Herc_TA_legs,
+		legs="Adhemar Kecks",
+		neck="Combatant's Torque",
 		ear1="Cessance Earring",
 		ear2="Brutal Earring",
 		ring2="Ramuh Ring +1",
@@ -436,8 +441,6 @@ function init_gear_sets()
 		})
 
 	sets.engaged.HighAcc = set_combine(sets.engaged.MidAcc, {
-		legs="Adhemar Kecks",
-		neck="Erudit. Necklace",
 		ear1="Digni. Earring",
 		ear2="Zennaroi Earring",
 		ring1="Ramuh Ring +1",
@@ -472,15 +475,14 @@ function init_gear_sets()
 		})
 
 	sets.engaged.HighHaste.MidAcc = set_combine(sets.engaged.HighHaste.LowAcc, {
-		legs=gear.Herc_TA_legs,
+		legs="Adhemar Kecks",
+		neck="Combatant's Torque",
 		ear2="Zennaroi Earring",
 		ring2="Ramuh Ring +1",
 		back="Ground. Mantle +1",
 		})
 
-		sets.engaged.HighHaste.HighAcc = set_combine(sets.engaged.HighHaste.MidAcc, {
-		legs="Adhemar Kecks",
-		neck="Erudit. Necklace",
+	sets.engaged.HighHaste.HighAcc = set_combine(sets.engaged.HighHaste.MidAcc, {
 		ear1="Digni. Earring",
 		ring1="Ramuh Ring +1",
 		waist="Olseni Belt",
@@ -515,15 +517,14 @@ function init_gear_sets()
 		})
 
 	sets.engaged.MaxHaste.MidAcc = set_combine(sets.engaged.MaxHaste.LowAcc, {
-		legs=gear.Herc_TA_legs,
+		legs="Adhemar Kecks",
+		neck="Combatant's Torque",
 		ear2="Zennaroi Earring",
 		ring2="Ramuh Ring +1",
 		back="Ground. Mantle +1",
 		})
 
 	sets.engaged.MaxHaste.HighAcc = set_combine(sets.engaged.MaxHaste.MidAcc, {
-		legs="Adhemar Kecks",
-		neck="Erudit. Necklace",
 		ear1="Digni. Earring",
 		ring1="Ramuh Ring +1",
 		waist="Olseni Belt",

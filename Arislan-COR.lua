@@ -132,18 +132,19 @@ function init_gear_sets()
 	sets.precast.CorsairRoll = {
 --		range="Compensator",
 		head="Lanun Tricorne +1",
-		body="Lanun Frac +1",
+		body="Meg. Cuirie +1",
 		hands="Chasseur's Gants +1",
-		legs="Desultor Tassets",
 		legs="Desultor Tassets",
 		feet="Lanun Bottes +1",
 		neck="Loricate Torque +1",
-		ring1="Barataria Ring",
+		ear1="Genmei Earring",
+		ring1="Defending Ring",
+		ring2="Barataria Ring",
 		back="Camulus's Mantle",
 		waist="Flume Belt",
 		}
 	
-	sets.precast.CorsairRoll["Caster's Roll"] = set_combine(sets.precast.CorsairRoll, {legs="Chas. Culottes"})
+--	sets.precast.CorsairRoll["Caster's Roll"] = set_combine(sets.precast.CorsairRoll, {legs="Chas. Culottes"})
 	sets.precast.CorsairRoll["Courser's Roll"] = set_combine(sets.precast.CorsairRoll, {feet="Chass. Bottes +1"})
 	sets.precast.CorsairRoll["Blitzer's Roll"] = set_combine(sets.precast.CorsairRoll, {head="Chass. Tricorne +1"})
 	sets.precast.CorsairRoll["Tactician's Roll"] = set_combine(sets.precast.CorsairRoll, {body="Chasseur's Frac +1"})
@@ -186,7 +187,7 @@ function init_gear_sets()
 		body="Lak. Frac +1",
 		hands="Carmine Fin. Ga. +1", --8
 		legs="Adhemar Kecks", --9
-		feet="Wurrukatte Boots", --6
+		feet="Meg. Jam. +1", --8
 		back="Navarch's Mantle", --6.5
 		waist="Impulse Belt", --3
 		}
@@ -196,19 +197,23 @@ function init_gear_sets()
 	-- Default set for any weaponskill that isn't any more specifically defined
 	sets.precast.WS = {
 		ammo=gear.WSbullet,
-		head="Pursuer's Beret",
-		body="Chasseur's Frac +1",
+		head="Meghanada Visor +1",
+		body="Meg. Cuirie +1",
 		hands="Carmine Fin. Ga. +1",
-		legs="Pursuer's Pants",
-		feet="Adhemar Gamashes",		
+		legs="Meg. Chausses +1",
+		feet="Meg. Jam. +1",
 		neck=gear.ElementalGorget,
 		ear1="Enervating Earring",
 		ear2="Moonshade Earring",
 		ring1="Arvina Ringlet +1",
 		ring2="Garuda Ring +1",
-		back=gear.COR_WS_Cape,
+		back=gear.COR_WS1_Cape,
 		waist=gear.ElementalBelt,
 		}
+
+	sets.precast.WS.Acc = set_combine(sets.precast.WS, {
+		hands="Meg. Gloves +1",
+		})
 
 	-- Specific weaponskill sets.  Uses the base set if an appropriate WSMod version isn't found.
 
@@ -218,10 +223,8 @@ function init_gear_sets()
 
 	sets.precast.WS['Last Stand'].Acc = set_combine(sets.precast.WS['Last Stand'], {
 		ammo=gear.WSbullet,
-		head="Chass. Tricorne +1",
-		hands="Floral Gauntlets",
-		feet=gear.Taeon_RA_feet,		
-		neck="Bilious Torque",
+		hands="Meg. Gloves +1",
+		neck="Combatant's Torque",
 		ring1="Cacoethic Ring +1",
 		})
 
@@ -237,7 +240,7 @@ function init_gear_sets()
 		ear2="Friomisi Earring",
 		ring1="Arvina Ringlet +1",
 		ring2="Garuda Ring +1",
-		back=gear.COR_WS_Cape,
+		back=gear.COR_WS1_Cape,
 		waist="Eschan Stone",
 		}
 	
@@ -253,14 +256,14 @@ function init_gear_sets()
 		ear2="Friomisi Earring",
 		ring1="Archon Ring",
 		ring2="Garuda Ring +1",
-		back=gear.COR_WS_Cape,
+		back=gear.COR_WS1_Cape,
 		waist="Eschan Stone",
 		}
 		
 	sets.precast.WS['Evisceration'] = {
 		head="Adhemar Bonnet",
 		body="Adhemar Jacket",
-		hands="Adhemar Wristbands",
+		hands="Meg. Gloves +1",
 		legs="Samnuha Tights",
 		feet=gear.Herc_TA_feet,
 		neck=gear.ElementalGorget,
@@ -268,11 +271,12 @@ function init_gear_sets()
 		ear2="Ishvara Earring",
 		ring1="Ramuh Ring +1",
 		ring2="Ramuh Ring +1",
-		back=gear.COR_WS_Cape,
+		back=gear.COR_WS1_Cape,
 		waist=gear.ElementalBelt,
 		}
 
 	sets.precast.WS['Exenterator'] = set_combine(sets.precast.WS['Evisceration'], {
+		hands="Meg. Gloves +1",
 		ear1="Cessance Earring",
 		ear2="Brutal Earring",
 		ring1="Garuda Ring +1",
@@ -281,21 +285,27 @@ function init_gear_sets()
 	
 	sets.precast.WS['Savage Blade'] = set_combine(sets.precast.WS['Evisceration'], {
 		head="Lilitu Headpiece",
-		legs=gear.Herc_TA_legs,
+		hands="Meg. Gloves +1",
 		neck="Caro Necklace",
 		ring1="Ifrit Ring +1",
 		ring2="Shukuyu Ring",
+		back=gear.COR_WS2_Cape,
 		waist="Prosilio Belt +1",
+		})
+		
+	sets.precast.WS['Savage Blade'].Acc = set_combine(sets.precast.WS['Savage Blade'], {
+		neck="Combatant's Torque",
+		waist="Grunfeld Rope",
 		})
 
 	sets.precast.WS['Requiescat'] = set_combine(sets.precast.WS['Savage Blade'], {
-		hands=gear.Herc_TA_hands,
+		hands="Meg. Gloves +1",
 		neck=gear.ElementalGorget,
 		ear1="Cessance Earring",
 		ear2="Brutal Earring",
 		ring1="Levia. Ring +1",
 		ring2="Levia. Ring +1",
-		back="Bleating Mantle",
+		back=gear.COR_WS2_Cape,
 		waist=gear.ElementalBelt,
 		}) --MND
 	
@@ -331,7 +341,7 @@ function init_gear_sets()
 		ear2="Friomisi Earring",
 		ring1="Fenrir Ring +1",
 		ring2="Fenrir Ring +1",
-		back=gear.COR_WS_Cape,
+		back=gear.COR_WS1_Cape,
 		waist="Eschan Stone",
 		}
 
@@ -351,11 +361,11 @@ function init_gear_sets()
 	-- Ranged gear
 	sets.midcast.RA = {
 		ammo=gear.RAbullet,	
-		head="Pursuer's Beret",
+		head="Meghanada Visor +1",
 		body="Chasseur's Frac +1",
 		hands="Carmine Fin. Ga. +1",
-		legs="Pursuer's Pants",
-		feet="Adhemar Gamashes",
+		legs="Meg. Chausses +1",
+		feet="Meg. Jam. +1",
 		neck="Marked Gorget",
 		ear1="Enervating Earring",
 		ear2="Neritic Earring",
@@ -367,10 +377,9 @@ function init_gear_sets()
 
 	sets.midcast.RA.Acc = set_combine(sets.midcast.RA, {
 		ammo=gear.RAbullet,
-		head="Chass. Tricorne +1",
-		hands="Floral Gauntlets",
-		legs="Pursuer's Pants",
-		neck="Bilious Torque",
+		body="Meg. Cuirie +1",
+		hands="Meg. Gloves +1",
+		neck="Combatant's Torque",
 		ring1="Cacoethic Ring +1",
 		waist="Eschan Stone",
 		})
@@ -405,8 +414,10 @@ function init_gear_sets()
 		}
 
 	sets.idle.PDT = set_combine (sets.idle, {
-		body="Lanun Frac +1",
-		hands=gear.Herc_TA_hands,
+		head="Meghanada Visor +1",
+		body="Meg. Cuirie +1",
+		hands="Meg. Gloves +1",
+		legs="Meg. Chausses +1",
 		feet="Lanun Bottes +1",
 		neck="Loricate Torque +1", 
 		ear1="Genmei Earring",
@@ -425,20 +436,23 @@ function init_gear_sets()
 		})
 
 	sets.idle.Town = set_combine(sets.idle, {
-		body="Lanun Frac +1",
+		body="Chasseur's Frac +1",
+		neck="Combatant's Torque",
 		ear1="Eabani Earring",
 		ear2="Suppanomimi",
 		ring1="Garuda Ring +1",
 		ring2="Garuda Ring +1",
-		back=gear.COR_WS_Cape,
-		waist="Eschan Stone",
+		back=gear.COR_WS1_Cape,
+		waist="Windbuffet Belt +1",
 		})
 
 	
 	-- Defense sets
 	sets.defense.PDT = {
-		body="Lanun Frac +1", --4
-		hands=gear.Herc_TA_hands, --2
+		head="Meghanada Visor +1", --4
+		body="Meg. Cuirie +1", --7
+		hands="Meg. Gloves +1", --3
+		legs="Meg. Chausses +1", --5
 		feet="Lanun Bottes +1", --4
 		neck="Loricate Torque +1", --6
 		ear1="Genmei Earring", --2
@@ -489,14 +503,14 @@ function init_gear_sets()
 		})
 
 	sets.engaged.MidAcc = set_combine(sets.engaged.LowAcc, {
-		legs="Carmine Cuisses +1",
+		legs="Adhemar Kecks",
+		neck="Combatant's Torque",
 		ear1="Cessance Earring",
 		ring2="Ramuh Ring +1",
 		})
 
 	sets.engaged.HighAcc = set_combine(sets.engaged.MidAcc, {
 		legs="Carmine Cuisses +1",
-		neck="Decimus Torque",
 		ear1="Digni. Earring",
 		ear2="Zennaroi Earring",
 		ring1="Ramuh Ring +1",
@@ -532,13 +546,13 @@ function init_gear_sets()
 
 	sets.engaged.HighHaste.MidAcc = set_combine(sets.engaged.HighHaste.LowAcc, {
 		legs="Adhemar Kecks",
+		neck="Combatant's Torque",
 		ear1="Cessance Earring",
 		ring2="Ramuh Ring +1",
 		})
 
 	sets.engaged.HighHaste.HighAcc = set_combine(sets.engaged.HighHaste.MidAcc, {
 		legs="Carmine Cuisses +1",
-		neck="Decimus Torque",
 		ear1="Digni. Earring",
 		ear2="Zennaroi Earring",
 		ring1="Ramuh Ring +1",
@@ -574,13 +588,13 @@ function init_gear_sets()
 
 	sets.engaged.MaxHaste.MidAcc = set_combine(sets.engaged.MaxHaste.LowAcc, {
 		legs="Adhemar Kecks",
+		neck="Combatant's Torque",
 		ear1="Cessance Earring",
 		ring2="Ramuh Ring +1",
 		})
 
 	sets.engaged.MaxHaste.HighAcc = set_combine(sets.engaged.MaxHaste.MidAcc, {
 		legs="Carmine Cuisses +1",
-		neck="Decimus Torque",
 		ear1="Digni. Earring",
 		ear2="Zennaroi Earring",
 		ring1="Ramuh Ring +1",

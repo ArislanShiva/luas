@@ -117,6 +117,8 @@ function init_gear_sets()
 	
 	sets.precast.FC = {
 	--	/RDM --15
+		main="Sucellus", --5
+		sub="Genmei Shield",
 		ammo="Sapience Orb", --2
 		head="Amalric Coif", --10
 		body="Shango Robe", --8
@@ -128,7 +130,7 @@ function init_gear_sets()
 		ear2="Loquacious Earring", --2
 		ring1="Prolix Ring", --2
 		ring2="Weather. Ring", --5
-		back="Swith Cape +1", --3
+		back=gear.SCH_FC_Cape, --10
 		waist="Witful Belt", --3/(3)
 		}
 
@@ -141,12 +143,12 @@ function init_gear_sets()
 		})
 	
 	sets.precast.FC.Cure = set_combine(sets.precast.FC, {
-		main="Vadose Rod", --5
+		main="Sucellus", --5
 		sub="Sors Shield", --5
 		feet="Vanya Clogs", --15
 		ear1="Mendi. Earring", --5
 		ring1="Lebeche Ring", --(2)
-		back="Pahtli Cape", --8
+		back="Perimede Cape", --(4)
 		})
 	
 	sets.precast.FC.Curaga = sets.precast.FC.Cure
@@ -154,7 +156,7 @@ function init_gear_sets()
 	sets.precast.FC.Impact = set_combine(sets.precast.FC['Elemental Magic'], {
 		head=empty,
 		body="Twilight Cloak"
-	})
+		})
 
 	sets.precast.WS = {
 		head="Telchine Cap",
@@ -164,7 +166,7 @@ function init_gear_sets()
 		ear2="Ishvara Earring",
 		ring1="Ramuh Ring +1",
 		ring2="Ramuh Ring +1",
-		back="Toro Cape",
+		back="Lugh's Cape",
 		waist=gear.ElementalBelt,
 		}
 
@@ -196,7 +198,7 @@ function init_gear_sets()
 		ear2="Moonshade Earring",
 		ring1="Levia. Ring +1",
 		ring2="Levia. Ring +1",
-		back="Aurist's Cape +1",
+		back=gear.SCH_FC_Cape,
 		waist="Luminary Sash",
 		} -- MND
 	
@@ -213,7 +215,7 @@ function init_gear_sets()
 		ear1="Etiolation Earring",
 		ear2="Loquac. Earring",
 		ring1="Prolix Ring",
-		back="Swith Cape +1",
+		back=gear.SCH_FC_Cape,
 		waist="Witful Belt",
 		} -- Haste
 	
@@ -224,7 +226,7 @@ function init_gear_sets()
 		head="Gende. Caubeen +1", --15/(-8)
 		body="Kaykaus Bliaut", --5(+3)
 		hands="Telchine Gloves", --10
-		legs="Gyve Trousers", --10
+		legs="Kaykaus Tights", --10/(-5)
 		feet="Kaykaus Boots", --10/(-10)
 		neck="Incanter's Torque",
 		ear1="Mendi. Earring", --5
@@ -242,6 +244,7 @@ function init_gear_sets()
 	sets.midcast.Curaga = set_combine(sets.midcast.Cure, {
 		ring1="Levia. Ring +1",
 		ring2="Levia. Ring +1",
+		back=gear.SCH_FC_Cape,
 		waist="Luminary Sash",
 		})
 	
@@ -287,7 +290,7 @@ function init_gear_sets()
 		sub="Genmei Shield",
 		head="Arbatel Bonnet +1",
 		body="Telchine Chas.",
-		back="Lugh's Cape",
+		back=gear.SCH_FC_Cape,
 		})
 	
 	sets.midcast.Refresh = set_combine(sets.midcast['Enhancing Magic'], {
@@ -332,7 +335,7 @@ function init_gear_sets()
 		ammo="Pemphredo Tathlum",
 		head="Amalric Coif",
 		body="Vanya Robe",
-		hands="Amalric Gages",
+		hands="Kaykaus Cuffs",
 		legs="Psycloth Lappas",
 		feet="Medium's Sabots",
 		neck="Imbodla Necklace",
@@ -340,14 +343,14 @@ function init_gear_sets()
 		ear2="Digni. Earring",
 		ring1="Globidonta Ring",
 		ring2="Levia. Ring +1",
-		back="Aurist's Cape +1",
+		back=gear.SCH_FC_Cape,
 		waist="Luminary Sash",
 		}
 	
 	sets.midcast.IntEnfeebles = set_combine(sets.midcast.MndEnfeebles, {
 		ring1="Shiva Ring +1",
 		ring2="Shiva Ring +1",
-		back="Lugh's Cape",
+		back=gear.SCH_MAB_Cape,
 		waist="Channeler's Stone",
 		})
 
@@ -367,7 +370,7 @@ function init_gear_sets()
 		ear2="Digni. Earring",
 		ring1="Evanescence Ring",
 		ring2="Weather. Ring",
-		back="Lugh's Cape",
+		back=gear.SCH_MAB_Cape,
 		waist=gear.ElementalObi,
 		}
 	
@@ -385,7 +388,7 @@ function init_gear_sets()
 		ear2="Friomisi Earring",
 		ring1="Shiva Ring +1",
 		ring2="Shiva Ring +1",
-		back="Lugh's Cape",
+		back=gear.SCH_MAB_Cape,
 		waist=gear.ElementalObi,
 		}
 	
@@ -415,7 +418,7 @@ function init_gear_sets()
 		ear2="Friomisi Earring",
 		ring1="Shiva Ring +1",
 		ring2="Shiva Ring +1",
-		back="Lugh's Cape",
+		back=gear.SCH_MAB_Cape,
 		waist=gear.ElementalObi,
 		}
 
@@ -441,8 +444,8 @@ function init_gear_sets()
 		main="Akademos",
 		sub="Niobid Strap",
 		ammo="Ghastly Tathlum +1",
-		ring1="Fenrir Ring +1",
-		ring2="Fenrir Ring +1",
+--		ring1="Fenrir Ring +1",
+--		ring2="Fenrir Ring +1",
 		waist="Yamabuki-no-Obi",
 		})
 
@@ -515,7 +518,7 @@ function init_gear_sets()
 		ear2="Friomisi Earring",
 		ring1="Shiva Ring +1",
 		ring2="Shiva Ring +1",
-		back="Lugh's Cape",
+		back=gear.SCH_MAB_Cape,
 		})
 	
 	sets.resting = set_combine(sets.idle, {
@@ -569,12 +572,12 @@ function init_gear_sets()
 	sets.engaged = {
 		head="Telchine Cap",
 		body="Onca Suit",
-		neck="Lissome Necklace",
+		neck="Combatant's Torque",
 		ear1="Cessance Earring",
 		ear2="Brutal Earring",
 		ring1="Ramuh Ring +1",
 		ring2="Ramuh Ring +1",
-		waist="Eschan Stone",
+		waist="Grunfeld Rope",
 		back="Aurist's Cape +1",
 		}
 	

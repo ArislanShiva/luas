@@ -90,6 +90,7 @@ function init_gear_sets()
 
 	sets.precast.FC['Enhancing Magic'] = set_combine(sets.precast.FC, {
 		waist="Siegel Sash",
+		back="Perimede Cape",
 		})
 
 	sets.precast.FC['Elemental Magic'] = set_combine(sets.precast.FC, {
@@ -98,12 +99,12 @@ function init_gear_sets()
 		})
 
 	sets.precast.FC.Cure = set_combine(sets.precast.FC, {
-		main="Vadose Rod", --5
+		main="Sucellus", --5
 		sub="Sors Shield", --5
 		feet="Vanya Clogs", --15
 		ear1="Mendi. Earring", --5
 		ring1="Lebeche Ring", --(2)
-		back="Pahtli Cape", --8
+		back="Perimede Cape", --(4)
 		})
 
 	sets.precast.FC.Curaga = sets.precast.FC.Cure
@@ -523,12 +524,12 @@ function init_gear_sets()
 	sets.engaged = {		
 		head="Telchine Cap",
 		body="Onca Suit",
-		neck="Lissome Necklace",
+		neck="Combatant's Torque",
 		ear1="Cessance Earring",
 		ear2="Brutal Earring",
 		ring1="Ramuh Ring +1",
 		ring2="Ramuh Ring +1",
-		waist="Eschan Stone",
+		waist="Grunfeld Rope",
 		back="Aurist's Cape +1",
 		}
 

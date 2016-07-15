@@ -68,7 +68,7 @@ function init_gear_sets()
 		head="Vanya Hood", --10
 		body="Inyanga Jubbah +1", --13
 		hands="Gende. Gages +1", --7
-		legs="Artsieq Hose", --5
+		legs="Kaykaus Tights", --6
 		feet="Regal Pumps +1", --7
 		neck="Orunmila's Torque", --5
 		ear1="Etiolation Earring", --1
@@ -80,6 +80,7 @@ function init_gear_sets()
 		}
 		
 	sets.precast.FC['Enhancing Magic'] = set_combine(sets.precast.FC, {
+		back="Perimede Cape",
 		waist="Siegel Sash",
 		})
 
@@ -89,12 +90,13 @@ function init_gear_sets()
 		main="Vadose Rod",
 		sub="Sors Shield",
 		legs="Ebers Pant. +1",
+		back="Perimede Cape",
 		})
 
 	sets.precast.FC.StatusRemoval = sets.precast.FC['Healing Magic']
 
 	sets.precast.FC.Cure = set_combine(sets.precast.FC['Healing Magic'], {
-		main="Vadose Rod", --5
+		main="Sucellus", --5
 		sub="Sors Shield", --5
 		head="Piety Cap +1", --13
 		legs="Ebers Pant. +1", --13
@@ -102,6 +104,7 @@ function init_gear_sets()
 		ear1="Nourish. Earring +1", --4
 		ear2="Mendi. Earring", --5
 		ring1="Lebeche Ring", --(2)
+		back="Perimede Cape", --(4)
 		})
 
 	sets.precast.FC.Curaga = sets.precast.FC.Cure
@@ -111,7 +114,7 @@ function init_gear_sets()
 	sets.precast.FC.Impact = set_combine(sets.precast.FC, {
 		head=empty,
 		body="Twilight Cloak"
-	})
+		})
 
 	-- CureMelee spell map should default back to Healing Magic.
 	
@@ -177,6 +180,7 @@ function init_gear_sets()
 
 	sets.midcast.Curaga = set_combine(sets.midcast.Cure, {
 		body="Kaykaus Bliaut", --5(+3)
+		legs="Kaykaus Tights", --10/(-5)
 		ring1="Levia. Ring +1",
 		ring2="Levia. Ring +1",
 		waist="Luminary Sash",
@@ -285,6 +289,7 @@ function init_gear_sets()
 		ammo="Pemphredo Tathlum",
 		body="Vanya Robe",
 		hands="Fanatic Gloves",
+		legs="Kaykaus Tights",
 		feet="Medium's Sabots",
 		neck="Incanter's Torque",
 		ear1="Hermetic Earring",
@@ -301,7 +306,7 @@ function init_gear_sets()
 		ammo="Pemphredo Tathlum",
 		head="Telchine Cap",
 		body="Shango Robe",
-		hands="Fanatic Gloves",
+		hands="Inyan. Dastanas +1",
 		legs="Assid. Pants +1",
 		feet="Medium's Sabots",
 		neck="Incanter's Torque",
@@ -321,7 +326,7 @@ function init_gear_sets()
 		head="Befouled Crown",
 		body="Inyanga Jubbah +1",
 		hands="Inyan. Dastanas +1",
-		legs="Assid. Pants +1",
+		legs="Kaykaus Tights",
 		feet="Medium's Sabots",
 		neck="Imbodla Necklace",
 		ear1="Hermetic Earring",
@@ -353,6 +358,7 @@ function init_gear_sets()
 	sets.midcast.Impact = {
 		head=empty,
 		body="Twilight Cloak",
+		legs="Gyve Trousers",
 		ring2="Archon Ring",
 		}
 	
@@ -474,12 +480,12 @@ function init_gear_sets()
 	sets.engaged = {
 		head="Telchine Cap",
 		body="Onca Suit",
-		neck="Lissome Necklace",
+		neck="Combatant's Torque",
 		ear1="Cessance Earring",
 		ear2="Brutal Earring",
 		ring1="Ramuh Ring +1",
 		ring2="Ramuh Ring +1",
-		waist="Eschan Stone",
+		waist="Grunfeld Rope",
 		back="Aurist's Cape +1",
 		}
 
@@ -507,11 +513,11 @@ function job_precast(spell, action, spellMap, eventArgs)
 		eventArgs.handled = true
 	end
 	
-	if spell.skill == 'Healing Magic' then
-		gear.default.obi_back = "Mending Cape"
-	else
-		gear.default.obi_back = "Toro Cape"
-	end
+--	if spell.skill == 'Healing Magic' then
+--		gear.default.obi_back = "Mending Cape"
+--	else
+--		gear.default.obi_back = "Toro Cape"
+--	end
 end
 
 

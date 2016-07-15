@@ -23,10 +23,8 @@ end
 -- Setup vars that are user-dependent.  Can override this function in a sidecar file.
 function user_setup()
 	state.OffenseMode:options('None', 'Normal')
---[[ **** Begin UPDATED **** ]]
 	state.CastingMode:options('Normal', 'Spaekona', 'Resistant', 'DeathMode')
 	state.IdleMode:options('Normal', 'PDT', 'MDT', 'DeathMode')
---[[ **** End UPDATED **** ]]	
 	state.MagicBurst = M(false, 'Magic Burst')
 	state.DeathMode = M(false, "Death Mode")
 
@@ -37,7 +35,7 @@ function user_setup()
 	send_command('bind !` gs c toggle MagicBurst')
 	send_command('bind @` gs c toggle DeathMode')
 	send_command('bind !o input /ma "Shock Spikes" <me>')
-	send_command('bind !p input /ma "Warp II" <stpc>')
+--	send_command('bind !p input /ma "Warp II" <stpc>')
 	send_command('bind ^, input /ma Sneak <stpc>')
 	send_command('bind ^. input /ma Invisible <stpc>')
 
@@ -50,7 +48,7 @@ function user_unload()
 	send_command('unbind !`')
 	send_command('unbind @`')
 	send_command('unbind !o')
-	send_command('unbind !p')
+--	send_command('unbind !p')
 	send_command('unbind ^,')
 	send_command('unbind !.')
 end
@@ -67,10 +65,10 @@ function init_gear_sets()
 	-- Precast sets to enhance JAs
 	sets.precast.JA['Mana Wall'] = {
 		feet="Wicce Sabots +1",
-		back=gear.BLM_Elem_Cape,
+		back=gear.BLM_MAB_Cape,
 		}
 
-	sets.precast.JA.Manafont = {body="Src. Coat +2"}
+--	sets.precast.JA.Manafont = {body="Src. Coat +2"}
 	
 	-- equip to maximize HP (for Tarus) and minimize MP loss before using convert
 	sets.precast.JA.Convert = {}
@@ -80,6 +78,8 @@ function init_gear_sets()
 
 	sets.precast.FC = {
 	--	/RDM --15 /SCH --10
+		main="Sucellus", --5
+		sub="Genmei Shield",
 		ammo="Sapience Orb", --2
 		head="Amalric Coif", --10
 		body="Shango Robe", --8
@@ -113,6 +113,7 @@ function init_gear_sets()
 
 	sets.precast.FC['Enhancing Magic'] = set_combine(sets.precast.FC, {
 		waist="Siegel Sash",
+		back="Perimede Cape",
 		})
 
 	sets.precast.FC['Elemental Magic'] = set_combine(sets.precast.FC, {
@@ -120,12 +121,12 @@ function init_gear_sets()
 		})
 
 	sets.precast.FC.Cure = set_combine(sets.precast.FC, {
-		main="Vadose Rod", --5
+		main="Sucellus", --5
 		sub="Sors Shield", --5
 		feet="Vanya Clogs", --15
 		ear1="Mendi. Earring", --5
 		ring1="Lebeche Ring", --(2)
-		back="Pahtli Cape", --8
+		back="Perimede Cape", --(4)
 		})
 
 	sets.precast.FC.Curaga = sets.precast.FC.Cure
@@ -165,7 +166,7 @@ function init_gear_sets()
 		ear2="Ishvara Earring",
 		ring1="Ramuh Ring +1",
 		ring2="Ramuh Ring +1",
-		back="Toro Cape",
+		back=gear.BLM_MAB_Cape,
 		waist=gear.ElementalBelt,
 		}
 
@@ -183,7 +184,7 @@ function init_gear_sets()
 		ear2="Moonshade Earring",
 		ring1="Shiva Ring +1",
 		ring2="Archon Ring",
-		back="Toro Cape",
+		back=gear.BLM_MAB_Cape,
 		waist="Yamabuki-no-Obi",
 		} -- INT
 
@@ -321,7 +322,7 @@ function init_gear_sets()
 		ear2="Digni. Earring",
 		ring1="Shiva Ring +1",
 		ring2="Shiva Ring +1",
-		back=gear.BLM_Elem_Cape,
+		back=gear.BLM_MAB_Cape,
 		waist="Channeler's Stone",
 		} -- INT/Magic accuracy
 		
@@ -341,7 +342,7 @@ function init_gear_sets()
 		ear2="Digni. Earring",
 		ring1="Evanescence Ring",
 		ring2="Weather. Ring",
-		back=gear.BLM_Elem_Cape,
+		back=gear.BLM_MAB_Cape,
 		waist=gear.ElementalObi,
 		}
 
@@ -379,7 +380,7 @@ function init_gear_sets()
 		ear2="Friomisi Earring",
 		ring1="Shiva Ring +1",
 		ring2="Shiva Ring +1",
-		back=gear.BLM_Elem_Cape,
+		back=gear.BLM_MAB_Cape,
 		waist=gear.ElementalObi,
 		}
 
@@ -493,7 +494,7 @@ function init_gear_sets()
 		ear2="Friomisi Earring",
 		ring1="Shiva Ring +1",
 		ring2="Shiva Ring +1",
-		back=gear.BLM_Elem_Cape,
+		back=gear.BLM_MAB_Cape,
 		})
 		
 	-- Defense sets
@@ -542,7 +543,7 @@ function init_gear_sets()
 		feet="Merlinic Crackows", --11
 		neck="Mizu. Kubikazari", --10
 		ring1="Mujin Band", --(5)
-		back=gear.BLM_Elem_Cape, --5
+		back=gear.BLM_MAB_Cape, --5
 		} 
 
 	-- Engaged sets
@@ -557,12 +558,12 @@ function init_gear_sets()
 	sets.engaged = {		
 		head="Telchine Cap",
 		body="Onca Suit",
-		neck="Lissome Necklace",
+		neck="Combatant's Torque",
 		ear1="Cessance Earring",
 		ear2="Brutal Earring",
 		ring1="Ramuh Ring +1",
 		ring2="Ramuh Ring +1",
-		waist="Eschan Stone",
+		waist="Grunfeld Rope",
 		back="Aurist's Cape +1",
 		}
 
