@@ -186,15 +186,16 @@ function init_gear_sets()
 
 	sets.precast.FC = {
 		ammo="Sapience Orb",
-		head=gear.Herc_MAB_head,
-		body="Samnuha Coat",
-		hands="Leyline Gloves",
-		feet=gear.Herc_MAB_feet,
-		neck="Orunmila's Torque",
-		ear1="Etiolation Earring",
-		ear2="Loquacious Earring",
-		ring1="Prolix Ring",
-		ring2="Weather. Ring",
+		head=gear.Herc_FC_head, --12
+		body="Samnuha Coat", --5
+		hands="Leyline Gloves", --7
+		feet=gear.Herc_MAB_feet, --2
+		neck="Orunmila's Torque", --5
+		ear1="Loquacious Earring", --2
+		ear2="Etiolation Earring", --1
+		ring1="Prolix Ring", --2
+		ring2="Weather. Ring", --5(3)
+		waist="Ninurta's Sash",
 		}
 
 	sets.precast.FC.Utsusemi = set_combine(sets.precast.FC, {
@@ -207,7 +208,7 @@ function init_gear_sets()
 	sets.precast.WS = {
 		ammo="Focal Orb",
 		head="Lilitu Headpiece",
-		body="Adhemar Jacket",
+		body="Meg. Cuirie +1",
 		hands="Meg. Gloves +1",
 		legs="Lustratio Subligar",
 		feet="Lustratio Leggings",
@@ -239,7 +240,6 @@ function init_gear_sets()
 	sets.precast.WS['Exenterator'].Acc = set_combine(sets.precast.WS['Exenterator'], {
 		ammo="Falcon Eye",
 		head="Dampening Tam",
-		body=gear.Herc_TA_body,
 		ear2="Zennaroi Earring",
 		ring1="Ramuh Ring +1",
 		back="Ground. Mantle +1",
@@ -253,7 +253,6 @@ function init_gear_sets()
 	sets.precast.WS['Evisceration'].Acc = set_combine(sets.precast.WS['Evisceration'], {
 		ammo="Falcon Eye",
 		head="Dampening Tam",
-		body=gear.Herc_TA_body,
 		legs="Meg. Chausses +1",
 		feet=gear.Herc_TA_feet,
 		ear2="Zennaroi Earring",
@@ -300,8 +299,8 @@ function init_gear_sets()
 	--------------------------------------
 
 	sets.midcast.FastRecast = {
-		ear1="Etiolation Earring",
-		ear2="Loquacious Earring",
+		ear1="Loquacious Earring",
+		ear2="Etiolation Earring",
 		}
 
 	-- Specific spells
@@ -353,7 +352,7 @@ function init_gear_sets()
 	sets.idle.MDT = set_combine (sets.idle, {
 		head="Dampening Tam",
 		neck="Loricate Torque +1",
-		ear1="Etiolation Earring",
+		ear2="Etiolation Earring",
 		ring1="Defending Ring", 
 		back="Solemnity Cape",
 		})
@@ -391,7 +390,7 @@ function init_gear_sets()
 	sets.defense.MDT = {
 		head="Dampening Tam", --4
 		neck="Loricate Torque +1", --6
-		ear1="Etiolation Earring", --3
+		ear2="Etiolation Earring", --3
 		ring1="Defending Ring", --10
 		back="Solemnity Cape", --4
 		}

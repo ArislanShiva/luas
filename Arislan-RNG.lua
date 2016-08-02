@@ -16,6 +16,7 @@ function job_setup()
 	state.Buff.Barrage = buffactive.Barrage or false
 	state.Buff.Camouflage = buffactive.Camouflage or false
 	state.Buff['Unlimited Shot'] = buffactive['Unlimited Shot'] or false
+	state.Buff.VelocityShot = buffactive.['Velocity Shot'] or false
 
 	determine_haste_group()
 end
@@ -86,16 +87,17 @@ function init_gear_sets()
 	sets.precast.Waltz['Healing Waltz'] = {}
 
 	sets.precast.FC = {
-		head=gear.Herc_MAB_head,
-		body="Samnuha Coat",
-		hands="Leyline Gloves",
+		head=gear.Herc_FC_head, --12
+		body="Samnuha Coat", --5
+		hands="Leyline Gloves", --7
 		legs="Carmine Cuisses +1",
-		feet=gear.Herc_MAB_feet,
-		neck="Orunmila's Torque",
-		ear1="Etiolation Earring",
-		ear2="Loquacious Earring",
-		ring1="Prolix Ring",
-		ring2="Weather. Ring",
+		feet=gear.Herc_MAB_feet, --2
+		neck="Orunmila's Torque", --5
+		ear1="Loquacious Earring", --2
+		ear2="Etiolation Earring", --1
+		ring1="Prolix Ring", --2
+		ring2="Weather. Ring", --5(3)
+		waist="Ninurta's Sash",
 		}
 
 	sets.precast.FC.Utsusemi = set_combine(sets.precast.FC, {
@@ -108,7 +110,7 @@ function init_gear_sets()
 	
 	sets.precast.RA = {
 		head="Amini Gapette +1", --7
-		body="Amini Caban +1",
+		body="Pursuer's Doublet", --6
 		hands="Carmine Fin. Ga. +1", --8
 		legs="Adhemar Kecks", --9
 		feet="Meg. Jam. +1", --8
@@ -155,7 +157,7 @@ function init_gear_sets()
 		body="Adhemar Jacket",
 		hands="Adhemar Wristbands",
 		ear1="Dominance Earring",
-		ring1="Ramuh Ring +1",
+		ring1="Apate Ring",
 		ring2="Ramuh Ring +1",
 		})
 
@@ -201,7 +203,7 @@ function init_gear_sets()
 
 	sets.precast.WS['Rampage'] = {
 		head="Lilitu Headpiece",
-		body="Adhemar Jacket",
+		body="Meg. Cuirie +1",
 		hands="Meg. Gloves +1",
 		hands="Meg. Gloves +1",
 		legs="Meg. Chausses +1",
@@ -219,7 +221,7 @@ function init_gear_sets()
 
 	sets.precast.WS['Evisceration'] = {
 		head="Adhemar Bonnet",
-		body="Adhemar Jacket",
+		body="Meg. Cuirie +1",
 		hands="Meg. Gloves +1",
 		legs="Meg. Chausses +1",
 		feet=gear.Herc_TA_feet,
@@ -241,8 +243,8 @@ function init_gear_sets()
 	
 	sets.midcast.FastRecast = {
 		body="Samnuha Coat",
-		ear1="Etiolation Earring",
-		ear2="Loquacious Earring",
+		ear1="Loquacious Earring",
+		ear2="Etiolation Earring",
 		}
 
 	sets.midcast.Utsusemi = {
@@ -252,12 +254,12 @@ function init_gear_sets()
 	-- Ranged sets
 
 	sets.midcast.RA = {
-		head="Meghanada Visor +1",
-		body="Amini Caban +1",
-		hands="Carmine Fin. Ga. +1",
+		head="Arcadian Beret +1",
+		body="Pursuer's Doublet",
+		hands="Amini Glove. +1",
 		legs="Meg. Chausses +1",
 		feet="Thereoid Greaves",
-		neck="Marked Gorget",
+		neck="Ocachi Gorget",
 		ear1="Enervating Earring",
 		ear2="Neritic Earring",
 		ring1="Garuda Ring +1",
@@ -267,6 +269,7 @@ function init_gear_sets()
 		}
 	
 	sets.midcast.RA.Acc = set_combine(sets.midcast.RA, {
+		head="Meghanada Visor +1",
 		body="Meg. Cuirie +1",
 		hands="Meg. Gloves +1",
 		feet="Meg. Jam. +1",
@@ -276,20 +279,21 @@ function init_gear_sets()
 		})
 		
 	sets.midcast.RA.Fodder = set_combine(sets.midcast.RA, {
-		head="Arcadian Beret +1",
-		neck="Ocachi Gorget",
 		waist="Ponente Sash",
 		})
 
 	sets.midcast.RA.Doomsday = set_combine(sets.midcast.RA, {
+		hands="Carmine Fin. Ga. +1",
 		ring2="Arvina Ringlet +1",
 		})
 
 	sets.midcast.RA.Doomsday.Acc = set_combine(sets.midcast.RA.Acc, {
+		hands="Carmine Fin. Ga. +1",
 		ring2="Arvina Ringlet +1",
 		})
 
 	sets.midcast.RA.Doomsday.Fodder = set_combine(sets.midcast.RA.Fodder, {
+		hands="Carmine Fin. Ga. +1",
 		ring2="Arvina Ringlet +1",
 		})
 	
@@ -336,7 +340,7 @@ function init_gear_sets()
 		head="Dampening Tam",
 		legs="Gyve Trousers",
 		neck="Loricate Torque +1",
-		ear1="Etiolation Earring",
+		ear2="Etiolation Earring",
 		ring1="Defending Ring", 
 		back="Solemnity Cape",
 		})
@@ -370,7 +374,7 @@ function init_gear_sets()
 		head="Dampening Tam", --4
 		legs="Gyve Trousers", --2
 		neck="Loricate Torque +1", --6
-		ear1="Etiolation Earring", --3
+		ear2="Etiolation Earring", --3
 		ring1="Defending Ring", --10
 		back="Solemnity Cape", --4
 		}
@@ -519,6 +523,7 @@ function init_gear_sets()
 	--------------------------------------
 
 	sets.buff.Barrage = set_combine(sets.midcast.RA.Acc, {hands="Orion Bracers +1"})
+	sets.buff.VelocityShot = set_combine(sets.midcast.RA, {body="Amini Caban +1"})
 --	sets.buff.Camouflage = {body="Orion Jerkin +1"}
 
 end
@@ -550,6 +555,10 @@ end
 function job_midcast(spell, action, spellMap, eventArgs)
 	if spell.action_type == 'Ranged Attack' and state.Buff.Barrage then
 		equip(sets.buff.Barrage)
+		eventArgs.handled = true
+	end
+	if spell.action_type == 'Ranged Attack' and state.Buff.VelocityShot then
+		equip(sets.buff.VelocityShot)
 		eventArgs.handled = true
 	end
 end

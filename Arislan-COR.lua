@@ -138,6 +138,7 @@ function init_gear_sets()
 		feet="Lanun Bottes +1",
 		neck="Loricate Torque +1",
 		ear1="Genmei Earring",
+		ear2="Etiolation Earring",
 		ring1="Defending Ring",
 		ring2="Barataria Ring",
 		back="Camulus's Mantle",
@@ -164,16 +165,17 @@ function init_gear_sets()
 	sets.precast.Waltz['Healing Waltz'] = {}
 	
 	sets.precast.FC = {
-		head=gear.Herc_MAB_head,
-		body="Samnuha Coat",
-		hands="Leyline Gloves",
+		head=gear.Herc_FC_head, --12
+		body="Samnuha Coat", --5
+		hands="Leyline Gloves", --7
 		legs="Carmine Cuisses +1",
-		feet=gear.Herc_MAB_feet,
-		neck="Orunmila's Torque",
-		ear1="Etiolation Earring",
-		ear2="Loquacious Earring",
-		ring1="Prolix Ring",
-		ring2="Weather. Ring",
+		feet=gear.Herc_MAB_feet, --2
+		neck="Orunmila's Torque", --5
+		ear1="Loquacious Earring", --2
+		ear2="Etiolation Earring", --1
+		ring1="Prolix Ring", --2
+		ring2="Weather. Ring", --5(3)
+		waist="Ninurta's Sash",
 		}
 
 	sets.precast.FC.Utsusemi = set_combine(sets.precast.FC, {
@@ -184,7 +186,7 @@ function init_gear_sets()
 	sets.precast.RA = {
 		ammo=gear.RAbullet,
 		head="Aurore Beret +1", --5
-		body="Lak. Frac +1",
+		body="Pursuer's Doublet", --6
 		hands="Carmine Fin. Ga. +1", --8
 		legs="Adhemar Kecks", --9
 		feet="Meg. Jam. +1", --8
@@ -262,7 +264,6 @@ function init_gear_sets()
 		
 	sets.precast.WS['Evisceration'] = {
 		head="Adhemar Bonnet",
-		body="Adhemar Jacket",
 		hands="Meg. Gloves +1",
 		legs="Samnuha Tights",
 		feet=gear.Herc_TA_feet,
@@ -311,8 +312,8 @@ function init_gear_sets()
 	
 	-- Midcast Sets
 	sets.midcast.FastRecast = {
-		ear1="Etiolation Earring",
-		ear2="Loquacious Earring",
+		ear1="Loquacious Earring",
+		ear2="Etiolation Earring",
 		}
 
 	sets.midcast.Cure = {
@@ -362,7 +363,7 @@ function init_gear_sets()
 	sets.midcast.RA = {
 		ammo=gear.RAbullet,	
 		head="Meghanada Visor +1",
-		body="Chasseur's Frac +1",
+		body="Pursuer's Doublet",
 		hands="Carmine Fin. Ga. +1",
 		legs="Meg. Chausses +1",
 		feet="Meg. Jam. +1",
@@ -386,7 +387,6 @@ function init_gear_sets()
 
 	sets.midcast.RA.Fodder = set_combine(sets.midcast.RA, {
 		ammo=gear.RAbullet,
-		body="Chasseur's Frac +1",
 		neck="Ocachi Gorget",
 		waist="Ponente Sash",
 		})
@@ -431,7 +431,7 @@ function init_gear_sets()
 		head="Dampening Tam",
 		neck="Loricate Torque +1",
 		ring1="Defending Ring", 
-		ear1="Etiolation Earring",
+		ear2="Etiolation Earring",
 		back="Solemnity Cape",
 		})
 
@@ -466,7 +466,7 @@ function init_gear_sets()
 		head="Dampening Tam", --4
 		neck="Loricate Torque +1", --6
 		ring1="Defending Ring", --10
-		ear1="Etiolation Earring", --3
+		ear2="Etiolation Earring", --3
 		back="Solemnity Cape", --4
 		}
 	

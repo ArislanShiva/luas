@@ -71,8 +71,8 @@ function init_gear_sets()
 		legs="Kaykaus Tights", --6
 		feet="Regal Pumps +1", --7
 		neck="Orunmila's Torque", --5
-		ear1="Etiolation Earring", --1
-		ear2="Loquacious Earring", --2
+		ear1="Loquacious Earring", --2
+		ear2="Etiolation Earring", --1
 		ring1="Prolix Ring", --2
 		ring2="Weather. Ring", --5
 		back="Alaunus's Cape", --10
@@ -144,8 +144,8 @@ function init_gear_sets()
 		hands="Fanatic Gloves",
 		legs="Ebers Pant. +1",
 		feet="Vanya Clogs",
-		ear1="Etiolation Earring",
-		ear2="Loquacious Earring",
+		ear1="Loquacious Earring",
+		ear2="Etiolation Earring",
 		ring1="Prolix Ring",
 		back="Swith Cape +1",
 		waist="Witful Belt",
@@ -411,7 +411,7 @@ function init_gear_sets()
 		hands="Inyan. Dastanas +1",
 		feet="Ebers Duckbills +1",
 		neck="Loricate Torque +1",
-		ear1="Etiolation Earring",
+		ear2="Etiolation Earring",
 		ring1="Defending Ring",
 		back="Solemnity Cape",
 		})
@@ -456,7 +456,7 @@ function init_gear_sets()
 		hands="Inyan. Dastanas +1", --3
 		feet="Ebers Duckbills +1",
 		neck="Loricate Torque +1", --6
-		ear1="Etiolation Earring", --3
+		ear2="Etiolation Earring", --3
 		ring1="Defending Ring", --10
 		back="Solemnity Cape", --4
 		}

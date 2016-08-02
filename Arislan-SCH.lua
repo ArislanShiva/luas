@@ -126,8 +126,8 @@ function init_gear_sets()
 		legs="Psycloth Lappas", --7
 		feet="Regal Pumps +1", --7
 		neck="Orunmila's Torque", --5
-		ear1="Etiolation Earring", --1
-		ear2="Loquacious Earring", --2
+		ear1="Loquacious Earring", --2
+		ear2="Etiolation Earring", --1
 		ring1="Prolix Ring", --2
 		ring2="Weather. Ring", --5
 		back=gear.SCH_FC_Cape, --10
@@ -178,8 +178,8 @@ function init_gear_sets()
 		legs="Amalric Slops",
 		feet="Arbatel Loafers +1",
 		neck="Orunmila's Torque",
-		ear1="Etiolation Earring",
-		ear2="Loquac. Earring",
+		ear1="Loquacious Earring",
+		ear2="Etiolation Earring",
 		ring1="Mephitas's Ring +1",
 		ring2="Mephitas's Ring",
 		back="Pahtli Cape",
@@ -212,8 +212,8 @@ function init_gear_sets()
 		hands="Gende. Gages +1",
 		legs="Merlinic Shalwar",
 		feet="Regal Pumps +1",
-		ear1="Etiolation Earring",
-		ear2="Loquac. Earring",
+		ear1="Loquacious Earring",
+		ear2="Etiolation Earring",
 		ring1="Prolix Ring",
 		back=gear.SCH_FC_Cape,
 		waist="Witful Belt",
@@ -292,6 +292,8 @@ function init_gear_sets()
 		body="Telchine Chas.",
 		back=gear.SCH_FC_Cape,
 		})
+
+	sets.midcast.Haste = sets.midcast['Enhancing Magic']
 	
 	sets.midcast.Refresh = set_combine(sets.midcast['Enhancing Magic'], {
 		waist="Gishdubar Sash",
@@ -325,9 +327,10 @@ function init_gear_sets()
 		head="Telchine Cap",
 		body="Telchine Chas.",
 		hands="Telchine Gloves",
+		legs="Telchine Braconi",
 		feet="Telchine Pigaches",
 		}
-	
+
 	-- Custom spell classes
 	sets.midcast.MndEnfeebles = {
 		main="Akademos",
@@ -437,15 +440,13 @@ function init_gear_sets()
 	sets.midcast.Impact = set_combine(sets.midcast['Elemental Magic'], {
 		head=empty,
 		body="Twilight Cloak",
-		ring2="Archon Ring",
+		ring1="Archon Ring",
 		})
 	
 	sets.midcast.Helix = set_combine(sets.midcast['Elemental Magic'], {
 		main="Akademos",
 		sub="Niobid Strap",
 		ammo="Ghastly Tathlum +1",
---		ring1="Fenrir Ring +1",
---		ring2="Fenrir Ring +1",
 		waist="Yamabuki-no-Obi",
 		})
 
@@ -502,7 +503,7 @@ function init_gear_sets()
 		legs="Gyve Trousers",
 		feet="Arbatel Loafers +1",
 		neck="Loricate Torque +1",
-		ear1="Etiolation Earring",
+		ear2="Etiolation Earring",
 		ring1="Defending Ring",
 		back="Solemnity Cape",
 		})
@@ -552,7 +553,7 @@ function init_gear_sets()
 		legs="Gyve Trousers", --2
 		feet="Arbatel Loafers +1",
 		neck="Loricate Torque +1", --6
-		ear1="Etiolation Earring", --3
+		ear2="Etiolation Earring", --3
 		ring1="Defending Ring", --10
 		back="Solemnity Cape", --4
 		}
@@ -578,7 +579,7 @@ function init_gear_sets()
 		ring1="Ramuh Ring +1",
 		ring2="Ramuh Ring +1",
 		waist="Grunfeld Rope",
-		back="Aurist's Cape +1",
+		back="Relucent Cape",
 		}
 	
 	------------------------------------------------------------------------------------------------
@@ -622,9 +623,15 @@ function job_post_midcast(spell, action, spellMap, eventArgs)
 	end
 	if spell.skill == 'Elemental Magic' and state.MagicBurst.value then
 		equip(sets.magic_burst)
+		if spell.english == "Impact" then
+			equip(sets.midcast.Impact)
+		end
 	end
 	if spell.skill == 'Enhancing Magic' and classes.NoSkillSpells:contains(spell.english) then
 		equip(sets.midcast.EnhancingDuration)
+		if state.Buff.Perpetuance then
+			equip(sets.buff['Perpetuance'])
+		end
 	end
 end
 

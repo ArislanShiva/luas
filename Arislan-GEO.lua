@@ -80,8 +80,8 @@ function init_gear_sets()
 		legs="Geo. Pants +1", --11
 		feet="Regal Pumps +1", --7
 		neck="Orunmila's Torque", --5
-		ear1="Etiolation Earring", --1
-		ear2="Loquacious Earring", --2
+		ear1="Loquacious Earring", --1
+		ear2="Etiolation Earring", --2
 		ring1="Prolix Ring", --2
 		ring2="Weather. Ring", --5
 		back="Lifestream Cape", --7
@@ -142,8 +142,8 @@ function init_gear_sets()
 		hands="Merlinic Dastanas",
 		legs="Geo. Pants +1",
 		feet="Regal Pumps +1",
-		ear1="Etiolation Earring",
-		ear2="Loquacious Earring",
+		ear1="Loquacious Earring",
+		ear2="Etiolation Earring",
 		ring1="Prolix Ring",
 		back="Swith Cape +1",
 		waist="Witful Belt",
@@ -419,7 +419,7 @@ function init_gear_sets()
 		body="Vanya Robe",
 		legs="Gyve Trousers",
 		neck="Loricate Torque +1",
-		ear1="Etiolation Earring",
+		ear2="Etiolation Earring",
 		ring1="Defending Ring",
 		back="Solemnity Cape",
 		})
@@ -498,7 +498,7 @@ function init_gear_sets()
 		body="Vanya Robe", --1
 		legs="Gyve Trousers", --2
 		neck="Loricate Torque +1", --6
-		ear1="Etiolation Earring", --3
+		ear2="Etiolation Earring", --3
 		ring1="Defending Ring", --10
 		back="Solemnity Cape", --4
 		}
@@ -530,7 +530,7 @@ function init_gear_sets()
 		ring1="Ramuh Ring +1",
 		ring2="Ramuh Ring +1",
 		waist="Grunfeld Rope",
-		back="Aurist's Cape +1",
+		back="Relucent Cape",
 		}
 
 

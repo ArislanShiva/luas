@@ -2,7 +2,6 @@ function define_global_sets()
 
 	-- Herculean Triple Attack Set
 
-	gear.Herc_TA_head = {name="Herculean Helm", augments={'Accuracy+24 Attack+24','Crit.hit rate+3','DEX+4','Accuracy+8','Attack+5',}}
 	gear.Herc_TA_body = {name="Herculean Vest", augments={'Accuracy+21 Attack+21','"Triple Atk."+3','STR+6','Accuracy+8',}}
 	gear.Herc_TA_hands = {name="Herculean Gloves", augments={'Accuracy+17 Attack+17','"Triple Atk."+2','AGI+10','Accuracy+12','Attack+13',}}
 	gear.Herc_TA_legs = {name="Herculean Trousers", augments={'Accuracy+15 Attack+15','"Triple Atk."+2','STR+10','Accuracy+12','Attack+4',}}
@@ -13,6 +12,8 @@ function define_global_sets()
 	gear.Herc_MAB_head = {name="Herculean Helm", augments={'Mag. Acc.+20 "Mag.Atk.Bns."+20','Weapon skill damage +1%','Mag. Acc.+13','"Mag.Atk.Bns."+13',}}
 	gear.Herc_MAB_legs = {name="Herculean Trousers", augments={'Mag. Acc.+16 "Mag.Atk.Bns."+16','"Fast Cast"+3','AGI+10','"Mag.Atk.Bns."+15',}}
 	gear.Herc_MAB_feet = {name="Herculean Boots", augments={'"Mag.Atk.Bns."+22','"Fast Cast"+2','Accuracy+10 Attack+10','Mag. Acc.+15 "Mag.Atk.Bns."+15',}}
+
+	gear.Herc_FC_head = {name="Herculean Helm", augments={'"Fast Cast"+5',}}	
 
 	-- Taeon Dual Wield Set
 	

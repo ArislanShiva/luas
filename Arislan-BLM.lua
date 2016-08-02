@@ -564,7 +564,7 @@ function init_gear_sets()
 		ring1="Ramuh Ring +1",
 		ring2="Ramuh Ring +1",
 		waist="Grunfeld Rope",
-		back="Aurist's Cape +1",
+		back="Relucent Cape",
 		}
 
 end
