@@ -26,7 +26,7 @@ function user_setup()
     state.OffenseMode:options('Normal', 'LowAcc', 'MidAcc', 'HighAcc', 'Shield')
     state.HybridMode:options('Normal', 'PhysicalDef', 'MagicalDef')
     state.CastingMode:options('Normal', 'Resistant', 'Potency')
-    state.IdleMode:options('Normal', 'PDT', 'MDT')
+    state.IdleMode:options('Normal', 'Movement', 'PDT', 'MDT')
 
 	state.MagicBurst = M(false, 'Magic Burst')
 
@@ -308,7 +308,7 @@ function init_gear_sets()
 		body="Shango Robe", hands="Leyline Gloves", lring="Stikini Ring", rring="Stikini Ring",
 		back=gear.RDMCape_Nuke, waist="Luminary Sash", legs="Merlinic Shalwar", feet=gear.NukeCrackows
 	}
-	
+
 	sets.midcast['Blue Magic'] =
 	{
 		main=gear.Grioavolr_Enf, sub="Clerisy Strap", ammo="Pemphredo Tathlum",
@@ -363,8 +363,13 @@ function init_gear_sets()
 		main="Bolelabunga", sub="Beatific Shield +1", ammo="Homiliary",
 		head="Viti. Chapeau +1", neck="Sanctity Necklace", lear="Dawn Earring", rear="Infused Earring",
 		body="Witching Robe", hands="Serpentes Cuffs", lring="Sheltered Ring", rring="Paguroidea Ring",
-        back="Shadow Mantle", waist="Fucho-no-Obi", legs="Carmine Cuisses +1", feet="Serpentes Sabots"
+        back="Shadow Mantle", waist="Fucho-no-Obi", legs="Lengo Pants", feet="Serpentes Sabots"
 	}
+
+	sets.idle.Movement = set_combine(sets.idle,
+    {
+        legs="Carmine Cuisses +1"
+    })
 
 	sets.idle.PDT =
 	{
@@ -460,7 +465,7 @@ function init_gear_sets()
 		rear="Digni. Earring",
 		waist="Kentarch Belt +1"
 	})
-	
+
 	sets.engaged.Shield =
 	{
 		main="Sequence", sub="Genmei Shield", ammo="Ginsen",
@@ -494,7 +499,7 @@ function init_gear_sets()
 		rear="Digni. Earring",
 		waist="Kentarch Belt +1"
 	})
-	
+
 
 
 	sets.engaged.MaxHaste =
@@ -522,7 +527,7 @@ function init_gear_sets()
 		rear="Digni. Earring",
 		waist="Kentarch Belt +1"
 	})
-	
+
 
 end
 
@@ -557,21 +562,6 @@ function job_post_midcast(spell, action, spellMap, eventArgs)
 			{
 				waist="Hachirin-no-Obi"
 			}))
-		elseif spell.element == 'Light' then
-			if (world.weather_element == 'Light' or world.day_element == 'Light') then
-				equip(set_combine(sets.magic_burst,
-				{
-					lring="Weather. Ring",
-					waist="Hachirin-no-Obi"
-				}))
-			else
-				equip(set_combine(sets.magic_burst,
-				{
-					lring="Weather. Ring"
-				}))
-
-			end
-
 		elseif spell.element == 'Dark' and spell.english ~= 'Impact' then
 			if (world.weather_element == 'Dark' or world.day_element == 'Dark') then
 				equip(set_combine(sets.magic_burst,
@@ -608,13 +598,7 @@ function job_post_midcast(spell, action, spellMap, eventArgs)
 			equip(sets.magic_burst)
 		end
 	elseif spell.skill =='Elemental Magic' and (spell.element == world.day_element or spell.element == world.weather_element) then
-		if spell.element == 'Light'	then
-			equip
-			{
-				rring="Weather. Ring",
-				waist="Hachirin-no-Obi"
-			}
-		elseif spell.element == 'Dark' then
+		if spell.element == 'Dark' then
 			equip
 			{
 				lring="Archon Ring",

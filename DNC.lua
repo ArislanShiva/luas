@@ -2,35 +2,10 @@
 -- Setup functions for this job.  Generally should not be modified.
 -------------------------------------------------------------------------------------------------------------------
 
---[[
-    Custom commands:
-    
-    gs c step
-        Uses the currently configured step on the target, with either <t> or <stnpc> depending on setting.
-    gs c step t
-        Uses the currently configured step on the target, but forces use of <t>.
-    
-    
-    Configuration commands:
-    
-    gs c cycle mainstep
-        Cycles through the available steps to use as the primary step when using one of the above commands.
-        
-    gs c cycle altstep
-        Cycles through the available steps to use for alternating with the configured main step.
-        
-    gs c toggle usealtstep
-        Toggles whether or not to use an alternate step.
-        
-    gs c toggle selectsteptarget
-        Toggles whether or not to use <stnpc> (as opposed to <t>) when using a step.
---]]
-
-
 -- Initialization function for this job file.
 function get_sets()
     mote_include_version = 2
-    
+
     -- Load and initialize the include file.
     include('Mote-Include.lua')
 end
@@ -61,6 +36,7 @@ function user_setup()
     state.HybridMode:options('Normal', 'Evasion', 'PDT')
 	state.WeaponskillMode:options('Normal', 'Acc')
     state.PhysicalDefenseMode:options('PDT', 'MDT', 'Evasion')
+    state.IdleMode:options('Normal', 'Movement', 'PDT', 'MDT')
 
     -- Additional local binds
     send_command('bind ^= gs c cycle mainstep')
@@ -72,7 +48,6 @@ function user_setup()
 
     select_default_macro_book()
 end
-
 
 -- Called when this job file is unloaded (eg: job change)
 function user_unload()
@@ -92,7 +67,7 @@ function init_gear_sets()
     --------------------------------------
 
 	-- Buff sets: Gear that needs to be worn to actively enhance a current player buff.
-    sets.buff['Climactic Flourish'] = 
+    sets.buff['Climactic Flourish'] =
 	{
 		head="Maculele Tiara +1"
 	}
@@ -103,54 +78,54 @@ function init_gear_sets()
 
     -- Precast sets to enhance JAs
 
-    sets.precast.JA['No Foot Rise'] = 
+    sets.precast.JA['No Foot Rise'] =
 	{
 		body="Horos Casaque +1"
 	}
 
-    sets.precast.JA['Trance'] = 
+    sets.precast.JA['Trance'] =
 	{
 		head="Horos Tiara +1"
 	}
-    
+
 
     -- Waltz set (chr and vit)
-    sets.precast.Waltz = 
+    sets.precast.Waltz =
 	{
         head="Horos Tiara +1", lear="Roundel Earring",
         body="Maxixi Casaque +1",
         back="Toetapper Mantle", waist="Fotia Belt", feet="Maxixi Shoes +1"
 	}
 
-    
-    sets.precast.Samba = 
+
+    sets.precast.Samba =
 	{
 		head="Maxixi Tiara +1",
 		back="Senuna's Mantle"
 	}
 
-    sets.precast.Jig = 
+    sets.precast.Jig =
 	{
 		legs="Horos Tights +1", feet="Maxixi Shoes +1"
 	}
 
-    sets.precast.Step = 
+    sets.precast.Step =
 	{
 		ammo="Falcon Eye",
 		head="Dampening Tam", neck="Combatant's Torque", lear="Telos Earring", rear="Digni. Earring",
 		body="Adhemar Jacket", hands="Meg. Gloves +1", lring="Cacoethic Ring +1", rring="Cacoethic Ring",
 		back="Toetapper Mantle", waist="Eschan Stone", legs="Adhemar Kecks", feet="Meg. Jam. +1"
 	}
-	
+
     sets.precast.Flourish1 = {}
-    sets.precast.Flourish1['Violent Flourish'] = 
+    sets.precast.Flourish1['Violent Flourish'] =
 	{
 		ammo="Pemphredo Tathlum",
 		head="Dampening Tam", neck="Sanctity Necklace", lear="Digni. Earring",ear2="Gwati Earring",
         body="Horos Casaque +1", hands="Leyline Gloves", lring="Stikini Ring", rring="Stikini Ring",
         back="Toetapper Mantle", waist="Eschan Stone", legs="Adhemar Kecks", feet="Herculean Boots"
 	}
-    sets.precast.Flourish1['Desperate Flourish'] = 
+    sets.precast.Flourish1['Desperate Flourish'] =
 	{
 		ammo="Falcon Eye",
 		head="Dampening Tam", neck="Combatant's Torque", lear="Telos Earring", rear="Digni. Earring",
@@ -159,21 +134,21 @@ function init_gear_sets()
 	}
 
     sets.precast.Flourish2 = {}
-    sets.precast.Flourish2['Reverse Flourish'] = 
+    sets.precast.Flourish2['Reverse Flourish'] =
 	{
 		hands="Macu. Bangles +1",
 		back="Toetapper Mantle"
 	}
 
     sets.precast.Flourish3 = {}
-    sets.precast.Flourish3['Climactic Flourish'] = 
+    sets.precast.Flourish3['Climactic Flourish'] =
 	{
 		head="Maculele Tiara +1"
 	}
 
     -- Fast cast sets for spells
-    
-    sets.precast.FC = 
+
+    sets.precast.FC =
 	{
 		ammo="Staunch Tathlum",
 		head="Herculean Helm", neck="Orunmila's Torque", lear="Etiolation Earring", rear="Loquac. Earring",
@@ -181,14 +156,14 @@ function init_gear_sets()
 		back="Shadow Mantle", waist="Flume Belt", legs="Herculean Trousers", feet="Herculean Boots"
 	}
 
-	sets.precast.FC.Utsusemi = set_combine(sets.precast.FC, 
+	sets.precast.FC.Utsusemi = set_combine(sets.precast.FC,
 	{
 		body="Passion Jacket"
 	})
 
 	-- Weaponskill Sets
 
-	sets.precast.WS = 
+	sets.precast.WS =
 	{
 		ammo="Falcon Eye",
 		head="Lilitu Headpiece", neck="Fotia Gorget", lear="Brutal Earring", rear="Moonshade Earring",
@@ -196,7 +171,7 @@ function init_gear_sets()
 		back="Senuna's Mantle", waist="Fotia Belt", legs="Samnuha Tights", feet="Herculean Boots"
 	} -- default set
 
-	sets.precast.WS.Acc = set_combine(sets.precast.WS, 
+	sets.precast.WS.Acc = set_combine(sets.precast.WS,
 	{
 		head="Dampening Tam", lear="Telos Earring",
 		lring="Cacoethic Ring +1",
@@ -204,20 +179,20 @@ function init_gear_sets()
 	})
 
 
-	sets.precast.WS['Exenterator'] = set_combine(sets.precast.WS, 
+	sets.precast.WS['Exenterator'] = set_combine(sets.precast.WS,
 	{
 		ammo="Ginsen",
 		head="Meghanada Visor +1",
 		lring="Garuda Ring", feet="Herculean Boots"
 	})
 
-	sets.precast.WS['Exenterator'].Acc = set_combine(sets.precast.WS['Exenterator'], 
+	sets.precast.WS['Exenterator'].Acc = set_combine(sets.precast.WS['Exenterator'],
 	{
 		lear="Telos Earring",
 		lring="Cacoethic Ring +1",
 		legs="Adhemar Kecks", feet="Meg. Jam. +1"
 	})
-	
+
 	sets.precast.WS['Exenterator'].CF = set_combine(sets.precast.WS['Exenterator'],
 	{
 		head="Maculele Tiara +1",
@@ -225,7 +200,7 @@ function init_gear_sets()
 		legs="Herculean Trousers"
 	})
 
-	sets.precast.WS['Evisceration'] = set_combine(sets.precast.WS, 
+	sets.precast.WS['Evisceration'] = set_combine(sets.precast.WS,
 	{
 		ammo="Falcon Eye",
 		head="Adhemar Bonnet",
@@ -233,31 +208,31 @@ function init_gear_sets()
 		legs="Herculean Trousers"
 	})
 
-	sets.precast.WS['Evisceration'].Acc = set_combine(sets.precast.WS['Evisceration'], 
+	sets.precast.WS['Evisceration'].Acc = set_combine(sets.precast.WS['Evisceration'],
 	{
 		head="Dampening Tam", lear="Telos Earring",
 		lring="Cacoethic Ring +1",
 		legs="Adhemar Kecks", feet="Meg. Jam. +1"
 	})
-	
+
 	sets.precast.WS['Evisceration'].CF = set_combine(sets.precast.WS['Evisceration'],
 	{
 		head="Maculele Tiara +1"
 	})
-	
-	sets.precast.WS['Pyrrhic Kleos'] = set_combine(sets.precast.WS, 
+
+	sets.precast.WS['Pyrrhic Kleos'] = set_combine(sets.precast.WS,
 	{
 		ammo="Floestone",
 		head="Meghanada Visor +1"
 	})
 
-	sets.precast.WS['Pyrrhic Kleos'].Acc = set_combine(sets.precast.WS['Pyrrhic Kleos'], 
+	sets.precast.WS['Pyrrhic Kleos'].Acc = set_combine(sets.precast.WS['Pyrrhic Kleos'],
 	{
 		lear="Telos Earring",
 		lring="Cacoethic Ring +1",
 		legs="Adhemar Kecks", feet="Meg. Jam. +1"
 	})
-	
+
 	sets.precast.WS['Pyrrhic Kleos'].CF = set_combine(sets.precast.WS['Pyrrhic Kleos'],
 	{
 		head="Maculele Tiara +1",
@@ -266,14 +241,14 @@ function init_gear_sets()
 	})
 
 
-	sets.precast.WS['Rudra\'s Storm'] = set_combine(sets.precast.WS, 
+	sets.precast.WS['Rudra\'s Storm'] = set_combine(sets.precast.WS,
 	{
 		lear="Dawn Earring",
 		rring="Apate Ring"
 	})
 
 	sets.precast.WS['Rudra\'s Storm'].Acc = sets.precast.WS["Rudra's Storm"]
-	
+
 	sets.precast.WS['Rudra\'s Storm'].CF = set_combine(sets.precast.WS["Rudra's Storm"],
 	{
 		head="Maculele Tiara +1",
@@ -281,23 +256,23 @@ function init_gear_sets()
 		legs="Herculean Trousers"
 	})
 
-	sets.precast.WS['Aeolian Edge'] = set_combine(sets.precast.WS, 
+	sets.precast.WS['Aeolian Edge'] = set_combine(sets.precast.WS,
 	{
 		ammo="Pemphredo Tathlum",
 		head="Herculean Helm", lear="Friomisi Earring",
 		body="Samnuha Coat", hands="Leyline Gloves", lring="Acumen Ring", rring="Garuda Ring",
 		back="Seshaw Cape", legs="Herculean Trousers", feet="Herculean Boots"
 	})
-	
+
 	sets.precast.WS['Cyclone'] = sets.precast.WS['Aeolian Edge']
-	
+
 	sets.precast.WS['Gust Slash'] = sets.precast.WS['Aeolian Edge']
-    
+
 	--------------------------------------
 	-- Midcast sets
 	--------------------------------------
 
-	sets.midcast.FastRecast = 
+	sets.midcast.FastRecast =
 	{
 		head="Herculean Helm", neck="Orunmila's Torque", lear="Etiolation Earring", rear="Loquac. Earring",
 		body="Foppish Tunica", hands="Leyline Gloves", lring="Evanescence Ring", rring="Prolix Ring",
@@ -310,7 +285,7 @@ function init_gear_sets()
 	-- Idle/resting/defense sets
 	--------------------------------------
 
-	sets.idle = 
+	sets.idle =
 	{
 		ammo="Staunch Tathlum",
 		head="Dampening Tam", neck="Sanctity Necklace", lear="Dawn Earring", rear="Infused Earring",
@@ -318,21 +293,21 @@ function init_gear_sets()
 		back="Shadow Mantle", waist="Flume Belt", legs="Meg. Chausses +1", feet="Tandava Crackows"
 	}
 
-	sets.idle.PDT = set_combine (sets.idle, 
+	sets.idle.PDT = set_combine (sets.idle,
 	{
-		head="Lithelimb Cap", neck="Twilight Torque", 
+		head="Lithelimb Cap", neck="Twilight Torque",
 		body="Meg. Cuirie +1", lring="Defending Ring", rring="Vocane Ring",
 		feet="Herculean Boots"
 	})
 
-	sets.idle.MDT = set_combine (sets.idle, 
+	sets.idle.MDT = set_combine (sets.idle,
 	{
 		neck="Twilight Torque", lear="Etiolation Earring", rear="Static Earring",
 		body="Samnuha Coat", hands="Leyline Gloves", lring="Defending Ring", rring="Vocane Ring",
 		back="Solemnity Cape", legs="Feast Hose"
 	})
 
-	sets.idle.Town = set_combine(sets.idle, 
+	sets.idle.Town = set_combine(sets.idle,
 	{
 		body="Councilor's Garb",
 		feet="Tandava Crackows"
@@ -343,15 +318,15 @@ function init_gear_sets()
 
 	-- Defense sets
 
-	sets.defense.PDT = 
+	sets.defense.PDT =
 	{
 		ammo="Staunch Tathlum",
-		head="Lithelimb Cap", neck="Twilight Torque", 
+		head="Lithelimb Cap", neck="Twilight Torque",
 		body="Meg. Cuirie +1", hands="Umuthi Gloves", lring="Defending Ring", rring="Vocane Ring",
 		back="Shadow Mantle", waist="Flume Belt", legs="Meg. Chausses +1", feet="Herculean Boots"
 	}
 
-	sets.defense.MDT = 
+	sets.defense.MDT =
 	{
 		ammo="Staunch Tathlum",
 		head="Dampening Tam", neck="Twilight Torque", lear="Etiolation Earring", rear="Static Earring",
@@ -370,8 +345,8 @@ function init_gear_sets()
 	-- sets if more refined versions aren't defined.
 	-- If you create a set with both offense and defense modes, the offense mode should be first.
 	-- EG: sets.engaged.Dagger.Accuracy.Evasion
-	
-	sets.engaged = 
+
+	sets.engaged =
 	{
 		main="Aeneas", sub="Skinflayer", ammo="Ginsen",
 		head="Adhemar Bonnet", neck="Asperity Necklace", lear="Eabani Earring", rear="Suppanomimi",
@@ -379,26 +354,26 @@ function init_gear_sets()
 		back="Senuna's Mantle", waist="Reiki Yotai", legs="Samnuha Tights", feet="Taeon Boots"
 	}
 
-	sets.engaged.LowAcc = set_combine(sets.engaged, 
+	sets.engaged.LowAcc = set_combine(sets.engaged,
 	{
-		ammo="Falcon Eye", 
-		head="Dampening Tam", neck="Combatant's Torque", lear="Telos Earring", 
+		ammo="Falcon Eye",
+		head="Dampening Tam", neck="Combatant's Torque", lear="Telos Earring",
 	})
 
-	sets.engaged.MidAcc = set_combine(sets.engaged.LowAcc, 
+	sets.engaged.MidAcc = set_combine(sets.engaged.LowAcc,
 	{
 		lring="Cacoethic Ring +1",
 		waist="Kentarch Belt +1", legs="Adhemar Kecks"
 	})
 
-	sets.engaged.HighAcc = set_combine(sets.engaged.MidAcc, 
+	sets.engaged.HighAcc = set_combine(sets.engaged.MidAcc,
 	{
 		head="Meghanada Visor +1", rear="Digni. Earring",
 		hands="Meg. Gloves +1", rring="Cacoethic Ring",
 		feet="Meg. Jam. +1"
 	})
 
-	sets.engaged.HighHaste = 
+	sets.engaged.HighHaste =
 	{
 		main="Aeneas", sub="Skinflayer", ammo="Ginsen",
 		head="Adhemar Bonnet", neck="Asperity Necklace", lear="Eabani Earring", rear="Suppanomimi",
@@ -406,26 +381,26 @@ function init_gear_sets()
 		back="Senuna's Mantle", waist="Reiki Yotai", legs="Samnuha Tights", feet="Herculean Boots"
 	}
 
-	sets.engaged.HighHaste.LowAcc = set_combine(sets.engaged.HighHaste, 
+	sets.engaged.HighHaste.LowAcc = set_combine(sets.engaged.HighHaste,
 	{
-		ammo="Falcon Eye", 
-		head="Dampening Tam", neck="Combatant's Torque", lear="Telos Earring", 
+		ammo="Falcon Eye",
+		head="Dampening Tam", neck="Combatant's Torque", lear="Telos Earring",
 	})
 
-	sets.engaged.HighHaste.MidAcc = set_combine(sets.engaged.HighHaste.LowAcc, 
+	sets.engaged.HighHaste.MidAcc = set_combine(sets.engaged.HighHaste.LowAcc,
 	{
 		lring="Cacoethic Ring +1",
 		waist="Kentarch Belt +1", legs="Adhemar Kecks"
 	})
 
-	sets.engaged.HighHaste.HighAcc = set_combine(sets.engaged.HighHaste.MidAcc, 
+	sets.engaged.HighHaste.HighAcc = set_combine(sets.engaged.HighHaste.MidAcc,
 	{
 		head="Meghanada Visor +1", rear="Digni. Earring",
 		hands="Meg. Gloves +1", rring="Cacoethic Ring",
 		feet="Meg. Jam. +1"
 	})
 
-	sets.engaged.MaxHaste = 
+	sets.engaged.MaxHaste =
 	{
 		main="Aeneas", sub="Skinflayer", ammo="Ginsen",
 		head="Adhemar Bonnet", neck="Asperity Necklace", lear="Brutal Earring", rear="Cessance Earring",
@@ -433,19 +408,19 @@ function init_gear_sets()
 		back="Senuna's Mantle", waist="Windbuffet Belt +1", legs="Samnuha Tights", feet="Herculean Boots"
 	}
 
-	sets.engaged.MaxHaste.LowAcc = set_combine(sets.engaged.MaxHaste, 
+	sets.engaged.MaxHaste.LowAcc = set_combine(sets.engaged.MaxHaste,
 	{
-		ammo="Falcon Eye", 
+		ammo="Falcon Eye",
 		head="Dampening Tam", neck="Combatant's Torque", lear="Telos Earring",
 	})
 
-	sets.engaged.MaxHaste.MidAcc = set_combine(sets.engaged.MaxHaste.LowAcc, 
+	sets.engaged.MaxHaste.MidAcc = set_combine(sets.engaged.MaxHaste.LowAcc,
 	{
 		lring="Cacoethic Ring +1",
 		waist="Kentarch Belt +1", legs="Adhemar Kecks"
 	})
 
-	sets.engaged.MaxHaste.HighAcc = set_combine(sets.engaged.MaxHaste.MidAcc, 
+	sets.engaged.MaxHaste.HighAcc = set_combine(sets.engaged.MaxHaste.MidAcc,
 	{
 		head="Meghanada Visor +1", rear="Digni. Earring",
 		hands="Meg. Gloves +1", rring="Cacoethic Ring",
@@ -512,7 +487,7 @@ function customize_melee_set(meleeSet)
             meleeSet = set_combine(meleeSet, sets.buff['Climactic Flourish'])
         end
     end
-    
+
     return meleeSet
 end
 
@@ -523,7 +498,7 @@ function job_auto_change_target(spell, action, spellMap, eventArgs)
             state.IgnoreTargetting:reset()
             eventArgs.handled = true
         end
-        
+
         eventArgs.SelectNPCTargets = state.SelectStepTarget.value
     end
 end
@@ -533,23 +508,23 @@ end
 -- Set eventArgs.handled to true if display was handled, and you don't want the default info shown.
 function display_current_job_state(eventArgs)
     local msg = 'Melee'
-    
+
     if state.CombatForm.has_value then
         msg = msg .. ' (' .. state.CombatForm.value .. ')'
     end
-    
+
     msg = msg .. ': '
-    
+
     msg = msg .. state.OffenseMode.value
     if state.HybridMode.value ~= 'Normal' then
         msg = msg .. '/' .. state.HybridMode.value
     end
     msg = msg .. ', WS: ' .. state.WeaponskillMode.value
-    
+
     if state.DefenseMode.value ~= 'None' then
         msg = msg .. ', ' .. 'Defense: ' .. state.DefenseMode.value .. ' (' .. state[state.DefenseMode.value .. 'DefenseMode'].value .. ')'
     end
-    
+
     if state.Kiting.value then
         msg = msg .. ', Kiting'
     end
@@ -559,7 +534,7 @@ function display_current_job_state(eventArgs)
     if state.UseAltStep.value == true then
         msg = msg .. '/'..state.AltStep.current
     end
-    
+
     msg = msg .. ']'
 
     if state.SelectStepTarget.value == true then
@@ -589,8 +564,8 @@ function job_self_command(cmdParams, eventArgs)
             state.CurrentStep:cycle()
         else
             doStep = state.MainStep.current
-        end        
-        
+        end
+
         send_command('@input /ja "'..doStep..'" <t>')
     end
 end

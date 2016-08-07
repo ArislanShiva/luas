@@ -44,6 +44,7 @@ function user_setup()
 	state.RangedMode:options('Normal', 'Acc')
 	state.WeaponskillMode:options('Normal', 'Acc')
 	state.PhysicalDefenseMode:options('PDT', 'MDT')
+    state.IdleMode:options('Normal', 'Movement', 'PDT', 'MDT')
 
 	-- Additional local binds
 	send_command('bind ^= gs c cycle treasuremode')
@@ -87,22 +88,22 @@ function init_gear_sets()
 
 	-- Precast sets to enhance JAs
 
-    sets.precast.JA['Burst Affinity'] = 
+    sets.precast.JA['Burst Affinity'] =
 	{
 		feet="Hashi. Basmak +1"
 	}
 
-    sets.precast.JA['Efflux'] = 
+    sets.precast.JA['Efflux'] =
 	{
 		legs="Hashishin Tayt +1"
 	}
 
-    sets.precast.JA['Azure Lore'] = 
+    sets.precast.JA['Azure Lore'] =
 	{
 		hands="Luh. Bazubands +1"
 	}
 
-    sets.precast.JA['Diffusion'] = 
+    sets.precast.JA['Diffusion'] =
 	{
 		feet="Luhlaza Charuqs +1"
 	}
@@ -120,7 +121,7 @@ function init_gear_sets()
 		body="Luhlaza Jubbah +1", hands="Leyline Gloves", lring="Evanescence Ring", rring="Prolix Ring",
 		back="Swith Cape +1", waist="Witful Belt", legs="Psycloth Lappas", feet="Carmine Greaves"
 	}
-	
+
 	sets.precast.FC['Blue Magic'] = set_combine(sets.precast.FC,
 	{
 		body="Hashishin Mintan +1"
@@ -446,8 +447,14 @@ function init_gear_sets()
 		ammo="Staunch Tathlum",
 		head="Rawhide Mask", neck="Sanctity Necklace", lear="Dawn Earring", rear="Infused Earring",
 		body="Amalric Doublet", hands="Serpentes Cuffs", lring="Sheltered Ring", rring="Paguroidea Ring",
-		back="Shadow Mantle", waist="Fucho-no-Obi", legs="Carmine Cuisses +1", feet="Serpentes Sabots"
+		back="Shadow Mantle", waist="Fucho-no-Obi", legs="Lengo Pants", feet="Serpentes Sabots"
 	}
+
+
+	sets.idle.Movement = set_combine(sets.idle,
+    {
+        legs="Carmine Cuisses +1"
+    })
 
 	sets.idle.PDT = set_combine(sets.idle,
 	{
@@ -732,7 +739,7 @@ function apply_ability_bonuses(spell, action, spellMap)
 	if state.Buff.Diffusion and (spellMap == 'Buffs' or spellMap == 'BlueSkill') then
 		equip(sets.buff['Diffusion'])
 	end
-	
+
 	if state.Buff['Burst Affinity'] then equip (sets.buff['Burst Affinity']) end
 	if state.Buff['Efflux'] then equip (sets.buff['Efflux']) end
 	if state.Buff['Diffusion'] then equip (sets.buff['Diffusion']) end

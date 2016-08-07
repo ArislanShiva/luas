@@ -24,7 +24,7 @@ end
 function user_setup()
 	state.OffenseMode:options('None', 'Normal')
 	state.CastingMode:options('Normal', 'Resistant')
-	state.IdleMode:options('Normal', 'PDT', 'MDT')
+	state.IdleMode:options('Normal', 'Movement', 'PDT', 'MDT')
 
 	-- Additional local binds
 	send_command('bind ^- input /ja "Light Arts" <me>')
@@ -335,6 +335,11 @@ function init_gear_sets()
 		body="Witching Robe", hands="Serpentes Cuffs", lring="Sheltered Ring", rring="Paguroidea Ring",
         back="Shadow Mantle", waist="Fucho-no-Obi", legs="Assid. Pants +1", feet="Serpentes Sabots"
 	}
+
+	sets.idle.Movement = set_combine(sets.idle,
+    {
+        feet="Crier's Gaiters"
+    })
 
 	sets.idle.PDT = set_combine(sets.idle,
 	{

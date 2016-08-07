@@ -2,26 +2,6 @@
 -- Setup functions for this job.  Generally should not be modified.
 -------------------------------------------------------------------------------------------------------------------
 
---[[
-		Custom commands:
-		Shorthand versions for each strategem type that uses the version appropriate for
-		the current Arts.
-										Light Arts				Dark Arts
-		gs c scholar light			  	Light Arts/Addendum
-		gs c scholar dark										Dark Arts/Addendum
-		gs c scholar cost			   	Penury				  	Parsimony
-		gs c scholar speed			  	Celerity				Alacrity
-		gs c scholar aoe				Accession			   	Manifestation
-		gs c scholar power			  	Rapture				 	Ebullience
-		gs c scholar duration		   	Perpetuance
-		gs c scholar accuracy		   	Altruism				Focalization
-		gs c scholar enmity			 	Tranquility			 	Equanimity
-		gs c scholar skillchain								 	Immanence
-		gs c scholar addendum			Addendum: White		 	Addendum: Black
---]]
-
-
-
 -- Initialization function for this job file.
 function get_sets()
 	mote_include_version = 2
@@ -46,8 +26,8 @@ end
 -- Setup vars that are user-dependent.  Can override this function in a sidecar file.
 function user_setup()
 	state.OffenseMode:options('None', 'Normal', 'Refresh')
-	state.CastingMode:options('Normal', 'Seidr', 'Resistant')
-	state.IdleMode:options('Normal', 'PDT', 'MDT')
+	state.CastingMode:options('Normal', 'Resistant')
+	state.IdleMode:options('Normal', 'Movement', 'PDT', 'MDT')
 
 	state.MagicBurst = M(false, 'Magic Burst')
 
@@ -368,11 +348,16 @@ function init_gear_sets()
 
 	sets.idle =
 	{
-		main="Akademos", sub="Oneiros Grip", ammo="Homiliary",
+		main="Akademos", sub="Mensch Strap", ammo="Homiliary",
 		head="Befouled Crown", neck="Sanctity Necklace", lear="Dawn Earring", rear="Infused Earring",
 		body="Witching Robe", hands="Serpentes Cuffs", lring="Sheltered Ring", rring="Paguroidea Ring",
         back="Shadow Mantle", waist="Fucho-no-Obi", legs="Assid. Pants +1", feet="Serpentes Sabots"
 	}
+
+	sets.idle.Movement = set_combine(sets.idle,
+    {
+        feet="Crier's Gaiters"
+    })
 
 	sets.idle.PDT = set_combine(sets.idle,
 	{

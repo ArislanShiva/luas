@@ -24,7 +24,7 @@ end
 function user_setup()
 	state.OffenseMode:options('None', 'Normal')
 	state.CastingMode:options('Normal', 'Spaekona', 'Resistant')
-	state.IdleMode:options('Normal', 'PDT', 'MDT', 'DeathMode')
+	state.IdleMode:options('Normal', 'Movement', 'PDT', 'MDT', 'DeathMode')
 	state.MagicBurst = M(false, 'Magic Burst')
 
 	lowTierNukes = S{'Stone', 'Water', 'Aero', 'Fire', 'Blizzard', 'Thunder'}
@@ -239,7 +239,7 @@ function init_gear_sets()
 	sets.midcast['Elemental Magic'] =
 	{
 		main=gear.Grioavolr_Enf, sub="Niobid Strap", ammo="Pemphredo Tathlum",
-		head=gear.NukeHead, neck="Sanctity Necklace", lear="Friomisi Earring", rear="Barkaro. Earring",
+		head=gear.NukeHood, neck="Sanctity Necklace", lear="Friomisi Earring", rear="Barkaro. Earring",
 		body="Merlinic Jubbah", hands="Amalric Gages", lring="Acumen Ring", rring="Shiva Ring",
 		back="Taranus's Cape", waist="Refoccilation Stone", legs="Merlinic Shalwar", feet="Amalric Nails"
 	}
@@ -291,11 +291,16 @@ function init_gear_sets()
 
 	sets.idle =
 	{
-		main="Lathi", sub="Oneiros Grip", ammo="Staunch Tathlum",
+		main="Lathi", sub="Mensch Strap", ammo="Staunch Tathlum",
 		head="Befouled Crown", neck="Sanctity Necklace", lear="Dawn Earring", rear="Infused Earring",
 		body="Witching Robe", hands="Serpentes Cuffs", lring="Sheltered Ring", rring="Paguroidea Ring",
         back="Shadow Mantle", waist="Fucho-no-Obi", legs="Assid. Pants +1", feet="Serpentes Sabots"
 	}
+
+	sets.idle.Movement = set_combine(sets.idle,
+    {
+        feet="Crier's Gaiters"
+    })
 
 	sets.idle.PDT = set_combine(sets.idle,
 	{
@@ -317,7 +322,7 @@ function init_gear_sets()
 
 	sets.idle.DeathMode =
 	{
-		main=gear.Grioavolr_Enf, sub="Oneiros Grip", ammo="Psilomene",
+		main=gear.Grioavolr_Enf, sub="Mensch Strap", ammo="Psilomene",
 		head="Vanya Hood", neck="Sanctity Necklace", lear="Etiolation Earring", rear="Loquac. Earring",
         body="Witching Robe", hands="Telchine Gloves", lring="Lebeche Ring", rring="Mephitas's Ring +1",
         back="Fi Follet Cape +1", waist="Fucho-no-Obi", legs="Assid. Pants +1", feet="Amalric Nails"
@@ -360,7 +365,7 @@ function init_gear_sets()
 		body="Merlinic Jubbah", hands="Amalric Gages", lring="Locus Ring", rring="Mujin Band",
 		back="Taranus's Cape", waist="Refoccilation Stone", legs="Merlinic Shalwar", feet=gear.NukeCrackows
 	}
-	
+
 	sets.magic_burst.Spaekona =
 	{
 		main="Lathi", sub="Niobid Strap", ammo="Pemphredo Tathlum",
@@ -432,7 +437,7 @@ function job_post_midcast(spell, action, spellMap, eventArgs)
 				equip(sets.magic_burst)
 			end
 		end
-		
+
 	elseif spell.english == 'Death' and state.MagicBurst.value then
 		if (world.weather_element == 'Dark' or world.day_element == 'Dark') then
 			equip(set_combine(sets.midcast.Death,

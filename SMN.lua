@@ -79,7 +79,7 @@ function job_setup()
 		'Howling Moon','Lunar Bay',
 		'Ruinous Omen','Somnolence','Nightmare','Nether Blast','Night Terror'
 	}
-	
+
 	blood_pacts.bp_Merit =
 	S{
 		'Heavenly Strike','Wind Blade','Geocrush','Thunderstorm','Grand Fall',
@@ -100,7 +100,7 @@ end
 -- Setup vars that are user-dependent.  Can override this function in a sidecar file.
 function user_setup()
     state.OffenseMode:options('None', 'Normal', 'Favor')
-    state.IdleMode:options('Normal', 'PDT', 'MDT')
+    state.IdleMode:options('Normal', 'Movement', 'PDT', 'MDT')
 	state.PhysicalDefenseMode:options('PDT', 'MDT')
 
     select_default_macro_book()
@@ -263,7 +263,7 @@ function init_gear_sets()
         body="Apogee Dalmatica", hands="Merlinic Dastanas", lring="Varar Ring", rring="Speaker's Ring",
         back="Campestres's Cape", waist="Incarnation Sash", legs="Helios Spats", feet=gear.PetCrackows
 	}
-	
+
 	   sets.midcast.Pet.bp_Merit =
 	{
 		main=gear.Grioavolr_Pet, sub="Elan Strap", ammo="Seraphicaller",
@@ -433,11 +433,16 @@ function init_gear_sets()
 	-- Idle sets (default idle set not needed since the other three are defined, but leaving for testing purposes)
 	sets.idle =
 	{
-		main="Gridarvor",sub="Oneiros Grip", ammo="Staunch Tathlum",
+		main="Gridarvor",sub="Mensch Strap", ammo="Staunch Tathlum",
 		head="Beckoner's Horn +1", neck="Sanctity Necklace", lear="Dawn Earring", rear="Infused Earring",
 		body="Shomonjijoe +1", hands="Asteria Mitts +1", lring="Sheltered Ring", rring="Paguroidea Ring",
         back="Shadow Mantle", waist="Fucho-no-Obi", legs="Assid. Pants +1", feet="Serpentes Sabots"
 	}
+
+	sets.idle.Movement = set_combine(sets.idle,
+    {
+        feet="Crier's Gaiters"
+    })
 
 	sets.idle.PDT = set_combine(sets.idle,
 	{
@@ -448,6 +453,7 @@ function init_gear_sets()
 
 	sets.idle.MDT = set_combine(sets.idle,
 	{
+		sub="Irenic Strap",
 		neck="Twilight Torque", lear="Etiolation Earring", rear="Static Earring",
         lring="Defending Ring", rring="Vocane Ring",
         back="Solemnity Cape", waist="Luminary Sash", feet="Inyan. Crackows +1"
@@ -482,11 +488,17 @@ function init_gear_sets()
 
     sets.idle.Avatar =
 	{
-		main="Gridarvor",sub="Oneiros Grip", ammo="Seraphicaller",
+		main="Gridarvor",sub="Mensch Strap", ammo="Seraphicaller",
         head="Beckoner's Horn +1", neck="Empath Necklace", lear="Domes. Earring",rear="Evans Earring",
         body="Apogee Dalmatica", hands="Glyphic Bracers +1", lring="Speaker's Ring", rring="Evoker's Ring",
         back="Campestres's Cape", waist="Klouskap Sash", legs="Enticer's Pants", feet="Apogee Pumps"
 	}
+
+    sets.idle.Movement.Avatar = set_combine(sets.idle.Avatar,
+    {
+        hands="Asteria Mitts +1",
+        waist="Lucidity Sash", legs="Assid. Pants +1", feet="Crier's Gaiters"
+    })
 
 	sets.idle.Avatar.Favor =
 	{
@@ -498,7 +510,7 @@ function init_gear_sets()
 
     sets.idle.PDT.Avatar =
 	{
-		main="Gridarvor",sub="Oneiros Grip", ammo="Seraphicaller",
+		main="Gridarvor",sub="Mensch Strap", ammo="Seraphicaller",
         head="Beckoner's Horn +1", neck="Caller's Pendant", ear1="Handler's Earring +1", ear2="Handler's Earring",
         body="Shomonjijoe +1", hands="Glyphic Bracers +1", lring="Stikini Ring", rring="Evoker's Ring",
         back="Campestres's Cape", waist="Isa Belt", legs="Enticer's Pants", feet="Apogee Pumps"
@@ -506,7 +518,7 @@ function init_gear_sets()
 
 	sets.idle.MDT.Avatar =
 	{
-		main="Gridarvor",sub="Oneiros Grip", ammo="Seraphicaller",
+		main="Gridarvor", sub="Irenic Strap", ammo="Seraphicaller",
         head="Beckoner's Horn +1", neck="Caller's Pendant", ear1="Handler's Earring +1", ear2="Handler's Earring",
         body="Shomonjijoe +1", hands="Glyphic Bracers +1", lring="Stikini Ring", rring="Evoker's Ring",
         back="Campestres's Cape", waist="Isa Belt", legs="Enticer's Pants", feet="Apogee Pumps"
@@ -514,7 +526,7 @@ function init_gear_sets()
 
     sets.idle.Spirit =
 	{
-		main="Espiritus",sub="Oneiros Grip", ammo="Seraphicaller",
+		main="Espiritus",sub="Mensch Strap", ammo="Seraphicaller",
         head="Beckoner's Horn +1", neck="Caller's Pendant", ear1="Andoaa Earring",ear2="Smn. Earring",
         body="Shomonjijoe +1", hands="Glyphic Bracers +1", ring1="Stikini Ring", ring2="Evoker's Ring",
         back="Campestres's Cape", waist="Lucidity Sash", legs="Assid. Pants +1", feet="Glyph. Pigaches +1"
@@ -530,7 +542,7 @@ function init_gear_sets()
 	{
 		hands="Asteria Mitts +1"
 	}
-	
+
 	sets.perp.CaitSith =
 	{
 		hands="Lamassu Mitts +1"
@@ -542,7 +554,7 @@ function init_gear_sets()
 
 	sets.engaged =
 	{
-		main="Gridarvor",sub="Oneiros Grip", ammo="Seraphicaller",
+		main="Gridarvor",sub="Mensch Strap", ammo="Seraphicaller",
         head="Beckoner's Horn +1", neck="Empath Necklace", lear="Domes. Earring",rear="Evans Earring",
         body="Apogee Dalmatica", hands="Glyphic Bracers +1", lring="Speaker's Ring", rring="Evoker's Ring",
         back="Campestres's Cape", waist="Klouskap Sash", legs="Enticer's Pants", feet="Apogee Pumps"
