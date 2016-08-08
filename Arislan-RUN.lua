@@ -183,10 +183,10 @@ function init_gear_sets()
 		
 	sets.precast.WS['Resolution'].Acc = set_combine(sets.precast.WS['Resolution'], {})
 	
-	sets.precast.WS['Dimidiation'] = {
+	sets.precast.WS['Dimidiation'] = set_combine(sets.precast.WS['Resolution'], {
 		legs="Lustratio Subligar",
 		feet="Lustratio Leggings",		
-		}
+		})
 		
 	sets.precast.WS['Dimidiation'].Acc = set_combine(sets.precast.WS['Dimidiation'], {})
 
