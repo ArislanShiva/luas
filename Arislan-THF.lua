@@ -189,6 +189,7 @@ function init_gear_sets()
 		head=gear.Herc_FC_head, --12
 		body="Samnuha Coat", --5
 		hands="Leyline Gloves", --7
+		legs="Rawhide Trousers", --5
 		feet=gear.Herc_MAB_feet, --2
 		neck="Orunmila's Torque", --5
 		ear1="Loquacious Earring", --2
@@ -343,18 +344,22 @@ function init_gear_sets()
 		feet="Meg. Jam. +1",
 		neck="Loricate Torque +1", 
 		ear1="Genmei Earring",
-		ring1="Defending Ring",
-		ring2="Gelatinous Ring +1",
+		ring1="Gelatinous Ring +1",
+		ring2="Defending Ring",
 		back="Solemnity Cape",
 		waist="Flume Belt",
 		})
 
 	sets.idle.MDT = set_combine (sets.idle, {
+		ammo="Vanir Battery",
 		head="Dampening Tam",
 		neck="Loricate Torque +1",
+		ear1="Odnowa Earring",
 		ear2="Etiolation Earring",
-		ring1="Defending Ring", 
-		back="Solemnity Cape",
+		ring1="Shadow Ring",
+		ring2="Defending Ring",
+		back="Mubvum. Mantle",
+		waist="Lieutenant's Sash",
 		})
 
 	sets.idle.Town = set_combine(sets.idle, {
@@ -381,18 +386,22 @@ function init_gear_sets()
 		feet="Meg. Jam. +1", --2
 		neck="Loricate Torque +1", --6
 		ear1="Genmei Earring", --2
-		ring1="Defending Ring", --10
-		ring2="Gelatinous Ring +1", --7
+		ring1="Gelatinous Ring +1", --7
+		ring2="Defending Ring", --10
 		back="Solemnity Cape", --4
 		waist="Flume Belt", --4
 		}
 
 	sets.defense.MDT = {
+		ammo="Vanir Battery",
 		head="Dampening Tam", --4
 		neck="Loricate Torque +1", --6
-		ear2="Etiolation Earring", --3
-		ring1="Defending Ring", --10
-		back="Solemnity Cape", --4
+		ear1="Odnowa Earring", --2
+		ear2="Etiolation Earring", --2
+		ring1="Shadow Ring",
+		ring2="Defending Ring", --10
+		back="Mubvum. Mantle", --6
+		waist="Lieutenant's Sash", --2
 		}
 
 

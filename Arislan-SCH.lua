@@ -292,8 +292,6 @@ function init_gear_sets()
 		body="Telchine Chas.",
 		back=gear.SCH_FC_Cape,
 		})
-
-	sets.midcast.Haste = sets.midcast['Enhancing Magic']
 	
 	sets.midcast.Refresh = set_combine(sets.midcast['Enhancing Magic'], {
 		waist="Gishdubar Sash",
@@ -491,21 +489,25 @@ function init_gear_sets()
 		feet="Arbatel Loafers +1",
 		neck="Loricate Torque +1",
 		ear1="Genmei Earring",
-		ring1="Defending Ring",
-		ring2="Gelatinous Ring +1",
+		ring1="Gelatinous Ring +1",
+		ring2="Defending Ring",
 		back="Umbra Cape",
 		})
 
 	sets.idle.MDT = set_combine(sets.idle, {
+		ammo="Vanir Battery",
 		head="Gende. Caubeen +1",
 		body="Vanya Robe",
 		hands="Gende. Gages +1",
 		legs="Gyve Trousers",
 		feet="Arbatel Loafers +1",
 		neck="Loricate Torque +1",
+		ear1="Odnowa Earring",
 		ear2="Etiolation Earring",
-		ring1="Defending Ring",
+		ring1="Shadow Ring",
+		ring2="Defending Ring",
 		back="Solemnity Cape",
+		waist="Lieutenant's Sash",
 		})
 
 	sets.idle.Town = set_combine(sets.idle, {
@@ -541,21 +543,25 @@ function init_gear_sets()
 		feet="Arbatel Loafers +1",
  		neck="Loricate Torque +1", --6
 		ear1="Genmei Earring", --2
-		ring1="Defending Ring", --10
-		ring2="Gelatinous Ring +1", --7
+		ring1="Gelatinous Ring +1", --7
+		ring2="Defending Ring", --10
 		back="Umbra Cape", --6
 		}
 	
 	sets.defense.MDT = {
+		ammo="Vanir Battery",
 		head="Gende. Caubeen +1", --4
 		body="Vanya Robe", --1
 		hands="Gende. Gages +1", --3
 		legs="Gyve Trousers", --2
 		feet="Arbatel Loafers +1",
 		neck="Loricate Torque +1", --6
-		ear2="Etiolation Earring", --3
-		ring1="Defending Ring", --10
+		ear1="Odnowa Earring", --2
+		ear2="Etiolation Earring", --2
+		ring1="Shadow Ring",
+		ring2="Defending Ring", --10
 		back="Solemnity Cape", --4
+		waist="Lieutenant's Sash", --2
 		}
 	
 	sets.Kiting = {

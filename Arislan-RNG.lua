@@ -16,7 +16,7 @@ function job_setup()
 	state.Buff.Barrage = buffactive.Barrage or false
 	state.Buff.Camouflage = buffactive.Camouflage or false
 	state.Buff['Unlimited Shot'] = buffactive['Unlimited Shot'] or false
-	state.Buff.VelocityShot = buffactive.['Velocity Shot'] or false
+	state.Buff['Velocity Shot'] = buffactive['Velocity Shot'] or false
 
 	determine_haste_group()
 end
@@ -90,8 +90,8 @@ function init_gear_sets()
 		head=gear.Herc_FC_head, --12
 		body="Samnuha Coat", --5
 		hands="Leyline Gloves", --7
-		legs="Carmine Cuisses +1",
-		feet=gear.Herc_MAB_feet, --2
+		legs="Rawhide Trousers", --5
+		feet="Carmine Greaves +1", --8
 		neck="Orunmila's Torque", --5
 		ear1="Loquacious Earring", --2
 		ear2="Etiolation Earring", --1
@@ -258,7 +258,7 @@ function init_gear_sets()
 		body="Pursuer's Doublet",
 		hands="Amini Glove. +1",
 		legs="Meg. Chausses +1",
-		feet="Thereoid Greaves",
+		feet="Carmine Greaves +1",
 		neck="Ocachi Gorget",
 		ear1="Enervating Earring",
 		ear2="Neritic Earring",
@@ -330,23 +330,27 @@ function init_gear_sets()
 		feet="Meg. Jam. +1",
 		neck="Loricate Torque +1", 
 		ear1="Genmei Earring",
-		ring1="Defending Ring",
-		ring2="Gelatinous Ring +1",
+		ring1="Gelatinous Ring +1",
+		ring2="Defending Ring",
 		back="Solemnity Cape",
 		waist="Flume Belt",
 		})
 
 	sets.idle.MDT = set_combine (sets.idle, {
 		head="Dampening Tam",
-		legs="Gyve Trousers",
 		neck="Loricate Torque +1",
+		ear1="Odnowa Earring",
 		ear2="Etiolation Earring",
-		ring1="Defending Ring", 
-		back="Solemnity Cape",
+		ring1="Shadow Ring",
+		ring2="Defending Ring",
+		back="Mubvum. Mantle",
+		waist="Lieutenant's Sash",
 		})
 		
 	sets.idle.Town = set_combine(sets.idle, {
+		head="Arcadian Beret +1",
 		body="Gyve Doublet",
+		feet="Carmine Greaves +1",
 		neck="Combatant's Torque",
 		ear1="Enervating Earring",
 		ear2="Neritic Earring",
@@ -364,19 +368,21 @@ function init_gear_sets()
 		feet="Meg. Jam. +1", --2
 		neck="Loricate Torque +1", --6
 		ear1="Genmei Earring", --2
-		ring1="Defending Ring", --10
-		ring2="Gelatinous Ring +1", --7
+		ring1="Gelatinous Ring +1", --7
+		ring2="Defending Ring", --10
 		back="Solemnity Cape", --4
 		waist="Flume Belt", --4
 		}
 
 	sets.defense.MDT = {
 		head="Dampening Tam", --4
-		legs="Gyve Trousers", --2
 		neck="Loricate Torque +1", --6
-		ear2="Etiolation Earring", --3
-		ring1="Defending Ring", --10
-		back="Solemnity Cape", --4
+		ear1="Odnowa Earring", --2
+		ear2="Etiolation Earring", --2
+		ring1="Shadow Ring",
+		ring2="Defending Ring", --10
+		back="Mubvum. Mantle", --6
+		waist="Lieutenant's Sash", --2
 		}
 
 	sets.Kiting = {
@@ -523,7 +529,7 @@ function init_gear_sets()
 	--------------------------------------
 
 	sets.buff.Barrage = set_combine(sets.midcast.RA.Acc, {hands="Orion Bracers +1"})
-	sets.buff.VelocityShot = set_combine(sets.midcast.RA, {body="Amini Caban +1"})
+	sets.buff['Velocity Shot'] = set_combine(sets.midcast.RA, {body="Amini Caban +1"})
 --	sets.buff.Camouflage = {body="Orion Jerkin +1"}
 
 end
@@ -557,8 +563,8 @@ function job_midcast(spell, action, spellMap, eventArgs)
 		equip(sets.buff.Barrage)
 		eventArgs.handled = true
 	end
-	if spell.action_type == 'Ranged Attack' and state.Buff.VelocityShot then
-		equip(sets.buff.VelocityShot)
+	if spell.action_type == 'Ranged Attack' and state.Buff['Velocity Shot'] then
+		equip(sets.buff['Velocity Shot'])
 		eventArgs.handled = true
 	end
 end

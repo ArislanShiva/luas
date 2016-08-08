@@ -290,6 +290,14 @@ function init_gear_sets()
 
 	sets.midcast.Shellra = sets.midcast.Protectra
 
+	sets.midcast.EnhancingDuration = {
+		head="Telchine Cap",
+		body="Telchine Chas.",
+		hands="Telchine Gloves",
+		legs="Telchine Braconi",
+		feet="Telchine Pigaches",
+		}
+
 	sets.midcast.MndEnfeebles = {
 		main="Grioavolr",
 		sub="Mephitis Grip",
@@ -448,19 +456,23 @@ function init_gear_sets()
 		legs="Artsieq Hose",
 		neck="Loricate Torque +1",
 		ear1="Genmei Earring",
-		ring1="Defending Ring",
-		ring2="Gelatinous Ring +1",
+		ring1="Gelatinous Ring +1",
+		ring2="Defending Ring",
 		back="Umbra Cape",
 		})
 
 	sets.idle.MDT = set_combine(sets.idle, {
+		ammo="Vanir Battery",
 		head="Vanya Hood",
 		body="Vanya Robe",
 		legs="Gyve Trousers",
 		neck="Loricate Torque +1",
-		ear1="Etiolation Earring",
-		ring1="Defending Ring",
+		ear1="Odnowa Earring",
+		ear2="Etiolation Earring",
+		ring1="Shadow Ring",
+		ring2="Defending Ring",
 		back="Solemnity Cape",
+		waist="Lieutenant's Sash",
 		})
 
 	sets.idle.DeathMode = {
@@ -506,19 +518,23 @@ function init_gear_sets()
 		legs="Artsieq Hose", --5
 		neck="Loricate Torque +1", --6
 		ear1="Genmei Earring", --2
-		ring1="Defending Ring", --10
-		ring2="Gelatinous Ring +1", --7
+		ring1="Gelatinous Ring +1", --7
+		ring2="Defending Ring", --10
 		back="Umbra Cape", --6
 		}
 
 	sets.defense.MDT = {
+		ammo="Vanir Battery",
 		head="Vanya Hood", --2
 		body="Vanya Robe", --1
 		legs="Gyve Trousers", --2
 		neck="Loricate Torque +1", --6
-		ear1="Etiolation Earring", --3
-		ring1="Defending Ring", --10
+		ear1="Odnowa Earring", --2
+		ear2="Etiolation Earring", --2
+		ring1="Shadow Ring",
+		ring2="Defending Ring", --10
 		back="Solemnity Cape", --4
+		waist="Lieutenant's Sash", --2
 		}
 
 	sets.Kiting = {
@@ -599,7 +615,10 @@ function job_post_midcast(spell, action, spellMap, eventArgs)
 		equip(sets.magic_burst)
 	elseif state.CastingMode.value == 'DeathMode' then
 		equip(sets.precast.Death)
-		end
+	end
+	if spell.skill == 'Enhancing Magic' and classes.NoSkillSpells:contains(spell.english) then
+		equip(sets.midcast.EnhancingDuration)
+	end
 end
 
 function job_aftercast(spell, action, spellMap, eventArgs)

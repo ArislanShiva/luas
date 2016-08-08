@@ -89,8 +89,8 @@ function user_setup()
 	send_command('bind !` input /ja "Bolter\'s Roll" <me>')
 	send_command ('bind @` gs c toggle LuzafRing')
 
-	send_command('bind ^- gs c cycle mainqd')
-	send_command('bind ^= gs c cycleback mainqd')
+	send_command('bind ^- gs c cycleback mainqd')
+	send_command('bind ^= gs c cycle mainqd')
 	send_command('bind !- gs c cycle altqd')
 	send_command('bind != gs c cycleback altqd')
 	send_command('bind ^[ gs c toggle selectqdtarget')
@@ -168,8 +168,8 @@ function init_gear_sets()
 		head=gear.Herc_FC_head, --12
 		body="Samnuha Coat", --5
 		hands="Leyline Gloves", --7
-		legs="Carmine Cuisses +1",
-		feet=gear.Herc_MAB_feet, --2
+		legs="Rawhide Trousers", --5
+		feet="Carmine Greaves +1", --8
 		neck="Orunmila's Torque", --5
 		ear1="Loquacious Earring", --2
 		ear2="Etiolation Earring", --1
@@ -421,8 +421,8 @@ function init_gear_sets()
 		feet="Lanun Bottes +1",
 		neck="Loricate Torque +1", 
 		ear1="Genmei Earring",
-		ring1="Defending Ring",
-		ring2="Gelatinous Ring +1",
+		ring1="Gelatinous Ring +1",
+		ring2="Defending Ring",
 		back="Solemnity Cape",
 		waist="Flume Belt",
 		})
@@ -430,9 +430,12 @@ function init_gear_sets()
 	sets.idle.MDT = set_combine (sets.idle, {
 		head="Dampening Tam",
 		neck="Loricate Torque +1",
-		ring1="Defending Ring", 
+		ear1="Odnowa Earring",
 		ear2="Etiolation Earring",
-		back="Solemnity Cape",
+		ring1="Shadow Ring",
+		ring2="Defending Ring",
+		back="Mubvum. Mantle",
+		waist="Lieutenant's Sash",
 		})
 
 	sets.idle.Town = set_combine(sets.idle, {
@@ -456,8 +459,8 @@ function init_gear_sets()
 		feet="Lanun Bottes +1", --4
 		neck="Loricate Torque +1", --6
 		ear1="Genmei Earring", --2
-		ring1="Defending Ring", --10
-		ring2="Gelatinous Ring +1", --7
+		ring1="Gelatinous Ring +1", --7
+		ring2="Defending Ring", --10
 		back="Solemnity Cape", --4
 		waist="Flume Belt", --4
 		}
@@ -465,9 +468,12 @@ function init_gear_sets()
 	sets.defense.MDT = {
 		head="Dampening Tam", --4
 		neck="Loricate Torque +1", --6
-		ring1="Defending Ring", --10
-		ear2="Etiolation Earring", --3
-		back="Solemnity Cape", --4
+		ear1="Odnowa Earring", --2
+		ear2="Etiolation Earring", --2
+		ring1="Shadow Ring",
+		ring2="Defending Ring", --10
+		back="Mubvum. Mantle", --6
+		waist="Lieutenant's Sash", --2
 		}
 	
 

@@ -252,7 +252,15 @@ function init_gear_sets()
 
 	sets.midcast.Shellra = sets.midcast.Protectra
 
-	sets.midcast.MndEnfeebles = {
+	sets.midcast.EnhancingDuration = {
+		head="Telchine Cap",
+		body="Telchine Chas.",
+		hands="Telchine Gloves",
+		legs="Telchine Braconi",
+		feet="Telchine Pigaches",
+		}
+
+		sets.midcast.MndEnfeebles = {
 		main="Grioavolr",
 		sub="Mephitis Grip",
 		head="Amalric Coif",
@@ -409,8 +417,8 @@ function init_gear_sets()
 		feet="Azimuth Gaiters +1",
 		neck="Loricate Torque +1",
 		ear1="Genmei Earring",
-		ring1="Defending Ring",
-		ring2="Gelatinous Ring +1",
+		ring1="Gelatinous Ring +1",
+		ring2="Defending Ring",
 		back="Umbra Cape",
 		})
 
@@ -419,9 +427,12 @@ function init_gear_sets()
 		body="Vanya Robe",
 		legs="Gyve Trousers",
 		neck="Loricate Torque +1",
+		ear1="Odnowa Earring",
 		ear2="Etiolation Earring",
-		ring1="Defending Ring",
+		ring1="Shadow Ring",
+		ring2="Defending Ring",
 		back="Solemnity Cape",
+		waist="Lieutenant's Sash",
 		})
 
 	sets.idle.Weak = sets.idle.PDT
@@ -445,15 +456,16 @@ function init_gear_sets()
 
 	sets.idle.PDT.Pet = set_combine(sets.idle.Pet, {
 		neck="Loricate Torque +1",
-		ring1="Defending Ring",
-		ring2="Gelatinous Ring +1",
+		ring1="Gelatinous Ring +1",
+		ring2="Defending Ring",
 		back="Nantosuelta's Cape",
 		waist="Isa Belt"
 		})
 
 	sets.idle.MDT.Pet = set_combine(sets.idle.Pet, {
 		neck="Loricate Torque +1",
-		ring1="Defending Ring",
+		ring1="Shadow Ring",
+		ring2="Defending Ring",
 		back="Nantosuelta's Cape",
 		waist="Isa Belt"
 		})
@@ -488,8 +500,8 @@ function init_gear_sets()
 		feet="Azimuth Gaiters +1", --4
 		neck="Loricate Torque +1", --6
 		ear1="Genmei Earring", --2
-		ring1="Defending Ring", --10
-		ring2="Gelatinous Ring +1", --7
+		ring1="Gelatinous Ring +1", --7
+		ring2="Defending Ring", --10
 		back="Umbra Cape", --6
 		}
 
@@ -498,9 +510,12 @@ function init_gear_sets()
 		body="Vanya Robe", --1
 		legs="Gyve Trousers", --2
 		neck="Loricate Torque +1", --6
-		ear2="Etiolation Earring", --3
-		ring1="Defending Ring", --10
+		ear1="Odnowa Earring", --2
+		ear2="Etiolation Earring", --2
+		ring1="Shadow Ring",
+		ring2="Defending Ring", --10
 		back="Solemnity Cape", --4
+		waist="Lieutenant's Sash", --2
 		}
 
 	sets.Kiting = {
@@ -560,6 +575,9 @@ function job_post_midcast(spell, action, spellMap, eventArgs)
 		if spell.english == "Impact" then
 			equip(sets.midcast.Impact)
 		end
+	end
+	if spell.skill == 'Enhancing Magic' and classes.NoSkillSpells:contains(spell.english) then
+		equip(sets.midcast.EnhancingDuration)
 	end
 end
 
