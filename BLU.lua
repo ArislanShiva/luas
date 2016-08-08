@@ -307,7 +307,7 @@ function init_gear_sets()
 		ammo="Falcon Eye",
 		head="Carmine Mask", neck="Sanctity Necklace", lear="Digni. Earring", rear="Gwati Earring",
 		body="Samnuha Coat", hands="Rawhide Gloves", lring="Stikini Ring", rring="Stikini Ring",
-		back="Cornflower Cape", waist="Eschan Stone", legs="Psycloth Lappas", feet="Herculean Boots"
+		back="Cornflower Cape", waist="Eschan Stone", legs="Psycloth Lappas", feet="Jhakri Pigaches +1"
 	}
 
 	sets.midcast.Magical =
@@ -393,7 +393,7 @@ function init_gear_sets()
 		ammo="Pemphredo Tathlum",
 		head="Amalric Coif", neck="Incanter's Torque", lear="Digni. Earring", rear="Gwati Earring",
 		body="Samnuha Coat", hands="Leyline Gloves", lring="Stikini Ring", rring="Stikini Ring",
-		back="Cornflower Cape", waist="Witful Belt", legs="Psycloth Lappas", feet="Hashi. Basmak +1"
+		back="Cornflower Cape", waist="Witful Belt", legs="Psycloth Lappas", feet="Jhakri Pigaches +1"
 	}
 
 	sets.midcast.Stoneskin = set_combine(sets.midcast.Duration,
@@ -458,18 +458,16 @@ function init_gear_sets()
 
 	sets.idle.PDT = set_combine(sets.idle,
 	{
-		ammo="Staunch Tathlum",
-		head="Lithelimb Cap", neck="Twilight Torque",
+		neck="Twilight Torque",
 		body="Vrikodara Jupon", hands="Umuthi Gloves", lring="Defending Ring", rring="Vocane Ring",
-		waist="Flume Belt", legs="Herculean Trousers", feet="Battlecast Gaiters"
+		waist="Flume Belt", feet="Battlecast Gaiters"
 	})
 
 	sets.idle.MDT = set_combine(sets.idle,
 	{
-		ammo="Staunch Tathlum",
-		head="Dampening Tam", neck="Twilight Torque", lear="Etiolation Earring", rear="Static Earring",
-		body="Samnuha Coat", hands="Leyline Gloves", lring="Defending Ring", rring="Vocane Ring",
-		back="Solemnity Cape", legs="Gyve Trousers"
+		neck="Twilight Torque", lear="Etiolation Earring", rear="Static Earring",
+		hands="Leyline Gloves", lring="Defending Ring", rring="Vocane Ring",
+		back="Solemnity Cape", waist="Lieutenant's Sash", feet="Amalric Nails"
 	})
 
 	sets.idle.Town = set_combine(sets.idle,
@@ -483,21 +481,19 @@ function init_gear_sets()
 
 	-- Defense sets
 
-	sets.defense.PDT =
+	sets.defense.PDT = set_combine(sets.idle.PDT,
 	{
-		ammo="Staunch Tathlum",
-		head="Lithelimb Cap", neck="Twilight Torque",
-		body="Emet Harness", hands="Umuthi Gloves", lring="Defending Ring", rring="Vocane Ring",
-		back="Shadow Mantle", waist="Flume Belt", legs="Herculean Trousers", feet="Battlecast Gaiters"
-	}
+		head="Lithelimb Cap",
+		body="Emet Harness", lring="Defending Ring", rring="Vocane Ring",
+		legs="Herculean Trousers"
+	})
 
-	sets.defense.MDT =
+	sets.defense.MDT = set_combine(sets.idle.MDT,
 	{
-		ammo="Staunch Tathlum",
-		head="Dampening Tam", neck="Twilight Torque", lear="Etiolation Earring", rear="Static Earring",
-		body="Samnuha Coat", hands="Leyline Gloves", lring="Defending Ring", rring="Vocane Ring",
-		back="Solemnity Cape", legs="Gyve Trousers"
-	}
+		head="Dampening Tam",
+		body="Amalric Doublet",
+		legs="Gyve Trousers"
+	})
 
 
 	--------------------------------------
@@ -515,7 +511,7 @@ function init_gear_sets()
 	{
 		rear="Static Earring",
 		body="Samnuha Coat", lring="Locus Ring", rring="Mujin Band",
-		back="Seshaw Cape"
+		back="Seshaw Cape", feet="Jhakri Pigaches +1"
 	})
 
 	sets.buff['Burst Affinity'] = {feet="Hashi. Basmak +1"}
@@ -527,7 +523,7 @@ function init_gear_sets()
 		main="Sequence", sub=gear.Colada_STP, ammo="Ginsen",
 		head="Adhemar Bonnet", neck="Asperity Necklace", lear="Eabani Earring", rear="Suppanomimi",
 		body="Adhemar Jacket", hands="Adhemar Wristbands", lring="Petrov Ring", rring="Epona's Ring",
-		back=gear.BLUCape_STP, waist="Reiki Yotai", legs="Samnuha Tights", feet="Taeon Boots"
+		back=gear.BLUCape_STP, waist="Reiki Yotai", legs="Carmine Cuisses +1", feet="Taeon Boots"
 	}
 
 	sets.engaged.LowAcc = set_combine(sets.engaged,
@@ -547,7 +543,7 @@ function init_gear_sets()
 	{
 		rear="Cessance Earring",
 		body="Herculean Vest", rring="Cacoethic Ring",
-		waist="Kentarch Belt +1", legs="Carmine Cuisses +1"
+		waist="Kentarch Belt +1"
 	})
 
 	sets.engaged.HighHaste =
@@ -580,8 +576,8 @@ function init_gear_sets()
 	sets.engaged.MaxHaste =
 	{
 		main="Sequence", sub=gear.Colada_STP, ammo="Ginsen",
-		head="Adhemar Bonnet", neck="Asperity Necklace", lear="Brutal Earring", rear="Cessance Earring",
-		body="Adhemar Jacket", hands="Adhemar Wristbands", lring="Petrov Ring", rring="Epona's Ring",
+		head="Adhemar Bonnet", neck="Asperity Necklace", lear="Telos Earring", rear="Cessance Earring",
+		body="Adhemar Jacket", hands="Adhemar Wristbands", lring="Hetairoi Ring", rring="Epona's Ring",
 		back=gear.BLUCape_STP, waist="Windbuffet Belt +1", legs="Samnuha Tights", feet="Herculean Boots"
 	}
 
@@ -593,7 +589,6 @@ function init_gear_sets()
 	sets.engaged.MaxHaste.MidAcc = set_combine(sets.engaged.MaxHaste.LowAcc,
 	{
 		ammo="Falcon Eye",
-		lear="Telos Earring",
 		lring="Cacoethic Ring +1"
 	})
 
@@ -749,13 +744,5 @@ end
 -- Select default macro book on initial load or subjob change.
 function select_default_macro_book()
 	-- Default macro set/book
-	if player.sub_job == 'DNC' then
-		set_macro_page(1, 5)
-	elseif player.sub_job == 'WAR' then
-		set_macro_page(1, 5)
-	elseif player.sub_job == 'NIN' then
-		set_macro_page(1, 5)
-	else
-		set_macro_page(1, 5)
-	end
+	set_macro_page(1, 5)
 end

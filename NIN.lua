@@ -208,7 +208,7 @@ function init_gear_sets()
 	{
 		neck="Twilight Torque", lear="Etiolation Earring", rear="Static Earring",
 		body="Hiza. Haramaki +1", hands="Leyline Gloves", lring="Defending Ring", rring="Vocane Ring",
-		back="Solemnity Cape", legs="Feast Hose"
+		back="Solemnity Cape", waist="Lieutenant's Sash", legs="Feast Hose"
 	})
 
 	sets.idle.Town = set_combine(sets.idle,
@@ -221,20 +221,9 @@ function init_gear_sets()
 
 	-- Defense sets
 
-	sets.defense.PDT =
-	{
-		head="Lithelimb Cap", neck="Twilight Torque",
-		body="Emet Harness", hands="Umuthi Gloves", lring="Defending Ring", rring="Vocane Ring",
-		back="Shadow Mantle", waist="Flume Belt", legs="Herculean Trousers", feet="Herculean Boots"
-	}
+	sets.defense.PDT = sets.idle.PDT
 
-	sets.defense.MDT =
-	{
-		head="Dampening Tam", neck="Twilight Torque", lear="Etiolation Earring", rear="Static Earring",
-		body="Hiza. Haramaki +1", hands="Leyline Gloves", lring="Defending Ring", rring="Vocane Ring",
-		back="Solemnity Cape", legs="Feast Hose",
-	}
-
+	sets.defense.MDT = sets.idle.MDT
 
 
     --------------------------------------

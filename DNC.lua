@@ -304,7 +304,7 @@ function init_gear_sets()
 	{
 		neck="Twilight Torque", lear="Etiolation Earring", rear="Static Earring",
 		body="Samnuha Coat", hands="Leyline Gloves", lring="Defending Ring", rring="Vocane Ring",
-		back="Solemnity Cape", legs="Feast Hose"
+		back="Solemnity Cape", waist="Lieutenant's Sash", legs="Feast Hose"
 	})
 
 	sets.idle.Town = set_combine(sets.idle,
@@ -318,21 +318,9 @@ function init_gear_sets()
 
 	-- Defense sets
 
-	sets.defense.PDT =
-	{
-		ammo="Staunch Tathlum",
-		head="Lithelimb Cap", neck="Twilight Torque",
-		body="Meg. Cuirie +1", hands="Umuthi Gloves", lring="Defending Ring", rring="Vocane Ring",
-		back="Shadow Mantle", waist="Flume Belt", legs="Meg. Chausses +1", feet="Herculean Boots"
-	}
+	sets.defense.PDT =  sets.idle.PDT
 
-	sets.defense.MDT =
-	{
-		ammo="Staunch Tathlum",
-		head="Dampening Tam", neck="Twilight Torque", lear="Etiolation Earring", rear="Static Earring",
-		body="Samnuha Coat", hands="Leyline Gloves", lring="Defending Ring", rring="Vocane Ring",
-		back="Solemnity Cape", legs="Feast Hose", feet="Herculean Boots"
-	}
+	sets.defense.MDT = sets.idle.MDT
 
 
 	--------------------------------------

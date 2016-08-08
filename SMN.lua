@@ -456,7 +456,7 @@ function init_gear_sets()
 		sub="Irenic Strap",
 		neck="Twilight Torque", lear="Etiolation Earring", rear="Static Earring",
         lring="Defending Ring", rring="Vocane Ring",
-        back="Solemnity Cape", waist="Luminary Sash", feet="Inyan. Crackows +1"
+        back="Solemnity Cape", waist="Lieutenant's Sash", feet="Inyan. Crackows +1"
 	})
 
 	sets.idle.Town = set_combine(sets.idle,

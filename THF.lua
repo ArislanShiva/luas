@@ -339,7 +339,7 @@ function init_gear_sets()
 		ammo="Staunch Tathlum",
 		neck="Twilight Torque", lear="Etiolation Earring", rear="Static Earring",
 		body="Samnuha Coat", hands="Leyline Gloves", lring="Defending Ring", rring="Vocane Ring",
-		back="Solemnity Cape", legs="Feast Hose"
+		back="Solemnity Cape", waist="Lieutenant's Sash", legs="Feast Hose"
 	})
 
 	sets.idle.Town = set_combine(sets.idle, 
@@ -352,29 +352,16 @@ function init_gear_sets()
 
 	-- Defense sets
 	
-	sets.defense.PDT = 
-	{
-		ammo="Staunch Tathlum",
-		head="Meghanada Visor +1", neck="Twilight Torque", 
-		body="Meg. Cuirie +1", hands="Umuthi Gloves", lring="Defending Ring", rring="Vocane Ring",
-		back="Shadow Mantle", waist="Flume Belt", legs="Meg. Chausses +1", feet="Herculean Boots"
-	}
+	sets.defense.PDT = sets.idle.PDT
 	
-	sets.defense.Evasion = 
+	sets.defense.Evasion = set_combine(sets.idle.PDT,
 	{
-		ammo="Staunch Tathlum",
-		head="Herculean Helm", neck="Combatant's Torque", lear="Eabani Earring", rear="Infused Earring",
-		body="Emet Harness", hands="Herculean Gloves", lring="Defending Ring", rring="Vocane Ring",
-		back="Canny Cape", waist="Flume Belt", legs="Herculean Trousers", feet="Skulk. Poulaines +1"
-	}
+		head="Herculean Helm", neck="Combatant's Torque", lear="Eabani Earring",
+		body="Emet Harness", hands="Herculean Gloves",
+		back="Canny Cape", feet="Skulk. Poulaines +1"
+	})
 
-	sets.defense.MDT = 
-	{
-		ammo="Staunch Tathlum",
-		head="Dampening Tam", neck="Twilight Torque", lear="Etiolation Earring", rear="Static Earring",
-		body="Samnuha Coat", hands="Leyline Gloves", lring="Defending Ring", rring="Vocane Ring",
-		back="Solemnity Cape", legs="Feast Hose", feet="Jute Boots +1"
-	}
+	sets.defense.MDT = sets.idle.MDT
 
 
 	--------------------------------------

@@ -157,7 +157,7 @@ function init_gear_sets()
 
 	sets.midcast.Cures =
 	{
-		main="Chatoyant Staff", sub="Achaq Grip", ammo="Esper Stone +1",
+		main="Chatoyant Staff", sub="Clerisy Strap", ammo="Esper Stone +1",
 		head="Vanya Hood", neck="Orunmila's Torque", lear="Glorious Earring", rear="Mendi. Earring",
         body="Kaykaus Bliaut", hands="Kaykaus Cuffs", lring="Lebeche Ring", rring="Prolix Ring",
         back="Twilight Cape", waist="Hachirin-no-Obi", legs="Sifahir Slacks", feet="Hygieia Clogs +1"
@@ -352,7 +352,7 @@ function init_gear_sets()
 	{
 		neck="Twilight Torque", lear="Etiolation Earring", rear="Static Earring",
         hands="Inyan. Dastanas +1", lring="Defending Ring", rring="Vocane Ring",
-        back="Solemnity Cape", waist="Luminary Sash", feet="Inyan. Crackows +1"
+        back="Solemnity Cape", waist="Lieutenant's Sash", feet="Inyan. Crackows +1"
 	})
 
 	sets.idle.Town = set_combine(sets.idle,

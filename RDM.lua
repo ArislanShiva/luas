@@ -371,21 +371,20 @@ function init_gear_sets()
         legs="Carmine Cuisses +1"
     })
 
-	sets.idle.PDT =
+	sets.idle.PDT = set_combine(sets.idle,
 	{
-		main="Bolelabunga", sub="Genmei Shield", ammo="Homiliary",
-		head="Viti. Chapeau +1", neck="Twilight Torque", lear="Dawn Earring", rear="Infused Earring",
+		sub="Genmei Shield",
+		neck="Twilight Torque",
         body="Vrikodara Jupon", hands="Gende. Gages +1", lring="Defending Ring", rring="Vocane Ring",
-        back="Shadow Mantle", waist="Fucho-no-Obi", legs="Lengo Pants", feet="Battlecast Gaiters"
-	}
+        waist="Flume Belt", feet="Battlecast Gaiters"
+	})
 
-	sets.idle.MDT =
+	sets.idle.MDT = set_combine(sets.idle,
 	{
-		main="Bolelabunga", sub="Beatific Shield +1", ammo="Homiliary",
-		head="Viti. Chapeau +1", neck="Twilight Torque", lear="Etiolation Earring", rear="Static Earring",
+		hneck="Twilight Torque", lear="Etiolation Earring", rear="Static Earring",
         body="Witching Robe", hands="Gende. Gages +1", lring="Defending Ring", rring="Vocane Ring",
-        back="Reiki Cloak", waist="Fucho-no-Obi",  legs="Lengo Pants", feet="Vanya Clogs"
-	}
+        back="Reiki Cloak", waist="Lieutenant's Sash", feet="Vanya Clogs"
+	})
 
 	sets.idle.Town = set_combine(sets.idle,
 	{
@@ -395,21 +394,21 @@ function init_gear_sets()
 
 
     -- Defense sets
-    sets.defense.PDT =
+    sets.defense.PDT = set_combine(sets.idle.PDT,
 	{
-		main="Bolelabunga", sub="Genmei Shield", ammo="Staunch Tathlum",
-		head="Lithelimb Cap", neck="Twilight Torque", lear="Dawn Earring", rear="Infused Earring",
-        body="Emet Harness", hands="Umuthi Gloves", lring="Defending Ring", rring="Vocane Ring",
-        back="Shadow Mantle", waist="Flume Belt", legs="Artsieq Hose", feet="Battlecast Gaiters"
-	}
+		ammo="Staunch Tathlum",
+		head="Lithelimb Cap", neck="Twilight Torque",
+        body="Emet Harness", hands="Umuthi Gloves", 
+        legs="Artsieq Hose"
+	})
 
-    sets.defense.MDT =
+    sets.defense.MDT = set_combine(sets.idle.MDT,
 	{
-		main="Bolelabunga", sub="Beatific Shield +1",ammo="Staunch Tathlum",
-		head="Vanya Hood", neck="Twilight Torque", lear="Etiolation Earring", rear="Static Earring",
-        body="Vanya Robe", hands="Gende. Gages +1", lring="Defending Ring", rring="Vocane Ring",
-        back="Reiki Cloak", waist="Luminary Sash",  legs="Gyve Trousers", feet="Vanya Clogs"
-	}
+		ammo="Staunch Tathlum",
+		head="Vanya Hood",
+        body="Vanya Robe", 
+        legs="Gyve Trousers"
+	})
 
     sets.Kiting =
 	{

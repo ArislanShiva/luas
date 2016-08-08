@@ -344,7 +344,7 @@ function init_gear_sets()
 		sub="Irenic Strap", ammo="Staunch Tathlum",
 		head="Dampening Tam", neck="Twilight Torque", lear="Etiolation Earring", rear="Static Earring",
 		lring="Defending Ring", rring="Vocane Ring",
-		back="Reiki Cloak", waist="Flume Belt", legs="Eri. Leg Guards +1"
+		back="Reiki Cloak", waist="Lieutenant's Sash", legs="Eri. Leg Guards +1"
 	})
 
     sets.Kiting =

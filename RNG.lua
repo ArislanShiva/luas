@@ -214,6 +214,7 @@ function init_gear_sets()
 	{
 		neck="Twilight Torque", lear="Etiolation Earring", rear="Static Earring",
 		body="Samnuha Coat", hands="Leyline Gloves", lring="Defending Ring", rring="Vocane Ring",
+		waist="Lieutenant's Sash"
 	})
 	
 	sets.idle.Town = set_combine(sets.idle, 
