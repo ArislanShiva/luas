@@ -39,11 +39,12 @@ function user_setup()
 	state.OffenseMode:options('Normal', 'LowAcc', 'MidAcc', 'HighAcc', 'Fodder')
 	state.WeaponskillMode:options('Normal', 'Acc')
 	state.CastingMode:options('Normal', 'Resistant')
-	state.IdleMode:options('Normal', 'PDT', 'MDT')
+	state.IdleMode:options('Normal', 'PDT', 'MDT', 'Refresh')
 	state.PhysicalDefenseMode:options('PDT')
 	state.MagicalDefenseMode:options('MDT', 'Status')
 	
-	state.ExtraDefenseMode = M{['description']='Extra Defense Mode', 'None', 'Knockback'}
+	state.Knockback = M(false, 'Knockback')
+	state.Death = M(false, "Death")
 
 	state.Runes = M{['description']='Runes', "Ignis", "Gelus", "Flabra", "Tellus", "Sulpor", "Unda", "Lux", "Tenebrae"}
 	
@@ -52,7 +53,9 @@ function user_setup()
 	send_command('bind ^- gs c cycleback Runes')
 	send_command('bind ^= gs c cycle Runes')
 	send_command('bind ^f11 gs c cycle MagicalDefenseMode')
-	send_command('bind !f11 gs c cycle ExtraDefenseMode')
+	send_command('bind ^[ gs c toggle Knockback')
+	send_command('bind ^] gs c toggle Death')
+
 	
 	select_default_macro_book()
 end
@@ -63,7 +66,8 @@ function user_unload()
 	send_command('unbind ^-')
 	send_command('unbind ^=')
     send_command('unbind ^f11')
-    send_command('unbind !f11')
+	send_command('unbind ^[')
+	send_command('unbind !]')
 end
 
 -- Define sets and vars used by this job file.
@@ -81,11 +85,11 @@ function init_gear_sets()
 --		hands="Kurys Gloves",
 		legs="Eri. Leg Guards +1", --7
 		feet="Erilaz Greaves +1",--6
-		neck="Unmoving Collar", --9
+		neck="Unmoving Collar +1", --10
 		ear1="Cryptic Earring", --4
 		ear2="Friomisi Earring", --2
 		ring1="Petrov Ring", --4
-		ring2="Vengeful Ring", --3
+		ring2="Eihwaz Ring", --5
 		back="Evasionist's Cape", --4
 		waist="Trance Belt", --4
 		}
@@ -181,14 +185,22 @@ function init_gear_sets()
 		ring2="Epona's Ring",
 		})
 		
-	sets.precast.WS['Resolution'].Acc = set_combine(sets.precast.WS['Resolution'], {})
+	sets.precast.WS['Resolution'].Acc = set_combine(sets.precast.WS['Resolution'], {
+		head="Dampening Tam",
+		legs="Adhemar Kecks",
+		ear2="Zennaroi Earring",
+		ring1="Rufescent Ring",
+		})
 	
 	sets.precast.WS['Dimidiation'] = set_combine(sets.precast.WS['Resolution'], {
 		legs="Lustratio Subligar",
 		feet="Lustratio Leggings",		
 		})
 		
-	sets.precast.WS['Dimidiation'].Acc = set_combine(sets.precast.WS['Dimidiation'], {})
+	sets.precast.WS['Dimidiation'].Acc = set_combine(sets.precast.WS['Dimidiation'], {
+		legs="Samnuha Tights",
+		ring1="Ramuh Ring +1",
+		})
 
 	sets.precast.WS['Herculean Slash'] = sets.precast.JA['Lunge']
 
@@ -208,8 +220,8 @@ function init_gear_sets()
 		legs="Carmine Cuisses +1",
 		neck="Incanter's Torque",
 		ear2="Andoaa Earring",
-		ring1="Levia. Ring +1",
-		ring2="Levia. Ring +1",
+		ring1="Stikini Ring",
+		ring2="Stikini Ring",
 		waist="Olympus Sash",
 		}
 
@@ -234,6 +246,14 @@ function init_gear_sets()
 	sets.midcast.EnhancingDuration = {
 		head="Erilaz Galea +1",
 		legs="Futhark Trousers",
+		}
+
+	sets.midcast['Divine Magic'] = {
+		legs="Runeist Trousers +1",
+		neck="Incanter's Torque",
+		ring1="Stikini Ring",
+		ring2="Stikini Ring",
+		waist="Bishop's Sash",
 		}
 
 	sets.midcast.Flash = sets.Enmity
@@ -270,7 +290,7 @@ function init_gear_sets()
 		}
 
 	sets.idle.Refresh = set_combine(sets.idle, {
---		head="Rawhide Mask",
+		head="Rawhide Mask",
 		body="Runeist Coat +1",
 		waist="Fucho-no-obi",
 		})
@@ -327,7 +347,9 @@ function init_gear_sets()
     -- Defense sets
     --------------------------------------
 
-	sets.Knockback = {back="Repulse Mantle"}
+	sets.defense.Knockback = {back="Repulse Mantle"}
+
+	sets.defense.Death = {ring1="Warden's Ring", ring2="Eihwaz Ring",}
 
 	sets.defense.PDT = {
 		--Aettir (5II) / Alber Strap 2
@@ -375,7 +397,8 @@ function init_gear_sets()
 		waist="Flume Belt", --4
 		}
 	
-	sets.defense.HP = {}
+	sets.defense.HP = {
+		}
 
 	--------------------------------------
 	-- Engaged sets
@@ -485,10 +508,12 @@ end
 -- Called when the player's status changes.
 function job_state_change(field, new_value, old_value)
 	classes.CustomDefenseGroups:clear()
-	classes.CustomDefenseGroups:append(state.ExtraDefenseMode.current)
+	classes.CustomDefenseGroups:append(state.Knockback.current)
+	classes.CustomDefenseGroups:append(state.Death.current)
 
 	classes.CustomMeleeGroups:clear()
-	classes.CustomMeleeGroups:append(state.ExtraDefenseMode.current)
+	classes.CustomMeleeGroups:append(state.Knockback.current)
+	classes.CustomMeleeGroups:append(state.Death.current)
 end
 
 -------------------------------------------------------------------------------------------------------------------
@@ -499,28 +524,37 @@ end
 function customize_idle_set(idleSet)
 	if player.mpp < 51 then
 		idleSet = set_combine(idleSet, sets.latent_refresh)
-	end
+		end
 	if state.Buff.Doom then
 		idleSet = set_combine(idleSet, sets.buff.Doom)
-	end	
+		end	
 	return idleSet
 end
 
 -- Modify the default melee set after it was constructed.
 function customize_melee_set(meleeSet)
+	if state.Knockback.value == true then
+		meleeSet = set_combine(meleeSet, sets.defense.Knockback)
+		end
+	if state.Death.value == true then
+		meleeSet = set_combine(meleeSet, sets.defense.Death)
+		end
 	if state.Buff.Doom then
 		meleeSet = set_combine(meleeSet, sets.buff.Doom)
-	end 
+		end 
 	return meleeSet
 end
 
 function customize_defense_set(defenseSet)
-	if state.ExtraDefenseMode.value ~= 'None' then
-		defenseSet = set_combine(defenseSet, sets[state.ExtraDefenseMode.value])
-	end
+	if state.Knockback.value == true then
+		defenseSet = set_combine(defenseSet, sets.defense.Knockback)
+		end
+	if state.Death.value == true then
+		defenseSet = set_combine(defenseSet, sets.defense.Death)
+		end
 	if state.Buff.Doom then
 		defenseSet = set_combine(defenseSet, sets.buff.Doom)
-	end
+		end
 	return defenseSet
 end
 
@@ -545,10 +579,14 @@ function display_current_job_state(eventArgs)
 		msg = msg .. ', ' .. 'Defense: ' .. state.DefenseMode.value .. ' (' .. state[state.DefenseMode.value .. 'DefenseMode'].value .. ')'
 	end
 
-	if state.ExtraDefenseMode.value ~= 'None' then
-        msg = msg .. ', Extra: [' .. state.ExtraDefenseMode.value .. ']'
+	if state.Knockback.value == true then
+        msg = msg .. ', Knockback: [ON]'
     end
 	
+	if state.Death.value == true then
+        msg = msg .. ', Death: [ON]'
+    end
+
 	if state.Kiting.value then
 		msg = msg .. ', Kiting'
 	end

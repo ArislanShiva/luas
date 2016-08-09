@@ -188,26 +188,9 @@ function init_gear_sets()
 
 	sets.midcast.CureMelee = sets.midcast.CureSolace
 
-	sets.midcast.Cursna = {
-		main="Queller Rod",
-		sub="Genmei Shield",
-		ammo="Hydrocera",
-		head="Ebers Cap +1",
-		body="Ebers Bliaud +1",
-		hands="Fanatic Gloves",
-		legs="Theo. Pant. +1",
-		feet="Gende. Galosh. +1",
-		neck="Malison Medallion",
-		ring1="Haoma's Ring",
-		ring2="Haoma's Ring",
-		back="Alaunus's Cape",
-		waist="Bishop's Sash",
-		}
-
 	sets.midcast.StatusRemoval = {
 		main="Chatoyant Staff",
 		sub="Clemency Grip",
-		ammo="Hydrocera",
 		head="Ebers Cap +1",
 		body="Ebers Bliaud +1",
 		hands="Fanatic Gloves",
@@ -219,10 +202,19 @@ function init_gear_sets()
 		back="Mending Cape",
 		waist="Bishop's Sash",
 		}
+		
+	sets.midcast.Cursna = set_combine(sets.midcast.StatusRemoval, {
+		main="Gada",
+		sub="Genmei Shield",
+		legs="Theo. Pant. +1",
+		feet="Gende. Galosh. +1",
+		neck="Malison Medallion",
+		back="Alaunus's Cape",
+		})
 
 	-- 110 total Enhancing Magic Skill; caps even without Light Arts
 	sets.midcast['Enhancing Magic'] = {
---		main="Beneficus",
+		main="Gada",
 		sub="Genmei Shield",
 		head="Telchine Cap",
 		body="Telchine Chas.",
@@ -231,8 +223,8 @@ function init_gear_sets()
 		feet="Telchine Pigaches",
 		neck="Incanter's Torque",
 		ear2="Andoaa Earring",
-		ring1="Levia. Ring +1",
-		ring2="Levia. Ring +1",
+		ring1="Stikini Ring",
+		ring2="Stikini Ring",
 		back="Fi Follet Cape +1",
 		waist="Olympus Sash",
 		}
@@ -283,6 +275,8 @@ function init_gear_sets()
 	sets.midcast.Shellra = sets.midcast.Protectra
 
 	sets.midcast.EnhancingDuration = {
+		main="Gada",
+		sub="Genmei Shield",
 		head="Telchine Cap",
 		body="Telchine Chas.",
 		hands="Telchine Gloves",
@@ -301,8 +295,8 @@ function init_gear_sets()
 		neck="Incanter's Torque",
 		ear1="Hermetic Earring",
 		ear2="Digni. Earring",
-		ring1="Globidonta Ring",
-		ring2="Weather. Ring",
+		ring1="Stikini Ring",
+		ring2="Stikini Ring",
 		back="Mending Cape",
 		waist=gear.ElementalObi,
 		}
@@ -320,7 +314,7 @@ function init_gear_sets()
 		ear1="Hermetic Earring",
 		ear2="Digni. Earring",
 		ring1="Evanescence Ring",
-		ring2="Weather. Ring",
+		ring2="Stikini Ring",
 		back="Aurist's Cape +1",
 		waist=gear.ElementalObi,
 		}
@@ -338,8 +332,8 @@ function init_gear_sets()
 		neck="Imbodla Necklace",
 		ear1="Hermetic Earring",
 		ear2="Digni. Earring",
-		ring1="Globidonta Ring",
-		ring2="Levia. Ring +1",
+		ring1="Stikini Ring",
+		ring2="Stikini Ring",
 		back="Alaunus's Cape",
 		waist="Luminary Sash",
 		}
@@ -356,8 +350,8 @@ function init_gear_sets()
 		neck="Imbodla Necklace",
 		ear1="Hermetic Earring",
 		ear2="Digni. Earring",
-		ring1="Shiva Ring +1",
-		ring2="Shiva Ring +1",
+		ring1="Stikini Ring",
+		ring2="Stikini Ring",
 		back="Aurist's Cape +1",
 		waist="Yamabuki-no-Obi",
 		}
@@ -407,7 +401,7 @@ function init_gear_sets()
 		feet="Ebers Duckbills +1",
 		ear1="Genmei Earring",
 		neck="Loricate Torque +1",
-		ring1"Gelatinous Ring +1",
+		ring1="Gelatinous Ring +1",
 		ring2="Defending Ring",
 		back="Umbra Cape",
 		})

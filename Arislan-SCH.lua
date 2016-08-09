@@ -257,7 +257,6 @@ function init_gear_sets()
 		legs="Acad. Pants +1",
 		feet="Vanya Clogs",
 		neck="Incanter's Torque",
-		ear2="Loquac. Earring",
 		ring1="Haoma's Ring",
 		ring2="Haoma's Ring",
 		back="Oretan. Cape +1",
@@ -265,12 +264,14 @@ function init_gear_sets()
 		}
 	
 	sets.midcast.Cursna = set_combine(sets.midcast.StatusRemoval, {
+		main="Gada",
+		sub="Genmei Shield",
 		feet="Gende. Galosh. +1",
 		neck="Malison Medallion",
 		})
 	
 	sets.midcast['Enhancing Magic'] = {
-		main="Bolelabunga",
+		main="Gada",
 		sub="Genmei Shield",
 		head="Telchine Cap",
 		body="Telchine Chasuble",
@@ -279,8 +280,8 @@ function init_gear_sets()
 		feet="Telchine Pigaches",
 		neck="Incanter's Torque",
 		ear2="Andoaa Earring",
-		ring1="Levia. Ring +1",
-		ring2="Levia. Ring +1",
+		ring1="Stikini Ring",
+		ring2="Stikini Ring",
 		back="Fi Follet Cape +1",
 		waist="Olympus Sash",
 		}
@@ -322,6 +323,8 @@ function init_gear_sets()
 	sets.midcast.Shellra = sets.midcast.Shell
 	
 	sets.midcast.EnhancingDuration = {
+		main="Gada",
+		sub="Genmei Shield",
 		head="Telchine Cap",
 		body="Telchine Chas.",
 		hands="Telchine Gloves",
@@ -342,15 +345,15 @@ function init_gear_sets()
 		neck="Imbodla Necklace",
 		ear1="Barkaro. Earring",
 		ear2="Digni. Earring",
-		ring1="Globidonta Ring",
-		ring2="Levia. Ring +1",
+		ring1="Stikini Ring",
+		ring2="Stikini Ring",
 		back=gear.SCH_FC_Cape,
 		waist="Luminary Sash",
 		}
 	
 	sets.midcast.IntEnfeebles = set_combine(sets.midcast.MndEnfeebles, {
-		ring1="Shiva Ring +1",
-		ring2="Shiva Ring +1",
+		ring1="Stikini Ring",
+		ring2="Stikini Ring",
 		back=gear.SCH_MAB_Cape,
 		waist="Channeler's Stone",
 		})
@@ -370,7 +373,7 @@ function init_gear_sets()
 		ear1="Barkaro. Earring",
 		ear2="Digni. Earring",
 		ring1="Evanescence Ring",
-		ring2="Weather. Ring",
+		ring2="Stikini Ring",
 		back=gear.SCH_MAB_Cape,
 		waist=gear.ElementalObi,
 		}
@@ -431,7 +434,6 @@ function init_gear_sets()
 	sets.midcast['Elemental Magic'].Resistant = set_combine(sets.midcast['Elemental Magic'], {
 		neck="Sanctity Necklace",
 		ear2="Hermetic Earring",
-		ring2="Weather. Ring",
 		waist="Yamabuki-no-Obi",
 		})
 	

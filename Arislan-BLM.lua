@@ -244,12 +244,16 @@ function init_gear_sets()
 		})
 
 	sets.midcast.Cursna = set_combine(sets.midcast.Cure, {
+		main="Gada",
+		sub="Genmei Shield",
 		feet="Vanya Clogs",
 		neck="Malison Medallion",
 		ring1="Haoma's Ring",
 		})
 
 	sets.midcast['Enhancing Magic'] = {
+		main="Gada",
+		sub="Genmei Shield",
 		head="Telchine Cap",
 		body="Telchine Chas.",
 		hands="Telchine Gloves",
@@ -257,8 +261,8 @@ function init_gear_sets()
 		feet="Telchine Pigaches",
 		neck="Incanter's Torque",
 		ear2="Andoaa Earring",
-		ring1="Levia. Ring +1",
-		ring2="Levia. Ring +1",
+		ring1="Stikini Ring",
+		ring2="Stikini Ring",
 		back="Fi Follet Cape +1",
 		waist="Olympus Sash",
 		}
@@ -291,6 +295,8 @@ function init_gear_sets()
 	sets.midcast.Shellra = sets.midcast.Protectra
 
 	sets.midcast.EnhancingDuration = {
+		main="Gada",
+		sub="Genmei Shield",
 		head="Telchine Cap",
 		body="Telchine Chas.",
 		hands="Telchine Gloves",
@@ -310,8 +316,8 @@ function init_gear_sets()
 		neck="Imbodla Necklace",
 		ear1="Hermetic Earring",
 		ear2="Digni. Earring",
-		ring1="Globidonta Ring",
-		ring2="Levia. Ring +1",
+		ring1="Stikini Ring",
+		ring2="Stikini Ring",
 		back="Aurist's Cape +1",
 		waist="Luminary Sash",
 		} -- MND/Magic accuracy
@@ -328,8 +334,8 @@ function init_gear_sets()
 		neck="Imbodla Necklace",
 		ear1="Barkaro. Earring",
 		ear2="Digni. Earring",
-		ring1="Shiva Ring +1",
-		ring2="Shiva Ring +1",
+		ring1="Stikini Ring",
+		ring2="Stikini Ring",
 		back=gear.BLM_MAB_Cape,
 		waist="Channeler's Stone",
 		} -- INT/Magic accuracy
@@ -349,7 +355,7 @@ function init_gear_sets()
 		ear1="Barkaro. Earring",
 		ear2="Digni. Earring",
 		ring1="Evanescence Ring",
-		ring2="Weather. Ring",
+		ring2="Stikini Ring",
 		back=gear.BLM_MAB_Cape,
 		waist=gear.ElementalObi,
 		}
@@ -599,9 +605,9 @@ function job_precast(spell, action, spellMap, eventArgs)
 		if state.CastingMode.value == 'Proc' then
 			classes.CustomClass = 'Proc'
 		end
-	elseif state.CastingMode.value == 'DeathMode' then
-		classes.CustomClass = 'DeathMode'
-		end
+--	elseif state.CastingMode.value == 'DeathMode' then
+--		classes.CustomClass = 'DeathMode'
+--		end
 end
 
 
@@ -613,8 +619,8 @@ end
 function job_post_midcast(spell, action, spellMap, eventArgs)
 	if spell.skill == 'Elemental Magic' and state.MagicBurst.value then
 		equip(sets.magic_burst)
-	elseif state.CastingMode.value == 'DeathMode' then
-		equip(sets.precast.Death)
+--	elseif state.CastingMode.value == 'DeathMode' then
+--		equip(sets.precast.Death)
 	end
 	if spell.skill == 'Enhancing Magic' and classes.NoSkillSpells:contains(spell.english) then
 		equip(sets.midcast.EnhancingDuration)
@@ -623,10 +629,10 @@ end
 
 function job_aftercast(spell, action, spellMap, eventArgs)
 	if not spell.interrupted then
-		if spell.english == 'Death' then
-			state.DeathMode:reset()
-			enable('ammo','head','neck','ear1','ear2','body','hands','ring1','ring2','back','waist','legs','feet')
-		end
+--		if spell.english == 'Death' then
+--			state.DeathMode:reset()
+--			enable('ammo','head','neck','ear1','ear2','body','hands','ring1','ring2','back','waist','legs','feet')
+--		end
 		-- Lock feet after using Mana Wall.
 		if spell.english == 'Mana Wall' then
 			enable('feet','back')
@@ -682,15 +688,15 @@ end
 
 -- Modify the default idle set after it was constructed.
 function customize_idle_set(idleSet)
-	if state.DeathMode.current == 'on' then
-		equip(sets.precast.Death)
-		disable('ammo','head','neck','ear1','ear2','body','hands','ring1','ring2','back','waist','legs','feet')
-	else
-		enable('ammo','head','neck','ear1','ear2','body','hands','ring1','ring2','back','waist','legs','feet')
-	end
+--	if state.DeathMode.current == 'on' then
+--		equip(sets.precast.Death)
+--		disable('ammo','head','neck','ear1','ear2','body','hands','ring1','ring2','back','waist','legs','feet')
+--	else
+--		enable('ammo','head','neck','ear1','ear2','body','hands','ring1','ring2','back','waist','legs','feet')
+--		end
 	if player.mpp < 51 then
 		idleSet = set_combine(idleSet, sets.latent_refresh)
-	end
+		end
 	
 	return idleSet
 end
