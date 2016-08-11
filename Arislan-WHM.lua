@@ -308,7 +308,7 @@ function init_gear_sets()
 		head="Telchine Cap",
 		body="Shango Robe",
 		hands="Inyan. Dastanas +1",
-		legs="Assid. Pants +1",
+		legs="Inyanga Shalwar +1",
 		feet="Medium's Sabots",
 		neck="Incanter's Torque",
 		ear1="Hermetic Earring",
@@ -325,9 +325,9 @@ function init_gear_sets()
 		sub="Mephitis Grip",
 		ammo="Hydrocera",
 		head="Befouled Crown",
-		body="Inyanga Jubbah +1",
+		body="Vanya Robe",
 		hands="Inyan. Dastanas +1",
-		legs="Kaykaus Tights",
+		legs="Inyanga Shalwar +1",
 		feet="Medium's Sabots",
 		neck="Imbodla Necklace",
 		ear1="Hermetic Earring",
@@ -343,9 +343,9 @@ function init_gear_sets()
 		sub="Mephitis Grip",
 		ammo="Pemphredo Tathlum",
 		head="Befouled Crown",
-		body="Inyanga Jubbah +1",
+		body="Vanya Robe",
 		hands="Inyan. Dastanas +1",
-		legs="Assid. Pants +1",
+		legs="Inyanga Shalwar +1",
 		feet="Medium's Sabots",
 		neck="Imbodla Necklace",
 		ear1="Hermetic Earring",
@@ -411,6 +411,7 @@ function init_gear_sets()
 		head="Inyanga Tiara +1",
 		body="Inyanga Jubbah +1",
 		hands="Inyan. Dastanas +1",
+		legs="Inyanga Shalwar +1",
 		feet="Ebers Duckbills +1",
 		neck="Loricate Torque +1",
 		ear1="Odnowa Earring",
@@ -422,8 +423,6 @@ function init_gear_sets()
 		})
 
 	sets.idle.Town = set_combine(sets.idle, {
-		main="Queller Rod",
-		sub="Genmei Shield",
 		head="Ebers Cap +1",
 		body="Ebers Bliaud +1",
 		hands="Ebers Mitts +1",
@@ -460,6 +459,7 @@ function init_gear_sets()
 		head="Inyanga Tiara +1", --4
 		body="Inyanga Jubbah +1", --7
 		hands="Inyan. Dastanas +1", --3
+		legs="Inyanga Shalwar +1", --5
 		feet="Ebers Duckbills +1",
 		neck="Loricate Torque +1", --6
 		ear1="Odnowa Earring", --2

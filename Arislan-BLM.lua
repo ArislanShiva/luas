@@ -26,14 +26,14 @@ function user_setup()
 	state.CastingMode:options('Normal', 'Spaekona', 'Resistant', 'DeathMode')
 	state.IdleMode:options('Normal', 'PDT', 'MDT', 'DeathMode')
 	state.MagicBurst = M(false, 'Magic Burst')
-	state.DeathMode = M(false, "Death Mode")
+--	state.DeathMode = M(false, "Death Mode")
 
 	lowTierNukes = S{'Stone', 'Water', 'Aero', 'Fire', 'Blizzard', 'Thunder'}
 	
 	-- Additional local binds
 	send_command('bind ^` input /ma Stun <t>')
 	send_command('bind !` gs c toggle MagicBurst')
-	send_command('bind @` gs c toggle DeathMode')
+--	send_command('bind @` gs c toggle DeathMode')
 	send_command('bind !o input /ma "Shock Spikes" <me>')
 --	send_command('bind !p input /ma "Warp II" <stpc>')
 	send_command('bind ^, input /ma Sneak <stpc>')
@@ -249,6 +249,7 @@ function init_gear_sets()
 		feet="Vanya Clogs",
 		neck="Malison Medallion",
 		ring1="Haoma's Ring",
+		ring2="Haoma's Ring",
 		})
 
 	sets.midcast['Enhancing Magic'] = {
@@ -310,7 +311,7 @@ function init_gear_sets()
 		ammo="Hydrocera",
 		head="Amalric Coif",
 		body="Vanya Robe",
-		hands="Amalric Gages",
+		hands="Jhakri Cuffs +1",
 		legs="Psycloth Lappas",
 		feet="Medium's Sabots",
 		neck="Imbodla Necklace",
@@ -322,23 +323,11 @@ function init_gear_sets()
 		waist="Luminary Sash",
 		} -- MND/Magic accuracy
 
-	sets.midcast.IntEnfeebles = {
-		main="Grioavolr",
-		sub="Mephitis Grip",
+	sets.midcast.IntEnfeebles = set_combine(sets.midcast.MndEnfeebles, {
 		ammo="Pemphredo Tathlum",
-		head="Amalric Coif",
-		body="Vanya Robe",
-		hands="Amalric Gages",
-		legs="Psycloth Lappas",
-		feet="Medium's Sabots",
-		neck="Imbodla Necklace",
 		ear1="Barkaro. Earring",
-		ear2="Digni. Earring",
-		ring1="Stikini Ring",
-		ring2="Stikini Ring",
 		back=gear.BLM_MAB_Cape,
-		waist="Channeler's Stone",
-		} -- INT/Magic accuracy
+		}) -- INT/Magic accuracy
 		
 	sets.midcast.ElementalEnfeeble = sets.midcast.IntEnfeebles
 
@@ -607,7 +596,7 @@ function job_precast(spell, action, spellMap, eventArgs)
 		end
 --	elseif state.CastingMode.value == 'DeathMode' then
 --		classes.CustomClass = 'DeathMode'
---		end
+		end
 end
 
 

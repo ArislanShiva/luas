@@ -44,7 +44,7 @@ function user_setup()
 	state.MagicalDefenseMode:options('MDT', 'Status')
 	
 	state.Knockback = M(false, 'Knockback')
-	state.Death = M(false, "Death")
+	state.Death = M(false, "Death Resistance")
 
 	state.Runes = M{['description']='Runes', "Ignis", "Gelus", "Flabra", "Tellus", "Sulpor", "Unda", "Lux", "Tenebrae"}
 	
@@ -55,6 +55,8 @@ function user_setup()
 	send_command('bind ^f11 gs c cycle MagicalDefenseMode')
 	send_command('bind ^[ gs c toggle Knockback')
 	send_command('bind ^] gs c toggle Death')
+	send_command('bind !e input /ma "Refueling" <me>')
+	send_command('bind !o input /ma "Cocoon" <me>')
 
 	
 	select_default_macro_book()
@@ -68,6 +70,8 @@ function user_unload()
     send_command('unbind ^f11')
 	send_command('unbind ^[')
 	send_command('unbind !]')
+	send_command('bind !e input /ma Haste <stpc>')
+	send_command('unbind !o')
 end
 
 -- Define sets and vars used by this job file.
@@ -316,8 +320,8 @@ function init_gear_sets()
 		legs="Eri. Leg Guards +1",
 		feet="Erilaz Greaves +1",
 		neck="Loricate Torque +1",
-		ear1="Odnowa Earring",
-		ear2="Etiolation Earring",
+		ear1="Etiolation Earring",
+		ear2="Odnowa Earring +1",
 		ring1="Shadow Rinsg",
 		ring2="Defending Ring",
 		back="Mubvum. Mantle",
@@ -332,8 +336,8 @@ function init_gear_sets()
 		legs="Carmine Cuisses +1",
 		feet="Carmine Greaves +1",
 		neck="Combatant's Torque",
-		ear1="Cessance Earring",
-		ear2="Brutal Earring",
+		ear1="Genmei Earring",
+		ear2="Odnowa Earring +1",
 		ring1="Warden's Ring",
 		ring2="Defending Ring",
 		back="Ogma's Cape",
@@ -359,6 +363,7 @@ function init_gear_sets()
 		feet="Erilaz Greaves +1", --5
 		neck="Loricate Torque +1", --6
 		ear1="Genmei Earring", --2
+		ear2="Odnowa Earring +1",
 		ring1="Gelatinous Ring +1", --7
 		ring2="Defending Ring", --10
 		back="Evasionist's Cape", --7
@@ -373,8 +378,8 @@ function init_gear_sets()
 		legs="Eri. Leg Guards +1",
 		feet="Erilaz Greaves +1",
 		neck="Loricate Torque +1", --6
-		ear1="Odnowa Earring", --2
-		ear2="Etiolation Earring", --2
+		ear1="Etiolation Earring", --2
+		ear2="Odnowa Earring +1", --2
 		ring1="Shadow Ring",
 		ring2="Defending Ring", --10
 		back="Mubvum. Mantle", --6
@@ -525,7 +530,12 @@ function customize_idle_set(idleSet)
 	if player.mpp < 51 then
 		idleSet = set_combine(idleSet, sets.latent_refresh)
 		end
-	if state.Buff.Doom then
+	if state.Knockback.value == true then
+		idleSet = set_combine(idleSet, sets.defense.Knockback)
+		end
+	if state.Death.value == true then
+		idleSet = set_combine(idleSet, sets.defense.Death)
+		end	if state.Buff.Doom then
 		idleSet = set_combine(idleSet, sets.buff.Doom)
 		end	
 	return idleSet
@@ -610,6 +620,7 @@ function job_get_spell_map(spell, default_spell_map)
 		end
 	end
 end
+
 -------------------------------------------------------------------------------------------------------------------
 -- User code that supplements self-commands.
 -------------------------------------------------------------------------------------------------------------------
@@ -618,7 +629,6 @@ function job_self_command(cmdParams, eventArgs)
 		send_command('@input /ja '..state.Runes.value..' <me>')
 	end
 end
-
 
 -------------------------------------------------------------------------------------------------------------------
 -- Utility functions specific to this job.
@@ -655,9 +665,9 @@ end
 -- Select default macro book on initial load or subjob change.
 function select_default_macro_book()
 	-- Default macro set/book: (set, book)
-	if player.sub_job == 'BLU' then
-		set_macro_page(2, 12)
-	else
+--	if player.sub_job == 'BLU' then
+--		set_macro_page(2, 12)
+--	else
 		set_macro_page(1, 12)
-	end
+--	end
 end

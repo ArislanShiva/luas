@@ -352,10 +352,7 @@ function init_gear_sets()
 		}
 	
 	sets.midcast.IntEnfeebles = set_combine(sets.midcast.MndEnfeebles, {
-		ring1="Stikini Ring",
-		ring2="Stikini Ring",
 		back=gear.SCH_MAB_Cape,
-		waist="Channeler's Stone",
 		})
 
 	sets.midcast.ElementalEnfeeble = sets.midcast.IntEnfeebles

@@ -161,6 +161,8 @@ function init_gear_sets()
 		neck="Incanter's Torque",
 		ear1="Gifted Earring",
 		ear2="Calamitous Earring",
+		ring1="Stikini Ring",
+		ring2="Stikini Ring",
 		back="Lifestream Cape",
 		waist="Austerity Belt +1",
 		}
@@ -177,6 +179,8 @@ function init_gear_sets()
 		neck="Incanter's Torque",
 		ear1="Gifted Earring",
 		ear2="Calamitous Earring",
+		ring1="Stikini Ring",
+		ring2="Stikini Ring",
 		back="Lifestream Cape",
 		waist="Austerity Belt +1",
 		}
@@ -209,6 +213,7 @@ function init_gear_sets()
 		feet="Vanya Clogs",
 		neck="Malison Medallion",
 		ring1="Haoma's Ring",
+		ring2="Haoma's Ring",
 		})
 
 	sets.midcast['Enhancing Magic'] = {
@@ -281,30 +286,16 @@ function init_gear_sets()
 		waist="Luminary Sash",
 		} -- MND/Magic accuracy
 	
-	sets.midcast.IntEnfeebles = {
-		main="Grioavolr",
-		sub="Mephitis Grip",
---		ammo="Pemphredo Tathlum",
-		head="Amalric Coif",
-		body="Vanya Robe",
-		hands="Azimuth Gloves +1",
-		legs="Psycloth Lappas",
-		feet="Medium's Sabots",
-		neck="Imbodla Necklace",
+	sets.midcast.IntEnfeebles = set_combine(sets.midcast.MndEnfeebles, {
 		ear1="Barkaro. Earring",
-		ear2="Digni. Earring",
-		ring1="Stikini Ring",
-		ring2="Stikini Ring",
-		back="Aurist's Cape +1",
-		waist="Channeler's Stone",
-		} -- INT/Magic accuracy
+		}) -- INT/Magic accuracy
 
 	sets.midcast['Dark Magic'] = {
 		main="Grioavolr",
 		sub="Mephitis Grip",
 		head="Amalric Coif",
 		body="Psycloth Vest",
-		hands="Amalric Gages",
+		hands="Jhakri Cuffs +1",
 		legs="Azimuth Tights +1",
 		feet="Merlinic Crackows",
 		neck="Incanter's Torque",

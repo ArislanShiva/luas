@@ -205,8 +205,8 @@ function init_gear_sets()
 		legs="Meg. Chausses +1",
 		feet="Meg. Jam. +1",
 		neck=gear.ElementalGorget,
-		ear1="Enervating Earring",
-		ear2="Moonshade Earring",
+		ear1="Moonshade Earring",
+		ear2="Ishvara Earring",
 		ring1="Arvina Ringlet +1",
 		ring2="Garuda Ring +1",
 		back=gear.COR_WS1_Cape,
@@ -220,6 +220,7 @@ function init_gear_sets()
 	-- Specific weaponskill sets.  Uses the base set if an appropriate WSMod version isn't found.
 
 	sets.precast.WS["Last Stand"] = set_combine(sets.precast.WS['Last Stand'], {
+		hands="Meg. Gloves +1",
 		ring1="Garuda Ring +1",
 		})
 
@@ -269,24 +270,17 @@ function init_gear_sets()
 		feet=gear.Herc_TA_feet,
 		neck=gear.ElementalGorget,
 		ear1="Moonshade Earring",
-		ear2="Ishvara Earring",
-		ring1="Ramuh Ring +1",
-		ring2="Ramuh Ring +1",
+		ear2="Brutal Earring",
+		ring1="Begrudging Ring",
+		ring2="Epona's Ring",
 		back=gear.COR_WS1_Cape,
 		waist=gear.ElementalBelt,
 		}
 
-	sets.precast.WS['Exenterator'] = set_combine(sets.precast.WS['Evisceration'], {
-		hands="Meg. Gloves +1",
-		ear1="Cessance Earring",
-		ear2="Brutal Earring",
-		ring1="Garuda Ring +1",
-		ring2="Garuda Ring +1",
-		})
-	
 	sets.precast.WS['Savage Blade'] = set_combine(sets.precast.WS['Evisceration'], {
 		head="Lilitu Headpiece",
 		hands="Meg. Gloves +1",
+		legs="Meg. Chausses +1",
 		neck="Caro Necklace",
 		ring1="Ifrit Ring +1",
 		ring2="Shukuyu Ring",
@@ -300,12 +294,11 @@ function init_gear_sets()
 		})
 
 	sets.precast.WS['Requiescat'] = set_combine(sets.precast.WS['Savage Blade'], {
-		hands="Meg. Gloves +1",
+		head="Meghanada Visor +1",
+		feet="Carmine Greaves +1",
 		neck=gear.ElementalGorget,
-		ear1="Cessance Earring",
-		ear2="Brutal Earring",
 		ring1="Levia. Ring +1",
-		ring2="Levia. Ring +1",
+		ring2="Epona's Ring",
 		back=gear.COR_WS2_Cape,
 		waist=gear.ElementalBelt,
 		}) --MND
