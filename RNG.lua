@@ -28,8 +28,8 @@ function user_setup()
 	state.WeaponskillMode:options('Normal', 'Acc')
 	
 
-	DefaultAmmo = {['Nobility'] = "Achiyal. Arrow", ['Steinthor'] = "Achiyal. Arrow", ['Holliday'] = "Achiyal. Bullet"}
-	U_Shot_Ammo = {['Nobility'] = "Achiyal. Arrow", ['Steinthor'] = "Achiyal. Arrow", ['Holliday'] = "Achiyal. Bullet"}
+	DefaultAmmo = {['Steinthor'] = "Achiyal. Arrow", ['Holliday'] = "Achiyal. Bullet"}
+	U_Shot_Ammo = {['Steinthor'] = "Achiyal. Arrow", ['Holliday'] = "Achiyal. Bullet"}
 
 	select_default_macro_book()
 
@@ -173,10 +173,6 @@ function init_gear_sets()
 		body="Amini Caban +1", hands="Meg. Gloves +1", lring="Cacoethic Ring", rring="Cacoethic Ring +1",
 		back="Belenus's Cape", waist="Yemaya Belt", legs="Adhemar Kecks", feet="Meg. Jam. +1"
 	})
-
-	sets.midcast.RA.Nobility = sets.midcast.RA
-
-	sets.midcast.RA.Nobility.Acc = set_combine(sets.midcast.RA.Acc)
 
 	sets.midcast.RA.Steinthor = sets.midcast.RA
 

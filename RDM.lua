@@ -60,10 +60,10 @@ function init_gear_sets()
 
     sets.precast.FC =
 	{
-		ammo="Staunch Tathlum",
-        head="Atrophy Chapeau +1",neck="Orunmila's Torque", lear="Etiolation Earring", rear="Loquacious Earring",
-        body="Viti. Tabard +1",hands="Leyline Gloves",lring="Evanescence Ring", rring="Prolix Ring",
-        back="Swith Cape +1",waist="Witful Belt",legs="Carmine Cuisses +1",feet="Amalric Nails"
+		ammo="Sapience Orb",
+        head="Atrophy Chapeau +1", neck="Orunmila's Torque", lear="Etiolation Earring", rear="Loquacious Earring",
+        body="Viti. Tabard +1", hands="Leyline Gloves", lring="Evanescence Ring", rring="Prolix Ring",
+        back="Swith Cape +1", waist="Witful Belt", legs="Carmine Cuisses +1",feet="Amalric Nails"
 	}
 
 	sets.precast.FC['Enhancing Magic'] = set_combine(sets.precast.FC,
@@ -88,7 +88,7 @@ function init_gear_sets()
 		gear.Grioavolr_Enf, sub="Clerisy Strap",
 		head=empty,
 		body="Twilight Cloak",
-		legs="Psycloth Lappas", feet="Carmine Greaves"
+		waist="Channeler's Stone", legs="Psycloth Lappas", feet="Carmine Greaves"
 	})
 
 	sets.precast.Reraise = sets.precast.FC
@@ -126,7 +126,7 @@ function init_gear_sets()
 	{
 		ammo="Pemphredo Tathlum",
 		head="Pixie Hairpin +1", neck="Fotia Gorget", lear="Friomisi Earring", rear="Hecate's Earring",
-		body="Merlinic Jubbah", hands="Chironic Gloves", lring="Archon Ring", rring="Levia. Ring",
+		body="Merlinic Jubbah", hands="Jhakri Cuffs +1", lring="Archon Ring", rring="Levia. Ring",
 		back=gear.RDMCape_Nuke, waist="Fotia Belt", legs="Merlinic Shalwar", feet="Chironic Slippers"
 	}
 
@@ -134,7 +134,7 @@ function init_gear_sets()
 
     sets.midcast.FastRecast =
 	{
-		ammo="Staunch Tathlum",
+		ammo="Sapience Orb",
         head="Carmine Mask", neck="Orunmila's Torque", lear="Etiolation Earring", rear="Loquacious Earring",
         body="Viti. Tabard +1", hands="Leyline Gloves", lring="Evanescence Ring", rring="Prolix Ring",
         back="Swith Cape +1", waist="Witful Belt", legs="Carmine Cuisses +1", feet="Amalric Nails"
@@ -150,17 +150,10 @@ function init_gear_sets()
 
 	sets.midcast.Cures =
 	{
-		main=gear.Grioavolr_Enh, sub="Achaq Grip", ammo="Esper Stone +1",
 		head="Vanya Hood", neck="Orunmila's Torque", lear="Gifted Earring", rear="Mendi. Earring",
         body="Kaykaus Bliaut", hands="Kaykaus Cuffs", lring="Lebeche Ring", rring="Vocane Ring",
         back="Solemnity Cape", waist="Gishdubar Sash", legs="Gyve Trousers", feet="Vanya Clogs"
 	}
-
-	sets.midcast.CureWithLightWeather = set_combine(sets.midcast.Cures,
-	{
-		main="Chatoyant Staff",
-		back="Twilight Cape", waist="Hachirin-no-Obi"
-	})
 
     sets.midcast.Curaga = sets.midcast.Cures
 
@@ -258,22 +251,22 @@ function init_gear_sets()
     sets.midcast.Macc =
 	{
 		main=gear.Grioavolr_Enf, sub="Mephitis Grip", ammo="Pemphredo Tathlum",
-		head=gear.NukeHood, neck="Incanter's Torque", lear="Digni. Earring", rear="Gwati Earring",
-		body="Merlinic Jubbah", hands="Leth. Gantherots +1", lring="Stikini Ring", rring="Stikini Ring",
-		back=gear.RDMCape_Nuke, waist="Luminary Sash", legs="Chironic Hose", feet="Medium's Sabots"
+		head="Amalric Coif", neck="Incanter's Torque", lear="Digni. Earring", rear="Gwati Earring",
+		body="Merlinic Jubbah", hands="Jhakri Cuffs +1", lring="Stikini Ring", rring="Stikini Ring",
+		back=gear.RDMCape_Nuke, waist="Luminary Sash", legs="Chironic Hose", feet=gear.NukeCrackows
 	}
 
 	sets.midcast['Enfeebling Magic'] = set_combine(sets.midcast.Macc,
 	{
 		head="Befouled Crown",
-		body="Lethargy Sayon +1",
-		back=gear.RDMCape_Nuke, legs="Psycloth Lappas"
+		body="Lethargy Sayon +1", hands="Leth. Gantherots +1",
+		legs="Psycloth Lappas", feet="Medium's Sabots"
 	})
 
 	sets.midcast['Enfeebling Magic'].Resistant = set_combine(sets.midcast.Macc,
 	{
-		body="Vanya Robe",
-		back=gear.RDMCape_Nuke
+		body="Vanya Robe", hands="Leth. Gantherots +1",
+		feet="Medium's Sabots"
 	})
 
 	sets.midcast['Enfeebling Magic'].Potency = set_combine(sets.midcast.Macc,
@@ -640,15 +633,6 @@ end
 -------------------------------------------------------------------------------------------------------------------
 -- User code that supplements standard library decisions.
 -------------------------------------------------------------------------------------------------------------------
-function job_get_spell_map(spell, default_spell_map)
-	if spell.action_type == 'Magic' then
-		if default_spell_map == 'Cures' or default_spell_map == 'Curaga' then
-			if (world.weather_element == 'Light' or world.day_element == 'Light') then
-				return 'CureWithLightWeather'
-			end
-		end
-	end
-end
 
 -- Called by the 'update' self-command.
 function job_update(cmdParams, eventArgs)

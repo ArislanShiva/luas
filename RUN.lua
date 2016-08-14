@@ -35,6 +35,7 @@ function init_gear_sets()
 
 	sets.Enmity =
 	{
+		ammo="Sapience Orb"
 		lear="Friomisi Earring",
 		body="Emet Harness", hands="Futhark Mitons", lring="Petrov Ring", rring="Begrudging Ring",
 		back="Reiki Cloak", legs="Eri. Leg Guards +1", feet="Erilaz Greaves +1"
@@ -43,7 +44,7 @@ function init_gear_sets()
 	-- Precast sets to enhance JAs
 	sets.precast.JA['Swipe'] =
 	{
-		ammo="Pemphredo Tathlum",
+		ammo="Seeth. Bomblet +1",
 		head="Herculean Helm", neck="Sanctity Necklace", lear="Friomisi Earring", rear="Hecate's Earring",
 		body="Samnuha Coat", hands="Leyline Gloves", lring="Acumen Ring", rring="Shiva Ring",
 		back="Evasionist's Cape", waist="Eschan Stone", legs="Samnuha Tights", feet="Herculean Boots"
@@ -126,7 +127,7 @@ function init_gear_sets()
 
 	sets.precast.FC =
 	{
-		ammo="Staunch Tathlum",
+		ammo="Sapience Orb",
         head="Rune. Bandeau +1", neck="Orunmila's Torque", lear="Etiolation Earring", rear="Loquacious Earring",
         body="Vrikodara Jupon", hands="Leyline Gloves", lring="Evanescence Ring", rring="Prolix Ring",
         back="Shadow Mantle", waist="Luminary Sash", legs="Rawhide Trousers", feet="Carmine Greaves"
@@ -162,13 +163,7 @@ function init_gear_sets()
 
     -- Midcast Sets
 
-    sets.midcast.FastRecast =
-	{
-		ammo="Staunch Tathlum",
-        head="Rune. Bandeau +1", neck="Orunmila's Torque", lear="Etiolation Earring", rear="Loquacious Earring",
-        body="Vrikodara Jupon", hands="Leyline Gloves", lring="Defending Ring", rring="Prolix Ring",
-        back="Shadow Mantle", waist="Flume Belt", legs="Carmine Cuisses +1", feet="Carmine Greaves"
-	}
+    sets.midcast.FastRecast = sets.precast.FC
 
 	sets.midcast.Cures =
 	{
@@ -177,25 +172,19 @@ function init_gear_sets()
         back="Solemnity Cape", waist="Gishdubar Sash", legs="Carmine Cuisses +1", feet="Carmine Greaves"
 	}
 
-	sets.midcast.CureWithLightWeather = set_combine(sets.midcast.Cures,
-	{
-		waist="Hachirin-no-Obi"
-	})
-
     sets.midcast.Curaga = sets.midcast.Cures
 
 	sets.midcast.StatusRemoval = sets.midcast.FastRecast
 
 	sets.midcast.Cursna = set_combine(sets.midcast.FastRecast,
 	{
-		ammo="Pemphredo Tathlum",
 		neck="Debilis Medallion",
         lring="Haoma's Ring", rring="Haoma's Ring",
 	})
 
 	sets.midcast.Regen =
 	{
-		ammo="Staunch Tathlum",
+		ammo="Pemphredo Tathlum",
 		head="Rune. Bandeau +1", neck="Incanter's Torque", lear="Gifted Earring", rear="Mendi. Earring",
         body="Futhark Coat +1", hands="Runeist Mitons +1", lring="Defending Ring", rring="Vocane Ring",
         back="Reiki Cloak", waist="Flume Belt", legs="Futhark Trousers +1", feet="Erilaz Greaves +1"
@@ -203,7 +192,7 @@ function init_gear_sets()
 
 	sets.midcast.Refresh =
 	{
-		ammo="Staunch Tathlum",
+		ammo="Pemphredo Tathlum",
 		head="Erilaz Galea +1", neck="Orunmila's Torque", lear="Gifted Earring", rear="Mendi. Earring",
         body="Futhark Coat +1", hands="Runeist Mitons +1", lring="Defending Ring", rring="Vocane Ring",
         back="Reiki Cloak", waist="Gishdubar Sash", legs="Futhark Trousers +1", feet="Erilaz Greaves +1"
@@ -211,7 +200,7 @@ function init_gear_sets()
 
 	sets.midcast.Phalanx =
 	{
-		ammo="Staunch Tathlum",
+		ammo="Pemphredo Tathlum",
 		head="Fu. Bandeau +1", neck="Incanter's Torque", lear="Andoaa Earring", rear="Augment. Earring",
         body="Futhark Coat +1", hands="Runeist Mitons +1", lring="Stikini Ring", rring="Stikini Ring",
         back="Reiki Cloak", waist="Olympus Sash", legs="Futhark Trousers +1", feet="Erilaz Greaves +1"
@@ -221,7 +210,7 @@ function init_gear_sets()
 
 	sets.midcast.BarElement = set_combine(sets.midcast.GainStat,
 	{
-		ammo="Staunch Tathlum",
+		ammo="Pemphredo Tathlum",
 		head="Carmine Mask", neck="Incanter's Torque", lear="Andoaa Earring", rear="Augment. Earring",
         body="Futhark Coat +1", hands="Runeist Mitons +1", lring="Stikini Ring", rring="Stikini Ring",
         back="Reiki Cloak", waist="Olympus Sash", legs="Carmine Cuisses +1", feet="Erilaz Greaves +1"
@@ -231,7 +220,7 @@ function init_gear_sets()
 
 	sets.midcast.Stoneskin =
 	{
-		ammo="Staunch Tathlum",
+		ammo="Sapience Orb",
 		head="Fu. Bandeau +1", neck="Stone Gorget", lear="Andoaa Earring", rear="Earthcry Earring",
         body="Futhark Coat +1", hands="Stone Mufflers", lring="Defending Ring", rring="Vocane Ring",
         back="Reiki Cloak", waist="Olympus Sash", legs="Carmine Cuisses +1", feet="Erilaz Greaves +1"
@@ -239,7 +228,7 @@ function init_gear_sets()
 
 	sets.midcast.Duration =
 	{
-		ammo="Staunch Tathlum",
+		ammo="Sapience Orb",
 		head="Rune. Bandeau +1", neck="Incanter's Torque", lear="Gifted Earring", rear="Mendi. Earring",
         body="Futhark Coat +1", hands="Runeist Mitons +1", lring="Defending Ring", rring="Vocane Ring",
         back="Reiki Cloak", waist="Fotia Belt", legs="Futhark Trousers +1", feet="Erilaz Greaves +1"
@@ -406,15 +395,6 @@ end
 -------------------------------------------------------------------------------------------------------------------
 -- User code that supplements standard library decisions.
 -------------------------------------------------------------------------------------------------------------------
-function job_get_spell_map(spell, default_spell_map)
-	if spell.action_type == 'Magic' then
-		if default_spell_map == 'Cures' or default_spell_map == 'Curaga' then
-			if (world.weather_element == 'Light' or world.day_element == 'Light') then
-				return 'CureWithLightWeather'
-			end
-		end
-	end
-end
 
 -- Called by the 'update' self-command.
 

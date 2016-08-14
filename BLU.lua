@@ -108,15 +108,9 @@ function init_gear_sets()
 		feet="Luhlaza Charuqs +1"
 	}
 
-	sets.precast.Waltz =
-	{
-		body="Passion Jacket",
-		feet="Rawhide Boots"
-	}
-
 	sets.precast.FC =
 	{
-		ammo="Staunch Tathlum",
+		ammo="Sapience Orb",
 		head="Amalric Coif", neck="Orunmila's Torque", lear="Etiolation Earring", rear="Loquac. Earring",
 		body="Luhlaza Jubbah +1", hands="Leyline Gloves", lring="Evanescence Ring", rring="Prolix Ring",
 		back="Swith Cape +1", waist="Witful Belt", legs="Psycloth Lappas", feet="Carmine Greaves"
@@ -129,7 +123,6 @@ function init_gear_sets()
 
 	sets.precast.FC.BlueSkill = set_combine(sets.precast.FC,
 	{
-		ammo="Staunch Tathlum",
 		body="Hashishin Mintan +1",
 		waist="Emphatikos Rope"
 	})
@@ -140,13 +133,11 @@ function init_gear_sets()
 
 	sets.precast.FC['Enhancing Magic'] = set_combine(sets.precast.FC,
 	{
-		ammo="Staunch Tathlum",
 		waist="Siegel Sash"
 	})
 
 	sets.precast.FC.Cures = set_combine(sets.precast.FC,
 	{
-		ammo="Staunch Tathlum",
 		rear="Mendi. Earring",
 		waist="Emphatikos Rope"
 	})
@@ -163,7 +154,7 @@ function init_gear_sets()
 
 	sets.precast.WS.Acc = set_combine(sets.precast.WS,
 	{
-		head="Dampening Tam", lear="Cessance Earring",
+		head="Dampening Tam", lear="Telos Earring",
 		ring1="Cacoethic Ring +1",
 		legs="Adhemar Kecks"
 	})
@@ -179,7 +170,7 @@ function init_gear_sets()
 
 	sets.precast.WS['Chant du Cygne'].Acc = set_combine(sets.precast.WS['Chant du Cygne'],
 	{
-		head="Dampening Tam",
+		head="Dampening Tam", lear="Telos Earring",
 		legs="Samnuha Tights", feet="Herculean Boots"
 	})
 
@@ -223,9 +214,9 @@ function init_gear_sets()
 	sets.precast.WS['Sanguine Blade'] =
 	{
 		ammo="Pemphredo Tathlum",
-		head="Pixie Hairpin +1", neck="Sanctity Necklace", lear="Friomisi Earring", rear="Hecate's Earring",
-		body="Amalric Doublet", hands="Amalric Gages", lring="Archon Ring", rring="Shiva Ring",
-		waist="Cornflower Cape", waist="Eschan Stone", legs="Amalric Slops", feet="Amalric Nails"
+		head="Pixie Hairpin +1", neck="Fotia Gorget", lear="Friomisi Earring", rear="Moonshade Earring",
+		body="Amalric Doublet", hands="Jhakri Cuffs +1", lring="Archon Ring", rring="Rufescent Ring",
+		back="Cornflower Cape", waist="Fotia Belt", legs="Amalric Slops", feet="Amalric Nails"
 	}
 
 	sets.precast.WS['True Strike']= set_combine(sets.precast.WS['Savage Blade'],
@@ -249,20 +240,19 @@ function init_gear_sets()
 
 	sets.precast.WS['Flash Nova'] = set_combine(sets.precast.WS['Sanguine Blade'],
 	{
-		head="Herculean Helm"
+		head="Jhakri Coronal +1",
+		lring="Acumen Ring"
 	})
 
 	--------------------------------------
 	-- Midcast sets
 	--------------------------------------
 
-	sets.midcast.FastRecast =
+	sets.midcast.FastRecast = set_combine(sets.precast.FC,
 	{
-		ammo="Staunch Tathlum",
-		head="Carmine Mask", neck="Orunmila's Torque", lear="Etiolation Earring", rear="Loquac. Earring",
-		body="Luhlaza Jubbah +1", hands="Leyline Gloves", lring="Evanescence Ring", rring="Prolix Ring",
-		back="Fi Follet Cape +1", waist="Witful Belt", legs="Psycloth Lappas", feet="Carmine Greaves"
-	}
+		head="Carmine Mask",
+		back="Fi Follet Cape +1"
+	})
 
 	sets.midcast.ConserveMP = set_combine(sets.midcast.FastRecast,
 	{
@@ -313,20 +303,18 @@ function init_gear_sets()
 	sets.midcast.Magical =
 	{
 		main="Nibiru Cudgel", sub="Nibiru Cudgel", ammo="Pemphredo Tathlum",
-		head="Herculean Helm", neck="Sanctity Necklace", lear="Friomisi Earring", rear="Hecate's Earring",
+		head="Jhakri Coronal +1", neck="Sanctity Necklace", lear="Friomisi Earring", rear="Hecate's Earring",
 		body="Amalric Doublet", hands="Amalric Gages", lring="Acumen Ring", rring="Shiva Ring",
 		back="Cornflower Cape", waist="Eschan Stone", legs="Amalric Slops", feet="Amalric Nails"
 	}
 
-	sets.midcast.DarkBlue = set_combine(sets.precast.WS['Sanguine Blade'],
+	sets.midcast.DarkBlue = set_combine(sets.midcast.Magical,
 	{
-		main="Nibiru Cudgel", sub="Nibiru Cudgel"
+		head="Pixie Hairpin +1",
+		lring="Archon Ring"
 	})
 
-	sets.midcast.LightBlue = set_combine(sets.precast.WS['Flash Nova'],
-	{
-		main="Nibiru Cudgel", sub="Nibiru Cudgel"
-	})
+	sets.midcast.LightBlue = sets.midcast.Magical
 
 	sets.midcast.Breath =
 	{
@@ -341,7 +329,7 @@ function init_gear_sets()
 		ammo="Pemphredo Tathlum",
 		head="Amalric Coif", neck="Incanter's Torque", lear="Digni. Earring", rear="Gwati Earring",
 		body="Samnuha Coat", hands="Rawhide Gloves", lring="Stikini Ring", rring="Stikini Ring",
-		back="Cornflower Cape", waist="Luminary Sash", legs="Psycloth Lappas", feet="Hashi. Basmak +1"
+		back="Cornflower Cape", waist="Luminary Sash", legs="Psycloth Lappas", feet="Jhakri Pigaches +1"
 	}
 
 	sets.midcast.BlueDrain = set_combine(sets.midcast.Debuffs,
@@ -388,13 +376,19 @@ function init_gear_sets()
 
 	sets.midcast.Statless = sets.midcast.Duration
 
-	sets.midcast.Stun =
+	sets.midcast['Enfeebling Magic'] =
 	{
 		ammo="Pemphredo Tathlum",
 		head="Amalric Coif", neck="Incanter's Torque", lear="Digni. Earring", rear="Gwati Earring",
-		body="Samnuha Coat", hands="Leyline Gloves", lring="Stikini Ring", rring="Stikini Ring",
-		back="Cornflower Cape", waist="Witful Belt", legs="Psycloth Lappas", feet="Jhakri Pigaches +1"
+		body="Samnuha Coat", hands="Jhakri Cuffs +1", lring="Stikini Ring", rring="Stikini Ring",
+		back="Cornflower Cape", waist="Luminary Sash", legs="Psycloth Lappas", feet="Jhakri Pigaches +1"
 	}
+
+	sets.midcast.Stun = set_combine(sets.midcast['Enfeebling Magic'],
+	{
+		hands="Leyline Gloves",
+		waist="Witful Belt"
+	})
 
 	sets.midcast.Stoneskin = set_combine(sets.midcast.Duration,
 	{
@@ -411,7 +405,7 @@ function init_gear_sets()
 	{
 		neck="Debilis Medallion",
         hands="Hieros Mittens", lring="Haoma's Ring", rring="Haoma's Ring",
-        back="Oretan. Cape +1"
+        back="Oretan. Cape +1", legs="Carmine Cuisses +1"
 	})
 
 	sets.midcast.StatusRemoval = sets.midcast.FastRecast
@@ -691,6 +685,7 @@ function display_current_job_state(eventArgs)
 
 	eventArgs.handled = true
 end
+
 
 -------------------------------------------------------------------------------------------------------------------
 -- Utility functions specific to this job.

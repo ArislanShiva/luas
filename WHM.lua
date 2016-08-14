@@ -73,7 +73,7 @@ function init_gear_sets()
 	-- Fast cast sets for spells
 	sets.precast.FC =
 	{
-		main=gear.Grioavolr_Enh, sub="Clerisy Strap", ammo="Staunch Tathlum",
+		main=gear.Grioavolr_Enh, sub="Clerisy Strap", ammo="Sapience Orb",
 		head="Vanya Hood", neck="Orunmila's Torque", lear="Etiolation Earring", rear="Loquac. Earring",
         body="Inyanga Jubbah +1", hands="Fanatic Gloves", lring="Evanescence Ring", rring="Prolix Ring",
         back="Alaunus's Cape", waist="Witful Belt", legs="Lengo Pants", feet="Telchine Pigaches"
@@ -86,7 +86,7 @@ function init_gear_sets()
 
 	sets.precast.FC['Enfeebling Magic'] = set_combine(sets.precast.FC,
 	{
-		waist="Emphatikos Rope"
+		waist="Channeler's Stone"
 	})
 
 	sets.precast.FC['Divine Magic'] = sets.precast.FC['Enfeebling Magic']
@@ -103,7 +103,7 @@ function init_gear_sets()
 
 	sets.precast.FC['Healing Magic'] = set_combine(sets.precast.FC,
 	{
-		waist="Emphatikos Rope", legs="Ebers Pant. +1"
+		waist="Channeler's Stone", legs="Ebers Pant. +1"
 	})
 
 	sets.precast.FC.StatusRemoval = sets.precast.FC['Healing Magic']
@@ -112,7 +112,7 @@ function init_gear_sets()
 	{
 		main="Queller Rod", Sub="Sors Shield",
 		neck="Aceso's Choker +1", rear="Mendi. Earring",
-		waist="Emphatikos Rope", legs="Ebers Pant. +1", feet="Hygieia Clogs +1"
+		waist="Channeler's Stone", legs="Ebers Pant. +1", feet="Hygieia Clogs +1"
 	})
 
 	sets.precast.FC.Curaga = sets.precast.FC.Cures
@@ -127,10 +127,9 @@ function init_gear_sets()
 
 	sets.precast.FC.Impact = set_combine(sets.precast.FC,
 	{
-		ammo="Psilomene",
 		head=empty,
 		body="Twilight Cloak",
-		waist="Emphatikos Rope"
+		waist="Channeler's Stone"
 	})
 
 	-- Midcast Sets

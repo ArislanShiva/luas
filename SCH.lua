@@ -78,7 +78,7 @@ function init_gear_sets()
 
 	sets.precast.FC =
 	{
-		main=gear.Grioavolr_Enh, sub="Clerisy Strap", ammo="Staunch Tathlum",
+		main=gear.Grioavolr_Enh, sub="Clerisy Strap", ammo="Sapience Orb",
 		head="Vanya Hood", neck="Orunmila's Torque", lear="Etiolation Earring", rear="Loquac. Earring",
         body="Shango Robe", hands="Gende. Gages +1", lring="Evanescence Ring", rring="Prolix Ring",
         back="Swith Cape +1", waist="Witful Belt", legs="Psycloth Lappas", feet="Peda. Loafers +1"
@@ -95,13 +95,13 @@ function init_gear_sets()
 	sets.precast.FC['Enfeebling Magic'] = set_combine(sets.precast.FC,
 	{
 		main=gear.Grioavolr_Enf, sub="Clerisy Strap",
-		waist="Emphatikos Rope"
+		waist="Channeler's Stone"
 	})
 
 	sets.precast.FC['Elemental Magic'] = set_combine(sets.precast.FC,
 	{
 		main=gear.Grioavolr_Enf, sub="Clerisy Strap",
-		waist="Emphatikos Rope"
+		waist="Channeler's Stone"
 	})
 
 	sets.precast.FC.Stoneskin = set_combine(sets.precast.FC['Enhancing Magic'],
@@ -117,7 +117,7 @@ function init_gear_sets()
 	sets.precast.FC.Cures = set_combine(sets.precast.FC,
 	{
 		rear="Mendi. Earring",
-		waist="Emphatikos Rope"
+		waist="Channeler's Stone"
 	})
 
 	sets.precast.FC.Curaga = sets.precast.FC.Cures
@@ -126,9 +126,17 @@ function init_gear_sets()
 	{
 		head=empty,
 		body="Twilight Cloak",
-		waist="Emphatikos Rope",
+		waist="Channeler's Stone"
 	})
 
+	sets.precast.WS =
+	{
+		ammo="Floestone",
+		head="Jhakri Coronal +1", neck="Fotia Gorget", lear="Telos Earring", rear="Moonshade Earring",
+		body="Vanya Robe", hands="Jhakri Cuffs +1",
+		waist="Fotia Belt", legs="Telchine Braconi", feet="Jhakri Pigaches +1"
+	}
+	
 	sets.precast.WS['Myrkr'] =
 	{
 		ammo="Psilomene",
@@ -158,17 +166,10 @@ function init_gear_sets()
 
 	sets.midcast.Cures =
 	{
-		main=gear.Grioavolr_Enh, sub="Achaq Grip", ammo="Esper Stone +1",
 		head="Vanya Hood", neck="Orunmila's Torque", lear="Gifted Earring", rear="Mendi. Earring",
         body="Kaykaus Bliaut", hands="Kaykaus Cuffs", lring="Lebeche Ring", rring="Vocane Ring",
         back="Solemnity Cape", waist="Gishdubar Sash", legs="Gyve Trousers", feet="Vanya Clogs"
 	}
-
-	sets.midcast.CureWithLightWeather = set_combine(sets.midcast.Cures,
-	{
-		main="Chatoyant Staff",
-		back="Twilight Cape", waist="Hachirin-no-Obi"
-	})
 
 	sets.midcast.Curaga = sets.midcast.Cures
 
@@ -261,18 +262,22 @@ function init_gear_sets()
 	{
 		main=gear.Grioavolr_Enf, sub="Mephitis Grip", ammo="Pemphredo Tathlum",
 		head="Amalric Coif", neck="Incanter's Torque", lear="Digni. Earring", rear="Barkaro. Earring",
-		body="Vanya Robe", hands="Lurid Mitts", lring="Stikini Ring", rring="Stikini Ring",
-		back="Lugh's Cape", waist="Luminary Sash", legs="Chironic Hose", feet="Medium's Sabots"
+		body="Vanya Robe", hands="Jhakri Cuffs +1", lring="Stikini Ring", rring="Stikini Ring",
+		back="Lugh's Cape", waist="Luminary Sash", legs="Chironic Hose", feet=gear.NukeCrackows
 	}
 
 	sets.midcast.MndEnfeebles = set_combine(sets.midcast.Macc,
 	{
-		head="Befouled Crown"
+		head="Befouled Crown",
+		hands="Lurid Mitts",
+		feet="Medium's Sabots"
 	})
 
 	sets.midcast.IntEnfeebles = set_combine(sets.midcast.Macc,
 	{
-		head="Befouled Crown"
+		head="Befouled Crown",
+		hands="Lurid Mitts",
+		feet="Medium's Sabots"
 	})
 
 	sets.midcast.ElementalEnfeeble = sets.midcast.Macc
@@ -564,11 +569,7 @@ end
 -- Custom spell mapping.
 function job_get_spell_map(spell, default_spell_map)
 	if spell.action_type == 'Magic' then
-		if default_spell_map == 'Cures' or default_spell_map == 'Curaga' then
-			if (world.weather_element == 'Light' or world.day_element == 'Light') then
-				return 'CureWithLightWeather'
-			end
-		elseif spell.skill == 'Enfeebling Magic' then
+		if spell.skill == 'Enfeebling Magic' then
 			if spell.type == 'WhiteMagic' then
 				return 'MndEnfeebles'
 			else

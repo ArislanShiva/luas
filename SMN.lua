@@ -139,7 +139,7 @@ function init_gear_sets()
     -- Pact delay reduction gear
     sets.precast.BloodPactWard =
 	{
-		main="Espiritus", sub="Vox Grip", ammo="Seraphicaller",
+		main="Espiritus", sub="Vox Grip", ammo="Sancus Sachet",
 		head="Convoker's Horn +1", neck="Incanter's Torque", lear="Andoaa Earring", rear="Evans Earring",
 		body="Apogee Dalmatica", hands="Glyphic Bracers +1", lring="Lebeche Ring", rring="Mephitas's Ring +1",
 		back="Conveyance Cape", waist="Kobo Obi", legs="Beck. Spats +1", feet="Glyph. Pigaches +1"
@@ -172,7 +172,7 @@ function init_gear_sets()
 
 	sets.precast.FC['Enfeebling Magic'] = set_combine(sets.precast.FC,
 	{
-		waist="Emphatikos Rope"
+		waist="Channeler's Stone"
 	})
 
 	sets.precast.FC['Elemental Magic'] = sets.precast.FC['Enfeebling Magic']
@@ -191,7 +191,7 @@ function init_gear_sets()
 	sets.precast.FC.Cures = set_combine(sets.precast.FC,
 	{
 		rear="Mendi. Earring",
-		waist="Emphatikos Rope", feet="Vanya Clogs"
+		waist="Channeler's Stone", feet="Vanya Clogs"
 	})
 
 	sets.precast.FC.Curaga = sets.precast.FC.Cures
@@ -208,7 +208,7 @@ function init_gear_sets()
 	{
 		head=empty,
 		body="Twilight Cloak",
-		waist="Emphatikos Rope"
+		waist="Channeler's Stone"
 	})
 
 	sets.precast.WS['Myrkr'] = set_combine(sets.precast.JA['Astral Conduit'],
@@ -242,7 +242,7 @@ function init_gear_sets()
 
     sets.midcast.Pet.bp_Debuffs =
 	{
-		main="Espiritus", sub="Vox Grip", ammo="Seraphicaller",
+		main="Espiritus", sub="Vox Grip", ammo="Sancus Sachet",
         head="Convoker's Horn +1", neck="Incanter's Torque", lear="Andoaa Earring", rear="Smn. Earring",
         body="Beck. Doublet +1", hands="Lamassu Mitts +1", lring="Stikini Ring", rring="Evoker's Ring",
         back="Conveyance Cape", waist="Incarnation Sash", legs="Beck. Spats +1",feet="Apogee Pumps"
@@ -250,7 +250,7 @@ function init_gear_sets()
 
     sets.midcast.Pet.bp_Physical =
 	{
-		main=gear.Grioavolr_Pet, sub="Elan Strap", ammo="Seraphicaller",
+		main=gear.Grioavolr_Pet, sub="Elan Strap", ammo="Sancus Sachet",
         head="Apogee Crown", neck="Empath Necklace", lear="Esper Earring", rear="Gelos Earring",
         body="Con. Doublet +1", hands="Merlinic Dastanas", lring="Varar Ring", rring="Varar Ring",
         back="Campestres's Cape", waist="Incarnation Sash", legs="Apogee Slacks", feet="Apogee Pumps"
@@ -258,7 +258,7 @@ function init_gear_sets()
 
     sets.midcast.Pet.bp_Magical =
 	{
-		main=gear.Grioavolr_Pet, sub="Elan Strap", ammo="Seraphicaller",
+		main=gear.Grioavolr_Pet, sub="Elan Strap", ammo="Sancus Sachet",
         head=gear.PetHood, neck="Deino Collar", lear="Esper Earring", rear="Gelos Earring",
         body="Apogee Dalmatica", hands="Merlinic Dastanas", lring="Varar Ring", rring="Speaker's Ring",
         back="Campestres's Cape", waist="Incarnation Sash", legs="Helios Spats", feet=gear.PetCrackows
@@ -266,7 +266,7 @@ function init_gear_sets()
 
 	   sets.midcast.Pet.bp_Merit =
 	{
-		main=gear.Grioavolr_Pet, sub="Elan Strap", ammo="Seraphicaller",
+		main=gear.Grioavolr_Pet, sub="Elan Strap", ammo="Sancus Sachet",
         head=gear.PetHood, neck="Deino Collar", lear="Esper Earring", rear="Gelos Earring",
         body="Apogee Dalmatica", hands="Merlinic Dastanas", lring="Varar Ring", rring="Speaker's Ring",
         back="Campestres's Cape", waist="Incarnation Sash", legs="Enticer's Pants", feet=gear.PetCrackows
@@ -274,7 +274,7 @@ function init_gear_sets()
 
     sets.midcast.Pet.bp_Hybrid =
 	{
-		main=gear.Grioavolr_Pet, sub="Elan Strap", ammo="Seraphicaller",
+		main=gear.Grioavolr_Pet, sub="Elan Strap", ammo="Sancus Sachet",
         head=gear.PetHood, neck="Deino Collar", lear="Esper Earring", rear="Gelos Earring",
         body="Apogee Dalmatica", hands="Merlinic Dastanas", lring="Varar Ring", rring="Varar Ring",
         back="Campestres's Cape", waist="Incarnation Sash", legs="Apogee Slacks", feet=gear.PetCrackows
@@ -488,7 +488,7 @@ function init_gear_sets()
 
     sets.idle.Avatar =
 	{
-		main="Gridarvor",sub="Mensch Strap", ammo="Seraphicaller",
+		main="Gridarvor",sub="Mensch Strap", ammo="Sancus Sachet",
         head="Beckoner's Horn +1", neck="Empath Necklace", lear="Domes. Earring",rear="Evans Earring",
         body="Apogee Dalmatica", hands="Glyphic Bracers +1", lring="Speaker's Ring", rring="Evoker's Ring",
         back="Campestres's Cape", waist="Klouskap Sash", legs="Enticer's Pants", feet="Apogee Pumps"
@@ -502,15 +502,15 @@ function init_gear_sets()
 
 	sets.idle.Avatar.Favor =
 	{
-		main="Gridarvor",sub="Vox Grip", ammo="Seraphicaller",
-        head="Beckoner's Horn +1", neck="Caller's Pendant", lear="Andoaa Earring",rear="Evans Earring",
+		main="Gridarvor",sub="Vox Grip", ammo="Sancus Sachet",
+        head="Beckoner's Horn +1", neck="Caller's Pendant", lear="Domes. Earring",rear="Evans Earring",
         body="Shomonjijoe +1", hands="Glyphic Bracers +1", lring="Stikini Ring", rring="Evoker's Ring",
         back="Campestres's Cape", waist="Klouskap Sash", legs="Assid. Pants +1", feet="Apogee Pumps"
 	}
 
     sets.idle.PDT.Avatar =
 	{
-		main="Gridarvor",sub="Mensch Strap", ammo="Seraphicaller",
+		main="Gridarvor",sub="Mensch Strap", ammo="Sancus Sachet",
         head="Beckoner's Horn +1", neck="Caller's Pendant", ear1="Handler's Earring +1", ear2="Handler's Earring",
         body="Shomonjijoe +1", hands="Glyphic Bracers +1", lring="Stikini Ring", rring="Evoker's Ring",
         back="Campestres's Cape", waist="Isa Belt", legs="Enticer's Pants", feet="Apogee Pumps"
@@ -518,7 +518,7 @@ function init_gear_sets()
 
 	sets.idle.MDT.Avatar =
 	{
-		main="Gridarvor", sub="Irenic Strap", ammo="Seraphicaller",
+		main="Gridarvor", sub="Irenic Strap", ammo="Sancus Sachet",
         head="Beckoner's Horn +1", neck="Caller's Pendant", ear1="Handler's Earring +1", ear2="Handler's Earring",
         body="Shomonjijoe +1", hands="Glyphic Bracers +1", lring="Stikini Ring", rring="Evoker's Ring",
         back="Campestres's Cape", waist="Isa Belt", legs="Enticer's Pants", feet="Apogee Pumps"
@@ -526,7 +526,7 @@ function init_gear_sets()
 
     sets.idle.Spirit =
 	{
-		main="Espiritus",sub="Mensch Strap", ammo="Seraphicaller",
+		main="Espiritus",sub="Mensch Strap", ammo="Sancus Sachet",
         head="Beckoner's Horn +1", neck="Caller's Pendant", ear1="Andoaa Earring",ear2="Smn. Earring",
         body="Shomonjijoe +1", hands="Glyphic Bracers +1", ring1="Stikini Ring", ring2="Evoker's Ring",
         back="Campestres's Cape", waist="Lucidity Sash", legs="Assid. Pants +1", feet="Glyph. Pigaches +1"
@@ -554,7 +554,7 @@ function init_gear_sets()
 
 	sets.engaged =
 	{
-		main="Gridarvor",sub="Mensch Strap", ammo="Seraphicaller",
+		main="Gridarvor",sub="Mensch Strap", ammo="Sancus Sachet",
         head="Beckoner's Horn +1", neck="Empath Necklace", lear="Domes. Earring",rear="Evans Earring",
         body="Apogee Dalmatica", hands="Glyphic Bracers +1", lring="Speaker's Ring", rring="Evoker's Ring",
         back="Campestres's Cape", waist="Klouskap Sash", legs="Enticer's Pants", feet="Apogee Pumps"
@@ -562,8 +562,8 @@ function init_gear_sets()
 
 	sets.engaged.Favor =
 	{
-		main="Gridarvor",sub="Vox Grip", ammo="Seraphicaller",
-        head="Beckoner's Horn +1", neck="Caller's Pendant", lear="Andoaa Earring",rear="Evans Earring",
+		main="Gridarvor",sub="Vox Grip", ammo="Sancus Sachet",
+        head="Beckoner's Horn +1", neck="Caller's Pendant", lear="Domes. Earring",rear="Evans Earring",
         body="Shomonjijoe +1", hands="Glyphic Bracers +1", lring="Stikini Ring", rring="Evoker's Ring",
         back="Campestres's Cape", waist="Klouskap Sash", legs="Assid. Pants +1", feet="Apogee Pumps"
 	}

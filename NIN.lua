@@ -61,10 +61,10 @@ function init_gear_sets()
     -- Fast cast sets for spells
 	sets.precast.FC =
 	{
-		ammo="Staunch Tathlum",
+		ammo="Sapience Orb",
 		head="Herculean Helm", neck="Orunmila's Torque", lear="Etiolation Earring", rear="Loquac. Earring",
 		body="Foppish Tunica", hands="Leyline Gloves", lring="Evanescence Ring", rring="Prolix Ring",
-		back="Andartia's Mantle", waist="Flume Belt", legs="Gyve Trousers", feet="Hattori Kyahan +1"
+		back="Andartia's Mantle", waist="Flume Belt", legs="Rawhide Trousers", feet="Hattori Kyahan +1"
 	}
 
 	sets.precast.FC.Utsusemi = set_combine(sets.precast.FC,
@@ -76,7 +76,7 @@ function init_gear_sets()
     -- Default set for any weaponskill that isn't any more specifically defined
   	sets.precast.WS =
 	{
-		ammo="Floestone",
+		ammo="Seeth. Bomblet +1",
 		head="Lilitu Headpiece", neck="Fotia Gorget", lear="Brutal Earring", rear="Moonshade Earring",
 		body="Adhemar Jacket", hands="Adhemar Wristbands", lring="Apate Ring", rring="Epona's Ring",
 		back="Yokaze Mantle", waist="Fotia Belt", legs="Samnuha Tights", feet="Herculean Boots"
@@ -148,12 +148,7 @@ function init_gear_sets()
     -- Midcast sets
     --------------------------------------
 
-	sets.midcast.FC =
-	{
-		head="Herculean Helm", neck="Orunmila's Torque", lear="Etiolation Earring", rear="Loquac. Earring",
-		body="Foppish Tunica", hands="Leyline Gloves", lring="Evanescence Ring", rring="Prolix Ring",
-		back="Andartia's Mantle", waist="Flume Belt", legs="Gyve Trousers", feet="Hattori Kyahan +1"
-	}
+	sets.midcast.FC = sets.precast.FC
 
     sets.midcast.ElementalNinjutsu =
 	{
@@ -173,6 +168,7 @@ function init_gear_sets()
 
     sets.midcast.NinjutsuBuff =
 	{
+		ammo="Sapience Orb",
 		head="Herculean Helm", neck="Orunmila's Torque", lear="Etiolation Earring", rear="Loquac. Earring",
 		body="Foppish Tunica", hands="Leyline Gloves", lring="Stikini Ring", rring="Prolix Ring",
 		back="Andartia's Mantle", waist="Flume Belt", legs="Gyve Trousers", feet="Hattori Kyahan +1"
@@ -208,7 +204,7 @@ function init_gear_sets()
 	{
 		neck="Twilight Torque", lear="Etiolation Earring", rear="Static Earring",
 		body="Hiza. Haramaki +1", hands="Leyline Gloves", lring="Defending Ring", rring="Vocane Ring",
-		back="Solemnity Cape", waist="Lieutenant's Sash", legs="Feast Hose"
+		back="Solemnity Cape", waist="Lieutenant's Sash", legs="Adhemar Kecks"
 	})
 
 	sets.idle.Town = set_combine(sets.idle,
@@ -291,7 +287,7 @@ function init_gear_sets()
 	sets.engaged.MaxHaste =
 	{
 		ammo="Happo Shuriken",
-		head="Adhemar Bonnet", neck="Asperity Necklace", lear="Brutal Earring", rear="Cessance Earring",
+		head="Adhemar Bonnet", neck="Asperity Necklace", lear="Telos Earring", rear="Cessance Earring",
 		body="Herculean Vest", hands="Adhemar Wristbands", lring="Hetairoi Ring", rring="Epona's Ring",
 		back="Yokaze Mantle", waist="Windbuffet Belt +1", legs="Samnuha Tights", feet="Herculean Boots"
 	}
@@ -304,7 +300,6 @@ function init_gear_sets()
 
 	sets.engaged.MaxHaste.MidAcc = set_combine(sets.engaged.MaxHaste.LowAcc,
 	{
-		lear="Telos Earring",
 		hands="Hizamaru Kote +1", legs="Adhemar Kecks"
 	})
 

@@ -164,7 +164,7 @@ function init_gear_sets()
 
 	sets.precast.FC = 
 	{
-		ammo="Staunch Tathlum",
+		ammo="Sapience Orb",
 		head="Herculean Helm", neck="Orunmila's Torque", lear="Etiolation Earring", rear="Loquac. Earring",
 		body="Foppish Tunica", hands="Leyline Gloves", lring="Defending Ring", rring="Prolix Ring",
 		back="Shadow Mantle", waist="Flume Belt", legs="Herculean Trousers", feet="Herculean Boots"
@@ -302,12 +302,8 @@ function init_gear_sets()
 	-- Midcast sets
 	--------------------------------------
 
-	sets.midcast.FastRecast = 
-	{
-		head="Herculean Helm", neck="Orunmila's Torque", lear="Etiolation Earring", rear="Loquac. Earring",
-		body="Foppish Tunica", hands="Leyline Gloves", lring="Defending Ring", rring="Prolix Ring",
-	}
-
+	sets.midcast.FastRecast = sets.precast.FC
+	
 	-- Specific spells
 	sets.midcast.Utsusemi = sets.midcast.FastRecast
 
@@ -339,7 +335,7 @@ function init_gear_sets()
 		ammo="Staunch Tathlum",
 		neck="Twilight Torque", lear="Etiolation Earring", rear="Static Earring",
 		body="Samnuha Coat", hands="Leyline Gloves", lring="Defending Ring", rring="Vocane Ring",
-		back="Solemnity Cape", waist="Lieutenant's Sash", legs="Feast Hose"
+		back="Solemnity Cape", waist="Lieutenant's Sash", legs="Adhemar Kecks"
 	})
 
 	sets.idle.Town = set_combine(sets.idle, 
