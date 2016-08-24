@@ -69,8 +69,11 @@ function user_setup()
 	send_command('bind != gs c scholar addendum')
 	send_command('bind ^[ gs c scholar power')
 	send_command('bind ^] gs c scholar accuracy')
+	send_command('bind ^; gs c scholar speed')
+	send_command('bind !o input /ma "Regen V" <stpc>')
 	send_command('bind ![ gs c scholar aoe')
 	send_command('bind !] gs c scholar duration')
+	send_command('bind !; gs c scholar cost')
 	send_command('bind ^, input /ma Sneak <stpc>')
 	send_command('bind ^. input /ma Invisible <stpc>')
 	
@@ -87,8 +90,11 @@ function user_unload()
 	send_command('unbind !=')
 	send_command('unbind ^[')
 	send_command('unbind ^]')
+	send_command('unbind ^;')
+	send_command('unbind !o')
 	send_command('unbind ![')
 	send_command('unbind !]')
+	send_command('unbind !;')
 	send_command('unbind ^,')
 	send_command('unbind !.')
 end
@@ -118,7 +124,7 @@ function init_gear_sets()
 	sets.precast.FC = {
 	--	/RDM --15
 		main="Sucellus", --5
-		sub="Genmei Shield",
+		sub="Chanter's Shield", --3
 		ammo="Sapience Orb", --2
 		head="Amalric Coif", --10
 		body="Shango Robe", --8
@@ -335,7 +341,7 @@ function init_gear_sets()
 	-- Custom spell classes
 	sets.midcast.MndEnfeebles = {
 		main="Akademos",
-		sub="Mephitis Grip",
+		sub="Clerisy Strap +1",
 		ammo="Pemphredo Tathlum",
 		head="Amalric Coif",
 		body="Vanya Robe",
@@ -359,7 +365,7 @@ function init_gear_sets()
 	
 	sets.midcast['Dark Magic'] = {
 		main="Akademos",
-		sub="Mephitis Grip",
+		sub="Clerisy Strap +1",
 		ammo="Pemphredo Tathlum",
 		head="Amalric Coif",
 		body="Shango Robe",
@@ -424,17 +430,23 @@ function init_gear_sets()
 		}
 
 	sets.midcast['Elemental Magic'].Seidr = set_combine(sets.midcast['Elemental Magic'], {
+		main="Akademos",
+		sub="Clerisy Strap +1",
 		body="Seidr Cotehardie",
 		neck="Sanctity Necklace",
 		})
 		
 	sets.midcast['Elemental Magic'].Resistant = set_combine(sets.midcast['Elemental Magic'], {
+		main="Akademos",
+		sub="Clerisy Strap +1",
 		neck="Sanctity Necklace",
 		ear2="Hermetic Earring",
 		waist="Yamabuki-no-Obi",
 		})
 	
 	sets.midcast.Impact = set_combine(sets.midcast['Elemental Magic'], {
+		main="Akademos",
+		sub="Niobid Strap",
 		head=empty,
 		body="Twilight Cloak",
 		ring1="Archon Ring",
@@ -495,23 +507,17 @@ function init_gear_sets()
 
 	sets.idle.MDT = set_combine(sets.idle, {
 		ammo="Vanir Battery",
-		head="Gende. Caubeen +1",
-		body="Vanya Robe",
 		hands="Gende. Gages +1",
-		legs="Gyve Trousers",
-		feet="Arbatel Loafers +1",
-		neck="Loricate Torque +1",
-		ear1="Odnowa Earring",
+		ear1="Odnowa Earring +1",
 		ear2="Etiolation Earring",
-		ring1="Shadow Ring",
+		ring1="Fortified Ring",
 		ring2="Defending Ring",
 		back="Solemnity Cape",
-		waist="Lieutenant's Sash",
 		})
 
 	sets.idle.Town = set_combine(sets.idle, {
 		main="Akademos",
-		sub="Niobid Strap",
+		sub="Clerisy Strap +1",
 		head="Merlinic Hood",
 		body="Merlinic Jubbah",
 		hands="Arbatel Bracers +1",
@@ -549,18 +555,17 @@ function init_gear_sets()
 	
 	sets.defense.MDT = {
 		ammo="Vanir Battery",
-		head="Gende. Caubeen +1", --4
-		body="Vanya Robe", --1
+--		head="Gende. Caubeen +1", --4
+--		body="Vanya Robe", --1
 		hands="Gende. Gages +1", --3
-		legs="Gyve Trousers", --2
-		feet="Arbatel Loafers +1",
-		neck="Loricate Torque +1", --6
-		ear1="Odnowa Earring", --2
+--		legs="Gyve Trousers", --2
+--		neck="Loricate Torque +1", --6
+		ear1="Odnowa Earring +1", --2
 		ear2="Etiolation Earring", --2
-		ring1="Shadow Ring",
+		ring1="Fortified Ring", --5
 		ring2="Defending Ring", --10
 		back="Solemnity Cape", --4
-		waist="Lieutenant's Sash", --2
+--		waist="Lieutenant's Sash", --2
 		}
 	
 	sets.Kiting = {

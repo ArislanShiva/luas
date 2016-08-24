@@ -39,8 +39,8 @@ function user_setup()
 	state.OffenseMode:options('Normal', 'LowAcc', 'MidAcc', 'HighAcc', 'Fodder')
 	state.WeaponskillMode:options('Normal', 'Acc')
 	state.CastingMode:options('Normal', 'Resistant')
-	state.IdleMode:options('Normal', 'PDT', 'MDT', 'Refresh')
-	state.PhysicalDefenseMode:options('PDT')
+	state.IdleMode:options('Normal', 'Refresh')
+	state.PhysicalDefenseMode:options('PDT', 'Critical', 'HP')
 	state.MagicalDefenseMode:options('MDT', 'Status')
 	
 	state.Knockback = M(false, 'Knockback')
@@ -55,9 +55,12 @@ function user_setup()
 	send_command('bind ^f11 gs c cycle MagicalDefenseMode')
 	send_command('bind ^[ gs c toggle Knockback')
 	send_command('bind ^] gs c toggle Death')
+	send_command('bind ^\ gs c toggle Charm')
+	send_command('bind !w input /ma "Cocoon" <me>')
 	send_command('bind !e input /ma "Refueling" <me>')
-	send_command('bind !o input /ma "Cocoon" <me>')
-
+	send_command('bind !o input /ma "Regen IV" <stpc>')
+	send_command('bind !p input /ma "Shock Spikes" <me>')
+	send_command('bind ^, input /ja "Spectral Jig" <me>')
 	
 	select_default_macro_book()
 end
@@ -70,8 +73,11 @@ function user_unload()
     send_command('unbind ^f11')
 	send_command('unbind ^[')
 	send_command('unbind !]')
+	send_command('unbind !w')
 	send_command('bind !e input /ma Haste <stpc>')
 	send_command('unbind !o')
+	send_command('unbind !p')
+	send_command('unbind ^,')
 end
 
 -- Define sets and vars used by this job file.
@@ -85,8 +91,8 @@ function init_gear_sets()
 		-- Aettir 10 / Alber Strap 5
 		ammo="Sapience Orb", --2
 		head="Halitus Helm", --8
-		body="Emet Harness", --9
---		hands="Kurys Gloves",
+		body="Emet Harness +1", --10
+		hands="Kurys Gloves", --9
 		legs="Eri. Leg Guards +1", --7
 		feet="Erilaz Greaves +1",--6
 		neck="Unmoving Collar +1", --10
@@ -99,15 +105,14 @@ function init_gear_sets()
 		}
 
 	-- Precast sets to enhance JAs
-	sets.precast.JA['Vallation'] = {body="Runeist Coat +1", legs="Futhark Trousers", back="Ogma's Cape"}
+	sets.precast.JA['Vallation'] = {body="Runeist Coat +1", legs="Futhark Trousers +1", back="Ogma's Cape"}
 	sets.precast.JA['Valiance'] = sets.precast.JA['Vallation']
 	sets.precast.JA['Pflug'] = {feet="Runeist Bottes +1"}
-	sets.precast.JA['Battuta'] = {head="Futhark Bandeau"}
-	sets.precast.JA['Liement'] = {body="Futhark Coat"}
+	sets.precast.JA['Battuta'] = {head="Fu. Bandeau +1"}
+	sets.precast.JA['Liement'] = {body="Futhark Coat +1"}
 
 	sets.precast.JA['Lunge'] = {
-		ammo="Ghastly Tathlum +1",
-		head=gear.Herc_MAB_head,
+		ammo="Seeth. Bomblet +1",
 		body="Samnuha Coat",
 		hands="Carmine Fin. Ga. +1",
 		legs=gear.Herc_MAB_legs,
@@ -124,8 +129,8 @@ function init_gear_sets()
 	sets.precast.JA['Swipe'] = sets.precast.JA['Lunge']
 	sets.precast.JA['Gambit'] = {hands="Runeist Mitons +1"}
 	sets.precast.JA['Rayke'] = {feet="Futhark Boots"}
-	sets.precast.JA['Elemental Sforzo'] = {body="Futhark Coat"}
-	sets.precast.JA['Swordplay'] = {hands="Futhark Mitons"}
+	sets.precast.JA['Elemental Sforzo'] = {body="Futhark Coat +1"}
+	sets.precast.JA['Swordplay'] = {hands="Futhark Mitons +1"}
 	sets.precast.JA['Embolden'] = {back="Evasionist's Cape"}
 	sets.precast.JA['Vivacious Pulse'] = {head="Erilaz Galea +1", neck="Incanter's Torque", legs="Rune. Trousers +1"}
 	sets.precast.JA['One For All'] = {}
@@ -143,7 +148,7 @@ function init_gear_sets()
 	sets.precast.FC = {
 		ammo="Sapience Orb", --2
 		head=gear.Herc_FC_head, --12
-		body="Samnuha Coat", --5
+		body="Taeon Tabard", --9
 		hands="Leyline Gloves", --7
 		legs="Rawhide Trousers", --5
 		feet="Carmine Greaves +1", --8
@@ -156,7 +161,7 @@ function init_gear_sets()
 		}
 
 	sets.precast.FC['Enhancing Magic'] = set_combine(sets.precast.FC, {
-		legs="Futhark Trousers",
+		legs="Futhark Trousers +1",
 		waist="Siegel Sash",
 		})
 
@@ -168,7 +173,7 @@ function init_gear_sets()
 
 	-- Weaponskill sets
 	sets.precast.WS = {
-		ammo="Seething Bomblet",
+		ammo="Seeth. Bomblet +1",
 		head="Lilitu Headpiece",
 		body=gear.Herc_TA_body,
 		hands="Adhemar Wristbands",
@@ -219,9 +224,11 @@ function init_gear_sets()
 		}
 
 	sets.midcast['Enhancing Magic'] = {
+		head="Erilaz Galea +1",
 --		head="Carmine Mask",
 		hands="Runeist Mitons +1",
-		legs="Carmine Cuisses +1",
+		legs="Futhark Trousers +1",
+--		legs="Carmine Cuisses +1",
 		neck="Incanter's Torque",
 		ear2="Andoaa Earring",
 		ring1="Stikini Ring",
@@ -230,13 +237,11 @@ function init_gear_sets()
 		}
 
 	sets.midcast['Phalanx'] = set_combine(sets.midcast['Enhancing Magic'], {
-		head="Futhark Bandeau",
+		head="Fu. Bandeau +1",
 		})
 
 	sets.midcast['Regen'] = set_combine(sets.midcast['Enhancing Magic'], {
-		head="Runeist Bandeau +1", 
-		legs="Futhark Trousers",
-		neck="Incanter's torque",
+		head="Runeist Bandeau +1",
 		})
 		
 	sets.midcast.Refresh = set_combine(sets.midcast['Enhancing Magic'], {
@@ -247,9 +252,16 @@ function init_gear_sets()
 		waist="Siegel Sash",
 		})
 
+	sets.midcast.Protect = set_combine(sets.midcast['Enhancing Magic'], {
+		legs="Futhark Trousers +1",
+		ring2="Sheltered Ring",
+		})
+
+	sets.midcast.Shell = sets.midcast.Protect
+
 	sets.midcast.EnhancingDuration = {
 		head="Erilaz Galea +1",
-		legs="Futhark Trousers",
+		legs="Futhark Trousers +1",
 		}
 
 	sets.midcast['Divine Magic'] = {
@@ -280,7 +292,7 @@ function init_gear_sets()
 	sets.idle = {
 		ammo="Homiliary",
 		head="Rawhide Mask",
-		body="Runeist Coat +1",
+		body="Futhark Coat +1",
 		hands="Erilaz Gauntlets +1",
 		legs="Carmine Cuisses +1",
 		feet="Erilaz Greaves +1",
@@ -290,7 +302,7 @@ function init_gear_sets()
 		ring1="Paguroidea Ring",
 		ring2="Sheltered Ring",
 		back="Solemnity Cape",
-		waist="Flume Belt",
+		waist="Flume Belt +1",
 		}
 
 	sets.idle.Refresh = set_combine(sets.idle, {
@@ -298,50 +310,21 @@ function init_gear_sets()
 		body="Runeist Coat +1",
 		waist="Fucho-no-obi",
 		})
-		   
-	sets.idle.PDT = {
-		ammo="Iron Gobbet",
-		body="Erilaz Surcoat +1",
-		legs="Eri. Leg Guards +1",
-		feet="Erilaz Greaves +1",
-		neck="Loricate Torque +1",
-		ear1="Genmei Earring",
-		ring1="Gelatinous Ring +1",
-		ring2="Defending Ring",
-		back="Evasionist's Cape",
-		waist="Flume Belt",
-		}
-
-	sets.idle.MDT = {
-		ammo="Vanir Battery",
-		head="Erilaz Galea +1",
-		body="Erilaz Surcoat +1",
-		hands="Erilaz Gauntlets +1",
-		legs="Eri. Leg Guards +1",
-		feet="Erilaz Greaves +1",
-		neck="Loricate Torque +1",
-		ear1="Etiolation Earring",
-		ear2="Odnowa Earring +1",
-		ring1="Shadow Rinsg",
-		ring2="Defending Ring",
-		back="Mubvum. Mantle",
-		waist="Lieutenant's Sash",
-		}
 
 	sets.idle.Town = {
-		ammo="Ginsen",
-		head="Erilaz Galea +1",
-		body="Erilaz Surcoat +1",
+		ammo="Seeth. Bomblet +1",
+		head="Fu. Bandeau +1",
+		body="Futhark Coat +1",
 		hands="Erilaz Gauntlets +1",
 		legs="Carmine Cuisses +1",
 		feet="Carmine Greaves +1",
-		neck="Combatant's Torque",
+		neck="Loricate Torque +1",
 		ear1="Genmei Earring",
 		ear2="Odnowa Earring +1",
-		ring1="Warden's Ring",
+		ring1="Gelatinous Ring +1",
 		ring2="Defending Ring",
 		back="Ogma's Cape",
-		waist="Windbuffet Belt +1",
+		waist="Flume Belt +1",
 		}
 
 	sets.Kiting = {legs="Carmine Cuisses +1"}
@@ -353,11 +336,16 @@ function init_gear_sets()
 
 	sets.defense.Knockback = {back="Repulse Mantle"}
 
-	sets.defense.Death = {ring1="Warden's Ring", ring2="Eihwaz Ring",}
+	sets.defense.Death = {
+		body="Samnuha Coat",
+		ring1="Warden's Ring",
+		ring2="Eihwaz Ring",
+		}
 
 	sets.defense.PDT = {
-		--Aettir (5II) / Alber Strap 2
-		ammo="Iron Gobbet", --(2)
+		--Aettir (5II) / Alber Strap 2 / Refined Grip 3
+		ammo="Brigantia Pebble",
+		head="Erilaz Galea +1",
 		body="Erilaz Surcoat +1",
 		legs="Eri. Leg Guards +1", --7
 		feet="Erilaz Greaves +1", --5
@@ -367,28 +355,30 @@ function init_gear_sets()
 		ring1="Gelatinous Ring +1", --7
 		ring2="Defending Ring", --10
 		back="Evasionist's Cape", --7
-		waist="Flume Belt", --4
+		waist="Flume Belt +1", --4
 		}
 	
 	sets.defense.MDT = {
+		--Refined Grip 3
 		ammo="Vanir Battery",
 		head="Erilaz Galea +1",
-		body="Erilaz Surcoat +1",
+		body="Futhark Coat +1", --7
 		hands="Erilaz Gauntlets +1",
 		legs="Eri. Leg Guards +1",
 		feet="Erilaz Greaves +1",
 		neck="Loricate Torque +1", --6
 		ear1="Etiolation Earring", --2
 		ear2="Odnowa Earring +1", --2
-		ring1="Shadow Ring",
+		ring1="Fortified Ring", --5
 		ring2="Defending Ring", --10
-		back="Mubvum. Mantle", --6
+		back="Evasionist's Cape", --4
 		waist="Lieutenant's Sash", --2
 		}
 
 	sets.defense.Status = {
-		ammo="Iron Gobbet", --(2)
-		head="Meghanada Visor +1", --4
+		--Aettir (5II) / Alber Strap 2 / Refined Grip 3
+		ammo="Brigantia Pebble",
+		head="Fu. Bandeau +1", --4
 		body="Erilaz Surcoat +1",
 		hands="Erilaz Gauntlets +1",
 		legs="Rune. Trousers +1", --3
@@ -399,10 +389,41 @@ function init_gear_sets()
 		ring1="Gelatinous Ring +1", --7
 		ring2="Defending Ring", --10
 		back="Evasionist's Cape", --7
-		waist="Flume Belt", --4
+		waist="Flume Belt +1", --4
 		}
 	
 	sets.defense.HP = {
+		--Aettir (5II) / Alber Strap 2 / Refined Grip 3
+		ammo="Brigantia Pebble",
+		head="Erilaz Galea +1",
+		body="Erilaz Surcoat +1",
+		hands="Runeist Mitons +1", --2
+		legs="Eri. Leg Guards +1", --7
+		feet="Erilaz Greaves +1", --5
+		neck="Loricate Torque +1", --6
+		ear1="Etiolation Earring",
+		ear2="Odnowa Earring +1",
+		ring1="Gelatinous Ring +1", --7
+		ring2="Defending Ring", --10
+		back="Evasionist's Cape", --7
+		waist="Flume Belt +1", --4
+		}
+
+	sets.defense.Critical = {
+		--Aettir (5II) / Alber Strap 2
+		ammo="Iron Gobbet", --(2)
+		head="Erilaz Galea +1",
+		body="Futhark Coat +1", --7
+		hands="Runeist Mitons +1", --2
+		legs="Eri. Leg Guards +1", --7
+		feet="Erilaz Greaves +1", --5
+		neck="Loricate Torque +1", --6
+		ear1="Genmei Earring", --2
+		ear2="Odnowa Earring +1",
+		ring1="Fortified Ring", --(7)
+		ring2="Defending Ring", --10
+		back="Evasionist's Cape", --7
+		waist="Flume Belt +1", --4
 		}
 
 	--------------------------------------
@@ -434,13 +455,14 @@ function init_gear_sets()
 	sets.engaged.MidAcc = set_combine(sets.engaged.LowAcc, {
 		ammo="Falcon Eye",
 		legs="Adhemar Kecks",
-		ear2="Zennaroi Earring",
+		ear2="Odnowa Earring +1",
 		ring1="Ramuh Ring +1",
 		waist="Kentarch Belt +1",
 		})
 
 	sets.engaged.HighAcc = set_combine(sets.engaged.MidAcc, {
 		ear1="Digni. Earring",
+		ear2="Zennaroi Earring",
 		ring2="Ramuh Ring +1",
 		waist="Olseni Belt",
 		})
@@ -451,7 +473,7 @@ function init_gear_sets()
 		})
 
 	-- Custom buff sets
-	sets.buff.Doom = {waist="Gishdubar Sash"}
+	sets.buff.Doom = {ring1="Saida Ring", ring2="Saida Ring", waist="Gishdubar Sash"}
 
 end
 

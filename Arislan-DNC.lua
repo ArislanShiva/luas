@@ -67,10 +67,11 @@ function user_setup()
 	gear.default.weaponskill_waist = "Grunfeld Rope"
 
 	-- Additional local binds
+	send_command('bind ^- gs c cycleback mainstep')
 	send_command('bind ^= gs c cycle mainstep')
+	send_command('bind ^- gs c cycleback altstep')
 	send_command('bind != gs c cycle altstep')
-	send_command('bind ^- gs c toggle selectsteptarget')
-	send_command('bind !- gs c toggle usealtstep')
+	send_command('bind !p gs c toggle usealtstep')
 	send_command('bind ^` input /ja "Berserk" <me>')
 	send_command('bind !` input /ja "Chocobo Jig II" <me>')
 	send_command('bind @` input /ja "Warcry" <me>')
@@ -82,10 +83,11 @@ end
 
 -- Called when this job file is unloaded (eg: job change)
 function user_unload()
-	send_command('unbind ^=')
-	send_command('unbind !=')
 	send_command('unbind ^-')
+	send_command('unbind ^=')
 	send_command('unbind !-')
+	send_command('unbind !=')
+	send_command('unbind !p')
 	send_command('unbind ^`')
 	send_command('unbind !`')
 	send_command('unbind @`')
@@ -101,8 +103,23 @@ function init_gear_sets()
 	
 	-- PRECAST SETS
 	
-	
+	-- Enmity set
+	sets.Enmity = {
+		ammo="Sapience Orb", --2
+		head="Halitus Helm", --8
+		body="Emet Harness +1", --10
+		hands="Kurys Gloves", --9
+		neck="Unmoving Collar +1", --10
+		ear1="Cryptic Earring", --4
+		ear2="Friomisi Earring", --2
+		ring1="Petrov Ring", --4
+		ring2="Eihwaz Ring", --5
+		waist="Trance Belt", --4
+		}
+		
 	-- Job Ability Sets
+
+	sets.precast.JA['Provoke'] = sets.Enmity
 
 	sets.precast.JA['No Foot Rise'] = {
 		body="Horos Casaque +1"
@@ -125,30 +142,29 @@ function init_gear_sets()
 		} -- Waltz Potency
 		
 	sets.precast.Waltz['Healing Waltz'] = {}
-
 	
 	sets.precast.Samba = {
 		head="Maxixi Tiara +1",
 		back=gear.DNC_TP_Cape,
 		}
-
 		
 	sets.precast.Jig = {
 		legs="Horos Tights +1",
 		feet="Maxixi Shoes +1"
 		}
-
 		
 	sets.precast.Step = {
 		back=gear.DNC_TP_Cape,
 		}
 	
 	sets.precast.Step['Feather Step'] = set_combine(sets.precast.Step, {
-		feet="Charis Shoes +1"
+		feet="Macu. Toeshoes +1"
 		})
 
 	sets.precast.Flourish1 = {}
-	
+
+	sets.precast.Flourish1['Animated Flourish'] = sets.Enmity
+
 	sets.precast.Flourish1['Violent Flourish'] = {
 		head="Dampening Tam",
 		body="Samnuha Coat",
@@ -191,7 +207,7 @@ function init_gear_sets()
 	sets.precast.FC = {
 		ammo="Sapience Orb",
 		head=gear.Herc_FC_head, --12
-		body="Samnuha Coat", --5
+		body="Taeon Tabard", --9
 		hands="Leyline Gloves", --7
 		legs="Rawhide Trousers", --5
 		feet=gear.Herc_MAB_feet, --2
@@ -354,7 +370,7 @@ function init_gear_sets()
 		ring1="Paguroidea Ring",
 		ring2="Sheltered Ring",
 		back="Solemnity Cape",
-		waist="Flume Belt",
+		waist="Flume Belt +1",
 		}
 
 	sets.idle.PDT = set_combine (sets.idle, {
@@ -369,19 +385,15 @@ function init_gear_sets()
 		ring1="Gelatinous Ring +1",
 		ring2="Defending Ring",
 		back="Solemnity Cape",
-		waist="Flume Belt",
+		waist="Flume Belt +1",
 		})
 
 	sets.idle.MDT = set_combine (sets.idle, {
 		ammo="Vanir Battery",
 		head="Dampening Tam",
 		neck="Loricate Torque +1",
-		ear1="Odnowa Earring",
-		ear2="Etiolation Earring",
-		ring1="Shadow Ring",
 		ring2="Defending Ring",
 		back="Mubvum. Mantle",
-		waist="Lieutenant's Sash",
 		})
 
 	sets.idle.Town = set_combine (sets.idle, {
@@ -410,19 +422,15 @@ function init_gear_sets()
 		ring1="Gelatinous Ring +1", --7
 		ring2="Defending Ring", --10
 		back="Solemnity Cape", --4
-		waist="Flume Belt", --4
+		waist="Flume Belt +1", --4
 		}
 
 	sets.defense.MDT = {
 		ammo="Vanir Battery",
 		head="Dampening Tam", --4
 		neck="Loricate Torque +1", --6
-		ear1="Odnowa Earring", --2
-		ear2="Etiolation Earring", --2
-		ring1="Shadow Ring",
 		ring2="Defending Ring", --10
 		back="Mubvum. Mantle", --6
-		waist="Lieutenant's Sash", --2
 		}
 
 	sets.Kiting = {

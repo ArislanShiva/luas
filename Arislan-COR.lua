@@ -142,7 +142,7 @@ function init_gear_sets()
 		ring1="Defending Ring",
 		ring2="Barataria Ring",
 		back="Camulus's Mantle",
-		waist="Flume Belt",
+		waist="Flume Belt +1",
 		}
 	
 --	sets.precast.CorsairRoll["Caster's Roll"] = set_combine(sets.precast.CorsairRoll, {legs="Chas. Culottes"})
@@ -166,7 +166,7 @@ function init_gear_sets()
 	
 	sets.precast.FC = {
 		head=gear.Herc_FC_head, --12
-		body="Samnuha Coat", --5
+		body="Taeon Tabard", --9
 		hands="Leyline Gloves", --7
 		legs="Rawhide Trousers", --5
 		feet="Carmine Greaves +1", --8
@@ -229,6 +229,7 @@ function init_gear_sets()
 		hands="Meg. Gloves +1",
 		neck="Combatant's Torque",
 		ring1="Cacoethic Ring +1",
+		waist="Kwahu Kachina Belt",
 		})
 
 	sets.precast.WS['Wildfire'] = {
@@ -265,6 +266,7 @@ function init_gear_sets()
 		
 	sets.precast.WS['Evisceration'] = {
 		head="Adhemar Bonnet",
+		body="Meg. Cuirie +1",
 		hands="Meg. Gloves +1",
 		legs="Samnuha Tights",
 		feet=gear.Herc_TA_feet,
@@ -290,6 +292,7 @@ function init_gear_sets()
 		
 	sets.precast.WS['Savage Blade'].Acc = set_combine(sets.precast.WS['Savage Blade'], {
 		neck="Combatant's Torque",
+		ring1="Rufescent Ring",
 		waist="Grunfeld Rope",
 		})
 
@@ -302,7 +305,13 @@ function init_gear_sets()
 		back=gear.COR_WS2_Cape,
 		waist=gear.ElementalBelt,
 		}) --MND
-	
+
+	sets.precast.WS['Requiescat'].Acc = set_combine(sets.precast.WS['Requiescat'], {
+		neck="Combatant's Torque",
+		ring1="Rufescent Ring",
+		ring2="Ramuh Ring +1",
+		})
+
 	-- Midcast Sets
 	sets.midcast.FastRecast = {
 		ear1="Loquacious Earring",
@@ -347,6 +356,7 @@ function init_gear_sets()
 		ear2="Digni. Earring",
 		ring1="Cacoethic Ring +1",
 		ring2="Weather. Ring",
+		waist="Kwahu Kachina Belt",
 		})
 
 	sets.midcast.CorsairShot['Dark Shot'] = sets.midcast.CorsairShot['Light Shot']
@@ -375,7 +385,7 @@ function init_gear_sets()
 		hands="Meg. Gloves +1",
 		neck="Combatant's Torque",
 		ring1="Cacoethic Ring +1",
-		waist="Eschan Stone",
+		waist="Kwahu Kachina Belt",
 		})
 
 	sets.midcast.RA.Fodder = set_combine(sets.midcast.RA, {
@@ -403,7 +413,7 @@ function init_gear_sets()
 		ring1="Paguroidea Ring",
 		ring2="Sheltered Ring",
 		back="Solemnity Cape",
-		waist="Flume Belt",
+		waist="Flume Belt +1",
 		}
 
 	sets.idle.PDT = set_combine (sets.idle, {
@@ -417,22 +427,19 @@ function init_gear_sets()
 		ring1="Gelatinous Ring +1",
 		ring2="Defending Ring",
 		back="Solemnity Cape",
-		waist="Flume Belt",
+		waist="Flume Belt +1",
 		})
 
 	sets.idle.MDT = set_combine (sets.idle, {
 		head="Dampening Tam",
 		neck="Loricate Torque +1",
-		ear1="Odnowa Earring",
-		ear2="Etiolation Earring",
-		ring1="Shadow Ring",
 		ring2="Defending Ring",
 		back="Mubvum. Mantle",
-		waist="Lieutenant's Sash",
 		})
 
 	sets.idle.Town = set_combine(sets.idle, {
 		body="Chasseur's Frac +1",
+		feet="Carmine Greaves +1",
 		neck="Combatant's Torque",
 		ear1="Eabani Earring",
 		ear2="Suppanomimi",
@@ -455,18 +462,14 @@ function init_gear_sets()
 		ring1="Gelatinous Ring +1", --7
 		ring2="Defending Ring", --10
 		back="Solemnity Cape", --4
-		waist="Flume Belt", --4
+		waist="Flume Belt +1", --4
 		}
 
 	sets.defense.MDT = {
 		head="Dampening Tam", --4
 		neck="Loricate Torque +1", --6
-		ear1="Odnowa Earring", --2
-		ear2="Etiolation Earring", --2
-		ring1="Shadow Ring",
 		ring2="Defending Ring", --10
 		back="Mubvum. Mantle", --6
-		waist="Lieutenant's Sash", --2
 		}
 	
 

@@ -72,7 +72,7 @@ function init_gear_sets()
 	sets.precast.FC = {
 	--	/RDM --15
   		main="Sucellus", --5
-		sub="Genmei Shield",
+		sub="Chanter's Shield", --3
 		range="Dunna", --3
 		head="Amalric Coif", --10
 		body="Shango Robe", --8
@@ -123,7 +123,7 @@ function init_gear_sets()
 		neck=gear.ElementalGorget,
 		ear1="Moonshade Earring",
 		ear2="Ishvara Earring",
-		ring1="Ramuh Ring +1",
+		ring1="Rufescent Ring",
 		ring2="Ramuh Ring +1",
 		back="Toro Cape",
 		waist=gear.ElementalBelt,
@@ -137,7 +137,7 @@ function init_gear_sets()
 	-- Base fast recast for spells
 	sets.midcast.FastRecast = {
   		main="Sucellus",
-		sub="Genmei Shield",
+		sub="Chanter's Shield",
 		head="Amalric Coif",
 		hands="Merlinic Dastanas",
 		legs="Geo. Pants +1",
@@ -271,7 +271,7 @@ function init_gear_sets()
 
 		sets.midcast.MndEnfeebles = {
 		main="Grioavolr",
-		sub="Mephitis Grip",
+		sub="Clerisy Strap +1",
 		head="Amalric Coif",
 		body="Vanya Robe",
 		hands="Azimuth Gloves +1",
@@ -292,7 +292,7 @@ function init_gear_sets()
 
 	sets.midcast['Dark Magic'] = {
 		main="Grioavolr",
-		sub="Mephitis Grip",
+		sub="Clerisy Strap +1",
 		head="Amalric Coif",
 		body="Psycloth Vest",
 		hands="Jhakri Cuffs +1",
@@ -341,7 +341,7 @@ function init_gear_sets()
 
 	sets.midcast['Elemental Magic'].Resistant = set_combine(sets.midcast['Elemental Magic'], {
 		main="Grioavolr",
-		sub="Niobid Strap",
+		sub="Clerisy Strap +1",
 		legs="Azimuth Tights +1",
 		neck="Sanctity Necklace",
 		ear2="Hermetic Earring",
@@ -371,6 +371,8 @@ function init_gear_sets()
 		})
 
 	sets.midcast.Impact = set_combine(sets.midcast['Elemental Magic'], {
+		main="Grioavolr",
+		sub="Niobid Strap",
 		head=empty,
 		body="Twilight Cloak",
 		ring2="Archon Ring",
@@ -418,16 +420,11 @@ function init_gear_sets()
 		})
 
 	sets.idle.MDT = set_combine(sets.idle, {
-		head="Vanya Hood",
-		body="Vanya Robe",
-		legs="Gyve Trousers",
 		neck="Loricate Torque +1",
-		ear1="Odnowa Earring",
 		ear2="Etiolation Earring",
-		ring1="Shadow Ring",
+		ring1="Fortified Ring",
 		ring2="Defending Ring",
 		back="Solemnity Cape",
-		waist="Lieutenant's Sash",
 		})
 
 	sets.idle.Weak = sets.idle.PDT
@@ -453,16 +450,12 @@ function init_gear_sets()
 		neck="Loricate Torque +1",
 		ring1="Gelatinous Ring +1",
 		ring2="Defending Ring",
-		back="Nantosuelta's Cape",
-		waist="Isa Belt"
 		})
 
 	sets.idle.MDT.Pet = set_combine(sets.idle.Pet, {
 		neck="Loricate Torque +1",
-		ring1="Shadow Ring",
+		ring1="Fortified Ring",
 		ring2="Defending Ring",
-		back="Nantosuelta's Cape",
-		waist="Isa Belt"
 		})
 
 	-- .Indi sets are for when an Indi-spell is active.
@@ -501,16 +494,16 @@ function init_gear_sets()
 		}
 
 	sets.defense.MDT = {
-		head="Vanya Hood", --2
-		body="Vanya Robe", --1
-		legs="Gyve Trousers", --2
+--		head="Vanya Hood", --2
+--		body="Vanya Robe", --1
+--		legs="Gyve Trousers", --2
 		neck="Loricate Torque +1", --6
-		ear1="Odnowa Earring", --2
+--		ear1="Odnowa Earring +1", --2
 		ear2="Etiolation Earring", --2
-		ring1="Shadow Ring",
+		ring1="Fortified Ring", --5
 		ring2="Defending Ring", --10
 		back="Solemnity Cape", --4
-		waist="Lieutenant's Sash", --2
+--		waist="Lieutenant's Sash", --2
 		}
 
 	sets.Kiting = {

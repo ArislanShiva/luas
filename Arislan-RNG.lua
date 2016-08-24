@@ -17,7 +17,8 @@ function job_setup()
 	state.Buff.Camouflage = buffactive.Camouflage or false
 	state.Buff['Unlimited Shot'] = buffactive['Unlimited Shot'] or false
 	state.Buff['Velocity Shot'] = buffactive['Velocity Shot'] or false
-
+	state.Buff['Double Shot'] = buffactive['Double Shot'] or false
+	
 	determine_haste_group()
 end
 
@@ -28,7 +29,7 @@ end
 -- Setup vars that are user-dependent.  Can override this function in a sidecar file.
 function user_setup()
 	state.OffenseMode:options('Normal', 'LowAcc', 'MidAcc', 'HighAcc', 'Fodder')
-	state.RangedMode:options('Normal', 'Acc', 'Fodder')
+	state.RangedMode:options('Normal', 'Acc', 'STP')
 	state.WeaponskillMode:options('Normal', 'Acc')
 	state.IdleMode:options('Normal', 'PDT', 'MDT')
 	
@@ -88,7 +89,7 @@ function init_gear_sets()
 
 	sets.precast.FC = {
 		head=gear.Herc_FC_head, --12
-		body="Samnuha Coat", --5
+		body="Taeon Tabard", --9
 		hands="Leyline Gloves", --7
 		legs="Rawhide Trousers", --5
 		feet="Carmine Greaves +1", --8
@@ -128,11 +129,11 @@ function init_gear_sets()
 		legs="Meg. Chausses +1",
 		feet="Thereoid Greaves",
 		neck=gear.ElementalGorget,
-		ear1="Enervating Earring",
-		ear2="Moonshade Earring",
+		ear1="Moonshade Earring",
+		ear2="Ishvara Earring",
 		ring1="Garuda Ring +1",
 		ring2="Garuda Ring +1",
-		back="Lutian Cape",
+		back="Belenus's Cape",
 		waist=gear.ElementalBelt,
 		}
 
@@ -141,7 +142,7 @@ function init_gear_sets()
 		hands="Meg. Gloves +1",
 		feet="Meg. Jam. +1",
 		neck="Combatant's Torque",
-		waist="Yemaya Belt",
+		waist="Kwahu Kachina Belt",
 		})
 
 	-- Specific weaponskill sets.  Uses the base set if an appropriate WSMod version isn't found.
@@ -151,12 +152,15 @@ function init_gear_sets()
 	sets.precast.WS['Apex Arrow'].Acc = set_combine(sets.precast.WS['Apex Arrow'], {
 		hands="Kobo Kote",
 		feet="Meg. Jam. +1",
+		waist="Kwahu Kachina Belt",
 		})
 
 	sets.precast.WS["Jishnu's Radiance"] = set_combine(sets.precast.WS, {
 		body="Adhemar Jacket",
 		hands="Adhemar Wristbands",
-		ear1="Dominance Earring",
+		legs="Amini Brague +1",
+		ear1="Enervating Earring",
+		ear2="Moonshade Earring",
 		ring1="Apate Ring",
 		ring2="Ramuh Ring +1",
 		})
@@ -167,6 +171,7 @@ function init_gear_sets()
 		feet="Meg. Jam. +1",
 		neck="Combatant's Torque",
 		ring1="Cacoethic Ring +1",
+		waist="Kwahu Kachina Belt",
 		})
 
 	sets.precast.WS["Last Stand"] = {
@@ -182,6 +187,7 @@ function init_gear_sets()
 		feet="Meg. Jam. +1",
 		neck="Combatant's Torque",
 		ring1="Cacoethic Ring +1",
+		waist="Kwahu Kachina Belt",
 		})
 		
 	sets.precast.WS["Trueflight"] = {
@@ -196,7 +202,7 @@ function init_gear_sets()
 		ring1="Weather. Ring",
 		ring2="Arvina Ringlet +1",
 		back="Argocham. Mantle",
-		waist="Eschan Stone",
+		waist="Ponente Sash",
 		}
 
 	sets.precast.WS["Wildfire"] = sets.precast.WS["Trueflight"]
@@ -256,15 +262,15 @@ function init_gear_sets()
 	sets.midcast.RA = {
 		head="Arcadian Beret +1",
 		body="Pursuer's Doublet",
-		hands="Amini Glove. +1",
-		legs="Meg. Chausses +1",
+		hands="Kobo Kote",
+		legs="Amini Brague +1",
 		feet="Carmine Greaves +1",
 		neck="Ocachi Gorget",
 		ear1="Enervating Earring",
 		ear2="Neritic Earring",
-		ring1="Garuda Ring +1",
-		ring2="Ifrit Ring +1",
-		back="Lutian Cape",
+		ring1="Apate Ring",
+		ring2="Garuda Ring +1",
+		back="Belenus's Cape",
 		waist="Yemaya Belt",
 		}
 	
@@ -272,14 +278,19 @@ function init_gear_sets()
 		head="Meghanada Visor +1",
 		body="Meg. Cuirie +1",
 		hands="Meg. Gloves +1",
+		legs="Meg. Chausses +1",
 		feet="Meg. Jam. +1",
 		neck="Combatant's Torque",
 		ring1="Cacoethic Ring +1",
 		ring2="Garuda Ring +1",
+		waist="Kwahu Kachina Belt",
 		})
 		
-	sets.midcast.RA.Fodder = set_combine(sets.midcast.RA, {
-		waist="Ponente Sash",
+	sets.midcast.RA.STP = set_combine(sets.midcast.RA, {
+		hands="Amini Glove. +1",
+		neck="Ainia Collar",
+		ear2="Dedition Earring",
+		ring2="Rajas Ring",
 		})
 
 	sets.midcast.RA.Doomsday = set_combine(sets.midcast.RA, {
@@ -290,9 +301,10 @@ function init_gear_sets()
 	sets.midcast.RA.Doomsday.Acc = set_combine(sets.midcast.RA.Acc, {
 		hands="Carmine Fin. Ga. +1",
 		ring2="Arvina Ringlet +1",
+		waist="Kwahu Kachina Belt",
 		})
 
-	sets.midcast.RA.Doomsday.Fodder = set_combine(sets.midcast.RA.Fodder, {
+	sets.midcast.RA.Doomsday.STP = set_combine(sets.midcast.RA.STP, {
 		hands="Carmine Fin. Ga. +1",
 		ring2="Arvina Ringlet +1",
 		})
@@ -319,7 +331,7 @@ function init_gear_sets()
 		ring1="Paguroidea Ring",
 		ring2="Sheltered Ring",
 		back="Solemnity Cape",
-		waist="Yemaya Belt",
+		waist="Kwahu Kachina Belt",
 		}
 
 	sets.idle.PDT = set_combine (sets.idle, {
@@ -333,18 +345,15 @@ function init_gear_sets()
 		ring1="Gelatinous Ring +1",
 		ring2="Defending Ring",
 		back="Solemnity Cape",
-		waist="Flume Belt",
+		waist="Flume Belt +1",
 		})
 
 	sets.idle.MDT = set_combine (sets.idle, {
+		ammo="Vanir Battery",
 		head="Dampening Tam",
 		neck="Loricate Torque +1",
-		ear1="Odnowa Earring",
-		ear2="Etiolation Earring",
-		ring1="Shadow Ring",
 		ring2="Defending Ring",
 		back="Mubvum. Mantle",
-		waist="Lieutenant's Sash",
 		})
 		
 	sets.idle.Town = set_combine(sets.idle, {
@@ -356,7 +365,7 @@ function init_gear_sets()
 		ear2="Neritic Earring",
 		ring1="Garuda Ring +1",
 		ring2="Garuda Ring +1",
-		back="Argocham. Mantle",
+		back="Belenus's Cape",
 		})
 	
 	-- Defense sets
@@ -371,18 +380,14 @@ function init_gear_sets()
 		ring1="Gelatinous Ring +1", --7
 		ring2="Defending Ring", --10
 		back="Solemnity Cape", --4
-		waist="Flume Belt", --4
+		waist="Flume Belt +1", --4
 		}
 
 	sets.defense.MDT = {
 		head="Dampening Tam", --4
 		neck="Loricate Torque +1", --6
-		ear1="Odnowa Earring", --2
-		ear2="Etiolation Earring", --2
-		ring1="Shadow Ring",
 		ring2="Defending Ring", --10
 		back="Mubvum. Mantle", --6
-		waist="Lieutenant's Sash", --2
 		}
 
 	sets.Kiting = {
@@ -529,7 +534,8 @@ function init_gear_sets()
 	--------------------------------------
 
 	sets.buff.Barrage = set_combine(sets.midcast.RA.Acc, {hands="Orion Bracers +1"})
-	sets.buff['Velocity Shot'] = set_combine(sets.midcast.RA, {body="Amini Caban +1"})
+	sets.buff['Velocity Shot'] = set_combine(sets.midcast.RA, {body="Amini Caban +1", back="Belenus's Cape"})
+	sets.buff['Double Shot'] = set_combine(sets.midcast.RA, {back="Belenus's Cape"})
 --	sets.buff.Camouflage = {body="Orion Jerkin +1"}
 
 end
@@ -546,10 +552,20 @@ function job_precast(spell, action, spellMap, eventArgs)
 	end
 
 	if spell.action_type == 'Ranged Attack' or
-	  (spell.type == 'WeaponSkill' and (spell.skill == 'Marksmanship' or spell.skill == 'Archery')) then
+		(spell.type == 'WeaponSkill' and (spell.skill == 'Marksmanship' or spell.skill == 'Archery')) then
 		check_ammo(spell, action, spellMap, eventArgs)
 	end
-	
+
+	if spell.action_type == 'Ranged Attack' and state.Buff['Velocity Shot'] then
+		equip(sets.buff['Velocity Shot'])
+		eventArgs.handled = true
+	end
+
+	if spell.action_type == 'Ranged Attack' and state.Buff['Double Shot'] then
+		equip(sets.buff['Double Shot'])
+		eventArgs.handled = true
+	end
+
 	if state.DefenseMode.value ~= 'None' and spell.type == 'WeaponSkill' then
 		-- Don't gearswap for weaponskills when Defense is active.
 		eventArgs.handled = true
@@ -565,6 +581,10 @@ function job_midcast(spell, action, spellMap, eventArgs)
 	end
 	if spell.action_type == 'Ranged Attack' and state.Buff['Velocity Shot'] then
 		equip(sets.buff['Velocity Shot'])
+		eventArgs.handled = true
+	end
+	if spell.action_type == 'Ranged Attack' and state.Buff['Double Shot'] then
+		equip(sets.buff['Double Shot'])
 		eventArgs.handled = true
 	end
 end

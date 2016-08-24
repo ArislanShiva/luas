@@ -75,7 +75,7 @@ function init_gear_sets()
 	sets.precast.FC = {
 		ammo="Sapience Orb", --2
 		head=gear.Herc_FC_head, --12
-		body="Samnuha Coat", --5
+		body="Taeon Tabard", --9
 		hands="Leyline Gloves", --7
 		legs="Rawhide Trousers", --5
 		feet=gear.Herc_MAB_feet, --2
@@ -101,7 +101,7 @@ function init_gear_sets()
 	-- Weaponskill sets
 	-- Default set for any weaponskill that isn't any more specifically defined
 	sets.precast.WS = {
-		ammo="Seething Bomblet",
+		ammo="Seeth. Bomblet +1",
 		head="Lilitu Headpiece",
 		body="Adhemar Jacket",
 		hands="Adhemar Wristbands",
@@ -123,6 +123,20 @@ function init_gear_sets()
 		ring2="Ramuh Ring +1",
 		})
 
+	sets.precast.WS['Blade: Hi'] = set_combine (sets.precast.WS, {
+		ear1="Lugra Earring",
+		ear2="Lugra Earring +1",
+		ring1="Begrudging Ring",
+		ring2="Epona's Ring",
+		waist="Windbuffet Belt +1",
+		})
+
+	sets.precast.WS['Blade: Ten'] = set_combine (sets.precast.WS, {
+		neck="Caro Necklace",
+		ear2="Lugra Earring +1",
+		waist="Grunfeld Rope",
+		})
+
 	sets.precast.WS['Blade: Shun'] = set_combine (sets.precast.WS, {
 		legs="Samnuha Tights",
 		ear1="Lugra Earring",
@@ -135,7 +149,7 @@ function init_gear_sets()
 		ear1="Lugra Earring",
 		ear2="Lugra Earring +1",
 		ring1="Ifrit Ring +1",
-		ring2="Shukuyu Ring",
+		ring2="Epona's Ring",
 		})
 
 	--------------------------------------
@@ -198,29 +212,27 @@ function init_gear_sets()
 		ring1="Paguroidea Ring",
 		ring2="Sheltered Ring",
 		back="Solemnity Cape",
-		waist="Flume Belt",
+		waist="Flume Belt +1",
 		}
 
 	sets.idle.PDT = set_combine (sets.idle, {
 		hands=gear.Herc_TA_hands,
+		feet="Amm Greaves",
 		neck="Loricate Torque +1", 
 		ear1="Genmei Earring",
 		ring1="Gelatinous Ring +1",
 		ring2="Defending Ring",
 		back="Solemnity Cape",
-		waist="Flume Belt",
+		waist="Flume Belt +1",
 		})
 
 	sets.idle.MDT = set_combine (sets.idle, {
 		ammo="Vanir Battery",
 		head="Dampening Tam",
+		feet="Amm Greaves",
 		neck="Loricate Torque +1",
-		ear1="Odnowa Earring",
-		ear2="Etiolation Earring",
-		ring1="Shadow Ring",
 		ring2="Defending Ring",
 		back="Mubvum. Mantle",
-		waist="Lieutenant's Sash",
 		})
 
 	sets.idle.Town = set_combine(sets.idle, {
@@ -238,24 +250,22 @@ function init_gear_sets()
 	-- Defense sets
 	sets.defense.PDT = {
 		hands=gear.Herc_TA_hands, --2
+		feet="Amm Greaves", --3
 		neck="Loricate Torque +1", --6
 		ear1="Genmei Earring", --2
 		ring1="Gelatinous Ring +1", --7
 		ring2="Defending Ring", --10
 		back="Solemnity Cape", --4
-		waist="Flume Belt", --4
+		waist="Flume Belt +1", --4
 		}
 
 	sets.defense.MDT = {
 		ammo="Vanir Battery",
 		head="Dampening Tam", --4
+		feet="Amm Greaves", --3
 		neck="Loricate Torque +1", --6
-		ear1="Odnowa Earring", --2
-		ear2="Etiolation Earring", --2
-		ring1="Shadow Ring",
 		ring2="Defending Ring", --10
 		back="Mubvum. Mantle", --6
-		waist="Lieutenant's Sash", --2
 		}
 
 	sets.Kiting = {feet="Danzo sune-ate"}

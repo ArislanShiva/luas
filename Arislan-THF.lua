@@ -101,7 +101,7 @@ function init_gear_sets()
 		ear1="Dominance Earring",
 		ring1="Ramuh Ring +1",
 		ring2="Ramuh Ring +1",
-		back="Ground. Mantle +1",
+		back="Toutatis's Cape",
 		}
 
 	sets.buff['Trick Attack'] = {
@@ -115,7 +115,7 @@ function init_gear_sets()
 		ear2="Infused Earring",
 		ring2="Garuda Ring +1",
 		ring2="Garuda Ring +1",
-		back="Bleating Mantle",
+		back="Toutatis's Cape",
 		}
 
 	-- Actions we want to use to tag TH.
@@ -185,7 +185,7 @@ function init_gear_sets()
 	sets.precast.FC = {
 		ammo="Sapience Orb",
 		head=gear.Herc_FC_head, --12
-		body="Samnuha Coat", --5
+		body="Taeon Tabard", --9
 		hands="Leyline Gloves", --7
 		legs="Rawhide Trousers", --5
 		feet=gear.Herc_MAB_feet, --2
@@ -216,7 +216,7 @@ function init_gear_sets()
 		ear2="Ishvara Earring",
 		ring1="Ramuh Ring +1",
 		ring2="Ramuh Ring +1",
-		back="Ground. Mantle +1",
+		back="Toutatis's Cape",
 		waist=gear.ElementalBelt,
 		} -- default set
 
@@ -241,7 +241,6 @@ function init_gear_sets()
 		head="Dampening Tam",
 		ear2="Zennaroi Earring",
 		ring1="Ramuh Ring +1",
-		back="Ground. Mantle +1",
 		})
 
 	sets.precast.WS['Evisceration'] = set_combine(sets.precast.WS, {
@@ -256,7 +255,6 @@ function init_gear_sets()
 		feet=gear.Herc_TA_feet,
 		ear2="Zennaroi Earring",
 		ring1="Ramuh Ring +1",
-		back="Ground. Mantle +1",
 		})
 
 	sets.precast.WS["Rudra's Storm"] = set_combine(sets.precast.WS, {
@@ -331,7 +329,7 @@ function init_gear_sets()
 		ring1="Paguroidea Ring",
 		ring2="Sheltered Ring",
 		back="Solemnity Cape",
-		waist="Flume Belt",
+		waist="Flume Belt +1",
 		}
 
 	sets.idle.PDT = set_combine (sets.idle, {
@@ -345,19 +343,15 @@ function init_gear_sets()
 		ring1="Gelatinous Ring +1",
 		ring2="Defending Ring",
 		back="Solemnity Cape",
-		waist="Flume Belt",
+		waist="Flume Belt +1",
 		})
 
 	sets.idle.MDT = set_combine (sets.idle, {
 		ammo="Vanir Battery",
 		head="Dampening Tam",
 		neck="Loricate Torque +1",
-		ear1="Odnowa Earring",
-		ear2="Etiolation Earring",
-		ring1="Shadow Ring",
 		ring2="Defending Ring",
 		back="Mubvum. Mantle",
-		waist="Lieutenant's Sash",
 		})
 
 	sets.idle.Town = set_combine(sets.idle, {
@@ -367,7 +361,7 @@ function init_gear_sets()
 		ear2="Brutal Earring",
 		ring1="Ramuh Ring +1",
 		ring2="Ramuh Ring +1",
-		back="Bleating Mantle",
+		back="Toutatis's Cape",
 		waist="Windbuffet Belt +1",
 		})
 
@@ -387,19 +381,15 @@ function init_gear_sets()
 		ring1="Gelatinous Ring +1", --7
 		ring2="Defending Ring", --10
 		back="Solemnity Cape", --4
-		waist="Flume Belt", --4
+		waist="Flume Belt +1", --4
 		}
 
 	sets.defense.MDT = {
 		ammo="Vanir Battery",
 		head="Dampening Tam", --4
 		neck="Loricate Torque +1", --6
-		ear1="Odnowa Earring", --2
-		ear2="Etiolation Earring", --2
-		ring1="Shadow Ring",
 		ring2="Defending Ring", --10
 		back="Mubvum. Mantle", --6
-		waist="Lieutenant's Sash", --2
 		}
 
 
@@ -443,7 +433,7 @@ function init_gear_sets()
 		ear1="Cessance Earring",
 		ear2="Brutal Earring",
 		ring2="Ramuh Ring +1",
-		back="Ground. Mantle +1",
+		back="Toutatis's Cape",
 		})
 
 	sets.engaged.HighAcc = set_combine(sets.engaged.MidAcc, {
@@ -469,7 +459,7 @@ function init_gear_sets()
 		ear2="Brutal Earring",
 		ring1="Petrov Ring",
 		ring2="Epona's Ring",
-		back="Canny Cape",
+		back="Toutatis's Cape",
 		waist="Windbuffet Belt +1",
 		}
 
@@ -485,7 +475,6 @@ function init_gear_sets()
 		neck="Combatant's Torque",
 		ear2="Zennaroi Earring",
 		ring2="Ramuh Ring +1",
-		back="Ground. Mantle +1",
 		})
 
 	sets.engaged.HighHaste.HighAcc = set_combine(sets.engaged.HighHaste.MidAcc, {
@@ -510,7 +499,7 @@ function init_gear_sets()
 		ear2="Brutal Earring",
 		ring1="Petrov Ring",
 		ring2="Epona's Ring",
-		back="Bleating Mantle",
+		back="Toutatis's Cape",
 		waist="Windbuffet Belt +1",
 		}
 
@@ -526,7 +515,6 @@ function init_gear_sets()
 		neck="Combatant's Torque",
 		ear2="Zennaroi Earring",
 		ring2="Ramuh Ring +1",
-		back="Ground. Mantle +1",
 		})
 
 	sets.engaged.MaxHaste.HighAcc = set_combine(sets.engaged.MaxHaste.MidAcc, {

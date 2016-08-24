@@ -34,8 +34,7 @@ function user_setup()
 	send_command('bind ^` input /ma Stun <t>')
 	send_command('bind !` gs c toggle MagicBurst')
 --	send_command('bind @` gs c toggle DeathMode')
-	send_command('bind !o input /ma "Shock Spikes" <me>')
---	send_command('bind !p input /ma "Warp II" <stpc>')
+	send_command('bind !p input /ma "Shock Spikes" <me>')
 	send_command('bind ^, input /ma Sneak <stpc>')
 	send_command('bind ^. input /ma Invisible <stpc>')
 
@@ -47,8 +46,7 @@ function user_unload()
 	send_command('unbind ^`')
 	send_command('unbind !`')
 	send_command('unbind @`')
-	send_command('unbind !o')
---	send_command('unbind !p')
+	send_command('unbind !p')
 	send_command('unbind ^,')
 	send_command('unbind !.')
 end
@@ -79,7 +77,7 @@ function init_gear_sets()
 	sets.precast.FC = {
 	--	/RDM --15 /SCH --10
 		main="Sucellus", --5
-		sub="Genmei Shield",
+		sub="Chanter's Shield", --3
 		ammo="Sapience Orb", --2
 		head="Amalric Coif", --10
 		body="Shango Robe", --8
@@ -307,7 +305,7 @@ function init_gear_sets()
 
 	sets.midcast.MndEnfeebles = {
 		main="Grioavolr",
-		sub="Mephitis Grip",
+		sub="Clerisy Strap +1",
 		ammo="Hydrocera",
 		head="Amalric Coif",
 		body="Vanya Robe",
@@ -333,7 +331,7 @@ function init_gear_sets()
 
 	sets.midcast['Dark Magic'] = {
 		main="Grioavolr",
-		sub="Mephitis Grip",
+		sub="Clerisy Strap +1",
 		ammo="Pemphredo Tathlum",
 		head="Amalric Coif",
 		body="Shango Robe",
@@ -388,6 +386,7 @@ function init_gear_sets()
 		}
 
 	sets.midcast['Elemental Magic'].Resistant = set_combine(sets.midcast['Elemental Magic'], {
+		sub="Clerisy Strap +1",
 		neck="Sanctity Necklace",
 		ear2="Hermetic Earring",
 		waist="Yamabuki-no-Obi",
@@ -405,6 +404,8 @@ function init_gear_sets()
 		})
 
 	sets.midcast.Impact = set_combine(sets.midcast['Elemental Magic'], {
+		main="Lathi",
+		sub="Niobid Strap",
 		head=empty,
 		body="Twilight Cloak",
 		ring2="Archon Ring",
@@ -415,6 +416,7 @@ function init_gear_sets()
 	-- Minimal damage gear for procs
 	sets.midcast['Elemental Magic'].Proc = {
 		main="Chatoyant Staff"
+		sub="Clerisy Strap +1",
 		}
 
 	-- Sets to return to when not performing an action.
@@ -458,16 +460,11 @@ function init_gear_sets()
 
 	sets.idle.MDT = set_combine(sets.idle, {
 		ammo="Vanir Battery",
-		head="Vanya Hood",
-		body="Vanya Robe",
-		legs="Gyve Trousers",
 		neck="Loricate Torque +1",
-		ear1="Odnowa Earring",
 		ear2="Etiolation Earring",
-		ring1="Shadow Ring",
+		ring1="Fortified Ring",
 		ring2="Defending Ring",
 		back="Solemnity Cape",
-		waist="Lieutenant's Sash",
 		})
 
 	sets.idle.DeathMode = {
@@ -492,7 +489,7 @@ function init_gear_sets()
 	
 	sets.idle.Town = set_combine(sets.idle, {
 		main="Lathi",
-		sub="Niobid Strap",
+		sub="Clerisy Strap +1",
 		head="Merlinic Hood",
 		body="Merlinic Jubbah",
 		legs="Merlinic Shalwar",
@@ -520,16 +517,16 @@ function init_gear_sets()
 
 	sets.defense.MDT = {
 		ammo="Vanir Battery",
-		head="Vanya Hood", --2
-		body="Vanya Robe", --1
-		legs="Gyve Trousers", --2
+--		head="Vanya Hood", --2
+--		body="Vanya Robe", --1
+--		legs="Gyve Trousers", --2
 		neck="Loricate Torque +1", --6
-		ear1="Odnowa Earring", --2
+--		ear1="Odnowa Earring +1", --2
 		ear2="Etiolation Earring", --2
-		ring1="Shadow Ring",
+		ring1="Fortified Ring", --5
 		ring2="Defending Ring", --10
 		back="Solemnity Cape", --4
-		waist="Lieutenant's Sash", --2
+--		waist="Lieutenant's Sash", --2
 		}
 
 	sets.Kiting = {

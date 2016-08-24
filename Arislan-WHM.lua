@@ -63,7 +63,7 @@ function init_gear_sets()
 	sets.precast.FC = {
 	--	/SCH --10
 		main="Sucellus", --5
-		sub="Genmei Shield",
+		sub="Chanter's Shield", --3
 		ammo="Sapience Orb", --2
 		head="Vanya Hood", --10
 		body="Inyanga Jubbah +1", --13
@@ -131,7 +131,7 @@ function init_gear_sets()
 		neck=gear.ElementalGorget,
 		ear1="Moonshade Earring",
 		ear2="Ishvara Earring",
-		ring1="Ramuh Ring +1",
+		ring1="Rufescent Ring",
 		ring2="Ramuh Ring +1",
 		waist=gear.ElementalBelt,
 		}	
@@ -206,11 +206,11 @@ function init_gear_sets()
 	sets.midcast.Cursna = set_combine(sets.midcast.StatusRemoval, {
 		main="Gada",
 		sub="Genmei Shield",
-		legs="Theo. Pant. +1",
-		feet="Gende. Galosh. +1",
-		neck="Malison Medallion",
-		back="Alaunus's Cape",
-		})
+		legs="Theo. Pant. +1", --15
+		feet="Gende. Galosh. +1", --10
+		neck="Malison Medallion", --10
+		back="Alaunus's Cape", --25
+		}) -- 105%
 
 	-- 110 total Enhancing Magic Skill; caps even without Light Arts
 	sets.midcast['Enhancing Magic'] = {
@@ -286,7 +286,7 @@ function init_gear_sets()
 
 	sets.midcast['Divine Magic'] = {
 		main="Grioavolr",
-		sub="Mephitis Grip",
+		sub="Clerisy Strap +1",
 		ammo="Pemphredo Tathlum",
 		body="Vanya Robe",
 		hands="Fanatic Gloves",
@@ -303,7 +303,7 @@ function init_gear_sets()
 
 	sets.midcast['Dark Magic'] = {
 		main="Grioavolr",
-		sub="Mephitis Grip",
+		sub="Clerisy Strap +1",
 		ammo="Pemphredo Tathlum",
 		head="Telchine Cap",
 		body="Shango Robe",
@@ -322,7 +322,7 @@ function init_gear_sets()
 	-- Custom spell classes
 	sets.midcast.MndEnfeebles = {
 		main="Grioavolr",
-		sub="Mephitis Grip",
+		sub="Clerisy Strap +1",
 		ammo="Hydrocera",
 		head="Befouled Crown",
 		body="Vanya Robe",
@@ -340,7 +340,7 @@ function init_gear_sets()
 
 	sets.midcast.IntEnfeebles = {
 		main="Grioavolr",
-		sub="Mephitis Grip",
+		sub="Clerisy Strap +1",
 		ammo="Pemphredo Tathlum",
 		head="Befouled Crown",
 		body="Vanya Robe",
@@ -357,6 +357,8 @@ function init_gear_sets()
 		}
 
 	sets.midcast.Impact = {
+		main="Grioavolr",
+		sub="Niobid Strap",
 		head=empty,
 		body="Twilight Cloak",
 		legs="Gyve Trousers",
@@ -408,18 +410,13 @@ function init_gear_sets()
 
 	sets.idle.MDT = set_combine(sets.idle, {
 		ammo="Vanir Battery",
-		head="Inyanga Tiara +1",
-		body="Inyanga Jubbah +1",
 		hands="Inyan. Dastanas +1",
-		legs="Inyanga Shalwar +1",
 		feet="Ebers Duckbills +1",
-		neck="Loricate Torque +1",
-		ear1="Odnowa Earring",
+		ear1="Odnowa Earring +1",
 		ear2="Etiolation Earring",
-		ring1="Shadow Ring",
+		ring1="Fortified Ring",
 		ring2="Defending Ring",
 		back="Solemnity Cape",
-		waist="Lieutenant's Sash",
 		})
 
 	sets.idle.Town = set_combine(sets.idle, {
@@ -456,18 +453,18 @@ function init_gear_sets()
 
 	sets.defense.MDT = {
 		ammo="Vanir Battery",
-		head="Inyanga Tiara +1", --4
-		body="Inyanga Jubbah +1", --7
+--		head="Inyanga Tiara +1", --4
+--		body="Inyanga Jubbah +1", --7
 		hands="Inyan. Dastanas +1", --3
-		legs="Inyanga Shalwar +1", --5
+--		legs="Inyanga Shalwar +1", --5
 		feet="Ebers Duckbills +1",
-		neck="Loricate Torque +1", --6
-		ear1="Odnowa Earring", --2
+--		neck="Loricate Torque +1", --6
+		ear1="Odnowa Earring +1", --2
 		ear2="Etiolation Earring", --2
-		ring1="Shadow Ring",
+		ring1="Fortified Ring", --5
 		ring2="Defending Ring", --10
 		back="Solemnity Cape", --4
-		waist="Lieutenant's Sash", --2
+--		waist="Lieutenant's Sash", --2
 		}
 
 	sets.Kiting = {
