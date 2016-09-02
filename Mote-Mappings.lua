@@ -11,38 +11,42 @@ elements = {}
 
 elements.list = S{'Light','Dark','Fire','Ice','Wind','Earth','Lightning','Water'}
 
-elements.weak_to = 
-{
-	['Light']='Dark', ['Dark']='Light', ['Fire']='Ice', ['Ice']='Wind', ['Wind']='Earth', ['Earth']='Lightning',
-    ['Lightning']='Water', ['Water']='Fire'
-}
+elements.weak_to = {['Light']='Dark', ['Dark']='Light', ['Fire']='Ice', ['Ice']='Wind', ['Wind']='Earth', ['Earth']='Lightning',
+        ['Lightning']='Water', ['Water']='Fire'}
 
-elements.strong_to = 
-{
-	['Light']='Dark', ['Dark']='Light', ['Fire']='Water', ['Ice']='Fire', ['Wind']='Ice', ['Earth']='Wind',
-    ['Lightning']='Earth', ['Water']='Lightning'
-}
+elements.strong_to = {['Light']='Dark', ['Dark']='Light', ['Fire']='Water', ['Ice']='Fire', ['Wind']='Ice', ['Earth']='Wind',
+        ['Lightning']='Earth', ['Water']='Lightning'}
 
-storms = S{"Aurorastorm II", "Voidstorm II", "Firestorm II", "Sandstorm II", "Rainstorm II", "Windstorm II", "Hailstorm II", "Thunderstorm II"}
-elements.storm_of = 
-{
-	['Light']="Aurorastorm II", ['Dark']="Voidstorm II", ['Fire']="Firestorm II", ['Earth']="Sandstorm II",
-    ['Water']="Rainstorm II", ['Wind']="Windstorm II", ['Ice']="Hailstorm II", ['Lightning']="Thunderstorm II"
-}
+
+storms = S{"Aurorastorm", "Voidstorm", "Firestorm", "Sandstorm", "Rainstorm", "Windstorm", "Hailstorm", "Thunderstorm"}
+elements.storm_of = {['Light']="Aurorastorm", ['Dark']="Voidstorm", ['Fire']="Firestorm", ['Earth']="Sandstorm",
+        ['Water']="Rainstorm", ['Wind']="Windstorm", ['Ice']="Hailstorm", ['Lightning']="Thunderstorm"}
 
 spirits = S{"LightSpirit", "DarkSpirit", "FireSpirit", "EarthSpirit", "WaterSpirit", "AirSpirit", "IceSpirit", "ThunderSpirit"}
-elements.spirit_of = 
-{
-	['Light']="Light Spirit", ['Dark']="Dark Spirit", ['Fire']="Fire Spirit", ['Earth']="Earth Spirit",
-    ['Water']="Water Spirit", ['Wind']="Air Spirit", ['Ice']="Ice Spirit", ['Lightning']="Thunder Spirit"
-}
+elements.spirit_of = {['Light']="Light Spirit", ['Dark']="Dark Spirit", ['Fire']="Fire Spirit", ['Earth']="Earth Spirit",
+        ['Water']="Water Spirit", ['Wind']="Air Spirit", ['Ice']="Ice Spirit", ['Lightning']="Thunder Spirit"}
 
 runes = S{'Lux', 'Tenebrae', 'Ignis', 'Gelus', 'Flabra', 'Tellus', 'Sulpor', 'Unda'}
-elements.rune_of = 
-{
-	['Light']='Lux', ['Dark']='Tenebrae', ['Fire']='Ignis', ['Ice']='Gelus', ['Wind']='Flabra',
-    ['Earth']='Tellus', ['Lightning']='Sulpor', ['Water']='Unda'
-}
+elements.rune_of = {['Light']='Lux', ['Dark']='Tenebrae', ['Fire']='Ignis', ['Ice']='Gelus', ['Wind']='Flabra',
+     ['Earth']='Tellus', ['Lightning']='Sulpor', ['Water']='Unda'}
+
+elements.obi_of = {['Light']='Hachirin-no-obi', ['Dark']='Hachirin-no-obi', ['Fire']='Hachirin-no-obi', ['Ice']='Hachirin-no-obi', ['Wind']='Hachirin-no-obi',
+     ['Earth']='Hachirin-no-obi', ['Lightning']='Hachirin-no-obi', ['Water']='Hachirin-no-obi'}
+ 
+elements.gorget_of = {['Light']='Fotia Gorget', ['Dark']='Fotia Gorget', ['Fire']='Fotia Gorget', ['Ice']='Fotia Gorget',
+    ['Wind']='Fotia Gorget', ['Earth']='Fotia Gorget', ['Lightning']='Fotia Gorget', ['Water']='Fotia Gorget'}
+ 
+elements.belt_of = {['Light']='Fotia Belt', ['Dark']='Fotia Belt', ['Fire']='Fotia Belt', ['Ice']='Fotia Belt',
+    ['Wind']='Fotia Belt', ['Earth']='Fotia Belt', ['Lightning']='Fotia Belt', ['Water']='Fotia Belt'}
+
+elements.fastcast_staff_of = {['Light']='Arka I', ['Dark']='Xsaeta I', ['Fire']='Atar I', ['Ice']='Vourukasha I',
+    ['Wind']='Vayuvata I', ['Earth']='Vishrava I', ['Lightning']='Apamajas I', ['Water']='Haoma I', ['Thunder']='Apamajas I'}
+
+elements.recast_staff_of = {['Light']='Arka II', ['Dark']='Xsaeta II', ['Fire']='Atar II', ['Ice']='Vourukasha II',
+    ['Wind']='Vayuvata II', ['Earth']='Vishrava II', ['Lightning']='Apamajas II', ['Water']='Haoma II', ['Thunder']='Apamajas II'}
+
+elements.perpetuance_staff_of = {['Light']='Arka III', ['Dark']='Xsaeta III', ['Fire']='Atar III', ['Ice']='Vourukasha III',
+    ['Wind']='Vayuvata III', ['Earth']='Vishrava III', ['Lightning']='Apamajas III', ['Water']='Haoma III', ['Thunder']='Apamajas III'}
 
 
 -- Elements for skillchain names
@@ -70,8 +74,7 @@ skillchain_elements.Reverberation = S{'Water'}
 -- REM weapons and their corresponding weaponskills
 data = {}
 data.weaponskills = {}
-data.weaponskills.relic = 
-{
+data.weaponskills.relic = {
     ["Spharai"] = "Final Heaven",
     ["Mandau"] = "Mercy Stroke",
     ["Excalibur"] = "Knights of Round",
@@ -85,11 +88,8 @@ data.weaponskills.relic =
     ["Mjollnir"] = "Randgrith",
     ["Claustrum"] = "Gates of Tartarus",
     ["Annihilator"] = "Coronach",
-    ["Yoichinoyumi"] = "Namas Arrow"
-}
-
-data.weaponskills.mythic = 
-{
+    ["Yoichinoyumi"] = "Namas Arrow"}
+data.weaponskills.mythic = {
     ["Conqueror"] = "King's Justice",
     ["Glanzfaust"] = "Ascetic's Fury",
     ["Yagrush"] = "Mystic Boon",
@@ -111,10 +111,8 @@ data.weaponskills.mythic =
     ["Terpsichore"] = "Pyrrhic Kleos",
     ["Tupsimati"] = "Omniscience",
     ["Idris"] = "Exudation",
-    ["Epeolatry"] = "Dimidiation"
-}
-data.weaponskills.empyrean = 
-{
+    ["Epeolatry"] = "Dimidiation"}
+data.weaponskills.empyrean = {
     ["Verethragna"] = "Victory Smite",
     ["Twashtar"] = "Rudra's Storm",
     ["Almace"] = "Chant du Cygne",
@@ -128,18 +126,14 @@ data.weaponskills.empyrean =
     ["Gambanteinn"] = "Dagann",
     ["Hvergelmir"] = "Myrkr",
     ["Gandiva"] = "Jishnu's Radiance",
-    ["Armageddon"] = "Wildfire"
-}
+    ["Armageddon"] = "Wildfire"}
 
 -- Weaponskills that can be used at range.
-data.weaponskills.ranged = 
-S{
-	"Flaming Arrow", "Piercing Arrow", "Dulling Arrow", "Sidewinder", "Arching Arrow",
+data.weaponskills.ranged = S{"Flaming Arrow", "Piercing Arrow", "Dulling Arrow", "Sidewinder", "Arching Arrow",
     "Empyreal Arrow", "Refulgent Arrow", "Apex Arrow", "Namas Arrow", "Jishnu's Radiance",
     "Hot Shot", "Split Shot", "Sniper Shot", "Slug Shot", "Heavy Shot", "Detonator", "Last Stand",
     "Coronach", "Trueflight", "Leaden Salute", "Wildfire",
-    "Myrkr"
-}
+    "Myrkr"}
 
 ranged_weaponskills = data.weaponskills.ranged
 
@@ -148,37 +142,28 @@ ranged_weaponskills = data.weaponskills.ranged
 -- spells all fall under.
 -------------------------------------------------------------------------------------------------------------------
 
-spell_maps =
-{
-    ['Cure']='Cures',['Cure II']='Cures',['Cure III']='Cures',['Cure IV']='Cures',['Cure V']='Cures',['Cure VI']='Cures',
-    ['Pollen']='Cures',['Wild Carrot']='Cures',['Magic Fruit']='Cures',['Plenilune Embrace']='Cures',['Restoral']='Cures',['Healing Breeze']='Cures',['White Wind']='Cures',
-	['Cura']='Curaga',['Cura II']='Curaga',['Cura III']='Curaga',
+spell_maps = {
+    ['Cure']='Cure',['Cure II']='Cure',['Cure III']='Cure',['Cure IV']='Cure',['Cure V']='Cure',['Cure VI']='Cure',['Full Cure']='Cure',
+    ['Cura']='Curaga',['Cura II']='Curaga',['Cura III']='Curaga',
     ['Curaga']='Curaga',['Curaga II']='Curaga',['Curaga III']='Curaga',['Curaga IV']='Curaga',['Curaga V']='Curaga',
     -- Status Removal doesn't include Esuna or Sacrifice, since they work differently than the rest
     ['Poisona']='StatusRemoval',['Paralyna']='StatusRemoval',['Silena']='StatusRemoval',['Blindna']='StatusRemoval',['Cursna']='StatusRemoval',
     ['Stona']='StatusRemoval',['Viruna']='StatusRemoval',['Erase']='StatusRemoval',
     ['Barfire']='BarElement',['Barstone']='BarElement',['Barwater']='BarElement',['Baraero']='BarElement',['Barblizzard']='BarElement',['Barthunder']='BarElement',
     ['Barfira']='BarElement',['Barstonra']='BarElement',['Barwatera']='BarElement',['Baraera']='BarElement',['Barblizzara']='BarElement',['Barthundra']='BarElement',
-	['Barsleepra']='BarStatus',['Barpoisonra']='BarStatus',['Barparalyzra']='BarStatus',['Barblindra']='BarStatus',['Barsilencera']='BarStatus',['Barpetra']='BarStatus',['Barvira']='BarStatus',['Baramnesra']='BarStatus',
-	['Barsleep']='BarStatus',['Barpoison']='BarStatus',['Barparalyze']='BarStatus',['Barblind']='BarStatus',['Barsilence']='BarStatus',['Barpetrify']='BarStatus',['Barvirus']='BarStatus',['Baramnesia']='BarStatus',
-	['Boost-STR']='BoostStat',['Boost-DEX']='BoostStat',['Boost-VIT']='BoostStat',['Boost-AGI']='BoostStat',['Boost-INT']='BoostStat',['Boost-MND']='BoostStat',['Boost-CHR']='BoostStat',
-    ['Gain-STR']='GainStat',['Gain-DEX']='GainStat',['Gain-VIT']='GainStat',['Gain-AGI']='GainStat',['Gain-INT']='GainStat',['Gain-MND']='GainStat',['Gain-CHR']='GainStat',
-	['Enfire']='Enspells',['Enfire II']='Enspells',['Enblizzard']='Enspells',['Enblizzard II']='Enspells',['Enaero']='Enspells',['Enaero II']='Enspells',
-	['Enstone']='Enspells',['Enstone II']='Enspells',['Enthunder']='Enspells',['Enthunder II']='Enspells',['Enwater']='Enspells',['Enwater II']='Enspells',
-	['Raise']='Raise',['Raise II']='Raise',['Raise III']='Raise',['Arise']='Raise',
-    ['Reraise']='Reraise',['Reraise II']='Reraise',['Reraise III']='Reraise',['Reraise IV']='Raise',
+    ['Raise']='Raise',['Raise II']='Raise',['Raise III']='Raise',['Raise IV']='Raise',['Arise']='Raise',
+    ['Reraise']='Reraise',['Reraise II']='Reraise',['Reraise III']='Reraise',
     ['Protect']='Protect',['Protect II']='Protect',['Protect III']='Protect',['Protect IV']='Protect',['Protect V']='Protect',
     ['Shell']='Shell',['Shell II']='Shell',['Shell III']='Shell',['Shell IV']='Shell',['Shell V']='Shell',
     ['Protectra']='Protectra',['Protectra II']='Protectra',['Protectra III']='Protectra',['Protectra IV']='Protectra',['Protectra V']='Protectra',
     ['Shellra']='Shellra',['Shellra II']='Shellra',['Shellra III']='Shellra',['Shellra IV']='Shellra',['Shellra V']='Shellra',
-    ['Regen']='Regen',['Regen II']='Regen',['Regen III']='Regen',['Regen IV']='Regen',['Regen V']='Regen',['Regeneration']='Regen',
-    ['Refresh']='Refresh',['Refresh II']='Refresh',['Refresh III']='Refresh',['Battery Charge']='Refresh',
+    ['Regen']='Regen',['Regen II']='Regen',['Regen III']='Regen',['Regen IV']='Regen',['Regen V']='Regen',
+    ['Refresh']='Refresh',['Refresh II']='Refresh',['Refresh III']='Refresh',
     ['Teleport-Holla']='Teleport',['Teleport-Dem']='Teleport',['Teleport-Mea']='Teleport',['Teleport-Altep']='Teleport',['Teleport-Yhoat']='Teleport',
     ['Teleport-Vahzl']='Teleport',['Recall-Pashh']='Teleport',['Recall-Meriph']='Teleport',['Recall-Jugner']='Teleport',
-	['Escape']='Teleport',['Warp']='Teleport',['Warp II']='Teleport',['Escape']='Teleport',
     ['Valor Minuet']='Minuet',['Valor Minuet II']='Minuet',['Valor Minuet III']='Minuet',['Valor Minuet IV']='Minuet',['Valor Minuet V']='Minuet',
     ["Knight's Minne"]='Minne',["Knight's Minne II"]='Minne',["Knight's Minne III"]='Minne',["Knight's Minne IV"]='Minne',["Knight's Minne V"]='Minne',
-    ['Advancing March']='March',['Victory March']='March',
+    ['Advancing March']='March',['Victory March']='March',['Honor March']='March',
     ['Sword Madrigal']='Madrigal',['Blade Madrigal']='Madrigal',
     ["Hunter's Prelude"]='Prelude',["Archer's Prelude"]='Prelude',
     ['Sheepfoe Mambo']='Mambo',['Dragonfoe Mambo']='Mambo',
@@ -191,63 +176,35 @@ spell_maps =
     ['Fire Carol II']='Carol',['Ice Carol II']='Carol',['Wind Carol II']='Carol',['Earth Carol II']='Carol',['Lightning Carol II']='Carol',['Water Carol II']='Carol',['Light Carol II']='Carol',['Dark Carol II']='Carol',
     ['Foe Lullaby']='Lullaby',['Foe Lullaby II']='Lullaby',['Horde Lullaby']='Lullaby',['Horde Lullaby II']='Lullaby',
     ['Fire Threnody']='Threnody',['Ice Threnody']='Threnody',['Wind Threnody']='Threnody',['Earth Threnody']='Threnody',['Lightning Threnody']='Threnody',['Water Threnody']='Threnody',['Light Threnody']='Threnody',['Dark Threnody']='Threnody',
+    ['Fire Threnody II']='Threnody',['Ice Threnody II']='Threnody',['Wind Threnody II']='Threnody',['Earth Threnody II']='Threnody',['Lightning Threnody II']='Threnody',['Water Threnody II']='Threnody',['Light Threnody II']='Threnody',['Dark Threnody II']='Threnody',
     ['Battlefield Elegy']='Elegy',['Carnage Elegy']='Elegy',
     ['Foe Requiem']='Requiem',['Foe Requiem II']='Requiem',['Foe Requiem III']='Requiem',['Foe Requiem IV']='Requiem',['Foe Requiem V']='Requiem',['Foe Requiem VI']='Requiem',['Foe Requiem VII']='Requiem',
-    ['Utsusemi: Ichi']='Utsusemi',['Utsusemi: Ni']='Utsusemi',
+    ['Utsusemi: Ichi']='Utsusemi',['Utsusemi: Ni']='Utsusemi',['Utsusemi: San']='Utsusemi',
     ['Katon: Ichi'] = 'ElementalNinjutsu',['Suiton: Ichi'] = 'ElementalNinjutsu',['Raiton: Ichi'] = 'ElementalNinjutsu',
     ['Doton: Ichi'] = 'ElementalNinjutsu',['Huton: Ichi'] = 'ElementalNinjutsu',['Hyoton: Ichi'] = 'ElementalNinjutsu',
     ['Katon: Ni'] = 'ElementalNinjutsu',['Suiton: Ni'] = 'ElementalNinjutsu',['Raiton: Ni'] = 'ElementalNinjutsu',
     ['Doton: Ni'] = 'ElementalNinjutsu',['Huton: Ni'] = 'ElementalNinjutsu',['Hyoton: Ni'] = 'ElementalNinjutsu',
     ['Katon: San'] = 'ElementalNinjutsu',['Suiton: San'] = 'ElementalNinjutsu',['Raiton: San'] = 'ElementalNinjutsu',
     ['Doton: San'] = 'ElementalNinjutsu',['Huton: San'] = 'ElementalNinjutsu',['Hyoton: San'] = 'ElementalNinjutsu',
-    ['Banish']='DivineNuke',['Banish II']='DivineNuke',['Banish III']='DivineNuke',['Banishga']='DivineNuke',['Banishga II']='DivineNuke',['Holy']='DivineNuke',['Holy II']='DivineNuke',
-	['Drain']='Sap',['Drain II']='Sap',['Aspir']='Sap',['Aspir II']='Sap',['Aspir III']='Sap',
+    ['Banish']='Banish',['Banish II']='Banish',['Banish III']='Banish',['Banishga']='Banish',['Banishga II']='Banish',
+    ['Holy']='Holy',['Holy II']='Holy',['Drain']='Drain',['Drain II']='Drain',['Drain III']='Drain',['Aspir']='Aspir',['Aspir II']='Aspir',['Aspir III']='Aspir',
     ['Absorb-Str']='Absorb',['Absorb-Dex']='Absorb',['Absorb-Vit']='Absorb',['Absorb-Agi']='Absorb',['Absorb-Int']='Absorb',['Absorb-Mnd']='Absorb',['Absorb-Chr']='Absorb',
     ['Absorb-Acc']='Absorb',['Absorb-TP']='Absorb',['Absorb-Attri']='Absorb',
     ['Burn']='ElementalEnfeeble',['Frost']='ElementalEnfeeble',['Choke']='ElementalEnfeeble',['Rasp']='ElementalEnfeeble',['Shock']='ElementalEnfeeble',['Drown']='ElementalEnfeeble',
-    ['Pyrohelix II']='Helix',['Cryohelix II']='Helix',['Anemohelix II']='Helix',['Geohelix II']='Helix',['Ionohelix II']='Helix',['Hydrohelix II']='Helix',['Luminohelix II']='LightHelix',['Noctohelix II']='DarkHelix',['Pyrohelix']='Helix',['Cryohelix']='Helix',['Anemohelix']='Helix',['Geohelix']='Helix',['Ionohelix']='Helix',['Hydrohelix']='Helix',['Luminohelix']='LightHelix',['Noctohelix']='DarkHelix',
-	['Firestorm II']='Storm',['Hailstorm II']='Storm',['Windstorm II']='Storm',['Sandstorm II']='Storm',['Thunderstorm II']='Storm',['Rainstorm II']='Storm',['Aurorastorm II']='Storm',['Voidstorm II']='Storm',['Firestorm']='Storm',['Hailstorm']='Storm',['Windstorm']='Storm',['Sandstorm']='Storm',['Thunderstorm']='Storm',['Rainstorm']='Storm',['Aurorastorm']='Storm',['Voidstorm']='Storm',
+    ['Pyrohelix']='Helix',['Cryohelix']='Helix',['Anemohelix']='Helix',['Geohelix']='Helix',['Ionohelix']='Helix',['Hydrohelix']='Helix',['Luminohelix']='LightHelix',['Noctohelix']='DarkHelix',
+    ['Pyrohelix II']='Helix',['Cryohelix II']='Helix',['Anemohelix II']='Helix',['Geohelix II']='Helix',['Ionohelix II']='Helix',['Hydrohelix II']='Helix',['Luminohelix II']='LightHelix',['Noctohelix II']='DarkHelix',
+    ['Firestorm']='Storm',['Hailstorm']='Storm',['Windstorm']='Storm',['Sandstorm']='Storm',['Thunderstorm']='Storm',['Rainstorm']='Storm',['Aurorastorm']='Storm',['Voidstorm']='Storm',
+    ['Firestorm II']='Storm',['Hailstorm II']='Storm',['Windstorm II']='Storm',['Sandstorm II']='Storm',['Thunderstorm II']='Storm',['Rainstorm II']='Storm',['Aurorastorm II']='Storm',['Voidstorm II']='Storm',
     ['Fire Maneuver']='Maneuver',['Ice Maneuver']='Maneuver',['Wind Maneuver']='Maneuver',['Earth Maneuver']='Maneuver',['Thunder Maneuver']='Maneuver',
     ['Water Maneuver']='Maneuver',['Light Maneuver']='Maneuver',['Dark Maneuver']='Maneuver',
-	['Fira']='GeoNukes',['Fira II']='GeoNukes',['Fira III']='GeoNukes',
-	['Blizzara']='GeoNukes',['Blizzara II']='GeoNukes',['Blizzara III']='GeoNukes',
-	['Aera']='GeoNukes',['Aera II']='GeoNukes',['Aera III']='GeoNukes',
-	['Stonera']='GeoNukes',['Stonera II']='GeoNukes',['Stonera III']='GeoNukes',
-	['Thundara']='GeoNukes',['Thundara II']='GeoNukes',['Thundara III']='GeoNukes',
-	['Watera']='GeoNukes',['Watera II']='GeoNukes',['Watera III']='GeoNukes',
-	['Sneak']='Statless',['Invisible']='Statless',['Deodorize']='Statless',
-	['Haste']='Statless',['Haste II']='Statless',['Adloquium']='Statless',['Animus Augeo']='Statless',['Animus Minuo']='Statless',['Blink']='Statless',
-	['Metallic Body']='BlueSkill',['Diamondhide']='BlueSkill',['Magic Barrier']='BlueSkill',['Occultation']='BlueSkill',
-	['Blood Drain']='BlueDrain',['Digest']='BlueDrain',['MP Drainkiss']='BlueDrain',['Blood Saber']='BlueDrain',['Atra. Libations']='BlueDrain',
-	['Death Ray']='DarkBlue',['Eyes On Me']='DarkBlue',['Evryone. Grudge']='DarkBlue',['Dark Orb']='DarkBlue',['Palling Salvo']='DarkBlue',['Tenebral Crush']='DarkBlue',
-	['Magic Hammer']='LightBlue',['Retinal Glare']='LightBlue',['Rail Cannon']='LightBlue',['Diffusion Ray']='LightBlue',['Blinding Fulgor']='LightBlue',
-	['Sprout Smack']='AddEffect',['Head Butt']='AddEffect',['Pinecone Bomb']='AddEffect',['Terror Touch']='AddEffect',['Spiral Spin']='AddEffect',
-	['Seedspray']='AddEffect',['Frypan']='AddEffect',['Tail Slap']='AddEffect',['Sub-zero Smash']='AddEffect',['Whirl of Rage']='AddEffect',['Benthic Typhoon']='AddEffect',
-	['Sudden Lunge']='AddEffect',['Barbed Crescent']='AddEffect',['Sweeping Gouge']='AddEffect',['Saurian Slide']='AddEffect',['Tourbillion']='AddEffect',['Bilgestorm']='AddEffect',
-	['Foot Kick']='Physical',['Power Attack']='Physical',['Wild Oats']='Physical',['Queasyshroom']='Physical',['Battle Dance']='Physical',['Feather Storm']='Physical',['Helldive']='Physical',
-	['Bludgeon']='Physical',['Claw Cyclone']='Physical',['Screwdriver']='Physical',['Grand Slam']='Physical',['Smite of Rage']='Physical',['Jet Stream']='Physical',['Uppercut']='Physical',
-	['Mandibular Bite']='Physical',['Sickle Slash']='Physical',['Death Scissors']='Physical',['Dimensional Death']='Physical',['Body Slam']='Physical',['Spinal Cleave']='Physical',
-	['Frenetic Rip']='Physical',['Hydro Shot']='Physical',['Hysteric Barrage']='Physical',['Asuran Claws']='Physical',['Cannonball']='Physical',['Disseverment']='Physical',
-	['Ram Charge']='Physical',['Vertical Cleave']='Physical',['Final Sting']='Physical',['Goblin Rush']='Physical',['Vanity Dive']='Physical',['Quad. Continuum']='Physical',
-	['Delta Thrust']='Physical',['Heavy Strike']='Physical',['Quadrastrike']='Physical',['Amorphic Spikes']='Physical',['Bloodrake']='Physical',['Paralyzing Triad']='Physical',
-	['Glutinous Dart']='Physical',['Thrashing Assault']='Physical',['Sinker Drill']='Physical',
-	['Sandspin']='Magical',['Cursed Sphere']='Magical',['Blastbomb']='Magical',['Bomb Toss']='Magical',['Mysterious Light']='Magical',['Blitzstrahl']='Magical',['Ice Break']='Magical',
-	['Self-Destruct']='Magical',['Maelstrom']='Magical',['1000 Needles']='Magical',['Corrosive Ooze']='Magical',['Firespit']='Magical',['Regurgitation']='Magical',['Mind Blast']='Magical',
-	['Acrid Stream']='Magical',['Leafstorm']='Magical',['Blazing Bound']='Magical',['Thermal Pulse']='Magical',['Charged Whisker']='Magical',['Water Bomb']='Magical',['Thunderbolt']='Magical',
-	['Gates of Hades']='Magical',['Droning Whirlwind']='Magical',['Tempestuous Upheaval']='Magical',['Rending Deluge']='Magical',['Embalming Earth']='Magical',['Nectarous Deluge']='Magical',
-	['Foul Waters']='Magical',['Subduction']='Magical',['Uproot']='Magical',['Crashing Thunder']='Magical',['Polar Roar']='Magical',['Molting Plumage']='Magical',['Searing Tempest']='Magical',
-	['Specrtal Floe']='Magical',['Scouring Spate']='Magical',['Anvil Lightning']='Magical',['Silent Storm']='Magical',['Entomb']='Magical',
-	['Poison Breath']='Breath',['Magnetite Cloud']='Breath',['Hecatomb Wave']='Breath',['Radiant Breath']='Breath',['Flying Hip Press']='Breath',['Bad Breath']='Breath', 
-	['Frost Breath']='Breath',['Heat Breath']='Breath',['Vapor Spray']='Breath',['Thunder Breath']='Breath',['Wind Breath']='Breath',
-	['Filamented Hold']='Debuffs',['Cimicine Discharge']='Debuffs',['Demoralizing Roar']='Debuffs',['Venom Shell']='Debuffs',['Light of Penance']='Debuffs',['Sandspray']='Debuffs', 
-	['Auroral Drape']='Debuffs',['Frightful Roar']='Debuffs',['Enervation']='Debuffs',['Infrasonics']='Debuffs',['Lowing']='Debuffs',['Cold Wave']='Debuffs',['Awful Eye']='Debuffs',
-	['Sheep Song']='Debuffs',['Soporific']='Debuffs',['Yawn']='Debuffs',['Dream Flower']='Debuffs',['Chaotic Eye']='Debuffs',['Sound Blast']='Debuffs',['Blank Gaze']='Debuffs',
-	['Stinking Gas']='Debuffs',['Geist Wall']='Debuffs',['Jettatura']='Debuffs',['Feather Tickle']='Debuffs',['Temporal Shift']='Debuffs',['Actinic Burst']='Debuffs',
-	['Reaving Wind']='Debuffs',['Mortal Ray']='Debuffs',['Absolute Terror']='Debuffs',['Blistering Roar']='Debuffs',['Voracious Trunk']='Debuffs',
-	['Cocoon']='Buffs',['Refueling']='Buffs',['Feather Barrier']='Buffs',['Memento Mori']='Buffs',['Zephyr Mantle']='Buffs',['Warm-Up']='Buffs',['Amplification']='Buffs',
-	['Saline Coat']='Buffs',['Reactor Cool']='Buffs',['Plasma Charge']='Buffs',['Animating Wail']='Buffs',['Magic Barrier']='Buffs',['Barrier Tusk']='Buffs',['O. Counterstance']='Buffs',
-	['Harden Shell']='Buffs',['Pyric Bulwark']='Buffs',['Nat. Meditation']='Buffs',['Carcharian Verve']='Buffs',['Erratic Flutter']='Buffs',['Mighty Guard']='Buffs',['Triumphant Roar']='Buffs'
+	['Fira']='GeoElem',['Blizzara']='GeoElem',['Aerora']='GeoElem',['Stonera']='GeoElem',['Thundara']='GeoElem',['Watera']='GeoElem',
+	['Fira II']='GeoElem',['Blizzara II']='GeoElem',['Aerora II']='GeoElem',['Stonera II']='GeoElem',['Thundara II']='GeoElem',['Watera II']='GeoElem',
+	['Fira III']='GeoElem',['Blizzara III']='GeoElem',['Aerora III']='GeoElem',['Stonera III']='GeoElem',['Thundara III']='GeoElem',['Watera III']='GeoElem',
 }
+
+no_skill_spells_list = S{'Haste', 'Refresh', 'Regen', 'Protect', 'Protectra', 'Shell', 'Shellra',
+        'Raise', 'Reraise', 'Sneak', 'Invisible', 'Deodorize'}
+
 
 -------------------------------------------------------------------------------------------------------------------
 -- Tables to specify general area groupings.  Creates the 'areas' table to be referenced in job files.
@@ -257,8 +214,7 @@ spell_maps =
 areas = {}
 
 -- City areas for town gear and behavior.
-areas.Cities = 
-S{
+areas.Cities = S{
     "Ru'Lude Gardens",
     "Upper Jeuno",
     "Lower Jeuno",
@@ -285,10 +241,8 @@ S{
     "Western Adoulin",
     "Kazham"
 }
-
 -- Adoulin areas, where Ionis will grant special stat bonuses.
-areas.Adoulin = 
-S{
+areas.Adoulin = S{
     "Yahse Hunting Grounds",
     "Ceizak Battlegrounds",
     "Foret de Hennetiel",
