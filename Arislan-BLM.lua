@@ -24,7 +24,7 @@ end
 function user_setup()
 	state.OffenseMode:options('None', 'Normal')
 	state.CastingMode:options('Normal', 'Spaekona', 'Resistant', 'DeathMode')
-	state.IdleMode:options('Normal', 'PDT', 'MDT', 'DeathMode')
+	state.IdleMode:options('Normal', 'DeathMode', 'DT')
 	state.MagicBurst = M(false, 'Magic Burst')
 --	state.DeathMode = M(false, "Death Mode")
 
@@ -34,6 +34,8 @@ function user_setup()
 	send_command('bind ^` input /ma Stun <t>')
 	send_command('bind !` gs c toggle MagicBurst')
 --	send_command('bind @` gs c toggle DeathMode')
+	send_command('bind !q input /item "Echo Drops" <me>')
+	send_command('bind !w input /ma "Aspir III" <t>')
 	send_command('bind !p input /ma "Shock Spikes" <me>')
 	send_command('bind ^, input /ma Sneak <stpc>')
 	send_command('bind ^. input /ma Invisible <stpc>')
@@ -46,6 +48,8 @@ function user_unload()
 	send_command('unbind ^`')
 	send_command('unbind !`')
 	send_command('unbind @`')
+	send_command('unbind !q')
+	send_command('unbind !w')
 	send_command('unbind !p')
 	send_command('unbind ^,')
 	send_command('unbind !.')
@@ -266,6 +270,16 @@ function init_gear_sets()
 		waist="Olympus Sash",
 		}
 
+	sets.midcast.EnhancingDuration = set_combine(sets.midcast['Enhancing Magic'], {
+		main="Gada",
+		sub="Genmei Shield",
+		head="Telchine Cap",
+		body="Telchine Chas.",
+		hands="Telchine Gloves",
+		legs="Telchine Braconi",
+		feet="Telchine Pigaches",
+		})
+
 	sets.midcast.Regen = set_combine(sets.midcast['Enhancing Magic'], {
 		main="Bolelabunga",
 		sub="Genmei Shield",
@@ -287,21 +301,12 @@ function init_gear_sets()
 		head="Amalric Coif",
 		})
 
-	sets.midcast.Protectra = set_combine(sets.midcast['Enhancing Magic'], {
+	sets.midcast.Protect = set_combine(sets.midcast.EnhancingDuration, {
 		ring1="Sheltered Ring",
 		})
-
-	sets.midcast.Shellra = sets.midcast.Protectra
-
-	sets.midcast.EnhancingDuration = {
-		main="Gada",
-		sub="Genmei Shield",
-		head="Telchine Cap",
-		body="Telchine Chas.",
-		hands="Telchine Gloves",
-		legs="Telchine Braconi",
-		feet="Telchine Pigaches",
-		}
+	sets.midcast.Protectra = sets.midcast.Protect
+	sets.midcast.Shell = sets.midcast.Protect
+	sets.midcast.Shellra = sets.midcast.Protect
 
 	sets.midcast.MndEnfeebles = {
 		main="Grioavolr",
@@ -349,6 +354,7 @@ function init_gear_sets()
 
 	sets.midcast.Drain = set_combine(sets.midcast['Dark Magic'], {
 		head="Pixie Hairpin +1",
+		feet="Merlinic Crackows",
 		ear2="Hirudinea Earring",
 		ring2="Archon Ring",
 		waist="Fucho-no-obi",
@@ -415,7 +421,7 @@ function init_gear_sets()
 
 	-- Minimal damage gear for procs
 	sets.midcast['Elemental Magic'].Proc = {
-		main="Chatoyant Staff"
+		main="Chatoyant Staff",
 		sub="Clerisy Strap +1",
 		}
 
@@ -446,25 +452,17 @@ function init_gear_sets()
 		waist="Refoccilation Stone",
 		}
 
-	sets.idle.PDT = set_combine(sets.idle, {
+	sets.idle.DT = set_combine(sets.idle, {
 		main="Bolelabunga",
-		sub="Genmei Shield",
-		body="Vanya Robe",
-		legs="Artsieq Hose",
-		neck="Loricate Torque +1",
-		ear1="Genmei Earring",
-		ring1="Gelatinous Ring +1",
-		ring2="Defending Ring",
-		back="Umbra Cape",
-		})
-
-	sets.idle.MDT = set_combine(sets.idle, {
-		ammo="Vanir Battery",
-		neck="Loricate Torque +1",
-		ear2="Etiolation Earring",
-		ring1="Fortified Ring",
-		ring2="Defending Ring",
-		back="Solemnity Cape",
+		sub="Genmei Shield", --10/0
+		ammo="Staunch Tathlum", --2/2
+		body="Hagondes Coat +1", --3/4
+		legs="Artsieq Hose", --5/0
+		neck="Loricate Torque +1", --6/6
+		ear1="Genmei Earring", --2/0
+		ring1="Gelatinous Ring +1", --7/(-1)
+		ring2="Defending Ring", --10/10
+		back="Solemnity Cape", --4/4
 		})
 
 	sets.idle.DeathMode = {
@@ -485,8 +483,6 @@ function init_gear_sets()
 		waist="Refoccilation Stone",
 		}
 
-	sets.idle.Weak = sets.idle.PDT
-	
 	sets.idle.Town = set_combine(sets.idle, {
 		main="Lathi",
 		sub="Clerisy Strap +1",
@@ -500,34 +496,25 @@ function init_gear_sets()
 		ring2="Shiva Ring +1",
 		back=gear.BLM_MAB_Cape,
 		})
+
+	sets.idle.Weak = sets.idle.DT
 		
 	-- Defense sets
 
 	sets.defense.PDT = {
 		main="Bolelabunga",
-		sub="Genmei Shield", --10
-		body="Vanya Robe", --1
-		legs="Artsieq Hose", --5
-		neck="Loricate Torque +1", --6
-		ear1="Genmei Earring", --2
-		ring1="Gelatinous Ring +1", --7
-		ring2="Defending Ring", --10
-		back="Umbra Cape", --6
+		sub="Genmei Shield", --10/0
+		ammo="Staunch Tathlum", --2/2
+		body="Hagondes Coat +1", --3/4
+		legs="Artsieq Hose", --5/0
+		neck="Loricate Torque +1", --6/6
+		ear1="Genmei Earring", --2/0
+		ring1="Gelatinous Ring +1", --7/(-1)
+		ring2="Defending Ring", --10/10
+		back="Solemnity Cape", --4/4
 		}
 
-	sets.defense.MDT = {
-		ammo="Vanir Battery",
---		head="Vanya Hood", --2
---		body="Vanya Robe", --1
---		legs="Gyve Trousers", --2
-		neck="Loricate Torque +1", --6
---		ear1="Odnowa Earring +1", --2
-		ear2="Etiolation Earring", --2
-		ring1="Fortified Ring", --5
-		ring2="Defending Ring", --10
-		back="Solemnity Cape", --4
---		waist="Lieutenant's Sash", --2
-		}
+	sets.defense.MDT = sets.defense.PDT
 
 	sets.Kiting = {
 		feet="Herald's Gaiters"

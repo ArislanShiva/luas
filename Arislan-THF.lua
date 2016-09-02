@@ -51,8 +51,9 @@ function user_setup()
 	state.HybridMode:options('Normal')
 	state.RangedMode:options('Normal', 'Acc')
 	state.WeaponskillMode:options('Normal', 'Acc')
-	state.PhysicalDefenseMode:options('Evasion', 'PDT', 'MDT')
+	state.IdleMode:options('Normal', 'DT')
 
+	state.CP = M(false, "Capacity Points Mode")
 
 	gear.default.weaponskill_neck = "Asperity Necklace"
 	gear.default.weaponskill_waist = gear.ElementalBelt
@@ -61,6 +62,8 @@ function user_setup()
 	send_command('bind ^` gs c cycle treasuremode')
 	send_command('bind !` input /ja "Flee" <me>')
 	send_command('bind ^, input /ja "Spectral Jig" <me>')
+	send_command('unbind ^.')
+	send_command('bind @c gs c toggle CP')
 
 	select_default_macro_book()
 end
@@ -70,6 +73,7 @@ function user_unload()
 	send_command('unbind ^`')
 	send_command('unbind !`')
 	send_command('unbind ^,')
+	send_command('unbind @c')
 end
 
 -- Define sets and vars used by this job file.
@@ -98,7 +102,7 @@ function init_gear_sets()
 		legs="Lustratio Subligar",
 		feet="Lustratio Leggings",
 		neck="Caro Necklace",
-		ear1="Dominance Earring",
+		ear1="Mache Earring",
 		ring1="Ramuh Ring +1",
 		ring2="Ramuh Ring +1",
 		back="Toutatis's Cape",
@@ -184,7 +188,7 @@ function init_gear_sets()
 
 	sets.precast.FC = {
 		ammo="Sapience Orb",
-		head=gear.Herc_FC_head, --12
+		head=gear.Herc_MAB_head, --7
 		body="Taeon Tabard", --9
 		hands="Leyline Gloves", --7
 		legs="Rawhide Trousers", --5
@@ -223,7 +227,6 @@ function init_gear_sets()
 	sets.precast.WS.Acc = set_combine(sets.precast.WS, {
 		legs="Adhemar Kecks",
 		})
-
 
 	sets.precast.WS['Exenterator'] = set_combine(sets.precast.WS, {
 		ammo="Expeditious Pinion",
@@ -272,8 +275,10 @@ function init_gear_sets()
 
 	sets.precast.WS['Mandalic Stab'].Acc = sets.precast.WS["Rudra's Storm"].Acc
 
+	sets.precast.WS['Shark Bite'] = sets.precast.WS["Rudra's Storm"]
+
 	sets.precast.WS['Aeolian Edge'] = set_combine(sets.precast.WS, {
-		ammo="Grenade Core",
+		ammo="Seeth. Bomblet +1",
 		head=gear.Herc_MAB_head,
 		body="Samnuha Coat",
 		hands="Leyline Gloves",
@@ -332,26 +337,19 @@ function init_gear_sets()
 		waist="Flume Belt +1",
 		}
 
-	sets.idle.PDT = set_combine (sets.idle, {
-		head="Meghanada Visor +1",
-		body="Meg. Cuirie +1",
-		hands="Meg. Gloves +1",
-		legs="Meg. Chausses +1",
-		feet="Meg. Jam. +1",
-		neck="Loricate Torque +1", 
-		ear1="Genmei Earring",
-		ring1="Gelatinous Ring +1",
-		ring2="Defending Ring",
-		back="Solemnity Cape",
-		waist="Flume Belt +1",
-		})
-
-	sets.idle.MDT = set_combine (sets.idle, {
-		ammo="Vanir Battery",
-		head="Dampening Tam",
-		neck="Loricate Torque +1",
-		ring2="Defending Ring",
-		back="Mubvum. Mantle",
+	sets.idle.DT = set_combine (sets.idle, {
+		head="Dampening Tam", --0/4
+		body="Meg. Cuirie +1", --7/0
+		hands="Meg. Gloves +1", --3/0
+		legs="Meg. Chausses +1", --5/0
+		feet="Meg. Jam. +1", --2/0
+		neck="Loricate Torque +1", --6/6
+		ear1="Genmei Earring", --2/0
+		ear2="Odnowa Earring +1", --0/2
+		ring1="Gelatinous Ring +1", --7/(-1)
+		ring2="Defending Ring", --10/10
+		back="Solemnity Cape", --4/4
+		waist="Flume Belt +1", --4/0
 		})
 
 	sets.idle.Town = set_combine(sets.idle, {
@@ -365,32 +363,27 @@ function init_gear_sets()
 		waist="Windbuffet Belt +1",
 		})
 
-	sets.idle.Weak = sets.idle.PDT
+	sets.idle.Weak = sets.idle.DT
 
 
 	-- Defense sets
 
 	sets.defense.PDT = {
-		head="Meghanada Visor +1", --4
-		body="Meg. Cuirie +1", --7
-		hands="Meg. Gloves +1", --3
-		legs="Meg. Chausses +1", --5
-		feet="Meg. Jam. +1", --2
-		neck="Loricate Torque +1", --6
-		ear1="Genmei Earring", --2
-		ring1="Gelatinous Ring +1", --7
-		ring2="Defending Ring", --10
-		back="Solemnity Cape", --4
-		waist="Flume Belt +1", --4
+		head="Dampening Tam", --0/4
+		body="Meg. Cuirie +1", --7/0
+		hands="Meg. Gloves +1", --3/0
+		legs="Meg. Chausses +1", --5/0
+		feet="Meg. Jam. +1", --2/0
+		neck="Loricate Torque +1", --6/6
+		ear1="Genmei Earring", --2/0
+		ear2="Odnowa Earring +1", --0/2
+		ring1="Gelatinous Ring +1", --7/(-1)
+		ring2="Defending Ring", --10/10
+		back="Solemnity Cape", --4/4
+		waist="Flume Belt +1", --4/0
 		}
 
-	sets.defense.MDT = {
-		ammo="Vanir Battery",
-		head="Dampening Tam", --4
-		neck="Loricate Torque +1", --6
-		ring2="Defending Ring", --10
-		back="Mubvum. Mantle", --6
-		}
+	sets.defense.MDT = sets.defense.PDT
 
 
 	--------------------------------------
@@ -437,7 +430,7 @@ function init_gear_sets()
 		})
 
 	sets.engaged.HighAcc = set_combine(sets.engaged.MidAcc, {
-		ear1="Digni. Earring",
+		ear1="Mache Earring",
 		ear2="Zennaroi Earring",
 		ring1="Ramuh Ring +1",
 		waist="Olseni Belt",
@@ -478,7 +471,7 @@ function init_gear_sets()
 		})
 
 	sets.engaged.HighHaste.HighAcc = set_combine(sets.engaged.HighHaste.MidAcc, {
-		ear1="Digni. Earring",
+		ear1="Mache Earring",
 		ring1="Ramuh Ring +1",
 		waist="Olseni Belt",
 		})
@@ -518,7 +511,7 @@ function init_gear_sets()
 		})
 
 	sets.engaged.MaxHaste.HighAcc = set_combine(sets.engaged.MaxHaste.MidAcc, {
-		ear1="Digni. Earring",
+		ear1="Mache Earring",
 		ring1="Ramuh Ring +1",
 		waist="Olseni Belt",
 		})
@@ -526,6 +519,10 @@ function init_gear_sets()
 	sets.engaged.MaxHaste.Fodder = set_combine(sets.engaged.MaxHaste, {
 		body="Thaumas Coat",
 		})
+	
+	-- Custom buff sets
+
+	sets.CP = {back="Mecisto. Mantle"}
 
 end
 
@@ -625,8 +622,11 @@ end
 
 
 function customize_idle_set(idleSet)
-	if player.hpp < 80 then
-		idleSet = set_combine(idleSet, sets.ExtraRegen)
+	if state.CP.current == 'on' then
+		equip(sets.CP)
+		disable('back')
+	else
+		enable('back')
 	end
 
 	return idleSet
@@ -650,7 +650,7 @@ end
 -- Function to display the current relevant user state when doing an update.
 -- Return true if display was handled, and you don't want the default info shown.
 function display_current_job_state(eventArgs)
-	local msg = 'Melee'
+	local msg = '[ Melee'
 	
 	if state.CombatForm.has_value then
 		msg = msg .. ' (' .. state.CombatForm.value .. ')'
@@ -662,19 +662,21 @@ function display_current_job_state(eventArgs)
 	if state.HybridMode.value ~= 'Normal' then
 		msg = msg .. '/' .. state.HybridMode.value
 	end
-	msg = msg .. ', WS: ' .. state.WeaponskillMode.value
+	msg = msg .. ' ][ WS: ' .. state.WeaponskillMode.value
 	
 	if state.DefenseMode.value ~= 'None' then
-		msg = msg .. ', ' .. 'Defense: ' .. state.DefenseMode.value .. ' (' .. state[state.DefenseMode.value .. 'DefenseMode'].value .. ')'
+		msg = msg .. ' ][ Defense: ' .. state.DefenseMode.value .. state[state.DefenseMode.value .. 'DefenseMode'].value
 	end
 	
-	if state.Kiting.value == true then
-		msg = msg .. ', Kiting'
+	if state.Kiting.value then
+		msg = msg .. ' ][ Kiting Mode: ON'
 	end
 	
-	msg = msg .. ', TH: ' .. state.TreasureMode.value
+	msg = msg .. ' ][ TH: ' .. state.TreasureMode.value
+	
+	msg = msg .. ' ]'
 
-	add_to_chat(122, msg)
+	add_to_chat(061, msg)
 
 	eventArgs.handled = true
 end

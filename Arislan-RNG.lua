@@ -31,8 +31,10 @@ function user_setup()
 	state.OffenseMode:options('Normal', 'LowAcc', 'MidAcc', 'HighAcc', 'Fodder')
 	state.RangedMode:options('Normal', 'Acc', 'STP')
 	state.WeaponskillMode:options('Normal', 'Acc')
-	state.IdleMode:options('Normal', 'PDT', 'MDT')
+	state.IdleMode:options('Normal', 'DT')
 	
+	state.CP = M(false, "Capacity Points Mode")
+
 	gear.default.weaponskill_neck = "Fotia Gorget"
 	gear.default.weaponskill_waist = "Fotia Belt"
 	
@@ -47,6 +49,8 @@ function user_setup()
 	send_command('bind !` input /ja "Double Shot" <me>')
 	send_command ('bind @` input /ja "Scavenge" <me>')
 	send_command('bind ^, input /ja "Spectral Jig" <me>')
+	send_command('unbind ^.')
+	send_command('bind @c gs c toggle CP')
 
 end
 
@@ -59,6 +63,7 @@ function user_unload()
 	send_command('unbind !`')
 	send_command('unbind @`')
 	send_command('unbind ^,')
+	send_command('unbind @c')
 end
 
 
@@ -88,7 +93,7 @@ function init_gear_sets()
 	sets.precast.Waltz['Healing Waltz'] = {}
 
 	sets.precast.FC = {
-		head=gear.Herc_FC_head, --12
+		head="Carmine Mask", --12
 		body="Taeon Tabard", --9
 		hands="Leyline Gloves", --7
 		legs="Rawhide Trousers", --5
@@ -159,7 +164,7 @@ function init_gear_sets()
 		body="Adhemar Jacket",
 		hands="Adhemar Wristbands",
 		legs="Amini Brague +1",
-		ear1="Enervating Earring",
+		ear1="Mache Earring",
 		ear2="Moonshade Earring",
 		ring1="Apate Ring",
 		ring2="Ramuh Ring +1",
@@ -170,6 +175,7 @@ function init_gear_sets()
 		hands="Meg. Gloves +1",
 		feet="Meg. Jam. +1",
 		neck="Combatant's Torque",
+		ear1="Enervating Earring",
 		ring1="Cacoethic Ring +1",
 		waist="Kwahu Kachina Belt",
 		})
@@ -334,26 +340,19 @@ function init_gear_sets()
 		waist="Kwahu Kachina Belt",
 		}
 
-	sets.idle.PDT = set_combine (sets.idle, {
-		head="Meghanada Visor +1",
-		body="Meg. Cuirie +1",
-		hands="Meg. Gloves +1",
-		legs="Meg. Chausses +1",
-		feet="Meg. Jam. +1",
-		neck="Loricate Torque +1", 
-		ear1="Genmei Earring",
-		ring1="Gelatinous Ring +1",
-		ring2="Defending Ring",
-		back="Solemnity Cape",
-		waist="Flume Belt +1",
-		})
-
-	sets.idle.MDT = set_combine (sets.idle, {
-		ammo="Vanir Battery",
-		head="Dampening Tam",
-		neck="Loricate Torque +1",
-		ring2="Defending Ring",
-		back="Mubvum. Mantle",
+	sets.idle.DT = set_combine (sets.idle, {
+		head="Dampening Tam", --0/4
+		body="Meg. Cuirie +1", --7/0
+		hands="Meg. Gloves +1", --3/0
+		legs="Meg. Chausses +1", --5/0
+		feet="Meg. Jam. +1", --2/0
+		neck="Loricate Torque +1", --6/6
+		ear1="Genmei Earring", --2/0
+		ear2="Odnowa Earring +1", --0/2
+		ring1="Gelatinous Ring +1", --7/(-1)
+		ring2="Defending Ring", --10/10
+		back="Solemnity Cape", --4/4
+		waist="Flume Belt +1", --4/0
 		})
 		
 	sets.idle.Town = set_combine(sets.idle, {
@@ -370,25 +369,21 @@ function init_gear_sets()
 	
 	-- Defense sets
 	sets.defense.PDT = {
-		head="Meghanada Visor +1", --4
-		body="Meg. Cuirie +1", --7
-		hands="Meg. Gloves +1", --3
-		legs="Meg. Chausses +1", --5
-		feet="Meg. Jam. +1", --2
-		neck="Loricate Torque +1", --6
-		ear1="Genmei Earring", --2
-		ring1="Gelatinous Ring +1", --7
-		ring2="Defending Ring", --10
-		back="Solemnity Cape", --4
-		waist="Flume Belt +1", --4
+		head="Dampening Tam", --0/4
+		body="Meg. Cuirie +1", --7/0
+		hands="Meg. Gloves +1", --3/0
+		legs="Meg. Chausses +1", --5/0
+		feet="Meg. Jam. +1", --2/0
+		neck="Loricate Torque +1", --6/6
+		ear1="Genmei Earring", --2/0
+		ear2="Odnowa Earring +1", --0/2
+		ring1="Gelatinous Ring +1", --7/(-1)
+		ring2="Defending Ring", --10/10
+		back="Solemnity Cape", --4/4
+		waist="Flume Belt +1", --4/0
 		}
 
-	sets.defense.MDT = {
-		head="Dampening Tam", --4
-		neck="Loricate Torque +1", --6
-		ring2="Defending Ring", --10
-		back="Mubvum. Mantle", --6
-		}
+	sets.defense.MDT = sets.defense.PDT
 
 	sets.Kiting = {
 		legs="Carmine Cuisses +1",
@@ -431,7 +426,7 @@ function init_gear_sets()
 
 	sets.engaged.HighAcc = set_combine(sets.engaged.MidAcc, {
 		legs="Carmine Cuisses +1",
-		ear1="Digni. Earring",
+		ear1="Mache Earring",
 		ear2="Zennaroi Earring",
 		ring1="Ramuh Ring +1",
 		waist="Olseni Belt",
@@ -474,7 +469,7 @@ function init_gear_sets()
 
 	sets.engaged.HighHaste.HighAcc = set_combine(sets.engaged.HighHaste.MidAcc, {
 		legs="Carmine Cuisses +1",
-		ear1="Digni. Earring",
+		ear1="Mache Earring",
 		ear2="Zennaroi Earring",
 		ring1="Ramuh Ring +1",
 		waist="Olseni Belt",
@@ -517,7 +512,7 @@ function init_gear_sets()
 
 	sets.engaged.MaxHaste.HighAcc = set_combine(sets.engaged.MaxHaste.MidAcc, {
 		legs="Carmine Cuisses +1",
-		ear1="Digni. Earring",
+		ear1="Mache Earring",
 		ear2="Zennaroi Earring",
 		ring1="Ramuh Ring +1",
 		waist="Olseni Belt",
@@ -537,6 +532,8 @@ function init_gear_sets()
 	sets.buff['Velocity Shot'] = set_combine(sets.midcast.RA, {body="Amini Caban +1", back="Belenus's Cape"})
 	sets.buff['Double Shot'] = set_combine(sets.midcast.RA, {back="Belenus's Cape"})
 --	sets.buff.Camouflage = {body="Orion Jerkin +1"}
+
+	sets.CP = {back="Mecisto. Mantle"}
 
 end
 
@@ -632,6 +629,17 @@ end
 -- User code that supplements standard library decisions.
 -------------------------------------------------------------------------------------------------------------------
 
+function customize_idle_set(idleSet)
+	if state.CP.current == 'on' then
+		equip(sets.CP)
+		disable('back')
+	else
+		enable('back')
+	end
+	
+	return idleSet
+end
+
 function job_update(cmdParams, eventArgs)
 	determine_haste_group()
 end
@@ -645,19 +653,20 @@ end
 function display_current_job_state(eventArgs)
 	local msg = ''
 	
-	msg = msg .. 'Offense/Ranged: ['..state.OffenseMode.current..'/'..state.RangedMode.current
-	msg = msg .. '], WS: ['..state.WeaponskillMode.current..']'
+	msg = msg .. '[ Offense/Ranged: '..state.OffenseMode.current..'/'..state.RangedMode.current
+	msg = msg .. ' ][ WS: '..state.WeaponskillMode.current
 
 	if state.DefenseMode.value ~= 'None' then
-		local defMode = state[state.DefenseMode.value ..'DefenseMode'].current
-		msg = msg .. ', Defense: ('..state.DefenseMode.value..' '..defMode..')'
+		msg = msg .. ' ][ Defense: ' .. state.DefenseMode.value .. state[state.DefenseMode.value .. 'DefenseMode'].value
 	end
 	
 	if state.Kiting.value then
-		msg = msg .. ', Kiting'
+		msg = msg .. ' ][ Kiting Mode: ON'
 	end
+
+	msg = msg .. ' ]'
 	
-	add_to_chat(122, msg)
+	add_to_chat(061, msg)
 
 	eventArgs.handled = true
 end

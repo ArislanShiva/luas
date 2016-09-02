@@ -24,7 +24,7 @@ end
 function user_setup()
 	state.OffenseMode:options('None', 'Normal')
 	state.CastingMode:options('Normal', 'Seidr', 'Resistant')
-	state.IdleMode:options('Normal', 'PDT', 'MDT')
+	state.IdleMode:options('Normal', 'DT')
 
 	state.MagicBurst = M(false, 'Magic Burst')
 	state.MPCoat = M(false, 'MP Coat')
@@ -37,6 +37,7 @@ function user_setup()
 	-- Additional local binds
 	send_command('bind ^` input /ja "Full Circle" <me>')
 	send_command('bind !` gs c toggle MagicBurst')
+	send_command('bind !w input /ma "Aspir III" <t>')
 	send_command('bind ^, input /ma Sneak <stpc>')
 	send_command('bind ^. input /ma Invisible <stpc>')
 	
@@ -46,6 +47,7 @@ end
 function user_unload()
 	send_command('unbind ^`')
 	send_command('unbind !`')
+	send_command('unbind !w')
 	send_command('unbind ^,')
 	send_command('unbind !.')
 end
@@ -232,6 +234,16 @@ function init_gear_sets()
 		waist="Olympus Sash",
 		}
 		
+	sets.midcast.EnhancingDuration = set_combine(sets.midcast['Enhancing Magic'], {
+		main="Gada",
+		sub="Genmei Shield",
+		head="Telchine Cap",
+		body="Telchine Chas.",
+		hands="Telchine Gloves",
+		legs="Telchine Braconi",
+		feet="Telchine Pigaches",
+		})
+
 	sets.midcast.Regen = set_combine(sets.midcast['Enhancing Magic'], {
 		main="Bolelabunga",
 		sub="Genmei Shield",
@@ -253,23 +265,15 @@ function init_gear_sets()
 		head="Amalric Coif",
 		})
 
-	sets.midcast.Protectra = set_combine(sets.midcast['Enhancing Magic'], {
+	sets.midcast.Protect = set_combine(sets.midcast.EnhancingDuration, {
 		ring1="Sheltered Ring",
 		})
+	sets.midcast.Protectra = sets.midcast.Protect
+	sets.midcast.Shell = sets.midcast.Protect
+	sets.midcast.Shellra = sets.midcast.Protect
 
-	sets.midcast.Shellra = sets.midcast.Protectra
 
-	sets.midcast.EnhancingDuration = {
-		main="Gada",
-		sub="Genmei Shield",
-		head="Telchine Cap",
-		body="Telchine Chas.",
-		hands="Telchine Gloves",
-		legs="Telchine Braconi",
-		feet="Telchine Pigaches",
-		}
-
-		sets.midcast.MndEnfeebles = {
+	sets.midcast.MndEnfeebles = {
 		main="Grioavolr",
 		sub="Clerisy Strap +1",
 		head="Amalric Coif",
@@ -288,6 +292,7 @@ function init_gear_sets()
 	
 	sets.midcast.IntEnfeebles = set_combine(sets.midcast.MndEnfeebles, {
 		ear1="Barkaro. Earring",
+		back="Nantosuelta's Cape",
 		}) -- INT/Magic accuracy
 
 	sets.midcast['Dark Magic'] = {
@@ -303,12 +308,13 @@ function init_gear_sets()
 		ear2="Digni. Earring",
 		ring1="Evanescence Ring",
 		ring2="Stikini Ring",
-		back="Aurist's Cape +1",
+		back="Nantosuelta's Cape",
 		waist=gear.ElementalObi,
 		}
 	
 	sets.midcast.Drain = set_combine(sets.midcast['Dark Magic'], {
 		head="Bagua Galero +1",
+		feet="Merlinic Crackows",
 		ear2="Hirudinea Earring",
 		ring2="Archon Ring",
 		waist="Fucho-no-obi",
@@ -405,38 +411,29 @@ function init_gear_sets()
 		waist="Austerity Belt +1",
 	})
 
-	sets.idle.PDT = set_combine(sets.idle, {
+	sets.idle.DT = set_combine(sets.idle, {
 		main="Bolelabunga",
-		sub="Genmei Shield",
-		body="Vanya Robe",
-		hands="Geo. Mitaines +1",
-		legs="Artsieq Hose",
-		feet="Azimuth Gaiters +1",
-		neck="Loricate Torque +1",
-		ear1="Genmei Earring",
-		ring1="Gelatinous Ring +1",
-		ring2="Defending Ring",
-		back="Umbra Cape",
+		sub="Genmei Shield", --10/0
+		body="Hagondes Coat +1", --3/4
+		legs="Artsieq Hose", --5/0
+		feet="Azimuth Gaiters +1", --4/0
+		neck="Loricate Torque +1", --6/6
+		ear1="Genmei Earring", --2/0
+		ring1="Gelatinous Ring +1", --7/(-1)
+		ring2="Defending Ring", --10/10
+		back="Solemnity Cape", --4/4	
 		})
 
-	sets.idle.MDT = set_combine(sets.idle, {
-		neck="Loricate Torque +1",
-		ear2="Etiolation Earring",
-		ring1="Fortified Ring",
-		ring2="Defending Ring",
-		back="Solemnity Cape",
-		})
-
-	sets.idle.Weak = sets.idle.PDT
+	sets.idle.Weak = sets.idle.DT
 
 	-- .Pet sets are for when Luopan is present.
 	sets.idle.Pet = set_combine(sets.idle, { 
-		-- dt/regen --
+		-- pet -dt (50% innate)/regen --
   		main="Sucellus", --3/3
 		sub="Genmei Shield",
 		range="Dunna", --5/0
 		head="Azimuth Hood +1", --3/0
-		body="Telchine Chas.", --0/1
+		body="Telchine Chas.", --0/3
 		hands="Geo. Mitaines +1", --11/0
 		legs="Psycloth Lappas", --4/0
 		feet="Telchine Pigaches", --0/3
@@ -446,23 +443,17 @@ function init_gear_sets()
 		waist="Isa Belt" --3/1
 		})
 
-	sets.idle.PDT.Pet = set_combine(sets.idle.Pet, {
+	sets.idle.DT.Pet = set_combine(sets.idle.Pet, {
 		neck="Loricate Torque +1",
 		ring1="Gelatinous Ring +1",
-		ring2="Defending Ring",
-		})
-
-	sets.idle.MDT.Pet = set_combine(sets.idle.Pet, {
-		neck="Loricate Torque +1",
-		ring1="Fortified Ring",
 		ring2="Defending Ring",
 		})
 
 	-- .Indi sets are for when an Indi-spell is active.
 	sets.idle.Indi = set_combine(sets.idle, {legs="Bagua Pants +1"})
 	sets.idle.Pet.Indi = set_combine(sets.idle.Pet, {legs="Bagua Pants +1"})
-	sets.idle.PDT.Indi = set_combine(sets.idle.PDT, {legs="Bagua Pants +1"})
-	sets.idle.PDT.Pet.Indi = set_combine(sets.idle.PDT.Pet, {legs="Bagua Pants +1"})
+	sets.idle.DT.Indi = set_combine(sets.idle.DT, {legs="Bagua Pants +1"})
+	sets.idle.DT.Pet.Indi = set_combine(sets.idle.DT.Pet, {legs="Bagua Pants +1"})
 
 	sets.idle.Town = set_combine(sets.idle, {
   		main="Sucellus",
@@ -482,29 +473,18 @@ function init_gear_sets()
 
 	sets.defense.PDT = {
 		main="Bolelabunga",
-		sub="Genmei Shield", --10
-		body="Vanya Robe", --1
-		legs="Artsieq Hose", --5
-		feet="Azimuth Gaiters +1", --4
-		neck="Loricate Torque +1", --6
-		ear1="Genmei Earring", --2
-		ring1="Gelatinous Ring +1", --7
-		ring2="Defending Ring", --10
-		back="Umbra Cape", --6
+		sub="Genmei Shield", --10/0
+		body="Hagondes Coat +1", --3/4
+		legs="Artsieq Hose", --5/0
+		feet="Azimuth Gaiters +1", --4/0
+		neck="Loricate Torque +1", --6/6
+		ear1="Genmei Earring", --2/0
+		ring1="Gelatinous Ring +1", --7/(-1)
+		ring2="Defending Ring", --10/10
+		back="Solemnity Cape", --4/4		
 		}
 
-	sets.defense.MDT = {
---		head="Vanya Hood", --2
---		body="Vanya Robe", --1
---		legs="Gyve Trousers", --2
-		neck="Loricate Torque +1", --6
---		ear1="Odnowa Earring +1", --2
-		ear2="Etiolation Earring", --2
-		ring1="Fortified Ring", --5
-		ring2="Defending Ring", --10
-		back="Solemnity Cape", --4
---		waist="Lieutenant's Sash", --2
-		}
+	sets.defense.MDT = sets.defense.PDT
 
 	sets.Kiting = {
 		feet="Herald's Gaiters"

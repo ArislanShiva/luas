@@ -31,14 +31,17 @@ function user_setup()
 	state.OffenseMode:options('Normal', 'LowAcc', 'MidAcc', 'HighAcc', 'Fodder')
 	state.WeaponskillMode:options('Normal', 'Acc')
 	state.CastingMode:options('Normal', 'Resistant')
-	state.IdleMode:options('Normal', 'PDT', 'MDT')
+	state.IdleMode:options('Normal', 'DT')
 	state.PhysicalDefenseMode:options('PDT', 'Evasion')
+
+	state.CP = M(false, "Capacity Points Mode")
 
 	-- Additional local binds
 	send_command('bind ^- input /ja "Yonin" <me>')
 	send_command('bind ^= input /ja "Innin" <me>')
 	send_command('bind ^, input /nin "Monomi: Ichi" <me>')
 	send_command('bind ^. input /ma "Tonko: Ni" <me>')
+	send_command('bind @c gs c toggle CP')
 
 --	select_movement_feet()
 	select_default_macro_book()
@@ -49,6 +52,7 @@ function user_unload()
 	send_command('unbind ^=')
 	send_command('unbind ^,')
 	send_command('unbind !.')
+	send_command('unbind @c')
 end
 
 -- Define sets and vars used by this job file.
@@ -74,7 +78,7 @@ function init_gear_sets()
 	
 	sets.precast.FC = {
 		ammo="Sapience Orb", --2
-		head=gear.Herc_FC_head, --12
+		head=gear.Herc_MAB_head, --7
 		body="Taeon Tabard", --9
 		hands="Leyline Gloves", --7
 		legs="Rawhide Trousers", --5
@@ -88,6 +92,7 @@ function init_gear_sets()
 		}
 
 	sets.precast.FC.Utsusemi = set_combine(sets.precast.FC, {
+		ammo="Staunch Tathlum",
 		neck="Magoraga Beads",
 		ring1="Lebeche Ring",
 		waist="Ninurta's Sash",
@@ -168,7 +173,7 @@ function init_gear_sets()
 		}
 
 	sets.midcast.ElementalNinjutsu = {
-		ammo="Grenade Core",
+		ammo="Seeth. Bomblet +1",
 		head=gear.Herc_MAB_head,
 		body="Samnuha Coat",
 		hands="Leyline Gloves",
@@ -215,24 +220,17 @@ function init_gear_sets()
 		waist="Flume Belt +1",
 		}
 
-	sets.idle.PDT = set_combine (sets.idle, {
-		hands=gear.Herc_TA_hands,
-		feet="Amm Greaves",
-		neck="Loricate Torque +1", 
-		ear1="Genmei Earring",
-		ring1="Gelatinous Ring +1",
-		ring2="Defending Ring",
-		back="Solemnity Cape",
-		waist="Flume Belt +1",
-		})
-
-	sets.idle.MDT = set_combine (sets.idle, {
-		ammo="Vanir Battery",
-		head="Dampening Tam",
-		feet="Amm Greaves",
-		neck="Loricate Torque +1",
-		ring2="Defending Ring",
-		back="Mubvum. Mantle",
+	sets.idle.DT = set_combine (sets.idle, {
+		ammo="Staunch Tathlum", --2/2
+		head="Dampening Tam", --0/4
+		hands=gear.Herc_TA_hands, --2
+		feet="Amm Greaves", --3/3
+		neck="Loricate Torque +1", --6/6
+		ear1="Genmei Earring", --2/0
+		ring1="Gelatinous Ring +1", --7/(-1)
+		ring2="Defending Ring", --10/10
+		back="Solemnity Cape", --4/4
+		waist="Flume Belt +1", --4/0
 		})
 
 	sets.idle.Town = set_combine(sets.idle, {
@@ -245,28 +243,23 @@ function init_gear_sets()
 		waist="Windbuffet Belt +1",
 		})
 	
-	sets.idle.Weak = sets.idle.PDT
+	sets.idle.Weak = sets.idle.DT
 	
 	-- Defense sets
 	sets.defense.PDT = {
+		ammo="Staunch Tathlum", --2/2
+		head="Dampening Tam", --0/4
 		hands=gear.Herc_TA_hands, --2
-		feet="Amm Greaves", --3
-		neck="Loricate Torque +1", --6
-		ear1="Genmei Earring", --2
-		ring1="Gelatinous Ring +1", --7
-		ring2="Defending Ring", --10
-		back="Solemnity Cape", --4
-		waist="Flume Belt +1", --4
+		feet="Amm Greaves", --3/3
+		neck="Loricate Torque +1", --6/6
+		ear1="Genmei Earring", --2/0
+		ring1="Gelatinous Ring +1", --7/(-1)
+		ring2="Defending Ring", --10/10
+		back="Solemnity Cape", --4/4
+		waist="Flume Belt +1", --4/0
 		}
 
-	sets.defense.MDT = {
-		ammo="Vanir Battery",
-		head="Dampening Tam", --4
-		feet="Amm Greaves", --3
-		neck="Loricate Torque +1", --6
-		ring2="Defending Ring", --10
-		back="Mubvum. Mantle", --6
-		}
+	sets.defense.MDT = sets.defense.PDT
 
 	sets.Kiting = {feet="Danzo sune-ate"}
 	
@@ -317,7 +310,7 @@ function init_gear_sets()
 	sets.engaged.HighAcc = set_combine(sets.engaged.MidAcc, {
 		legs="Hiza. Hizayoroi +1",
 		neck="Combatant's Torque",
-		ear1="Digni. Earring",
+		ear1="Mache Earring",
 		ear2="Zennaroi Earring",
 		ring1="Ramuh Ring +1",
 		waist="Olseni Belt",
@@ -360,7 +353,7 @@ function init_gear_sets()
 		sets.engaged.HighHaste.HighAcc = set_combine(sets.engaged.HighHaste.MidAcc, {
 		legs="Hiza. Hizayoroi +1",
 		neck="Combatant's Torque",
-		ear1="Digni. Earring",
+		ear1="Mache Earring",
 		ring1="Ramuh Ring +1",
 		waist="Olseni Belt",
 		})
@@ -402,7 +395,7 @@ function init_gear_sets()
 	sets.engaged.MaxHaste.HighAcc = set_combine(sets.engaged.MaxHaste.MidAcc, {
 		legs="Hiza. Hizayoroi +1",
 		neck="Combatant's Torque",
-		ear1="Digni. Earring",
+		ear1="Mache Earring",
 		ring1="Ramuh Ring +1",
 		waist="Olseni Belt",
 		})
@@ -419,6 +412,8 @@ function init_gear_sets()
 --	sets.buff.Doom = {ring2="Saida Ring"}
 --	sets.buff.Yonin = {}
 --	sets.buff.Innin = {}
+
+	sets.CP = {back="Mecisto. Mantle"}
 
 end
 
@@ -491,6 +486,12 @@ function customize_idle_set(idleSet)
     if state.Buff.Doom then
         idleSet = set_combine(idleSet, sets.buff.Doom)
     end
+	if state.CP.current == 'on' then
+		equip(sets.CP)
+		disable('back')
+	else
+		enable('back')
+	end
 --    idleSet = set_combine(idleSet, select_movement_feet())
     return idleSet
 end
@@ -511,6 +512,38 @@ end
 function job_update(cmdParams, eventArgs)
 --	select_movement_feet()
 	determine_haste_group()
+end
+
+-- Function to display the current relevant user state when doing an update.
+function display_current_job_state(eventArgs)
+
+	local msg = '[ Melee'
+	
+	if state.CombatForm.has_value then
+		msg = msg .. ' (' .. state.CombatForm.value .. ')'
+	end
+	
+	msg = msg .. ': '
+	
+	msg = msg .. state.OffenseMode.value
+	if state.HybridMode.value ~= 'Normal' then
+		msg = msg .. '/' .. state.HybridMode.value
+	end
+	msg = msg .. ' ][ WS: ' .. state.WeaponskillMode.value
+	
+	if state.DefenseMode.value ~= 'None' then
+		msg = msg .. ' ][ Defense: ' .. state.DefenseMode.value .. state[state.DefenseMode.value .. 'DefenseMode'].value
+	end
+	
+	if state.Kiting.value then
+		msg = msg .. ' ][ Kiting Mode: ON'
+	end
+	
+	msg = msg .. ' ]'
+	
+	add_to_chat(060, msg)
+
+	eventArgs.handled = true
 end
 
 -------------------------------------------------------------------------------------------------------------------

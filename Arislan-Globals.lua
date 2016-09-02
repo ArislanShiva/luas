@@ -1,3 +1,9 @@
+-------------------------------------------------------------------------------------------------------------------
+-- Modify the sets table.  Any gear sets that are added to the sets table need to
+-- be defined within this function, because sets isn't available until after the
+-- include is complete.  It is called at the end of basic initialization in Mote-Include.
+-------------------------------------------------------------------------------------------------------------------
+
 function define_global_sets()
 
 	-- Herculean Triple Attack Set
@@ -13,7 +19,9 @@ function define_global_sets()
 	gear.Herc_MAB_legs = {name="Herculean Trousers", augments={'Mag. Acc.+16 "Mag.Atk.Bns."+16','"Fast Cast"+3','AGI+10','"Mag.Atk.Bns."+15',}}
 	gear.Herc_MAB_feet = {name="Herculean Boots", augments={'"Mag.Atk.Bns."+22','"Fast Cast"+2','Accuracy+10 Attack+10','Mag. Acc.+15 "Mag.Atk.Bns."+15',}}
 
-	gear.Herc_FC_head = {name="Herculean Helm", augments={'"Fast Cast"+5',}}	
+	-- Herculean -DT Set
+
+	gear.Herc_DT_head = {name="Herculean Helm", augments={'Damage taken-3%','Accuracy+10',}}	
 
 	-- Taeon Dual Wield Set
 	
@@ -39,5 +47,8 @@ function define_global_sets()
 
 	gear.SCH_MAB_Cape = {name="Lugh's Cape", augments={'INT+20','Mag. Acc+20 /Mag. Dmg.+20','"Mag.Atk.Bns."+10',}}
     gear.SCH_FC_Cape = {name="Lugh's Cape", augments={'MND+20','Mag. Acc+20 /Mag. Dmg.+20','"Fast Cast"+10',}}
+
+
+	sets.CP = {back="Mecisto. Mantle"}
 
 end

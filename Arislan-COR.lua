@@ -6,25 +6,25 @@
 
 	Custom commands:
 	
-	gs c qd
+	gs c shot
 		Uses the currently configured shot on the target, with either <t> or <stnpc> depending on setting.
 
-	gs c qd t
+	gs c shot t
 		Uses the currently configured shot on the target, but forces use of <t>.
 	
 	
 	Configuration commands:
 	
-	gs c cycle mainqd
+	gs c cycle mainshot
 		Cycles through the available steps to use as the primary shot when using one of the above commands.
 		
-	gs c cycle altqd
+	gs c cycle altshot
 		Cycles through the available steps to use for alternating with the configured main shot.
 		
-	gs c toggle usealtqd
+	gs c toggle usealtshot
 		Toggles whether or not to use an alternate shot.
 		
-	gs c toggle selectqdtarget
+	gs c toggle selectshottarget
 		Toggles whether or not to use <stnpc> (as opposed to <t>) when using a shot.
 		
 		
@@ -48,13 +48,13 @@ end
 -- Setup vars that are user-independent.  state.Buff vars initialized here will automatically be tracked.
 function job_setup()
 	-- QuickDraw Selector
-	state.MainQD = M{['description']='Primary Shot', 'Dark Shot', 'Earth Shot', 'Water Shot', 'Wind Shot', 'Fire Shot', 'Ice Shot', 'Thunder Shot'}
-	state.AltQD = M{['description']='Secondary Shot', 'Earth Shot', 'Water Shot', 'Wind Shot', 'Fire Shot', 'Ice Shot', 'Thunder Shot', 'Dark Shot'}
-	state.UseAltQD = M(false, 'Use Secondary Shot')
-	state.SelectQDTarget = M(false, 'Select Quick Draw Target')
+	state.MainShot = M{['description']='Primary Shot', 'Dark Shot', 'Earth Shot', 'Water Shot', 'Wind Shot', 'Fire Shot', 'Ice Shot', 'Thunder Shot'}
+	state.AltShot = M{['description']='Secondary Shot', 'Earth Shot', 'Water Shot', 'Wind Shot', 'Fire Shot', 'Ice Shot', 'Thunder Shot', 'Dark Shot'}
+	state.UseAltShot = M(false, 'Use Secondary Shot')
+	state.SelectShotTarget = M(false, 'Select Quick Draw Target')
 	state.IgnoreTargetting = M(false, 'Ignore Targetting')
 
-	state.CurrentQD = M{['description']='Current Quick Draw', 'Main', 'Alt'}
+	state.CurrentShot = M{['description']='Current Quick Draw', 'Main', 'Alt'}
 	
 	-- Whether to use Luzaf's Ring
 	state.LuzafRing = M(false, "Luzaf's Ring")
@@ -76,7 +76,7 @@ function user_setup()
 	state.RangedMode:options('Normal', 'Acc', 'Fodder')
 	state.WeaponskillMode:options('Normal', 'Acc')
 	state.CastingMode:options('Normal', 'Resistant')
-	state.IdleMode:options('Normal', 'PDT', 'MDT')
+	state.IdleMode:options('Normal', 'DT')
 
 	gear.RAbullet = "Adlivun Bullet"
 	gear.WSbullet = "Adlivun Bullet"
@@ -89,13 +89,14 @@ function user_setup()
 	send_command('bind !` input /ja "Bolter\'s Roll" <me>')
 	send_command ('bind @` gs c toggle LuzafRing')
 
-	send_command('bind ^- gs c cycleback mainqd')
-	send_command('bind ^= gs c cycle mainqd')
-	send_command('bind !- gs c cycle altqd')
-	send_command('bind != gs c cycleback altqd')
-	send_command('bind ^[ gs c toggle selectqdtarget')
-	send_command('bind ^] gs c toggle usealtqd')
+	send_command('bind ^- gs c cycleback mainshot')
+	send_command('bind ^= gs c cycle mainshot')
+	send_command('bind !- gs c cycle altshot')
+	send_command('bind != gs c cycleback altshot')
+	send_command('bind ^[ gs c toggle selectshottarget')
+	send_command('bind ^] gs c toggle usealtshot')
 	send_command('bind ^, input /ja "Spectral Jig" <me>')
+	send_command('unbind ^.')
 
 	select_default_macro_book()
 end
@@ -165,7 +166,7 @@ function init_gear_sets()
 	sets.precast.Waltz['Healing Waltz'] = {}
 	
 	sets.precast.FC = {
-		head=gear.Herc_FC_head, --12
+		head="Carmine Mask", --12
 		body="Taeon Tabard", --9
 		hands="Leyline Gloves", --7
 		legs="Rawhide Trousers", --5
@@ -406,7 +407,7 @@ function init_gear_sets()
 		body="Mekosu. Harness",
 		hands="Carmine Fin. Ga. +1",
 		legs="Carmine Cuisses +1",
-		feet=gear.Herc_TA_feet,
+		feet="Carmine Greaves +1",
 		neck="Sanctity Necklace",
 		ear1="Genmei Earring",
 		ear2="Infused Earring",
@@ -416,25 +417,18 @@ function init_gear_sets()
 		waist="Flume Belt +1",
 		}
 
-	sets.idle.PDT = set_combine (sets.idle, {
-		head="Meghanada Visor +1",
-		body="Meg. Cuirie +1",
-		hands="Meg. Gloves +1",
-		legs="Meg. Chausses +1",
-		feet="Lanun Bottes +1",
-		neck="Loricate Torque +1", 
-		ear1="Genmei Earring",
-		ring1="Gelatinous Ring +1",
-		ring2="Defending Ring",
-		back="Solemnity Cape",
-		waist="Flume Belt +1",
-		})
-
-	sets.idle.MDT = set_combine (sets.idle, {
-		head="Dampening Tam",
-		neck="Loricate Torque +1",
-		ring2="Defending Ring",
-		back="Mubvum. Mantle",
+	sets.idle.DT = set_combine (sets.idle, {
+		head="Dampening Tam", --0/4
+		body="Meg. Cuirie +1", --7/0
+		hands="Meg. Gloves +1", --3/0
+		legs="Meg. Chausses +1", --5/0
+		feet="Lanun Bottes +1", --4/0
+		neck="Loricate Torque +1", --6/6
+		ear2="Odnowa Earring +1", --0/2
+		ring1="Gelatinous Ring +1", --7/(-1)
+		ring2="Defending Ring", --10/10
+		back="Solemnity Cape", --4/4
+		waist="Flume Belt +1", --4/0
 		})
 
 	sets.idle.Town = set_combine(sets.idle, {
@@ -452,26 +446,20 @@ function init_gear_sets()
 	
 	-- Defense sets
 	sets.defense.PDT = {
-		head="Meghanada Visor +1", --4
-		body="Meg. Cuirie +1", --7
-		hands="Meg. Gloves +1", --3
-		legs="Meg. Chausses +1", --5
-		feet="Lanun Bottes +1", --4
-		neck="Loricate Torque +1", --6
-		ear1="Genmei Earring", --2
-		ring1="Gelatinous Ring +1", --7
-		ring2="Defending Ring", --10
-		back="Solemnity Cape", --4
-		waist="Flume Belt +1", --4
+		head="Dampening Tam", --0/4
+		body="Meg. Cuirie +1", --7/0
+		hands="Meg. Gloves +1", --3/0
+		legs="Meg. Chausses +1", --5/0
+		feet="Lanun Bottes +1", --4/0
+		neck="Loricate Torque +1", --6/6
+		ear2="Odnowa Earring +1", --0/2
+		ring1="Gelatinous Ring +1", --7/(-1)
+		ring2="Defending Ring", --10/10
+		back="Solemnity Cape", --4/4
+		waist="Flume Belt +1", --4/0
 		}
 
-	sets.defense.MDT = {
-		head="Dampening Tam", --4
-		neck="Loricate Torque +1", --6
-		ring2="Defending Ring", --10
-		back="Mubvum. Mantle", --6
-		}
-	
+	sets.defense.MDT = sets.defense.PDT
 
 	sets.Kiting = {legs="Carmine Cuisses +1"}
 
@@ -513,7 +501,7 @@ function init_gear_sets()
 
 	sets.engaged.HighAcc = set_combine(sets.engaged.MidAcc, {
 		legs="Carmine Cuisses +1",
-		ear1="Digni. Earring",
+		ear1="Mache Earring",
 		ear2="Zennaroi Earring",
 		ring1="Ramuh Ring +1",
 		waist="Olseni Belt",
@@ -555,7 +543,7 @@ function init_gear_sets()
 
 	sets.engaged.HighHaste.HighAcc = set_combine(sets.engaged.HighHaste.MidAcc, {
 		legs="Carmine Cuisses +1",
-		ear1="Digni. Earring",
+		ear1="Mache Earring",
 		ear2="Zennaroi Earring",
 		ring1="Ramuh Ring +1",
 		waist="Olseni Belt",
@@ -597,7 +585,7 @@ function init_gear_sets()
 
 	sets.engaged.MaxHaste.HighAcc = set_combine(sets.engaged.MaxHaste.MidAcc, {
 		legs="Carmine Cuisses +1",
-		ear1="Digni. Earring",
+		ear1="Mache Earring",
 		ear2="Zennaroi Earring",
 		ring1="Ramuh Ring +1",
 		waist="Olseni Belt",
@@ -667,10 +655,6 @@ function job_update(cmdParams, eventArgs)
 	determine_haste_group()
 end
 
-function display_current_job_state(eventArgs)
-
-end
-
 function get_custom_wsmode(spell, spellMap, default_wsmode)
 	if buffactive['Transcendancy'] then
 		return 'Brew'
@@ -694,7 +678,7 @@ function job_auto_change_target(spell, action, spellMap, eventArgs)
 			eventArgs.handled = true
 		end
 		
-		eventArgs.SelectNPCTargets = state.SelectQDTarget.value
+		eventArgs.SelectNPCTargets = state.SelectShotTarget.value
 	end
 end
 
@@ -702,27 +686,26 @@ end
 function display_current_job_state(eventArgs)
 	local msg = ''
 	
-	msg = msg .. 'Offense/Ranged: ['..state.OffenseMode.current..'/'..state.RangedMode.current
-	msg = msg .. '], WS: ['..state.WeaponskillMode.current..']'
+	msg = msg .. '[ Offense/Ranged: '..state.OffenseMode.current..'/'..state.RangedMode.current
+	msg = msg .. ' ][ WS: '..state.WeaponskillMode.current
 
 	if state.DefenseMode.value ~= 'None' then
-		local defMode = state[state.DefenseMode.value ..'DefenseMode'].current
-		msg = msg .. ', Defense: ('..state.DefenseMode.value..' '..defMode..')'
+		msg = msg .. ' ][ Defense: ' .. state.DefenseMode.value .. state[state.DefenseMode.value .. 'DefenseMode'].value
 	end
 	
 	if state.Kiting.value then
-		msg = msg .. ', Kiting'
+		msg = msg .. ' ][ Kiting Mode: ON'
 	end
 
-	msg = msg .. ', ['..state.MainQD.current
+	msg = msg .. ' ][ '..state.MainShot.current
 
-	if state.UseAltQD.value == true then
-		msg = msg .. '/'..state.AltQD.current
+	if state.UseAltShot.value == true then
+		msg = msg .. '/'..state.AltShot.current
 	end
 	
-	msg = msg .. ']'
+	msg = msg .. ' ]'
 	
-	add_to_chat(122, msg)
+	add_to_chat(061, msg)
 
 	eventArgs.handled = true
 end
@@ -733,20 +716,20 @@ end
 
 -- Called for custom player commands.
 function job_self_command(cmdParams, eventArgs)
-	if cmdParams[1] == 'qd' then
+	if cmdParams[1] == 'Shot' then
 		if cmdParams[2] == 't' then
 			state.IgnoreTargetting:set()
 		end
 
-		local doQD = ''
-		if state.UseAltQD.value == true then
-			doQD = state[state.CurrentQD.current..'QD'].current
-			state.CurrentQD:cycle()
+		local doShot = ''
+		if state.UseAltShot.value == true then
+			doShot = state[state.CurrentShot.current..'Shot'].current
+			state.CurrentShot:cycle()
 		else
-			doQD = state.MainQD.current
+			doShot = state.MainShot.current
 		end		
 		
-		send_command('@input /ja "'..doQD..'" <t>')
+		send_command('@input /ja "'..doShot..'" <t>')
 	end
 end
 
@@ -907,6 +890,6 @@ function select_default_macro_book()
 	if player.sub_job == 'DNC' then
 		set_macro_page(1, 7)
 	else
-		set_macro_page(2, 7)
+		set_macro_page(1, 7)
 	end
 end

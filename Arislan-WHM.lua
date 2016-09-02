@@ -24,7 +24,9 @@ end
 function user_setup()
 	state.OffenseMode:options('None', 'Normal')
 	state.CastingMode:options('Normal', 'Resistant')
-	state.IdleMode:options('Normal', 'PDT', 'MDT')
+	state.IdleMode:options('Normal', 'DT')
+	
+	state.CP = M(false, "Capacity Points Mode")
 
 	-- Additional local binds
 	send_command('bind ^` input /ja "Afflatus Solace" <me>')
@@ -33,8 +35,10 @@ function user_setup()
 	send_command('bind ^[ input /ja "Divine Seal" <me>')
 	send_command('bind ^] input /ja "Divine Caress" <me>')
 	send_command('bind ![ input /ja "Accession" <me>')
+	send_command('bind !o input /ma "Regen IV" <stpc>')
 	send_command('bind ^, input /ma Sneak <stpc>')
 	send_command('bind ^. input /ma Invisible <stpc>')
+	send_command('bind @c gs c toggle CP')
 
 	select_default_macro_book()
 end
@@ -46,8 +50,10 @@ function user_unload()
 	send_command('unbind ^[')
 	send_command('unbind ^]')
 	send_command('unbind ![')
+	send_command('unbind !o')
 	send_command('unbind ^,')
 	send_command('unbind !.')
+	send_command('unbind @c')
 end
 
 -- Define sets and vars used by this job file.
@@ -220,7 +226,7 @@ function init_gear_sets()
 		body="Telchine Chas.",
 		hands="Telchine Gloves",
 		legs="Telchine Braconi",
-		feet="Telchine Pigaches",
+		feet="Ebers Duckbills +1",
 		neck="Incanter's Torque",
 		ear2="Andoaa Earring",
 		ring1="Stikini Ring",
@@ -228,6 +234,16 @@ function init_gear_sets()
 		back="Fi Follet Cape +1",
 		waist="Olympus Sash",
 		}
+
+	sets.midcast.EnhancingDuration = set_combine(sets.midcast['Enhancing Magic'], {
+		main="Gada",
+		sub="Genmei Shield",
+		head="Telchine Cap",
+		body="Telchine Chas.",
+		hands="Telchine Gloves",
+		legs="Telchine Braconi",
+		feet="Telchine Pigaches",
+		})
 
 	sets.midcast.Regen = set_combine(sets.midcast['Enhancing Magic'], {
 		main="Bolelabunga",
@@ -253,7 +269,7 @@ function init_gear_sets()
 		})
 
 	sets.midcast.Auspice = set_combine(sets.midcast['Enhancing Magic'], {
-		feet="Ebers Duckbills +1"
+		feet="Ebers Duckbills +1",
 		})
 
 	sets.midcast.BarElement = set_combine(sets.midcast['Enhancing Magic'], {
@@ -261,43 +277,36 @@ function init_gear_sets()
 		body="Ebers Bliaud +1",
 		hands="Ebers Mitts +1",
 		legs="Piety Pantaln. +1",
-		feet="Ebers Duckbills +1"
+		feet="Ebers Duckbills +1",
 		})
 
 	sets.midcast.BoostStat = set_combine(sets.midcast['Enhancing Magic'], {
 		feet="Ebers Duckbills +1"
 		})
 
-	sets.midcast.Protectra = set_combine(sets.midcast['Enhancing Magic'], {
+	sets.midcast.Protect = set_combine(sets.midcast.EnhancingDuration, {
 		ring1="Sheltered Ring",
 		})
 
+	sets.midcast.Protectra = sets.midcast.Protectra
+	sets.midcast.Shell = sets.midcast.Protectra
 	sets.midcast.Shellra = sets.midcast.Protectra
-
-	sets.midcast.EnhancingDuration = {
-		main="Gada",
-		sub="Genmei Shield",
-		head="Telchine Cap",
-		body="Telchine Chas.",
-		hands="Telchine Gloves",
-		legs="Telchine Braconi",
-		feet="Telchine Pigaches",
-		}
 
 	sets.midcast['Divine Magic'] = {
 		main="Grioavolr",
 		sub="Clerisy Strap +1",
 		ammo="Pemphredo Tathlum",
+		head="Befouled Crown",
 		body="Vanya Robe",
 		hands="Fanatic Gloves",
 		legs="Kaykaus Tights",
-		feet="Medium's Sabots",
+		feet="Chironic Slippers",
 		neck="Incanter's Torque",
 		ear1="Hermetic Earring",
 		ear2="Digni. Earring",
 		ring1="Stikini Ring",
 		ring2="Stikini Ring",
-		back="Mending Cape",
+		back="Alaunus's Cape",
 		waist=gear.ElementalObi,
 		}
 
@@ -305,17 +314,17 @@ function init_gear_sets()
 		main="Grioavolr",
 		sub="Clerisy Strap +1",
 		ammo="Pemphredo Tathlum",
-		head="Telchine Cap",
+		head="Befouled Crown",
 		body="Shango Robe",
 		hands="Inyan. Dastanas +1",
-		legs="Inyanga Shalwar +1",
+		legs="Chironic Hose",
 		feet="Medium's Sabots",
 		neck="Incanter's Torque",
 		ear1="Hermetic Earring",
 		ear2="Digni. Earring",
 		ring1="Evanescence Ring",
 		ring2="Stikini Ring",
-		back="Aurist's Cape +1",
+		back="Alaunus's Cape",
 		waist=gear.ElementalObi,
 		}
 
@@ -327,7 +336,7 @@ function init_gear_sets()
 		head="Befouled Crown",
 		body="Vanya Robe",
 		hands="Inyan. Dastanas +1",
-		legs="Inyanga Shalwar +1",
+		legs="Chironic Hose",
 		feet="Medium's Sabots",
 		neck="Imbodla Necklace",
 		ear1="Hermetic Earring",
@@ -345,7 +354,7 @@ function init_gear_sets()
 		head="Befouled Crown",
 		body="Vanya Robe",
 		hands="Inyan. Dastanas +1",
-		legs="Inyanga Shalwar +1",
+		legs="Chironic Hose",
 		feet="Medium's Sabots",
 		neck="Imbodla Necklace",
 		ear1="Hermetic Earring",
@@ -393,30 +402,17 @@ function init_gear_sets()
 		waist="Austerity Belt +1",
 		}
 
-	sets.idle.PDT = set_combine(sets.idle, {
+	sets.idle.DT = set_combine(sets.idle, {
 		main="Bolelabunga",
-		sub="Genmei Shield",
-		head="Gende. Caubeen +1",
-		body="Vanya Robe",
-		hands="Gende. Gages +1",
-		legs="Artsieq Hose",
-		feet="Ebers Duckbills +1",
-		ear1="Genmei Earring",
-		neck="Loricate Torque +1",
-		ring1="Gelatinous Ring +1",
-		ring2="Defending Ring",
-		back="Umbra Cape",
-		})
-
-	sets.idle.MDT = set_combine(sets.idle, {
-		ammo="Vanir Battery",
-		hands="Inyan. Dastanas +1",
-		feet="Ebers Duckbills +1",
-		ear1="Odnowa Earring +1",
-		ear2="Etiolation Earring",
-		ring1="Fortified Ring",
-		ring2="Defending Ring",
-		back="Solemnity Cape",
+		sub="Genmei Shield", --10/0
+		ammo="Staunch Tathlum", --2/2
+		head="Gende. Caubeen +1", --4/4
+		hands="Gende. Gages +1", --4/3
+		neck="Loricate Torque +1", --6/6
+		ear1="Genmei Earring", --2/0
+		ring1="Gelatinous Ring +1", --7/(-1)
+		ring2="Defending Ring", --10/10
+		back="Solemnity Cape", --4
 		})
 
 	sets.idle.Town = set_combine(sets.idle, {
@@ -432,40 +428,24 @@ function init_gear_sets()
 		back="Alaunus's Cape",
 		})
 	
-	sets.idle.Weak = sets.idle
+	sets.idle.Weak = sets.idle.DT
 	
 	-- Defense sets
 
 	sets.defense.PDT = {
 		main="Bolelabunga",
-		sub="Genmei Shield", --10
-		head="Gende. Caubeen +1", --4
-		body="Vanya Robe", --1
-		hands="Gende. Gages +1", --4
-		legs="Artsieq Hose", --5
-		feet="Ebers Duckbills +1",
-		neck="Loricate Torque +1", --6
-		ear1="Genmei Earring", --2
-		ring1="Gelatinous Ring +1", --7
-		ring2="Defending Ring", --10
-		back="Umbra Cape", --6
+		sub="Genmei Shield", --10/0
+		ammo="Staunch Tathlum", --2/2
+		head="Gende. Caubeen +1", --4/4
+		hands="Gende. Gages +1", --4/3
+		neck="Loricate Torque +1", --6/6
+		ear1="Genmei Earring", --2/0
+		ring1="Gelatinous Ring +1", --7/(-1)
+		ring2="Defending Ring", --10/10
+		back="Solemnity Cape", --4
 		}
 
-	sets.defense.MDT = {
-		ammo="Vanir Battery",
---		head="Inyanga Tiara +1", --4
---		body="Inyanga Jubbah +1", --7
-		hands="Inyan. Dastanas +1", --3
---		legs="Inyanga Shalwar +1", --5
-		feet="Ebers Duckbills +1",
---		neck="Loricate Torque +1", --6
-		ear1="Odnowa Earring +1", --2
-		ear2="Etiolation Earring", --2
-		ring1="Fortified Ring", --5
-		ring2="Defending Ring", --10
-		back="Solemnity Cape", --4
---		waist="Lieutenant's Sash", --2
-		}
+	sets.defense.MDT = sets.defense.PDT
 
 	sets.Kiting = {
 		feet="Herald's Gaiters"
@@ -497,13 +477,8 @@ function init_gear_sets()
 
 
 	-- Buff sets: Gear that needs to be worn to actively enhance a current player buff.
-	sets.buff['Divine Caress'] = {
-		back="Mending Cape",
-		}
-
-	sets.buff['Devotion'] = {
-		head="Piety Cap +1",
-		}
+	sets.buff['Divine Caress'] = {back="Mending Cape"}
+	sets.buff['Devotion'] = {head="Piety Cap +1"}
 
 end
 
@@ -518,12 +493,6 @@ function job_precast(spell, action, spellMap, eventArgs)
 		-- no gear swaps if we're paralyzed, to avoid blinking while trying to remove it.
 		eventArgs.handled = true
 	end
-	
---	if spell.skill == 'Healing Magic' then
---		gear.default.obi_back = "Mending Cape"
---	else
---		gear.default.obi_back = "Toro Cape"
---	end
 end
 
 
@@ -585,6 +554,13 @@ function customize_idle_set(idleSet)
 	if player.mpp < 51 then
 		idleSet = set_combine(idleSet, sets.latent_refresh)
 	end
+	if state.CP.current == 'on' then
+		equip(sets.CP)
+		disable('back')
+	else
+		enable('back')
+	end
+	
 	return idleSet
 end
 
