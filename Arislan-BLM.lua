@@ -603,12 +603,6 @@ function job_post_midcast(spell, action, spellMap, eventArgs)
 			equip(sets.Obi)
 		end
 	end
-	if spell.skill == 'Elemental Magic' and state.MagicBurst.value then
-		equip(sets.magic_burst)
-		if spell.english == "Impact" then
-			equip(sets.midcast.Impact)
-		end
-	end
 	if spell.skill == 'Enhancing Magic' and classes.NoSkillSpells:contains(spell.english) then
 		equip(sets.midcast.EnhancingDuration)
 	end
