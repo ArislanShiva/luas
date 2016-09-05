@@ -310,6 +310,21 @@ function init_gear_sets()
 		waist=gear.ElementalObi,
 		}
 
+	sets.midcast.Banish = set_combine(sets.midcast['Divine Magic'], {
+		main="Grioavolr",
+		sub="Niobid Strap",
+		head="Inyanga Tiara +1",
+		body="Witching Robe",
+		legs="Chironic Hose",
+		neck="Sanctity Necklace",
+		ear1="Hecate's Earring",
+		ear2="Friomisi Earring",
+		ring2="Weather. Ring",
+		waist="Refoccilation Stone",
+		}}
+
+	sets.midcast.Holy = sets.midcast.Banish
+
 	sets.midcast['Dark Magic'] = {
 		main="Grioavolr",
 		sub="Clerisy Strap +1",
@@ -373,6 +388,10 @@ function init_gear_sets()
 		legs="Gyve Trousers",
 		ring2="Archon Ring",
 		}
+
+	-- Initializes trusts at iLvl 119
+	sets.midcast.Trust = sets.precast.FC
+
 	
 	-- Sets to return to when not performing an action.
 	
@@ -382,7 +401,6 @@ function init_gear_sets()
 		waist="Austerity Belt +1",
 		}
 	
-
 	-- Idle sets (default idle set not needed since the other three are defined, but leaving for testing purposes)
 	sets.idle = {
 		main="Bolelabunga",
@@ -475,10 +493,11 @@ function init_gear_sets()
 		back="Aurist's Cape +1",
 		}
 
-
 	-- Buff sets: Gear that needs to be worn to actively enhance a current player buff.
 	sets.buff['Divine Caress'] = {back="Mending Cape"}
 	sets.buff['Devotion'] = {head="Piety Cap +1"}
+
+	sets.Obi = {waist="Hachirin-no-Obi"}
 
 end
 
@@ -501,12 +520,15 @@ function job_post_midcast(spell, action, spellMap, eventArgs)
 	if spellMap == 'StatusRemoval' and buffactive['Divine Caress'] then
 		equip(sets.buff['Divine Caress'])
 	elseif default_spell_map == 'Cure' or default_spell_map == 'Curaga' then
-		if default_spell_map == 'Cure' or default_spell_map == 'Curaga' then
-			if world.weather_element == 'Light' then
-				return 'CureWeather'
-			end
+		if (world.weather_element == 'Light' or world.day_element == 'Light') then
+			return 'CureWeather'
 		end
     end
+	if spellMap == 'Banish' or spellMap == "Holy" then
+		if (world.weather_element == 'Light' or world.day_element == 'Light') then
+			equip(sets.Obi)
+		end
+	end
 	if spell.skill == 'Enhancing Magic' and classes.NoSkillSpells:contains(spell.english) then
 		equip(sets.midcast.EnhancingDuration)
 	end

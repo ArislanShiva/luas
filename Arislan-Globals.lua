@@ -9,7 +9,7 @@ function define_global_sets()
 	-- Herculean Triple Attack Set
 
 	gear.Herc_TA_body = {name="Herculean Vest", augments={'Accuracy+21 Attack+21','"Triple Atk."+3','STR+6','Accuracy+8',}}
-	gear.Herc_TA_hands = {name="Herculean Gloves", augments={'Accuracy+17 Attack+17','"Triple Atk."+2','AGI+10','Accuracy+12','Attack+13',}}
+	gear.Herc_TA_hands = {name="Herculean Gloves", augments={'Accuracy+20 Attack+20','"Triple Atk."+3','DEX+8','Accuracy+1',}}
 	gear.Herc_TA_legs = {name="Herculean Trousers", augments={'Accuracy+15 Attack+15','"Triple Atk."+2','STR+10','Accuracy+12','Attack+4',}}
 	gear.Herc_TA_feet = {name="Herculean Boots", augments={'Accuracy+20 Attack+20','"Triple Atk."+4','STR+7','Accuracy+8',}}
 

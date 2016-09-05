@@ -309,7 +309,7 @@ function init_gear_sets()
 		ring1="Evanescence Ring",
 		ring2="Stikini Ring",
 		back="Nantosuelta's Cape",
-		waist=gear.ElementalObi,
+		waist="Yamabuki-no-Obi",
 		}
 	
 	sets.midcast.Drain = set_combine(sets.midcast['Dark Magic'], {
@@ -342,7 +342,7 @@ function init_gear_sets()
 		ring1="Shiva Ring +1",
 		ring2="Shiva Ring +1",
 		back="Toro Cape",
-		waist=gear.ElementalObi,
+		waist="Refoccilation Stone",
 		}
 
 	sets.midcast['Elemental Magic'].Resistant = set_combine(sets.midcast['Elemental Magic'], {
@@ -383,6 +383,9 @@ function init_gear_sets()
 		body="Twilight Cloak",
 		ring2="Archon Ring",
 		})
+
+	-- Initializes trusts at iLvl 119
+	sets.midcast.Trust = sets.precast.FC
 
 	------------------------------------------------------------------------------------------------
 	------------------------------------------ Idle Sets -------------------------------------------
@@ -531,6 +534,8 @@ function init_gear_sets()
 		back="Seshaw Cape", --5
 		}
 
+	sets.Obi = {waist="Hachirin-no-Obi"}
+
 end
 
 -------------------------------------------------------------------------------------------------------------------
@@ -538,10 +543,15 @@ end
 -------------------------------------------------------------------------------------------------------------------
 
 function job_post_midcast(spell, action, spellMap, eventArgs)
-	if spell.skill == 'Elemental Magic' and state.MagicBurst.value then
-		equip(sets.magic_burst)
-		if spell.english == "Impact" then
-			equip(sets.midcast.Impact)
+	if spell.skill == 'Elemental Magic' then 
+		if state.MagicBurst.value then
+			equip(sets.magic_burst)
+			if spell.english == "Impact" then
+				equip(sets.midcast.Impact)
+			end
+		end
+		if (spell.element == world.day_element or spell.element == world.weather_element) then
+			equip(sets.Obi)
 		end
 	end
 	if spell.skill == 'Enhancing Magic' and classes.NoSkillSpells:contains(spell.english) then

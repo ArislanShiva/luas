@@ -208,7 +208,7 @@ function init_gear_sets()
 		ring1="Weather. Ring",
 		ring2="Arvina Ringlet +1",
 		back="Argocham. Mantle",
-		waist="Ponente Sash",
+		waist="Eschan Stone",
 		}
 
 	sets.precast.WS["Wildfire"] = sets.precast.WS["Trueflight"]
@@ -533,6 +533,7 @@ function init_gear_sets()
 	sets.buff['Double Shot'] = set_combine(sets.midcast.RA, {back="Belenus's Cape"})
 --	sets.buff.Camouflage = {body="Orion Jerkin +1"}
 
+	sets.Obi = {waist="Hachirin-no-Obi"}
 	sets.CP = {back="Mecisto. Mantle"}
 
 end
@@ -566,6 +567,18 @@ function job_precast(spell, action, spellMap, eventArgs)
 	if state.DefenseMode.value ~= 'None' and spell.type == 'WeaponSkill' then
 		-- Don't gearswap for weaponskills when Defense is active.
 		eventArgs.handled = true
+	end
+
+end
+
+function job_post_precast(spell, action, spellMap, eventArgs)
+	-- Equip obi if weather/day matches for WS.
+    if spell.type == 'WeaponSkill' then
+		if spell.english == 'Trueflight' and (world.weather_element == 'Light' or world.day_element == 'Light') then
+			equip(sets.Obi)
+		elseif spell.english == 'Wildfire' and (world.weather_element == 'Fire' or world.day_element == 'Fire') then
+			equip(sets.Obi)
+		end
 	end
 end
 

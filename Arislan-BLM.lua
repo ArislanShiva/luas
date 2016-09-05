@@ -26,14 +26,12 @@ function user_setup()
 	state.CastingMode:options('Normal', 'Spaekona', 'Resistant', 'DeathMode')
 	state.IdleMode:options('Normal', 'DeathMode', 'DT')
 	state.MagicBurst = M(false, 'Magic Burst')
---	state.DeathMode = M(false, "Death Mode")
 
 	lowTierNukes = S{'Stone', 'Water', 'Aero', 'Fire', 'Blizzard', 'Thunder'}
 	
 	-- Additional local binds
 	send_command('bind ^` input /ma Stun <t>')
 	send_command('bind !` gs c toggle MagicBurst')
---	send_command('bind @` gs c toggle DeathMode')
 	send_command('bind !q input /item "Echo Drops" <me>')
 	send_command('bind !w input /ma "Aspir III" <t>')
 	send_command('bind !p input /ma "Shock Spikes" <me>')
@@ -154,7 +152,7 @@ function init_gear_sets()
 		ring1="Mephitas's Ring +1",
 		ring2="Archon Ring",
 		back=gear.BLM_Death_Cape, --5
-		waist=gear.ElementalObi,
+		waist="Yamabuki-no-Obi",
 		}
 
 	-- Weaponskill sets
@@ -349,7 +347,7 @@ function init_gear_sets()
 		ring1="Evanescence Ring",
 		ring2="Stikini Ring",
 		back=gear.BLM_MAB_Cape,
-		waist=gear.ElementalObi,
+		waist="Yamabuki-no-Obi",
 		}
 
 	sets.midcast.Drain = set_combine(sets.midcast['Dark Magic'], {
@@ -388,7 +386,7 @@ function init_gear_sets()
 		ring1="Shiva Ring +1",
 		ring2="Shiva Ring +1",
 		back=gear.BLM_MAB_Cape,
-		waist=gear.ElementalObi,
+		waist="Refoccilation Stone",
 		}
 
 	sets.midcast['Elemental Magic'].Resistant = set_combine(sets.midcast['Elemental Magic'], {
@@ -425,6 +423,10 @@ function init_gear_sets()
 		sub="Clerisy Strap +1",
 		}
 
+	-- Initializes trusts at iLvl 119
+	sets.midcast.Trust = sets.precast.FC
+
+	
 	-- Sets to return to when not performing an action.
 	
 	sets.resting = {
@@ -562,6 +564,8 @@ function init_gear_sets()
 		back="Relucent Cape",
 		}
 
+	sets.Obi = {waist="Hachirin-no-Obi"}
+
 end
 
 -------------------------------------------------------------------------------------------------------------------
@@ -578,9 +582,7 @@ function job_precast(spell, action, spellMap, eventArgs)
 		if state.CastingMode.value == 'Proc' then
 			classes.CustomClass = 'Proc'
 		end
---	elseif state.CastingMode.value == 'DeathMode' then
---		classes.CustomClass = 'DeathMode'
-		end
+	end
 end
 
 
@@ -590,10 +592,22 @@ function job_midcast(spell, action, spellMap, eventArgs)
 end
 
 function job_post_midcast(spell, action, spellMap, eventArgs)
+	if spell.skill == 'Elemental Magic' then
+		if state.MagicBurst.value then
+			equip(sets.magic_burst)
+			if spell.english == "Impact" then
+				equip(sets.midcast.Impact)
+			end
+		end
+		if (spell.element == world.day_element or spell.element == world.weather_element) then
+			equip(sets.Obi)
+		end
+	end
 	if spell.skill == 'Elemental Magic' and state.MagicBurst.value then
 		equip(sets.magic_burst)
---	elseif state.CastingMode.value == 'DeathMode' then
---		equip(sets.precast.Death)
+		if spell.english == "Impact" then
+			equip(sets.midcast.Impact)
+		end
 	end
 	if spell.skill == 'Enhancing Magic' and classes.NoSkillSpells:contains(spell.english) then
 		equip(sets.midcast.EnhancingDuration)
@@ -602,10 +616,6 @@ end
 
 function job_aftercast(spell, action, spellMap, eventArgs)
 	if not spell.interrupted then
---		if spell.english == 'Death' then
---			state.DeathMode:reset()
---			enable('ammo','head','neck','ear1','ear2','body','hands','ring1','ring2','back','waist','legs','feet')
---		end
 		-- Lock feet after using Mana Wall.
 		if spell.english == 'Mana Wall' then
 			enable('feet','back')
@@ -661,12 +671,6 @@ end
 
 -- Modify the default idle set after it was constructed.
 function customize_idle_set(idleSet)
---	if state.DeathMode.current == 'on' then
---		equip(sets.precast.Death)
---		disable('ammo','head','neck','ear1','ear2','body','hands','ring1','ring2','back','waist','legs','feet')
---	else
---		enable('ammo','head','neck','ear1','ear2','body','hands','ring1','ring2','back','waist','legs','feet')
---		end
 	if player.mpp < 51 then
 		idleSet = set_combine(idleSet, sets.latent_refresh)
 		end

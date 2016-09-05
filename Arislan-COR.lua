@@ -596,6 +596,8 @@ function init_gear_sets()
 		neck="Asperity Necklace",
 		})
 
+	sets.Obi = {waist="Hachirin-no-Obi"}
+
 end
 
 
@@ -624,6 +626,18 @@ function job_precast(spell, action, spellMap, eventArgs)
 	end
 end
 
+function job_post_precast(spell, action, spellMap, eventArgs)
+	-- Equip obi if weather/day matches for WS/Quick Draw.
+	if spell.type == 'WeaponSkill' or spell.type == 'CorsairShot' then
+		if spell.english == 'Leaden Salute' and (world.weather_element == 'Dark' or world.day_element == 'Dark') then
+			equip(sets.Obi)
+		elseif spell.english == 'Wildfire' and (world.weather_element == 'Fire' or world.day_element == 'Fire') then
+			equip(sets.Obi)
+		elseif spell.type == 'CorsairShot' and (spell.element == world.weather_element or spell.element == world.day_element) then
+			equip(sets.Obi)
+		end
+	end
+end
 
 -- Set eventArgs.handled to true if we don't want any automatic gear equipping to be done.
 function job_aftercast(spell, action, spellMap, eventArgs)

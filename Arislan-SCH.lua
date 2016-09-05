@@ -56,7 +56,7 @@ function user_setup()
 	state.MPCoat = M(false, 'MP Coat')
 
     gear.default.weaponskill_waist = "Windbuffet Belt +1"	
-	gear.default.obi_waist = "Yamabuki-no-Obi"
+	gear.default.obi_waist = "Refoccilation Stone"
 	gear.default.obi_back = "Lugh's Cape"
 	gear.MPCoat = "Seidr Cotehardie"
 
@@ -375,7 +375,7 @@ function init_gear_sets()
 		ring1="Stikini Ring",
 		ring2="Stikini Ring",
 		back=gear.SCH_MAB_Cape,
-		waist=gear.ElementalObi,
+		waist="Yamabuki-no-Obi",
 		}
 
 	sets.midcast.Kaustra = {
@@ -393,7 +393,7 @@ function init_gear_sets()
 		ring1="Shiva Ring +1",
 		ring2="Shiva Ring +1",
 		back=gear.SCH_MAB_Cape,
-		waist=gear.ElementalObi,
+		waist="Yamabuki-no-Obi",
 		}
 	
 	sets.midcast.Drain = set_combine(sets.midcast['Dark Magic'], {
@@ -419,14 +419,14 @@ function init_gear_sets()
 		body="Merlinic Jubbah",
 		hands="Amalric Gages",
 		legs="Merlinic Shalwar",
-		feet="Merlinic Crackows",
+		feet="Chironic Slippers",
 		neck="Saevus Pendant +1",
 		ear1="Barkaro. Earring",
 		ear2="Friomisi Earring",
 		ring1="Shiva Ring +1",
 		ring2="Shiva Ring +1",
 		back=gear.SCH_MAB_Cape,
-		waist=gear.ElementalObi,
+		waist="Refoccilation Stone",
 		}
 
 	sets.midcast['Elemental Magic'].Seidr = set_combine(sets.midcast['Elemental Magic'], {
@@ -452,12 +452,12 @@ function init_gear_sets()
 		ring1="Archon Ring",
 		})
 	
-	sets.midcast.Helix = set_combine(sets.midcast['Elemental Magic'], {
+	sets.midcast.Helix = {
 		main="Akademos",
 		sub="Niobid Strap",
 		ammo="Ghastly Tathlum +1",
 		waist="Yamabuki-no-Obi",
-		})
+		}
 
 	sets.midcast.DarkHelix = set_combine(sets.midcast.Helix, {
 		head="Pixie Hairpin +1",
@@ -467,6 +467,9 @@ function init_gear_sets()
 	sets.midcast.LightHelix = set_combine(sets.midcast.Helix, {
 		ring2="Weather. Ring"
 		})
+
+	-- Initializes trusts at iLvl 119
+	sets.midcast.Trust = sets.precast.FC
 	
 	------------------------------------------------------------------------------------------------
 	------------------------------------------ Idle Sets -------------------------------------------
@@ -588,13 +591,22 @@ function init_gear_sets()
 	sets.buff['Parsimony'] = {legs="Arbatel Pants +1"}
 	sets.buff['Celerity'] = {feet="Peda. Loafers +1"}
 	sets.buff['Alacrity'] = {feet="Peda. Loafers +1"}
-	sets.buff['Klimaform'] = {feet="Arbatel Loafers +1"}
+	
+	sets.buff['Klimaform'] = {
+		main="Akademos",
+		sub="Niobid Strap",
+		feet="Arbatel Loafers +1",
+		waist="Hachirin-no-Obi",
+		}
 	
 	sets.buff.FullSublimation = {
 		head="Acad. Mortar. +1",
 		ear1="Savant's Earring",
 		body="Peda. Gown +1",
 		}
+	
+	sets.Obi = {waist="Hachirin-no-Obi"}
+
 end
 
 -------------------------------------------------------------------------------------------------------------------
@@ -603,6 +615,20 @@ end
 
 -- Run after the general midcast() is done.
 function job_post_midcast(spell, action, spellMap, eventArgs)
+	if spell.skill == 'Elemental Magic' then
+		if spellMap == "Helix" then
+			equip(sets.midcast['Elemental Magic'])
+			equip(sets.midcast.Helix)
+			if spell.english:startswith('Lumino') then
+				equip(sets.midcast.LightHelix)
+			elseif spell.english:startswith('Nocto') then
+				equip(sets.midcast.DarkHelix)
+			end
+		end
+		if (spell.element == world.day_element or spell.element == world.weather_element) then
+			equip(sets.Obi)
+		end
+	end
 	if spell.action_type == 'Magic' then
 		apply_grimoire_bonuses(spell, action, spellMap, eventArgs)
 	end
@@ -669,14 +695,6 @@ function job_get_spell_map(spell, default_spell_map)
 			else
 				return 'IntEnfeebles'
 			end
---[[		elseif spell.skill == 'Elemental Magic' then
-			if info.low_nukes:contains(spell.english) then
-				return 'LowTierNuke'
-			elseif info.mid_nukes:contains(spell.english) then
-				return 'MidTierNuke'
-			elseif info.high_nukes:contains(spell.english) then
-				return 'HighTierNuke'
-			end --]]
 		end
 	end
 end
@@ -762,7 +780,7 @@ function apply_grimoire_bonuses(spell, action, spellMap)
 		if state.Buff.Immanence then
 			equip(sets.buff['Immanence'])
 		end
-		if state.Buff.Klimaform and spell.element == world.weather_element then
+		if state.Buff.Klimaform and (spell.element == world.weather_element or spell.element == world.day_element) then
 			equip(sets.buff['Klimaform'])
 		end
 	end
