@@ -134,12 +134,12 @@ function init_gear_sets()
 	sets.precast.WS = {
 		head="Telchine Cap",
 		body="Onca Suit",
-		neck=gear.ElementalGorget,
+		neck="Fotia Gorget",
 		ear1="Moonshade Earring",
 		ear2="Ishvara Earring",
 		ring1="Rufescent Ring",
 		ring2="Ramuh Ring +1",
-		waist=gear.ElementalBelt,
+		waist="Fotia Belt",
 		}	
 
 	-- Midcast Sets
@@ -181,7 +181,7 @@ function init_gear_sets()
 
 	sets.midcast.CureWeather = set_combine(sets.midcast.Cure, {
 		main="Chatoyant Staff",
-		waist=gear.ElementalObi,
+		waist="Hachirin-no-Obi",
 		})
 
 	sets.midcast.Curaga = set_combine(sets.midcast.Cure, {
@@ -307,7 +307,7 @@ function init_gear_sets()
 		ring1="Stikini Ring",
 		ring2="Stikini Ring",
 		back="Alaunus's Cape",
-		waist=gear.ElementalObi,
+		waist="Refoccilation Stone",
 		}
 
 	sets.midcast.Banish = set_combine(sets.midcast['Divine Magic'], {
@@ -321,7 +321,7 @@ function init_gear_sets()
 		ear2="Friomisi Earring",
 		ring2="Weather. Ring",
 		waist="Refoccilation Stone",
-		}}
+		})
 
 	sets.midcast.Holy = sets.midcast.Banish
 
@@ -340,7 +340,7 @@ function init_gear_sets()
 		ring1="Evanescence Ring",
 		ring2="Stikini Ring",
 		back="Alaunus's Cape",
-		waist=gear.ElementalObi,
+		waist="Yamabuki-no-Obi",
 		}
 
 	-- Custom spell classes
@@ -416,7 +416,7 @@ function init_gear_sets()
 		ear2="Infused Earring",
 		ring1="Paguroidea Ring",
 		ring2="Sheltered Ring",
-		back="Umbra Cape",
+		back="Solemnity Cape",
 		waist="Austerity Belt +1",
 		}
 
@@ -498,6 +498,7 @@ function init_gear_sets()
 	sets.buff['Devotion'] = {head="Piety Cap +1"}
 
 	sets.Obi = {waist="Hachirin-no-Obi"}
+	sets.CP = {back="Mecisto. Mantle"}
 
 end
 

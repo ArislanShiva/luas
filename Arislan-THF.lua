@@ -56,13 +56,18 @@ function user_setup()
 	state.CP = M(false, "Capacity Points Mode")
 
 	gear.default.weaponskill_neck = "Asperity Necklace"
-	gear.default.weaponskill_waist = gear.ElementalBelt
+	gear.default.weaponskill_waist = "Fotia Belt"
 
 	-- Additional local binds
 	send_command('bind ^` gs c cycle treasuremode')
 	send_command('bind !` input /ja "Flee" <me>')
-	send_command('bind ^, input /ja "Spectral Jig" <me>')
-	send_command('unbind ^.')
+	if player.sub_job == 'DNC' then
+		send_command('bind ^, input /ja "Spectral Jig" <me>')
+		send_command('unbind ^.')
+	else
+		send_command('bind ^, input /item "Silent Oil" <me>')
+		send_command('bind ^. input /item "Prism Powder" <me>')
+	end
 	send_command('bind @c gs c toggle CP')
 
 	select_default_macro_book()
@@ -215,13 +220,13 @@ function init_gear_sets()
 		hands="Meg. Gloves +1",
 		legs="Lustratio Subligar",
 		feet="Lustratio Leggings",
-		neck=gear.ElementalGorget,
+		neck="Fotia Gorget",
 		ear1="Moonshade Earring",
 		ear2="Ishvara Earring",
 		ring1="Ramuh Ring +1",
 		ring2="Ramuh Ring +1",
 		back="Toutatis's Cape",
-		waist=gear.ElementalBelt,
+		waist="Fotia Belt",
 		} -- default set
 
 	sets.precast.WS.Acc = set_combine(sets.precast.WS, {
@@ -338,11 +343,11 @@ function init_gear_sets()
 		}
 
 	sets.idle.DT = set_combine (sets.idle, {
+		ammo="Staunch Tathlum", --2/2
 		head="Dampening Tam", --0/4
 		body="Meg. Cuirie +1", --7/0
 		hands="Meg. Gloves +1", --3/0
 		legs="Meg. Chausses +1", --5/0
-		feet="Meg. Jam. +1", --2/0
 		neck="Loricate Torque +1", --6/6
 		ear1="Genmei Earring", --2/0
 		ear2="Odnowa Earring +1", --0/2
@@ -376,7 +381,7 @@ function init_gear_sets()
 		feet="Meg. Jam. +1", --2/0
 		neck="Loricate Torque +1", --6/6
 		ear1="Genmei Earring", --2/0
-		ear2="Odnowa Earring +1", --0/2
+		ear2="Etiolation Earring", --0/3
 		ring1="Gelatinous Ring +1", --7/(-1)
 		ring2="Defending Ring", --10/10
 		back="Solemnity Cape", --4/4
@@ -522,6 +527,7 @@ function init_gear_sets()
 	
 	-- Custom buff sets
 
+	sets.Reive = {neck="Ygnas's Resolve +1"}
 	sets.CP = {back="Mecisto. Mantle"}
 
 end
@@ -547,6 +553,7 @@ function job_post_midcast(spell, action, spellMap, eventArgs)
 	if state.TreasureMode.value ~= 'None' and spell.action_type == 'Ranged Attack' then
 		equip(sets.TreasureHunter)
 	end
+
 end
 
 -- Set eventArgs.handled to true if we don't want any automatic gear equipping to be done.
@@ -575,9 +582,17 @@ end
 -- gain == true if the buff was gained, false if it was lost.
 function job_buff_change(buff,gain)
 	-- If we gain or lose any haste buffs, adjust which gear set we target.
-	if S{'haste','march','embrava','haste samba'}:contains(buff:lower()) then
+	if S{'haste', 'march', 'mighty guard', 'embrava', 'haste samba', 'geo-haste', 'indi-haste'}:contains(buff:lower()) then
 		determine_haste_group()
-		handle_equipping_gear(player.status)
+		if not midaction() then
+			handle_equipping_gear(player.status)
+		end
+	end
+	if buffactive['Reive Mark'] then
+		equip(sets.Reive)
+		disable('neck')
+	else
+		enable('neck')
 	end
 end
 
@@ -676,7 +691,7 @@ function display_current_job_state(eventArgs)
 	
 	msg = msg .. ' ]'
 
-	add_to_chat(061, msg)
+	add_to_chat(060, msg)
 
 	eventArgs.handled = true
 end
@@ -687,18 +702,59 @@ end
 
 function determine_haste_group()
 
+	-- Gearswap can't detect the difference between Haste I and Haste II
+	-- so use winkey-H to manually set Haste spell level.
+
+	-- Haste (buffactive[33]) - 15%
+	-- Haste II (buffactive[33]) - 30%
+	-- Haste Samba - 5%/10%
+	-- Victory March +0/+3/+4/+5	9.4%/14%/15.6%/17.1%
+	-- Advancing March +0/+3/+4/+5  6.3%/10.9%/12.5%/14% 
+	-- Embrava - 30%
+	-- Mighty Guard (buffactive[604]) - 15%
+	-- Geo-Haste (buffactive[580]) - 40%
+
 	classes.CustomMeleeGroups:clear()
-	
-	if buffactive.embrava and (buffactive.haste or buffactive.march) then
-		classes.CustomMeleeGroups:append('MaxHaste')
-	elseif buffactive.march == 2 and buffactive.haste then
-		classes.CustomMeleeGroups:append('MaxHaste')
-	elseif buffactive.embrava and (buffactive.haste or buffactive.march) then
-		classes.CustomMeleeGroups:append('HighHaste')
-	elseif buffactive.march == 1 and buffactive.haste then
-		classes.CustomMeleeGroups:append('HighHaste')
-	elseif buffactive.march == 2 and buffactive.haste then
-		classes.CustomMeleeGroups:append('HighHaste')
+
+	if state.HasteMode.value == 'Haste II' then
+		if(((buffactive[33] or buffactive[580] or buffactive.embrava) and (buffactive.march or buffactive[604])) or
+			(buffactive[33] and (buffactive[580] or buffactive.embrava)) or
+			(buffactive.march == 2 and buffactive[604])) then
+			--add_to_chat(215, '---------- <<<< | Magic Haste Level: 43% | >>>> ----------')
+			classes.CustomMeleeGroups:append('MaxHaste')
+		elseif ((buffactive[33] or buffactive.march == 2 or buffactive[580]) and buffactive['haste samba']) then
+			--add_to_chat(004, '---------- <<<< | Magic Haste Level: 35% | >>>> ----------')
+			classes.CustomMeleeGroups:append('HighHaste')
+		elseif ((buffactive[580] or buffactive[33] or buffactive.march == 2) or
+			(buffactive.march == 1 and buffactive[604])) then
+			--add_to_chat(008, '---------- <<<< | Magic Haste Level: 30% | >>>> ----------')
+			classes.CustomMeleeGroups:append('MidHaste')
+		elseif (buffactive.march == 1 or buffactive[604]) then
+			--add_to_chat(007, '---------- <<<< | Magic Haste Level: 15% | >>>> ----------')
+			classes.CustomMeleeGroups:append('LowHaste')
+		end
+	else
+		if (buffactive[580] and ( buffactive.march or buffactive[33] or buffactive.embrava or buffactive[604]) ) or
+			(buffactive.embrava and (buffactive.march or buffactive[33] or buffactive[604])) or
+			(buffactive.march == 2 and (buffactive[33] or buffactive[604])) or
+			(buffactive[33] and buffactive[604] and buffactive.march ) then
+			--add_to_chat(215, '---------- <<<< | Magic Haste Level: 43% | >>>> ----------')
+			classes.CustomMeleeGroups:append('MaxHaste')
+		elseif ((buffactive[604] or buffactive[33]) and buffactive['haste samba'] and buffactive.march == 1) or
+			(buffactive.march == 2 and buffactive['haste samba']) or
+			(buffactive[580] and buffactive['haste samba'] ) then
+			--add_to_chat(004, '---------- <<<< | Magic Haste Level: 35% | >>>> ----------')
+			classes.CustomMeleeGroups:append('HighHaste')
+		elseif (buffactive.march == 2 ) or
+			((buffactive[33] or buffactive[604]) and buffactive.march == 1 ) or  -- MG or haste + 1 march
+			(buffactive[580] ) or  -- geo haste
+			(buffactive[33] and buffactive[604]) then
+			--add_to_chat(008, '---------- <<<< | Magic Haste Level: 30% | >>>> ----------')
+			classes.CustomMeleeGroups:append('MidHaste')
+		elseif buffactive[33] or buffactive[604] or buffactive.march == 1 then
+			--add_to_chat(007, '---------- <<<< | Magic Haste Level: 15% | >>>> ----------')
+			classes.CustomMeleeGroups:append('LowHaste')
+		end
 	end
 end
 

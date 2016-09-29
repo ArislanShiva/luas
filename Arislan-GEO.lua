@@ -122,13 +122,13 @@ function init_gear_sets()
 	sets.precast.WS = {
 		head="Telchine Cap",
 		body="Onca Suit",
-		neck=gear.ElementalGorget,
+		neck="Fotia Gorget",
 		ear1="Moonshade Earring",
 		ear2="Ishvara Earring",
 		ring1="Rufescent Ring",
 		ring2="Ramuh Ring +1",
 		back="Toro Cape",
-		waist=gear.ElementalBelt,
+		waist="Fotia Belt",
 		}
 
 	
@@ -405,7 +405,7 @@ function init_gear_sets()
 		ear2="Infused Earring",
 		ring1="Paguroidea Ring",
 		ring2="Sheltered Ring",
-		back="Umbra Cape",
+		back="Solemnity Cape",
 		waist="Austerity Belt +1",
 		}
 	

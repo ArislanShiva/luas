@@ -117,7 +117,6 @@ function init_gear_sets()
 	sets.precast.JA['Enlightenment'] = {body="Peda. Gown +1"}
 
 	-- Fast cast sets for spells
-	
 	sets.precast.FC = {
 	--	/RDM --15
 		main="Sucellus", --5
@@ -168,13 +167,13 @@ function init_gear_sets()
 	sets.precast.WS = {
 		head="Telchine Cap",
 		body="Onca Suit",
-		neck=gear.ElementalGorget,
+		neck="Fotia Gorget",
 		ear1="Moonshade Earring",
 		ear2="Ishvara Earring",
 		ring1="Ramuh Ring +1",
 		ring2="Ramuh Ring +1",
 		back="Lugh's Cape",
-		waist=gear.ElementalBelt,
+		waist="Fotia Belt",
 		}
 
 	sets.precast.WS['Myrkr'] = {
@@ -489,7 +488,7 @@ function init_gear_sets()
 		ear2="Infused Earring",
 		ring1="Paguroidea Ring",
 		ring2="Sheltered Ring",
-		back="Umbra Cape",
+		back="Solemnity Cape",
 		waist="Refoccilation Stone",
 		}
 

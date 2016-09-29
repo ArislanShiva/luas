@@ -24,7 +24,7 @@ end
 function user_setup()
 	state.OffenseMode:options('None', 'Normal')
 	state.CastingMode:options('Normal', 'Spaekona', 'Resistant', 'DeathMode')
-	state.IdleMode:options('Normal', 'DeathMode', 'DT')
+	state.IdleMode:options('Normal', 'DT', 'DeathMode')
 	state.MagicBurst = M(false, 'Magic Burst')
 
 	lowTierNukes = S{'Stone', 'Water', 'Aero', 'Fire', 'Blizzard', 'Thunder'}
@@ -161,13 +161,13 @@ function init_gear_sets()
 	sets.precast.WS = {
 		head="Telchine Cap",
 		body="Onca Suit",
-		neck=gear.ElementalGorget,
+		neck="Fotia Gorget",
 		ear1="Moonshade Earring",
 		ear2="Ishvara Earring",
 		ring1="Ramuh Ring +1",
 		ring2="Ramuh Ring +1",
 		back=gear.BLM_MAB_Cape,
-		waist=gear.ElementalBelt,
+		waist="Fotia Belt",
 		}
 
 	-- Specific weaponskill sets.  Uses the base set if an appropriate WSMod version isn't found.
@@ -307,7 +307,7 @@ function init_gear_sets()
 	sets.midcast.Shellra = sets.midcast.Protect
 
 	sets.midcast.MndEnfeebles = {
-		main="Grioavolr",
+		main=gear.Lathi_ENF,
 		sub="Clerisy Strap +1",
 		ammo="Hydrocera",
 		head="Amalric Coif",
@@ -333,27 +333,28 @@ function init_gear_sets()
 	sets.midcast.ElementalEnfeeble = sets.midcast.IntEnfeebles
 
 	sets.midcast['Dark Magic'] = {
-		main="Grioavolr",
+		main=gear.Lathi_ENF,
 		sub="Clerisy Strap +1",
 		ammo="Pemphredo Tathlum",
 		head="Amalric Coif",
 		body="Shango Robe",
-		hands="Arch. Gloves +1",
+		hands="Jhakri Cuffs +1",
 		legs="Psycloth Lappas",
 		feet="Merlinic Crackows",
 		neck="Incanter's Torque",
 		ear1="Barkaro. Earring",
 		ear2="Digni. Earring",
-		ring1="Evanescence Ring",
+		ring1="Stikini Ring",
 		ring2="Stikini Ring",
 		back=gear.BLM_MAB_Cape,
-		waist="Yamabuki-no-Obi",
+		waist="Luminary Sash",
 		}
 
 	sets.midcast.Drain = set_combine(sets.midcast['Dark Magic'], {
 		head="Pixie Hairpin +1",
 		feet="Merlinic Crackows",
 		ear2="Hirudinea Earring",
+		ring1="Evanescence Ring",
 		ring2="Archon Ring",
 		waist="Fucho-no-obi",
 		})
@@ -372,7 +373,7 @@ function init_gear_sets()
 	-- Elemental Magic sets
 	
 	sets.midcast['Elemental Magic'] = {
-		main="Lathi",
+		main=gear.Lathi_MAB,
 		sub="Niobid Strap",
 		ammo="Pemphredo Tathlum",
 		head="Merlinic Hood",
@@ -408,7 +409,7 @@ function init_gear_sets()
 		})
 
 	sets.midcast.Impact = set_combine(sets.midcast['Elemental Magic'], {
-		main="Lathi",
+		main=gear.Lathi_MAB,
 		sub="Niobid Strap",
 		head=empty,
 		body="Twilight Cloak",
@@ -450,7 +451,7 @@ function init_gear_sets()
 		ear2="Infused Earring",
 		ring1="Paguroidea Ring",
 		ring2="Sheltered Ring",
-		back="Umbra Cape",
+		back="Solemnity Cape",
 		waist="Refoccilation Stone",
 		}
 
@@ -486,7 +487,7 @@ function init_gear_sets()
 		}
 
 	sets.idle.Town = set_combine(sets.idle, {
-		main="Lathi",
+		main=gear.Lathi_MAB,
 		sub="Clerisy Strap +1",
 		head="Merlinic Hood",
 		body="Merlinic Jubbah",

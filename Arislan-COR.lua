@@ -6,25 +6,25 @@
 
 	Custom commands:
 	
-	gs c shot
+	gs c qd
 		Uses the currently configured shot on the target, with either <t> or <stnpc> depending on setting.
 
-	gs c shot t
+	gs c qd t
 		Uses the currently configured shot on the target, but forces use of <t>.
 	
 	
 	Configuration commands:
 	
-	gs c cycle mainshot
+	gs c cycle mainqd
 		Cycles through the available steps to use as the primary shot when using one of the above commands.
 		
-	gs c cycle altshot
+	gs c cycle altqd
 		Cycles through the available steps to use for alternating with the configured main shot.
 		
-	gs c toggle usealtshot
+	gs c toggle usealtqd
 		Toggles whether or not to use an alternate shot.
 		
-	gs c toggle selectshottarget
+	gs c toggle selectqdtarget
 		Toggles whether or not to use <stnpc> (as opposed to <t>) when using a shot.
 		
 		
@@ -48,13 +48,14 @@ end
 -- Setup vars that are user-independent.  state.Buff vars initialized here will automatically be tracked.
 function job_setup()
 	-- QuickDraw Selector
-	state.MainShot = M{['description']='Primary Shot', 'Dark Shot', 'Earth Shot', 'Water Shot', 'Wind Shot', 'Fire Shot', 'Ice Shot', 'Thunder Shot'}
-	state.AltShot = M{['description']='Secondary Shot', 'Earth Shot', 'Water Shot', 'Wind Shot', 'Fire Shot', 'Ice Shot', 'Thunder Shot', 'Dark Shot'}
-	state.UseAltShot = M(false, 'Use Secondary Shot')
-	state.SelectShotTarget = M(false, 'Select Quick Draw Target')
+	state.Mainqd = M{['description']='Primary Shot', 'Dark Shot', 'Earth Shot', 'Water Shot', 'Wind Shot', 'Fire Shot', 'Ice Shot', 'Thunder Shot'}
+	state.Altqd = M{['description']='Secondary Shot', 'Earth Shot', 'Water Shot', 'Wind Shot', 'Fire Shot', 'Ice Shot', 'Thunder Shot', 'Dark Shot'}
+	state.UseAltqd = M(false, 'Use Secondary Shot')
+	state.SelectqdTarget = M(false, 'Select Quick Draw Target')
 	state.IgnoreTargetting = M(false, 'Ignore Targetting')
+	state.HasteMode = M{['description']='Haste Mode', 'Haste I', 'Haste II'}
 
-	state.CurrentShot = M{['description']='Current Quick Draw', 'Main', 'Alt'}
+	state.Currentqd = M{['description']='Current Quick Draw', 'Main', 'Alt'}
 	
 	-- Whether to use Luzaf's Ring
 	state.LuzafRing = M(false, "Luzaf's Ring")
@@ -89,14 +90,23 @@ function user_setup()
 	send_command('bind !` input /ja "Bolter\'s Roll" <me>')
 	send_command ('bind @` gs c toggle LuzafRing')
 
-	send_command('bind ^- gs c cycleback mainshot')
-	send_command('bind ^= gs c cycle mainshot')
-	send_command('bind !- gs c cycle altshot')
-	send_command('bind != gs c cycleback altshot')
-	send_command('bind ^[ gs c toggle selectshottarget')
-	send_command('bind ^] gs c toggle usealtshot')
-	send_command('bind ^, input /ja "Spectral Jig" <me>')
-	send_command('unbind ^.')
+	send_command('bind ^- gs c cycleback mainqd')
+	send_command('bind ^= gs c cycle mainqd')
+	send_command('bind !- gs c cycle altqd')
+	send_command('bind != gs c cycleback altqd')
+	send_command('bind ^[ gs c toggle selectqdtarget')
+	send_command('bind ^] gs c toggle usealtqd')
+	if player.sub_job == 'DNC' then
+		send_command('bind ^, input /ja "Spectral Jig" <me>')
+		send_command('unbind ^.')
+	elseif player.sub_job == "RDM" or player.sub_job == "WHM" then
+		send_command('bind ^, input /ma "Sneak" <stpc>')
+		send_command('bind ^. input /ma "Invisible" <stpc>')
+	else
+		send_command('bind ^, input /item "Silent Oil" <me>')
+		send_command('bind ^. input /item "Prism Powder" <me>')
+	end
+	send_command('bind @h gs c cycle HasteMode')
 
 	select_default_macro_book()
 end
@@ -114,6 +124,7 @@ function user_unload()
 	send_command('unbind ^[')
 	send_command('unbind ^]')
 	send_command('unbind ^,')
+	send_command('unbind @h')
 end
 
 -- Define sets and vars used by this job file.
@@ -146,7 +157,7 @@ function init_gear_sets()
 		waist="Flume Belt +1",
 		}
 	
---	sets.precast.CorsairRoll["Caster's Roll"] = set_combine(sets.precast.CorsairRoll, {legs="Chas. Culottes"})
+	sets.precast.CorsairRoll["Caster's Roll"] = set_combine(sets.precast.CorsairRoll, {legs="Chas. Culottes +1"})
 	sets.precast.CorsairRoll["Courser's Roll"] = set_combine(sets.precast.CorsairRoll, {feet="Chass. Bottes +1"})
 	sets.precast.CorsairRoll["Blitzer's Roll"] = set_combine(sets.precast.CorsairRoll, {head="Chass. Tricorne +1"})
 	sets.precast.CorsairRoll["Tactician's Roll"] = set_combine(sets.precast.CorsairRoll, {body="Chasseur's Frac +1"})
@@ -166,7 +177,7 @@ function init_gear_sets()
 	sets.precast.Waltz['Healing Waltz'] = {}
 	
 	sets.precast.FC = {
-		head="Carmine Mask", --12
+		head="Carmine Mask +1", --14
 		body="Taeon Tabard", --9
 		hands="Leyline Gloves", --7
 		legs="Rawhide Trousers", --5
@@ -205,13 +216,13 @@ function init_gear_sets()
 		hands="Carmine Fin. Ga. +1",
 		legs="Meg. Chausses +1",
 		feet="Meg. Jam. +1",
-		neck=gear.ElementalGorget,
+		neck="Fotia Gorget",
 		ear1="Moonshade Earring",
 		ear2="Ishvara Earring",
 		ring1="Arvina Ringlet +1",
 		ring2="Garuda Ring +1",
 		back=gear.COR_WS1_Cape,
-		waist=gear.ElementalBelt,
+		waist="Fotia Belt",
 		}
 
 	sets.precast.WS.Acc = set_combine(sets.precast.WS, {
@@ -271,13 +282,13 @@ function init_gear_sets()
 		hands="Meg. Gloves +1",
 		legs="Samnuha Tights",
 		feet=gear.Herc_TA_feet,
-		neck=gear.ElementalGorget,
+		neck="Fotia Gorget",
 		ear1="Moonshade Earring",
 		ear2="Brutal Earring",
 		ring1="Begrudging Ring",
 		ring2="Epona's Ring",
 		back=gear.COR_WS1_Cape,
-		waist=gear.ElementalBelt,
+		waist="Fotia Belt",
 		}
 
 	sets.precast.WS['Savage Blade'] = set_combine(sets.precast.WS['Evisceration'], {
@@ -300,11 +311,11 @@ function init_gear_sets()
 	sets.precast.WS['Requiescat'] = set_combine(sets.precast.WS['Savage Blade'], {
 		head="Meghanada Visor +1",
 		feet="Carmine Greaves +1",
-		neck=gear.ElementalGorget,
+		neck="Fotia Gorget",
 		ring1="Levia. Ring +1",
 		ring2="Epona's Ring",
 		back=gear.COR_WS2_Cape,
-		waist=gear.ElementalBelt,
+		waist="Fotia Belt",
 		}) --MND
 
 	sets.precast.WS['Requiescat'].Acc = set_combine(sets.precast.WS['Requiescat'], {
@@ -350,6 +361,7 @@ function init_gear_sets()
 		}
 
 	sets.midcast.CorsairShot['Light Shot'] = set_combine(sets.midcast.CorsairShot, {
+		head="Carmine Mask +1",
 		hands="Leyline Gloves",
 		feet=gear.Herc_MAB_feet,
 		neck="Sanctity Necklace",
@@ -452,7 +464,7 @@ function init_gear_sets()
 		legs="Meg. Chausses +1", --5/0
 		feet="Lanun Bottes +1", --4/0
 		neck="Loricate Torque +1", --6/6
-		ear2="Odnowa Earring +1", --0/2
+		ear2="Etiolation Earring", --0/3
 		ring1="Gelatinous Ring +1", --7/(-1)
 		ring2="Defending Ring", --10/10
 		back="Solemnity Cape", --4/4
@@ -469,23 +481,26 @@ function init_gear_sets()
 	-- sets if more refined versions aren't defined.
 	-- If you create a set with both offense and defense modes, the offense mode should be first.
 	-- EG: sets.engaged.Dagger.Accuracy.Evasion
+
+	-- * NIN Subjob DW Trait: 25% DW
+	-- * DNC Subjob DW Trait: 15% DW
 	
-	-- Normal melee group
+	-- No Magic Haste (72% DW to cap)
 	sets.engaged = {
 		ammo=gear.RAbullet,
 		head="Dampening Tam",
-		body="Adhemar Jacket",
-		hands="Floral Gauntlets",
-		legs="Samnuha Tights",
-		feet=gear.Taeon_DW_feet,
+		body="Adhemar Jacket", --5
+		hands="Floral Gauntlets", --5
+		legs="Carmine Cuisses +1", --6
+		feet=gear.Taeon_DW_feet, --9
 		neck="Lissome Necklace",
-		ear1="Eabani Earring",
-		ear2="Suppanomimi",
+		ear1="Eabani Earring", --4
+		ear2="Suppanomimi", --5
 		ring1="Petrov Ring",
 		ring2="Epona's Ring",
 		back=gear.COR_TP_Cape,
 		waist="Windbuffet Belt +1",
-		}
+		} -- 49-59% (34% Gear)
 
 	sets.engaged.LowAcc = set_combine(sets.engaged, {
 		legs=gear.Herc_TA_legs,
@@ -500,7 +515,9 @@ function init_gear_sets()
 		})
 
 	sets.engaged.HighAcc = set_combine(sets.engaged.MidAcc, {
+		head="Carmine Mask +1",
 		legs="Carmine Cuisses +1",
+		feet=gear.Herc_TA_feet,
 		ear1="Mache Earring",
 		ear2="Zennaroi Earring",
 		ring1="Ramuh Ring +1",
@@ -512,24 +529,112 @@ function init_gear_sets()
 		neck="Asperity Necklace",
 		})
 
-	sets.engaged.HighHaste = {
+	-- 15% Magic Haste (66% DW to cap)
+	sets.engaged.LowHaste = {
 		ammo=gear.RAbullet,
 		head="Dampening Tam",
-		body="Adhemar Jacket",
-		hands="Adhemar Wristbands",
-		legs="Samnuha Tights",
-		feet=gear.Herc_TA_feet,
+		body="Adhemar Jacket", --5
+		hands="Floral Gauntlets", --5
+		legs="Carmine Cuisses +1", --6
+		feet=gear.Taeon_DW_feet, --9
 		neck="Lissome Necklace",
-		ear1="Eabani Earring",
-		ear2="Suppanomimi",
+		ear1="Eabani Earring", --4
+		ear2="Suppanomimi", --5
 		ring1="Petrov Ring",
 		ring2="Epona's Ring",
 		back=gear.COR_TP_Cape,
 		waist="Windbuffet Belt +1",
-		}
+		} -- 49-59% (34% Gear)
+
+	sets.engaged.LowHaste.LowAcc = set_combine(sets.engaged.LowHaste, {
+		legs=gear.Herc_TA_legs,
+		waist="Kentarch Belt +1",
+		})
+
+	sets.engaged.LowHaste.MidAcc = set_combine(sets.engaged.LowHaste.LowAcc, {
+		legs="Adhemar Kecks",
+		neck="Combatant's Torque",
+		ear1="Cessance Earring",
+		ring2="Ramuh Ring +1",
+		})
+
+	sets.engaged.LowHaste.HighAcc = set_combine(sets.engaged.LowHaste.MidAcc, {
+		head="Carmine Mask +1",
+		legs="Carmine Cuisses +1",
+		feet=gear.Herc_TA_feet,
+		ear1="Mache Earring",
+		ear2="Zennaroi Earring",
+		ring1="Ramuh Ring +1",
+		waist="Olseni Belt",
+		})
+
+	sets.engaged.LowHaste.Fodder = set_combine(sets.engaged.LowHaste, {
+		body="Thaumas Coat",
+		neck="Asperity Necklace",
+		})
+
+	-- 30% Magic Haste (55% DW to cap)
+	sets.engaged.MidHaste = {
+		ammo=gear.RAbullet,
+		head="Dampening Tam",
+		body="Adhemar Jacket", --5
+		hands="Floral Gauntlets", --5
+		legs="Samnuha Tights",
+		feet=gear.Taeon_DW_feet, --9
+		neck="Lissome Necklace",
+		ear1="Eabani Earring", --4
+		ear2="Suppanomimi", --5
+		ring1="Petrov Ring",
+		ring2="Epona's Ring",
+		back=gear.COR_TP_Cape,
+		waist="Windbuffet Belt +1",
+		} -- 43-53% (28% Gear)
+
+	sets.engaged.MidHaste.LowAcc = set_combine(sets.engaged.MidHaste, {
+		legs=gear.Herc_TA_legs,
+		waist="Kentarch Belt +1",
+		})
+
+	sets.engaged.MidHaste.MidAcc = set_combine(sets.engaged.MidHaste.LowAcc, {
+		legs="Adhemar Kecks",
+		neck="Combatant's Torque",
+		ear1="Cessance Earring",
+		ring2="Ramuh Ring +1",
+		})
+
+	sets.engaged.MidHaste.HighAcc = set_combine(sets.engaged.MidHaste.MidAcc, {
+		head="Carmine Mask +1",
+		legs="Carmine Cuisses +1",
+		feet=gear.Herc_TA_feet,
+		ear1="Mache Earring",
+		ear2="Zennaroi Earring",
+		ring1="Ramuh Ring +1",
+		waist="Olseni Belt",
+		})
+
+	sets.engaged.MidHaste.Fodder = set_combine(sets.engaged.MidHaste, {
+		body="Thaumas Coat",
+		neck="Asperity Necklace",
+		})
+
+	-- 35% Magic Haste (50% DW to cap)
+	sets.engaged.HighHaste = {
+		ammo=gear.RAbullet,
+		head="Dampening Tam",
+		body=gear.Herc_TA_body,
+		hands="Floral Gauntlets", --5
+		legs="Samnuha Tights",
+		feet=gear.Taeon_DW_feet, --9
+		neck="Lissome Necklace",
+		ear1="Eabani Earring", --4
+		ear2="Suppanomimi", --5
+		ring1="Petrov Ring",
+		ring2="Epona's Ring",
+		back=gear.COR_TP_Cape,
+		waist="Windbuffet Belt +1",
+		} -- 38-48% (23% Gear)
 
 	sets.engaged.HighHaste.LowAcc = set_combine(sets.engaged.HighHaste, {
-		hands=gear.Herc_TA_hands,
 		legs=gear.Herc_TA_legs,
 		waist="Kentarch Belt +1",
 		})
@@ -542,7 +647,9 @@ function init_gear_sets()
 		})
 
 	sets.engaged.HighHaste.HighAcc = set_combine(sets.engaged.HighHaste.MidAcc, {
+		head="Carmine Mask +1",
 		legs="Carmine Cuisses +1",
+		feet=gear.Herc_TA_feet,
 		ear1="Mache Earring",
 		ear2="Zennaroi Earring",
 		ring1="Ramuh Ring +1",
@@ -553,7 +660,8 @@ function init_gear_sets()
 		body="Thaumas Coat",
 		neck="Asperity Necklace",
 		})
-
+		
+	-- 47% Magic Haste (36% DW to cap)
 	sets.engaged.MaxHaste = {
 		ammo=gear.RAbullet,
 		head="Dampening Tam",
@@ -562,13 +670,13 @@ function init_gear_sets()
 		legs="Samnuha Tights",
 		feet=gear.Herc_TA_feet,
 		neck="Lissome Necklace",
-		ear1="Eabani Earring",
-		ear2="Suppanomimi",
+		ear1="Eabani Earring", --4
+		ear2="Suppanomimi", --5
 		ring1="Petrov Ring",
 		ring2="Epona's Ring",
 		back=gear.COR_TP_Cape,
 		waist="Windbuffet Belt +1",
-		}
+		} -- 24-34% (9% Gear)
 
 	sets.engaged.MaxHaste.LowAcc = set_combine(sets.engaged.HighHaste, {
 		hands=gear.Herc_TA_hands,
@@ -584,6 +692,7 @@ function init_gear_sets()
 		})
 
 	sets.engaged.MaxHaste.HighAcc = set_combine(sets.engaged.MaxHaste.MidAcc, {
+		head="Carmine Mask +1",
 		legs="Carmine Cuisses +1",
 		ear1="Mache Earring",
 		ear2="Zennaroi Earring",
@@ -597,6 +706,7 @@ function init_gear_sets()
 		})
 
 	sets.Obi = {waist="Hachirin-no-Obi"}
+	sets.Reive = {neck="Ygnas's Resolve +1"}
 
 end
 
@@ -646,9 +756,19 @@ function job_aftercast(spell, action, spellMap, eventArgs)
 	end
 end
 
-function job_status_change(new_status, old_status)
-	if new_status == 'Engaged' then
+function job_buff_change(buff,gain)
+	-- If we gain or lose any haste buffs, adjust which gear set we target.
+	if S{'haste', 'march', 'mighty guard', 'embrava', 'haste samba', 'geo-haste', 'indi-haste'}:contains(buff:lower()) then
 		determine_haste_group()
+		if not midaction() then
+			handle_equipping_gear(player.status)
+		end
+	end
+	if buffactive['Reive Mark'] then
+		equip(sets.Reive)
+		disable('neck')
+	else
+		enable('neck')
 	end
 end
 
@@ -692,7 +812,7 @@ function job_auto_change_target(spell, action, spellMap, eventArgs)
 			eventArgs.handled = true
 		end
 		
-		eventArgs.SelectNPCTargets = state.SelectShotTarget.value
+		eventArgs.SelectNPCTargets = state.SelectqdTarget.value
 	end
 end
 
@@ -704,22 +824,24 @@ function display_current_job_state(eventArgs)
 	msg = msg .. ' ][ WS: '..state.WeaponskillMode.current
 
 	if state.DefenseMode.value ~= 'None' then
-		msg = msg .. ' ][ Defense: ' .. state.DefenseMode.value .. state[state.DefenseMode.value .. 'DefenseMode'].value
+		msg = msg .. ' ][ Defense: ' .. state.DefenseMode.value .. state[state.DefenseMode.value .. 'DefenseMode'].value .. ' ]'
 	end
 	
 	if state.Kiting.value then
-		msg = msg .. ' ][ Kiting Mode: ON'
+		msg = msg .. '[ Kiting Mode: ON ]'
 	end
 
-	msg = msg .. ' ][ '..state.MainShot.current
+	msg = msg .. '[ ' .. state.HasteMode.value .. ' ]'
 
-	if state.UseAltShot.value == true then
-		msg = msg .. '/'..state.AltShot.current
+	msg = msg .. '[ *'..state.Mainqd.current
+
+	if state.UseAltqd.value == true then
+		msg = msg .. '/'..state.Altqd.current
 	end
 	
-	msg = msg .. ' ]'
+	msg = msg .. '* ]'
 	
-	add_to_chat(061, msg)
+	add_to_chat(060, msg)
 
 	eventArgs.handled = true
 end
@@ -730,20 +852,20 @@ end
 
 -- Called for custom player commands.
 function job_self_command(cmdParams, eventArgs)
-	if cmdParams[1] == 'Shot' then
+	if cmdParams[1] == 'qd' then
 		if cmdParams[2] == 't' then
 			state.IgnoreTargetting:set()
 		end
 
-		local doShot = ''
-		if state.UseAltShot.value == true then
-			doShot = state[state.CurrentShot.current..'Shot'].current
-			state.CurrentShot:cycle()
+		local doqd = ''
+		if state.UseAltqd.value == true then
+			doqd = state[state.Currentqd.current..'qd'].current
+			state.Currentqd:cycle()
 		else
-			doShot = state.MainShot.current
+			doqd = state.Mainqd.current
 		end		
 		
-		send_command('@input /ja "'..doShot..'" <t>')
+		send_command('@input /ja "'..doqd..'" <t>')
 	end
 end
 
@@ -753,32 +875,60 @@ end
 -------------------------------------------------------------------------------------------------------------------
 
 function determine_haste_group()
-	-- We have three groups of DW in gear: Charis body, Charis neck + DW earrings, and Patentia Sash.
 
-	-- For high haste, we want to be able to drop one of the 10% groups (body, preferably).
-	-- High haste buffs:
-	-- 2x Marches + Haste
-	-- 2x Marches + Haste Samba
-	-- 1x March + Haste + Haste Samba
-	-- Embrava + any other haste buff
-	
-	-- For max haste, we probably need to consider dropping all DW gear.
-	-- Max haste buffs:
-	-- Embrava + Haste/March + Haste Samba
-	-- 2x March + Haste + Haste Samba
+	-- Gearswap can't detect the difference between Haste I and Haste II
+	-- so use winkey-H to manually set Haste spell level.
+
+	-- Haste (buffactive[33]) - 15%
+	-- Haste II (buffactive[33]) - 30%
+	-- Haste Samba - 5%/10%
+	-- Victory March +0/+3/+4/+5	9.4%/14%/15.6%/17.1%
+	-- Advancing March +0/+3/+4/+5  6.3%/10.9%/12.5%/14% 
+	-- Embrava - 30%
+	-- Mighty Guard (buffactive[604]) - 15%
+	-- Geo-Haste (buffactive[580]) - 40%
 
 	classes.CustomMeleeGroups:clear()
-	
-	if buffactive.embrava and (buffactive.haste or buffactive.march) then
-		classes.CustomMeleeGroups:append('MaxHaste')
-	elseif buffactive.march == 2 and buffactive.haste then
-		classes.CustomMeleeGroups:append('MaxHaste')
-	elseif buffactive.embrava and (buffactive.haste or buffactive.march) then
-		classes.CustomMeleeGroups:append('HighHaste')
-	elseif buffactive.march == 1 and buffactive.haste then
-		classes.CustomMeleeGroups:append('HighHaste')
-	elseif buffactive.march == 2 and buffactive.haste then
-		classes.CustomMeleeGroups:append('HighHaste')
+
+	if state.HasteMode.value == 'Haste II' then
+		if(((buffactive[33] or buffactive[580] or buffactive.embrava) and (buffactive.march or buffactive[604])) or
+			(buffactive[33] and (buffactive[580] or buffactive.embrava)) or
+			(buffactive.march == 2 and buffactive[604])) then
+			--add_to_chat(215, '---------- <<<< | Magic Haste Level: 43% | >>>> ----------')
+			classes.CustomMeleeGroups:append('MaxHaste')
+		elseif ((buffactive[33] or buffactive.march == 2 or buffactive[580]) and buffactive['haste samba']) then
+			--add_to_chat(004, '---------- <<<< | Magic Haste Level: 35% | >>>> ----------')
+			classes.CustomMeleeGroups:append('HighHaste')
+		elseif ((buffactive[580] or buffactive[33] or buffactive.march == 2) or
+			(buffactive.march == 1 and buffactive[604])) then
+			--add_to_chat(008, '---------- <<<< | Magic Haste Level: 30% | >>>> ----------')
+			classes.CustomMeleeGroups:append('MidHaste')
+		elseif (buffactive.march == 1 or buffactive[604]) then
+			--add_to_chat(007, '---------- <<<< | Magic Haste Level: 15% | >>>> ----------')
+			classes.CustomMeleeGroups:append('LowHaste')
+		end
+	else
+		if (buffactive[580] and ( buffactive.march or buffactive[33] or buffactive.embrava or buffactive[604]) ) or
+			(buffactive.embrava and (buffactive.march or buffactive[33] or buffactive[604])) or
+			(buffactive.march == 2 and (buffactive[33] or buffactive[604])) or
+			(buffactive[33] and buffactive[604] and buffactive.march ) then
+			--add_to_chat(215, '---------- <<<< | Magic Haste Level: 43% | >>>> ----------')
+			classes.CustomMeleeGroups:append('MaxHaste')
+		elseif ((buffactive[604] or buffactive[33]) and buffactive['haste samba'] and buffactive.march == 1) or
+			(buffactive.march == 2 and buffactive['haste samba']) or
+			(buffactive[580] and buffactive['haste samba'] ) then
+			--add_to_chat(004, '---------- <<<< | Magic Haste Level: 35% | >>>> ----------')
+			classes.CustomMeleeGroups:append('HighHaste')
+		elseif (buffactive.march == 2 ) or
+			((buffactive[33] or buffactive[604]) and buffactive.march == 1 ) or  -- MG or haste + 1 march
+			(buffactive[580] ) or  -- geo haste
+			(buffactive[33] and buffactive[604]) then
+			--add_to_chat(008, '---------- <<<< | Magic Haste Level: 30% | >>>> ----------')
+			classes.CustomMeleeGroups:append('MidHaste')
+		elseif buffactive[33] or buffactive[604] or buffactive.march == 1 then
+			--add_to_chat(007, '---------- <<<< | Magic Haste Level: 15% | >>>> ----------')
+			classes.CustomMeleeGroups:append('LowHaste')
+		end
 	end
 end
 
@@ -859,7 +1009,7 @@ function do_bullet_checks(spell, spellMap, eventArgs)
 	
 	-- If no ammo is available, give appropriate warning and end.
 	if not available_bullets then
-		if spell.type == 'CorsairShot' and player.equipment.ammo ~= 'empty' then
+		if spell.type == 'CorsairShotShot' and player.equipment.ammo ~= 'empty' then
 			add_to_chat(104, 'No Quick Draw ammo left.  Using what\'s currently equipped ('..player.equipment.ammo..').')
 			return
 		elseif spell.type == 'WeaponSkill' and player.equipment.ammo == gear.RAbullet then

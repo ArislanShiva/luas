@@ -46,9 +46,11 @@ function job_setup()
 	state.UseAltStep = M(false, 'Use Alt Step')
 	state.SelectStepTarget = M(false, 'Select Step Target')
 	state.IgnoreTargetting = M(false, 'Ignore Targetting')
-
+	state.HasteMode = M{['description']='Haste Mode', 'Haste I', 'Haste II'}
+	
 	state.CurrentStep = M{['description']='Current Step', 'Main', 'Alt'}
 	state.SkillchainPending = M(false, 'Skillchain Pending')
+
 	state.CP = M(false, "Capacity Points Mode")
 
 	determine_haste_group()
@@ -78,6 +80,7 @@ function user_setup()
 	send_command('bind @` input /ja "Warcry" <me>')
 	send_command('bind ^, input /ja "Spectral Jig" <me>')
 	send_command('unbind ^.')
+	send_command('bind @h gs c cycle HasteMode')
 	send_command('bind @c gs c toggle CP')
 
 	select_default_macro_book()
@@ -95,6 +98,7 @@ function user_unload()
 	send_command('unbind !`')
 	send_command('unbind @`')
 	send_command('unbind ^,')
+	send_command('unbind @h')
 	send_command('unbind @c')
 end
 
@@ -143,6 +147,7 @@ function init_gear_sets()
 		ring1="Asklepian Ring",
 		ring2="Valseur's Ring",
 		back="Toetapper Mantle",
+		waist="Gishdubar Sash",
 		} -- Waltz Potency
 		
 	sets.precast.Waltz['Healing Waltz'] = {}
@@ -237,13 +242,13 @@ function init_gear_sets()
 		hands="Meg. Gloves +1",
 		legs="Lustratio Subligar",
 		feet="Lustratio Leggings",
-		neck=gear.ElementalGorget,
+		neck="Fotia Gorget",
 		ear1="Moonshade Earring",
 		ear2="Ishvara Earring",
 		ring1="Ramuh Ring +1",
 		ring2="Ramuh Ring +1",
 		back=gear.DNC_WS_Cape,
-		waist=gear.ElementalBelt,
+		waist="Fotia Belt",
 		} -- default set
 		
 	sets.precast.WS.Acc = set_combine(sets.precast.WS, {
@@ -362,7 +367,7 @@ function init_gear_sets()
 	-- Idle sets
 
 	sets.idle = {
-		ammo="Ginsen",
+		ammo="Staunch Tathlum",
 		head="Dampening Tam",
 		body="Mekosu. Harness",
 		hands="Adhemar Wristbands",
@@ -393,6 +398,7 @@ function init_gear_sets()
 		})
 
 	sets.idle.Town = set_combine (sets.idle, {
+		ammo="Ginsen",
 		body="Adhemar Jacket",
 		neck="Combatant's Torque",
 		ear1="Cessance Earring",
@@ -408,11 +414,11 @@ function init_gear_sets()
 	-- Defense sets
 
 	sets.defense.PDT = {
+		ammo="Staunch Tathlum", --2/2
 		head="Dampening Tam", --0/4
 		body="Meg. Cuirie +1", --7/0
 		hands="Meg. Gloves +1", --3/0
 		legs="Meg. Chausses +1", --5/0
-		feet="Meg. Jam. +1", --2/0
 		neck="Loricate Torque +1", --6/6
 		ear1="Genmei Earring", --2/0
 		ear2="Odnowa Earring +1", --0/2
@@ -434,35 +440,39 @@ function init_gear_sets()
 	-- sets if more refined versions aren't defined.
 	-- If you create a set with both offense and defense modes, the offense mode should be first.
 	-- EG: sets.engaged.Dagger.Accuracy.Evasion
+
+	-- * DNC Native DW Trait: 30% DW
+	-- * DNC Job Points DW Gift: 5% DW
 	
+	-- No Magic Haste (72% DW to cap)
 	sets.engaged = {
 		ammo="Ginsen",
 		head="Dampening Tam",
-		body="Macu. Casaque +1",
+		body="Macu. Casaque +1", --11
 		hands="Adhemar Wristbands",
 		legs="Samnuha Tights",
-		feet=gear.Taeon_DW_feet,
-		neck="Charis Necklace",
-		ear1="Eabani Earring",
-		ear2="Suppanomimi",
+		feet=gear.Taeon_DW_feet, --9
+		neck="Charis Necklace", --5
+		ear1="Eabani Earring", --4
+		ear2="Brutal Earring",
 		ring1="Petrov Ring",
 		ring2="Epona's Ring",
 		back=gear.DNC_TP_Cape,
-		waist="Patentia Sash",
-		}
+		waist="Patentia Sash", --5
+		} -- 69% (34% Gear)
 
 	sets.engaged.LowAcc = set_combine(sets.engaged, {
+		ammo="Falcon Eye",
 		hands=gear.Herc_TA_hands,
 		neck="Combatant's Torque",
-		waist="Kentarch Belt +1",
 		})
 
 	sets.engaged.MidAcc = set_combine(sets.engaged.LowAcc, {
-		ammo="Falcon Eye",
 		body="Adhemar Jacket",
 		legs="Adhemar Kecks",
-		ear1="Cessance Earring",
+		feet=gear.Herc_TA_feet,
 		ring2="Ramuh Ring +1",
+		waist="Kentarch Belt +1",
 		})
 
 	sets.engaged.HighAcc = set_combine(sets.engaged.MidAcc, {
@@ -477,21 +487,107 @@ function init_gear_sets()
 		waist="Sinew Belt",
 		})
 
-	sets.engaged.HighHaste = {
+	-- 15% Magic Haste (66% DW to cap)
+	sets.engaged.LowHaste = {
 		ammo="Ginsen",
 		head="Dampening Tam",
+		body="Macu. Casaque +1", --11
+		hands="Adhemar Wristbands",
+		legs="Samnuha Tights",
+		feet=gear.Herc_TA_feet,
+		neck="Charis Necklace", --5
+		ear1="Eabani Earring", --4
+		ear2="Suppanomimi", --5
+		ring1="Petrov Ring",
+		ring2="Epona's Ring",
+		back=gear.DNC_TP_Cape,
+		waist="Patentia Sash", --5
+		} -- 65% (30% Gear)
+
+	sets.engaged.LowHaste.LowAcc = set_combine(sets.engaged.LowHaste, {
+		ammo="Falcon Eye",
+		hands=gear.Herc_TA_hands,
+		neck="Combatant's Torque",
+		})
+
+	sets.engaged.LowHaste.MidAcc = set_combine(sets.engaged.LowHaste.LowAcc, {
 		body="Adhemar Jacket",
+		legs="Adhemar Kecks",
+		ring2="Ramuh Ring +1",
+		waist="Kentarch Belt +1",
+		})
+
+	sets.engaged.LowHaste.HighAcc = set_combine(sets.engaged.LowHaste.MidAcc, {
+		ear1="Mache Earring",
+		ear2="Zennaroi Earring",
+		ring1="Ramuh Ring +1",
+		waist="Olseni Belt",
+		})
+
+	sets.engaged.LowHaste.Fodder = set_combine(sets.engaged.LowHaste, {
+		body="Thaumas Coat",
+		waist="Sinew Belt",
+		})
+
+	-- 30% Magic Haste (55% DW to cap)
+	sets.engaged.MidHaste = {
+		ammo="Ginsen",
+		head="Dampening Tam",
+		body="Adhemar Jacket", --5
 		hands="Adhemar Wristbands",
 		legs="Samnuha Tights",
 		feet=gear.Herc_TA_feet,
 		neck="Asperity Necklace",
+		ear1="Eabani Earring", --4
+		ear2="Suppanomimi", --5
+		ring1="Petrov Ring",
+		ring2="Epona's Ring",
+		back=gear.DNC_TP_Cape,
+		waist="Patentia Sash", --5
+		} -- 54% (19% Gear)
+
+	sets.engaged.MidHaste.LowAcc = set_combine(sets.engaged.MidHaste, {
+		ammo="Falcon Eye",
+		hands=gear.Herc_TA_hands,
+		neck="Combatant's Torque",
+		})
+
+	sets.engaged.MidHaste.MidAcc = set_combine(sets.engaged.MidHaste.LowAcc, {
+		legs="Adhemar Kecks",
+		feet=gear.Herc_TA_feet,
 		ear1="Cessance Earring",
+		ear2="Zennaroi Earring",
+		ring2="Ramuh Ring +1",
+		waist="Kentarch Belt +1",
+		})
+
+	sets.engaged.MidHaste.HighAcc = set_combine(sets.engaged.MidHaste.MidAcc, {
+		ear1="Mache Earring",
+		ring1="Ramuh Ring +1",
+		waist="Olseni Belt",
+		})
+
+	sets.engaged.MidHaste.Fodder = set_combine(sets.engaged.MidHaste, {
+		body="Thaumas Coat",
+		waist="Sinew Belt",
+		})
+
+	-- 35% Magic Haste (50% DW to cap)
+	sets.engaged.HighHaste = {
+		ammo="Ginsen",
+		head="Dampening Tam",
+		body="Adhemar Jacket", --5
+		hands="Adhemar Wristbands",
+		legs="Samnuha Tights",
+		feet=gear.Herc_TA_feet,
+		neck="Asperity Necklace",
+		ear1="Eabani Earring", --4
 		ear2="Brutal Earring",
 		ring1="Petrov Ring",
 		ring2="Epona's Ring",
 		back=gear.DNC_TP_Cape,
-		waist="Windbuffet Belt +1",
-		}
+		waist="Patentia Sash", --5
+		} -- 49% (14% Gear)
 
 	sets.engaged.HighHaste.LowAcc = set_combine(sets.engaged.HighHaste, {
 		hands=gear.Herc_TA_hands,
@@ -502,6 +598,7 @@ function init_gear_sets()
 	sets.engaged.HighHaste.MidAcc = set_combine(sets.engaged.HighHaste.LowAcc, {
 		ammo="Falcon Eye",
 		legs="Adhemar Kecks",
+		ear1="Cessance Earring",
 		ear2="Zennaroi Earring",
 		ring2="Ramuh Ring +1",
 		})
@@ -517,6 +614,7 @@ function init_gear_sets()
 		waist="Sinew Belt",
 		})
 
+	-- 47% Magic Haste (36% DW to cap)
 	sets.engaged.MaxHaste = {
 		ammo="Ginsen",
 		head="Dampening Tam",
@@ -531,7 +629,7 @@ function init_gear_sets()
 		ring2="Epona's Ring",
 		back=gear.DNC_TP_Cape,
 		waist="Windbuffet Belt +1",
-		}
+		} -- 35% (0% Gear)
 
 	sets.engaged.MaxHaste.LowAcc = set_combine(sets.engaged.MaxHaste, {
 		hands=gear.Herc_TA_hands,
@@ -563,7 +661,7 @@ function init_gear_sets()
 	sets.buff['Climactic Flourish'] = {head="Maculele Tiara +1"}
 	
 	sets.CP = {back="Mecisto. Mantle"}
-
+	sets.Reive = {neck="Ygnas's Resolve +1"}
 
 end
 
@@ -614,11 +712,19 @@ end
 -- gain == true if the buff was gained, false if it was lost.
 function job_buff_change(buff,gain)
 	-- If we gain or lose any haste buffs, adjust which gear set we target.
-	if S{'haste','march','embrava','haste samba'}:contains(buff:lower()) then
+	if S{'haste', 'march', 'mighty guard', 'embrava', 'haste samba', 'geo-haste', 'indi-haste'}:contains(buff:lower()) then
 		determine_haste_group()
-		handle_equipping_gear(player.status)
+		if not midaction() then
+			handle_equipping_gear(player.status)
+		end
 	elseif buff == 'Saber Dance' or buff == 'Climactic Flourish' or buff == 'Fan Dance' then
 		handle_equipping_gear(player.status)
+	end
+	if buffactive['Reive Mark'] then
+		equip(sets.Reive)
+		disable('neck')
+	else
+		enable('neck')
 	end
 end
 
@@ -695,25 +801,27 @@ function display_current_job_state(eventArgs)
 	if state.HybridMode.value ~= 'Normal' then
 		msg = msg .. '/' .. state.HybridMode.value
 	end
-	msg = msg .. ' ][ WS: ' .. state.WeaponskillMode.value
+	msg = msg .. ' ][ WS: ' .. state.WeaponskillMode.value .. ' ]'
 	
 	if state.DefenseMode.value ~= 'None' then
-		msg = msg .. ' ][ Defense: ' .. state.DefenseMode.value .. state[state.DefenseMode.value .. 'DefenseMode'].value
-	end
-	
-	if state.Kiting.value then
-		msg = msg .. ' ][ Kiting Mode: ON'
+		msg = msg .. '[ Defense: ' .. state.DefenseMode.value .. state[state.DefenseMode.value .. 'DefenseMode'].value .. ' ]'
 	end
 
-	msg = msg .. ' [ '..state.MainStep.current
+	msg = msg .. '[ ' .. state.HasteMode.value .. ' ]'
+	
+	if state.Kiting.value then
+		msg = msg .. '[ Kiting Mode: ON ]'
+	end
+
+	msg = msg .. '[ *'..state.MainStep.current
 
 	if state.UseAltStep.value == true then
 		msg = msg .. '/'..state.AltStep.current
 	end
 	
-	msg = msg .. ' ]'
+	msg = msg .. '* ]'
 
-	add_to_chat(061, msg)
+	add_to_chat(060, msg)
 
 	eventArgs.handled = true
 end
@@ -747,32 +855,60 @@ end
 -------------------------------------------------------------------------------------------------------------------
 
 function determine_haste_group()
-	-- We have three groups of DW in gear: Charis body, Charis neck + DW earrings, and Patentia Sash.
 
-	-- For high haste, we want to be able to drop one of the 10% groups (body, preferably).
-	-- High haste buffs:
-	-- 2x Marches + Haste
-	-- 2x Marches + Haste Samba
-	-- 1x March + Haste + Haste Samba
-	-- Embrava + any other haste buff
-	
-	-- For max haste, we probably need to consider dropping all DW gear.
-	-- Max haste buffs:
-	-- Embrava + Haste/March + Haste Samba
-	-- 2x March + Haste + Haste Samba
+	-- Gearswap can't detect the difference between Haste I and Haste II
+	-- so use winkey-H to manually set Haste spell level.
+
+	-- Haste (buffactive[33]) - 15%
+	-- Haste II (buffactive[33]) - 30%
+	-- Haste Samba - 5%/10%
+	-- Victory March +0/+3/+4/+5	9.4%/14%/15.6%/17.1%
+	-- Advancing March +0/+3/+4/+5  6.3%/10.9%/12.5%/14% 
+	-- Embrava - 30%
+	-- Mighty Guard (buffactive[604]) - 15%
+	-- Geo-Haste (buffactive[580]) - 40%
 
 	classes.CustomMeleeGroups:clear()
-	
-	if buffactive.embrava and (buffactive.haste or buffactive.march) and buffactive['haste samba'] then
-		classes.CustomMeleeGroups:append('MaxHaste')
-	elseif buffactive.march == 2 and buffactive.haste then
-		classes.CustomMeleeGroups:append('MaxHaste')
-	elseif buffactive.embrava and (buffactive.haste or buffactive.march or buffactive['haste samba']) then
-		classes.CustomMeleeGroups:append('HighHaste')
-	elseif buffactive.march == 1 and buffactive.haste then
-		classes.CustomMeleeGroups:append('HighHaste')
-	elseif buffactive.march == 2 and (buffactive.haste or buffactive['haste samba']) then
-		classes.CustomMeleeGroups:append('HighHaste')
+
+	if state.HasteMode.value == 'Haste II' then
+		if(((buffactive[33] or buffactive[580] or buffactive.embrava) and (buffactive.march or buffactive[604])) or
+			(buffactive[33] and (buffactive[580] or buffactive.embrava)) or
+			(buffactive.march == 2 and buffactive[604])) then
+			--add_to_chat(215, '---------- <<<< | Magic Haste Level: 43% | >>>> ----------')
+			classes.CustomMeleeGroups:append('MaxHaste')
+		elseif ((buffactive[33] or buffactive.march == 2 or buffactive[580]) and buffactive['haste samba']) then
+			--add_to_chat(004, '---------- <<<< | Magic Haste Level: 35% | >>>> ----------')
+			classes.CustomMeleeGroups:append('HighHaste')
+		elseif ((buffactive[580] or buffactive[33] or buffactive.march == 2) or
+			(buffactive.march == 1 and buffactive[604])) then
+			--add_to_chat(008, '---------- <<<< | Magic Haste Level: 30% | >>>> ----------')
+			classes.CustomMeleeGroups:append('MidHaste')
+		elseif (buffactive.march == 1 or buffactive[604]) then
+			--add_to_chat(007, '---------- <<<< | Magic Haste Level: 15% | >>>> ----------')
+			classes.CustomMeleeGroups:append('LowHaste')
+		end
+	else
+		if (buffactive[580] and ( buffactive.march or buffactive[33] or buffactive.embrava or buffactive[604]) ) or
+			(buffactive.embrava and (buffactive.march or buffactive[33] or buffactive[604])) or
+			(buffactive.march == 2 and (buffactive[33] or buffactive[604])) or
+			(buffactive[33] and buffactive[604] and buffactive.march ) then
+			--add_to_chat(215, '---------- <<<< | Magic Haste Level: 43% | >>>> ----------')
+			classes.CustomMeleeGroups:append('MaxHaste')
+		elseif ((buffactive[604] or buffactive[33]) and buffactive['haste samba'] and buffactive.march == 1) or
+			(buffactive.march == 2 and buffactive['haste samba']) or
+			(buffactive[580] and buffactive['haste samba'] ) then
+			--add_to_chat(004, '---------- <<<< | Magic Haste Level: 35% | >>>> ----------')
+			classes.CustomMeleeGroups:append('HighHaste')
+		elseif (buffactive.march == 2 ) or
+			((buffactive[33] or buffactive[604]) and buffactive.march == 1 ) or  -- MG or haste + 1 march
+			(buffactive[580] ) or  -- geo haste
+			(buffactive[33] and buffactive[604]) then
+			--add_to_chat(008, '---------- <<<< | Magic Haste Level: 30% | >>>> ----------')
+			classes.CustomMeleeGroups:append('MidHaste')
+		elseif buffactive[33] or buffactive[604] or buffactive.march == 1 then
+			--add_to_chat(007, '---------- <<<< | Magic Haste Level: 15% | >>>> ----------')
+			classes.CustomMeleeGroups:append('LowHaste')
+		end
 	end
 end
 

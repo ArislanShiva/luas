@@ -39,6 +39,13 @@ function user_setup()
 	-- Additional local binds
 	send_command('bind ^- input /ja "Yonin" <me>')
 	send_command('bind ^= input /ja "Innin" <me>')
+	if player.sub_job == 'DNC' then
+		send_command('bind ^, input /ja "Spectral Jig" <me>')
+		send_command('unbind ^.')
+	else
+		send_command('bind ^, input /nin "Monomi: Ichi" <me>')
+		send_command('bind ^. input /ma "Tonko: Ni" <me>')
+	end
 	send_command('bind ^, input /nin "Monomi: Ichi" <me>')
 	send_command('bind ^. input /ma "Tonko: Ni" <me>')
 	send_command('bind @c gs c toggle CP')
@@ -112,13 +119,13 @@ function init_gear_sets()
 		hands="Adhemar Wristbands",
 		legs="Hiza. Hizayoroi +1",
 		feet=gear.Herc_TA_feet,
-		neck=gear.ElementalGorget,
+		neck="Fotia Gorget",
 		ear1="Moonshade Earring",
 		ear2="Ishvara Earring",
 		ring1="Ifrit Ring +1",
 		ring2="Shukuyu Ring",
 		back="Ground. Mantle +1",
-		waist=gear.ElementalBelt,
+		waist="Fotia Belt",
 		} -- default set
 
 	sets.precast.WS.Acc = set_combine(sets.precast.WS, {

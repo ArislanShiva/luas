@@ -48,8 +48,13 @@ function user_setup()
 	send_command('bind ^` input /ja "Velocity Shot" <me>')
 	send_command('bind !` input /ja "Double Shot" <me>')
 	send_command ('bind @` input /ja "Scavenge" <me>')
-	send_command('bind ^, input /ja "Spectral Jig" <me>')
-	send_command('unbind ^.')
+	if player.sub_job == 'DNC' then
+		send_command('bind ^, input /ja "Spectral Jig" <me>')
+		send_command('unbind ^.')
+	else
+		send_command('bind ^, input /item "Silent Oil" <me>')
+		send_command('bind ^. input /item "Prism Powder" <me>')
+	end
 	send_command('bind @c gs c toggle CP')
 
 end
@@ -93,7 +98,7 @@ function init_gear_sets()
 	sets.precast.Waltz['Healing Waltz'] = {}
 
 	sets.precast.FC = {
-		head="Carmine Mask", --12
+		head="Carmine Mask +1", --14
 		body="Taeon Tabard", --9
 		hands="Leyline Gloves", --7
 		legs="Rawhide Trousers", --5
@@ -133,13 +138,13 @@ function init_gear_sets()
 		hands="Carmine Fin. Ga. +1",
 		legs="Meg. Chausses +1",
 		feet="Thereoid Greaves",
-		neck=gear.ElementalGorget,
+		neck="Fotia Gorget",
 		ear1="Moonshade Earring",
 		ear2="Ishvara Earring",
 		ring1="Garuda Ring +1",
 		ring2="Garuda Ring +1",
 		back="Belenus's Cape",
-		waist=gear.ElementalBelt,
+		waist="Fotia Belt",
 		}
 
 	sets.precast.WS.Acc = set_combine(sets.precast.WS, {
@@ -182,7 +187,7 @@ function init_gear_sets()
 
 	sets.precast.WS["Last Stand"] = {
 		hands="Kobo Kote",
-		neck=gear.ElementalGorget,
+		neck="Fotia Gorget",
 		ring1="Garuda Ring +1",
 		ring2="Garuda Ring +1",
 		}
@@ -220,13 +225,13 @@ function init_gear_sets()
 		hands="Meg. Gloves +1",
 		legs="Meg. Chausses +1",
 		feet=gear.Herc_TA_feet,
-		neck=gear.ElementalGorget,
+		neck="Fotia Gorget",
 		ear1="Moonshade Earring",
 		ear2="Ishvara Earring",
 		ring1="Ifrit Ring +1",
 		ring2="Shukuyu Ring",
 		back="Bleating Mantle",
-		waist=gear.ElementalBelt,
+		waist="Fotia Belt",
 		}
 
 	sets.precast.WS['Decimation'] = sets.precast.WS['Rampage']
@@ -237,13 +242,13 @@ function init_gear_sets()
 		hands="Meg. Gloves +1",
 		legs="Meg. Chausses +1",
 		feet=gear.Herc_TA_feet,
-		neck=gear.ElementalGorget,
+		neck="Fotia Gorget",
 		ear1="Moonshade Earring",
 		ear2="Ishvara Earring",
 		ring1="Ramuh Ring +1",
 		ring2="Ramuh Ring +1",
 		back="Bleating Mantle",
-		waist=gear.ElementalBelt,
+		waist="Fotia Belt",
 		}
 	
 	
@@ -348,7 +353,7 @@ function init_gear_sets()
 		feet="Meg. Jam. +1", --2/0
 		neck="Loricate Torque +1", --6/6
 		ear1="Genmei Earring", --2/0
-		ear2="Odnowa Earring +1", --0/2
+		ear2="Etiolation Earring", --0/3
 		ring1="Gelatinous Ring +1", --7/(-1)
 		ring2="Defending Ring", --10/10
 		back="Solemnity Cape", --4/4
@@ -376,7 +381,7 @@ function init_gear_sets()
 		feet="Meg. Jam. +1", --2/0
 		neck="Loricate Torque +1", --6/6
 		ear1="Genmei Earring", --2/0
-		ear2="Odnowa Earring +1", --0/2
+		ear2="Etiolation Earring", --0/3
 		ring1="Gelatinous Ring +1", --7/(-1)
 		ring2="Defending Ring", --10/10
 		back="Solemnity Cape", --4/4
@@ -425,6 +430,7 @@ function init_gear_sets()
 		})
 
 	sets.engaged.HighAcc = set_combine(sets.engaged.MidAcc, {
+		head="Carmine Mask +1",
 		legs="Carmine Cuisses +1",
 		ear1="Mache Earring",
 		ear2="Zennaroi Earring",
@@ -468,6 +474,7 @@ function init_gear_sets()
 		})
 
 	sets.engaged.HighHaste.HighAcc = set_combine(sets.engaged.HighHaste.MidAcc, {
+		head="Carmine Mask +1",
 		legs="Carmine Cuisses +1",
 		ear1="Mache Earring",
 		ear2="Zennaroi Earring",
@@ -511,6 +518,7 @@ function init_gear_sets()
 		})
 
 	sets.engaged.MaxHaste.HighAcc = set_combine(sets.engaged.MaxHaste.MidAcc, {
+		head="Carmine Mask +1",
 		legs="Carmine Cuisses +1",
 		ear1="Mache Earring",
 		ear2="Zennaroi Earring",
@@ -534,6 +542,7 @@ function init_gear_sets()
 --	sets.buff.Camouflage = {body="Orion Jerkin +1"}
 
 	sets.Obi = {waist="Hachirin-no-Obi"}
+	sets.Reive = {neck="Ygnas's Resolve +1"}
 	sets.CP = {back="Mecisto. Mantle"}
 
 end
@@ -606,22 +615,13 @@ end
 -- Called when a player gains or loses a buff.
 -- buff == buff gained or lost
 -- gain == true if the buff was gained, false if it was lost.
-function job_buff_change(buff, gain)
-	if buff == "Camouflage" then
-		if gain then
-			equip(sets.buff.Camouflage)
-			disable('body')
-		else
-			enable('body')
-		end
-	end
-end
-
 function job_buff_change(buff,gain)
 	-- If we gain or lose any haste buffs, adjust which gear set we target.
-	if S{'haste','march','embrava','haste samba'}:contains(buff:lower()) then
+	if S{'haste', 'march', 'mighty guard', 'embrava', 'haste samba', 'geo-haste', 'indi-haste'}:contains(buff:lower()) then
 		determine_haste_group()
-		handle_equipping_gear(player.status)
+		if not midaction() then
+			handle_equipping_gear(player.status)
+		end
 	elseif buff == "Camouflage" then
 		if gain then
 			equip(sets.buff.Camouflage)
@@ -629,6 +629,12 @@ function job_buff_change(buff,gain)
 		else
 			enable('body')
 		end
+	end
+	if buffactive['Reive Mark'] then
+		equip(sets.Reive)
+		disable('neck')
+	else
+		enable('neck')
 	end
 end
 
@@ -679,7 +685,7 @@ function display_current_job_state(eventArgs)
 
 	msg = msg .. ' ]'
 	
-	add_to_chat(061, msg)
+	add_to_chat(060, msg)
 
 	eventArgs.handled = true
 end

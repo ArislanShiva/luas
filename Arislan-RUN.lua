@@ -40,7 +40,7 @@ function user_setup()
 	state.WeaponskillMode:options('Normal', 'Acc')
 	state.CastingMode:options('Normal', 'Resistant')
 	state.IdleMode:options('Normal', 'DT', 'Refresh')
-	state.PhysicalDefenseMode:options('PDT', 'HP', 'Critical', 'Status')
+	state.PhysicalDefenseMode:options('PDT', 'HP', 'Parry', 'Critical')
 	state.MagicalDefenseMode:options('MDT', 'Status')
 	
 	state.Knockback = M(false, 'Knockback')
@@ -57,12 +57,18 @@ function user_setup()
 	send_command('bind ^[ gs c toggle Knockback')
 	send_command('bind ^] gs c toggle Death')
 	send_command('bind ^\ gs c toggle Charm')
+	send_command('bind !q input /ma "Temper" <me>')
 	send_command('bind !w input /ma "Cocoon" <me>')
 	send_command('bind !e input /ma "Refueling" <me>')
 	send_command('bind !o input /ma "Regen IV" <stpc>')
 	send_command('bind !p input /ma "Shock Spikes" <me>')
-	send_command('bind ^, input /ja "Spectral Jig" <me>')
-	send_command('unbind ^.')
+	if player.sub_job == 'DNC' then
+		send_command('bind ^, input /ja "Spectral Jig" <me>')
+		send_command('unbind ^.')
+	else
+		send_command('bind ^, input /item "Silent Oil" <me>')
+		send_command('bind ^. input /item "Prism Powder" <me>')
+	end
 	send_command('bind @c gs c toggle CP')
 	
 	select_default_macro_book()
@@ -76,6 +82,7 @@ function user_unload()
     send_command('unbind ^f11')
 	send_command('unbind ^[')
 	send_command('unbind !]')
+	send_command('unbind !q')
 	send_command('unbind !w')
 	send_command('bind !e input /ma Haste <stpc>')
 	send_command('unbind !o')
@@ -132,7 +139,7 @@ function init_gear_sets()
 
 	sets.precast.JA['Swipe'] = sets.precast.JA['Lunge']
 	sets.precast.JA['Gambit'] = {hands="Runeist Mitons +1"}
-	sets.precast.JA['Rayke'] = {feet="Futhark Boots"}
+	sets.precast.JA['Rayke'] = {feet="Futhark Boots +1"}
 	sets.precast.JA['Elemental Sforzo'] = {body="Futhark Coat +1"}
 	sets.precast.JA['Swordplay'] = {hands="Futhark Mitons +1"}
 	sets.precast.JA['Embolden'] = {back="Evasionist's Cape"}
@@ -151,14 +158,14 @@ function init_gear_sets()
 	-- Fast cast sets for spells
 	sets.precast.FC = {
 		ammo="Sapience Orb", --2
-		head="Carmine Mask", --12
+		head="Carmine Mask +1", --14
 		body="Taeon Tabard", --9
 		hands="Leyline Gloves", --7
 		legs="Rawhide Trousers", --5
 		feet="Carmine Greaves +1", --8
 		neck="Orunmila's Torque", --5
-		ear1="Loquacious Earring", --2
-		ear2="Etiolation Earring", --1
+		ear1="Etiolation Earring", --1
+		ear2="Loquacious Earring", --2
 		ring1="Prolix Ring", --2
 		ring2="Weather. Ring", --5(3)
 		waist="Ninurta's Sash",
@@ -184,13 +191,13 @@ function init_gear_sets()
 		hands="Adhemar Wristbands",
 		legs=gear.Herc_TA_legs,
 		feet=gear.Herc_TA_feet,
-		neck=gear.ElementalGorget,
+		neck="Fotia Gorget",
 		ear1="Moonshade Earring",
 		ear2="Brutal earring",
 		ring1="Shukuyu Ring",
 		ring2="Ifrit Ring +1",
 		back="Bleating Mantle",
-		waist=gear.ElementalBelt,
+		waist="Fotia Belt",
 		}
 
 	sets.precast.WS['Resolution'] = set_combine(sets.precast.WS, {
@@ -246,17 +253,27 @@ function init_gear_sets()
 		waist="Eschan Stone",
 		}
 
+	sets.precast.WS['True Strike']= sets.precast.WS['Savage Blade']
+	sets.precast.WS['Judgment'] = sets.precast.WS['Savage Blade']
+	sets.precast.WS['Black Halo'] = sets.precast.WS['Savage Blade']
+
+	sets.precast.WS['Flash Nova'] = set_combine(sets.precast.WS['Sanguine Blade'], {
+		head=gear.Herc_MAB_head,
+		ring1="Shiva Ring +1",
+		ring2="Shiva Ring +1",
+		})
+
 	--------------------------------------
 	-- Midcast Sets
 	--------------------------------------
 	
 	sets.midcast.FastRecast = {
-		ear1="Loquacious Earring",
-		ear2="Etiolation Earring",
+		ear1="Etiolation Earring",
+		ear2="Loquacious Earring",
 		}
 
 	sets.midcast['Enhancing Magic'] = {
-		head="Carmine Mask",
+		head="Carmine Mask +1",
 		hands="Runeist Mitons +1",
 		legs="Carmine Cuisses +1",
 		neck="Incanter's Torque",
@@ -358,7 +375,7 @@ function init_gear_sets()
 
 	sets.idle.Town = set_combine(sets.idle, {
 		ammo="Staunch Tathlum",
-		head="Erilaz Galea +1",
+		head="Carmine Mask +1",
 		body="Erilaz Surcoat +1",
 		feet="Carmine Greaves +1",
 		neck="Loricate Torque +1",
@@ -452,6 +469,23 @@ function init_gear_sets()
 		waist="Flume Belt +1", --4/0
 		}
 
+	sets.defense.Parry = {
+		-- Aettir (+5 PDTII) - Alber Strap 2/0 - Refined Grip 3/3
+		ammo="Staunch Tathlum", --2/2
+		head=gear.Herc_DT_head, --3/3
+		body="Futhark Coat +1", --7/7
+		hands="Meg. Gloves +1", --3/0
+		legs="Eri. Leg Guards +1", --7/0
+		feet="Erilaz Greaves +1", --5/0
+		neck="Combatant's Torque",
+		ear1="Etiolation Earring", --0/3
+		ear2="Odnowa Earring +1", --0/2
+		ring1="Gelatinous Ring +1", --7/(-1)
+		ring2="Defending Ring", --10/10
+		back="Ogma's Cape",
+		waist="Flume Belt +1", --4/0
+		}
+
 	sets.defense.Critical = {
 		-- Aettir (+5 PDTII) - Alber Strap 2/0 - Refined Grip 3/3
 		ammo="Iron Gobbet", --(2)
@@ -503,6 +537,8 @@ function init_gear_sets()
 		})
 
 	sets.engaged.HighAcc = set_combine(sets.engaged.MidAcc, {
+		head="Carmine Mask +1",
+		legs="Carmine Cuisses +1",
 		ear1="Mache Earring",
 		ear2="Zennaroi Earring",
 		ring2="Ramuh Ring +1",
@@ -517,6 +553,7 @@ function init_gear_sets()
 	sets.buff.Doom = {ring1="Saida Ring", ring2="Saida Ring", waist="Gishdubar Sash"}
 
 	sets.CP = {back="Mecisto. Mantle"}
+	sets.Reive = {neck="Ygnas's Resolve +1"}
 
 end
 
@@ -577,6 +614,9 @@ function job_post_midcast(spell, action, spellMap, eventArgs)
 		handle_equipping_gear(player.status)
 		eventArgs.handled = true
 	end
+	if buffactive['Reive Mark'] and spell.type == 'WeaponSkill' then
+		equip(sets.Reive)
+	end
 end
 
 -------------------------------------------------------------------------------------------------------------------
@@ -592,6 +632,16 @@ function job_state_change(field, new_value, old_value)
 	classes.CustomMeleeGroups:clear()
 	classes.CustomMeleeGroups:append(state.Knockback.current)
 	classes.CustomMeleeGroups:append(state.Death.current)
+end
+
+function job_buff_change(buff,gain)
+	-- If we gain or lose any haste buffs, adjust which gear set we target.
+	if buffactive['Reive Mark'] then
+		equip(sets.Reive)
+		disable('neck')
+	else
+		enable('neck')
+	end
 end
 
 -------------------------------------------------------------------------------------------------------------------
@@ -683,7 +733,7 @@ function display_current_job_state(eventArgs)
 	
 	msg = msg .. ' ][ *Rune: '..state.Runes.current .. '* ]'
 	
-	add_to_chat(061, msg)
+	add_to_chat(060, msg)
 
 	eventArgs.handled = true
 end
