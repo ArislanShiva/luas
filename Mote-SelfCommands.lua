@@ -362,7 +362,7 @@ function display_current_state()
 
 		msg = msg .. ' ]'
 
-        add_to_chat(061, msg)
+        add_to_chat(060, msg)
     end
 
     if state.EquipStop.value ~= 'off' then
@@ -394,7 +394,7 @@ function display_current_caster_state()
 
 	msg = msg .. ' ]'
 
-    add_to_chat(061, msg)
+    add_to_chat(060, msg)
 end
 
 
