@@ -16,8 +16,6 @@
 
 
 -------------------------------------------------------------------------------------------------------------------
--- Setup functions for this job.  Generally should not be modified.
--------------------------------------------------------------------------------------------------------------------
 
 --[[
 
@@ -53,6 +51,10 @@
 	Weaponskill mode, if set to 'Normal', is handled separately for melee and ranged weaponskills.
 --]]
 
+
+-------------------------------------------------------------------------------------------------------------------
+-- Setup functions for this job.  Generally should not be modified.
+-------------------------------------------------------------------------------------------------------------------
 
 -- Initialization function for this job file.
 function get_sets()

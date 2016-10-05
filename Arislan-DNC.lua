@@ -16,8 +16,6 @@
 
 
 -------------------------------------------------------------------------------------------------------------------
--- Setup functions for this job.  Generally should not be modified.
--------------------------------------------------------------------------------------------------------------------
 
 --[[
 	Custom step commands:
@@ -44,6 +42,10 @@
 		Toggles whether or not to use <stnpc> (as opposed to <t>) when using a step.
 --]]
 
+
+-------------------------------------------------------------------------------------------------------------------
+-- Setup functions for this job.  Generally should not be modified.
+-------------------------------------------------------------------------------------------------------------------
 
 -- Initialization function for this job file.
 function get_sets()
