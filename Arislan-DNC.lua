@@ -1,9 +1,26 @@
 -------------------------------------------------------------------------------------------------------------------
+-- (Original: Motenten / Modified: Arislan)
+-------------------------------------------------------------------------------------------------------------------
+
+--[[	Custom Features:
+
+		Step Selector		Cycle through available primary and secondary step types,
+							and trigger with a single macro
+		Haste Detection		Detects current magic haste level and equips corresponding engaged set to
+							optimize delay reduction (automatic)
+		Haste Mode			Toggles between Haste II and Haste I recieved, used by Haste Detection [WinKey-H]
+		Capacity Pts. Mode	Capacity Points Mode Toggle [WinKey-C]
+		Reive Detection		Automatically equips Reive bonus gear
+		Auto. Lockstyle		Automatically locks specified equipset on file load
+--]]
+
+
+-------------------------------------------------------------------------------------------------------------------
 -- Setup functions for this job.  Generally should not be modified.
 -------------------------------------------------------------------------------------------------------------------
 
 --[[
-	Custom commands:
+	Custom step commands:
 	
 	gs c step
 		Uses the currently configured step on the target, with either <t> or <stnpc> depending on setting.
@@ -84,6 +101,7 @@ function user_setup()
 	send_command('bind @c gs c toggle CP')
 
 	select_default_macro_book()
+	set_lockstyle()
 end
 
 
@@ -151,27 +169,13 @@ function init_gear_sets()
 		} -- Waltz Potency
 		
 	sets.precast.Waltz['Healing Waltz'] = {}
-	
-	sets.precast.Samba = {
-		head="Maxixi Tiara +1",
-		back=gear.DNC_TP_Cape,
-		}
-		
-	sets.precast.Jig = {
-		legs="Horos Tights +1",
-		feet="Maxixi Shoes +1"
-		}
-		
-	sets.precast.Step = {
-		back=gear.DNC_TP_Cape,
-		}
-	
-	sets.precast.Step['Feather Step'] = set_combine(sets.precast.Step, {
-		feet="Macu. Toeshoes +1"
-		})
+	sets.precast.Samba = {head="Maxixi Tiara +1", back=gear.DNC_TP_Cape}
+	sets.precast.Jig = {legs="Horos Tights +1", feet="Maxixi Shoes +1"}
+
+	sets.precast.Step = {back=gear.DNC_TP_Cape}
+	sets.precast.Step['Feather Step'] = set_combine(sets.precast.Step, {feet="Macu. Toeshoes +1"})
 
 	sets.precast.Flourish1 = {}
-
 	sets.precast.Flourish1['Animated Flourish'] = sets.Enmity
 
 	sets.precast.Flourish1['Violent Flourish'] = {
@@ -229,8 +233,10 @@ function init_gear_sets()
 		}
 
 	sets.precast.FC.Utsusemi = set_combine(sets.precast.FC, {
+		ammo="Impatiens",
 		neck="Magoraga Beads",
 		ring1="Lebeche Ring",
+		waist="Ninurta's Sash",
 		})
 	   
 	-- Weapon Skill Sets
@@ -465,6 +471,7 @@ function init_gear_sets()
 		ammo="Falcon Eye",
 		hands=gear.Herc_TA_hands,
 		neck="Combatant's Torque",
+		ring1="Chirich Ring",
 		})
 
 	sets.engaged.MidAcc = set_combine(sets.engaged.LowAcc, {
@@ -508,6 +515,7 @@ function init_gear_sets()
 		ammo="Falcon Eye",
 		hands=gear.Herc_TA_hands,
 		neck="Combatant's Torque",
+		ring1="Chirich Ring",
 		})
 
 	sets.engaged.LowHaste.MidAcc = set_combine(sets.engaged.LowHaste.LowAcc, {
@@ -550,6 +558,7 @@ function init_gear_sets()
 		ammo="Falcon Eye",
 		hands=gear.Herc_TA_hands,
 		neck="Combatant's Torque",
+		ring1="Chirich Ring",
 		})
 
 	sets.engaged.MidHaste.MidAcc = set_combine(sets.engaged.MidHaste.LowAcc, {
@@ -593,6 +602,7 @@ function init_gear_sets()
 		hands=gear.Herc_TA_hands,
 		neck="Combatant's Torque",
 		waist="Kentarch Belt +1",
+		ring1="Chirich Ring",
 		})
 
 	sets.engaged.HighHaste.MidAcc = set_combine(sets.engaged.HighHaste.LowAcc, {
@@ -635,6 +645,7 @@ function init_gear_sets()
 		hands=gear.Herc_TA_hands,
 		neck="Combatant's Torque",
 		waist="Kentarch Belt +1",
+		ring1="Chirich Ring",
 		})
 
 	sets.engaged.MaxHaste.MidAcc = set_combine(sets.engaged.MaxHaste.LowAcc, {
@@ -943,4 +954,8 @@ function select_default_macro_book()
 	else
 		set_macro_page(1, 2)
 	end
+end
+
+function set_lockstyle()
+	send_command('wait 2; input /lockstyleset 1')
 end

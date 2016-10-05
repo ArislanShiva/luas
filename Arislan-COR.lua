@@ -1,4 +1,21 @@
 -------------------------------------------------------------------------------------------------------------------
+-- (Original: Motenten / Modified: Arislan)
+-------------------------------------------------------------------------------------------------------------------
+
+--[[	Custom Features:
+
+		QuickDraw Selector	Cycle through available primary and secondary shot types,
+							and trigger with a single macro
+		Haste Detection		Detects current magic haste level and equips corresponding engaged set to
+							optimize delay reduction (automatic)
+		Haste Mode			Toggles between Haste II and Haste I recieved, used by Haste Detection [WinKey-H]
+		Capacity Pts. Mode	Capacity Points Mode Toggle [WinKey-C]
+		Reive Detection		Automatically equips Reive bonus gear
+		Auto. Lockstyle		Automatically locks specified equipset on file load
+--]]
+
+
+-------------------------------------------------------------------------------------------------------------------
 -- Setup functions for this job.  Generally should not be modified.
 -------------------------------------------------------------------------------------------------------------------
 
@@ -79,6 +96,8 @@ function user_setup()
 	state.CastingMode:options('Normal', 'Resistant')
 	state.IdleMode:options('Normal', 'DT')
 
+	state.CP = M(false, "Capacity Points Mode")
+
 	gear.RAbullet = "Adlivun Bullet"
 	gear.WSbullet = "Adlivun Bullet"
 	gear.MAbullet = "Orichalc. Bullet"
@@ -96,6 +115,7 @@ function user_setup()
 	send_command('bind != gs c cycleback altqd')
 	send_command('bind ^[ gs c toggle selectqdtarget')
 	send_command('bind ^] gs c toggle usealtqd')
+
 	if player.sub_job == 'DNC' then
 		send_command('bind ^, input /ja "Spectral Jig" <me>')
 		send_command('unbind ^.')
@@ -106,9 +126,12 @@ function user_setup()
 		send_command('bind ^, input /item "Silent Oil" <me>')
 		send_command('bind ^. input /item "Prism Powder" <me>')
 	end
+
+	send_command('bind @c gs c toggle CP')
 	send_command('bind @h gs c cycle HasteMode')
 
 	select_default_macro_book()
+	set_lockstyle()
 end
 
 
@@ -124,6 +147,7 @@ function user_unload()
 	send_command('unbind ^[')
 	send_command('unbind ^]')
 	send_command('unbind ^,')
+	send_command('unbind @c')
 	send_command('unbind @h')
 end
 
@@ -294,7 +318,7 @@ function init_gear_sets()
 	sets.precast.WS['Savage Blade'] = set_combine(sets.precast.WS['Evisceration'], {
 		head="Lilitu Headpiece",
 		hands="Meg. Gloves +1",
-		legs="Meg. Chausses +1",
+		legs=gear.Herc_TA_legs,
 		neck="Caro Necklace",
 		ring1="Ifrit Ring +1",
 		ring2="Shukuyu Ring",
@@ -401,12 +425,6 @@ function init_gear_sets()
 		waist="Kwahu Kachina Belt",
 		})
 
-	sets.midcast.RA.Fodder = set_combine(sets.midcast.RA, {
-		ammo=gear.RAbullet,
-		neck="Ocachi Gorget",
-		waist="Ponente Sash",
-		})
-
 	-- Sets to return to when not performing an action.
 	
 	-- Resting sets
@@ -499,11 +517,12 @@ function init_gear_sets()
 		ring1="Petrov Ring",
 		ring2="Epona's Ring",
 		back=gear.COR_TP_Cape,
-		waist="Windbuffet Belt +1",
-		} -- 49-59% (34% Gear)
+		waist="Shetal Stone", --6
+		} -- 55-65% (40% Gear)
 
 	sets.engaged.LowAcc = set_combine(sets.engaged, {
 		legs=gear.Herc_TA_legs,
+		ring1="Chirich Ring",
 		waist="Kentarch Belt +1",
 		})
 
@@ -543,11 +562,12 @@ function init_gear_sets()
 		ring1="Petrov Ring",
 		ring2="Epona's Ring",
 		back=gear.COR_TP_Cape,
-		waist="Windbuffet Belt +1",
-		} -- 49-59% (34% Gear)
+		waist="Shetal Stone", --6
+		} -- 55-65% (40% Gear)
 
 	sets.engaged.LowHaste.LowAcc = set_combine(sets.engaged.LowHaste, {
 		legs=gear.Herc_TA_legs,
+		ring1="Chirich Ring",
 		waist="Kentarch Belt +1",
 		})
 
@@ -587,11 +607,12 @@ function init_gear_sets()
 		ring1="Petrov Ring",
 		ring2="Epona's Ring",
 		back=gear.COR_TP_Cape,
-		waist="Windbuffet Belt +1",
-		} -- 43-53% (28% Gear)
+		waist="Shetal Stone", --6
+		} -- 49-59% (34% Gear)
 
 	sets.engaged.MidHaste.LowAcc = set_combine(sets.engaged.MidHaste, {
 		legs=gear.Herc_TA_legs,
+		ring1="Chirich Ring",
 		waist="Kentarch Belt +1",
 		})
 
@@ -636,6 +657,7 @@ function init_gear_sets()
 
 	sets.engaged.HighHaste.LowAcc = set_combine(sets.engaged.HighHaste, {
 		legs=gear.Herc_TA_legs,
+		ring1="Chirich Ring",
 		waist="Kentarch Belt +1",
 		})
 
@@ -681,6 +703,7 @@ function init_gear_sets()
 	sets.engaged.MaxHaste.LowAcc = set_combine(sets.engaged.HighHaste, {
 		hands=gear.Herc_TA_hands,
 		legs=gear.Herc_TA_legs,
+		ring1="Chirich Ring",
 		waist="Kentarch Belt +1",
 		})
 
@@ -706,6 +729,7 @@ function init_gear_sets()
 		})
 
 	sets.Obi = {waist="Hachirin-no-Obi"}
+	sets.CP = {back="Mecisto. Mantle"}
 	sets.Reive = {neck="Ygnas's Resolve +1"}
 
 end
@@ -776,6 +800,17 @@ end
 -- User code that supplements standard library decisions.
 -------------------------------------------------------------------------------------------------------------------
 
+-- Modify the default idle set after it was constructed.
+function customize_idle_set(idleSet)
+	if state.CP.current == 'on' then
+		equip(sets.CP)
+		disable('back')
+	else
+		enable('back')
+	end
+	return idleSet
+end
+
 -- Return a customized weaponskill mode to use for weaponskill sets.
 -- Don't return anything if you're not overriding the default value.
 
@@ -820,11 +855,11 @@ end
 function display_current_job_state(eventArgs)
 	local msg = ''
 	
-	msg = msg .. '[ Offense/Ranged: '..state.OffenseMode.current..'/'..state.RangedMode.current
-	msg = msg .. ' ][ WS: '..state.WeaponskillMode.current
+	msg = msg .. '[ Offense/Ranged: '..state.OffenseMode.current..'/'..state.RangedMode.current .. ' ]'
+	msg = msg .. '[ WS: '..state.WeaponskillMode.current .. ' ]'
 
 	if state.DefenseMode.value ~= 'None' then
-		msg = msg .. ' ][ Defense: ' .. state.DefenseMode.value .. state[state.DefenseMode.value .. 'DefenseMode'].value .. ' ]'
+		msg = msg .. '[ Defense: ' .. state.DefenseMode.value .. state[state.DefenseMode.value .. 'DefenseMode'].value .. ' ]'
 	end
 	
 	if state.Kiting.value then
@@ -1056,4 +1091,8 @@ function select_default_macro_book()
 	else
 		set_macro_page(1, 7)
 	end
+end
+
+function set_lockstyle()
+	send_command('wait 2; input /lockstyleset 1')
 end

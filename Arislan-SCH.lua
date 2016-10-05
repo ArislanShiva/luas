@@ -1,9 +1,18 @@
 -------------------------------------------------------------------------------------------------------------------
--- Setup functions for this job.  Generally should not be modified.
+-- (Original: Motenten / Modified: Arislan)
 -------------------------------------------------------------------------------------------------------------------
 
---[[
-		Custom commands:
+--[[	Custom Features:
+		
+		Magic Burst			Toggle Magic Burst Mode  [Alt-`]
+		Helix Mode			Toggle between Lugh's Cape for potency and Bookworm's Cape for duration [WinKey-H]
+		Capacity Pts. Mode	Capacity Points Mode Toggle [WinKey-C]
+		Auto. Lockstyle		Automatically locks desired equipset on file load
+
+
+-------------------------------------------------------------------------------------------------------------------
+
+		Addendum Commands:
 
 		Shorthand versions for each strategem type that uses the version appropriate for
 		the current Arts.
@@ -23,7 +32,9 @@
 		gs c scholar addendum			Addendum: White		 	Addendum: Black
 --]]
 
-
+-------------------------------------------------------------------------------------------------------------------
+-- Setup functions for this job.  Generally should not be modified.
+-------------------------------------------------------------------------------------------------------------------
 
 -- Initialization function for this job file.
 function get_sets()
@@ -39,6 +50,9 @@ function job_setup()
 		"Stone V", "Water V", "Aero V", "Fire V", "Blizzard V", "Thunder V"}
 
 	state.Buff['Sublimation: Activated'] = buffactive['Sublimation: Activated'] or false
+	state.HelixMode = M{['description']='Helix Mode', 'Lughs', 'Bookworm'}
+	state.CP = M(false, "Capacity Points Mode")
+
 	update_active_strategems()
 end
 
@@ -77,8 +91,10 @@ function user_setup()
 	send_command('bind !; gs c scholar cost')
 	send_command('bind ^, input /ma Sneak <stpc>')
 	send_command('bind ^. input /ma Invisible <stpc>')
+	send_command('bind @h gs c cycle HelixMode')
 	
 	select_default_macro_book()
+	set_lockstyle()
 end
 
 -- Called when this job file is unloaded (eg: job change)
@@ -99,20 +115,19 @@ function user_unload()
 	send_command('unbind !;')
 	send_command('unbind ^,')
 	send_command('unbind !.')
+	send_command('unbind @h')
 end
 
 
 
 -- Define sets and vars used by this job file.
 function init_gear_sets()
-	--------------------------------------
-	-- Start defining the sets
-	--------------------------------------
-	
-	---- Precast Sets ----
+
+	------------------------------------------------------------------------------------------------
+	---------------------------------------- Precast Sets ------------------------------------------
+	------------------------------------------------------------------------------------------------
 	
 	-- Precast sets to enhance JAs
-	
 	sets.precast.JA['Tabula Rasa'] = {legs="Peda. Pants +1"}
 	sets.precast.JA['Enlightenment'] = {body="Peda. Gown +1"}
 
@@ -147,6 +162,7 @@ function init_gear_sets()
 	sets.precast.FC.Cure = set_combine(sets.precast.FC, {
 		main="Sucellus", --5
 		sub="Sors Shield", --5
+		ammo="Impatiens",
 		feet="Vanya Clogs", --15
 		ear1="Mendi. Earring", --5
 		ring1="Lebeche Ring", --(2)
@@ -163,6 +179,11 @@ function init_gear_sets()
 		head=empty,
 		body="Twilight Cloak"
 		})
+
+		
+	------------------------------------------------------------------------------------------------
+	------------------------------------- Weapon Skill Sets ----------------------------------------
+	------------------------------------------------------------------------------------------------
 
 	sets.precast.WS = {
 		head="Telchine Cap",
@@ -211,8 +232,10 @@ function init_gear_sets()
 	sets.precast.WS['Starburst'] = sets.precast.WS['Omniscience']
    
 
-	---- Precast Sets ----
-	
+	------------------------------------------------------------------------------------------------
+	---------------------------------------- Midcast Sets ------------------------------------------
+	------------------------------------------------------------------------------------------------
+
 	sets.midcast.FastRecast = {
 		head="Amalric Coif",
 		hands="Gende. Gages +1",
@@ -308,7 +331,9 @@ function init_gear_sets()
 		back=gear.SCH_FC_Cape,
 		})
 	
-	sets.midcast.Refresh = set_combine(sets.midcast['Enhancing Magic'], {
+	sets.midcast.Haste = sets.midcast.EnhancingDuration
+
+	sets.midcast.Refresh = set_combine(sets.midcast.EnhancingDuration, {
 		waist="Gishdubar Sash",
 		back="Grapevine Cape",
 		})
@@ -390,7 +415,7 @@ function init_gear_sets()
 		ear1="Barkaro. Earring",
 		ear2="Friomisi Earring",
 		ring1="Shiva Ring +1",
-		ring2="Shiva Ring +1",
+		ring2="Archon Ring",
 		back=gear.SCH_MAB_Cape,
 		waist="Yamabuki-no-Obi",
 		}
@@ -471,7 +496,7 @@ function init_gear_sets()
 	sets.midcast.Trust = sets.precast.FC
 	
 	------------------------------------------------------------------------------------------------
-	------------------------------------------ Idle Sets -------------------------------------------
+	----------------------------------------- Idle Sets --------------------------------------------
 	------------------------------------------------------------------------------------------------
 	
 	sets.idle = {
@@ -563,7 +588,7 @@ function init_gear_sets()
 		neck="Combatant's Torque",
 		ear1="Cessance Earring",
 		ear2="Brutal Earring",
-		ring1="Ramuh Ring +1",
+		ring1="Chirich Ring",
 		ring2="Ramuh Ring +1",
 		waist="Grunfeld Rope",
 		back="Relucent Cape",
@@ -605,6 +630,8 @@ function init_gear_sets()
 		}
 	
 	sets.Obi = {waist="Hachirin-no-Obi"}
+	sets.Bookworm = {back="Bookworm's Cape"}
+	sets.CP = {back="Mecisto. Mantle"}
 
 end
 
@@ -622,6 +649,9 @@ function job_post_midcast(spell, action, spellMap, eventArgs)
 				equip(sets.midcast.LightHelix)
 			elseif spell.english:startswith('Nocto') then
 				equip(sets.midcast.DarkHelix)
+			end
+			if state.HelixMode.value == 'Bookworm' then
+				equip(sets.Bookworm)
 			end
 		end
 		if (spell.element == world.day_element or spell.element == world.weather_element) then
@@ -706,9 +736,14 @@ function customize_idle_set(idleSet)
 			idleSet = set_combine(idleSet, sets.buff.PDTSublimation)
 		end
 	end
-
 	if player.mpp < 51 then
 		idleSet = set_combine(idleSet, sets.latent_refresh)
+	end
+	if state.CP.current == 'on' then
+		equip(sets.CP)
+		disable('back')
+	else
+		enable('back')
 	end
 
 	return idleSet
@@ -889,4 +924,8 @@ end
 -- Select default macro book on initial load or subjob change.
 function select_default_macro_book()
 	set_macro_page(1, 9)
+end
+
+function set_lockstyle()
+	send_command('wait 2; input /lockstyleset 12')
 end

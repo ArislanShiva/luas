@@ -1,4 +1,20 @@
 -------------------------------------------------------------------------------------------------------------------
+-- (Original: Motenten / Modified: Arislan)
+-------------------------------------------------------------------------------------------------------------------
+
+--[[	Custom Features:
+
+		Rune Selector		Cycle through available runes and trigger with a single macro [Ctl-`]
+		Knockback Mode		Equips knockback prevention gear (Ctl-[)
+		Death Mode			Equips death prevention gear (Ctl-])
+		Auto. Doom			Automatically equips cursna received gear on doom status
+		Capacity Pts. Mode	Capacity Points Mode Toggle [WinKey-C]
+		Reive Detection		Automatically equips Reive bonus gear
+		Auto. Lockstyle		Automatically locks specified equipset on file load
+--]]
+
+
+-------------------------------------------------------------------------------------------------------------------
 -- Setup functions for this job.  Generally should not be modified.
 -------------------------------------------------------------------------------------------------------------------
 
@@ -72,6 +88,7 @@ function user_setup()
 	send_command('bind @c gs c toggle CP')
 	
 	select_default_macro_book()
+	set_lockstyle()
 end
 
 function user_unload()
@@ -177,7 +194,7 @@ function init_gear_sets()
 		})
 
 	sets.precast.FC.Utsusemi = set_combine(sets.precast.FC, {
-		ammo="Staunch Tathlum",
+		ammo="Impatiens",
 		neck="Magoraga Beads",
 		ring1="Lebeche Ring",
 		waist="Ninurta's Sash",
@@ -527,13 +544,13 @@ function init_gear_sets()
 		hands=gear.Herc_TA_hands,
 		feet=gear.Herc_TA_feet,
 		neck="Combatant's Torque",
+		ring1="Chirich Ring",
 		})
 
 	sets.engaged.MidAcc = set_combine(sets.engaged.LowAcc, {
 		ammo="Falcon Eye",
 		legs="Adhemar Kecks",
 		ear2="Odnowa Earring +1",
-		ring1="Ramuh Ring +1",
 		})
 
 	sets.engaged.HighAcc = set_combine(sets.engaged.MidAcc, {
@@ -541,6 +558,7 @@ function init_gear_sets()
 		legs="Carmine Cuisses +1",
 		ear1="Mache Earring",
 		ear2="Zennaroi Earring",
+		ring1="Ramuh Ring +1",
 		ring2="Ramuh Ring +1",
 		waist="Kentarch Belt +1",
 		})
@@ -711,27 +729,27 @@ function display_current_job_state(eventArgs)
 	
 	msg = msg .. state.OffenseMode.value
 	if state.HybridMode.value ~= 'Normal' then
-		msg = msg .. '/' .. state.HybridMode.value
+		msg = msg .. '/' .. state.HybridMode.value .. ' ]'
 	end
-	msg = msg .. ' ][ WS: ' .. state.WeaponskillMode.value
+	msg = msg .. '[ WS: ' .. state.WeaponskillMode.value .. ' ]'
 	
 	if state.DefenseMode.value ~= 'None' then
-		msg = msg .. ' ][ Defense: ' .. state.DefenseMode.value .. state[state.DefenseMode.value .. 'DefenseMode'].value
+		msg = msg .. '[ Defense: ' .. state.DefenseMode.value .. state[state.DefenseMode.value .. 'DefenseMode'].value .. ' ]'
 	end
 	
 	if state.Knockback.value == true then
-        msg = msg .. ' ][ Knockback: ON'
+        msg = msg .. '[ Knockback: ON ]'
     end
 	
 	if state.Death.value == true then
-        msg = msg .. ' ][ Death: ON'
+        msg = msg .. '[ Death: ON ]'
     end
 
 	if state.Kiting.value then
-		msg = msg .. ' ][ Kiting Mode: ON'
+		msg = msg .. '[ Kiting Mode: ON ]'
 	end
 	
-	msg = msg .. ' ][ *Rune: '..state.Runes.current .. '* ]'
+	msg = msg .. '[ *Rune: '..state.Runes.current .. '* ]'
 	
 	add_to_chat(060, msg)
 
@@ -800,4 +818,8 @@ function select_default_macro_book()
 --	else
 		set_macro_page(1, 12)
 --	end
+end
+
+function set_lockstyle()
+	send_command('wait 2; input /lockstyleset 2')
 end

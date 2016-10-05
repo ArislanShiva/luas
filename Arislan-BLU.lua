@@ -1,3 +1,18 @@
+-------------------------------------------------------------------------------------------------------------------
+-- (Original: Motenten / Modified: Arislan)
+-------------------------------------------------------------------------------------------------------------------
+
+--[[	Custom Features:
+		
+		Magic Burst			Toggle Magic Burst Mode  [Alt-`]
+		Haste Detection		Detects current magic haste level and equips corresponding engaged set to
+							optimize delay reduction (automatic)
+		Haste Mode			Toggles between Haste II and Haste I recieved, used by Haste Detection [WinKey-H]
+		Capacity Pts. Mode	Capacity Points Mode Toggle [WinKey-C]
+		Reive Detection		Automatically equips Reive bonus gear
+		Auto. Lockstyle		Automatically locks specified equipset on file load
+--]]
+
 --------------------------------------------------------------------------------------------------------------------
 -- Setup functions for this job.  Generally should not be modified.
 -------------------------------------------------------------------------------------------------------------------
@@ -19,16 +34,11 @@ function job_setup()
 	state.Buff.Efflux = buffactive.Efflux or false
 	
 	state.Buff['Unbridled Learning'] = buffactive['Unbridled Learning'] or false
-	
 	blue_magic_maps = {}
 	
 	-- Mappings for gear sets to use for various blue magic spells.
 	-- While Str isn't listed for each, it's generally assumed as being at least
 	-- moderately signficant, even for spells with other mods.
-
-
-	-- *** Physical Spells *** --
-
 
 	-- Physical spells with no particular (or known) stat mods
 	blue_magic_maps.Physical = S{'Bilgestorm'}
@@ -65,10 +75,6 @@ function job_setup()
 
 	-- Physical spells with HP stat mod
 	blue_magic_maps.PhysicalHP = S{'Final Sting'}
-
-
-	-- *** Magical Spells *** --
-
 
 	-- Magical spells with the typical Int mod
 	blue_magic_maps.Magical = S{'Anvil Lightning','Blastbomb','Blazing Bound','Bomb Toss','Cursed Sphere',
@@ -136,7 +142,6 @@ function job_setup()
 	state.CP = M(false, "Capacity Points Mode")
 
 	determine_haste_group()
-
 end
 
 -------------------------------------------------------------------------------------------------------------------
@@ -145,59 +150,77 @@ end
 
 -- Setup vars that are user-dependent.  Can override this function in a sidecar file.
 function user_setup()
-	state.OffenseMode:options('Normal', 'LowAcc', 'MidAcc', 'HighAcc')
+	state.OffenseMode:options('STP', 'Normal', 'LowAcc', 'MidAcc', 'HighAcc')
 	state.HybridMode:options('Normal')
 	state.RangedMode:options('Normal', 'Acc')
 	state.WeaponskillMode:options('Normal', 'Acc')
 	state.PhysicalDefenseMode:options('PDT', 'MDT')
 	state.IdleMode:options('Normal', 'DT', 'Learning')
 
+	state.MagicBurst = M(false, 'Magic Burst')
 	state.CP = M(false, "Capacity Points Mode")
 
 	-- Additional local binds
 	send_command('bind ^` input /ma "Sudden Lunge" <t>')
-	send_command('bind !` input /ma "Mighty Guard" <me>')
+	send_command('bind !` gs c toggle MagicBurst')
+	send_command('bind ^- input /ja "Chain Affinity" <me>')
+	send_command('bind ^[ input /ja "Efflux" <me>')
+	send_command('bind ^= input /ja "Burst Affinity" <me>')
 	send_command('bind ![ input /ja "Diffusion" <me>')
 	send_command('bind !] input /ja "Unbridled Learning" <me>')
-	send_command('bind !q input /ma "Nat. Meditation" <me>')
-	send_command('bind !w input /ma "Cocoon" <me>')
 	send_command('bind !e input /ma "Erratic Flutter" <me>')
-	send_command('bind !r input /ma "Battery Charge" <me>')
 	send_command('bind !t input /ma "Occultation" <me>')
-	send_command('bind !y input /ma "Barrier Tusk" <me>')
---	send_command('bind !u input /ma "Diamondhide" <me>')
---	send_command('bind !o input /ma "Regeneration" <me>')
-	send_command('bind !p input /ma "Reactor Cool" <me>')
+
+	if player.sub_job == "RDM" then	
+		send_command('bind !q input /ma "Memento Mori" <me>')
+		send_command('bind !w input /ma "Reactor Cool" <me>')
+		send_command('bind !r input /ma "Refresh" <stpc>')
+		send_command('bind !y input /ma "Phalanx" <me>')
+		send_command('bind !u input /ma "Stoneskin" <me>')
+	else
+		send_command('bind !q input /ma "Nat. Meditation" <me>')
+		send_command('bind !w input /ma "Cocoon" <me>')
+		send_command('bind !r input /ma "Battery Charge" <me>')
+		send_command('bind !y input /ma "Barrier Tusk" <me>')
+		send_command('bind !u input /ma "Diamondhide" <me>')
+	end
+	
+	send_command('bind !p input /ma "Mighty Guard" <me>')
+	
 	if player.sub_job == 'DNC' then
 		send_command('bind ^, input /ja "Spectral Jig" <me>')
 		send_command('unbind ^.')
-	elseif player.sub_job == "RDM" or player.sub_job == "WHM" then
+	elseif player.sub_job == "RDM" then
 		send_command('bind ^, input /ma "Sneak" <stpc>')
 		send_command('bind ^. input /ma "Invisible" <stpc>')
 	else
 		send_command('bind ^, input /item "Silent Oil" <me>')
 		send_command('bind ^. input /item "Prism Powder" <me>')
 	end
+	
 	send_command('bind @c gs c toggle CP')
 	send_command('bind @h gs c cycle HasteMode')
 
 	select_default_macro_book()
+	set_lockstyle()
 end
 
 -- Called when this job file is unloaded (eg: job change)
 function user_unload()
 	send_command('unbind ^`')
 	send_command('unbind !`')
+	send_command('unbind ^-')
+	send_command('unbind ^=')
+	send_command('unbind ^[')
 	send_command('unbind ![')
 	send_command('unbind !]')
 	send_command('unbind !q')
 	send_command('unbind !w')
 	send_command('bind !e input /ma Haste <stpc>')
-	send_command('bind !r input /ma Refresh <stpc>')
 	send_command('bind !t input /ma Blink <me>')
+	send_command('bind !r input /ma Refresh <stpc>')
 	send_command('bind !y input /ma Phalanx <me>')
---	send_command('bind !u input /ma Stoneskin <me>')
---	send_command('unbind !o')
+	send_command('bind !u input /ma Stoneskin <me>')
 	send_command('unbind !p')
 	send_command('unbind ^,')
 	send_command('unbind @c')
@@ -206,9 +229,6 @@ end
 
 -- Define sets and vars used by this job file.
 function init_gear_sets()
-	--------------------------------------
-	-- Start defining the sets
-	--------------------------------------
 
 	-- Enmity set
 	sets.Enmity = {
@@ -224,19 +244,20 @@ function init_gear_sets()
 		waist="Trance Belt", --4
 		}
 
-	--------------------------------------
-	-- Precast sets
-	--------------------------------------
+	------------------------------------------------------------------------------------------------
+	---------------------------------------- Precast Sets ------------------------------------------
+	------------------------------------------------------------------------------------------------
 
 	-- Precast sets to enhance JAs
 
-	--sets.precast.JA['Burst Affinity'] = {feet="Hashi. Basmak +1"}
-	sets.buff['Chain Affinity'] = {feet="Assim. Charuqs +1"}
-	sets.buff.Convergence = {head="Luh. Keffiyeh +1"}
-	sets.precast.JA['Diffusion'] = {feet="Luhlaza Charuqs +1"}
-	--sets.buff.Enchainment = {body="Luhlaza Jubbah +1"}
-	sets.precast.JA['Efflux'] = {legs="Hashishin Tayt +1"}
+	sets.buff['Burst Affinity'] = {feet="Hashi. Basmak +1"}
+	sets.buff['Diffusion'] = {feet="Luhlaza Charuqs +1"}
+	sets.buff['Efflux'] = {legs="Hashishin Tayt +1"}
+
 	sets.precast.JA['Azure Lore'] = {hands="Luhlaza Bazubands"}
+	sets.precast.JA['Chain Affinity'] = {feet="Assim. Charuqs +1"}
+	--sets.precast.JA['Convergence'] = {head="Luh. Keffiyeh +1"}
+	--sets.precast.JA['Enchainment'] = {body="Luhlaza Jubbah +1"}
 
 	sets.precast.FC = {
 		-- Tanmoygayi +1 6 / Colada 4
@@ -257,9 +278,13 @@ function init_gear_sets()
 
 	sets.precast.FC['Blue Magic'] = set_combine(sets.precast.FC, {body="Hashishin Mintan +1"})
 	sets.precast.FC['Enhancing Magic'] = set_combine(sets.precast.FC, {waist="Siegel Sash"})
-	sets.precast.FC.Cures = set_combine(sets.precast.FC, {ear2="Mendi. Earring"})
+	sets.precast.FC.Cures = set_combine(sets.precast.FC, {ammo="Impatiens", ear2="Mendi. Earring"})
 
-	-- Weaponskill Sets
+	
+	------------------------------------------------------------------------------------------------
+	------------------------------------- Weapon Skill Sets ----------------------------------------
+	------------------------------------------------------------------------------------------------
+
 	sets.precast.WS = {
 		ammo="Focal Orb",
 		head="Lilitu Headpiece",
@@ -344,15 +369,12 @@ function init_gear_sets()
 		waist="Fotia Belt",
 		}
 
-	sets.precast.WS['True Strike']= set_combine(sets.precast.WS['Savage Blade'], {
-		ring1="Ifrit Ring +1"
-		})
-
-	sets.precast.WS['True Strike'].Acc = sets.precast.WS['True Strike']
-	sets.precast.WS['Judgment'] = sets.precast.WS['Savage Blade']
-	sets.precast.WS['Judgment'].Acc = sets.precast.WS['Judgment']
-	sets.precast.WS['Black Halo'] = sets.precast.WS['Savage Blade']
-	sets.precast.WS['Black Halo'] = sets.precast.WS['Black Halo']
+	sets.precast.WS['True Strike']= set_combine(sets.precast.WS['Savage Blade'], {ring1="Ifrit Ring +1"})
+	sets.precast.WS['True Strike'].Acc = sets.precast.WS['Savage Blade'].Acc
+	sets.precast.WS['Judgment'] = sets.precast.WS['True Strike']
+	sets.precast.WS['Judgment'].Acc = sets.precast.WS['True Strike'].Acc
+	sets.precast.WS['Black Halo'] = sets.precast.WS['True Strike']
+	sets.precast.WS['Black Halo'].Acc = sets.precast.WS['True Strike'].Acc
 	sets.precast.WS['Realmrazer'] = sets.precast.WS['Requiescat']
 	sets.precast.WS['Realmrazer'].Acc = sets.precast.WS['Requiescat'].Acc
 	
@@ -361,9 +383,9 @@ function init_gear_sets()
 		ring1="Levia. Ring +1"
 		})
 
-	--------------------------------------
-	-- Midcast sets
-	--------------------------------------
+	------------------------------------------------------------------------------------------------
+	---------------------------------------- Midcast Sets ------------------------------------------
+	------------------------------------------------------------------------------------------------
 
 	sets.midcast.FastRecast = set_combine(sets.precast.FC, {
 		head="Carmine Mask +1",
@@ -450,7 +472,7 @@ function init_gear_sets()
 		ring2="Shiva Ring +1",
 		back="Cornflower Cape",
 		waist="Eschan Stone",
-	}
+		}
 
 	sets.midcast['Blue Magic'].Magical.Resistant = set_combine(sets.midcast['Blue Magic'].Magical, {	
 		neck="Sanctity Necklace",
@@ -563,9 +585,9 @@ function init_gear_sets()
 	sets.midcast.Shellra = sets.midcast.Protect
 
 
-	--------------------------------------
-	-- Idle/resting/defense sets
-	--------------------------------------
+	------------------------------------------------------------------------------------------------
+	----------------------------------------- Idle Sets --------------------------------------------
+	------------------------------------------------------------------------------------------------
 
 	-- Resting sets
 	sets.resting = {}
@@ -619,22 +641,16 @@ function init_gear_sets()
 
 	sets.idle.Learning = set_combine(sets.idle, sets.Learning)
 
-	-- Defense sets
+	------------------------------------------------------------------------------------------------
+	---------------------------------------- Defense Sets ------------------------------------------
+	------------------------------------------------------------------------------------------------
 
 	sets.defense.PDT = sets.idle.DT
 	sets.defense.MDT = sets.idle.DT
 
-	sets.magic_burst = set_combine(sets.midcast.Magical, {
-		body="Samnuha Coat",
-		feet="Jhakri Pigaches +1",
-		ear2="Static Earring",
-		ring2="Mujin Band",
-		back="Seshaw Cape",
-		})
-
-	--------------------------------------
-	-- Melee sets
-	--------------------------------------
+	------------------------------------------------------------------------------------------------
+	---------------------------------------- Engaged Sets ------------------------------------------
+	------------------------------------------------------------------------------------------------
 
 	-- Engaged sets
 
@@ -661,16 +677,17 @@ function init_gear_sets()
 		neck="Asperity Necklace", 
 		ear1="Eabani Earring", --4
 		ear2="Suppanomimi", --5
-		ring1="Petrov Ring",
+		ring1="Hetairoi Ring",
 		ring2="Epona's Ring",
 		back=gear.BLU_CDC_Cape,
-		waist="Windbuffet Belt +1",
-		} -- 59% (29% Gear)
+		waist="Shetal Stone", --6
+		} -- 65% (35% Gear)
 		
 	sets.engaged.LowAcc = set_combine(sets.engaged, {
 		ammo="Falcon Eye",
 		hands=gear.Herc_TA_hands,
 		neck="Combatant's Torque",
+		ring1="Chirich Ring",
 		})
 
 	sets.engaged.MidAcc = set_combine(sets.engaged.LowAcc, {
@@ -689,9 +706,13 @@ function init_gear_sets()
 		waist="Olseni Belt",
 		})
 
-	sets.engaged.Fodder = set_combine(sets.engaged, {
-		body="Thaumas Coat",
-		waist="Sinew Belt",
+	sets.engaged.STP = set_combine(sets.engaged, {
+		feet="Carmine Greaves +1",
+		neck="Ainia Collar",
+		ear1="Cessance Earring",
+		ear2="Dedition Earring",
+		ring1="Petrov Ring",
+		waist="Kentarch Belt +1",
 		})
 
 	-- 15% Magic Haste (66% DW to cap)
@@ -705,16 +726,17 @@ function init_gear_sets()
 		neck="Asperity Necklace", 
 		ear1="Eabani Earring", --4
 		ear2="Suppanomimi", --5
-		ring1="Petrov Ring",
+		ring1="Hetairoi Ring",
 		ring2="Epona's Ring",
 		back=gear.BLU_CDC_Cape,
-		waist="Windbuffet Belt +1",
-		} -- 59% (29% Gear)
+		waist="Shetal Stone", --6
+		} -- 65% (35% Gear)
 
 	sets.engaged.LowHaste.LowAcc = set_combine(sets.engaged.LowHaste, {
 		ammo="Falcon Eye",
 		hands=gear.Herc_TA_hands,
 		neck="Combatant's Torque",
+		ring1="Chirich Ring",
 		})
 
 	sets.engaged.LowHaste.MidAcc = set_combine(sets.engaged.LowHaste.LowAcc, {
@@ -733,9 +755,13 @@ function init_gear_sets()
 		waist="Olseni Belt",
 		})
 
-	sets.engaged.LowHaste.Fodder = set_combine(sets.engaged.LowHaste, {
-		body="Thaumas Coat",
-		waist="Sinew Belt",
+	sets.engaged.LowHaste.STP = set_combine(sets.engaged.LowHaste, {
+		feet="Carmine Greaves +1",
+		neck="Ainia Collar",
+		ear1="Cessance Earring",
+		ear2="Dedition Earring",
+		ring1="Petrov Ring",
+		waist="Kentarch Belt +1",
 		})
 
 	-- 30% Magic Haste (55% DW to cap)
@@ -749,7 +775,7 @@ function init_gear_sets()
 		neck="Asperity Necklace", 
 		ear1="Eabani Earring", --4
 		ear2="Suppanomimi", --5
-		ring1="Petrov Ring",
+		ring1="Hetairoi Ring",
 		ring2="Epona's Ring",
 		back=gear.BLU_CDC_Cape,
 		waist="Windbuffet Belt +1",
@@ -759,6 +785,7 @@ function init_gear_sets()
 		ammo="Falcon Eye",
 		hands=gear.Herc_TA_hands,
 		neck="Combatant's Torque",
+		ring1="Chirich Ring",
 		})
 
 	sets.engaged.MidHaste.MidAcc = set_combine(sets.engaged.MidHaste.LowAcc, {
@@ -779,9 +806,13 @@ function init_gear_sets()
 		waist="Olseni Belt",
 		})
 
-	sets.engaged.MidHaste.Fodder = set_combine(sets.engaged.MidHaste, {
-		body="Thaumas Coat",
-		waist="Sinew Belt",
+	sets.engaged.MidHaste.STP = set_combine(sets.engaged.MidHaste, {
+		feet="Carmine Greaves +1",
+		neck="Ainia Collar",
+		ear1="Cessance Earring",
+		ear2="Dedition Earring",
+		ring1="Petrov Ring",
+		waist="Kentarch Belt +1",
 		})
 		
 	-- 35% Magic Haste (50% DW to cap)
@@ -795,7 +826,7 @@ function init_gear_sets()
 		neck="Asperity Necklace", 
 		ear1="Eabani Earring", --4
 		ear2="Brutal Earring",
-		ring1="Petrov Ring",
+		ring1="Hetairoi Ring",
 		ring2="Epona's Ring",
 		back=gear.BLU_CDC_Cape,
 		waist="Windbuffet Belt +1",
@@ -805,6 +836,7 @@ function init_gear_sets()
 		hands=gear.Herc_TA_hands,
 		neck="Combatant's Torque",
 		waist="Kentarch Belt +1",
+		ring1="Chirich Ring",
 		})
 
 	sets.engaged.HighHaste.MidAcc = set_combine(sets.engaged.HighHaste.LowAcc, {
@@ -823,9 +855,13 @@ function init_gear_sets()
 		waist="Olseni Belt",
 		})
 
-	sets.engaged.HighHaste.Fodder = set_combine(sets.engaged.HighHaste, {
-		body="Thaumas Coat",
-		waist="Sinew Belt",
+	sets.engaged.HighHaste.STP = set_combine(sets.engaged.HighHaste, {
+		feet="Carmine Greaves +1",
+		neck="Ainia Collar",
+		ear1="Cessance Earring",
+		ear2="Dedition Earring",
+		ring1="Petrov Ring",
+		waist="Kentarch Belt +1",
 		})
 
 	-- 47% Magic Haste (36% DW to cap)
@@ -839,7 +875,7 @@ function init_gear_sets()
 		neck="Asperity Necklace",
 		ear1="Eabani Earring", --4
 		ear2="Brutal Earring",
-		ring1="Petrov Ring",
+		ring1="Hetairoi Ring",
 		ring2="Epona's Ring",
 		back=gear.BLU_CDC_Cape,
 		waist="Windbuffet Belt +1",
@@ -849,6 +885,7 @@ function init_gear_sets()
 		ammo="Falcon Eye",
 		hands=gear.Herc_TA_hands,
 		neck="Combatant's Torque",
+		ring1="Chirich Ring",
 		})
 
 	sets.engaged.MaxHaste.MidAcc = set_combine(sets.engaged.MaxHaste.LowAcc, {
@@ -867,16 +904,32 @@ function init_gear_sets()
 		waist="Olseni Belt",
 		})
 
-	sets.engaged.MaxHaste.Fodder = set_combine(sets.engaged.MaxHaste, {
-		body="Thaumas Coat",
-		waist="Sinew Belt",
+	sets.engaged.MaxHaste.STP = set_combine(sets.engaged.MaxHaste, {
+		feet="Carmine Greaves +1",
+		neck="Ainia Collar",
+		ear1="Cessance Earring",
+		ear2="Dedition Earring",
+		ring1="Petrov Ring",
+		waist="Kentarch Belt +1",
 		})
 
-	-- Buff sets: Gear that needs to be worn to actively enhance a current player buff.
+	------------------------------------------------------------------------------------------------
+	---------------------------------------- Special Sets ------------------------------------------
+	------------------------------------------------------------------------------------------------
+
+	sets.magic_burst = set_combine(sets.midcast['Blue Magic'].Magical, {
+		body="Samnuha Coat", --(8)
+		hands="Amalric Gages", --(5)
+		feet="Jhakri Pigaches +1", --5
+		ear2="Static Earring", --5
+		ring1="Mujin Band", --(5)
+		back="Seshaw Cape", --5
+		})
+
 	sets.Kiting = {legs="Carmine Cuisses +1"}
 	sets.Learning = {hands="Assim. Bazu."}
 	sets.latent_refresh = {waist="Fucho-no-obi"}
-	
+
 	sets.CP = {back="Mecisto. Mantle"}
 	sets.Reive = {neck="Ygnas's Resolve +1"}
 
@@ -1004,6 +1057,10 @@ function display_current_job_state(eventArgs)
 		msg = msg .. '[ Defense: ' .. state.DefenseMode.value .. state[state.DefenseMode.value .. 'DefenseMode'].value .. ' ]'
 	end
 
+	if state.IdleMode.value ~= 'None' then
+		msg = msg .. '[ Idle: ' .. state.IdleMode.value .. ' ]'
+	end
+
 	msg = msg .. '[ ' .. state.HasteMode.value .. ' ]'
 	
 	if state.Kiting.value then
@@ -1086,7 +1143,10 @@ end
 
 -- State buff checks that will equip buff gear and mark the event as handled.
 function apply_ability_bonuses(spell, action, spellMap)
-	if state.Buff['Burst Affinity'] and (spellMap == 'Magical' or spellMap == 'DarkBlue' or spellMap == 'LightBlue' or spellMap == 'Breath') then
+	if state.Buff['Burst Affinity'] and (spellMap == 'Magical' or spellMap == 'MagicalLight' or spellMap == 'MagicalDark' or spellMap == 'Breath') then
+		if state.MagicBurst.value then
+			equip(sets.magic_burst)
+		end
 		equip(sets.buff['Burst Affinity'])
 	end
 	if state.Buff.Efflux and spellMap == 'Physical' then
@@ -1112,4 +1172,8 @@ function select_default_macro_book()
 	else
 		set_macro_page(1, 10)
 	end
+end
+
+function set_lockstyle()
+	send_command('wait 2; input /lockstyleset 3')
 end

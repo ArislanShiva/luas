@@ -1,4 +1,15 @@
 -------------------------------------------------------------------------------------------------------------------
+-- (Original: Motenten / Modified: Arislan)
+-------------------------------------------------------------------------------------------------------------------
+
+--[[	Custom Features:
+		
+		Magic Burst			Toggle Magic Burst Mode  [Alt-`]
+		Capacity Pts. Mode	Capacity Points Mode Toggle [WinKey-C]
+		Auto. Lockstyle		Automatically locks desired equipset on file load
+--]]
+
+-------------------------------------------------------------------------------------------------------------------
 -- Setup functions for this job.  Generally should not be modified.
 -------------------------------------------------------------------------------------------------------------------
 
@@ -14,6 +25,9 @@ end
 function job_setup()
 	indi_timer = ''
 	indi_duration = 180
+
+	state.CP = M(false, "Capacity Points Mode")
+	
 end
 
 -------------------------------------------------------------------------------------------------------------------
@@ -42,6 +56,7 @@ function user_setup()
 	send_command('bind ^. input /ma Invisible <stpc>')
 	
 	select_default_macro_book()
+	set_lockstyle()
 end
 
 function user_unload()
@@ -513,7 +528,7 @@ function init_gear_sets()
 		neck="Combatant's Torque",
 		ear1="Cessance Earring",
 		ear2="Brutal Earring",
-		ring1="Ramuh Ring +1",
+		ring1="Chirich Ring",
 		ring2="Ramuh Ring +1",
 		waist="Grunfeld Rope",
 		back="Relucent Cape",
@@ -535,6 +550,7 @@ function init_gear_sets()
 		}
 
 	sets.Obi = {waist="Hachirin-no-Obi"}
+	sets.CP = {back="Mecisto. Mantle"}
 
 end
 
@@ -632,6 +648,13 @@ function customize_idle_set(idleSet)
 	if player.mpp < 51 then
 		idleSet = set_combine(idleSet, sets.latent_refresh)
 	end
+	if state.CP.current == 'on' then
+		equip(sets.CP)
+		disable('back')
+	else
+		enable('back')
+	end
+
 	return idleSet
 end
 
@@ -663,4 +686,8 @@ end
 -- Select default macro book on initial load or subjob change.
 function select_default_macro_book()
 	set_macro_page(10, 3)
+end
+
+function set_lockstyle()
+	send_command('wait 2; input /lockstyleset 13')
 end
