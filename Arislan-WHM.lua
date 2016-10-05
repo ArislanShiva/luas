@@ -1,4 +1,14 @@
 -------------------------------------------------------------------------------------------------------------------
+-- (Original: Motenten / Modified: Arislan)
+-------------------------------------------------------------------------------------------------------------------
+
+--[[	Custom Features:
+		
+		Capacity Pts. Mode	Capacity Points Mode Toggle [WinKey-C]
+		Auto. Lockstyle		Automatically locks desired equipset on file load
+--]]
+
+-------------------------------------------------------------------------------------------------------------------
 -- Setup functions for this job.  Generally should not be modified.
 -------------------------------------------------------------------------------------------------------------------
 
@@ -41,6 +51,7 @@ function user_setup()
 	send_command('bind @c gs c toggle CP')
 
 	select_default_macro_book()
+	set_lockstyle()
 end
 
 function user_unload()
@@ -487,7 +498,7 @@ function init_gear_sets()
 		neck="Combatant's Torque",
 		ear1="Cessance Earring",
 		ear2="Brutal Earring",
-		ring1="Ramuh Ring +1",
+		ring1="Chirich Ring",
 		ring2="Ramuh Ring +1",
 		waist="Grunfeld Rope",
 		back="Aurist's Cape +1",
@@ -622,4 +633,8 @@ end
 function select_default_macro_book()
 	-- Default macro set/book
 	set_macro_page(1, 4)
+end
+
+function set_lockstyle()
+	send_command('wait 2; input /lockstyleset 11')
 end
