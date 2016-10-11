@@ -36,17 +36,12 @@ end
 
 -- Setup vars that are user-dependent.  Can override this function in a sidecar file.
 function user_setup()
-	state.OffenseMode:options('None', 'Normal')
+	state.OffenseMode:options('Normal', 'Acc')
 	state.CastingMode:options('Normal', 'Seidr', 'Resistant')
 	state.IdleMode:options('Normal', 'DT')
 
+	state.WeaponLock = M(false, 'Weapon Lock')	
 	state.MagicBurst = M(false, 'Magic Burst')
-	state.MPCoat = M(false, 'MP Coat')
-	
-	gear.default.weaponskill_waist = "Windbuffet Belt +1"
-	gear.default.obi_waist = "Refoccilation Stone"
-	gear.default.obi_back = "Bookworm's Cape"
-	gear.MPCoat = "Seidr Cotehardie"
 
 	-- Additional local binds
 	send_command('bind ^` input /ja "Full Circle" <me>')
@@ -54,6 +49,8 @@ function user_setup()
 	send_command('bind !w input /ma "Aspir III" <t>')
 	send_command('bind ^, input /ma Sneak <stpc>')
 	send_command('bind ^. input /ma Invisible <stpc>')
+	send_command('bind @c gs c toggle CP')
+	send_command('bind @w gs c toggle WeaponLock')
 	
 	select_default_macro_book()
 	set_lockstyle()
@@ -65,6 +62,8 @@ function user_unload()
 	send_command('unbind !w')
 	send_command('unbind ^,')
 	send_command('unbind !.')
+	send_command('unbind @c')
+	send_command('unbind @w')
 end
 
 
@@ -162,8 +161,7 @@ function init_gear_sets()
 		ear1="Loquacious Earring",
 		ear2="Etiolation Earring",
 		ring1="Prolix Ring",
-		back="Swith Cape +1",
-		waist="Witful Belt",
+		back="Lifestream Cape",
 		} -- Haste
 	
    sets.midcast.Geomancy = {
@@ -610,13 +608,12 @@ function job_buff_change(buff, gain)
 	end
 end
 
+-- Handle notifications of general user state change.
 function job_state_change(stateField, newValue, oldValue)
-	if stateField == 'Offense Mode' then
-		if newValue == 'None' then
-			enable('main','sub','range')
-		else
-			disable('main','sub','range')
-		end
+	if state.WeaponLock.value == true then
+		disable('main','sub')
+	else
+		enable('main','sub')
 	end
 end
 

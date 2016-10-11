@@ -59,6 +59,7 @@ function user_setup()
 	state.PhysicalDefenseMode:options('PDT', 'HP', 'Parry', 'Critical')
 	state.MagicalDefenseMode:options('MDT', 'Status')
 	
+	state.WeaponLock = M(false, 'Weapon Lock')	
 	state.Knockback = M(false, 'Knockback')
 	state.Death = M(false, "Death Resistance")
 	state.CP = M(false, "Capacity Points Mode")
@@ -78,6 +79,7 @@ function user_setup()
 	send_command('bind !e input /ma "Refueling" <me>')
 	send_command('bind !o input /ma "Regen IV" <stpc>')
 	send_command('bind !p input /ma "Shock Spikes" <me>')
+	
 	if player.sub_job == 'DNC' then
 		send_command('bind ^, input /ja "Spectral Jig" <me>')
 		send_command('unbind ^.')
@@ -85,6 +87,8 @@ function user_setup()
 		send_command('bind ^, input /item "Silent Oil" <me>')
 		send_command('bind ^. input /item "Prism Powder" <me>')
 	end
+	
+	send_command('bind @w gs c toggle WeaponLock')
 	send_command('bind @c gs c toggle CP')
 	
 	select_default_macro_book()
@@ -105,6 +109,7 @@ function user_unload()
 	send_command('unbind !o')
 	send_command('unbind !p')
 	send_command('unbind ^,')
+	send_command('unbind @w')
 	send_command('unbind @c')
 end
 
@@ -185,6 +190,7 @@ function init_gear_sets()
 		ear2="Loquacious Earring", --2
 		ring1="Prolix Ring", --2
 		ring2="Weather. Ring", --5(3)
+		back=gear.RUN_HP_Cape, --10
 		waist="Ninurta's Sash",
 		}
 
@@ -197,7 +203,6 @@ function init_gear_sets()
 		ammo="Impatiens",
 		neck="Magoraga Beads",
 		ring1="Lebeche Ring",
-		waist="Ninurta's Sash",
 		})
 
 	-- Weaponskill sets
@@ -232,7 +237,8 @@ function init_gear_sets()
 	
 	sets.precast.WS['Dimidiation'] = set_combine(sets.precast.WS['Resolution'], {
 		legs="Lustratio Subligar",
-		feet="Lustratio Leggings",		
+		feet="Lustratio Leggings",
+		back=gear.RUN_TP_Cape,
 		waist="Ioskeha Belt",
 		})
 		
@@ -353,6 +359,7 @@ function init_gear_sets()
 	--------------------------------------
 
 	sets.idle = {
+		sub="Mensch Strap +1",
 		ammo="Homiliary",
 		head="Rawhide Mask",
 		body="Futhark Coat +1",
@@ -364,12 +371,13 @@ function init_gear_sets()
 		ear2="Infused Earring",
 		ring1="Paguroidea Ring",
 		ring2="Sheltered Ring",
-		back="Evasionist's Cape",
+		back=gear.RUN_HP_Cape,
 		waist="Flume Belt +1",
 		}
 
 	sets.idle.DT = {
-		-- Aettir (+5 PDTII) - Alber Strap 2/0 - Refined Grip 3/3
+		-- Aettir (+5 PDTII)
+		sub="Refined Grip +1", --3/3
 		ammo="Staunch Tathlum", --2/2
 		head="Erilaz Galea +1",
 		body="Erilaz Surcoat +1",
@@ -420,7 +428,8 @@ function init_gear_sets()
 		}
 
 	sets.defense.PDT = {
-		-- Aettir (+5 PDTII) - Alber Strap 2/0 - Refined Grip 3/3
+		-- Aettir (+5 PDTII)
+		sub="Refined Grip +1", --3/3
 		ammo="Staunch Tathlum", --2/2
 		head="Erilaz Galea +1",
 		body="Erilaz Surcoat +1",
@@ -436,8 +445,9 @@ function init_gear_sets()
 		}
 	
 	sets.defense.MDT = {
-		-- Aettir (+5 PDTII) - Alber Strap 2/0 - Refined Grip 3/3
-		ammo="Staunch Tathlum", --2/2
+		-- Aettir (+5 PDTII)
+		sub="Refined Grip +1", --3/3
+		ammo="Iron Gobbet",
 		head="Erilaz Galea +1",
 		body="Futhark Coat +1", --7/7
 		hands="Erilaz Gauntlets +1",
@@ -453,7 +463,8 @@ function init_gear_sets()
 		}
 
 	sets.defense.Status = {
-		-- Aettir (+5 PDTII) - Alber Strap 2/0 - Refined Grip 3/3
+		-- Aettir (+5 PDTII)
+		sub="Refined Grip +1", --3/3
 		ammo="Staunch Tathlum", --2/2
 		head=gear.Herc_DT_head, --3/3
 		body="Erilaz Surcoat +1",
@@ -462,7 +473,7 @@ function init_gear_sets()
 		feet="Erilaz Greaves +1", --5/0
 		neck="Loricate Torque +1", --6/6
 		ear1="Hearty Earring",
-		ear2="Odnowa Earring +1", --0/2
+		ear2="Impreg. Earring",
 		ring1="Gelatinous Ring +1", --7/(-1)
 		ring2="Defending Ring", --10/10
 		back="Evasionist's Cape", --7/4
@@ -470,7 +481,8 @@ function init_gear_sets()
 		}
 	
 	sets.defense.HP = {
-		-- Aettir (+5 PDTII) - Alber Strap 2/0 - Refined Grip 3/3
+		-- Aettir (+5 PDTII)
+		sub="Refined Grip +1", --3/3
 		ammo="Staunch Tathlum", --2/2
 		head="Erilaz Galea +1",
 		body="Erilaz Surcoat +1",
@@ -487,36 +499,38 @@ function init_gear_sets()
 		}
 
 	sets.defense.Parry = {
-		-- Aettir (+5 PDTII) - Alber Strap 2/0 - Refined Grip 3/3
+		-- Aettir (+5 PDTII)
+		sub="Refined Grip +1", --3/3
 		ammo="Staunch Tathlum", --2/2
 		head=gear.Herc_DT_head, --3/3
-		body="Futhark Coat +1", --7/7
-		hands="Meg. Gloves +1", --3/0
-		legs="Eri. Leg Guards +1", --7/0
-		feet="Erilaz Greaves +1", --5/0
-		neck="Combatant's Torque",
-		ear1="Etiolation Earring", --0/3
-		ear2="Odnowa Earring +1", --0/2
-		ring1="Gelatinous Ring +1", --7/(-1)
-		ring2="Defending Ring", --10/10
-		back="Ogma's Cape",
-		waist="Flume Belt +1", --4/0
-		}
-
-	sets.defense.Critical = {
-		-- Aettir (+5 PDTII) - Alber Strap 2/0 - Refined Grip 3/3
-		ammo="Iron Gobbet", --(2)
-		head="Erilaz Galea +1",
 		body="Futhark Coat +1", --7/7
 		hands="Erilaz Gauntlets +1",
 		legs="Eri. Leg Guards +1", --7/0
 		feet="Erilaz Greaves +1", --5/0
-		neck="Loricate Torque +1", --6/6
+		neck="Combatant's Torque",
 		ear1="Genmei Earring", --2/0
 		ear2="Odnowa Earring +1", --0/2
+		ring1="Gelatinous Ring +1", --7/(-1)
+		ring2="Defending Ring", --10/10
+		back=gear.RUN_HP_Cape,
+		waist="Flume Belt +1", --4/0
+		}
+
+	sets.defense.Critical = {
+		-- Aettir (+5 PDTII)
+		sub="Refined Grip +1", --3/3
+		ammo="Iron Gobbet", --(2)
+		head="Fu. Bandeau +1", -- 4/0
+		body="Futhark Coat +1", --7/7
+		hands="Runeist Mitons +1", --2/0
+		legs="Eri. Leg Guards +1", --7/0
+		feet="Erilaz Greaves +1", --5/0
+		neck="Loricate Torque +1", --6/6
+		ear1="Genmei Earring", --2/0
+		ear2="Impreg. Earring",
 		ring1="Fortified Ring", --0/5(7)
 		ring2="Defending Ring", --10/10
-		back="Evasionist's Cape", --7/4
+		back=gear.RUN_HP_Cape,
 		waist="Flume Belt +1", --4/0
 		}
 
@@ -525,6 +539,7 @@ function init_gear_sets()
 	--------------------------------------
 
 	sets.engaged = {
+		sub="Alber Strap",
 		ammo="Ginsen",
 		head="Dampening Tam",
 		body=gear.Herc_TA_body,
@@ -536,7 +551,7 @@ function init_gear_sets()
 		ear2="Dedition Earring",
 		ring1="Petrov Ring",
 		ring2="Epona's Ring",
-		back="Ogma's Cape",
+		back=gear.RUN_TP_Cape,
 		waist="Ioskeha Belt",
 		}
 
@@ -661,6 +676,15 @@ function job_buff_change(buff,gain)
 		enable('neck')
 	end
 end
+	
+-- Handle notifications of general user state change.
+function job_state_change(stateField, newValue, oldValue)
+	if state.WeaponLock.value == true then
+		disable('main','sub')
+	else
+		enable('main','sub')
+	end
+end
 
 -------------------------------------------------------------------------------------------------------------------
 -- User code that supplements standard library decisions.
@@ -685,6 +709,7 @@ function customize_idle_set(idleSet)
 	else
 		enable('back')
 	end
+
 	return idleSet
 end
 

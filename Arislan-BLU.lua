@@ -526,15 +526,16 @@ function init_gear_sets()
 	sets.midcast['Blue Magic'].Healing = {
 		ammo="Pemphredo Tathlum",
 		head="Carmine Mask +1", 
-		--body="Vrikodara Jupon",
-		hands="Telchine Gloves",
-		legs="Gyve Trousers",
-		feet="Medium's Sabots",
+		body="Vrikodara Jupon", -- 13
+		hands="Telchine Gloves", -- 10
+		legs="Gyve Trousers", -- 10
+		feet="Medium's Sabots", -- 12
 		neck="Incanter's Torque",
-		ear2="Mendi. Earring",
-		ring1="Asklepian Ring",
-		ring2="Valseur's Ring",
-		back="Solemnity Cape", 
+		ear1="Calamitous Earring",
+		ear2="Mendi. Earring", -- 5
+		ring1="Lebeche Ring", -- 3
+		ring2="Asklepian Ring",
+		back="Solemnity Cape", -- 7
 		waist="Gishdubar Sash",
 		}
 

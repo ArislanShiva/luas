@@ -42,8 +42,6 @@ function user_setup()
 	DefaultAmmo = {['Nobility'] = "Achiyal. Arrow", ['Doomsday'] = "Orichalc. Bullet"}
 	U_Shot_Ammo = {['Nobility'] = "Achiyal. Arrow", ['Doomsday'] = "Animikii Bullet"}
 
-	select_default_macro_book()
-
 	-- Additional local binds
 	send_command('bind ^` input /ja "Velocity Shot" <me>')
 	send_command('bind !` input /ja "Double Shot" <me>')
@@ -57,6 +55,8 @@ function user_setup()
 	end
 	send_command('bind @c gs c toggle CP')
 
+	select_default_macro_book()
+	set_lockstyle()
 end
 
 
@@ -417,6 +417,7 @@ function init_gear_sets()
 	sets.engaged.LowAcc = set_combine(sets.engaged, {
 		hands=gear.Herc_TA_hands,
 		legs=gear.Herc_TA_legs,
+		ring1="Chirich Ring",
 		waist="Kentarch Belt +1",
 		})
 
@@ -462,6 +463,7 @@ function init_gear_sets()
 	sets.engaged.HighHaste.LowAcc = set_combine(sets.engaged.HighHaste, {
 		hands=gear.Herc_TA_hands,
 		legs=gear.Herc_TA_legs,
+		ring1="Chirich Ring",
 		waist="Kentarch Belt +1",
 		})
 
@@ -506,6 +508,7 @@ function init_gear_sets()
 	sets.engaged.MaxHaste.LowAcc = set_combine(sets.engaged.HighHaste, {
 		hands=gear.Herc_TA_hands,
 		legs=gear.Herc_TA_legs,
+		ring1="Chirich Ring",
 		waist="Kentarch Belt +1",
 		})
 
@@ -785,4 +788,8 @@ function select_default_macro_book()
 	else
 		set_macro_page(1, 6)
 	end
+end
+
+function set_lockstyle()
+	send_command('wait 2; input /lockstyleset 1')
 end

@@ -52,6 +52,7 @@ function user_setup()
 
 --	select_movement_feet()
 	select_default_macro_book()
+	set_lockstyle()
 end
 
 function user_unload()
@@ -303,6 +304,7 @@ function init_gear_sets()
 		ammo="Falcon Eye",
 		hands=gear.Herc_TA_hands,
 		neck="Lissome Necklace",
+		ring1="Chirich Ring",
 		waist="Kentarch Belt +1",
 		})
 
@@ -347,6 +349,7 @@ function init_gear_sets()
 		ammo="Falcon Eye",
 		hands=gear.Herc_TA_hands,
 		neck="Lissome Necklace",
+		ring1="Chirich Ring",
 		waist="Kentarch Belt +1",
 		})
 
@@ -389,6 +392,7 @@ function init_gear_sets()
 		ammo="Falcon Eye",
 		hands=gear.Herc_TA_hands,
 		neck="Lissome Necklace",
+		ring1="Chirich Ring",
 		waist="Kentarch Belt +1",
 		})
 
@@ -621,4 +625,8 @@ function select_default_macro_book()
 	else
 		set_macro_page(1, 11)
 	end
+end
+
+function set_lockstyle()
+	send_command('wait 2; input /lockstyleset 4')
 end

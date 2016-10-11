@@ -219,6 +219,7 @@ function init_gear_sets()
 	sets.precast.FC.Utsusemi = set_combine(sets.precast.FC, {
 		neck="Magoraga Beads",
 		ring1="Lebeche Ring",
+		waist="Ninurta's Sash",
 		})
 
 	sets.precast.RA = {

@@ -32,10 +32,11 @@ end
 
 -- Setup vars that are user-dependent.  Can override this function in a sidecar file.
 function user_setup()
-	state.OffenseMode:options('None', 'Normal')
+	state.OffenseMode:options('Normal', 'Acc')
 	state.CastingMode:options('Normal', 'Resistant')
 	state.IdleMode:options('Normal', 'DT')
 	
+	state.WeaponLock = M(false, 'Weapon Lock')	
 	state.CP = M(false, "Capacity Points Mode")
 
 	-- Additional local binds
@@ -49,6 +50,7 @@ function user_setup()
 	send_command('bind ^, input /ma Sneak <stpc>')
 	send_command('bind ^. input /ma Invisible <stpc>')
 	send_command('bind @c gs c toggle CP')
+	send_command('bind @w gs c toggle WeaponLock')
 
 	select_default_macro_book()
 	set_lockstyle()
@@ -65,6 +67,7 @@ function user_unload()
 	send_command('unbind ^,')
 	send_command('unbind !.')
 	send_command('unbind @c')
+	send_command('unbind @w')
 end
 
 -- Define sets and vars used by this job file.
@@ -115,6 +118,7 @@ function init_gear_sets()
 	sets.precast.FC.Cure = set_combine(sets.precast.FC['Healing Magic'], {
 		main="Sucellus", --5
 		sub="Sors Shield", --5
+		ammo="Impatiens",
 		head="Piety Cap +1", --13
 		legs="Ebers Pant. +1", --13
 		feet="Vanya Clogs", --15
@@ -552,12 +556,10 @@ end
 
 -- Handle notifications of general user state change.
 function job_state_change(stateField, newValue, oldValue)
-	if stateField == 'Offense Mode' then
-		if newValue == 'Normal' then
-			disable('main','sub','range')
-		else
-			enable('main','sub','range')
-		end
+	if state.WeaponLock.value == true then
+		disable('main','sub')
+	else
+		enable('main','sub')
 	end
 end
 

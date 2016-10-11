@@ -38,7 +38,6 @@ function job_setup()
 	info.default_u_ja_ids = S{201, 202, 203, 205, 207}
 
 	determine_haste_group()
-
 end
 
 -------------------------------------------------------------------------------------------------------------------
@@ -71,6 +70,7 @@ function user_setup()
 	send_command('bind @c gs c toggle CP')
 
 	select_default_macro_book()
+	set_lockstyle()
 end
 
 -- Called when this job file is unloaded (eg: job change)
@@ -422,6 +422,7 @@ function init_gear_sets()
 		ammo="Falcon Eye",
 		hands=gear.Herc_TA_hands,
 		neck="Lissome Necklace",
+		ring1="Chirich Ring",
 		waist="Kentarch Belt +1",
 		})
 
@@ -465,6 +466,7 @@ function init_gear_sets()
 		ammo="Falcon Eye",
 		hands=gear.Herc_TA_hands,
 		neck="Lissome Necklace",
+		ring1="Chirich Ring",
 		waist="Kentarch Belt +1",
 		})
 
@@ -505,6 +507,7 @@ function init_gear_sets()
 		ammo="Falcon Eye",
 		hands=gear.Herc_TA_hands,
 		neck="Lissome Necklace",
+		ring1="Chirich Ring",
 		waist="Kentarch Belt +1",
 		})
 
@@ -809,3 +812,6 @@ function select_default_macro_book()
 	end
 end
 
+function set_lockstyle()
+	send_command('wait 2; input /lockstyleset 1')
+end

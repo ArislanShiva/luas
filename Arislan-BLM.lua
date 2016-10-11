@@ -36,10 +36,14 @@ end
 
 -- Setup vars that are user-dependent.  Can override this function in a sidecar file.
 function user_setup()
-	state.OffenseMode:options('None', 'Normal')
-	state.CastingMode:options('Normal', 'Spaekona', 'Resistant', 'DeathMode')
-	state.IdleMode:options('Normal', 'DT', 'DeathMode')
+	state.OffenseMode:options('Normal', 'Acc')
+	state.CastingMode:options('Normal', 'Spaekona', 'Resistant')
+	state.IdleMode:options('Normal', 'DT')
+
+	state.WeaponLock = M(false, 'Weapon Lock')	
 	state.MagicBurst = M(false, 'Magic Burst')
+	state.DeathMode = M(false, 'Death Mode')
+	state.CP = M(false, "Capacity Points Mode")
 
 	lowTierNukes = S{'Stone', 'Water', 'Aero', 'Fire', 'Blizzard', 'Thunder'}
 	
@@ -51,6 +55,9 @@ function user_setup()
 	send_command('bind !p input /ma "Shock Spikes" <me>')
 	send_command('bind ^, input /ma Sneak <stpc>')
 	send_command('bind ^. input /ma Invisible <stpc>')
+	send_command('bind @d gs c toggle DeathMode')
+	send_command('bind @c gs c toggle CP')
+	send_command('bind @w gs c toggle WeaponLock')
 
 	select_default_macro_book()
 	set_lockstyle()
@@ -60,12 +67,14 @@ end
 function user_unload()
 	send_command('unbind ^`')
 	send_command('unbind !`')
-	send_command('unbind @`')
 	send_command('unbind !q')
 	send_command('unbind !w')
 	send_command('unbind !p')
 	send_command('unbind ^,')
 	send_command('unbind !.')
+	send_command('unbind @d')
+	send_command('unbind @c')
+	send_command('unbind @w')
 end
 
 
@@ -138,6 +147,7 @@ function init_gear_sets()
 	sets.precast.FC.Cure = set_combine(sets.precast.FC, {
 		main="Sucellus", --5
 		sub="Sors Shield", --5
+		ammo="Impatiens",
 		feet="Vanya Clogs", --15
 		ear1="Mendi. Earring", --5
 		ring1="Lebeche Ring", --(2)
@@ -151,24 +161,6 @@ function init_gear_sets()
 		body="Twilight Cloak",
 		waist="Channeler's Stone",
 		})
-
-	sets.precast.Death = {
-		main="Grioavolr",
-		sub="Elder's Grip +1",
-		ammo="Ghastly Tathlum +1",
-		head="Pixie Hairpin +1",
-		body="Merlinic Jubbah", --10
-		hands="Amalric Gages", --(5)
-		legs="Amalric Slops",
-		feet="Merlinic Crackows", --11
-		neck="Mizu. Kubikazari", --10
-		ear1="Barkaro. Earring",
-		ear2="Static Earring", --5
-		ring1="Mephitas's Ring +1",
-		ring2="Archon Ring",
-		back=gear.BLM_Death_Cape, --5
-		waist="Yamabuki-no-Obi",
-		}
 
 	-- Weaponskill sets
 	-- Default set for any weaponskill that isn't any more specifically defined
@@ -230,7 +222,7 @@ function init_gear_sets()
 		ear1="Etiolation Earring",
 		ear2="Loquacious Earring",
 		ring1="Prolix Ring",
-		back="Swith Cape +1",
+		back="Bane Cape",
 		waist="Witful Belt",
 		} -- Haste
 
@@ -243,7 +235,7 @@ function init_gear_sets()
 		hands="Telchine Gloves", --10
 		legs="Gyve Trousers", --10
 		feet="Medium's Sabots", --12
-		neck="Incanter's Torque",
+		neck="Nodens Gorget", --5
 		ear1="Mendi. Earring", --5
 		ear2="Roundel Earring", --5
 		ring1="Lebeche Ring", --3/(-5)
@@ -336,7 +328,8 @@ function init_gear_sets()
 		ring1="Stikini Ring",
 		ring2="Stikini Ring",
 		back="Aurist's Cape +1",
-		waist="Luminary Sash",
+		waist="Casso Sash",
+--		waist="Luminary Sash",
 		} -- MND/Magic accuracy
 
 	sets.midcast.IntEnfeebles = set_combine(sets.midcast.MndEnfeebles, {
@@ -381,10 +374,6 @@ function init_gear_sets()
 		waist="Channeler's Stone",
 		})
 
-	sets.midcast.BardSong = set_combine(sets.midcast['Enfeebling Magic'], {
-		feet="Telchine Pigaches",
-		})
-
 	-- Elemental Magic sets
 	
 	sets.midcast['Elemental Magic'] = {
@@ -405,6 +394,24 @@ function init_gear_sets()
 		waist="Refoccilation Stone",
 		}
 
+	sets.midcast['Elemental Magic'].DeathMode = {
+		main=gear.Lathi_MAB,
+		sub="Niobid Strap",
+		ammo="Pemphredo Tathlum",
+		head="Merlinic Hood",
+		body="Merlinic Jubbah",
+		hands="Amalric Gages",
+		legs="Merlinic Shalwar",
+		feet="Merlinic Crackows",
+		neck="Saevus Pendant +1",
+		ear1="Barkaro. Earring",
+		ear2="Friomisi Earring",
+		ring1="Mephitas's Ring +1",
+		ring2="Shiva Ring +1",
+		back="Bane Cape",
+		waist="Refoccilation Stone",
+		}
+
 	sets.midcast['Elemental Magic'].Resistant = set_combine(sets.midcast['Elemental Magic'], {
 		sub="Clerisy Strap +1",
 		neck="Sanctity Necklace",
@@ -418,11 +425,6 @@ function init_gear_sets()
 		neck="Sanctity Necklace",
 		})
 
-	sets.midcast.Comet = set_combine(sets.midcast['Elemental Magic'], {
-		head="Pixie Hairpin +1",
-		ring2="Archon Ring",
-		})
-
 	sets.midcast.Impact = set_combine(sets.midcast['Elemental Magic'], {
 		main=gear.Lathi_MAB,
 		sub="Niobid Strap",
@@ -431,12 +433,22 @@ function init_gear_sets()
 		ring2="Archon Ring",
 		})
 
-	sets.midcast.Death = sets.precast.Death
-
-	-- Minimal damage gear for procs
-	sets.midcast['Elemental Magic'].Proc = {
-		main="Chatoyant Staff",
-		sub="Clerisy Strap +1",
+	sets.midcast.Death = {
+		main="Grioavolr",
+		sub="Elder's Grip +1",
+		ammo="Ghastly Tathlum +1",
+		head="Pixie Hairpin +1",
+		body="Merlinic Jubbah", --10
+		hands="Amalric Gages", --(5)
+		legs="Amalric Slops",
+		feet="Merlinic Crackows", --11
+		neck="Mizu. Kubikazari", --10
+		ear1="Barkaro. Earring",
+		ear2="Static Earring", --5
+		ring1="Mephitas's Ring +1",
+		ring2="Archon Ring",
+		back=gear.BLM_Death_Cape, --5
+		waist="Yamabuki-no-Obi",
 		}
 
 	-- Initializes trusts at iLvl 119
@@ -580,6 +592,7 @@ function init_gear_sets()
 		back="Relucent Cape",
 		}
 
+	sets.DarkAffinity = {head="Pixie Hairpin +1",ring2="Archon Ring"}
 	sets.Obi = {waist="Hachirin-no-Obi"}
 	sets.CP = {back="Mecisto. Mantle"}
 
@@ -588,27 +601,33 @@ end
 -------------------------------------------------------------------------------------------------------------------
 -- Job-specific hooks for standard casting events.
 -------------------------------------------------------------------------------------------------------------------
-
 -- Set eventArgs.handled to true if we don't want any automatic gear equipping to be done.
 -- Set eventArgs.useMidcastGear to true if we want midcast gear equipped on precast.
 function job_precast(spell, action, spellMap, eventArgs)
-	if spellMap == 'Cure' or spellMap == 'Curaga' then
-		gear.default.obi_waist = "Bishop's Sash"
-	elseif spell.skill == 'Elemental Magic' then
-		gear.default.obi_waist = "Refoccilation Stone"
-		if state.CastingMode.value == 'Proc' then
-			classes.CustomClass = 'Proc'
+	if spell.action_type == 'Magic' and state.DeathMode.value then
+		classes.CustomClass = 'DeathMode'
+	end
+end
+
+-- Set eventArgs.handled to true if we don't want any automatic gear equipping to be done.
+function job_midcast(spell, action, spellMap, eventArgs)
+	if spell.action_type == 'Magic' and state.DeathMode.value then
+		if spell.skill == 'Elemental Magic' then
+			classes.CustomClass = 'DeathMode'
+		else
+			equip(sets.midcast.Death)
+			disable('ammo','head','neck','ear1','ear2','body','hands','ring1','ring2','back','waist','legs','feet')
 		end
 	end
 end
 
-
--- Set eventArgs.handled to true if we don't want any automatic gear equipping to be done.
-function job_midcast(spell, action, spellMap, eventArgs)
-
-end
-
 function job_post_midcast(spell, action, spellMap, eventArgs)
+	if spell.skill == 'Enhancing Magic' and classes.NoSkillSpells:contains(spell.english) and not state.DeathMode.value then
+		equip(sets.midcast.EnhancingDuration)
+	end
+	if spell.skill == 'Elemental Magic' and spell.english == "Comet" then
+		equip(sets.DarkAffinity)		
+	end
 	if spell.skill == 'Elemental Magic' then
 		if state.MagicBurst.value then
 			equip(sets.magic_burst)
@@ -620,9 +639,6 @@ function job_post_midcast(spell, action, spellMap, eventArgs)
 			equip(sets.Obi)
 		end
 	end
-	if spell.skill == 'Enhancing Magic' and classes.NoSkillSpells:contains(spell.english) then
-		equip(sets.midcast.EnhancingDuration)
-	end
 end
 
 function job_aftercast(spell, action, spellMap, eventArgs)
@@ -632,7 +648,10 @@ function job_aftercast(spell, action, spellMap, eventArgs)
 			enable('feet','back')
 			equip(sets.buff['Mana Wall'])
 			disable('feet','back')
-		end 
+		end
+		if state.DeathMode.value then
+			enable('ammo','head','neck','ear1','ear2','body','hands','ring1','ring2','back','waist','legs','feet')
+		end
 	end
 end
 
@@ -645,7 +664,7 @@ end
 -- gain == true if the buff was gained, false if it was lost.
 function job_buff_change(buff, gain)
 	-- Unlock feet when Mana Wall buff is lost.
-    if buff == "Mana Wall" and not gain then
+	if buff == "Mana Wall" and not gain then
 		enable('feet','back')
 		handle_equipping_gear(player.status)
 	end
@@ -653,12 +672,10 @@ end
 
 -- Handle notifications of general user state change.
 function job_state_change(stateField, newValue, oldValue)
-	if stateField == 'Offense Mode' then
-		if newValue == 'Normal' then
-			disable('main','sub','range')
-		else
-			enable('main','sub','range')
-		end
+	if state.WeaponLock.value == true then
+		disable('main','sub')
+	else
+		enable('main','sub')
 	end
 end
 
@@ -690,6 +707,9 @@ function customize_idle_set(idleSet)
 		disable('back')
 	else
 		enable('back')
+	end
+	if state.DeathMode.value then
+		idleSet = sets.idle.DeathMode
 	end
 	
 	return idleSet

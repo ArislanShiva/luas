@@ -62,10 +62,11 @@ end
 
 -- Setup vars that are user-dependent.  Can override this function in a sidecar file.
 function user_setup()
-	state.OffenseMode:options('None', 'Normal')
+	state.OffenseMode:options('Normal', 'Acc')
 	state.CastingMode:options('Normal', 'Seidr', 'Resistant')
 	state.IdleMode:options('Normal', 'DT')
 	
+	state.WeaponLock = M(false, 'Weapon Lock')	
 	state.MagicBurst = M(false, 'Magic Burst')
 	state.MPCoat = M(false, 'MP Coat')
 
@@ -91,7 +92,9 @@ function user_setup()
 	send_command('bind !; gs c scholar cost')
 	send_command('bind ^, input /ma Sneak <stpc>')
 	send_command('bind ^. input /ma Invisible <stpc>')
+	send_command('bind @c gs c toggle CP')
 	send_command('bind @h gs c cycle HelixMode')
+	send_command('bind @w gs c toggle WeaponLock')
 	
 	select_default_macro_book()
 	set_lockstyle()
@@ -115,7 +118,9 @@ function user_unload()
 	send_command('unbind !;')
 	send_command('unbind ^,')
 	send_command('unbind !.')
+	send_command('unbind @c')
 	send_command('unbind @h')
+	send_command('unbind @w')
 end
 
 
@@ -399,7 +404,7 @@ function init_gear_sets()
 		ring1="Stikini Ring",
 		ring2="Stikini Ring",
 		back=gear.SCH_MAB_Cape,
-		waist="Yamabuki-no-Obi",
+		waist="Casso Sash",
 		}
 
 	sets.midcast.Kaustra = {
@@ -698,12 +703,10 @@ end
 
 -- Handle notifications of general user state change.
 function job_state_change(stateField, newValue, oldValue)
-	if stateField == 'Offense Mode' then
-		if newValue == 'None' then
-			enable('main','sub','range')
-		else
-			disable('main','sub','range')
-		end
+	if state.WeaponLock.value == true then
+		disable('main','sub')
+	else
+		enable('main','sub')
 	end
 end
 
