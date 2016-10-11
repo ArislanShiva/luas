@@ -308,7 +308,7 @@ function init_gear_sets()
 		})
 
 	sets.precast.WS['Chant du Cygne'] = set_combine(sets.precast.WS, {
-		ammo="Expeditious Pinion",
+		ammo="Jukukik Feather",
 		head="Adhemar Bonnet",
 		body="Abnoba Kaftan",
 		hands=gear.Herc_TA_hands,
@@ -513,8 +513,8 @@ function init_gear_sets()
 		neck="Incanter's Torque",
 		ear1="Digni. Earring",
 		ear2="Hermetic Earring",
-		ring="Stikini Ring",
-		ring="Stikini Ring",
+		ring1="Stikini Ring",
+		ring2="Stikini Ring",
 		back="Cornflower Cape",
 		waist="Luminary Sash",
 		}
@@ -560,8 +560,8 @@ function init_gear_sets()
 		ear1="Andoaa Earring",
 		body="Telchine Chas.",
 		hands="Telchine Gloves",
-		lring="Stikini Ring",
-		rring="Stikini Ring",
+		ring1="Stikini Ring",
+		ring2="Stikini Ring",
 		back="Fi Follet Cape +1",
 		waist="Olympus Sash",
 		legs="Carmine Cuisses +1",
@@ -802,7 +802,7 @@ function init_gear_sets()
 		head="Carmine Mask +1",
 		legs="Carmine Cuisses +1",
 		ear1="Cessance Earring",
-		ear1="Mache Earring",
+		ear2="Mache Earring",
 		ring1="Ramuh Ring +1",
 		waist="Olseni Belt",
 		})
