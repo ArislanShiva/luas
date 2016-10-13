@@ -37,6 +37,8 @@ function job_setup()
 	-- Unblinkable JA IDs for actions that always have TH: Quick/Box/Stutter Step, Desperate/Violent Flourish
 	info.default_u_ja_ids = S{201, 202, 203, 205, 207}
 
+	state.HasteMode = M{['description']='Haste Mode', 'Haste I', 'Haste II'}
+
 	determine_haste_group()
 end
 
@@ -67,6 +69,7 @@ function user_setup()
 		send_command('bind ^, input /item "Silent Oil" <me>')
 		send_command('bind ^. input /item "Prism Powder" <me>')
 	end
+	send_command('bind @h gs c cycle HasteMode')
 	send_command('bind @c gs c toggle CP')
 
 	select_default_macro_book()
@@ -78,6 +81,7 @@ function user_unload()
 	send_command('unbind ^`')
 	send_command('unbind !`')
 	send_command('unbind ^,')
+	send_command('unbind @h')
 	send_command('unbind @c')
 end
 
