@@ -48,9 +48,8 @@ function user_setup()
 	lowTierNukes = S{'Stone', 'Water', 'Aero', 'Fire', 'Blizzard', 'Thunder'}
 	
 	-- Additional local binds
-	send_command('bind ^` input /ma Stun <t>')
+	send_command('bind ^` input /ma Stun <t>; input /p I just Stunned [#1]')
 	send_command('bind !` gs c toggle MagicBurst')
-	send_command('bind !q input /item "Echo Drops" <me>')
 	send_command('bind !w input /ma "Aspir III" <t>')
 	send_command('bind !p input /ma "Shock Spikes" <me>')
 	send_command('bind ^, input /ma Sneak <stpc>')
@@ -67,7 +66,6 @@ end
 function user_unload()
 	send_command('unbind ^`')
 	send_command('unbind !`')
-	send_command('unbind !q')
 	send_command('unbind !w')
 	send_command('unbind !p')
 	send_command('unbind ^,')
@@ -87,19 +85,10 @@ function init_gear_sets()
 	---- Precast Sets ----
 	
 	-- Precast sets to enhance JAs
-	sets.precast.JA['Mana Wall'] = {
-		feet="Wicce Sabots +1",
-		back=gear.BLM_MAB_Cape,
-		}
-
---	sets.precast.JA.Manafont = {body="Src. Coat +2"}
-	
-	-- equip to maximize HP (for Tarus) and minimize MP loss before using convert
-	sets.precast.JA.Convert = {}
-
+	sets.precast.JA['Mana Wall'] = {feet="Wicce Sabots +1",	back=gear.BLM_MAB_Cape}
+	sets.precast.JA.Manafont = {body="Arch. Coat "}
 
 	-- Fast cast sets for spells
-
 	sets.precast.FC = {
 	--	/RDM --15 /SCH --10
 		main="Sucellus", --5
@@ -115,7 +104,7 @@ function init_gear_sets()
 		ear2="Loquacious Earring", --2
 		ring1="Prolix Ring", --2
 		ring2="Weather. Ring", --5
-		back="Bane Cape", --4
+		back=gear.BLM_FC_Cape, --10
 		waist="Witful Belt", --3/(2)
 		}
 
@@ -163,8 +152,8 @@ function init_gear_sets()
 		})
 
 	-- Weaponskill sets
+	
 	-- Default set for any weaponskill that isn't any more specifically defined
-
 	sets.precast.WS = {
 		head="Telchine Cap",
 		body="Onca Suit",
@@ -222,7 +211,7 @@ function init_gear_sets()
 		ear1="Etiolation Earring",
 		ear2="Loquacious Earring",
 		ring1="Prolix Ring",
-		back="Bane Cape",
+		back=gear.BLM_FC_Cape,
 		waist="Witful Belt",
 		} -- Haste
 
@@ -327,7 +316,7 @@ function init_gear_sets()
 		ear2="Digni. Earring",
 		ring1="Stikini Ring",
 		ring2="Stikini Ring",
-		back="Aurist's Cape +1",
+		back=gear.BLM_FC_Cape,
 		waist="Casso Sash",
 --		waist="Luminary Sash",
 		} -- MND/Magic accuracy
@@ -453,9 +442,6 @@ function init_gear_sets()
 
 	-- Initializes trusts at iLvl 119
 	sets.midcast.Trust = sets.precast.FC
-
-	
-	-- Sets to return to when not performing an action.
 	
 	sets.resting = {
 		main="Chatoyant Staff",
@@ -546,20 +532,8 @@ function init_gear_sets()
 
 	sets.defense.MDT = sets.defense.PDT
 
-	sets.Kiting = {
-		feet="Herald's Gaiters"
-		}
-
-	sets.latent_refresh = {
-		waist="Fucho-no-obi"
-		}
-
-	-- Buff sets: Gear that needs to be worn to actively enhance a current player buff.
-	
-	sets.buff['Mana Wall'] = {
-		feet="Wicce Sabots +1",
-		}
-
+	sets.Kiting = {feet="Herald's Gaiters"}
+	sets.latent_refresh = {waist="Fucho-no-obi"}
 
 	sets.magic_burst = { 
 		body="Merlinic Jubbah", --10

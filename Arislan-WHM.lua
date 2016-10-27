@@ -260,7 +260,7 @@ function init_gear_sets()
 		feet="Telchine Pigaches",
 		})
 
-	sets.midcast.Regen = set_combine(sets.midcast['Enhancing Magic'], {
+	sets.midcast.Regen = set_combine(sets.midcast.EnhancingDuration, {
 		main="Bolelabunga",
 		sub="Genmei Shield",
 		head="Inyanga Tiara +1",

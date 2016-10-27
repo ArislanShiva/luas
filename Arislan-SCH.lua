@@ -328,11 +328,10 @@ function init_gear_sets()
 		feet="Telchine Pigaches",
 		})
 
-	sets.midcast.Regen = set_combine(sets.midcast['Enhancing Magic'], {
+	sets.midcast.Regen = set_combine(sets.midcast.EnhancingDuration, {
 		main="Bolelabunga",
 		sub="Genmei Shield",
 		head="Arbatel Bonnet +1",
-		body="Telchine Chas.",
 		back=gear.SCH_FC_Cape,
 		})
 	
@@ -612,7 +611,7 @@ function init_gear_sets()
 		ring1="Mujin Band", --(5)
 		}
 	
-	sets.buff['Ebullience'] = {head="Arbatel Bonnet +1"}
+--	sets.buff['Ebullience'] = {head="Arbatel Bonnet +1"}
 	sets.buff['Rapture'] = {head="Arbatel Bonnet +1"}
 	sets.buff['Perpetuance'] = {hands="Arbatel Bracers +1"}
 	sets.buff['Immanence'] = {hands="Arbatel Bracers +1", "Lugh's Cape"}

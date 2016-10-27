@@ -1,4 +1,19 @@
 -------------------------------------------------------------------------------------------------------------------
+-- (Original: Motenten / Modified: Arislan)
+-------------------------------------------------------------------------------------------------------------------
+
+--[[	Custom Features:
+
+		Haste Detection		Detects current magic haste level and equips corresponding engaged set to
+							optimize delay reduction (automatic)
+		Haste Mode			Toggles between Haste II and Haste I recieved, used by Haste Detection [WinKey-H]
+		Capacity Pts. Mode	Capacity Points Mode Toggle [WinKey-C]
+		Reive Detection		Automatically equips Reive bonus gear
+		Auto. Lockstyle		Automatically locks specified equipset on file load
+--]]
+
+
+-------------------------------------------------------------------------------------------------------------------
 -- Setup functions for this job.  Generally should not be modified.
 -------------------------------------------------------------------------------------------------------------------
 
@@ -19,6 +34,8 @@ function job_setup()
 	state.Buff.Innin = buffactive.Innin or false
 	state.Buff.Futae = buffactive.Futae or false
 
+	state.HasteMode = M{['description']='Haste Mode', 'Haste I', 'Haste II'}
+
 	determine_haste_group()
 end
 
@@ -28,7 +45,7 @@ end
 
 -- Setup vars that are user-dependent.  Can override this function in a sidecar file.
 function user_setup()
-	state.OffenseMode:options('Normal', 'LowAcc', 'MidAcc', 'HighAcc', 'Fodder')
+	state.OffenseMode:options('STP', 'Normal', 'LowAcc', 'MidAcc', 'HighAcc', 'Fodder')
 	state.WeaponskillMode:options('Normal', 'Acc')
 	state.CastingMode:options('Normal', 'Resistant')
 	state.IdleMode:options('Normal', 'DT')
@@ -48,6 +65,7 @@ function user_setup()
 	end
 	send_command('bind ^, input /nin "Monomi: Ichi" <me>')
 	send_command('bind ^. input /ma "Tonko: Ni" <me>')
+	send_command('bind @h gs c cycle HasteMode')
 	send_command('bind @c gs c toggle CP')
 
 --	select_movement_feet()
@@ -60,6 +78,7 @@ function user_unload()
 	send_command('unbind ^=')
 	send_command('unbind ^,')
 	send_command('unbind !.')
+	send_command('unbind @h')
 	send_command('unbind @c')
 end
 
@@ -119,7 +138,7 @@ function init_gear_sets()
 		body="Adhemar Jacket",
 		hands="Adhemar Wristbands",
 		legs="Hiza. Hizayoroi +1",
-		feet=gear.Herc_TA_feet,
+		feet=gear.Herc_WS_feet,
 		neck="Fotia Gorget",
 		ear1="Moonshade Earring",
 		ear2="Ishvara Earring",
@@ -131,7 +150,9 @@ function init_gear_sets()
 
 	sets.precast.WS.Acc = set_combine(sets.precast.WS, {
 		head="Adhemar Bonnet",
+		hands=gear.Herc_WS_hands,
 		legs="Adhemar Kecks",
+		feet=gear.Herc_Acc_feet,
 		ring1="Ramuh Ring +1",
 		ring2="Ramuh Ring +1",
 		})
@@ -145,6 +166,7 @@ function init_gear_sets()
 		})
 
 	sets.precast.WS['Blade: Ten'] = set_combine (sets.precast.WS, {
+		hands=gear.Herc_WS_hands,
 		neck="Caro Necklace",
 		ear2="Lugra Earring +1",
 		waist="Grunfeld Rope",
@@ -192,7 +214,7 @@ function init_gear_sets()
 		ear2="Friomisi Earring",
 		ring1="Shiva Ring +1",
 		ring2="Shiva Ring +1",
-		back=gear.COR_WS_Cape,
+		back="Argocham. Mantle",
 		waist="Eschan Stone",
 		}
 
@@ -230,8 +252,8 @@ function init_gear_sets()
 
 	sets.idle.DT = set_combine (sets.idle, {
 		ammo="Staunch Tathlum", --2/2
-		head="Dampening Tam", --0/4
-		hands=gear.Herc_TA_hands, --2
+		head=gear.Herc_DT_head, --3/3
+		hands=gear.Herc_DT_hands, --5/3
 		feet="Amm Greaves", --3/3
 		neck="Loricate Torque +1", --6/6
 		ear1="Genmei Earring", --2/0
@@ -279,99 +301,207 @@ function init_gear_sets()
 	-- Engaged sets
 	--------------------------------------
 
+	-- Engaged sets
+
 	-- Variations for TP weapon and (optional) offense/defense modes.  Code will fall back on previous
 	-- sets if more refined versions aren't defined.
 	-- If you create a set with both offense and defense modes, the offense mode should be first.
 	-- EG: sets.engaged.Dagger.Accuracy.Evasion
+
+	-- * NIN Native DW Trait: 35% DW
 	
+	-- No Magic Haste (74% DW to cap)	
 	sets.engaged = {
 		ammo="Ginsen",
 		head="Dampening Tam",
-		body="Adhemar Jacket",
-		hands="Adhemar Wristbands",
+		body="Adhemar Jacket", --5
+		hands="Floral Gauntlets", --5
 		legs="Samnuha Tights",
-		feet=gear.Taeon_DW_feet,
+		feet=gear.Taeon_DW_feet, --9
 		neck="Erudit. Necklace",
-		ear1="Eabani Earring",
-		ear2="Suppanomimi",
+		ear1="Eabani Earring", --4
+		ear2="Suppanomimi", --5
 		ring1="Petrov Ring",
 		ring2="Epona's Ring",
 		back="Bleating Mantle",
-		waist="Patentia Sash",
-		}
+		waist="Patentia Sash", --5
+		} -- 33%
 
 	sets.engaged.LowAcc = set_combine(sets.engaged, {
 		ammo="Falcon Eye",
 		hands=gear.Herc_TA_hands,
-		neck="Lissome Necklace",
+		neck="Combatant's Torque",
 		ring1="Chirich Ring",
-		waist="Kentarch Belt +1",
 		})
 
 	sets.engaged.MidAcc = set_combine(sets.engaged.LowAcc, {
-		legs=gear.Herc_TA_legs,
-		ear1="Cessance Earring",
-		ear2="Brutal Earring",
+		legs="Adhemar Kecks",
+		feet=gear.Herc_TA_feet,
 		ring2="Ramuh Ring +1",
 		back="Ground. Mantle +1",
+		waist="Kentarch Belt +1",
 		})
 
 	sets.engaged.HighAcc = set_combine(sets.engaged.MidAcc, {
-		legs="Hiza. Hizayoroi +1",
-		neck="Combatant's Torque",
-		ear1="Mache Earring",
-		ear2="Zennaroi Earring",
+		feet=gear.Herc_Acc_feet,
+		ear1="Cessance Earring",
+		ear2="Mache Earring",
 		ring1="Ramuh Ring +1",
 		waist="Olseni Belt",
 		})
 
-	sets.engaged.Fodder = set_combine(sets.engaged, {
-		body="Thaumas Coat",
+	sets.engaged.STP = set_combine(sets.engaged, {
+		neck="Ainia Collar",
+		ear1="Cessance Earring",
+		ear2="Dedition Earring",
+		ring1="Petrov Ring",
+		waist="Kentarch Belt +1",
 		})
 
-	sets.engaged.HighHaste = {
+	-- 15% Magic Haste (67% DW to cap)
+	sets.engaged.LowHaste = {
 		ammo="Ginsen",
 		head="Dampening Tam",
-		body="Adhemar Jacket",
+		body="Adhemar Jacket", --5
+		hands="Floral Gauntlets", --5
+		legs="Samnuha Tights",
+		feet=gear.Taeon_DW_feet, --9
+		neck="Erudit. Necklace",
+		ear1="Eabani Earring", --4
+		ear2="Suppanomimi", --5
+		ring1="Petrov Ring",
+		ring2="Epona's Ring",
+		back="Bleating Mantle",
+		waist="Patentia Sash", --5
+		} -- 33%
+
+	sets.engaged.LowHaste.LowAcc = set_combine(sets.engaged.LowHaste, {
+		ammo="Falcon Eye",
+		hands=gear.Herc_TA_hands,
+		neck="Combatant's Torque",
+		ring1="Chirich Ring",
+		})
+
+	sets.engaged.LowHaste.MidAcc = set_combine(sets.engaged.LowHaste.LowAcc, {
+		legs="Adhemar Kecks",
+		feet=gear.Herc_TA_feet,
+		ring2="Ramuh Ring +1",
+		back="Ground. Mantle +1",
+		waist="Kentarch Belt +1",
+		})
+
+	sets.engaged.LowHaste.HighAcc = set_combine(sets.engaged.LowHaste.MidAcc, {
+		feet=gear.Herc_Acc_feet,
+		ear1="Cessance Earring",
+		ear2="Mache Earring",
+		ring1="Ramuh Ring +1",
+		waist="Olseni Belt",
+		})
+
+	sets.engaged.LowHaste.STP = set_combine(sets.engaged.LowHaste, {
+		neck="Ainia Collar",
+		ear1="Cessance Earring",
+		ear2="Dedition Earring",
+		ring1="Petrov Ring",
+		waist="Kentarch Belt +1",
+		})
+
+	-- 30% Magic Haste (56% DW to cap)
+	sets.engaged.MidHaste = {
+		ammo="Ginsen",
+		head="Dampening Tam",
+		body="Adhemar Jacket", --5
 		hands="Adhemar Wristbands",
 		legs="Samnuha Tights",
 		feet=gear.Herc_TA_feet,
 		neck="Erudit. Necklace",
-		ear1="Cessance Earring",
-		ear2="Brutal Earring",
+		ear1="Eabani Earring", --4
+		ear2="Suppanomimi", --5
 		ring1="Petrov Ring",
 		ring2="Epona's Ring",
 		back="Bleating Mantle",
-		waist="Windbuffet Belt +1",
-		}
+		waist="Patentia Sash", --5
+		} -- 19%
 
-	sets.engaged.HighHaste.LowAcc = set_combine(sets.engaged.HighHaste, {
+	sets.engaged.MidHaste.LowAcc = set_combine(sets.engaged.MidHaste, {
 		ammo="Falcon Eye",
 		hands=gear.Herc_TA_hands,
-		neck="Lissome Necklace",
+		neck="Combatant's Torque",
 		ring1="Chirich Ring",
+		})
+
+	sets.engaged.MidHaste.MidAcc = set_combine(sets.engaged.MidHaste.LowAcc, {
+		legs="Adhemar Kecks",
+		feet=gear.Herc_TA_feet,
+		ear1="Cessance Earring",
+		ring2="Ramuh Ring +1",
+		back="Ground. Mantle +1",
 		waist="Kentarch Belt +1",
 		})
 
-	sets.engaged.HighHaste.MidAcc = set_combine(sets.engaged.HighHaste.LowAcc, {
-		legs=gear.Herc_TA_legs,
-		ear2="Zennaroi Earring",
-		ring2="Ramuh Ring +1",
-		back="Ground. Mantle +1",
-		})
-
-		sets.engaged.HighHaste.HighAcc = set_combine(sets.engaged.HighHaste.MidAcc, {
-		legs="Hiza. Hizayoroi +1",
-		neck="Combatant's Torque",
-		ear1="Mache Earring",
+	sets.engaged.MidHaste.HighAcc = set_combine(sets.engaged.MidHaste.MidAcc, {
+		feet=gear.Herc_Acc_feet,
+		ear2="Mache Earring",
 		ring1="Ramuh Ring +1",
 		waist="Olseni Belt",
 		})
 
-	sets.engaged.HighHaste.Fodder = set_combine(sets.engaged.HighHaste, {
-		body="Thaumas Coat",
+	sets.engaged.MidHaste.STP = set_combine(sets.engaged.MidHaste, {
+		neck="Ainia Collar",
+		ear1="Cessance Earring",
+		ear2="Dedition Earring",
+		ring1="Petrov Ring",
+		waist="Kentarch Belt +1",
 		})
 
+	-- 35% Magic Haste (51% DW to cap)
+	sets.engaged.HighHaste = {
+		ammo="Ginsen",
+		head="Dampening Tam",
+		body="Adhemar Jacket", --5
+		hands="Adhemar Wristbands",
+		legs="Samnuha Tights",
+		feet=gear.Herc_TA_feet,
+		neck="Erudit. Necklace",
+		ear1="Eabani Earring", --4
+		ear2="Suppanomimi", --5
+		ring1="Petrov Ring",
+		ring2="Epona's Ring",
+		back="Bleating Mantle",
+		waist="Windbuffet Belt +1",
+		} -- 14% Gear
+
+	sets.engaged.HighHaste.LowAcc = set_combine(sets.engaged.HighHaste, {
+		hands=gear.Herc_TA_hands,
+		neck="Combatant's Torque",
+		waist="Kentarch Belt +1",
+		ring1="Chirich Ring",
+		})
+
+	sets.engaged.HighHaste.MidAcc = set_combine(sets.engaged.HighHaste.LowAcc, {
+		ammo="Falcon Eye",
+		legs="Adhemar Kecks",
+		ear1="Cessance Earring",
+		ring2="Ramuh Ring +1",
+		back="Ground. Mantle +1",
+		})
+
+	sets.engaged.HighHaste.HighAcc = set_combine(sets.engaged.HighHaste.MidAcc, {
+		feet=gear.Herc_Acc_feet,
+		ear2="Mache Earring",
+		ring1="Ramuh Ring +1",
+		waist="Olseni Belt",
+		})
+
+	sets.engaged.HighHaste.STP = set_combine(sets.engaged.HighHaste, {
+		neck="Ainia Collar",
+		ear1="Cessance Earring",
+		ear2="Dedition Earring",
+		ring1="Petrov Ring",
+		waist="Kentarch Belt +1",
+		})
+
+	-- 47% Magic Haste (36% DW to cap)
 	sets.engaged.MaxHaste = {
 		ammo="Ginsen",
 		head="Dampening Tam",
@@ -386,33 +516,36 @@ function init_gear_sets()
 		ring2="Epona's Ring",
 		back="Bleating Mantle",
 		waist="Windbuffet Belt +1",
-		}
+		} -- 0%
 
 	sets.engaged.MaxHaste.LowAcc = set_combine(sets.engaged.MaxHaste, {
-		ammo="Falcon Eye",
 		hands=gear.Herc_TA_hands,
-		neck="Lissome Necklace",
-		ring1="Chirich Ring",
+		neck="Combatant's Torque",
 		waist="Kentarch Belt +1",
+		ring1="Chirich Ring",
 		})
 
 	sets.engaged.MaxHaste.MidAcc = set_combine(sets.engaged.MaxHaste.LowAcc, {
-		legs=gear.Herc_TA_legs,
-		ear2="Zennaroi Earring",
+		ammo="Falcon Eye",
+		legs="Adhemar Kecks",
+		ear1="Cessance Earring",
 		ring2="Ramuh Ring +1",
 		back="Ground. Mantle +1",
 		})
 
 	sets.engaged.MaxHaste.HighAcc = set_combine(sets.engaged.MaxHaste.MidAcc, {
-		legs="Hiza. Hizayoroi +1",
-		neck="Combatant's Torque",
-		ear1="Mache Earring",
+		feet=gear.Herc_Acc_feet,
+		ear2="Mache Earring",
 		ring1="Ramuh Ring +1",
 		waist="Olseni Belt",
 		})
 
-	sets.engaged.MaxHaste.Fodder = set_combine(sets.engaged.MaxHaste, {
-		body="Thaumas Coat",
+	sets.engaged.MaxHaste.STP = set_combine(sets.engaged.MaxHaste, {
+		neck="Ainia Collar",
+		ear1="Cessance Earring",
+		ear2="Dedition Earring",
+		ring1="Petrov Ring",
+		waist="Kentarch Belt +1",
 		})
 
 	--------------------------------------
@@ -420,11 +553,12 @@ function init_gear_sets()
 	--------------------------------------
 
 --	sets.buff.Migawari = {body="Iga Ningi +2"}
---	sets.buff.Doom = {ring2="Saida Ring"}
+	sets.buff.Doom = {ring1="Saida Ring", ring2="Saida Ring"}
 --	sets.buff.Yonin = {}
 --	sets.buff.Innin = {}
 
 	sets.CP = {back="Mecisto. Mantle"}
+	sets.Reive = {neck="Ygnas's Resolve +1"}
 
 end
 
@@ -457,11 +591,17 @@ end
 -- gain == true if the buff was gained, false if it was lost.
 function job_buff_change(buff, gain)
 	-- If we gain or lose any haste buffs, adjust which gear set we target.
-	if S{'haste','march','embrava','haste samba'}:contains(buff:lower()) then
+	if S{'haste', 'march', 'mighty guard', 'embrava', 'haste samba', 'geo-haste', 'indi-haste'}:contains(buff:lower()) then
 		determine_haste_group()
-		handle_equipping_gear(player.status)
-	elseif state.Buff[buff] ~= nil then
-		handle_equipping_gear(player.status)
+		if not midaction() then
+			handle_equipping_gear(player.status)
+		end
+	end
+	if buffactive['Reive Mark'] then
+		equip(sets.Reive)
+		disable('neck')
+	else
+		enable('neck')
 	end
 end
 

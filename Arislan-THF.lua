@@ -48,7 +48,7 @@ end
 
 -- Setup vars that are user-dependent.  Can override this function in a sidecar file.
 function user_setup()
-	state.OffenseMode:options('Normal', 'LowAcc', 'MidAcc', 'HighAcc', 'Fodder')
+	state.OffenseMode:options('STP', 'Normal', 'LowAcc', 'MidAcc', 'HighAcc')
 	state.HybridMode:options('Normal')
 	state.RangedMode:options('Normal', 'Acc')
 	state.WeaponskillMode:options('Normal', 'Acc')
@@ -111,7 +111,7 @@ function init_gear_sets()
 		legs="Lustratio Subligar",
 		feet="Lustratio Leggings",
 		neck="Caro Necklace",
-		ear1="Mache Earring",
+		ear2="Mache Earring",
 		ring1="Ramuh Ring +1",
 		ring2="Ramuh Ring +1",
 		back="Toutatis's Cape",
@@ -234,14 +234,15 @@ function init_gear_sets()
 		} -- default set
 
 	sets.precast.WS.Acc = set_combine(sets.precast.WS, {
-		legs="Adhemar Kecks",
+		hands=gear.Herc_WS_hands,
+		legs="Meg. Chausses +1",
 		})
 
 	sets.precast.WS['Exenterator'] = set_combine(sets.precast.WS, {
 		ammo="Expeditious Pinion",
 		head="Adhemar Bonnet",
-		legs="Meg. Chausses +1",
-		feet=gear.Herc_TA_feet,
+		legs=gear.Herc_WS_legs,
+		feet=gear.Herc_WS_feet,
 		ear1="Cessance Earring",
 		ear2="Brutal Earring",
 		ring2="Garuda Ring +1",
@@ -251,7 +252,9 @@ function init_gear_sets()
 	sets.precast.WS['Exenterator'].Acc = set_combine(sets.precast.WS['Exenterator'], {
 		ammo="Falcon Eye",
 		head="Dampening Tam",
-		ear2="Zennaroi Earring",
+		hands=gear.Herc_WS_hands,
+		feet=gear.Herc_Acc_feet,
+		ear2="Mache Earring",
 		ring1="Ramuh Ring +1",
 		})
 
@@ -263,9 +266,10 @@ function init_gear_sets()
 	sets.precast.WS['Evisceration'].Acc = set_combine(sets.precast.WS['Evisceration'], {
 		ammo="Falcon Eye",
 		head="Dampening Tam",
-		legs="Meg. Chausses +1",
-		feet=gear.Herc_TA_feet,
-		ear2="Zennaroi Earring",
+		hands=gear.Herc_WS_hands,
+		legs=gear.Herc_WS_legs,
+		feet=gear.Herc_Acc_feet,
+		ear2="Mache Earring",
 		ring1="Ramuh Ring +1",
 		})
 
@@ -277,7 +281,9 @@ function init_gear_sets()
 
 	sets.precast.WS["Rudra's Storm"].Acc = set_combine(sets.precast.WS["Rudra's Storm"], {
 		ammo="Falcon Eye",
-		legs="Meg. Chausses +1",
+		hands=gear.Herc_WS_hands,
+		legs=gear.Herc_WS_legs,
+		feet=gear.Herc_Acc_feet,
 		})
 
 	sets.precast.WS['Mandalic Stab'] = sets.precast.WS["Rudra's Storm"]
@@ -405,92 +411,198 @@ function init_gear_sets()
 	-- sets if more refined versions aren't defined.
 	-- If you create a set with both offense and defense modes, the offense mode should be first.
 	-- EG: sets.engaged.Dagger.Accuracy.Evasion
+
+	-- * THF Native DW Trait: 25% DW
 	
+	-- No Magic Haste (74% DW to cap)
 	sets.engaged = {
 		ammo="Ginsen",
 		head="Dampening Tam",
-		body="Adhemar Jacket",
+		body="Adhemar Jacket", -- 5
 		hands="Adhemar Wristbands",
 		legs="Samnuha Tights",
-		feet=gear.Taeon_DW_feet,
+		feet=gear.Taeon_DW_feet, --9
 		neck="Asperity Necklace",
-		ear1="Eabani Earring",
-		ear2="Suppanomimi",
+		ear1="Eabani Earring", --4
+		ear2="Suppanomimi", --5
 		ring1="Petrov Ring",
 		ring2="Epona's Ring",
-		back="Canny Cape",
-		waist="Patentia Sash",
-		}
+		back="Canny Cape", --4
+		waist="Patentia Sash", --5
+		} -- 32%
 
 	sets.engaged.LowAcc = set_combine(sets.engaged, {
 		ammo="Falcon Eye",
 		hands=gear.Herc_TA_hands,
-		neck="Lissome Necklace",
+		neck="Combatant's Torque",
 		ring1="Chirich Ring",
-		waist="Kentarch Belt +1",
 		})
 
 	sets.engaged.MidAcc = set_combine(sets.engaged.LowAcc, {
 		legs="Adhemar Kecks",
-		neck="Combatant's Torque",
-		ear1="Cessance Earring",
-		ear2="Brutal Earring",
+		feet=gear.Herc_TA_feet,
 		ring2="Ramuh Ring +1",
 		back="Toutatis's Cape",
+		waist="Kentarch Belt +1",
 		})
 
 	sets.engaged.HighAcc = set_combine(sets.engaged.MidAcc, {
-		ear1="Mache Earring",
-		ear2="Zennaroi Earring",
+		feet=gear.Herc_Acc_feet,
+		ear1="Cessance Earring",
+		ear2="Mache Earring",
 		ring1="Ramuh Ring +1",
 		waist="Olseni Belt",
 		})
 
-	sets.engaged.Fodder = set_combine(sets.engaged, {
-		body="Thaumas Coat",
+	sets.engaged.STP = set_combine(sets.engaged, {
+		neck="Ainia Collar",
+		ear1="Cessance Earring",
+		ear2="Dedition Earring",
+		ring1="Petrov Ring",
+		waist="Kentarch Belt +1",
 		})
 
+	-- 15% Magic Haste (67% DW to cap)
+	sets.engaged.LowHaste = {
+		ammo="Ginsen",
+		head="Dampening Tam",
+		body="Adhemar Jacket", -- 5
+		hands="Adhemar Wristbands",
+		legs="Samnuha Tights",
+		feet=gear.Taeon_DW_feet, --9
+		neck="Asperity Necklace",
+		ear1="Eabani Earring", --4
+		ear2="Suppanomimi", --5
+		ring1="Petrov Ring",
+		ring2="Epona's Ring",
+		back="Canny Cape", --4
+		waist="Patentia Sash", --5
+		} -- 32%
+
+	sets.engaged.LowHaste.LowAcc = set_combine(sets.engaged.LowHaste, {
+		ammo="Falcon Eye",
+		hands=gear.Herc_TA_hands,
+		neck="Combatant's Torque",
+		ring1="Chirich Ring",
+		})
+
+	sets.engaged.LowHaste.MidAcc = set_combine(sets.engaged.LowHaste.LowAcc, {
+		legs="Adhemar Kecks",
+		ring2="Ramuh Ring +1",
+		back="Toutatis's Cape",
+		waist="Kentarch Belt +1",
+		})
+
+	sets.engaged.LowHaste.HighAcc = set_combine(sets.engaged.LowHaste.MidAcc, {
+		feet=gear.Herc_Acc_feet,
+		ear1="Cessance Earring",
+		ear2="Mache Earring",
+		ring1="Ramuh Ring +1",
+		waist="Olseni Belt",
+		})
+
+	sets.engaged.LowHaste.STP = set_combine(sets.engaged.LowHaste, {
+		neck="Ainia Collar",
+		ear1="Cessance Earring",
+		ear2="Dedition Earring",
+		ring1="Petrov Ring",
+		waist="Kentarch Belt +1",
+		})
+
+	-- 30% Magic Haste (56% DW to cap)
+	sets.engaged.MidHaste = {
+		ammo="Ginsen",
+		head="Dampening Tam",
+		body="Adhemar Jacket", -- 5
+		hands="Adhemar Wristbands",
+		legs="Samnuha Tights",
+		feet=gear.Taeon_DW_feet, --9
+		neck="Asperity Necklace",
+		ear1="Eabani Earring", --4
+		ear2="Suppanomimi", --5
+		ring1="Petrov Ring",
+		ring2="Epona's Ring",
+		back="Canny Cape", --4
+		waist="Patentia Sash", --5
+		} -- 32%
+
+	sets.engaged.MidHaste.LowAcc = set_combine(sets.engaged.MidHaste, {
+		ammo="Falcon Eye",
+		hands=gear.Herc_TA_hands,
+		neck="Combatant's Torque",
+		ring1="Chirich Ring",
+		})
+
+	sets.engaged.MidHaste.MidAcc = set_combine(sets.engaged.MidHaste.LowAcc, {
+		feet=gear.Herc_TA_feet,
+		ear1="Cessance Earring",
+		ring2="Ramuh Ring +1",
+		back="Toutatis's Cape",
+		waist="Kentarch Belt +1",
+		})
+
+	sets.engaged.MidHaste.HighAcc = set_combine(sets.engaged.MidHaste.MidAcc, {
+		feet=gear.Herc_Acc_feet,
+		ear2="Mache Earring",
+		ring1="Ramuh Ring +1",
+		waist="Olseni Belt",
+		})
+
+	sets.engaged.MidHaste.STP = set_combine(sets.engaged.MidHaste, {
+		neck="Ainia Collar",
+		ear1="Cessance Earring",
+		ear2="Dedition Earring",
+		ring1="Petrov Ring",
+		waist="Kentarch Belt +1",
+		})
+
+	-- 35% Magic Haste (51% DW to cap)
 	sets.engaged.HighHaste = {
 		ammo="Ginsen",
 		head="Dampening Tam",
-		body="Adhemar Jacket",
+		body="Adhemar Jacket", -- 5
 		hands="Adhemar Wristbands",
 		legs="Samnuha Tights",
-		feet=gear.Herc_TA_feet,
+		feet=gear.Taeon_DW_feet, --9
 		neck="Asperity Necklace",
-		ear1="Cessance Earring",
+		ear1="Eabani Earring", --4
 		ear2="Brutal Earring",
 		ring1="Petrov Ring",
 		ring2="Epona's Ring",
 		back="Toutatis's Cape",
-		waist="Windbuffet Belt +1",
-		}
+		waist="Patentia Sash", --5
+		} -- 23%
 
 	sets.engaged.HighHaste.LowAcc = set_combine(sets.engaged.HighHaste, {
-		ammo="Falcon Eye",
 		hands=gear.Herc_TA_hands,
-		neck="Lissome Necklace",
-		ring1="Chirich Ring",
+		neck="Combatant's Torque",
 		waist="Kentarch Belt +1",
+		ring1="Chirich Ring",
 		})
 
 	sets.engaged.HighHaste.MidAcc = set_combine(sets.engaged.HighHaste.LowAcc, {
+		ammo="Falcon Eye",
 		legs="Adhemar Kecks",
-		neck="Combatant's Torque",
-		ear2="Zennaroi Earring",
+		ear1="Cessance Earring",
 		ring2="Ramuh Ring +1",
 		})
 
 	sets.engaged.HighHaste.HighAcc = set_combine(sets.engaged.HighHaste.MidAcc, {
-		ear1="Mache Earring",
+		feet=gear.Herc_Acc_feet,
+		ear2="Mache Earring",
 		ring1="Ramuh Ring +1",
 		waist="Olseni Belt",
 		})
 
-	sets.engaged.HighHaste.Fodder = set_combine(sets.engaged.HighHaste, {
-		body="Thaumas Coat",
+	sets.engaged.HighHaste.STP = set_combine(sets.engaged.HighHaste, {
+		neck="Ainia Collar",
+		ear1="Cessance Earring",
+		ear2="Dedition Earring",
+		ring1="Petrov Ring",
+		waist="Kentarch Belt +1",
 		})
 
+	-- 47% Magic Haste (36% DW to cap)
 	sets.engaged.MaxHaste = {
 		ammo="Ginsen",
 		head="Dampening Tam",
@@ -499,41 +611,44 @@ function init_gear_sets()
 		legs="Samnuha Tights",
 		feet=gear.Herc_TA_feet,
 		neck="Asperity Necklace",
-		ear1="Cessance Earring",
-		ear2="Brutal Earring",
+		ear1="Eabani Earring", --4
+		ear2="Suppanomimi", --5
 		ring1="Petrov Ring",
 		ring2="Epona's Ring",
 		back="Toutatis's Cape",
 		waist="Windbuffet Belt +1",
-		}
+		} -- 9%
 
 	sets.engaged.MaxHaste.LowAcc = set_combine(sets.engaged.MaxHaste, {
-		ammo="Falcon Eye",
 		hands=gear.Herc_TA_hands,
-		neck="Lissome Necklace",
-		ring1="Chirich Ring",
+		neck="Combatant's Torque",
 		waist="Kentarch Belt +1",
+		ring1="Chirich Ring",
 		})
 
 	sets.engaged.MaxHaste.MidAcc = set_combine(sets.engaged.MaxHaste.LowAcc, {
+		ammo="Falcon Eye",
 		legs="Adhemar Kecks",
-		neck="Combatant's Torque",
-		ear2="Zennaroi Earring",
+		ear1="Cessance Earring",
 		ring2="Ramuh Ring +1",
 		})
 
 	sets.engaged.MaxHaste.HighAcc = set_combine(sets.engaged.MaxHaste.MidAcc, {
-		ear1="Mache Earring",
+		feet=gear.Herc_Acc_feet,
+		ear2="Mache Earring",
 		ring1="Ramuh Ring +1",
 		waist="Olseni Belt",
 		})
 
-	sets.engaged.MaxHaste.Fodder = set_combine(sets.engaged.MaxHaste, {
-		body="Thaumas Coat",
+	sets.engaged.MaxHaste.STP = set_combine(sets.engaged.MaxHaste, {
+		neck="Ainia Collar",
+		ear1="Cessance Earring",
+		ear2="Dedition Earring",
+		ring1="Petrov Ring",
+		waist="Kentarch Belt +1",
 		})
 	
 	-- Custom buff sets
-
 	sets.Reive = {neck="Ygnas's Resolve +1"}
 	sets.CP = {back="Mecisto. Mantle"}
 

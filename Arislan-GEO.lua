@@ -580,7 +580,7 @@ function job_aftercast(spell, action, spellMap, eventArgs)
 				classes.CustomIdleGroups:append('Indi')
 			end
 			--send_command('@timers d "'..indi_timer..'"')
-			indi_timer = spell.english
+			--indi_timer = spell.english
 			--send_command('@timers c "'..indi_timer..'" '..indi_duration..' down spells/00136.png')
 		elseif spell.skill == 'Elemental Magic' then
  --		   state.MagicBurst:reset()
