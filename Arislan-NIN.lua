@@ -138,7 +138,7 @@ function init_gear_sets()
 		body="Adhemar Jacket",
 		hands="Adhemar Wristbands",
 		legs="Hiza. Hizayoroi +1",
-		feet=gear.Herc_WS_feet,
+		feet=gear.Herc_TA_feet,
 		neck="Fotia Gorget",
 		ear1="Moonshade Earring",
 		ear2="Ishvara Earring",

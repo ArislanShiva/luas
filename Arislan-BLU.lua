@@ -267,7 +267,7 @@ function init_gear_sets()
 		head="Carmine Mask +1", --14
 		body="Taeon Tabard", --9
 		hands="Leyline Gloves", --7
-		legs="Psycloth Lappas", --7
+		legs="Enif Cosciales", --8
 		feet="Carmine Greaves +1", --8
 		neck="Orunmila's Torque", --5
 		ear1="Etiolation Earring", --1
@@ -290,10 +290,10 @@ function init_gear_sets()
 	sets.precast.WS = {
 		ammo="Focal Orb",
 		head="Lilitu Headpiece",
-		body=gear.Herc_TA_body,
+		body=gear.Herc_WS_body,
 		hands="Jhakri Cuffs +1",
 		legs=gear.Herc_WS_legs,
-		feet=gear.Herc_WS_feet,
+		feet=gear.Herc_TA_feet,
 		neck="Fotia Gorget",
 		ear1="Moonshade Earring",
 		ear2="Ishvara Earring",
@@ -305,6 +305,7 @@ function init_gear_sets()
 
 	sets.precast.WS.Acc = set_combine(sets.precast.WS, {
 		head="Dampening Tam",
+		body=gear.Herc_TA_body,
 		hands=gear.Herc_WS_hands,
 		ring1="Ramuh Ring +1",
 		legs="Adhemar Kecks"
@@ -332,14 +333,19 @@ function init_gear_sets()
 
 	sets.precast.WS['Savage Blade'] = set_combine(sets.precast.WS, {
 		hands=gear.Herc_WS_hands,
-		feet=gear.Herc_WS_feet,
 		neck="Caro Necklace",
 		ring1="Ifrit Ring +1",
 		ring2="Shukuyu Ring",
 		waist="Prosilio Belt +1",
 		})
 
-	sets.precast.WS['Savage Blade'].Acc = sets.precast.WS['Savage Blade']
+	sets.precast.WS['Savage Blade'].Acc = set_combine(sets.precast.WS['Savage Blade'], {
+		body=gear.Herc_TA_body,
+		feet=gear.Herc_Acc_feet,
+		neck="Combatant's Torque",
+		ring1="Rufescent Ring",
+		waist="Grunfeld Rope",
+		})
 
 	sets.precast.WS['Requiescat'] = set_combine(sets.precast.WS['Savage Blade'], {
 		feet="Carmine Greaves +1",
@@ -349,15 +355,17 @@ function init_gear_sets()
 
 	sets.precast.WS['Requiescat'].Acc = set_combine(sets.precast.WS['Requiescat'], {
 		ammo="Falcon Eye",
+		body=gear.Herc_TA_body,
 		hands=gear.Herc_WS_hands,
 		})
 
 	sets.precast.WS['Expiacion'] = set_combine(sets.precast.WS['Savage Blade'], {
-		hands=gear.Herc_WS_hands,
 		ring1="Apate Ring",
 		})
 
-	sets.precast.WS['Expiacion'].Acc = sets.precast.WS['Expiacion']
+	sets.precast.WS['Expiacion'].Acc = set_combine(sets.precast.WS['Expiacion'], {
+		body=gear.Herc_TA_body,
+		})
 
 	sets.precast.WS['Sanguine Blade'] = {
 		ammo="Pemphredo Tathlum",
@@ -516,7 +524,7 @@ function init_gear_sets()
 	sets.midcast['Blue Magic'].MagicAccuracy = {
 		ammo="Pemphredo Tathlum",
 		head="Amalric Coif",
-		body="Samnuha Coat",
+		body="Amalric Doublet",
 		hands="Rawhide Gloves", 
 		legs="Psycloth Lappas",
 		feet="Jhakri Pigaches +1",
@@ -538,7 +546,7 @@ function init_gear_sets()
 		head="Carmine Mask +1", 
 		body="Vrikodara Jupon", -- 13
 		hands="Telchine Gloves", -- 10
-		legs="Gyve Trousers", -- 10
+		legs="Lengo Pants",
 		feet="Medium's Sabots", -- 12
 		neck="Incanter's Torque",
 		ear1="Calamitous Earring",

@@ -100,7 +100,8 @@ function init_gear_sets()
 	sets.ExtraRegen = {}
 	
 	sets.Kiting = {
-		feet="Jute Boots +1",
+		--feet="Jute Boots +1",
+		feet="Skd. Jambeaux +1",
 		}
 
 	sets.buff['Sneak Attack'] = {
@@ -242,7 +243,7 @@ function init_gear_sets()
 		ammo="Expeditious Pinion",
 		head="Adhemar Bonnet",
 		legs=gear.Herc_WS_legs,
-		feet=gear.Herc_WS_feet,
+		feet=gear.Herc_TA_feet,
 		ear1="Cessance Earring",
 		ear2="Brutal Earring",
 		ring2="Garuda Ring +1",
@@ -342,7 +343,8 @@ function init_gear_sets()
 		body="Mekosu. Harness",
 		hands=gear.Herc_TA_hands,
 		legs="Samnuha Tights",
-		feet="Jute Boots +1",
+--		feet="Jute Boots +1",
+		feet="Skd. Jambeaux +1",
 		neck="Sanctity Necklace",
 		ear1="Genmei Earring",
 		ear2="Infused Earring",

@@ -177,7 +177,7 @@ function init_gear_sets()
 	sets.midcast.CureSolace = {
 		main="Queller Rod", --15(+2)/(-15)
 		sub="Sors Shield", --3/(-5)
-		ammo="Leisure Musk +1", --0/(-4)
+		ammo="Esper Stone +1", --0/(-5)
 		head="Gende. Caubeen +1", --15/(-8)
 		body="Ebers Bliaud +1",
 		hands="Theo. Mitts +1", --0/(-5)
@@ -196,6 +196,9 @@ function init_gear_sets()
 
 	sets.midcast.CureWeather = set_combine(sets.midcast.Cure, {
 		main="Chatoyant Staff",
+		sub="Clerisy Strap +1",
+		hands="Kaykaus Cuffs", --10/(-6)
+		back="Solemnity Cape", --7/0
 		waist="Hachirin-no-Obi",
 		})
 
@@ -449,6 +452,8 @@ function init_gear_sets()
 		})
 
 	sets.idle.Town = set_combine(sets.idle, {
+		main="Izcalli",
+		sub="Genmei Shield",
 		head="Ebers Cap +1",
 		body="Ebers Bliaud +1",
 		hands="Ebers Mitts +1",
@@ -497,6 +502,8 @@ function init_gear_sets()
 	
 	-- Basic set for if no TP weapon is defined.
 	sets.engaged = {
+		main="Izcalli",
+		sub="Genmei Shield",
 		head="Telchine Cap",
 		body="Onca Suit",
 		neck="Combatant's Torque",
@@ -535,9 +542,10 @@ function job_post_midcast(spell, action, spellMap, eventArgs)
 	-- Apply Divine Caress boosting items as highest priority over other gear, if applicable.
 	if spellMap == 'StatusRemoval' and buffactive['Divine Caress'] then
 		equip(sets.buff['Divine Caress'])
-	elseif default_spell_map == 'Cure' or default_spell_map == 'Curaga' then
+	end
+	if spellMap == 'Cure' or spellMap == 'Curaga' then
 		if (world.weather_element == 'Light' or world.day_element == 'Light') then
-			return 'CureWeather'
+			equip(sets.midcast.CureWeather)
 		end
     end
 	if spellMap == 'Banish' or spellMap == "Holy" then

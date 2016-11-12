@@ -218,7 +218,7 @@ function init_gear_sets()
 	sets.midcast.Cure = {
 		main="Tamaxchi", --22/(-10)
 		sub="Sors Shield", --3/(-5)
-		ammo="Leisure Musk +1", --0/(-4)
+		ammo="Esper Stone +1", --0/(-5)
 		head="Vanya Hood", --10
 		body="Vanya Robe", --7/(-6)
 		hands="Telchine Gloves", --10

@@ -28,16 +28,6 @@ end
 
 -- Setup vars that are user-independent.
 function job_setup()
-	-- Number of runes
-	if player.main_job_level >= 65 then
-		max_runes = 3
-	elseif player.main_job_level >= 35 then
-		max_runes = 2
-	elseif player.main_job_level >= 5 then
-		max_runes = 1
-	else
-		max_runes = 0
-	end
 	-- /BLU Spell Maps
 	blue_magic_maps = {}
 
@@ -45,6 +35,10 @@ function job_setup()
 		'Poison Breath', 'Blitzstrahl', 'Sheep Song', 'Chaotic Eye'}
 	blue_magic_maps.Cure = S{'Wild Carrot'}
 	blue_magic_maps.Buffs = S{'Cocoon', 'Refueling'}
+
+	rayke_duration = 50
+	gambit_duration = 98
+
 end
 
 -------------------------------------------------------------------------------------------------------------------
@@ -146,6 +140,7 @@ function init_gear_sets()
 
 	sets.precast.JA['Lunge'] = {
 		ammo="Seeth. Bomblet +1",
+		head=gear.Herc_MAB_head,
 		body="Samnuha Coat",
 		hands="Carmine Fin. Ga. +1",
 		legs=gear.Herc_MAB_legs,
@@ -212,7 +207,7 @@ function init_gear_sets()
 		body=gear.Herc_TA_body,
 		hands="Meg. Gloves +1",
 		legs=gear.Herc_WS_legs,
-		feet=gear.Herc_WS_feet,
+		feet=gear.Herc_TA_feet,
 		neck="Fotia Gorget",
 		ear1="Moonshade Earring",
 		ear2="Brutal earring",
@@ -262,9 +257,9 @@ function init_gear_sets()
 
 	sets.precast.WS['Savage Blade'] = set_combine(sets.precast.WS, {
 		body="Meg. Cuirie +1",
-		hands=gear.Herc_WS_hands,
+		hands="Meg. Gloves +1",
 		legs="Meg. Chausses +1",
-		feet=gear.Herc_WS_feet,
+		feet=gear.Herc_TA_feet,
 		neck="Caro Necklace",
 		ring1="Ifrit Ring +1",
 		ring2="Shukuyu Ring",
@@ -647,6 +642,16 @@ function job_post_midcast(spell, action, spellMap, eventArgs)
 	end
 end
 
+function job_aftercast(spell, action, spellMap, eventArgs)
+	if spell.name == 'Rayke' and not spell.interrupted then
+		send_command('@timers c "Rayke ['..spell.target.name..']" '..rayke_duration..' down spells/00136.png')
+		send_command('input /echo Rayke: ON;wait '..rayke_duration..';input /echo Rayke: OFF;')
+	elseif spell.name == 'Gambit' and not spell.interrupted then
+		send_command('@timers c "Gambit ['..spell.target.name..']" '..gambit_duration..' down spells/00136.png')
+		send_command('input /echo Gambit: ON;wait '..gambit_duration..';input /echo Gambit: OFF;')
+	end
+end
+
 -------------------------------------------------------------------------------------------------------------------
 -- Job-specific hooks for non-casting events.
 -------------------------------------------------------------------------------------------------------------------
@@ -749,9 +754,9 @@ function display_current_job_state(eventArgs)
 	
 	msg = msg .. state.OffenseMode.value
 	if state.HybridMode.value ~= 'Normal' then
-		msg = msg .. '/' .. state.HybridMode.value .. ' ]'
+		msg = msg .. '/' .. state.HybridMode.value 
 	end
-	msg = msg .. '[ WS: ' .. state.WeaponskillMode.value .. ' ]'
+	msg = msg .. ' ][ WS: ' .. state.WeaponskillMode.value .. ' ]'
 	
 	if state.DefenseMode.value ~= 'None' then
 		msg = msg .. '[ Defense: ' .. state.DefenseMode.value .. state[state.DefenseMode.value .. 'DefenseMode'].value .. ' ]'

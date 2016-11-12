@@ -320,8 +320,10 @@ function init_gear_sets()
 
 	sets.precast.WS['Savage Blade'] = set_combine(sets.precast.WS['Evisceration'], {
 		head="Lilitu Headpiece",
+		body=gear.Herc_WS_body,
+		hands="Meg. Gloves +1",
 		legs=gear.Herc_WS_legs,
-		feet=gear.Herc_WS_feet,
+		feet=gear.Herc_TA_feet,
 		neck="Caro Necklace",
 		ring1="Ifrit Ring +1",
 		ring2="Shukuyu Ring",
@@ -330,6 +332,7 @@ function init_gear_sets()
 		})
 		
 	sets.precast.WS['Savage Blade'].Acc = set_combine(sets.precast.WS['Savage Blade'], {
+		body=gear.Herc_TA_body,
 		feet=gear.Herc_Acc_feet,
 		neck="Combatant's Torque",
 		ring1="Rufescent Ring",
@@ -338,6 +341,7 @@ function init_gear_sets()
 
 	sets.precast.WS['Requiescat'] = set_combine(sets.precast.WS['Savage Blade'], {
 		head="Meghanada Visor +1",
+		body=gear.Herc_WS_body,
 		feet="Carmine Greaves +1",
 		neck="Fotia Gorget",
 		ring1="Levia. Ring +1",
@@ -347,6 +351,7 @@ function init_gear_sets()
 		}) --MND
 
 	sets.precast.WS['Requiescat'].Acc = set_combine(sets.precast.WS['Requiescat'], {
+		body=gear.Herc_TA_body,
 		hands=gear.Herc_WS_hands,
 		feet=gear.Herc_Acc_feet,
 		neck="Combatant's Torque",
@@ -531,7 +536,6 @@ function init_gear_sets()
 		})
 
 	sets.engaged.MidAcc = set_combine(sets.engaged.LowAcc, {
-		legs="Adhemar Kecks",
 		neck="Combatant's Torque",
 		ear1="Cessance Earring",
 		ring2="Ramuh Ring +1",
@@ -576,7 +580,6 @@ function init_gear_sets()
 		})
 
 	sets.engaged.LowHaste.MidAcc = set_combine(sets.engaged.LowHaste.LowAcc, {
-		legs="Adhemar Kecks",
 		neck="Combatant's Torque",
 		ear2="Mache Earring",
 		ring2="Ramuh Ring +1",
@@ -1005,7 +1008,7 @@ function define_roll_values()
 		["Courser's Roll"]   = {lucky=3, unlucky=9, bonus="Snapshot"},
 		["Blitzer's Roll"]   = {lucky=4, unlucky=9, bonus="Attack Delay"},
 		["Tactician's Roll"] = {lucky=5, unlucky=8, bonus="Regain"},
-		["Allies's Roll"]	= {lucky=3, unlucky=10, bonus="Skillchain Damage"},
+		["Allies' Roll"]	= {lucky=3, unlucky=10, bonus="Skillchain Damage"},
 		["Miser's Roll"]	 = {lucky=5, unlucky=7, bonus="Save TP"},
 		["Companion's Roll"] = {lucky=2, unlucky=10, bonus="Pet Regain and Regen"},
 		["Avenger's Roll"]   = {lucky=4, unlucky=8, bonus="Counter Rate"},

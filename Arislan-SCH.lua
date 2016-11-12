@@ -256,7 +256,7 @@ function init_gear_sets()
 	sets.midcast.Cure = {
 		main="Tamaxchi", --22/(-10)
 		sub="Sors Shield", --3/(-5)
-		ammo="Leisure Musk +1", --0/(-4)
+		ammo="Esper Stone +1", --0/(-5)
 		head="Gende. Caubeen +1", --15/(-8)
 		body="Kaykaus Bliaut", --5(+3)
 		hands="Telchine Gloves", --10
@@ -365,7 +365,7 @@ function init_gear_sets()
 
 	-- Custom spell classes
 	sets.midcast.MndEnfeebles = {
-		main="Akademos",
+		main=gear.Akademos_MAC,
 		sub="Clerisy Strap +1",
 		ammo="Pemphredo Tathlum",
 		head="Amalric Coif",
@@ -389,7 +389,7 @@ function init_gear_sets()
 	sets.midcast.ElementalEnfeeble = sets.midcast.IntEnfeebles
 	
 	sets.midcast['Dark Magic'] = {
-		main="Akademos",
+		main=gear.Akademos_MAC,
 		sub="Clerisy Strap +1",
 		ammo="Pemphredo Tathlum",
 		head="Amalric Coif",
@@ -407,7 +407,7 @@ function init_gear_sets()
 		}
 
 	sets.midcast.Kaustra = {
-		main="Akademos",
+		main=gear.Akademos_MAB,
 		sub="Niobid Strap",
 		ammo="Pemphredo Tathlum",
 		head="Pixie Hairpin +1",
@@ -440,7 +440,7 @@ function init_gear_sets()
 
 	-- Elemental Magic
 	sets.midcast['Elemental Magic'] = {
-		main="Akademos",
+		main=gear.Akademos_MAB,
 		sub="Niobid Strap",
 		ammo="Pemphredo Tathlum",
 		head="Merlinic Hood",
@@ -458,14 +458,14 @@ function init_gear_sets()
 		}
 
 	sets.midcast['Elemental Magic'].Seidr = set_combine(sets.midcast['Elemental Magic'], {
-		main="Akademos",
+		main=gear.Akademos_MAC,
 		sub="Clerisy Strap +1",
 		body="Seidr Cotehardie",
 		neck="Sanctity Necklace",
 		})
 		
 	sets.midcast['Elemental Magic'].Resistant = set_combine(sets.midcast['Elemental Magic'], {
-		main="Akademos",
+		main=gear.Akademos_MAC,
 		sub="Clerisy Strap +1",
 		neck="Sanctity Necklace",
 		ear2="Hermetic Earring",
@@ -473,7 +473,7 @@ function init_gear_sets()
 		})
 	
 	sets.midcast.Impact = set_combine(sets.midcast['Elemental Magic'], {
-		main="Akademos",
+		main=gear.Akademos_MAB,
 		sub="Niobid Strap",
 		head=empty,
 		body="Twilight Cloak",
@@ -481,7 +481,7 @@ function init_gear_sets()
 		})
 	
 	sets.midcast.Helix = {
-		main="Akademos",
+		main=gear.Akademos_MAB,
 		sub="Niobid Strap",
 		ammo="Ghastly Tathlum +1",
 		waist="Yamabuki-no-Obi",
@@ -535,7 +535,7 @@ function init_gear_sets()
 		})
 
 	sets.idle.Town = set_combine(sets.idle, {
-		main="Akademos",
+		main=gear.Akademos_MAB,
 		sub="Clerisy Strap +1",
 		head="Merlinic Hood",
 		body="Merlinic Jubbah",
@@ -621,7 +621,7 @@ function init_gear_sets()
 	sets.buff['Alacrity'] = {feet="Peda. Loafers +1"}
 	
 	sets.buff['Klimaform'] = {
-		main="Akademos",
+		main=gear.Akademos_MAB,
 		sub="Niobid Strap",
 		feet="Arbatel Loafers +1",
 		waist="Hachirin-no-Obi",

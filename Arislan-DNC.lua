@@ -174,7 +174,22 @@ function init_gear_sets()
 	sets.precast.Samba = {head="Maxixi Tiara +1", back=gear.DNC_TP_Cape}
 	sets.precast.Jig = {legs="Horos Tights +1", feet="Maxixi Shoes +1"}
 
-	sets.precast.Step = {back=gear.DNC_TP_Cape}
+	sets.precast.Step = {
+		ammo="Falcon Eye",
+		head="Dampening Tam",
+		body=gear.Herc_TA_body,
+		hands=gear.Herc_TA_hands,
+		legs="Adhemar Kecks",
+		feet=gear.Herc_Acc_feet,
+		neck="Sanctity Necklace",
+		ear1="Cessance Earring",
+		ear2="Mache Earring",
+		ring1="Ramuh Ring +1",
+		ring2="Ramuh Ring +1",
+		waist="Olseni Belt",
+		back=gear.DNC_TP_Cape
+		}
+
 	sets.precast.Step['Feather Step'] = set_combine(sets.precast.Step, {feet="Macu. Toeshoes +1"})
 
 	sets.precast.Flourish1 = {}
@@ -269,7 +284,7 @@ function init_gear_sets()
 		ammo="Ginsen",
 		head="Adhemar Bonnet",
 		legs=gear.Herc_WS_legs,
-		feet=gear.Herc_WS_feet,
+		feet=gear.Herc_TA_feet,
 		ear1="Cessance Earring",
 		ear2="Brutal Earring",
 		ring1="Garuda Ring +1",
