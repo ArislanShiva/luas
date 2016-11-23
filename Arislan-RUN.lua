@@ -36,8 +36,8 @@ function job_setup()
 	blue_magic_maps.Cure = S{'Wild Carrot'}
 	blue_magic_maps.Buffs = S{'Cocoon', 'Refueling'}
 
-	rayke_duration = 50
-	gambit_duration = 98
+	rayke_duration = 47
+	gambit_duration = 92
 
 end
 
@@ -125,7 +125,7 @@ function init_gear_sets()
 		neck="Unmoving Collar +1", --10
 		ear1="Cryptic Earring", --4
 		ear2="Friomisi Earring", --2
-		ring1="Petrov Ring", --4
+		ring1="Supershear Ring", --5
 		ring2="Eihwaz Ring", --5
 		back="Evasionist's Cape", --4
 		waist="Trance Belt", --4
@@ -220,6 +220,7 @@ function init_gear_sets()
 	sets.precast.WS.Acc = set_combine(sets.precast.WS, {
 		hands=gear.Herc_WS_hands,
 		legs="Meg. Chausses +1",
+		ear2="Telos Earring",
 		})
 
 
@@ -234,7 +235,7 @@ function init_gear_sets()
 		head="Dampening Tam",
 		legs="Adhemar Kecks",
 		feet=gear.Herc_Acc_feet,
-		ear2="Mache Earring",
+		ear2="Telos Earring",
 		ring1="Rufescent Ring",
 		})
 	
@@ -250,6 +251,7 @@ function init_gear_sets()
 		hands=gear.Herc_WS_hands,
 		legs="Samnuha Tights",
 		feet=gear.Herc_Acc_feet,
+		ear2="Telos Earring",
 		ring1="Ramuh Ring +1",
 		})
 
@@ -553,7 +555,7 @@ function init_gear_sets()
 	sets.engaged.MidAcc = set_combine(sets.engaged.LowAcc, {
 		ammo="Falcon Eye",
 		legs="Adhemar Kecks",
-		ear2="Mache Earring",
+		ear2="Telos Earring",
 		})
 
 	sets.engaged.HighAcc = set_combine(sets.engaged.MidAcc, {
@@ -562,13 +564,15 @@ function init_gear_sets()
 		feet=gear.Herc_Acc_feet,
 		ring1="Ramuh Ring +1",
 		ring2="Ramuh Ring +1",
+		ear1="Mache Earring",
 		waist="Kentarch Belt +1",
 		})
 
 	sets.engaged.STP = set_combine(sets.engaged, {
 		feet="Carmine Greaves +1",
 		neck="Ainia Collar",
-		ear2="Dedition Earring",
+		ear1="Dedition Earring",
+		ear2="Telos Earring",
 		waist="Kentarch Belt +1",
 		})
 

@@ -48,7 +48,7 @@ function user_setup()
 	lowTierNukes = S{'Stone', 'Water', 'Aero', 'Fire', 'Blizzard', 'Thunder'}
 	
 	-- Additional local binds
-	send_command('bind ^` input /ma Stun <t>; input /p I just Stunned [#1]')
+	send_command('bind ^` input /ma Stun <t>')
 	send_command('bind !` gs c toggle MagicBurst')
 	send_command('bind !w input /ma "Aspir III" <t>')
 	send_command('bind !p input /ma "Shock Spikes" <me>')
@@ -85,8 +85,12 @@ function init_gear_sets()
 	---- Precast Sets ----
 	
 	-- Precast sets to enhance JAs
-	sets.precast.JA['Mana Wall'] = {feet="Wicce Sabots +1",	back=gear.BLM_MAB_Cape}
-	sets.precast.JA.Manafont = {body="Arch. Coat "}
+	sets.precast.JA['Mana Wall'] = {
+		feet="Wicce Sabots +1",
+		back=gear.BLM_Death_Cape,
+		}
+
+	sets.precast.JA.Manafont = {body="Arch. Coat"}
 
 	-- Fast cast sets for spells
 	sets.precast.FC = {
@@ -159,7 +163,7 @@ function init_gear_sets()
 		body="Onca Suit",
 		neck="Fotia Gorget",
 		ear1="Moonshade Earring",
-		ear2="Ishvara Earring",
+		ear2="Telos Earring",
 		ring1="Ramuh Ring +1",
 		ring2="Ramuh Ring +1",
 		back=gear.BLM_MAB_Cape,
@@ -355,8 +359,13 @@ function init_gear_sets()
 		ring2="Archon Ring",
 		waist="Fucho-no-obi",
 		})
-	
+
 	sets.midcast.Aspir = sets.midcast.Drain
+
+	sets.midcast.Aspir.DeathMode = {
+		ear2="Hirudinea Earring",
+		waist="Fucho-no-obi",
+		}
 
 	sets.midcast.Stun = set_combine(sets.midcast['Dark Magic'], {
 		feet="Regal Pumps +1",
@@ -385,14 +394,14 @@ function init_gear_sets()
 
 	sets.midcast['Elemental Magic'].DeathMode = {
 		main=gear.Lathi_MAB,
-		sub="Niobid Strap",
+		sub="Elder's Grip +1",
 		ammo="Pemphredo Tathlum",
 		head="Merlinic Hood",
 		body="Merlinic Jubbah",
 		hands="Amalric Gages",
 		legs="Merlinic Shalwar",
 		feet="Merlinic Crackows",
-		neck="Saevus Pendant +1",
+		neck="Sanctity Necklace",
 		ear1="Barkaro. Earring",
 		ear2="Friomisi Earring",
 		ring1="Mephitas's Ring +1",
@@ -496,7 +505,7 @@ function init_gear_sets()
 		ring1="Mephitas's Ring +1",
 		ring2="Mephitas's Ring",
 		back=gear.BLM_Death_Cape,
-		waist="Refoccilation Stone",
+		waist="Fucho-no-obi",
 		}
 
 	sets.idle.Town = set_combine(sets.idle, {
@@ -559,7 +568,7 @@ function init_gear_sets()
 		body="Onca Suit",
 		neck="Combatant's Torque",
 		ear1="Cessance Earring",
-		ear2="Brutal Earring",
+		ear2="Telos Earring",
 		ring1="Chirich Ring",
 		ring2="Ramuh Ring +1",
 		waist="Grunfeld Rope",
@@ -586,11 +595,11 @@ end
 -- Set eventArgs.handled to true if we don't want any automatic gear equipping to be done.
 function job_midcast(spell, action, spellMap, eventArgs)
 	if spell.action_type == 'Magic' and state.DeathMode.value then
-		if spell.skill == 'Elemental Magic' then
-			classes.CustomClass = 'DeathMode'
-		else
+		classes.CustomClass = 'DeathMode'
+		if spell.english == 'Death' then
 			equip(sets.midcast.Death)
-			disable('ammo','head','neck','ear1','ear2','body','hands','ring1','ring2','back','waist','legs','feet')
+		elseif spell.skill == 'Enhancing Magic' or spell.skill == 'Enfeebling Magic' or spellMap == 'Cure' then
+			eventArgs.handled = true
 		end
 	end
 end
@@ -620,11 +629,8 @@ function job_aftercast(spell, action, spellMap, eventArgs)
 		-- Lock feet after using Mana Wall.
 		if spell.english == 'Mana Wall' then
 			enable('feet','back')
-			equip(sets.buff['Mana Wall'])
+			equip(sets.precast.JA['Mana Wall'])
 			disable('feet','back')
-		end
-		if state.DeathMode.value then
-			enable('ammo','head','neck','ear1','ear2','body','hands','ring1','ring2','back','waist','legs','feet')
 		end
 	end
 end
@@ -684,6 +690,11 @@ function customize_idle_set(idleSet)
 	end
 	if state.DeathMode.value then
 		idleSet = sets.idle.DeathMode
+		if buffactive['Mana Wall'] then
+			enable('feet','back')
+			equip(sets.precast.JA['Mana Wall'])
+			disable('feet','back')
+		end
 	end
 	
 	return idleSet
