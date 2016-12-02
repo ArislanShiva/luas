@@ -93,7 +93,7 @@ end
 -- Setup vars that are user-dependent.  Can override this function in a sidecar file.
 function user_setup()
 	state.OffenseMode:options('STP', 'Normal', 'LowAcc', 'MidAcc', 'HighAcc')
-	state.RangedMode:options('Normal', 'Acc', 'Fodder')
+	state.RangedMode:options('Normal', 'Acc')
 	state.WeaponskillMode:options('Normal', 'Acc')
 	state.CastingMode:options('Normal', 'Resistant')
 	state.IdleMode:options('Normal', 'DT')
@@ -226,12 +226,12 @@ function init_gear_sets()
 		ammo=gear.RAbullet,
 		head="Aurore Beret +1", --5
 		body="Pursuer's Doublet", --6
-		hands="Carmine Fin. Ga. +1", --8
+		hands="Lanun Gants +1", --9
 		legs="Adhemar Kecks", --9
 		feet="Meg. Jam. +1", --8
-		back="Navarch's Mantle", --6.5
+		back="Navarch's Mantle", --6
 		waist="Impulse Belt", --3
-		}
+		} -- 10% Gifts
 
 	   
 	-- Weaponskill sets
@@ -303,6 +303,8 @@ function init_gear_sets()
 		back=gear.COR_WS1_Cape,
 		waist="Eschan Stone",
 		}
+
+	sets.precast.WS['Leaden Salute'].FullTP = {ear1="Hecate's Earring", waist="Svelt. Gouriz +1"}
 		
 	sets.precast.WS['Evisceration'] = {
 		head="Adhemar Bonnet",
@@ -321,7 +323,7 @@ function init_gear_sets()
 
 	sets.precast.WS['Savage Blade'] = set_combine(sets.precast.WS['Evisceration'], {
 		head="Lilitu Headpiece",
-		body=gear.Herc_WS_body,
+		body=gear.Herc_TA_body,
 		hands="Meg. Gloves +1",
 		legs=gear.Herc_WS_legs,
 		feet=gear.Herc_TA_feet,
@@ -343,7 +345,7 @@ function init_gear_sets()
 
 	sets.precast.WS['Requiescat'] = set_combine(sets.precast.WS['Savage Blade'], {
 		head="Meghanada Visor +1",
-		body=gear.Herc_WS_body,
+		body=gear.Herc_TA_body,
 		feet="Carmine Greaves +1",
 		neck="Fotia Gorget",
 		ring1="Levia. Ring +1",
@@ -475,7 +477,8 @@ function init_gear_sets()
 		})
 
 	sets.idle.Town = set_combine(sets.idle, {
-		body="Chasseur's Frac +1",
+		head="Carmine Mask +1",
+		body="Lanun Frac +1",
 		feet="Carmine Greaves +1",
 		neck="Combatant's Torque",
 		ear1="Eabani Earring",
@@ -731,7 +734,6 @@ function init_gear_sets()
 		})
 
 	sets.Obi = {waist="Hachirin-no-Obi"}
-	sets.FullTP = {ear1="Infused Earring"}
 	sets.CP = {back="Mecisto. Mantle"}
 	sets.Reive = {neck="Ygnas's Resolve +1"}
 
@@ -770,9 +772,9 @@ function job_post_precast(spell, action, spellMap, eventArgs)
 			if world.weather_element == 'Dark' or world.day_element == 'Dark' then
 				equip(sets.Obi)
 			end
-			if player.tp > 2999 then
-				equip(sets.FullTP)
-			end			
+			if player.tp > 2900 then
+				equip(sets.precast.WS['Leaden Salute'].FullTP)
+			end	
 		elseif spell.english == 'Wildfire' and (world.weather_element == 'Fire' or world.day_element == 'Fire') then
 			equip(sets.Obi)
 		elseif spell.type == 'CorsairShot' and (spell.element == world.weather_element or spell.element == world.day_element) then

@@ -226,6 +226,8 @@ function init_gear_sets()
 		waist="Eschan Stone",
 		}
 
+	sets.precast.WS["Trueflight"].FullTP = {ear1="Hecate's Earring", waist="Svelt. Gouriz +1"}
+
 	sets.precast.WS["Wildfire"] = sets.precast.WS["Trueflight"]
 
 	sets.precast.WS['Rampage'] = {
@@ -681,8 +683,13 @@ end
 function job_post_precast(spell, action, spellMap, eventArgs)
 	-- Equip obi if weather/day matches for WS.
     if spell.type == 'WeaponSkill' then
-		if spell.english == 'Trueflight' and (world.weather_element == 'Light' or world.day_element == 'Light') then
-			equip(sets.Obi)
+		if spell.english == 'Trueflight' then
+			if world.weather_element == 'Light' or world.day_element == 'Light' then
+				equip(sets.Obi)
+			end
+			if player.tp > 2900 then
+				equip(sets.precast.WS["Trueflight"].FullTP)
+			end	
 		elseif spell.english == 'Wildfire' and (world.weather_element == 'Fire' or world.day_element == 'Fire') then
 			equip(sets.Obi)
 		end

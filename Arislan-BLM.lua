@@ -112,22 +112,6 @@ function init_gear_sets()
 		waist="Witful Belt", --3/(2)
 		}
 
-	sets.precast.FC.DeathMode = {
-		ammo="Ghastly Tathlum +1",
-		head="Amalric Coif", --10
-		body="Amalric Doublet",
-		hands="Amalric Gages",
-		legs="Psycloth Lappas", --7
-		feet="Regal Pumps +1", --7
-		neck="Orunmila's Torque", --5
-		ear1="Etiolation Earring", --1
-		ear2="Loquacious Earring", --2
-		ring1="Mephitas's Ring +1",
-		ring2="Weather. Ring", --5
-		back="Bane Cape", --4
-		waist="Witful Belt", --3/(2)
-		}
-
 	sets.precast.FC['Enhancing Magic'] = set_combine(sets.precast.FC, {
 		waist="Siegel Sash",
 		back="Perimede Cape",
@@ -154,6 +138,22 @@ function init_gear_sets()
 		body="Twilight Cloak",
 		waist="Channeler's Stone",
 		})
+	
+	sets.precast.FC.DeathMode = {
+		ammo="Ghastly Tathlum +1",
+		head="Amalric Coif", --10
+		body="Amalric Doublet",
+		hands="Amalric Gages",
+		legs="Psycloth Lappas", --7
+		feet="Regal Pumps +1", --7
+		neck="Orunmila's Torque", --5
+		ear1="Etiolation Earring", --1
+		ear2="Loquacious Earring", --2
+		ring1="Mephitas's Ring +1",
+		ring2="Weather. Ring", --5
+		back="Bane Cape", --4
+		waist="Witful Belt", --3/(2)
+		}
 
 	-- Weaponskill sets
 	
@@ -362,15 +362,28 @@ function init_gear_sets()
 
 	sets.midcast.Aspir = sets.midcast.Drain
 
-	sets.midcast.Aspir.DeathMode = {
-		ear2="Hirudinea Earring",
-		waist="Fucho-no-obi",
-		}
-
 	sets.midcast.Stun = set_combine(sets.midcast['Dark Magic'], {
 		feet="Regal Pumps +1",
 		waist="Channeler's Stone",
 		})
+
+	sets.midcast.Death = {
+		main="Grioavolr",
+		sub="Elder's Grip +1",
+		ammo="Ghastly Tathlum +1",
+		head="Pixie Hairpin +1",
+		body="Merlinic Jubbah", --10
+		hands="Amalric Gages", --(5)
+		legs="Amalric Slops",
+		feet="Merlinic Crackows", --11
+		neck="Mizu. Kubikazari", --10
+		ear1="Barkaro. Earring",
+		ear2="Static Earring", --5
+		ring1="Mephitas's Ring +1",
+		ring2="Archon Ring",
+		back=gear.BLM_Death_Cape, --5
+		waist="Yamabuki-no-Obi",
+		}
 
 	-- Elemental Magic sets
 	
@@ -430,24 +443,6 @@ function init_gear_sets()
 		body="Twilight Cloak",
 		ring2="Archon Ring",
 		})
-
-	sets.midcast.Death = {
-		main="Grioavolr",
-		sub="Elder's Grip +1",
-		ammo="Ghastly Tathlum +1",
-		head="Pixie Hairpin +1",
-		body="Merlinic Jubbah", --10
-		hands="Amalric Gages", --(5)
-		legs="Amalric Slops",
-		feet="Merlinic Crackows", --11
-		neck="Mizu. Kubikazari", --10
-		ear1="Barkaro. Earring",
-		ear2="Static Earring", --5
-		ring1="Mephitas's Ring +1",
-		ring2="Archon Ring",
-		back=gear.BLM_Death_Cape, --5
-		waist="Yamabuki-no-Obi",
-		}
 
 	-- Initializes trusts at iLvl 119
 	sets.midcast.Trust = sets.precast.FC
@@ -588,19 +583,16 @@ end
 -- Set eventArgs.useMidcastGear to true if we want midcast gear equipped on precast.
 function job_precast(spell, action, spellMap, eventArgs)
 	if spell.action_type == 'Magic' and state.DeathMode.value then
-		classes.CustomClass = 'DeathMode'
+		eventArgs.handled = true
+		equip(sets.precast.FC.DeathMode)
 	end
 end
 
 -- Set eventArgs.handled to true if we don't want any automatic gear equipping to be done.
 function job_midcast(spell, action, spellMap, eventArgs)
 	if spell.action_type == 'Magic' and state.DeathMode.value then
-		classes.CustomClass = 'DeathMode'
-		if spell.english == 'Death' then
-			equip(sets.midcast.Death)
-		elseif spell.skill == 'Enhancing Magic' or spell.skill == 'Enfeebling Magic' or spellMap == 'Cure' then
-			eventArgs.handled = true
-		end
+		eventArgs.handled = true
+		equip(sets.midcast.Death)
 	end
 end
 

@@ -241,12 +241,12 @@ function init_gear_sets()
 		})
 
 	sets.precast.WS['Exenterator'] = set_combine(sets.precast.WS, {
-		ammo="Expeditious Pinion",
+		ammo="Seeth. Bomblet +1",
 		head="Adhemar Bonnet",
-		legs=gear.Herc_WS_legs,
-		feet=gear.Herc_TA_feet,
+		legs="Meg. Chausses +1",
+		feet="Meg. Jam. +1",
 		ear1="Cessance Earring",
-		ear2="Brutal Earring",
+		ear2="Telos Earring",
 		ring2="Garuda Ring +1",
 		ring2="Garuda Ring +1",
 		})
@@ -254,10 +254,6 @@ function init_gear_sets()
 	sets.precast.WS['Exenterator'].Acc = set_combine(sets.precast.WS['Exenterator'], {
 		ammo="Falcon Eye",
 		head="Dampening Tam",
-		hands=gear.Herc_WS_hands,
-		feet=gear.Herc_Acc_feet,
-		ear2="Telos Earring",
-		ring1="Ramuh Ring +1",
 		})
 
 	sets.precast.WS['Evisceration'] = set_combine(sets.precast.WS, {

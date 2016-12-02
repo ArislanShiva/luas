@@ -444,14 +444,14 @@ function init_gear_sets()
 
 	-- .Pet sets are for when Luopan is present.
 	sets.idle.Pet = set_combine(sets.idle, { 
-		-- pet -dt (50% innate)/regen --
+		-- Pet: -DT (37.5% to cap) / Pet: Regen 
   		main="Sucellus", --3/3
 		sub="Genmei Shield",
 		range="Dunna", --5/0
-		head="Azimuth Hood +1", --3/0
+		head="Azimuth Hood +1", --0/3
 		body="Telchine Chas.", --0/3
 		hands="Geo. Mitaines +1", --11/0
-		legs="Psycloth Lappas", --4/0
+		legs="Telchine Braconi", --0/2
 		feet="Telchine Pigaches", --0/3
 		ear1="Handler's Earring", --3*/0
 		ear2="Handler's Earring +1", --4*/0
@@ -460,16 +460,18 @@ function init_gear_sets()
 		})
 
 	sets.idle.DT.Pet = set_combine(sets.idle.Pet, {
+		legs="Psycloth Lappas", --4/0
 		neck="Loricate Torque +1",
 		ring1="Gelatinous Ring +1",
 		ring2="Defending Ring",
+		back="Lifestream Cape", --3/0
 		})
 
 	-- .Indi sets are for when an Indi-spell is active.
-	sets.idle.Indi = set_combine(sets.idle, {legs="Bagua Pants +1"})
-	sets.idle.Pet.Indi = set_combine(sets.idle.Pet, {legs="Bagua Pants +1"})
-	sets.idle.DT.Indi = set_combine(sets.idle.DT, {legs="Bagua Pants +1"})
-	sets.idle.DT.Pet.Indi = set_combine(sets.idle.DT.Pet, {legs="Bagua Pants +1"})
+--	sets.idle.Indi = set_combine(sets.idle, {legs="Bagua Pants +1"})
+--	sets.idle.Pet.Indi = set_combine(sets.idle.Pet, {legs="Bagua Pants +1"})
+--	sets.idle.DT.Indi = set_combine(sets.idle.DT, {legs="Bagua Pants +1"})
+--	sets.idle.DT.Pet.Indi = set_combine(sets.idle.DT.Pet, {legs="Bagua Pants +1"})
 
 	sets.idle.Town = set_combine(sets.idle, {
   		main="Sucellus",

@@ -241,7 +241,7 @@ function init_gear_sets()
 		neck="Unmoving Collar +1", --10
 		ear1="Cryptic Earring", --4
 		ear2="Friomisi Earring", --2
-		ring1="Petrov Ring", --4
+		ring1="Supershear Ring", --5
 		ring2="Eihwaz Ring", --5
 		waist="Trance Belt", --4
 		}
@@ -280,7 +280,7 @@ function init_gear_sets()
 
 	sets.precast.FC['Blue Magic'] = set_combine(sets.precast.FC, {body="Hashishin Mintan +1"})
 	sets.precast.FC['Enhancing Magic'] = set_combine(sets.precast.FC, {waist="Siegel Sash"})
-	sets.precast.FC.Cures = set_combine(sets.precast.FC, {ammo="Impatiens", ear2="Mendi. Earring"})
+	sets.precast.FC.Cure = set_combine(sets.precast.FC, {ammo="Impatiens", ear2="Mendi. Earring"})
 
 	
 	------------------------------------------------------------------------------------------------
@@ -290,7 +290,7 @@ function init_gear_sets()
 	sets.precast.WS = {
 		ammo="Focal Orb",
 		head="Lilitu Headpiece",
-		body=gear.Herc_WS_body,
+		body=gear.Herc_TA_body,
 		hands="Jhakri Cuffs +1",
 		legs=gear.Herc_WS_legs,
 		feet=gear.Herc_TA_feet,
@@ -299,7 +299,7 @@ function init_gear_sets()
 		ear2="Ishvara Earring",
 		ring1="Shukuyu Ring",
 		ring2="Ramuh Ring +1",
-		back=gear.BLU_CDC_Cape, 
+		back=gear.BLU_WS2_Cape,
 		waist="Fotia Belt",
 		}
 
@@ -322,7 +322,7 @@ function init_gear_sets()
 		ear2="Brutal Earring",
 		ring1="Begrudging Ring",
 		ring2="Epona's Ring",
-		feet="Thereoid Greaves"
+		back=gear.BLU_WS1_Cape,
 		})
 
 	sets.precast.WS['Chant du Cygne'].Acc = set_combine(sets.precast.WS['Chant du Cygne'], {
@@ -437,7 +437,7 @@ function init_gear_sets()
 		neck="Caro Necklace", 
 		ring1="Ifrit Ring +1",
 		ring2="Shukuyu Ring",
-		back="Cornflower Cape",
+		back=gear.BLU_WS2_Cape,
 		waist="Prosilio Belt +1",
 		}
 
@@ -458,7 +458,7 @@ function init_gear_sets()
 		ear2="Mache Earring",
 		ring1="Ramuh Ring +1",
 		ring2="Ramuh Ring +1",
-		back=gear.BLU_CDC_Cape,
+		back=gear.BLU_WS1_Cape,
 		})
 
 	sets.midcast['Blue Magic'].PhysicalVit = sets.midcast['Blue Magic'].Physical
@@ -483,7 +483,7 @@ function init_gear_sets()
 	sets.midcast['Blue Magic'].Magical = {
 		ammo="Pemphredo Tathlum",
 		head="Jhakri Coronal +1",
-		body="Gyve Doublet",
+		body="Vedic Coat",
 		hands="Amalric Gages",
 		legs="Amalric Slops",
 		feet="Jhakri Pigaches +1",
@@ -552,18 +552,26 @@ function init_gear_sets()
 		ammo="Pemphredo Tathlum",
 		head="Carmine Mask +1", 
 		body="Vrikodara Jupon", -- 13
-		hands="Buremte Gloves", -- (13)
-		legs="Gyve Trousers", -- 10
+		hands="Telchine Gloves", -- 10
 		feet="Medium's Sabots", -- 12
 		neck="Incanter's Torque",
 		ear1="Calamitous Earring",
 		ear2="Mendi. Earring", -- 5
 		ring1="Lebeche Ring", -- 3
-		ring2="Asklepian Ring", -- (3)
+		ring2="Haoma's Ring",
 		back="Solemnity Cape", -- 7
-		waist="Gishdubar Sash", -- (10)
+		waist="Bishop's Sash",
 		}
 
+	sets.midcast['Blue Magic'].HealingSelf = set_combine(sets.midcast['Blue Magic'].Healing, {
+		hands="Buremte Gloves", -- (13)
+		legs="Gyve Trousers", -- 10
+		neck="Phalaina Locket", -- 4(4)
+		ring2="Asklepian Ring", -- (3)
+		waist="Gishdubar Sash", -- (10)
+		})
+
+		
 	sets.midcast['Blue Magic'].Buff = sets.midcast['Blue Magic']
 	sets.midcast['Blue Magic'].SkillBasedBuff = sets.midcast['Blue Magic']
 	
@@ -640,10 +648,11 @@ function init_gear_sets()
 	sets.idle.DT = set_combine(sets.idle, {
 		ammo="Staunch Tathlum", --2/2
 		head=gear.Herc_DT_head, --3/3
-		body="Emet Harness +1", --6/0
+		body=gear.Herc_DT_body, --3/3
 		hands=gear.Herc_DT_hands, --5/3
 		feet="Battlecast Gaiters", --3/0
 		neck="Loricate Torque +1", --6/6
+		ear1="Genmei Earring", --2/0
 		ring1="Gelatinous Ring +1", --7/(-1)
 		ring2="Defending Ring", --10/10
 		back="Solemnity Cape", --4/4
@@ -658,11 +667,11 @@ function init_gear_sets()
 		ear2="Telos Earring",
 		ring1="Ramuh Ring +1",
 		ring2="Ramuh Ring +1",
-		back=gear.BLU_CDC_Cape,
+		back=gear.BLU_WS1_Cape,
 		waist="Windbuffet Belt +1",
 		})
 
-	sets.idle.Weak = sets.idle.PDT
+	sets.idle.Weak = sets.idle.DT
 
 	sets.idle.Learning = set_combine(sets.idle, sets.Learning)
 
@@ -980,8 +989,8 @@ function job_post_midcast(spell, action, spellMap, eventArgs)
 				equip(sets.buff[buff])
 			end
 		end
-		if spellMap == 'Healing' and spell.target.type == 'SELF' and sets.self_healing then
-			equip(sets.self_healing)
+		if spellMap == 'Healing' and spell.target.type == 'SELF' then
+			equip(sets.midcast['Blue Magic'].HealingSelf)
 		end
 	end
 

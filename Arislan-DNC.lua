@@ -284,22 +284,17 @@ function init_gear_sets()
 	sets.precast.WS['Exenterator'] = set_combine(sets.precast.WS, {
 		ammo="Ginsen",
 		head="Adhemar Bonnet",
-		legs=gear.Herc_WS_legs,
-		feet=gear.Herc_TA_feet,
+		legs="Meg. Chausses +1",
+		feet="Meg. Jam. +1",
 		ear1="Cessance Earring",
-		ear2="Brutal Earring",
-		ring1="Garuda Ring +1",
+		ear2="Telos Earring",
+		ring2="Garuda Ring +1",
 		ring2="Garuda Ring +1",
 		})
 		
 	sets.precast.WS['Exenterator'].Acc = set_combine(sets.precast.WS['Exenterator'], {
 		ammo="Falcon Eye",
 		head="Dampening Tam",
-		body=gear.Herc_TA_body,
-		hands=gear.Herc_WS_hands,
-		feet=gear.Herc_Acc_feet,
-		ear2="Telos Earring",
-		ring1="Cacoethic Ring +1",
 		})
 
 	sets.precast.WS['Pyrrhic Kleos'] = set_combine(sets.precast.WS, {
@@ -494,6 +489,7 @@ function init_gear_sets()
 		})
 
 	sets.engaged.HighAcc = set_combine(sets.engaged.MidAcc, {
+		legs="Adhemar Kecks",
 		feet=gear.Herc_Acc_feet,
 		ear1="Cessance Earring",
 		ear2="Telos Earring",
@@ -541,6 +537,7 @@ function init_gear_sets()
 		})
 
 	sets.engaged.LowHaste.HighAcc = set_combine(sets.engaged.LowHaste.MidAcc, {
+		legs="Adhemar Kecks",
 		feet=gear.Herc_Acc_feet,
 		ear1="Cessance Earring",
 		ear2="Telos Earring",
@@ -589,6 +586,7 @@ function init_gear_sets()
 		})
 
 	sets.engaged.MidHaste.HighAcc = set_combine(sets.engaged.MidHaste.MidAcc, {
+		legs="Adhemar Kecks",
 		feet=gear.Herc_Acc_feet,
 		ear2="Telos Earring",
 		ring1="Ramuh Ring +1",
@@ -635,6 +633,7 @@ function init_gear_sets()
 		})
 
 	sets.engaged.HighHaste.HighAcc = set_combine(sets.engaged.HighHaste.MidAcc, {
+		legs="Adhemar Kecks",
 		feet=gear.Herc_Acc_feet,
 		ear2="Telos Earring",
 		ring1="Ramuh Ring +1",

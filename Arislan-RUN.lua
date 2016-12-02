@@ -194,6 +194,8 @@ function init_gear_sets()
 		waist="Siegel Sash",
 		})
 
+	sets.precast.FC.Cure = set_combine(sets.precast.FC, {ammo="Impatiens", ear2="Mendi. Earring"})
+
 	sets.precast.FC.Utsusemi = set_combine(sets.precast.FC, {
 		ammo="Impatiens",
 		neck="Magoraga Beads",
@@ -301,6 +303,23 @@ function init_gear_sets()
 	sets.midcast.FastRecast = {
 		ear1="Etiolation Earring",
 		ear2="Loquacious Earring",
+		}
+
+	sets.midcast.Cure = {
+		sub="Mensch Strap +1",
+		ammo="Staunch Tathlum",
+		head=gear.Herc_DT_head,
+		body="Vrikodara Jupon", -- 13
+		hands="Buremte Gloves", --(13)
+		legs="Eri. Leg Guards +1",
+		feet="Erilaz Greaves +1",
+		neck="Phalaina Locket", -- 4(4)
+		ear1="Roundel Earring", -- 5
+		ear2="Mendi. Earring", -- 5
+		ring1="Lebeche Ring", -- 3
+		ring2="Defending Ring",
+		back="Solemnity Cape", -- 7
+		waist="Flume Belt +1",
 		}
 
 	sets.midcast['Enhancing Magic'] = {
@@ -447,7 +466,7 @@ function init_gear_sets()
 		neck="Loricate Torque +1", --6/6
 		ear1="Genmei Earring", --2/0
 		ear2="Impreg. Earring",
-		ring1="Warden's Ring +1", --3/0
+		ring1="Warden's Ring", --3/0
 		ring2="Defending Ring", --10/10
 		back=gear.RUN_HP_Cape,
 		waist="Flume Belt +1", --4/0
