@@ -261,6 +261,7 @@ function init_gear_sets()
 	sets.precast.WS["Last Stand"] = set_combine(sets.precast.WS['Last Stand'], {
 		hands="Meg. Gloves +1",
 		ring1="Garuda Ring +1",
+		back=gear.COR_RA_Cape,
 		})
 
 	sets.precast.WS['Last Stand'].Acc = set_combine(sets.precast.WS['Last Stand'], {
@@ -383,6 +384,22 @@ function init_gear_sets()
 		waist="Ninurta's Sash",
 		}
 
+	sets.midcast['Dark Magic'] = {
+		ammo=gear.QDbullet,
+		head=gear.Herc_MAB_head,
+		body="Pursuer's Doublet",
+		hands="Adhemar Wristbands",
+		legs="Chas. Culottes +1",
+		feet="Carmine Greaves +1",
+		neck="Ainia Collar",
+		ear1="Enervating Earring",
+		ear2="Telos Earring",
+		ring1="Petrov Ring",
+		ring2="Chirich Ring",
+		back=gear.COR_RA_Cape,
+		waist="Oneiros Rope",		
+		}
+
 	sets.midcast.CorsairShot = {
 		ammo=gear.QDbullet,
 		head=gear.Herc_MAB_head,
@@ -428,7 +445,7 @@ function init_gear_sets()
 		ear2="Telos Earring",
 		ring1="Arvina Ringlet +1",
 		ring2="Garuda Ring +1",
-		back="Gunslinger's Cape",
+		back=gear.COR_RA_Cape,
 		waist="Yemaya Belt",
 		}
 

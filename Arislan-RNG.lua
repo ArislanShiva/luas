@@ -312,7 +312,7 @@ function init_gear_sets()
 		feet="Carmine Greaves +1",
 		neck="Ainia Collar",
 		ear1="Dedition Earring",
-		ring2="Rajas Ring",
+		ring1="Petrov Ring",
 		})
 
 	sets.midcast.RA.Doomsday = set_combine(sets.midcast.RA, {

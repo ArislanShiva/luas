@@ -155,6 +155,8 @@ function init_gear_sets()
 		waist="Witful Belt", --3/(2)
 		}
 
+	sets.precast.FC.Impact.DeathMode = {head=empty,	body="Twilight Cloak"}
+
 	-- Weaponskill sets
 	
 	-- Default set for any weaponskill that isn't any more specifically defined
@@ -585,6 +587,9 @@ function job_precast(spell, action, spellMap, eventArgs)
 	if spell.action_type == 'Magic' and state.DeathMode.value then
 		eventArgs.handled = true
 		equip(sets.precast.FC.DeathMode)
+		if spell.english == "Impact" then
+			equip(sets.precast.FC.Impact.DeathMode)
+		end
 	end
 end
 
@@ -592,7 +597,11 @@ end
 function job_midcast(spell, action, spellMap, eventArgs)
 	if spell.action_type == 'Magic' and state.DeathMode.value then
 		eventArgs.handled = true
-		equip(sets.midcast.Death)
+		if spell.skill == 'Elemental Magic' then
+			equip(sets.midcast['Elemental Magic'].DeathMode)
+		else
+			equip(sets.midcast.Death)
+		end
 	end
 end
 
@@ -604,8 +613,9 @@ function job_post_midcast(spell, action, spellMap, eventArgs)
 		equip(sets.DarkAffinity)		
 	end
 	if spell.skill == 'Elemental Magic' then
-		if state.MagicBurst.value then
+		if state.MagicBurst.value and spell.english ~= 'Death' then
 			equip(sets.magic_burst)
+			add_to_chat(122, 'Triggered')
 			if spell.english == "Impact" then
 				equip(sets.midcast.Impact)
 			end
@@ -618,11 +628,11 @@ end
 
 function job_aftercast(spell, action, spellMap, eventArgs)
 	if not spell.interrupted then
-		-- Lock feet after using Mana Wall.
+		-- Lock armor and equip -DT after using Mana Wall.
 		if spell.english == 'Mana Wall' then
-			enable('feet','back')
+			enable('back','feet')
 			equip(sets.precast.JA['Mana Wall'])
-			disable('feet','back')
+			disable('back','feet')
 		end
 	end
 end
@@ -635,9 +645,9 @@ end
 -- buff == buff gained or lost
 -- gain == true if the buff was gained, false if it was lost.
 function job_buff_change(buff, gain)
-	-- Unlock feet when Mana Wall buff is lost.
+	-- Unlock armor when Mana Wall buff is lost.
 	if buff == "Mana Wall" and not gain then
-		enable('feet','back')
+		enable('back','feet')
 		handle_equipping_gear(player.status)
 	end
 end
@@ -671,6 +681,9 @@ end
 
 -- Modify the default idle set after it was constructed.
 function customize_idle_set(idleSet)
+	if state.DeathMode.value then
+		idleSet = sets.idle.DeathMode
+	end
 	if player.mpp < 51 then
 		idleSet = set_combine(idleSet, sets.latent_refresh)
 	end
@@ -680,13 +693,11 @@ function customize_idle_set(idleSet)
 	else
 		enable('back')
 	end
-	if state.DeathMode.value then
-		idleSet = sets.idle.DeathMode
-		if buffactive['Mana Wall'] then
-			enable('feet','back')
-			equip(sets.precast.JA['Mana Wall'])
-			disable('feet','back')
-		end
+	-- if Mana Wall active, lock armor and equip -DT
+	if buffactive['Mana Wall'] then
+		enable('back','feet')
+		equip(sets.precast.JA['Mana Wall'])
+		disable('back','feet')
 	end
 	
 	return idleSet

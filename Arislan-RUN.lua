@@ -668,10 +668,10 @@ end
 function job_aftercast(spell, action, spellMap, eventArgs)
 	if spell.name == 'Rayke' and not spell.interrupted then
 		send_command('@timers c "Rayke ['..spell.target.name..']" '..rayke_duration..' down spells/00136.png')
-		send_command('input /echo Rayke: ON;wait '..rayke_duration..';input /echo Rayke: OFF;')
+		send_command('wait '..rayke_duration..';input /p ******** Rayke: OFF ********;')
 	elseif spell.name == 'Gambit' and not spell.interrupted then
 		send_command('@timers c "Gambit ['..spell.target.name..']" '..gambit_duration..' down spells/00136.png')
-		send_command('input /echo Gambit: ON;wait '..gambit_duration..';input /echo Gambit: OFF;')
+		send_command('wait '..gambit_duration..';input /p ******** Gambit: OFF ********;')
 	end
 end
 

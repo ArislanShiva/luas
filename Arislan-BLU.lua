@@ -401,7 +401,8 @@ function init_gear_sets()
 	
 	sets.precast.WS['Flash Nova'] = set_combine(sets.precast.WS['Sanguine Blade'], {
 		head="Jhakri Coronal +1",
-		ring1="Levia. Ring +1"
+		ring1="Levia. Ring +1",
+		ring2="Weather. Ring",
 		})
 
 	------------------------------------------------------------------------------------------------
