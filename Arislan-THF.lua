@@ -37,7 +37,7 @@ function job_setup()
 	-- Unblinkable JA IDs for actions that always have TH: Quick/Box/Stutter Step, Desperate/Violent Flourish
 	info.default_u_ja_ids = S{201, 202, 203, 205, 207}
 
-	state.HasteMode = M{['description']='Haste Mode', 'Haste I', 'Haste II'}
+	state.HasteMode = M{['description']='Haste Mode', 'Haste II', 'Haste I'}
 
 	determine_haste_group()
 end
@@ -105,7 +105,7 @@ function init_gear_sets()
 		}
 
 	sets.buff['Sneak Attack'] = {
-		ammo="Expeditious Pinion",
+		ammo="Yetshila",
 		head="Dampening Tam",
 		body="Adhemar Jacket", 
 		hands="Adhemar Wristbands",
@@ -119,7 +119,7 @@ function init_gear_sets()
 		}
 
 	sets.buff['Trick Attack'] = {
-		ammo="Expeditious Pinion",
+		ammo="Yetshila",
 		head="Pillager's Bonnet +1",
 		body="Adhemar Jacket", 
 		hands="Pillager's Armlets +1",
@@ -130,6 +130,7 @@ function init_gear_sets()
 		ring2="Garuda Ring +1",
 		ring2="Garuda Ring +1",
 		back="Toutatis's Cape",
+		waist="Svelt. Gouriz +1",
 		}
 
 	-- Actions we want to use to tag TH.

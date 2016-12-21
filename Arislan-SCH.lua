@@ -215,7 +215,7 @@ function init_gear_sets()
 		ring1="Mephitas's Ring +1",
 		ring2="Mephitas's Ring",
 		back="Pahtli Cape",
-		waist="Luminary Sash",
+		waist="Shinjutsu-no-Obi +1",
 		} -- Max MP
 
 	sets.precast.WS['Omniscience'] = {
@@ -367,7 +367,7 @@ function init_gear_sets()
 	sets.midcast.MndEnfeebles = {
 		main=gear.Akademos_MAC,
 		sub="Clerisy Strap +1",
-		ammo="Pemphredo Tathlum",
+		ammo="Quartz Tathlum +1",
 		head="Amalric Coif",
 		body="Vanya Robe",
 		hands="Kaykaus Cuffs",
@@ -383,6 +383,7 @@ function init_gear_sets()
 		}
 	
 	sets.midcast.IntEnfeebles = set_combine(sets.midcast.MndEnfeebles, {
+		ammo="Pemphredo Tathlum",
 		back=gear.SCH_MAB_Cape,
 		})
 
@@ -402,7 +403,7 @@ function init_gear_sets()
 		ear2="Digni. Earring",
 		ring1="Stikini Ring",
 		ring2="Stikini Ring",
-		back=gear.SCH_MAB_Cape,
+		back="Perimede Cape",
 		waist="Casso Sash",
 		}
 
@@ -522,16 +523,18 @@ function init_gear_sets()
 		}
 
 	sets.idle.DT = set_combine(sets.idle, {
-		main="Bolelabunga",
+		main="Mafic Cudgel", --10/0
 		sub="Genmei Shield", --10/0
 		ammo="Staunch Tathlum", --2/2
 		head="Gende. Caubeen +1", --4/4
 		hands="Gende. Gages +1", --4/3
  		neck="Loricate Torque +1", --6/6
 		ear1="Genmei Earring", --2/0
+		ear2="Etiolation Earring", --0/3
 		ring1="Gelatinous Ring +1", --7/(-1)
 		ring2="Defending Ring", --10/10
-		back="Solemnity Cape", --4
+		back="Solemnity Cape", --4/4
+		waist="Lieutenant's Sash", --0/2
 		})
 
 	sets.idle.Town = set_combine(sets.idle, {
@@ -552,27 +555,15 @@ function init_gear_sets()
 	
 	sets.resting = set_combine(sets.idle, {
 		main="Chatoyant Staff",
-		waist="Austerity Belt +1",
+		waist="Shinjutsu-no-Obi +1",
 		})
 	
 	------------------------------------------------------------------------------------------------
 	---------------------------------------- Defense Sets ------------------------------------------
 	------------------------------------------------------------------------------------------------
 	
-	sets.defense.PDT = {
-		main="Bolelabunga",
-		sub="Genmei Shield", --10/0
-		ammo="Staunch Tathlum", --2/2
-		head="Gende. Caubeen +1", --4/4
-		hands="Gende. Gages +1", --4/3
- 		neck="Loricate Torque +1", --6/6
-		ear1="Genmei Earring", --2/0
-		ring1="Gelatinous Ring +1", --7/(-1)
-		ring2="Defending Ring", --10/10
-		back="Solemnity Cape", --4
-		}
-	
-	sets.defense.MDT = sets.defense.PDT
+	sets.defense.PDT = sets.idle.DT
+	sets.defense.MDT = sets.idle.DT
 	
 	sets.Kiting = {
 		feet="Herald's Gaiters"
@@ -929,5 +920,5 @@ function select_default_macro_book()
 end
 
 function set_lockstyle()
-	send_command('wait 2; input /lockstyleset 12')
+	send_command('wait 2; input /lockstyleset 10')
 end

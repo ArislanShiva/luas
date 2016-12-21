@@ -294,8 +294,8 @@ function init_gear_sets()
 		hands="Azimuth Gloves +1",
 		legs="Psycloth Lappas",
 		feet="Medium's Sabots",
-		neck="Imbodla Necklace",
-		ear1="Hermetic Earring",
+		neck="Incanter's Torque",
+		ear1="Barkaro. Earring",
 		ear2="Digni. Earring",
 		ring1="Stikini Ring",
 		ring2="Stikini Ring",
@@ -304,7 +304,6 @@ function init_gear_sets()
 		} -- MND/Magic accuracy
 	
 	sets.midcast.IntEnfeebles = set_combine(sets.midcast.MndEnfeebles, {
-		ear1="Barkaro. Earring",
 		back="Nantosuelta's Cape",
 		}) -- INT/Magic accuracy
 
@@ -321,8 +320,8 @@ function init_gear_sets()
 		ear2="Digni. Earring",
 		ring1="Evanescence Ring",
 		ring2="Stikini Ring",
-		back="Nantosuelta's Cape",
-		waist="Yamabuki-no-Obi",
+		back="Perimede Cape",
+		waist="Casso Sash",
 		}
 	
 	sets.midcast.Drain = set_combine(sets.midcast['Dark Magic'], {
@@ -349,7 +348,7 @@ function init_gear_sets()
 		hands="Amalric Gages",
 		legs="Merlinic Shalwar",
 		feet="Merlinic Crackows",
-		neck="Saevus Pendant +1",
+		neck="Sanctity Necklace",
 		ear1="Barkaro. Earring",
 		ear2="Friomisi Earring",
 		ring1="Shiva Ring +1",
@@ -362,7 +361,6 @@ function init_gear_sets()
 		main="Grioavolr",
 		sub="Clerisy Strap +1",
 		legs="Azimuth Tights +1",
-		neck="Sanctity Necklace",
 		ear2="Hermetic Earring",
 		back="Aurist's Cape +1",
 		waist="Yamabuki-no-Obi",
@@ -424,20 +422,21 @@ function init_gear_sets()
 	
 	sets.resting = set_combine(sets.idle, {
 		main="Chatoyant Staff",
-		waist="Austerity Belt +1",
-	})
+		waist="Shinjutsu-no-Obi +1",
+		})
 
 	sets.idle.DT = set_combine(sets.idle, {
-		main="Bolelabunga",
+		main="Mafic Cudgel", --10/0
 		sub="Genmei Shield", --10/0
 		body="Hagondes Coat +1", --3/4
-		legs="Artsieq Hose", --5/0
 		feet="Azimuth Gaiters +1", --4/0
 		neck="Loricate Torque +1", --6/6
 		ear1="Genmei Earring", --2/0
+		ear2="Etiolation Earring", --0/3
 		ring1="Gelatinous Ring +1", --7/(-1)
 		ring2="Defending Ring", --10/10
 		back="Solemnity Cape", --4/4	
+		waist="Lieutenant's Sash", --0/2
 		})
 
 	sets.idle.Weak = sets.idle.DT
@@ -451,7 +450,7 @@ function init_gear_sets()
 		head="Azimuth Hood +1", --0/3
 		body="Telchine Chas.", --0/3
 		hands="Geo. Mitaines +1", --11/0
-		legs="Telchine Braconi", --0/2
+		legs="Telchine Braconi", --0/3
 		feet="Telchine Pigaches", --0/3
 		ear1="Handler's Earring", --3*/0
 		ear2="Handler's Earring +1", --4*/0
@@ -489,20 +488,8 @@ function init_gear_sets()
 		
 	-- Defense sets
 
-	sets.defense.PDT = {
-		main="Bolelabunga",
-		sub="Genmei Shield", --10/0
-		body="Hagondes Coat +1", --3/4
-		legs="Artsieq Hose", --5/0
-		feet="Azimuth Gaiters +1", --4/0
-		neck="Loricate Torque +1", --6/6
-		ear1="Genmei Earring", --2/0
-		ring1="Gelatinous Ring +1", --7/(-1)
-		ring2="Defending Ring", --10/10
-		back="Solemnity Cape", --4/4		
-		}
-
-	sets.defense.MDT = sets.defense.PDT
+	sets.defense.PDT = sets.idle.DT
+	sets.defense.MDT = sets.idle.DT
 
 	sets.Kiting = {
 		feet="Herald's Gaiters"

@@ -19,7 +19,7 @@ function job_setup()
 	state.Buff['Velocity Shot'] = buffactive['Velocity Shot'] or false
 	state.Buff['Double Shot'] = buffactive['Double Shot'] or false
 
-	state.HasteMode = M{['description']='Haste Mode', 'Haste I', 'Haste II'}
+	state.HasteMode = M{['description']='Haste Mode', 'Haste II', 'Haste I'}
 	
 	determine_haste_group()
 end
@@ -411,7 +411,7 @@ function init_gear_sets()
 		hands="Floral Gauntlets", --5
 		legs="Carmine Cuisses +1", --6
 		feet=gear.Taeon_DW_feet, --9
-		neck="Lissome Necklace",
+		neck="Asperity Necklace",
 		ear1="Eabani Earring", --4
 		ear2="Suppanomimi", --5
 		ring1="Petrov Ring",
@@ -456,7 +456,7 @@ function init_gear_sets()
 		hands="Floral Gauntlets", --5
 		legs="Carmine Cuisses +1", --6
 		feet=gear.Taeon_DW_feet, --9
-		neck="Lissome Necklace",
+		neck="Asperity Necklace",
 		ear1="Eabani Earring", --4
 		ear2="Suppanomimi", --5
 		ring1="Petrov Ring",
@@ -501,7 +501,7 @@ function init_gear_sets()
 		hands="Floral Gauntlets", --5
 		legs="Carmine Cuisses +1", --6
 		feet=gear.Taeon_DW_feet, --9
-		neck="Lissome Necklace",
+		neck="Asperity Necklace",
 		ear1="Eabani Earring", --4
 		ear2="Suppanomimi", --5
 		ring1="Petrov Ring",
@@ -546,7 +546,7 @@ function init_gear_sets()
 		hands="Floral Gauntlets", --5
 		legs="Samnuha Tights",
 		feet=gear.Taeon_DW_feet, --9
-		neck="Lissome Necklace",
+		neck="Asperity Necklace",
 		ear1="Eabani Earring", --4
 		ear2="Suppanomimi", --5
 		ring1="Petrov Ring",
@@ -592,7 +592,7 @@ function init_gear_sets()
 		hands="Adhemar Wristbands",
 		legs="Samnuha Tights",
 		feet=gear.Herc_TA_feet,
-		neck="Lissome Necklace",
+		neck="Asperity Necklace",
 		ear1="Eabani Earring", --4
 		ear2="Suppanomimi", --5
 		ring1="Petrov Ring",

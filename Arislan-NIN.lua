@@ -34,7 +34,7 @@ function job_setup()
 	state.Buff.Innin = buffactive.Innin or false
 	state.Buff.Futae = buffactive.Futae or false
 
-	state.HasteMode = M{['description']='Haste Mode', 'Haste I', 'Haste II'}
+	state.HasteMode = M{['description']='Haste Mode', 'Haste II', 'Haste I'}
 
 	determine_haste_group()
 end
@@ -159,6 +159,7 @@ function init_gear_sets()
 		})
 
 	sets.precast.WS['Blade: Hi'] = set_combine (sets.precast.WS, {
+		ammo="Yetshila",
 		ear1="Lugra Earring",
 		ear2="Lugra Earring +1",
 		ring1="Begrudging Ring",

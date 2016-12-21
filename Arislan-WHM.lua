@@ -155,7 +155,23 @@ function init_gear_sets()
 		ring1="Rufescent Ring",
 		ring2="Ramuh Ring +1",
 		waist="Fotia Belt",
-		}	
+		}
+	
+	sets.precast.WS['Flash Nova'] = set_combine(sets.precast.WS, {
+		ammo="Pemphredo Tathlum",
+		head="Inyanga Tiara +1",
+		body="Vedic Coat",
+		hands="Fanatic Gloves",
+		legs="Gyve Trousers",
+		feet="Chironic Slippers",
+		neck="Saevus Pendant +1",
+		ear1="Hecate's Earring",
+		ear2="Friomisi Earring",
+		ring1="Shiva Ring +1",
+		ring2="Weather. Ring",
+		back="Toro Cape",
+		waist="Refoccilation Stone",
+		})
 
 	-- Midcast Sets
 	
@@ -365,7 +381,7 @@ function init_gear_sets()
 	sets.midcast.MndEnfeebles = {
 		main="Grioavolr",
 		sub="Clerisy Strap +1",
-		ammo="Hydrocera",
+		ammo="Quartz Tathlum +1",
 		head="Befouled Crown",
 		body="Vanya Robe",
 		hands="Inyan. Dastanas +1",
@@ -416,7 +432,7 @@ function init_gear_sets()
 	-- Resting sets
 	sets.resting = {
 		main="Chatoyant Staff",
-		waist="Austerity Belt +1",
+		waist="Shinjutsu-no-Obi +1",
 		}
 	
 	-- Idle sets (default idle set not needed since the other three are defined, but leaving for testing purposes)
@@ -439,21 +455,23 @@ function init_gear_sets()
 		}
 
 	sets.idle.DT = set_combine(sets.idle, {
-		main="Bolelabunga",
+		main="Mafic Cudgel", --10/0
 		sub="Genmei Shield", --10/0
 		ammo="Staunch Tathlum", --2/2
 		head="Gende. Caubeen +1", --4/4
 		hands="Gende. Gages +1", --4/3
 		neck="Loricate Torque +1", --6/6
 		ear1="Genmei Earring", --2/0
+		ear2="Etiolation Earring", --0/3
 		ring1="Gelatinous Ring +1", --7/(-1)
 		ring2="Defending Ring", --10/10
-		back="Solemnity Cape", --4
+		back="Solemnity Cape", --4/4
+		waist="Lieutenant's Sash", --0/2
 		})
 
 	sets.idle.Town = set_combine(sets.idle, {
 		main="Izcalli",
-		sub="Genmei Shield",
+		sub="Deliverance",
 		head="Ebers Cap +1",
 		body="Ebers Bliaud +1",
 		hands="Ebers Mitts +1",
@@ -470,20 +488,8 @@ function init_gear_sets()
 	
 	-- Defense sets
 
-	sets.defense.PDT = {
-		main="Bolelabunga",
-		sub="Genmei Shield", --10/0
-		ammo="Staunch Tathlum", --2/2
-		head="Gende. Caubeen +1", --4/4
-		hands="Gende. Gages +1", --4/3
-		neck="Loricate Torque +1", --6/6
-		ear1="Genmei Earring", --2/0
-		ring1="Gelatinous Ring +1", --7/(-1)
-		ring2="Defending Ring", --10/10
-		back="Solemnity Cape", --4
-		}
-
-	sets.defense.MDT = sets.defense.PDT
+	sets.defense.PDT = sets.idle.DT
+	sets.defense.MDT = sets.idle.DT
 
 	sets.Kiting = {
 		feet="Herald's Gaiters"
@@ -503,7 +509,7 @@ function init_gear_sets()
 	-- Basic set for if no TP weapon is defined.
 	sets.engaged = {
 		main="Izcalli",
-		sub="Genmei Shield",
+		sub="Deliverance",
 		head="Telchine Cap",
 		body="Onca Suit",
 		neck="Combatant's Torque",

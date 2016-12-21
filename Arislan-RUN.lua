@@ -213,7 +213,7 @@ function init_gear_sets()
 		neck="Fotia Gorget",
 		ear1="Moonshade Earring",
 		ear2="Brutal earring",
-		ring1="Shukuyu Ring",
+		ring1="Ifrit Ring +1",
 		ring2="Ifrit Ring +1",
 		back="Bleating Mantle",
 		waist="Fotia Belt",
@@ -230,6 +230,7 @@ function init_gear_sets()
 		head="Adhemar Bonnet",
 		hands=gear.Herc_WS_hands,
 		legs="Samnuha Tights",
+		ring1="Ifrit Ring +1",
 		ring2="Epona's Ring",
 		})
 		
@@ -245,6 +246,7 @@ function init_gear_sets()
 		hands="Adhemar Wristbands",
 		legs="Lustratio Subligar",
 		feet="Lustratio Leggings",
+		ring1="Apate Ring",
 		back=gear.RUN_TP_Cape,
 		waist="Ioskeha Belt",
 		})
@@ -285,6 +287,8 @@ function init_gear_sets()
 		back="Argocham. Mantle",
 		waist="Eschan Stone",
 		}
+
+	sets.precast.WS['True Strike']= sets.precast.WS['Resolution']
 
 	sets.precast.WS['True Strike']= sets.precast.WS['Savage Blade']
 	sets.precast.WS['Judgment'] = sets.precast.WS['Savage Blade']

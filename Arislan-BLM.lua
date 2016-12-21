@@ -48,7 +48,7 @@ function user_setup()
 	lowTierNukes = S{'Stone', 'Water', 'Aero', 'Fire', 'Blizzard', 'Thunder'}
 	
 	-- Additional local binds
-	send_command('bind ^` input /ma Stun <t>')
+	send_command('bind ^` input /ma Stun <t>;input /p ***** #1 Stun ***** <call14>')
 	send_command('bind !` gs c toggle MagicBurst')
 	send_command('bind !w input /ma "Aspir III" <t>')
 	send_command('bind !p input /ma "Shock Spikes" <me>')
@@ -203,7 +203,7 @@ function init_gear_sets()
 		ring1="Mephitas's Ring +1",
 		ring2="Mephitas's Ring",
 		back="Bane Cape",
-		waist="Luminary Sash",
+		waist="Shinjutsu-no-Obi +1",
 		} -- Max MP
 
 	
@@ -311,25 +311,23 @@ function init_gear_sets()
 	sets.midcast.MndEnfeebles = {
 		main=gear.Lathi_ENF,
 		sub="Clerisy Strap +1",
-		ammo="Hydrocera",
+		ammo="Quartz Tathlum +1",
 		head="Amalric Coif",
 		body="Vanya Robe",
 		hands="Jhakri Cuffs +1",
 		legs="Psycloth Lappas",
 		feet="Medium's Sabots",
 		neck="Imbodla Necklace",
-		ear1="Hermetic Earring",
+		ear1="Barkaro. Earring",
 		ear2="Digni. Earring",
 		ring1="Stikini Ring",
 		ring2="Stikini Ring",
 		back=gear.BLM_FC_Cape,
 		waist="Casso Sash",
---		waist="Luminary Sash",
 		} -- MND/Magic accuracy
 
 	sets.midcast.IntEnfeebles = set_combine(sets.midcast.MndEnfeebles, {
 		ammo="Pemphredo Tathlum",
-		ear1="Barkaro. Earring",
 		back=gear.BLM_MAB_Cape,
 		}) -- INT/Magic accuracy
 		
@@ -451,7 +449,7 @@ function init_gear_sets()
 	
 	sets.resting = {
 		main="Chatoyant Staff",
-		waist="Austerity Belt +1",
+		waist="Shinjutsu-no-Obi +1",
 		}
 
 	-- Idle sets
@@ -475,17 +473,36 @@ function init_gear_sets()
 		}
 
 	sets.idle.DT = set_combine(sets.idle, {
-		main="Bolelabunga",
+		main="Mafic Cudgel", --10/0
 		sub="Genmei Shield", --10/0
 		ammo="Staunch Tathlum", --2/2
 		body="Hagondes Coat +1", --3/4
-		legs="Artsieq Hose", --5/0
 		neck="Loricate Torque +1", --6/6
 		ear1="Genmei Earring", --2/0
+		ear2="Etiolation Earring", --0/3
 		ring1="Gelatinous Ring +1", --7/(-1)
 		ring2="Defending Ring", --10/10
 		back="Solemnity Cape", --4/4
+		waist="Lieutenant's Sash", --0/2
 		})
+
+	sets.idle.ManaWall = {
+		main="Mafic Cudgel", --10/0
+		sub="Genmei Shield", --10/0
+		ammo="Staunch Tathlum", --2/2
+		head="Befouled Crown",
+		body="Hagondes Coat +1", --3/4
+		hands="Merlinic Dastanas",
+		legs="Assid. Pants +1",
+		feet="Wicce Sabots +1",
+		neck="Loricate Torque +1", --6/6
+		ear1="Genmei Earring", --2/0
+		ear2="Etiolation Earring", --0/3
+		ring1="Gelatinous Ring +1", --7/(-1)
+		ring2="Defending Ring", --10/10
+		back=gear.BLM_Death_Cape,
+		waist="Lieutenant's Sash", --0/2
+		}
 
 	sets.idle.DeathMode = {
 		main="Grioavolr",
@@ -502,7 +519,7 @@ function init_gear_sets()
 		ring1="Mephitas's Ring +1",
 		ring2="Mephitas's Ring",
 		back=gear.BLM_Death_Cape,
-		waist="Fucho-no-obi",
+		waist="Shinjutsu-no-Obi +1",
 		}
 
 	sets.idle.Town = set_combine(sets.idle, {
@@ -523,20 +540,8 @@ function init_gear_sets()
 		
 	-- Defense sets
 
-	sets.defense.PDT = {
-		main="Bolelabunga",
-		sub="Genmei Shield", --10/0
-		ammo="Staunch Tathlum", --2/2
-		body="Hagondes Coat +1", --3/4
-		legs="Artsieq Hose", --5/0
-		neck="Loricate Torque +1", --6/6
-		ear1="Genmei Earring", --2/0
-		ring1="Gelatinous Ring +1", --7/(-1)
-		ring2="Defending Ring", --10/10
-		back="Solemnity Cape", --4/4
-		}
-
-	sets.defense.MDT = sets.defense.PDT
+	sets.defense.PDT = sets.idle.DT
+	sets.defense.MDT = sets.idle.DT
 
 	sets.Kiting = {feet="Herald's Gaiters"}
 	sets.latent_refresh = {waist="Fucho-no-obi"}
@@ -615,24 +620,12 @@ function job_post_midcast(spell, action, spellMap, eventArgs)
 	if spell.skill == 'Elemental Magic' then
 		if state.MagicBurst.value and spell.english ~= 'Death' then
 			equip(sets.magic_burst)
-			add_to_chat(122, 'Triggered')
 			if spell.english == "Impact" then
 				equip(sets.midcast.Impact)
 			end
 		end
 		if (spell.element == world.day_element or spell.element == world.weather_element) then
 			equip(sets.Obi)
-		end
-	end
-end
-
-function job_aftercast(spell, action, spellMap, eventArgs)
-	if not spell.interrupted then
-		-- Lock armor and equip -DT after using Mana Wall.
-		if spell.english == 'Mana Wall' then
-			enable('back','feet')
-			equip(sets.precast.JA['Mana Wall'])
-			disable('back','feet')
 		end
 	end
 end
@@ -646,8 +639,12 @@ end
 -- gain == true if the buff was gained, false if it was lost.
 function job_buff_change(buff, gain)
 	-- Unlock armor when Mana Wall buff is lost.
-	if buff == "Mana Wall" and not gain then
-		enable('back','feet')
+	if buff== "Mana Wall" and gain then
+		send_command('gs enable all')
+		equip(sets.idle.ManaWall)
+		send_command('gs disable all')
+	elseif buff == "Mana Wall" and not gain then
+		send_command('gs enable all')
 		handle_equipping_gear(player.status)
 	end
 end
@@ -695,9 +692,8 @@ function customize_idle_set(idleSet)
 	end
 	-- if Mana Wall active, lock armor and equip -DT
 	if buffactive['Mana Wall'] then
-		enable('back','feet')
-		equip(sets.precast.JA['Mana Wall'])
-		disable('back','feet')
+		idleSet = sets.idle.ManaWall
+		send_command('gs disable all')
 	end
 	
 	return idleSet

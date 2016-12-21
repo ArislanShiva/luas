@@ -335,6 +335,7 @@ function init_gear_sets()
 		})
 
 	sets.precast.WS['Savage Blade'] = set_combine(sets.precast.WS, {
+		ammo="Floestone",
 		hands=gear.Herc_WS_hands,
 		neck="Caro Necklace",
 		ring1="Ifrit Ring +1",
@@ -343,6 +344,7 @@ function init_gear_sets()
 		})
 
 	sets.precast.WS['Savage Blade'].Acc = set_combine(sets.precast.WS['Savage Blade'], {
+		ammo="Focal Orb",
 		body=gear.Herc_TA_body,
 		feet=gear.Herc_Acc_feet,
 		neck="Combatant's Torque",
@@ -351,17 +353,28 @@ function init_gear_sets()
 		waist="Grunfeld Rope",
 		})
 
-	sets.precast.WS['Requiescat'] = set_combine(sets.precast.WS['Savage Blade'], {
-		feet="Carmine Greaves +1",
+	sets.precast.WS['Requiescat'] = {
+		ammo="Quartz Tathlum +1",
+		head="Jhakri Coronal +1",
+		body="Jhakri Robe +1",
+		hands="Jhakri Cuffs +1",
+		legs=gear.Herc_WS_legs,
+		feet="Jhakri Pigaches +1",
+		neck="Fotia Gorget",
+		ear1="Moonshade Earring",
+		ear2="Brutal Earring",
 		ring1="Levia. Ring +1",
 		ring2="Epona's Ring",
-		})
+		back=gear.BLU_WS1_Cape,
+		waist="Fotia Belt",
+		}
 
 	sets.precast.WS['Requiescat'].Acc = set_combine(sets.precast.WS['Requiescat'], {
 		ammo="Falcon Eye",
-		body=gear.Herc_TA_body,
-		hands=gear.Herc_WS_hands,
+		head="Dampening Tam",
+		ear1="Cessance Earring",
 		ear2="Telos Earring",
+		ring1="Rufescent Ring",
 		})
 
 	sets.precast.WS['Expiacion'] = set_combine(sets.precast.WS['Savage Blade'], {
@@ -443,7 +456,7 @@ function init_gear_sets()
 		}
 
 	sets.midcast['Blue Magic'].PhysicalAcc = set_combine(sets.midcast['Blue Magic'].Physical, {
-		ammo="Falcon Eye",
+		ammo="Floestone",
 		head="Jhakri Coronal +1", 
 		hands=gear.Herc_TA_Hands,
 		legs="Carmine Cuisses +1",
@@ -456,6 +469,7 @@ function init_gear_sets()
 	sets.midcast['Blue Magic'].PhysicalStr = sets.midcast['Blue Magic'].Physical
 
 	sets.midcast['Blue Magic'].PhysicalDex = set_combine(sets.midcast['Blue Magic'].Physical, {
+		ammo="Falcon Eye",
 		ear2="Mache Earring",
 		ring1="Ramuh Ring +1",
 		ring2="Ramuh Ring +1",
@@ -649,11 +663,10 @@ function init_gear_sets()
 	sets.idle.DT = set_combine(sets.idle, {
 		ammo="Staunch Tathlum", --2/2
 		head=gear.Herc_DT_head, --3/3
-		body=gear.Herc_DT_body, --3/3
+		body="Emet Harness +1", --6/0
 		hands=gear.Herc_DT_hands, --5/3
 		feet="Battlecast Gaiters", --3/0
 		neck="Loricate Torque +1", --6/6
-		ear1="Genmei Earring", --2/0
 		ring1="Gelatinous Ring +1", --7/(-1)
 		ring2="Defending Ring", --10/10
 		back="Solemnity Cape", --4/4

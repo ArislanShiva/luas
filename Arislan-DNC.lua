@@ -65,7 +65,7 @@ function job_setup()
 	state.UseAltStep = M(false, 'Use Alt Step')
 	state.SelectStepTarget = M(false, 'Select Step Target')
 	state.IgnoreTargetting = M(false, 'Ignore Targetting')
-	state.HasteMode = M{['description']='Haste Mode', 'Haste I', 'Haste II'}
+	state.HasteMode = M{['description']='Haste Mode', 'Haste II', 'Haste I'}
 	
 	state.CurrentStep = M{['description']='Current Step', 'Main', 'Alt'}
 	state.SkillchainPending = M(false, 'Skillchain Pending')
@@ -94,9 +94,8 @@ function user_setup()
 	send_command('bind !- gs c cycleback altstep')
 	send_command('bind != gs c cycle altstep')
 	send_command('bind !p gs c toggle usealtstep')
-	send_command('bind ^` input /ja "Berserk" <me>')
+	send_command('bind ^` input /ja "Saber Dance" <me>')
 	send_command('bind !` input /ja "Chocobo Jig II" <me>')
-	send_command('bind @` input /ja "Warcry" <me>')
 	send_command('bind ^, input /ja "Spectral Jig" <me>')
 	send_command('unbind ^.')
 	send_command('bind @h gs c cycle HasteMode')
@@ -116,7 +115,6 @@ function user_unload()
 	send_command('unbind !p')
 	send_command('unbind ^`')
 	send_command('unbind !`')
-	send_command('unbind @`')
 	send_command('unbind ^,')
 	send_command('unbind @h')
 	send_command('unbind @c')
@@ -298,13 +296,16 @@ function init_gear_sets()
 		})
 
 	sets.precast.WS['Pyrrhic Kleos'] = set_combine(sets.precast.WS, {
+		ammo="Floestone",
 		head="Adhemar Bonnet",
+		body="Adhemar Jacket",
+		hands="Adhemar Wristbands",
 		legs="Samnuha Tights",
 		feet=gear.Herc_TA_feet,
-		ear1="Cessance Earring",
+		ear1="Mache Earring",
 		ear2="Brutal Earring",
-		ring1="Ifrit Ring +1",
-		ring2="Shukuyu Ring",
+		ring1="Apate Ring",
+		ring2="Epona's Ring",
 		})
 		
 	sets.precast.WS['Pyrrhic Kleos'].Acc = set_combine(sets.precast.WS['Pyrrhic Kleos'], {
