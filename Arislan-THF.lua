@@ -190,9 +190,12 @@ function init_gear_sets()
 	sets.precast.JA['Trick Attack'] = sets.buff['Trick Attack']
 
 	sets.precast.Waltz = {
+		body="Passion Jacket",
 		hands="Slither Gloves +1",
+		neck="Phalaina Locket",
 		ring1="Asklepian Ring",
 		ring2="Valseur's Ring",
+		waist="Gishdubar Sash",
 		}
 
 	sets.precast.Waltz['Healing Waltz'] = {}
@@ -207,12 +210,12 @@ function init_gear_sets()
 		neck="Orunmila's Torque", --5
 		ear1="Loquacious Earring", --2
 		ear2="Etiolation Earring", --1
-		ring1="Prolix Ring", --2
 		ring2="Weather. Ring", --5(3)
 		waist="Ninurta's Sash",
 		}
 
 	sets.precast.FC.Utsusemi = set_combine(sets.precast.FC, {
+		body="Passion Jacket",
 		neck="Magoraga Beads",
 		ring1="Lebeche Ring",
 		})
@@ -260,12 +263,13 @@ function init_gear_sets()
 	sets.precast.WS['Evisceration'] = set_combine(sets.precast.WS, {
 		ammo="Expeditious Pinion",
 		head="Adhemar Bonnet",
+		hands="Adhemar Wristbands",
 		})
 
 	sets.precast.WS['Evisceration'].Acc = set_combine(sets.precast.WS['Evisceration'], {
 		ammo="Falcon Eye",
 		head="Dampening Tam",
-		hands=gear.Herc_WS_hands,
+		hands="Meg. Gloves +1",
 		legs=gear.Herc_WS_legs,
 		feet=gear.Herc_Acc_feet,
 		ear2="Telos Earring",
@@ -280,7 +284,6 @@ function init_gear_sets()
 
 	sets.precast.WS["Rudra's Storm"].Acc = set_combine(sets.precast.WS["Rudra's Storm"], {
 		ammo="Falcon Eye",
-		hands=gear.Herc_WS_hands,
 		legs=gear.Herc_WS_legs,
 		feet=gear.Herc_Acc_feet,
 		ear2="Telos Earring",
@@ -299,7 +302,7 @@ function init_gear_sets()
 		hands="Leyline Gloves",
 		legs=gear.Herc_MAB_legs,
 		feet=gear.Herc_MAB_feet,
-		neck="Sanctity Necklace",
+		neck="Baetyl Pendant",
 		ear1="Hecate's Earring",
 		ear2="Friomisi Earring",
 		ring1="Shiva Ring +1",
@@ -315,16 +318,17 @@ function init_gear_sets()
 	-- Midcast sets
 	--------------------------------------
 
-	sets.midcast.FastRecast = {
-		ear1="Loquacious Earring",
-		ear2="Etiolation Earring",
-		}
+	sets.midcast.FastRecast = sets.precast.FC
 
-	-- Specific spells
-	sets.midcast.Utsusemi = {
-		ear2="Loquacious Earring",
-		waist="Ninurta's Sash",
+	sets.midcast.SpellInterrupt = {
+		ammo="Impatiens", --10
+		ear1="Halasz Earring", --5
+		ring1="Evanescence Ring", --5
+		waist="Ninurta's Sash", --6
 		}
+		
+	-- Specific spells
+	sets.midcast.Utsusemi = sets.midcast.SpellInterrupt
 
 	--------------------------------------
 	-- Idle/resting/defense sets
@@ -357,7 +361,7 @@ function init_gear_sets()
 		ammo="Staunch Tathlum", --2/2
 		head=gear.Herc_DT_head, --3/3
 		body="Meg. Cuirie +1", --7/0
-		hands=gear.Herc_DT_hands, --5/3
+		hands=gear.Herc_DT_hands, --6/4
 		neck="Loricate Torque +1", --6/6
 		ear1="Genmei Earring", --2/0
 		ring1="Gelatinous Ring +1", --7/(-1)
@@ -424,14 +428,14 @@ function init_gear_sets()
 		})
 
 	sets.engaged.MidAcc = set_combine(sets.engaged.LowAcc, {
-		legs="Adhemar Kecks",
-		feet=gear.Herc_TA_feet,
+		hands=gear.Herc_Acc_hands,
 		ring2="Ramuh Ring +1",
 		back="Toutatis's Cape",
 		waist="Kentarch Belt +1",
 		})
 
 	sets.engaged.HighAcc = set_combine(sets.engaged.MidAcc, {
+		legs=gear.Herc_WS_legs,
 		feet=gear.Herc_Acc_feet,
 		ear1="Cessance Earring",
 		ear2="Telos Earring",
@@ -472,13 +476,14 @@ function init_gear_sets()
 		})
 
 	sets.engaged.LowHaste.MidAcc = set_combine(sets.engaged.LowHaste.LowAcc, {
-		legs="Adhemar Kecks",
+		hands=gear.Herc_Acc_hands,
 		ring2="Ramuh Ring +1",
 		back="Toutatis's Cape",
 		waist="Kentarch Belt +1",
 		})
 
 	sets.engaged.LowHaste.HighAcc = set_combine(sets.engaged.LowHaste.MidAcc, {
+		legs=gear.Herc_WS_legs,
 		feet=gear.Herc_Acc_feet,
 		ear1="Cessance Earring",
 		ear2="Telos Earring",
@@ -519,6 +524,7 @@ function init_gear_sets()
 		})
 
 	sets.engaged.MidHaste.MidAcc = set_combine(sets.engaged.MidHaste.LowAcc, {
+		hands=gear.Herc_Acc_hands,
 		feet=gear.Herc_TA_feet,
 		ear1="Cessance Earring",
 		ring2="Ramuh Ring +1",
@@ -527,6 +533,7 @@ function init_gear_sets()
 		})
 
 	sets.engaged.MidHaste.HighAcc = set_combine(sets.engaged.MidHaste.MidAcc, {
+		legs=gear.Herc_WS_legs,
 		feet=gear.Herc_Acc_feet,
 		ear2="Telos Earring",
 		ring1="Ramuh Ring +1",
@@ -567,12 +574,13 @@ function init_gear_sets()
 
 	sets.engaged.HighHaste.MidAcc = set_combine(sets.engaged.HighHaste.LowAcc, {
 		ammo="Falcon Eye",
-		legs="Adhemar Kecks",
+		hands=gear.Herc_Acc_hands,
 		ear1="Cessance Earring",
 		ring2="Ramuh Ring +1",
 		})
 
 	sets.engaged.HighHaste.HighAcc = set_combine(sets.engaged.HighHaste.MidAcc, {
+		legs=gear.Herc_WS_legs,
 		feet=gear.Herc_Acc_feet,
 		ear2="Telos Earring",
 		ring1="Ramuh Ring +1",
@@ -613,12 +621,13 @@ function init_gear_sets()
 
 	sets.engaged.MaxHaste.MidAcc = set_combine(sets.engaged.MaxHaste.LowAcc, {
 		ammo="Falcon Eye",
-		legs="Adhemar Kecks",
+		hands=gear.Herc_Acc_hands,
 		ear1="Cessance Earring",
 		ring2="Ramuh Ring +1",
 		})
 
 	sets.engaged.MaxHaste.HighAcc = set_combine(sets.engaged.MaxHaste.MidAcc, {
+		legs=gear.Herc_WS_legs,
 		feet=gear.Herc_Acc_feet,
 		ear2="Telos Earring",
 		ring1="Ramuh Ring +1",

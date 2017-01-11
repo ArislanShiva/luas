@@ -49,7 +49,7 @@ function user_setup()
 	state.OffenseMode:options('STP', 'Normal', 'LowAcc', 'MidAcc', 'HighAcc')
 	state.WeaponskillMode:options('Normal', 'Acc')
 	state.CastingMode:options('Normal', 'Resistant')
-	state.IdleMode:options('Normal', 'DT', 'Refresh')
+	state.IdleMode:options('Normal', 'DT')
 	state.PhysicalDefenseMode:options('PDT', 'HP', 'Critical')
 	state.MagicalDefenseMode:options('MDT', 'Status')
 	
@@ -70,7 +70,6 @@ function user_setup()
 	send_command('bind ^\ gs c toggle Charm')
 	send_command('bind !q input /ma "Temper" <me>')
 	send_command('bind !w input /ma "Cocoon" <me>')
-	send_command('bind !e input /ma "Refueling" <me>')
 	send_command('bind !o input /ma "Regen IV" <stpc>')
 	send_command('bind !p input /ma "Shock Spikes" <me>')
 	
@@ -99,7 +98,6 @@ function user_unload()
 	send_command('unbind !]')
 	send_command('unbind !q')
 	send_command('unbind !w')
-	send_command('bind !e input /ma Haste <stpc>')
 	send_command('unbind !o')
 	send_command('unbind !p')
 	send_command('unbind ^,')
@@ -132,11 +130,11 @@ function init_gear_sets()
 		}
 
 	-- Precast sets to enhance JAs
-	sets.precast.JA['Vallation'] = {body="Runeist Coat +1", legs="Futhark Trousers +1", back="Ogma's Cape"}
+	sets.precast.JA['Vallation'] = set_combine(sets.Enmity, {body="Runeist Coat +1", legs="Futhark Trousers +1", back="Ogma's Cape"})
 	sets.precast.JA['Valiance'] = sets.precast.JA['Vallation']
-	sets.precast.JA['Pflug'] = {feet="Runeist Bottes +1"}
-	sets.precast.JA['Battuta'] = {head="Fu. Bandeau +1"}
-	sets.precast.JA['Liement'] = {body="Futhark Coat +1"}
+	sets.precast.JA['Pflug'] = set_combine(sets.Enmity, {feet="Runeist Bottes +1"})
+	sets.precast.JA['Battuta'] = set_combine(sets.Enmity, {head="Fu. Bandeau +1"})
+	sets.precast.JA['Liement'] = set_combine(sets.Enmity, {body="Futhark Coat +1"})
 
 	sets.precast.JA['Lunge'] = {
 		ammo="Seeth. Bomblet +1",
@@ -145,7 +143,7 @@ function init_gear_sets()
 		hands="Carmine Fin. Ga. +1",
 		legs=gear.Herc_MAB_legs,
 		feet=gear.Herc_MAB_feet,
-		neck="Sanctity Necklace",
+		neck="Baetyl Pendant",
 		ear1="Hecate's Earring",
 		ear2="Friomisi Earring",
 		ring1="Fenrir Ring +1",
@@ -157,11 +155,11 @@ function init_gear_sets()
 	sets.precast.JA['Swipe'] = sets.precast.JA['Lunge']
 	sets.precast.JA['Gambit'] = {hands="Runeist Mitons +1"}
 	sets.precast.JA['Rayke'] = {feet="Futhark Boots +1"}
-	sets.precast.JA['Elemental Sforzo'] = {body="Futhark Coat +1"}
-	sets.precast.JA['Swordplay'] = {hands="Futhark Mitons +1"}
-	sets.precast.JA['Embolden'] = {back="Evasionist's Cape"}
-	sets.precast.JA['Vivacious Pulse'] = {head="Erilaz Galea +1", neck="Incanter's Torque", legs="Rune. Trousers +1"}
-	sets.precast.JA['One For All'] = {}
+	sets.precast.JA['Elemental Sforzo'] = set_combine(sets.Enmity, {body="Futhark Coat +1"})
+	sets.precast.JA['Swordplay'] = set_combine(sets.Enmity, {hands="Futhark Mitons +1"})
+	sets.precast.JA['Embolden'] = set_combine(sets.Enmity, {back="Evasionist's Cape"})
+	sets.precast.JA['Vivacious Pulse'] = set_combine(sets.Enmity, {head="Erilaz Galea +1", neck="Incanter's Torque", legs="Rune. Trousers +1"})
+	sets.precast.JA['One For All'] = set_combine(sets.Enmity, {})
 	sets.precast.JA['Provoke'] = sets.Enmity
 
 	sets.precast.Waltz = {
@@ -183,7 +181,7 @@ function init_gear_sets()
 		neck="Orunmila's Torque", --5
 		ear1="Etiolation Earring", --1
 		ear2="Loquacious Earring", --2
-		ring1="Prolix Ring", --2
+		ring1="Kishar Ring", --4
 		ring2="Weather. Ring", --5(3)
 		back=gear.RUN_HP_Cape, --10
 		waist="Ninurta's Sash",
@@ -194,12 +192,14 @@ function init_gear_sets()
 		waist="Siegel Sash",
 		})
 
-	sets.precast.FC.Cure = set_combine(sets.precast.FC, {ammo="Impatiens", ear2="Mendi. Earring"})
+	sets.precast.FC.Cure = set_combine(sets.precast.FC, {ammo="Impatiens", ear2="Mendi. Earring", legs="Doyen Pants"})
 
 	sets.precast.FC.Utsusemi = set_combine(sets.precast.FC, {
 		ammo="Impatiens",
+		body="Passion Jacket",
 		neck="Magoraga Beads",
 		ring1="Lebeche Ring",
+		waist="Ninurta's Sash",
 		})
 
 	-- Weaponskill sets
@@ -220,7 +220,6 @@ function init_gear_sets()
 		}
 
 	sets.precast.WS.Acc = set_combine(sets.precast.WS, {
-		hands=gear.Herc_WS_hands,
 		legs="Meg. Chausses +1",
 		ear2="Telos Earring",
 		})
@@ -228,15 +227,15 @@ function init_gear_sets()
 
 	sets.precast.WS['Resolution'] = set_combine(sets.precast.WS, {
 		head="Adhemar Bonnet",
-		hands=gear.Herc_WS_hands,
 		legs="Samnuha Tights",
 		ring1="Ifrit Ring +1",
 		ring2="Epona's Ring",
+		back=gear.RUN_WS2_Cape,
 		})
 		
 	sets.precast.WS['Resolution'].Acc = set_combine(sets.precast.WS['Resolution'], {
 		head="Dampening Tam",
-		legs="Adhemar Kecks",
+		legs="Meg. Chausses +1",
 		feet=gear.Herc_Acc_feet,
 		ear2="Telos Earring",
 		ring1="Rufescent Ring",
@@ -252,7 +251,7 @@ function init_gear_sets()
 		})
 		
 	sets.precast.WS['Dimidiation'].Acc = set_combine(sets.precast.WS['Dimidiation'], {
-		hands=gear.Herc_WS_hands,
+		hands="Meg. Gloves +1",
 		legs="Samnuha Tights",
 		feet=gear.Herc_Acc_feet,
 		ear2="Telos Earring",
@@ -270,6 +269,7 @@ function init_gear_sets()
 		ring1="Ifrit Ring +1",
 		ring2="Shukuyu Ring",
 		waist="Prosilio Belt +1",
+		back=gear.RUN_WS2_Cape,
 		})
 
 	sets.precast.WS['Sanguine Blade'] = {
@@ -279,7 +279,7 @@ function init_gear_sets()
 		hands="Carmine Fin. Ga. +1",
 		legs=gear.Herc_MAB_legs,
 		feet=gear.Herc_MAB_feet,
-		neck="Sanctity Necklace",
+		neck="Baetyl Pendant",
 		ear1="Moonshade Earring",
 		ear2="Friomisi Earring",
 		ring1="Archon Ring",
@@ -297,16 +297,21 @@ function init_gear_sets()
 	sets.precast.WS['Flash Nova'] = set_combine(sets.precast.WS['Sanguine Blade'], {
 		head=gear.Herc_MAB_head,
 		ring1="Shiva Ring +1",
-		ring2="Shiva Ring +1",
+		ring2="Weather. Ring",
 		})
 
 	--------------------------------------
 	-- Midcast Sets
 	--------------------------------------
 	
-	sets.midcast.FastRecast = {
-		ear1="Etiolation Earring",
-		ear2="Loquacious Earring",
+	sets.midcast.FastRecast = sets.precast.FC
+
+	sets.midcast.SpellInterrupt = {
+		ammo="Impatiens", --10
+		legs="Carmine Cuisses +1", --20
+		ear1="Halasz Earring", --5
+		ring1="Evanescence Ring", --5
+		waist="Rumination Sash", --10
 		}
 
 	sets.midcast.Cure = {
@@ -373,12 +378,9 @@ function init_gear_sets()
 		}
 
 	sets.midcast.Flash = sets.Enmity
-
 	sets.midcast.Foil = sets.midcast.EnhancingDuration--sets.Enmity
-
-	sets.midcast.Utsusemi = {
-		waist="Ninurta's Sash",
-		}
+	sets.midcast.Diaga = sets.Enmity
+	sets.midcast.Utsusemi = sets.midcast.SpellInterrupt
 	
 	sets.midcast['Blue Magic'] = {}
 	sets.midcast['Blue Magic'].Enmity = sets.Enmity
@@ -423,12 +425,6 @@ function init_gear_sets()
 		waist="Flume Belt +1", --4/0
 		}
 
-	sets.idle.Refresh = set_combine(sets.idle, {
-		head="Rawhide Mask",
-		body="Runeist Coat +1",
-		waist="Fucho-no-obi",
-		})
-
 	sets.idle.Town = set_combine(sets.idle, {
 		ammo="Staunch Tathlum",
 		head="Carmine Mask +1",
@@ -464,7 +460,7 @@ function init_gear_sets()
 		ammo="Staunch Tathlum", --2/2
 		head=gear.Herc_DT_head, --3/3
 		body="Erilaz Surcoat +1",
-		hands=gear.Herc_DT_hands, --5/3
+		hands=gear.Herc_DT_hands, --6/4
 		legs="Eri. Leg Guards +1", --7/0
 		feet="Erilaz Greaves +1", --5/0
 		neck="Loricate Torque +1", --6/6
@@ -577,7 +573,7 @@ function init_gear_sets()
 
 	sets.engaged.MidAcc = set_combine(sets.engaged.LowAcc, {
 		ammo="Falcon Eye",
-		legs="Adhemar Kecks",
+		hands=gear.Herc_Acc_hands,
 		ear2="Telos Earring",
 		})
 
@@ -672,10 +668,10 @@ end
 function job_aftercast(spell, action, spellMap, eventArgs)
 	if spell.name == 'Rayke' and not spell.interrupted then
 		send_command('@timers c "Rayke ['..spell.target.name..']" '..rayke_duration..' down spells/00136.png')
-		send_command('wait '..rayke_duration..';input /p ******** Rayke: OFF ********;')
+		send_command('wait '..rayke_duration..';input /p <bstar><bstar><bstar> <ldangle> Rayke: OFF <rdangle> <bstar><bstar><bstar> <call21>;')
 	elseif spell.name == 'Gambit' and not spell.interrupted then
 		send_command('@timers c "Gambit ['..spell.target.name..']" '..gambit_duration..' down spells/00136.png')
-		send_command('wait '..gambit_duration..';input /p ******** Gambit: OFF ********;')
+		send_command('wait '..gambit_duration..';input /p <bstar><bstar><bstar> <ldangle> Gambit: OFF <rdangle> <bstar><bstar><bstar> <call21>;')
 	end
 end
 

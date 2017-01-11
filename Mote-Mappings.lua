@@ -151,6 +151,7 @@ spell_maps = {
     ['Stona']='StatusRemoval',['Viruna']='StatusRemoval',['Erase']='StatusRemoval',
     ['Barfire']='BarElement',['Barstone']='BarElement',['Barwater']='BarElement',['Baraero']='BarElement',['Barblizzard']='BarElement',['Barthunder']='BarElement',
     ['Barfira']='BarElement',['Barstonra']='BarElement',['Barwatera']='BarElement',['Baraera']='BarElement',['Barblizzara']='BarElement',['Barthundra']='BarElement',
+    ['Haste']='Haste',['Haste II']='Haste',
     ['Raise']='Raise',['Raise II']='Raise',['Raise III']='Raise',['Raise IV']='Raise',['Arise']='Raise',
     ['Reraise']='Reraise',['Reraise II']='Reraise',['Reraise III']='Reraise',
     ['Protect']='Protect',['Protect II']='Protect',['Protect III']='Protect',['Protect IV']='Protect',['Protect V']='Protect',
@@ -202,8 +203,11 @@ spell_maps = {
 	['Fira III']='GeoElem',['Blizzara III']='GeoElem',['Aerora III']='GeoElem',['Stonera III']='GeoElem',['Thundara III']='GeoElem',['Watera III']='GeoElem',
 }
 
-no_skill_spells_list = S{'Haste', 'Refresh', 'Regen', 'Protect', 'Protectra', 'Shell', 'Shellra',
-        'Raise', 'Reraise', 'Sneak', 'Invisible', 'Deodorize'}
+no_skill_spells_list = S{
+		'Haste', 'Haste II', 'Refresh', 'Refresh II', 'Refresh III', 'Protect', 'Protect II', 'Protect III', 'Protect IV', 'Protect V',
+		'Protectra', 'Protectra II', 'Protectra III', 'Protectra IV', 'Protectra V', 'Shell', 'Shell II', 'Shell III', 'Shell IV',
+		'Shell V', 'Shellra', 'Shellra II', 'Shellra III', 'Shellra IV', 'Shellra V', 'Raise', 'Raise II', 'Raise III', 'Arise',
+		'Reraise', 'Reraise II', 'Reraise III', 'Reraise IV', 'Sneak', 'Invisible', 'Deodorize'}
 
 
 -------------------------------------------------------------------------------------------------------------------
@@ -232,7 +236,7 @@ areas.Cities = S{
     "Bastok Mines",
     "Metalworks",
     "Aht Urhgan Whitegate",
-    "Tavanazian Safehold",
+    "Tavnazian Safehold",
     "Nashmau",
     "Selbina",
     "Mhaura",

@@ -81,11 +81,10 @@ function init_gear_sets()
 	-- Fast cast sets for spells
 
 	sets.precast.FC = {
-	--	/SCH --10
+	--	/SCH --3
 		main="Sucellus", --5
 		sub="Chanter's Shield", --3
 		ammo="Sapience Orb", --2
-		head="Vanya Hood", --10
 		body="Inyanga Jubbah +1", --13
 		hands="Gende. Gages +1", --7
 		legs="Kaykaus Tights", --6
@@ -93,7 +92,7 @@ function init_gear_sets()
 		neck="Orunmila's Torque", --5
 		ear1="Loquacious Earring", --2
 		ear2="Etiolation Earring", --1
-		ring1="Prolix Ring", --2
+		ring1="Kishar Ring", --4
 		ring2="Weather. Ring", --5
 		back="Alaunus's Cape", --10
 		waist="Witful Belt", --3/(2)
@@ -104,11 +103,12 @@ function init_gear_sets()
 		waist="Siegel Sash",
 		})
 
-	sets.precast.FC.Stoneskin = sets.precast.FC['Enhancing Magic']
+	sets.precast.FC.Stoneskin = set_combine(sets.precast.FC['Enhancing Magic'], {legs="Doyen Pants"})
 
 	sets.precast.FC['Healing Magic'] = set_combine(sets.precast.FC, {
 		main="Vadose Rod",
 		sub="Sors Shield",
+		head="Vanya Hood", --7
 		legs="Ebers Pant. +1",
 		back="Perimede Cape",
 		})
@@ -120,8 +120,7 @@ function init_gear_sets()
 		sub="Sors Shield", --5
 		ammo="Impatiens",
 		head="Piety Cap +1", --13
-		legs="Ebers Pant. +1", --13
-		feet="Vanya Clogs", --15
+		legs="Doyen Pants", --15
 		ear1="Nourish. Earring +1", --4
 		ear2="Mendi. Earring", --5
 		ring1="Lebeche Ring", --(2)
@@ -164,7 +163,7 @@ function init_gear_sets()
 		hands="Fanatic Gloves",
 		legs="Gyve Trousers",
 		feet="Chironic Slippers",
-		neck="Saevus Pendant +1",
+		neck="Baetyl Pendant",
 		ear1="Hecate's Earring",
 		ear2="Friomisi Earring",
 		ring1="Shiva Ring +1",
@@ -180,10 +179,10 @@ function init_gear_sets()
 		body="Inyanga Jubbah +1",
 		hands="Fanatic Gloves",
 		legs="Ebers Pant. +1",
-		feet="Vanya Clogs",
+		feet="Regal Pumps +1",
 		ear1="Loquacious Earring",
 		ear2="Etiolation Earring",
-		ring1="Prolix Ring",
+		ring1="Kishar Ring",
 		back="Swith Cape +1",
 		waist="Witful Belt",
 		} -- Haste
@@ -233,7 +232,7 @@ function init_gear_sets()
 		sub="Clemency Grip",
 		head="Ebers Cap +1",
 		body="Ebers Bliaud +1",
-		hands="Fanatic Gloves",
+		hands="Inyan. Dastanas +1",
 		legs="Piety Pantaln. +1",
 		feet="Vanya Clogs",
 		neck="Incanter's Torque",
@@ -246,11 +245,17 @@ function init_gear_sets()
 	sets.midcast.Cursna = set_combine(sets.midcast.StatusRemoval, {
 		main="Gada",
 		sub="Genmei Shield",
+		head="Vanya Hood",
+		hands="Fanatic Gloves", --15
 		legs="Theo. Pant. +1", --15
-		feet="Gende. Galosh. +1", --10
+		feet="Vanya Clogs", --5
+--		feet="Gende. Galosh. +1", --10
 		neck="Malison Medallion", --10
+		ear1="Beatific Earring",
+		ring1="Haoma's Ring", --15
+		ring2="Haoma's Ring", --15
 		back="Alaunus's Cape", --25
-		}) -- 105%
+		})
 
 	-- 110 total Enhancing Magic Skill; caps even without Light Arts
 	sets.midcast['Enhancing Magic'] = {
@@ -258,7 +263,7 @@ function init_gear_sets()
 		sub="Genmei Shield",
 		head="Telchine Cap",
 		body="Telchine Chas.",
-		hands="Telchine Gloves",
+		hands="Dynasty Mitts",
 		legs="Telchine Braconi",
 		feet="Ebers Duckbills +1",
 		neck="Incanter's Torque",
@@ -269,7 +274,7 @@ function init_gear_sets()
 		waist="Olympus Sash",
 		}
 
-	sets.midcast.EnhancingDuration = set_combine(sets.midcast['Enhancing Magic'], {
+	sets.midcast.EnhancingDuration = {
 		main="Gada",
 		sub="Genmei Shield",
 		head="Telchine Cap",
@@ -277,7 +282,7 @@ function init_gear_sets()
 		hands="Telchine Gloves",
 		legs="Telchine Braconi",
 		feet="Telchine Pigaches",
-		})
+		}
 
 	sets.midcast.Regen = set_combine(sets.midcast.EnhancingDuration, {
 		main="Bolelabunga",
@@ -300,6 +305,7 @@ function init_gear_sets()
 
 	sets.midcast.Aquaveil = set_combine(sets.midcast['Enhancing Magic'], {
 		main="Vadose Rod",
+		waist="Emphatikos Rope",
 		})
 
 	sets.midcast.Auspice = set_combine(sets.midcast['Enhancing Magic'], {
@@ -322,12 +328,12 @@ function init_gear_sets()
 		ring1="Sheltered Ring",
 		})
 
-	sets.midcast.Protectra = sets.midcast.Protectra
-	sets.midcast.Shell = sets.midcast.Protectra
-	sets.midcast.Shellra = sets.midcast.Protectra
+	sets.midcast.Protectra = sets.midcast.Protect
+	sets.midcast.Shell = sets.midcast.Protect
+	sets.midcast.Shellra = sets.midcast.Protect
 
 	sets.midcast['Divine Magic'] = {
-		main="Grioavolr",
+		main=gear.Grioavolr_MP,
 		sub="Clerisy Strap +1",
 		ammo="Pemphredo Tathlum",
 		head="Befouled Crown",
@@ -338,14 +344,14 @@ function init_gear_sets()
 		neck="Incanter's Torque",
 		ear1="Hermetic Earring",
 		ear2="Digni. Earring",
-		ring1="Stikini Ring",
+		ring1="Kishar Ring",
 		ring2="Stikini Ring",
 		back="Alaunus's Cape",
 		waist="Refoccilation Stone",
 		}
 
 	sets.midcast.Banish = set_combine(sets.midcast['Divine Magic'], {
-		main="Grioavolr",
+		main=gear.Grioavolr_MP,
 		sub="Niobid Strap",
 		head="Inyanga Tiara +1",
 		body="Witching Robe",
@@ -360,7 +366,7 @@ function init_gear_sets()
 	sets.midcast.Holy = sets.midcast.Banish
 
 	sets.midcast['Dark Magic'] = {
-		main="Grioavolr",
+		main=gear.Grioavolr_INT,
 		sub="Clerisy Strap +1",
 		ammo="Pemphredo Tathlum",
 		head="Befouled Crown",
@@ -379,7 +385,7 @@ function init_gear_sets()
 
 	-- Custom spell classes
 	sets.midcast.MndEnfeebles = {
-		main="Grioavolr",
+		main=gear.Grioavolr_MP,
 		sub="Clerisy Strap +1",
 		ammo="Quartz Tathlum +1",
 		head="Befouled Crown",
@@ -397,7 +403,7 @@ function init_gear_sets()
 		}
 
 	sets.midcast.IntEnfeebles = {
-		main="Grioavolr",
+		main=gear.Grioavolr_INT,
 		sub="Clerisy Strap +1",
 		ammo="Pemphredo Tathlum",
 		head="Befouled Crown",
@@ -415,7 +421,7 @@ function init_gear_sets()
 		}
 
 	sets.midcast.Impact = {
-		main="Grioavolr",
+		main=gear.Grioavolr_INT,
 		sub="Niobid Strap",
 		head=empty,
 		body="Twilight Cloak",

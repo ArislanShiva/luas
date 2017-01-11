@@ -68,7 +68,7 @@ function job_setup()
 	state.HasteMode = M{['description']='Haste Mode', 'Haste II', 'Haste I'}
 	
 	state.CurrentStep = M{['description']='Current Step', 'Main', 'Alt'}
-	state.SkillchainPending = M(false, 'Skillchain Pending')
+--	state.SkillchainPending = M(false, 'Skillchain Pending')
 
 	state.CP = M(false, "Capacity Points Mode")
 
@@ -156,16 +156,16 @@ function init_gear_sets()
 		}
 	  
 	sets.precast.Waltz = {
-		head="Horos Tiara +1",
-		body="Maxixi Casaque +1",
-		hands="Slither Gloves +1",
-		legs="Horos Tights +1",
-		feet="Maxixi Shoes +1",
-		ear1="Roundel Earring",
-		ring1="Asklepian Ring",
-		ring2="Valseur's Ring",
-		back="Toetapper Mantle",
-		waist="Gishdubar Sash",
+		head="Horos Tiara +1", --11
+		body="Maxixi Casaque +1", --15
+		hands="Slither Gloves +1", --5
+		feet="Maxixi Shoes +1", --10
+		neck="Phalaina Locket", --(4)
+		ear1="Roundel Earring", --5
+		ring1="Asklepian Ring", --(3)
+		ring2="Carb. Ring +1", --3
+		back="Toetapper Mantle", --5
+		waist="Gishdubar Sash", --(10)
 		} -- Waltz Potency
 		
 	sets.precast.Waltz['Healing Waltz'] = {}
@@ -177,7 +177,7 @@ function init_gear_sets()
 		head="Dampening Tam",
 		body=gear.Herc_TA_body,
 		hands=gear.Herc_TA_hands,
-		legs="Adhemar Kecks",
+		legs="Meg. Chausses +1",
 		feet=gear.Herc_Acc_feet,
 		neck="Sanctity Necklace",
 		ear1="Mache Earring",
@@ -208,9 +208,9 @@ function init_gear_sets()
 		ammo="Charis Feather",
 		head="Meghanada Visor +1",
 		body=gear.Herc_TA_body,
-		hands=gear.Herc_TA_hands,
+		hands=gear.Herc_Acc_hands,
 		legs=gear.Herc_WS_legs,
-		feet=gear.Herc_TA_feet,
+		feet=gear.Herc_Acc_feet,
 		neck="Combatant's Torque",
 		ear1="Mache Earring",
 		ear2="Telos Earring",
@@ -242,13 +242,12 @@ function init_gear_sets()
 		neck="Orunmila's Torque", --5
 		ear1="Loquacious Earring", --2
 		ear2="Etiolation Earring", --1
-		ring1="Prolix Ring", --2
 		ring2="Weather. Ring", --5(3)
-		waist="Ninurta's Sash",
 		}
 
 	sets.precast.FC.Utsusemi = set_combine(sets.precast.FC, {
 		ammo="Impatiens",
+		body="Passion Jacket",
 		neck="Magoraga Beads",
 		ring1="Lebeche Ring",
 		waist="Ninurta's Sash",
@@ -268,12 +267,11 @@ function init_gear_sets()
 		ear2="Ishvara Earring",
 		ring1="Ramuh Ring +1",
 		ring2="Ramuh Ring +1",
-		back=gear.DNC_WS_Cape,
+		back=gear.DNC_WS1_Cape,
 		waist="Fotia Belt",
 		} -- default set
 		
 	sets.precast.WS.Acc = set_combine(sets.precast.WS, {
-		hands=gear.Herc_WS_hands,
 		legs="Meg. Chausses +1",
 		ring1="Ramuh Ring +1",
 		ear2="Telos Earring",
@@ -288,6 +286,7 @@ function init_gear_sets()
 		ear2="Telos Earring",
 		ring2="Garuda Ring +1",
 		ring2="Garuda Ring +1",
+		back=gear.DNC_WS2_Cape,
 		})
 		
 	sets.precast.WS['Exenterator'].Acc = set_combine(sets.precast.WS['Exenterator'], {
@@ -296,7 +295,7 @@ function init_gear_sets()
 		})
 
 	sets.precast.WS['Pyrrhic Kleos'] = set_combine(sets.precast.WS, {
-		ammo="Floestone",
+		ammo="Cheruski Needle",
 		head="Adhemar Bonnet",
 		body="Adhemar Jacket",
 		hands="Adhemar Wristbands",
@@ -306,13 +305,14 @@ function init_gear_sets()
 		ear2="Brutal Earring",
 		ring1="Apate Ring",
 		ring2="Epona's Ring",
+		back=gear.DNC_WS2_Cape,
 		})
 		
 	sets.precast.WS['Pyrrhic Kleos'].Acc = set_combine(sets.precast.WS['Pyrrhic Kleos'], {
 		ammo="Falcon Eye",
 		head="Dampening Tam",
 		body=gear.Herc_TA_body,
-		hands=gear.Herc_WS_hands,
+		hands="Meg. Gloves +1",
 		legs=gear.Herc_WS_legs,
 		feet=gear.Herc_Acc_feet,
 		ear2="Telos Earring",
@@ -321,15 +321,22 @@ function init_gear_sets()
 		})
 
 	sets.precast.WS['Evisceration'] = set_combine(sets.precast.WS, {
-		ammo="Falcon Eye",
+		ammo="Charis Feather",
 		head="Adhemar Bonnet",
-		ring1="Ramuh Ring +1",
+		body="Abnoba Kaftan",
+		hands="Adhemar Wristbands",
+		legs="Samnuha Tights", 
+		feet=gear.Herc_TA_feet,
+		ear2="Brutal Earring",
+		ring1="Begrudging Ring",
+		ring2="Epona's Ring",
 		})
 
 	sets.precast.WS['Evisceration'].Acc = set_combine(sets.precast.WS['Evisceration'], {
+		ammo="Falcon Eye",
 		head="Dampening Tam",
 		body=gear.Herc_TA_body,
-		hands=gear.Herc_WS_hands,
+		hands="Meg. Gloves +1",
 		legs=gear.Herc_WS_legs,
 		feet=gear.Herc_Acc_feet,
 		ear2="Telos Earring",
@@ -345,7 +352,6 @@ function init_gear_sets()
 
 	sets.precast.WS["Rudra's Storm"].Acc = set_combine(sets.precast.WS["Rudra's Storm"], {
 		ammo="Falcon Eye",
-		hands=gear.Herc_WS_hands,
 		legs=gear.Herc_WS_legs,
 		feet=gear.Herc_Acc_feet,
 		ear2="Telos Earring",
@@ -359,7 +365,7 @@ function init_gear_sets()
 		hands="Leyline Gloves",
 		legs=gear.Herc_MAB_legs,
 		feet=gear.Herc_MAB_feet,
-		neck="Sanctity Necklace",
+		neck="Baetyl Pendant",
 		ear1="Hecate's Earring",
 		ear2="Friomisi Earring",
 		ring1="Shiva Ring +1",
@@ -375,19 +381,17 @@ function init_gear_sets()
 	
 	-- MIDCAST SETS
 	
-	sets.midcast.FastRecast = {
-		ear1="Loquacious Earring",
-		ear2="Etiolation Earring",
+	sets.midcast.FastRecast = sets.precast.FC
+
+	sets.midcast.SpellInterrupt = {
+		ammo="Impatiens", --10
+		ear1="Halasz Earring", --5
+		ring1="Evanescence Ring", --5
+		waist="Ninurta's Sash", --6
 		}
 		
 	-- Specific spells
-	sets.midcast.Utsusemi = {
-		ear2="Loquacious Earring",
-		waist="Ninurta's Sash",
-		}
-
-	
-	-- Sets to return to when not performing an action.
+	sets.midcast.Utsusemi = sets.midcast.SpellInterrupt
 	
 	-- Resting sets
 	sets.resting = {}
@@ -415,7 +419,7 @@ function init_gear_sets()
 		ammo="Staunch Tathlum", --2/2
 		head=gear.Herc_DT_head, --3/3
 		body="Meg. Cuirie +1", --7/0
-		hands=gear.Herc_DT_hands, --5/3
+		hands=gear.Herc_DT_hands, --6/4
 		neck="Loricate Torque +1", --6/6
 		ear1="Genmei Earring", --2/0
 		ring1="Gelatinous Ring +1", --7/(-1)
@@ -432,7 +436,7 @@ function init_gear_sets()
 		ear2="Telos Earring",
 		ring1="Ramuh Ring +1",
 		ring2="Ramuh Ring +1",
-		back=gear.DNC_WS_Cape,
+		back=gear.DNC_TP_Cape,
 		waist="Windbuffet Belt +1",
 		})
 	
@@ -483,14 +487,13 @@ function init_gear_sets()
 
 	sets.engaged.MidAcc = set_combine(sets.engaged.LowAcc, {
 		body="Adhemar Jacket",
-		legs="Adhemar Kecks",
-		feet=gear.Herc_TA_feet,
+		hands=gear.Herc_Acc_hands,
 		ring2="Ramuh Ring +1",
 		waist="Kentarch Belt +1",
 		})
 
 	sets.engaged.HighAcc = set_combine(sets.engaged.MidAcc, {
-		legs="Adhemar Kecks",
+		legs=gear.Herc_WS_legs,
 		feet=gear.Herc_Acc_feet,
 		ear1="Cessance Earring",
 		ear2="Telos Earring",
@@ -531,14 +534,14 @@ function init_gear_sets()
 		})
 
 	sets.engaged.LowHaste.MidAcc = set_combine(sets.engaged.LowHaste.LowAcc, {
-		legs="Adhemar Kecks",
+		hands=gear.Herc_Acc_hands,
 		feet=gear.Herc_TA_feet,
 		ring2="Ramuh Ring +1",
 		waist="Kentarch Belt +1",
 		})
 
 	sets.engaged.LowHaste.HighAcc = set_combine(sets.engaged.LowHaste.MidAcc, {
-		legs="Adhemar Kecks",
+		legs=gear.Herc_WS_legs,
 		feet=gear.Herc_Acc_feet,
 		ear1="Cessance Earring",
 		ear2="Telos Earring",
@@ -579,7 +582,7 @@ function init_gear_sets()
 		})
 
 	sets.engaged.MidHaste.MidAcc = set_combine(sets.engaged.MidHaste.LowAcc, {
-		legs="Adhemar Kecks",
+		hands=gear.Herc_Acc_hands,
 		feet=gear.Herc_TA_feet,
 		ear1="Cessance Earring",
 		ring2="Ramuh Ring +1",
@@ -587,7 +590,7 @@ function init_gear_sets()
 		})
 
 	sets.engaged.MidHaste.HighAcc = set_combine(sets.engaged.MidHaste.MidAcc, {
-		legs="Adhemar Kecks",
+		legs=gear.Herc_WS_legs,
 		feet=gear.Herc_Acc_feet,
 		ear2="Telos Earring",
 		ring1="Ramuh Ring +1",
@@ -628,13 +631,13 @@ function init_gear_sets()
 
 	sets.engaged.HighHaste.MidAcc = set_combine(sets.engaged.HighHaste.LowAcc, {
 		ammo="Falcon Eye",
-		legs="Adhemar Kecks",
+		hands=gear.Herc_Acc_hands,
 		ear1="Cessance Earring",
 		ring2="Ramuh Ring +1",
 		})
 
 	sets.engaged.HighHaste.HighAcc = set_combine(sets.engaged.HighHaste.MidAcc, {
-		legs="Adhemar Kecks",
+		legs=gear.Herc_WS_legs,
 		feet=gear.Herc_Acc_feet,
 		ear2="Telos Earring",
 		ring1="Ramuh Ring +1",
@@ -675,12 +678,13 @@ function init_gear_sets()
 
 	sets.engaged.MaxHaste.MidAcc = set_combine(sets.engaged.MaxHaste.LowAcc, {
 		ammo="Falcon Eye",
-		legs="Adhemar Kecks",
+		hands=gear.Herc_Acc_hands,
 		ear1="Cessance Earring",
 		ring2="Ramuh Ring +1",
 		})
 
 	sets.engaged.MaxHaste.HighAcc = set_combine(sets.engaged.MaxHaste.MidAcc, {
+		legs=gear.Herc_WS_legs,
 		feet=gear.Herc_Acc_feet,
 		ear2="Telos Earring",
 		ring1="Ramuh Ring +1",
@@ -722,9 +726,9 @@ function job_post_precast(spell, action, spellMap, eventArgs)
 		if state.Buff['Climactic Flourish'] then
 			equip(sets.buff['Climactic Flourish'])
 		end
-		if state.SkillchainPending.value == true then
-			equip(sets.precast.Skillchain)
-		end
+--		if state.SkillchainPending.value == true then
+--			equip(sets.precast.Skillchain)
+--		end
 	end
 end
 
@@ -732,15 +736,15 @@ end
 -- Return true if we handled the aftercast work.  Otherwise it will fall back
 -- to the general aftercast() code in Mote-Include.
 function job_aftercast(spell, action, spellMap, eventArgs)
-	if not spell.interrupted then
-		if spell.english == "Wild Flourish" then
-			state.SkillchainPending:set()
-			send_command('wait 5;gs c unset SkillchainPending')
-		elseif spell.type:lower() == "weaponskill" then
-			state.SkillchainPending:toggle()
-			send_command('wait 6;gs c unset SkillchainPending')
-		end
-	end
+--	if not spell.interrupted then
+--		if spell.english == "Wild Flourish" then
+--			state.SkillchainPending:set()
+--			send_command('wait 5;gs c unset SkillchainPending')
+--		elseif spell.type:lower() == "weaponskill" then
+--			state.SkillchainPending:toggle()
+--			send_command('wait 6;gs c unset SkillchainPending')
+--		end
+--	end
 end
 
 -------------------------------------------------------------------------------------------------------------------

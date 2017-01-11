@@ -48,7 +48,7 @@ function user_setup()
 	lowTierNukes = S{'Stone', 'Water', 'Aero', 'Fire', 'Blizzard', 'Thunder'}
 	
 	-- Additional local binds
-	send_command('bind ^` input /ma Stun <t>;input /p ***** #1 Stun ***** <call14>')
+	send_command('bind ^` input /ma Stun <t>;input /p <wstar><wstar><wstar> <ldangle> <circle1> Stun <rarr> <t> <rdangle> <wstar><wstar><wstar> <call14>') 
 	send_command('bind !` gs c toggle MagicBurst')
 	send_command('bind !w input /ma "Aspir III" <t>')
 	send_command('bind !p input /ma "Shock Spikes" <me>')
@@ -106,7 +106,7 @@ function init_gear_sets()
 		neck="Orunmila's Torque", --5
 		ear1="Etiolation Earring", --1
 		ear2="Loquacious Earring", --2
-		ring1="Prolix Ring", --2
+		ring1="Kishar Ring", --4
 		ring2="Weather. Ring", --5
 		back=gear.BLM_FC_Cape, --10
 		waist="Witful Belt", --3/(2)
@@ -117,6 +117,8 @@ function init_gear_sets()
 		back="Perimede Cape",
 		})
 
+	sets.precast.FC.Stoneskin = set_combine(sets.precast.FC['Enhancing Magic'], {legs="Doyen Pants"})
+
 	sets.precast.FC['Elemental Magic'] = set_combine(sets.precast.FC, {
 		waist="Channeler's Stone", --2
 		})
@@ -125,7 +127,7 @@ function init_gear_sets()
 		main="Sucellus", --5
 		sub="Sors Shield", --5
 		ammo="Impatiens",
-		feet="Vanya Clogs", --15
+		legs="Doyen Pants", --15
 		ear1="Mendi. Earring", --5
 		ring1="Lebeche Ring", --(2)
 		back="Perimede Cape", --(4)
@@ -138,6 +140,8 @@ function init_gear_sets()
 		body="Twilight Cloak",
 		waist="Channeler's Stone",
 		})
+
+	sets.precast.Storm = set_combine(sets.precast.FC, {ring2="Levia. Ring +1", waist="Channeler's Stone"}) -- stop quick cast
 	
 	sets.precast.FC.DeathMode = {
 		ammo="Ghastly Tathlum +1",
@@ -216,7 +220,7 @@ function init_gear_sets()
 		feet="Regal Pumps +1",
 		ear1="Etiolation Earring",
 		ear2="Loquacious Earring",
-		ring1="Prolix Ring",
+		ring1="Kishar Ring",
 		back=gear.BLM_FC_Cape,
 		waist="Witful Belt",
 		} -- Haste
@@ -225,8 +229,6 @@ function init_gear_sets()
 		main="Tamaxchi", --22/(-10)
 		sub="Sors Shield", --3/(-5)
 		ammo="Esper Stone +1", --0/(-5)
-		head="Vanya Hood", --10
-		body="Vanya Robe", --7/(-6)
 		hands="Telchine Gloves", --10
 		legs="Gyve Trousers", --10
 		feet="Medium's Sabots", --12
@@ -248,8 +250,10 @@ function init_gear_sets()
 	sets.midcast.Cursna = set_combine(sets.midcast.Cure, {
 		main="Gada",
 		sub="Genmei Shield",
+		head="Vanya Hood",
 		feet="Vanya Clogs",
 		neck="Malison Medallion",
+		ear1="Beatific Earring",
 		ring1="Haoma's Ring",
 		ring2="Haoma's Ring",
 		})
@@ -270,7 +274,7 @@ function init_gear_sets()
 		waist="Olympus Sash",
 		}
 
-	sets.midcast.EnhancingDuration = set_combine(sets.midcast['Enhancing Magic'], {
+	sets.midcast.EnhancingDuration = {
 		main="Gada",
 		sub="Genmei Shield",
 		head="Telchine Cap",
@@ -278,7 +282,7 @@ function init_gear_sets()
 		hands="Telchine Gloves",
 		legs="Telchine Braconi",
 		feet="Telchine Pigaches",
-		})
+		}
 
 	sets.midcast.Regen = set_combine(sets.midcast['Enhancing Magic'], {
 		main="Bolelabunga",
@@ -287,6 +291,7 @@ function init_gear_sets()
 		})
 	
 	sets.midcast.Refresh = set_combine(sets.midcast['Enhancing Magic'], {
+		head="Amalric Coif",
 		waist="Gishdubar Sash",
 		back="Grapevine Cape",
 		})
@@ -299,6 +304,7 @@ function init_gear_sets()
 	sets.midcast.Aquaveil = set_combine(sets.midcast['Enhancing Magic'], {
 		main="Vadose Rod",
 		head="Amalric Coif",
+		waist="Emphatikos Rope",
 		})
 
 	sets.midcast.Protect = set_combine(sets.midcast.EnhancingDuration, {
@@ -320,7 +326,7 @@ function init_gear_sets()
 		neck="Imbodla Necklace",
 		ear1="Barkaro. Earring",
 		ear2="Digni. Earring",
-		ring1="Stikini Ring",
+		ring1="Kishar Ring",
 		ring2="Stikini Ring",
 		back=gear.BLM_FC_Cape,
 		waist="Casso Sash",
@@ -368,7 +374,7 @@ function init_gear_sets()
 		})
 
 	sets.midcast.Death = {
-		main="Grioavolr",
+		main=gear.Grioavolr_MP,
 		sub="Elder's Grip +1",
 		ammo="Ghastly Tathlum +1",
 		head="Pixie Hairpin +1",
@@ -396,7 +402,7 @@ function init_gear_sets()
 		hands="Amalric Gages",
 		legs="Merlinic Shalwar",
 		feet="Merlinic Crackows",
-		neck="Saevus Pendant +1",
+		neck="Baetyl Pendant",
 		ear1="Barkaro. Earring",
 		ear2="Friomisi Earring",
 		ring1="Shiva Ring +1",
@@ -405,23 +411,14 @@ function init_gear_sets()
 		waist="Refoccilation Stone",
 		}
 
-	sets.midcast['Elemental Magic'].DeathMode = {
-		main=gear.Lathi_MAB,
+	sets.midcast['Elemental Magic'].DeathMode = set_combine(sets.midcast['Elemental Magic'], {
+		main=gear.Grioavolr_MP,
 		sub="Elder's Grip +1",
-		ammo="Pemphredo Tathlum",
-		head="Merlinic Hood",
-		body="Merlinic Jubbah",
-		hands="Amalric Gages",
-		legs="Merlinic Shalwar",
-		feet="Merlinic Crackows",
+		ammo="Ghastly Tathlum +1",
+		legs="Amalric Slops",
 		neck="Sanctity Necklace",
-		ear1="Barkaro. Earring",
-		ear2="Friomisi Earring",
-		ring1="Mephitas's Ring +1",
-		ring2="Shiva Ring +1",
-		back="Bane Cape",
-		waist="Refoccilation Stone",
-		}
+		back=gear.BLM_Death_Cape,
+		})
 
 	sets.midcast['Elemental Magic'].Resistant = set_combine(sets.midcast['Elemental Magic'], {
 		sub="Clerisy Strap +1",
@@ -429,7 +426,6 @@ function init_gear_sets()
 		ear2="Hermetic Earring",
 		waist="Yamabuki-no-Obi",
 		})
-
 			
 	sets.midcast['Elemental Magic'].Spaekona = set_combine(sets.midcast['Elemental Magic'], {
 		body="Spae. Coat +1",
@@ -476,7 +472,8 @@ function init_gear_sets()
 		main="Mafic Cudgel", --10/0
 		sub="Genmei Shield", --10/0
 		ammo="Staunch Tathlum", --2/2
-		body="Hagondes Coat +1", --3/4
+		body="Hagondes Coat +1", --4/4
+		hands="Hagondes Cuffs +1", --3/3
 		neck="Loricate Torque +1", --6/6
 		ear1="Genmei Earring", --2/0
 		ear2="Etiolation Earring", --0/3
@@ -491,21 +488,21 @@ function init_gear_sets()
 		sub="Genmei Shield", --10/0
 		ammo="Staunch Tathlum", --2/2
 		head="Befouled Crown",
-		body="Hagondes Coat +1", --3/4
-		hands="Merlinic Dastanas",
+		body="Hagondes Coat +1", --4/4
+		hands="Hagondes Cuffs +1", --3/3
 		legs="Assid. Pants +1",
 		feet="Wicce Sabots +1",
 		neck="Loricate Torque +1", --6/6
 		ear1="Genmei Earring", --2/0
 		ear2="Etiolation Earring", --0/3
-		ring1="Gelatinous Ring +1", --7/(-1)
+		ring1="Warden's Ring", --3/0
 		ring2="Defending Ring", --10/10
 		back=gear.BLM_Death_Cape,
 		waist="Lieutenant's Sash", --0/2
 		}
 
 	sets.idle.DeathMode = {
-		main="Grioavolr",
+		main=gear.Grioavolr_MP,
 		sub="Elder's Grip +1",
 		ammo="Ghastly Tathlum +1",
 		head="Pixie Hairpin +1",
@@ -528,7 +525,7 @@ function init_gear_sets()
 		head="Merlinic Hood",
 		body="Merlinic Jubbah",
 		legs="Merlinic Shalwar",
-		neck="Saevus Pendant +1",
+		neck="Incanter's Torque",
 		ear1="Barkaro. Earring",
 		ear2="Friomisi Earring",
 		ring1="Shiva Ring +1",
@@ -545,6 +542,7 @@ function init_gear_sets()
 
 	sets.Kiting = {feet="Herald's Gaiters"}
 	sets.latent_refresh = {waist="Fucho-no-obi"}
+	sets.latent_dt = {ear2="Sorcerer's Earring"}
 
 	sets.magic_burst = { 
 		body="Merlinic Jubbah", --10
@@ -639,13 +637,15 @@ end
 -- gain == true if the buff was gained, false if it was lost.
 function job_buff_change(buff, gain)
 	-- Unlock armor when Mana Wall buff is lost.
-	if buff== "Mana Wall" and gain then
-		send_command('gs enable all')
-		equip(sets.idle.ManaWall)
-		send_command('gs disable all')
-	elseif buff == "Mana Wall" and not gain then
-		send_command('gs enable all')
-		handle_equipping_gear(player.status)
+	if buff== "Mana Wall" then
+		if gain then
+			send_command('gs enable all')
+			equip(sets.idle.ManaWall)
+			send_command('gs disable all')
+		else
+			send_command('gs enable all')
+			handle_equipping_gear(player.status)
+		end
 	end
 end
 
@@ -657,6 +657,13 @@ function job_state_change(stateField, newValue, oldValue)
 		enable('main','sub')
 	end
 end
+
+-- latent DT set auto equip on HP% change
+windower.register_event('hpp change', function(new, old)
+		if new<=25 then
+			equip(sets.latent_dt)
+		end
+	end)
 
 
 -------------------------------------------------------------------------------------------------------------------
@@ -683,6 +690,9 @@ function customize_idle_set(idleSet)
 	end
 	if player.mpp < 51 then
 		idleSet = set_combine(idleSet, sets.latent_refresh)
+	end
+	if player.hpp <= 25 then
+		idleSet = set_combine(idleSet, sets.latent_dt)
 	end
 	if state.CP.current == 'on' then
 		equip(sets.CP)

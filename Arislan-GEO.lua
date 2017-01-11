@@ -98,7 +98,7 @@ function init_gear_sets()
 		neck="Orunmila's Torque", --5
 		ear1="Loquacious Earring", --1
 		ear2="Etiolation Earring", --2
-		ring1="Prolix Ring", --2
+		ring1="Kishar Ring", --4
 		ring2="Weather. Ring", --5
 		back="Lifestream Cape", --7
 		waist="Witful Belt", --3/(2)
@@ -108,7 +108,7 @@ function init_gear_sets()
 		waist="Siegel Sash",
 		back="Perimede Cape",
 		})
-
+		
 	sets.precast.FC['Elemental Magic'] = set_combine(sets.precast.FC, {
 		hands="Bagua Mitaines +1",
 		waist="Channeler's Stone",
@@ -117,7 +117,7 @@ function init_gear_sets()
 	sets.precast.FC.Cure = set_combine(sets.precast.FC, {
 		main="Sucellus", --5
 		sub="Sors Shield", --5
-		feet="Vanya Clogs", --15
+		legs="Doyen Pants", --15
 		ear1="Mendi. Earring", --5
 		ring1="Lebeche Ring", --(2)
 		back="Perimede Cape", --(4)
@@ -160,7 +160,7 @@ function init_gear_sets()
 		feet="Regal Pumps +1",
 		ear1="Loquacious Earring",
 		ear2="Etiolation Earring",
-		ring1="Prolix Ring",
+		ring1="Kishar Ring",
 		back="Lifestream Cape",
 		} -- Haste
 	
@@ -203,8 +203,6 @@ function init_gear_sets()
 	sets.midcast.Cure = {
 		main="Tamaxchi", --22/(-10)
 		sub="Sors Shield", --3/(-5)
-		head="Vanya Hood", --10
-		body="Vanya Robe", --7/(-6)
 		hands="Telchine Gloves", --10
 		legs="Gyve Trousers", --10
 		feet="Medium's Sabots", --12
@@ -225,8 +223,10 @@ function init_gear_sets()
 	sets.midcast.Cursna = set_combine(sets.midcast.Cure, {
 		main="Gada",
 		sub="Genmei Shield",
+		head="Vanya Hood",
 		feet="Vanya Clogs",
 		neck="Malison Medallion",
+		ear1="Beatific Earring",
 		ring1="Haoma's Ring",
 		ring2="Haoma's Ring",
 		})
@@ -247,7 +247,7 @@ function init_gear_sets()
 		waist="Olympus Sash",
 		}
 		
-	sets.midcast.EnhancingDuration = set_combine(sets.midcast['Enhancing Magic'], {
+	sets.midcast.EnhancingDuration = {
 		main="Gada",
 		sub="Genmei Shield",
 		head="Telchine Cap",
@@ -255,7 +255,7 @@ function init_gear_sets()
 		hands="Telchine Gloves",
 		legs="Telchine Braconi",
 		feet="Telchine Pigaches",
-		})
+		}
 
 	sets.midcast.Regen = set_combine(sets.midcast['Enhancing Magic'], {
 		main="Bolelabunga",
@@ -264,6 +264,7 @@ function init_gear_sets()
 		})
 	
 	sets.midcast.Refresh = set_combine(sets.midcast['Enhancing Magic'], {
+		head="Amalric Coif",
 		waist="Gishdubar Sash",
 		back="Grapevine Cape",
 		})
@@ -276,6 +277,7 @@ function init_gear_sets()
 	sets.midcast.Aquaveil = set_combine(sets.midcast['Enhancing Magic'], {
 		main="Vadose Rod",
 		head="Amalric Coif",
+		waist="Emphatikos Rope",
 		})
 
 	sets.midcast.Protect = set_combine(sets.midcast.EnhancingDuration, {
@@ -287,7 +289,7 @@ function init_gear_sets()
 
 
 	sets.midcast.MndEnfeebles = {
-		main="Grioavolr",
+		main=gear.Grioavolr_MP,
 		sub="Clerisy Strap +1",
 		head="Amalric Coif",
 		body="Vanya Robe",
@@ -297,18 +299,19 @@ function init_gear_sets()
 		neck="Incanter's Torque",
 		ear1="Barkaro. Earring",
 		ear2="Digni. Earring",
-		ring1="Stikini Ring",
+		ring1="Kishar Ring",
 		ring2="Stikini Ring",
 		back="Aurist's Cape +1",
 		waist="Luminary Sash",
 		} -- MND/Magic accuracy
 	
 	sets.midcast.IntEnfeebles = set_combine(sets.midcast.MndEnfeebles, {
+		main=gear.Grioavolr_INT,
 		back="Nantosuelta's Cape",
 		}) -- INT/Magic accuracy
 
 	sets.midcast['Dark Magic'] = {
-		main="Grioavolr",
+		main=gear.Grioavolr_INT,
 		sub="Clerisy Strap +1",
 		head="Amalric Coif",
 		body="Psycloth Vest",
@@ -341,14 +344,14 @@ function init_gear_sets()
 	-- Elemental Magic sets
 	
 	sets.midcast['Elemental Magic'] = {
-  		main="Grioavolr",
+		main=gear.Grioavolr_INT,
 		sub="Niobid Strap",
 		head="Merlinic Hood",
 		body="Merlinic Jubbah",
 		hands="Amalric Gages",
 		legs="Merlinic Shalwar",
 		feet="Merlinic Crackows",
-		neck="Sanctity Necklace",
+		neck="Baetyl Pendant",
 		ear1="Barkaro. Earring",
 		ear2="Friomisi Earring",
 		ring1="Shiva Ring +1",
@@ -358,15 +361,16 @@ function init_gear_sets()
 		}
 
 	sets.midcast['Elemental Magic'].Resistant = set_combine(sets.midcast['Elemental Magic'], {
-		main="Grioavolr",
+		main=gear.Grioavolr_INT,
 		sub="Clerisy Strap +1",
 		legs="Azimuth Tights +1",
+		neck="Sanctity Necklace",
 		ear2="Hermetic Earring",
 		back="Aurist's Cape +1",
 		waist="Yamabuki-no-Obi",
 		})
 
-	sets.midcast.GeoElem = set_combine(sets.midcast['Elemental Magic'].Resistant, {
+	sets.midcast.GeoElem = set_combine(sets.midcast['Elemental Magic'], {
   		main="Solstice",
 		sub="Culminus",
 		ring1="Fenrir Ring +1",
@@ -388,7 +392,7 @@ function init_gear_sets()
 		})
 
 	sets.midcast.Impact = set_combine(sets.midcast['Elemental Magic'], {
-		main="Grioavolr",
+		main=gear.Grioavolr_INT,
 		sub="Niobid Strap",
 		head=empty,
 		body="Twilight Cloak",
@@ -429,11 +433,11 @@ function init_gear_sets()
 		main="Mafic Cudgel", --10/0
 		sub="Genmei Shield", --10/0
 		body="Hagondes Coat +1", --3/4
+		hands="Hagondes Cuffs +1", --3/3
 		feet="Azimuth Gaiters +1", --4/0
 		neck="Loricate Torque +1", --6/6
-		ear1="Genmei Earring", --2/0
 		ear2="Etiolation Earring", --0/3
-		ring1="Gelatinous Ring +1", --7/(-1)
+		ring1="Fortified Ring", --0/5
 		ring2="Defending Ring", --10/10
 		back="Solemnity Cape", --4/4	
 		waist="Lieutenant's Sash", --0/2
