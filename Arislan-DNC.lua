@@ -298,7 +298,7 @@ function init_gear_sets()
 		ammo="Cheruski Needle",
 		head="Adhemar Bonnet",
 		body="Adhemar Jacket",
-		hands="Adhemar Wristbands",
+		hands="gear.Adhemar_Att_hands",
 		legs="Samnuha Tights",
 		feet=gear.Herc_TA_feet,
 		ear1="Mache Earring",
@@ -324,7 +324,7 @@ function init_gear_sets()
 		ammo="Charis Feather",
 		head="Adhemar Bonnet",
 		body="Abnoba Kaftan",
-		hands="Adhemar Wristbands",
+		hands="gear.Adhemar_Att_hands",
 		legs="Samnuha Tights", 
 		feet=gear.Herc_TA_feet,
 		ear2="Brutal Earring",
@@ -403,7 +403,7 @@ function init_gear_sets()
 		ammo="Staunch Tathlum",
 		head="Dampening Tam",
 		body="Mekosu. Harness",
-		hands="Adhemar Wristbands",
+		hands="gear.Adhemar_Att_hands",
 		legs="Samnuha Tights",
 		feet="Skd. Jambeaux +1",
 		neck="Sanctity Necklace",
@@ -466,7 +466,7 @@ function init_gear_sets()
 		ammo="Ginsen",
 		head="Dampening Tam",
 		body="Macu. Casaque +1", --11
-		hands="Adhemar Wristbands",
+		hands="gear.Adhemar_Att_hands",
 		legs="Samnuha Tights",
 		feet=gear.Taeon_DW_feet, --9
 		neck="Charis Necklace", --5
@@ -514,7 +514,7 @@ function init_gear_sets()
 		ammo="Ginsen",
 		head="Dampening Tam",
 		body="Macu. Casaque +1", --11
-		hands="Adhemar Wristbands",
+		hands="gear.Adhemar_Att_hands",
 		legs="Samnuha Tights",
 		feet=gear.Herc_TA_feet,
 		neck="Charis Necklace", --5
@@ -562,7 +562,7 @@ function init_gear_sets()
 		ammo="Ginsen",
 		head="Dampening Tam",
 		body="Adhemar Jacket", --5
-		hands="Adhemar Wristbands",
+		hands="gear.Adhemar_Att_hands",
 		legs="Samnuha Tights",
 		feet=gear.Herc_TA_feet,
 		neck="Asperity Necklace",
@@ -610,7 +610,7 @@ function init_gear_sets()
 		ammo="Ginsen",
 		head="Dampening Tam",
 		body="Adhemar Jacket", --5
-		hands="Adhemar Wristbands",
+		hands="gear.Adhemar_Att_hands",
 		legs="Samnuha Tights",
 		feet=gear.Herc_TA_feet,
 		neck="Asperity Necklace",
@@ -657,7 +657,7 @@ function init_gear_sets()
 		ammo="Ginsen",
 		head="Dampening Tam",
 		body=gear.Herc_TA_body,
-		hands="Adhemar Wristbands",
+		hands="gear.Adhemar_Att_hands",
 		legs="Samnuha Tights",
 		feet=gear.Herc_TA_feet,
 		neck="Asperity Necklace",
@@ -704,6 +704,8 @@ function init_gear_sets()
 	sets.buff['Fan Dance'] = {body="Horos Casaque +1"}
 	sets.buff['Climactic Flourish'] = {head="Maculele Tiara +1"}
 	
+	sets.buff.Doom = {ring1="Saida Ring", ring2="Saida Ring", waist="Gishdubar Sash"}
+
 	sets.CP = {back="Mecisto. Mantle"}
 	sets.Reive = {neck="Ygnas's Resolve +1"}
 
@@ -764,12 +766,25 @@ function job_buff_change(buff,gain)
 	elseif buff == 'Saber Dance' or buff == 'Climactic Flourish' or buff == 'Fan Dance' then
 		handle_equipping_gear(player.status)
 	end
+
 	if buffactive['Reive Mark'] then
 		equip(sets.Reive)
 		disable('neck')
 	else
 		enable('neck')
 	end
+
+	if buff == "doom" then
+		if gain then		   
+			equip(sets.buff.Doom)
+			send_command('@input /p Doomed.')
+			disable('ring1','ring2','waist')
+		else
+			enable('ring1','ring2','waist')
+			handle_equipping_gear(player.status)
+		end
+	end
+
 end
 
 

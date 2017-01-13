@@ -140,7 +140,7 @@ function init_gear_sets()
 		ammo="Seeth. Bomblet +1",
 		head="Lilitu Headpiece",
 		body="Adhemar Jacket",
-		hands="Adhemar Wristbands",
+		hands="gear.Adhemar_Att_hands",
 		legs="Hiza. Hizayoroi +1",
 		feet=gear.Herc_TA_feet,
 		neck="Fotia Gorget",
@@ -406,7 +406,7 @@ function init_gear_sets()
 		ammo="Ginsen",
 		head="Dampening Tam",
 		body="Adhemar Jacket", --5
-		hands="Adhemar Wristbands",
+		hands="gear.Adhemar_Att_hands",
 		legs="Samnuha Tights",
 		feet=gear.Herc_TA_feet,
 		neck="Erudit. Necklace",
@@ -455,7 +455,7 @@ function init_gear_sets()
 		ammo="Ginsen",
 		head="Dampening Tam",
 		body="Adhemar Jacket", --5
-		hands="Adhemar Wristbands",
+		hands="gear.Adhemar_Att_hands",
 		legs="Samnuha Tights",
 		feet=gear.Herc_TA_feet,
 		neck="Erudit. Necklace",
@@ -503,7 +503,7 @@ function init_gear_sets()
 		ammo="Ginsen",
 		head="Dampening Tam",
 		body=gear.Herc_TA_body,
-		hands="Adhemar Wristbands",
+		hands="gear.Adhemar_Att_hands",
 		legs="Samnuha Tights",
 		feet=gear.Herc_TA_feet,
 		neck="Erudit. Necklace",
@@ -551,7 +551,7 @@ function init_gear_sets()
 	--------------------------------------
 
 --	sets.buff.Migawari = {body="Iga Ningi +2"}
-	sets.buff.Doom = {ring1="Saida Ring", ring2="Saida Ring"}
+	sets.buff.Doom = {ring1="Saida Ring", ring2="Saida Ring", waist="Gishdubar Sash"}
 --	sets.buff.Yonin = {}
 --	sets.buff.Innin = {}
 
@@ -595,12 +595,25 @@ function job_buff_change(buff, gain)
 			handle_equipping_gear(player.status)
 		end
 	end
+
 	if buffactive['Reive Mark'] then
 		equip(sets.Reive)
 		disable('neck')
 	else
 		enable('neck')
 	end
+
+	if buff == "doom" then
+		if gain then		   
+			equip(sets.buff.Doom)
+			send_command('@input /p Doomed.')
+			disable('ring1','ring2','waist')
+		else
+			enable('ring1','ring2','waist')
+			handle_equipping_gear(player.status)
+		end
+	end
+
 end
 
 --function job_status_change(new_status, old_status)
@@ -632,9 +645,6 @@ function customize_idle_set(idleSet)
     if state.Buff.Migawari then
         idleSet = set_combine(idleSet, sets.buff.Migawari)
     end
-    if state.Buff.Doom then
-        idleSet = set_combine(idleSet, sets.buff.Doom)
-    end
 	if state.CP.current == 'on' then
 		equip(sets.CP)
 		disable('back')
@@ -650,9 +660,6 @@ end
 function customize_melee_set(meleeSet)
 	if state.Buff.Migawari then
 		meleeSet = set_combine(meleeSet, sets.buff.Migawari)
-	end
-	if state.Buff.Doom then
-		meleeSet = set_combine(meleeSet, sets.buff.Doom)
 	end
 	return meleeSet
 end

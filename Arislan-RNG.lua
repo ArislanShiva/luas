@@ -181,7 +181,7 @@ function init_gear_sets()
 
 	sets.precast.WS["Jishnu's Radiance"] = set_combine(sets.precast.WS, {
 		body="Adhemar Jacket",
-		hands="Adhemar Wristbands",
+		hands="Meg. Gloves +1",
 		feet="Thereoid Greaves",
 		ear1="Moonshade Earring",
 		ear2="Mache Earring",
@@ -192,7 +192,6 @@ function init_gear_sets()
 	sets.precast.WS["Jishnu's Radiance"].Acc = set_combine(sets.precast.WS["Jishnu's Radiance"], {
 		head="Meghanada Visor +1",
 		body=gear.Herc_RA_body,
-		hands="Meg. Gloves +1",
 		feet=gear.Herc_RA_feet,
 		neck="Combatant's Torque",
 		ear1="Enervating Earring",
@@ -257,7 +256,7 @@ function init_gear_sets()
 	sets.precast.WS['Evisceration'] = {
 		head="Adhemar Bonnet",
 		body="Meg. Cuirie +1",
-		hands="Adhemar Wristbands",
+		hands=gear.Adhemar_Att_hands,
 		legs=gear.Herc_WS_legs,
 		feet=gear.Herc_TA_feet,
 		neck="Fotia Gorget",
@@ -293,7 +292,7 @@ function init_gear_sets()
 	sets.midcast.RA = {
 		head="Arcadian Beret +1",
 		body=gear.Herc_RA_body,
-		hands="Kobo Kote",
+		hands=gear.Adhemar_RA_hands,
 		legs="Adhemar Kecks",
 		feet="Adhemar Gamashes",
 		neck="Ocachi Gorget",
@@ -308,7 +307,7 @@ function init_gear_sets()
 	sets.midcast.RA.Acc = set_combine(sets.midcast.RA, {
 		head="Meghanada Visor +1",
 		body="Meg. Cuirie +1",
-		hands="Meg. Gloves +1",
+		hands="Kobo Kote",
 		legs="Meg. Chausses +1",
 		feet=gear.Herc_RA_feet,
 		neck="Combatant's Torque",
@@ -324,7 +323,7 @@ function init_gear_sets()
 		feet="Carmine Greaves +1",
 		neck="Ainia Collar",
 		ear1="Dedition Earring",
-		ring1="Petrov Ring",
+		ring1="Apate Ring",
 		})
 
 	sets.midcast.RA.Holliday = set_combine(sets.midcast.RA, {
@@ -339,7 +338,7 @@ function init_gear_sets()
 		})
 
 	sets.midcast.RA.Holliday.STP = set_combine(sets.midcast.RA.STP, {
-		hands="Carmine Fin. Ga. +1",
+		hands=gear.Adhemar_RA_hands,
 		feet="Carmine Greaves +1",
 		ring2="Arvina Ringlet +1",
 		})
@@ -605,7 +604,7 @@ function init_gear_sets()
 	sets.engaged.MaxHaste = {
 		head="Dampening Tam",
 		body="Adhemar Jacket", --5
-		hands="Adhemar Wristbands",
+		hands=gear.Adhemar_Att_hands,
 		legs="Samnuha Tights",
 		feet=gear.Herc_TA_feet,
 		neck="Asperity Necklace",
@@ -657,6 +656,8 @@ function init_gear_sets()
 	sets.buff['Velocity Shot'] = set_combine(sets.midcast.RA, {body="Amini Caban +1", back="Belenus's Cape"})
 	sets.buff['Double Shot'] = set_combine(sets.midcast.RA, {back="Belenus's Cape"})
 --	sets.buff.Camouflage = {body="Orion Jerkin +1"}
+
+	sets.buff.Doom = {ring1="Saida Ring", ring2="Saida Ring", waist="Gishdubar Sash"}
 
 	sets.Obi = {waist="Hachirin-no-Obi"}
 	sets.Reive = {neck="Ygnas's Resolve +1"}
@@ -744,7 +745,9 @@ function job_buff_change(buff,gain)
 		if not midaction() then
 			handle_equipping_gear(player.status)
 		end
-	elseif buff == "Camouflage" then
+	end
+
+	if buff == "Camouflage" then
 		if gain then
 			equip(sets.buff.Camouflage)
 			disable('body')
@@ -752,12 +755,25 @@ function job_buff_change(buff,gain)
 			enable('body')
 		end
 	end
+
 	if buffactive['Reive Mark'] then
 		equip(sets.Reive)
 		disable('neck')
 	else
 		enable('neck')
 	end
+
+	if buff == "doom" then
+		if gain then		   
+			equip(sets.buff.Doom)
+			send_command('@input /p Doomed.')
+			disable('ring1','ring2','waist')
+		else
+			enable('ring1','ring2','waist')
+			handle_equipping_gear(player.status)
+		end
+	end
+
 end
 
 function job_status_change(new_status, old_status)

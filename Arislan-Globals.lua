@@ -6,6 +6,10 @@
 
 function define_global_sets()
 
+	-- Adhemar
+	gear.Adhemar_RA_hands = {name="Adhemar Wristbands", augments={'AGI+10','Rng.Acc.+15','Rng.Atk.+15',}}
+	gear.Adhemar_Att_hands = {name="Adhemar Wristbands", augments={'STR+10','DEX+10','Attack+15',}}
+
 	-- Herculean Triple Attack Set
 	gear.Herc_TA_body = {name="Herculean Vest", augments={'Accuracy+21 Attack+21','"Triple Atk."+3','STR+6','Accuracy+8',}}
 	gear.Herc_TA_hands = {name="Herculean Gloves", augments={'Accuracy+20 Attack+20','"Triple Atk."+3','DEX+8','Accuracy+1',}}

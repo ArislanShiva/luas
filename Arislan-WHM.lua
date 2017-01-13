@@ -531,6 +531,8 @@ function init_gear_sets()
 	sets.buff['Divine Caress'] = {back="Mending Cape"}
 	sets.buff['Devotion'] = {head="Piety Cap +1"}
 
+	sets.buff.Doom = {ring1="Saida Ring", ring2="Saida Ring", waist="Gishdubar Sash"}
+
 	sets.Obi = {waist="Hachirin-no-Obi"}
 	sets.CP = {back="Mecisto. Mantle"}
 
@@ -573,6 +575,20 @@ end
 -------------------------------------------------------------------------------------------------------------------
 -- Job-specific hooks for non-casting events.
 -------------------------------------------------------------------------------------------------------------------
+
+function job_buff_change(buff,gain)
+	if buff == "doom" then
+		if gain then		   
+			equip(sets.buff.Doom)
+			--send_command('@input /p Doomed.')
+			disable('ring1','ring2','waist')
+		else
+			enable('ring1','ring2','waist')
+			handle_equipping_gear(player.status)
+		end
+	end
+
+end
 
 -- Handle notifications of general user state change.
 function job_state_change(stateField, newValue, oldValue)

@@ -579,7 +579,9 @@ function init_gear_sets()
 		ear1="Savant's Earring",
 		body="Peda. Gown +1",
 		}
-	
+
+	sets.buff.Doom = {ring1="Saida Ring", ring2="Saida Ring", waist="Gishdubar Sash"}
+
 	sets.Obi = {waist="Hachirin-no-Obi"}
 	sets.Bookworm = {back="Bookworm's Cape"}
 	sets.CP = {back="Mecisto. Mantle"}
@@ -645,6 +647,18 @@ function job_buff_change(buff, gain)
 	if buff == "Sublimation: Activated" then
 		handle_equipping_gear(player.status)
 	end
+
+	if buff == "doom" then
+		if gain then		   
+			equip(sets.buff.Doom)
+			send_command('@input /p Doomed.')
+			disable('ring1','ring2','waist')
+		else
+			enable('ring1','ring2','waist')
+			handle_equipping_gear(player.status)
+		end
+	end
+
 end
 
 -- Handle notifications of general user state change.

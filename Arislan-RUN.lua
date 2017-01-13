@@ -93,7 +93,7 @@ function user_unload()
 	send_command('unbind !`')
 	send_command('unbind ^-')
 	send_command('unbind ^=')
-    send_command('unbind ^f11')
+	send_command('unbind ^f11')
 	send_command('unbind ^[')
 	send_command('unbind !]')
 	send_command('unbind !q')
@@ -242,7 +242,7 @@ function init_gear_sets()
 		})
 	
 	sets.precast.WS['Dimidiation'] = set_combine(sets.precast.WS['Resolution'], {
-		hands="Adhemar Wristbands",
+		hands="gear.Adhemar_Att_hands",
 		legs="Lustratio Subligar",
 		feet="Lustratio Leggings",
 		ring1="Apate Ring",
@@ -442,9 +442,9 @@ function init_gear_sets()
 	sets.Kiting = {legs="Carmine Cuisses +1"}
 
 
-    --------------------------------------
-    -- Defense sets
-    --------------------------------------
+	--------------------------------------
+	-- Defense sets
+	--------------------------------------
 
 	sets.defense.Knockback = {back="Repulse Mantle"}
 
@@ -553,7 +553,7 @@ function init_gear_sets()
 		ammo="Ginsen",
 		head="Dampening Tam",
 		body=gear.Herc_TA_body,
-		hands="Adhemar Wristbands",
+		hands="gear.Adhemar_Att_hands",
 		legs="Samnuha Tights",
 		feet=gear.Herc_TA_feet,
 		neck="Asperity Necklace",
@@ -698,6 +698,18 @@ function job_buff_change(buff,gain)
 	else
 		enable('neck')
 	end
+
+	if buff == "doom" then
+		if gain then		   
+			equip(sets.buff.Doom)
+			send_command('@input /p Doomed.')
+			disable('ring1','ring2','waist')
+		else
+			enable('ring1','ring2','waist')
+			handle_equipping_gear(player.status)
+		end
+	end
+
 end
 	
 -- Handle notifications of general user state change.
@@ -723,9 +735,7 @@ function customize_idle_set(idleSet)
 		end
 	if state.Death.value == true then
 		idleSet = set_combine(idleSet, sets.defense.Death)
-		end	if state.Buff.Doom then
-		idleSet = set_combine(idleSet, sets.buff.Doom)
-		end	
+		end
 	if state.CP.current == 'on' then
 		equip(sets.CP)
 		disable('back')
@@ -744,9 +754,6 @@ function customize_melee_set(meleeSet)
 	if state.Death.value == true then
 		meleeSet = set_combine(meleeSet, sets.defense.Death)
 		end
-	if state.Buff.Doom then
-		meleeSet = set_combine(meleeSet, sets.buff.Doom)
-		end 
 
 	return meleeSet
 end
@@ -758,9 +765,7 @@ function customize_defense_set(defenseSet)
 	if state.Death.value == true then
 		defenseSet = set_combine(defenseSet, sets.defense.Death)
 		end
-	if state.Buff.Doom then
-		defenseSet = set_combine(defenseSet, sets.buff.Doom)
-		end
+
 	return defenseSet
 end
 
@@ -786,12 +791,12 @@ function display_current_job_state(eventArgs)
 	end
 	
 	if state.Knockback.value == true then
-        msg = msg .. '[ Knockback: ON ]'
-    end
+		msg = msg .. '[ Knockback: ON ]'
+	end
 	
 	if state.Death.value == true then
-        msg = msg .. '[ Death: ON ]'
-    end
+		msg = msg .. '[ Death: ON ]'
+	end
 
 	if state.Kiting.value then
 		msg = msg .. '[ Kiting Mode: ON ]'

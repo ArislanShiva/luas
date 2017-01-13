@@ -108,7 +108,7 @@ function init_gear_sets()
 		ammo="Yetshila",
 		head="Dampening Tam",
 		body="Adhemar Jacket", 
-		hands="Adhemar Wristbands",
+		hands="gear.Adhemar_Att_hands",
 		legs="Lustratio Subligar",
 		feet="Lustratio Leggings",
 		neck="Caro Necklace",
@@ -263,7 +263,7 @@ function init_gear_sets()
 	sets.precast.WS['Evisceration'] = set_combine(sets.precast.WS, {
 		ammo="Expeditious Pinion",
 		head="Adhemar Bonnet",
-		hands="Adhemar Wristbands",
+		hands="gear.Adhemar_Att_hands",
 		})
 
 	sets.precast.WS['Evisceration'].Acc = set_combine(sets.precast.WS['Evisceration'], {
@@ -408,7 +408,7 @@ function init_gear_sets()
 		ammo="Ginsen",
 		head="Dampening Tam",
 		body="Adhemar Jacket", -- 5
-		hands="Adhemar Wristbands",
+		hands="gear.Adhemar_Att_hands",
 		legs="Samnuha Tights",
 		feet=gear.Taeon_DW_feet, --9
 		neck="Asperity Necklace",
@@ -456,7 +456,7 @@ function init_gear_sets()
 		ammo="Ginsen",
 		head="Dampening Tam",
 		body="Adhemar Jacket", -- 5
-		hands="Adhemar Wristbands",
+		hands="gear.Adhemar_Att_hands",
 		legs="Samnuha Tights",
 		feet=gear.Taeon_DW_feet, --9
 		neck="Asperity Necklace",
@@ -504,7 +504,7 @@ function init_gear_sets()
 		ammo="Ginsen",
 		head="Dampening Tam",
 		body="Adhemar Jacket", -- 5
-		hands="Adhemar Wristbands",
+		hands="gear.Adhemar_Att_hands",
 		legs="Samnuha Tights",
 		feet=gear.Taeon_DW_feet, --9
 		neck="Asperity Necklace",
@@ -553,7 +553,7 @@ function init_gear_sets()
 		ammo="Ginsen",
 		head="Dampening Tam",
 		body="Adhemar Jacket", -- 5
-		hands="Adhemar Wristbands",
+		hands="gear.Adhemar_Att_hands",
 		legs="Samnuha Tights",
 		feet=gear.Taeon_DW_feet, --9
 		neck="Asperity Necklace",
@@ -600,7 +600,7 @@ function init_gear_sets()
 		ammo="Ginsen",
 		head="Dampening Tam",
 		body=gear.Herc_TA_body,
-		hands="Adhemar Wristbands",
+		hands="gear.Adhemar_Att_hands",
 		legs="Samnuha Tights",
 		feet=gear.Herc_TA_feet,
 		neck="Asperity Necklace",
@@ -643,6 +643,8 @@ function init_gear_sets()
 		})
 	
 	-- Custom buff sets
+	sets.buff.Doom = {ring1="Saida Ring", ring2="Saida Ring", waist="Gishdubar Sash"}
+
 	sets.Reive = {neck="Ygnas's Resolve +1"}
 	sets.CP = {back="Mecisto. Mantle"}
 
@@ -704,12 +706,25 @@ function job_buff_change(buff,gain)
 			handle_equipping_gear(player.status)
 		end
 	end
+
 	if buffactive['Reive Mark'] then
 		equip(sets.Reive)
 		disable('neck')
 	else
 		enable('neck')
 	end
+
+	if buff == "doom" then
+		if gain then		   
+			equip(sets.buff.Doom)
+			send_command('@input /p Doomed.')
+			disable('ring1','ring2','waist')
+		else
+			enable('ring1','ring2','waist')
+			handle_equipping_gear(player.status)
+		end
+	end
+
 end
 
 function job_status_change(new_status, old_status)

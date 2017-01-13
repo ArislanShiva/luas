@@ -244,7 +244,7 @@ function init_gear_sets()
 	sets.precast.WS = {
 		ammo=gear.WSbullet,
 		head="Meghanada Visor +1",
-		body=gear.Herc_RA_body,
+		body="Laksa. Frac +2",
 		hands="Meg. Gloves +1",
 		legs="Meg. Chausses +1",
 		feet="Adhemar Gamashes",
@@ -317,7 +317,7 @@ function init_gear_sets()
 	sets.precast.WS['Evisceration'] = {
 		head="Adhemar Bonnet",
 		body="Meg. Cuirie +1",
-		hands="Adhemar Wristbands",
+		hands=gear.Adhemar_Att_hands,
 		legs="Samnuha Tights",
 		feet=gear.Herc_TA_feet,
 		neck="Fotia Gorget",
@@ -379,7 +379,6 @@ function init_gear_sets()
 	sets.midcast.FastRecast = sets.precast.FC
 
 	sets.midcast.SpellInterrupt = {
-		ammo="Impatiens", --10
 		legs="Carmine Cuisses +1", --20
 		ear1="Halasz Earring", --5
 		ring1="Evanescence Ring", --5
@@ -401,7 +400,7 @@ function init_gear_sets()
 		ammo=gear.QDbullet,
 		head=gear.Herc_MAB_head,
 		body="Pursuer's Doublet",
-		hands="Adhemar Wristbands",
+		hands=gear.Adhemar_RA_hands,
 		legs="Chas. Culottes +1",
 		feet="Carmine Greaves +1",
 		neck="Ainia Collar",
@@ -451,8 +450,8 @@ function init_gear_sets()
 	sets.midcast.RA = {
 		ammo=gear.RAbullet,	
 		head="Meghanada Visor +1",
-		body=gear.Herc_RA_body,
-		hands="Carmine Fin. Ga. +1",
+		body="Laksa. Frac +2",
+		hands=gear.Adhemar_RA_hands,
 		legs="Adhemar Kecks",
 		feet="Adhemar Gamashes",
 		neck="Ocachi Gorget",
@@ -488,6 +487,7 @@ function init_gear_sets()
 		neck="Ainia Collar",
 		ear1="Dedition Earring",
 		ring1="Petrov Ring",
+		ring2="Apate Ring",
 		})
 
 
@@ -501,7 +501,7 @@ function init_gear_sets()
 		ranged="Death Penalty",
 		ammo=gear.MAbullet,
 		head="Dampening Tam",
-		body="Mekosu. Harness",
+		body="Laksa. Frac +2",
 		hands="Carmine Fin. Ga. +1",
 		legs="Carmine Cuisses +1",
 		feet="Carmine Greaves +1",
@@ -528,7 +528,6 @@ function init_gear_sets()
 
 	sets.idle.Town = set_combine(sets.idle, {
 		head="Carmine Mask +1",
-		body=gear.Herc_RA_body,
 		feet="Carmine Greaves +1",
 		neck="Baetyl Pendant",
 		ear1="Eabani Earring",
@@ -656,7 +655,7 @@ function init_gear_sets()
 	sets.engaged.MidHaste = {
 		head="Dampening Tam",
 		body="Adhemar Jacket", --5
-		hands="Adhemar Wristbands",
+		hands=gear.Adhemar_Att_hands,
 		legs="Samnuha Tights",
 		feet=gear.Taeon_DW_feet, --9
 		neck="Asperity Necklace",
@@ -704,7 +703,7 @@ function init_gear_sets()
 	sets.engaged.HighHaste = {
 		head="Dampening Tam",
 		body="Adhemar Jacket", --5
-		hands="Adhemar Wristbands",
+		hands=gear.Adhemar_Att_hands,
 		legs="Samnuha Tights",
 		feet=gear.Herc_TA_feet,
 		neck="Asperity Necklace",
@@ -752,7 +751,7 @@ function init_gear_sets()
 	sets.engaged.MaxHaste = {
 		head="Dampening Tam",
 		body="Adhemar Jacket", --5
-		hands="Adhemar Wristbands",
+		hands=gear.Adhemar_Att_hands,
 		legs="Samnuha Tights",
 		feet=gear.Herc_TA_feet,
 		neck="Asperity Necklace",
@@ -795,6 +794,8 @@ function init_gear_sets()
 		ring1="Petrov Ring",
 		waist="Kentarch Belt +1",
 		})
+
+	sets.buff.Doom = {ring1="Saida Ring", ring2="Saida Ring", waist="Gishdubar Sash"}
 
 	sets.Obi = {waist="Hachirin-no-Obi"}
 	sets.CP = {back="Mecisto. Mantle"}
@@ -865,12 +866,25 @@ function job_buff_change(buff,gain)
 			handle_equipping_gear(player.status)
 		end
 	end
+
 	if buffactive['Reive Mark'] then
 		equip(sets.Reive)
 		disable('neck')
 	else
 		enable('neck')
 	end
+
+	if buff == "doom" then
+		if gain then		   
+			equip(sets.buff.Doom)
+			send_command('@input /p Doomed.')
+			disable('ring1','ring2','waist')
+		else
+			enable('ring1','ring2','waist')
+			handle_equipping_gear(player.status)
+		end
+	end
+
 end
 
 -- Handle notifications of general user state change.

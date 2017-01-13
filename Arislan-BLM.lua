@@ -575,6 +575,8 @@ function init_gear_sets()
 		back="Relucent Cape",
 		}
 
+	sets.buff.Doom = {ring1="Saida Ring", ring2="Saida Ring", waist="Gishdubar Sash"}
+
 	sets.DarkAffinity = {head="Pixie Hairpin +1",ring2="Archon Ring"}
 	sets.Obi = {waist="Hachirin-no-Obi"}
 	sets.CP = {back="Mecisto. Mantle"}
@@ -647,6 +649,18 @@ function job_buff_change(buff, gain)
 			handle_equipping_gear(player.status)
 		end
 	end
+
+	if buff == "doom" then
+		if gain then		   
+			equip(sets.buff.Doom)
+			send_command('@input /p Doomed.')
+			disable('ring1','ring2','waist')
+		else
+			enable('ring1','ring2','waist')
+			handle_equipping_gear(player.status)
+		end
+	end
+
 end
 
 -- Handle notifications of general user state change.
