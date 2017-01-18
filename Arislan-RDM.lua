@@ -52,6 +52,7 @@ function user_setup()
 	send_command('bind != gs c scholar addendum')
 	send_command('bind ^; gs c scholar speed')
 	send_command('bind !q input /ma "Temper" <me>')
+	send_command('bind !w input /ma "Flurry II" <stpc>')
 	send_command('bind !e input /ma "Haste II" <stpc>')
 	send_command('bind !r input /ma "Refresh II" <stpc>')
 	send_command('bind !o input /ma "Regen II" <stpc>')
@@ -78,6 +79,7 @@ function user_unload()
 	send_command('unbind !=')
 	send_command('unbind ^;')
 	send_command('unbind !q')
+	send_command('unbind !w')
 	send_command('bind !e input /ma "Haste" <stpc>')
 	send_command('bind !r input /ma "Refresh" <stpc>')
 	send_command('unbind !o')
@@ -99,7 +101,7 @@ function init_gear_sets()
 	------------------------------------------------------------------------------------------------
 	
 	-- Precast sets to enhance JAs
-	sets.precast.JA['Chainspell'] = {body="Vitivation Tabard"}
+	sets.precast.JA['Chainspell'] = {body="Viti. Tabard +1"}
 	
 	-- Fast cast sets for spells
 	
@@ -193,6 +195,24 @@ function init_gear_sets()
 		ring2="Shukuyu Ring",
 		})
 
+	sets.precast.WS['Sanguine Blade'] = {
+		main=gear.Grioavolr_INT,
+		sub="Niobid Strap",
+		ammo="Pemphredo Tathlum",
+		head="Pixie Hairpin +1",
+		body="Merlinic Jubbah",
+		hands="Amalric Gages",
+		legs="Merlinic Shalwar",
+		feet="Chironic Slippers",
+		neck="Baetyl Pendant",
+		ear1="Hecate's Earring",
+		ear2="Friomisi Earring",
+		ring1="Shiva Ring +1",
+		ring2="Archon Ring",
+		back="Seshaw Cape",
+		waist="Refoccilation Stone",
+		}
+
 	------------------------------------------------------------------------------------------------
 	---------------------------------------- Midcast Sets ------------------------------------------
 	------------------------------------------------------------------------------------------------
@@ -271,7 +291,7 @@ function init_gear_sets()
 		main="Gada",
 		sub="Beatific Shield +1",
 		head="Befouled Crown",
-		body="Vitivation Tabard",
+		body="Viti. Tabard +1",
 		legs="Atrophy Tights +1",
 		feet="Leth. Houseaux +1",
 		neck="Incanter's Torque",
@@ -351,8 +371,8 @@ function init_gear_sets()
 	sets.midcast.ElementalEnfeeble = sets.midcast.IntEnfeebles
 
 
-	sets.midcast['Dia III'] = set_combine(sets.midcast.MndEnfeebles, {head="Vitivation Chapeau"})
-	sets.midcast['Slow II'] = set_combine(sets.midcast.MndEnfeebles, {head="Vitivation Chapeau"})
+	sets.midcast['Dia III'] = set_combine(sets.midcast.MndEnfeebles, {head="Viti. Chapeau +1"})
+	sets.midcast['Slow II'] = set_combine(sets.midcast.MndEnfeebles, {head="Viti. Chapeau +1"})
 
 	sets.midcast['Dark Magic'] = {
 		main=gear.Grioavolr_INT,
@@ -449,7 +469,7 @@ function init_gear_sets()
 		main="Bolelabunga",
 		sub="Beatific Shield +1",
 		ammo="Homiliary",
-		head="Vitivation Chapeau",
+		head="Viti. Chapeau +1",
 		body="Witching Robe",
 		hands="Gende. Gages +1",
 		legs="Carmine Cuisses +1",
@@ -479,7 +499,6 @@ function init_gear_sets()
 		})
 
 	sets.idle.Town = set_combine(sets.idle, {
-		head="Carmine Mask +1",
 		body="Lethargy Sayon +1",
 		hands="Leth. Gantherots +1",
 		legs="Carmine Cuisses +1",
@@ -543,6 +562,19 @@ end
 -- Job-specific hooks for standard casting events.
 -------------------------------------------------------------------------------------------------------------------
 
+function job_precast(spell, action, spellMap, eventArgs)
+
+	if type(windower.ffxi.get_player().autorun) == 'table' and spell.action_type == 'Magic' then 
+		windower.add_to_chat(122,'Currently auto-running - stopping to cast spell')
+		windower.ffxi.run(false)
+		windower.ffxi.follow()  -- disabling Follow - turning back autorun automatically turns back on follow.
+		autorun = 1
+		cast_delay(.4) -- manipulate based on lag.
+		return
+	end
+
+end
+
 -- Run after the default midcast() is done.
 -- eventArgs is the same one used in job_midcast, in case information needs to be persisted.
 function job_post_midcast(spell, action, spellMap, eventArgs)
@@ -569,11 +601,21 @@ function job_post_midcast(spell, action, spellMap, eventArgs)
 	end
 end
 
+function job_aftercast(spell, action, spellMap, eventArgs)
+
+	if autorun == 1 then 
+		windower.ffxi.run()
+		autorun = 0
+	end
+
+end
+
 -------------------------------------------------------------------------------------------------------------------
 -- Job-specific hooks for non-casting events.
 -------------------------------------------------------------------------------------------------------------------
 
 function job_buff_change(buff,gain)
+
 	if buff == "doom" then
 		if gain then		   
 			equip(sets.buff.Doom)

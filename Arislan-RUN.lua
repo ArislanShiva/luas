@@ -224,7 +224,6 @@ function init_gear_sets()
 		ear2="Telos Earring",
 		})
 
-
 	sets.precast.WS['Resolution'] = set_combine(sets.precast.WS, {
 		head="Adhemar Bonnet",
 		legs="Samnuha Tights",

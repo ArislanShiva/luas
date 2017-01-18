@@ -145,7 +145,7 @@ function init_gear_sets()
 		ear1="Loquacious Earring", --2
 		ear2="Etiolation Earring", --1
 		ring1="Kishar Ring", --4
-		ring2="Weather. Ring", --5
+		ring2="Weather. Ring", --5/(3)
 		back=gear.SCH_FC_Cape, --10
 		waist="Witful Belt", --3/(3)
 		}
@@ -333,7 +333,7 @@ function init_gear_sets()
 		main=gear.Grioavolr_MP,
 		sub="Clerisy Strap +1",
 		ammo="Quartz Tathlum +1",
-		head="Amalric Coif",
+		head="Merlinic Hood",
 		body="Vanya Robe",
 		hands="Kaykaus Cuffs",
 		legs="Chironic Hose",
@@ -358,7 +358,7 @@ function init_gear_sets()
 		main=gear.Grioavolr_INT,
 		sub="Clerisy Strap +1",
 		ammo="Pemphredo Tathlum",
-		head="Amalric Coif",
+		head="Merlinic Hood",
 		body="Shango Robe",
 		hands="Jhakri Cuffs +1",
 		legs="Chironic Hose",

@@ -247,7 +247,7 @@ function init_gear_sets()
 		body="Laksa. Frac +2",
 		hands="Meg. Gloves +1",
 		legs="Meg. Chausses +1",
-		feet="Adhemar Gamashes",
+		feet=gear.Herc_RA_feet,
 		neck="Fotia Gorget",
 		ear1="Moonshade Earring",
 		ear2="Ishvara Earring",
@@ -273,7 +273,6 @@ function init_gear_sets()
 
 	sets.precast.WS['Last Stand'].Acc = set_combine(sets.precast.WS['Last Stand'], {
 		ammo=gear.WSbullet,
-		feet="Meg. Jam. +1",
 		neck="Marked Gorget",
 		ear2="Telos Earring",
 		ring1="Cacoethic Ring +1",
@@ -453,7 +452,7 @@ function init_gear_sets()
 		body="Laksa. Frac +2",
 		hands=gear.Adhemar_RA_hands,
 		legs="Adhemar Kecks",
-		feet="Adhemar Gamashes",
+		feet=gear.Herc_RA_feet,
 		neck="Ocachi Gorget",
 		ear1="Enervating Earring",
 		ear2="Telos Earring",
@@ -467,7 +466,6 @@ function init_gear_sets()
 		ammo=gear.RAbullet,
 		hands="Meg. Gloves +1",
 		legs="Meg. Chausses +1",
-		feet=gear.Herc_RA_feet,
 		neck="Marked Gorget",
 		ring1="Cacoethic Ring +1",
 		waist="Kwahu Kachina Belt",

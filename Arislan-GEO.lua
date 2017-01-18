@@ -291,7 +291,7 @@ function init_gear_sets()
 	sets.midcast.MndEnfeebles = {
 		main=gear.Grioavolr_MP,
 		sub="Clerisy Strap +1",
-		head="Amalric Coif",
+		head="Merlinic Hood",
 		body="Vanya Robe",
 		hands="Azimuth Gloves +1",
 		legs="Psycloth Lappas",
@@ -313,7 +313,7 @@ function init_gear_sets()
 	sets.midcast['Dark Magic'] = {
 		main=gear.Grioavolr_INT,
 		sub="Clerisy Strap +1",
-		head="Amalric Coif",
+		head="Merlinic Hood",
 		body="Psycloth Vest",
 		hands="Jhakri Cuffs +1",
 		legs="Azimuth Tights +1",

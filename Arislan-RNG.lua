@@ -147,7 +147,7 @@ function init_gear_sets()
 		body=gear.Herc_RA_body,
 		hands="Carmine Fin. Ga. +1",
 		legs="Meg. Chausses +1",
-		feet="Adhemar Gamashes",
+		feet=gear.Herc_RA_feet,
 		neck="Fotia Gorget",
 		ear1="Moonshade Earring",
 		ear2="Ishvara Earring",
@@ -210,7 +210,6 @@ function init_gear_sets()
 	sets.precast.WS['Last Stand'].Acc = set_combine(sets.precast.WS['Last Stand'], {
 		head="Meghanada Visor +1",
 		hands="Meg. Gloves +1",
-		feet="Meg. Jam. +1",
 		neck="Combatant's Torque",
 		ear2="Telos Earring",
 		ring1="Cacoethic Ring +1",

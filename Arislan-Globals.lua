@@ -22,7 +22,7 @@ function define_global_sets()
 	-- Herculean Ranged Set
 	gear.Herc_RA_body = {name="Herculean Vest", augments={'Rng.Acc.+25 Rng.Atk.+25','Weapon skill damage +3%','AGI+6','Rng.Acc.+15','Rng.Atk.+11',}}
 	gear.Herc_RA_hands = {name="Herculean Gloves", augments={'Rng.Acc.+24 Rng.Atk.+24','"Subtle Blow"+5','Rng.Acc.+12',}}
-	gear.Herc_RA_feet = {name="Herculean Boots", augments={'Rng.Acc.+23 Rng.Atk.+23','"Rapid Shot"+3','DEX+9','Rng.Acc.+15','Rng.Atk.+12',}}
+	gear.Herc_RA_feet = {name="Herculean Boots", augments={'Rng.Acc.+20 Rng.Atk.+20','Crit. hit damage +2%','AGI+11','Rng.Acc.+11',}}
 	
 	-- Herculean Weapon Skill Set
 	gear.Herc_WS_hands = {name="Herculean Gloves", augments={'Accuracy+27','Weapon skill damage +4%','DEX+9','Attack+7',}}

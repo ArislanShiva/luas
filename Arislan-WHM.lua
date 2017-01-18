@@ -128,7 +128,6 @@ function init_gear_sets()
 		})
 
 	sets.precast.FC.Curaga = sets.precast.FC.Cure
-
 	sets.precast.FC.CureSolace = sets.precast.FC.Cure
 
 	sets.precast.FC.Impact = set_combine(sets.precast.FC, {
@@ -195,7 +194,7 @@ function init_gear_sets()
 		ammo="Esper Stone +1", --0/(-5)
 		head="Gende. Caubeen +1", --15/(-8)
 		body="Ebers Bliaud +1",
-		hands="Theo. Mitts +1", --0/(-5)
+		hands="Theophany Mitts +2", --(+2)/(-6)
 		legs="Ebers Pant. +1",
 		feet="Kaykaus Boots", --10/(-10)
 		neck="Incanter's Torque",
@@ -210,19 +209,28 @@ function init_gear_sets()
 	sets.midcast.Cure = sets.midcast.CureSolace
 
 	sets.midcast.CureWeather = set_combine(sets.midcast.Cure, {
-		main="Chatoyant Staff",
+		main="Chatoyant Staff", --10
 		sub="Clerisy Strap +1",
-		hands="Kaykaus Cuffs", --10/(-6)
-		back="Solemnity Cape", --7/0
+		neck="Nodens Gorget", --5
+		back="Twilight Cape",
 		waist="Hachirin-no-Obi",
 		})
 
 	sets.midcast.Curaga = set_combine(sets.midcast.Cure, {
 		body="Kaykaus Bliaut", --5(+3)
-		legs="Kaykaus Tights", --10/(-5)
+		neck="Imbodla Necklace",
 		ring1="Levia. Ring +1",
 		ring2="Levia. Ring +1",
 		waist="Luminary Sash",
+		})
+
+	sets.midcast.CuragaWeather = set_combine(sets.midcast.Curaga, {
+		main="Chatoyant Staff", --10
+		sub="Clerisy Strap +1",
+		neck="Nodens Gorget", --5
+		ring1="Lebeche Ring", --3/(-5)
+		back="Twilight Cape",
+		waist="Hachirin-no-Obi",
 		})
 
 	sets.midcast.CureMelee = sets.midcast.CureSolace
@@ -232,7 +240,7 @@ function init_gear_sets()
 		sub="Clemency Grip",
 		head="Ebers Cap +1",
 		body="Ebers Bliaud +1",
-		hands="Inyan. Dastanas +1",
+		hands="Theophany Mitts +2",
 		legs="Piety Pantaln. +1",
 		feet="Vanya Clogs",
 		neck="Incanter's Torque",
@@ -463,16 +471,12 @@ function init_gear_sets()
 	sets.idle.DT = set_combine(sets.idle, {
 		main="Mafic Cudgel", --10/0
 		sub="Genmei Shield", --10/0
-		ammo="Staunch Tathlum", --2/2
 		head="Gende. Caubeen +1", --4/4
 		hands="Gende. Gages +1", --4/3
 		neck="Loricate Torque +1", --6/6
 		ear1="Genmei Earring", --2/0
-		ear2="Etiolation Earring", --0/3
-		ring1="Gelatinous Ring +1", --7/(-1)
 		ring2="Defending Ring", --10/10
 		back="Solemnity Cape", --4/4
-		waist="Lieutenant's Sash", --0/2
 		})
 
 	sets.idle.Town = set_combine(sets.idle, {
@@ -480,7 +484,7 @@ function init_gear_sets()
 		sub="Deliverance",
 		head="Ebers Cap +1",
 		body="Ebers Bliaud +1",
-		hands="Ebers Mitts +1",
+		hands="Theophany Mitts +2",
 		legs="Ebers Pant. +1",
 		neck="Incanter's Torque",
 		ring1="Levia. Ring +1",
@@ -557,9 +561,11 @@ function job_post_midcast(spell, action, spellMap, eventArgs)
 	if spellMap == 'StatusRemoval' and buffactive['Divine Caress'] then
 		equip(sets.buff['Divine Caress'])
 	end
-	if spellMap == 'Cure' or spellMap == 'Curaga' then
-		if (world.weather_element == 'Light' or world.day_element == 'Light') then
+	if spell.skill == 'Healing Magic' and (world.weather_element == 'Light' or world.day_element == 'Light') then
+		if spellMap == 'Cure' then
 			equip(sets.midcast.CureWeather)
+		elseif spellMap == 'Curaga' then
+			equip(sets.midcast.CuragaWeather)
 		end
     end
 	if spellMap == 'Banish' or spellMap == "Holy" then
