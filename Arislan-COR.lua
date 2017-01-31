@@ -917,14 +917,6 @@ function job_update(cmdParams, eventArgs)
 	determine_haste_group()
 end
 
--- Called by the 'update' self-command, for common needs.
--- Set eventArgs.handled to true if we don't want automatic equipping of gear.
-function job_update(cmdParams, eventArgs)
-	if newStatus == 'Engaged' and player.equipment.main == 'Chatoyant Staff' then
-		state.OffenseMode:set('Ranged')
-	end
-end
-
 -- Handle auto-targetting based on local setup.
 function job_auto_change_target(spell, action, spellMap, eventArgs)
 	if spell.type == 'CorsairShot' then
