@@ -354,7 +354,7 @@ function init_gear_sets()
 
 	sets.precast.WS['Savage Blade'] = set_combine(sets.precast.WS, {
 		ammo="Floestone",
-		hands="gear.Adhemar_Att_hands",
+		hands=gear.Adhemar_Att_hands,
 		neck="Caro Necklace",
 		ring1="Ifrit Ring +1",
 		ring2="Shukuyu Ring",
@@ -471,7 +471,7 @@ function init_gear_sets()
 		ammo="Ginsen",
 		head="Adhemar Bonnet", 
 		body=gear.Herc_TA_body,
-		hands="gear.Adhemar_Att_hands",
+		hands=gear.Adhemar_Att_hands,
 		legs=gear.Herc_WS_legs,
 		feet=gear.Herc_TA_feet,
 		neck="Caro Necklace", 
@@ -754,7 +754,7 @@ function init_gear_sets()
 		ammo="Ginsen",
 		head="Dampening Tam",
 		body="Adhemar Jacket", --5
-		hands="gear.Adhemar_Att_hands",
+		hands=gear.Adhemar_Att_hands,
 		legs="Carmine Cuisses +1", --6
 		feet=gear.Taeon_DW_feet, --9
 		neck="Asperity Necklace", 
@@ -802,7 +802,7 @@ function init_gear_sets()
 		ammo="Ginsen",
 		head="Dampening Tam",
 		body="Adhemar Jacket", --5
-		hands="gear.Adhemar_Att_hands",
+		hands=gear.Adhemar_Att_hands,
 		legs="Carmine Cuisses +1", --6
 		feet=gear.Taeon_DW_feet, --9
 		neck="Asperity Necklace", 
@@ -850,7 +850,7 @@ function init_gear_sets()
 		ammo="Ginsen",
 		head="Dampening Tam",
 		body="Adhemar Jacket", --5
-		hands="gear.Adhemar_Att_hands",
+		hands=gear.Adhemar_Att_hands,
 		legs="Samnuha Tights",
 		feet=gear.Taeon_DW_feet, --9
 		neck="Asperity Necklace", 
@@ -900,7 +900,7 @@ function init_gear_sets()
 		ammo="Ginsen",
 		head="Dampening Tam",
 		body="Adhemar Jacket", --5
-		hands="gear.Adhemar_Att_hands",
+		hands=gear.Adhemar_Att_hands,
 		legs="Samnuha Tights",
 		feet=gear.Herc_TA_feet,
 		neck="Asperity Necklace", 
@@ -949,7 +949,7 @@ function init_gear_sets()
 		ammo="Ginsen",
 		head="Dampening Tam",
 		body=gear.Herc_TA_body,
-		hands="gear.Adhemar_Att_hands",
+		hands=gear.Adhemar_Att_hands,
 		legs="Samnuha Tights",
 		feet=gear.Herc_TA_feet,
 		neck="Asperity Necklace",

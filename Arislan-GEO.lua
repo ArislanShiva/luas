@@ -290,7 +290,7 @@ function init_gear_sets()
 
 	sets.midcast.MndEnfeebles = {
 		main=gear.Grioavolr_MP,
-		sub="Clerisy Strap +1",
+		sub="Enki Strap",
 		head="Merlinic Hood",
 		body="Vanya Robe",
 		hands="Azimuth Gloves +1",
@@ -312,7 +312,7 @@ function init_gear_sets()
 
 	sets.midcast['Dark Magic'] = {
 		main=gear.Grioavolr_INT,
-		sub="Clerisy Strap +1",
+		sub="Enki Strap",
 		head="Merlinic Hood",
 		body="Psycloth Vest",
 		hands="Jhakri Cuffs +1",
@@ -362,7 +362,7 @@ function init_gear_sets()
 
 	sets.midcast['Elemental Magic'].Resistant = set_combine(sets.midcast['Elemental Magic'], {
 		main=gear.Grioavolr_INT,
-		sub="Clerisy Strap +1",
+		sub="Enki Strap",
 		legs="Azimuth Tights +1",
 		neck="Sanctity Necklace",
 		ear2="Hermetic Earring",
@@ -378,6 +378,7 @@ function init_gear_sets()
 		})
 
 	sets.midcast['Elemental Magic'].Seidr = set_combine(sets.midcast['Elemental Magic'], {
+		sub="Enki Strap",
 		body="Seidr Cotehardie",
 		neck="Sanctity Necklace",
 		})

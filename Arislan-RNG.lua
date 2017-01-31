@@ -130,7 +130,7 @@ function init_gear_sets()
 	-- Ranged sets (snapshot)
 	
 	sets.precast.RA = {
-		head="Amini Gapette +1", --7
+		head="Taeon Chapeau", --10/0
 		body="Pursuer's Doublet", --6
 		hands="Carmine Fin. Ga. +1", --8
 		legs="Adhemar Kecks", --9
@@ -192,7 +192,6 @@ function init_gear_sets()
 	sets.precast.WS["Jishnu's Radiance"].Acc = set_combine(sets.precast.WS["Jishnu's Radiance"], {
 		head="Meghanada Visor +1",
 		body=gear.Herc_RA_body,
-		feet=gear.Herc_RA_feet,
 		neck="Combatant's Torque",
 		ear1="Enervating Earring",
 		ear2="Telos Earring",
@@ -221,7 +220,7 @@ function init_gear_sets()
 		body="Gyve Doublet",
 		hands="Carmine Fin. Ga. +1",
 		legs=gear.Herc_MAB_legs,
-		feet=gear.Herc_MAB_feet,		
+		feet=gear.Herc_WS_feet,		
 		neck="Baetyl Pendant",
 		ear1="Moonshade Earring",
 		ear2="Friomisi Earring",
@@ -294,7 +293,7 @@ function init_gear_sets()
 		hands=gear.Adhemar_RA_hands,
 		legs="Adhemar Kecks",
 		feet="Adhemar Gamashes",
-		neck="Ocachi Gorget",
+		neck="Erudit. Necklace",
 		ear1="Enervating Earring",
 		ear2="Telos Earring",
 		ring1="Apate Ring",
@@ -308,7 +307,7 @@ function init_gear_sets()
 		body="Meg. Cuirie +1",
 		hands="Kobo Kote",
 		legs="Meg. Chausses +1",
-		feet=gear.Herc_RA_feet,
+		feet="Meg. Jam. +1",
 		neck="Combatant's Torque",
 		ring1="Cacoethic Ring +1",
 		ring2="Garuda Ring +1",
@@ -320,7 +319,7 @@ function init_gear_sets()
 		hands="Amini Glove. +1",
 		legs="Amini Brague +1",
 		feet="Carmine Greaves +1",
-		neck="Ainia Collar",
+		neck="Anu Torque",
 		ear1="Dedition Earring",
 		ring1="Apate Ring",
 		})
@@ -382,7 +381,6 @@ function init_gear_sets()
 		head="Arcadian Beret +1",
 		body=gear.Herc_RA_body,
 		hands="Kobo Kote",
-		feet=gear.Herc_RA_feet,
 		neck="Combatant's Torque",
 		ear1="Enervating Earring",
 		ear2="Telos Earring",
@@ -455,7 +453,7 @@ function init_gear_sets()
 
 	sets.engaged.STP = set_combine(sets.engaged, {
 		feet="Carmine Greaves +1",
-		neck="Ainia Collar",
+		neck="Anu Torque",
 		ear1="Dedition Earring",
 		ear2="Telos Earring",
 		ring1="Petrov Ring",
@@ -500,7 +498,7 @@ function init_gear_sets()
 
 	sets.engaged.LowHaste.STP = set_combine(sets.engaged.LowHaste, {
 		feet="Carmine Greaves +1",
-		neck="Ainia Collar",
+		neck="Anu Torque",
 		ear1="Dedition Earring",
 		ear2="Telos Earring",
 		ring1="Petrov Ring",
@@ -545,7 +543,7 @@ function init_gear_sets()
 
 	sets.engaged.MidHaste.STP = set_combine(sets.engaged.MidHaste, {
 		feet="Carmine Greaves +1",
-		neck="Ainia Collar",
+		neck="Anu Torque",
 		ear1="Dedition Earring",
 		ear2="Telos Earring",
 		ring1="Petrov Ring",
@@ -592,7 +590,7 @@ function init_gear_sets()
 
 	sets.engaged.HighHaste.STP = set_combine(sets.engaged.HighHaste, {
 		feet="Carmine Greaves +1",
-		neck="Ainia Collar",
+		neck="Anu Torque",
 		ear1="Cessance Earring",
 		ear2="Dedition Earring",
 		ring1="Petrov Ring",
@@ -640,7 +638,7 @@ function init_gear_sets()
 
 	sets.engaged.MaxHaste.STP = set_combine(sets.engaged.MaxHaste, {
 		feet="Carmine Greaves +1",
-		neck="Ainia Collar",
+		neck="Anu Torque",
 		ear1="Dedition Earring",
 		ear2="Telos Earring",
 		ring1="Petrov Ring",

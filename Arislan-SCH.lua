@@ -202,7 +202,7 @@ function init_gear_sets()
 		ear2="Etiolation Earring",
 		ring1="Mephitas's Ring +1",
 		ring2="Mephitas's Ring",
-		back="Aurist's Cape +1",
+		back="Fi Follet Cape +1",
 		waist="Shinjutsu-no-Obi +1",
 		} -- Max MP
    
@@ -331,7 +331,7 @@ function init_gear_sets()
 	-- Custom spell classes
 	sets.midcast.MndEnfeebles = {
 		main=gear.Grioavolr_MP,
-		sub="Clerisy Strap +1",
+		sub="Enki Strap",
 		ammo="Quartz Tathlum +1",
 		head="Merlinic Hood",
 		body="Vanya Robe",
@@ -356,7 +356,7 @@ function init_gear_sets()
 	
 	sets.midcast['Dark Magic'] = {
 		main=gear.Grioavolr_INT,
-		sub="Clerisy Strap +1",
+		sub="Enki Strap",
 		ammo="Pemphredo Tathlum",
 		head="Merlinic Hood",
 		body="Shango Robe",
@@ -421,14 +421,14 @@ function init_gear_sets()
 
 	sets.midcast['Elemental Magic'].Seidr = set_combine(sets.midcast['Elemental Magic'], {
 		main=gear.Grioavolr_INT,
-		sub="Clerisy Strap +1",
+		sub="Enki Strap",
 		body="Seidr Cotehardie",
 		neck="Sanctity Necklace",
 		})
 		
 	sets.midcast['Elemental Magic'].Resistant = set_combine(sets.midcast['Elemental Magic'], {
 		main=gear.Grioavolr_INT,
-		sub="Clerisy Strap +1",
+		sub="Enki Strap",
 		neck="Sanctity Necklace",
 		ear2="Hermetic Earring",
 		waist="Yamabuki-no-Obi",

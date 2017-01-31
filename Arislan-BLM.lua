@@ -316,7 +316,7 @@ function init_gear_sets()
 
 	sets.midcast.MndEnfeebles = {
 		main=gear.Lathi_ENF,
-		sub="Clerisy Strap +1",
+		sub="Enki Strap",
 		ammo="Quartz Tathlum +1",
 		head="Merlinic Hood",
 		body="Vanya Robe",
@@ -341,7 +341,7 @@ function init_gear_sets()
 
 	sets.midcast['Dark Magic'] = {
 		main=gear.Lathi_ENF,
-		sub="Clerisy Strap +1",
+		sub="Enki Strap",
 		ammo="Pemphredo Tathlum",
 		head="Merlinic Hood",
 		body="Shango Robe",
@@ -421,13 +421,14 @@ function init_gear_sets()
 		})
 
 	sets.midcast['Elemental Magic'].Resistant = set_combine(sets.midcast['Elemental Magic'], {
-		sub="Clerisy Strap +1",
+		sub="Enki Strap",
 		neck="Sanctity Necklace",
 		ear2="Hermetic Earring",
 		waist="Yamabuki-no-Obi",
 		})
 			
 	sets.midcast['Elemental Magic'].Spaekona = set_combine(sets.midcast['Elemental Magic'], {
+		sub="Enki Strap",
 		body="Spae. Coat +1",
 		neck="Sanctity Necklace",
 		})
@@ -484,21 +485,8 @@ function init_gear_sets()
 		})
 
 	sets.idle.ManaWall = {
-		main="Mafic Cudgel", --10/0
-		sub="Genmei Shield", --10/0
-		ammo="Staunch Tathlum", --2/2
-		head="Befouled Crown",
-		body="Hagondes Coat +1", --4/4
-		hands="Hagondes Cuffs +1", --3/3
-		legs="Assid. Pants +1",
 		feet="Wicce Sabots +1",
-		neck="Loricate Torque +1", --6/6
-		ear1="Genmei Earring", --2/0
-		ear2="Etiolation Earring", --0/3
-		ring1="Warden's Ring", --3/0
-		ring2="Defending Ring", --10/10
 		back=gear.BLM_Death_Cape,
-		waist="Lieutenant's Sash", --0/2
 		}
 
 	sets.idle.DeathMode = {
@@ -596,6 +584,10 @@ function job_precast(spell, action, spellMap, eventArgs)
 			equip(sets.precast.FC.Impact.DeathMode)
 		end
 	end
+	
+	if buffactive['Mana Wall'] then
+		equip(sets.precast.JA['Mana Wall'])
+	end
 end
 
 -- Set eventArgs.handled to true if we don't want any automatic gear equipping to be done.
@@ -607,6 +599,10 @@ function job_midcast(spell, action, spellMap, eventArgs)
 		else
 			equip(sets.midcast.Death)
 		end
+	end
+
+	if buffactive['Mana Wall'] then
+		equip(sets.precast.JA['Mana Wall'])
 	end
 end
 
@@ -628,6 +624,9 @@ function job_post_midcast(spell, action, spellMap, eventArgs)
 			equip(sets.Obi)
 		end
 	end
+	if buffactive['Mana Wall'] then
+		equip(sets.precast.JA['Mana Wall'])
+	end
 end
 
 -------------------------------------------------------------------------------------------------------------------
@@ -641,11 +640,11 @@ function job_buff_change(buff, gain)
 	-- Unlock armor when Mana Wall buff is lost.
 	if buff== "Mana Wall" then
 		if gain then
-			send_command('gs enable all')
-			equip(sets.idle.ManaWall)
-			send_command('gs disable all')
+			--send_command('gs enable all')
+			equip(sets.precast.JA['Mana Wall'])
+			--send_command('gs disable all')
 		else
-			send_command('gs enable all')
+			--send_command('gs enable all')
 			handle_equipping_gear(player.status)
 		end
 	end
@@ -673,7 +672,7 @@ function job_state_change(stateField, newValue, oldValue)
 end
 
 -- latent DT set auto equip on HP% change
-windower.register_event('hpp change', function(new, old)
+	windower.register_event('hpp change', function(new, old)
 		if new<=25 then
 			equip(sets.latent_dt)
 		end
@@ -714,13 +713,28 @@ function customize_idle_set(idleSet)
 	else
 		enable('back')
 	end
-	-- if Mana Wall active, lock armor and equip -DT
 	if buffactive['Mana Wall'] then
-		idleSet = sets.idle.ManaWall
-		send_command('gs disable all')
+		idleSet = set_combine(idleSet, sets.precast.JA['Mana Wall'])
 	end
 	
 	return idleSet
+end
+
+-- Modify the default melee set after it was constructed.
+function customize_melee_set(meleeSet)
+	if buffactive['Mana Wall'] then
+		meleeSet = set_combine(meleeSet, sets.precast.JA['Mana Wall'])
+	end
+
+	return meleeSet
+end
+
+function customize_defense_set(defenseSet)
+	if buffactive['Mana Wall'] then
+		defenseSet = set_combine(defenseSet, sets.precast.JA['Mana Wall'])
+	end
+
+	return defenseSet
 end
 
 

@@ -140,7 +140,7 @@ function init_gear_sets()
 		ammo="Seeth. Bomblet +1",
 		head="Lilitu Headpiece",
 		body="Adhemar Jacket",
-		hands="gear.Adhemar_Att_hands",
+		hands=gear.Adhemar_Att_hands,
 		legs="Hiza. Hizayoroi +1",
 		feet=gear.Herc_TA_feet,
 		neck="Fotia Gorget",
@@ -148,7 +148,7 @@ function init_gear_sets()
 		ear2="Ishvara Earring",
 		ring1="Ifrit Ring +1",
 		ring2="Shukuyu Ring",
-		back="Ground. Mantle +1",
+		back="Bleating Mantle",
 		waist="Fotia Belt",
 		} -- default set
 
@@ -160,6 +160,7 @@ function init_gear_sets()
 		ear2="Telos Earring",
 		ring1="Ramuh Ring +1",
 		ring2="Ramuh Ring +1",
+		back="Letalis Mantle",
 		})
 
 	sets.precast.WS['Blade: Hi'] = set_combine (sets.precast.WS, {
@@ -275,7 +276,7 @@ function init_gear_sets()
 		ear2="Telos Earring",
 		ring1="Ramuh Ring +1",
 		ring2="Ramuh Ring +1",
-		back="Ground. Mantle +1",
+		back="Letalis Mantle",
 		waist="Windbuffet Belt +1",
 		})
 	
@@ -331,7 +332,7 @@ function init_gear_sets()
 	sets.engaged.MidAcc = set_combine(sets.engaged.LowAcc, {
 		hands=gear.Herc_Acc_hands,
 		ring2="Ramuh Ring +1",
-		back="Ground. Mantle +1",
+		back="Letalis Mantle",
 		waist="Kentarch Belt +1",
 		})
 
@@ -345,7 +346,6 @@ function init_gear_sets()
 		})
 
 	sets.engaged.STP = set_combine(sets.engaged, {
-		neck="Ainia Collar",
 		ear1="Dedition Earring",
 		ear2="Telos Earring",
 		ring1="Petrov Ring",
@@ -380,7 +380,7 @@ function init_gear_sets()
 		hands=gear.Herc_Acc_hands,
 		feet=gear.Herc_TA_feet,
 		ring2="Ramuh Ring +1",
-		back="Ground. Mantle +1",
+		back="Letalis Mantle",
 		waist="Kentarch Belt +1",
 		})
 
@@ -394,7 +394,6 @@ function init_gear_sets()
 		})
 
 	sets.engaged.LowHaste.STP = set_combine(sets.engaged.LowHaste, {
-		neck="Ainia Collar",
 		ear1="Dedition Earring",
 		ear2="Telos Earring",
 		ring1="Petrov Ring",
@@ -406,7 +405,7 @@ function init_gear_sets()
 		ammo="Ginsen",
 		head="Dampening Tam",
 		body="Adhemar Jacket", --5
-		hands="gear.Adhemar_Att_hands",
+		hands=gear.Adhemar_Att_hands,
 		legs="Samnuha Tights",
 		feet=gear.Herc_TA_feet,
 		neck="Erudit. Necklace",
@@ -430,7 +429,7 @@ function init_gear_sets()
 		feet=gear.Herc_TA_feet,
 		ear1="Cessance Earring",
 		ring2="Ramuh Ring +1",
-		back="Ground. Mantle +1",
+		back="Letalis Mantle",
 		waist="Kentarch Belt +1",
 		})
 
@@ -443,7 +442,6 @@ function init_gear_sets()
 		})
 
 	sets.engaged.MidHaste.STP = set_combine(sets.engaged.MidHaste, {
-		neck="Ainia Collar",
 		ear1="Dedition Earring",
 		ear2="Telos Earring",
 		ring1="Petrov Ring",
@@ -455,7 +453,7 @@ function init_gear_sets()
 		ammo="Ginsen",
 		head="Dampening Tam",
 		body="Adhemar Jacket", --5
-		hands="gear.Adhemar_Att_hands",
+		hands=gear.Adhemar_Att_hands,
 		legs="Samnuha Tights",
 		feet=gear.Herc_TA_feet,
 		neck="Erudit. Necklace",
@@ -479,7 +477,7 @@ function init_gear_sets()
 		hands=gear.Herc_Acc_hands,
 		ear1="Cessance Earring",
 		ring2="Ramuh Ring +1",
-		back="Ground. Mantle +1",
+		back="Letalis Mantle",
 		})
 
 	sets.engaged.HighHaste.HighAcc = set_combine(sets.engaged.HighHaste.MidAcc, {
@@ -491,7 +489,6 @@ function init_gear_sets()
 		})
 
 	sets.engaged.HighHaste.STP = set_combine(sets.engaged.HighHaste, {
-		neck="Ainia Collar",
 		ear1="Dedition Earring",
 		ear2="Telos Earring",
 		ring1="Petrov Ring",
@@ -503,7 +500,7 @@ function init_gear_sets()
 		ammo="Ginsen",
 		head="Dampening Tam",
 		body=gear.Herc_TA_body,
-		hands="gear.Adhemar_Att_hands",
+		hands=gear.Adhemar_Att_hands,
 		legs="Samnuha Tights",
 		feet=gear.Herc_TA_feet,
 		neck="Erudit. Necklace",
@@ -527,7 +524,7 @@ function init_gear_sets()
 		hands=gear.Herc_Acc_hands,
 		ear1="Cessance Earring",
 		ring2="Ramuh Ring +1",
-		back="Ground. Mantle +1",
+		back="Letalis Mantle",
 		})
 
 	sets.engaged.MaxHaste.HighAcc = set_combine(sets.engaged.MaxHaste.MidAcc, {

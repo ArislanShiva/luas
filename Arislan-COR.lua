@@ -229,12 +229,12 @@ function init_gear_sets()
 
 	sets.precast.RA = {
 		ammo=gear.RAbullet,
-		head="Aurore Beret +1", --5/0
+		head="Taeon Chapeau", --10/0
 		body="Pursuer's Doublet", --6
 		hands="Carmine Fin. Ga. +1", --8/11
 		legs="Adhemar Kecks", --9
 		feet="Meg. Jam. +1", --8
-		back="Navarch's Mantle", --6
+		back="Navarch's Mantle", --7
 		waist="Impulse Belt", --3
 		} -- 10% Gifts
 
@@ -285,7 +285,7 @@ function init_gear_sets()
 		body="Samnuha Coat",
 		hands="Carmine Fin. Ga. +1",
 		legs=gear.Herc_MAB_legs,
-		feet=gear.Herc_MAB_feet,
+		feet=gear.Herc_WS_feet,
 		neck="Baetyl Pendant",
 		ear1="Hecate's Earring",
 		ear2="Friomisi Earring",
@@ -301,7 +301,7 @@ function init_gear_sets()
 		body="Samnuha Coat",
 		hands="Carmine Fin. Ga. +1",
 		legs=gear.Herc_MAB_legs,
-		feet=gear.Herc_MAB_feet,
+		feet=gear.Herc_WS_feet,
 		neck="Baetyl Pendant",
 		ear1="Moonshade Earring",
 		ear2="Friomisi Earring",
@@ -453,7 +453,7 @@ function init_gear_sets()
 		hands=gear.Adhemar_RA_hands,
 		legs="Adhemar Kecks",
 		feet=gear.Herc_RA_feet,
-		neck="Ocachi Gorget",
+		neck="Marked Gorget",
 		ear1="Enervating Earring",
 		ear2="Telos Earring",
 		ring1="Arvina Ringlet +1",
@@ -466,7 +466,8 @@ function init_gear_sets()
 		ammo=gear.RAbullet,
 		hands="Meg. Gloves +1",
 		legs="Meg. Chausses +1",
-		neck="Marked Gorget",
+		feet="Meg. Jam. +1",
+		neck="Combatant's Torque",
 		ring1="Cacoethic Ring +1",
 		waist="Kwahu Kachina Belt",
 		})
@@ -916,19 +917,6 @@ function job_update(cmdParams, eventArgs)
 	determine_haste_group()
 end
 
--- Set eventArgs.handled to true if we don't want the automatic display to be run.
-
-function job_update(cmdParams, eventArgs)
-	determine_haste_group()
-end
-
-function get_custom_wsmode(spell, spellMap, default_wsmode)
-	if buffactive['Transcendancy'] then
-		return 'Brew'
-	end
-end
-
-
 -- Called by the 'update' self-command, for common needs.
 -- Set eventArgs.handled to true if we don't want automatic equipping of gear.
 function job_update(cmdParams, eventArgs)
@@ -1187,7 +1175,7 @@ function select_default_macro_book()
 	if player.sub_job == 'DNC' then
 		set_macro_page(1, 7)
 	else
-		set_macro_page(10, 7)
+		set_macro_page(1, 7)
 	end
 end
 

@@ -176,7 +176,7 @@ function init_gear_sets()
 		head="Carmine Mask +1", --14
 		body="Taeon Tabard", --9
 		hands="Leyline Gloves", --7
-		legs="Rawhide Trousers", --5
+		legs="Aya. Cosciales +1", --5
 		feet="Carmine Greaves +1", --8
 		neck="Orunmila's Torque", --5
 		ear1="Etiolation Earring", --1
@@ -229,7 +229,7 @@ function init_gear_sets()
 		legs="Samnuha Tights",
 		ring1="Ifrit Ring +1",
 		ring2="Epona's Ring",
-		back=gear.RUN_WS2_Cape,
+		back=gear.RUN_WS1_Cape,
 		})
 		
 	sets.precast.WS['Resolution'].Acc = set_combine(sets.precast.WS['Resolution'], {
@@ -241,7 +241,7 @@ function init_gear_sets()
 		})
 	
 	sets.precast.WS['Dimidiation'] = set_combine(sets.precast.WS['Resolution'], {
-		hands="gear.Adhemar_Att_hands",
+		hands=gear.Adhemar_Att_hands,
 		legs="Lustratio Subligar",
 		feet="Lustratio Leggings",
 		ring1="Apate Ring",
@@ -268,7 +268,7 @@ function init_gear_sets()
 		ring1="Ifrit Ring +1",
 		ring2="Shukuyu Ring",
 		waist="Prosilio Belt +1",
-		back=gear.RUN_WS2_Cape,
+		back=gear.RUN_WS1_Cape,
 		})
 
 	sets.precast.WS['Sanguine Blade'] = {
@@ -552,7 +552,7 @@ function init_gear_sets()
 		ammo="Ginsen",
 		head="Dampening Tam",
 		body=gear.Herc_TA_body,
-		hands="gear.Adhemar_Att_hands",
+		hands=gear.Adhemar_Att_hands,
 		legs="Samnuha Tights",
 		feet=gear.Herc_TA_feet,
 		neck="Asperity Necklace",
@@ -588,7 +588,7 @@ function init_gear_sets()
 
 	sets.engaged.STP = set_combine(sets.engaged, {
 		feet="Carmine Greaves +1",
-		neck="Ainia Collar",
+		neck="Anu Torque",
 		ear1="Dedition Earring",
 		ear2="Telos Earring",
 		waist="Kentarch Belt +1",

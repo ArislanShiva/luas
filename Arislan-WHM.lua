@@ -255,7 +255,7 @@ function init_gear_sets()
 		sub="Genmei Shield",
 		head="Vanya Hood",
 		hands="Fanatic Gloves", --15
-		legs="Theo. Pant. +1", --15
+		legs="Th. Pantaloons +2", --17
 		feet="Vanya Clogs", --5
 --		feet="Gende. Galosh. +1", --10
 		neck="Malison Medallion", --10
@@ -298,7 +298,7 @@ function init_gear_sets()
 		head="Inyanga Tiara +1",
 		body="Piety Briault +1",
 		hands="Ebers Mitts +1",
-		legs="Theo. Pant. +1",
+		legs="Th. Pantaloons +2",
 		})
 	
 	sets.midcast.Refresh = set_combine(sets.midcast['Enhancing Magic'], {
@@ -342,12 +342,12 @@ function init_gear_sets()
 
 	sets.midcast['Divine Magic'] = {
 		main=gear.Grioavolr_MP,
-		sub="Clerisy Strap +1",
+		sub="Enki Strap",
 		ammo="Pemphredo Tathlum",
 		head="Befouled Crown",
 		body="Vanya Robe",
 		hands="Fanatic Gloves",
-		legs="Kaykaus Tights",
+		legs="Th. Pantaloons +2",
 		feet="Chironic Slippers",
 		neck="Incanter's Torque",
 		ear1="Hermetic Earring",
@@ -363,7 +363,7 @@ function init_gear_sets()
 		sub="Niobid Strap",
 		head="Inyanga Tiara +1",
 		body="Witching Robe",
-		legs="Chironic Hose",
+		legs="Th. Pantaloons +2",
 		neck="Sanctity Necklace",
 		ear1="Hecate's Earring",
 		ear2="Friomisi Earring",
@@ -375,7 +375,7 @@ function init_gear_sets()
 
 	sets.midcast['Dark Magic'] = {
 		main=gear.Grioavolr_INT,
-		sub="Clerisy Strap +1",
+		sub="Enki Strap",
 		ammo="Pemphredo Tathlum",
 		head="Befouled Crown",
 		body="Shango Robe",
@@ -394,7 +394,7 @@ function init_gear_sets()
 	-- Custom spell classes
 	sets.midcast.MndEnfeebles = {
 		main=gear.Grioavolr_MP,
-		sub="Clerisy Strap +1",
+		sub="Enki Strap",
 		ammo="Quartz Tathlum +1",
 		head="Befouled Crown",
 		body="Vanya Robe",
@@ -412,7 +412,7 @@ function init_gear_sets()
 
 	sets.midcast.IntEnfeebles = {
 		main=gear.Grioavolr_INT,
-		sub="Clerisy Strap +1",
+		sub="Enki Strap",
 		ammo="Pemphredo Tathlum",
 		head="Befouled Crown",
 		body="Vanya Robe",
@@ -481,11 +481,11 @@ function init_gear_sets()
 
 	sets.idle.Town = set_combine(sets.idle, {
 		main="Izcalli",
-		sub="Deliverance",
+		sub="Deliverance +1",
 		head="Ebers Cap +1",
 		body="Ebers Bliaud +1",
 		hands="Theophany Mitts +2",
-		legs="Ebers Pant. +1",
+		legs="Th. Pantaloons +2",
 		neck="Incanter's Torque",
 		ring1="Levia. Ring +1",
 		ring2="Levia. Ring +1",
@@ -519,7 +519,7 @@ function init_gear_sets()
 	-- Basic set for if no TP weapon is defined.
 	sets.engaged = {
 		main="Izcalli",
-		sub="Deliverance",
+		sub="Deliverance +1",
 		head="Telchine Cap",
 		body="Onca Suit",
 		neck="Combatant's Torque",
@@ -528,7 +528,7 @@ function init_gear_sets()
 		ring1="Chirich Ring",
 		ring2="Ramuh Ring +1",
 		waist="Grunfeld Rope",
-		back="Aurist's Cape +1",
+		back="Relucent Cape",
 		}
 
 	-- Buff sets: Gear that needs to be worn to actively enhance a current player buff.

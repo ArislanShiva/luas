@@ -64,7 +64,8 @@ function user_setup()
 	send_command('bind @c gs c toggle CP')
 	send_command('bind @h gs c cycle HelixMode')
 	send_command('bind @w gs c toggle WeaponLock')
-	
+
+	update_offense_mode()	
 	select_default_macro_book()
 	set_lockstyle()
 end
@@ -203,13 +204,13 @@ function init_gear_sets()
 		body="Merlinic Jubbah",
 		hands="Amalric Gages",
 		legs="Merlinic Shalwar",
-		feet="Chironic Slippers",
+		feet="Merlinic Crackows",
 		neck="Baetyl Pendant",
 		ear1="Hecate's Earring",
 		ear2="Friomisi Earring",
 		ring1="Shiva Ring +1",
 		ring2="Archon Ring",
-		back="Seshaw Cape",
+		back=gear.RDM_INT_Cape,
 		waist="Refoccilation Stone",
 		}
 
@@ -241,7 +242,7 @@ function init_gear_sets()
 		ear2="Roundel Earring", --5
 		ring1="Lebeche Ring", --3/(-5)
 		ring2="Haoma's Ring",
-		back="Oretan. Cape +1", --6
+		back=gear.RDM_MND_Cape, --10
 		waist="Bishop's Sash",
 		}
 
@@ -249,7 +250,7 @@ function init_gear_sets()
 		main="Chatoyant Staff",
 		sub="Clerisy Strap +1",
 		hands="Kaykaus Cuffs", --10/(-6)
-		back="Solemnity Cape", --7/0
+		back="Twilight Cape",
 		waist="Hachirin-no-Obi",
 		})
 
@@ -275,21 +276,18 @@ function init_gear_sets()
 		neck="Incanter's Torque",
 		ring1="Haoma's Ring",
 		ring2="Haoma's Ring",
-		back="Oretan. Cape +1",
+		back=gear.RDM_MND_Cape,
 		waist="Bishop's Sash",
 		}
 		
 	sets.midcast.Cursna = set_combine(sets.midcast.StatusRemoval, {
-		main="Gada",
-		sub="Beatific Shield +1",
 		feet="Vanya Clogs",
 		neck="Malison Medallion",
 		ear1="Beatific Earring",
+		back="Oretan. Cape +1",
 		})
 
 	sets.midcast['Enhancing Magic'] = {
-		main="Gada",
-		sub="Beatific Shield +1",
 		head="Befouled Crown",
 		body="Viti. Tabard +1",
 		legs="Atrophy Tights +1",
@@ -308,7 +306,7 @@ function init_gear_sets()
 		hands="Atrophy Gloves +1",
 		legs="Telchine Braconi",
 		feet="Leth. Houseaux +1",
-		back="Sucellos's Cape",
+		back=gear.RDM_MND_Cape,
 		}
 
 	sets.midcast.Regen = set_combine(sets.midcast.EnhancingDuration, {
@@ -329,7 +327,6 @@ function init_gear_sets()
 		})
 
 	sets.midcast.Aquaveil = set_combine(sets.midcast['Enhancing Magic'], {
-		main="Vadose Rod",
 		head="Amalric Coif",
 		waist="Emphatikos Rope",
 		})
@@ -347,7 +344,7 @@ function init_gear_sets()
  	-- Custom spell classes
 	sets.midcast.MndEnfeebles = {
 		main=gear.Grioavolr_MP,
-		sub="Clerisy Strap +1",
+		sub="Enki Strap",
 		ammo="Quartz Tathlum +1",
 		head="Carmine Mask +1",
 		body="Lethargy Sayon +1",
@@ -359,24 +356,26 @@ function init_gear_sets()
 		ear2="Digni. Earring",
 		ring1="Kishar Ring",
 		ring2="Stikini Ring",
-		back="Aurist's Cape +1",
+		back=gear.RDM_MND_Cape,
 		waist="Luminary Sash",
 		}
 	
 	sets.midcast.IntEnfeebles = set_combine(sets.midcast.MndEnfeebles, {
 		main=gear.Grioavolr_INT,
 		ammo="Pemphredo Tathlum",
+		back=gear.RDM_INT_Cape,
 		})
 
 	sets.midcast.ElementalEnfeeble = sets.midcast.IntEnfeebles
 
 
 	sets.midcast['Dia III'] = set_combine(sets.midcast.MndEnfeebles, {head="Viti. Chapeau +1"})
+	sets.midcast['Paralyze II'] = set_combine(sets.midcast.MndEnfeebles, {head="Vitivation Boots +1"})
 	sets.midcast['Slow II'] = set_combine(sets.midcast.MndEnfeebles, {head="Viti. Chapeau +1"})
 
 	sets.midcast['Dark Magic'] = {
 		main=gear.Grioavolr_INT,
-		sub="Clerisy Strap +1",
+		sub="Enki Strap",
 		ammo="Pemphredo Tathlum",
 		head="Amalric Coif",
 		body="Shango Robe",
@@ -388,7 +387,7 @@ function init_gear_sets()
 		ear2="Digni. Earring",
 		ring1="Stikini Ring",
 		ring2="Stikini Ring",
-		back="Perimede Cape",
+		back=gear.RDM_INT_Cape,
 		waist="Casso Sash",
 		}
 
@@ -411,26 +410,26 @@ function init_gear_sets()
 		body="Merlinic Jubbah",
 		hands="Amalric Gages",
 		legs="Merlinic Shalwar",
-		feet="Chironic Slippers",
+		feet="Merlinic Crackows",
 		neck="Baetyl Pendant",
 		ear1="Hecate's Earring",
 		ear2="Friomisi Earring",
 		ring1="Shiva Ring +1",
 		ring2="Shiva Ring +1",
-		back="Seshaw Cape",
+		back=gear.RDM_INT_Cape,
 		waist="Refoccilation Stone",
 		}
 
 	sets.midcast['Elemental Magic'].Seidr = set_combine(sets.midcast['Elemental Magic'], {
 		main=gear.Grioavolr_INT,
-		sub="Clerisy Strap +1",
+		sub="Enki Strap",
 		body="Seidr Cotehardie",
 		neck="Sanctity Necklace",
 		})
 
 	sets.midcast['Elemental Magic'].Resistant = set_combine(sets.midcast['Elemental Magic'], {
 		main=gear.Grioavolr_INT,
-		sub="Clerisy Strap +1",
+		sub="Enki Strap",
 		neck="Sanctity Necklace",
 		ear2="Hermetic Earring",
 		waist="Yamabuki-no-Obi",
@@ -507,7 +506,7 @@ function init_gear_sets()
 		ear2="Digni. Earring",
 		ring1="Levia. Ring +1",
 		ring2="Shiva Ring +1",
-		back="Sucellos's Cape",
+		back=gear.RDM_INT_Cape,
 		waist="Flume Belt +1",
 		})
 
@@ -533,23 +532,35 @@ function init_gear_sets()
 	------------------------------------------------------------------------------------------------
 	
 	sets.engaged = {
-		--NIN --25
 		main="Colada",
-		sub="Demersal Degen +1",
+		sub="Deliverance +1",
 		ammo="Ginsen",
-		head="Carmine Mask +1",
-		body="Jhakri Robe +1",
-		hands="Leyline Gloves",
-		legs="Carmine Cuisses +1", --6
-		feet=gear.Taeon_DW_feet, --9
-		neck="Combatant's Torque",
-		ear1="Eabani Earring", --4
+		head="Aya. Zucchetto +1",
+		body="Ayanmo Corazza +1",
+		hands="Aya. Manopolas +1",
+		legs="Carmine Cuisses +1",
+		feet="Carmine Greaves +1",
+		neck="Anu Torque",
+		ear1="Cessance Earring",
 		ear2="Telos Earring",
 		ring1="Petrov Ring",
 		ring2="Hetairoi Ring",
-		back="Grounded Mantle +1",
-		waist="Sarissapho. Belt",
+		back="Letalis Mantle",
+		waist="Kentarch Belt +1",
 		}
+
+	sets.engaged.Acc = sets.engaged
+
+	sets.engaged.DW = set_combine(sets.engaged, {
+		--NIN --25
+		sub="Demersal Degen +1",
+		hands="Aya. Manopolas +1", --6
+		feet=gear.Taeon_DW_feet, --9
+		waist="Shetal Stone", --6
+		})
+
+	sets.engaged.DW.Acc = sets.engaged.DW
+
 
 	sets.buff.Doom = {ring1="Saida Ring", ring2="Saida Ring", waist="Gishdubar Sash"}
 
@@ -670,6 +681,12 @@ function job_get_spell_map(spell, default_spell_map)
 	end
 end
 
+-- Called by the 'update' self-command, for common needs.
+-- Set eventArgs.handled to true if we don't want automatic equipping of gear.
+function job_update(cmdParams, eventArgs)
+    update_offense_mode()
+end
+
 -- Modify the default idle set after it was constructed.
 function customize_idle_set(idleSet)
 	if player.mpp < 51 then
@@ -748,6 +765,14 @@ function handle_strategems(cmdParams)
 		end
 	else
 		add_to_chat(123,'No arts has been activated yet.')
+	end
+end
+
+function update_offense_mode()  
+	if player.sub_job == 'NIN' or player.sub_job == 'DNC' then
+		state.CombatForm:set('DW')
+	else
+		state.CombatForm:reset()
 	end
 end
 

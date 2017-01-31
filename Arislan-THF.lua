@@ -56,9 +56,6 @@ function user_setup()
 
 	state.CP = M(false, "Capacity Points Mode")
 
-	gear.default.weaponskill_neck = "Asperity Necklace"
-	gear.default.weaponskill_waist = "Fotia Belt"
-
 	-- Additional local binds
 	send_command('bind ^` gs c cycle treasuremode')
 	send_command('bind !` input /ja "Flee" <me>')
@@ -108,7 +105,7 @@ function init_gear_sets()
 		ammo="Yetshila",
 		head="Dampening Tam",
 		body="Adhemar Jacket", 
-		hands="gear.Adhemar_Att_hands",
+		hands=gear.Adhemar_Att_hands,
 		legs="Lustratio Subligar",
 		feet="Lustratio Leggings",
 		neck="Caro Necklace",
@@ -263,7 +260,7 @@ function init_gear_sets()
 	sets.precast.WS['Evisceration'] = set_combine(sets.precast.WS, {
 		ammo="Expeditious Pinion",
 		head="Adhemar Bonnet",
-		hands="gear.Adhemar_Att_hands",
+		hands=gear.Adhemar_Att_hands,
 		})
 
 	sets.precast.WS['Evisceration'].Acc = set_combine(sets.precast.WS['Evisceration'], {
@@ -408,10 +405,10 @@ function init_gear_sets()
 		ammo="Ginsen",
 		head="Dampening Tam",
 		body="Adhemar Jacket", -- 5
-		hands="gear.Adhemar_Att_hands",
+		hands=gear.Adhemar_Att_hands,
 		legs="Samnuha Tights",
 		feet=gear.Taeon_DW_feet, --9
-		neck="Asperity Necklace",
+		neck="Erudit. Necklace",
 		ear1="Eabani Earring", --4
 		ear2="Suppanomimi", --5
 		ring1="Petrov Ring",
@@ -444,7 +441,7 @@ function init_gear_sets()
 		})
 
 	sets.engaged.STP = set_combine(sets.engaged, {
-		neck="Ainia Collar",
+		neck="Anu Torque",
 		ear1="Dedition Earring",
 		ear2="Telos Earring",
 		ring1="Petrov Ring",
@@ -456,10 +453,10 @@ function init_gear_sets()
 		ammo="Ginsen",
 		head="Dampening Tam",
 		body="Adhemar Jacket", -- 5
-		hands="gear.Adhemar_Att_hands",
+		hands=gear.Adhemar_Att_hands,
 		legs="Samnuha Tights",
 		feet=gear.Taeon_DW_feet, --9
-		neck="Asperity Necklace",
+		neck="Erudit. Necklace",
 		ear1="Eabani Earring", --4
 		ear2="Suppanomimi", --5
 		ring1="Petrov Ring",
@@ -492,7 +489,7 @@ function init_gear_sets()
 		})
 
 	sets.engaged.LowHaste.STP = set_combine(sets.engaged.LowHaste, {
-		neck="Ainia Collar",
+		neck="Anu Torque",
 		ear1="Dedition Earring",
 		ear2="Telos Earring",
 		ring1="Petrov Ring",
@@ -504,10 +501,10 @@ function init_gear_sets()
 		ammo="Ginsen",
 		head="Dampening Tam",
 		body="Adhemar Jacket", -- 5
-		hands="gear.Adhemar_Att_hands",
+		hands=gear.Adhemar_Att_hands,
 		legs="Samnuha Tights",
 		feet=gear.Taeon_DW_feet, --9
-		neck="Asperity Necklace",
+		neck="Erudit. Necklace",
 		ear1="Eabani Earring", --4
 		ear2="Suppanomimi", --5
 		ring1="Petrov Ring",
@@ -541,7 +538,7 @@ function init_gear_sets()
 		})
 
 	sets.engaged.MidHaste.STP = set_combine(sets.engaged.MidHaste, {
-		neck="Ainia Collar",
+		neck="Anu Torque",
 		ear1="Dedition Earring",
 		ear2="Telos Earring",
 		ring1="Petrov Ring",
@@ -553,10 +550,10 @@ function init_gear_sets()
 		ammo="Ginsen",
 		head="Dampening Tam",
 		body="Adhemar Jacket", -- 5
-		hands="gear.Adhemar_Att_hands",
+		hands=gear.Adhemar_Att_hands,
 		legs="Samnuha Tights",
 		feet=gear.Taeon_DW_feet, --9
-		neck="Asperity Necklace",
+		neck="Erudit. Necklace",
 		ear1="Eabani Earring", --4
 		ear2="Brutal Earring",
 		ring1="Petrov Ring",
@@ -588,7 +585,7 @@ function init_gear_sets()
 		})
 
 	sets.engaged.HighHaste.STP = set_combine(sets.engaged.HighHaste, {
-		neck="Ainia Collar",
+		neck="Anu Torque",
 		ear1="Dedition Earring",
 		ear2="Telos Earring",
 		ring1="Petrov Ring",
@@ -600,10 +597,10 @@ function init_gear_sets()
 		ammo="Ginsen",
 		head="Dampening Tam",
 		body=gear.Herc_TA_body,
-		hands="gear.Adhemar_Att_hands",
+		hands=gear.Adhemar_Att_hands,
 		legs="Samnuha Tights",
 		feet=gear.Herc_TA_feet,
-		neck="Asperity Necklace",
+		neck="Erudit. Necklace",
 		ear1="Eabani Earring", --4
 		ear2="Suppanomimi", --5
 		ring1="Petrov Ring",
@@ -635,7 +632,7 @@ function init_gear_sets()
 		})
 
 	sets.engaged.MaxHaste.STP = set_combine(sets.engaged.MaxHaste, {
-		neck="Ainia Collar",
+		neck="Anu Torque",
 		ear1="Dedition Earring",
 		ear2="Telos Earring",
 		ring1="Petrov Ring",
