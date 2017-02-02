@@ -475,18 +475,18 @@ function init_gear_sets()
 		waist="Patentia Sash", --5
 		} -- 39%
 
-	sets.engaged.LowHaste.LowAcc = set_combine(sets.engaged.LowHaste, {
+	sets.engaged.LowAcc.LowHaste = set_combine(sets.engaged.LowHaste, {
 		ring1="Chirich Ring",
 		waist="Kentarch Belt +1",
 		})
 
-	sets.engaged.LowHaste.MidAcc = set_combine(sets.engaged.LowHaste.LowAcc, {
+	sets.engaged.MidAcc.LowHaste = set_combine(sets.engaged.LowAcc.LowHaste, {
 		neck="Combatant's Torque",
 		ear2="Telos Earring",
 		ring2="Ramuh Ring +1",
 		})
 
-	sets.engaged.LowHaste.HighAcc = set_combine(sets.engaged.LowHaste.MidAcc, {
+	sets.engaged.HighAcc.LowHaste = set_combine(sets.engaged.MidAcc.LowHaste, {
 		head="Carmine Mask +1",
 		feet=gear.Herc_Acc_feet,
 		ear1="Cessance Earring",
@@ -494,7 +494,7 @@ function init_gear_sets()
 		waist="Olseni Belt",
 		})
 
-	sets.engaged.LowHaste.STP = set_combine(sets.engaged.LowHaste, {
+	sets.engaged.STP.LowHaste = set_combine(sets.engaged.LowHaste, {
 		feet="Carmine Greaves +1",
 		neck="Anu Torque",
 		ear1="Dedition Earring",
@@ -519,18 +519,18 @@ function init_gear_sets()
 		waist="Patentia Sash", --5
 		} -- 40%
 
-	sets.engaged.MidHaste.LowAcc = set_combine(sets.engaged.MidHaste, {
+	sets.engaged.LowAcc.MidHaste = set_combine(sets.engaged.MidHaste, {
 		ring1="Chirich Ring",
 		waist="Kentarch Belt +1",
 		})
 
-	sets.engaged.MidHaste.MidAcc = set_combine(sets.engaged.MidHaste.LowAcc, {
+	sets.engaged.MidAcc.MidHaste = set_combine(sets.engaged.LowAcc.MidHaste, {
 		neck="Combatant's Torque",
 		ear2="Telos Earring",
 		ring2="Ramuh Ring +1",
 		})
 
-	sets.engaged.MidHaste.HighAcc = set_combine(sets.engaged.MidHaste.MidAcc, {
+	sets.engaged.HighAcc.MidHaste = set_combine(sets.engaged.MidAcc.MidHaste, {
 		head="Carmine Mask +1",
 		feet=gear.Herc_Acc_feet,
 		ear1="Cessance Earring",
@@ -538,7 +538,7 @@ function init_gear_sets()
 		waist="Olseni Belt",
 		})
 
-	sets.engaged.MidHaste.STP = set_combine(sets.engaged.MidHaste, {
+	sets.engaged.STP.MidHaste = set_combine(sets.engaged.MidHaste, {
 		feet="Carmine Greaves +1",
 		neck="Anu Torque",
 		ear1="Dedition Earring",
@@ -563,19 +563,19 @@ function init_gear_sets()
 		waist="Patentia Sash", --5
 		} -- 33%
 
-	sets.engaged.HighHaste.LowAcc = set_combine(sets.engaged.HighHaste, {
+	sets.engaged.LowAcc.HighHaste = set_combine(sets.engaged.HighHaste, {
 		ring1="Chirich Ring",
 		waist="Kentarch Belt +1",
 		})
 
-	sets.engaged.HighHaste.MidAcc = set_combine(sets.engaged.HighHaste.LowAcc, {
+	sets.engaged.MidAcc.HighHaste = set_combine(sets.engaged.LowAcc.HighHaste, {
 		legs="Meg. Chausses +1",
 		neck="Combatant's Torque",
 		ear2="Telos Earring",
 		ring2="Ramuh Ring +1",
 		})
 
-	sets.engaged.HighHaste.HighAcc = set_combine(sets.engaged.HighHaste.MidAcc, {
+	sets.engaged.HighAcc.HighHaste = set_combine(sets.engaged.MidAcc.HighHaste, {
 		head="Carmine Mask +1",
 		legs="Carmine Cuisses +1",
 		feet=gear.Herc_Acc_feet,
@@ -584,7 +584,7 @@ function init_gear_sets()
 		waist="Olseni Belt",
 		})
 
-	sets.engaged.HighHaste.STP = set_combine(sets.engaged.HighHaste, {
+	sets.engaged.STP.HighHaste = set_combine(sets.engaged.HighHaste, {
 		feet="Carmine Greaves +1",
 		neck="Anu Torque",
 		ear1="Cessance Earring",
@@ -609,19 +609,19 @@ function init_gear_sets()
 		waist="Patentia Sash", --5
 		} -- 19%
 
-	sets.engaged.MaxHaste.LowAcc = set_combine(sets.engaged.HighHaste, {
+	sets.engaged.LowAcc.MaxHaste = set_combine(sets.engaged.HighHaste, {
 		ring1="Chirich Ring",
 		waist="Kentarch Belt +1",
 		})
 
-	sets.engaged.MaxHaste.MidAcc = set_combine(sets.engaged.MaxHaste.LowAcc, {
+	sets.engaged.MidAcc.MaxHaste = set_combine(sets.engaged.LowAcc.MaxHaste, {
 		legs="Meg. Chausses +1",
 		neck="Combatant's Torque",
 		ear2="Telos Earring",
 		ring2="Ramuh Ring +1",
 		})
 
-	sets.engaged.MaxHaste.HighAcc = set_combine(sets.engaged.MaxHaste.MidAcc, {
+	sets.engaged.HighAcc.MaxHaste = set_combine(sets.engaged.MidAcc.MaxHaste, {
 		head="Carmine Mask +1",
 		legs="Carmine Cuisses +1",
 		feet=gear.Herc_Acc_feet,
@@ -630,7 +630,7 @@ function init_gear_sets()
 		waist="Olseni Belt",
 		})
 
-	sets.engaged.MaxHaste.STP = set_combine(sets.engaged.MaxHaste, {
+	sets.engaged.STP.MaxHaste = set_combine(sets.engaged.MaxHaste, {
 		feet="Carmine Greaves +1",
 		neck="Anu Torque",
 		ear1="Dedition Earring",

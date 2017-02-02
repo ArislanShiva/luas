@@ -177,6 +177,7 @@ function init_gear_sets()
 
 	sets.precast.WS['Chant du Cygne'] = set_combine(sets.precast.WS, {
 		ammo="Yetshila",
+		body="Ayanmo Corazza +1",
 		feet="Thereoid Greaves",
 		ear2="Brutal Earring",
 		ring1="Begrudging Ring",
@@ -535,9 +536,9 @@ function init_gear_sets()
 		main="Colada",
 		sub="Deliverance +1",
 		ammo="Ginsen",
-		head="Aya. Zucchetto +1",
+		head="Carmine Mask +1",
 		body="Ayanmo Corazza +1",
-		hands="Aya. Manopolas +1",
+		hands="Leyline Gloves",
 		legs="Carmine Cuisses +1",
 		feet="Carmine Greaves +1",
 		neck="Anu Torque",
@@ -554,9 +555,7 @@ function init_gear_sets()
 	sets.engaged.DW = set_combine(sets.engaged, {
 		--NIN --25
 		sub="Demersal Degen +1",
-		hands="Aya. Manopolas +1", --6
 		feet=gear.Taeon_DW_feet, --9
-		waist="Shetal Stone", --6
 		})
 
 	sets.engaged.DW.Acc = sets.engaged.DW

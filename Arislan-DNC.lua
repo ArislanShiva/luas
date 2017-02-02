@@ -527,14 +527,14 @@ function init_gear_sets()
 		ring1="Chirich Ring",
 		})
 
-	sets.engaged.MidAcc.LowHaste = set_combine(sets.engaged.LowHaste.LowAcc, {
+	sets.engaged.MidAcc.LowHaste = set_combine(sets.engaged.LowAcc.LowHaste, {
 		hands=gear.Herc_Acc_hands,
 		feet=gear.Herc_TA_feet,
 		ring2="Ramuh Ring +1",
 		waist="Kentarch Belt +1",
 		})
 
-	sets.engaged.HighAcc.LowHaste = set_combine(sets.engaged.LowHaste.MidAcc, {
+	sets.engaged.HighAcc.LowHaste = set_combine(sets.engaged.MidAcc.LowHaste, {
 		legs=gear.Herc_WS_legs,
 		feet=gear.Herc_Acc_feet,
 		ear1="Cessance Earring",
@@ -574,14 +574,14 @@ function init_gear_sets()
 		ring1="Chirich Ring",
 		})
 
-	sets.engaged.MidAcc.MidHaste = set_combine(sets.engaged.MidHaste.LowAcc, {
+	sets.engaged.MidAcc.MidHaste = set_combine(sets.engaged.LowAcc.MidHaste, {
 		feet=gear.Herc_TA_feet,
 		ear1="Cessance Earring",
 		ring2="Ramuh Ring +1",
 		waist="Kentarch Belt +1",
 		})
 
-	sets.engaged.HighAcc.MidHaste = set_combine(sets.engaged.MidHaste.MidAcc, {
+	sets.engaged.HighAcc.MidHaste = set_combine(sets.engaged.MidAcc.MidHaste, {
 		legs=gear.Herc_WS_legs,
 		feet=gear.Herc_Acc_feet,
 		ear2="Telos Earring",
@@ -620,13 +620,13 @@ function init_gear_sets()
 		ring1="Chirich Ring",
 		})
 
-	sets.engaged.MidAcc.HighHaste = set_combine(sets.engaged.HighHaste.LowAcc, {
+	sets.engaged.MidAcc.HighHaste = set_combine(sets.engaged.LowAcc.HighHaste, {
 		ammo="Falcon Eye",
 		ear1="Cessance Earring",
 		ring2="Ramuh Ring +1",
 		})
 
-	sets.engaged.HighAcc.HighHaste = set_combine(sets.engaged.HighHaste.MidAcc, {
+	sets.engaged.HighAcc.HighHaste = set_combine(sets.engaged.MidAcc.HighHaste, {
 		legs=gear.Herc_WS_legs,
 		feet=gear.Herc_Acc_feet,
 		ear2="Telos Earring",
@@ -665,13 +665,13 @@ function init_gear_sets()
 		ring1="Chirich Ring",
 		})
 
-	sets.engaged.MidAcc.MaxHaste = set_combine(sets.engaged.MaxHaste.LowAcc, {
+	sets.engaged.MidAcc.MaxHaste = set_combine(sets.engaged.LowAcc.MaxHaste, {
 		ammo="Falcon Eye",
 		ear1="Cessance Earring",
 		ring2="Ramuh Ring +1",
 		})
 
-	sets.engaged.HighAcc.MaxHaste = set_combine(sets.engaged.MaxHaste.MidAcc, {
+	sets.engaged.HighAcc.MaxHaste = set_combine(sets.engaged.MidAcc.MaxHaste, {
 		legs=gear.Herc_WS_legs,
 		feet=gear.Herc_Acc_feet,
 		ear2="Telos Earring",

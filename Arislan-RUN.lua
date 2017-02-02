@@ -592,7 +592,6 @@ function init_gear_sets()
 
 	sets.engaged.STP = set_combine(sets.engaged, {
 		sub="Bloodrain Strap",
-		head="Aya. Zucchetto +1",
 		feet="Carmine Greaves +1",
 		neck="Anu Torque",
 		ear1="Dedition Earring",

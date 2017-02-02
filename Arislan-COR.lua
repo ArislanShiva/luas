@@ -630,7 +630,7 @@ function init_gear_sets()
 		ring2="Ramuh Ring +1",
 		})
 
-	sets.engaged.HighAcc.LowHaste = set_combine(sets.engaged.LowAcc.LowHaste, {
+	sets.engaged.HighAcc.LowHaste = set_combine(sets.engaged.MidAcc.LowHaste, {
 		head="Carmine Mask +1",
 		feet=gear.Herc_Acc_feet,
 		ear1="Cessance Earring",
