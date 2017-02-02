@@ -755,7 +755,7 @@ function init_gear_sets()
 		waist="Shetal Stone", --6
 		} -- 20%
 
-	sets.engaged.LowAcc.MaxHaste = set_combine(sets.engaged.HighHaste, {
+	sets.engaged.LowAcc.MaxHaste = set_combine(sets.engaged.MaxHaste, {
 		ring1="Chirich Ring",
 		waist="Kentarch Belt +1",
 		})
