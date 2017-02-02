@@ -113,7 +113,8 @@ function init_gear_sets()
 
 	-- Enmity set
 	sets.Enmity = {
-		-- Aettir 10 / Alber Strap 5
+		main="Epeolatry", --18
+		sub="Alber Strap", --5
 		ammo="Sapience Orb", --2
 		head="Halitus Helm", --8
 		body="Emet Harness +1", --10
@@ -137,6 +138,7 @@ function init_gear_sets()
 	sets.precast.JA['Liement'] = set_combine(sets.Enmity, {body="Futhark Coat +1"})
 
 	sets.precast.JA['Lunge'] = {
+		sub="Alber Strap",
 		ammo="Seeth. Bomblet +1",
 		head=gear.Herc_MAB_head,
 		body="Samnuha Coat",
@@ -226,6 +228,7 @@ function init_gear_sets()
 
 	sets.precast.WS['Resolution'] = set_combine(sets.precast.WS, {
 		head="Adhemar Bonnet",
+		hands=gear.Herc_TA_hands,
 		legs="Samnuha Tights",
 		ring1="Ifrit Ring +1",
 		ring2="Epona's Ring",
@@ -234,6 +237,7 @@ function init_gear_sets()
 		
 	sets.precast.WS['Resolution'].Acc = set_combine(sets.precast.WS['Resolution'], {
 		head="Dampening Tam",
+		hands="Meg. Gloves +1",
 		legs="Meg. Chausses +1",
 		feet=gear.Herc_Acc_feet,
 		ear2="Telos Earring",
@@ -314,7 +318,6 @@ function init_gear_sets()
 		}
 
 	sets.midcast.Cure = {
-		sub="Mensch Strap +1",
 		ammo="Staunch Tathlum",
 		head=gear.Herc_DT_head,
 		body="Vrikodara Jupon", -- 13
@@ -391,7 +394,8 @@ function init_gear_sets()
 	--------------------------------------
 
 	sets.idle = {
-		sub="Mensch Strap +1",
+		main="Epeolatry",
+		sub="Refined Grip +1",
 		ammo="Homiliary",
 		head="Rawhide Mask",
 		body="Futhark Coat +1",
@@ -408,7 +412,7 @@ function init_gear_sets()
 		}
 
 	sets.idle.DT = {
-		-- Aettir (+5 PDTII)
+		main="Epeolatry",
 		sub="Refined Grip +1", --3/3
 		ammo="Staunch Tathlum", --2/2
 		head="Erilaz Galea +1",
@@ -430,9 +434,9 @@ function init_gear_sets()
 		body="Erilaz Surcoat +1",
 		feet="Carmine Greaves +1",
 		neck="Loricate Torque +1",
-		ear1="Odnowa Earring",
-		ear2="Odnowa Earring +1",
-		ring1="Gelatinous Ring +1",
+		ear1="Cessance Earring",
+		ear2="Telos Earring",
+		ring1="Warden's Ring",
 		ring2="Defending Ring",
 		})
 
@@ -454,7 +458,7 @@ function init_gear_sets()
 		}
 
 	sets.defense.PDT = {
-		-- Aettir (+5 PDTII)
+		main="Epeolatry", --(25)/0
 		sub="Refined Grip +1", --3/3
 		ammo="Staunch Tathlum", --2/2
 		head=gear.Herc_DT_head, --3/3
@@ -472,7 +476,7 @@ function init_gear_sets()
 		}
 	
 	sets.defense.MDT = {
-		-- Aettir (+5 PDTII)
+		main="Aettir", --(5)/0
 		sub="Refined Grip +1", --3/3
 		ammo="Iron Gobbet",
 		head="Erilaz Galea +1",
@@ -490,7 +494,7 @@ function init_gear_sets()
 		}
 
 	sets.defense.Status = {
-		-- Aettir (+5 PDTII)
+		main="Aettir", --(5)/0
 		sub="Refined Grip +1", --3/3
 		ammo="Staunch Tathlum", --2/2
 		head=gear.Herc_DT_head, --3/3
@@ -508,7 +512,7 @@ function init_gear_sets()
 		}
 	
 	sets.defense.HP = {
-		-- Aettir (+5 PDTII)
+		main="Epeolatry", --(25)/0
 		sub="Refined Grip +1", --3/3
 		ammo="Staunch Tathlum", --2/2
 		head="Erilaz Galea +1",
@@ -527,6 +531,7 @@ function init_gear_sets()
 
 	sets.defense.Critical = {
 		-- Aettir (+5 PDTII)
+		main="Epeolatry", --(25)/0
 		sub="Refined Grip +1", --3/3
 		ammo="Iron Gobbet", --(2)
 		head="Fu. Bandeau +1", -- 4/0
@@ -548,7 +553,8 @@ function init_gear_sets()
 	--------------------------------------
 
 	sets.engaged = {
-		sub="Alber Strap",
+		main="Lionheart",
+		sub="Balarama Grip",
 		ammo="Ginsen",
 		head="Dampening Tam",
 		body=gear.Herc_TA_body,
@@ -565,14 +571,12 @@ function init_gear_sets()
 		}
 
 	sets.engaged.LowAcc = set_combine(sets.engaged, {
-		hands=gear.Herc_TA_hands,
 		neck="Combatant's Torque",
 		ring1="Chirich Ring",
 		})
 
 	sets.engaged.MidAcc = set_combine(sets.engaged.LowAcc, {
 		ammo="Falcon Eye",
-		hands=gear.Herc_Acc_hands,
 		ear2="Telos Earring",
 		})
 
@@ -587,10 +591,13 @@ function init_gear_sets()
 		})
 
 	sets.engaged.STP = set_combine(sets.engaged, {
+		sub="Bloodrain Strap",
+		head="Aya. Zucchetto +1",
 		feet="Carmine Greaves +1",
 		neck="Anu Torque",
 		ear1="Dedition Earring",
 		ear2="Telos Earring",
+		ring2="Chirich Ring",
 		waist="Kentarch Belt +1",
 		})
 

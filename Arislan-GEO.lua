@@ -289,7 +289,7 @@ function init_gear_sets()
 
 
 	sets.midcast.MndEnfeebles = {
-		main=gear.Grioavolr_MP,
+		main=gear.Grioavolr_MND,
 		sub="Enki Strap",
 		head="Merlinic Hood",
 		body="Vanya Robe",

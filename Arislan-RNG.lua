@@ -153,7 +153,7 @@ function init_gear_sets()
 		ear2="Ishvara Earring",
 		ring1="Garuda Ring +1",
 		ring2="Garuda Ring +1",
-		back="Belenus's Cape",
+		back=gear.RNG_TP_Cape,
 		waist="Fotia Belt",
 		}
 
@@ -226,7 +226,7 @@ function init_gear_sets()
 		ear2="Friomisi Earring",
 		ring1="Weather. Ring",
 		ring2="Arvina Ringlet +1",
-		back="Argocham. Mantle",
+		back=gear.RNG_WS1_Cape,
 		waist="Eschan Stone",
 		}
 
@@ -298,7 +298,7 @@ function init_gear_sets()
 		ear2="Telos Earring",
 		ring1="Apate Ring",
 		ring2="Garuda Ring +1",
-		back="Belenus's Cape",
+		back=gear.RNG_TP_Cape,
 		waist="Yemaya Belt",
 		}
 	
@@ -386,7 +386,7 @@ function init_gear_sets()
 		ear2="Telos Earring",
 		ring1="Garuda Ring +1",
 		ring2="Garuda Ring +1",
-		back="Belenus's Cape",
+		back=gear.RNG_TP_Cape,
 		})
 
 		
@@ -444,7 +444,6 @@ function init_gear_sets()
 
 	sets.engaged.HighAcc = set_combine(sets.engaged.MidAcc, {
 		head="Carmine Mask +1",
-		hands=gear.Herc_Acc_hands,
 		feet=gear.Herc_Acc_feet,
 		ear2="Telos Earring",
 		ring1="Ramuh Ring +1",
@@ -489,7 +488,6 @@ function init_gear_sets()
 
 	sets.engaged.LowHaste.HighAcc = set_combine(sets.engaged.LowHaste.MidAcc, {
 		head="Carmine Mask +1",
-		hands=gear.Herc_Acc_hands,
 		feet=gear.Herc_Acc_feet,
 		ear1="Cessance Earring",
 		ring1="Ramuh Ring +1",
@@ -534,7 +532,6 @@ function init_gear_sets()
 
 	sets.engaged.MidHaste.HighAcc = set_combine(sets.engaged.MidHaste.MidAcc, {
 		head="Carmine Mask +1",
-		hands=gear.Herc_Acc_hands,
 		feet=gear.Herc_Acc_feet,
 		ear1="Cessance Earring",
 		ring1="Ramuh Ring +1",
@@ -580,7 +577,6 @@ function init_gear_sets()
 
 	sets.engaged.HighHaste.HighAcc = set_combine(sets.engaged.HighHaste.MidAcc, {
 		head="Carmine Mask +1",
-		hands=gear.Herc_Acc_hands,
 		legs="Carmine Cuisses +1",
 		feet=gear.Herc_Acc_feet,
 		ear1="Cessance Earring",
@@ -614,7 +610,6 @@ function init_gear_sets()
 		} -- 19%
 
 	sets.engaged.MaxHaste.LowAcc = set_combine(sets.engaged.HighHaste, {
-		hands=gear.Herc_TA_hands,
 		ring1="Chirich Ring",
 		waist="Kentarch Belt +1",
 		})
@@ -628,7 +623,6 @@ function init_gear_sets()
 
 	sets.engaged.MaxHaste.HighAcc = set_combine(sets.engaged.MaxHaste.MidAcc, {
 		head="Carmine Mask +1",
-		hands=gear.Herc_Acc_hands,
 		legs="Carmine Cuisses +1",
 		feet=gear.Herc_Acc_feet,
 		ear1="Cessance Earring",
@@ -650,8 +644,8 @@ function init_gear_sets()
 	--------------------------------------
 
 	sets.buff.Barrage = set_combine(sets.midcast.RA.Acc, {hands="Orion Bracers +1"})
-	sets.buff['Velocity Shot'] = set_combine(sets.midcast.RA, {body="Amini Caban +1", back="Belenus's Cape"})
-	sets.buff['Double Shot'] = set_combine(sets.midcast.RA, {back="Belenus's Cape"})
+	sets.buff['Velocity Shot'] = set_combine(sets.midcast.RA, {body="Amini Caban +1", back=gear.RNG_TP_Cape})
+	sets.buff['Double Shot'] = set_combine(sets.midcast.RA, {back=gear.RNG_TP_Cape})
 --	sets.buff.Camouflage = {body="Orion Jerkin +1"}
 
 	sets.buff.Doom = {ring1="Saida Ring", ring2="Saida Ring", waist="Gishdubar Sash"}

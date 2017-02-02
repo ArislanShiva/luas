@@ -419,13 +419,11 @@ function init_gear_sets()
 
 	sets.engaged.LowAcc = set_combine(sets.engaged, {
 		ammo="Falcon Eye",
-		hands=gear.Herc_TA_hands,
 		neck="Combatant's Torque",
 		ring1="Chirich Ring",
 		})
 
 	sets.engaged.MidAcc = set_combine(sets.engaged.LowAcc, {
-		hands=gear.Herc_Acc_hands,
 		ring2="Ramuh Ring +1",
 		back="Toutatis's Cape",
 		waist="Kentarch Belt +1",
@@ -467,13 +465,11 @@ function init_gear_sets()
 
 	sets.engaged.LowHaste.LowAcc = set_combine(sets.engaged.LowHaste, {
 		ammo="Falcon Eye",
-		hands=gear.Herc_TA_hands,
 		neck="Combatant's Torque",
 		ring1="Chirich Ring",
 		})
 
 	sets.engaged.LowHaste.MidAcc = set_combine(sets.engaged.LowHaste.LowAcc, {
-		hands=gear.Herc_Acc_hands,
 		ring2="Ramuh Ring +1",
 		back="Toutatis's Cape",
 		waist="Kentarch Belt +1",
@@ -515,13 +511,11 @@ function init_gear_sets()
 
 	sets.engaged.MidHaste.LowAcc = set_combine(sets.engaged.MidHaste, {
 		ammo="Falcon Eye",
-		hands=gear.Herc_TA_hands,
 		neck="Combatant's Torque",
 		ring1="Chirich Ring",
 		})
 
 	sets.engaged.MidHaste.MidAcc = set_combine(sets.engaged.MidHaste.LowAcc, {
-		hands=gear.Herc_Acc_hands,
 		feet=gear.Herc_TA_feet,
 		ear1="Cessance Earring",
 		ring2="Ramuh Ring +1",
@@ -563,7 +557,6 @@ function init_gear_sets()
 		} -- 23%
 
 	sets.engaged.HighHaste.LowAcc = set_combine(sets.engaged.HighHaste, {
-		hands=gear.Herc_TA_hands,
 		neck="Combatant's Torque",
 		waist="Kentarch Belt +1",
 		ring1="Chirich Ring",
@@ -571,7 +564,6 @@ function init_gear_sets()
 
 	sets.engaged.HighHaste.MidAcc = set_combine(sets.engaged.HighHaste.LowAcc, {
 		ammo="Falcon Eye",
-		hands=gear.Herc_Acc_hands,
 		ear1="Cessance Earring",
 		ring2="Ramuh Ring +1",
 		})
@@ -610,7 +602,6 @@ function init_gear_sets()
 		} -- 9%
 
 	sets.engaged.MaxHaste.LowAcc = set_combine(sets.engaged.MaxHaste, {
-		hands=gear.Herc_TA_hands,
 		neck="Combatant's Torque",
 		waist="Kentarch Belt +1",
 		ring1="Chirich Ring",
@@ -618,7 +609,6 @@ function init_gear_sets()
 
 	sets.engaged.MaxHaste.MidAcc = set_combine(sets.engaged.MaxHaste.LowAcc, {
 		ammo="Falcon Eye",
-		hands=gear.Herc_Acc_hands,
 		ear1="Cessance Earring",
 		ring2="Ramuh Ring +1",
 		})

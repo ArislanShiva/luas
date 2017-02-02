@@ -551,7 +551,8 @@ function init_gear_sets()
 	
 	-- Normal melee group
 
-	sets.engaged = {		
+	sets.engaged = {
+		sub="Bloodrain Strap",
 		head="Telchine Cap",
 		body="Onca Suit",
 		neck="Combatant's Torque",

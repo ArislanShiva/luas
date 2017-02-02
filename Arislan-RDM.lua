@@ -343,7 +343,7 @@ function init_gear_sets()
 
  	-- Custom spell classes
 	sets.midcast.MndEnfeebles = {
-		main=gear.Grioavolr_MP,
+		main=gear.Grioavolr_MND,
 		sub="Enki Strap",
 		ammo="Quartz Tathlum +1",
 		head="Carmine Mask +1",

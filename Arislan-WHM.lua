@@ -341,7 +341,7 @@ function init_gear_sets()
 	sets.midcast.Shellra = sets.midcast.Protect
 
 	sets.midcast['Divine Magic'] = {
-		main=gear.Grioavolr_MP,
+		main=gear.Grioavolr_MND,
 		sub="Enki Strap",
 		ammo="Pemphredo Tathlum",
 		head="Befouled Crown",
@@ -359,7 +359,7 @@ function init_gear_sets()
 		}
 
 	sets.midcast.Banish = set_combine(sets.midcast['Divine Magic'], {
-		main=gear.Grioavolr_MP,
+		main=gear.Grioavolr_MND,
 		sub="Niobid Strap",
 		head="Inyanga Tiara +1",
 		body="Witching Robe",
@@ -393,7 +393,7 @@ function init_gear_sets()
 
 	-- Custom spell classes
 	sets.midcast.MndEnfeebles = {
-		main=gear.Grioavolr_MP,
+		main=gear.Grioavolr_MND,
 		sub="Enki Strap",
 		ammo="Quartz Tathlum +1",
 		head="Befouled Crown",

@@ -93,7 +93,7 @@ end
 -- Setup vars that are user-dependent.  Can override this function in a sidecar file.
 function user_setup()
 	state.OffenseMode:options('STP', 'Normal', 'LowAcc', 'MidAcc', 'HighAcc')
-	state.RangedMode:options('Acc', 'Critical', 'STP', 'Normal')
+	state.RangedMode:options('STP', 'Normal', 'Acc', 'Critical')
 	state.WeaponskillMode:options('Normal', 'Acc')
 	state.CastingMode:options('Normal', 'Resistant')
 	state.IdleMode:options('Normal', 'DT')
@@ -163,7 +163,6 @@ function init_gear_sets()
 	---------------------------------------- Precast Sets ------------------------------------------
 	------------------------------------------------------------------------------------------------
 
-	sets.precast.JA['Triple Shot'] = {body="Chasseur's Frac +1"}
 	sets.precast.JA['Snake Eye'] = {legs="Lanun Culottes"}
 	sets.precast.JA['Wild Card'] = {feet="Lanun Bottes +1"}
 	sets.precast.JA['Random Deal'] = {body="Lanun Frac +1"}
@@ -589,7 +588,6 @@ function init_gear_sets()
 
 	sets.engaged.HighAcc = set_combine(sets.engaged.MidAcc, {
 		head="Carmine Mask +1",
-		hands=gear.Herc_Acc_hands,
 		feet=gear.Herc_Acc_feet,
 		ear2="Telos Earring",
 		ring1="Ramuh Ring +1",
@@ -634,7 +632,6 @@ function init_gear_sets()
 
 	sets.engaged.LowHaste.HighAcc = set_combine(sets.engaged.LowHaste.MidAcc, {
 		head="Carmine Mask +1",
-		hands=gear.Herc_Acc_hands,
 		feet=gear.Herc_Acc_feet,
 		ear1="Cessance Earring",
 		ring1="Ramuh Ring +1",
@@ -667,7 +664,6 @@ function init_gear_sets()
 		} -- 39%
 
 	sets.engaged.MidHaste.LowAcc = set_combine(sets.engaged.MidHaste, {
-		hands=gear.Herc_TA_hands,
 		ring1="Chirich Ring",
 		waist="Kentarch Belt +1",
 		})
@@ -681,7 +677,6 @@ function init_gear_sets()
 
 	sets.engaged.MidHaste.HighAcc = set_combine(sets.engaged.MidHaste.MidAcc, {
 		head="Carmine Mask +1",
-		hands=gear.Herc_Acc_hands,
 		legs="Carmine Cuisses +1",
 		feet=gear.Herc_Acc_feet,
 		ear1="Cessance Earring",
@@ -715,7 +710,6 @@ function init_gear_sets()
 		} -- 35%
 
 	sets.engaged.HighHaste.LowAcc = set_combine(sets.engaged.HighHaste, {
-		hands=gear.Herc_TA_hands,
 		ring1="Chirich Ring",
 		waist="Kentarch Belt +1",
 		})
@@ -729,7 +723,6 @@ function init_gear_sets()
 
 	sets.engaged.HighHaste.HighAcc = set_combine(sets.engaged.HighHaste.MidAcc, {
 		head="Carmine Mask +1",
-		hands=gear.Herc_Acc_hands,
 		legs="Carmine Cuisses +1",
 		feet=gear.Herc_Acc_feet,
 		ear1="Cessance Earring",
@@ -763,7 +756,6 @@ function init_gear_sets()
 		} -- 20%
 
 	sets.engaged.MaxHaste.LowAcc = set_combine(sets.engaged.HighHaste, {
-		hands=gear.Herc_TA_hands,
 		ring1="Chirich Ring",
 		waist="Kentarch Belt +1",
 		})
@@ -777,7 +769,6 @@ function init_gear_sets()
 
 	sets.engaged.MaxHaste.HighAcc = set_combine(sets.engaged.MaxHaste.MidAcc, {
 		head="Carmine Mask +1",
-		hands=gear.Herc_Acc_hands,
 		legs="Carmine Cuisses +1",
 		feet=gear.Herc_Acc_feet,
 		ear1="Cessance Earring",
@@ -796,6 +787,7 @@ function init_gear_sets()
 
 	sets.buff.Doom = {ring1="Saida Ring", ring2="Saida Ring", waist="Gishdubar Sash"}
 
+	sets.TripleShot = {body="Chasseur's Frac +1"}
 	sets.Obi = {waist="Hachirin-no-Obi"}
 	sets.CP = {back="Mecisto. Mantle"}
 	sets.Reive = {neck="Ygnas's Resolve +1"}
@@ -847,6 +839,12 @@ function job_post_precast(spell, action, spellMap, eventArgs)
 				equip(sets.Obi)
 			end
 		end
+	end
+end
+
+function job_post_midcast(spell, action, spellMap, eventArgs)
+	if spell.action_type == 'Ranged Attack' and buffactive['Triple Shot'] then
+		equip(sets.TripleShot)
 	end
 end
 
