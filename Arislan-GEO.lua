@@ -289,7 +289,7 @@ function init_gear_sets()
 
 
 	sets.midcast.MndEnfeebles = {
-		main=gear.Grioavolr_MND,
+		main=gear.Grioavolr_INT,
 		sub="Enki Strap",
 		head="Merlinic Hood",
 		body="Vanya Robe",
@@ -306,7 +306,6 @@ function init_gear_sets()
 		} -- MND/Magic accuracy
 	
 	sets.midcast.IntEnfeebles = set_combine(sets.midcast.MndEnfeebles, {
-		main=gear.Grioavolr_INT,
 		back="Nantosuelta's Cape",
 		}) -- INT/Magic accuracy
 

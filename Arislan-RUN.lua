@@ -69,7 +69,17 @@ function user_setup()
 	send_command('bind ^] gs c toggle Death')
 	send_command('bind ^\ gs c toggle Charm')
 	send_command('bind !q input /ma "Temper" <me>')
-	send_command('bind !w input /ma "Cocoon" <me>')
+
+	if player.sub_job == 'BLU' then
+		send_command('bind !w input /ma "Cocoon" <me>')
+	elseif player.sub_job == 'WAR' then
+		send_command('bind !w input /ja "Defender" <me>')
+	elseif player.sub_job == 'DRK' then
+		send_command('bind !w input /ja "Last Resort" <me>')
+	elseif player.sub_job == 'SAM' then
+		send_command('bind !w input /ja "Hasso" <me>')
+	end
+
 	send_command('bind !o input /ma "Regen IV" <stpc>')
 	send_command('bind !p input /ma "Shock Spikes" <me>')
 	
@@ -176,7 +186,7 @@ function init_gear_sets()
 	sets.precast.FC = {
 		ammo="Sapience Orb", --2
 		head="Carmine Mask +1", --14
-		body="Taeon Tabard", --9
+		body=gear.Taeon_FC_body, --8
 		hands="Leyline Gloves", --7
 		legs="Aya. Cosciales +1", --5
 		feet="Carmine Greaves +1", --8
@@ -228,7 +238,6 @@ function init_gear_sets()
 
 	sets.precast.WS['Resolution'] = set_combine(sets.precast.WS, {
 		head="Adhemar Bonnet",
-		hands=gear.Herc_TA_hands,
 		legs="Samnuha Tights",
 		ring1="Ifrit Ring +1",
 		ring2="Epona's Ring",
@@ -237,7 +246,6 @@ function init_gear_sets()
 		
 	sets.precast.WS['Resolution'].Acc = set_combine(sets.precast.WS['Resolution'], {
 		head="Dampening Tam",
-		hands="Meg. Gloves +1",
 		legs="Meg. Chausses +1",
 		feet=gear.Herc_Acc_feet,
 		ear2="Telos Earring",
@@ -245,7 +253,7 @@ function init_gear_sets()
 		})
 	
 	sets.precast.WS['Dimidiation'] = set_combine(sets.precast.WS['Resolution'], {
-		hands=gear.Adhemar_Att_hands,
+		hands=gear.Adhemar_TP_hands,
 		legs="Lustratio Subligar",
 		feet="Lustratio Leggings",
 		ring1="Apate Ring",
@@ -351,6 +359,8 @@ function init_gear_sets()
 
 	sets.midcast['Phalanx'] = set_combine(sets.midcast['Enhancing Magic'], {
 		head="Fu. Bandeau +1",
+		body=gear.Taeon_FC_body,
+		feet=gear.Taeon_PH_feet,
 		})
 
 	sets.midcast['Regen'] = set_combine(sets.midcast['Enhancing Magic'], {
@@ -429,6 +439,7 @@ function init_gear_sets()
 		}
 
 	sets.idle.Town = set_combine(sets.idle, {
+		sub="Nepenthe Grip +1",
 		ammo="Staunch Tathlum",
 		head="Carmine Mask +1",
 		body="Erilaz Surcoat +1",
@@ -558,7 +569,7 @@ function init_gear_sets()
 		ammo="Ginsen",
 		head="Dampening Tam",
 		body=gear.Herc_TA_body,
-		hands=gear.Adhemar_Att_hands,
+		hands=gear.Adhemar_TP_hands,
 		legs="Samnuha Tights",
 		feet=gear.Herc_TA_feet,
 		neck="Asperity Necklace",
@@ -591,12 +602,12 @@ function init_gear_sets()
 		})
 
 	sets.engaged.STP = set_combine(sets.engaged, {
-		sub="Bloodrain Strap",
+		sub="Nepenthe Grip +1",
 		feet="Carmine Greaves +1",
 		neck="Anu Torque",
 		ear1="Dedition Earring",
 		ear2="Telos Earring",
-		ring2="Chirich Ring",
+		--ring2="Chirich Ring",
 		waist="Kentarch Belt +1",
 		})
 

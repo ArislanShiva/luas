@@ -109,7 +109,7 @@ function init_gear_sets()
 	sets.precast.FC = {
 		ammo="Sapience Orb", --2
 		head=gear.Herc_MAB_head, --7
-		body="Taeon Tabard", --9
+		body=gear.Taeon_FC_body, --8
 		hands="Leyline Gloves", --7
 		legs="Rawhide Trousers", --5
 		feet=gear.Herc_MAB_feet, --2
@@ -130,8 +130,9 @@ function init_gear_sets()
 		})
 
 	sets.precast.RA = {
-		head="Aurore Beret +1", --5
-		legs="Adhemar Kecks", --9
+		head="Taeon Chapeau", --10/0
+		body=gear.Taeon_RA_body, --9/0
+		legs="Adhemar Kecks", --9/0
 		}
 	   
 	-- Weaponskill sets
@@ -140,7 +141,7 @@ function init_gear_sets()
 		ammo="Seeth. Bomblet +1",
 		head="Lilitu Headpiece",
 		body="Adhemar Jacket",
-		hands=gear.Adhemar_Att_hands,
+		hands=gear.Adhemar_TP_hands,
 		legs="Hiza. Hizayoroi +1",
 		feet=gear.Herc_TA_feet,
 		neck="Fotia Gorget",
@@ -401,7 +402,7 @@ function init_gear_sets()
 		ammo="Ginsen",
 		head="Dampening Tam",
 		body="Adhemar Jacket", --5
-		hands=gear.Adhemar_Att_hands,
+		hands=gear.Adhemar_TP_hands,
 		legs="Samnuha Tights",
 		feet=gear.Herc_TA_feet,
 		neck="Erudit. Necklace",
@@ -447,7 +448,7 @@ function init_gear_sets()
 		ammo="Ginsen",
 		head="Dampening Tam",
 		body="Adhemar Jacket", --5
-		hands=gear.Adhemar_Att_hands,
+		hands=gear.Adhemar_TP_hands,
 		legs="Samnuha Tights",
 		feet=gear.Herc_TA_feet,
 		neck="Erudit. Necklace",
@@ -492,7 +493,7 @@ function init_gear_sets()
 		ammo="Ginsen",
 		head="Dampening Tam",
 		body=gear.Herc_TA_body,
-		hands=gear.Adhemar_Att_hands,
+		hands=gear.Adhemar_TP_hands,
 		legs="Samnuha Tights",
 		feet=gear.Herc_TA_feet,
 		neck="Erudit. Necklace",

@@ -268,8 +268,8 @@ function init_gear_sets()
 		})
 	
 	sets.midcast['Enhancing Magic'] = {
-		main="Gada",
-		sub="Genmei Shield",
+		main="Oranyan",
+		sub="Enki Strap",
 		head="Telchine Cap",
 		body="Telchine Chasuble",
 		hands="Telchine Gloves",
@@ -284,6 +284,8 @@ function init_gear_sets()
 		}
 	
 	sets.midcast.EnhancingDuration = {
+		main="Oranyan",
+		sub="Enki Strap",
 		head="Telchine Cap",
 		body="Telchine Chas.",
 		hands="Telchine Gloves",
@@ -330,7 +332,7 @@ function init_gear_sets()
 
 	-- Custom spell classes
 	sets.midcast.MndEnfeebles = {
-		main=gear.Grioavolr_MND,
+		main=gear.Grioavolr_INT,
 		sub="Enki Strap",
 		ammo="Quartz Tathlum +1",
 		head="Merlinic Hood",
@@ -550,7 +552,8 @@ function init_gear_sets()
 	---------------------------------------- Special Sets ------------------------------------------
 	------------------------------------------------------------------------------------------------
 	
-	sets.magic_burst = { -- Staff 10
+	sets.magic_burst = { 
+		-- Akademos 10
 		body="Merlinic Jubbah", --10
 		hands="Amalric Gages", --(5)
 		legs="Merlinic Shalwar", --6

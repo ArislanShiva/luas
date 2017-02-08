@@ -208,7 +208,7 @@ function init_gear_sets()
 	
 	sets.precast.FC = {
 		head="Carmine Mask +1", --14
-		body="Taeon Tabard", --9
+		body=gear.Taeon_FC_body, --8
 		hands="Leyline Gloves", --7
 		legs="Rawhide Trousers", --5
 		feet="Carmine Greaves +1", --8
@@ -229,12 +229,12 @@ function init_gear_sets()
 	sets.precast.RA = {
 		ammo=gear.RAbullet,
 		head="Taeon Chapeau", --10/0
-		body="Pursuer's Doublet", --6
+		body=gear.Taeon_RA_body, --9/0
 		hands="Carmine Fin. Ga. +1", --8/11
-		legs="Adhemar Kecks", --9
-		feet="Meg. Jam. +1", --8
-		back="Navarch's Mantle", --7
-		waist="Impulse Belt", --3
+		legs="Adhemar Kecks", --9/0
+		feet="Meg. Jam. +1", --8/0
+		back="Navarch's Mantle", --7/0
+		waist="Impulse Belt", --3/0
 		} -- 10% Gifts
 
 	   
@@ -315,7 +315,7 @@ function init_gear_sets()
 	sets.precast.WS['Evisceration'] = {
 		head="Adhemar Bonnet",
 		body="Meg. Cuirie +1",
-		hands=gear.Adhemar_Att_hands,
+		hands=gear.Adhemar_TP_hands,
 		legs="Samnuha Tights",
 		feet=gear.Herc_TA_feet,
 		neck="Fotia Gorget",
@@ -455,7 +455,7 @@ function init_gear_sets()
 		neck="Marked Gorget",
 		ear1="Enervating Earring",
 		ear2="Telos Earring",
-		ring1="Arvina Ringlet +1",
+		ring1="Garuda Ring +1",
 		ring2="Garuda Ring +1",
 		back=gear.COR_RA_Cape,
 		waist="Yemaya Belt",
@@ -651,7 +651,7 @@ function init_gear_sets()
 	sets.engaged.MidHaste = {
 		head="Dampening Tam",
 		body="Adhemar Jacket", --5
-		hands=gear.Adhemar_Att_hands,
+		hands=gear.Adhemar_TP_hands,
 		legs="Samnuha Tights",
 		feet=gear.Taeon_DW_feet, --9
 		neck="Asperity Necklace",
@@ -697,7 +697,7 @@ function init_gear_sets()
 	sets.engaged.HighHaste = {
 		head="Dampening Tam",
 		body="Adhemar Jacket", --5
-		hands=gear.Adhemar_Att_hands,
+		hands=gear.Adhemar_TP_hands,
 		legs="Samnuha Tights",
 		feet=gear.Herc_TA_feet,
 		neck="Asperity Necklace",
@@ -743,7 +743,7 @@ function init_gear_sets()
 	sets.engaged.MaxHaste = {
 		head="Dampening Tam",
 		body="Adhemar Jacket", --5
-		hands=gear.Adhemar_Att_hands,
+		hands=gear.Adhemar_TP_hands,
 		legs="Samnuha Tights",
 		feet=gear.Herc_TA_feet,
 		neck="Asperity Necklace",

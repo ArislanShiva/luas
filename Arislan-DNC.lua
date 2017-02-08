@@ -232,7 +232,7 @@ function init_gear_sets()
 	sets.precast.FC = {
 		ammo="Sapience Orb",
 		head=gear.Herc_MAB_head, --7
-		body="Taeon Tabard", --9
+		body=gear.Taeon_FC_body, --8
 		hands="Leyline Gloves", --7
 		legs="Rawhide Trousers", --5
 		feet=gear.Herc_MAB_feet, --2
@@ -295,7 +295,7 @@ function init_gear_sets()
 		ammo="Cheruski Needle",
 		head="Adhemar Bonnet",
 		body="Adhemar Jacket",
-		hands=gear.Adhemar_Att_hands,
+		hands=gear.Adhemar_TP_hands,
 		legs="Samnuha Tights",
 		feet=gear.Herc_TA_feet,
 		ear1="Mache Earring",
@@ -400,7 +400,7 @@ function init_gear_sets()
 		ammo="Staunch Tathlum",
 		head="Dampening Tam",
 		body="Mekosu. Harness",
-		hands=gear.Adhemar_Att_hands,
+		hands=gear.Adhemar_TP_hands,
 		legs="Samnuha Tights",
 		feet="Skd. Jambeaux +1",
 		neck="Sanctity Necklace",
@@ -463,7 +463,7 @@ function init_gear_sets()
 		ammo="Ginsen",
 		head="Dampening Tam",
 		body="Macu. Casaque +1", --11
-		hands=gear.Adhemar_Att_hands,
+		hands=gear.Adhemar_TP_hands,
 		legs="Samnuha Tights",
 		feet=gear.Taeon_DW_feet, --9
 		neck="Charis Necklace", --5
@@ -509,7 +509,7 @@ function init_gear_sets()
 		ammo="Ginsen",
 		head="Dampening Tam",
 		body="Macu. Casaque +1", --11
-		hands=gear.Adhemar_Att_hands,
+		hands=gear.Adhemar_TP_hands,
 		legs="Samnuha Tights",
 		feet=gear.Herc_TA_feet,
 		neck="Charis Necklace", --5
@@ -556,7 +556,7 @@ function init_gear_sets()
 		ammo="Ginsen",
 		head="Dampening Tam",
 		body="Adhemar Jacket", --5
-		hands=gear.Adhemar_Att_hands,
+		hands=gear.Adhemar_TP_hands,
 		legs="Samnuha Tights",
 		feet=gear.Herc_TA_feet,
 		neck="Asperity Necklace",
@@ -602,7 +602,7 @@ function init_gear_sets()
 		ammo="Ginsen",
 		head="Dampening Tam",
 		body="Adhemar Jacket", --5
-		hands=gear.Adhemar_Att_hands,
+		hands=gear.Adhemar_TP_hands,
 		legs="Samnuha Tights",
 		feet=gear.Herc_TA_feet,
 		neck="Asperity Necklace",
@@ -647,7 +647,7 @@ function init_gear_sets()
 		ammo="Ginsen",
 		head="Dampening Tam",
 		body=gear.Herc_TA_body,
-		hands=gear.Adhemar_Att_hands,
+		hands=gear.Adhemar_TP_hands,
 		legs="Samnuha Tights",
 		feet=gear.Herc_TA_feet,
 		neck="Asperity Necklace",

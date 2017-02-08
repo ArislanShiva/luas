@@ -289,8 +289,11 @@ function init_gear_sets()
 		})
 
 	sets.midcast['Enhancing Magic'] = {
+		main="Oranyan",
+		sub="Enki Strap",
 		head="Befouled Crown",
 		body="Viti. Tabard +1",
+		hands="Atrophy Gloves +1",
 		legs="Atrophy Tights +1",
 		feet="Leth. Houseaux +1",
 		neck="Incanter's Torque",
@@ -302,6 +305,8 @@ function init_gear_sets()
 		}
 	
 	sets.midcast.EnhancingDuration = {
+		main="Oranyan",
+		sub="Enki Strap",
 		head="Telchine Cap",
 		body="Telchine Chas.",
 		hands="Atrophy Gloves +1",
@@ -327,6 +332,10 @@ function init_gear_sets()
 		waist="Siegel Sash",
 		})
 
+	sets.midcast['Phalanx'] = set_combine(sets.midcast['Enhancing Magic'], {
+		body=gear.Taeon_FC_body,
+		feet=gear.Taeon_PH_feet
+		})
 	sets.midcast.Aquaveil = set_combine(sets.midcast['Enhancing Magic'], {
 		head="Amalric Coif",
 		waist="Emphatikos Rope",
@@ -344,7 +353,7 @@ function init_gear_sets()
 
  	-- Custom spell classes
 	sets.midcast.MndEnfeebles = {
-		main=gear.Grioavolr_MND,
+		main=gear.Grioavolr_INT,
 		sub="Enki Strap",
 		ammo="Quartz Tathlum +1",
 		head="Carmine Mask +1",
@@ -362,7 +371,6 @@ function init_gear_sets()
 		}
 	
 	sets.midcast.IntEnfeebles = set_combine(sets.midcast.MndEnfeebles, {
-		main=gear.Grioavolr_INT,
 		ammo="Pemphredo Tathlum",
 		back=gear.RDM_INT_Cape,
 		})
@@ -523,7 +531,18 @@ function init_gear_sets()
 	------------------------------------------------------------------------------------------------
 	
 	sets.defense.PDT = sets.idle.DT
-	sets.defense.MDT = sets.idle.DT
+	sets.defense.MDT = sets.idle.DT	
+
+	sets.magic_burst = { 
+		main=gear.Grioavolr_MAB, --5
+		body="Merlinic Jubbah", --10
+		hands="Amalric Gages", --(5)
+		legs="Merlinic Shalwar", --6
+		feet="Merlinic Crackows", --11
+		neck="Mizu. Kubikazari", --10
+		ring1="Mujin Band", --(5)
+		}
+
 	sets.Kiting = {legs="Carmine Cuisses +1"}
 	sets.latent_refresh = {waist="Fucho-no-obi"}
 
@@ -554,7 +573,7 @@ function init_gear_sets()
 
 	sets.engaged.DW = set_combine(sets.engaged, {
 		--NIN --25
-		sub="Demersal Degen +1",
+		sub="Blurred Knife +1",
 		feet=gear.Taeon_DW_feet, --9
 		})
 
@@ -571,19 +590,6 @@ end
 -------------------------------------------------------------------------------------------------------------------
 -- Job-specific hooks for standard casting events.
 -------------------------------------------------------------------------------------------------------------------
-
-function job_precast(spell, action, spellMap, eventArgs)
-
-	if type(windower.ffxi.get_player().autorun) == 'table' and spell.action_type == 'Magic' then 
-		windower.add_to_chat(122,'Currently auto-running - stopping to cast spell')
-		windower.ffxi.run(false)
-		windower.ffxi.follow()  -- disabling Follow - turning back autorun automatically turns back on follow.
-		autorun = 1
-		cast_delay(.4) -- manipulate based on lag.
-		return
-	end
-
-end
 
 -- Run after the default midcast() is done.
 -- eventArgs is the same one used in job_midcast, in case information needs to be persisted.

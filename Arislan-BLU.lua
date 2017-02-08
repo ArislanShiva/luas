@@ -274,7 +274,7 @@ function init_gear_sets()
 		-- Tanmoygayi +1 6 / Colada 4
 		ammo="Sapience Orb", --2
 		head="Carmine Mask +1", --14
-		body="Taeon Tabard", --9
+		body=gear.Taeon_FC_body, --8
 		hands="Leyline Gloves", --7
 		legs="Psycloth Lappas", --7
 		feet="Carmine Greaves +1", --8
@@ -334,7 +334,7 @@ function init_gear_sets()
 		ammo="Jukukik Feather",
 		head="Adhemar Bonnet",
 		body="Abnoba Kaftan",
-		hands=gear.Adhemar_Att_hands,
+		hands=gear.Adhemar_TP_hands,
 		legs="Samnuha Tights", 
 		feet="Thereoid Greaves",
 		ear2="Brutal Earring",
@@ -354,7 +354,7 @@ function init_gear_sets()
 
 	sets.precast.WS['Savage Blade'] = set_combine(sets.precast.WS, {
 		ammo="Floestone",
-		hands=gear.Adhemar_Att_hands,
+		hands=gear.Adhemar_TP_hands,
 		neck="Caro Necklace",
 		ring1="Ifrit Ring +1",
 		ring2="Shukuyu Ring",
@@ -471,7 +471,7 @@ function init_gear_sets()
 		ammo="Ginsen",
 		head="Adhemar Bonnet", 
 		body=gear.Herc_TA_body,
-		hands=gear.Adhemar_Att_hands,
+		hands=gear.Adhemar_TP_hands,
 		legs=gear.Herc_WS_legs,
 		feet=gear.Herc_TA_feet,
 		neck="Caro Necklace", 
@@ -658,6 +658,7 @@ function init_gear_sets()
 
 	sets.midcast.Refresh = set_combine(sets.midcast['Enhancing Magic'], {head="Amalric Coif", waist="Gishdubar Sash"})
 	sets.midcast.Stoneskin = set_combine(sets.midcast['Enhancing Magic'], {waist="Siegel Sash"})
+	sets.midcast.Phalanx = set_combine(sets.midcast['Enhancing Magic'], {body=gear.Taeon_FC_body, feet=gear.Taeon_PH_feet})
 	sets.midcast.Aquaveil = set_combine(sets.midcast['Enhancing Magic'], {head="Amalric Coif", waist="Emphatikos Rope"})
 
 	sets.midcast.Protect = {ring1="Sheltered Ring"}
@@ -754,7 +755,7 @@ function init_gear_sets()
 		ammo="Ginsen",
 		head="Dampening Tam",
 		body="Adhemar Jacket", --5
-		hands=gear.Adhemar_Att_hands,
+		hands=gear.Adhemar_TP_hands,
 		legs="Carmine Cuisses +1", --6
 		feet=gear.Taeon_DW_feet, --9
 		neck="Asperity Necklace", 
@@ -802,7 +803,7 @@ function init_gear_sets()
 		ammo="Ginsen",
 		head="Dampening Tam",
 		body="Adhemar Jacket", --5
-		hands=gear.Adhemar_Att_hands,
+		hands=gear.Adhemar_TP_hands,
 		legs="Carmine Cuisses +1", --6
 		feet=gear.Taeon_DW_feet, --9
 		neck="Asperity Necklace", 
@@ -850,7 +851,7 @@ function init_gear_sets()
 		ammo="Ginsen",
 		head="Dampening Tam",
 		body="Adhemar Jacket", --5
-		hands=gear.Adhemar_Att_hands,
+		hands=gear.Adhemar_TP_hands,
 		legs="Samnuha Tights",
 		feet=gear.Taeon_DW_feet, --9
 		neck="Asperity Necklace", 
@@ -900,7 +901,7 @@ function init_gear_sets()
 		ammo="Ginsen",
 		head="Dampening Tam",
 		body="Adhemar Jacket", --5
-		hands=gear.Adhemar_Att_hands,
+		hands=gear.Adhemar_TP_hands,
 		legs="Samnuha Tights",
 		feet=gear.Herc_TA_feet,
 		neck="Asperity Necklace", 
@@ -949,7 +950,7 @@ function init_gear_sets()
 		ammo="Ginsen",
 		head="Dampening Tam",
 		body=gear.Herc_TA_body,
-		hands=gear.Adhemar_Att_hands,
+		hands=gear.Adhemar_TP_hands,
 		legs="Samnuha Tights",
 		feet=gear.Herc_TA_feet,
 		neck="Asperity Necklace",

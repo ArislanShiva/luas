@@ -48,7 +48,7 @@ function user_setup()
 	lowTierNukes = S{'Stone', 'Water', 'Aero', 'Fire', 'Blizzard', 'Thunder'}
 	
 	-- Additional local binds
-	send_command('bind ^` input /ma Stun <t>;input /p <wstar><wstar><wstar> <ldangle> <circle1> Stun <rarr> <t> <rdangle> <wstar><wstar><wstar> <call14>') 
+	send_command('bind ^` input /ma Stun <t>;')--input /p <wstar> <ldangle> <circle1> Stun <rarr> <t> <rdangle> <wstar> <call14>') 
 	send_command('bind !` gs c toggle MagicBurst')
 	send_command('bind !w input /ma "Aspir III" <t>')
 	send_command('bind !p input /ma "Shock Spikes" <me>')
@@ -259,8 +259,8 @@ function init_gear_sets()
 		})
 
 	sets.midcast['Enhancing Magic'] = {
-		main="Gada",
-		sub="Genmei Shield",
+		main="Oranyan",
+		sub="Enki Strap",
 		head="Telchine Cap",
 		body="Telchine Chas.",
 		hands="Telchine Gloves",
@@ -275,8 +275,8 @@ function init_gear_sets()
 		}
 
 	sets.midcast.EnhancingDuration = {
-		main="Gada",
-		sub="Genmei Shield",
+		main="Oranyan",
+		sub="Enki Strap",
 		head="Telchine Cap",
 		body="Telchine Chas.",
 		hands="Telchine Gloves",
@@ -375,6 +375,7 @@ function init_gear_sets()
 
 	sets.midcast.Death = {
 		main=gear.Grioavolr_MP,
+		--main=gear.Grioavolr_MB, --5
 		sub="Elder's Grip +1",
 		ammo="Ghastly Tathlum +1",
 		head="Pixie Hairpin +1",

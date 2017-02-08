@@ -267,8 +267,8 @@ function init_gear_sets()
 
 	-- 110 total Enhancing Magic Skill; caps even without Light Arts
 	sets.midcast['Enhancing Magic'] = {
-		main="Gada",
-		sub="Genmei Shield",
+		main="Oranyan",
+		sub="Enki Strap",
 		head="Telchine Cap",
 		body="Telchine Chas.",
 		hands="Dynasty Mitts",
@@ -283,8 +283,8 @@ function init_gear_sets()
 		}
 
 	sets.midcast.EnhancingDuration = {
-		main="Gada",
-		sub="Genmei Shield",
+		main="Oranyan",
+		sub="Enki Strap",
 		head="Telchine Cap",
 		body="Telchine Chas.",
 		hands="Telchine Gloves",
@@ -321,6 +321,8 @@ function init_gear_sets()
 		})
 
 	sets.midcast.BarElement = set_combine(sets.midcast['Enhancing Magic'], {
+		main="Beneficus",
+		sub="Genmei Shield",
 		head="Ebers Cap +1",
 		body="Ebers Bliaud +1",
 		hands="Ebers Mitts +1",

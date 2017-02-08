@@ -109,7 +109,7 @@ function init_gear_sets()
 
 	sets.precast.FC = {
 		head="Carmine Mask +1", --14
-		body="Taeon Tabard", --9
+		body=gear.Taeon_FC_body, --8
 		hands="Leyline Gloves", --7
 		legs="Rawhide Trousers", --5
 		feet="Carmine Greaves +1", --8
@@ -131,12 +131,12 @@ function init_gear_sets()
 	
 	sets.precast.RA = {
 		head="Taeon Chapeau", --10/0
-		body="Pursuer's Doublet", --6
-		hands="Carmine Fin. Ga. +1", --8
-		legs="Adhemar Kecks", --9
-		feet="Meg. Jam. +1", --8
+		body=gear.Taeon_RA_body, --9/0
+		hands="Carmine Fin. Ga. +1", --8/11
+		legs="Adhemar Kecks", --9/0
+		feet="Meg. Jam. +1", --8/0
 		back="Lutian Cape",
-		waist="Impulse Belt", --3
+		waist="Impulse Belt", --3/0
 		}
 
 
@@ -254,7 +254,7 @@ function init_gear_sets()
 	sets.precast.WS['Evisceration'] = {
 		head="Adhemar Bonnet",
 		body="Meg. Cuirie +1",
-		hands=gear.Adhemar_Att_hands,
+		hands=gear.Adhemar_TP_hands,
 		legs=gear.Herc_WS_legs,
 		feet=gear.Herc_TA_feet,
 		neck="Fotia Gorget",
@@ -597,7 +597,7 @@ function init_gear_sets()
 	sets.engaged.MaxHaste = {
 		head="Dampening Tam",
 		body="Adhemar Jacket", --5
-		hands=gear.Adhemar_Att_hands,
+		hands=gear.Adhemar_TP_hands,
 		legs="Samnuha Tights",
 		feet=gear.Herc_TA_feet,
 		neck="Asperity Necklace",
