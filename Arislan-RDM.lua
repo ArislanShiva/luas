@@ -204,7 +204,7 @@ function init_gear_sets()
 		head="Pixie Hairpin +1",
 		body="Merlinic Jubbah",
 		hands="Amalric Gages",
-		legs="Merlinic Shalwar",
+		legs=gear.Merlinic_MB_legs,
 		feet="Merlinic Crackows",
 		neck="Baetyl Pendant",
 		ear1="Hecate's Earring",
@@ -418,7 +418,7 @@ function init_gear_sets()
 		head="Merlinic Hood",
 		body="Merlinic Jubbah",
 		hands="Amalric Gages",
-		legs="Merlinic Shalwar",
+		legs=gear.Merlinic_MB_legs,
 		feet="Merlinic Crackows",
 		neck="Baetyl Pendant",
 		ear1="Hecate's Earring",
@@ -534,10 +534,10 @@ function init_gear_sets()
 	sets.defense.MDT = sets.idle.DT	
 
 	sets.magic_burst = { 
-		main=gear.Grioavolr_MAB, --5
+		main=gear.Grioavolr_MB, --5
 		body="Merlinic Jubbah", --10
 		hands="Amalric Gages", --(5)
-		legs="Merlinic Shalwar", --6
+		legs=gear.Merlinic_MB_legs, --6
 		feet="Merlinic Crackows", --11
 		neck="Mizu. Kubikazari", --10
 		ring1="Mujin Band", --(5)
@@ -591,6 +591,13 @@ end
 -- Job-specific hooks for standard casting events.
 -------------------------------------------------------------------------------------------------------------------
 
+function job_precast(spell, action, spellMap, eventArgs)
+	if spell.action_type == 'Magic' then
+		windower.ffxi.run(false)
+		cast_delay(0.3)
+	end
+end
+
 -- Run after the default midcast() is done.
 -- eventArgs is the same one used in job_midcast, in case information needs to be persisted.
 function job_post_midcast(spell, action, spellMap, eventArgs)
@@ -615,15 +622,6 @@ function job_post_midcast(spell, action, spellMap, eventArgs)
 			equip(sets.Obi)
 		end
 	end
-end
-
-function job_aftercast(spell, action, spellMap, eventArgs)
-
-	if autorun == 1 then 
-		windower.ffxi.run()
-		autorun = 0
-	end
-
 end
 
 -------------------------------------------------------------------------------------------------------------------

@@ -232,8 +232,8 @@ function init_gear_sets()
 		})
 
 	sets.midcast['Enhancing Magic'] = {
-		main="Gada",
-		sub="Genmei Shield",
+		main="Oranyan",
+		sub="Enki Strap",
 		head="Telchine Cap",
 		body="Telchine Chas.",
 		hands="Telchine Gloves",
@@ -248,8 +248,8 @@ function init_gear_sets()
 		}
 		
 	sets.midcast.EnhancingDuration = {
-		main="Gada",
-		sub="Genmei Shield",
+		main="Oranyan",
+		sub="Enki Strap",
 		head="Telchine Cap",
 		body="Telchine Chas.",
 		hands="Telchine Gloves",
@@ -348,7 +348,7 @@ function init_gear_sets()
 		head="Merlinic Hood",
 		body="Merlinic Jubbah",
 		hands="Amalric Gages",
-		legs="Merlinic Shalwar",
+		legs=gear.Merlinic_MB_legs,
 		feet="Merlinic Crackows",
 		neck="Baetyl Pendant",
 		ear1="Barkaro. Earring",
@@ -533,7 +533,7 @@ function init_gear_sets()
 	sets.magic_burst = {
 		body="Merlinic Jubbah", --10
 		hands="Amalric Gages", --(5)
-		legs="Merlinic Shalwar", --6
+		legs=gear.Merlinic_MB_legs, --6
 		feet="Merlinic Crackows", --11
 		neck="Mizu. Kubikazari", --10
 		ring1="Mujin Band", --(5)

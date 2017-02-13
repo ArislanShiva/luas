@@ -170,7 +170,7 @@ function init_gear_sets()
 	sets.precast.JA['Elemental Sforzo'] = set_combine(sets.Enmity, {body="Futhark Coat +1"})
 	sets.precast.JA['Swordplay'] = set_combine(sets.Enmity, {hands="Futhark Mitons +1"})
 	sets.precast.JA['Embolden'] = set_combine(sets.Enmity, {back="Evasionist's Cape"})
-	sets.precast.JA['Vivacious Pulse'] = set_combine(sets.Enmity, {head="Erilaz Galea +1", neck="Incanter's Torque", legs="Rune. Trousers +1"})
+	sets.precast.JA['Vivacious Pulse'] = set_combine(sets.Enmity, {head="Erilaz Galea +1", neck="Incanter's Torque", legs="Rune. Trousers +2"})
 	sets.precast.JA['One For All'] = set_combine(sets.Enmity, {})
 	sets.precast.JA['Provoke'] = sets.Enmity
 
@@ -382,7 +382,7 @@ function init_gear_sets()
 	sets.midcast.Shell = sets.midcast.Protect
 
 	sets.midcast['Divine Magic'] = {
-		legs="Runeist Trousers +1",
+		legs="Runeist Trousers +2",
 		neck="Incanter's Torque",
 		ring1="Stikini Ring",
 		ring2="Stikini Ring",
@@ -511,7 +511,7 @@ function init_gear_sets()
 		head=gear.Herc_DT_head, --3/3
 		body="Erilaz Surcoat +1",
 		hands="Erilaz Gauntlets +1",
-		legs="Rune. Trousers +1", --3/0
+		legs="Rune. Trousers +2", --4/0
 		feet="Erilaz Greaves +1", --5/0
 		neck="Loricate Torque +1", --6/6
 		ear1="Hearty Earring",
@@ -565,7 +565,7 @@ function init_gear_sets()
 
 	sets.engaged = {
 		main="Lionheart",
-		sub="Balarama Grip",
+		sub="Bloodrain Strap",
 		ammo="Ginsen",
 		head="Dampening Tam",
 		body=gear.Herc_TA_body,

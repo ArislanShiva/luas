@@ -381,7 +381,7 @@ function init_gear_sets()
 		head="Pixie Hairpin +1",
 		body="Merlinic Jubbah",
 		hands="Amalric Gages",
-		legs="Merlinic Shalwar",
+		legs=gear.Merlinic_MB_legs,
 		feet="Merlinic Crackows",
 		neck="Incanter's Torque",
 		ear1="Barkaro. Earring",
@@ -410,7 +410,7 @@ function init_gear_sets()
 		head="Merlinic Hood",
 		body="Merlinic Jubbah",
 		hands="Amalric Gages",
-		legs="Merlinic Shalwar",
+		legs=gear.Merlinic_MB_legs,
 		feet="Merlinic Crackows",
 		neck="Baetyl Pendant",
 		ear1="Barkaro. Earring",
@@ -507,7 +507,7 @@ function init_gear_sets()
 		head="Merlinic Hood",
 		body="Merlinic Jubbah",
 		hands="Arbatel Bracers +1",
-		legs="Merlinic Shalwar",
+		legs=gear.Merlinic_MB_legs,
 		ear1="Barkaro. Earring",
 		ear2="Friomisi Earring",
 		ring1="Shiva Ring +1",
@@ -556,7 +556,7 @@ function init_gear_sets()
 		-- Akademos 10
 		body="Merlinic Jubbah", --10
 		hands="Amalric Gages", --(5)
-		legs="Merlinic Shalwar", --6
+		legs=gear.Merlinic_MB_legs, --6
 		feet="Merlinic Crackows", --11
 		neck="Mizu. Kubikazari", --10
 		ring1="Mujin Band", --(5)

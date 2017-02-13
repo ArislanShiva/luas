@@ -15,7 +15,7 @@ function define_global_sets()
 	
 	gear.Grioavolr_MP = {name="Grioavolr", augments={'"Fast Cast"+5','MP+97','Mag. Acc.+28','"Mag.Atk.Bns."+29',}}
 	gear.Grioavolr_INT = {name="Grioavolr", augments={'"Fast Cast"+3','INT+11','Mag. Acc.+25','"Mag.Atk.Bns."+30','Magic Damage +2',}}
-	gear.Grioavolr_MAB = {name="Grioavolr", augments={'Magic burst mdg.+5%','INT+9','Mag. Acc.+27','"Mag.Atk.Bns."+27',}}
+	gear.Grioavolr_MB = {name="Grioavolr", augments={'Magic burst mdg.+5%','INT+9','Mag. Acc.+27','"Mag.Atk.Bns."+27',}}
 
 	-- Adhemar
 	gear.Adhemar_RA_hands = {name="Adhemar Wristbands", augments={'AGI+10','Rng.Acc.+15','Rng.Atk.+15',}}
@@ -44,11 +44,15 @@ function define_global_sets()
 	gear.Herc_DT_head = {name="Herculean Helm", augments={'Damage taken-3%','Accuracy+10',}}
 	gear.Herc_DT_hands = {name="Herculean Gloves", augments={'Attack+20','Damage taken-4%','AGI+3','Accuracy+9',}}
 
+	-- Merlinic
+	gear.Merlinic_MAcc_legs = {name="Merlinic Shalwar", augments={'Mag. Acc.+23 "Mag.Atk.Bns."+23','"Fast Cast"+2','Mag. Acc.+15','"Mag.Atk.Bns."+14',}}
+	gear.Merlinic_MB_legs = {name="Merlinic Shalwar", augments={'Mag. Acc.+24 "Mag.Atk.Bns."+24','Magic burst mdg.+6%','"Mag.Atk.Bns."+15',}}
+
 	-- Taeon
 	gear.Taeon_FC_body = {name="Taeon Tabard", augments={'"Fast Cast"+4','Phalanx +3',}}
 	gear.Taeon_RA_body = {name="Taeon Tabard", augments={'Rng.Acc.+20 Rng.Atk.+20','"Snapshot"+4','"Snapshot"+5',}}
-	gear.Taeon_DW_feet = {name=gear.Taeon_DW_feet, augments={'Accuracy+22','"Dual Wield"+5','DEX+8',}}
-	gear.Taeon_PH_feet = {name=gear.Taeon_DW_feet, augments={'Phalanx +2',}}
+	gear.Taeon_DW_feet = {name="Taeon Boots", augments={'Accuracy+22','"Dual Wield"+5','DEX+8',}}
+	gear.Taeon_PH_feet = {name="Taeon Boots", augments={'Phalanx +2',}}
 
 	-- Ambuscade Capes
 	gear.BLM_Death_Cape = {name="Taranus's Cape", augments={'MP+60','Mag. Acc+20 /Mag. Dmg.+20','INT+10','"Mag.Atk.Bns."+10',}} --*

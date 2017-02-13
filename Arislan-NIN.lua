@@ -695,46 +695,60 @@ end
 -------------------------------------------------------------------------------------------------------------------
 
 function determine_haste_group()
-	-- We have three groups of DW in gear: Hachiya body/legs, Iga head + Patentia Sash, and DW earrings
-	
-	-- Standard gear set reaches near capped delay with just Haste (77%-78%, depending on HQs)
 
-	-- For high haste, we want to be able to drop one of the 10% groups.
-	-- Basic gear hits capped delay (roughly) with:
-	-- 1 March + Haste
-	-- 2 March
-	-- Haste + Haste Samba
-	-- 1 March + Haste Samba
-	-- Embrava
-	
-	-- High haste buffs:
-	-- 2x Marches + Haste Samba == 19% DW in gear
-	-- 1x March + Haste + Haste Samba == 22% DW in gear
-	-- Embrava + Haste or 1x March == 7% DW in gear
-	
-	-- For max haste (capped magic haste + 25% gear haste), we can drop all DW gear.
-	-- Max haste buffs:
-	-- Embrava + Haste+March or 2x March
-	-- 2x Marches + Haste
-	
-	-- So we want four tiers:
-	-- Normal DW
-	-- 20% DW -- High Haste
-	-- 7% DW (earrings) - Embrava Haste (specialized situation with embrava and haste, but no marches)
-	-- 0 DW - Max Haste
+	-- Gearswap can't detect the difference between Haste I and Haste II
+	-- so use winkey-H to manually set Haste spell level.
+
+	-- Haste (buffactive[33]) - 15%
+	-- Haste II (buffactive[33]) - 30%
+	-- Haste Samba - 5%/10%
+	-- Victory March +0/+3/+4/+5	9.4%/14%/15.6%/17.1%
+	-- Advancing March +0/+3/+4/+5  6.3%/10.9%/12.5%/14% 
+	-- Embrava - 30%
+	-- Mighty Guard (buffactive[604]) - 15%
+	-- Geo-Haste (buffactive[580]) - 40%
 	
 	classes.CustomMeleeGroups:clear()
 	
-	if buffactive.embrava and (buffactive.march == 2 or (buffactive.march and buffactive.haste)) then
-		classes.CustomMeleeGroups:append('MaxHaste')
-	elseif buffactive.march == 2 and buffactive.haste then
-		classes.CustomMeleeGroups:append('MaxHaste')
-	elseif buffactive.embrava and (buffactive.haste or buffactive.march) then
-		classes.CustomMeleeGroups:append('EmbravaHaste')
-	elseif buffactive.march == 1 and buffactive.haste and buffactive['haste samba'] then
-		classes.CustomMeleeGroups:append('HighHaste')
-	elseif buffactive.march == 2 then
-		classes.CustomMeleeGroups:append('HighHaste')
+	if state.HasteMode.value == 'Haste II' then
+		if(((buffactive[33] or buffactive[580] or buffactive.embrava) and (buffactive.march or buffactive[604])) or
+			(buffactive[33] and (buffactive[580] or buffactive.embrava)) or
+			(buffactive.march == 2 and buffactive[604]) or buffactive.march == 3) then
+			add_to_chat(122, 'Magic Haste Level: 43%')
+			classes.CustomMeleeGroups:append('MaxHaste')
+		elseif ((buffactive[33] or buffactive.march == 2 or buffactive[580]) and buffactive['haste samba']) then
+			add_to_chat(122, 'Magic Haste Level: 35%')
+			classes.CustomMeleeGroups:append('HighHaste')
+		elseif ((buffactive[580] or buffactive[33] or buffactive.march == 2) or
+			(buffactive.march == 1 and buffactive[604])) then
+			add_to_chat(122, 'Magic Haste Level: 30%')
+			classes.CustomMeleeGroups:append('MidHaste')
+		elseif (buffactive.march == 1 or buffactive[604]) then
+			add_to_chat(122, 'Magic Haste Level: 15%')
+			classes.CustomMeleeGroups:append('LowHaste')
+		end
+	else
+		if (buffactive[580] and ( buffactive.march or buffactive[33] or buffactive.embrava or buffactive[604]) ) or
+			(buffactive.embrava and (buffactive.march or buffactive[33] or buffactive[604])) or
+			(buffactive.march == 2 and (buffactive[33] or buffactive[604])) or
+			(buffactive[33] and buffactive[604] and buffactive.march ) or buffactive.march == 3 then
+			add_to_chat(122, 'Magic Haste Level: 43%')
+			classes.CustomMeleeGroups:append('MaxHaste')
+		elseif ((buffactive[604] or buffactive[33]) and buffactive['haste samba'] and buffactive.march == 1) or
+			(buffactive.march == 2 and buffactive['haste samba']) or
+			(buffactive[580] and buffactive['haste samba'] ) then
+			add_to_chat(122, 'Magic Haste Level: 35%')
+			classes.CustomMeleeGroups:append('HighHaste')
+		elseif (buffactive.march == 2 ) or
+			((buffactive[33] or buffactive[604]) and buffactive.march == 1 ) or  -- MG or haste + 1 march
+			(buffactive[580] ) or  -- geo haste
+			(buffactive[33] and buffactive[604]) then
+			add_to_chat(122, 'Magic Haste Level: 30%')
+			classes.CustomMeleeGroups:append('MidHaste')
+		elseif buffactive[33] or buffactive[604] or buffactive.march == 1 then
+			add_to_chat(122, 'Magic Haste Level: 15%')
+			classes.CustomMeleeGroups:append('LowHaste')
+		end
 	end
 end
 
