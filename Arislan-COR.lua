@@ -463,7 +463,7 @@ function init_gear_sets()
 
 	sets.midcast.RA.Acc = set_combine(sets.midcast.RA, {
 		ammo=gear.RAbullet,
-		hands="Meg. Gloves +1",
+		hands=gear.Herc_RA_hands,
 		legs="Meg. Chausses +1",
 		feet="Meg. Jam. +1",
 		neck="Combatant's Torque",

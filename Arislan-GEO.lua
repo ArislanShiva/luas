@@ -87,8 +87,8 @@ function init_gear_sets()
 	
 	sets.precast.FC = {
 	--	/RDM --15
-  		main="Sucellus", --5
-		sub="Chanter's Shield", --3
+		main="Oranyan", --7
+		sub="Clerisy Strap +1", --3
 		range="Dunna", --3
 		head="Amalric Coif", --10
 		body="Shango Robe", --8
@@ -115,8 +115,8 @@ function init_gear_sets()
 		})
 
 	sets.precast.FC.Cure = set_combine(sets.precast.FC, {
-		main="Sucellus", --5
-		sub="Sors Shield", --5
+		main="Oranyan", --7
+		sub="Clerisy Strap +1", --3
 		legs="Doyen Pants", --15
 		ear1="Mendi. Earring", --5
 		ring1="Lebeche Ring", --(2)
@@ -124,12 +124,8 @@ function init_gear_sets()
 		})
 
 	sets.precast.FC.Curaga = sets.precast.FC.Cure
+	sets.precast.FC.Impact = {head=empty, body="Twilight Cloak"}
 
-	sets.precast.FC.Impact = set_combine(sets.precast.FC['Elemental Magic'], {
-		head=empty,
-		body="Twilight Cloak",
-		waist="Channeler's Stone",
-		})
 	 
 	-- Weaponskill sets
 	-- Default set for any weaponskill that isn't any more specifically defined
@@ -289,12 +285,12 @@ function init_gear_sets()
 
 
 	sets.midcast.MndEnfeebles = {
-		main=gear.Grioavolr_INT,
+		main=gear.Grioavolr_MND,
 		sub="Enki Strap",
 		head="Merlinic Hood",
 		body="Vanya Robe",
 		hands="Azimuth Gloves +1",
-		legs="Psycloth Lappas",
+		legs=gear.Merlinic_MAcc_legs,
 		feet="Medium's Sabots",
 		neck="Incanter's Torque",
 		ear1="Barkaro. Earring",
@@ -306,11 +302,12 @@ function init_gear_sets()
 		} -- MND/Magic accuracy
 	
 	sets.midcast.IntEnfeebles = set_combine(sets.midcast.MndEnfeebles, {
+		main=gear.Grioavolr_MB,
 		back="Nantosuelta's Cape",
 		}) -- INT/Magic accuracy
 
 	sets.midcast['Dark Magic'] = {
-		main=gear.Grioavolr_INT,
+		main=gear.Grioavolr_MB,
 		sub="Enki Strap",
 		head="Merlinic Hood",
 		body="Psycloth Vest",
@@ -343,7 +340,7 @@ function init_gear_sets()
 	-- Elemental Magic sets
 	
 	sets.midcast['Elemental Magic'] = {
-		main=gear.Grioavolr_INT,
+		main=gear.Grioavolr_MB,
 		sub="Niobid Strap",
 		head="Merlinic Hood",
 		body="Merlinic Jubbah",
@@ -360,9 +357,9 @@ function init_gear_sets()
 		}
 
 	sets.midcast['Elemental Magic'].Resistant = set_combine(sets.midcast['Elemental Magic'], {
-		main=gear.Grioavolr_INT,
+		main=gear.Grioavolr_MB,
 		sub="Enki Strap",
-		legs="Azimuth Tights +1",
+		legs=gear.Merlinic_MAcc_legs,
 		neck="Sanctity Necklace",
 		ear2="Hermetic Earring",
 		back="Aurist's Cape +1",
@@ -379,6 +376,7 @@ function init_gear_sets()
 	sets.midcast['Elemental Magic'].Seidr = set_combine(sets.midcast['Elemental Magic'], {
 		sub="Enki Strap",
 		body="Seidr Cotehardie",
+		legs=gear.Merlinic_MAcc_legs,
 		neck="Sanctity Necklace",
 		})
 
@@ -392,7 +390,7 @@ function init_gear_sets()
 		})
 
 	sets.midcast.Impact = set_combine(sets.midcast['Elemental Magic'], {
-		main=gear.Grioavolr_INT,
+		main=gear.Grioavolr_MB,
 		sub="Niobid Strap",
 		head=empty,
 		body="Twilight Cloak",
@@ -550,6 +548,12 @@ end
 -------------------------------------------------------------------------------------------------------------------
 -- Job-specific hooks for standard casting events.
 -------------------------------------------------------------------------------------------------------------------
+
+function job_post_precast(spell, action, spellMap, eventArgs)
+	if spell.name == 'Impact' then
+		equip(sets.precast.FC.Impact)
+	end
+end
 
 function job_post_midcast(spell, action, spellMap, eventArgs)
 	if spell.skill == 'Elemental Magic' then 

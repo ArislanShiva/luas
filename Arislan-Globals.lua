@@ -13,8 +13,8 @@ function define_global_sets()
 	gear.Lathi_MAB = {name="Lathi", augments={'MP+80','INT+20','"Mag.Atk.Bns."+20',}}
 	gear.Lathi_ENF = {name="Lathi", augments={'Mag. Acc.+20','Enfb.mag. skill +15','Dark magic skill +15',}}
 	
+	gear.Grioavolr_MND = {name="Grioavolr", augments={'MND+14','Mag. Acc.+29','"Mag.Atk.Bns."+28','Magic Damage +3',}}
 	gear.Grioavolr_MP = {name="Grioavolr", augments={'"Fast Cast"+5','MP+97','Mag. Acc.+28','"Mag.Atk.Bns."+29',}}
-	gear.Grioavolr_INT = {name="Grioavolr", augments={'"Fast Cast"+3','INT+11','Mag. Acc.+25','"Mag.Atk.Bns."+30','Magic Damage +2',}}
 	gear.Grioavolr_MB = {name="Grioavolr", augments={'Magic burst mdg.+5%','INT+9','Mag. Acc.+27','"Mag.Atk.Bns."+27',}}
 
 	-- Adhemar
@@ -26,11 +26,10 @@ function define_global_sets()
 	gear.Herc_TA_hands = {name="Herculean Gloves", augments={'Attack+26','"Triple Atk."+4','DEX+7','Accuracy+11',}}
 	gear.Herc_TA_feet = {name="Herculean Boots", augments={'Accuracy+21 Attack+21','"Triple Atk."+4','STR+9','Accuracy+15',}}
 	
-	gear.Herc_Acc_hands = {name="Herculean Gloves", augments={'Accuracy+25 Attack+25','Damage taken-2%','DEX+3','Accuracy+14','Attack+5',}}
 	gear.Herc_Acc_feet = {name="Herculean Boots", augments={'Accuracy+19 Attack+19','"Store TP"+4','DEX+10','Accuracy+15','Attack+10',}}
 	
 	gear.Herc_RA_body = {name="Herculean Vest", augments={'Rng.Acc.+25 Rng.Atk.+25','Weapon skill damage +3%','AGI+6','Rng.Acc.+15','Rng.Atk.+11',}}
-	gear.Herc_RA_hands = {name="Herculean Gloves", augments={'Rng.Acc.+24 Rng.Atk.+24','"Subtle Blow"+5','Rng.Acc.+12',}}
+	gear.Herc_RA_hands = {name="Herculean Gloves", augments={'Rng.Acc.+24 Rng.Atk.+24','Phys. dmg. taken -1%','Rng.Acc.+14','Rng.Atk.+10',}}
 	gear.Herc_RA_feet = {name="Herculean Boots", augments={'Rng.Acc.+25 Rng.Atk.+25','Weapon skill damage +1%','AGI+4','Rng.Atk.+15',}}
 	
 	gear.Herc_WS_hands = {name="Herculean Gloves", augments={'Accuracy+25 Attack+25','Weapon skill damage +4%','STR+3','Attack+1',}}
@@ -81,7 +80,7 @@ function define_global_sets()
 	gear.RNG_WS1_Cape = {name="Belenus's Cape", augments={'AGI+20','Mag. Acc+20 /Mag. Dmg.+20','Weapon skill damage +10%',}}
 
 	gear.RUN_HP_Cape = {name="Ogma's cape", augments={'HP+60','Eva.+20 /Mag. Eva.+20','Mag. Evasion+10','"Fast Cast"+10',}} --*
-    gear.RUN_TP_Cape = {name="Ogma's cape", augments={'DEX+20','Accuracy+20 Attack+20','"Store TP"+10',}}
+    gear.RUN_TP_Cape = {name="Ogma's cape", augments={'DEX+20','Accuracy+20 Attack+20','Accuracy+10','"Store TP"+10',}} --*
     gear.RUN_WS1_Cape = {name="Ogma's cape", augments={'STR+20','Accuracy+20 Attack+20','STR+10','"Dbl.Atk."+10',}} --*
 
 	gear.SCH_MAB_Cape = {name="Lugh's Cape", augments={'INT+20','Mag. Acc+20 /Mag. Dmg.+20','INT+10','"Mag.Atk.Bns."+10',}} --*

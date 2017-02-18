@@ -95,8 +95,8 @@ function init_gear_sets()
 	-- Fast cast sets for spells
 	sets.precast.FC = {
 	--	/RDM --15 /SCH --10
-		main="Sucellus", --5
-		sub="Chanter's Shield", --3
+		main="Oranyan", --7
+		sub="Clerisy Strap +1", --3
 		ammo="Sapience Orb", --2
 		head="Amalric Coif", --10
 		body="Shango Robe", --8
@@ -124,8 +124,8 @@ function init_gear_sets()
 		})
 
 	sets.precast.FC.Cure = set_combine(sets.precast.FC, {
-		main="Sucellus", --5
-		sub="Sors Shield", --5
+		main="Oranyan", --7
+		sub="Clerisy Strap +1", --3
 		ammo="Impatiens",
 		legs="Doyen Pants", --15
 		ear1="Mendi. Earring", --5
@@ -134,13 +134,7 @@ function init_gear_sets()
 		})
 
 	sets.precast.FC.Curaga = sets.precast.FC.Cure
-	
-	sets.precast.FC.Impact = set_combine(sets.precast.FC['Elemental Magic'], {
-		head=empty,
-		body="Twilight Cloak",
-		waist="Channeler's Stone",
-		})
-
+	sets.precast.FC.Impact = {head=empty, body="Twilight Cloak"}
 	sets.precast.Storm = set_combine(sets.precast.FC, {ring2="Levia. Ring +1", waist="Channeler's Stone"}) -- stop quick cast
 	
 	sets.precast.FC.DeathMode = {
@@ -315,13 +309,13 @@ function init_gear_sets()
 	sets.midcast.Shellra = sets.midcast.Protect
 
 	sets.midcast.MndEnfeebles = {
-		main=gear.Lathi_ENF,
+		main=gear.Grioavolr_MND,
 		sub="Enki Strap",
 		ammo="Quartz Tathlum +1",
 		head="Merlinic Hood",
 		body="Vanya Robe",
 		hands="Jhakri Cuffs +1",
-		legs="Psycloth Lappas",
+		legs=gear.Merlinic_MAcc_legs,
 		feet="Medium's Sabots",
 		neck="Imbodla Necklace",
 		ear1="Barkaro. Earring",
@@ -333,6 +327,7 @@ function init_gear_sets()
 		} -- MND/Magic accuracy
 
 	sets.midcast.IntEnfeebles = set_combine(sets.midcast.MndEnfeebles, {
+		main=gear.Grioavolr_MB,
 		ammo="Pemphredo Tathlum",
 		back=gear.BLM_MAB_Cape,
 		}) -- INT/Magic accuracy
@@ -346,7 +341,7 @@ function init_gear_sets()
 		head="Merlinic Hood",
 		body="Shango Robe",
 		hands="Jhakri Cuffs +1",
-		legs="Psycloth Lappas",
+		legs=gear.Merlinic_MAcc_legs,
 		feet="Merlinic Crackows",
 		neck="Incanter's Torque",
 		ear1="Barkaro. Earring",
@@ -433,6 +428,7 @@ function init_gear_sets()
 	sets.midcast['Elemental Magic'].Spaekona = set_combine(sets.midcast['Elemental Magic'], {
 		sub="Enki Strap",
 		body="Spae. Coat +1",
+		legs=gear.Merlinic_MAcc_legs,
 		neck="Sanctity Necklace",
 		})
 
@@ -603,6 +599,12 @@ function job_precast(spell, action, spellMap, eventArgs)
 	
 	if buffactive['Mana Wall'] then
 		equip(sets.precast.JA['Mana Wall'])
+	end
+end
+
+function job_post_precast(spell, action, spellMap, eventArgs)
+	if spell.name == 'Impact' then
+		equip(sets.precast.FC.Impact)
 	end
 end
 

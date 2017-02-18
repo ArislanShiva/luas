@@ -205,7 +205,7 @@ function init_gear_sets()
 		ammo="Charis Feather",
 		head="Meghanada Visor +1",
 		body=gear.Herc_TA_body,
-		hands=gear.Herc_Acc_hands,
+		hands="Meg. Gloves +1",
 		legs=gear.Herc_WS_legs,
 		feet=gear.Herc_Acc_feet,
 		neck="Combatant's Torque",
@@ -528,7 +528,6 @@ function init_gear_sets()
 		})
 
 	sets.engaged.MidAcc.LowHaste = set_combine(sets.engaged.LowAcc.LowHaste, {
-		hands=gear.Herc_Acc_hands,
 		feet=gear.Herc_TA_feet,
 		ring2="Ramuh Ring +1",
 		waist="Kentarch Belt +1",

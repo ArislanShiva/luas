@@ -109,7 +109,8 @@ function init_gear_sets()
 	-- Fast cast sets for spells
 	sets.precast.FC = {
 	--	Traits --30
-		sub="Chanter's Shield", --3
+		main="Oranyan", --7
+		sub="Clerisy Strap +1", --3
 		ammo="Sapience Orb", --2
 		head="Carmine Mask +1", --14
 		hands="Leyline Gloves", --7
@@ -138,12 +139,7 @@ function init_gear_sets()
 	sets.precast.FC.Curaga = sets.precast.FC.Cure
 	sets.precast.FC['Healing Magic'] = sets.precast.FC.Cure
 	sets.precast.FC['Elemental Magic'] = set_combine(sets.precast.FC, {waist="Channeler's Stone"})
-
-	sets.precast.FC.Impact = set_combine(sets.precast.FC['Elemental Magic'], {
-		head=empty,
-		body="Twilight Cloak"
-		})
-
+	sets.precast.FC.Impact = {head=empty, body="Twilight Cloak"}
 	sets.precast.Storm = set_combine(sets.precast.FC, {ring2="Levia. Ring +1", waist="Channeler's Stone"}) -- stop quick cast
 
 	sets.precast.FC.Utsusemi = set_combine(sets.precast.FC, {
@@ -198,8 +194,6 @@ function init_gear_sets()
 		})
 
 	sets.precast.WS['Sanguine Blade'] = {
-		main=gear.Grioavolr_INT,
-		sub="Niobid Strap",
 		ammo="Pemphredo Tathlum",
 		head="Pixie Hairpin +1",
 		body="Merlinic Jubbah",
@@ -353,7 +347,7 @@ function init_gear_sets()
 
  	-- Custom spell classes
 	sets.midcast.MndEnfeebles = {
-		main=gear.Grioavolr_INT,
+		main=gear.Grioavolr_MND,
 		sub="Enki Strap",
 		ammo="Quartz Tathlum +1",
 		head="Carmine Mask +1",
@@ -371,6 +365,7 @@ function init_gear_sets()
 		}
 	
 	sets.midcast.IntEnfeebles = set_combine(sets.midcast.MndEnfeebles, {
+		main=gear.Grioavolr_MB,
 		ammo="Pemphredo Tathlum",
 		back=gear.RDM_INT_Cape,
 		})
@@ -383,13 +378,13 @@ function init_gear_sets()
 	sets.midcast['Slow II'] = set_combine(sets.midcast.MndEnfeebles, {head="Viti. Chapeau +1"})
 
 	sets.midcast['Dark Magic'] = {
-		main=gear.Grioavolr_INT,
+		main=gear.Grioavolr_MB,
 		sub="Enki Strap",
 		ammo="Pemphredo Tathlum",
 		head="Amalric Coif",
 		body="Shango Robe",
 		hands="Jhakri Cuffs +1",
-		legs="Chironic Hose",
+		legs=gear.Merlinic_MAcc_legs,
 		feet="Merlinic Crackows",
 		neck="Incanter's Torque",
 		ear1="Hermetic Earring",
@@ -412,7 +407,7 @@ function init_gear_sets()
 	sets.midcast.Stun = set_combine(sets.midcast['Dark Magic'], {waist="Luminary Sash"})
 
 	sets.midcast['Elemental Magic'] = {
-		main=gear.Grioavolr_INT,
+		main=gear.Grioavolr_MB,
 		sub="Niobid Strap",
 		ammo="Pemphredo Tathlum",
 		head="Merlinic Hood",
@@ -430,22 +425,24 @@ function init_gear_sets()
 		}
 
 	sets.midcast['Elemental Magic'].Seidr = set_combine(sets.midcast['Elemental Magic'], {
-		main=gear.Grioavolr_INT,
+		main=gear.Grioavolr_MB,
 		sub="Enki Strap",
 		body="Seidr Cotehardie",
+		legs=gear.Merlinic_MAcc_legs,
 		neck="Sanctity Necklace",
 		})
 
 	sets.midcast['Elemental Magic'].Resistant = set_combine(sets.midcast['Elemental Magic'], {
-		main=gear.Grioavolr_INT,
+		main=gear.Grioavolr_MB,
 		sub="Enki Strap",
+		legs=gear.Merlinic_MAcc_legs,
 		neck="Sanctity Necklace",
 		ear2="Hermetic Earring",
 		waist="Yamabuki-no-Obi",
 		})
 		
 	sets.midcast.Impact = set_combine(sets.midcast['Elemental Magic'], {
-		main=gear.Grioavolr_INT,
+		main=gear.Grioavolr_MB,
 		sub="Niobid Strap",
 		head=empty,
 		body="Twilight Cloak",
@@ -595,6 +592,12 @@ function job_precast(spell, action, spellMap, eventArgs)
 	if spell.action_type == 'Magic' then
 		windower.ffxi.run(false)
 		cast_delay(0.3)
+	end
+end
+
+function job_post_precast(spell, action, spellMap, eventArgs)
+	if spell.name == 'Impact' then
+		equip(sets.precast.FC.Impact)
 	end
 end
 

@@ -6,6 +6,7 @@
 		
 		Magic Burst			Toggle Magic Burst Mode  [Alt-`]
 		Helix Mode			Toggle between Lugh's Cape for potency and Bookworm's Cape for duration [WinKey-H]
+		Stormsurge Mode		Toggle to activate Peda. Loafers +1 bonus for storm spells.
 		Capacity Pts. Mode	Capacity Points Mode Toggle [WinKey-C]
 		Auto. Lockstyle		Automatically locks desired equipset on file load
 
@@ -68,6 +69,7 @@ function user_setup()
 	
 	state.WeaponLock = M(false, 'Weapon Lock')	
 	state.MagicBurst = M(false, 'Magic Burst')
+	state.StormSurge = M(false, 'Stormsurge')
 
 	-- Additional local binds
 	send_command('bind ^` input /ja Immanence <me>')
@@ -88,6 +90,7 @@ function user_setup()
 	send_command('bind ^. input /ma Invisible <stpc>')
 	send_command('bind @c gs c toggle CP')
 	send_command('bind @h gs c cycle HelixMode')
+	send_command('bind @s gs c toggle StormSurge')
 	send_command('bind @w gs c toggle WeaponLock')
 	
 	select_default_macro_book()
@@ -114,6 +117,7 @@ function user_unload()
 	send_command('unbind !.')
 	send_command('unbind @c')
 	send_command('unbind @h')
+	send_command('unbind @s')
 	send_command('unbind @w')
 end
 
@@ -133,8 +137,8 @@ function init_gear_sets()
 	-- Fast cast sets for spells
 	sets.precast.FC = {
 	--	/RDM --15
-		main="Sucellus", --5
-		sub="Chanter's Shield", --3
+		main="Oranyan", --7
+		sub="Clerisy Strap +1", --3
 		ammo="Sapience Orb", --2
 		head="Amalric Coif", --10
 		body="Shango Robe", --8
@@ -150,13 +154,14 @@ function init_gear_sets()
 		waist="Witful Belt", --3/(3)
 		}
 
+	sets.precast.FC.Grimoire = {head="Peda. M.Board", feet="Acad. Loafers +2"}
 	sets.precast.FC['Enhancing Magic'] = set_combine(sets.precast.FC, {waist="Siegel Sash"})
 	sets.precast.FC.Stoneskin = set_combine(sets.precast.FC['Enhancing Magic'], {legs="Doyen Pants"})
 	sets.precast.FC['Elemental Magic'] = set_combine(sets.precast.FC, {waist="Channeler's Stone"})
 	
 	sets.precast.FC.Cure = set_combine(sets.precast.FC, {
-		main="Sucellus", --5
-		sub="Sors Shield", --5
+		main="Oranyan", --7
+		sub="Clerisy Strap +1", --3
 		ammo="Impatiens",
 		legs="Doyen Pants", --15
 		ear1="Mendi. Earring", --5
@@ -165,12 +170,7 @@ function init_gear_sets()
 		})
 	
 	sets.precast.FC.Curaga = sets.precast.FC.Cure
-	
-	sets.precast.FC.Impact = set_combine(sets.precast.FC['Elemental Magic'], {
-		head=empty,
-		body="Twilight Cloak"
-		})
-
+	sets.precast.FC.Impact = {head=empty, body="Twilight Cloak"}
 	sets.precast.Storm = set_combine(sets.precast.FC, {ring2="Levia. Ring +1", waist="Channeler's Stone"}) -- stop quick cast
 
 	
@@ -320,7 +320,9 @@ function init_gear_sets()
 		waist="Emphatikos Rope",
 		})
 	
---	sets.midcast.Storm = set_combine(sets.midcast.EnhancingDuration, {feet="Peda. Loafers +1"})
+	sets.midcast.Storm = sets.midcast.EnhancingDuration
+
+	sets.midcast.Stormsurge = set_combine(sets.midcast.Storm, {feet="Peda. Loafers +1"})
 	
 	sets.midcast.Protect = set_combine(sets.midcast.EnhancingDuration, {
 		ring2="Sheltered Ring",
@@ -332,7 +334,7 @@ function init_gear_sets()
 
 	-- Custom spell classes
 	sets.midcast.MndEnfeebles = {
-		main=gear.Grioavolr_INT,
+		main=gear.Grioavolr_MND,
 		sub="Enki Strap",
 		ammo="Quartz Tathlum +1",
 		head="Merlinic Hood",
@@ -357,13 +359,13 @@ function init_gear_sets()
 	sets.midcast.ElementalEnfeeble = sets.midcast.IntEnfeebles
 	
 	sets.midcast['Dark Magic'] = {
-		main=gear.Grioavolr_INT,
+		main=gear.Grioavolr_MB,
 		sub="Enki Strap",
 		ammo="Pemphredo Tathlum",
 		head="Merlinic Hood",
 		body="Shango Robe",
 		hands="Jhakri Cuffs +1",
-		legs="Chironic Hose",
+		legs=gear.Merlinic_MAcc_legs,
 		feet="Merlinic Crackows",
 		neck="Incanter's Torque",
 		ear1="Barkaro. Earring",
@@ -381,7 +383,7 @@ function init_gear_sets()
 		head="Pixie Hairpin +1",
 		body="Merlinic Jubbah",
 		hands="Amalric Gages",
-		legs=gear.Merlinic_MB_legs,
+		legs=gear.Merlinic_MAcc_legs,
 		feet="Merlinic Crackows",
 		neck="Incanter's Torque",
 		ear1="Barkaro. Earring",
@@ -422,15 +424,17 @@ function init_gear_sets()
 		}
 
 	sets.midcast['Elemental Magic'].Seidr = set_combine(sets.midcast['Elemental Magic'], {
-		main=gear.Grioavolr_INT,
+		main=gear.Grioavolr_MB,
 		sub="Enki Strap",
 		body="Seidr Cotehardie",
+		legs=gear.Merlinic_MAcc_legs,
 		neck="Sanctity Necklace",
 		})
 		
 	sets.midcast['Elemental Magic'].Resistant = set_combine(sets.midcast['Elemental Magic'], {
-		main=gear.Grioavolr_INT,
+		main=gear.Grioavolr_MB,
 		sub="Enki Strap",
+		legs=gear.Merlinic_MAcc_legs,
 		neck="Sanctity Necklace",
 		ear2="Hermetic Earring",
 		waist="Yamabuki-no-Obi",
@@ -469,8 +473,8 @@ function init_gear_sets()
 	------------------------------------------------------------------------------------------------
 	
 	sets.idle = {
-		main="Bolelabunga",
-		sub="Genmei Shield",
+		main=gear.Akademos_MAB,
+		sub="Enki Strap",
 		ammo="Homiliary",
 		head="Befouled Crown",
 		body="Witching Robe",
@@ -501,12 +505,11 @@ function init_gear_sets()
 		waist="Lieutenant's Sash", --0/2
 		})
 
+	sets.idle.Refresh = {main="Bolelabunga", sub="Genmei Shield"}
+
 	sets.idle.Town = set_combine(sets.idle, {
-		main=gear.Akademos_MAB,
-		sub="Clerisy Strap +1",
 		head="Merlinic Hood",
 		body="Merlinic Jubbah",
-		hands="Arbatel Bracers +1",
 		legs=gear.Merlinic_MB_legs,
 		ear1="Barkaro. Earring",
 		ear2="Friomisi Earring",
@@ -570,13 +573,7 @@ function init_gear_sets()
 	sets.buff['Parsimony'] = {legs="Arbatel Pants +1"}
 	sets.buff['Celerity'] = {feet="Peda. Loafers +1"}
 	sets.buff['Alacrity'] = {feet="Peda. Loafers +1"}
-	
-	sets.buff['Klimaform'] = {
-		main=gear.Akademos_MAB,
-		sub="Niobid Strap",
-		feet="Arbatel Loafers +1",
-		waist="Hachirin-no-Obi",
-		}
+	sets.buff['Klimaform'] = {feet="Arbatel Loafers +1"}
 	
 	sets.buff.FullSublimation = {
 		head="Acad. Mortar. +1",
@@ -595,6 +592,15 @@ end
 -------------------------------------------------------------------------------------------------------------------
 -- Job-specific hooks for standard casting events.
 -------------------------------------------------------------------------------------------------------------------
+
+function job_post_precast(spell, action, spellMap, eventArgs)
+	if (spell.type == "WhiteMagic" and (buffactive["Light Arts"] or buffactive["Addendum: White"])) or
+		(spell.type == "BlackMagic" and (buffactive["Dark Arts"] or buffactive["Addendum: Black"])) then 
+		equip(sets.precast.FC.Grimoire) 
+	elseif spell.name == 'Impact' then
+		equip(sets.precast.FC.Impact)
+	end
+end
 
 -- Run after the general midcast() is done.
 function job_post_midcast(spell, action, spellMap, eventArgs)
@@ -624,10 +630,15 @@ function job_post_midcast(spell, action, spellMap, eventArgs)
 			equip(sets.midcast.Impact)
 		end
 	end
-	if spell.skill == 'Enhancing Magic' and classes.NoSkillSpells:contains(spell.english) then
-		equip(sets.midcast.EnhancingDuration)
+	if spell.skill == 'Enhancing Magic' then
+		if classes.NoSkillSpells:contains(spell.english) then
+			equip(sets.midcast.EnhancingDuration)
+		end
 		if state.Buff.Perpetuance then
 			equip(sets.buff['Perpetuance'])
+		end
+		if spellMap == "Storm" and state.StormSurge.value then
+			equip (sets.midcast.Stormsurge)
 		end
 	end
 end

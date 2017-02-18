@@ -82,8 +82,8 @@ function init_gear_sets()
 
 	sets.precast.FC = {
 	--	/SCH --3
-		main="Sucellus", --5
-		sub="Chanter's Shield", --3
+		main="Oranyan", --7
+		sub="Clerisy Strap +1", --3
 		ammo="Sapience Orb", --2
 		body="Inyanga Jubbah +1", --13
 		hands="Gende. Gages +1", --7
@@ -106,8 +106,8 @@ function init_gear_sets()
 	sets.precast.FC.Stoneskin = set_combine(sets.precast.FC['Enhancing Magic'], {legs="Doyen Pants"})
 
 	sets.precast.FC['Healing Magic'] = set_combine(sets.precast.FC, {
-		main="Vadose Rod",
-		sub="Sors Shield",
+		main="Oranyan",
+		sub="Clerisy Strap +1",
 		head="Vanya Hood", --7
 		legs="Ebers Pant. +1",
 		back="Perimede Cape",
@@ -116,8 +116,8 @@ function init_gear_sets()
 	sets.precast.FC.StatusRemoval = sets.precast.FC['Healing Magic']
 
 	sets.precast.FC.Cure = set_combine(sets.precast.FC['Healing Magic'], {
-		main="Sucellus", --5
-		sub="Sors Shield", --5
+		main="Oranyan",
+		sub="Clerisy Strap +1",
 		ammo="Impatiens",
 		head="Piety Cap +1", --13
 		legs="Doyen Pants", --15
@@ -129,21 +129,14 @@ function init_gear_sets()
 
 	sets.precast.FC.Curaga = sets.precast.FC.Cure
 	sets.precast.FC.CureSolace = sets.precast.FC.Cure
+	sets.precast.FC.Impact = {head=empty, body="Twilight Cloak"}
 
-	sets.precast.FC.Impact = set_combine(sets.precast.FC, {
-		head=empty,
-		body="Twilight Cloak"
-		})
-
-	-- CureMelee spell map should default back to Healing Magic.
-	
 	-- Precast sets to enhance JAs
-	sets.precast.JA.Benediction = {}
+	--sets.precast.JA.Benediction = {}
 	
 	-- Weaponskill sets
 
 	-- Default set for any weaponskill that isn't any more specifically defined
-
 	sets.precast.WS = {
 		head="Telchine Cap",
 		body="Onca Suit",
@@ -376,7 +369,7 @@ function init_gear_sets()
 	sets.midcast.Holy = sets.midcast.Banish
 
 	sets.midcast['Dark Magic'] = {
-		main=gear.Grioavolr_INT,
+		main=gear.Grioavolr_MB,
 		sub="Enki Strap",
 		ammo="Pemphredo Tathlum",
 		head="Befouled Crown",
@@ -413,7 +406,7 @@ function init_gear_sets()
 		}
 
 	sets.midcast.IntEnfeebles = {
-		main=gear.Grioavolr_INT,
+		main=gear.Grioavolr_MB,
 		sub="Enki Strap",
 		ammo="Pemphredo Tathlum",
 		head="Befouled Crown",
@@ -431,7 +424,7 @@ function init_gear_sets()
 		}
 
 	sets.midcast.Impact = {
-		main=gear.Grioavolr_INT,
+		main=gear.Grioavolr_MB,
 		sub="Niobid Strap",
 		head=empty,
 		body="Twilight Cloak",
@@ -557,6 +550,11 @@ function job_precast(spell, action, spellMap, eventArgs)
 	end
 end
 
+function job_post_precast(spell, action, spellMap, eventArgs)
+	if spell.name == 'Impact' then
+		equip(sets.precast.FC.Impact)
+	end
+end
 
 function job_post_midcast(spell, action, spellMap, eventArgs)
 	-- Apply Divine Caress boosting items as highest priority over other gear, if applicable.
