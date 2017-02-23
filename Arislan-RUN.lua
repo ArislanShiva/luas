@@ -216,7 +216,7 @@ function init_gear_sets()
 
 	-- Weaponskill sets
 	sets.precast.WS = {
-		ammo="Seeth. Bomblet +1",
+		ammo="Knobkierrie",
 		head="Lilitu Headpiece",
 		body=gear.Herc_TA_body,
 		hands="Meg. Gloves +1",
@@ -232,6 +232,7 @@ function init_gear_sets()
 		}
 
 	sets.precast.WS.Acc = set_combine(sets.precast.WS, {
+		ammo="Seeth. Bomblet +1",
 		legs="Meg. Chausses +1",
 		ear2="Telos Earring",
 		})
@@ -245,6 +246,7 @@ function init_gear_sets()
 		})
 		
 	sets.precast.WS['Resolution'].Acc = set_combine(sets.precast.WS['Resolution'], {
+		ammo="Seeth. Bomblet +1",
 		head="Dampening Tam",
 		legs="Meg. Chausses +1",
 		feet=gear.Herc_Acc_feet,
@@ -262,6 +264,7 @@ function init_gear_sets()
 		})
 		
 	sets.precast.WS['Dimidiation'].Acc = set_combine(sets.precast.WS['Dimidiation'], {
+		ammo="Seeth. Bomblet +1",
 		hands="Meg. Gloves +1",
 		legs="Samnuha Tights",
 		feet=gear.Herc_Acc_feet,
@@ -363,26 +366,14 @@ function init_gear_sets()
 		feet=gear.Taeon_PH_feet,
 		})
 
-	sets.midcast['Regen'] = set_combine(sets.midcast['Enhancing Magic'], {
-		head="Runeist Bandeau +1",
-		})
-		
-	sets.midcast.Refresh = set_combine(sets.midcast['Enhancing Magic'], {
-		waist="Gishdubar Sash",
-		})
-	
-	sets.midcast.Stoneskin = set_combine(sets.midcast['Enhancing Magic'], {
-		waist="Siegel Sash",
-		})
-
-	sets.midcast.Protect = set_combine(sets.midcast.EnhancingDuration, {
-		ring2="Sheltered Ring",
-		})
-
+	sets.midcast['Regen'] = set_combine(sets.midcast['Enhancing Magic'], {head="Runeist Bandeau +1"})
+	sets.midcast.Refresh = set_combine(sets.midcast['Enhancing Magic'], {waist="Gishdubar Sash"})
+	sets.midcast.Stoneskin = set_combine(sets.midcast['Enhancing Magic'], {waist="Siegel Sash"})
+	sets.midcast.Protect = set_combine(sets.midcast.EnhancingDuration, {ring2="Sheltered Ring"})
 	sets.midcast.Shell = sets.midcast.Protect
 
 	sets.midcast['Divine Magic'] = {
-		legs="Runeist Trousers +2",
+		legs="Rune. Trousers +2",
 		neck="Incanter's Torque",
 		ring1="Stikini Ring",
 		ring2="Stikini Ring",
@@ -390,7 +381,7 @@ function init_gear_sets()
 		}
 
 	sets.midcast.Flash = sets.Enmity
-	sets.midcast.Foil = sets.midcast.EnhancingDuration--sets.Enmity
+	sets.midcast.Foil = sets.Enmity
 	sets.midcast.Diaga = sets.Enmity
 	sets.midcast.Utsusemi = sets.midcast.SpellInterrupt
 	
@@ -440,7 +431,7 @@ function init_gear_sets()
 
 	sets.idle.Town = set_combine(sets.idle, {
 		sub="Nepenthe Grip +1",
-		ammo="Staunch Tathlum",
+		ammo="Knobkierrie",
 		head="Carmine Mask +1",
 		body="Erilaz Surcoat +1",
 		feet="Carmine Greaves +1",
@@ -452,7 +443,6 @@ function init_gear_sets()
 		})
 
 	sets.idle.Weak = sets.idle.DT
-
 	sets.Kiting = {legs="Carmine Cuisses +1"}
 
 
@@ -487,7 +477,8 @@ function init_gear_sets()
 		}
 	
 	sets.defense.MDT = {
-		main="Aettir", --(5)/0
+		main="Epeolatry", --(25)/0
+--		main="Aettir", --(5)/0
 		sub="Refined Grip +1", --3/3
 		ammo="Iron Gobbet",
 		head="Erilaz Galea +1",
@@ -505,7 +496,8 @@ function init_gear_sets()
 		}
 
 	sets.defense.Status = {
-		main="Aettir", --(5)/0
+		main="Epeolatry", --(25)/0
+--		main="Aettir", --(5)/0
 		sub="Refined Grip +1", --3/3
 		ammo="Staunch Tathlum", --2/2
 		head=gear.Herc_DT_head, --3/3
@@ -882,11 +874,15 @@ end
 -- Select default macro book on initial load or subjob change.
 function select_default_macro_book()
 	-- Default macro set/book: (set, book)
---	if player.sub_job == 'BLU' then
---		set_macro_page(2, 12)
---	else
+	if player.sub_job == 'BLU' then
+		set_macro_page(2, 12)
+	elseif player.sub_job == 'DRK' then
+		set_macro_page(3, 12)
+	elseif player.sub_job == 'WHM' then
+		set_macro_page(4, 12)
+	else
 		set_macro_page(1, 12)
---	end
+	end
 end
 
 function set_lockstyle()

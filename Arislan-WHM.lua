@@ -266,7 +266,7 @@ function init_gear_sets()
 		body="Telchine Chas.",
 		hands="Dynasty Mitts",
 		legs="Telchine Braconi",
-		feet="Ebers Duckbills +1",
+		feet="Theo. Duckbills +2",
 		neck="Incanter's Torque",
 		ear2="Andoaa Earring",
 		ring1="Stikini Ring",
@@ -395,7 +395,7 @@ function init_gear_sets()
 		body="Vanya Robe",
 		hands="Inyan. Dastanas +1",
 		legs="Chironic Hose",
-		feet="Medium's Sabots",
+		feet="Theo. Duckbills +2",
 		neck="Imbodla Necklace",
 		ear1="Hermetic Earring",
 		ear2="Digni. Earring",
@@ -405,23 +405,12 @@ function init_gear_sets()
 		waist="Luminary Sash",
 		}
 
-	sets.midcast.IntEnfeebles = {
+	sets.midcast.IntEnfeebles = set_combine(sets.midcast.MndEnfeebles, {
 		main=gear.Grioavolr_MB,
-		sub="Enki Strap",
 		ammo="Pemphredo Tathlum",
-		head="Befouled Crown",
-		body="Vanya Robe",
-		hands="Inyan. Dastanas +1",
-		legs="Chironic Hose",
-		feet="Medium's Sabots",
-		neck="Imbodla Necklace",
-		ear1="Hermetic Earring",
-		ear2="Digni. Earring",
-		ring1="Stikini Ring",
-		ring2="Stikini Ring",
 		back="Aurist's Cape +1",
 		waist="Yamabuki-no-Obi",
-		}
+		})
 
 	sets.midcast.Impact = {
 		main=gear.Grioavolr_MB,

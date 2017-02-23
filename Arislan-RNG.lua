@@ -40,8 +40,8 @@ function user_setup()
 	gear.default.weaponskill_neck = "Fotia Gorget"
 	gear.default.weaponskill_waist = "Fotia Belt"
 	
---	DefaultAmmo = {['Steinthor'] = "Achiyal. Arrow", ['Holliday'] = "Achiyal. Bullet"}
-	DefaultAmmo = {['Steinthor'] = "Achiyal. Arrow", ['Holliday'] = "Orichalc. Bullet"}
+	DefaultAmmo = {['Steinthor'] = "Achiyal. Arrow", ['Holliday'] = "Achiyal. Bullet"}
+--	DefaultAmmo = {['Steinthor'] = "Achiyal. Arrow", ['Holliday'] = "Orichalc. Bullet"}
 	U_Shot_Ammo = {['Steinthor'] = "Achiyal. Arrow", ['Holliday'] = "Animikii Bullet"}
 
 	-- Additional local binds

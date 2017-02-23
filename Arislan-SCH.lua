@@ -366,7 +366,7 @@ function init_gear_sets()
 		body="Shango Robe",
 		hands="Jhakri Cuffs +1",
 		legs=gear.Merlinic_MAcc_legs,
-		feet="Merlinic Crackows",
+		feet="Acad. Loafers +2",
 		neck="Incanter's Torque",
 		ear1="Barkaro. Earring",
 		ear2="Digni. Earring",
@@ -377,17 +377,17 @@ function init_gear_sets()
 		}
 
 	sets.midcast.Kaustra = {
-		main=gear.Akademos_MAB,
-		sub="Niobid Strap",
-		ammo="Pemphredo Tathlum",
+		main=gear.Akademos_MAB, --10
+		sub="Enki Strap",
+		ammo="Ghastly Tathlum +1",
 		head="Pixie Hairpin +1",
-		body="Merlinic Jubbah",
-		hands="Amalric Gages",
-		legs=gear.Merlinic_MAcc_legs,
-		feet="Merlinic Crackows",
-		neck="Incanter's Torque",
+		body="Merlinic Jubbah", --10
+		hands="Amalric Gages", --(5)
+		legs="Mallquis Trews +1", --5
+		feet="Merlinic Crackows", --9
+		neck="Mizu. Kubikazari", --10
 		ear1="Barkaro. Earring",
-		ear2="Friomisi Earring",
+		ear2="Digni. Earring",
 		ring1="Shiva Ring +1",
 		ring2="Archon Ring",
 		back=gear.SCH_MAB_Cape,
@@ -508,6 +508,8 @@ function init_gear_sets()
 	sets.idle.Refresh = {main="Bolelabunga", sub="Genmei Shield"}
 
 	sets.idle.Town = set_combine(sets.idle, {
+		main=gear.Akademos_MAB,
+		sub="Enki Strap",
 		head="Merlinic Hood",
 		body="Merlinic Jubbah",
 		legs=gear.Merlinic_MB_legs,
@@ -583,6 +585,7 @@ function init_gear_sets()
 
 	sets.buff.Doom = {ring1="Saida Ring", ring2="Saida Ring", waist="Gishdubar Sash"}
 
+	sets.Grimoire = {feet="Acad. Loafers +2"}
 	sets.Obi = {waist="Hachirin-no-Obi"}
 	sets.Bookworm = {back="Bookworm's Cape"}
 	sets.CP = {back="Mecisto. Mantle"}
@@ -604,7 +607,7 @@ end
 
 -- Run after the general midcast() is done.
 function job_post_midcast(spell, action, spellMap, eventArgs)
-	if spell.skill == 'Elemental Magic' then
+	if spell.skill == 'Elemental Magic' or spell.english == "Kaustra" then
 		if spellMap == "Helix" then
 			equip(sets.midcast['Elemental Magic'])
 			equip(sets.midcast.Helix)
@@ -623,6 +626,11 @@ function job_post_midcast(spell, action, spellMap, eventArgs)
 	end
 	if spell.action_type == 'Magic' then
 		apply_grimoire_bonuses(spell, action, spellMap, eventArgs)
+	end
+	if spell.skill == 'Enfeebling Magic' and ((spell.type == "WhiteMagic" and (buffactive["Light Arts"]
+		or buffactive["Addendum: White"])) or (spell.type == "BlackMagic" and (buffactive["Dark Arts"]
+		or buffactive["Addendum: Black"]))) then 
+		equip(sets.Grimoire) 
 	end
 	if spell.skill == 'Elemental Magic' and state.MagicBurst.value then
 		equip(sets.magic_burst)
