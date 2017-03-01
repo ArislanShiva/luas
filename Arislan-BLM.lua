@@ -48,7 +48,7 @@ function user_setup()
 	lowTierNukes = S{'Stone', 'Water', 'Aero', 'Fire', 'Blizzard', 'Thunder'}
 	
 	-- Additional local binds
-	send_command('bind ^` input /ma Stun <t>;')--input /p <wstar> <ldangle> <circle1> Stun <rarr> <t> <rdangle> <wstar> <call14>') 
+	send_command('bind ^` input /ma Stun <t>')--;input /p <wstar> #1 Stun <t>, Articgun next. <wstar> <call14>') 
 	send_command('bind !` gs c toggle MagicBurst')
 	send_command('bind !w input /ma "Aspir III" <t>')
 	send_command('bind !p input /ma "Shock Spikes" <me>')
@@ -370,7 +370,25 @@ function init_gear_sets()
 
 	sets.midcast.Death = {
 		main=gear.Grioavolr_MP,
-		--main=gear.Grioavolr_MB, --5
+		sub="Enki Strap",
+		ammo="Ghastly Tathlum +1",
+		head="Amalric Coif",
+		body="Merlinic Jubbah", --10
+		hands="Amalric Gages", --(5)
+		legs=gear.Merlinic_MAcc_legs,
+		feet="Merlinic Crackows", --11
+		neck="Mizu. Kubikazari", --10
+		ear1="Barkaro. Earring",
+		ear2="Digni. Earring",
+		ring1="Mephitas's Ring +1",
+		ring2="Shiva Ring +1",
+		back=gear.BLM_Death_Cape, --5
+		waist="Yamabuki-no-Obi",
+		}
+
+--[[
+	sets.midcast.Death = {
+		main=gear.Grioavolr_MP,
 		sub="Elder's Grip +1",
 		ammo="Ghastly Tathlum +1",
 		head="Pixie Hairpin +1",
@@ -386,6 +404,7 @@ function init_gear_sets()
 		back=gear.BLM_Death_Cape, --5
 		waist="Yamabuki-no-Obi",
 		}
+]]--
 
 	-- Elemental Magic sets
 	
@@ -480,7 +499,6 @@ function init_gear_sets()
 		ring1="Gelatinous Ring +1", --7/(-1)
 		ring2="Defending Ring", --10/10
 		back="Solemnity Cape", --4/4
-		waist="Lieutenant's Sash", --0/2
 		})
 
 	sets.idle.ManaWall = {
@@ -507,8 +525,8 @@ function init_gear_sets()
 		}
 
 	sets.idle.Town = set_combine(sets.idle, {
-		main=gear.Lathi_MAB,
-		sub="Clerisy Strap +1",
+		main=gear.Grioavolr_MB,
+		sub="Enki Strap",
 		head="Merlinic Hood",
 		body="Merlinic Jubbah",
 		legs=gear.Merlinic_MB_legs,

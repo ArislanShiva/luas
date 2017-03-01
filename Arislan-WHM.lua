@@ -175,7 +175,7 @@ function init_gear_sets()
 		ear1="Loquacious Earring",
 		ear2="Etiolation Earring",
 		ring1="Kishar Ring",
-		back="Swith Cape +1",
+		back="Alaunus's Cape",
 		waist="Witful Belt",
 		} -- Haste
 	
@@ -205,7 +205,7 @@ function init_gear_sets()
 		main="Chatoyant Staff", --10
 		sub="Clerisy Strap +1",
 		neck="Nodens Gorget", --5
-		back="Twilight Cape",
+		--back="Twilight Cape",
 		waist="Hachirin-no-Obi",
 		})
 
@@ -336,7 +336,7 @@ function init_gear_sets()
 	sets.midcast.Shellra = sets.midcast.Protect
 
 	sets.midcast['Divine Magic'] = {
-		main=gear.Grioavolr_MND,
+		main=gear.Grioavolr_MB,
 		sub="Enki Strap",
 		ammo="Pemphredo Tathlum",
 		head="Befouled Crown",
@@ -354,7 +354,7 @@ function init_gear_sets()
 		}
 
 	sets.midcast.Banish = set_combine(sets.midcast['Divine Magic'], {
-		main=gear.Grioavolr_MND,
+		main=gear.Grioavolr_MB,
 		sub="Niobid Strap",
 		head="Inyanga Tiara +1",
 		body="Witching Robe",

@@ -148,8 +148,8 @@ function init_gear_sets()
 	
 	-- Base fast recast for spells
 	sets.midcast.FastRecast = {
-  		main="Sucellus",
-		sub="Chanter's Shield",
+		main="Oranyan",
+		sub="Clerisy Strap +1",
 		head="Amalric Coif",
 		hands="Merlinic Dastanas",
 		legs="Geo. Pants +1",
@@ -310,7 +310,7 @@ function init_gear_sets()
 		main=gear.Grioavolr_MB,
 		sub="Enki Strap",
 		head="Merlinic Hood",
-		body="Psycloth Vest",
+		body="Shango Robe",
 		hands="Jhakri Cuffs +1",
 		legs="Azimuth Tights +1",
 		feet="Merlinic Crackows",
@@ -438,7 +438,6 @@ function init_gear_sets()
 		ring1="Fortified Ring", --0/5
 		ring2="Defending Ring", --10/10
 		back="Solemnity Cape", --4/4	
-		waist="Lieutenant's Sash", --0/2
 		})
 
 	sets.idle.Weak = sets.idle.DT

@@ -180,7 +180,7 @@ function init_gear_sets()
 		ear2="Etiolation Earring",
 		ring1="Defending Ring",
 		ring2="Barataria Ring",
-		back="Camulus's Mantle",
+		back=gear.COR_SNP_Cape,
 		waist="Flume Belt +1",
 		}
 	
@@ -233,7 +233,7 @@ function init_gear_sets()
 		hands="Carmine Fin. Ga. +1", --8/11
 		legs="Adhemar Kecks", --9/0
 		feet="Meg. Jam. +1", --8/0
-		back="Navarch's Mantle", --7/0
+		back=gear.COR_SNP_Cape, --10/0
 		waist="Impulse Belt", --3/0
 		} -- 10% Gifts
 
@@ -259,7 +259,8 @@ function init_gear_sets()
 	sets.precast.WS.Acc = set_combine(sets.precast.WS, {
 		feet="Meg. Jam. +1",
 		ear2="Telos Earring",
-		ring1="Cacoethic Ring +1",
+		ring1="Hajduk Ring +1",
+		ring2="Hajduk Ring +1",
 		waist="Kwahu Kachina Belt",
 		})
 
@@ -274,7 +275,8 @@ function init_gear_sets()
 		ammo=gear.WSbullet,
 		neck="Marked Gorget",
 		ear2="Telos Earring",
-		ring1="Cacoethic Ring +1",
+		ring1="Hajduk Ring +1",
+		ring2="Hajduk Ring +1",
 		waist="Kwahu Kachina Belt",
 		})
 
@@ -467,7 +469,8 @@ function init_gear_sets()
 		legs="Meg. Chausses +1",
 		feet="Meg. Jam. +1",
 		neck="Combatant's Torque",
-		ring1="Cacoethic Ring +1",
+		ring1="Hajduk Ring +1",
+		ring2="Hajduk Ring +1",
 		waist="Kwahu Kachina Belt",
 		})
 

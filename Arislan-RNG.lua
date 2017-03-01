@@ -195,7 +195,8 @@ function init_gear_sets()
 		neck="Combatant's Torque",
 		ear1="Enervating Earring",
 		ear2="Telos Earring",
-		ring1="Cacoethic Ring +1",
+		ring1="Hajduk Ring +1",
+		ring2="Hajduk Ring +1",
 		waist="Kwahu Kachina Belt",
 		})
 
@@ -211,7 +212,8 @@ function init_gear_sets()
 		hands="Meg. Gloves +1",
 		neck="Combatant's Torque",
 		ear2="Telos Earring",
-		ring1="Cacoethic Ring +1",
+		ring1="Hajduk Ring +1",
+		ring2="Hajduk Ring +1",
 		waist="Kwahu Kachina Belt",
 		})
 		
@@ -309,7 +311,8 @@ function init_gear_sets()
 		legs="Meg. Chausses +1",
 		feet="Meg. Jam. +1",
 		neck="Combatant's Torque",
-		ring1="Cacoethic Ring +1",
+		ring1="Hajduk Ring +1",
+		ring2="Hajduk Ring +1",
 		ring2="Garuda Ring +1",
 		waist="Kwahu Kachina Belt",
 		})

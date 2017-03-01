@@ -502,7 +502,6 @@ function init_gear_sets()
 		ring1="Gelatinous Ring +1", --7/(-1)
 		ring2="Defending Ring", --10/10
 		back="Solemnity Cape", --4/4
-		waist="Lieutenant's Sash", --0/2
 		})
 
 	sets.idle.Refresh = {main="Bolelabunga", sub="Genmei Shield"}
@@ -570,7 +569,7 @@ function init_gear_sets()
 --	sets.buff['Ebullience'] = {head="Arbatel Bonnet +1"}
 	sets.buff['Rapture'] = {head="Arbatel Bonnet +1"}
 	sets.buff['Perpetuance'] = {hands="Arbatel Bracers +1"}
-	sets.buff['Immanence'] = {hands="Arbatel Bracers +1", "Lugh's Cape"}
+	sets.buff['Immanence'] = {main=gear.Akademos_MAB, sub="Enki Strap", hands="Arbatel Bracers +1", "Lugh's Cape"}
 	sets.buff['Penury'] = {legs="Arbatel Pants +1"}
 	sets.buff['Parsimony'] = {legs="Arbatel Pants +1"}
 	sets.buff['Celerity'] = {feet="Peda. Loafers +1"}
@@ -608,20 +607,21 @@ end
 -- Run after the general midcast() is done.
 function job_post_midcast(spell, action, spellMap, eventArgs)
 	if spell.skill == 'Elemental Magic' or spell.english == "Kaustra" then
+		if (spell.element == world.day_element or spell.element == world.weather_element) then
+			equip(sets.Obi)
+		end
 		if spellMap == "Helix" then
-			equip(sets.midcast['Elemental Magic'])
-			equip(sets.midcast.Helix)
+			--equip(sets.midcast['Elemental Magic'])
 			if spell.english:startswith('Lumino') then
 				equip(sets.midcast.LightHelix)
 			elseif spell.english:startswith('Nocto') then
 				equip(sets.midcast.DarkHelix)
+			else
+				equip(sets.midcast.Helix)
 			end
 			if state.HelixMode.value == 'Bookworm' then
 				equip(sets.Bookworm)
 			end
-		end
-		if (spell.element == world.day_element or spell.element == world.weather_element) then
-			equip(sets.Obi)
 		end
 	end
 	if spell.action_type == 'Magic' then

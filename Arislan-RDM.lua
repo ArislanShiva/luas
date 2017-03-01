@@ -26,6 +26,10 @@ function job_setup()
 
 	state.CP = M(false, "Capacity Points Mode")
 	state.Buff.Saboteur = buffactive.saboteur or false
+	
+	enfeebling_magic_acc = S{'Bind', 'Break', 'Dispel', 'Distract', 'Distract II', 'Frazzle',
+		'Frazzle II',  'Gravity', 'Gravity II', 'Silence', 'Sleep', 'Sleep II', 'Sleepga'}
+	enfeebling_magic_skill = S{'Dia', 'Dia II', 'Dia III', 'Diaga', 'Distract III', 'Frazzle III'}
 
 end
 
@@ -359,10 +363,17 @@ function init_gear_sets()
 		ear1="Hermetic Earring",
 		ear2="Digni. Earring",
 		ring1="Kishar Ring",
-		ring2="Stikini Ring",
+		ring2="Globidonta Ring",
 		back=gear.RDM_MND_Cape,
 		waist="Luminary Sash",
 		}
+
+	sets.midcast.MndEnfeeblesAcc = set_combine(sets.midcast.MndEnfeebles, {
+		ammo="Pemphredo Tathlum",
+		body="Vanya Robe",
+		neck="Sanctity Necklace",
+		ring2="Weather. Ring",
+		})
 	
 	sets.midcast.IntEnfeebles = set_combine(sets.midcast.MndEnfeebles, {
 		main=gear.Grioavolr_MB,
@@ -370,10 +381,24 @@ function init_gear_sets()
 		back=gear.RDM_INT_Cape,
 		})
 
+	sets.midcast.IntEnfeeblesAcc = set_combine(sets.midcast.IntEnfeebles, {
+		ammo="Pemphredo Tathlum",
+		body="Vanya Robe",
+		neck="Sanctity Necklace",
+		ring2="Weather. Ring",
+		})
+
+	sets.midcast.SkillEnfeebles = {
+		sub="Mephitis Grip",
+		head="Befouled Crown",
+		neck="Incanter's Torque",
+		ring1="Stikini Ring",
+		waist="Rumination Sash",
+		}
+
 	sets.midcast.ElementalEnfeeble = sets.midcast.IntEnfeebles
 
-
-	sets.midcast['Dia III'] = set_combine(sets.midcast.MndEnfeebles, {head="Viti. Chapeau +1"})
+	sets.midcast['Dia III'] = set_combine(sets.midcast.SkillEnfeebles, {head="Viti. Chapeau +1"})
 	sets.midcast['Paralyze II'] = set_combine(sets.midcast.MndEnfeebles, {head="Vitivation Boots +1"})
 	sets.midcast['Slow II'] = set_combine(sets.midcast.MndEnfeebles, {head="Viti. Chapeau +1"})
 
@@ -554,7 +579,7 @@ function init_gear_sets()
 		ammo="Ginsen",
 		head="Carmine Mask +1",
 		body="Ayanmo Corazza +1",
-		hands="Leyline Gloves",
+		hands="Chironic Gloves",
 		legs="Carmine Cuisses +1",
 		feet="Carmine Greaves +1",
 		neck="Anu Torque",
@@ -588,13 +613,6 @@ end
 -- Job-specific hooks for standard casting events.
 -------------------------------------------------------------------------------------------------------------------
 
-function job_precast(spell, action, spellMap, eventArgs)
-	if spell.action_type == 'Magic' then
-		windower.ffxi.run(false)
-		cast_delay(0.3)
-	end
-end
-
 function job_post_precast(spell, action, spellMap, eventArgs)
 	if spell.name == 'Impact' then
 		equip(sets.precast.FC.Impact)
@@ -604,8 +622,13 @@ end
 -- Run after the default midcast() is done.
 -- eventArgs is the same one used in job_midcast, in case information needs to be persisted.
 function job_post_midcast(spell, action, spellMap, eventArgs)
-	if spell.skill == 'Enfeebling Magic' and state.Buff.Saboteur then
-		equip(sets.buff.Saboteur)
+	if spell.skill == 'Enfeebling Magic' then
+		if enfeebling_magic_skill:contains(spell.english) then
+			equip(sets.midcast.SkillEnfeebles)
+		end
+		if state.Buff.Saboteur then
+			equip(sets.buff.Saboteur)
+		end
 	elseif spell.skill == 'Enhancing Magic' and classes.NoSkillSpells:contains(spell.english) then
 		equip(sets.midcast.EnhancingDuration)
 	elseif spell.skill == 'Enhancing Magic' and spell.target.type == 'PLAYER' then
@@ -677,12 +700,23 @@ function job_get_spell_map(spell, default_spell_map)
 			if (world.weather_element == 'Light' or world.day_element == 'Light') then
 				return 'CureWeather'
 			end
-		elseif spell.skill == 'Enfeebling Magic' then
-			if spell.type == 'WhiteMagic' then
-				return 'MndEnfeebles'
+		end
+		if spell.skill == 'Enfeebling Magic' then
+			if spell.type == "WhiteMagic" and not enfeebling_magic_skill:contains(spell.english) then
+				if enfeebling_magic_acc:contains(spell.english) then
+					return "MndEnfeeblesAcc"
+				else
+					return "MndEnfeebles"
+				end
+			elseif spell.type == "BlackMagic" and not enfeebling_magic_skill:contains(spell.english) then
+				if enfeebling_magic_acc:contains(spell.english) then
+					return "IntEnfeeblesAcc"
+				else
+					return "IntEnfeebles"
+				end
 			else
-				return 'IntEnfeebles'
-			end
+				return "MndEnfeebles"
+			end 
 		end
 	end
 end

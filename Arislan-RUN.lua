@@ -259,7 +259,7 @@ function init_gear_sets()
 		legs="Lustratio Subligar",
 		feet="Lustratio Leggings",
 		ring1="Apate Ring",
-		back=gear.RUN_TP_Cape,
+		back=gear.RUN_WS2_Cape,
 		waist="Ioskeha Belt",
 		})
 		
@@ -396,7 +396,7 @@ function init_gear_sets()
 
 	sets.idle = {
 		main="Epeolatry",
-		sub="Refined Grip +1",
+		sub="Mensch Strap +1",
 		ammo="Homiliary",
 		head="Rawhide Mask",
 		body="Futhark Coat +1",
@@ -430,7 +430,6 @@ function init_gear_sets()
 		}
 
 	sets.idle.Town = set_combine(sets.idle, {
-		sub="Nepenthe Grip +1",
 		ammo="Knobkierrie",
 		head="Carmine Mask +1",
 		body="Erilaz Surcoat +1",
@@ -676,10 +675,10 @@ end
 function job_aftercast(spell, action, spellMap, eventArgs)
 	if spell.name == 'Rayke' and not spell.interrupted then
 		send_command('@timers c "Rayke ['..spell.target.name..']" '..rayke_duration..' down spells/00136.png')
-		send_command('wait '..rayke_duration..';input /p <bstar><bstar><bstar> <ldangle> Rayke: OFF <rdangle> <bstar><bstar><bstar> <call21>;')
+		send_command('wait '..rayke_duration..';input /p <ref><ref><ref> <ldangle> Rayke: OFF <rdangle> <ref><ref><ref> <call21>;')
 	elseif spell.name == 'Gambit' and not spell.interrupted then
 		send_command('@timers c "Gambit ['..spell.target.name..']" '..gambit_duration..' down spells/00136.png')
-		send_command('wait '..gambit_duration..';input /p <bstar><bstar><bstar> <ldangle> Gambit: OFF <rdangle> <bstar><bstar><bstar> <call21>;')
+		send_command('wait '..gambit_duration..';input /p <ref><ref><ref> <ldangle> Gambit: OFF <rdangle> <ref><ref><ref> <call21>;')
 	end
 end
 
