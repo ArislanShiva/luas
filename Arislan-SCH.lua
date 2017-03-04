@@ -481,7 +481,7 @@ function init_gear_sets()
 		hands="Gende. Gages +1",
 		legs="Assiduity Pants +1",
 		feet="Herald's Gaiters",
-		neck="Sanctity Necklace",
+		neck="Bathy Choker +1",
 		ear1="Genmei Earring",
 		ear2="Infused Earring",
 		ring1="Paguroidea Ring",
@@ -512,6 +512,7 @@ function init_gear_sets()
 		head="Merlinic Hood",
 		body="Merlinic Jubbah",
 		legs=gear.Merlinic_MB_legs,
+		neck="Incanter's Torque",
 		ear1="Barkaro. Earring",
 		ear2="Friomisi Earring",
 		ring1="Shiva Ring +1",
@@ -565,6 +566,14 @@ function init_gear_sets()
 		neck="Mizu. Kubikazari", --10
 		ring1="Mujin Band", --(5)
 		}
+
+	sets.magic_burst.Resistant = { 
+		body="Merlinic Jubbah", --10
+		hands="Amalric Gages", --(5)
+		legs=gear.Merlinic_MAcc_legs,
+		feet="Merlinic Crackows", --11
+		neck="Mizu. Kubikazari", --10
+		} 
 	
 --	sets.buff['Ebullience'] = {head="Arbatel Bonnet +1"}
 	sets.buff['Rapture'] = {head="Arbatel Bonnet +1"}
@@ -633,7 +642,11 @@ function job_post_midcast(spell, action, spellMap, eventArgs)
 		equip(sets.Grimoire) 
 	end
 	if spell.skill == 'Elemental Magic' and state.MagicBurst.value then
-		equip(sets.magic_burst)
+		if state.CastingMode.value == "Resistant" then
+			equip(sets.magic_burst.Resistant)
+		else
+			equip(sets.magic_burst)
+		end
 		if spell.english == "Impact" then
 			equip(sets.midcast.Impact)
 		end

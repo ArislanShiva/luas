@@ -249,7 +249,7 @@ function init_gear_sets()
 		hands=gear.Herc_TA_hands,
 		legs="Samnuha Tights",
 		feet="Danzo Sune-ate",
-		neck="Sanctity Necklace",
+		neck="Bathy Choker +1",
 		ear1="Genmei Earring",
 		ear2="Infused Earring",
 		ring1="Paguroidea Ring",

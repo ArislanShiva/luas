@@ -358,7 +358,7 @@ function init_gear_sets()
 		hands="Carmine Fin. Ga. +1",
 		legs="Carmine Cuisses +1",
 		feet="Amini Bottillons +1",
-		neck="Sanctity Necklace",
+		neck="Bathy Choker +1",
 		ear1="Genmei Earring",
 		ear2="Infused Earring",
 		ring1="Paguroidea Ring",

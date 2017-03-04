@@ -478,7 +478,7 @@ function init_gear_sets()
 		hands="Amalric Gages",
 		legs="Assid. Pants +1",
 		feet="Herald's Gaiters",
-		neck="Sanctity Necklace",
+		neck="Bathy Choker +1",
 		ear1="Genmei Earring",
 		ear2="Infused Earring",
 		ring1="Paguroidea Ring",
