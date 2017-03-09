@@ -1,0 +1,21 @@
+            <avatar>
+                <slot01>barbed crescent</slot01>
+                <slot02>delta thrust</slot02>
+                <slot03>erratic flutter</slot03>
+                <slot04>fantod</slot04>
+                <slot05>zephyr mantle</slot05>
+                <slot06>occultation</slot06>
+                <slot07>magic fruit</slot07>
+                <slot08>thrashing assault</slot08>
+                <slot09>anvil lightning</slot09>
+                <slot10>sudden lunge</slot10>
+                <slot11>molting plumage</slot11>
+                <slot12>diffusion ray</slot12>
+                <slot13>paralyzing triad</slot13>
+                <slot14>empty thrash</slot14>
+                <slot15>heavy strike</slot15>
+                <slot16>sweeping gouge</slot16>
+                <slot17>sinker drill</slot17>
+                <slot18>nat. meditation</slot18>
+                <slot19>cocoon</slot19>
+            </avatar>
