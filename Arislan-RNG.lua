@@ -36,13 +36,9 @@ function user_setup()
 	state.IdleMode:options('Normal', 'DT')
 	
 	state.CP = M(false, "Capacity Points Mode")
-
-	gear.default.weaponskill_neck = "Fotia Gorget"
-	gear.default.weaponskill_waist = "Fotia Belt"
 	
-	DefaultAmmo = {['Steinthor'] = "Achiyal. Arrow", ['Holliday'] = "Achiyal. Bullet"}
---	DefaultAmmo = {['Steinthor'] = "Achiyal. Arrow", ['Holliday'] = "Orichalc. Bullet"}
-	U_Shot_Ammo = {['Steinthor'] = "Achiyal. Arrow", ['Holliday'] = "Animikii Bullet"}
+	DefaultAmmo = {['Steinthor'] = "Achiyal. Arrow", ['Fomalhaut'] = "Chrono Bullet"}
+	U_Shot_Ammo = {['Steinthor'] = "Achiyal. Arrow", ['Fomalhaut'] = "Animikii Bullet"}
 
 	-- Additional local binds
 	send_command('bind ^` input /ja "Velocity Shot" <me>')
@@ -135,10 +131,9 @@ function init_gear_sets()
 		hands="Carmine Fin. Ga. +1", --8/11
 		legs="Adhemar Kecks", --9/0
 		feet="Meg. Jam. +1", --8/0
-		back="Lutian Cape",
+		back=gear.RNG_TP_Cape,
 		waist="Impulse Belt", --3/0
 		}
-
 
 	-- Weaponskill sets
 	-- Default set for any weaponskill that isn't any more specifically defined
@@ -153,7 +148,7 @@ function init_gear_sets()
 		ear2="Ishvara Earring",
 		ring1="Garuda Ring +1",
 		ring2="Garuda Ring +1",
-		back=gear.RNG_TP_Cape,
+		back=gear.RNG_WS2_Cape,
 		waist="Fotia Belt",
 		}
 
@@ -200,12 +195,12 @@ function init_gear_sets()
 		waist="Kwahu Kachina Belt",
 		})
 
-	sets.precast.WS["Last Stand"] = {
+	sets.precast.WS["Last Stand"] = set_combine(sets.precast.WS, {
 		hands="Kobo Kote",
 		neck="Fotia Gorget",
 		ring1="Garuda Ring +1",
 		ring2="Garuda Ring +1",
-		}
+		})
 
 	sets.precast.WS['Last Stand'].Acc = set_combine(sets.precast.WS['Last Stand'], {
 		head="Meghanada Visor +1",
@@ -722,6 +717,12 @@ function job_midcast(spell, action, spellMap, eventArgs)
 	if spell.action_type == 'Ranged Attack' and state.Buff['Double Shot'] then
 		equip(sets.buff['Double Shot'])
 		eventArgs.handled = true
+	end
+end
+
+function job_aftercast(spell, action, spellMap, eventArgs)
+	if spell.english == "Shadowbind" then
+		send_command('@timers c "Shadowbind ['..spell.target.name..']" 42 down abilities/00122.png')
 	end
 end
 

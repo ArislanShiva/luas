@@ -280,8 +280,8 @@ function init_gear_sets()
 		}
 		
 	sets.midcast.Cursna = set_combine(sets.midcast.StatusRemoval, {
-		feet="Vanya Clogs",
-		neck="Malison Medallion",
+		feet="Gende. Galosh. +1",
+		neck="Debilis Medallion",
 		ear1="Beatific Earring",
 		back="Oretan. Cape +1",
 		})
@@ -647,6 +647,18 @@ function job_post_midcast(spell, action, spellMap, eventArgs)
 		if (spell.element == world.day_element or spell.element == world.weather_element) then
 			equip(sets.Obi)
 		end
+	end
+end
+
+function job_aftercast(spell, action, spellMap, eventArgs)
+	if not spell.interrupted then
+		if spell.english == "Sleep II" then
+			send_command('@timers c "Sleep II ['..spell.target.name..']" 90 down spells/00259.png')
+		elseif spell.english == "Sleep" or spell.english == "Sleepga" then -- Sleep & Sleepga Countdown --
+			send_command('@timers c "Sleep ['..spell.target.name..']" 60 down spells/00253.png')
+		elseif spell.english == "Break" then
+			send_command('@timers c "Break ['..spell.target.name..']" 30 down spells/00255.png')
+		end 
 	end
 end
 

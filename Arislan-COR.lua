@@ -80,7 +80,7 @@ function job_setup()
 	state.LuzafRing = M(false, "Luzaf's Ring")
 	-- Whether a warning has been given for low ammo
 	state.warned = M(false)
-
+	
 	define_roll_values()
 	determine_haste_group()
 
@@ -99,13 +99,14 @@ function user_setup()
 	state.IdleMode:options('Normal', 'DT')
 
 	state.WeaponLock = M(false, 'Weapon Lock')	
+	state.Gun = M{['description']='Current Gun', 'Death Penalty', 'Fomalhaut'}--, 'Armageddon'}
 	state.CP = M(false, "Capacity Points Mode")
 
-	gear.RAbullet = "Decimating Bullet"
-	gear.WSbullet = "Decimating Bullet"
+	gear.RAbullet = "Chrono Bullet"
+	gear.WSbullet = "Chrono Bullet"
 	gear.MAbullet = "Living Bullet"
 	gear.QDbullet = "Living Bullet"
-	options.ammo_warning_limit = 5
+	options.ammo_warning_limit = 10
 
 	-- Additional local binds
 	send_command('bind ^` input /ja "Double-up" <me>')
@@ -131,6 +132,7 @@ function user_setup()
 	end
 
 	send_command('bind @c gs c toggle CP')
+	send_command('bind @g gs c cycle Gun')
 	send_command('bind @h gs c cycle HasteMode')
 	send_command('bind @w gs c toggle WeaponLock')
 
@@ -152,6 +154,7 @@ function user_unload()
 	send_command('unbind ^]')
 	send_command('unbind ^,')
 	send_command('unbind @c')
+	send_command('unbind @g')
 	send_command('unbind @h')
 	send_command('unbind @w')
 end
@@ -499,7 +502,6 @@ function init_gear_sets()
 	sets.resting = {}
 
 	sets.idle = {
-		ranged="Death Penalty",
 		ammo=gear.MAbullet,
 		head="Dampening Tam",
 		body="Laksa. Frac +2",
@@ -857,6 +859,9 @@ function job_aftercast(spell, action, spellMap, eventArgs)
 	if spell.type == 'CorsairRoll' and not spell.interrupted then
 		display_roll_info(spell)
 	end
+	if spell.english == "Light Shot" then
+		send_command('@timers c "Light Shot ['..spell.target.name..']" 60 down abilities/00195.png')
+	end
 end
 
 function job_buff_change(buff,gain)
@@ -903,6 +908,14 @@ end
 
 -- Modify the default idle set after it was constructed.
 function customize_idle_set(idleSet)
+	if state.Gun.current == "Death Penalty" then
+		equip({ranged="Death Penalty"})
+	elseif state.Gun.current == "Fomalhaut" then
+		equip({ranged="Fomalhaut"})
+--	elseif state.Gun.current == "Armageddon" then
+--		equip({ranged="Armageddon"})
+	end
+
 	if state.CP.current == 'on' then
 		equip(sets.CP)
 		disable('back')
@@ -1128,7 +1141,7 @@ function do_bullet_checks(spell, spellMap, eventArgs)
 			add_to_chat(104, 'No Quick Draw ammo left.  Using what\'s currently equipped ('..player.equipment.ammo..').')
 			return
 		elseif spell.type == 'WeaponSkill' and player.equipment.ammo == gear.RAbullet then
---			add_to_chat(104, 'No weaponskill ammo left.  Using what\'s currently equipped (standard ranged bullets: '..player.equipment.ammo..').')
+			add_to_chat(104, 'No weaponskill ammo left.  Using what\'s currently equipped (standard ranged bullets: '..player.equipment.ammo..').')
 			return
 		else
 			add_to_chat(104, 'No ammo ('..tostring(bullet_name)..') available for that action.')

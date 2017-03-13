@@ -236,6 +236,7 @@ function init_gear_sets()
 		}
 
 	sets.midcast.Curaga = set_combine(sets.midcast.Cure, {
+		neck="Nuna Gorget +1",
 		ring1="Levia. Ring +1",
 		ring2="Levia. Ring +1",
 		waist="Luminary Sash",
@@ -246,7 +247,7 @@ function init_gear_sets()
 		sub="Genmei Shield",
 		head="Vanya Hood",
 		feet="Vanya Clogs",
-		neck="Malison Medallion",
+		neck="Debilis Medallion",
 		ear1="Beatific Earring",
 		ring1="Haoma's Ring",
 		ring2="Haoma's Ring",
@@ -370,25 +371,6 @@ function init_gear_sets()
 
 	sets.midcast.Death = {
 		main=gear.Grioavolr_MP,
-		sub="Enki Strap",
-		ammo="Ghastly Tathlum +1",
-		head="Amalric Coif",
-		body="Merlinic Jubbah", --10
-		hands="Amalric Gages", --(5)
-		legs=gear.Merlinic_MAcc_legs,
-		feet="Merlinic Crackows", --11
-		neck="Mizu. Kubikazari", --10
-		ear1="Barkaro. Earring",
-		ear2="Digni. Earring",
-		ring1="Mephitas's Ring +1",
-		ring2="Shiva Ring +1",
-		back=gear.BLM_Death_Cape, --5
-		waist="Yamabuki-no-Obi",
-		}
-
---[[
-	sets.midcast.Death = {
-		main=gear.Grioavolr_MP,
 		sub="Elder's Grip +1",
 		ammo="Ghastly Tathlum +1",
 		head="Pixie Hairpin +1",
@@ -404,7 +386,16 @@ function init_gear_sets()
 		back=gear.BLM_Death_Cape, --5
 		waist="Yamabuki-no-Obi",
 		}
-]]--
+
+	sets.midcast.Death.Resistant = set_combine(sets.midcast.Death, {
+		main=gear.Grioavolr_MP,
+		sub="Enki Strap",
+		head="Amalric Coif",
+		legs=gear.Merlinic_MAcc_legs,
+		ear2="Digni. Earring",
+		ring2="Shiva Ring +1",
+		})
+
 
 	-- Elemental Magic sets
 	
@@ -491,8 +482,9 @@ function init_gear_sets()
 		main="Mafic Cudgel", --10/0
 		sub="Genmei Shield", --10/0
 		ammo="Staunch Tathlum", --2/2
-		body="Hagondes Coat +1", --4/4
+		body="Mallquis Saio +1", --6/6
 		hands="Hagondes Cuffs +1", --3/3
+		feet="Mallquis Clogs +1",
 		neck="Loricate Torque +1", --6/6
 		ear1="Genmei Earring", --2/0
 		ear2="Etiolation Earring", --0/3
@@ -633,7 +625,11 @@ function job_midcast(spell, action, spellMap, eventArgs)
 		if spell.skill == 'Elemental Magic' then
 			equip(sets.midcast['Elemental Magic'].DeathMode)
 		else
-			equip(sets.midcast.Death)
+			if state.CastingMode.value == "Resistant" then
+				equip(sets.midcast.Death.Resistant)
+			else
+				equip(sets.midcast.Death)
+			end
 		end
 	end
 
@@ -666,6 +662,18 @@ function job_post_midcast(spell, action, spellMap, eventArgs)
 	end
 	if buffactive['Mana Wall'] then
 		equip(sets.precast.JA['Mana Wall'])
+	end
+end
+
+function job_aftercast(spell, action, spellMap, eventArgs)
+	if not spell.interrupted then
+		if spell.english == "Sleep II" or spell.english == "Sleepga II" then
+			send_command('@timers c "Sleep II ['..spell.target.name..']" 90 down spells/00259.png')
+		elseif spell.english == "Sleep" or spell.english == "Sleepga" then -- Sleep & Sleepga Countdown --
+			send_command('@timers c "Sleep ['..spell.target.name..']" 60 down spells/00253.png')
+		elseif spell.english == "Break" or spell.english == "Breakga" then
+			send_command('@timers c "Break ['..spell.target.name..']" 30 down spells/00255.png')
+		end 
 	end
 end
 

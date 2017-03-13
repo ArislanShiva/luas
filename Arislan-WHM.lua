@@ -211,7 +211,7 @@ function init_gear_sets()
 
 	sets.midcast.Curaga = set_combine(sets.midcast.Cure, {
 		body="Kaykaus Bliaut", --5(+3)
-		neck="Imbodla Necklace",
+		neck="Nuna Gorget +1",
 		ring1="Levia. Ring +1",
 		ring2="Levia. Ring +1",
 		waist="Luminary Sash",
@@ -219,7 +219,7 @@ function init_gear_sets()
 
 	sets.midcast.CuragaWeather = set_combine(sets.midcast.Curaga, {
 		main="Chatoyant Staff", --10
-		sub="Clerisy Strap +1",
+		sub="Enki Strap",
 		neck="Nodens Gorget", --5
 		ring1="Lebeche Ring", --3/(-5)
 		back="Twilight Cape",
@@ -249,9 +249,8 @@ function init_gear_sets()
 		head="Vanya Hood",
 		hands="Fanatic Gloves", --15
 		legs="Th. Pantaloons +2", --17
-		feet="Vanya Clogs", --5
 --		feet="Gende. Galosh. +1", --10
-		neck="Malison Medallion", --10
+		neck="Debilis Medallion", --15
 		ear1="Beatific Earring",
 		ring1="Haoma's Ring", --15
 		ring2="Haoma's Ring", --15
@@ -392,7 +391,7 @@ function init_gear_sets()
 		sub="Enki Strap",
 		ammo="Quartz Tathlum +1",
 		head="Befouled Crown",
-		body="Vanya Robe",
+		body="Theo. Briault +2",
 		hands="Inyan. Dastanas +1",
 		legs="Chironic Hose",
 		feet="Theo. Duckbills +2",
@@ -467,10 +466,10 @@ function init_gear_sets()
 		main="Izcalli",
 		sub="Deliverance +1",
 		head="Ebers Cap +1",
-		body="Ebers Bliaud +1",
+		body="Theo. Briault +2",
 		hands="Theophany Mitts +2",
 		legs="Th. Pantaloons +2",
-		neck="Incanter's Torque",
+		neck="Debilis Medallion",
 		ring1="Levia. Ring +1",
 		ring2="Levia. Ring +1",
 		ear1="Nourish. Earring +1",
@@ -564,6 +563,18 @@ function job_post_midcast(spell, action, spellMap, eventArgs)
 	end
 	if spell.skill == 'Enhancing Magic' and classes.NoSkillSpells:contains(spell.english) then
 		equip(sets.midcast.EnhancingDuration)
+	end
+end
+
+function job_aftercast(spell, action, spellMap, eventArgs)
+	if not spell.interrupted then
+		if spell.english == "Sleep II" then
+			send_command('@timers c "Sleep II ['..spell.target.name..']" 90 down spells/00259.png')
+		elseif spell.english == "Sleep" or spell.english == "Sleepga" then -- Sleep & Sleepga Countdown --
+			send_command('@timers c "Sleep ['..spell.target.name..']" 60 down spells/00253.png')
+		elseif spell.english == "Repose" then
+			send_command('@timers c "Repose ['..spell.target.name..']" 90 down spells/00098.png')
+		end 
 	end
 end
 

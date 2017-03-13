@@ -212,6 +212,7 @@ function init_gear_sets()
 		}
 
 	sets.midcast.Curaga = set_combine(sets.midcast.Cure, {
+		neck="Nuna Gorget +1",
 		ring1="Levia. Ring +1",
 		ring2="Levia. Ring +1",
 		})
@@ -221,7 +222,7 @@ function init_gear_sets()
 		sub="Genmei Shield",
 		head="Vanya Hood",
 		feet="Vanya Clogs",
-		neck="Malison Medallion",
+		neck="Debilis Medallion",
 		ear1="Beatific Earring",
 		ring1="Haoma's Ring",
 		ring2="Haoma's Ring",
@@ -430,12 +431,13 @@ function init_gear_sets()
 	sets.idle.DT = set_combine(sets.idle, {
 		main="Mafic Cudgel", --10/0
 		sub="Genmei Shield", --10/0
-		body="Hagondes Coat +1", --3/4
+		body="Mallquis Saio +1", --6/6
 		hands="Hagondes Cuffs +1", --3/3
 		feet="Azimuth Gaiters +1", --4/0
 		neck="Loricate Torque +1", --6/6
+		ear1="Genmei Earring", --2/0
 		ear2="Etiolation Earring", --0/3
-		ring1="Fortified Ring", --0/5
+		ring1="Gelatinous Ring +1", --7/(-1)
 		ring2="Defending Ring", --10/10
 		back="Solemnity Cape", --4/4	
 		})
@@ -460,11 +462,12 @@ function init_gear_sets()
 		})
 
 	sets.idle.DT.Pet = set_combine(sets.idle.Pet, {
+		body="Mallquis Saio +1", --6/6
 		legs="Psycloth Lappas", --4/0
-		neck="Loricate Torque +1",
-		ring1="Gelatinous Ring +1",
-		ring2="Defending Ring",
-		back="Lifestream Cape", --3/0
+		neck="Loricate Torque +1", --6/6
+		ring1="Gelatinous Ring +1", --7/(-1)
+		ring2="Defending Ring", --10/10
+		back="Solemnity Cape", --4/4	
 		})
 
 	-- .Indi sets are for when an Indi-spell is active.
@@ -583,6 +586,11 @@ function job_aftercast(spell, action, spellMap, eventArgs)
 		elseif spell.skill == 'Elemental Magic' then
  --		   state.MagicBurst:reset()
 		end
+		if spell.english == "Sleep II" then
+			send_command('@timers c "Sleep II ['..spell.target.name..']" 90 down spells/00259.png')
+		elseif spell.english == "Sleep" or spell.english == "Sleepga" then -- Sleep & Sleepga Countdown --
+			send_command('@timers c "Sleep ['..spell.target.name..']" 60 down spells/00253.png')
+		end 
 	elseif not player.indi then
 		classes.CustomIdleGroups:clear()
 	end

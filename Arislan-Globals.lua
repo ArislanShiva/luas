@@ -15,7 +15,7 @@ function define_global_sets()
 	
 	gear.Grioavolr_MND = {name="Grioavolr", augments={'Enfb.mag. skill +10','MND+18','Mag. Acc.+20','"Mag.Atk.Bns."+11',}}
 	gear.Grioavolr_MP = {name="Grioavolr", augments={'"Fast Cast"+5','MP+97','Mag. Acc.+28','"Mag.Atk.Bns."+29',}}
-	gear.Grioavolr_MB = {name="Grioavolr", augments={'Magic burst mdg.+5%','INT+9','Mag. Acc.+27','"Mag.Atk.Bns."+27',}}
+	gear.Grioavolr_MB = {name="Grioavolr", augments={'Magic burst dmg.+5%','INT+9','Mag. Acc.+27','"Mag.Atk.Bns."+27',}}
 
 	-- Adhemar
 	gear.Adhemar_RA_hands = {name="Adhemar Wristbands", augments={'AGI+10','Rng.Acc.+15','Rng.Atk.+15',}}
@@ -45,7 +45,7 @@ function define_global_sets()
 
 	-- Merlinic
 	gear.Merlinic_MAcc_legs = {name="Merlinic Shalwar", augments={'Mag. Acc.+23 "Mag.Atk.Bns."+23','"Fast Cast"+2','Mag. Acc.+15','"Mag.Atk.Bns."+14',}}
-	gear.Merlinic_MB_legs = {name="Merlinic Shalwar", augments={'Mag. Acc.+24 "Mag.Atk.Bns."+24','Magic burst mdg.+6%','"Mag.Atk.Bns."+15',}}
+	gear.Merlinic_MB_legs = {name="Merlinic Shalwar", augments={'Mag. Acc.+24 "Mag.Atk.Bns."+24','Magic burst dmg.+6%','"Mag.Atk.Bns."+15',}}
 
 	-- Taeon
 	gear.Taeon_FC_body = {name="Taeon Tabard", augments={'"Fast Cast"+4','Phalanx +3',}}
@@ -79,6 +79,7 @@ function define_global_sets()
 
 	gear.RNG_TP_Cape = {name="Belenus's Cape", augments={'AGI+20','Rng.Acc.+20 Rng.Atk.+20','"Store TP"+10',}}
 	gear.RNG_WS1_Cape = {name="Belenus's Cape", augments={'AGI+20','Mag. Acc+20 /Mag. Dmg.+20','Weapon skill damage +10%',}}
+	gear.RNG_WS2_Cape = {name="Belenus's Cape", augments={'AGI+20','Rng.Acc.+20 Rng.Atk.+20','Weapon skill damage +10%',}}
 
 	gear.RUN_HP_Cape = {name="Ogma's cape", augments={'HP+60','Eva.+20 /Mag. Eva.+20','Mag. Evasion+10','"Fast Cast"+10',}} --*
     gear.RUN_TP_Cape = {name="Ogma's cape", augments={'DEX+20','Accuracy+20 Attack+20','Accuracy+10','"Store TP"+10',}} --*

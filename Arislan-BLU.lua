@@ -1050,6 +1050,20 @@ function job_post_midcast(spell, action, spellMap, eventArgs)
 	end
 end
 
+function job_post_midcast(spell, action, spellMap, eventArgs)
+	if not spell.interrupted then
+		if spell.english == "Dream Flower" then
+			send_command('@timers c "Dream Flower ['..spell.target.name..']" 90 down spells/00098.png')
+		elseif spell.english == "Soporific" then
+			send_command('@timers c "Sleep ['..spell.target.name..']" 90 down spells/00259.png')
+		elseif spell.english == "Sheep Song" then
+			send_command('@timers c "Sheep Song ['..spell.target.name..']" 60 down spells/00098.png')
+		elseif spell.english == "Yawn" then
+			send_command('@timers c "Yawn ['..spell.target.name..']" 60 down spells/00098.png')
+		end
+	end
+end
+
 -------------------------------------------------------------------------------------------------------------------
 -- Job-specific hooks for non-casting events.
 -------------------------------------------------------------------------------------------------------------------

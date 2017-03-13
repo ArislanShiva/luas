@@ -240,6 +240,7 @@ function init_gear_sets()
 		})
 	
 	sets.midcast.Curaga = set_combine(sets.midcast.Cure, {
+		neck="Nuna Gorget +1",
 		ring1="Levia. Ring +1",
 		ring2="Levia. Ring +1",
 		back=gear.SCH_FC_Cape,
@@ -262,8 +263,8 @@ function init_gear_sets()
 	sets.midcast.Cursna = set_combine(sets.midcast.StatusRemoval, {
 		main="Gada",
 		sub="Genmei Shield",
-		feet="Vanya Clogs",
-		neck="Malison Medallion",
+		feet="Gende. Galosh. +1",
+		neck="Debilis Medallion",
 		ear1="Beatific Earring",
 		})
 	
@@ -495,6 +496,7 @@ function init_gear_sets()
 		sub="Genmei Shield", --10/0
 		ammo="Staunch Tathlum", --2/2
 		head="Gende. Caubeen +1", --4/4
+		body="Mallquis Saio +1", --6/6
 		hands="Gende. Gages +1", --4/3
  		neck="Loricate Torque +1", --6/6
 		ear1="Genmei Earring", --2/0
@@ -665,12 +667,17 @@ function job_post_midcast(spell, action, spellMap, eventArgs)
 end
 
 function job_aftercast(spell, action, spellMap, eventArgs)
---	if not spell.interrupted then
---		if spell.skill == 'Elemental Magic' then
-			--state.MagicBurst:reset()
---		end
---	end
+	if not spell.interrupted then
+		if spell.english == "Sleep II" then
+			send_command('@timers c "Sleep II ['..spell.target.name..']" 90 down spells/00259.png')
+		elseif spell.english == "Sleep" or spell.english == "Sleepga" then -- Sleep & Sleepga Countdown --
+			send_command('@timers c "Sleep ['..spell.target.name..']" 60 down spells/00253.png')
+		elseif spell.english == "Break" then
+			send_command('@timers c "Break ['..spell.target.name..']" 30 down spells/00255.png')
+		end 
+	end
 end
+
 
 -------------------------------------------------------------------------------------------------------------------
 -- Job-specific hooks for non-casting events.
