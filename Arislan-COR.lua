@@ -170,7 +170,6 @@ function init_gear_sets()
 	sets.precast.JA['Wild Card'] = {feet="Lanun Bottes +1"}
 	sets.precast.JA['Random Deal'] = {body="Lanun Frac +1"}
 
-	
 	sets.precast.CorsairRoll = {
 		range="Compensator",
 		head="Lanun Tricorne +1",
@@ -178,11 +177,11 @@ function init_gear_sets()
 		hands="Chasseur's Gants +1",
 		legs="Desultor Tassets",
 		feet="Lanun Bottes +1",
-		neck="Loricate Torque +1",
+		neck="Regal Necklace",
 		ear1="Genmei Earring",
 		ear2="Etiolation Earring",
-		ring1="Defending Ring",
-		ring2="Barataria Ring",
+		ring1="Gelatinous Ring +1",
+		ring2="Defending Ring",
 		back=gear.COR_SNP_Cape,
 		waist="Flume Belt +1",
 		}
@@ -217,7 +216,7 @@ function init_gear_sets()
 		feet="Carmine Greaves +1", --8
 		neck="Orunmila's Torque", --5
 		ear1="Loquacious Earring", --2
-		ear2="Etiolation Earring", --1
+		ear2="Enchntr. Earring +1", --2
 		ring1="Kishar Ring", --4
 		ring2="Weather. Ring", --5(3)
 		waist="Ninurta's Sash",
@@ -532,7 +531,7 @@ function init_gear_sets()
 	sets.idle.Town = set_combine(sets.idle, {
 		head="Carmine Mask +1",
 		feet="Carmine Greaves +1",
-		neck="Baetyl Pendant",
+		neck="Regal Necklace",
 		ear1="Eabani Earring",
 		ear2="Telos Earring",
 		ring1="Arvina Ringlet +1",

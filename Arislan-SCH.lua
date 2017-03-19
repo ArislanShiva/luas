@@ -147,7 +147,7 @@ function init_gear_sets()
 		feet="Regal Pumps +1", --7
 		neck="Orunmila's Torque", --5
 		ear1="Loquacious Earring", --2
-		ear2="Etiolation Earring", --1
+		ear2="Enchntr. Earring +1", --2
 		ring1="Kishar Ring", --4
 		ring2="Weather. Ring", --5/(3)
 		back=gear.SCH_FC_Cape, --10
@@ -193,10 +193,10 @@ function init_gear_sets()
 	sets.precast.WS['Myrkr'] = {
 		ammo="Ghastly Tathlum +1",
 		head="Pixie Hairpin +1",
-		body="Peda. Gown +1",
-		hands="Telchine Gloves",
+		body="Weather. Rope +1",
+		hands="Kaykaus Cuffs",
 		legs="Amalric Slops",
-		feet="Arbatel Loafers +1",
+		feet="Kaykaus Boots",
 		neck="Orunmila's Torque",
 		ear1="Loquacious Earring",
 		ear2="Etiolation Earring",

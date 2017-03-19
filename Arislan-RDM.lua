@@ -122,7 +122,7 @@ function init_gear_sets()
 		feet="Carmine Greaves +1", --8
 		neck="Orunmila's Torque", --5
 		ear1="Loquacious Earring", --2
-		ear2="Etiolation Earring", --1
+		ear2="Enchntr. Earring +1", --2
 		ring1="Kishar Ring", --4
 		ring2="Weather. Ring", --5
 		back="Swith Cape +1", --4
@@ -391,8 +391,11 @@ function init_gear_sets()
 	sets.midcast.SkillEnfeebles = {
 		sub="Mephitis Grip",
 		head="Befouled Crown",
+		body="Vanya Robe",
+		hands="Leth. Gantherots +1",
 		neck="Incanter's Torque",
 		ring1="Stikini Ring",
+		ear1="Enfeebling Earring",
 		waist="Rumination Sash",
 		}
 

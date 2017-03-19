@@ -96,8 +96,8 @@ function init_gear_sets()
 		legs="Geo. Pants +1", --11
 		feet="Regal Pumps +1", --7
 		neck="Orunmila's Torque", --5
-		ear1="Loquacious Earring", --1
-		ear2="Etiolation Earring", --2
+		ear1="Loquacious Earring", --2
+		ear2="Enchntr. Earring +1", --2
 		ring1="Kishar Ring", --4
 		ring2="Weather. Ring", --5
 		back="Lifestream Cape", --7

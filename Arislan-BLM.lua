@@ -104,8 +104,8 @@ function init_gear_sets()
 		legs="Psycloth Lappas", --7
 		feet="Regal Pumps +1", --7
 		neck="Orunmila's Torque", --5
-		ear1="Etiolation Earring", --1
-		ear2="Loquacious Earring", --2
+		ear1="Loquacious Earring", --2
+		ear2="Enchntr. Earring +1", --2
 		ring1="Kishar Ring", --4
 		ring2="Weather. Ring", --5
 		back=gear.BLM_FC_Cape, --10
@@ -191,10 +191,10 @@ function init_gear_sets()
 	sets.precast.WS['Myrkr'] = {
 		ammo="Ghastly Tathlum +1",
 		head="Pixie Hairpin +1",
-		body="Amalric Doublet",
+		body="Weather. Rope +1",
 		hands="Telchine Gloves",
 		legs="Amalric Slops",
-		feet="Telchine Pigaches",
+		feet="Medium's Sabots",
 		neck="Orunmila's Torque",
 		ear1="Etiolation Earring",
 		ear2="Loquacious Earring",

@@ -65,6 +65,9 @@ function job_setup()
 	state.UseAltStep = M(false, 'Use Alt Step')
 	state.SelectStepTarget = M(false, 'Select Step Target')
 	state.IgnoreTargetting = M(false, 'Ignore Targetting')
+
+	state.ClosedPosition = M(false, 'Closed Position')
+
 	state.HasteMode = M{['description']='Haste Mode', 'Haste II', 'Haste I'}
 	
 	state.CurrentStep = M{['description']='Current Step', 'Main', 'Alt'}
@@ -91,11 +94,15 @@ function user_setup()
 	send_command('bind !- gs c cycleback altstep')
 	send_command('bind != gs c cycle altstep')
 	send_command('bind !p gs c toggle usealtstep')
+	send_command('bind ^[ input /ja "Trance" <me>')
+	send_command('bind ^] input /ja "Grand Pas" <me>')
+	send_command('bind ![ input /ja "Contradance" <me>')
 	send_command('bind ^` input /ja "Saber Dance" <me>')
 	send_command('bind !` input /ja "Chocobo Jig II" <me>')
 	send_command('bind ^, input /ja "Spectral Jig" <me>')
 	send_command('unbind ^.')
 	send_command('bind @h gs c cycle HasteMode')
+	send_command('bind @f gs c toggle ClosedPosition')
 	send_command('bind @c gs c toggle CP')
 
 	select_default_macro_book()
@@ -110,10 +117,14 @@ function user_unload()
 	send_command('unbind !-')
 	send_command('unbind !=')
 	send_command('unbind !p')
+	send_command('unbind ^[')
+	send_command('unbind ^]')
+	send_command('unbind ![')
 	send_command('unbind ^`')
 	send_command('unbind !`')
 	send_command('unbind ^,')
 	send_command('unbind @h')
+	send_command('unbind @f')
 	send_command('unbind @c')
 end
 
@@ -143,22 +154,17 @@ function init_gear_sets()
 	-- Job Ability Sets
 
 	sets.precast.JA['Provoke'] = sets.Enmity
-
-	sets.precast.JA['No Foot Rise'] = {
-		body="Horos Casaque +1"
-		}
-
-	sets.precast.JA['Trance'] = {
-		head="Horos Tiara +1"
-		}
+	sets.precast.JA['No Foot Rise'] = {body="Horos Casaque +1"}
+	sets.precast.JA['Trance'] = {head="Horos Tiara +1"}
 	  
 	sets.precast.Waltz = {
 		head="Horos Tiara +1", --11
 		body="Maxixi Casaque +1", --15
 		hands="Slither Gloves +1", --5
 		feet="Maxixi Shoes +1", --10
-		neck="Phalaina Locket", --(4)
+		neck="Unmoving Collar +1",
 		ear1="Roundel Earring", --5
+		ear2="Enchntr. Earring +1",
 		ring1="Asklepian Ring", --(3)
 		ring2="Carb. Ring +1", --3
 		back="Toetapper Mantle", --5
@@ -176,8 +182,8 @@ function init_gear_sets()
 		hands="Meg. Gloves +1",
 		legs="Meg. Chausses +1",
 		feet=gear.Herc_Acc_feet,
-		neck="Sanctity Necklace",
-		ear1="Mache Earring",
+		neck="Combatant's Torque",
+		ear1="Digni. Earring",
 		ear2="Telos Earring",
 		ring1="Ramuh Ring +1",
 		ring2="Ramuh Ring +1",
@@ -186,19 +192,23 @@ function init_gear_sets()
 		}
 
 	sets.precast.Step['Feather Step'] = set_combine(sets.precast.Step, {feet="Macu. Toeshoes +1"})
-
 	sets.precast.Flourish1 = {}
 	sets.precast.Flourish1['Animated Flourish'] = sets.Enmity
 
 	sets.precast.Flourish1['Violent Flourish'] = {
-		head="Dampening Tam",
-		body="Samnuha Coat",
-		hands="Leyline Gloves",
-		legs="Horos Tights +1",
-		feet=gear.Taeon_DW_feet,
+		ammo="Hydrocera",
+		head="Mummu Bonnet +1",
+		body="Horos Casaque +1",
+		hands="Mummu Wrists +1",
+		legs="Mummu Kecks +1",
+		feet="Mummu Gamashes +1",
+		neck="Sanctity Necklace",
 		ear1="Digni. Earring",
 		ear2="Hermetic Earring",
+		ring1="Stikini Ring",
 		ring2="Weather. Ring",
+		waist="Eschan Stone",
+		back=gear.DNC_TP_Cape,
 		} -- Magic Accuracy
 		
 	sets.precast.Flourish1['Desperate Flourish'] = {
@@ -217,16 +227,9 @@ function init_gear_sets()
 		} -- Accuracy
 
 	sets.precast.Flourish2 = {}
-	
-	sets.precast.Flourish2['Reverse Flourish'] = {
-		hands="Macu. Bangles +1",
-		back="Toetapper Mantle",
-		}
-
+	sets.precast.Flourish2['Reverse Flourish'] = {hands="Macu. Bangles +1",	back="Toetapper Mantle"}
 	sets.precast.Flourish3 = {}
-	
 	sets.precast.Flourish3['Striking Flourish'] = {body="Macu. Casaque +1"}
-	
 	sets.precast.Flourish3['Climactic Flourish'] = {head="Maculele Tiara +1",}
 	
 	sets.precast.FC = {
@@ -238,7 +241,7 @@ function init_gear_sets()
 		feet=gear.Herc_MAB_feet, --2
 		neck="Orunmila's Torque", --5
 		ear1="Loquacious Earring", --2
-		ear2="Etiolation Earring", --1
+		ear2="Enchntr. Earring +1", --2
 		ring2="Weather. Ring", --5(3)
 		}
 
@@ -324,6 +327,7 @@ function init_gear_sets()
 		hands="Mummu Wrists +1",
 		legs="Samnuha Tights", 
 		feet=gear.Herc_TA_feet,
+		ear1="Mache Earring",
 		ear2="Brutal Earring",
 		ring1="Begrudging Ring",
 		ring2="Epona's Ring",
@@ -687,12 +691,11 @@ function init_gear_sets()
 		})
 
 	-- Buff sets: Gear that needs to be worn to actively enhance a current player buff.
-	sets.buff['Saber Dance'] = {legs="Horos Tights +1"}
-	sets.buff['Fan Dance'] = {body="Horos Casaque +1"}
+--	sets.buff['Saber Dance'] = {legs="Horos Tights +1"}
+--	sets.buff['Fan Dance'] = {body="Horos Bangles +1"}
 	sets.buff['Climactic Flourish'] = {head="Maculele Tiara +1"}
-	
+	sets.buff['Closed Position'] = {feet="Horos Toe Shoes +1"}
 	sets.buff.Doom = {ring1="Saida Ring", ring2="Saida Ring", waist="Gishdubar Sash"}
-
 	sets.CP = {back="Mecisto. Mantle"}
 	sets.Reive = {neck="Ygnas's Resolve +1"}
 
@@ -715,26 +718,9 @@ function job_post_precast(spell, action, spellMap, eventArgs)
 		if state.Buff['Climactic Flourish'] then
 			equip(sets.buff['Climactic Flourish'])
 		end
---		if state.SkillchainPending.value == true then
---			equip(sets.precast.Skillchain)
---		end
 	end
 end
 
-
--- Return true if we handled the aftercast work.  Otherwise it will fall back
--- to the general aftercast() code in Mote-Include.
-function job_aftercast(spell, action, spellMap, eventArgs)
---	if not spell.interrupted then
---		if spell.english == "Wild Flourish" then
---			state.SkillchainPending:set()
---			send_command('wait 5;gs c unset SkillchainPending')
---		elseif spell.type:lower() == "weaponskill" then
---			state.SkillchainPending:toggle()
---			send_command('wait 6;gs c unset SkillchainPending')
---		end
---	end
-end
 
 -------------------------------------------------------------------------------------------------------------------
 -- Job-specific hooks for non-casting events.
@@ -807,15 +793,16 @@ function customize_idle_set(idleSet)
 end
 
 function customize_melee_set(meleeSet)
-	if state.DefenseMode.value ~= 'None' then
-		if buffactive['saber dance'] then
-			meleeSet = set_combine(meleeSet, sets.buff['Saber Dance'])
-		end
-		if state.Buff['Climactic Flourish'] then
-			meleeSet = set_combine(meleeSet, sets.buff['Climactic Flourish'])
-		end
+	if buffactive['Saber Dance'] then
+		meleeSet = set_combine(meleeSet, sets.buff['Saber Dance'])
 	end
-	
+	if state.Buff['Climactic Flourish'] then
+		meleeSet = set_combine(meleeSet, sets.buff['Climactic Flourish'])
+	end
+	if state.ClosedPosition.value == true and state.OffenseMode.value == 'STP' then
+		meleeSet = set_combine(meleeSet, sets.buff['Closed Position'])
+	end
+
 	return meleeSet
 end
 
@@ -855,6 +842,10 @@ function display_current_job_state(eventArgs)
 
 	msg = msg .. '[ ' .. state.HasteMode.value .. ' ]'
 	
+	if state.ClosedPosition.value then
+		msg = msg .. '[ Closed Position: ON ]'
+	end
+
 	if state.Kiting.value then
 		msg = msg .. '[ Kiting Mode: ON ]'
 	end

@@ -111,7 +111,7 @@ function init_gear_sets()
 		feet="Carmine Greaves +1", --8
 		neck="Orunmila's Torque", --5
 		ear1="Loquacious Earring", --2
-		ear2="Etiolation Earring", --1
+		ear2="Enchntr. Earring +1", --2
 		ring2="Weather. Ring", --5(3)
 		waist="Ninurta's Sash",
 		}

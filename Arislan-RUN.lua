@@ -191,8 +191,8 @@ function init_gear_sets()
 		legs="Aya. Cosciales +1", --5
 		feet="Carmine Greaves +1", --8
 		neck="Orunmila's Torque", --5
-		ear1="Etiolation Earring", --1
-		ear2="Loquacious Earring", --2
+		ear1="Loquacious Earring", --2
+		ear2="Enchntr. Earring +1", --2
 		ring1="Kishar Ring", --4
 		ring2="Weather. Ring", --5(3)
 		back=gear.RUN_HP_Cape, --10
@@ -757,10 +757,10 @@ end
 function customize_melee_set(meleeSet)
 	if state.Knockback.value == true then
 		meleeSet = set_combine(meleeSet, sets.defense.Knockback)
-		end
+	end
 	if state.Death.value == true then
 		meleeSet = set_combine(meleeSet, sets.defense.Death)
-		end
+	end
 
 	return meleeSet
 end
@@ -768,10 +768,10 @@ end
 function customize_defense_set(defenseSet)
 	if state.Knockback.value == true then
 		defenseSet = set_combine(defenseSet, sets.defense.Knockback)
-		end
+	end
 	if state.Death.value == true then
 		defenseSet = set_combine(defenseSet, sets.defense.Death)
-		end
+	end
 
 	return defenseSet
 end

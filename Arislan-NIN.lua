@@ -115,7 +115,7 @@ function init_gear_sets()
 		feet=gear.Herc_MAB_feet, --2
 		neck="Orunmila's Torque", --5
 		ear1="Loquacious Earring", --2
-		ear2="Etiolation Earring", --1
+		ear2="Enchntr. Earring +1", --2
 		ring1="Kishar Ring", --4
 		ring2="Weather. Ring", --5(3)
 		waist="Ninurta's Sash",

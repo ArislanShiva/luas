@@ -91,7 +91,7 @@ function init_gear_sets()
 		feet="Regal Pumps +1", --7
 		neck="Orunmila's Torque", --5
 		ear1="Loquacious Earring", --2
-		ear2="Etiolation Earring", --1
+		ear2="Enchntr. Earring +1", --2
 		ring1="Kishar Ring", --4
 		ring2="Weather. Ring", --5
 		back="Alaunus's Cape", --10
@@ -458,6 +458,7 @@ function init_gear_sets()
 		hands="Gende. Gages +1", --4/3
 		neck="Loricate Torque +1", --6/6
 		ear1="Genmei Earring", --2/0
+		ring1="Fortified Ring", --0/5
 		ring2="Defending Ring", --10/10
 		back="Solemnity Cape", --4/4
 		})

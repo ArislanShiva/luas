@@ -279,8 +279,8 @@ function init_gear_sets()
 		legs="Psycloth Lappas", --7
 		feet="Carmine Greaves +1", --8
 		neck="Orunmila's Torque", --5
-		ear1="Etiolation Earring", --1
-		ear2="Loquacious Earring", --2
+		ear1="Loquacious Earring", --2
+		ear2="Enchntr. Earring +1", --2
 		ring1="Kishar Ring", --4
 		ring2="Weather. Ring", --5(3)
 		back="Swith Cape +1", --4
@@ -568,7 +568,7 @@ function init_gear_sets()
 		})
 
 	sets.midcast['Blue Magic'].MagicalVit = sets.midcast['Blue Magic'].Magical
-	sets.midcast['Blue Magic'].MagicalChr = sets.midcast['Blue Magic'].Magical
+	sets.midcast['Blue Magic'].MagicalChr = set_combine(sets.midcast['Blue Magic'].Magical, {ear2="Enchntr. Earring +1"})
 
 	sets.midcast['Blue Magic'].MagicAccuracy = {
 		ammo="Pemphredo Tathlum",
