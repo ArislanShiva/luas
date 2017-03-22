@@ -25,7 +25,7 @@ end
 function job_setup()
 
 	state.CP = M(false, "Capacity Points Mode")
-	state.Buff.Saboteur = buffactive.saboteur or false
+	state.Buff.Saboteur = buffactive.Saboteur or false
 	
 	enfeebling_magic_acc = S{'Bind', 'Break', 'Dispel', 'Distract', 'Distract II', 'Frazzle',
 		'Frazzle II',  'Gravity', 'Gravity II', 'Silence', 'Sleep', 'Sleep II', 'Sleepga'}
@@ -630,18 +630,22 @@ function job_post_midcast(spell, action, spellMap, eventArgs)
 			equip(sets.midcast.SkillEnfeebles)
 		end
 		if state.Buff.Saboteur then
+			add_to_chat(122, "Saboteur Test")
 			equip(sets.buff.Saboteur)
 		end
 	end
 	if spell.skill == 'Enhancing Magic' then
 		if classes.NoSkillSpells:contains(spell.english) then
+			add_to_chat(122, "NoSkill Test")
 			equip(sets.midcast.EnhancingDuration)
 		end
-		if spell.target.type == 'PLAYER' and buffactive.composure then
+		if (spell.target.type == 'PLAYER' or spell.target.type == 'NPC') and buffactive.Composure then
+			add_to_chat(122, "Composure Test")
 			equip(sets.buff.ComposureOther)
 		end
 	end
 	if spellMap == 'Cure' and spell.target.type == 'SELF' then
+		add_to_chat(122, "Cure Self Test")
 		equip(sets.midcast.CureSelf)
 	end
 	if spell.skill == 'Elemental Magic' then
