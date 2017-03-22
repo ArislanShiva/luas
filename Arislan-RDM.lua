@@ -377,7 +377,7 @@ function init_gear_sets()
 	
 	sets.midcast.IntEnfeebles = set_combine(sets.midcast.MndEnfeebles, {
 		main=gear.Grioavolr_MB,
-		ammo="Pemphredo Tathlum",
+		ammo="Pem phredo Tathlum",
 		back=gear.RDM_INT_Cape,
 		})
 
@@ -626,26 +626,22 @@ end
 -- eventArgs is the same one used in job_midcast, in case information needs to be persisted.
 function job_post_midcast(spell, action, spellMap, eventArgs)
 	if spell.skill == 'Enfeebling Magic' then
-		if enfeebling_magic_skill:contains(spell.english) then
+		if enfeebling_magic_skill:contains(spell.english) and not buffactive.Stymie then
 			equip(sets.midcast.SkillEnfeebles)
 		end
 		if state.Buff.Saboteur then
-			add_to_chat(122, "Saboteur Test")
 			equip(sets.buff.Saboteur)
 		end
 	end
 	if spell.skill == 'Enhancing Magic' then
 		if classes.NoSkillSpells:contains(spell.english) then
-			add_to_chat(122, "NoSkill Test")
 			equip(sets.midcast.EnhancingDuration)
 		end
 		if (spell.target.type == 'PLAYER' or spell.target.type == 'NPC') and buffactive.Composure then
-			add_to_chat(122, "Composure Test")
 			equip(sets.buff.ComposureOther)
 		end
 	end
 	if spellMap == 'Cure' and spell.target.type == 'SELF' then
-		add_to_chat(122, "Cure Self Test")
 		equip(sets.midcast.CureSelf)
 	end
 	if spell.skill == 'Elemental Magic' then
@@ -726,13 +722,13 @@ function job_get_spell_map(spell, default_spell_map)
 		end
 		if spell.skill == 'Enfeebling Magic' then
 			if spell.type == "WhiteMagic" and not enfeebling_magic_skill:contains(spell.english) then
-				if enfeebling_magic_acc:contains(spell.english) then
+				if enfeebling_magic_acc:contains(spell.english) and not buffactive.Stymie then
 					return "MndEnfeeblesAcc"
 				else
 					return "MndEnfeebles"
 				end
 			elseif spell.type == "BlackMagic" and not enfeebling_magic_skill:contains(spell.english) then
-				if enfeebling_magic_acc:contains(spell.english) then
+				if enfeebling_magic_acc:contains(spell.english) and not buffactive.Stymie then
 					return "IntEnfeeblesAcc"
 				else
 					return "IntEnfeebles"
