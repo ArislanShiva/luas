@@ -632,15 +632,17 @@ function job_post_midcast(spell, action, spellMap, eventArgs)
 		if state.Buff.Saboteur then
 			equip(sets.buff.Saboteur)
 		end
-	elseif spell.skill == 'Enhancing Magic' and classes.NoSkillSpells:contains(spell.english) then
+	end
+	if spell.skill == 'Enhancing Magic' and classes.NoSkillSpells:contains(spell.english) then
 		equip(sets.midcast.EnhancingDuration)
-	elseif spell.skill == 'Enhancing Magic' and spell.target.type == 'PLAYER' then
-		if buffactive.composure then
+		if spell.target.type == 'PLAYER' and buffactive.composure then
 			equip(sets.buff.ComposureOther)
 		end
-	elseif spellMap == 'Cure' and spell.target.type == 'SELF' then
+	end
+	if spellMap == 'Cure' and spell.target.type == 'SELF' then
 		equip(sets.midcast.CureSelf)
-	elseif spell.skill == 'Elemental Magic' then
+	end
+	if spell.skill == 'Elemental Magic' then
 		if state.MagicBurst.value and spell.english ~= 'Death' then
 			equip(sets.magic_burst)
 			if spell.english == "Impact" then

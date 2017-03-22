@@ -5,8 +5,9 @@
 --[[	Custom Features:
 
 		Rune Selector		Cycle through available runes and trigger with a single macro [Ctl-`]
-		Knockback Mode		Equips knockback prevention gear (Ctl-[)
-		Death Mode			Equips death prevention gear (Ctl-])
+		Charm Mode			Equips charm prevention gear (WinKey-h)
+		Knockback Mode		Equips knockback prevention gear (WinKey-k)
+		Death Mode			Equips death prevention gear (WinKey-d)
 		Auto. Doom			Automatically equips cursna received gear on doom status
 		Capacity Pts. Mode	Capacity Points Mode Toggle [WinKey-C]
 		Reive Detection		Automatically equips Reive bonus gear
@@ -54,6 +55,7 @@ function user_setup()
 	state.MagicalDefenseMode:options('MDT', 'Status')
 	
 	state.WeaponLock = M(false, 'Weapon Lock')	
+	state.Charm = M(false, 'Charm')
 	state.Knockback = M(false, 'Knockback')
 	state.Death = M(false, "Death Resistance")
 	state.CP = M(false, "Capacity Points Mode")
@@ -65,9 +67,9 @@ function user_setup()
 	send_command('bind ^- gs c cycleback Runes')
 	send_command('bind ^= gs c cycle Runes')
 	send_command('bind ^f11 gs c cycle MagicalDefenseMode')
-	send_command('bind ^[ gs c toggle Knockback')
-	send_command('bind ^] gs c toggle Death')
-	send_command('bind ^\ gs c toggle Charm')
+	send_command('bind @h gs c toggle Charm')
+	send_command('bind @k gs c toggle Knockback')
+	send_command('bind @d gs c toggle Death')
 	send_command('bind !q input /ma "Temper" <me>')
 
 	if player.sub_job == 'BLU' then
@@ -104,8 +106,9 @@ function user_unload()
 	send_command('unbind ^-')
 	send_command('unbind ^=')
 	send_command('unbind ^f11')
-	send_command('unbind ^[')
-	send_command('unbind !]')
+	send_command('unbind @h')
+	send_command('unbind @k')
+	send_command('unbind @d')
 	send_command('unbind !q')
 	send_command('unbind !w')
 	send_command('unbind !o')
@@ -141,7 +144,7 @@ function init_gear_sets()
 		}
 
 	-- Precast sets to enhance JAs
-	sets.precast.JA['Vallation'] = set_combine(sets.Enmity, {body="Runeist Coat +1", legs="Futhark Trousers +1", back="Ogma's Cape"})
+	sets.precast.JA['Vallation'] = set_combine(sets.Enmity, {body="Runeist Coat +2", legs="Futhark Trousers +1", back="Ogma's Cape"})
 	sets.precast.JA['Valiance'] = sets.precast.JA['Vallation']
 	sets.precast.JA['Pflug'] = set_combine(sets.Enmity, {feet="Runeist Bottes +1"})
 	sets.precast.JA['Battuta'] = set_combine(sets.Enmity, {head="Fu. Bandeau +1"})
@@ -399,7 +402,7 @@ function init_gear_sets()
 		sub="Mensch Strap +1",
 		ammo="Homiliary",
 		head="Rawhide Mask",
-		body="Futhark Coat +1",
+		body="Runeist's Coat +2",
 		hands="Erilaz Gauntlets +1",
 		legs="Carmine Cuisses +1",
 		feet="Erilaz Greaves +1",
@@ -432,7 +435,6 @@ function init_gear_sets()
 	sets.idle.Town = set_combine(sets.idle, {
 		ammo="Knobkierrie",
 		head="Carmine Mask +1",
-		body="Erilaz Surcoat +1",
 		feet="Carmine Greaves +1",
 		neck="Loricate Torque +1",
 		ear1="Cessance Earring",
@@ -449,13 +451,9 @@ function init_gear_sets()
 	-- Defense sets
 	--------------------------------------
 
+	sets.defense.Charm = {neck="Unmoving Collar +1", ring1="Wuji Ring", back="Solemnity Cape"}
 	sets.defense.Knockback = {back="Repulse Mantle"}
-
-	sets.defense.Death = {
-		body="Samnuha Coat",
-		ring1="Warden's Ring",
-		ring2="Eihwaz Ring",
-		}
+	sets.defense.Death = {body="Samnuha Coat", ring1="Warden's Ring", ring2="Eihwaz Ring"}
 
 	sets.defense.PDT = {
 		main="Epeolatry", --(25)/0
@@ -479,14 +477,14 @@ function init_gear_sets()
 		main="Epeolatry", --(25)/0
 --		main="Aettir", --(5)/0
 		sub="Refined Grip +1", --3/3
-		ammo="Iron Gobbet",
+		ammo="Staunch Tathlum", --2/2
 		head="Erilaz Galea +1",
-		body="Futhark Coat +1", --7/7
-		hands="Erilaz Gauntlets +1",
+		body="Runeist's Coat +2",
+		hands=gear.Herc_DT_hands, --6/4
 		legs="Eri. Leg Guards +1", --7/0
 		feet="Erilaz Greaves +1",--5/0
 		neck="Warder's Charm +1",
-		ear2="Odnowa Earring", --0/1
+		ear1="Odnowa Earring", --0/1
 		ear2="Odnowa Earring +1", --0/2
 		ring1="Gelatinous Ring +1", --7/(-1)
 		ring2="Defending Ring", --10/10
@@ -500,7 +498,7 @@ function init_gear_sets()
 		sub="Refined Grip +1", --3/3
 		ammo="Staunch Tathlum", --2/2
 		head=gear.Herc_DT_head, --3/3
-		body="Erilaz Surcoat +1",
+		body="Runeist's Coat +2",
 		hands="Erilaz Gauntlets +1",
 		legs="Rune. Trousers +2", --4/0
 		feet="Erilaz Greaves +1", --5/0
@@ -518,7 +516,7 @@ function init_gear_sets()
 		sub="Refined Grip +1", --3/3
 		ammo="Staunch Tathlum", --2/2
 		head="Erilaz Galea +1",
-		body="Erilaz Surcoat +1",
+		body="Runeist's Coat +2",
 		hands="Runeist Mitons +1", --2/0
 		legs="Eri. Leg Guards +1", --7/0
 		feet="Erilaz Greaves +1", --5/0
@@ -689,10 +687,12 @@ end
 -- Called when the player's status changes.
 function job_state_change(field, new_value, old_value)
 	classes.CustomDefenseGroups:clear()
+	classes.CustomDefenseGroups:append(state.Charm.current)
 	classes.CustomDefenseGroups:append(state.Knockback.current)
 	classes.CustomDefenseGroups:append(state.Death.current)
 
 	classes.CustomMeleeGroups:clear()
+	classes.CustomMeleeGroups:append(state.Charm.current)
 	classes.CustomMeleeGroups:append(state.Knockback.current)
 	classes.CustomMeleeGroups:append(state.Death.current)
 end
@@ -736,13 +736,16 @@ end
 function customize_idle_set(idleSet)
 	if player.mpp < 51 then
 		idleSet = set_combine(idleSet, sets.latent_refresh)
-		end
+	end
+	if state.Charm.value == true then
+		idleSet = set_combine(idleSet, sets.defense.Charm)
+	end	
 	if state.Knockback.value == true then
 		idleSet = set_combine(idleSet, sets.defense.Knockback)
-		end
+	end
 	if state.Death.value == true then
 		idleSet = set_combine(idleSet, sets.defense.Death)
-		end
+	end
 	if state.CP.current == 'on' then
 		equip(sets.CP)
 		disable('back')
@@ -755,7 +758,9 @@ end
 
 -- Modify the default melee set after it was constructed.
 function customize_melee_set(meleeSet)
-	if state.Knockback.value == true then
+	if state.Charm.value == true then
+		meleeSet = set_combine(meleeSet, sets.defense.Charm)
+	end	if state.Knockback.value == true then
 		meleeSet = set_combine(meleeSet, sets.defense.Knockback)
 	end
 	if state.Death.value == true then
@@ -766,6 +771,9 @@ function customize_melee_set(meleeSet)
 end
 
 function customize_defense_set(defenseSet)
+	if state.Charm.value == true then
+		defenseSet = set_combine(defenseSet, sets.defense.Charm)
+	end
 	if state.Knockback.value == true then
 		defenseSet = set_combine(defenseSet, sets.defense.Knockback)
 	end
@@ -797,6 +805,10 @@ function display_current_job_state(eventArgs)
 		msg = msg .. '[ Defense: ' .. state.DefenseMode.value .. state[state.DefenseMode.value .. 'DefenseMode'].value .. ' ]'
 	end
 	
+	if state.Charm.value == true then
+		msg = msg .. '[ Charm: ON ]'
+	end
+
 	if state.Knockback.value == true then
 		msg = msg .. '[ Knockback: ON ]'
 	end

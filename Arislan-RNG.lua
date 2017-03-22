@@ -185,7 +185,6 @@ function init_gear_sets()
 		})
 
 	sets.precast.WS["Jishnu's Radiance"].Acc = set_combine(sets.precast.WS["Jishnu's Radiance"], {
-		head="Meghanada Visor +1",
 		body=gear.Herc_RA_body,
 		neck="Combatant's Torque",
 		ear1="Enervating Earring",
@@ -203,7 +202,6 @@ function init_gear_sets()
 		})
 
 	sets.precast.WS['Last Stand'].Acc = set_combine(sets.precast.WS['Last Stand'], {
-		head="Meghanada Visor +1",
 		hands="Meg. Gloves +1",
 		neck="Combatant's Torque",
 		ear2="Telos Earring",

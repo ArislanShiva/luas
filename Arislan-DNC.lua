@@ -179,7 +179,7 @@ function init_gear_sets()
 		ammo="Falcon Eye",
 		head="Dampening Tam",
 		body=gear.Herc_TA_body,
-		hands="Meg. Gloves +1",
+		hands="Maxixi Bangles +2",
 		legs="Meg. Chausses +1",
 		feet=gear.Herc_Acc_feet,
 		neck="Combatant's Torque",
@@ -402,10 +402,10 @@ function init_gear_sets()
 
 	sets.idle = {
 		ammo="Staunch Tathlum",
-		head="Dampening Tam",
-		body="Mekosu. Harness",
-		hands=gear.Adhemar_TP_hands,
-		legs="Samnuha Tights",
+		head=gear.Herc_DT_head,
+		body="Meg. Cuirie +1",
+		hands=gear.Herc_DT_hands,
+		legs="Meg. Chausses +1",
 		feet="Skd. Jambeaux +1",
 		neck="Bathy Choker +1",
 		ear1="Genmei Earring",
@@ -431,7 +431,10 @@ function init_gear_sets()
 
 	sets.idle.Town = set_combine (sets.idle, {
 		ammo="Ginsen",
+		head="Dampening Tam",
 		body="Adhemar Jacket",
+		hands="Maxixi Bangles +2",
+		legs="Samnuha Tights",
 		neck="Combatant's Torque",
 		ear1="Cessance Earring",
 		ear2="Telos Earring",
