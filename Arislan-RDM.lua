@@ -66,7 +66,6 @@ function user_setup()
 	send_command('bind ^, input /ma Sneak <stpc>')
 	send_command('bind ^. input /ma Invisible <stpc>')
 	send_command('bind @c gs c toggle CP')
-	send_command('bind @h gs c cycle HelixMode')
 	send_command('bind @w gs c toggle WeaponLock')
 
 	update_offense_mode()	
@@ -94,7 +93,6 @@ function user_unload()
 	send_command('unbind ^,')
 	send_command('unbind !.')
 	send_command('unbind @c')
-	send_command('unbind @h')
 	send_command('unbind @w')
 end
 
@@ -626,7 +624,7 @@ end
 -- eventArgs is the same one used in job_midcast, in case information needs to be persisted.
 function job_post_midcast(spell, action, spellMap, eventArgs)
 	if spell.skill == 'Enfeebling Magic' then
-		if enfeebling_magic_skill:contains(spell.english) and not buffactive.Stymie then
+		if enfeebling_magic_skill:contains(spell.english) then
 			equip(sets.midcast.SkillEnfeebles)
 		end
 		if state.Buff.Saboteur then
