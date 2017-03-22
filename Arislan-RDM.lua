@@ -633,8 +633,10 @@ function job_post_midcast(spell, action, spellMap, eventArgs)
 			equip(sets.buff.Saboteur)
 		end
 	end
-	if spell.skill == 'Enhancing Magic' and classes.NoSkillSpells:contains(spell.english) then
-		equip(sets.midcast.EnhancingDuration)
+	if spell.skill == 'Enhancing Magic' then
+		if classes.NoSkillSpells:contains(spell.english) then
+			equip(sets.midcast.EnhancingDuration)
+		end
 		if spell.target.type == 'PLAYER' and buffactive.composure then
 			equip(sets.buff.ComposureOther)
 		end
