@@ -249,7 +249,6 @@ function init_gear_sets()
 		head="Vanya Hood",
 		hands="Fanatic Gloves", --15
 		legs="Th. Pantaloons +2", --17
---		feet="Gende. Galosh. +1", --10
 		neck="Debilis Medallion", --15
 		ear1="Beatific Earring",
 		ring1="Haoma's Ring", --15
@@ -564,6 +563,9 @@ function job_post_midcast(spell, action, spellMap, eventArgs)
 	end
 	if spell.skill == 'Enhancing Magic' and classes.NoSkillSpells:contains(spell.english) then
 		equip(sets.midcast.EnhancingDuration)
+		if spellMap == 'Refresh' then
+			equip(sets.midcast.Refresh)
+		end
 	end
 end
 

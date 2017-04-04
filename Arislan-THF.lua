@@ -122,7 +122,7 @@ function init_gear_sets()
 		hands="Pillager's Armlets +1",
 		legs="Pillager's Culottes +1",
 		feet="Meg. Jam. +1",
-		neck="Pentalagus Charm",
+		neck="Marked Gorget",
 		ear2="Infused Earring",
 		ring2="Garuda Ring +1",
 		ring2="Garuda Ring +1",
@@ -141,49 +141,28 @@ function init_gear_sets()
 	--------------------------------------
 
 	-- Precast sets to enhance JAs
-	sets.precast.JA['Collaborator'] = {
-		head="Raider's Bonnet +1",
-		}
-
-	sets.precast.JA['Accomplice'] = {
-		head="Raider's Bonnet +1",
-		}
-
-	sets.precast.JA['Flee'] = {
-		feet="Rog. Poulaines +1",
-		}
-
-	sets.precast.JA['Hide'] = {
-		body="Pillager's Vest +1",
-		}
-
-	sets.precast.JA['Conspirator'] = {
-		body="Raider's Vest +1",
-		}
+	--sets.precast.JA['Collaborator'] = {head="Raider's Bonnet +1"}
+	--sets.precast.JA['Accomplice'] = {head="Raider's Bonnet +1"}
+	--sets.precast.JA['Flee'] = {feet="Rog. Poulaines +1"}
+	sets.precast.JA['Hide'] = {body="Pillager's Vest +1"}
+	--sets.precast.JA['Conspirator'] = {body="Raider's Vest +1"}
 
 	sets.precast.JA['Steal'] = {
 		ammo="Barathrum",
-		head="Asn. Bonnet +2",
+		--head="Asn. Bonnet +2",
 		hands="Pillager's Armlets +1",
 		legs="Pillager's Culottes +1",
 		}
 
 	sets.precast.JA['Despoil'] = {
 		ammo="Barathrum",
-		legs="Raider's Culottes +1",
+		--legs="Raider's Culottes +1",
 		feet="Skulk. Poulaines +1",
 		}
 
-	sets.precast.JA['Perfect Dodge'] = {
-		hands="Plunderer's Armlets +1",
-		}
-
-	sets.precast.JA['Feint'] = {
-		legs="Plunderer's Culottes +1",
-		}
-
+	sets.precast.JA['Perfect Dodge'] = {hands="Plunderer's Armlets +1"}
+	sets.precast.JA['Feint'] = {legs="Plunderer's Culottes +1"}
 	sets.precast.JA['Sneak Attack'] = sets.buff['Sneak Attack']
-	
 	sets.precast.JA['Trick Attack'] = sets.buff['Trick Attack']
 
 	sets.precast.Waltz = {
@@ -236,7 +215,6 @@ function init_gear_sets()
 		} -- default set
 
 	sets.precast.WS.Acc = set_combine(sets.precast.WS, {
-		hands=gear.Herc_WS_hands,
 		legs="Meg. Chausses +1",
 		ear2="Telos Earring",
 		})
@@ -340,8 +318,8 @@ function init_gear_sets()
 	sets.idle = {
 		ammo="Ginsen",
 		head="Dampening Tam",
-		body="Mekosu. Harness",
-		hands=gear.Herc_TA_hands,
+		body="Meg. Cuirie +1",
+		hands=gear.Adhemar_TP_hands,
 		legs="Samnuha Tights",
 --		feet="Jute Boots +1",
 		feet="Skd. Jambeaux +1",

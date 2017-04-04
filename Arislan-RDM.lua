@@ -159,11 +159,11 @@ function init_gear_sets()
 
 	sets.precast.WS = {
 		ammo="Floestone",
-		head="Jhakri Coronal +1",
-		body="Jhakri Robe +1",
+		head="Despair Helm",
+		body="Despair Mail",
 		hands="Jhakri Cuffs +1",
-		legs="Carmine Cuisses +1",
-		feet="Jhakri Pigaches +1",
+		legs="Despair Cuisses",
+		feet="Despair Greaves",
 		neck="Fotia Gorget",
 		ear1="Moonshade Earring",
 		ear2="Telos Earring",
@@ -175,6 +175,7 @@ function init_gear_sets()
 
 	sets.precast.WS['Chant du Cygne'] = set_combine(sets.precast.WS, {
 		ammo="Yetshila",
+		head="Jhakri Coronal +1",
 		body="Ayanmo Corazza +1",
 		feet="Thereoid Greaves",
 		ear2="Brutal Earring",
@@ -189,8 +190,13 @@ function init_gear_sets()
 		waist="Prosilio Belt +1",
 		})
 
+	sets.precast.WS['Death Blossom'] = 	sets.precast.WS['Savage Blade']
+
 	sets.precast.WS['Requiescat'] = set_combine(sets.precast.WS, {
 		ammo="Quartz Tathlum +1",
+		head="Jhakri Coronal +1",
+		body="Jhakri Robe +1",
+		feet="Carmine Greaves +1",
 		ring1="Rufescent Ring",
 		ring2="Shukuyu Ring",
 		})
@@ -278,7 +284,6 @@ function init_gear_sets()
 		}
 		
 	sets.midcast.Cursna = set_combine(sets.midcast.StatusRemoval, {
-		feet="Gende. Galosh. +1",
 		neck="Debilis Medallion",
 		ear1="Beatific Earring",
 		back="Oretan. Cape +1",
@@ -319,9 +324,12 @@ function init_gear_sets()
 	sets.midcast.Refresh = set_combine(sets.midcast.EnhancingDuration, {
 		head="Amalric Coif",
 		legs="Leth. Fuseau +1",
-		waist="Gishdubar Sash",
-		back="Grapevine Cape",
 		})
+	
+	sets.midcast.RefreshSelf = {
+		waist="Gishdubar Sash",
+		back="Grapevine Cape"
+		}
 
 	sets.midcast.Stoneskin = set_combine(sets.midcast['Enhancing Magic'], {
 		neck="Nodens Gorget",
@@ -375,7 +383,7 @@ function init_gear_sets()
 	
 	sets.midcast.IntEnfeebles = set_combine(sets.midcast.MndEnfeebles, {
 		main=gear.Grioavolr_MB,
-		ammo="Pem phredo Tathlum",
+		ammo="Pemphredo Tathlum",
 		back=gear.RDM_INT_Cape,
 		})
 
@@ -530,12 +538,14 @@ function init_gear_sets()
 		})
 
 	sets.idle.Town = set_combine(sets.idle, {
+		main="Sequence",
 		body="Lethargy Sayon +1",
 		hands="Leth. Gantherots +1",
 		legs="Carmine Cuisses +1",
 		feet="Carmine Greaves +1",
+		neck="Incanter's Torque",
 		ear1="Hermetic Earring",
-		ear2="Digni. Earring",
+		ear2="Enchntr. Earring +1",
 		ring1="Levia. Ring +1",
 		ring2="Shiva Ring +1",
 		back=gear.RDM_INT_Cape,
@@ -575,10 +585,10 @@ function init_gear_sets()
 	------------------------------------------------------------------------------------------------
 	
 	sets.engaged = {
-		main="Colada",
+		main="Sequence",
 		sub="Deliverance +1",
 		ammo="Ginsen",
-		head="Carmine Mask +1",
+		head="Despair Helm",
 		body="Ayanmo Corazza +1",
 		hands="Chironic Gloves",
 		legs="Carmine Cuisses +1",
@@ -596,7 +606,7 @@ function init_gear_sets()
 
 	sets.engaged.DW = set_combine(sets.engaged, {
 		--NIN --25
-		sub="Blurred Knife +1",
+		sub="Colada",
 		feet=gear.Taeon_DW_feet, --9
 		})
 
@@ -634,6 +644,12 @@ function job_post_midcast(spell, action, spellMap, eventArgs)
 	if spell.skill == 'Enhancing Magic' then
 		if classes.NoSkillSpells:contains(spell.english) then
 			equip(sets.midcast.EnhancingDuration)
+			if spellMap == 'Refresh' then
+				equip(sets.midcast.Refresh)
+				if spell.target.type == 'SELF' then
+					equip (sets.midcast.RefreshSelf)
+				end
+			end
 		end
 		if (spell.target.type == 'PLAYER' or spell.target.type == 'NPC') and buffactive.Composure then
 			equip(sets.buff.ComposureOther)

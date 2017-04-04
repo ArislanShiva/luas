@@ -19,8 +19,12 @@ function job_setup()
 	state.Buff['Velocity Shot'] = buffactive['Velocity Shot'] or false
 	state.Buff['Double Shot'] = buffactive['Double Shot'] or false
 
+	state.FlurryMode = M{['description']='Flurry Mode', 'Flurry II', 'Flurry I'}
 	state.HasteMode = M{['description']='Haste Mode', 'Haste II', 'Haste I'}
-	
+
+	-- Whether a warning has been given for low ammo
+	state.warned = M(false)
+
 	determine_haste_group()
 end
 
@@ -37,8 +41,10 @@ function user_setup()
 	
 	state.CP = M(false, "Capacity Points Mode")
 	
-	DefaultAmmo = {['Steinthor'] = "Achiyal. Arrow", ['Fomalhaut'] = "Chrono Bullet"}
-	U_Shot_Ammo = {['Steinthor'] = "Achiyal. Arrow", ['Fomalhaut'] = "Animikii Bullet"}
+	gear.RAbullet = "Chrono Bullet"
+	gear.WSbullet = "Chrono Bullet"
+	gear.MAbullet = "Orichalc. Bullet"
+	options.ammo_warning_limit = 10
 
 	-- Additional local binds
 	send_command('bind ^` input /ja "Velocity Shot" <me>')
@@ -53,6 +59,7 @@ function user_setup()
 		send_command('bind ^. input /item "Prism Powder" <me>')
 	end
 
+	send_command('bind @f gs c cycle FlurryMode')
 	send_command('bind @h gs c cycle HasteMode')
 	send_command('bind @c gs c toggle CP')
 
@@ -69,6 +76,7 @@ function user_unload()
 	send_command('unbind !`')
 	send_command('unbind @`')
 	send_command('unbind ^,')
+	send_command('unbind @f')
 	send_command('unbind @h')
 	send_command('unbind @c')
 end
@@ -123,21 +131,32 @@ function init_gear_sets()
 		})
 
 
-	-- Ranged sets (snapshot)
-	
+	-- (10% Snapshot, 5% Rapid from Merits)
 	sets.precast.RA = {
 		head="Taeon Chapeau", --10/0
 		body=gear.Taeon_RA_body, --9/0
 		hands="Carmine Fin. Ga. +1", --8/11
 		legs="Adhemar Kecks", --9/0
 		feet="Meg. Jam. +1", --8/0
-		back=gear.RNG_TP_Cape,
+		back=gear.RNG_SNP_Cape, --10/0
 		waist="Impulse Belt", --3/0
-		}
+		} --57/11
+
+	sets.precast.RA.Flurry1 = set_combine(sets.precast.RA, {
+		head="Orion Beret +1", --0/14
+		waist="Yemaya Belt", --0/5
+		}) --44/30
+
+	sets.precast.RA.Flurry2 = set_combine(sets.precast.RA.Flurry1, {
+		body="Arcadian Jerkin +1", --0/12
+		legs="Pursuer's Pants", --0/19
+		waist="Impulse Belt", --3/0
+		}) --29/56
 
 	-- Weaponskill sets
 	-- Default set for any weaponskill that isn't any more specifically defined
 	sets.precast.WS = {
+		ammo=gear.RAbullet,
 		head="Meghanada Visor +1",
 		body=gear.Herc_RA_body,
 		hands="Carmine Fin. Ga. +1",
@@ -211,6 +230,7 @@ function init_gear_sets()
 		})
 		
 	sets.precast.WS["Trueflight"] = {
+		ammo=gear.MAbullet,
 		head=gear.Herc_MAB_head,
 		body="Gyve Doublet",
 		hands="Carmine Fin. Ga. +1",
@@ -283,6 +303,7 @@ function init_gear_sets()
 	-- Ranged sets
 
 	sets.midcast.RA = {
+		ammo=gear.RAbullet,
 		head="Arcadian Beret +1",
 		body=gear.Herc_RA_body,
 		hands=gear.Adhemar_RA_hands,
@@ -346,8 +367,10 @@ function init_gear_sets()
 
 	-- Idle sets
 	sets.idle = {
+		ranged="Fomalhaut",
+		ammo=gear.RAbullet,
 		head="Amini Gapette +1",
-		body="Mekosu. Harness",
+		body="Meg. Cuirie +1",
 		hands="Carmine Fin. Ga. +1",
 		legs="Carmine Cuisses +1",
 		feet="Amini Bottillons +1",
@@ -659,33 +682,23 @@ end
 -- Set eventArgs.handled to true if we don't want any automatic gear equipping to be done.
 -- Set eventArgs.useMidcastGear to true if we want midcast gear equipped on precast.
 function job_precast(spell, action, spellMap, eventArgs)
-	if spell.action_type == 'Ranged Attack' then
-		state.CombatWeapon:set(player.equipment.range)
+	-- Check that proper ammo is available if we're using ranged attacks or similar.
+	if spell.action_type == 'Ranged Attack' or spell.type == 'WeaponSkill' or spell.type == 'CorsairShot' then
+		do_bullet_checks(spell, spellMap, eventArgs)
 	end
-
-	if spell.action_type == 'Ranged Attack' or
-		(spell.type == 'WeaponSkill' and (spell.skill == 'Marksmanship' or spell.skill == 'Archery')) then
-		check_ammo(spell, action, spellMap, eventArgs)
-	end
-
-	if spell.action_type == 'Ranged Attack' and state.Buff['Velocity Shot'] then
-		equip(sets.buff['Velocity Shot'])
-		eventArgs.handled = true
-	end
-
-	if spell.action_type == 'Ranged Attack' and state.Buff['Double Shot'] then
-		equip(sets.buff['Double Shot'])
-		eventArgs.handled = true
-	end
-
-	if state.DefenseMode.value ~= 'None' and spell.type == 'WeaponSkill' then
-		-- Don't gearswap for weaponskills when Defense is active.
-		eventArgs.handled = true
-	end
-
 end
 
 function job_post_precast(spell, action, spellMap, eventArgs)
+	if spell.action_type == 'Ranged Attack' then
+--		if state.Buff['Velocity Shot'] then
+--			equip( sets.buff['Velocity Shot'])
+--		end
+		if state.FlurryMode.value == 'Flurry II' and (buffactive[265] or buffactive[581]) then
+			equip(sets.precast.RA.Flurry2)
+		elseif state.FlurryMode.value == 'Flurry I' and (buffactive[265] or buffactive[581]) then
+			equip(sets.precast.RA.Flurry1)
+		end
+	end
 	-- Equip obi if weather/day matches for WS.
     if spell.type == 'WeaponSkill' then
 		if spell.english == 'Trueflight' then
@@ -703,20 +716,15 @@ end
 
 
 -- Set eventArgs.handled to true if we don't want any automatic gear equipping to be done.
-function job_midcast(spell, action, spellMap, eventArgs)
+function job_post_midcast(spell, action, spellMap, eventArgs)
 	if spell.action_type == 'Ranged Attack' and state.Buff.Barrage then
 		equip(sets.buff.Barrage)
-		eventArgs.handled = true
 	end
-	if spell.action_type == 'Ranged Attack' and state.Buff['Velocity Shot'] then
-		equip(sets.buff['Velocity Shot'])
-		eventArgs.handled = true
-	end
-	if spell.action_type == 'Ranged Attack' and state.Buff['Double Shot'] then
-		equip(sets.buff['Double Shot'])
-		eventArgs.handled = true
-	end
+--	if spell.action_type == 'Ranged Attack' and state.Buff['Velocity Shot'] and state.RangedMode.value == 'STP' then
+--		equip(sets.buff['Velocity Shot'])
+--	end
 end
+
 
 function job_aftercast(spell, action, spellMap, eventArgs)
 	if spell.english == "Shadowbind" then
@@ -929,7 +937,64 @@ function check_ammo(spell, action, spellMap, eventArgs)
 	end
 end
 
+-- Determine whether we have sufficient ammo for the action being attempted.
+function do_bullet_checks(spell, spellMap, eventArgs)
+	local bullet_name
+	local bullet_min_count = 1
+	
+	if spell.type == 'WeaponSkill' then
+		if spell.skill == "Marksmanship" then
+			if spell.element == 'None' then
+				-- physical weaponskills
+				bullet_name = gear.WSbullet
+			else
+				-- magical weaponskills
+				bullet_name = gear.MAbullet
+			end
+		else
+			-- Ignore non-ranged weaponskills
+			return
+		end
+	elseif spell.action_type == 'Ranged Attack' then
+		bullet_name = gear.RAbullet
+		if buffactive['Double Shot'] then
+			bullet_min_count = 2
+		end
+	end
+	
+	local available_bullets = player.inventory[bullet_name] or player.wardrobe[bullet_name]
+	
+	-- If no ammo is available, give appropriate warning and end.
+	if not available_bullets then
+		if spell.type == 'WeaponSkill' and player.equipment.ammo == gear.RAbullet then
+			add_to_chat(104, 'No weaponskill ammo left.  Using what\'s currently equipped (standard ranged bullets: '..player.equipment.ammo..').')
+			return
+		else
+			add_to_chat(104, 'No ammo ('..tostring(bullet_name)..') available for that action.')
+			eventArgs.cancel = true
+			return
+		end
+	end
+	
+	-- Low ammo warning.
+	if state.warned.value == false
+		and available_bullets.count > 1 and available_bullets.count <= options.ammo_warning_limit then
+		local msg = '*****  LOW AMMO WARNING: '..bullet_name..' *****'
+		--local border = string.repeat("*", #msg)
+		local border = ""
+		for i = 1, #msg do
+			border = border .. "*"
+		end
+		
+		add_to_chat(104, border)
+		add_to_chat(104, msg)
+		add_to_chat(104, border)
 
+		state.warned:set()
+	elseif available_bullets.count > options.ammo_warning_limit and state.warned then
+		state.warned:reset()
+	end
+end
 
 -- Select default macro book on initial load or subjob change.
 
@@ -937,12 +1002,8 @@ function select_default_macro_book()
 	-- Default macro set/book: (set, book)
 	if player.sub_job == 'DNC' then
 		set_macro_page(1, 6)	
-	elseif player.sub_job == 'NIN' then
-		set_macro_page(2, 6)	
-	elseif player.sub_job == 'WAR' then
-		set_macro_page(3, 6)
 	else
-		set_macro_page(1, 6)
+		set_macro_page(2, 6)	
 	end
 end
 

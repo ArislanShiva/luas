@@ -191,7 +191,7 @@ function init_gear_sets()
 	sets.precast.WS['Myrkr'] = {
 		ammo="Ghastly Tathlum +1",
 		head="Pixie Hairpin +1",
-		body="Weather. Rope +1",
+		body="Weather. Robe +1",
 		hands="Telchine Gloves",
 		legs="Amalric Slops",
 		feet="Medium's Sabots",
@@ -287,6 +287,7 @@ function init_gear_sets()
 	
 	sets.midcast.Refresh = set_combine(sets.midcast['Enhancing Magic'], {
 		head="Amalric Coif",
+		--feet="Inspirited Boots",
 		waist="Gishdubar Sash",
 		back="Grapevine Cape",
 		})
@@ -641,6 +642,9 @@ end
 function job_post_midcast(spell, action, spellMap, eventArgs)
 	if spell.skill == 'Enhancing Magic' and classes.NoSkillSpells:contains(spell.english) and not state.DeathMode.value then
 		equip(sets.midcast.EnhancingDuration)
+		if spellMap == 'Refresh' then
+			equip(sets.midcast.Refresh)
+		end
 	end
 	if spell.skill == 'Elemental Magic' and spell.english == "Comet" then
 		equip(sets.DarkAffinity)		

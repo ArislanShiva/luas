@@ -127,10 +127,12 @@ function job_setup()
 		'Plasma Charge','Pyric Bulwark','Reactor Cool','Occultation'}
 
 	-- Other general buffs
-	blue_magic_maps.Buff = S{'Amplification','Animating Wail','Battery Charge','Carcharian Verve','Cocoon',
+	blue_magic_maps.Buff = S{'Amplification','Animating Wail','Carcharian Verve','Cocoon',
 		'Erratic Flutter','Exuviation','Fantod','Feather Barrier','Harden Shell','Memento Mori',
 		'Nat. Meditation','Orcish Counterstance','Refueling','Regeneration','Saline Coat','Triumphant Roar',
 		'Warm-Up','Winds of Promyvion','Zephyr Mantle'}
+	
+	blue_magic_maps.Refresh = S{'Battery Charge'}
 
 	-- Spells that require Unbridled Learning to cast.
 	unbridled_spells = S{'Absolute Terror','Bilgestorm','Blistering Roar','Bloodrake','Carcharian Verve','Cesspool',
@@ -422,7 +424,7 @@ function init_gear_sets()
 		ear2="Moonshade Earring",
 		ring1="Archon Ring",
 		ring2="Rufescent Ring",
-		back="Cornflower Cape",
+		back=gear.BLU_MAB_Cape,
 		waist="Fotia Belt",
 		}
 
@@ -513,6 +515,7 @@ function init_gear_sets()
 	sets.midcast['Blue Magic'].PhysicalInt = set_combine(sets.midcast['Blue Magic'].Physical, {
 		ring1="Shiva Ring +1",
 		ring2="Shiva Ring +1",
+		back=gear.BLU_MAB_Cape,
 		})
 
 	sets.midcast['Blue Magic'].PhysicalMnd = set_combine(sets.midcast['Blue Magic'].Physical, {
@@ -534,7 +537,7 @@ function init_gear_sets()
 		ear2="Hecate's Earring",
 		ring1="Shiva Ring +1",
 		ring2="Shiva Ring +1",
-		back="Cornflower Cape",
+		back=gear.BLU_MAB_Cape,
 		waist="Eschan Stone",
 		}
 
@@ -582,7 +585,6 @@ function init_gear_sets()
 		ear2="Hermetic Earring",
 		ring1="Stikini Ring",
 		ring2="Stikini Ring",
-		back="Cornflower Cape",
 		waist="Luminary Sash",
 		}
 
@@ -615,6 +617,7 @@ function init_gear_sets()
 
 		
 	sets.midcast['Blue Magic'].Buff = sets.midcast['Blue Magic']
+	sets.midcast['Blue Magic'].Refresh = set_combine(sets.midcast['Blue Magic'], {head="Amalric Coif", waist="Gishdubar Sash", back="Grapevine Cape"})
 	sets.midcast['Blue Magic'].SkillBasedBuff = sets.midcast['Blue Magic']
 	
 	sets.midcast['Blue Magic']['Occultation'] = set_combine(sets.midcast['Blue Magic'], {
@@ -656,7 +659,7 @@ function init_gear_sets()
 		feet="Telchine Pigaches",
 		}
 
-	sets.midcast.Refresh = set_combine(sets.midcast['Enhancing Magic'], {head="Amalric Coif", waist="Gishdubar Sash"})
+	sets.midcast.Refresh = set_combine(sets.midcast['Enhancing Magic'], {head="Amalric Coif", waist="Gishdubar Sash", back="Grapevine Cape"})
 	sets.midcast.Stoneskin = set_combine(sets.midcast['Enhancing Magic'], {waist="Siegel Sash"})
 	sets.midcast.Phalanx = set_combine(sets.midcast['Enhancing Magic'], {body=gear.Taeon_FC_body, feet=gear.Taeon_PH_feet})
 	sets.midcast.Aquaveil = set_combine(sets.midcast['Enhancing Magic'], {head="Amalric Coif", waist="Emphatikos Rope"})
@@ -683,7 +686,7 @@ function init_gear_sets()
 		ammo="Staunch Tathlum",
 		head="Rawhide Mask", 
 		body="Jhakri Robe +1",
-		hands=gear.Herc_TA_hands,
+		hands=gear.Adhemar_TP_hands,
 		legs="Carmine Cuisses +1",
 		feet="Carmine Greaves +1",
 		neck="Bathy Choker +1",
@@ -710,7 +713,7 @@ function init_gear_sets()
 		})
 
 	sets.idle.Town = set_combine(sets.idle, {
-		head="Carmine Mask +1",
+		head="Dampening Tam",
 		feet="Carmine Greaves +1",
 		neck="Combatant's Torque",
 		ear1="Eabani Earring",
@@ -769,7 +772,6 @@ function init_gear_sets()
 		
 	sets.engaged.LowAcc = set_combine(sets.engaged, {
 		ammo="Falcon Eye",
-		hands=gear.Herc_TA_hands,
 		neck="Combatant's Torque",
 		ring1="Chirich Ring",
 		})
@@ -817,7 +819,6 @@ function init_gear_sets()
 
 	sets.engaged.LowAcc.LowHaste = set_combine(sets.engaged.LowHaste, {
 		ammo="Falcon Eye",
-		hands=gear.Herc_TA_hands,
 		neck="Combatant's Torque",
 		ring1="Chirich Ring",
 		})
@@ -865,7 +866,6 @@ function init_gear_sets()
 
 	sets.engaged.LowAcc.MidHaste = set_combine(sets.engaged.MidHaste, {
 		ammo="Falcon Eye",
-		hands=gear.Herc_TA_hands,
 		neck="Combatant's Torque",
 		ring1="Chirich Ring",
 		})
@@ -914,7 +914,6 @@ function init_gear_sets()
 		} -- 14%
 
 	sets.engaged.LowAcc.HighHaste = set_combine(sets.engaged.HighHaste, {
-		hands=gear.Herc_TA_hands,
 		neck="Combatant's Torque",
 		waist="Kentarch Belt +1",
 		ring1="Chirich Ring",
@@ -964,7 +963,6 @@ function init_gear_sets()
 
 	sets.engaged.LowAcc.MaxHaste = set_combine(sets.engaged.MaxHaste, {
 		ammo="Falcon Eye",
-		hands=gear.Herc_TA_hands,
 		neck="Combatant's Torque",
 		ring1="Chirich Ring",
 		})
@@ -1047,6 +1045,9 @@ function job_post_midcast(spell, action, spellMap, eventArgs)
 
 	if spell.skill == 'Enhancing Magic' and classes.NoSkillSpells:contains(spell.english) then
 		equip(sets.midcast.EnhancingDuration)
+		if spellMap == 'Refresh' then
+			equip(sets.midcast.Refresh)
+		end
 	end
 end
 
@@ -1060,6 +1061,8 @@ function job_post_midcast(spell, action, spellMap, eventArgs)
 			send_command('@timers c "Sheep Song ['..spell.target.name..']" 60 down spells/00098.png')
 		elseif spell.english == "Yawn" then
 			send_command('@timers c "Yawn ['..spell.target.name..']" 60 down spells/00098.png')
+		elseif spell.english == "Entomb" then
+			send_command('@timers c "Entomb ['..spell.target.name..']" 60 down spells/00547.png')
 		end
 	end
 end

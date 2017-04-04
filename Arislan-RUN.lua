@@ -144,7 +144,7 @@ function init_gear_sets()
 		}
 
 	-- Precast sets to enhance JAs
-	sets.precast.JA['Vallation'] = set_combine(sets.Enmity, {body="Runeist Coat +2", legs="Futhark Trousers +1", back="Ogma's Cape"})
+	sets.precast.JA['Vallation'] = set_combine(sets.Enmity, {body="Runeist's Coat +2", legs="Futhark Trousers +1", back="Ogma's Cape"})
 	sets.precast.JA['Valiance'] = sets.precast.JA['Vallation']
 	sets.precast.JA['Pflug'] = set_combine(sets.Enmity, {feet="Runeist Bottes +1"})
 	sets.precast.JA['Battuta'] = set_combine(sets.Enmity, {head="Fu. Bandeau +1"})
@@ -364,6 +364,8 @@ function init_gear_sets()
 		}
 
 	sets.midcast['Phalanx'] = set_combine(sets.midcast['Enhancing Magic'], {
+		main="Deacon Sword",
+		sub="Chanter's Shield",
 		head="Fu. Bandeau +1",
 		body=gear.Taeon_FC_body,
 		feet=gear.Taeon_PH_feet,
@@ -596,7 +598,6 @@ function init_gear_sets()
 		neck="Anu Torque",
 		ear1="Dedition Earring",
 		ear2="Telos Earring",
-		--ring2="Chirich Ring",
 		waist="Kentarch Belt +1",
 		})
 
@@ -653,6 +654,9 @@ function job_post_midcast(spell, action, spellMap, eventArgs)
 	end
 	if spell.skill == 'Enhancing Magic' and classes.NoSkillSpells:contains(spell.english) then
 		equip(sets.midcast.EnhancingDuration)
+		if spellMap == 'Refresh' then
+			equip(sets.midcast.Refresh)
+		end
 	end
 	-- If DefenseMode is active, apply that gear over midcast
 	-- choices.  Precast is allowed through for fast cast on

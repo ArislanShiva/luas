@@ -72,6 +72,8 @@ function job_setup()
 	state.UseAltqd = M(false, 'Use Secondary Shot')
 	state.SelectqdTarget = M(false, 'Select Quick Draw Target')
 	state.IgnoreTargetting = M(false, 'Ignore Targetting')
+
+	state.FlurryMode = M{['description']='Flurry Mode', 'Flurry II', 'Flurry I'}
 	state.HasteMode = M{['description']='Haste Mode', 'Haste II', 'Haste I'}
 
 	state.Currentqd = M{['description']='Current Quick Draw', 'Main', 'Alt'}
@@ -133,6 +135,7 @@ function user_setup()
 
 	send_command('bind @c gs c toggle CP')
 	send_command('bind @g gs c cycle Gun')
+	send_command('bind @f gs c cycle FlurryMode')
 	send_command('bind @h gs c cycle HasteMode')
 	send_command('bind @w gs c toggle WeaponLock')
 
@@ -155,6 +158,7 @@ function user_unload()
 	send_command('unbind ^,')
 	send_command('unbind @c')
 	send_command('unbind @g')
+	send_command('unbind @f')
 	send_command('unbind @h')
 	send_command('unbind @w')
 end
@@ -228,6 +232,7 @@ function init_gear_sets()
 		ring1="Lebeche Ring",
 		})
 
+	-- (10% Snapshot from JP Gifts)
 	sets.precast.RA = {
 		ammo=gear.RAbullet,
 		head="Taeon Chapeau", --10/0
@@ -237,15 +242,25 @@ function init_gear_sets()
 		feet="Meg. Jam. +1", --8/0
 		back=gear.COR_SNP_Cape, --10/0
 		waist="Impulse Belt", --3/0
-		} -- 10% Gifts
+		} --57/11
 
-	   
+	sets.precast.RA.Flurry1 = set_combine(sets.precast.RA, {
+		body="Laksa. Frac +3", --0/20
+		waist="Yemaya Belt", --0/5
+		}) --45/36
+
+	sets.precast.RA.Flurry2 = set_combine(sets.precast.RA.Flurry1, {
+		head="Chass. Tricorne +1", --0/14
+		legs="Pursuer's Pants", --0/19
+		waist="Impulse Belt", --3/0
+		}) --29/64
+		
 	-- Weaponskill sets
 	-- Default set for any weaponskill that isn't any more specifically defined
 	sets.precast.WS = {
 		ammo=gear.WSbullet,
 		head="Meghanada Visor +1",
-		body="Laksa. Frac +2",
+		body="Laksa. Frac +3",
 		hands="Meg. Gloves +1",
 		legs="Meg. Chausses +1",
 		feet=gear.Herc_RA_feet,
@@ -452,7 +467,7 @@ function init_gear_sets()
 	sets.midcast.RA = {
 		ammo=gear.RAbullet,	
 		head="Meghanada Visor +1",
-		body="Laksa. Frac +2",
+		body="Laksa. Frac +3",
 		hands=gear.Adhemar_RA_hands,
 		legs="Adhemar Kecks",
 		feet=gear.Herc_RA_feet,
@@ -503,7 +518,7 @@ function init_gear_sets()
 	sets.idle = {
 		ammo=gear.MAbullet,
 		head="Dampening Tam",
-		body="Laksa. Frac +2",
+		body="Laksa. Frac +3",
 		hands="Carmine Fin. Ga. +1",
 		legs="Carmine Cuisses +1",
 		feet="Carmine Greaves +1",
@@ -529,7 +544,6 @@ function init_gear_sets()
 		})
 
 	sets.idle.Town = set_combine(sets.idle, {
-		head="Carmine Mask +1",
 		feet="Carmine Greaves +1",
 		neck="Regal Necklace",
 		ear1="Eabani Earring",
@@ -827,7 +841,13 @@ function job_precast(spell, action, spellMap, eventArgs)
 end
 
 function job_post_precast(spell, action, spellMap, eventArgs)
-	-- Equip obi if weather/day matches for WS/Quick Draw.
+	if spell.action_type == 'Ranged Attack' then
+		if state.FlurryMode.value == 'Flurry II' and (buffactive[265] or buffactive[581]) then
+			equip(sets.precast.RA.Flurry2)
+		elseif state.FlurryMode.value == 'Flurry I' and (buffactive[265] or buffactive[581]) then
+			equip(sets.precast.RA.Flurry1)
+		end
+	end	-- Equip obi if weather/day matches for WS/Quick Draw.
 	if spell.type == 'WeaponSkill' then
 		if spell.english == 'Leaden Salute' then
 			if world.weather_element == 'Dark' or world.day_element == 'Dark' then

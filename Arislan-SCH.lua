@@ -154,7 +154,7 @@ function init_gear_sets()
 		waist="Witful Belt", --3/(3)
 		}
 
-	sets.precast.FC.Grimoire = {head="Peda. M.Board", feet="Acad. Loafers +2"}
+	sets.precast.FC.Grimoire = {head="Peda. M.Board +1", feet="Acad. Loafers +3"}
 	sets.precast.FC['Enhancing Magic'] = set_combine(sets.precast.FC, {waist="Siegel Sash"})
 	sets.precast.FC.Stoneskin = set_combine(sets.precast.FC['Enhancing Magic'], {legs="Doyen Pants"})
 	sets.precast.FC['Elemental Magic'] = set_combine(sets.precast.FC, {waist="Channeler's Stone"})
@@ -193,7 +193,7 @@ function init_gear_sets()
 	sets.precast.WS['Myrkr'] = {
 		ammo="Ghastly Tathlum +1",
 		head="Pixie Hairpin +1",
-		body="Weather. Rope +1",
+		body="Weather. Robe +1",
 		hands="Kaykaus Cuffs",
 		legs="Amalric Slops",
 		feet="Kaykaus Boots",
@@ -263,7 +263,6 @@ function init_gear_sets()
 	sets.midcast.Cursna = set_combine(sets.midcast.StatusRemoval, {
 		main="Gada",
 		sub="Genmei Shield",
-		feet="Gende. Galosh. +1",
 		neck="Debilis Medallion",
 		ear1="Beatific Earring",
 		})
@@ -367,7 +366,7 @@ function init_gear_sets()
 		body="Shango Robe",
 		hands="Jhakri Cuffs +1",
 		legs=gear.Merlinic_MAcc_legs,
-		feet="Acad. Loafers +2",
+		feet="Acad. Loafers +3",
 		neck="Incanter's Torque",
 		ear1="Barkaro. Earring",
 		ear2="Digni. Earring",
@@ -595,7 +594,7 @@ function init_gear_sets()
 
 	sets.buff.Doom = {ring1="Saida Ring", ring2="Saida Ring", waist="Gishdubar Sash"}
 
-	sets.Grimoire = {feet="Acad. Loafers +2"}
+	sets.Grimoire = {feet="Acad. Loafers +3"}
 	sets.Obi = {waist="Hachirin-no-Obi"}
 	sets.Bookworm = {back="Bookworm's Cape"}
 	sets.CP = {back="Mecisto. Mantle"}
@@ -656,6 +655,9 @@ function job_post_midcast(spell, action, spellMap, eventArgs)
 	if spell.skill == 'Enhancing Magic' then
 		if classes.NoSkillSpells:contains(spell.english) then
 			equip(sets.midcast.EnhancingDuration)
+			if spellMap == 'Refresh' then
+				equip(sets.midcast.Refresh)
+			end
 		end
 		if state.Buff.Perpetuance then
 			equip(sets.buff['Perpetuance'])

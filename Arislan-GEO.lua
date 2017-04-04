@@ -571,6 +571,9 @@ function job_post_midcast(spell, action, spellMap, eventArgs)
 	end
 	if spell.skill == 'Enhancing Magic' and classes.NoSkillSpells:contains(spell.english) then
 		equip(sets.midcast.EnhancingDuration)
+		if spellMap == 'Refresh' then
+			equip(sets.midcast.Refresh)
+		end
 	end
 end
 
@@ -704,5 +707,5 @@ function select_default_macro_book()
 end
 
 function set_lockstyle()
-	send_command('wait 2; input /lockstyleset 13')
+	send_command('wait 2; input /lockstyleset 10')
 end
