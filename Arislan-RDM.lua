@@ -167,8 +167,8 @@ function init_gear_sets()
 		neck="Fotia Gorget",
 		ear1="Moonshade Earring",
 		ear2="Telos Earring",
-		ring1="Ramuh Ring +1",
-		ring2="Ramuh Ring +1",
+		ring1="Rufescent Ring",
+		ring2="Shukuyu Ring",
 		back="Bleating Mantle",
 		waist="Fotia Belt",
 		}
@@ -180,13 +180,11 @@ function init_gear_sets()
 		feet="Thereoid Greaves",
 		ear2="Brutal Earring",
 		ring1="Begrudging Ring",
-		ring2="Hetairoi Ring",
+		ring2="Ilabrat Ring",
 		})
 
 	sets.precast.WS['Savage Blade'] = set_combine(sets.precast.WS, {
 		neck="Caro Necklace",
-		ring1="Rufescent Ring",
-		ring2="Shukuyu Ring",
 		waist="Prosilio Belt +1",
 		})
 
@@ -298,6 +296,7 @@ function init_gear_sets()
 		legs="Atrophy Tights +1",
 		feet="Leth. Houseaux +1",
 		neck="Incanter's Torque",
+		ear1="Augment. Earring",
 		ear2="Andoaa Earring",
 		ring1="Stikini Ring",
 		ring2="Stikini Ring",

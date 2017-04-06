@@ -266,6 +266,7 @@ function init_gear_sets()
 		legs="Telchine Braconi",
 		feet="Theo. Duckbills +2",
 		neck="Incanter's Torque",
+		ear1="Augment. Earring",
 		ear2="Andoaa Earring",
 		ring1="Stikini Ring",
 		ring2="Stikini Ring",

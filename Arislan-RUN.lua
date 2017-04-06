@@ -261,7 +261,8 @@ function init_gear_sets()
 		hands=gear.Adhemar_TP_hands,
 		legs="Lustratio Subligar",
 		feet="Lustratio Leggings",
-		ring1="Apate Ring",
+		ring1="Ramuh Ring +1",
+		ring2="Ilabrat Ring",
 		back=gear.RUN_WS2_Cape,
 		waist="Ioskeha Belt",
 		})
@@ -352,6 +353,7 @@ function init_gear_sets()
 		hands="Runeist Mitons +1",
 		legs="Carmine Cuisses +1",
 		neck="Incanter's Torque",
+		ear1="Augment. Earring",
 		ear2="Andoaa Earring",
 		ring1="Stikini Ring",
 		ring2="Stikini Ring",
@@ -580,6 +582,7 @@ function init_gear_sets()
 	sets.engaged.MidAcc = set_combine(sets.engaged.LowAcc, {
 		ammo="Falcon Eye",
 		ear2="Telos Earring",
+		ring2="Ilabrat Ring",
 		})
 
 	sets.engaged.HighAcc = set_combine(sets.engaged.MidAcc, {
@@ -764,7 +767,8 @@ end
 function customize_melee_set(meleeSet)
 	if state.Charm.value == true then
 		meleeSet = set_combine(meleeSet, sets.defense.Charm)
-	end	if state.Knockback.value == true then
+	end
+	if state.Knockback.value == true then
 		meleeSet = set_combine(meleeSet, sets.defense.Knockback)
 	end
 	if state.Death.value == true then
