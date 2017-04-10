@@ -158,30 +158,30 @@ function init_gear_sets()
 	sets.precast.JA['Trance'] = {head="Horos Tiara +1"}
 	  
 	sets.precast.Waltz = {
-		head="Horos Tiara +1", --11
-		body="Maxixi Casaque +1", --15
+		head="Anwig Salade",
+		body="Maxixi Casaque +2", --17(7)
 		hands="Slither Gloves +1", --5
-		feet="Maxixi Shoes +1", --10
+		feet="Maxixi Toeshoes +2", --12
 		neck="Unmoving Collar +1",
 		ear1="Roundel Earring", --5
 		ear2="Enchntr. Earring +1",
 		ring1="Asklepian Ring", --(3)
-		ring2="Carb. Ring +1", --3
+		ring2="Valseur's Ring", --3
 		back="Toetapper Mantle", --5
 		waist="Gishdubar Sash", --(10)
 		} -- Waltz Potency
 		
 	sets.precast.Waltz['Healing Waltz'] = {}
-	sets.precast.Samba = {head="Maxixi Tiara +1", back=gear.DNC_TP_Cape}
-	sets.precast.Jig = {legs="Horos Tights +1", feet="Maxixi Shoes +1"}
+	sets.precast.Samba = {head="Maxixi Tiara +2", back=gear.DNC_TP_Cape}
+	sets.precast.Jig = {legs="Horos Tights +1", feet="Maxixi Toeshoes +2"}
 
 	sets.precast.Step = {
 		ammo="Falcon Eye",
-		head="Dampening Tam",
-		body=gear.Herc_TA_body,
+		head="Maxixi Tiara +2",
+		body="Maxixi Casaque +2",
 		hands="Maxixi Bangles +2",
-		legs="Meg. Chausses +1",
-		feet=gear.Herc_Acc_feet,
+		legs="Mummu Kecks +1",
+		feet="Maxixi Toeshoes +2",
 		neck="Combatant's Torque",
 		ear1="Digni. Earring",
 		ear2="Telos Earring",
@@ -213,11 +213,11 @@ function init_gear_sets()
 		
 	sets.precast.Flourish1['Desperate Flourish'] = {
 		ammo="Charis Feather",
-		head="Meghanada Visor +1",
-		body=gear.Herc_TA_body,
-		hands="Meg. Gloves +1",
+		head="Maxixi Tiara +2",
+		body="Maxixi Casaque +2",
+		hands="Maxixi Gloves +2",
 		legs=gear.Herc_WS_legs,
-		feet=gear.Herc_Acc_feet,
+		feet="Maxixi Toeshoes +2",
 		neck="Combatant's Torque",
 		ear1="Mache Earring",
 		ear2="Telos Earring",
@@ -259,7 +259,7 @@ function init_gear_sets()
 		ammo="Focal Orb",
 		head="Lilitu Headpiece",
 		body="Meg. Cuirie +1",
-		hands="Meg. Gloves +1",
+		hands="Meg. Gloves +2",
 		legs="Lustratio Subligar",
 		feet="Lustratio Leggings",
 		neck="Fotia Gorget",
@@ -312,7 +312,7 @@ function init_gear_sets()
 		ammo="Falcon Eye",
 		head="Dampening Tam",
 		body=gear.Herc_TA_body,
-		hands="Meg. Gloves +1",
+		hands="Meg. Gloves +2",
 		legs=gear.Herc_WS_legs,
 		feet=gear.Herc_Acc_feet,
 		ear2="Telos Earring",
@@ -337,7 +337,7 @@ function init_gear_sets()
 		ammo="Falcon Eye",
 		head="Dampening Tam",
 		body=gear.Herc_TA_body,
-		hands="Meg. Gloves +1",
+		hands="Meg. Gloves +2",
 		legs=gear.Herc_WS_legs,
 		feet=gear.Herc_Acc_feet,
 		ear2="Telos Earring",
@@ -402,7 +402,7 @@ function init_gear_sets()
 	sets.idle = {
 		ammo="Staunch Tathlum",
 		head=gear.Herc_DT_head,
-		body="Meg. Cuirie +1",
+		body="Maxixi Casaque +2",
 		hands=gear.Herc_DT_hands,
 		legs="Meg. Chausses +1",
 		feet="Skd. Jambeaux +1",
@@ -430,8 +430,7 @@ function init_gear_sets()
 
 	sets.idle.Town = set_combine (sets.idle, {
 		ammo="Ginsen",
-		head="Dampening Tam",
-		body="Adhemar Jacket",
+		head="Maxixi Tiara +2",
 		hands="Maxixi Bangles +2",
 		legs="Samnuha Tights",
 		neck="Combatant's Torque",

@@ -47,8 +47,9 @@ end
 -------------------------------------------------------------------------------------------------------------------
 
 function user_setup()
-	state.OffenseMode:options('STP', 'Normal', 'LowAcc', 'MidAcc', 'HighAcc')
+	state.OffenseMode:options('STP', 'Normal', 'LowAcc', 'MidAcc', 'HighAcc', 'Hybrid')
 	state.WeaponskillMode:options('Normal', 'Acc')
+	state.HybridMode:options('Normal', 'DT')
 	state.CastingMode:options('Normal', 'Resistant')
 	state.IdleMode:options('Normal', 'DT')
 	state.PhysicalDefenseMode:options('PDT', 'HP', 'Critical')
@@ -67,7 +68,7 @@ function user_setup()
 	send_command('bind ^- gs c cycleback Runes')
 	send_command('bind ^= gs c cycle Runes')
 	send_command('bind ^f11 gs c cycle MagicalDefenseMode')
-	send_command('bind @h gs c toggle Charm')
+	send_command('bind @c gs c toggle Charm')
 	send_command('bind @k gs c toggle Knockback')
 	send_command('bind @d gs c toggle Death')
 	send_command('bind !q input /ma "Temper" <me>')
@@ -222,7 +223,7 @@ function init_gear_sets()
 		ammo="Knobkierrie",
 		head="Lilitu Headpiece",
 		body=gear.Herc_TA_body,
-		hands="Meg. Gloves +1",
+		hands="Meg. Gloves +2",
 		legs=gear.Herc_WS_legs,
 		feet=gear.Herc_TA_feet,
 		neck="Fotia Gorget",
@@ -243,7 +244,7 @@ function init_gear_sets()
 	sets.precast.WS['Resolution'] = set_combine(sets.precast.WS, {
 		head="Adhemar Bonnet",
 		legs="Samnuha Tights",
-		ring1="Ifrit Ring +1",
+		ring1="Shukuyu Ring",
 		ring2="Epona's Ring",
 		back=gear.RUN_WS1_Cape,
 		})
@@ -258,18 +259,15 @@ function init_gear_sets()
 		})
 	
 	sets.precast.WS['Dimidiation'] = set_combine(sets.precast.WS['Resolution'], {
-		hands=gear.Adhemar_TP_hands,
 		legs="Lustratio Subligar",
 		feet="Lustratio Leggings",
 		ring1="Ramuh Ring +1",
 		ring2="Ilabrat Ring",
 		back=gear.RUN_WS2_Cape,
-		waist="Ioskeha Belt",
 		})
 		
 	sets.precast.WS['Dimidiation'].Acc = set_combine(sets.precast.WS['Dimidiation'], {
 		ammo="Seeth. Bomblet +1",
-		hands="Meg. Gloves +1",
 		legs="Samnuha Tights",
 		feet=gear.Herc_Acc_feet,
 		ear2="Telos Earring",
@@ -280,12 +278,12 @@ function init_gear_sets()
 
 	sets.precast.WS['Savage Blade'] = set_combine(sets.precast.WS, {
 		body="Meg. Cuirie +1",
-		hands="Meg. Gloves +1",
+		hands="Meg. Gloves +2",
 		legs="Meg. Chausses +1",
 		feet=gear.Herc_TA_feet,
 		neck="Caro Necklace",
-		ring1="Ifrit Ring +1",
-		ring2="Shukuyu Ring",
+		ring1="Shukuyu Ring",
+		ring2="Ifrit Ring +1",
 		waist="Prosilio Belt +1",
 		back=gear.RUN_WS1_Cape,
 		})
@@ -602,6 +600,44 @@ function init_gear_sets()
 		ear1="Dedition Earring",
 		ear2="Telos Earring",
 		waist="Kentarch Belt +1",
+		})
+
+	--------------------------------------
+	-- Hybrid sets
+	--------------------------------------
+
+	sets.engaged.DT = {
+		sub="Mensch Strap +1", --5/0
+		ammo="Staunch Tathlum", --2/2
+		head="Meghanada Visor +1", --4/0
+		body="Ayanmo Corazza +1", --5/5
+		hands=gear.Herc_DT_hands, --6/4
+		legs="Meg. Chausses +1", --5/0
+		feet=gear.Herc_TA_feet,
+		neck="Loricate Torque", --6/6
+		ear1="Cessance Earring",
+		ear2="Brutal Earring",
+		ring1="Gelatinous Ring +1",  --7/(-1)
+		ring2="Defending Ring", --10/10
+		back=gear.RUN_TP_Cape,
+		waist="Ioskeha Belt",
+		}
+	
+	sets.engaged.LowAcc.DT = set_combine(sets.engaged.DT, {
+		ear2="Telos Earring",
+		})
+	
+	sets.engaged.MidAcc.DT = set_combine(sets.engaged.LowAcc.DT, {
+		hands="Meg. Gloves +2", --4/0
+		})
+
+	sets.engaged.HighAcc.DT = set_combine(sets.engaged.LowAcc.DT, {
+		ear1="Mache Earring",
+		})
+
+	sets.engaged.STP.DT = set_combine(sets.engaged.DT, {
+		ear1="Dedition Earring",
+		ear2="Telos Earring",
 		})
 
 	-- Custom buff sets

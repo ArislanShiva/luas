@@ -261,7 +261,7 @@ function init_gear_sets()
 		ammo=gear.WSbullet,
 		head="Meghanada Visor +1",
 		body="Laksa. Frac +3",
-		hands="Meg. Gloves +1",
+		hands="Meg. Gloves +2",
 		legs="Meg. Chausses +1",
 		feet=gear.Herc_RA_feet,
 		neck="Fotia Gorget",
@@ -349,7 +349,7 @@ function init_gear_sets()
 	sets.precast.WS['Savage Blade'] = set_combine(sets.precast.WS['Evisceration'], {
 		head="Lilitu Headpiece",
 		body=gear.Herc_TA_body,
-		hands="Meg. Gloves +1",
+		hands="Meg. Gloves +2",
 		legs=gear.Herc_WS_legs,
 		feet=gear.Herc_TA_feet,
 		neck="Caro Necklace",

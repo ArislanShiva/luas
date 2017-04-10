@@ -35,7 +35,7 @@ end
 -- Setup vars that are user-dependent.  Can override this function in a sidecar file.
 function user_setup()
 	state.OffenseMode:options('STP', 'Normal', 'LowAcc', 'MidAcc', 'HighAcc')
-	state.RangedMode:options('STP', 'Normal', 'Acc', 'Ambuscade')
+	state.RangedMode:options('STP', 'Normal', 'Acc', 'Critical')
 	state.WeaponskillMode:options('Normal', 'Acc')
 	state.IdleMode:options('Normal', 'DT')
 	
@@ -133,6 +133,7 @@ function init_gear_sets()
 
 	-- (10% Snapshot, 5% Rapid from Merits)
 	sets.precast.RA = {
+		ammo=gear.RAbullet,
 		head="Taeon Chapeau", --10/0
 		body=gear.Taeon_RA_body, --9/0
 		hands="Carmine Fin. Ga. +1", --8/11
@@ -172,7 +173,7 @@ function init_gear_sets()
 		}
 
 	sets.precast.WS.Acc = set_combine(sets.precast.WS, {
-		hands="Meg. Gloves +1",
+		hands="Meg. Gloves +2",
 		feet="Meg. Jam. +1",
 		neck="Combatant's Torque",
 		ear2="Telos Earring",
@@ -195,7 +196,7 @@ function init_gear_sets()
 
 	sets.precast.WS["Jishnu's Radiance"] = set_combine(sets.precast.WS, {
 		body="Adhemar Jacket",
-		hands="Meg. Gloves +1",
+		hands="Meg. Gloves +2",
 		feet="Thereoid Greaves",
 		ear1="Moonshade Earring",
 		ear2="Mache Earring",
@@ -221,7 +222,7 @@ function init_gear_sets()
 		})
 
 	sets.precast.WS['Last Stand'].Acc = set_combine(sets.precast.WS['Last Stand'], {
-		hands="Meg. Gloves +1",
+		hands="Meg. Gloves +2",
 		neck="Combatant's Torque",
 		ear2="Telos Earring",
 		ring1="Hajduk Ring +1",
@@ -252,7 +253,7 @@ function init_gear_sets()
 	sets.precast.WS['Rampage'] = {
 		head="Lilitu Headpiece",
 		body="Meg. Cuirie +1",
-		hands="Meg. Gloves +1",
+		hands="Meg. Gloves +2",
 		legs=gear.Herc_WS_legs,
 		feet=gear.Herc_TA_feet,
 		neck="Fotia Gorget",
@@ -328,6 +329,14 @@ function init_gear_sets()
 		ring1="Hajduk Ring +1",
 		ring2="Hajduk Ring +1",
 		waist="Kwahu Kachina Belt",
+		})
+
+	sets.midcast.RA.Critical = set_combine(sets.midcast.RA, {
+		head="Mummu Bonnet +1",
+		body="Mummu Jacket +1",
+		hands="Mummu Wrists +1",
+		legs="Mummu Kecks +1",
+		feet="Mummu Gamash. +1",
 		})
 		
 	sets.midcast.RA.STP = set_combine(sets.midcast.RA, {

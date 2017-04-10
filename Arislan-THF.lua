@@ -202,7 +202,7 @@ function init_gear_sets()
 		ammo="Focal Orb",
 		head="Lilitu Headpiece",
 		body="Meg. Cuirie +1",
-		hands="Meg. Gloves +1",
+		hands="Meg. Gloves +2",
 		legs="Lustratio Subligar",
 		feet="Lustratio Leggings",
 		neck="Fotia Gorget",
@@ -250,7 +250,7 @@ function init_gear_sets()
 	sets.precast.WS['Evisceration'].Acc = set_combine(sets.precast.WS['Evisceration'], {
 		ammo="Falcon Eye",
 		head="Dampening Tam",
-		hands="Meg. Gloves +1",
+		hands="Meg. Gloves +2",
 		legs=gear.Herc_WS_legs,
 		feet=gear.Herc_Acc_feet,
 		ear2="Telos Earring",
