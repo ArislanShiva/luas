@@ -631,7 +631,7 @@ function init_gear_sets()
 		hands="Meg. Gloves +2", --4/0
 		})
 
-	sets.engaged.HighAcc.DT = set_combine(sets.engaged.LowAcc.DT, {
+	sets.engaged.HighAcc.DT = set_combine(sets.engaged.MidAcc.DT, {
 		ear1="Mache Earring",
 		})
 
