@@ -272,7 +272,7 @@ function init_gear_sets()
 		} -- default set
 		
 	sets.precast.WS.Acc = set_combine(sets.precast.WS, {
-		legs="Meg. Chausses +1",
+		legs="Meg. Chausses +2",
 		ring1="Ramuh Ring +1",
 		ear2="Telos Earring",
 		})
@@ -280,7 +280,7 @@ function init_gear_sets()
 	sets.precast.WS['Exenterator'] = set_combine(sets.precast.WS, {
 		ammo="Ginsen",
 		head="Adhemar Bonnet",
-		legs="Meg. Chausses +1",
+		legs="Meg. Chausses +2",
 		feet="Meg. Jam. +1",
 		ear1="Cessance Earring",
 		ear2="Telos Earring",
@@ -404,7 +404,7 @@ function init_gear_sets()
 		head=gear.Herc_DT_head,
 		body="Maxixi Casaque +2",
 		hands=gear.Herc_DT_hands,
-		legs="Meg. Chausses +1",
+		legs="Meg. Chausses +2",
 		feet="Skd. Jambeaux +1",
 		neck="Bathy Choker +1",
 		ear1="Genmei Earring",

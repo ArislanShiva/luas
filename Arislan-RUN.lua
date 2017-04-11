@@ -237,7 +237,7 @@ function init_gear_sets()
 
 	sets.precast.WS.Acc = set_combine(sets.precast.WS, {
 		ammo="Seeth. Bomblet +1",
-		legs="Meg. Chausses +1",
+		legs="Meg. Chausses +2",
 		ear2="Telos Earring",
 		})
 
@@ -252,7 +252,7 @@ function init_gear_sets()
 	sets.precast.WS['Resolution'].Acc = set_combine(sets.precast.WS['Resolution'], {
 		ammo="Seeth. Bomblet +1",
 		head="Dampening Tam",
-		legs="Meg. Chausses +1",
+		legs="Meg. Chausses +2",
 		feet=gear.Herc_Acc_feet,
 		ear2="Telos Earring",
 		ring1="Rufescent Ring",
@@ -279,7 +279,7 @@ function init_gear_sets()
 	sets.precast.WS['Savage Blade'] = set_combine(sets.precast.WS, {
 		body="Meg. Cuirie +1",
 		hands="Meg. Gloves +2",
-		legs="Meg. Chausses +1",
+		legs="Meg. Chausses +2",
 		feet=gear.Herc_TA_feet,
 		neck="Caro Necklace",
 		ring1="Shukuyu Ring",
@@ -612,7 +612,7 @@ function init_gear_sets()
 		head="Meghanada Visor +1", --4/0
 		body="Ayanmo Corazza +1", --5/5
 		hands=gear.Herc_DT_hands, --6/4
-		legs="Meg. Chausses +1", --5/0
+		legs="Meg. Chausses +2", --5/0
 		feet=gear.Herc_TA_feet,
 		neck="Loricate Torque", --6/6
 		ear1="Cessance Earring",

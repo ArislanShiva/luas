@@ -215,14 +215,14 @@ function init_gear_sets()
 		} -- default set
 
 	sets.precast.WS.Acc = set_combine(sets.precast.WS, {
-		legs="Meg. Chausses +1",
+		legs="Meg. Chausses +2",
 		ear2="Telos Earring",
 		})
 
 	sets.precast.WS['Exenterator'] = set_combine(sets.precast.WS, {
 		ammo="Seeth. Bomblet +1",
 		head="Adhemar Bonnet",
-		legs="Meg. Chausses +1",
+		legs="Meg. Chausses +2",
 		feet="Meg. Jam. +1",
 		ear1="Cessance Earring",
 		ear2="Telos Earring",

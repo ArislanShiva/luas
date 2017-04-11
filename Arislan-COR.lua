@@ -262,7 +262,7 @@ function init_gear_sets()
 		head="Meghanada Visor +1",
 		body="Laksa. Frac +3",
 		hands="Meg. Gloves +2",
-		legs="Meg. Chausses +1",
+		legs="Meg. Chausses +2",
 		feet=gear.Herc_RA_feet,
 		neck="Fotia Gorget",
 		ear1="Moonshade Earring",
@@ -483,7 +483,7 @@ function init_gear_sets()
 	sets.midcast.RA.Acc = set_combine(sets.midcast.RA, {
 		ammo=gear.RAbullet,
 		hands=gear.Herc_RA_hands,
-		legs="Meg. Chausses +1",
+		legs="Meg. Chausses +2",
 		feet="Meg. Jam. +1",
 		neck="Combatant's Torque",
 		ring1="Hajduk Ring +1",
@@ -688,7 +688,7 @@ function init_gear_sets()
 		})
 
 	sets.engaged.MidAcc.MidHaste = set_combine(sets.engaged.LowAcc.MidHaste, {
-		legs="Meg. Chausses +1",
+		legs="Meg. Chausses +2",
 		neck="Combatant's Torque",
 		ear2="Telos Earring",
 		ring2="Ilabrat Ring",
@@ -735,7 +735,7 @@ function init_gear_sets()
 		})
 
 	sets.engaged.MidAcc.HighHaste = set_combine(sets.engaged.LowAcc.HighHaste, {
-		legs="Meg. Chausses +1",
+		legs="Meg. Chausses +2",
 		neck="Combatant's Torque",
 		ear2="Telos Earring",
 		ring2="Ilabrat Ring",
@@ -782,7 +782,7 @@ function init_gear_sets()
 		})
 
 	sets.engaged.MidAcc.MaxHaste = set_combine(sets.engaged.LowAcc.MaxHaste, {
-		legs="Meg. Chausses +1",
+		legs="Meg. Chausses +2",
 		neck="Combatant's Torque",
 		ear2="Telos Earring",
 		ring2="Ilabrat Ring",
