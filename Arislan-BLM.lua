@@ -134,7 +134,7 @@ function init_gear_sets()
 		})
 
 	sets.precast.FC.Curaga = sets.precast.FC.Cure
-	sets.precast.FC.Impact = {head=empty, body="Twilight Cloak"}
+	sets.precast.FC.Impact = set_combine(sets.precast.FC, {head=empty, body="Twilight Cloak"})
 	sets.precast.Storm = set_combine(sets.precast.FC, {ring2="Levia. Ring +1", waist="Channeler's Stone"}) -- stop quick cast
 	
 	sets.precast.FC.DeathMode = {
@@ -153,7 +153,7 @@ function init_gear_sets()
 		waist="Witful Belt", --3/(2)
 		}
 
-	sets.precast.FC.Impact.DeathMode = {head=empty,	body="Twilight Cloak"}
+	sets.precast.FC.Impact.DeathMode = set_combine(sets.precast.FC.DeathMode, {head=empty, body="Twilight Cloak"})
 
 	-- Weaponskill sets
 	
@@ -322,7 +322,7 @@ function init_gear_sets()
 		feet="Medium's Sabots",
 		neck="Imbodla Necklace",
 		ear1="Barkaro. Earring",
-		ear2="Digni. Earring",
+		ear2="Regal Earring",
 		ring1="Kishar Ring",
 		ring2="Stikini Ring",
 		back=gear.BLM_FC_Cape,
@@ -348,7 +348,7 @@ function init_gear_sets()
 		feet="Merlinic Crackows",
 		neck="Incanter's Torque",
 		ear1="Barkaro. Earring",
-		ear2="Digni. Earring",
+		ear2="Regal Earring",
 		ring1="Stikini Ring",
 		ring2="Stikini Ring",
 		back=gear.BLM_MAB_Cape,
@@ -358,7 +358,7 @@ function init_gear_sets()
 	sets.midcast.Drain = set_combine(sets.midcast['Dark Magic'], {
 		head="Pixie Hairpin +1",
 		feet="Merlinic Crackows",
-		ear2="Hirudinea Earring",
+		ear1="Hirudinea Earring",
 		ring1="Evanescence Ring",
 		ring2="Archon Ring",
 		waist="Fucho-no-obi",
@@ -372,8 +372,8 @@ function init_gear_sets()
 		})
 
 	sets.midcast.Death = {
-		main=gear.Grioavolr_MP,
-		sub="Elder's Grip +1",
+		main=gear.Grioavolr_MB,
+		sub="Enki Strap",
 		ammo="Ghastly Tathlum +1",
 		head="Pixie Hairpin +1",
 		body="Merlinic Jubbah", --10
@@ -390,11 +390,11 @@ function init_gear_sets()
 		}
 
 	sets.midcast.Death.Resistant = set_combine(sets.midcast.Death, {
-		main=gear.Grioavolr_MP,
+		main=gear.Grioavolr_MB,
 		sub="Enki Strap",
 		head="Amalric Coif",
 		legs=gear.Merlinic_MAcc_legs,
-		ear2="Digni. Earring",
+		ear2="Regal Earring",
 		ring2="Shiva Ring +1",
 		})
 
@@ -412,7 +412,7 @@ function init_gear_sets()
 		feet="Merlinic Crackows",
 		neck="Baetyl Pendant",
 		ear1="Barkaro. Earring",
-		ear2="Friomisi Earring",
+		ear2="Regal Earring",
 		ring1="Shiva Ring +1",
 		ring2="Shiva Ring +1",
 		back=gear.BLM_MAB_Cape,
@@ -420,8 +420,8 @@ function init_gear_sets()
 		}
 
 	sets.midcast['Elemental Magic'].DeathMode = set_combine(sets.midcast['Elemental Magic'], {
-		main=gear.Grioavolr_MP,
-		sub="Elder's Grip +1",
+		main=gear.Grioavolr_MB,
+		sub="Enki Strap",
 		ammo="Ghastly Tathlum +1",
 		legs="Amalric Slops",
 		neck="Sanctity Necklace",
@@ -433,7 +433,6 @@ function init_gear_sets()
 		sub="Enki Strap",
 		legs=gear.Merlinic_MAcc_legs,
 		neck="Sanctity Necklace",
-		ear2="Hermetic Earring",
 		waist="Yamabuki-no-Obi",
 		})
 			
@@ -476,7 +475,7 @@ function init_gear_sets()
 		ear2="Infused Earring",
 		ring1="Paguroidea Ring",
 		ring2="Sheltered Ring",
-		back="Solemnity Cape",
+		back="Moonbeam Cape",
 		waist="Refoccilation Stone",
 		}
 
@@ -489,10 +488,9 @@ function init_gear_sets()
 		feet="Mallquis Clogs +1",
 		neck="Loricate Torque +1", --6/6
 		ear1="Genmei Earring", --2/0
-		ear2="Etiolation Earring", --0/3
 		ring1="Gelatinous Ring +1", --7/(-1)
 		ring2="Defending Ring", --10/10
-		back="Solemnity Cape", --4/4
+		back="Moonbeam Cape", --5/5
 		})
 
 	sets.idle.ManaWall = {
@@ -501,8 +499,8 @@ function init_gear_sets()
 		}
 
 	sets.idle.DeathMode = {
-		main=gear.Grioavolr_MP,
-		sub="Elder's Grip +1",
+		main=gear.Grioavolr_MB,
+		sub="Enki Strap",
 		ammo="Ghastly Tathlum +1",
 		head="Pixie Hairpin +1",
 		body="Amalric Doublet",
@@ -511,7 +509,7 @@ function init_gear_sets()
 		feet="Merlinic Crackows",
 		neck="Sanctity Necklace",
 		ear1="Barkaro. Earring",
-		ear2="Static Earring",
+		ear2="Regal Earring",
 		ring1="Mephitas's Ring +1",
 		ring2="Mephitas's Ring",
 		back=gear.BLM_Death_Cape,
@@ -526,7 +524,7 @@ function init_gear_sets()
 		legs=gear.Merlinic_MB_legs,
 		neck="Incanter's Torque",
 		ear1="Barkaro. Earring",
-		ear2="Friomisi Earring",
+		ear2="Regal Earring",
 		ring1="Shiva Ring +1",
 		ring2="Shiva Ring +1",
 		back=gear.BLM_MAB_Cape,
@@ -581,7 +579,7 @@ function init_gear_sets()
 		neck="Combatant's Torque",
 		ear1="Cessance Earring",
 		ear2="Telos Earring",
-		ring1="Chirich Ring",
+		ring1="Ramuh Ring +1",
 		ring2="Ramuh Ring +1",
 		waist="Grunfeld Rope",
 		back="Relucent Cape",

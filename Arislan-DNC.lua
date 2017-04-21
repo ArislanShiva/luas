@@ -161,15 +161,21 @@ function init_gear_sets()
 		head="Anwig Salade",
 		body="Maxixi Casaque +2", --17(7)
 		hands="Slither Gloves +1", --5
+		legs="Meg. Chausses +2",
 		feet="Maxixi Toeshoes +2", --12
 		neck="Unmoving Collar +1",
 		ear1="Roundel Earring", --5
 		ear2="Enchntr. Earring +1",
-		ring1="Asklepian Ring", --(3)
+		ring1="Carb. Ring +1",
 		ring2="Valseur's Ring", --3
 		back="Toetapper Mantle", --5
-		waist="Gishdubar Sash", --(10)
-		} -- Waltz Potency
+		waist="Chaac Belt",
+		} -- Waltz Potency/CHR
+	
+	sets.precast.WaltzSelf = set_combine(sets.precast.Waltz, {
+		head="Mummu Bonnet +1", --8
+		ring1="Asklepian Ring", --3
+		}) -- Waltz effects received
 		
 	sets.precast.Waltz['Healing Waltz'] = {}
 	sets.precast.Samba = {head="Maxixi Tiara +2", back=gear.DNC_TP_Cape}
@@ -279,7 +285,7 @@ function init_gear_sets()
 	
 	sets.precast.WS['Exenterator'] = set_combine(sets.precast.WS, {
 		ammo="Ginsen",
-		head="Adhemar Bonnet",
+		head=gear.Adhemar_TP_head,
 		legs="Meg. Chausses +2",
 		feet="Meg. Jam. +1",
 		ear1="Cessance Earring",
@@ -296,7 +302,7 @@ function init_gear_sets()
 
 	sets.precast.WS['Pyrrhic Kleos'] = set_combine(sets.precast.WS, {
 		ammo="Cheruski Needle",
-		head="Adhemar Bonnet",
+		head=gear.Adhemar_TP_head,
 		body="Adhemar Jacket",
 		hands=gear.Adhemar_TP_hands,
 		legs="Samnuha Tights",
@@ -322,7 +328,7 @@ function init_gear_sets()
 
 	sets.precast.WS['Evisceration'] = set_combine(sets.precast.WS, {
 		ammo="Charis Feather",
-		head="Adhemar Bonnet",
+		head=gear.Adhemar_TP_head,
 		body="Abnoba Kaftan",
 		hands="Mummu Wrists +1",
 		legs="Samnuha Tights", 
@@ -411,7 +417,7 @@ function init_gear_sets()
 		ear2="Infused Earring",
 		ring1="Paguroidea Ring",
 		ring2="Sheltered Ring",
-		back="Solemnity Cape",
+		back="Moonbeam Cape",
 		waist="Flume Belt +1",
 		}
 
@@ -424,7 +430,7 @@ function init_gear_sets()
 		ear1="Genmei Earring", --2/0
 		ring1="Gelatinous Ring +1", --7/(-1)
 		ring2="Defending Ring", --10/10
-		back="Solemnity Cape", --4/4
+		back="Moonbeam Cape", --5/5
 		waist="Flume Belt +1", --4/0
 		})
 
@@ -437,7 +443,7 @@ function init_gear_sets()
 		ear1="Cessance Earring",
 		ear2="Telos Earring",
 		ring1="Ramuh Ring +1",
-		ring2="Ramuh Ring +1",
+		ring2="Ilabrat Ring",
 		back=gear.DNC_TP_Cape,
 		waist="Windbuffet Belt +1",
 		})
@@ -477,8 +483,8 @@ function init_gear_sets()
 		ring1="Petrov Ring",
 		ring2="Epona's Ring",
 		back=gear.DNC_TP_Cape,
-		waist="Patentia Sash", --5
-		} -- 39%
+		waist="Reiki Yotai", --7
+		} -- 41%
 
 	sets.engaged.LowAcc = set_combine(sets.engaged, {
 		ammo="Falcon Eye",
@@ -524,8 +530,8 @@ function init_gear_sets()
 		ring1="Petrov Ring",
 		ring2="Epona's Ring",
 		back=gear.DNC_TP_Cape,
-		waist="Patentia Sash", --5
-		} -- 30%
+		waist="Reiki Yotai", --7
+		} -- 32%
 
 	sets.engaged.LowAcc.LowHaste = set_combine(sets.engaged.LowHaste, {
 		ammo="Falcon Eye",
@@ -571,8 +577,8 @@ function init_gear_sets()
 		ring1="Petrov Ring",
 		ring2="Epona's Ring",
 		back=gear.DNC_TP_Cape,
-		waist="Patentia Sash", --5
-		} -- 19%
+		waist="Reiki Yotai", --7
+		} -- 21%
 
 	sets.engaged.LowAcc.MidHaste = set_combine(sets.engaged.MidHaste, {
 		ammo="Falcon Eye",
@@ -725,8 +731,10 @@ function job_post_precast(spell, action, spellMap, eventArgs)
 			equip(sets.buff['Climactic Flourish'])
 		end
 	end
+	if spell.type=='Waltz' and spell.target.type == 'SELF' then
+		equip(sets.precast.WaltzSelf)
+	end
 end
-
 
 -------------------------------------------------------------------------------------------------------------------
 -- Job-specific hooks for non-casting events.

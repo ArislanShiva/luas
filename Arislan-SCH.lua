@@ -52,6 +52,7 @@ function job_setup()
 
 	state.Buff['Sublimation: Activated'] = buffactive['Sublimation: Activated'] or false
 	state.HelixMode = M{['description']='Helix Mode', 'Lughs', 'Bookworm'}
+	state.RegenMode = M{['description']='Regen Mode', 'Duration', 'Potency'}
 	state.CP = M(false, "Capacity Points Mode")
 
 	update_active_strategems()
@@ -90,6 +91,7 @@ function user_setup()
 	send_command('bind ^. input /ma Invisible <stpc>')
 	send_command('bind @c gs c toggle CP')
 	send_command('bind @h gs c cycle HelixMode')
+	send_command('bind @g gs c cycle RegenMode')
 	send_command('bind @s gs c toggle StormSurge')
 	send_command('bind @w gs c toggle WeaponLock')
 	
@@ -117,6 +119,7 @@ function user_unload()
 	send_command('unbind !.')
 	send_command('unbind @c')
 	send_command('unbind @h')
+	send_command('unbind @g')
 	send_command('unbind @s')
 	send_command('unbind @w')
 end
@@ -170,7 +173,7 @@ function init_gear_sets()
 		})
 	
 	sets.precast.FC.Curaga = sets.precast.FC.Cure
-	sets.precast.FC.Impact = {head=empty, body="Twilight Cloak"}
+	sets.precast.FC.Impact = set_combine(sets.precast.FC, {head=empty, body="Twilight Cloak"})
 	sets.precast.Storm = set_combine(sets.precast.FC, {ring2="Levia. Ring +1", waist="Channeler's Stone"}) -- stop quick cast
 
 	
@@ -224,7 +227,7 @@ function init_gear_sets()
 		feet="Kaykaus Boots", --10/(-10)
 		neck="Incanter's Torque",
 		ear1="Mendi. Earring", --5
-		ear2="Loquac. Earring",
+		ear2="Regal Earring",
 		ring1="Lebeche Ring", --3/(-5)
 		ring2="Haoma's Ring",
 		back="Oretan. Cape +1", --6
@@ -298,8 +301,10 @@ function init_gear_sets()
 		main="Bolelabunga",
 		sub="Genmei Shield",
 		head="Arbatel Bonnet +1",
-		back=gear.SCH_FC_Cape,
+		back="Bookworm's Cape"
 		})
+	
+	sets.midcast.RegenDuration = set_combine(sets.midcast.EnhancingDuration, {back=gear.SCH_FC_Cape})
 	
 	sets.midcast.Haste = sets.midcast.EnhancingDuration
 
@@ -345,7 +350,7 @@ function init_gear_sets()
 		feet="Medium's Sabots",
 		neck="Imbodla Necklace",
 		ear1="Barkaro. Earring",
-		ear2="Digni. Earring",
+		ear2="Regal Earring",
 		ring1="Kishar Ring",
 		ring2="Stikini Ring",
 		back=gear.SCH_FC_Cape,
@@ -370,7 +375,7 @@ function init_gear_sets()
 		feet="Acad. Loafers +3",
 		neck="Incanter's Torque",
 		ear1="Barkaro. Earring",
-		ear2="Digni. Earring",
+		ear2="Regal Earring",
 		ring1="Stikini Ring",
 		ring2="Stikini Ring",
 		back="Perimede Cape",
@@ -388,7 +393,7 @@ function init_gear_sets()
 		feet="Merlinic Crackows", --9
 		neck="Mizu. Kubikazari", --10
 		ear1="Barkaro. Earring",
-		ear2="Digni. Earring",
+		ear2="Regal Earring",
 		ring1="Shiva Ring +1",
 		ring2="Archon Ring",
 		back=gear.SCH_MAB_Cape,
@@ -397,7 +402,7 @@ function init_gear_sets()
 	
 	sets.midcast.Drain = set_combine(sets.midcast['Dark Magic'], {
 		head="Pixie Hairpin +1",
-		ear2="Hirudinea Earring",
+		ear1="Hirudinea Earring",
 		ring2="Archon Ring",
 		waist="Fucho-no-obi",
 		})
@@ -417,7 +422,7 @@ function init_gear_sets()
 		feet="Merlinic Crackows",
 		neck="Baetyl Pendant",
 		ear1="Barkaro. Earring",
-		ear2="Friomisi Earring",
+		ear2="Regal Earring",
 		ring1="Shiva Ring +1",
 		ring2="Shiva Ring +1",
 		back=gear.SCH_MAB_Cape,
@@ -437,7 +442,6 @@ function init_gear_sets()
 		sub="Enki Strap",
 		legs=gear.Merlinic_MAcc_legs,
 		neck="Sanctity Necklace",
-		ear2="Hermetic Earring",
 		waist="Yamabuki-no-Obi",
 		})
 	
@@ -487,7 +491,7 @@ function init_gear_sets()
 		ear2="Infused Earring",
 		ring1="Paguroidea Ring",
 		ring2="Sheltered Ring",
-		back="Solemnity Cape",
+		back="Moonbeam Cape",
 		waist="Refoccilation Stone",
 		}
 
@@ -503,7 +507,7 @@ function init_gear_sets()
 		ear2="Etiolation Earring", --0/3
 		ring1="Gelatinous Ring +1", --7/(-1)
 		ring2="Defending Ring", --10/10
-		back="Solemnity Cape", --4/4
+		back="Moonbeam Cape", --5/5
 		})
 
 	sets.idle.Refresh = {main="Bolelabunga", sub="Genmei Shield"}
@@ -516,7 +520,7 @@ function init_gear_sets()
 		legs=gear.Merlinic_MB_legs,
 		neck="Incanter's Torque",
 		ear1="Barkaro. Earring",
-		ear2="Friomisi Earring",
+		ear2="Regal Earring",
 		ring1="Shiva Ring +1",
 		ring2="Shiva Ring +1",
 		back=gear.SCH_MAB_Cape,
@@ -659,6 +663,10 @@ function job_post_midcast(spell, action, spellMap, eventArgs)
 			if spellMap == 'Refresh' then
 				equip(sets.midcast.Refresh)
 			end
+		end
+		if spellMap == "Regen" and state.RegenMode.value == 'Duration' then
+			equip(sets.midcast.RegenDuration)
+			add_to_chat(122,'Regen Test')
 		end
 		if state.Buff.Perpetuance then
 			equip(sets.buff['Perpetuance'])

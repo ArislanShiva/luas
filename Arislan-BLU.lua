@@ -334,7 +334,7 @@ function init_gear_sets()
 
 	sets.precast.WS['Chant du Cygne'] = set_combine(sets.precast.WS, {
 		ammo="Jukukik Feather",
-		head="Adhemar Bonnet",
+		head=gear.Adhemar_TP_head,
 		body="Abnoba Kaftan",
 		hands=gear.Adhemar_TP_hands,
 		legs="Samnuha Tights", 
@@ -419,8 +419,8 @@ function init_gear_sets()
 		feet="Jhakri Pigaches +1",
 		--feet="Amalric Nails"
 		neck="Fotia Gorget",
-		ear1="Friomisi Earring",
-		ear2="Moonshade Earring",
+		ear1="Moonshade Earring",
+		ear2="Regal Earring",
 		ring1="Archon Ring",
 		ring2="Rufescent Ring",
 		back=gear.BLU_MAB_Cape,
@@ -450,7 +450,7 @@ function init_gear_sets()
 
 	sets.midcast.SpellInterrupt = {
 		ammo="Impatiens", --10
-		ear1="Halasz Earring", --5
+		--ear1="Halasz Earring", --5
 		ring1="Evanescence Ring", --5
 		waist="Ninurta's Sash", --6
 		}
@@ -470,7 +470,7 @@ function init_gear_sets()
 
 	sets.midcast['Blue Magic'].Physical = {
 		ammo="Ginsen",
-		head="Adhemar Bonnet", 
+		head=gear.Adhemar_TP_head, 
 		body=gear.Herc_TA_body,
 		hands=gear.Adhemar_TP_hands,
 		legs=gear.Herc_WS_legs,
@@ -512,17 +512,19 @@ function init_gear_sets()
 		})
 
 	sets.midcast['Blue Magic'].PhysicalInt = set_combine(sets.midcast['Blue Magic'].Physical, {
+		ear2="Regal Earring",
 		ring1="Shiva Ring +1",
 		ring2="Shiva Ring +1",
 		back=gear.BLU_MAB_Cape,
 		})
 
 	sets.midcast['Blue Magic'].PhysicalMnd = set_combine(sets.midcast['Blue Magic'].Physical, {
+		ear2="Regal Earring",
 		ring1="Levia. Ring +1",
 		ring2="Levia. Ring +1",
 		})
 	
-	sets.midcast['Blue Magic'].PhysicalChr = sets.midcast['Blue Magic'].Physical
+	sets.midcast['Blue Magic'].PhysicalChr = set_combine(sets.midcast['Blue Magic'].Physical, {ear1="Regal Earring", ear2="Enchntr. Earring +1"})
 
 	sets.midcast['Blue Magic'].Magical = {
 		ammo="Pemphredo Tathlum",
@@ -533,7 +535,7 @@ function init_gear_sets()
 		feet="Jhakri Pigaches +1",
 		neck="Baetyl Pendant",
 		ear1="Friomisi Earring",
-		ear2="Hecate's Earring",
+		ear2="Regal Earring",
 		ring1="Shiva Ring +1",
 		ring2="Shiva Ring +1",
 		back=gear.BLU_MAB_Cape,
@@ -544,7 +546,6 @@ function init_gear_sets()
 		body="Samnuha Coat",
 		neck="Sanctity Necklace",
 		ear1="Digni. Earring",
-		ear2="Hermetic Earring",
 		ring1="Stikini Ring",
 		ring2="Stikini Ring",
 		waist="Yamabuki-no-Obi",
@@ -570,7 +571,7 @@ function init_gear_sets()
 		})
 
 	sets.midcast['Blue Magic'].MagicalVit = sets.midcast['Blue Magic'].Magical
-	sets.midcast['Blue Magic'].MagicalChr = set_combine(sets.midcast['Blue Magic'].Magical, {ear2="Enchntr. Earring +1"})
+	sets.midcast['Blue Magic'].MagicalChr = set_combine(sets.midcast['Blue Magic'].Magical, {ear1="Regal Earring", ear2="Enchntr. Earring +1"})
 
 	sets.midcast['Blue Magic'].MagicAccuracy = {
 		ammo="Pemphredo Tathlum",
@@ -580,8 +581,8 @@ function init_gear_sets()
 		legs="Psycloth Lappas",
 		feet="Jhakri Pigaches +1",
 		neck="Incanter's Torque",
-		ear1="Digni. Earring",
-		ear2="Hermetic Earring",
+		ear1="Hermetic Earring",
+		ear2="Regal Earring",
 		ring1="Stikini Ring",
 		ring2="Stikini Ring",
 		waist="Luminary Sash",
@@ -695,7 +696,7 @@ function init_gear_sets()
 		ear2="Infused Earring",
 		ring1="Paguroidea Ring",
 		ring2="Sheltered Ring",
-		back="Solemnity Cape",
+		back="Moonbeam Cape",
 		waist="Flume Belt +1",
 		}
 
@@ -709,7 +710,7 @@ function init_gear_sets()
 		ear1="Genmei Earring", --2/0
 		ring1="Gelatinous Ring +1", --7/(-1)
 		ring2="Defending Ring", --10/10
-		back="Solemnity Cape", --4/4
+		back="Moonbeam Cape", --5/5
 		waist="Flume Belt +1", --4/0
 		})
 
@@ -768,8 +769,8 @@ function init_gear_sets()
 		ring1="Hetairoi Ring",
 		ring2="Epona's Ring",
 		back=gear.BLU_TP_Cape,
-		waist="Shetal Stone", --6
-		} -- 35%
+		waist="Reiki Yotai", --7
+		} -- 36%
 		
 	sets.engaged.LowAcc = set_combine(sets.engaged, {
 		ammo="Falcon Eye",
@@ -816,8 +817,8 @@ function init_gear_sets()
 		ring1="Hetairoi Ring",
 		ring2="Epona's Ring",
 		back=gear.BLU_TP_Cape,
-		waist="Shetal Stone", --6
-		} -- 35%
+		waist="Reiki Yotai", --7
+		} -- 36%
 
 	sets.engaged.LowAcc.LowHaste = set_combine(sets.engaged.LowHaste, {
 		ammo="Falcon Eye",

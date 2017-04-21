@@ -38,7 +38,7 @@ function job_setup()
 	blue_magic_maps.Buffs = S{'Cocoon', 'Refueling'}
 
 	rayke_duration = 47
-	gambit_duration = 92
+	gambit_duration = 94
 
 end
 
@@ -47,7 +47,7 @@ end
 -------------------------------------------------------------------------------------------------------------------
 
 function user_setup()
-	state.OffenseMode:options('STP', 'Normal', 'LowAcc', 'MidAcc', 'HighAcc', 'Hybrid')
+	state.OffenseMode:options('STP', 'Normal', 'LowAcc', 'MidAcc', 'HighAcc')
 	state.WeaponskillMode:options('Normal', 'Acc')
 	state.HybridMode:options('Normal', 'DT')
 	state.CastingMode:options('Normal', 'Resistant')
@@ -147,7 +147,7 @@ function init_gear_sets()
 	-- Precast sets to enhance JAs
 	sets.precast.JA['Vallation'] = set_combine(sets.Enmity, {body="Runeist's Coat +2", legs="Futhark Trousers +1", back="Ogma's Cape"})
 	sets.precast.JA['Valiance'] = sets.precast.JA['Vallation']
-	sets.precast.JA['Pflug'] = set_combine(sets.Enmity, {feet="Runeist Bottes +1"})
+	sets.precast.JA['Pflug'] = set_combine(sets.Enmity, {feet="Runeist's Boots +2"})
 	sets.precast.JA['Battuta'] = set_combine(sets.Enmity, {head="Fu. Bandeau +1"})
 	sets.precast.JA['Liement'] = set_combine(sets.Enmity, {body="Futhark Coat +1"})
 
@@ -169,7 +169,7 @@ function init_gear_sets()
 		}
 
 	sets.precast.JA['Swipe'] = sets.precast.JA['Lunge']
-	sets.precast.JA['Gambit'] = {hands="Runeist Mitons +1"}
+	sets.precast.JA['Gambit'] = {hands="Runeist's Mitons +2"}
 	sets.precast.JA['Rayke'] = {feet="Futhark Boots +1"}
 	sets.precast.JA['Elemental Sforzo'] = set_combine(sets.Enmity, {body="Futhark Coat +1"})
 	sets.precast.JA['Swordplay'] = set_combine(sets.Enmity, {hands="Futhark Mitons +1"})
@@ -203,6 +203,14 @@ function init_gear_sets()
 		waist="Ninurta's Sash",
 		}
 
+	sets.precast.FC.HP = {
+		ammo="Sapience Orb", --2
+		neck="Orunmila's Torque", --5
+		ring2="Weather. Ring", --5(3)
+		waist="Ninurta's Sash",
+		}
+
+
 	sets.precast.FC['Enhancing Magic'] = set_combine(sets.precast.FC, {
 		legs="Futhark Trousers +1",
 		waist="Siegel Sash",
@@ -230,7 +238,7 @@ function init_gear_sets()
 		ear1="Moonshade Earring",
 		ear2="Brutal earring",
 		ring1="Ifrit Ring +1",
-		ring2="Ifrit Ring +1",
+		ring2="Ilabrat Ring",
 		back="Bleating Mantle",
 		waist="Fotia Belt",
 		}
@@ -239,11 +247,13 @@ function init_gear_sets()
 		ammo="Seeth. Bomblet +1",
 		legs="Meg. Chausses +2",
 		ear2="Telos Earring",
+		ring1="Ramuh Ring +1",
+		ring2="Ramuh Ring +1",
 		})
 
 	sets.precast.WS['Resolution'] = set_combine(sets.precast.WS, {
-		head="Adhemar Bonnet",
-		legs="Samnuha Tights",
+		head=gear.Adhemar_TP_head,
+		legs="Meg. Chausses +2",
 		ring1="Shukuyu Ring",
 		ring2="Epona's Ring",
 		back=gear.RUN_WS1_Cape,
@@ -252,7 +262,6 @@ function init_gear_sets()
 	sets.precast.WS['Resolution'].Acc = set_combine(sets.precast.WS['Resolution'], {
 		ammo="Seeth. Bomblet +1",
 		head="Dampening Tam",
-		legs="Meg. Chausses +2",
 		feet=gear.Herc_Acc_feet,
 		ear2="Telos Earring",
 		ring1="Rufescent Ring",
@@ -325,7 +334,7 @@ function init_gear_sets()
 	sets.midcast.SpellInterrupt = {
 		ammo="Impatiens", --10
 		legs="Carmine Cuisses +1", --20
-		ear1="Halasz Earring", --5
+		--ear1="Halasz Earring", --5
 		ring1="Evanescence Ring", --5
 		waist="Rumination Sash", --10
 		}
@@ -348,7 +357,7 @@ function init_gear_sets()
 
 	sets.midcast['Enhancing Magic'] = {
 		head="Carmine Mask +1",
-		hands="Runeist Mitons +1",
+		hands="Runeist's Mitons +2",
 		legs="Carmine Cuisses +1",
 		neck="Incanter's Torque",
 		ear1="Augment. Earring",
@@ -421,13 +430,13 @@ function init_gear_sets()
 		main="Epeolatry",
 		sub="Refined Grip +1", --3/3
 		ammo="Staunch Tathlum", --2/2
-		head="Erilaz Galea +1",
-		body="Erilaz Surcoat +1",
-		legs="Eri. Leg Guards +1", --7/0
+		head=gear.Herc_DT_head, --3/3
+		body="Runeist's Coat +2",
+		legs="Carmine Cuisses +1",
 		feet="Erilaz Greaves +1", --5/0
 		neck="Loricate Torque +1", --6/6
-		ear2="Odnowa Earring", --0/1
-		ear2="Odnowa Earring +1", --0/2
+		ear1="Genmei Earring", --2/0
+		ear2="Infused Earring",
 		ring1="Gelatinous Ring +1", --7/(-1)
 		ring2="Defending Ring", --10/10
 		back="Evasionist's Cape", --7/4
@@ -441,7 +450,7 @@ function init_gear_sets()
 		neck="Loricate Torque +1",
 		ear1="Cessance Earring",
 		ear2="Telos Earring",
-		ring1="Warden's Ring",
+		ring1="Moonbeam Ring",
 		ring2="Defending Ring",
 		})
 
@@ -517,28 +526,27 @@ function init_gear_sets()
 		main="Epeolatry", --(25)/0
 		sub="Refined Grip +1", --3/3
 		ammo="Staunch Tathlum", --2/2
-		head="Erilaz Galea +1",
+		head=gear.Adhemar_DT_head, --3/0
 		body="Runeist's Coat +2",
-		hands="Runeist Mitons +1", --2/0
+		hands="Runeist's Mitons +2", --2/0
 		legs="Eri. Leg Guards +1", --7/0
-		feet="Erilaz Greaves +1", --5/0
+		feet="Runeist's Boots +2",
 		neck="Loricate Torque +1", --6/6
 		ear1="Odnowa Earring", --0/1
 		ear2="Odnowa Earring +1", --0/2
-		ring1="Gelatinous Ring +1", --7/(-1)
+		ring1="Moonbeam Ring", --4/4
 		ring2="Defending Ring", --10/10
-		back="Evasionist's Cape", --7/4
+		back="Moonbeam Cape", --5/5
 		waist="Flume Belt +1", --4/0
 		}
 
 	sets.defense.Critical = {
-		-- Aettir (+5 PDTII)
 		main="Epeolatry", --(25)/0
 		sub="Refined Grip +1", --3/3
 		ammo="Iron Gobbet", --(2)
 		head="Fu. Bandeau +1", -- 4/0
 		body="Futhark Coat +1", --7/7
-		hands="Runeist Mitons +1", --2/0
+		hands="Runeist's Mitons +2", --2/0
 		legs="Eri. Leg Guards +1", --7/0
 		feet="Erilaz Greaves +1", --5/0
 		neck="Loricate Torque +1", --6/6
@@ -556,7 +564,7 @@ function init_gear_sets()
 
 	sets.engaged = {
 		main="Lionheart",
-		sub="Bloodrain Strap",
+		sub="Nepenthe Grip +1",
 		ammo="Ginsen",
 		head="Dampening Tam",
 		body=gear.Herc_TA_body,
@@ -578,6 +586,7 @@ function init_gear_sets()
 		})
 
 	sets.engaged.MidAcc = set_combine(sets.engaged.LowAcc, {
+		sub="Bloodrain Strap",
 		ammo="Falcon Eye",
 		ear2="Telos Earring",
 		ring2="Ilabrat Ring",
@@ -609,15 +618,15 @@ function init_gear_sets()
 	sets.engaged.DT = {
 		sub="Mensch Strap +1", --5/0
 		ammo="Staunch Tathlum", --2/2
-		head="Meghanada Visor +1", --4/0
+		head=gear.Adhemar_DT_head, --3/0
 		body="Ayanmo Corazza +1", --5/5
 		hands=gear.Herc_DT_hands, --6/4
-		legs="Meg. Chausses +2", --5/0
+		legs="Meg. Chausses +2", --6/0
 		feet=gear.Herc_TA_feet,
-		neck="Loricate Torque", --6/6
+		neck="Loricate Torque +1", --6/6
 		ear1="Cessance Earring",
 		ear2="Brutal Earring",
-		ring1="Gelatinous Ring +1",  --7/(-1)
+		ring1="Moonbeam Ring",  --4/4
 		ring2="Defending Ring", --10/10
 		back=gear.RUN_TP_Cape,
 		waist="Ioskeha Belt",
@@ -628,10 +637,12 @@ function init_gear_sets()
 		})
 	
 	sets.engaged.MidAcc.DT = set_combine(sets.engaged.LowAcc.DT, {
+		head="Meghanada Visor +1", --4/0
 		hands="Meg. Gloves +2", --4/0
 		})
 
 	sets.engaged.HighAcc.DT = set_combine(sets.engaged.MidAcc.DT, {
+		feet=gear.Herc_Acc_feet,
 		ear1="Mache Earring",
 		})
 
@@ -653,6 +664,10 @@ end
 -------------------------------------------------------------------------------------------------------------------
 
 function job_precast(spell, action, spellMap, eventArgs)
+	if spell.action_type == 'Magic' and state.PhysicalDefenseMode.value == 'HP' then
+		eventArgs.handled = true
+		equip(sets.precast.FC.HP)
+	end
 	if spell.english == 'Lunge' then
 		local abil_recasts = windower.ffxi.get_ability_recasts()
 		if abil_recasts[spell.recast_id] > 0 then
@@ -716,10 +731,10 @@ end
 function job_aftercast(spell, action, spellMap, eventArgs)
 	if spell.name == 'Rayke' and not spell.interrupted then
 		send_command('@timers c "Rayke ['..spell.target.name..']" '..rayke_duration..' down spells/00136.png')
-		send_command('wait '..rayke_duration..';input /p <ref><ref><ref> <ldangle> Rayke: OFF <rdangle> <ref><ref><ref> <call21>;')
+		send_command('wait '..rayke_duration..';input /p Rayke: OFF <call21>;')
 	elseif spell.name == 'Gambit' and not spell.interrupted then
 		send_command('@timers c "Gambit ['..spell.target.name..']" '..gambit_duration..' down spells/00136.png')
-		send_command('wait '..gambit_duration..';input /p <ref><ref><ref> <ldangle> Gambit: OFF <rdangle> <ref><ref><ref> <call21>;')
+		send_command('wait '..gambit_duration..';input /p Gambit: OFF <call21>;')
 	end
 end
 

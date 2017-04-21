@@ -75,13 +75,8 @@ function init_gear_sets()
 	------------------------------------------------------------------------------------------------
 	
 	-- Precast sets to enhance JAs
-	sets.precast.JA.Bolster = {
-		body="Bagua Tunic +1"
-	}
-	sets.precast.JA['Life Cycle'] = {
-		body="Geo. Tunic +1",
-		back="Nantosuelta's Cape",
-	}
+	sets.precast.JA.Bolster = {body="Bagua Tunic +1"}
+	sets.precast.JA['Life Cycle'] = {body="Geo. Tunic +1", back="Nantosuelta's Cape"}
   
 	-- Fast cast sets for spells
 	
@@ -124,7 +119,7 @@ function init_gear_sets()
 		})
 
 	sets.precast.FC.Curaga = sets.precast.FC.Cure
-	sets.precast.FC.Impact = {head=empty, body="Twilight Cloak"}
+	sets.precast.FC.Impact = set_combine(sets.precast.FC, {head=empty, body="Twilight Cloak"})
 
 	 
 	-- Weaponskill sets
@@ -296,7 +291,7 @@ function init_gear_sets()
 		feet="Medium's Sabots",
 		neck="Incanter's Torque",
 		ear1="Barkaro. Earring",
-		ear2="Digni. Earring",
+		ear2="Regal Earring",
 		ring1="Kishar Ring",
 		ring2="Stikini Ring",
 		back="Aurist's Cape +1",
@@ -318,7 +313,7 @@ function init_gear_sets()
 		feet="Merlinic Crackows",
 		neck="Incanter's Torque",
 		ear1="Barkaro. Earring",
-		ear2="Digni. Earring",
+		ear2="Regal Earring",
 		ring1="Evanescence Ring",
 		ring2="Stikini Ring",
 		back="Perimede Cape",
@@ -328,7 +323,7 @@ function init_gear_sets()
 	sets.midcast.Drain = set_combine(sets.midcast['Dark Magic'], {
 		head="Bagua Galero +1",
 		feet="Merlinic Crackows",
-		ear2="Hirudinea Earring",
+		ear1="Hirudinea Earring",
 		ring2="Archon Ring",
 		waist="Fucho-no-obi",
 		})
@@ -351,7 +346,7 @@ function init_gear_sets()
 		feet="Merlinic Crackows",
 		neck="Baetyl Pendant",
 		ear1="Barkaro. Earring",
-		ear2="Friomisi Earring",
+		ear2="Regal Earring",
 		ring1="Shiva Ring +1",
 		ring2="Shiva Ring +1",
 		back="Toro Cape",
@@ -363,7 +358,6 @@ function init_gear_sets()
 		sub="Enki Strap",
 		legs=gear.Merlinic_MAcc_legs,
 		neck="Sanctity Necklace",
-		ear2="Hermetic Earring",
 		back="Aurist's Cape +1",
 		waist="Yamabuki-no-Obi",
 		})
@@ -420,7 +414,7 @@ function init_gear_sets()
 		ear2="Infused Earring",
 		ring1="Paguroidea Ring",
 		ring2="Sheltered Ring",
-		back="Solemnity Cape",
+		back="Moonbeam Cape",
 		waist="Austerity Belt +1",
 		}
 	
@@ -440,7 +434,7 @@ function init_gear_sets()
 		ear2="Etiolation Earring", --0/3
 		ring1="Gelatinous Ring +1", --7/(-1)
 		ring2="Defending Ring", --10/10
-		back="Solemnity Cape", --4/4	
+		back="Moonbeam Cape", --5/5
 		})
 
 	sets.idle.Weak = sets.idle.DT
@@ -468,7 +462,7 @@ function init_gear_sets()
 		neck="Loricate Torque +1", --6/6
 		ring1="Gelatinous Ring +1", --7/(-1)
 		ring2="Defending Ring", --10/10
-		back="Solemnity Cape", --4/4	
+		back="Moonbeam Cape", --5/5
 		})
 
 	-- .Indi sets are for when an Indi-spell is active.
@@ -486,7 +480,7 @@ function init_gear_sets()
 		legs="Azimuth Tights +1",
 		neck="Incanter's Torque",
 		ear1="Barkaro. Earring",
-		ear2="Friomisi Earring",
+		ear2="Regal Earring",
 		ring1="Fenrir Ring +1",
 		ring2="Fenrir Ring +1",
 		})
@@ -520,7 +514,7 @@ function init_gear_sets()
 		neck="Combatant's Torque",
 		ear1="Cessance Earring",
 		ear2="Telos Earring",
-		ring1="Chirich Ring",
+		ring1="Ramuh Ring +1",
 		ring2="Ramuh Ring +1",
 		waist="Grunfeld Rope",
 		back="Relucent Cape",

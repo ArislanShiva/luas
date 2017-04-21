@@ -101,7 +101,7 @@ function user_setup()
 	state.IdleMode:options('Normal', 'DT')
 
 	state.WeaponLock = M(false, 'Weapon Lock')	
-	state.Gun = M{['description']='Current Gun', 'Death Penalty', 'Fomalhaut'}--, 'Armageddon'}
+	state.Gun = M{['description']='Current Gun', 'Death Penalty', 'Fomalhaut', 'Doomsday'}--, 'Armageddon'}
 	state.CP = M(false, "Capacity Points Mode")
 
 	gear.RAbullet = "Chrono Bullet"
@@ -332,7 +332,7 @@ function init_gear_sets()
 	sets.precast.WS['Leaden Salute'].FullTP = {ear1="Hecate's Earring", waist="Svelt. Gouriz +1"}
 		
 	sets.precast.WS['Evisceration'] = {
-		head="Adhemar Bonnet",
+		head=gear.Adhemar_TP_head,
 		body="Meg. Cuirie +1",
 		hands=gear.Adhemar_TP_hands,
 		legs="Samnuha Tights",
@@ -482,7 +482,7 @@ function init_gear_sets()
 
 	sets.midcast.RA.Acc = set_combine(sets.midcast.RA, {
 		ammo=gear.RAbullet,
-		hands=gear.Herc_RA_hands,
+		hands="Meg. Gloves +2",
 		legs="Meg. Chausses +2",
 		feet="Meg. Jam. +1",
 		neck="Combatant's Torque",
@@ -526,7 +526,7 @@ function init_gear_sets()
 		ear2="Infused Earring",
 		ring1="Paguroidea Ring",
 		ring2="Sheltered Ring",
-		back="Solemnity Cape",
+		back="Moonbeam Cape",
 		waist="Flume Belt +1",
 		}
 
@@ -538,7 +538,7 @@ function init_gear_sets()
 		neck="Loricate Torque +1", --6/6
 		ring1="Gelatinous Ring +1", --7/(-1)
 		ring2="Defending Ring", --10/10
-		back="Solemnity Cape", --4/4
+		back="Moonbeam Cape", --5/5
 		waist="Flume Belt +1", --4/0
 		})
 
@@ -589,8 +589,8 @@ function init_gear_sets()
 		ring1="Petrov Ring",
 		ring2="Epona's Ring",
 		back=gear.COR_DW_Cape, --10
-		waist="Shetal Stone", --6
-		} -- 50%
+		waist="Reiki Yotai", --7
+		} -- 51%
 
 	sets.engaged.LowAcc = set_combine(sets.engaged, {
 		ring1="Chirich Ring",
@@ -634,8 +634,8 @@ function init_gear_sets()
 		ring1="Petrov Ring",
 		ring2="Epona's Ring",
 		back=gear.COR_DW_Cape, --10
-		waist="Shetal Stone", --6
-		} -- 50%
+		waist="Reiki Yotai", --7
+		} -- 51%
 
 	sets.engaged.LowAcc.LowHaste = set_combine(sets.engaged.LowHaste, {
 		ring1="Chirich Ring",
@@ -679,8 +679,8 @@ function init_gear_sets()
 		ring1="Petrov Ring",
 		ring2="Epona's Ring",
 		back=gear.COR_DW_Cape, --10
-		waist="Shetal Stone", --6
-		} -- 39%
+		waist="Reiki Yotai", --7
+		} -- 40%
 
 	sets.engaged.LowAcc.MidHaste = set_combine(sets.engaged.MidHaste, {
 		ring1="Chirich Ring",
@@ -726,8 +726,8 @@ function init_gear_sets()
 		ring1="Petrov Ring",
 		ring2="Epona's Ring",
 		back=gear.COR_DW_Cape, --10
-		waist="Shetal Stone", --6
-		} -- 35%
+		waist="Reiki Yotai", --7
+		} -- 36%
 
 	sets.engaged.LowAcc.HighHaste = set_combine(sets.engaged.HighHaste, {
 		ring1="Chirich Ring",
@@ -773,8 +773,8 @@ function init_gear_sets()
 		ring1="Petrov Ring",
 		ring2="Epona's Ring",
 		back=gear.COR_TP_Cape,
-		waist="Shetal Stone", --6
-		} -- 20%
+		waist="Reiki Yotai", --7
+		} -- 21%
 
 	sets.engaged.LowAcc.MaxHaste = set_combine(sets.engaged.MaxHaste, {
 		ring1="Chirich Ring",
@@ -871,7 +871,7 @@ function job_post_midcast(spell, action, spellMap, eventArgs)
 	if spell.action_type == 'Ranged Attack' and buffactive['Triple Shot'] then
 		equip(sets.TripleShot)
 	end
-	if spell.type == 'WeaponSkill' or spell.type == 'CorsairShot' then
+	if spell.type == 'CorsairShot' then
 		if spell.english ~= "Light Shot" and spell.english ~= "Dark Shot" then
 			equip(sets.Obi)
 		end
@@ -936,6 +936,8 @@ function customize_idle_set(idleSet)
 		equip({ranged="Death Penalty"})
 	elseif state.Gun.current == 'Fomalhaut' then
 		equip({ranged="Fomalhaut"})
+	elseif state.Gun.current == 'Doomsday' then
+		equip({ranged="Doomsday"})
 --	elseif state.Gun.current == 'Armageddon' then
 --		equip({ranged="Armageddon"})
 	end

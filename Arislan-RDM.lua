@@ -141,7 +141,7 @@ function init_gear_sets()
 	sets.precast.FC.Curaga = sets.precast.FC.Cure
 	sets.precast.FC['Healing Magic'] = sets.precast.FC.Cure
 	sets.precast.FC['Elemental Magic'] = set_combine(sets.precast.FC, {waist="Channeler's Stone"})
-	sets.precast.FC.Impact = {head=empty, body="Twilight Cloak"}
+	sets.precast.FC.Impact = set_combine(sets.precast.FC, {head=empty, body="Twilight Cloak"})
 	sets.precast.Storm = set_combine(sets.precast.FC, {ring2="Levia. Ring +1", waist="Channeler's Stone"}) -- stop quick cast
 
 	sets.precast.FC.Utsusemi = set_combine(sets.precast.FC, {
@@ -207,8 +207,8 @@ function init_gear_sets()
 		legs=gear.Merlinic_MB_legs,
 		feet="Merlinic Crackows",
 		neck="Baetyl Pendant",
-		ear1="Hecate's Earring",
-		ear2="Friomisi Earring",
+		ear1="Friomisi Earring",
+		ear2="Regal Earring",
 		ring1="Shiva Ring +1",
 		ring2="Archon Ring",
 		back=gear.RDM_INT_Cape,
@@ -224,7 +224,7 @@ function init_gear_sets()
 	sets.midcast.SpellInterrupt = {
 		ammo="Impatiens", --10
 		legs="Carmine Cuisses +1", --20
-		ear1="Halasz Earring", --5
+		--ear1="Halasz Earring", --5
 		ring1="Evanescence Ring", --5
 		waist="Rumination Sash", --10
 		}
@@ -366,7 +366,7 @@ function init_gear_sets()
 		feet="Medium's Sabots",
 		neck="Imbodla Necklace",
 		ear1="Hermetic Earring",
-		ear2="Digni. Earring",
+		ear2="Regal Earring",
 		ring1="Kishar Ring",
 		ring2="Globidonta Ring",
 		back=gear.RDM_MND_Cape,
@@ -421,7 +421,7 @@ function init_gear_sets()
 		feet="Merlinic Crackows",
 		neck="Incanter's Torque",
 		ear1="Hermetic Earring",
-		ear2="Digni. Earring",
+		ear2="Regal Earring",
 		ring1="Stikini Ring",
 		ring2="Stikini Ring",
 		back=gear.RDM_INT_Cape,
@@ -431,7 +431,7 @@ function init_gear_sets()
 	sets.midcast.Drain = set_combine(sets.midcast['Dark Magic'], {
 		head="Pixie Hairpin +1",
 		feet="Merlinic Crackows",
-		ear2="Hirudinea Earring",
+		ear1="Hirudinea Earring",
 		ring2="Archon Ring",
 		waist="Fucho-no-obi",
 		})
@@ -449,8 +449,8 @@ function init_gear_sets()
 		legs=gear.Merlinic_MB_legs,
 		feet="Merlinic Crackows",
 		neck="Baetyl Pendant",
-		ear1="Hecate's Earring",
-		ear2="Friomisi Earring",
+		ear1="Friomisi Earring",
+		ear2="Regal Earring",
 		ring1="Shiva Ring +1",
 		ring2="Shiva Ring +1",
 		back=gear.RDM_INT_Cape,
@@ -470,7 +470,7 @@ function init_gear_sets()
 		sub="Enki Strap",
 		legs=gear.Merlinic_MAcc_legs,
 		neck="Sanctity Necklace",
-		ear2="Hermetic Earring",
+		ear1="Hermetic Earring",
 		waist="Yamabuki-no-Obi",
 		})
 		
@@ -517,7 +517,7 @@ function init_gear_sets()
 		ear2="Infused Earring",
 		ring1="Paguroidea Ring",
 		ring2="Sheltered Ring",
-		back="Solemnity Cape",
+		back="Moonbeam Cape",
 		waist="Flume Belt +1",
 		}
 
@@ -532,7 +532,7 @@ function init_gear_sets()
 		ear1="Genmei Earring", --2/0
 		ring1="Gelatinous Ring +1", --7/(-1)
 		ring2="Defending Ring", --10/10
-		back="Solemnity Cape", --4/4
+		back="Moonbeam Cape", --5/5
 		waist="Flume Belt +1", --4/0
 		})
 
@@ -544,7 +544,7 @@ function init_gear_sets()
 		feet="Carmine Greaves +1",
 		neck="Incanter's Torque",
 		ear1="Hermetic Earring",
-		ear2="Enchntr. Earring +1",
+		ear2="Regal Earring",
 		ring1="Levia. Ring +1",
 		ring2="Shiva Ring +1",
 		back=gear.RDM_INT_Cape,
@@ -606,7 +606,7 @@ function init_gear_sets()
 	sets.engaged.DW = set_combine(sets.engaged, {
 		--NIN --25
 		sub="Colada",
-		feet=gear.Taeon_DW_feet, --9
+		waist="Reiki Yotai", --7
 		})
 
 	sets.engaged.DW.Acc = sets.engaged.DW

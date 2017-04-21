@@ -129,7 +129,7 @@ function init_gear_sets()
 
 	sets.precast.FC.Curaga = sets.precast.FC.Cure
 	sets.precast.FC.CureSolace = sets.precast.FC.Cure
-	sets.precast.FC.Impact = {head=empty, body="Twilight Cloak"}
+	sets.precast.FC.Impact = set_combine(sets.precast.FC, {head=empty, body="Twilight Cloak"})
 
 	-- Precast sets to enhance JAs
 	--sets.precast.JA.Benediction = {}
@@ -156,8 +156,8 @@ function init_gear_sets()
 		legs="Gyve Trousers",
 		feet="Chironic Slippers",
 		neck="Baetyl Pendant",
-		ear1="Hecate's Earring",
-		ear2="Friomisi Earring",
+		ear1="Friomisi Earring",
+		ear2="Regal Earring",
 		ring1="Shiva Ring +1",
 		ring2="Weather. Ring",
 		back="Toro Cape",
@@ -345,7 +345,7 @@ function init_gear_sets()
 		feet="Chironic Slippers",
 		neck="Incanter's Torque",
 		ear1="Hermetic Earring",
-		ear2="Digni. Earring",
+		ear2="Regal Earring",
 		ring1="Kishar Ring",
 		ring2="Stikini Ring",
 		back="Alaunus's Cape",
@@ -359,8 +359,8 @@ function init_gear_sets()
 		body="Witching Robe",
 		legs="Th. Pantaloons +2",
 		neck="Sanctity Necklace",
-		ear1="Hecate's Earring",
-		ear2="Friomisi Earring",
+		ear1="Friomisi Earring",
+		ear2="Regal Earring",
 		ring2="Weather. Ring",
 		waist="Refoccilation Stone",
 		})
@@ -378,7 +378,7 @@ function init_gear_sets()
 		feet="Medium's Sabots",
 		neck="Incanter's Torque",
 		ear1="Hermetic Earring",
-		ear2="Digni. Earring",
+		ear2="Regal Earring",
 		ring1="Evanescence Ring",
 		ring2="Stikini Ring",
 		back="Alaunus's Cape",
@@ -397,7 +397,7 @@ function init_gear_sets()
 		feet="Theo. Duckbills +2",
 		neck="Imbodla Necklace",
 		ear1="Hermetic Earring",
-		ear2="Digni. Earring",
+		ear2="Regal Earring",
 		ring1="Stikini Ring",
 		ring2="Stikini Ring",
 		back="Alaunus's Cape",
@@ -447,7 +447,7 @@ function init_gear_sets()
 		ear2="Infused Earring",
 		ring1="Paguroidea Ring",
 		ring2="Sheltered Ring",
-		back="Solemnity Cape",
+		back="Moonbeam Cape",
 		waist="Austerity Belt +1",
 		}
 
@@ -458,9 +458,8 @@ function init_gear_sets()
 		hands="Gende. Gages +1", --4/3
 		neck="Loricate Torque +1", --6/6
 		ear1="Genmei Earring", --2/0
-		ring1="Fortified Ring", --0/5
 		ring2="Defending Ring", --10/10
-		back="Solemnity Cape", --4/4
+		back="Moonbeam Cape", --5/5
 		})
 
 	sets.idle.Town = set_combine(sets.idle, {

@@ -154,7 +154,7 @@ function init_gear_sets()
 		} -- default set
 
 	sets.precast.WS.Acc = set_combine(sets.precast.WS, {
-		head="Adhemar Bonnet",
+		head=gear.Adhemar_TP_head,
 		hands=gear.Herc_Acc_hands,
 		legs=gear.Herc_WS_legs,
 		feet=gear.Herc_Acc_feet,
@@ -254,7 +254,7 @@ function init_gear_sets()
 		ear2="Infused Earring",
 		ring1="Paguroidea Ring",
 		ring2="Sheltered Ring",
-		back="Solemnity Cape",
+		back="Moonbeam Cape",
 		waist="Flume Belt +1",
 		}
 
@@ -267,7 +267,7 @@ function init_gear_sets()
 		ear1="Genmei Earring", --2/0
 		ring1="Gelatinous Ring +1", --7/(-1)
 		ring2="Defending Ring", --10/10
-		back="Solemnity Cape", --4/4
+		back="Moonbeam Cape", --5/5
 		waist="Flume Belt +1", --4/0
 		})
 
@@ -320,8 +320,8 @@ function init_gear_sets()
 		ring1="Petrov Ring",
 		ring2="Epona's Ring",
 		back="Bleating Mantle",
-		waist="Patentia Sash", --5
-		} -- 33%
+		waist="Reiki Yotai", --7
+		} -- 35%
 
 	sets.engaged.LowAcc = set_combine(sets.engaged, {
 		ammo="Falcon Eye",
@@ -366,8 +366,8 @@ function init_gear_sets()
 		ring1="Petrov Ring",
 		ring2="Epona's Ring",
 		back="Bleating Mantle",
-		waist="Patentia Sash", --5
-		} -- 33%
+		waist="Reiki Yotai", --7
+		} -- 35%
 
 	sets.engaged.LowAcc.LowHaste = set_combine(sets.engaged.LowHaste, {
 		ammo="Falcon Eye",
@@ -413,8 +413,8 @@ function init_gear_sets()
 		ring1="Petrov Ring",
 		ring2="Epona's Ring",
 		back="Bleating Mantle",
-		waist="Patentia Sash", --5
-		} -- 19%
+		waist="Reiki Yotai", --7
+		} -- 21%
 
 	sets.engaged.LowAcc.MidHaste = set_combine(sets.engaged.MidHaste, {
 		ammo="Falcon Eye",
