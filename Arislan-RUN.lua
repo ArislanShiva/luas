@@ -808,10 +808,12 @@ function job_buff_change(buff,gain)
 
 	if buff == 'Embolden' then
 		if gain then 
+			add_to_chat(122, 'On')
 			equip(sets.Embolden)
-			disable('back')			
-		elseif lose then
-			enable('back')
+			disable('head','legs','back')			
+		else
+			add_to_chat(122, 'Off')
+			enable('head','legs','back')			
 			status_change(player.status)
 		end
 	end	
