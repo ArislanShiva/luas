@@ -91,7 +91,7 @@ function user_setup()
 	send_command('bind ^. input /ma Invisible <stpc>')
 	send_command('bind @c gs c toggle CP')
 	send_command('bind @h gs c cycle HelixMode')
-	send_command('bind @g gs c cycle RegenMode')
+	send_command('bind @r gs c cycle RegenMode')
 	send_command('bind @s gs c toggle StormSurge')
 	send_command('bind @w gs c toggle WeaponLock')
 	
@@ -159,14 +159,12 @@ function init_gear_sets()
 
 	sets.precast.FC.Grimoire = {head="Peda. M.Board +1", feet="Acad. Loafers +3"}
 	sets.precast.FC['Enhancing Magic'] = set_combine(sets.precast.FC, {waist="Siegel Sash"})
-	sets.precast.FC.Stoneskin = set_combine(sets.precast.FC['Enhancing Magic'], {legs="Doyen Pants"})
 	sets.precast.FC['Elemental Magic'] = set_combine(sets.precast.FC, {waist="Channeler's Stone"})
 	
 	sets.precast.FC.Cure = set_combine(sets.precast.FC, {
 		main="Oranyan", --7
 		sub="Clerisy Strap +1", --3
 		ammo="Impatiens",
-		legs="Doyen Pants", --15
 		ear1="Mendi. Earring", --5
 		ring1="Lebeche Ring", --(2)
 		back="Perimede Cape", --(4)
@@ -370,7 +368,7 @@ function init_gear_sets()
 		ammo="Pemphredo Tathlum",
 		head="Merlinic Hood",
 		body="Shango Robe",
-		hands="Jhakri Cuffs +1",
+		hands="Kaykaus Cuffs",
 		legs=gear.Merlinic_MAcc_legs,
 		feet="Acad. Loafers +3",
 		neck="Incanter's Torque",
@@ -408,7 +406,14 @@ function init_gear_sets()
 		})
 	
 	sets.midcast.Aspir = sets.midcast.Drain
-	sets.midcast.Stun = set_combine(sets.midcast['Dark Magic'], {waist="Luminary Sash"})
+
+	sets.midcast.Stun = set_combine(sets.midcast['Dark Magic'], {
+		body="Merlinic Jubbah",
+		ring1="Stikini Ring",
+		ring2="Stikini Ring",
+		back=gear.SCH_MAB_Cape,
+		waist="Luminary Sash"
+		})
 
 	-- Elemental Magic
 	sets.midcast['Elemental Magic'] = {
@@ -553,7 +558,7 @@ function init_gear_sets()
 		neck="Combatant's Torque",
 		ear1="Cessance Earring",
 		ear2="Telos Earring",
-		ring1="Chirich Ring",
+		ring1="Ramuh Ring +1",
 		ring2="Ramuh Ring +1",
 		waist="Grunfeld Rope",
 		back="Relucent Cape",

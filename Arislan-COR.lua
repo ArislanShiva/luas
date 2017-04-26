@@ -139,6 +139,26 @@ function user_setup()
 	send_command('bind @h gs c cycle HasteMode')
 	send_command('bind @w gs c toggle WeaponLock')
 
+	send_command('bind ^numlock input /ja "Triple Shot" <me>')
+
+	if player.sub_job == 'WAR' then
+		send_command('bind ^numpad/ input /ja "Berserk" <me>')
+		send_command('bind ^numpad* input /ja "Warcry" <me>')
+		send_command('bind ^numpad- input /ja "Defender" <me>')
+	elseif player.sub_job == 'RNG' then
+		send_command('bind ^numpad/ input /ja "Barrage" <me>')
+		send_command('bind ^numpad* input /ja "Sharpshot" <me>')
+		send_command('bind ^numpad- input /ja "Shadowbind" <me>')
+	end
+
+	send_command('bind !numpad7 input /ws "Savage Blade" <t>')
+	send_command('bind @numpad7 input /ws "Exenterator" <t>')
+	send_command('bind ^numpad8 input /ws "Last Stand" <t>')
+	send_command('bind ^numpad4 input /ws "Leaden Salute" <t>')
+	send_command('bind !numpad4 input /ws "Requiescat" <t>')
+	send_command('bind @numpad4 input /ws "Evisceration" <t>')
+	send_command('bind ^numpad6 input /ws "Wildfire" <t>')
+
 	select_default_macro_book()
 	set_lockstyle()
 end
@@ -161,6 +181,17 @@ function user_unload()
 	send_command('unbind @f')
 	send_command('unbind @h')
 	send_command('unbind @w')
+	send_command('unbind ^numlock')
+	send_command('unbind ^numpad/')
+	send_command('unbind ^numpad*')
+	send_command('unbind ^numpad-')
+	send_command('unbind !numpad7')
+	send_command('unbind @numpad7')
+	send_command('unbind ^numpad8')
+	send_command('unbind ^numpad4')
+	send_command('unbind !numpad4')
+	send_command('unbind @numpad4')
+	send_command('unbind ^numpad6')
 end
 
 -- Define sets and vars used by this job file.
@@ -424,7 +455,6 @@ function init_gear_sets()
 		ear1="Enervating Earring",
 		ear2="Telos Earring",
 		ring1="Petrov Ring",
-		ring2="Chirich Ring",
 		back=gear.COR_RA_Cape,
 		waist="Oneiros Rope",		
 		}
@@ -593,7 +623,6 @@ function init_gear_sets()
 		} -- 51%
 
 	sets.engaged.LowAcc = set_combine(sets.engaged, {
-		ring1="Chirich Ring",
 		waist="Kentarch Belt +1",
 		})
 
@@ -638,7 +667,6 @@ function init_gear_sets()
 		} -- 51%
 
 	sets.engaged.LowAcc.LowHaste = set_combine(sets.engaged.LowHaste, {
-		ring1="Chirich Ring",
 		waist="Kentarch Belt +1",
 		})
 
@@ -683,7 +711,6 @@ function init_gear_sets()
 		} -- 40%
 
 	sets.engaged.LowAcc.MidHaste = set_combine(sets.engaged.MidHaste, {
-		ring1="Chirich Ring",
 		waist="Kentarch Belt +1",
 		})
 
@@ -730,7 +757,6 @@ function init_gear_sets()
 		} -- 36%
 
 	sets.engaged.LowAcc.HighHaste = set_combine(sets.engaged.HighHaste, {
-		ring1="Chirich Ring",
 		waist="Kentarch Belt +1",
 		})
 
@@ -777,7 +803,6 @@ function init_gear_sets()
 		} -- 21%
 
 	sets.engaged.LowAcc.MaxHaste = set_combine(sets.engaged.MaxHaste, {
-		ring1="Chirich Ring",
 		waist="Kentarch Belt +1",
 		})
 
@@ -809,7 +834,7 @@ function init_gear_sets()
 
 	sets.buff.Doom = {ring1="Saida Ring", ring2="Saida Ring", waist="Gishdubar Sash"}
 
-	sets.Afterglow = {ring1="Chirich Ring", ring2="Ilabrat Ring"}
+	sets.Afterglow = {ring2="Ilabrat Ring"}
 	sets.TripleShot = {body="Chasseur's Frac +1"}
 	sets.Obi = {waist="Hachirin-no-Obi"}
 	sets.CP = {back="Mecisto. Mantle"}
@@ -898,10 +923,12 @@ function job_buff_change(buff,gain)
 	end
 
 	if buffactive['Reive Mark'] then
-		equip(sets.Reive)
-		disable('neck')
-	else
-		enable('neck')
+		if gain then		   
+			equip(sets.Reive)
+			disable('neck')
+		else
+			enable('neck')
+		end
 	end
 
 	if buff == "doom" then

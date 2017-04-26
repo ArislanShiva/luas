@@ -96,6 +96,29 @@ function user_setup()
 	
 	send_command('bind @w gs c toggle WeaponLock')
 	send_command('bind @c gs c toggle CP')
+
+	if player.sub_job == 'WAR' then
+		send_command('bind ^numpad/ input /ja "Berserk" <me>')
+		send_command('bind ^numpad* input /ja "Warcry" <me>')
+		send_command('bind ^numpad- input /ja "Defender" <me>')
+	elseif player.sub_job == 'DRK' then
+		send_command('bind ^numlock input /ja "Last Resort" <me>')
+		send_command('bind ^numpad/ input /ja "Souleater" <me>')
+		send_command('bind ^numpad* input /ja "Arcane Circle" <me>')
+		send_command('bind ^numpad- input /ja "Weapon Bash" <me>')
+	elseif player.sub_job == 'SAM' then
+		send_command('bind ^numlock input /ja "Hasso" <me>')
+		send_command('bind ^numpad/ input /ja "Meditate" <me>')
+		send_command('bind ^numpad* input /ja "Sekkanoki" <me>')
+		send_command('bind ^numpad- input /ja "Third Eye" <me>')
+	end
+
+	send_command('bind ^numpad7 input /ws "Resolution" <t>')
+	send_command('bind !numpad7 input /ws "Savage Blade" <t>')
+	send_command('bind ^numpad9 input /ws "Dimidiation" <t>')
+	send_command('bind !numpad4 input /ws "Requiescat" <t>')
+	send_command('bind ^numpad5 input /ws "Ground Strike" <t>')
+	send_command('bind ^numpad1 input /ws "Herculean Slash" <t>')
 	
 	select_default_macro_book()
 	set_lockstyle()
@@ -117,6 +140,16 @@ function user_unload()
 	send_command('unbind ^,')
 	send_command('unbind @w')
 	send_command('unbind @c')
+	send_command('unbind ^numlock')
+	send_command('unbind ^numpad/')
+	send_command('unbind ^numpad*')
+	send_command('unbind ^numpad-')
+	send_command('unbind ^numpad7')
+	send_command('unbind !numpad7')
+	send_command('unbind ^numpad9')
+	send_command('unbind !numpad4')
+	send_command('unbind ^numpad5')
+	send_command('unbind ^numpad1')
 end
 
 -- Define sets and vars used by this job file.
@@ -173,13 +206,13 @@ function init_gear_sets()
 	sets.precast.JA['Rayke'] = {feet="Futhark Boots +1"}
 	sets.precast.JA['Elemental Sforzo'] = set_combine(sets.Enmity, {body="Futhark Coat +1"})
 	sets.precast.JA['Swordplay'] = set_combine(sets.Enmity, {hands="Futhark Mitons +1"})
-	sets.precast.JA['Embolden'] = set_combine(sets.Enmity, {back="Evasionist's Cape"})
 	sets.precast.JA['Vivacious Pulse'] = set_combine(sets.Enmity, {head="Erilaz Galea +1", neck="Incanter's Torque", legs="Rune. Trousers +2"})
 	sets.precast.JA['One For All'] = set_combine(sets.Enmity, {})
 	sets.precast.JA['Provoke'] = sets.Enmity
 
 	sets.precast.Waltz = {
 		hands="Slither Gloves +1",
+		legs="Dashing Subligar",
 		ring1="Asklepian Ring",
 		ring2="Valseur's Ring",
 		}
@@ -216,7 +249,7 @@ function init_gear_sets()
 		waist="Siegel Sash",
 		})
 
-	sets.precast.FC.Cure = set_combine(sets.precast.FC, {ammo="Impatiens", ear2="Mendi. Earring", legs="Doyen Pants"})
+	sets.precast.FC.Cure = set_combine(sets.precast.FC, {ammo="Impatiens", ear2="Mendi. Earring"})
 
 	sets.precast.FC.Utsusemi = set_combine(sets.precast.FC, {
 		ammo="Impatiens",
@@ -504,21 +537,20 @@ function init_gear_sets()
 		}
 
 	sets.defense.Status = {
-		main="Epeolatry", --(25)/0
---		main="Aettir", --(5)/0
+		main="Aettir", --(5)/0
 		sub="Refined Grip +1", --3/3
 		ammo="Staunch Tathlum", --2/2
 		head=gear.Herc_DT_head, --3/3
-		body="Runeist's Coat +2",
+		body="Futhark Coat +1", --7/7
 		hands="Erilaz Gauntlets +1",
 		legs="Rune. Trousers +2", --4/0
 		feet="Erilaz Greaves +1", --5/0
 		neck="Loricate Torque +1", --6/6
-		ear1="Hearty Earring",
-		ear2="Impreg. Earring",
+		ear1="Eabani Earring",
+		ear2="Hearty Earring",
 		ring1="Gelatinous Ring +1", --7/(-1)
 		ring2="Defending Ring", --10/10
-		back="Evasionist's Cape", --7/4
+		back=gear.RUN_HP_Cape,
 		waist="Flume Belt +1", --4/0
 		}
 	
@@ -582,7 +614,6 @@ function init_gear_sets()
 
 	sets.engaged.LowAcc = set_combine(sets.engaged, {
 		neck="Combatant's Torque",
-		ring1="Chirich Ring",
 		})
 
 	sets.engaged.MidAcc = set_combine(sets.engaged.LowAcc, {
@@ -654,6 +685,7 @@ function init_gear_sets()
 	-- Custom buff sets
 	sets.buff.Doom = {ring1="Saida Ring", ring2="Saida Ring", waist="Gishdubar Sash"}
 
+	sets.Embolden = set_combine(sets.midcast.EnhancingDuration, {back="Evasionist's Cape"})
 	sets.CP = {back="Mecisto. Mantle"}
 	sets.Reive = {neck="Ygnas's Resolve +1"}
 
@@ -723,9 +755,6 @@ function job_post_midcast(spell, action, spellMap, eventArgs)
 		handle_equipping_gear(player.status)
 		eventArgs.handled = true
 	end
-	if buffactive['Reive Mark'] and spell.type == 'WeaponSkill' then
-		equip(sets.Reive)
-	end
 end
 
 function job_aftercast(spell, action, spellMap, eventArgs)
@@ -758,10 +787,12 @@ end
 function job_buff_change(buff,gain)
 	-- If we gain or lose any haste buffs, adjust which gear set we target.
 	if buffactive['Reive Mark'] then
-		equip(sets.Reive)
-		disable('neck')
-	else
-		enable('neck')
+		if gain then		   
+			equip(sets.Reive)
+			disable('neck')
+		else
+			enable('neck')
+		end
 	end
 
 	if buff == "doom" then
@@ -774,6 +805,16 @@ function job_buff_change(buff,gain)
 			handle_equipping_gear(player.status)
 		end
 	end
+
+	if buff == 'Embolden' then
+		if gain then 
+			equip(sets.Embolden)
+			disable('back')			
+		elseif lose then
+			enable('back')
+			status_change(player.status)
+		end
+	end	
 
 end
 	

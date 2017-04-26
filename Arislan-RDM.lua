@@ -128,11 +128,9 @@ function init_gear_sets()
 		}
 
 	sets.precast.FC['Enhancing Magic'] = set_combine(sets.precast.FC, {waist="Siegel Sash"})
-	sets.precast.FC.Stoneskin = set_combine(sets.precast.FC['Enhancing Magic'], {legs="Doyen Pants"})
 
 	sets.precast.FC.Cure = set_combine(sets.precast.FC, {
 		ammo="Impatiens",
-		legs="Doyen Pants", --15
 		ear1="Mendi. Earring", --5
 		ring1="Lebeche Ring", --(2)
 		back="Perimede Cape", --(4)
@@ -169,7 +167,7 @@ function init_gear_sets()
 		ear2="Telos Earring",
 		ring1="Rufescent Ring",
 		ring2="Shukuyu Ring",
-		back="Bleating Mantle",
+		back=gear.RDM_DW_Cape,
 		waist="Fotia Belt",
 		}
 
@@ -363,7 +361,7 @@ function init_gear_sets()
 		body="Lethargy Sayon +1",
 		hands="Kaykaus Cuffs",
 		legs="Chironic Hose",
-		feet="Medium's Sabots",
+		feet="Skaoi Boots",
 		neck="Imbodla Necklace",
 		ear1="Hermetic Earring",
 		ear2="Regal Earring",
@@ -597,7 +595,7 @@ function init_gear_sets()
 		ear2="Telos Earring",
 		ring1="Petrov Ring",
 		ring2="Hetairoi Ring",
-		back="Letalis Mantle",
+		back=gear.RDM_DW_Cape,
 		waist="Kentarch Belt +1",
 		}
 
@@ -610,7 +608,6 @@ function init_gear_sets()
 		})
 
 	sets.engaged.DW.Acc = sets.engaged.DW
-
 
 	sets.buff.Doom = {ring1="Saida Ring", ring2="Saida Ring", waist="Gishdubar Sash"}
 

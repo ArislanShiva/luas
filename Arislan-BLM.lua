@@ -117,8 +117,6 @@ function init_gear_sets()
 		back="Perimede Cape",
 		})
 
-	sets.precast.FC.Stoneskin = set_combine(sets.precast.FC['Enhancing Magic'], {legs="Doyen Pants"})
-
 	sets.precast.FC['Elemental Magic'] = set_combine(sets.precast.FC, {
 		waist="Channeler's Stone", --2
 		})
@@ -127,7 +125,6 @@ function init_gear_sets()
 		main="Oranyan", --7
 		sub="Clerisy Strap +1", --3
 		ammo="Impatiens",
-		legs="Doyen Pants", --15
 		ear1="Mendi. Earring", --5
 		ring1="Lebeche Ring", --(2)
 		back="Perimede Cape", --(4)
@@ -319,7 +316,7 @@ function init_gear_sets()
 		body="Vanya Robe",
 		hands="Jhakri Cuffs +1",
 		legs=gear.Merlinic_MAcc_legs,
-		feet="Medium's Sabots",
+		feet="Skaoi Boots",
 		neck="Imbodla Necklace",
 		ear1="Barkaro. Earring",
 		ear2="Regal Earring",

@@ -103,8 +103,6 @@ function init_gear_sets()
 		waist="Siegel Sash",
 		})
 
-	sets.precast.FC.Stoneskin = set_combine(sets.precast.FC['Enhancing Magic'], {legs="Doyen Pants"})
-
 	sets.precast.FC['Healing Magic'] = set_combine(sets.precast.FC, {
 		main="Oranyan",
 		sub="Clerisy Strap +1",
@@ -120,7 +118,6 @@ function init_gear_sets()
 		sub="Clerisy Strap +1",
 		ammo="Impatiens",
 		head="Piety Cap +1", --13
-		legs="Doyen Pants", --15
 		ear1="Nourish. Earring +1", --4
 		ear2="Mendi. Earring", --5
 		ring1="Lebeche Ring", --(2)
@@ -508,7 +505,7 @@ function init_gear_sets()
 		neck="Combatant's Torque",
 		ear1="Cessance Earring",
 		ear2="Telos Earring",
-		ring1="Chirich Ring",
+		ring1="Ramuh Ring +1",
 		ring2="Ramuh Ring +1",
 		waist="Grunfeld Rope",
 		back="Relucent Cape",

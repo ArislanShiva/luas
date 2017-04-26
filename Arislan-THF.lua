@@ -69,6 +69,23 @@ function user_setup()
 	send_command('bind @h gs c cycle HasteMode')
 	send_command('bind @c gs c toggle CP')
 
+	send_command('bind ^numlock input /ja "Assassin\'s Charge" <me>')
+
+	if player.sub_job == 'WAR' then
+		send_command('bind ^numpad/ input /ja "Berserk" <me>')
+		send_command('bind ^numpad* input /ja "Warcry" <me>')
+		send_command('bind ^numpad- input /ja "Defender" <me>')
+	end
+
+	send_command('bind ^numpad+ input /ja "Sneak Attack" <me>')
+	send_command('bind !numpad+ input /ja "Trick Attack" <me>')
+
+	send_command('bind ^numpad7 input /ws "Exenterator" <t>')
+	send_command('bind ^numpad8 input /ws "Mandalic Stab" <t>')
+	send_command('bind ^numpad4 input /ws "Evisceration" <t>')
+	send_command('bind ^numpad5 input /ws "Rudra\'s Storm" <t>')
+	send_command('bind ^numpad1 input /ws "Aeolian Edge" <t>')
+
 	select_default_macro_book()
 	set_lockstyle()
 end
@@ -80,6 +97,17 @@ function user_unload()
 	send_command('unbind ^,')
 	send_command('unbind @h')
 	send_command('unbind @c')
+	send_command('unbind ^numlock')
+	send_command('unbind ^numpad/')
+	send_command('unbind ^numpad*')
+	send_command('unbind ^numpad-')
+	send_command('unbind ^numpad+')
+	send_command('unbind !numpad+')
+	send_command('unbind ^numpad7')
+	send_command('unbind ^numpad8')
+	send_command('unbind ^numpad4')
+	send_command('unbind ^numpad5')
+	send_command('unbind ^numpad1')
 end
 
 -- Define sets and vars used by this job file.
@@ -94,12 +122,7 @@ function init_gear_sets()
 		waist="Chaac Belt",
 		}
 		
-	sets.ExtraRegen = {}
-	
-	sets.Kiting = {
-		--feet="Jute Boots +1",
-		feet="Skd. Jambeaux +1",
-		}
+	sets.Kiting = {feet="Jute Boots +1"}
 
 	sets.buff['Sneak Attack'] = {
 		ammo="Yetshila",
@@ -168,6 +191,7 @@ function init_gear_sets()
 	sets.precast.Waltz = {
 		body="Passion Jacket",
 		hands="Slither Gloves +1",
+		legs="Dashing Subligar",
 		neck="Phalaina Locket",
 		ring1="Asklepian Ring",
 		ring2="Valseur's Ring",
@@ -250,6 +274,7 @@ function init_gear_sets()
 	sets.precast.WS['Evisceration'].Acc = set_combine(sets.precast.WS['Evisceration'], {
 		ammo="Falcon Eye",
 		head="Dampening Tam",
+		body="Sayadio's Kaftan",
 		hands="Meg. Gloves +2",
 		legs=gear.Herc_WS_legs,
 		feet=gear.Herc_Acc_feet,
@@ -327,8 +352,7 @@ function init_gear_sets()
 		body="Meg. Cuirie +1",
 		hands=gear.Adhemar_TP_hands,
 		legs="Samnuha Tights",
---		feet="Jute Boots +1",
-		feet="Skd. Jambeaux +1",
+		feet="Jute Boots +1",
 		neck="Bathy Choker +1",
 		ear1="Genmei Earring",
 		ear2="Infused Earring",
@@ -404,7 +428,6 @@ function init_gear_sets()
 	sets.engaged.LowAcc = set_combine(sets.engaged, {
 		ammo="Falcon Eye",
 		neck="Combatant's Torque",
-		ring1="Chirich Ring",
 		})
 
 	sets.engaged.MidAcc = set_combine(sets.engaged.LowAcc, {
@@ -451,7 +474,6 @@ function init_gear_sets()
 	sets.engaged.LowAcc.LowHaste = set_combine(sets.engaged.LowHaste, {
 		ammo="Falcon Eye",
 		neck="Combatant's Torque",
-		ring1="Chirich Ring",
 		})
 
 	sets.engaged.MidAcc.LowHaste = set_combine(sets.engaged.LowAcc.LowHaste, {
@@ -498,7 +520,6 @@ function init_gear_sets()
 	sets.engaged.LowAcc.MidHaste = set_combine(sets.engaged.MidHaste, {
 		ammo="Falcon Eye",
 		neck="Combatant's Torque",
-		ring1="Chirich Ring",
 		})
 
 	sets.engaged.MidHaste.MidAcc = set_combine(sets.engaged.LowAcc.MidHaste, {
@@ -546,7 +567,6 @@ function init_gear_sets()
 	sets.engaged.LowAcc.HighHaste = set_combine(sets.engaged.HighHaste, {
 		neck="Combatant's Torque",
 		waist="Kentarch Belt +1",
-		ring1="Chirich Ring",
 		})
 
 	sets.engaged.MidAcc.HighHaste = set_combine(sets.engaged.LowAcc.HighHaste, {
@@ -592,7 +612,6 @@ function init_gear_sets()
 	sets.engaged.LowAcc.MaxHaste = set_combine(sets.engaged.MaxHaste, {
 		neck="Combatant's Torque",
 		waist="Kentarch Belt +1",
-		ring1="Chirich Ring",
 		})
 
 	sets.engaged.MidAcc.MaxHaste = set_combine(sets.engaged.LowAcc.MaxHaste, {
@@ -684,10 +703,12 @@ function job_buff_change(buff,gain)
 	end
 
 	if buffactive['Reive Mark'] then
-		equip(sets.Reive)
-		disable('neck')
-	else
-		enable('neck')
+		if gain then		   
+			equip(sets.Reive)
+			disable('neck')
+		else
+			enable('neck')
+		end
 	end
 
 	if buff == "doom" then

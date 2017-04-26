@@ -266,6 +266,7 @@ function init_gear_sets()
 	sets.precast.Waltz = {
 		body="Passion Jacket",
 		hands="Slither Gloves +1",
+		legs="Dashing Subligar",
 		neck="Phalaina Locket",
 		ring1="Asklepian Ring",
 		ring2="Valseur's Ring",
@@ -291,8 +292,7 @@ function init_gear_sets()
 
 	sets.precast.FC['Blue Magic'] = set_combine(sets.precast.FC, {body="Hashishin Mintan +1"})
 	sets.precast.FC['Enhancing Magic'] = set_combine(sets.precast.FC, {waist="Siegel Sash"})
-	sets.precast.FC.Stoneskin = set_combine(sets.precast.FC['Enhancing Magic'], {legs="Doyen Pants"})
-	sets.precast.FC.Cure = set_combine(sets.precast.FC, {ammo="Impatiens", ear2="Mendi. Earring", legs="Doyen Pants"})
+	sets.precast.FC.Cure = set_combine(sets.precast.FC, {ammo="Impatiens", ear2="Mendi. Earring"})
 
 	sets.precast.FC.Utsusemi = set_combine(sets.precast.FC, {
 		ammo="Impatiens",
@@ -348,6 +348,7 @@ function init_gear_sets()
 	sets.precast.WS['Chant du Cygne'].Acc = set_combine(sets.precast.WS['Chant du Cygne'], {
 		ammo="Falcon Eye",
 		head="Dampening Tam",
+		body="Sayadio's Kaftan",
 		feet=gear.Herc_Acc_feet,
 		ear2="Telos Earring",
 		ring1="Ramuh Ring +1",
@@ -507,6 +508,7 @@ function init_gear_sets()
 	sets.midcast['Blue Magic'].PhysicalVit = sets.midcast['Blue Magic'].Physical
 
 	sets.midcast['Blue Magic'].PhysicalAgi = set_combine(sets.midcast['Blue Magic'].Physical, {
+		body="Sayadio's Kaftan",
 		ring1="Garuda Ring +1",
 		ring2="Garuda Ring +1",
 		})
@@ -775,7 +777,6 @@ function init_gear_sets()
 	sets.engaged.LowAcc = set_combine(sets.engaged, {
 		ammo="Falcon Eye",
 		neck="Combatant's Torque",
-		ring1="Chirich Ring",
 		})
 
 	sets.engaged.MidAcc = set_combine(sets.engaged.LowAcc, {
@@ -823,7 +824,6 @@ function init_gear_sets()
 	sets.engaged.LowAcc.LowHaste = set_combine(sets.engaged.LowHaste, {
 		ammo="Falcon Eye",
 		neck="Combatant's Torque",
-		ring1="Chirich Ring",
 		})
 
 	sets.engaged.MidAcc.LowHaste = set_combine(sets.engaged.LowAcc.LowHaste, {
@@ -871,7 +871,6 @@ function init_gear_sets()
 	sets.engaged.LowAcc.MidHaste = set_combine(sets.engaged.MidHaste, {
 		ammo="Falcon Eye",
 		neck="Combatant's Torque",
-		ring1="Chirich Ring",
 		})
 
 	sets.engaged.MidAcc.MidHaste = set_combine(sets.engaged.LowAcc.MidHaste, {
@@ -921,7 +920,6 @@ function init_gear_sets()
 	sets.engaged.LowAcc.HighHaste = set_combine(sets.engaged.HighHaste, {
 		neck="Combatant's Torque",
 		waist="Kentarch Belt +1",
-		ring1="Chirich Ring",
 		})
 
 	sets.engaged.MidAcc.HighHaste = set_combine(sets.engaged.LowAcc.HighHaste, {
@@ -970,7 +968,6 @@ function init_gear_sets()
 	sets.engaged.LowAcc.MaxHaste = set_combine(sets.engaged.MaxHaste, {
 		ammo="Falcon Eye",
 		neck="Combatant's Torque",
-		ring1="Chirich Ring",
 		})
 
 	sets.engaged.MidAcc.MaxHaste = set_combine(sets.engaged.LowAcc.MaxHaste, {
@@ -1091,10 +1088,12 @@ function job_buff_change(buff,gain)
 	end
 
 	if buffactive['Reive Mark'] then
-		equip(sets.Reive)
-		disable('neck')
-	else
-		enable('neck')
+		if gain then		   
+			equip(sets.Reive)
+			disable('neck')
+		else
+			enable('neck')
+		end
 	end
 
 	if buff == "doom" then

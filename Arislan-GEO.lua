@@ -112,7 +112,6 @@ function init_gear_sets()
 	sets.precast.FC.Cure = set_combine(sets.precast.FC, {
 		main="Oranyan", --7
 		sub="Clerisy Strap +1", --3
-		legs="Doyen Pants", --15
 		ear1="Mendi. Earring", --5
 		ring1="Lebeche Ring", --(2)
 		back="Perimede Cape", --(4)
@@ -288,7 +287,7 @@ function init_gear_sets()
 		body="Vanya Robe",
 		hands="Azimuth Gloves +1",
 		legs=gear.Merlinic_MAcc_legs,
-		feet="Medium's Sabots",
+		feet="Skaoi Boots",
 		neck="Incanter's Torque",
 		ear1="Barkaro. Earring",
 		ear2="Regal Earring",

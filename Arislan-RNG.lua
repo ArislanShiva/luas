@@ -48,7 +48,6 @@ function user_setup()
 
 	-- Additional local binds
 	send_command('bind ^` input /ja "Velocity Shot" <me>')
-	send_command('bind !` input /ja "Double Shot" <me>')
 	send_command ('bind @` input /ja "Scavenge" <me>')
 
 	if player.sub_job == 'DNC' then
@@ -62,6 +61,28 @@ function user_setup()
 	send_command('bind @f gs c cycle FlurryMode')
 	send_command('bind @h gs c cycle HasteMode')
 	send_command('bind @c gs c toggle CP')
+
+	send_command('bind ^numlock input /ja "Double Shot" <me>')
+
+	if player.sub_job == 'WAR' then
+		send_command('bind ^numpad/ input /ja "Berserk" <me>')
+		send_command('bind ^numpad* input /ja "Warcry" <me>')
+		send_command('bind ^numpad- input /ja "Defender" <me>')
+	elseif player.sub_job == 'SAM' then
+		send_command('bind ^numpad/ input /ja "Meditate" <me>')
+		send_command('bind ^numpad* input /ja "Sekkanoki" <me>')
+		send_command('bind ^numpad- input /ja "Third Eye" <me>')
+	end
+
+	send_command('bind ^numpad7 input /ws "Trueflight" <t>')
+	send_command('bind !numpad7 input /ws "Apex Arrow" <t>')
+	send_command('bind @numpad7 input /ws "Exenterator" <t>')
+	send_command('bind ^numpad8 input /ws "Last Stand" <t>')
+	send_command('bind !numpad8 input /ws "Jishnu\'s Radiance" <t>')
+	send_command('bind @numpad8 input /ws "Decimation" <t>')
+	send_command('bind ^numpad4 input /ws "Wildfire" <t>')
+	send_command('bind @numpad4 input /ws "Evisceration" <t>')
+	send_command('bind @numpad5 input /ws "Ruinator" <t>')
 
 	select_default_macro_book()
 	set_lockstyle()
@@ -79,6 +100,19 @@ function user_unload()
 	send_command('unbind @f')
 	send_command('unbind @h')
 	send_command('unbind @c')
+	send_command('unbind ^numlock')
+	send_command('unbind ^numpad/')
+	send_command('unbind ^numpad*')
+	send_command('unbind ^numpad-')
+	send_command('unbind ^numpad7')
+	send_command('unbind !numpad7')
+	send_command('unbind @numpad7')
+	send_command('unbind ^numpad8')
+	send_command('unbind !numpad8')
+	send_command('unbind @numpad8')
+	send_command('unbind ^numpad4')
+	send_command('unbind @numpad4')
+	send_command('unbind @numpad5')
 end
 
 
@@ -195,7 +229,7 @@ function init_gear_sets()
 		})
 
 	sets.precast.WS["Jishnu's Radiance"] = set_combine(sets.precast.WS, {
-		body="Adhemar Jacket",
+		body="Abnoba Kaftan",
 		hands="Meg. Gloves +2",
 		feet="Thereoid Greaves",
 		ear1="Moonshade Earring",
@@ -205,7 +239,7 @@ function init_gear_sets()
 		})
 
 	sets.precast.WS["Jishnu's Radiance"].Acc = set_combine(sets.precast.WS["Jishnu's Radiance"], {
-		body=gear.Herc_RA_body,
+		body="Sayadio's Kaftan",
 		neck="Combatant's Torque",
 		ear1="Enervating Earring",
 		ear2="Telos Earring",
@@ -261,7 +295,7 @@ function init_gear_sets()
 		ear2="Ishvara Earring",
 		ring1="Ifrit Ring +1",
 		ring2="Shukuyu Ring",
-		back="Bleating Mantle",
+		back=gear.RNG_STP_Cape,
 		waist="Fotia Belt",
 		}
 
@@ -269,7 +303,7 @@ function init_gear_sets()
 
 	sets.precast.WS['Evisceration'] = {
 		head=gear.Adhemar_TP_head,
-		body="Meg. Cuirie +1",
+		body="Abnoba Kaftan",
 		hands=gear.Adhemar_TP_hands,
 		legs=gear.Herc_WS_legs,
 		feet=gear.Herc_TA_feet,
@@ -278,9 +312,12 @@ function init_gear_sets()
 		ear2="Ishvara Earring",
 		ring1="Ramuh Ring +1",
 		ring2="Ilabrat Ring",
-		back="Bleating Mantle",
+		back=gear.RNG_STP_Cape,
 		waist="Fotia Belt",
 		}
+
+	sets.precast.WS['Evisceration'].Acc = set_combine(sets.precast.WS['Evisceration'], {body="Sayadio's Kaftan"})
+
 	
 	
 	------------------------------------------------------------------------------------------------
@@ -435,12 +472,11 @@ function init_gear_sets()
 		ear2="Suppanomimi", --5
 		ring1="Petrov Ring",
 		ring2="Epona's Ring",
-		back="Letalis Mantle",
+		back=gear.RNG_STP_Cape,
 		waist="Reiki Yotai", --7
 		} -- 41%
 
 	sets.engaged.LowAcc = set_combine(sets.engaged, {
-		ring1="Chirich Ring",
 		waist="Kentarch Belt +1",
 		})
 
@@ -480,12 +516,11 @@ function init_gear_sets()
 		ear2="Suppanomimi", --5
 		ring1="Petrov Ring",
 		ring2="Epona's Ring",
-		back="Letalis Mantle",
+		back=gear.RNG_STP_Cape,
 		waist="Reiki Yotai", --7
 		} -- 41%
 
 	sets.engaged.LowAcc.LowHaste = set_combine(sets.engaged.LowHaste, {
-		ring1="Chirich Ring",
 		waist="Kentarch Belt +1",
 		})
 
@@ -525,12 +560,11 @@ function init_gear_sets()
 		ear2="Suppanomimi", --5
 		ring1="Petrov Ring",
 		ring2="Epona's Ring",
-		back="Letalis Mantle",
+		back=gear.RNG_STP_Cape,
 		waist="Reiki Yotai", --7
 		} -- 41%
 
 	sets.engaged.LowAcc.MidHaste = set_combine(sets.engaged.MidHaste, {
-		ring1="Chirich Ring",
 		waist="Kentarch Belt +1",
 		})
 
@@ -570,12 +604,11 @@ function init_gear_sets()
 		ear2="Suppanomimi", --5
 		ring1="Petrov Ring",
 		ring2="Epona's Ring",
-		back="Letalis Mantle",
+		back=gear.RNG_STP_Cape,
 		waist="Reiki Yotai", --7
 		} -- 35%
 
 	sets.engaged.LowAcc.HighHaste = set_combine(sets.engaged.HighHaste, {
-		ring1="Chirich Ring",
 		waist="Kentarch Belt +1",
 		})
 
@@ -617,12 +650,11 @@ function init_gear_sets()
 		ear2="Suppanomimi", --5
 		ring1="Petrov Ring",
 		ring2="Epona's Ring",
-		back="Letalis Mantle",
+		back=gear.RNG_STP_Cape,
 		waist="Reiki Yotai", --7
 		} -- 21%
 
 	sets.engaged.LowAcc.MaxHaste = set_combine(sets.engaged.MaxHaste, {
-		ring1="Chirich Ring",
 		waist="Kentarch Belt +1",
 		})
 
@@ -752,10 +784,12 @@ function job_buff_change(buff,gain)
 	end
 
 	if buffactive['Reive Mark'] then
-		equip(sets.Reive)
-		disable('neck')
-	else
-		enable('neck')
+		if gain then		   
+			equip(sets.Reive)
+			disable('neck')
+		else
+			enable('neck')
+		end
 	end
 
 	if buff == "doom" then

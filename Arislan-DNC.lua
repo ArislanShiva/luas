@@ -94,8 +94,6 @@ function user_setup()
 	send_command('bind !- gs c cycleback altstep')
 	send_command('bind != gs c cycle altstep')
 	send_command('bind !p gs c toggle usealtstep')
---	send_command('bind ^[ input /ja "Trance" <me>')
---	send_command('bind ^] input /ja "Grand Pas" <me>')
 	send_command('bind ![ input /ja "Contradance" <me>')
 	send_command('bind ^` input /ja "Saber Dance" <me>')
 	send_command('bind !` input /ja "Chocobo Jig II" <me>')
@@ -104,6 +102,32 @@ function user_setup()
 	send_command('bind @h gs c cycle HasteMode')
 	send_command('bind @f gs c toggle ClosedPosition')
 	send_command('bind @c gs c toggle CP')
+
+	send_command('bind ^numlock input /ja "Reverse Flourish" <me>')
+
+	if player.sub_job == 'WAR' then
+		send_command('bind ^numpad/ input /ja "Berserk" <me>')
+		send_command('bind ^numpad* input /ja "Warcry" <me>')
+		send_command('bind ^numpad- input /ja "Defender" <me>')
+	elseif player.sub_job == 'SAM' then
+		send_command('bind ^numpad/ input /ja "Meditate" <me>')
+		send_command('bind ^numpad* input /ja "Sekkanoki" <me>')
+		send_command('bind ^numpad- input /ja "Third Eye" <me>')
+	elseif player.sub_job == 'THF' then
+		send_command('bind ^numpad/ input /ja "Sneak Attack" <me>')
+		send_command('bind ^numpad* input /ja "Trick Attack" <me>')
+		send_command('bind ^numpad- input /ja "Flee" <me>')
+	end
+
+	send_command('bind ^numpad+ input /ja "Climactic Flourish" <me>')
+	send_command('bind !numpad+ input /ja "Ternary Flourish" <me>')
+	send_command('bind @numpad+ input /ja "Striking Flourish" <me>')
+
+	send_command('bind ^numpad7 input /ws "Exenterator" <t>')
+	send_command('bind ^numpad4 input /ws "Evisceration" <t>')
+	send_command('bind ^numpad5 input /ws "Rudra\'s Storm" <t>')
+	send_command('bind ^numpad6 input /ws "Pyrrhic Kleos" <t>')
+	send_command('bind ^numpad1 input /ws "Aeolian Edge" <t>')
 
 	select_default_macro_book()
 	set_lockstyle()
@@ -126,6 +150,18 @@ function user_unload()
 	send_command('unbind @h')
 	send_command('unbind @f')
 	send_command('unbind @c')
+	send_command('unbind ^numlock')
+	send_command('unbind ^numpad/')
+	send_command('unbind ^numpad*')
+	send_command('unbind ^numpad-')
+	send_command('unbind ^numpad+')
+	send_command('unbind !numpad+')
+	send_command('unbind @numpad+')
+	send_command('unbind ^numpad7')
+	send_command('unbind ^numpad4')
+	send_command('unbind ^numpad5')
+	send_command('unbind ^numpad6')
+	send_command('unbind ^numpad1')
 end
 
 
@@ -160,8 +196,8 @@ function init_gear_sets()
 	sets.precast.Waltz = {
 		head="Anwig Salade",
 		body="Maxixi Casaque +2", --17(7)
-		hands="Slither Gloves +1", --5
-		legs="Meg. Chausses +2",
+		hands="Meg. Gloves +2",
+		legs="Dashing Subligar", --10
 		feet="Maxixi Toeshoes +2", --12
 		neck="Unmoving Collar +1",
 		ear1="Roundel Earring", --5
@@ -221,7 +257,7 @@ function init_gear_sets()
 		ammo="Charis Feather",
 		head="Maxixi Tiara +2",
 		body="Maxixi Casaque +2",
-		hands="Maxixi Gloves +2",
+		hands="Maxixi Bangles +2",
 		legs=gear.Herc_WS_legs,
 		feet="Maxixi Toeshoes +2",
 		neck="Combatant's Torque",
@@ -342,7 +378,7 @@ function init_gear_sets()
 	sets.precast.WS['Evisceration'].Acc = set_combine(sets.precast.WS['Evisceration'], {
 		ammo="Falcon Eye",
 		head="Dampening Tam",
-		body=gear.Herc_TA_body,
+		body="Sayadio's Kaftan",
 		hands="Meg. Gloves +2",
 		legs=gear.Herc_WS_legs,
 		feet=gear.Herc_Acc_feet,
@@ -489,7 +525,6 @@ function init_gear_sets()
 	sets.engaged.LowAcc = set_combine(sets.engaged, {
 		ammo="Falcon Eye",
 		neck="Combatant's Torque",
-		ring1="Chirich Ring",
 		})
 
 	sets.engaged.MidAcc = set_combine(sets.engaged.LowAcc, {
@@ -536,7 +571,6 @@ function init_gear_sets()
 	sets.engaged.LowAcc.LowHaste = set_combine(sets.engaged.LowHaste, {
 		ammo="Falcon Eye",
 		neck="Combatant's Torque",
-		ring1="Chirich Ring",
 		})
 
 	sets.engaged.MidAcc.LowHaste = set_combine(sets.engaged.LowAcc.LowHaste, {
@@ -583,7 +617,6 @@ function init_gear_sets()
 	sets.engaged.LowAcc.MidHaste = set_combine(sets.engaged.MidHaste, {
 		ammo="Falcon Eye",
 		neck="Combatant's Torque",
-		ring1="Chirich Ring",
 		})
 
 	sets.engaged.MidAcc.MidHaste = set_combine(sets.engaged.LowAcc.MidHaste, {
@@ -630,7 +663,6 @@ function init_gear_sets()
 	sets.engaged.LowAcc.HighHaste = set_combine(sets.engaged.HighHaste, {
 		neck="Combatant's Torque",
 		waist="Kentarch Belt +1",
-		ring1="Chirich Ring",
 		})
 
 	sets.engaged.MidAcc.HighHaste = set_combine(sets.engaged.LowAcc.HighHaste, {
@@ -676,7 +708,6 @@ function init_gear_sets()
 	sets.engaged.LowAcc.MaxHaste = set_combine(sets.engaged.MaxHaste, {
 		neck="Combatant's Torque",
 		waist="Kentarch Belt +1",
-		ring1="Chirich Ring",
 		})
 
 	sets.engaged.MidAcc.MaxHaste = set_combine(sets.engaged.LowAcc.MaxHaste, {
@@ -755,10 +786,12 @@ function job_buff_change(buff,gain)
 	end
 
 	if buffactive['Reive Mark'] then
-		equip(sets.Reive)
-		disable('neck')
-	else
-		enable('neck')
+		if gain then		   
+			equip(sets.Reive)
+			disable('neck')
+		else
+			enable('neck')
+		end
 	end
 
 	if buff == "doom" then
