@@ -93,7 +93,7 @@ function init_gear_sets()
 		ear1="Loquacious Earring", --2
 		ear2="Enchntr. Earring +1", --2
 		ring1="Kishar Ring", --4
-		ring2="Weather. Ring", --5
+		ring2="Weather. Ring +1", --5
 		back="Alaunus's Cape", --10
 		waist="Witful Belt", --3/(2)
 		}
@@ -156,7 +156,7 @@ function init_gear_sets()
 		ear1="Friomisi Earring",
 		ear2="Regal Earring",
 		ring1="Shiva Ring +1",
-		ring2="Weather. Ring",
+		ring2="Weather. Ring +1",
 		back="Toro Cape",
 		waist="Refoccilation Stone",
 		})
@@ -358,7 +358,7 @@ function init_gear_sets()
 		neck="Sanctity Necklace",
 		ear1="Friomisi Earring",
 		ear2="Regal Earring",
-		ring2="Weather. Ring",
+		ring2="Weather. Ring +1",
 		waist="Refoccilation Stone",
 		})
 
@@ -468,7 +468,7 @@ function init_gear_sets()
 		legs="Th. Pantaloons +2",
 		neck="Debilis Medallion",
 		ring1="Levia. Ring +1",
-		ring2="Levia. Ring +1",
+		ring2="Weather. Ring +1",
 		ear1="Nourish. Earring +1",
 		ear2="Glorious Earring",
 		back="Alaunus's Cape",

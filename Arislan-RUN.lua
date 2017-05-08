@@ -10,7 +10,6 @@
 		Death Mode			Equips death prevention gear (WinKey-d)
 		Auto. Doom			Automatically equips cursna received gear on doom status
 		Capacity Pts. Mode	Capacity Points Mode Toggle [WinKey-C]
-		Reive Detection		Automatically equips Reive bonus gear
 		Auto. Lockstyle		Automatically locks specified equipset on file load
 --]]
 
@@ -52,7 +51,7 @@ function user_setup()
 	state.HybridMode:options('Normal', 'DT')
 	state.CastingMode:options('Normal', 'Resistant')
 	state.IdleMode:options('Normal', 'DT')
-	state.PhysicalDefenseMode:options('PDT', 'HP', 'Critical')
+	state.PhysicalDefenseMode:options('PDT', 'HP')
 	state.MagicalDefenseMode:options('MDT', 'Status')
 	
 	state.WeaponLock = M(false, 'Weapon Lock')	
@@ -100,7 +99,7 @@ function user_setup()
 	if player.sub_job == 'WAR' then
 		send_command('bind ^numpad/ input /ja "Berserk" <me>')
 		send_command('bind ^numpad* input /ja "Warcry" <me>')
-		send_command('bind ^numpad- input /ja "Defender" <me>')
+		send_command('bind ^numpad- input /ja "Aggressor" <me>')
 	elseif player.sub_job == 'DRK' then
 		send_command('bind ^numlock input /ja "Last Resort" <me>')
 		send_command('bind ^numpad/ input /ja "Souleater" <me>')
@@ -193,7 +192,7 @@ function init_gear_sets()
 		legs=gear.Herc_MAB_legs,
 		feet=gear.Herc_MAB_feet,
 		neck="Baetyl Pendant",
-		ear1="Hecate's Earring",
+		ear1="Novio Earring",
 		ear2="Friomisi Earring",
 		ring1="Fenrir Ring +1",
 		ring2="Fenrir Ring +1",
@@ -231,16 +230,15 @@ function init_gear_sets()
 		ear1="Loquacious Earring", --2
 		ear2="Enchntr. Earring +1", --2
 		ring1="Kishar Ring", --4
-		ring2="Weather. Ring", --5(3)
+		ring2="Weather. Ring +1", --6(4)
 		back=gear.RUN_HP_Cape, --10
-		waist="Ninurta's Sash",
+		waist="Rumination Sash",
 		}
 
 	sets.precast.FC.HP = {
 		ammo="Sapience Orb", --2
 		neck="Orunmila's Torque", --5
-		ring2="Weather. Ring", --5(3)
-		waist="Ninurta's Sash",
+		ring2="Weather. Ring +1", --6(4)
 		}
 
 
@@ -256,14 +254,14 @@ function init_gear_sets()
 		body="Passion Jacket",
 		neck="Magoraga Beads",
 		ring1="Lebeche Ring",
-		waist="Ninurta's Sash",
+		waist="Rumination Sash",
 		})
 
 	-- Weaponskill sets
 	sets.precast.WS = {
 		ammo="Knobkierrie",
 		head="Lilitu Headpiece",
-		body=gear.Herc_TA_body,
+		body="Meg. Cuirie +1",
 		hands="Meg. Gloves +2",
 		legs=gear.Herc_WS_legs,
 		feet=gear.Herc_TA_feet,
@@ -286,6 +284,7 @@ function init_gear_sets()
 
 	sets.precast.WS['Resolution'] = set_combine(sets.precast.WS, {
 		head=gear.Adhemar_TP_head,
+		body=gear.Herc_TA_body,
 		legs="Meg. Chausses +2",
 		ring1="Shukuyu Ring",
 		ring2="Epona's Ring",
@@ -300,12 +299,15 @@ function init_gear_sets()
 		ring1="Rufescent Ring",
 		})
 	
-	sets.precast.WS['Dimidiation'] = set_combine(sets.precast.WS['Resolution'], {
-		legs="Lustratio Subligar",
-		feet="Lustratio Leggings",
+	sets.precast.WS['Dimidiation'] = set_combine(sets.precast.WS, {
+		legs="Lustr. Subligar +1",
+		feet="Lustra. Leggings +1",
+		neck="Caro Necklace",
+		ear2="Ishvara Earring",
 		ring1="Ramuh Ring +1",
 		ring2="Ilabrat Ring",
 		back=gear.RUN_WS2_Cape,
+		waist="Grunfeld Rope",
 		})
 		
 	sets.precast.WS['Dimidiation'].Acc = set_combine(sets.precast.WS['Dimidiation'], {
@@ -319,8 +321,6 @@ function init_gear_sets()
 	sets.precast.WS['Herculean Slash'] = sets.precast.JA['Lunge']
 
 	sets.precast.WS['Savage Blade'] = set_combine(sets.precast.WS, {
-		body="Meg. Cuirie +1",
-		hands="Meg. Gloves +2",
 		legs="Meg. Chausses +2",
 		feet=gear.Herc_TA_feet,
 		neck="Caro Necklace",
@@ -355,7 +355,7 @@ function init_gear_sets()
 	sets.precast.WS['Flash Nova'] = set_combine(sets.precast.WS['Sanguine Blade'], {
 		head=gear.Herc_MAB_head,
 		ring1="Shiva Ring +1",
-		ring2="Weather. Ring",
+		ring2="Weather. Ring +1",
 		})
 
 	--------------------------------------
@@ -367,7 +367,6 @@ function init_gear_sets()
 	sets.midcast.SpellInterrupt = {
 		ammo="Impatiens", --10
 		legs="Carmine Cuisses +1", --20
-		--ear1="Halasz Earring", --5
 		ring1="Evanescence Ring", --5
 		waist="Rumination Sash", --10
 		}
@@ -481,7 +480,6 @@ function init_gear_sets()
 		head="Carmine Mask +1",
 		feet="Carmine Greaves +1",
 		neck="Loricate Torque +1",
-		ear1="Cessance Earring",
 		ear2="Telos Earring",
 		ring1="Moonbeam Ring",
 		ring2="Defending Ring",
@@ -519,26 +517,25 @@ function init_gear_sets()
 	
 	sets.defense.MDT = {
 		main="Epeolatry", --(25)/0
---		main="Aettir", --(5)/0
-		sub="Refined Grip +1", --3/3
+		sub="Irenic Strap +1", --0/5
 		ammo="Staunch Tathlum", --2/2
-		head="Erilaz Galea +1",
+		head=gear.Herc_DT_head, --3/3
 		body="Runeist's Coat +2",
 		hands=gear.Herc_DT_hands, --6/4
 		legs="Eri. Leg Guards +1", --7/0
 		feet="Erilaz Greaves +1",--5/0
 		neck="Warder's Charm +1",
-		ear1="Odnowa Earring", --0/1
-		ear2="Odnowa Earring +1", --0/2
+		ear1="Genmei Earring", --2/0
+		ear2="Impreg. Earring",
 		ring1="Gelatinous Ring +1", --7/(-1)
 		ring2="Defending Ring", --10/10
 		back="Evasionist's Cape", --7/4
-		waist="Flume Belt +1", --4/0
+		waist="Engraved Belt",
 		}
 
 	sets.defense.Status = {
 		main="Aettir", --(5)/0
-		sub="Refined Grip +1", --3/3
+		sub="Mensch Strap +1", --5/0
 		ammo="Staunch Tathlum", --2/2
 		head=gear.Herc_DT_head, --3/3
 		body="Futhark Coat +1", --7/7
@@ -546,12 +543,12 @@ function init_gear_sets()
 		legs="Rune. Trousers +2", --4/0
 		feet="Erilaz Greaves +1", --5/0
 		neck="Loricate Torque +1", --6/6
-		ear1="Eabani Earring",
+		ear1="Genmei Earring", --2/0
 		ear2="Hearty Earring",
 		ring1="Gelatinous Ring +1", --7/(-1)
 		ring2="Defending Ring", --10/10
 		back=gear.RUN_HP_Cape,
-		waist="Flume Belt +1", --4/0
+		waist="Engraved Belt",
 		}
 	
 	sets.defense.HP = {
@@ -569,24 +566,6 @@ function init_gear_sets()
 		ring1="Moonbeam Ring", --4/4
 		ring2="Defending Ring", --10/10
 		back="Moonbeam Cape", --5/5
-		waist="Flume Belt +1", --4/0
-		}
-
-	sets.defense.Critical = {
-		main="Epeolatry", --(25)/0
-		sub="Refined Grip +1", --3/3
-		ammo="Iron Gobbet", --(2)
-		head="Fu. Bandeau +1", -- 4/0
-		body="Futhark Coat +1", --7/7
-		hands="Runeist's Mitons +2", --2/0
-		legs="Eri. Leg Guards +1", --7/0
-		feet="Erilaz Greaves +1", --5/0
-		neck="Loricate Torque +1", --6/6
-		ear1="Genmei Earring", --2/0
-		ear2="Impreg. Earring",
-		ring1="Fortified Ring", --0/5(7)
-		ring2="Defending Ring", --10/10
-		back=gear.RUN_HP_Cape,
 		waist="Flume Belt +1", --4/0
 		}
 
@@ -715,8 +694,11 @@ function job_precast(spell, action, spellMap, eventArgs)
 			send_command('input /jobability "Vallation" <me>')
 			eventArgs.cancel = true
 			return
+		elseif spell.english == 'Valiance' and buffactive['vallation'] then
+			cast_delay(0.2)
+			send_command('cancel Vallation') -- command requires 'cancel' add-on to work
 		end
-	end	
+	end
 	if spellMap == 'Utsusemi' then
 		if buffactive['Copy Image (3)'] or buffactive['Copy Image (4+)'] then
 			cancel_spell()
@@ -786,14 +768,14 @@ end
 
 function job_buff_change(buff,gain)
 	-- If we gain or lose any haste buffs, adjust which gear set we target.
-	if buffactive['Reive Mark'] then
-		if gain then		   
-			equip(sets.Reive)
-			disable('neck')
-		else
-			enable('neck')
-		end
-	end
+--	if buffactive['Reive Mark'] then
+--		if gain then		   
+--			equip(sets.Reive)
+--			disable('neck')
+--		else
+--			enable('neck')
+--		end
+--	end
 
 	if buff == "doom" then
 		if gain then		   
@@ -808,11 +790,9 @@ function job_buff_change(buff,gain)
 
 	if buff == 'Embolden' then
 		if gain then 
-			add_to_chat(122, 'On')
 			equip(sets.Embolden)
 			disable('head','legs','back')			
 		else
-			add_to_chat(122, 'Off')
 			enable('head','legs','back')			
 			status_change(player.status)
 		end

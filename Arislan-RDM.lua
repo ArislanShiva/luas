@@ -68,6 +68,12 @@ function user_setup()
 	send_command('bind @c gs c toggle CP')
 	send_command('bind @w gs c toggle WeaponLock')
 
+	send_command('bind ^numpad7 input /ws "Savage Blade" <t>')
+	send_command('bind ^numpad9 input /ws "Chant du Cygne" <t>')
+	send_command('bind ^numpad4 input /ws "Requiescat" <t>')
+	send_command('bind ^numpad5 input /ws "Expiacion" <t>')
+	send_command('bind ^numpad1 input /ws "Sanguine Blade" <t>')
+
 	update_offense_mode()	
 	select_default_macro_book()
 	set_lockstyle()
@@ -94,6 +100,11 @@ function user_unload()
 	send_command('unbind !.')
 	send_command('unbind @c')
 	send_command('unbind @w')
+	send_command('unbind ^numpad7')
+	send_command('unbind ^numpad9')
+	send_command('unbind ^numpad4')
+	send_command('unbind ^numpad5')
+	send_command('unbind ^numpad1')
 end
 
 -- Define sets and vars used by this job file.
@@ -122,7 +133,7 @@ function init_gear_sets()
 		ear1="Loquacious Earring", --2
 		ear2="Enchntr. Earring +1", --2
 		ring1="Kishar Ring", --4
-		ring2="Weather. Ring", --5
+		ring2="Weather. Ring +1", --5
 		back="Swith Cape +1", --4
 		waist="Witful Belt", --3/(3)
 		}
@@ -147,7 +158,7 @@ function init_gear_sets()
 		neck="Magoraga Beads",
 		ring1="Lebeche Ring",
 		back="Perimede Cape",
-		waist="Ninurta's Sash",
+		waist="Rumination Sash",
 		})
 
 
@@ -222,7 +233,6 @@ function init_gear_sets()
 	sets.midcast.SpellInterrupt = {
 		ammo="Impatiens", --10
 		legs="Carmine Cuisses +1", --20
-		--ear1="Halasz Earring", --5
 		ring1="Evanescence Ring", --5
 		waist="Rumination Sash", --10
 		}
@@ -375,7 +385,7 @@ function init_gear_sets()
 		ammo="Pemphredo Tathlum",
 		body="Vanya Robe",
 		neck="Sanctity Necklace",
-		ring2="Weather. Ring",
+		ring2="Weather. Ring +1",
 		})
 	
 	sets.midcast.IntEnfeebles = set_combine(sets.midcast.MndEnfeebles, {
@@ -388,7 +398,7 @@ function init_gear_sets()
 		ammo="Pemphredo Tathlum",
 		body="Vanya Robe",
 		neck="Sanctity Necklace",
-		ring2="Weather. Ring",
+		ring2="Weather. Ring +1",
 		})
 
 	sets.midcast.SkillEnfeebles = {
@@ -544,7 +554,7 @@ function init_gear_sets()
 		ear1="Hermetic Earring",
 		ear2="Regal Earring",
 		ring1="Levia. Ring +1",
-		ring2="Shiva Ring +1",
+		ring2="Weather. Ring +1",
 		back=gear.RDM_INT_Cape,
 		waist="Flume Belt +1",
 		})

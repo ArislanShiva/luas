@@ -94,7 +94,7 @@ function init_gear_sets()
 		ear1="Loquacious Earring", --2
 		ear2="Enchntr. Earring +1", --2
 		ring1="Kishar Ring", --4
-		ring2="Weather. Ring", --5
+		ring2="Weather. Ring +1", --5
 		back="Lifestream Cape", --7
 		waist="Witful Belt", --3/(2)
 		}
@@ -481,7 +481,7 @@ function init_gear_sets()
 		ear1="Barkaro. Earring",
 		ear2="Regal Earring",
 		ring1="Fenrir Ring +1",
-		ring2="Fenrir Ring +1",
+		ring2="Weather. Ring +1",
 		})
 		
 	-- Defense sets

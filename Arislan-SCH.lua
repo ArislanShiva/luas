@@ -152,7 +152,7 @@ function init_gear_sets()
 		ear1="Loquacious Earring", --2
 		ear2="Enchntr. Earring +1", --2
 		ring1="Kishar Ring", --4
-		ring2="Weather. Ring", --5/(3)
+		ring2="Weather. Ring +1", --5/(3)
 		back=gear.SCH_FC_Cape, --10
 		waist="Witful Belt", --3/(3)
 		}
@@ -471,7 +471,7 @@ function init_gear_sets()
 		})
 
 	sets.midcast.LightHelix = set_combine(sets.midcast.Helix, {
-		ring2="Weather. Ring"
+		ring2="Weather. Ring +1"
 		})
 
 	-- Initializes trusts at iLvl 119
@@ -527,7 +527,7 @@ function init_gear_sets()
 		ear1="Barkaro. Earring",
 		ear2="Regal Earring",
 		ring1="Shiva Ring +1",
-		ring2="Shiva Ring +1",
+		ring2="Weather. Ring +1",
 		back=gear.SCH_MAB_Cape,
 		})
 
@@ -671,7 +671,6 @@ function job_post_midcast(spell, action, spellMap, eventArgs)
 		end
 		if spellMap == "Regen" and state.RegenMode.value == 'Duration' then
 			equip(sets.midcast.RegenDuration)
-			add_to_chat(122,'Regen Test')
 		end
 		if state.Buff.Perpetuance then
 			equip(sets.buff['Perpetuance'])

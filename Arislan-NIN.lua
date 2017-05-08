@@ -8,7 +8,6 @@
 							optimize delay reduction (automatic)
 		Haste Mode			Toggles between Haste II and Haste I recieved, used by Haste Detection [WinKey-H]
 		Capacity Pts. Mode	Capacity Points Mode Toggle [WinKey-C]
-		Reive Detection		Automatically equips Reive bonus gear
 		Auto. Lockstyle		Automatically locks specified equipset on file load
 --]]
 
@@ -68,6 +67,26 @@ function user_setup()
 	send_command('bind @h gs c cycle HasteMode')
 	send_command('bind @c gs c toggle CP')
 
+	send_command('bind ^numlock input /ja "Innin" <me>')
+	send_command('bind !numlock input /ja "Yonin" <me>')
+
+	if player.sub_job == 'WAR' then
+		send_command('bind ^numpad/ input /ja "Berserk" <me>')
+		send_command('bind !numpad/ input /ja "Defender" <me>')
+		send_command('bind ^numpad* input /ja "Warcry" <me>')
+		send_command('bind ^numpad- input /ja "Aggressor" <me>')
+	elseif player.sub_job == 'THF' then
+		send_command('bind ^numpad/ input /ja "Sneak Attack" <me>')
+		send_command('bind ^numpad* input /ja "Trick Attack" <me>')
+		send_command('bind ^numpad- input /ja "Flee" <me>')
+	end
+
+	send_command('bind ^numpad7 input /ws "Blade: Kamu" <t>')
+	send_command('bind ^numpad8 input /ws "Blade: Shun" <t>')
+	send_command('bind ^numpad4 input /ws "Blade: Ten" <t>')
+	send_command('bind ^numpad6 input /ws "Blade: Hi" <t>')
+	send_command('bind ^numpad1 input /ws "Blade: Yu" <t>')	
+
 --	select_movement_feet()
 	select_default_macro_book()
 	set_lockstyle()
@@ -80,6 +99,19 @@ function user_unload()
 	send_command('unbind !.')
 	send_command('unbind @h')
 	send_command('unbind @c')
+	send_command('unbind ^numlock')
+	send_command('unbind !numlock')
+	send_command('unbind ^numpad/')
+	send_command('unbind !numpad/')
+	send_command('unbind ^numpad*')
+	send_command('unbind ^numpad-')
+	send_command('unbind ^numpad+')
+	send_command('unbind !numpad+')
+	send_command('unbind ^numpad7')
+	send_command('unbind ^numpad8')
+	send_command('unbind ^numpad4')
+	send_command('unbind ^numpad5')
+	send_command('unbind ^numpad1')
 end
 
 -- Define sets and vars used by this job file.
@@ -118,8 +150,7 @@ function init_gear_sets()
 		ear1="Loquacious Earring", --2
 		ear2="Enchntr. Earring +1", --2
 		ring1="Kishar Ring", --4
-		ring2="Weather. Ring", --5(3)
-		waist="Ninurta's Sash",
+		ring2="Weather. Ring +1", --6(4)
 		}
 
 	sets.precast.FC.Utsusemi = set_combine(sets.precast.FC, {
@@ -127,7 +158,6 @@ function init_gear_sets()
 		body="Passion Jacket",
 		neck="Magoraga Beads",
 		ring1="Lebeche Ring",
-		waist="Ninurta's Sash",
 		})
 
 	sets.precast.RA = {
@@ -203,9 +233,7 @@ function init_gear_sets()
 
 	sets.midcast.SpellInterrupt = {
 		ammo="Impatiens", --10
-		ear1="Halasz Earring", --5
 		ring1="Evanescence Ring", --5
-		waist="Ninurta's Sash", --6
 		}
 		
 	-- Specific spells
@@ -219,7 +247,7 @@ function init_gear_sets()
 		legs=gear.Herc_MAB_legs,
 		feet=gear.Herc_MAB_feet,
 		neck="Baetyl Pendant",
-		ear1="Hecate's Earring",
+		ear1="Novio Earring",
 		ear2="Friomisi Earring",
 		ring1="Shiva Ring +1",
 		ring2="Shiva Ring +1",
@@ -247,7 +275,7 @@ function init_gear_sets()
 		ammo="Ginsen",
 		head="Dampening Tam",
 		body="Hiza. Haramaki +1",
-		hands=gear.Herc_TA_hands,
+		hands=gear.Herc_DT_hands,
 		legs="Samnuha Tights",
 		feet="Danzo Sune-ate",
 		neck="Bathy Choker +1",
@@ -585,14 +613,14 @@ function job_buff_change(buff, gain)
 		end
 	end
 
-	if buffactive['Reive Mark'] then
-		if gain then		   
-			equip(sets.Reive)
-			disable('neck')
-		else
-			enable('neck')
-		end
-	end
+--	if buffactive['Reive Mark'] then
+--		if gain then		   
+--			equip(sets.Reive)
+--			disable('neck')
+--		else
+--			enable('neck')
+--		end
+--	end
 
 	if buff == "doom" then
 		if gain then		   

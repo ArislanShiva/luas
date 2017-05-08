@@ -9,7 +9,6 @@
 							optimize delay reduction (automatic)
 		Haste Mode			Toggles between Haste II and Haste I recieved, used by Haste Detection [WinKey-H]
 		Capacity Pts. Mode	Capacity Points Mode Toggle [WinKey-C]
-		Reive Detection		Automatically equips Reive bonus gear
 		Auto. Lockstyle		Automatically locks specified equipset on file load
 --]]
 
@@ -204,6 +203,18 @@ function user_setup()
 	
 	send_command('bind @c gs c toggle CP')
 	send_command('bind @h gs c cycle HasteMode')
+
+	if player.sub_job == 'WAR' then
+		send_command('bind ^numpad/ input /ja "Berserk" <me>')
+		send_command('bind ^numpad* input /ja "Warcry" <me>')
+		send_command('bind ^numpad- input /ja "Aggressor" <me>')
+	end
+
+	send_command('bind ^numpad7 input /ws "Savage Blade" <t>')
+	send_command('bind ^numpad9 input /ws "Chant du Cygne" <t>')
+	send_command('bind ^numpad4 input /ws "Requiescat" <t>')
+	send_command('bind ^numpad5 input /ws "Expiacion" <t>')
+	send_command('bind ^numpad1 input /ws "Sanguine Blade" <t>')
 	
 	select_default_macro_book()
 	set_lockstyle()
@@ -229,6 +240,15 @@ function user_unload()
 	send_command('unbind ^,')
 	send_command('unbind @c')
 	send_command('unbind @h')
+	send_command('unbind ^numlock')
+	send_command('unbind ^numpad/')
+	send_command('unbind ^numpad*')
+	send_command('unbind ^numpad-')
+	send_command('unbind ^numpad7')
+	send_command('unbind ^numpad9')
+	send_command('unbind ^numpad4')
+	send_command('unbind ^numpad5')
+	send_command('unbind ^numpad1')
 end
 
 -- Define sets and vars used by this job file.
@@ -285,7 +305,7 @@ function init_gear_sets()
 		ear1="Loquacious Earring", --2
 		ear2="Enchntr. Earring +1", --2
 		ring1="Kishar Ring", --4
-		ring2="Weather. Ring", --5(3)
+		ring2="Weather. Ring +1", --6(4)
 		back="Swith Cape +1", --4
 		waist="Witful Belt", --3/(2)
 		}
@@ -299,7 +319,7 @@ function init_gear_sets()
 		body="Passion Jacket",
 		neck="Magoraga Beads",
 		ring1="Lebeche Ring",
-		waist="Ninurta's Sash",
+		waist="Rumination Sash",
 		})
 
 	
@@ -440,7 +460,7 @@ function init_gear_sets()
 	sets.precast.WS['Flash Nova'] = set_combine(sets.precast.WS['Sanguine Blade'], {
 		head="Jhakri Coronal +1",
 		ring1="Levia. Ring +1",
-		ring2="Weather. Ring",
+		ring2="Weather. Ring +1",
 		})
 
 	------------------------------------------------------------------------------------------------
@@ -451,9 +471,8 @@ function init_gear_sets()
 
 	sets.midcast.SpellInterrupt = {
 		ammo="Impatiens", --10
-		--ear1="Halasz Earring", --5
 		ring1="Evanescence Ring", --5
-		waist="Ninurta's Sash", --6
+		waist="Rumination Sash", --10
 		}
 
 	sets.midcast['Blue Magic'] = {
@@ -559,7 +578,7 @@ function init_gear_sets()
 		})
 
 	sets.midcast['Blue Magic'].MagicalLight = set_combine(sets.midcast['Blue Magic'].Magical, {
-		ring2="Weather. Ring"
+		ring2="Weather. Ring +1"
 		})
 
 	sets.midcast['Blue Magic'].MagicalMnd = set_combine(sets.midcast['Blue Magic'].Magical, {
@@ -629,7 +648,7 @@ function init_gear_sets()
 		ear1="Etiolation Earring",
 		ear2="Loquacious Earring", 	
 		ring1="Kishar Ring",
-		ring2="Weather. Ring",
+		ring2="Weather. Ring +1",
 		waist="Witful Belt",
 		})
 
@@ -723,7 +742,7 @@ function init_gear_sets()
 		ear1="Eabani Earring",
 		ear2="Telos Earring",
 		ring1="Ramuh Ring +1",
-		ring2="Ramuh Ring +1",
+		ring2="Weather. Ring +1",
 		back=gear.BLU_WS1_Cape,
 		waist="Windbuffet Belt +1",
 		})
@@ -1087,14 +1106,14 @@ function job_buff_change(buff,gain)
 		end
 	end
 
-	if buffactive['Reive Mark'] then
-		if gain then		   
-			equip(sets.Reive)
-			disable('neck')
-		else
-			enable('neck')
-		end
-	end
+--	if buffactive['Reive Mark'] then
+--		if gain then		   
+--			equip(sets.Reive)
+--			disable('neck')
+--		else
+--			enable('neck')
+--		end
+--	end
 
 	if buff == "doom" then
 		if gain then		   

@@ -1,4 +1,17 @@
 -------------------------------------------------------------------------------------------------------------------
+-- (Original: Motenten / Modified: Arislan)
+-------------------------------------------------------------------------------------------------------------------
+
+--[[	Custom Features:
+
+		Haste Detection		Detects current magic haste level and equips corresponding engaged set to
+							optimize delay reduction (automatic)
+		Haste Mode			Toggles between Haste II and Haste I recieved, used by Haste Detection [WinKey-H]
+		Capacity Pts. Mode	Capacity Points Mode Toggle [WinKey-C]
+		Auto. Lockstyle		Automatically locks specified equipset on file load
+--]]
+
+-------------------------------------------------------------------------------------------------------------------
 -- Setup functions for this job.  Generally should not be modified.
 -------------------------------------------------------------------------------------------------------------------
 
@@ -67,7 +80,7 @@ function user_setup()
 	if player.sub_job == 'WAR' then
 		send_command('bind ^numpad/ input /ja "Berserk" <me>')
 		send_command('bind ^numpad* input /ja "Warcry" <me>')
-		send_command('bind ^numpad- input /ja "Defender" <me>')
+		send_command('bind ^numpad- input /ja "Aggressor" <me>')
 	elseif player.sub_job == 'SAM' then
 		send_command('bind ^numpad/ input /ja "Meditate" <me>')
 		send_command('bind ^numpad* input /ja "Sekkanoki" <me>')
@@ -83,6 +96,8 @@ function user_setup()
 	send_command('bind ^numpad4 input /ws "Wildfire" <t>')
 	send_command('bind @numpad4 input /ws "Evisceration" <t>')
 	send_command('bind @numpad5 input /ws "Ruinator" <t>')
+
+	send_command('bind numpad0 input /ra <t>')
 
 	select_default_macro_book()
 	set_lockstyle()
@@ -113,6 +128,7 @@ function user_unload()
 	send_command('unbind ^numpad4')
 	send_command('unbind @numpad4')
 	send_command('unbind @numpad5')
+	send_command('unbind numpad0')
 end
 
 
@@ -154,8 +170,8 @@ function init_gear_sets()
 		neck="Orunmila's Torque", --5
 		ear1="Loquacious Earring", --2
 		ear2="Enchntr. Earring +1", --2
-		ring2="Weather. Ring", --5(3)
-		waist="Ninurta's Sash",
+		ring2="Weather. Ring +1", --6(4)
+		waist="Rumination Sash",
 		}
 
 	sets.precast.FC.Utsusemi = set_combine(sets.precast.FC, {
@@ -228,7 +244,7 @@ function init_gear_sets()
 		waist="Kwahu Kachina Belt",
 		})
 
-	sets.precast.WS["Jishnu's Radiance"] = set_combine(sets.precast.WS, {
+	sets.precast.WS['Jishnu\'s Radiance'] = set_combine(sets.precast.WS, {
 		body="Abnoba Kaftan",
 		hands="Meg. Gloves +2",
 		feet="Thereoid Greaves",
@@ -238,9 +254,9 @@ function init_gear_sets()
 		ring2="Ilabrat Ring",
 		})
 
-	sets.precast.WS["Jishnu's Radiance"].Acc = set_combine(sets.precast.WS["Jishnu's Radiance"], {
+	sets.precast.WS['Jishnu\'s Radiance'].Acc = set_combine(sets.precast.WS['Jishnu\'s Radiance'], {
 		body="Sayadio's Kaftan",
-		neck="Combatant's Torque",
+		neck="Iskur Gorget",
 		ear1="Enervating Earring",
 		ear2="Telos Earring",
 		ring1="Hajduk Ring +1",
@@ -257,7 +273,7 @@ function init_gear_sets()
 
 	sets.precast.WS['Last Stand'].Acc = set_combine(sets.precast.WS['Last Stand'], {
 		hands="Meg. Gloves +2",
-		neck="Combatant's Torque",
+		neck="Iskur Gorget",
 		ear2="Telos Earring",
 		ring1="Hajduk Ring +1",
 		ring2="Hajduk Ring +1",
@@ -274,13 +290,13 @@ function init_gear_sets()
 		neck="Baetyl Pendant",
 		ear1="Moonshade Earring",
 		ear2="Friomisi Earring",
-		ring1="Weather. Ring",
+		ring1="Weather. Ring +1",
 		ring2="Arvina Ringlet +1",
 		back=gear.RNG_WS1_Cape,
 		waist="Eschan Stone",
 		}
 
-	sets.precast.WS["Trueflight"].FullTP = {ear1="Hecate's Earring", waist="Svelt. Gouriz +1"}
+	sets.precast.WS["Trueflight"].FullTP = {ear1="Novio Earring", waist="Svelt. Gouriz +1"}
 
 	sets.precast.WS["Wildfire"] = set_combine(sets.precast.WS["Trueflight"], {ring1="Garuda Ring +1"})
 
@@ -331,9 +347,8 @@ function init_gear_sets()
 	sets.midcast.SpellInterrupt = {
 		ammo="Impatiens", --10
 		legs="Carmine Cuisses +1", --20
-		--ear1="Halasz Earring", --5
 		ring1="Evanescence Ring", --5
-		waist="Ninurta's Sash", --6
+		waist="Rumination Sash", --10
 		}
 
 	sets.midcast.Utsusemi = sets.midcast.SpellInterrupt
@@ -347,7 +362,7 @@ function init_gear_sets()
 		hands=gear.Adhemar_RA_hands,
 		legs=gear.Adhemar_RA_legs,
 		feet=gear.Herc_RA_feet,
-		neck="Erudit. Necklace",
+		neck="Iskur Gorget",
 		ear1="Enervating Earring",
 		ear2="Telos Earring",
 		ring1="Garuda Ring +1",
@@ -362,7 +377,6 @@ function init_gear_sets()
 		hands="Meg. Gloves +2",
 		legs="Meg. Chausses +2",
 		feet="Meg. Jam. +1",
-		neck="Combatant's Torque",
 		ring1="Hajduk Ring +1",
 		ring2="Hajduk Ring +1",
 		waist="Kwahu Kachina Belt",
@@ -379,7 +393,6 @@ function init_gear_sets()
 	sets.midcast.RA.STP = set_combine(sets.midcast.RA, {
 		body="Pursuer's Doublet",
 		feet="Carmine Greaves +1",
-		neck="Anu Torque",
 		ear1="Dedition Earring",
 		ring1="Apate Ring",
 		})
@@ -426,7 +439,7 @@ function init_gear_sets()
 		head="Arcadian Beret +1",
 		body=gear.Herc_RA_body,
 		hands="Kobo Kote",
-		neck="Combatant's Torque",
+		neck="Iskur Gorget",
 		ear1="Enervating Earring",
 		ear2="Telos Earring",
 		ring1="Garuda Ring +1",
@@ -688,7 +701,7 @@ function init_gear_sets()
 	-- Custom buff sets
 	--------------------------------------
 
-	sets.buff.Barrage = set_combine(sets.midcast.RA.Acc, {hands="Orion Bracers +1"})
+	sets.buff.Barrage = {hands="Orion Bracers +1"}
 	sets.buff['Velocity Shot'] = set_combine(sets.midcast.RA, {body="Amini Caban +1", back=gear.RNG_TP_Cape})
 	sets.buff['Double Shot'] = set_combine(sets.midcast.RA, {back=gear.RNG_TP_Cape})
 --	sets.buff.Camouflage = {body="Orion Jerkin +1"}
@@ -783,14 +796,14 @@ function job_buff_change(buff,gain)
 		end
 	end
 
-	if buffactive['Reive Mark'] then
-		if gain then		   
-			equip(sets.Reive)
-			disable('neck')
-		else
-			enable('neck')
-		end
-	end
+--	if buffactive['Reive Mark'] then
+--		if gain then		   
+--			equip(sets.Reive)
+--			disable('neck')
+--		else
+--			enable('neck')
+--		end
+--	end
 
 	if buff == "doom" then
 		if gain then		   

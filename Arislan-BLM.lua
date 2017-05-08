@@ -37,7 +37,7 @@ end
 -- Setup vars that are user-dependent.  Can override this function in a sidecar file.
 function user_setup()
 	state.OffenseMode:options('Normal', 'Acc')
-	state.CastingMode:options('Normal', 'Spaekona', 'Resistant')
+	state.CastingMode:options('Normal', 'Resistant', 'Spaekona', 'Occult')
 	state.IdleMode:options('Normal', 'DT')
 
 	state.WeaponLock = M(false, 'Weapon Lock')	
@@ -107,7 +107,7 @@ function init_gear_sets()
 		ear1="Loquacious Earring", --2
 		ear2="Enchntr. Earring +1", --2
 		ring1="Kishar Ring", --4
-		ring2="Weather. Ring", --5
+		ring2="Weather. Ring +1", --5
 		back=gear.BLM_FC_Cape, --10
 		waist="Witful Belt", --3/(2)
 		}
@@ -145,7 +145,7 @@ function init_gear_sets()
 		ear1="Etiolation Earring", --1
 		ear2="Loquacious Earring", --2
 		ring1="Mephitas's Ring +1",
-		ring2="Weather. Ring", --5
+		ring2="Weather. Ring +1", --5
 		back="Bane Cape", --4
 		waist="Witful Belt", --3/(2)
 		}
@@ -369,7 +369,7 @@ function init_gear_sets()
 		})
 
 	sets.midcast.Death = {
-		main=gear.Grioavolr_MB,
+		main=gear.Grioavolr_MB, --5
 		sub="Enki Strap",
 		ammo="Ghastly Tathlum +1",
 		head="Pixie Hairpin +1",
@@ -381,7 +381,6 @@ function init_gear_sets()
 		ear1="Barkaro. Earring",
 		ear2="Static Earring", --5
 		ring1="Mephitas's Ring +1",
-		ring2="Archon Ring",
 		back=gear.BLM_Death_Cape, --5
 		waist="Yamabuki-no-Obi",
 		}
@@ -395,6 +394,18 @@ function init_gear_sets()
 		ring2="Shiva Ring +1",
 		})
 
+	sets.midcast.Death.Occult = set_combine(sets.midcast.Death, {
+		sub="Bloodrain Strap",
+		head="Mallquis Chapeau +1",
+		legs="Perdition Slops",
+		feet="Battlecast Gaiters",
+		neck="Seraphic Ampulla",
+		ear1="Dedition Earring",
+		ear2="Telos Earring",
+		ring1="Petrov Ring",
+		ring2="Apate Ring",
+		waist="Oneiros Rope",
+		})
 
 	-- Elemental Magic sets
 	
@@ -440,12 +451,43 @@ function init_gear_sets()
 		neck="Sanctity Necklace",
 		})
 
+	sets.midcast['Elemental Magic'].Occult = set_combine(sets.midcast['Elemental Magic'], {
+		sub="Bloodrain Strap",
+		head="Mallquis Chapeau +1",
+		legs="Perdition Slops",
+		feet="Battlecast Gaiters",
+		neck="Seraphic Ampulla",
+		ear1="Dedition Earring",
+		ear2="Telos Earring",
+		ring1="Petrov Ring",
+		ring2="Apate Ring",
+		waist="Oneiros Rope",
+		})
+
 	sets.midcast.Impact = set_combine(sets.midcast['Elemental Magic'], {
-		main=gear.Lathi_MAB,
 		sub="Niobid Strap",
 		head=empty,
 		body="Twilight Cloak",
 		ring2="Archon Ring",
+		})
+
+	sets.midcast.Impact.Resistant = set_combine(sets.midcast['Elemental Magic'].Resistant, {
+		sub="Enki Strap",
+		head=empty,
+		body="Twilight Cloak",
+		hands="Jhakri Cuffs +1",
+		})
+
+	sets.midcast.Impact.Occult = set_combine(sets.midcast.Impact, {
+		sub="Bloodrain Strap",
+		legs="Perdition Slops",
+		feet="Battlecast Gaiters",
+		neck="Seraphic Ampulla",
+		ear1="Dedition Earring",
+		ear2="Telos Earring",
+		ring1="Petrov Ring",
+		ring2="Apate Ring",
+		waist="Oneiros Rope",
 		})
 
 	-- Initializes trusts at iLvl 119
@@ -482,7 +524,6 @@ function init_gear_sets()
 		ammo="Staunch Tathlum", --2/2
 		body="Mallquis Saio +1", --6/6
 		hands="Hagondes Cuffs +1", --3/3
-		feet="Mallquis Clogs +1",
 		neck="Loricate Torque +1", --6/6
 		ear1="Genmei Earring", --2/0
 		ring1="Gelatinous Ring +1", --7/(-1)
@@ -523,7 +564,7 @@ function init_gear_sets()
 		ear1="Barkaro. Earring",
 		ear2="Regal Earring",
 		ring1="Shiva Ring +1",
-		ring2="Shiva Ring +1",
+		ring2="Weather. Ring +1",
 		back=gear.BLM_MAB_Cape,
 		})
 

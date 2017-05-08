@@ -74,7 +74,7 @@ function user_setup()
 	if player.sub_job == 'WAR' then
 		send_command('bind ^numpad/ input /ja "Berserk" <me>')
 		send_command('bind ^numpad* input /ja "Warcry" <me>')
-		send_command('bind ^numpad- input /ja "Defender" <me>')
+		send_command('bind ^numpad- input /ja "Aggressor" <me>')
 	end
 
 	send_command('bind ^numpad+ input /ja "Sneak Attack" <me>')
@@ -129,8 +129,8 @@ function init_gear_sets()
 		head="Dampening Tam",
 		body="Adhemar Jacket", 
 		hands=gear.Adhemar_TP_hands,
-		legs="Lustratio Subligar",
-		feet="Lustratio Leggings",
+		legs="Lustr. Subligar +1",
+		feet="Lustra. Leggings +1",
 		neck="Caro Necklace",
 		ear2="Mache Earring",
 		ring1="Ramuh Ring +1",
@@ -145,7 +145,7 @@ function init_gear_sets()
 		hands="Pillager's Armlets +1",
 		legs="Pillager's Culottes +1",
 		feet="Meg. Jam. +1",
-		neck="Marked Gorget",
+		neck="Magoraga Beads",
 		ear2="Infused Earring",
 		ring2="Garuda Ring +1",
 		ring2="Garuda Ring +1",
@@ -210,8 +210,7 @@ function init_gear_sets()
 		neck="Orunmila's Torque", --5
 		ear1="Loquacious Earring", --2
 		ear2="Enchntr. Earring +1", --2
-		ring2="Weather. Ring", --5(3)
-		waist="Ninurta's Sash",
+		ring2="Weather. Ring +1", --6(4)
 		}
 
 	sets.precast.FC.Utsusemi = set_combine(sets.precast.FC, {
@@ -227,8 +226,8 @@ function init_gear_sets()
 		head="Lilitu Headpiece",
 		body="Meg. Cuirie +1",
 		hands="Meg. Gloves +2",
-		legs="Lustratio Subligar",
-		feet="Lustratio Leggings",
+		legs="Lustr. Subligar +1",
+		feet="Lustra. Leggings +1",
 		neck="Fotia Gorget",
 		ear1="Moonshade Earring",
 		ear2="Ishvara Earring",
@@ -282,13 +281,13 @@ function init_gear_sets()
 		ring1="Ramuh Ring +1",
 		})
 
-	sets.precast.WS["Rudra's Storm"] = set_combine(sets.precast.WS, {
+	sets.precast.WS['Rudra\'s Storm'] = set_combine(sets.precast.WS, {
 		ammo="Expeditious Pinion",
 		neck="Caro Necklace",
 		waist="Grunfeld Rope",
 		})
 
-	sets.precast.WS["Rudra's Storm"].Acc = set_combine(sets.precast.WS["Rudra's Storm"], {
+	sets.precast.WS['Rudra\'s Storm'].Acc = set_combine(sets.precast.WS['Rudra\'s Storm'], {
 		ammo="Falcon Eye",
 		legs=gear.Herc_WS_legs,
 		feet=gear.Herc_Acc_feet,
@@ -309,7 +308,7 @@ function init_gear_sets()
 		legs=gear.Herc_MAB_legs,
 		feet=gear.Herc_MAB_feet,
 		neck="Baetyl Pendant",
-		ear1="Hecate's Earring",
+		ear1="Novio Earring",
 		ear2="Friomisi Earring",
 		ring1="Shiva Ring +1",
 		ring2="Shiva Ring +1",
@@ -328,9 +327,7 @@ function init_gear_sets()
 
 	sets.midcast.SpellInterrupt = {
 		ammo="Impatiens", --10
-		--ear1="Halasz Earring", --5
 		ring1="Evanescence Ring", --5
-		waist="Ninurta's Sash", --6
 		}
 		
 	-- Specific spells
@@ -377,6 +374,7 @@ function init_gear_sets()
 
 	sets.idle.Town = set_combine(sets.idle, {
 		body="Adhemar Jacket",
+		legs="Lustr. Subligar +1",
 		neck="Combatant's Torque",
 		ear1="Cessance Earring",
 		ear2="Telos Earring",
@@ -702,14 +700,14 @@ function job_buff_change(buff,gain)
 		end
 	end
 
-	if buffactive['Reive Mark'] then
-		if gain then		   
-			equip(sets.Reive)
-			disable('neck')
-		else
-			enable('neck')
-		end
-	end
+--	if buffactive['Reive Mark'] then
+--		if gain then		   
+--			equip(sets.Reive)
+--			disable('neck')
+--		else
+--			enable('neck')
+--		end
+--	end
 
 	if buff == "doom" then
 		if gain then		   

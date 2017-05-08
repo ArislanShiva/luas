@@ -55,7 +55,7 @@ function define_global_sets()
 	-- Taeon
 	gear.Taeon_FC_body = {name="Taeon Tabard", augments={'"Fast Cast"+5','Phalanx +3',}}
 	gear.Taeon_RA_body = {name="Taeon Tabard", augments={'Rng.Acc.+20 Rng.Atk.+20','"Snapshot"+4','"Snapshot"+5',}}
-	gear.Taeon_DW_feet = {name="Taeon Boots", augments={'Accuracy+22','"Dual Wield"+5','DEX+8',}}
+	gear.Taeon_DW_feet = {name="Taeon Boots",augments={'Accuracy+18 Attack+18','"Dual Wield"+5','DEX+8',}}
 	gear.Taeon_PH_feet = {name="Taeon Boots", augments={'Phalanx +2',}}
 
 	-- Ambuscade Capes

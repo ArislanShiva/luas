@@ -10,7 +10,6 @@
 							optimize delay reduction (automatic)
 		Haste Mode			Toggles between Haste II and Haste I recieved, used by Haste Detection [WinKey-H]
 		Capacity Pts. Mode	Capacity Points Mode Toggle [WinKey-C]
-		Reive Detection		Automatically equips Reive bonus gear
 		Auto. Lockstyle		Automatically locks specified equipset on file load
 --]]
 
@@ -144,7 +143,7 @@ function user_setup()
 	if player.sub_job == 'WAR' then
 		send_command('bind ^numpad/ input /ja "Berserk" <me>')
 		send_command('bind ^numpad* input /ja "Warcry" <me>')
-		send_command('bind ^numpad- input /ja "Defender" <me>')
+		send_command('bind ^numpad- input /ja "Aggressor" <me>')
 	elseif player.sub_job == 'RNG' then
 		send_command('bind ^numpad/ input /ja "Barrage" <me>')
 		send_command('bind ^numpad* input /ja "Sharpshot" <me>')
@@ -158,6 +157,8 @@ function user_setup()
 	send_command('bind !numpad4 input /ws "Requiescat" <t>')
 	send_command('bind @numpad4 input /ws "Evisceration" <t>')
 	send_command('bind ^numpad6 input /ws "Wildfire" <t>')
+
+	send_command('bind numpad0 input /ra <t>')
 
 	select_default_macro_book()
 	set_lockstyle()
@@ -192,6 +193,7 @@ function user_unload()
 	send_command('unbind !numpad4')
 	send_command('unbind @numpad4')
 	send_command('unbind ^numpad6')
+	send_command('unbind numpad0')
 end
 
 -- Define sets and vars used by this job file.
@@ -245,7 +247,7 @@ function init_gear_sets()
 	
 	sets.precast.FC = {
 		head="Carmine Mask +1", --14
-		body=gear.Taeon_FC_body, --8
+		body=gear.Taeon_FC_body, --9
 		hands="Leyline Gloves", --7
 		legs="Rawhide Trousers", --5
 		feet="Carmine Greaves +1", --8
@@ -253,8 +255,7 @@ function init_gear_sets()
 		ear1="Loquacious Earring", --2
 		ear2="Enchntr. Earring +1", --2
 		ring1="Kishar Ring", --4
-		ring2="Weather. Ring", --5(3)
-		waist="Ninurta's Sash",
+		ring2="Weather. Ring +1", --6(4)
 		}
 
 	sets.precast.FC.Utsusemi = set_combine(sets.precast.FC, {
@@ -307,6 +308,7 @@ function init_gear_sets()
 	sets.precast.WS.Acc = set_combine(sets.precast.WS, {
 		feet="Meg. Jam. +1",
 		ear2="Telos Earring",
+		neck="Iskur Gorget",
 		ring1="Hajduk Ring +1",
 		ring2="Hajduk Ring +1",
 		waist="Kwahu Kachina Belt",
@@ -321,7 +323,7 @@ function init_gear_sets()
 
 	sets.precast.WS['Last Stand'].Acc = set_combine(sets.precast.WS['Last Stand'], {
 		ammo=gear.WSbullet,
-		neck="Marked Gorget",
+		neck="Iskur Gorget",
 		ear2="Telos Earring",
 		ring1="Hajduk Ring +1",
 		ring2="Hajduk Ring +1",
@@ -336,7 +338,7 @@ function init_gear_sets()
 		legs=gear.Herc_MAB_legs,
 		feet=gear.Herc_WS_feet,
 		neck="Baetyl Pendant",
-		ear1="Hecate's Earring",
+		ear1="Novio Earring",
 		ear2="Friomisi Earring",
 		ring1="Arvina Ringlet +1",
 		ring2="Ilabrat Ring",
@@ -360,7 +362,7 @@ function init_gear_sets()
 		waist="Eschan Stone",
 		}
 
-	sets.precast.WS['Leaden Salute'].FullTP = {ear1="Hecate's Earring", waist="Svelt. Gouriz +1"}
+	sets.precast.WS['Leaden Salute'].FullTP = {ear1="Novio Earring", waist="Svelt. Gouriz +1"}
 		
 	sets.precast.WS['Evisceration'] = {
 		head=gear.Adhemar_TP_head,
@@ -428,9 +430,7 @@ function init_gear_sets()
 
 	sets.midcast.SpellInterrupt = {
 		legs="Carmine Cuisses +1", --20
-		ear1="Halasz Earring", --5
 		ring1="Evanescence Ring", --5
-		waist="Ninurta's Sash", --6
 		}
 
 	sets.midcast.Cure = {
@@ -452,9 +452,10 @@ function init_gear_sets()
 		legs="Chas. Culottes +1",
 		feet="Carmine Greaves +1",
 		neck="Ainia Collar",
-		ear1="Enervating Earring",
+		ear1="Dedition Earring",
 		ear2="Telos Earring",
 		ring1="Petrov Ring",
+		ring2="Apate Ring",
 		back=gear.COR_RA_Cape,
 		waist="Oneiros Rope",		
 		}
@@ -467,7 +468,7 @@ function init_gear_sets()
 		legs=gear.Herc_MAB_legs,
 		feet="Chass. Bottes +1",
 		neck="Baetyl Pendant",
-		ear1="Hecate's Earring",
+		ear1="Novio Earring",
 		ear2="Friomisi Earring",
 		ring1="Fenrir Ring +1",
 		ring2="Fenrir Ring +1",
@@ -501,7 +502,7 @@ function init_gear_sets()
 		hands=gear.Adhemar_RA_hands,
 		legs=gear.Adhemar_RA_legs,
 		feet=gear.Herc_RA_feet,
-		neck="Marked Gorget",
+		neck="Iskur Gorget",
 		ear1="Enervating Earring",
 		ear2="Telos Earring",
 		ring1="Garuda Ring +1",
@@ -515,7 +516,6 @@ function init_gear_sets()
 		hands="Meg. Gloves +2",
 		legs="Meg. Chausses +2",
 		feet="Meg. Jam. +1",
-		neck="Combatant's Torque",
 		ring1="Hajduk Ring +1",
 		ring2="Hajduk Ring +1",
 		waist="Kwahu Kachina Belt",
@@ -532,9 +532,7 @@ function init_gear_sets()
 	sets.midcast.RA.STP = set_combine(sets.midcast.RA, {
 		body="Pursuer's Doublet",
 		feet="Carmine Greaves +1",
-		neck="Ainia Collar",
 		ear1="Dedition Earring",
-		ring1="Apate Ring",
 		})
 
 
@@ -574,7 +572,7 @@ function init_gear_sets()
 
 	sets.idle.Town = set_combine(sets.idle, {
 		feet="Carmine Greaves +1",
-		neck="Regal Necklace",
+		neck="Iskur Gorget",
 		ear1="Eabani Earring",
 		ear2="Telos Earring",
 		ring1="Arvina Ringlet +1",
@@ -922,14 +920,14 @@ function job_buff_change(buff,gain)
 		end
 	end
 
-	if buffactive['Reive Mark'] then
-		if gain then		   
-			equip(sets.Reive)
-			disable('neck')
-		else
-			enable('neck')
-		end
-	end
+--	if buffactive['Reive Mark'] then
+--		if gain then		   
+--			equip(sets.Reive)
+--			disable('neck')
+--		else
+--			enable('neck')
+--		end
+--	end
 
 	if buff == "doom" then
 		if gain then		   
