@@ -52,6 +52,11 @@ function user_setup()
 	send_command('bind @c gs c toggle CP')
 	send_command('bind @w gs c toggle WeaponLock')
 
+	send_command('bind ^numpad7 input /ws "Black Halo" <t>')
+	send_command('bind ^numpad8 input /ws "Hexa Strike" <t>')
+	send_command('bind ^numpad9 input /ws "Realmrazer" <t>')
+	send_command('bind ^numpad1 input /ws "Flash Nova" <t>')
+
 	select_default_macro_book()
 	set_lockstyle()
 end
@@ -135,15 +140,20 @@ function init_gear_sets()
 
 	-- Default set for any weaponskill that isn't any more specifically defined
 	sets.precast.WS = {
-		head="Telchine Cap",
+		ammo="Floestone",
+		head="Chironic Hat",
 		body="Onca Suit",
 		neck="Fotia Gorget",
 		ear1="Moonshade Earring",
 		ear2="Telos Earring",
 		ring1="Rufescent Ring",
-		ring2="Ramuh Ring +1",
+		ring2="Shukuyu Ring",
 		waist="Fotia Belt",
 		}
+
+	sets.precast.WS['Hexa Strike'] = set_combine(sets.precast.WS, {
+		ring2="Begrudging Ring",
+		})
 	
 	sets.precast.WS['Flash Nova'] = set_combine(sets.precast.WS, {
 		ammo="Pemphredo Tathlum",
@@ -184,7 +194,7 @@ function init_gear_sets()
 		ammo="Esper Stone +1", --0/(-5)
 		head="Gende. Caubeen +1", --15/(-8)
 		body="Ebers Bliaud +1",
-		hands="Theophany Mitts +2", --(+2)/(-6)
+		hands="Theophany Mitts +3", --(+4)/(-7)
 		legs="Ebers Pant. +1",
 		feet="Kaykaus Boots", --10/(-10)
 		neck="Incanter's Torque",
@@ -230,7 +240,7 @@ function init_gear_sets()
 		sub="Clemency Grip",
 		head="Ebers Cap +1",
 		body="Ebers Bliaud +1",
-		hands="Theophany Mitts +2",
+		hands="Theophany Mitts +3",
 		legs="Piety Pantaln. +1",
 		feet="Vanya Clogs",
 		neck="Incanter's Torque",
@@ -389,7 +399,7 @@ function init_gear_sets()
 		ammo="Quartz Tathlum +1",
 		head="Befouled Crown",
 		body="Theo. Briault +2",
-		hands="Inyan. Dastanas +1",
+		hands="Theophany Mitts +3",
 		legs="Chironic Hose",
 		feet="Theo. Duckbills +2",
 		neck="Imbodla Necklace",
@@ -436,7 +446,7 @@ function init_gear_sets()
 		ammo="Homiliary",
 		head="Befouled Crown",
 		body="Witching Robe",
-		hands="Gende. Gages +1",
+		hands="Theophany Mitts +3",
 		legs="Assid. Pants +1",
 		feet="Herald's Gaiters",
 		neck="Bathy Choker +1",
@@ -460,11 +470,8 @@ function init_gear_sets()
 		})
 
 	sets.idle.Town = set_combine(sets.idle, {
-		main="Izcalli",
-		sub="Deliverance +1",
 		head="Ebers Cap +1",
 		body="Theo. Briault +2",
-		hands="Theophany Mitts +2",
 		legs="Th. Pantaloons +2",
 		neck="Debilis Medallion",
 		ring1="Levia. Ring +1",
@@ -499,17 +506,27 @@ function init_gear_sets()
 	-- Basic set for if no TP weapon is defined.
 	sets.engaged = {
 		main="Izcalli",
-		sub="Deliverance +1",
-		head="Telchine Cap",
-		body="Onca Suit",
-		neck="Combatant's Torque",
-		ear1="Cessance Earring",
-		ear2="Telos Earring",
-		ring1="Ramuh Ring +1",
-		ring2="Ramuh Ring +1",
-		waist="Grunfeld Rope",
+		sub="Genmei Shield",
+		ammo="Jukukik Feather",
+		head="Chironic Hat",
+		body="Ayanmo Corazza +1",
+		hands="Chironic Gloves",
+		legs="Aya. Cosciales +1",
+		feet="Chironic Slippers",
+		neck="Asperity Necklace",
+		ear1="Telos Earring",
+		ear2="Brutal Earring",
+		ring1="Petrov Ring",
+		ring2="Hetairoi Ring",
+		waist="Windbuffet Belt +1",
 		back="Relucent Cape",
 		}
+
+	sets.engaged.DW = set_combine(sets.engaged, {
+		sub="Mafic Cudgel",
+		ear1="Eabani Earring",
+		ear2="Suppanomimi",
+		})
 
 	-- Buff sets: Gear that needs to be worn to actively enhance a current player buff.
 	sets.buff['Divine Caress'] = {back="Mending Cape"}
@@ -660,6 +677,7 @@ function job_update(cmdParams, eventArgs)
 			end
 		end
 	end--]]
+	update_offense_mode()
 end
 
 
@@ -667,6 +685,14 @@ end
 function display_current_job_state(eventArgs)
 	display_current_caster_state()
 	eventArgs.handled = true
+end
+
+function update_offense_mode()  
+	if player.sub_job == 'NIN' or player.sub_job == 'DNC' then
+		state.CombatForm:set('DW')
+	else
+		state.CombatForm:reset()
+	end
 end
 
 -------------------------------------------------------------------------------------------------------------------

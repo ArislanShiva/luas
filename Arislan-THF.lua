@@ -77,14 +77,14 @@ function user_setup()
 		send_command('bind ^numpad- input /ja "Aggressor" <me>')
 	end
 
-	send_command('bind ^numpad+ input /ja "Sneak Attack" <me>')
-	send_command('bind !numpad+ input /ja "Trick Attack" <me>')
-
 	send_command('bind ^numpad7 input /ws "Exenterator" <t>')
 	send_command('bind ^numpad8 input /ws "Mandalic Stab" <t>')
 	send_command('bind ^numpad4 input /ws "Evisceration" <t>')
 	send_command('bind ^numpad5 input /ws "Rudra\'s Storm" <t>')
 	send_command('bind ^numpad1 input /ws "Aeolian Edge" <t>')
+
+	send_command('bind ^numpad0 input /ja "Sneak Attack" <me>')
+	send_command('bind ^numpad. input /ja "Trick Attack" <me>')
 
 	select_default_macro_book()
 	set_lockstyle()
@@ -101,13 +101,13 @@ function user_unload()
 	send_command('unbind ^numpad/')
 	send_command('unbind ^numpad*')
 	send_command('unbind ^numpad-')
-	send_command('unbind ^numpad+')
-	send_command('unbind !numpad+')
 	send_command('unbind ^numpad7')
 	send_command('unbind ^numpad8')
 	send_command('unbind ^numpad4')
 	send_command('unbind ^numpad5')
 	send_command('unbind ^numpad1')
+	send_command('unbind ^numpad0')
+	send_command('unbind ^numpad.')
 end
 
 -- Define sets and vars used by this job file.
@@ -132,7 +132,7 @@ function init_gear_sets()
 		legs="Lustr. Subligar +1",
 		feet="Lustra. Leggings +1",
 		neck="Caro Necklace",
-		ear2="Mache Earring",
+		ear1="Sherida Earring",
 		ring1="Ramuh Ring +1",
 		ring2="Ramuh Ring +1",
 		back="Toutatis's Cape",
@@ -144,7 +144,7 @@ function init_gear_sets()
 		body="Adhemar Jacket", 
 		hands="Pillager's Armlets +1",
 		legs="Pillager's Culottes +1",
-		feet="Meg. Jam. +1",
+		feet="Meg. Jam. +2",
 		neck="Magoraga Beads",
 		ear2="Infused Earring",
 		ring2="Garuda Ring +1",
@@ -224,13 +224,13 @@ function init_gear_sets()
 	sets.precast.WS = {
 		ammo="Focal Orb",
 		head="Lilitu Headpiece",
-		body="Meg. Cuirie +1",
+		body="Meg. Cuirie +2",
 		hands="Meg. Gloves +2",
 		legs="Lustr. Subligar +1",
 		feet="Lustra. Leggings +1",
 		neck="Fotia Gorget",
-		ear1="Moonshade Earring",
-		ear2="Ishvara Earring",
+		ear1="Ishvara Earring",
+		ear2="Moonshade Earring",
 		ring1="Ramuh Ring +1",
 		ring2="Ilabrat Ring",
 		back="Toutatis's Cape",
@@ -246,8 +246,8 @@ function init_gear_sets()
 		ammo="Seeth. Bomblet +1",
 		head=gear.Adhemar_TP_head,
 		legs="Meg. Chausses +2",
-		feet="Meg. Jam. +1",
-		ear1="Cessance Earring",
+		feet="Meg. Jam. +2",
+		ear1="Sherida Earring",
 		ear2="Telos Earring",
 		ring1="Garuda Ring +1",
 		})
@@ -264,7 +264,7 @@ function init_gear_sets()
 		hands="Mummu Wrists +1",
 		legs="Samnuha Tights", 
 		feet=gear.Herc_TA_feet,
-		ear1="Mache Earring",
+		ear1="Sherida Earring",
 		ear2="Brutal Earring",
 		ring1="Begrudging Ring",
 		ring2="Epona's Ring",
@@ -346,7 +346,7 @@ function init_gear_sets()
 	sets.idle = {
 		ammo="Ginsen",
 		head="Dampening Tam",
-		body="Meg. Cuirie +1",
+		body="Meg. Cuirie +2",
 		hands=gear.Adhemar_TP_hands,
 		legs="Samnuha Tights",
 		feet="Jute Boots +1",
@@ -362,7 +362,7 @@ function init_gear_sets()
 	sets.idle.DT = set_combine (sets.idle, {
 		ammo="Staunch Tathlum", --2/2
 		head=gear.Herc_DT_head, --3/3
-		body="Meg. Cuirie +1", --7/0
+		body="Meg. Cuirie +2", --8/0
 		hands=gear.Herc_DT_hands, --6/4
 		neck="Loricate Torque +1", --6/6
 		ear1="Genmei Earring", --2/0
@@ -376,7 +376,7 @@ function init_gear_sets()
 		body="Adhemar Jacket",
 		legs="Lustr. Subligar +1",
 		neck="Combatant's Torque",
-		ear1="Cessance Earring",
+		ear1="Sherida Earring",
 		ear2="Telos Earring",
 		ring1="Ramuh Ring +1",
 		ring2="Ramuh Ring +1",
@@ -446,7 +446,7 @@ function init_gear_sets()
 
 	sets.engaged.STP = set_combine(sets.engaged, {
 		neck="Anu Torque",
-		ear1="Dedition Earring",
+		ear1="Sherida Earring",
 		ear2="Telos Earring",
 		ring1="Petrov Ring",
 		waist="Kentarch Belt +1",
@@ -492,7 +492,7 @@ function init_gear_sets()
 
 	sets.engaged.STP.LowHaste = set_combine(sets.engaged.LowHaste, {
 		neck="Anu Torque",
-		ear1="Dedition Earring",
+		ear1="Sherida Earring",
 		ear2="Telos Earring",
 		ring1="Petrov Ring",
 		waist="Kentarch Belt +1",
@@ -539,7 +539,7 @@ function init_gear_sets()
 
 	sets.engaged.STP.MidHaste = set_combine(sets.engaged.MidHaste, {
 		neck="Anu Torque",
-		ear1="Dedition Earring",
+		ear1="Sherida Earring",
 		ear2="Telos Earring",
 		ring1="Petrov Ring",
 		waist="Kentarch Belt +1",
@@ -554,13 +554,13 @@ function init_gear_sets()
 		legs="Samnuha Tights",
 		feet=gear.Taeon_DW_feet, --9
 		neck="Erudit. Necklace",
-		ear1="Eabani Earring", --4
-		ear2="Brutal Earring",
+		ear1="Sherida Earring",
+		ear2="Suppanomimi", --5
 		ring1="Petrov Ring",
 		ring2="Epona's Ring",
 		back="Toutatis's Cape",
 		waist="Reiki Yotai", --7
-		} -- 25%
+		} -- 26%
 
 	sets.engaged.LowAcc.HighHaste = set_combine(sets.engaged.HighHaste, {
 		neck="Combatant's Torque",
@@ -584,7 +584,7 @@ function init_gear_sets()
 
 	sets.engaged.STP.HighHaste = set_combine(sets.engaged.HighHaste, {
 		neck="Anu Torque",
-		ear1="Dedition Earring",
+		ear1="Sherida Earring",
 		ear2="Telos Earring",
 		ring1="Petrov Ring",
 		waist="Kentarch Belt +1",
@@ -629,7 +629,7 @@ function init_gear_sets()
 
 	sets.engaged.STP.MaxHaste = set_combine(sets.engaged.MaxHaste, {
 		neck="Anu Torque",
-		ear1="Dedition Earring",
+		ear1="Sherida Earring",
 		ear2="Telos Earring",
 		ring1="Petrov Ring",
 		waist="Kentarch Belt +1",

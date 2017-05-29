@@ -54,8 +54,15 @@ function define_global_sets()
 
 	-- Taeon
 	gear.Taeon_FC_body = {name="Taeon Tabard", augments={'"Fast Cast"+5','Phalanx +3',}}
-	gear.Taeon_RA_body = {name="Taeon Tabard", augments={'Rng.Acc.+20 Rng.Atk.+20','"Snapshot"+4','"Snapshot"+5',}}
-	gear.Taeon_DW_feet = {name="Taeon Boots",augments={'Accuracy+18 Attack+18','"Dual Wield"+5','DEX+8',}}
+
+	gear.Taeon_TA_head = {name="Taeon Chapeau", augments={'Accuracy+19 Attack+19','"Triple Atk."+2','DEX+8',}}
+	gear.Taeon_TA_hands = {name="Taeon Gloves", augments={'Accuracy+18 Attack+18','"Triple Atk."+2','DEX+9',}}
+	gear.Taeon_TA_legs = {name="Taeon Tights", augments={'Accuracy+19 Attack+19','"Triple Atk."+2','DEX+9',}}
+	gear.Taeon_DW_feet = {name="Taeon Boots", augments={'Accuracy+18 Attack+18','"Dual Wield"+5','STR+6 DEX+6',}}
+
+	gear.Taeon_RA_head = {name="Taeon Chapeau", augments={'Rng.Acc.+19 Rng.Atk.+19','"Snapshot"+5','"Snapshot"+5',}}
+	gear.Taeon_RA_body = {name="Taeon Tabard", augments={'Rng.Acc.+20 Rng.Atk.+20','"Snapshot"+5','"Snapshot"+5',}}
+
 	gear.Taeon_PH_feet = {name="Taeon Boots", augments={'Phalanx +2',}}
 
 	-- Ambuscade Capes
@@ -83,12 +90,13 @@ function define_global_sets()
 	gear.RDM_DW_Cape = {name="Sucellos's Cape", augments={'DEX+20','Accuracy+20 Attack+20','"Dual Wield"+10',}}
 	gear.RDM_INT_Cape = {name="Sucellos's Cape", augments={'INT+20','Mag. Acc+20 /Mag. Dmg.+20','"Mag.Atk.Bns."+10',}}
     gear.RDM_MND_Cape = {name="Sucellos's Cape", augments={'MND+20','Mag. Acc+20 /Mag. Dmg.+20','MND+10','"Cure" potency +10%',}} --*
+	gear.RDM_WS1_Cape = {name="Sucellos's Cape", augments={'DEX+20','Accuracy+20 Attack+20','Crit.hit rate+10',}}
 
 	gear.RNG_SNP_Cape = {name="Belenus's Cape", augments={'AGI+20','Rng.Acc.+20 Rng.Atk.+20','"Snapshot"+10',}}
 	gear.RNG_STP_Cape = {name="Belenus's Cape", augments={'DEX+20','Accuracy+20 Attack+20','"Store TP"+10',}}
 	gear.RNG_TP_Cape = {name="Belenus's Cape", augments={'AGI+20','Rng.Acc.+20 Rng.Atk.+20','"Store TP"+10',}}
-	gear.RNG_WS1_Cape = {name="Belenus's Cape", augments={'AGI+20','Mag. Acc+20 /Mag. Dmg.+20','Weapon skill damage +10%',}}
-	gear.RNG_WS2_Cape = {name="Belenus's Cape", augments={'AGI+20','Rng.Acc.+20 Rng.Atk.+20','Weapon skill damage +10%',}}
+	gear.RNG_WS1_Cape = {name="Belenus's Cape", augments={'AGI+20','Mag. Acc+20 /Mag. Dmg.+20','AGI+10','Weapon skill damage +10%',}} --*
+	gear.RNG_WS2_Cape = {name="Belenus's Cape", augments={'AGI+20','Rng.Acc.+20 Rng.Atk.+20','AGI+10','Weapon skill damage +10%',}} --*
 
 	gear.RUN_HP_Cape = {name="Ogma's cape", augments={'HP+60','Eva.+20 /Mag. Eva.+20','Mag. Evasion+10','"Fast Cast"+10',}} --*
     gear.RUN_TP_Cape = {name="Ogma's cape", augments={'DEX+20','Accuracy+20 Attack+20','Accuracy+10','"Store TP"+10',}} --*

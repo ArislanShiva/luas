@@ -31,6 +31,10 @@ function job_setup()
 		'Frazzle II',  'Gravity', 'Gravity II', 'Silence', 'Sleep', 'Sleep II', 'Sleepga'}
 	enfeebling_magic_skill = S{'Dia', 'Dia II', 'Dia III', 'Diaga', 'Distract III', 'Frazzle III'}
 
+	skill_spells = S{
+		'Temper', 'Temper II', 'Enfire', 'Enfire II', 'Enblizzard', 'Enblizzard II', 'Enaero', 'Enaero II',
+		'Enstone', 'Enstone II', 'Enthunder', 'Enthunder II', 'Enwater', 'Enwater II'}
+
 end
 
 
@@ -55,10 +59,10 @@ function user_setup()
 	send_command('bind !- gs c scholar addendum')
 	send_command('bind != gs c scholar addendum')
 	send_command('bind ^; gs c scholar speed')
-	send_command('bind !q input /ma "Temper" <me>')
+	send_command('bind !q input /ma "Temper II" <me>')
 	send_command('bind !w input /ma "Flurry II" <stpc>')
 	send_command('bind !e input /ma "Haste II" <stpc>')
-	send_command('bind !r input /ma "Refresh II" <stpc>')
+	send_command('bind !r input /ma "Refresh III" <stpc>')
 	send_command('bind !o input /ma "Regen II" <stpc>')
 	send_command('bind !p input /ma "Shock Spikes" <me>')
 	send_command('bind ![ gs c scholar aoe')
@@ -174,8 +178,8 @@ function init_gear_sets()
 		legs="Despair Cuisses",
 		feet="Despair Greaves",
 		neck="Fotia Gorget",
-		ear1="Moonshade Earring",
-		ear2="Telos Earring",
+		ear1="Ishvara Earring",
+		ear2="Moonshade Earring",
 		ring1="Rufescent Ring",
 		ring2="Shukuyu Ring",
 		back=gear.RDM_DW_Cape,
@@ -184,16 +188,20 @@ function init_gear_sets()
 
 	sets.precast.WS['Chant du Cygne'] = set_combine(sets.precast.WS, {
 		ammo="Yetshila",
-		head="Jhakri Coronal +1",
+		head=gear.Taeon_TA_head,
 		body="Ayanmo Corazza +1",
+		hands=gear.Taeon_TA_hands,
+		legs=gear.Taeon_TA_legs,
 		feet="Thereoid Greaves",
-		ear2="Brutal Earring",
+		ear1="Sherida Earring",
 		ring1="Begrudging Ring",
 		ring2="Ilabrat Ring",
+		back=gear.RDM_WS1_Cape,
 		})
 
 	sets.precast.WS['Savage Blade'] = set_combine(sets.precast.WS, {
 		neck="Caro Necklace",
+		ear1="Sherida Earring",
 		waist="Prosilio Belt +1",
 		})
 
@@ -204,6 +212,7 @@ function init_gear_sets()
 		head="Jhakri Coronal +1",
 		body="Jhakri Robe +1",
 		feet="Carmine Greaves +1",
+		ear1="Sherida Earring",
 		ring1="Rufescent Ring",
 		ring2="Shukuyu Ring",
 		})
@@ -321,6 +330,12 @@ function init_gear_sets()
 		legs="Telchine Braconi",
 		feet="Leth. Houseaux +1",
 		back=gear.RDM_MND_Cape,
+		}
+
+	sets.midcast.EnhancingSkill = {
+		main="Pukulatmuj +1", 
+		sub="Pukulatmuj", 
+		hands="Viti. Gloves +1",
 		}
 
 	sets.midcast.Regen = set_combine(sets.midcast.EnhancingDuration, {
@@ -551,7 +566,7 @@ function init_gear_sets()
 		legs="Carmine Cuisses +1",
 		feet="Carmine Greaves +1",
 		neck="Incanter's Torque",
-		ear1="Hermetic Earring",
+		ear1="Sherida Earring",
 		ear2="Regal Earring",
 		ring1="Levia. Ring +1",
 		ring2="Weather. Ring +1",
@@ -593,15 +608,15 @@ function init_gear_sets()
 	
 	sets.engaged = {
 		main="Sequence",
-		sub="Deliverance +1",
+		sub="Genmei Shield",
 		ammo="Ginsen",
-		head="Despair Helm",
+		head=gear.Taeon_TA_head,
 		body="Ayanmo Corazza +1",
-		hands="Chironic Gloves",
-		legs="Carmine Cuisses +1",
+		hands=gear.Taeon_TA_hands,
+		legs=gear.Taeon_TA_legs,
 		feet="Carmine Greaves +1",
 		neck="Anu Torque",
-		ear1="Cessance Earring",
+		ear1="Sherida Earring",
 		ear2="Telos Earring",
 		ring1="Petrov Ring",
 		ring2="Hetairoi Ring",
@@ -609,15 +624,22 @@ function init_gear_sets()
 		waist="Kentarch Belt +1",
 		}
 
-	sets.engaged.Acc = sets.engaged
+	sets.engaged.Acc = set_combine(sets.engaged, {
+		head="Carmine Mask +1",
+		legs="Carmine Cuisses +1",
+		neck="Combatant's Torque",
+		ring1="Ramuh Ring +1",
+		ring2="Ramuh Ring +1",
+		waist="Olseni Belt",
+		})
 
 	sets.engaged.DW = set_combine(sets.engaged, {
 		--NIN --25
 		sub="Colada",
 		waist="Reiki Yotai", --7
 		})
-
-	sets.engaged.DW.Acc = sets.engaged.DW
+	
+	sets.engaged.DW.Acc = sets.engaged.Acc
 
 	sets.buff.Doom = {ring1="Saida Ring", ring2="Saida Ring", waist="Gishdubar Sash"}
 
@@ -656,6 +678,8 @@ function job_post_midcast(spell, action, spellMap, eventArgs)
 					equip (sets.midcast.RefreshSelf)
 				end
 			end
+		elseif skill_spells:contains(spell.english) then
+			equip(sets.midcast.EnhancingSkill)	
 		end
 		if (spell.target.type == 'PLAYER' or spell.target.type == 'NPC') and buffactive.Composure then
 			equip(sets.buff.ComposureOther)

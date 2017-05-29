@@ -94,7 +94,7 @@ function user_setup()
 	end
 	
 	send_command('bind @w gs c toggle WeaponLock')
-	send_command('bind @c gs c toggle CP')
+	--send_command('bind @c gs c toggle CP')
 
 	if player.sub_job == 'WAR' then
 		send_command('bind ^numpad/ input /ja "Berserk" <me>')
@@ -261,13 +261,13 @@ function init_gear_sets()
 	sets.precast.WS = {
 		ammo="Knobkierrie",
 		head="Lilitu Headpiece",
-		body="Meg. Cuirie +1",
+		body="Meg. Cuirie +2",
 		hands="Meg. Gloves +2",
 		legs=gear.Herc_WS_legs,
 		feet=gear.Herc_TA_feet,
 		neck="Fotia Gorget",
-		ear1="Moonshade Earring",
-		ear2="Brutal earring",
+		ear1="Sherida Earring",
+		ear2="Moonshade Earring",
 		ring1="Ifrit Ring +1",
 		ring2="Ilabrat Ring",
 		back="Bleating Mantle",
@@ -303,7 +303,6 @@ function init_gear_sets()
 		legs="Lustr. Subligar +1",
 		feet="Lustra. Leggings +1",
 		neck="Caro Necklace",
-		ear2="Ishvara Earring",
 		ring1="Ramuh Ring +1",
 		ring2="Ilabrat Ring",
 		back=gear.RUN_WS2_Cape,
@@ -478,10 +477,12 @@ function init_gear_sets()
 	sets.idle.Town = set_combine(sets.idle, {
 		ammo="Knobkierrie",
 		head="Carmine Mask +1",
-		feet="Carmine Greaves +1",
+		hands="Runeist's Mitons +2",
+		feet="Runeist's Boots +2",
 		neck="Loricate Torque +1",
+		ear1="Sherida Earring",
 		ear2="Telos Earring",
-		ring1="Moonbeam Ring",
+		ring1="Gelatinous Ring +1",
 		ring2="Defending Ring",
 		})
 
@@ -493,7 +494,13 @@ function init_gear_sets()
 	-- Defense sets
 	--------------------------------------
 
-	sets.defense.Charm = {neck="Unmoving Collar +1", ring1="Wuji Ring", back="Solemnity Cape"}
+	sets.defense.Charm = {
+		neck="Unmoving Collar +1",
+		ear2="Arete del Luna +1",
+		ring1="Wuji Ring",
+		back="Solemnity Cape",
+		}
+
 	sets.defense.Knockback = {back="Repulse Mantle"}
 	sets.defense.Death = {body="Samnuha Coat", ring1="Warden's Ring", ring2="Eihwaz Ring"}
 
@@ -575,7 +582,7 @@ function init_gear_sets()
 
 	sets.engaged = {
 		main="Lionheart",
-		sub="Nepenthe Grip +1",
+		sub="Utu Grip",
 		ammo="Ginsen",
 		head="Dampening Tam",
 		body=gear.Herc_TA_body,
@@ -583,7 +590,7 @@ function init_gear_sets()
 		legs="Samnuha Tights",
 		feet=gear.Herc_TA_feet,
 		neck="Asperity Necklace",
-		ear1="Cessance Earring",
+		ear1="Sherida Earring",
 		ear2="Brutal Earring",
 		ring1="Petrov Ring",
 		ring2="Epona's Ring",
@@ -608,15 +615,14 @@ function init_gear_sets()
 		feet=gear.Herc_Acc_feet,
 		ring1="Ramuh Ring +1",
 		ring2="Ramuh Ring +1",
-		ear1="Mache Earring",
+		ear1="Cessance Earring",
 		waist="Kentarch Belt +1",
 		})
 
 	sets.engaged.STP = set_combine(sets.engaged, {
-		sub="Nepenthe Grip +1",
 		feet="Carmine Greaves +1",
 		neck="Anu Torque",
-		ear1="Dedition Earring",
+		ear1="Sherida Earring",
 		ear2="Telos Earring",
 		waist="Kentarch Belt +1",
 		})
@@ -626,15 +632,17 @@ function init_gear_sets()
 	--------------------------------------
 
 	sets.engaged.DT = {
-		sub="Mensch Strap +1", --5/0
+		--sub="Mensch Strap +1", --5/0
 		ammo="Staunch Tathlum", --2/2
-		head=gear.Adhemar_DT_head, --3/0
+		head="Dampening Tam",
+		--head=gear.Adhemar_DT_head, --3/0
 		body="Ayanmo Corazza +1", --5/5
-		hands=gear.Herc_DT_hands, --6/4
+		--hands=gear.Herc_DT_hands, --6/4
+		hands=gear.Adhemar_TP_hands,
 		legs="Meg. Chausses +2", --6/0
 		feet=gear.Herc_TA_feet,
 		neck="Loricate Torque +1", --6/6
-		ear1="Cessance Earring",
+		ear1="Sherida Earring",
 		ear2="Brutal Earring",
 		ring1="Moonbeam Ring",  --4/4
 		ring2="Defending Ring", --10/10
@@ -653,11 +661,11 @@ function init_gear_sets()
 
 	sets.engaged.HighAcc.DT = set_combine(sets.engaged.MidAcc.DT, {
 		feet=gear.Herc_Acc_feet,
-		ear1="Mache Earring",
+		ear1="Cessance Earring",
 		})
 
 	sets.engaged.STP.DT = set_combine(sets.engaged.DT, {
-		ear1="Dedition Earring",
+		ear1="Sherida Earring",
 		ear2="Telos Earring",
 		})
 
@@ -708,6 +716,12 @@ function job_precast(spell, action, spellMap, eventArgs)
 		elseif buffactive['Copy Image'] or buffactive['Copy Image (2)'] then
 			send_command('cancel 66; cancel 444; cancel Copy Image; cancel Copy Image (2)')
 		end
+	end
+end
+
+function job_post_precast(spell, action, spellMap, eventArgs)
+	if spell.english == 'Holy Water' then
+		add_to_chat(122, 'Test Holy Water')
 	end
 end
 

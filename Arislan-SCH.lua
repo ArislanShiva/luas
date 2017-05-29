@@ -252,7 +252,7 @@ function init_gear_sets()
 		main="Tamaxchi",
 		sub="Sors Shield",
 		head="Vanya Hood",
-		legs="Acad. Pants +1",
+		legs="Acad. Pants +2",
 		feet="Vanya Clogs",
 		neck="Incanter's Torque",
 		ring1="Haoma's Ring",
@@ -313,7 +313,7 @@ function init_gear_sets()
 		})
 		
 	sets.midcast.Stoneskin = set_combine(sets.midcast['Enhancing Magic'], {
-		legs="Acad. Pants +1",
+		legs="Acad. Pants +2",
 		neck="Nodens Gorget",
 		waist="Siegel Sash",
 		})
@@ -604,7 +604,9 @@ function init_gear_sets()
 
 	sets.buff.Doom = {ring1="Saida Ring", ring2="Saida Ring", waist="Gishdubar Sash"}
 
-	sets.Grimoire = {feet="Acad. Loafers +3"}
+	sets.LightArts = {legs="Acad. Pants +2", feet="Acad. Loafers +3"}
+	sets.DarkArts = {feet="Acad. Loafers +3"}
+
 	sets.Obi = {waist="Hachirin-no-Obi"}
 	sets.Bookworm = {back="Bookworm's Cape"}
 	sets.CP = {back="Mecisto. Mantle"}
@@ -647,10 +649,12 @@ function job_post_midcast(spell, action, spellMap, eventArgs)
 	if spell.action_type == 'Magic' then
 		apply_grimoire_bonuses(spell, action, spellMap, eventArgs)
 	end
-	if spell.skill == 'Enfeebling Magic' and ((spell.type == "WhiteMagic" and (buffactive["Light Arts"]
-		or buffactive["Addendum: White"])) or (spell.type == "BlackMagic" and (buffactive["Dark Arts"]
-		or buffactive["Addendum: Black"]))) then 
-		equip(sets.Grimoire) 
+	if spell.skill == 'Enfeebling Magic' then
+		if spell.type == "WhiteMagic" and (buffactive["Light Arts"] or buffactive["Addendum: White"]) then
+			equip(sets.LightArts)
+		elseif spell.type == "BlackMagic" and (buffactive["Dark Arts"] or buffactive["Addendum: Black"]) then 
+			equip(sets.DarkArts)
+		end
 	end
 	if spell.skill == 'Elemental Magic' and state.MagicBurst.value then
 		if state.CastingMode.value == "Resistant" then

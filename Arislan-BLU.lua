@@ -385,7 +385,7 @@ function init_gear_sets()
 		})
 
 	sets.precast.WS['Savage Blade'].Acc = set_combine(sets.precast.WS['Savage Blade'], {
-		ammo="Focal Orb",
+		ammo="Falcon Eye",
 		body=gear.Herc_TA_body,
 		hands=gear.Herc_Acc_hands,
 		feet=gear.Herc_Acc_feet,
@@ -518,7 +518,6 @@ function init_gear_sets()
 
 	sets.midcast['Blue Magic'].PhysicalDex = set_combine(sets.midcast['Blue Magic'].Physical, {
 		ammo="Falcon Eye",
-		ear2="Mache Earring",
 		ring1="Ramuh Ring +1",
 		ring2="Ramuh Ring +1",
 		back=gear.BLU_WS1_Cape,

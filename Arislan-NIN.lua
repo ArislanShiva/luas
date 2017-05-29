@@ -161,7 +161,7 @@ function init_gear_sets()
 		})
 
 	sets.precast.RA = {
-		head="Taeon Chapeau", --10/0
+		head=gear.Taeon_RA_head, --10/0
 		body=gear.Taeon_RA_body, --9/0
 		legs="Adhemar Kecks", --9/0
 		}

@@ -210,17 +210,17 @@ function init_gear_sets()
 	sets.precast.CorsairRoll = {
 		range="Compensator",
 		head="Lanun Tricorne +1",
-		body="Meg. Cuirie +1",
+		body="Meg. Cuirie +2", --8/0
 		hands="Chasseur's Gants +1",
 		legs="Desultor Tassets",
-		feet="Lanun Bottes +1",
-		neck="Regal Necklace",
-		ear1="Genmei Earring",
-		ear2="Etiolation Earring",
-		ring1="Gelatinous Ring +1",
-		ring2="Defending Ring",
+		feet="Meg. Jam. +2", --3/0
+		neck="Regal Necklace", 
+		ear1="Genmei Earring", --2/0
+		ear2="Etiolation Earring", --0/3
+		ring1="Gelatinous Ring +1", --7/(-1)
+		ring2="Defending Ring", --10/10
 		back=gear.COR_SNP_Cape,
-		waist="Flume Belt +1",
+		waist="Flume Belt +1", --4/0
 		}
 	
 	sets.precast.CorsairRoll["Caster's Roll"] = set_combine(sets.precast.CorsairRoll, {legs="Chas. Culottes +1"})
@@ -229,7 +229,7 @@ function init_gear_sets()
 	sets.precast.CorsairRoll["Tactician's Roll"] = set_combine(sets.precast.CorsairRoll, {body="Chasseur's Frac +1"})
 	sets.precast.CorsairRoll["Allies' Roll"] = set_combine(sets.precast.CorsairRoll, {hands="Chasseur's Gants +1"})
 	
-	sets.precast.LuzafRing = {ring1="Luzaf's Ring"}
+	sets.precast.LuzafRing = set_combine(sets.precast.CorsairRoll, {ring1="Luzaf's Ring"})
 	sets.precast.FoldDoubleBust = {hands="Lanun Gants +1"}
 	
 	sets.precast.CorsairShot = {}
@@ -267,25 +267,25 @@ function init_gear_sets()
 	-- (10% Snapshot from JP Gifts)
 	sets.precast.RA = {
 		ammo=gear.RAbullet,
-		head="Taeon Chapeau", --10/0
-		body=gear.Taeon_RA_body, --9/0
+		head=gear.Taeon_RA_head, --10/0
+		body=gear.Taeon_RA_body, --10/0
 		hands="Carmine Fin. Ga. +1", --8/11
 		legs=gear.Adhemar_RS_legs, --9/10
-		feet="Meg. Jam. +1", --8/0
+		feet="Meg. Jam. +2", --10/0
 		back=gear.COR_SNP_Cape, --10/0
 		waist="Impulse Belt", --3/0
-		} --57/21
+		} --60/21
 
 	sets.precast.RA.Flurry1 = set_combine(sets.precast.RA, {
 		body="Laksa. Frac +3", --0/20
 		waist="Yemaya Belt", --0/5
-		}) --45/46
+		}) --47/46
 
 	sets.precast.RA.Flurry2 = set_combine(sets.precast.RA.Flurry1, {
 		head="Chass. Tricorne +1", --0/14
 		legs="Pursuer's Pants", --0/19
 		waist="Impulse Belt", --3/0
-		}) --29/64
+		}) --31/64
 		
 	-- Weaponskill sets
 	-- Default set for any weaponskill that isn't any more specifically defined
@@ -306,7 +306,7 @@ function init_gear_sets()
 		}
 
 	sets.precast.WS.Acc = set_combine(sets.precast.WS, {
-		feet="Meg. Jam. +1",
+		feet="Meg. Jam. +2",
 		ear2="Telos Earring",
 		neck="Iskur Gorget",
 		ring1="Hajduk Ring +1",
@@ -366,7 +366,7 @@ function init_gear_sets()
 		
 	sets.precast.WS['Evisceration'] = {
 		head=gear.Adhemar_TP_head,
-		body="Meg. Cuirie +1",
+		body="Meg. Cuirie +2",
 		hands=gear.Adhemar_TP_hands,
 		legs="Samnuha Tights",
 		feet=gear.Herc_TA_feet,
@@ -515,7 +515,7 @@ function init_gear_sets()
 		ammo=gear.RAbullet,
 		hands="Meg. Gloves +2",
 		legs="Meg. Chausses +2",
-		feet="Meg. Jam. +1",
+		feet="Meg. Jam. +2",
 		ring1="Hajduk Ring +1",
 		ring2="Hajduk Ring +1",
 		waist="Kwahu Kachina Belt",
@@ -560,7 +560,7 @@ function init_gear_sets()
 
 	sets.idle.DT = set_combine (sets.idle, {
 		head=gear.Herc_DT_head, --3/3
-		body="Meg. Cuirie +1", --7/0
+		body="Meg. Cuirie +2", --8/0
 		hands=gear.Herc_DT_hands, --6/4
 		feet="Lanun Bottes +1", --4/0
 		neck="Loricate Torque +1", --6/6
