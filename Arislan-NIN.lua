@@ -45,6 +45,7 @@ end
 -- Setup vars that are user-dependent.  Can override this function in a sidecar file.
 function user_setup()
 	state.OffenseMode:options('STP', 'Normal', 'LowAcc', 'MidAcc', 'HighAcc', 'Fodder')
+	state.HybridMode:options('Normal', 'DT')
 	state.WeaponskillMode:options('Normal', 'Acc')
 	state.CastingMode:options('Normal', 'Resistant')
 	state.IdleMode:options('Normal', 'DT')
@@ -127,7 +128,6 @@ function init_gear_sets()
 
 	sets.precast.Waltz = {
 		body="Passion Jacket",
-		hands="Slither Gloves +1",
 		legs="Dashing Subligar",
 		neck="Phalaina Locket",
 		ring1="Asklepian Ring",
@@ -186,7 +186,6 @@ function init_gear_sets()
 
 	sets.precast.WS.Acc = set_combine(sets.precast.WS, {
 		head=gear.Adhemar_TP_head,
-		hands=gear.Herc_Acc_hands,
 		legs=gear.Herc_WS_legs,
 		feet=gear.Herc_Acc_feet,
 		ear2="Telos Earring",
@@ -562,6 +561,41 @@ function init_gear_sets()
 		ring1="Petrov Ring",
 		waist="Kentarch Belt +1",
 		})
+
+	sets.engaged.Hybrid = {
+		neck="Loricate Torque +1", --6/6
+		ring2="Defending Ring", --10/10
+		}
+	
+	sets.engaged.DT = set_combine(sets.engaged, sets.engaged.Hybrid)
+	sets.engaged.LowAcc.DT = set_combine(sets.engaged.LowAcc, sets.engaged.Hybrid)
+	sets.engaged.MidAcc.DT = set_combine(sets.engaged.MidAcc, sets.engaged.Hybrid)
+	sets.engaged.HighAcc.DT = set_combine(sets.engaged.HighAcc, sets.engaged.Hybrid)
+	sets.engaged.STP.DT = set_combine(sets.engaged.STP, sets.engaged.Hybrid)
+
+	sets.engaged.DT.LowHaste = set_combine(sets.engaged.LowHaste, sets.engaged.Hybrid)
+	sets.engaged.LowAcc.DT.LowHaste = set_combine(sets.engaged.LowAcc.LowHaste, sets.engaged.Hybrid)
+	sets.engaged.MidAcc.DT.LowHaste = set_combine(sets.engaged.MidAcc.LowHaste, sets.engaged.Hybrid)
+	sets.engaged.HighAcc.DT.LowHaste = set_combine(sets.engaged.HighAcc.LowHaste, sets.engaged.Hybrid)	
+	sets.engaged.STP.DT.LowHaste = set_combine(sets.engaged.STP.LowHaste, sets.engaged.Hybrid)
+
+	sets.engaged.DT.MidHaste = set_combine(sets.engaged.MidHaste, sets.engaged.Hybrid)
+	sets.engaged.LowAcc.DT.MidHaste = set_combine(sets.engaged.LowAcc.MidHaste, sets.engaged.Hybrid)
+	sets.engaged.MidAcc.DT.MidHaste = set_combine(sets.engaged.MidAcc.MidHaste, sets.engaged.Hybrid)
+	sets.engaged.HighAcc.DT.MidHaste = set_combine(sets.engaged.HighAcc.MidHaste, sets.engaged.Hybrid)	
+	sets.engaged.STP.DT.MidHaste = set_combine(sets.engaged.STP.MidHaste, sets.engaged.Hybrid)
+
+	sets.engaged.DT.HighHaste = set_combine(sets.engaged.HighHaste, sets.engaged.Hybrid)
+	sets.engaged.LowAcc.DT.HighHaste = set_combine(sets.engaged.LowAcc.HighHaste, sets.engaged.Hybrid)
+	sets.engaged.MidAcc.DT.HighHaste = set_combine(sets.engaged.MidAcc.HighHaste, sets.engaged.Hybrid)
+	sets.engaged.HighAcc.DT.HighHaste = set_combine(sets.engaged.HighAcc.HighHaste, sets.engaged.Hybrid)	
+	sets.engaged.STP.DT.HighHaste = set_combine(sets.engaged.HighHaste.STP, sets.engaged.Hybrid)
+
+	sets.engaged.DT.MaxHaste = set_combine(sets.engaged.MaxHaste, sets.engaged.Hybrid)
+	sets.engaged.LowAcc.DT.MaxHaste = set_combine(sets.engaged.LowAcc.MaxHaste, sets.engaged.Hybrid)
+	sets.engaged.MidAcc.DT.MaxHaste = set_combine(sets.engaged.MidAcc.MaxHaste, sets.engaged.Hybrid)
+	sets.engaged.HighAcc.DT.MaxHaste = set_combine(sets.engaged.HighAcc.MaxHaste, sets.engaged.Hybrid)	
+	sets.engaged.STP.DT.MaxHaste = set_combine(sets.engaged.STP.MaxHaste, sets.engaged.Hybrid)
 
 	--------------------------------------
 	-- Custom buff sets

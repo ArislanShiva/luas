@@ -63,6 +63,7 @@ function user_setup()
 	send_command('bind !w input /ma "Flurry II" <stpc>')
 	send_command('bind !e input /ma "Haste II" <stpc>')
 	send_command('bind !r input /ma "Refresh III" <stpc>')
+	send_command('bind !y input /ma "Phalanx II" <stpc>')
 	send_command('bind !o input /ma "Regen II" <stpc>')
 	send_command('bind !p input /ma "Shock Spikes" <me>')
 	send_command('bind ![ gs c scholar aoe')
@@ -95,8 +96,9 @@ function user_unload()
 	send_command('unbind !q')
 	send_command('unbind !w')
 	send_command('bind !e input /ma "Haste" <stpc>')
-	send_command('bind !r input /ma "Refresh" <stpc>')
+	send_command('bind !y input /ma "Phalanx" <me>')
 	send_command('unbind !o')
+	send_command('unbind !p')
 	send_command('unbind !p')
 	send_command('unbind ![')
 	send_command('unbind !;')
@@ -248,10 +250,10 @@ function init_gear_sets()
 
 	sets.midcast.Cure = {
 		main="Tamaxchi", --22/(-10)
-		sub="Culminus",
+		sub="Sors Shield", --3/(-5)
 		ammo="Esper Stone +1", --0/(-5)
 		head="Gende. Caubeen +1", --15/(-8)
-		body="Kaykaus Bliaut", --5(+3)
+		body="Kaykaus Bliaut", --(+3)
 		hands="Kaykaus Cuffs", --10/(-6)
 		legs="Kaykaus Tights", --10/(-5)
 		feet="Kaykaus Boots", --10/(-10)
@@ -266,7 +268,7 @@ function init_gear_sets()
 
 	sets.midcast.CureWeather = set_combine(sets.midcast.Cure, {
 		main="Chatoyant Staff",
-		sub="Clerisy Strap +1",
+		sub="Achaq Grip", --0/(-4)
 		hands="Kaykaus Cuffs", --10/(-6)
 		back="Twilight Cape",
 		waist="Hachirin-no-Obi",
@@ -280,6 +282,7 @@ function init_gear_sets()
 		})
 
 	sets.midcast.Curaga = set_combine(sets.midcast.Cure, {
+		ammo="Regal Gem",
 		ring1="Levia. Ring +1",
 		ring2="Levia. Ring +1",
 		waist="Luminary Sash",
@@ -289,9 +292,11 @@ function init_gear_sets()
 		main="Tamaxchi",
 		sub="Sors Shield",
 		head="Vanya Hood",
+		body="Vanya Robe",
 		legs="Atrophy Tights +1",
 		feet="Vanya Clogs",
 		neck="Incanter's Torque",
+		ear2="Healing Earring",
 		ring1="Haoma's Ring",
 		ring2="Haoma's Ring",
 		back=gear.RDM_MND_Cape,
@@ -299,6 +304,7 @@ function init_gear_sets()
 		}
 		
 	sets.midcast.Cursna = set_combine(sets.midcast.StatusRemoval, {
+		hands="Hieros Mittens",
 		neck="Debilis Medallion",
 		ear1="Beatific Earring",
 		back="Oretan. Cape +1",
@@ -307,6 +313,7 @@ function init_gear_sets()
 	sets.midcast['Enhancing Magic'] = {
 		main="Oranyan",
 		sub="Enki Strap",
+		ammo="Regal Gem",
 		head="Befouled Crown",
 		body="Viti. Tabard +1",
 		hands="Atrophy Gloves +1",
@@ -344,8 +351,9 @@ function init_gear_sets()
 		})
 
 	sets.midcast.Refresh = set_combine(sets.midcast.EnhancingDuration, {
-		head="Amalric Coif",
-		legs="Leth. Fuseau +1",
+		head="Amalric Coif", -- +1
+		body="Atrophy Tabard +2", -- +2
+		legs="Leth. Fuseau +1", -- +2
 		})
 	
 	sets.midcast.RefreshSelf = {
@@ -359,9 +367,9 @@ function init_gear_sets()
 		})
 
 	sets.midcast['Phalanx'] = set_combine(sets.midcast['Enhancing Magic'], {
-		body=gear.Taeon_FC_body,
-		feet=gear.Taeon_PH_feet
+--		feet=gear.Taeon_PH_feet
 		})
+
 	sets.midcast.Aquaveil = set_combine(sets.midcast['Enhancing Magic'], {
 		head="Amalric Coif",
 		waist="Emphatikos Rope",
@@ -381,7 +389,7 @@ function init_gear_sets()
 	sets.midcast.MndEnfeebles = {
 		main=gear.Grioavolr_MND,
 		sub="Enki Strap",
-		ammo="Quartz Tathlum +1",
+		ammo="Regal Gem",
 		head="Carmine Mask +1",
 		body="Lethargy Sayon +1",
 		hands="Kaykaus Cuffs",
@@ -397,22 +405,19 @@ function init_gear_sets()
 		}
 
 	sets.midcast.MndEnfeeblesAcc = set_combine(sets.midcast.MndEnfeebles, {
-		ammo="Pemphredo Tathlum",
-		body="Vanya Robe",
+		body="Atrophy Tabard +2",
 		neck="Sanctity Necklace",
 		ring2="Weather. Ring +1",
 		})
 	
 	sets.midcast.IntEnfeebles = set_combine(sets.midcast.MndEnfeebles, {
 		main=gear.Grioavolr_MB,
-		ammo="Pemphredo Tathlum",
 		back=gear.RDM_INT_Cape,
 		})
 
 	sets.midcast.IntEnfeeblesAcc = set_combine(sets.midcast.IntEnfeebles, {
-		ammo="Pemphredo Tathlum",
-		body="Vanya Robe",
-		neck="Sanctity Necklace",
+		body="Atrophy Tabard +2",
+		neck="Erra Pendant",
 		ring2="Weather. Ring +1",
 		})
 
@@ -439,10 +444,10 @@ function init_gear_sets()
 		ammo="Pemphredo Tathlum",
 		head="Amalric Coif",
 		body="Shango Robe",
-		hands="Jhakri Cuffs +1",
+		hands="Ea Cuffs",
 		legs=gear.Merlinic_MAcc_legs,
 		feet="Merlinic Crackows",
-		neck="Incanter's Torque",
+		neck="Erra Pendant",
 		ear1="Hermetic Earring",
 		ear2="Regal Earring",
 		ring1="Stikini Ring",
@@ -469,7 +474,7 @@ function init_gear_sets()
 		head="Merlinic Hood",
 		body="Merlinic Jubbah",
 		hands="Amalric Gages",
-		legs=gear.Merlinic_MB_legs,
+		legs=gear.Merlinic_MAcc_legs,
 		feet="Merlinic Crackows",
 		neck="Baetyl Pendant",
 		ear1="Friomisi Earring",
@@ -485,14 +490,14 @@ function init_gear_sets()
 		sub="Enki Strap",
 		body="Seidr Cotehardie",
 		legs=gear.Merlinic_MAcc_legs,
-		neck="Sanctity Necklace",
+		neck="Erra Pendant",
 		})
 
 	sets.midcast['Elemental Magic'].Resistant = set_combine(sets.midcast['Elemental Magic'], {
 		main=gear.Grioavolr_MB,
 		sub="Enki Strap",
-		legs=gear.Merlinic_MAcc_legs,
-		neck="Sanctity Necklace",
+		hands="Ea Cuffs",
+		neck="Erra Pendant",
 		ear1="Hermetic Earring",
 		waist="Yamabuki-no-Obi",
 		})
@@ -561,6 +566,7 @@ function init_gear_sets()
 
 	sets.idle.Town = set_combine(sets.idle, {
 		main="Sequence",
+		ammo="Regal Gem",
 		body="Lethargy Sayon +1",
 		hands="Leth. Gantherots +1",
 		legs="Carmine Cuisses +1",
@@ -591,8 +597,7 @@ function init_gear_sets()
 	sets.magic_burst = { 
 		main=gear.Grioavolr_MB, --5
 		body="Merlinic Jubbah", --10
-		hands="Amalric Gages", --(5)
-		legs=gear.Merlinic_MB_legs, --6
+		hands="Ea Cuffs", --5(5)
 		feet="Merlinic Crackows", --11
 		neck="Mizu. Kubikazari", --10
 		ring1="Mujin Band", --(5)
@@ -655,6 +660,10 @@ end
 function job_post_precast(spell, action, spellMap, eventArgs)
 	if spell.name == 'Impact' then
 		equip(sets.precast.FC.Impact)
+	end
+	if spell.english == "Phalanx II" and spell.target.type == 'SELF' then
+		cancel_spell()
+		send_command('@input /ma "Phalanx" <me>')
 	end
 end
 

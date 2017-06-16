@@ -39,6 +39,8 @@ function job_setup()
 	rayke_duration = 47
 	gambit_duration = 94
 
+	state.Buff.Battuta = buffactive.Battuta or false
+
 end
 
 -------------------------------------------------------------------------------------------------------------------
@@ -118,6 +120,8 @@ function user_setup()
 	send_command('bind !numpad4 input /ws "Requiescat" <t>')
 	send_command('bind ^numpad5 input /ws "Ground Strike" <t>')
 	send_command('bind ^numpad1 input /ws "Herculean Slash" <t>')
+
+	send_command('bind @numpad* input /item "Panacea" <me>')
 	
 	select_default_macro_book()
 	set_lockstyle()
@@ -149,6 +153,7 @@ function user_unload()
 	send_command('unbind !numpad4')
 	send_command('unbind ^numpad5')
 	send_command('unbind ^numpad1')
+	send_command('unbind @numpad*')
 end
 
 -- Define sets and vars used by this job file.
@@ -173,7 +178,7 @@ function init_gear_sets()
 		ring1="Supershear Ring", --5
 		ring2="Eihwaz Ring", --5
 		back="Evasionist's Cape", --4
-		waist="Trance Belt", --4
+		waist="Kasiri Belt", --3
 		}
 
 	-- Precast sets to enhance JAs
@@ -209,15 +214,6 @@ function init_gear_sets()
 	sets.precast.JA['One For All'] = set_combine(sets.Enmity, {})
 	sets.precast.JA['Provoke'] = sets.Enmity
 
-	sets.precast.Waltz = {
-		hands="Slither Gloves +1",
-		legs="Dashing Subligar",
-		ring1="Asklepian Ring",
-		ring2="Valseur's Ring",
-		}
-
-	sets.precast.Waltz['Healing Waltz'] = {}
-
 	-- Fast cast sets for spells
 	sets.precast.FC = {
 		ammo="Sapience Orb", --2
@@ -240,7 +236,6 @@ function init_gear_sets()
 		neck="Orunmila's Torque", --5
 		ring2="Weather. Ring +1", --6(4)
 		}
-
 
 	sets.precast.FC['Enhancing Magic'] = set_combine(sets.precast.FC, {
 		legs="Futhark Trousers +1",
@@ -371,19 +366,20 @@ function init_gear_sets()
 		}
 
 	sets.midcast.Cure = {
+		sub="Mensch Strap +1",
 		ammo="Staunch Tathlum",
 		head=gear.Herc_DT_head,
 		body="Vrikodara Jupon", -- 13
 		hands="Buremte Gloves", --(13)
-		legs="Eri. Leg Guards +1",
-		feet="Erilaz Greaves +1",
+		legs="Aya. Cosciales +1",
+		feet="Skaoi Boots", --7
 		neck="Phalaina Locket", -- 4(4)
 		ear1="Roundel Earring", -- 5
 		ear2="Mendi. Earring", -- 5
 		ring1="Lebeche Ring", -- 3
 		ring2="Defending Ring",
 		back="Solemnity Cape", -- 7
-		waist="Flume Belt +1",
+		waist="Gishdubar Sash", --(10)
 		}
 
 	sets.midcast['Enhancing Magic'] = {
@@ -407,8 +403,7 @@ function init_gear_sets()
 		main="Deacon Sword",
 		sub="Chanter's Shield",
 		head="Fu. Bandeau +1",
-		body=gear.Taeon_FC_body,
-		feet=gear.Taeon_PH_feet,
+--		feet=gear.Taeon_PH_feet,
 		})
 
 	sets.midcast['Regen'] = set_combine(sets.midcast['Enhancing Magic'], {head="Runeist Bandeau +1"})
@@ -447,7 +442,7 @@ function init_gear_sets()
 		body="Runeist's Coat +2",
 		hands="Erilaz Gauntlets +1",
 		legs="Carmine Cuisses +1",
-		feet="Erilaz Greaves +1",
+		feet="Turms Leggings",
 		neck="Bathy Choker +1",
 		ear1="Genmei Earring",
 		ear2="Infused Earring",
@@ -467,7 +462,7 @@ function init_gear_sets()
 		feet="Erilaz Greaves +1", --5/0
 		neck="Loricate Torque +1", --6/6
 		ear1="Genmei Earring", --2/0
-		ear2="Infused Earring",
+		ear2="Ethereal Earring",
 		ring1="Gelatinous Ring +1", --7/(-1)
 		ring2="Defending Ring", --10/10
 		back="Evasionist's Cape", --7/4
@@ -501,6 +496,7 @@ function init_gear_sets()
 		back="Solemnity Cape",
 		}
 
+	sets.defense.Battuta = {}
 	sets.defense.Knockback = {back="Repulse Mantle"}
 	sets.defense.Death = {body="Samnuha Coat", ring1="Warden's Ring", ring2="Eihwaz Ring"}
 
@@ -512,11 +508,11 @@ function init_gear_sets()
 		body="Erilaz Surcoat +1",
 		hands=gear.Herc_DT_hands, --6/4
 		legs="Eri. Leg Guards +1", --7/0
-		feet="Erilaz Greaves +1", --5/0
+		feet="Turms Leggings",
 		neck="Loricate Torque +1", --6/6
 		ear1="Genmei Earring", --2/0
-		ear2="Impreg. Earring",
-		ring1="Warden's Ring", --3/0
+		ear2="Ethereal Earring",
+		ring1="Gelatinous Ring +1", --7/(-1)
 		ring2="Defending Ring", --10/10
 		back=gear.RUN_HP_Cape,
 		waist="Flume Belt +1", --4/0
@@ -533,7 +529,7 @@ function init_gear_sets()
 		feet="Erilaz Greaves +1",--5/0
 		neck="Warder's Charm +1",
 		ear1="Genmei Earring", --2/0
-		ear2="Impreg. Earring",
+		ear2="Ethereal Earring",
 		ring1="Gelatinous Ring +1", --7/(-1)
 		ring2="Defending Ring", --10/10
 		back="Evasionist's Cape", --7/4
@@ -566,7 +562,7 @@ function init_gear_sets()
 		body="Runeist's Coat +2",
 		hands="Runeist's Mitons +2", --2/0
 		legs="Eri. Leg Guards +1", --7/0
-		feet="Runeist's Boots +2",
+		feet="Turms Leggings",
 		neck="Loricate Torque +1", --6/6
 		ear1="Odnowa Earring", --0/1
 		ear2="Odnowa Earring +1", --0/2
@@ -655,7 +651,7 @@ function init_gear_sets()
 		})
 	
 	sets.engaged.MidAcc.DT = set_combine(sets.engaged.LowAcc.DT, {
-		head="Meghanada Visor +1", --4/0
+		head="Meghanada Visor +2", --5/0
 		hands="Meg. Gloves +2", --4/0
 		})
 
@@ -810,7 +806,11 @@ function job_buff_change(buff,gain)
 			enable('head','legs','back')			
 			status_change(player.status)
 		end
-	end	
+	end
+
+	if buff == 'Battuta' and not gain then
+		status_change(player.status)
+	end
 
 end
 	
@@ -841,6 +841,9 @@ function customize_idle_set(idleSet)
 	if state.Death.value == true then
 		idleSet = set_combine(idleSet, sets.defense.Death)
 	end
+	if state.Buff.Battuta then
+		idleSet = set_combine(idleSet, sets.defense.Battuta)
+	end
 	if state.CP.current == 'on' then
 		equip(sets.CP)
 		disable('back')
@@ -862,6 +865,9 @@ function customize_melee_set(meleeSet)
 	if state.Death.value == true then
 		meleeSet = set_combine(meleeSet, sets.defense.Death)
 	end
+	if state.Buff.Battuta then
+		meleeSet = set_combine(meleeSet, sets.defense.Battuta)
+	end
 
 	return meleeSet
 end
@@ -875,6 +881,9 @@ function customize_defense_set(defenseSet)
 	end
 	if state.Death.value == true then
 		defenseSet = set_combine(defenseSet, sets.defense.Death)
+	end
+	if state.Buff.Battuta then
+		defenseSet = set_combine(defenseSet, sets.defense.Battuta)
 	end
 
 	return defenseSet

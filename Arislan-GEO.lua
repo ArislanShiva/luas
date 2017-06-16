@@ -193,6 +193,7 @@ function init_gear_sets()
 	sets.midcast.Cure = {
 		main="Tamaxchi", --22/(-10)
 		sub="Sors Shield", --3/(-5)
+		body="Vanya Robe",
 		hands="Telchine Gloves", --10
 		legs="Gyve Trousers", --10
 		feet="Medium's Sabots", --12
@@ -215,9 +216,12 @@ function init_gear_sets()
 		main="Gada",
 		sub="Genmei Shield",
 		head="Vanya Hood",
+		body="Vanya Robe",
+		hands="Hieros Mittens",
 		feet="Vanya Clogs",
 		neck="Debilis Medallion",
 		ear1="Beatific Earring",
+		ear2="Healing Earring",
 		ring1="Haoma's Ring",
 		ring2="Haoma's Ring",
 		})
@@ -288,7 +292,7 @@ function init_gear_sets()
 		hands="Azimuth Gloves +1",
 		legs=gear.Merlinic_MAcc_legs,
 		feet="Skaoi Boots",
-		neck="Incanter's Torque",
+		neck="Erra Pendant",
 		ear1="Barkaro. Earring",
 		ear2="Regal Earring",
 		ring1="Kishar Ring",
@@ -307,10 +311,10 @@ function init_gear_sets()
 		sub="Enki Strap",
 		head="Merlinic Hood",
 		body="Shango Robe",
-		hands="Jhakri Cuffs +1",
+		hands="Ea Cuffs",
 		legs="Azimuth Tights +1",
 		feet="Merlinic Crackows",
-		neck="Incanter's Torque",
+		neck="Erra Pendant",
 		ear1="Barkaro. Earring",
 		ear2="Regal Earring",
 		ring1="Evanescence Ring",
@@ -341,7 +345,7 @@ function init_gear_sets()
 		head="Merlinic Hood",
 		body="Merlinic Jubbah",
 		hands="Amalric Gages",
-		legs=gear.Merlinic_MB_legs,
+		legs=gear.Merlinic_MAcc_legs,
 		feet="Merlinic Crackows",
 		neck="Baetyl Pendant",
 		ear1="Barkaro. Earring",
@@ -355,8 +359,8 @@ function init_gear_sets()
 	sets.midcast['Elemental Magic'].Resistant = set_combine(sets.midcast['Elemental Magic'], {
 		main=gear.Grioavolr_MB,
 		sub="Enki Strap",
-		legs=gear.Merlinic_MAcc_legs,
-		neck="Sanctity Necklace",
+		hands="Ea Cuffs",
+		neck="Erra Pendant",
 		back="Aurist's Cape +1",
 		waist="Yamabuki-no-Obi",
 		})
@@ -371,6 +375,7 @@ function init_gear_sets()
 	sets.midcast['Elemental Magic'].Seidr = set_combine(sets.midcast['Elemental Magic'], {
 		sub="Enki Strap",
 		body="Seidr Cotehardie",
+		hands="Ea Cuffs",
 		legs=gear.Merlinic_MAcc_legs,
 		neck="Sanctity Necklace",
 		})
@@ -379,7 +384,8 @@ function init_gear_sets()
   		main="Solstice",
 		sub="Culminus",		
 		body="Seidr Cotehardie",
-		neck="Sanctity Necklace",
+		hands="Ea Cuffs",
+		neck="Erra Pendant",
 		ring1="Fenrir Ring +1",
 		ring2="Fenrir Ring +1",
 		})
@@ -426,7 +432,6 @@ function init_gear_sets()
 		main="Mafic Cudgel", --10/0
 		sub="Genmei Shield", --10/0
 		body="Mallquis Saio +1", --6/6
-		hands="Hagondes Cuffs +1", --3/3
 		feet="Azimuth Gaiters +1", --4/0
 		neck="Loricate Torque +1", --6/6
 		ear1="Genmei Earring", --2/0
@@ -526,8 +531,7 @@ function init_gear_sets()
 
 	sets.magic_burst = {
 		body="Merlinic Jubbah", --10
-		hands="Amalric Gages", --(5)
-		legs=gear.Merlinic_MB_legs, --6
+		hands="Ea Cuffs", --5(5)
 		feet="Merlinic Crackows", --11
 		neck="Mizu. Kubikazari", --10
 		ring1="Mujin Band", --(5)

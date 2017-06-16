@@ -94,6 +94,7 @@ end
 -- Setup vars that are user-dependent.  Can override this function in a sidecar file.
 function user_setup()
 	state.OffenseMode:options('STP', 'Normal', 'LowAcc', 'MidAcc', 'HighAcc')
+	state.HybridMode:options('Normal', 'DT')
 	state.RangedMode:options('STP', 'Normal', 'Acc', 'Critical')
 	state.WeaponskillMode:options('Normal', 'Acc')
 	state.CastingMode:options('Normal', 'Resistant')
@@ -236,7 +237,6 @@ function init_gear_sets()
 
 	sets.precast.Waltz = {
 		body="Passion Jacket",
-		hands="Slither Gloves +1",
 		neck="Phalaina Locket",
 		ring1="Asklepian Ring",
 		ring2="Valseur's Ring",
@@ -291,7 +291,7 @@ function init_gear_sets()
 	-- Default set for any weaponskill that isn't any more specifically defined
 	sets.precast.WS = {
 		ammo=gear.WSbullet,
-		head="Meghanada Visor +1",
+		head="Meghanada Visor +2",
 		body="Laksa. Frac +3",
 		hands="Meg. Gloves +2",
 		legs="Meg. Chausses +2",
@@ -367,7 +367,7 @@ function init_gear_sets()
 	sets.precast.WS['Evisceration'] = {
 		head=gear.Adhemar_TP_head,
 		body="Meg. Cuirie +2",
-		hands=gear.Adhemar_TP_hands,
+		hands="Mummu Wrists +1",
 		legs="Samnuha Tights",
 		feet=gear.Herc_TA_feet,
 		neck="Fotia Gorget",
@@ -402,7 +402,7 @@ function init_gear_sets()
 		})
 
 	sets.precast.WS['Requiescat'] = set_combine(sets.precast.WS['Savage Blade'], {
-		head="Meghanada Visor +1",
+		head="Meghanada Visor +2",
 		body=gear.Herc_TA_body,
 		feet="Carmine Greaves +1",
 		neck="Fotia Gorget",
@@ -497,7 +497,7 @@ function init_gear_sets()
 	-- Ranged gear
 	sets.midcast.RA = {
 		ammo=gear.RAbullet,	
-		head="Meghanada Visor +1",
+		head="Meghanada Visor +2",
 		body="Laksa. Frac +3",
 		hands=gear.Adhemar_RA_hands,
 		legs=gear.Adhemar_RA_legs,
@@ -830,10 +830,54 @@ function init_gear_sets()
 		waist="Kentarch Belt +1",
 		})
 
+	------------------------------------------------------------------------------------------------
+	---------------------------------------- Hybrid Sets -------------------------------------------
+	------------------------------------------------------------------------------------------------
+
+	sets.engaged.Hybrid = {
+		neck="Loricate Torque +1", --6/6
+		ring2="Defending Ring", --10/10
+		}
+	
+	sets.engaged.DT = set_combine(sets.engaged, sets.engaged.Hybrid)
+	sets.engaged.LowAcc.DT = set_combine(sets.engaged.LowAcc, sets.engaged.Hybrid)
+	sets.engaged.MidAcc.DT = set_combine(sets.engaged.MidAcc, sets.engaged.Hybrid)
+	sets.engaged.HighAcc.DT = set_combine(sets.engaged.HighAcc, sets.engaged.Hybrid)
+	sets.engaged.STP.DT = set_combine(sets.engaged.STP, sets.engaged.Hybrid)
+
+	sets.engaged.DT.LowHaste = set_combine(sets.engaged.LowHaste, sets.engaged.Hybrid)
+	sets.engaged.LowAcc.DT.LowHaste = set_combine(sets.engaged.LowAcc.LowHaste, sets.engaged.Hybrid)
+	sets.engaged.MidAcc.DT.LowHaste = set_combine(sets.engaged.MidAcc.LowHaste, sets.engaged.Hybrid)
+	sets.engaged.HighAcc.DT.LowHaste = set_combine(sets.engaged.HighAcc.LowHaste, sets.engaged.Hybrid)	
+	sets.engaged.STP.DT.LowHaste = set_combine(sets.engaged.STP.LowHaste, sets.engaged.Hybrid)
+
+	sets.engaged.DT.MidHaste = set_combine(sets.engaged.MidHaste, sets.engaged.Hybrid)
+	sets.engaged.LowAcc.DT.MidHaste = set_combine(sets.engaged.LowAcc.MidHaste, sets.engaged.Hybrid)
+	sets.engaged.MidAcc.DT.MidHaste = set_combine(sets.engaged.MidAcc.MidHaste, sets.engaged.Hybrid)
+	sets.engaged.HighAcc.DT.MidHaste = set_combine(sets.engaged.HighAcc.MidHaste, sets.engaged.Hybrid)	
+	sets.engaged.STP.DT.MidHaste = set_combine(sets.engaged.STP.MidHaste, sets.engaged.Hybrid)
+
+	sets.engaged.DT.HighHaste = set_combine(sets.engaged.HighHaste, sets.engaged.Hybrid)
+	sets.engaged.LowAcc.DT.HighHaste = set_combine(sets.engaged.LowAcc.HighHaste, sets.engaged.Hybrid)
+	sets.engaged.MidAcc.DT.HighHaste = set_combine(sets.engaged.MidAcc.HighHaste, sets.engaged.Hybrid)
+	sets.engaged.HighAcc.DT.HighHaste = set_combine(sets.engaged.HighAcc.HighHaste, sets.engaged.Hybrid)	
+	sets.engaged.STP.DT.HighHaste = set_combine(sets.engaged.HighHaste.STP, sets.engaged.Hybrid)
+
+	sets.engaged.DT.MaxHaste = set_combine(sets.engaged.MaxHaste, sets.engaged.Hybrid)
+	sets.engaged.LowAcc.DT.MaxHaste = set_combine(sets.engaged.LowAcc.MaxHaste, sets.engaged.Hybrid)
+	sets.engaged.MidAcc.DT.MaxHaste = set_combine(sets.engaged.MidAcc.MaxHaste, sets.engaged.Hybrid)
+	sets.engaged.HighAcc.DT.MaxHaste = set_combine(sets.engaged.HighAcc.MaxHaste, sets.engaged.Hybrid)	
+	sets.engaged.STP.DT.MaxHaste = set_combine(sets.engaged.STP.MaxHaste, sets.engaged.Hybrid)
+
+
+	------------------------------------------------------------------------------------------------
+	---------------------------------------- Special Sets ------------------------------------------
+	------------------------------------------------------------------------------------------------
+
 	sets.buff.Doom = {ring1="Saida Ring", ring2="Saida Ring", waist="Gishdubar Sash"}
 
 	sets.Afterglow = {ring2="Ilabrat Ring"}
-	sets.TripleShot = {body="Chasseur's Frac +1"}
+	sets.TripleShot = {head="Oshosi Mask", body="Chasseur's Frac +1", legs="Oshosi Trousers"}
 	sets.Obi = {waist="Hachirin-no-Obi"}
 	sets.CP = {back="Mecisto. Mantle"}
 	sets.Reive = {neck="Ygnas's Resolve +1"}
@@ -1060,12 +1104,13 @@ function determine_haste_group()
 
 	-- Haste (buffactive[33]) - 15%
 	-- Haste II (buffactive[33]) - 30%
-	-- Haste Samba - 5%/10%
-	-- Victory March +0/+3/+4/+5	9.4%/14%/15.6%/17.1%
-	-- Advancing March +0/+3/+4/+5  6.3%/10.9%/12.5%/14% 
-	-- Embrava - 30%
+	-- Haste Samba - 5~10%
+	-- Honor March - 12~16%
+	-- Victory March - 15~28%
+	-- Advancing March - 10~18%
+	-- Embrava - 25%
 	-- Mighty Guard (buffactive[604]) - 15%
-	-- Geo-Haste (buffactive[580]) - 40%
+	-- Geo-Haste (buffactive[580]) - 30~40%
 
 	classes.CustomMeleeGroups:clear()
 
@@ -1164,12 +1209,12 @@ function do_bullet_checks(spell, spellMap, eventArgs)
 	
 	if spell.type == 'WeaponSkill' then
 		if spell.skill == "Marksmanship" then
-			if spell.element == 'None' then
-				-- physical weaponskills
-				bullet_name = gear.WSbullet
-			else
+			if spell.english == 'Wildfire' or spell.english == 'Leaden Salute' then
 				-- magical weaponskills
 				bullet_name = gear.MAbullet
+			else
+				-- physical weaponskills
+				bullet_name = gear.WSbullet
 			end
 		else
 			-- Ignore non-ranged weaponskills

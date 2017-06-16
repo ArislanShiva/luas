@@ -138,7 +138,7 @@ function init_gear_sets()
 		ammo="Ghastly Tathlum +1",
 		head="Amalric Coif", --10
 		body="Amalric Doublet",
-		hands="Amalric Gages",
+		hands="Merlinic Dastanas", --6
 		legs="Psycloth Lappas", --7
 		feet="Regal Pumps +1", --7
 		neck="Orunmila's Torque", --5
@@ -156,14 +156,18 @@ function init_gear_sets()
 	
 	-- Default set for any weaponskill that isn't any more specifically defined
 	sets.precast.WS = {
-		head="Telchine Cap",
-		body="Onca Suit",
+		ammo="Floestone",
+		head="Jhakri Coronal +1",
+		body="Jhakri Robe +1",
+		hands="Jhakri Cuffs +1",
+		legs="Telchine Braconi",
+		feet="Jhakri Pigaches +1",
 		neck="Fotia Gorget",
 		ear1="Moonshade Earring",
 		ear2="Telos Earring",
-		ring1="Ramuh Ring +1",
-		ring2="Ramuh Ring +1",
-		back=gear.BLM_MAB_Cape,
+		ring1="Rufescent Ring",
+		ring2="Shukuyu Ring",
+		back="Relucent Cape",
 		waist="Fotia Belt",
 		}
 
@@ -220,6 +224,7 @@ function init_gear_sets()
 		main="Tamaxchi", --22/(-10)
 		sub="Sors Shield", --3/(-5)
 		ammo="Esper Stone +1", --0/(-5)
+		body="Vanya Robe",
 		hands="Telchine Gloves", --10
 		legs="Gyve Trousers", --10
 		feet="Medium's Sabots", --12
@@ -243,9 +248,12 @@ function init_gear_sets()
 		main="Gada",
 		sub="Genmei Shield",
 		head="Vanya Hood",
+		body="Vanya Robe",
+		hands="Hieros Mittens",
 		feet="Vanya Clogs",
 		neck="Debilis Medallion",
 		ear1="Beatific Earring",
+		ear2="Healing Earring",
 		ring1="Haoma's Ring",
 		ring2="Haoma's Ring",
 		})
@@ -314,10 +322,10 @@ function init_gear_sets()
 		ammo="Quartz Tathlum +1",
 		head="Merlinic Hood",
 		body="Vanya Robe",
-		hands="Jhakri Cuffs +1",
+		hands="Ea Cuffs",
 		legs=gear.Merlinic_MAcc_legs,
 		feet="Skaoi Boots",
-		neck="Imbodla Necklace",
+		neck="Erra Pendant",
 		ear1="Barkaro. Earring",
 		ear2="Regal Earring",
 		ring1="Kishar Ring",
@@ -335,15 +343,15 @@ function init_gear_sets()
 	sets.midcast.ElementalEnfeeble = sets.midcast.IntEnfeebles
 
 	sets.midcast['Dark Magic'] = {
-		main=gear.Lathi_ENF,
+		main=gear.Grioavolr_MB,
 		sub="Enki Strap",
 		ammo="Pemphredo Tathlum",
 		head="Merlinic Hood",
 		body="Shango Robe",
-		hands="Jhakri Cuffs +1",
+		hands="Ea Cuffs",
 		legs=gear.Merlinic_MAcc_legs,
 		feet="Merlinic Crackows",
-		neck="Incanter's Torque",
+		neck="Erra Pendant",
 		ear1="Barkaro. Earring",
 		ear2="Regal Earring",
 		ring1="Stikini Ring",
@@ -374,12 +382,12 @@ function init_gear_sets()
 		ammo="Ghastly Tathlum +1",
 		head="Pixie Hairpin +1",
 		body="Merlinic Jubbah", --10
-		hands="Amalric Gages", --(5)
+		hands="Ea Cuffs", --5(5)
 		legs="Amalric Slops",
 		feet="Merlinic Crackows", --11
 		neck="Mizu. Kubikazari", --10
 		ear1="Barkaro. Earring",
-		ear2="Static Earring", --5
+		ear2="Regal Earring",
 		ring1="Mephitas's Ring +1",
 		back=gear.BLM_Death_Cape, --5
 		waist="Yamabuki-no-Obi",
@@ -390,7 +398,6 @@ function init_gear_sets()
 		sub="Enki Strap",
 		head="Amalric Coif",
 		legs=gear.Merlinic_MAcc_legs,
-		ear2="Regal Earring",
 		ring2="Shiva Ring +1",
 		})
 
@@ -416,7 +423,7 @@ function init_gear_sets()
 		head="Merlinic Hood",
 		body="Merlinic Jubbah",
 		hands="Amalric Gages",
-		legs=gear.Merlinic_MB_legs,
+		legs=gear.Merlinic_MAcc_legs,
 		feet="Merlinic Crackows",
 		neck="Baetyl Pendant",
 		ear1="Barkaro. Earring",
@@ -432,14 +439,14 @@ function init_gear_sets()
 		sub="Enki Strap",
 		ammo="Ghastly Tathlum +1",
 		legs="Amalric Slops",
-		neck="Sanctity Necklace",
+		neck="Erra Pendant",
 		back=gear.BLM_Death_Cape,
 		})
 
 	sets.midcast['Elemental Magic'].Resistant = set_combine(sets.midcast['Elemental Magic'], {
 		main=gear.Grioavolr_MB,
 		sub="Enki Strap",
-		legs=gear.Merlinic_MAcc_legs,
+		hands="Ea Cuffs",
 		neck="Sanctity Necklace",
 		waist="Yamabuki-no-Obi",
 		})
@@ -448,7 +455,7 @@ function init_gear_sets()
 		sub="Enki Strap",
 		body="Spae. Coat +1",
 		legs=gear.Merlinic_MAcc_legs,
-		neck="Sanctity Necklace",
+		neck="Erra Pendant",
 		})
 
 	sets.midcast['Elemental Magic'].Occult = set_combine(sets.midcast['Elemental Magic'], {
@@ -475,7 +482,6 @@ function init_gear_sets()
 		sub="Enki Strap",
 		head=empty,
 		body="Twilight Cloak",
-		hands="Jhakri Cuffs +1",
 		})
 
 	sets.midcast.Impact.Occult = set_combine(sets.midcast.Impact, {
@@ -506,7 +512,7 @@ function init_gear_sets()
 		ammo="Pemphredo Tathlum",
 		head="Befouled Crown",
 		body="Witching Robe",
-		hands="Amalric Gages",
+		hands="Ea Cuffs",
 		legs="Assid. Pants +1",
 		feet="Herald's Gaiters",
 		neck="Bathy Choker +1",
@@ -523,7 +529,6 @@ function init_gear_sets()
 		sub="Genmei Shield", --10/0
 		ammo="Staunch Tathlum", --2/2
 		body="Mallquis Saio +1", --6/6
-		hands="Hagondes Cuffs +1", --3/3
 		neck="Loricate Torque +1", --6/6
 		ear1="Genmei Earring", --2/0
 		ring1="Gelatinous Ring +1", --7/(-1)
@@ -559,6 +564,7 @@ function init_gear_sets()
 		sub="Enki Strap",
 		head="Merlinic Hood",
 		body="Merlinic Jubbah",
+		hands="Ea Cuffs",
 		legs=gear.Merlinic_MB_legs,
 		neck="Incanter's Torque",
 		ear1="Barkaro. Earring",
@@ -581,25 +587,14 @@ function init_gear_sets()
 
 	sets.magic_burst = { 
 		body="Merlinic Jubbah", --10
-		hands="Amalric Gages", --(5)
-		legs=gear.Merlinic_MB_legs, --6
+		hands="Ea Cuffs", --5(5)
 		feet="Merlinic Crackows", --11
 		neck="Mizu. Kubikazari", --10
 		ring1="Mujin Band", --(5)
 		back=gear.BLM_MAB_Cape, --5
 		}
 
-	sets.magic_burst.Resistant = { 
-		main=gear.Grioavolr_MB, --5
-		sub="Enki Strap",
-		body="Merlinic Jubbah", --10
-		hands="Amalric Gages", --(5)
-		legs=gear.Merlinic_MAcc_legs,
-		feet="Merlinic Crackows", --11
-		neck="Mizu. Kubikazari", --10
-		ring1="Mujin Band", --(5)
-		back=gear.BLM_MAB_Cape, --5
-		} 
+	sets.magic_burst.Resistant = {} 
 
 	-- Engaged sets
 
@@ -612,14 +607,15 @@ function init_gear_sets()
 
 	sets.engaged = {
 		sub="Bloodrain Strap",
+		ammo="Jukukik Feather",
 		head="Telchine Cap",
 		body="Onca Suit",
 		neck="Combatant's Torque",
 		ear1="Cessance Earring",
 		ear2="Telos Earring",
-		ring1="Ramuh Ring +1",
-		ring2="Ramuh Ring +1",
-		waist="Grunfeld Rope",
+		ring1="Hetairoi Ring",
+		ring2="Apate Ring",
+		waist="Witful Belt",
 		back="Relucent Cape",
 		}
 
@@ -688,11 +684,11 @@ function job_post_midcast(spell, action, spellMap, eventArgs)
 	end
 	if spell.skill == 'Elemental Magic' then
 		if state.MagicBurst.value and spell.english ~= 'Death' then
-			if state.CastingMode.value == "Resistant" then
-				equip(sets.magic_burst.Resistant)
-			else
+			--if state.CastingMode.value == "Resistant" then
+				--equip(sets.magic_burst.Resistant)
+			--else
 				equip(sets.magic_burst)
-			end
+			--end
 			if spell.english == "Impact" then
 				equip(sets.midcast.Impact)
 			end

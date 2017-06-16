@@ -151,13 +151,18 @@ function init_gear_sets()
 		waist="Fotia Belt",
 		}
 
+	sets.precast.WS['Black Halo'] = set_combine(sets.precast.WS, {
+		neck="Caro Necklace",
+		waist="Prosilio Belt +1",
+		})
+
 	sets.precast.WS['Hexa Strike'] = set_combine(sets.precast.WS, {
 		ring2="Begrudging Ring",
 		})
-	
+
 	sets.precast.WS['Flash Nova'] = set_combine(sets.precast.WS, {
 		ammo="Pemphredo Tathlum",
-		head="Inyanga Tiara +1",
+		head="Telchine Cap",
 		body="Vedic Coat",
 		hands="Fanatic Gloves",
 		legs="Gyve Trousers",
@@ -165,7 +170,7 @@ function init_gear_sets()
 		neck="Baetyl Pendant",
 		ear1="Friomisi Earring",
 		ear2="Regal Earring",
-		ring1="Shiva Ring +1",
+		ring1="Rufescent Ring",
 		ring2="Weather. Ring +1",
 		back="Toro Cape",
 		waist="Refoccilation Stone",
@@ -189,6 +194,7 @@ function init_gear_sets()
 	-- Cure sets
 
 	sets.midcast.CureSolace = {
+		-- 10 from JP Gifts
 		main="Queller Rod", --15(+2)/(-15)
 		sub="Sors Shield", --3/(-5)
 		ammo="Esper Stone +1", --0/(-5)
@@ -204,15 +210,14 @@ function init_gear_sets()
 		ring2="Haoma's Ring",
 		back="Alaunus's Cape",
 		waist="Bishop's Sash",
-		}
+		} -- 16% Cure Potency from JP
 
 	sets.midcast.Cure = sets.midcast.CureSolace
 
 	sets.midcast.CureWeather = set_combine(sets.midcast.Cure, {
 		main="Chatoyant Staff", --10
-		sub="Clerisy Strap +1",
-		neck="Nodens Gorget", --5
-		--back="Twilight Cape",
+		sub="Achaq Grip", --0/(-4)
+		back="Mending Cape", --(-6)
 		waist="Hachirin-no-Obi",
 		})
 
@@ -226,9 +231,7 @@ function init_gear_sets()
 
 	sets.midcast.CuragaWeather = set_combine(sets.midcast.Curaga, {
 		main="Chatoyant Staff", --10
-		sub="Enki Strap",
-		neck="Nodens Gorget", --5
-		ring1="Lebeche Ring", --3/(-5)
+		sub="Achaq Grip", --0/(-4)
 		back="Twilight Cape",
 		waist="Hachirin-no-Obi",
 		})
@@ -236,7 +239,7 @@ function init_gear_sets()
 	sets.midcast.CureMelee = sets.midcast.CureSolace
 
 	sets.midcast.StatusRemoval = {
-		main="Chatoyant Staff",
+		main="Oranyan",
 		sub="Clemency Grip",
 		head="Ebers Cap +1",
 		body="Ebers Bliaud +1",
@@ -244,10 +247,11 @@ function init_gear_sets()
 		legs="Piety Pantaln. +1",
 		feet="Vanya Clogs",
 		neck="Incanter's Torque",
+		ear2="Healing Earring",
 		ring1="Haoma's Ring",
 		ring2="Haoma's Ring",
 		back="Mending Cape",
-		waist="Bishop's Sash",
+		waist="Witful Belt",
 		}
 		
 	sets.midcast.Cursna = set_combine(sets.midcast.StatusRemoval, {
@@ -257,10 +261,12 @@ function init_gear_sets()
 		hands="Fanatic Gloves", --15
 		legs="Th. Pantaloons +2", --17
 		neck="Debilis Medallion", --15
+		feet="Gende. Galosh. +1", --10
 		ear1="Beatific Earring",
 		ring1="Haoma's Ring", --15
 		ring2="Haoma's Ring", --15
 		back="Alaunus's Cape", --25
+		waist="Bishop's Sash",
 		})
 
 	-- 110 total Enhancing Magic Skill; caps even without Light Arts
@@ -383,7 +389,7 @@ function init_gear_sets()
 		hands="Inyan. Dastanas +1",
 		legs="Chironic Hose",
 		feet="Medium's Sabots",
-		neck="Incanter's Torque",
+		neck="Erra Pendant",
 		ear1="Hermetic Earring",
 		ear2="Regal Earring",
 		ring1="Evanescence Ring",
@@ -402,7 +408,7 @@ function init_gear_sets()
 		hands="Theophany Mitts +3",
 		legs="Chironic Hose",
 		feet="Theo. Duckbills +2",
-		neck="Imbodla Necklace",
+		neck="Erra Pendant",
 		ear1="Hermetic Earring",
 		ear2="Regal Earring",
 		ring1="Stikini Ring",
@@ -470,6 +476,7 @@ function init_gear_sets()
 		})
 
 	sets.idle.Town = set_combine(sets.idle, {
+		main="Sindri",
 		head="Ebers Cap +1",
 		body="Theo. Briault +2",
 		legs="Th. Pantaloons +2",
@@ -505,31 +512,32 @@ function init_gear_sets()
 	
 	-- Basic set for if no TP weapon is defined.
 	sets.engaged = {
-		main="Izcalli",
+		main="Sindri",
 		sub="Genmei Shield",
-		ammo="Jukukik Feather",
+		ammo="Vanir Battery",
 		head="Chironic Hat",
 		body="Ayanmo Corazza +1",
 		hands="Chironic Gloves",
 		legs="Aya. Cosciales +1",
 		feet="Chironic Slippers",
 		neck="Asperity Necklace",
-		ear1="Telos Earring",
+		ear1="Cessance Earring",
 		ear2="Brutal Earring",
-		ring1="Petrov Ring",
+		ring1="Ilabrat Ring",
 		ring2="Hetairoi Ring",
 		waist="Windbuffet Belt +1",
 		back="Relucent Cape",
 		}
 
 	sets.engaged.DW = set_combine(sets.engaged, {
-		sub="Mafic Cudgel",
+		main="Izcalli",
+		sub="Sindri",
 		ear1="Eabani Earring",
-		ear2="Suppanomimi",
+		waist="Shetal Stone",
 		})
 
 	-- Buff sets: Gear that needs to be worn to actively enhance a current player buff.
-	sets.buff['Divine Caress'] = {back="Mending Cape"}
+	sets.buff['Divine Caress'] = {hands="Ebers Mitts +1", back="Mending Cape"}
 	sets.buff['Devotion'] = {head="Piety Cap +1"}
 
 	sets.buff.Doom = {ring1="Saida Ring", ring2="Saida Ring", waist="Gishdubar Sash"}
@@ -706,5 +714,5 @@ function select_default_macro_book()
 end
 
 function set_lockstyle()
-	send_command('wait 2; input /lockstyleset 11')
+	send_command('wait 2; input /lockstyleset 12')
 end

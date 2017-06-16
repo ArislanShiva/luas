@@ -180,14 +180,18 @@ function init_gear_sets()
 	------------------------------------------------------------------------------------------------
 
 	sets.precast.WS = {
-		head="Telchine Cap",
-		body="Onca Suit",
+		ammo="Floestone",
+		head="Jhakri Coronal +1",
+		body="Jhakri Robe +1",
+		hands="Jhakri Cuffs +1",
+		legs="Telchine Braconi",
+		feet="Jhakri Pigaches +1",
 		neck="Fotia Gorget",
 		ear1="Moonshade Earring",
 		ear2="Telos Earring",
-		ring1="Ramuh Ring +1",
-		ring2="Ramuh Ring +1",
-		back="Lugh's Cape",
+		ring1="Rufescent Ring",
+		ring2="Shukuyu Ring",
+		back="Relucent Cape",
 		waist="Fotia Belt",
 		}
 
@@ -233,8 +237,8 @@ function init_gear_sets()
 		}
 
 	sets.midcast.CureWeather = set_combine(sets.midcast.Cure, {
-		main="Chatoyant Staff",
-		sub="Clerisy Strap +1",
+		main="Chatoyant Staff", --10
+		sub="Achaq Grip", --0/(-4)
 		hands="Kaykaus Cuffs", --10/(-6)
 		back="Solemnity Cape", --7/0
 		waist="Hachirin-no-Obi",
@@ -252,9 +256,11 @@ function init_gear_sets()
 		main="Tamaxchi",
 		sub="Sors Shield",
 		head="Vanya Hood",
+		body="Vanya Robe",
 		legs="Acad. Pants +2",
 		feet="Vanya Clogs",
 		neck="Incanter's Torque",
+		ear2="Healing Earring",
 		ring1="Haoma's Ring",
 		ring2="Haoma's Ring",
 		back="Oretan. Cape +1",
@@ -264,6 +270,8 @@ function init_gear_sets()
 	sets.midcast.Cursna = set_combine(sets.midcast.StatusRemoval, {
 		main="Gada",
 		sub="Genmei Shield",
+		hands="Hieros Mittens",
+		feet="Gende. Galosh. +1",
 		neck="Debilis Medallion",
 		ear1="Beatific Earring",
 		})
@@ -271,6 +279,7 @@ function init_gear_sets()
 	sets.midcast['Enhancing Magic'] = {
 		main="Oranyan",
 		sub="Enki Strap",
+		ammo="Savant's Treatise",
 		head="Telchine Cap",
 		body="Telchine Chasuble",
 		hands="Telchine Gloves",
@@ -345,8 +354,8 @@ function init_gear_sets()
 		body="Vanya Robe",
 		hands="Kaykaus Cuffs",
 		legs="Chironic Hose",
-		feet="Medium's Sabots",
-		neck="Imbodla Necklace",
+		feet="Skaoi Boots",
+		neck="Erra Pendant",
 		ear1="Barkaro. Earring",
 		ear2="Regal Earring",
 		ring1="Kishar Ring",
@@ -371,7 +380,7 @@ function init_gear_sets()
 		hands="Kaykaus Cuffs",
 		legs=gear.Merlinic_MAcc_legs,
 		feet="Acad. Loafers +3",
-		neck="Incanter's Torque",
+		neck="Erra Pendant",
 		ear1="Barkaro. Earring",
 		ear2="Regal Earring",
 		ring1="Stikini Ring",
@@ -439,14 +448,14 @@ function init_gear_sets()
 		sub="Enki Strap",
 		body="Seidr Cotehardie",
 		legs=gear.Merlinic_MAcc_legs,
-		neck="Sanctity Necklace",
+		neck="Erra Pendant",
 		})
 		
 	sets.midcast['Elemental Magic'].Resistant = set_combine(sets.midcast['Elemental Magic'], {
 		main=gear.Grioavolr_MB,
 		sub="Enki Strap",
 		legs=gear.Merlinic_MAcc_legs,
-		neck="Sanctity Necklace",
+		neck="Erra Pendant",
 		waist="Yamabuki-no-Obi",
 		})
 	
@@ -553,14 +562,15 @@ function init_gear_sets()
 	
 	sets.engaged = {
 		sub="Bloodrain Strap",
+		ammo="Jukukik Feather",
 		head="Telchine Cap",
 		body="Onca Suit",
 		neck="Combatant's Torque",
 		ear1="Cessance Earring",
 		ear2="Telos Earring",
-		ring1="Ramuh Ring +1",
-		ring2="Ramuh Ring +1",
-		waist="Grunfeld Rope",
+		ring1="Hetairoi Ring",
+		ring2="Apate Ring",
+		waist="Witful Belt",
 		back="Relucent Cape",
 		}
 	

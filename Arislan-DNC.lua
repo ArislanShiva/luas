@@ -84,6 +84,7 @@ end
 -- Setup vars that are user-dependent.  Can override this function in a sidecar file.
 function user_setup()
 	state.OffenseMode:options('STP', 'Normal', 'LowAcc', 'MidAcc', 'HighAcc')
+	state.HybridMode:options('Normal', 'DT')
 	state.WeaponskillMode:options('Normal', 'Acc')
 	state.IdleMode:options('Normal', 'DT')
 
@@ -123,10 +124,10 @@ function user_setup()
 	send_command('bind !numpad+ input /ja "Ternary Flourish" <me>')
 	send_command('bind @numpad+ input /ja "Striking Flourish" <me>')
 
-	send_command('bind ^numpad7 input /ws "Exenterator" <t>')
-	send_command('bind ^numpad4 input /ws "Evisceration" <t>')
-	send_command('bind ^numpad5 input /ws "Rudra\'s Storm" <t>')
-	send_command('bind ^numpad6 input /ws "Pyrrhic Kleos" <t>')
+	send_command('bind ^numpad7 input /ws "Exenterator" <t>') --;input /p Exenterator
+	send_command('bind ^numpad4 input /ws "Evisceration" <t>') --;input /p Evisceration
+	send_command('bind ^numpad5 input /ws "Rudra\'s Storm" <t>') --;input /p Rudra\'s Storm
+	send_command('bind ^numpad6 input /ws "Pyrrhic Kleos" <t>') --;input /p Pyrrhic Kleos
 	send_command('bind ^numpad1 input /ws "Aeolian Edge" <t>')
 
 	send_command('bind ^numpad0 gs c step')
@@ -171,11 +172,10 @@ end
 
 -- Define sets and vars used by this job file.
 function init_gear_sets()
-	--------------------------------------
-	-- Start defining the sets
-	--------------------------------------
-	
-	-- PRECAST SETS
+
+	------------------------------------------------------------------------------------------------
+	---------------------------------------- Precast Sets ------------------------------------------
+	------------------------------------------------------------------------------------------------
 	
 	-- Enmity set
 	sets.Enmity = {
@@ -188,10 +188,8 @@ function init_gear_sets()
 		ear2="Friomisi Earring", --2
 		ring1="Supershear Ring", --5
 		ring2="Eihwaz Ring", --5
-		waist="Trance Belt", --4
+		waist="Kasiri Belt", --3
 		}
-		
-	-- Job Ability Sets
 
 	sets.precast.JA['Provoke'] = sets.Enmity
 	sets.precast.JA['No Foot Rise'] = {body="Horos Casaque +1"}
@@ -297,8 +295,11 @@ function init_gear_sets()
 		neck="Magoraga Beads",
 		ring1="Lebeche Ring",
 		})
-	   
-	-- Weapon Skill Sets
+
+
+	------------------------------------------------------------------------------------------------
+	------------------------------------- Weapon Skill Sets ----------------------------------------
+	------------------------------------------------------------------------------------------------
 	
 	sets.precast.WS = {
 		ammo="Focal Orb",
@@ -424,23 +425,25 @@ function init_gear_sets()
 		}
 	
 	
-	-- MIDCAST SETS
-	
+	------------------------------------------------------------------------------------------------
+	---------------------------------------- Midcast Sets ------------------------------------------
+	------------------------------------------------------------------------------------------------
+
 	sets.midcast.FastRecast = sets.precast.FC
 
 	sets.midcast.SpellInterrupt = {
 		ammo="Impatiens", --10
 		ring1="Evanescence Ring", --5
 		}
-		
-	-- Specific spells
-	sets.midcast.Utsusemi = sets.midcast.SpellInterrupt
-	
-	-- Resting sets
-	sets.resting = {}
-	
 
-	-- Idle sets
+	sets.midcast.Utsusemi = sets.midcast.SpellInterrupt
+
+
+	------------------------------------------------------------------------------------------------
+	----------------------------------------- Idle Sets --------------------------------------------
+	------------------------------------------------------------------------------------------------
+
+	sets.resting = {}
 
 	sets.idle = {
 		ammo="Staunch Tathlum",
@@ -487,7 +490,10 @@ function init_gear_sets()
 	
 	sets.idle.Weak = sets.idle.DT
 	
-	-- Defense sets
+
+	------------------------------------------------------------------------------------------------
+	---------------------------------------- Defense Sets ------------------------------------------
+	------------------------------------------------------------------------------------------------
 
 	sets.defense.PDT = sets.idle.DT
 	sets.defense.MDT = sets.idle.DT
@@ -496,7 +502,10 @@ function init_gear_sets()
 		feet="Skd. Jambeaux +1",
 		}
 
-	-- Engaged sets
+
+	------------------------------------------------------------------------------------------------
+	---------------------------------------- Engaged Sets ------------------------------------------
+	------------------------------------------------------------------------------------------------
 
 	-- Variations for TP weapon and (optional) offense/defense modes.  Code will fall back on previous
 	-- sets if more refined versions aren't defined.
@@ -734,11 +743,55 @@ function init_gear_sets()
 		waist="Kentarch Belt +1",
 		})
 
-	-- Buff sets: Gear that needs to be worn to actively enhance a current player buff.
+	------------------------------------------------------------------------------------------------
+	---------------------------------------- Hybrid Sets -------------------------------------------
+	------------------------------------------------------------------------------------------------
+
+	sets.engaged.Hybrid = {
+		neck="Loricate Torque +1", --6/6
+		ring2="Defending Ring", --10/10
+		}
+	
+	sets.engaged.DT = set_combine(sets.engaged, sets.engaged.Hybrid)
+	sets.engaged.LowAcc.DT = set_combine(sets.engaged.LowAcc, sets.engaged.Hybrid)
+	sets.engaged.MidAcc.DT = set_combine(sets.engaged.MidAcc, sets.engaged.Hybrid)
+	sets.engaged.HighAcc.DT = set_combine(sets.engaged.HighAcc, sets.engaged.Hybrid)
+	sets.engaged.STP.DT = set_combine(sets.engaged.STP, sets.engaged.Hybrid)
+
+	sets.engaged.DT.LowHaste = set_combine(sets.engaged.LowHaste, sets.engaged.Hybrid)
+	sets.engaged.LowAcc.DT.LowHaste = set_combine(sets.engaged.LowAcc.LowHaste, sets.engaged.Hybrid)
+	sets.engaged.MidAcc.DT.LowHaste = set_combine(sets.engaged.MidAcc.LowHaste, sets.engaged.Hybrid)
+	sets.engaged.HighAcc.DT.LowHaste = set_combine(sets.engaged.HighAcc.LowHaste, sets.engaged.Hybrid)	
+	sets.engaged.STP.DT.LowHaste = set_combine(sets.engaged.STP.LowHaste, sets.engaged.Hybrid)
+
+	sets.engaged.DT.MidHaste = set_combine(sets.engaged.MidHaste, sets.engaged.Hybrid)
+	sets.engaged.LowAcc.DT.MidHaste = set_combine(sets.engaged.LowAcc.MidHaste, sets.engaged.Hybrid)
+	sets.engaged.MidAcc.DT.MidHaste = set_combine(sets.engaged.MidAcc.MidHaste, sets.engaged.Hybrid)
+	sets.engaged.HighAcc.DT.MidHaste = set_combine(sets.engaged.HighAcc.MidHaste, sets.engaged.Hybrid)	
+	sets.engaged.STP.DT.MidHaste = set_combine(sets.engaged.STP.MidHaste, sets.engaged.Hybrid)
+
+	sets.engaged.DT.HighHaste = set_combine(sets.engaged.HighHaste, sets.engaged.Hybrid)
+	sets.engaged.LowAcc.DT.HighHaste = set_combine(sets.engaged.LowAcc.HighHaste, sets.engaged.Hybrid)
+	sets.engaged.MidAcc.DT.HighHaste = set_combine(sets.engaged.MidAcc.HighHaste, sets.engaged.Hybrid)
+	sets.engaged.HighAcc.DT.HighHaste = set_combine(sets.engaged.HighAcc.HighHaste, sets.engaged.Hybrid)	
+	sets.engaged.STP.DT.HighHaste = set_combine(sets.engaged.HighHaste.STP, sets.engaged.Hybrid)
+
+	sets.engaged.DT.MaxHaste = set_combine(sets.engaged.MaxHaste, sets.engaged.Hybrid)
+	sets.engaged.LowAcc.DT.MaxHaste = set_combine(sets.engaged.LowAcc.MaxHaste, sets.engaged.Hybrid)
+	sets.engaged.MidAcc.DT.MaxHaste = set_combine(sets.engaged.MidAcc.MaxHaste, sets.engaged.Hybrid)
+	sets.engaged.HighAcc.DT.MaxHaste = set_combine(sets.engaged.HighAcc.MaxHaste, sets.engaged.Hybrid)	
+	sets.engaged.STP.DT.MaxHaste = set_combine(sets.engaged.STP.MaxHaste, sets.engaged.Hybrid)
+
+
+	------------------------------------------------------------------------------------------------
+	---------------------------------------- Special Sets ------------------------------------------
+	------------------------------------------------------------------------------------------------
+
 --	sets.buff['Saber Dance'] = {legs="Horos Tights +1"}
 --	sets.buff['Fan Dance'] = {body="Horos Bangles +1"}
 	sets.buff['Climactic Flourish'] = {head="Maculele Tiara +1"}
 	sets.buff['Closed Position'] = {feet="Horos Toe Shoes +1"}
+
 	sets.buff.Doom = {ring1="Saida Ring", ring2="Saida Ring", waist="Gishdubar Sash"}
 	sets.CP = {back="Mecisto. Mantle"}
 	sets.Reive = {neck="Ygnas's Resolve +1"}
@@ -946,12 +999,13 @@ function determine_haste_group()
 
 	-- Haste (buffactive[33]) - 15%
 	-- Haste II (buffactive[33]) - 30%
-	-- Haste Samba - 5%/10%
-	-- Victory March +0/+3/+4/+5	9.4%/14%/15.6%/17.1%
-	-- Advancing March +0/+3/+4/+5  6.3%/10.9%/12.5%/14% 
-	-- Embrava - 30%
+	-- Haste Samba - 5~10%
+	-- Honor March - 12~16%
+	-- Victory March - 15~28%
+	-- Advancing March - 10~18%
+	-- Embrava - 25%
 	-- Mighty Guard (buffactive[604]) - 15%
-	-- Geo-Haste (buffactive[580]) - 40%
+	-- Geo-Haste (buffactive[580]) - 30~40%
 
 	classes.CustomMeleeGroups:clear()
 
