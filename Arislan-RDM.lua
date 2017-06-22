@@ -29,7 +29,8 @@ function job_setup()
 	
 	enfeebling_magic_acc = S{'Bind', 'Break', 'Dispel', 'Distract', 'Distract II', 'Frazzle',
 		'Frazzle II',  'Gravity', 'Gravity II', 'Silence', 'Sleep', 'Sleep II', 'Sleepga'}
-	enfeebling_magic_skill = S{'Dia', 'Dia II', 'Dia III', 'Diaga', 'Distract III', 'Frazzle III'}
+	enfeebling_magic_skill = S{'Distract III', 'Frazzle III', 'Poison II'}
+	enfeebling_magic_effect = S{'Dia', 'Dia II', 'Dia III', 'Diaga'}
 
 	skill_spells = S{
 		'Temper', 'Temper II', 'Enfire', 'Enfire II', 'Enblizzard', 'Enblizzard II', 'Enaero', 'Enaero II',
@@ -432,6 +433,13 @@ function init_gear_sets()
 		waist="Rumination Sash",
 		}
 
+	sets.midcast.EffectEnfeebles = {
+		ammo="Regal Gem",
+		body="Lethargy Sayon +1",
+		feet="Uk'uxkaj Boots",
+		back=gear.RDM_MND_Cape,
+		}
+
 	sets.midcast.ElementalEnfeeble = sets.midcast.IntEnfeebles
 
 	sets.midcast['Dia III'] = set_combine(sets.midcast.SkillEnfeebles, {head="Viti. Chapeau +1"})
@@ -667,12 +675,28 @@ function job_post_precast(spell, action, spellMap, eventArgs)
 	end
 end
 
+function job_midcast(spell, action, spellMap, eventArgs)
+	if spell.skill == 'Enfeebling Magic' then
+		if enfeebling_magic_skill:contains(spell.english) or enfeebling_magic_effect:contains(spell.english) then
+			if spell.type == "WhiteMagic" then
+				equip(sets.midcast.MndEnfeeblesAcc)
+				add_to_chat(122,'White Magic Test 1')
+			else
+				equip(sets.midcast.IntEnfeeblesAcc)
+				add_to_chat(122,'Black Magic Test 1')
+			end
+		end
+	end
+end
+
 -- Run after the default midcast() is done.
 -- eventArgs is the same one used in job_midcast, in case information needs to be persisted.
 function job_post_midcast(spell, action, spellMap, eventArgs)
 	if spell.skill == 'Enfeebling Magic' then
 		if enfeebling_magic_skill:contains(spell.english) then
 			equip(sets.midcast.SkillEnfeebles)
+		elseif enfeebling_magic_effect:contains(spell.english) then
+			equip(sets.midcast.EffectEnfeebles)
 		end
 		if state.Buff.Saboteur then
 			equip(sets.buff.Saboteur)
@@ -774,17 +798,25 @@ function job_get_spell_map(spell, default_spell_map)
 			end
 		end
 		if spell.skill == 'Enfeebling Magic' then
-			if spell.type == "WhiteMagic" and not enfeebling_magic_skill:contains(spell.english) then
-				if enfeebling_magic_acc:contains(spell.english) and not buffactive.Stymie then
-					return "MndEnfeeblesAcc"
-				else
-					return "MndEnfeebles"
+			if spell.type == "WhiteMagic" then
+				if  enfeebling_magic_effect:contains(spell.english) then
+					return "EffectEnfeebles"
+				elseif not enfeebling_magic_skill:contains(spell.english) then
+					if enfeebling_magic_acc:contains(spell.english) and not buffactive.Stymie then
+						return "MndEnfeeblesAcc"
+					else
+						return "MndEnfeebles"
+					end
 				end
-			elseif spell.type == "BlackMagic" and not enfeebling_magic_skill:contains(spell.english) then
-				if enfeebling_magic_acc:contains(spell.english) and not buffactive.Stymie then
-					return "IntEnfeeblesAcc"
-				else
-					return "IntEnfeebles"
+			elseif spell.type == "BlackMagic" then
+				if  enfeebling_magic_effect:contains(spell.english) then
+					return "EffectEnfeebles"
+				elseif not enfeebling_magic_skill:contains(spell.english) then
+					if enfeebling_magic_acc:contains(spell.english) and not buffactive.Stymie then
+						return "IntEnfeeblesAcc"
+					else
+						return "IntEnfeebles"
+					end
 				end
 			else
 				return "MndEnfeebles"

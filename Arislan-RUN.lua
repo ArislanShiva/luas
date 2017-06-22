@@ -57,10 +57,10 @@ function user_setup()
 	state.MagicalDefenseMode:options('MDT', 'Status')
 	
 	state.WeaponLock = M(false, 'Weapon Lock')	
-	state.Charm = M(false, 'Charm')
+	state.Charm = M(false, 'Charm Resistance')
 	state.Knockback = M(false, 'Knockback')
 	state.Death = M(false, "Death Resistance")
-	state.CP = M(false, "Capacity Points Mode")
+	--state.CP = M(false, "Capacity Points Mode")
 
 	state.Runes = M{['description']='Runes', "Ignis", "Gelus", "Flabra", "Tellus", "Sulpor", "Unda", "Lux", "Tenebrae"}
 	
@@ -120,8 +120,6 @@ function user_setup()
 	send_command('bind !numpad4 input /ws "Requiescat" <t>')
 	send_command('bind ^numpad5 input /ws "Ground Strike" <t>')
 	send_command('bind ^numpad1 input /ws "Herculean Slash" <t>')
-
-	send_command('bind @numpad* input /item "Panacea" <me>')
 	
 	select_default_macro_book()
 	set_lockstyle()
@@ -669,7 +667,7 @@ function init_gear_sets()
 	sets.buff.Doom = {ring1="Saida Ring", ring2="Saida Ring", waist="Gishdubar Sash"}
 
 	sets.Embolden = set_combine(sets.midcast.EnhancingDuration, {back="Evasionist's Cape"})
-	sets.CP = {back="Mecisto. Mantle"}
+	--sets.CP = {back="Mecisto. Mantle"}
 	sets.Reive = {neck="Ygnas's Resolve +1"}
 
 end
@@ -844,12 +842,12 @@ function customize_idle_set(idleSet)
 	if state.Buff.Battuta then
 		idleSet = set_combine(idleSet, sets.defense.Battuta)
 	end
-	if state.CP.current == 'on' then
-		equip(sets.CP)
-		disable('back')
-	else
-		enable('back')
-	end
+	--if state.CP.current == 'on' then
+	--	equip(sets.CP)
+	--	disable('back')
+	--else
+	--	enable('back')
+	--end
 
 	return idleSet
 end

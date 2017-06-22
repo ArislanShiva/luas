@@ -268,13 +268,13 @@ function init_gear_sets()
 	sets.precast.RA = {
 		ammo=gear.RAbullet,
 		head=gear.Taeon_RA_head, --10/0
-		body=gear.Taeon_RA_body, --10/0
+		body="Oshosi Vest", --12/0
 		hands="Carmine Fin. Ga. +1", --8/11
 		legs=gear.Adhemar_RS_legs, --9/10
 		feet="Meg. Jam. +2", --10/0
 		back=gear.COR_SNP_Cape, --10/0
 		waist="Impulse Belt", --3/0
-		} --60/21
+		} --62/21
 
 	sets.precast.RA.Flurry1 = set_combine(sets.precast.RA, {
 		body="Laksa. Frac +3", --0/20
@@ -447,15 +447,15 @@ function init_gear_sets()
 	sets.midcast['Dark Magic'] = {
 		ammo=gear.QDbullet,
 		head=gear.Herc_MAB_head,
-		body="Pursuer's Doublet",
+		body=gear.Herc_RA_body,
 		hands=gear.Adhemar_RA_hands,
 		legs="Chas. Culottes +1",
 		feet="Carmine Greaves +1",
 		neck="Ainia Collar",
 		ear1="Dedition Earring",
 		ear2="Telos Earring",
-		ring1="Petrov Ring",
-		ring2="Apate Ring",
+		ring1="Apate Ring",
+		ring2="Ilabrat Ring",
 		back=gear.COR_RA_Cape,
 		waist="Oneiros Rope",		
 		}
@@ -530,10 +530,18 @@ function init_gear_sets()
 		})
 
 	sets.midcast.RA.STP = set_combine(sets.midcast.RA, {
-		body="Pursuer's Doublet",
+		body="Oshosi Vest",
 		feet="Carmine Greaves +1",
 		ear1="Dedition Earring",
+		ring1="Apate Ring",
 		})
+
+	sets.TripleShot = {
+		head="Oshosi Mask", --4
+		body="Chasseur's Frac +1", --12
+		legs="Oshosi Trousers", --5
+		} --21
+
 
 
 	------------------------------------------------------------------------------------------------
@@ -544,11 +552,11 @@ function init_gear_sets()
 
 	sets.idle = {
 		ammo=gear.MAbullet,
-		head="Dampening Tam",
-		body="Laksa. Frac +3",
-		hands="Carmine Fin. Ga. +1",
+		head="Oshosi Mask",
+		body="Oshosi Vest",
+		hands=gear.Herc_DT_hands,
 		legs="Carmine Cuisses +1",
-		feet="Carmine Greaves +1",
+		feet="Meg. Jam. +2",
 		neck="Bathy Choker +1",
 		ear1="Genmei Earring",
 		ear2="Infused Earring",
@@ -571,6 +579,9 @@ function init_gear_sets()
 		})
 
 	sets.idle.Town = set_combine(sets.idle, {
+		head="Dampening Tam",
+		body="Laksa. Frac +3",
+		hands="Carmine Fin. Ga. +1",
 		feet="Carmine Greaves +1",
 		neck="Iskur Gorget",
 		ear1="Eabani Earring",
@@ -877,7 +888,6 @@ function init_gear_sets()
 	sets.buff.Doom = {ring1="Saida Ring", ring2="Saida Ring", waist="Gishdubar Sash"}
 
 	sets.Afterglow = {ring2="Ilabrat Ring"}
-	sets.TripleShot = {head="Oshosi Mask", body="Chasseur's Frac +1", legs="Oshosi Trousers"}
 	sets.Obi = {waist="Hachirin-no-Obi"}
 	sets.CP = {back="Mecisto. Mantle"}
 	sets.Reive = {neck="Ygnas's Resolve +1"}

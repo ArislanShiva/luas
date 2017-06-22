@@ -184,13 +184,13 @@ function init_gear_sets()
 	sets.precast.RA = {
 		ammo=gear.RAbullet,
 		head=gear.Taeon_RA_head, --10/0
-		body=gear.Taeon_RA_body, --10/0
+		body="Oshosi Vest", --12/0
 		hands="Carmine Fin. Ga. +1", --8/11
 		legs=gear.Adhemar_RS_legs, --9/10
 		feet="Meg. Jam. +2", --10/0
 		back=gear.RNG_SNP_Cape, --10/0
 		waist="Impulse Belt", --3/0
-		} --60/11
+		} --62/11
 
 	sets.precast.RA.Flurry1 = set_combine(sets.precast.RA, {
 		head="Orion Beret +3", --0/18
@@ -276,7 +276,7 @@ function init_gear_sets()
 		
 	sets.precast.WS["Trueflight"] = {
 		ammo=gear.MAbullet,
-		head="Orion Beret +1",
+		head="Orion Beret +3",
 		body="Samnuha Coat",
 		hands="Carmine Fin. Ga. +1",
 		legs=gear.Herc_MAB_legs,
@@ -349,7 +349,7 @@ function init_gear_sets()
 	sets.midcast.RA = {
 		ammo=gear.RAbullet,
 		head="Arcadian Beret +1",
-		body=gear.Herc_RA_body,
+		body="Oshosi Vest",
 		hands=gear.Adhemar_RA_hands,
 		legs=gear.Adhemar_RA_legs,
 		feet=gear.Herc_RA_feet,
@@ -382,11 +382,17 @@ function init_gear_sets()
 		})
 		
 	sets.midcast.RA.STP = set_combine(sets.midcast.RA, {
-		body="Pursuer's Doublet",
 		feet="Carmine Greaves +1",
 		ear1="Dedition Earring",
 		ring1="Apate Ring",
 		})
+
+	sets.DoubleShot = {
+		head="Oshosi Mask", --5
+		body="Oshosi Vest", --7
+		legs="Oshosi Trousers", --6
+		} --18
+
 
 		
 	------------------------------------------------------------------------------------------------
@@ -399,11 +405,11 @@ function init_gear_sets()
 	sets.idle = {
 		ranged="Fomalhaut",
 		ammo=gear.RAbullet,
-		head=gear.Herc_DT_head,
-		body="Meg. Cuirie +2",
+		head="Oshosi Mask",
+		body="Oshosi Vest",
 		hands=gear.Herc_DT_hands,
 		legs="Carmine Cuisses +1",
-		feet="Carmine Greaves +1",
+		feet="Meg. Jam. +2",
 		neck="Bathy Choker +1",
 		ear1="Genmei Earring",
 		ear2="Infused Earring",
@@ -429,6 +435,7 @@ function init_gear_sets()
 		head="Orion Beret +3",
 		body=gear.Herc_RA_body,
 		hands="Meg. Gloves +2",
+		feet="Carmine Greaves +1",
 		neck="Iskur Gorget",
 		ear1="Enervating Earring",
 		ear2="Telos Earring",
@@ -732,7 +739,6 @@ function init_gear_sets()
 	
 	sets.buff.Doom = {ring1="Saida Ring", ring2="Saida Ring", waist="Gishdubar Sash"}
 
-	sets.DoubleShot = {head="Oshosi Mask", legs="Oshosi Trousers"}
 	sets.Obi = {waist="Hachirin-no-Obi"}
 	sets.Reive = {neck="Ygnas's Resolve +1"}
 	sets.CP = {back="Mecisto. Mantle"}
@@ -781,15 +787,17 @@ end
 
 -- Set eventArgs.handled to true if we don't want any automatic gear equipping to be done.
 function job_post_midcast(spell, action, spellMap, eventArgs)
-	if spell.action_type == 'Ranged Attack' and buffactive['Triple Shot'] then
-		equip(sets.DoubleShot)
+	if spell.action_type == 'Ranged Attack' then
+		if buffactive['Double Shot'] then
+			equip(sets.DoubleShot)
+		end
+		if state.Buff.Barrage then
+			equip(sets.buff.Barrage)
+		end
+--		if state.Buff['Velocity Shot'] and state.RangedMode.value == 'STP' then
+--			equip(sets.buff['Velocity Shot'])
+--		end
 	end
-	if spell.action_type == 'Ranged Attack' and state.Buff.Barrage then
-		equip(sets.buff.Barrage)
-	end
---	if spell.action_type == 'Ranged Attack' and state.Buff['Velocity Shot'] and state.RangedMode.value == 'STP' then
---		equip(sets.buff['Velocity Shot'])
---	end
 end
 
 
