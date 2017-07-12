@@ -623,7 +623,7 @@ function init_gear_sets()
 --    sets.buff.Innin = {}
 
     sets.CP = {back="Mecisto. Mantle"}
-	sets.TH = {waist="Chaac Belt"}
+    sets.TH = {waist="Chaac Belt"}
     sets.Reive = {neck="Ygnas's Resolve +1"}
 
 end
@@ -689,7 +689,7 @@ end
 --function job_status_change(new_status, old_status)
     if new_status == 'Idle' then
         select_movement_feet()
-	end
+    end
 --end
 
 

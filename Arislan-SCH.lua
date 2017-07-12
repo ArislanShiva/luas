@@ -185,7 +185,7 @@ function init_gear_sets()
         body="Jhakri Robe +2",
         hands="Jhakri Cuffs +2",
         legs="Telchine Braconi",
-        feet="Jhakri Pigaches +1",
+        feet="Jhakri Pigaches +2",
         neck="Fotia Gorget",
         ear1="Moonshade Earring",
         ear2="Telos Earring",
@@ -376,7 +376,7 @@ function init_gear_sets()
         sub="Enki Strap",
         ammo="Pemphredo Tathlum",
         head="Merlinic Hood",
-        body="Shango Robe",
+        body="Jhakri Robe +2",
         hands="Kaykaus Cuffs",
         legs=gear.Merlinic_MAcc_legs,
         feet="Acad. Loafers +3",
@@ -397,7 +397,7 @@ function init_gear_sets()
         body="Merlinic Jubbah", --10
         hands="Amalric Gages", --(5)
         legs="Mallquis Trews +1", --5
-        feet="Merlinic Crackows", --9
+        feet="Merlinic Crackows", --11
         neck="Mizu. Kubikazari", --10
         ear1="Barkaro. Earring",
         ear2="Regal Earring",
@@ -448,6 +448,7 @@ function init_gear_sets()
         sub="Enki Strap",
         body="Seidr Cotehardie",
         legs=gear.Merlinic_MAcc_legs,
+		feet="Jhakri Pigaches +2",
         neck="Erra Pendant",
         })
         
@@ -455,6 +456,7 @@ function init_gear_sets()
         main=gear.Grioavolr_MB,
         sub="Enki Strap",
         legs=gear.Merlinic_MAcc_legs,
+		feet="Jhakri Pigaches +2",
         neck="Erra Pendant",
         waist="Yamabuki-no-Obi",
         })

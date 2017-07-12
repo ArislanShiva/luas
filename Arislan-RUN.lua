@@ -40,7 +40,7 @@ function job_setup()
     gambit_duration = 94
 
     state.Buff.Battuta = buffactive.Battuta or false
-	state.Buff['Aftermath'] = buffactive['Aftermath: Lv.3'] or false
+    state.Buff['Aftermath'] = buffactive['Aftermath: Lv.3'] or false
 
 end
 
@@ -256,7 +256,7 @@ function init_gear_sets()
         })
 
 
-	------------------------------------------------------------------------------------------------
+    ------------------------------------------------------------------------------------------------
     ------------------------------------- Weapon Skill Sets ----------------------------------------
     ------------------------------------------------------------------------------------------------
 
@@ -438,7 +438,7 @@ function init_gear_sets()
     sets.midcast['Blue Magic'].Cure = sets.midcast.Cure
     sets.midcast['Blue Magic'].Buff = sets.midcast['Enhancing Magic']
 
-	
+    
     ------------------------------------------------------------------------------------------------
     ----------------------------------------- Idle Sets --------------------------------------------
     ------------------------------------------------------------------------------------------------
@@ -647,14 +647,14 @@ function init_gear_sets()
         waist="Kentarch Belt +1",
         })
 
-	sets.engaged.Aftermath = {
-		head="Aya. Zucchetto +1",
-		body="Turms Harness",
+    sets.engaged.Aftermath = {
+        head="Aya. Zucchetto +1",
+        body="Turms Harness",
         neck="Anu Torque",
         ear2="Telos Earring",
-		ring2="Ilabrat Ring",
+        ring2="Ilabrat Ring",
         waist="Kentarch Belt +1",
-		}
+        }
 
 
     ------------------------------------------------------------------------------------------------
@@ -699,6 +699,15 @@ function init_gear_sets()
         ear2="Telos Earring",
         })
 
+    sets.engaged.Aftermath.DT = {
+        head="Aya. Zucchetto +1",
+        body="Turms Harness",
+		legs="Samnuha Tights",
+		feet="Carmine Greaves +1",
+        neck="Loricate Torque +1",
+        ear2="Telos Earring",
+        waist="Flume Belt +1",
+        }
 
     ------------------------------------------------------------------------------------------------
     ---------------------------------------- Special Sets ------------------------------------------
@@ -875,7 +884,7 @@ function customize_idle_set(idleSet)
         equip({main="Aettir"})
     end
 
-	if player.mpp < 51 then
+    if player.mpp < 51 then
         idleSet = set_combine(idleSet, sets.latent_refresh)
     end
     if state.Charm.value == true then
@@ -911,10 +920,13 @@ function customize_melee_set(meleeSet)
     if state.Death.value == true then
         meleeSet = set_combine(meleeSet, sets.defense.Death)
     end
-	if state.Buff.Aftermath and state.Greatsword.value == "Epeolatry" 
-	    and state.HybridMode.value ~= "DT" then
-		meleeSet = set_combine(meleeSet, sets.engaged.Aftermath)
-	end
+    if state.Buff.Aftermath and state.Greatsword.value == "Epeolatry" then
+        if state.HybridMode.value == "DT" then
+            meleeSet = set_combine(meleeSet, sets.engaged.Aftermath.DT)
+        else
+            meleeSet = set_combine(meleeSet, sets.engaged.Aftermath)
+        end
+    end
     if state.Buff.Battuta then
         meleeSet = set_combine(meleeSet, sets.defense.Battuta)
     end

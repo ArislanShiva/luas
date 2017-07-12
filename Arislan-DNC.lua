@@ -448,7 +448,7 @@ function init_gear_sets()
     sets.idle = {
         ammo="Staunch Tathlum",
         head=gear.Herc_DT_head,
-		body="Turms Harness",
+        body="Turms Harness",
         hands=gear.Herc_DT_hands,
         legs="Meg. Chausses +2",
         feet="Skd. Jambeaux +1",

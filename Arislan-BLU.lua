@@ -377,7 +377,7 @@ function init_gear_sets()
         body="Jhakri Robe +2",
         hands="Jhakri Cuffs +2",
         legs=gear.Herc_WS_legs,
-        feet="Jhakri Pigaches +1",
+        feet="Jhakri Pigaches +2",
         neck="Fotia Gorget",
         ear1="Moonshade Earring",
         ear2="Brutal Earring",
@@ -413,7 +413,7 @@ function init_gear_sets()
         body="Amalric Doublet",
         hands="Jhakri Cuffs +2",
         legs="Amalric Slops",
-        feet="Jhakri Pigaches +1",
+        feet="Jhakri Pigaches +2",
         --feet="Amalric Nails"
         neck="Fotia Gorget",
         ear1="Moonshade Earring",
@@ -528,7 +528,7 @@ function init_gear_sets()
         body="Vedic Coat",
         hands="Amalric Gages",
         legs="Amalric Slops",
-        feet="Jhakri Pigaches +1",
+        feet="Jhakri Pigaches +2",
         neck="Baetyl Pendant",
         ear1="Friomisi Earring",
         ear2="Regal Earring",
@@ -575,7 +575,7 @@ function init_gear_sets()
         body="Amalric Doublet",
         hands="Rawhide Gloves", 
         legs="Psycloth Lappas",
-        feet="Jhakri Pigaches +1",
+        feet="Jhakri Pigaches +2",
         neck="Erra Pendant",
         ear1="Hermetic Earring",
         ear2="Regal Earring",
@@ -1028,7 +1028,7 @@ function init_gear_sets()
     sets.magic_burst = set_combine(sets.midcast['Blue Magic'].Magical, {
         body="Samnuha Coat", --(8)
         hands="Amalric Gages", --(5)
-        feet="Jhakri Pigaches +1", --5
+        feet="Jhakri Pigaches +2", --5
         ring1="Mujin Band", --(5)
         back="Seshaw Cape", --5
         })

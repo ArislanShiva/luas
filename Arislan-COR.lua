@@ -839,9 +839,9 @@ function init_gear_sets()
         waist="Kentarch Belt +1",
         })
 
-	sets.engaged.Aftermath = {
-		ring2="Ilabrat Ring",
-		}
+    sets.engaged.Aftermath = {
+        ring2="Ilabrat Ring",
+        }
 
     ------------------------------------------------------------------------------------------------
     ---------------------------------------- Hybrid Sets -------------------------------------------
@@ -1034,10 +1034,10 @@ end
 
 -- Modify the default melee set after it was constructed.
 function customize_melee_set(meleeSet)
-	if state.Buff.Aftermath and state.Gun.value == "Death Penalty" 
+    if state.Buff.Aftermath and state.Gun.value == "Death Penalty" 
         and state.HybridMode.value ~= 'DT' then
-		meleeSet = set_combine(meleeSet, sets.engaged.Aftermath)
-	end
+        meleeSet = set_combine(meleeSet, sets.engaged.Aftermath)
+    end
 
     return meleeSet
 end

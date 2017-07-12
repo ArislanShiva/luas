@@ -339,7 +339,7 @@ function init_gear_sets()
     sets.idle = {
         ammo="Ginsen",
         head="Dampening Tam",
-		body="Turms Harness",
+        body="Turms Harness",
         hands=gear.Adhemar_TP_hands,
         legs="Samnuha Tights",
         feet="Jute Boots +1",

@@ -81,7 +81,7 @@ function init_gear_sets()
     -- Fast cast sets for spells
     
     sets.precast.FC = {
-    --    /RDM --15
+    --  /RDM --15
         main="Oranyan", --7
         sub="Clerisy Strap +1", --3
         range="Dunna", --3
@@ -124,14 +124,18 @@ function init_gear_sets()
     -- Weaponskill sets
     -- Default set for any weaponskill that isn't any more specifically defined
     sets.precast.WS = {
-        head="Telchine Cap",
-        body="Onca Suit",
+        ammo="Floestone",
+        head="Jhakri Coronal +1",
+        body="Jhakri Robe +2",
+        hands="Jhakri Cuffs +2",
+        legs="Telchine Braconi",
+        feet="Jhakri Pigaches +2",
         neck="Fotia Gorget",
         ear1="Moonshade Earring",
         ear2="Telos Earring",
         ring1="Rufescent Ring",
-        ring2="Ramuh Ring +1",
-        back="Toro Cape",
+        ring2="Shukuyu Ring",
+        back="Relucent Cape",
         waist="Fotia Belt",
         }
 
@@ -155,7 +159,7 @@ function init_gear_sets()
         } -- Haste
     
    sets.midcast.Geomancy = {
-          main="Sucellus",
+        main="Sucellus",
         sub="Genmei Shield",
         range="Dunna",
         head="Azimuth Hood +1",
@@ -310,7 +314,7 @@ function init_gear_sets()
         main=gear.Grioavolr_MB,
         sub="Enki Strap",
         head="Merlinic Hood",
-        body="Shango Robe",
+        body="Jhakri Robe +2",
         hands="Ea Cuffs",
         legs="Azimuth Tights +1",
         feet="Merlinic Crackows",
@@ -360,13 +364,14 @@ function init_gear_sets()
         main=gear.Grioavolr_MB,
         sub="Enki Strap",
         hands="Ea Cuffs",
+        feet="Jhakri Pigaches +2",
         neck="Erra Pendant",
         back="Aurist's Cape +1",
         waist="Yamabuki-no-Obi",
         })
 
     sets.midcast.GeoElem = set_combine(sets.midcast['Elemental Magic'], {
-          main="Solstice",
+        main="Solstice",
         sub="Culminus",
         ring1="Fenrir Ring +1",
         ring2="Fenrir Ring +1",
@@ -377,6 +382,7 @@ function init_gear_sets()
         body="Seidr Cotehardie",
         hands="Ea Cuffs",
         legs=gear.Merlinic_MAcc_legs,
+        feet="Jhakri Pigaches +2",
         neck="Sanctity Necklace",
         })
 
@@ -446,7 +452,7 @@ function init_gear_sets()
     -- .Pet sets are for when Luopan is present.
     sets.idle.Pet = set_combine(sets.idle, { 
         -- Pet: -DT (37.5% to cap) / Pet: Regen 
-          main="Sucellus", --3/3
+        main="Sucellus", --3/3
         sub="Genmei Shield",
         range="Dunna", --5/0
         head="Azimuth Hood +1", --0/3
@@ -476,7 +482,7 @@ function init_gear_sets()
 --    sets.idle.DT.Pet.Indi = set_combine(sets.idle.DT.Pet, {legs="Bagua Pants +1"})
 
     sets.idle.Town = set_combine(sets.idle, {
-          main="Sucellus",
+        main="Sucellus",
         sub="Culminus",
         head="Azimuth Hood +1",
         body="Azimuth Coat +1",
