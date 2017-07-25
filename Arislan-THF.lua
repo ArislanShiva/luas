@@ -403,6 +403,7 @@ function init_gear_sets()
     -- EG: sets.engaged.Dagger.Accuracy.Evasion
 
     -- * THF Native DW Trait: 25% DW
+    -- * THF Job Points DW Gift: 5% DW
     
     -- No Magic Haste (74% DW to cap)
     sets.engaged = {
@@ -507,13 +508,13 @@ function init_gear_sets()
         legs="Samnuha Tights",
         feet=gear.Taeon_DW_feet, --9
         neck="Erudit. Necklace",
-        ear1="Eabani Earring", --4
+        ear1="Sherida Earring",
         ear2="Suppanomimi", --5
         ring1="Petrov Ring",
         ring2="Epona's Ring",
-        back="Canny Cape", --4
+        back=gear.THF_TP_Cape,
         waist="Reiki Yotai", --7
-        } -- 34%
+        } -- 26%
 
     sets.engaged.LowAcc.MidHaste = set_combine(sets.engaged.MidHaste, {
         ammo="Falcon Eye",
@@ -525,7 +526,6 @@ function init_gear_sets()
         feet=gear.Herc_TA_feet,
         ear1="Cessance Earring",
         ring2="Ilabrat Ring",
-        back=gear.THF_TP_Cape,
         waist="Kentarch Belt +1",
         })
 
@@ -556,12 +556,12 @@ function init_gear_sets()
         feet=gear.Taeon_DW_feet, --9
         neck="Erudit. Necklace",
         ear1="Sherida Earring",
-        ear2="Suppanomimi", --5
+        ear2="Brutal Earring",
         ring1="Petrov Ring",
         ring2="Epona's Ring",
         back=gear.THF_TP_Cape,
         waist="Reiki Yotai", --7
-        } -- 26%
+        } -- 21%
 
     sets.engaged.LowAcc.HighHaste = set_combine(sets.engaged.HighHaste, {
         neck="Combatant's Torque",
@@ -596,18 +596,18 @@ function init_gear_sets()
     sets.engaged.MaxHaste = {
         ammo="Ginsen",
         head="Skulker's Bonnet +1",
-        body=gear.Herc_TA_body,
+        body="Adhemar Jacket", -- 5
         hands=gear.Adhemar_TP_hands,
         legs="Samnuha Tights",
         feet=gear.Herc_TA_feet,
         neck="Erudit. Necklace",
-        ear1="Eabani Earring", --4
-        ear2="Suppanomimi", --5
+        ear1="Sherida Earring",
+        ear2="Brutal Earring",
         ring1="Petrov Ring",
         ring2="Epona's Ring",
         back=gear.THF_TP_Cape,
         waist="Windbuffet Belt +1",
-        } -- 9%
+        } -- 5%
 
     sets.engaged.LowAcc.MaxHaste = set_combine(sets.engaged.MaxHaste, {
         neck="Combatant's Torque",

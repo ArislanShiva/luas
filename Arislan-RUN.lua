@@ -230,7 +230,7 @@ function init_gear_sets()
         ear2="Enchntr. Earring +1", --2
         ring1="Kishar Ring", --4
         ring2="Weather. Ring +1", --6(4)
-        back=gear.RUN_HP_Cape, --10
+        back=gear.RUN_FC_Cape, --10
         waist="Rumination Sash",
         }
 
@@ -402,19 +402,18 @@ function init_gear_sets()
         waist="Olympus Sash",
         }
 
-    sets.midcast.EnhancingDuration = {
+    sets.midcast.EnhancingDuration = set_combine(sets.midcast['Enhancing Magic'], {
         head="Erilaz Galea +1",
         legs="Futhark Trousers +1",
-        }
+        })
 
     sets.midcast['Phalanx'] = set_combine(sets.midcast['Enhancing Magic'], {
         main="Deacon Sword",
         sub="Chanter's Shield",
         head="Fu. Bandeau +1",
---        feet=gear.Taeon_PH_feet,
         })
 
-    sets.midcast['Regen'] = set_combine(sets.midcast.EnhancingDuration, {head="Runeist Bandeau +1"})
+    sets.midcast['Regen'] = set_combine(sets.midcast['Enhancing Magic'], {head="Rune. Bandeau +2"})
     sets.midcast.Refresh = set_combine(sets.midcast.EnhancingDuration, {waist="Gishdubar Sash"})
     sets.midcast.Stoneskin = set_combine(sets.midcast['Enhancing Magic'], {waist="Siegel Sash"})
     sets.midcast.Protect = set_combine(sets.midcast.EnhancingDuration, {ring2="Sheltered Ring"})
@@ -448,7 +447,7 @@ function init_gear_sets()
         ammo="Homiliary",
         head="Rawhide Mask",
         body="Runeist's Coat +2",
-        hands="Erilaz Gauntlets +1",
+        hands="Turms Mittens",
         legs="Carmine Cuisses +1",
         feet="Turms Leggings",
         neck="Bathy Choker +1",
@@ -480,8 +479,6 @@ function init_gear_sets()
     sets.idle.Town = set_combine(sets.idle, {
         ammo="Knobkierrie",
         head="Carmine Mask +1",
-        hands="Runeist's Mitons +2",
-        feet="Runeist's Boots +2",
         neck="Loricate Torque +1",
         ear1="Sherida Earring",
         ear2="Telos Earring",

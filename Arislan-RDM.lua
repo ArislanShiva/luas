@@ -317,7 +317,7 @@ function init_gear_sets()
         ammo="Regal Gem",
         head="Befouled Crown",
         body="Viti. Tabard +1",
-        hands="Atrophy Gloves +1",
+        hands="Atrophy Gloves +2",
         legs="Atrophy Tights +1",
         feet="Leth. Houseaux +1",
         neck="Incanter's Torque",
@@ -334,7 +334,7 @@ function init_gear_sets()
         sub="Enki Strap",
         head="Telchine Cap",
         body="Telchine Chas.",
-        hands="Atrophy Gloves +1",
+        hands="Atrophy Gloves +2",
         legs="Telchine Braconi",
         feet="Leth. Houseaux +1",
         back=gear.RDM_MND_Cape,
@@ -353,7 +353,7 @@ function init_gear_sets()
 
     sets.midcast.Refresh = set_combine(sets.midcast.EnhancingDuration, {
         head="Amalric Coif", -- +1
-        body="Atrophy Tabard +2", -- +2
+        body="Atrophy Tabard +3", -- +3
         legs="Leth. Fuseau +1", -- +2
         })
     
@@ -406,7 +406,7 @@ function init_gear_sets()
         }
 
     sets.midcast.MndEnfeeblesAcc = set_combine(sets.midcast.MndEnfeebles, {
-        body="Atrophy Tabard +2",
+        body="Atrophy Tabard +3",
         neck="Sanctity Necklace",
         ring2="Weather. Ring +1",
         })
@@ -417,7 +417,7 @@ function init_gear_sets()
         })
 
     sets.midcast.IntEnfeeblesAcc = set_combine(sets.midcast.IntEnfeebles, {
-        body="Atrophy Tabard +2",
+        body="Atrophy Tabard +3",
         neck="Erra Pendant",
         ring2="Weather. Ring +1",
         })
@@ -425,7 +425,7 @@ function init_gear_sets()
     sets.midcast.SkillEnfeebles = {
         sub="Mephitis Grip",
         head="Befouled Crown",
-        body="Vanya Robe",
+        body="Atrophy Tabard +3",
         hands="Leth. Gantherots +1",
         neck="Incanter's Torque",
         ring1="Stikini Ring",
@@ -451,7 +451,7 @@ function init_gear_sets()
         sub="Enki Strap",
         ammo="Pemphredo Tathlum",
         head="Amalric Coif",
-        body="Jhakri Robe +2",
+        body="Atrophy Tabard +3",
         hands="Ea Cuffs",
         legs=gear.Merlinic_MAcc_legs,
         feet="Merlinic Crackows",
@@ -506,6 +506,7 @@ function init_gear_sets()
         main=gear.Grioavolr_MB,
         sub="Enki Strap",
         hands="Ea Cuffs",
+        body="Atrophy Tabard +3",
 		feet="Jhakri Pigaches +2",
         neck="Erra Pendant",
         ear1="Hermetic Earring",
@@ -529,7 +530,7 @@ function init_gear_sets()
     sets.buff.ComposureOther = {
         head="Leth. Chappel +1",
         body="Lethargy Sayon +1",
-        hands="Leth. Gantherots +1",
+        --hands="Leth. Gantherots +1",
         legs="Leth. Fuseau +1",
         feet="Leth. Houseaux +1",
         }
@@ -566,7 +567,7 @@ function init_gear_sets()
         head="Gende. Caubeen +1", --4/4
         body="Emet Harness +1", --6/0
         hands="Gende. Gages +1", --4/3
-         neck="Loricate Torque +1", --6/6
+        neck="Loricate Torque +1", --6/6
         ear1="Genmei Earring", --2/0
         ring1="Gelatinous Ring +1", --7/(-1)
         ring2="Defending Ring", --10/10
@@ -577,7 +578,7 @@ function init_gear_sets()
     sets.idle.Town = set_combine(sets.idle, {
         main="Sequence",
         ammo="Regal Gem",
-        body="Lethargy Sayon +1",
+        body="Atrophy Tabard +3",
         hands="Leth. Gantherots +1",
         legs="Carmine Cuisses +1",
         feet="Carmine Greaves +1",

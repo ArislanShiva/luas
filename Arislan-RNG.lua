@@ -143,7 +143,7 @@ function init_gear_sets()
     -- Precast sets to enhance JAs
     sets.precast.JA['Eagle Eye Shot'] = {legs="Arc. Braccae +1"}
     sets.precast.JA['Bounty Shot'] = {hands="Amini Glove. +1"}
-    sets.precast.JA['Camouflage'] = {body="Orion Jerkin +1"}
+    sets.precast.JA['Camouflage'] = {body="Orion Jerkin +3"}
     sets.precast.JA['Scavenge'] = {feet="Orion Socks +1"}
     sets.precast.JA['Shadowbind'] = {hands="Orion Bracers +1"}
     sets.precast.JA['Sharpshot'] = {legs="Orion Braccae +1"}
@@ -350,7 +350,7 @@ function init_gear_sets()
     sets.midcast.RA = {
         ammo=gear.RAbullet,
         head="Arcadian Beret +1",
-        body="Oshosi Vest",
+		body="Orion Jerkin +3",
         hands=gear.Adhemar_RA_hands,
         legs=gear.Adhemar_RA_legs,
         feet=gear.Herc_RA_feet,
@@ -365,7 +365,6 @@ function init_gear_sets()
     
     sets.midcast.RA.Acc = set_combine(sets.midcast.RA, {
         head="Orion Beret +3",
-        body="Meg. Cuirie +2",
         hands="Meg. Gloves +2",
         legs="Meg. Chausses +2",
         feet="Meg. Jam. +2",
@@ -406,11 +405,11 @@ function init_gear_sets()
     sets.idle = {
         ranged="Fomalhaut",
         ammo=gear.RAbullet,
-        head="Oshosi Mask",
-        body="Oshosi Vest",
-        hands=gear.Herc_DT_hands,
+        head="Orion Beret +3",
+        body="Orion Jerkin +3",
+        hands="Carmine Fin. Ga. +1",
         legs="Carmine Cuisses +1",
-        feet="Meg. Jam. +2",
+        feet="Carmine Greaves +1",
         neck="Bathy Choker +1",
         ear1="Genmei Earring",
         ear2="Infused Earring",
@@ -433,10 +432,6 @@ function init_gear_sets()
         })
         
     sets.idle.Town = set_combine(sets.idle, {
-        head="Orion Beret +3",
-        body=gear.Herc_RA_body,
-        hands="Meg. Gloves +2",
-        feet="Carmine Greaves +1",
         neck="Iskur Gorget",
         ear1="Enervating Earring",
         ear2="Telos Earring",
@@ -736,7 +731,7 @@ function init_gear_sets()
 
     sets.buff.Barrage = {hands="Orion Bracers +1"}
     sets.buff['Velocity Shot'] = set_combine(sets.midcast.RA, {body="Amini Caban +1", back=gear.RNG_TP_Cape})
-    sets.buff.Camouflage = {body="Orion Jerkin +1"}
+    sets.buff.Camouflage = {body="Orion Jerkin +3"}
     
     sets.buff.Doom = {ring1="Saida Ring", ring2="Saida Ring", waist="Gishdubar Sash"}
 

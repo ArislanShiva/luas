@@ -709,7 +709,7 @@ function init_gear_sets()
         feet=gear.Herc_TA_feet,
         neck="Asperity Necklace",
         ear1="Sherida Earring",
-        ear2="Telos Earring",
+        ear2="Brutal Earring",
         ring1="Petrov Ring",
         ring2="Epona's Ring",
         back=gear.DNC_TP_Cape,
