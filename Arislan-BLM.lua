@@ -57,6 +57,7 @@ function user_setup()
     send_command('bind @d gs c toggle DeathMode')
     send_command('bind @c gs c toggle CP')
     send_command('bind @w gs c toggle WeaponLock')
+    send_command('bind ^numpad0 input /Myrkr')
 
     select_default_macro_book()
     set_lockstyle()
@@ -73,6 +74,7 @@ function user_unload()
     send_command('unbind @d')
     send_command('unbind @c')
     send_command('unbind @w')
+    send_command('unbind ^numpad0')
 end
 
 

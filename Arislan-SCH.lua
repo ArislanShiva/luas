@@ -94,6 +94,8 @@ function user_setup()
     send_command('bind @r gs c cycle RegenMode')
     send_command('bind @s gs c toggle StormSurge')
     send_command('bind @w gs c toggle WeaponLock')
+    send_command('bind ^numpad0 input /Myrkr')
+
     
     select_default_macro_book()
     set_lockstyle()
@@ -122,6 +124,7 @@ function user_unload()
     send_command('unbind @g')
     send_command('unbind @s')
     send_command('unbind @w')
+    send_command('unbind ^numpad0')
 end
 
 

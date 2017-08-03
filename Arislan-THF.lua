@@ -984,5 +984,5 @@ function select_default_macro_book()
 end
 
 function set_lockstyle()
-    send_command('wait 2; input /lockstyleset 4')
+    send_command('wait 2; input /lockstyleset 1')
 end
