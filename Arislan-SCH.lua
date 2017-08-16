@@ -94,8 +94,17 @@ function user_setup()
     send_command('bind @r gs c cycle RegenMode')
     send_command('bind @s gs c toggle StormSurge')
     send_command('bind @w gs c toggle WeaponLock')
+
     send_command('bind ^numpad0 input /Myrkr')
 
+    send_command('bind !numpad7 input /ma "Paralyna" <t>')
+    send_command('bind !numpad8 input /ma "Silena" <t>')
+    send_command('bind !numpad9 input /ma "Blindna" <t>')
+    send_command('bind !numpad4 input /ma "Poisona" <t>')
+    send_command('bind !numpad5 input /ma "Stona" <t>')
+    send_command('bind !numpad6 input /ma "Viruna" <t>')
+    send_command('bind !numpad1 input /ma "Cursna" <t>')
+    send_command('bind !numpad+ input /ma "Erase" <t>')
     
     select_default_macro_book()
     set_lockstyle()
@@ -125,6 +134,14 @@ function user_unload()
     send_command('unbind @s')
     send_command('unbind @w')
     send_command('unbind ^numpad0')
+    send_command('unbind !numpad7')
+    send_command('unbind !numpad8')
+    send_command('unbind !numpad9')
+    send_command('unbind !numpad4')
+    send_command('unbind !numpad5')
+    send_command('unbind !numpad6')
+    send_command('unbind !numpad1')
+    send_command('unbind !numpad+')
 end
 
 
@@ -280,8 +297,8 @@ function init_gear_sets()
         })
     
     sets.midcast['Enhancing Magic'] = {
-        main="Oranyan",
-        sub="Enki Strap",
+        main="Gada",
+        sub="Ammurapi Shield",
         ammo="Savant's Treatise",
         head="Telchine Cap",
         body="Telchine Chasuble",
@@ -298,8 +315,8 @@ function init_gear_sets()
         }
     
     sets.midcast.EnhancingDuration = {
-        main="Oranyan",
-        sub="Enki Strap",
+        main="Gada",
+        sub="Ammurapi Shield",
         head="Telchine Cap",
         body="Telchine Chas.",
         hands="Telchine Gloves",
@@ -309,6 +326,7 @@ function init_gear_sets()
 
     sets.midcast.Regen = set_combine(sets.midcast.EnhancingDuration, {
         main="Bolelabunga",
+        sub="Ammurapi Shield",
         sub="Genmei Shield",
         head="Arbatel Bonnet +1",
         back="Bookworm's Cape"
@@ -332,6 +350,7 @@ function init_gear_sets()
 
     sets.midcast.Aquaveil = set_combine(sets.midcast['Enhancing Magic'], {
         main="Vadose Rod",
+        sub="Ammurapi Shield",
         head="Amalric Coif",
         waist="Emphatikos Rope",
         })

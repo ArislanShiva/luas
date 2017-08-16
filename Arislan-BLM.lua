@@ -261,8 +261,8 @@ function init_gear_sets()
         })
 
     sets.midcast['Enhancing Magic'] = {
-        main="Oranyan",
-        sub="Enki Strap",
+        main="Gada",
+        sub="Ammurapi Shield",
         head="Telchine Cap",
         body="Telchine Chas.",
         hands="Telchine Gloves",
@@ -278,8 +278,8 @@ function init_gear_sets()
         }
 
     sets.midcast.EnhancingDuration = {
-        main="Oranyan",
-        sub="Enki Strap",
+        main="Gada",
+        sub="Ammurapi Shield",
         head="Telchine Cap",
         body="Telchine Chas.",
         hands="Telchine Gloves",
@@ -289,6 +289,7 @@ function init_gear_sets()
 
     sets.midcast.Regen = set_combine(sets.midcast['Enhancing Magic'], {
         main="Bolelabunga",
+        sub="Ammurapi Shield",
         sub="Genmei Shield",
         body="Telchine Chas.",
         })
@@ -307,6 +308,7 @@ function init_gear_sets()
 
     sets.midcast.Aquaveil = set_combine(sets.midcast['Enhancing Magic'], {
         main="Vadose Rod",
+        sub="Ammurapi Shield",
         head="Amalric Coif",
         waist="Emphatikos Rope",
         })

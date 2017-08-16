@@ -270,7 +270,7 @@ function init_gear_sets()
     --sets.precast.JA['Enchainment'] = {body="Luhlaza Jubbah +1"}
 
     sets.precast.FC = {
-        -- Tanmoygayi +1 6 / Colada 4
+        -- Colada 4
         ammo="Sapience Orb", --2
         head="Carmine Mask +1", --14
         body=gear.Taeon_FC_body, --8
@@ -790,8 +790,6 @@ function init_gear_sets()
 
     sets.engaged.STP = set_combine(sets.engaged, {
         neck="Ainia Collar",
-        ear1="Dedition Earring",
-        ear2="Telos Earring",
         ring1="Petrov Ring",
         })
 
@@ -835,8 +833,6 @@ function init_gear_sets()
 
     sets.engaged.STP.LowHaste = set_combine(sets.engaged.LowHaste, {
         neck="Ainia Collar",
-        ear1="Dedition Earring",
-        ear2="Telos Earring",
         ring1="Petrov Ring",
         })
 
@@ -883,7 +879,6 @@ function init_gear_sets()
     sets.engaged.STP.MidHaste = set_combine(sets.engaged.MidHaste, {
         neck="Ainia Collar",
         ear1="Dedition Earring",
-        ear2="Telos Earring",
         ring1="Petrov Ring",
         })
         
@@ -927,10 +922,7 @@ function init_gear_sets()
         })
 
     sets.engaged.STP.HighHaste = set_combine(sets.engaged.HighHaste, {
-        feet="Carmine Greaves +1",
         neck="Ainia Collar",
-        ear1="Dedition Earring",
-        ear2="Telos Earring",
         ring1="Petrov Ring",
         })
 
@@ -972,7 +964,6 @@ function init_gear_sets()
         })
 
     sets.engaged.STP.MaxHaste = set_combine(sets.engaged.MaxHaste, {
-        feet="Carmine Greaves +1",
         neck="Ainia Collar",
         ear1="Dedition Earring",
         ear2="Telos Earring",

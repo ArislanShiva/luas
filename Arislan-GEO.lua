@@ -51,6 +51,21 @@ function user_setup()
     send_command('bind ^. input /ma Invisible <stpc>')
     send_command('bind @c gs c toggle CP')
     send_command('bind @w gs c toggle WeaponLock')
+
+    send_command('bind ^numpad7 input /ws "Black Halo" <t>')
+    send_command('bind ^numpad8 input /ws "Hexa Strike" <t>')
+    send_command('bind ^numpad9 input /ws "Realmrazer" <t>')
+    send_command('bind ^numpad6 input /ws "Exudation" <t>')
+    send_command('bind ^numpad1 input /ws "Flash Nova" <t>')
+
+    send_command('bind !numpad7 input /ma "Paralyna" <t>')
+    send_command('bind !numpad8 input /ma "Silena" <t>')
+    send_command('bind !numpad9 input /ma "Blindna" <t>')
+    send_command('bind !numpad4 input /ma "Poisona" <t>')
+    send_command('bind !numpad5 input /ma "Stona" <t>')
+    send_command('bind !numpad6 input /ma "Viruna" <t>')
+    send_command('bind !numpad1 input /ma "Cursna" <t>')
+    send_command('bind !numpad+ input /ma "Erase" <t>')
     
     select_default_macro_book()
     set_lockstyle()
@@ -64,6 +79,19 @@ function user_unload()
     send_command('unbind !.')
     send_command('unbind @c')
     send_command('unbind @w')
+    send_command('unbind ^numpad7')
+    send_command('unbind ^numpad8')
+    send_command('unbind ^numpad9')
+    send_command('unbind ^numpad4')
+    send_command('unbind ^numpad1')
+    send_command('unbind !numpad7')
+    send_command('unbind !numpad8')
+    send_command('unbind !numpad9')
+    send_command('unbind !numpad4')
+    send_command('unbind !numpad5')
+    send_command('unbind !numpad6')
+    send_command('unbind !numpad1')
+    send_command('unbind !numpad+')
 end
 
 
@@ -231,8 +259,8 @@ function init_gear_sets()
         })
 
     sets.midcast['Enhancing Magic'] = {
-        main="Oranyan",
-        sub="Enki Strap",
+        main="Gada",
+        sub="Ammurapi Shield",
         head="Telchine Cap",
         body="Telchine Chas.",
         hands="Telchine Gloves",
@@ -248,8 +276,8 @@ function init_gear_sets()
         }
         
     sets.midcast.EnhancingDuration = {
-        main="Oranyan",
-        sub="Enki Strap",
+        main="Gada",
+        sub="Ammurapi Shield",
         head="Telchine Cap",
         body="Telchine Chas.",
         hands="Telchine Gloves",
@@ -259,6 +287,7 @@ function init_gear_sets()
 
     sets.midcast.Regen = set_combine(sets.midcast['Enhancing Magic'], {
         main="Bolelabunga",
+        sub="Ammurapi Shield",
         sub="Genmei Shield",
         body="Telchine Chas.",
         })
@@ -276,6 +305,7 @@ function init_gear_sets()
 
     sets.midcast.Aquaveil = set_combine(sets.midcast['Enhancing Magic'], {
         main="Vadose Rod",
+        sub="Ammurapi Shield",
         head="Amalric Coif",
         waist="Emphatikos Rope",
         })

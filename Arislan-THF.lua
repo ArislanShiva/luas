@@ -246,7 +246,7 @@ function init_gear_sets()
         feet="Meg. Jam. +2",
         ear1="Sherida Earring",
         ear2="Telos Earring",
-        ring1="Garuda Ring +1"
+        ring1="Dingir Ring"
         })
 
     sets.precast.WS['Exenterator'].Acc = set_combine(sets.precast.WS['Exenterator'], {
@@ -416,7 +416,7 @@ function init_gear_sets()
         neck="Erudit. Necklace",
         ear1="Eabani Earring", --4
         ear2="Suppanomimi", --5
-        ring1="Petrov Ring",
+        ring1="Hetairoi Ring",
         ring2="Epona's Ring",
         back="Canny Cape", --4
         waist="Reiki Yotai", --7
@@ -446,10 +446,7 @@ function init_gear_sets()
 
     sets.engaged.STP = set_combine(sets.engaged, {
         neck="Anu Torque",
-        ear1="Sherida Earring",
-        ear2="Telos Earring",
         ring1="Petrov Ring",
-        waist="Kentarch Belt +1",
         })
 
     -- 15% Magic Haste (67% DW to cap)
@@ -463,7 +460,7 @@ function init_gear_sets()
         neck="Erudit. Necklace",
         ear1="Eabani Earring", --4
         ear2="Suppanomimi", --5
-        ring1="Petrov Ring",
+        ring1="Hetairoi Ring",
         ring2="Epona's Ring",
         back="Canny Cape", --4
         waist="Reiki Yotai", --7
@@ -493,10 +490,7 @@ function init_gear_sets()
 
     sets.engaged.STP.LowHaste = set_combine(sets.engaged.LowHaste, {
         neck="Anu Torque",
-        ear1="Sherida Earring",
-        ear2="Telos Earring",
         ring1="Petrov Ring",
-        waist="Kentarch Belt +1",
         })
 
     -- 30% Magic Haste (56% DW to cap)
@@ -510,7 +504,7 @@ function init_gear_sets()
         neck="Erudit. Necklace",
         ear1="Sherida Earring",
         ear2="Suppanomimi", --5
-        ring1="Petrov Ring",
+        ring1="Hetairoi Ring",
         ring2="Epona's Ring",
         back=gear.THF_TP_Cape,
         waist="Reiki Yotai", --7
@@ -541,9 +535,7 @@ function init_gear_sets()
     sets.engaged.STP.MidHaste = set_combine(sets.engaged.MidHaste, {
         neck="Anu Torque",
         ear1="Sherida Earring",
-        ear2="Telos Earring",
         ring1="Petrov Ring",
-        waist="Kentarch Belt +1",
         })
 
     -- 35% Magic Haste (51% DW to cap)
@@ -557,7 +549,7 @@ function init_gear_sets()
         neck="Erudit. Necklace",
         ear1="Sherida Earring",
         ear2="Brutal Earring",
-        ring1="Petrov Ring",
+        ring1="Hetairoi Ring",
         ring2="Epona's Ring",
         back=gear.THF_TP_Cape,
         waist="Reiki Yotai", --7
@@ -589,7 +581,6 @@ function init_gear_sets()
         ear1="Sherida Earring",
         ear2="Telos Earring",
         ring1="Petrov Ring",
-        waist="Kentarch Belt +1",
         })
 
     -- 47% Magic Haste (36% DW to cap)
@@ -603,7 +594,7 @@ function init_gear_sets()
         neck="Erudit. Necklace",
         ear1="Sherida Earring",
         ear2="Brutal Earring",
-        ring1="Petrov Ring",
+        ring1="Hetairoi Ring",
         ring2="Epona's Ring",
         back=gear.THF_TP_Cape,
         waist="Windbuffet Belt +1",

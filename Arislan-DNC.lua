@@ -527,7 +527,7 @@ function init_gear_sets()
         neck="Charis Necklace", --5
         ear1="Eabani Earring", --4
         ear2="Suppanomimi", --5
-        ring1="Petrov Ring",
+        ring1="Hetairoi Ring",
         ring2="Epona's Ring",
         back=gear.DNC_TP_Cape,
         waist="Reiki Yotai", --7
@@ -555,11 +555,7 @@ function init_gear_sets()
         })
 
     sets.engaged.STP = set_combine(sets.engaged, {
-        neck="Anu Torque",
-        ear1="Sherida Earring",
-        ear2="Telos Earring",
         ring1="Petrov Ring",
-        waist="Kentarch Belt +1",
         })
 
     -- 15% Magic Haste (67% DW to cap)
@@ -573,7 +569,7 @@ function init_gear_sets()
         neck="Charis Necklace", --5
         ear1="Eabani Earring", --4
         ear2="Suppanomimi", --5
-        ring1="Petrov Ring",
+        ring1="Hetairoi Ring",
         ring2="Epona's Ring",
         back=gear.DNC_TP_Cape,
         waist="Reiki Yotai", --7
@@ -601,11 +597,7 @@ function init_gear_sets()
         })
 
     sets.engaged.STP.LowHaste = set_combine(sets.engaged.LowHaste, {
-        neck="Anu Torque",
-        ear1="Sherida Earring",
-        ear2="Telos Earring",
         ring1="Petrov Ring",
-        waist="Kentarch Belt +1",
         })
 
     -- 30% Magic Haste (56% DW to cap)
@@ -619,7 +611,7 @@ function init_gear_sets()
         neck="Asperity Necklace",
         ear1="Eabani Earring", --4
         ear2="Suppanomimi", --5
-        ring1="Petrov Ring",
+        ring1="Hetairoi Ring",
         ring2="Epona's Ring",
         back=gear.DNC_TP_Cape,
         waist="Reiki Yotai", --7
@@ -648,10 +640,7 @@ function init_gear_sets()
 
     sets.engaged.STP.MidHaste = set_combine(sets.engaged.MidHaste, {
         neck="Anu Torque",
-        ear1="Sherida Earring",
-        ear2="Telos Earring",
         ring1="Petrov Ring",
-        waist="Kentarch Belt +1",
         })
 
     -- 35% Magic Haste (51% DW to cap)
@@ -665,7 +654,7 @@ function init_gear_sets()
         neck="Asperity Necklace",
         ear1="Eabani Earring", --4
         ear2="Suppanomimi", --5
-        ring1="Petrov Ring",
+        ring1="Hetairoi Ring",
         ring2="Epona's Ring",
         back=gear.DNC_TP_Cape,
         waist="Windbuffet Belt +1",
@@ -693,8 +682,6 @@ function init_gear_sets()
 
     sets.engaged.STP.HighHaste = set_combine(sets.engaged.HighHaste, {
         neck="Anu Torque",
-        ear1="Sherida Earring",
-        ear2="Telos Earring",
         ring1="Petrov Ring",
         waist="Kentarch Belt +1",
         })
@@ -710,7 +697,7 @@ function init_gear_sets()
         neck="Asperity Necklace",
         ear1="Sherida Earring",
         ear2="Brutal Earring",
-        ring1="Petrov Ring",
+        ring1="Hetairoi Ring",
         ring2="Epona's Ring",
         back=gear.DNC_TP_Cape,
         waist="Windbuffet Belt +1",

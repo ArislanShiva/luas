@@ -302,7 +302,7 @@ function init_gear_sets()
         neck="Fotia Gorget",
         ear1="Moonshade Earring",
         ear2="Ishvara Earring",
-        ring1="Garuda Ring +1",
+        ring1="Dingir Ring",
         ring2="Garuda Ring +1",
         back=gear.COR_WS3_Cape,
         waist="Fotia Belt",
@@ -338,7 +338,7 @@ function init_gear_sets()
         neck="Baetyl Pendant",
         ear1="Novio Earring",
         ear2="Friomisi Earring",
-        ring1="Arvina Ringlet +1",
+        ring1="Dingir Ring",
         ring2="Ilabrat Ring",
         back=gear.COR_WS1_Cape,
         waist="Eschan Stone",
@@ -354,8 +354,8 @@ function init_gear_sets()
         neck="Baetyl Pendant",
         ear1="Moonshade Earring",
         ear2="Friomisi Earring",
-        ring1="Archon Ring",
-        ring2="Ilabrat Ring",
+        ring1="Dingir Ring",
+        ring2="Archon Ring",
         back=gear.COR_WS1_Cape,
         waist="Eschan Stone",
         }
@@ -391,12 +391,26 @@ function init_gear_sets()
         })
         
     sets.precast.WS['Savage Blade'].Acc = set_combine(sets.precast.WS['Savage Blade'], {
-        body=gear.Herc_TA_body,
+        body="Meg. Cuirie +2",
         feet=gear.Herc_Acc_feet,
         neck="Combatant's Torque",
         ear2="Telos Earring",
         ring1="Rufescent Ring",
         waist="Grunfeld Rope",
+        })
+
+	sets.precast.WS['Swift Blade'] = set_combine(sets.precast.WS['Savage Blade'], {
+        legs="Samnuha Tights",
+        neck="Fotia Gorget",
+        ear2="Brutal Earring",
+        waist="Fotia Belt",
+        })
+
+    sets.precast.WS['Swift Blade'].Acc = set_combine(sets.precast.WS['Swift Blade'], {
+        body="Meg. Cuirie +2",
+        feet=gear.Herc_Acc_feet,
+        ear2="Telos Earring",
+        ring1="Rufescent Ring",
         })
 
     sets.precast.WS['Requiescat'] = set_combine(sets.precast.WS['Savage Blade'], {
@@ -452,8 +466,8 @@ function init_gear_sets()
         neck="Ainia Collar",
         ear1="Dedition Earring",
         ear2="Telos Earring",
-        ring1="Apate Ring",
-        ring2="Ilabrat Ring",
+        ring1="Dingir Ring",
+        ring2="Archon Ring",
         back=gear.COR_RA_Cape,
         waist="Oneiros Rope",        
         }
@@ -468,7 +482,7 @@ function init_gear_sets()
         neck="Baetyl Pendant",
         ear1="Novio Earring",
         ear2="Friomisi Earring",
-        ring1="Fenrir Ring +1",
+        ring1="Dingir Ring",
         ring2="Fenrir Ring +1",
         back=gear.COR_WS1_Cape,
         waist="Eschan Stone",
@@ -483,8 +497,8 @@ function init_gear_sets()
         neck="Sanctity Necklace",
         ear1="Hermetic Earring",
         ear2="Digni. Earring",
-        ring1="Arvina Ringlet +1",
-        ring2="Stikini Ring",
+        ring1="Stikini Ring",
+        ring2="Weather. Ring",
         waist="Kwahu Kachina Belt",
         })
 
@@ -503,7 +517,7 @@ function init_gear_sets()
         neck="Iskur Gorget",
         ear1="Enervating Earring",
         ear2="Telos Earring",
-        ring1="Garuda Ring +1",
+        ring1="Dingir Ring",
         ring2="Ilabrat Ring",
         back=gear.COR_RA_Cape,
         waist="Yemaya Belt",
@@ -584,7 +598,7 @@ function init_gear_sets()
         neck="Iskur Gorget",
         ear1="Eabani Earring",
         ear2="Telos Earring",
-        ring1="Arvina Ringlet +1",
+        ring1="Dingir Ring",
         ring2="Garuda Ring +1",
         back=gear.COR_WS1_Cape,
         waist="Windbuffet Belt +1",
@@ -623,7 +637,7 @@ function init_gear_sets()
         neck="Asperity Necklace",
         ear1="Eabani Earring", --4
         ear2="Suppanomimi", --5
-        ring1="Petrov Ring",
+        ring1="Hetairoi Ring",
         ring2="Epona's Ring",
         back=gear.COR_DW_Cape, --10
         waist="Reiki Yotai", --7
@@ -649,12 +663,8 @@ function init_gear_sets()
         })
 
     sets.engaged.STP = set_combine(sets.engaged, {
-        feet="Carmine Greaves +1",
         neck="Ainia Collar",
-        ear1="Dedition Earring",
-        ear2="Telos Earring",
         ring1="Petrov Ring",
-        waist="Kentarch Belt +1",
         })
 
     -- 15% Magic Haste (67% DW to cap)
@@ -667,7 +677,7 @@ function init_gear_sets()
         neck="Asperity Necklace",
         ear1="Eabani Earring", --4
         ear2="Suppanomimi", --5
-        ring1="Petrov Ring",
+        ring1="Hetairoi Ring",
         ring2="Epona's Ring",
         back=gear.COR_DW_Cape, --10
         waist="Reiki Yotai", --7
@@ -693,12 +703,8 @@ function init_gear_sets()
         })
 
     sets.engaged.STP.LowHaste = set_combine(sets.engaged.LowHaste, {
-        feet="Carmine Greaves +1",
         neck="Ainia Collar",
-        ear1="Dedition Earring",
-        ear2="Telos Earring",
         ring1="Petrov Ring",
-        waist="Kentarch Belt +1",
         })
 
     -- 30% Magic Haste (56% DW to cap)
@@ -711,7 +717,7 @@ function init_gear_sets()
         neck="Asperity Necklace",
         ear1="Eabani Earring", --4
         ear2="Suppanomimi", --5
-        ring1="Petrov Ring",
+        ring1="Hetairoi Ring",
         ring2="Epona's Ring",
         back=gear.COR_DW_Cape, --10
         waist="Reiki Yotai", --7
@@ -739,12 +745,8 @@ function init_gear_sets()
         })
 
     sets.engaged.STP.MidHaste = set_combine(sets.engaged.MidHaste, {
-        feet="Carmine Greaves +1",
         neck="Ainia Collar",
-        ear1="Dedition Earring",
-        ear2="Telos Earring",
         ring1="Petrov Ring",
-        waist="Kentarch Belt +1",
         })
 
     -- 35% Magic Haste (51% DW to cap)
@@ -757,7 +759,7 @@ function init_gear_sets()
         neck="Asperity Necklace",
         ear1="Eabani Earring", --4
         ear2="Suppanomimi", --5
-        ring1="Petrov Ring",
+        ring1="Hetairoi Ring",
         ring2="Epona's Ring",
         back=gear.COR_DW_Cape, --10
         waist="Reiki Yotai", --7
@@ -785,12 +787,8 @@ function init_gear_sets()
         })
 
     sets.engaged.STP.HighHaste = set_combine(sets.engaged.HighHaste, {
-        feet="Carmine Greaves +1",
         neck="Ainia Collar",
-        ear1="Dedition Earring",
-        ear2="Telos Earring",
         ring1="Petrov Ring",
-        waist="Kentarch Belt +1",
         })
         
     -- 47% Magic Haste (36% DW to cap)
@@ -803,7 +801,7 @@ function init_gear_sets()
         neck="Asperity Necklace",
         ear1="Eabani Earring", --4
         ear2="Suppanomimi", --5
-        ring1="Petrov Ring",
+        ring1="Hetairoi Ring",
         ring2="Epona's Ring",
         back=gear.COR_TP_Cape,
         waist="Reiki Yotai", --7
@@ -831,12 +829,8 @@ function init_gear_sets()
         })
 
     sets.engaged.STP.MaxHaste = set_combine(sets.engaged.MaxHaste, {
-        feet="Carmine Greaves +1",
         neck="Ainia Collar",
-        ear1="Dedition Earring",
-        ear2="Telos Earring",
         ring1="Petrov Ring",
-        waist="Kentarch Belt +1",
         })
 
     sets.engaged.Aftermath = {

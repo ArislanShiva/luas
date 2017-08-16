@@ -57,6 +57,17 @@ function user_setup()
     send_command('bind ^numpad9 input /ws "Realmrazer" <t>')
     send_command('bind ^numpad1 input /ws "Flash Nova" <t>')
 
+    send_command('bind !numpad7 input /ma "Paralyna" <t>')
+    send_command('bind !numpad8 input /ma "Silena" <t>')
+    send_command('bind !numpad9 input /ma "Blindna" <t>')
+    send_command('bind !numpad4 input /ma "Poisona" <t>')
+    send_command('bind !numpad5 input /ma "Stona" <t>')
+    send_command('bind !numpad6 input /ma "Viruna" <t>')
+    send_command('bind !numpad1 input /ma "Cursna" <t>')
+    send_command('bind !numpad+ input /ma "Erase" <t>')
+    send_command('bind !numpad0 input /ma "Sacrifice" <t>')
+    send_command('bind !numpad. input /ma "Esuna" <me>')
+
     select_default_macro_book()
     set_lockstyle()
 end
@@ -73,6 +84,20 @@ function user_unload()
     send_command('unbind !.')
     send_command('unbind @c')
     send_command('unbind @w')
+    send_command('unbind ^numpad7')
+    send_command('unbind ^numpad8')
+    send_command('unbind ^numpad9')
+    send_command('unbind ^numpad1')
+    send_command('unbind !numpad7')
+    send_command('unbind !numpad8')
+    send_command('unbind !numpad9')
+    send_command('unbind !numpad4')
+    send_command('unbind !numpad5')
+    send_command('unbind !numpad6')
+    send_command('unbind !numpad1')
+    send_command('unbind !numpad+')
+    send_command('unbind !numpad0')
+    send_command('unbind !numpad.')
 end
 
 -- Define sets and vars used by this job file.
@@ -260,8 +285,8 @@ function init_gear_sets()
         head="Vanya Hood",
         hands="Fanatic Gloves", --15
         legs="Th. Pantaloons +2", --17
-        neck="Debilis Medallion", --15
         feet="Gende. Galosh. +1", --10
+        neck="Debilis Medallion", --15
         ear1="Beatific Earring",
         ring1="Haoma's Ring", --15
         ring2="Haoma's Ring", --15
@@ -271,13 +296,13 @@ function init_gear_sets()
 
     -- 110 total Enhancing Magic Skill; caps even without Light Arts
     sets.midcast['Enhancing Magic'] = {
-        main="Oranyan",
-        sub="Enki Strap",
+        main="Gada",
+        sub="Ammurapi Shield",
         head="Telchine Cap",
         body="Telchine Chas.",
         hands="Dynasty Mitts",
         legs="Telchine Braconi",
-        feet="Theo. Duckbills +2",
+        feet="Theo. Duckbills +3",
         neck="Incanter's Torque",
         ear1="Augment. Earring",
         ear2="Andoaa Earring",
@@ -288,18 +313,18 @@ function init_gear_sets()
         }
 
     sets.midcast.EnhancingDuration = {
-        main="Oranyan",
-        sub="Enki Strap",
+        main="Gada",
+        sub="Ammurapi Shield",
         head="Telchine Cap",
         body="Telchine Chas.",
         hands="Telchine Gloves",
         legs="Telchine Braconi",
-        feet="Telchine Pigaches",
+        feet="Theo. Duckbills +3",
         }
 
     sets.midcast.Regen = set_combine(sets.midcast.EnhancingDuration, {
         main="Bolelabunga",
-        sub="Genmei Shield",
+        sub="Ammurapi Shield",
         head="Inyanga Tiara +1",
         body="Piety Briault +1",
         hands="Ebers Mitts +1",
@@ -318,6 +343,7 @@ function init_gear_sets()
 
     sets.midcast.Aquaveil = set_combine(sets.midcast['Enhancing Magic'], {
         main="Vadose Rod",
+        sub="Ammurapi Shield",
         waist="Emphatikos Rope",
         })
 
@@ -327,7 +353,7 @@ function init_gear_sets()
 
     sets.midcast.BarElement = set_combine(sets.midcast['Enhancing Magic'], {
         main="Beneficus",
-        sub="Genmei Shield",
+        sub="Ammurapi Shield",
         head="Ebers Cap +1",
         body="Ebers Bliaud +1",
         hands="Ebers Mitts +1",
@@ -407,7 +433,7 @@ function init_gear_sets()
         body="Theo. Briault +2",
         hands="Theophany Mitts +3",
         legs="Chironic Hose",
-        feet="Theo. Duckbills +2",
+        feet="Theo. Duckbills +3",
         neck="Erra Pendant",
         ear1="Hermetic Earring",
         ear2="Regal Earring",

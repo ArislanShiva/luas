@@ -39,9 +39,6 @@ function job_setup()
     rayke_duration = 47
     gambit_duration = 94
 
-    state.Buff.Battuta = buffactive.Battuta or false
-    state.Buff['Aftermath'] = buffactive['Aftermath: Lv.3'] or false
-
 end
 
 -------------------------------------------------------------------------------------------------------------------
@@ -58,13 +55,10 @@ function user_setup()
     state.MagicalDefenseMode:options('MDT', 'Status')
     
     state.WeaponLock = M(false, 'Weapon Lock')    
-    state.Greatsword = M{['description']='Current Greatsword', 'Epeolatry', 'Lionheart', "Aettir"}
     state.Charm = M(false, 'Charm Resistance')
     state.Knockback = M(false, 'Knockback')
     state.Death = M(false, "Death Resistance")
     --state.CP = M(false, "Capacity Points Mode")
-
-    gear.CurrentWeapon = state.Greatsword.value
 
     state.Runes = M{['description']='Runes', "Ignis", "Gelus", "Flabra", "Tellus", "Sulpor", "Unda", "Lux", "Tenebrae"}
     
@@ -73,7 +67,6 @@ function user_setup()
     send_command('bind ^- gs c cycleback Runes')
     send_command('bind ^= gs c cycle Runes')
     send_command('bind ^f11 gs c cycle MagicalDefenseMode')
-    send_command('bind @g gs c cycle Greatsword')
     send_command('bind @c gs c toggle Charm')
     send_command('bind @k gs c toggle Knockback')
     send_command('bind @d gs c toggle Death')
@@ -185,7 +178,7 @@ function init_gear_sets()
         waist="Kasiri Belt", --3
         }
 
-    sets.precast.JA['Vallation'] = set_combine(sets.Enmity, {body="Runeist's Coat +2", legs="Futhark Trousers +1", back="Ogma's Cape"})
+    sets.precast.JA['Vallation'] = set_combine(sets.Enmity, {body="Runeist's Coat +3", legs="Futhark Trousers +1", back="Ogma's Cape"})
     sets.precast.JA['Valiance'] = sets.precast.JA['Vallation']
     sets.precast.JA['Pflug'] = set_combine(sets.Enmity, {feet="Runeist's Boots +2"})
     sets.precast.JA['Battuta'] = set_combine(sets.Enmity, {head="Fu. Bandeau +1"})
@@ -446,7 +439,7 @@ function init_gear_sets()
         sub="Mensch Strap +1",
         ammo="Homiliary",
         head="Rawhide Mask",
-        body="Runeist's Coat +2",
+        body="Runeist's Coat +3",
         hands="Turms Mittens",
         legs="Carmine Cuisses +1",
         feet="Turms Leggings",
@@ -464,7 +457,7 @@ function init_gear_sets()
         sub="Refined Grip +1", --3/3
         ammo="Staunch Tathlum", --2/2
         head=gear.Herc_DT_head, --3/3
-        body="Runeist's Coat +2",
+        body="Runeist's Coat +3",
         legs="Carmine Cuisses +1",
         feet="Erilaz Greaves +1", --5/0
         neck="Loricate Torque +1", --6/6
@@ -501,7 +494,6 @@ function init_gear_sets()
         back="Solemnity Cape",
         }
 
-    sets.defense.Battuta = {}
     sets.defense.Knockback = {back="Repulse Mantle"}
     sets.defense.Death = {body="Samnuha Coat", ring1="Warden's Ring", ring2="Eihwaz Ring"}
 
@@ -528,7 +520,7 @@ function init_gear_sets()
         sub="Irenic Strap +1", --0/5
         ammo="Staunch Tathlum", --2/2
         head=gear.Herc_DT_head, --3/3
-        body="Runeist's Coat +2",
+        body="Runeist's Coat +3",
         hands=gear.Herc_DT_hands, --6/4
         legs="Eri. Leg Guards +1", --7/0
         feet="Erilaz Greaves +1",--5/0
@@ -564,7 +556,7 @@ function init_gear_sets()
         sub="Refined Grip +1", --3/3
         ammo="Staunch Tathlum", --2/2
         head=gear.Adhemar_DT_head, --3/0
-        body="Runeist's Coat +2",
+        body="Runeist's Coat +3",
         hands="Runeist's Mitons +2", --2/0
         legs="Eri. Leg Guards +1", --7/0
         feet="Turms Leggings",
@@ -873,14 +865,6 @@ end
 
 -- Modify the default idle set after it was constructed.
 function customize_idle_set(idleSet)
-    if state.Greatsword.current == 'Epeolatry' then
-        equip({main="Epeolatry"})
-    elseif state.Greatsword.current == 'Lionheart' then
-        equip({main="Lionheart"})
-    elseif state.Greatsword.current == 'Aettir' then
-        equip({main="Aettir"})
-    end
-
     if player.mpp < 51 then
         idleSet = set_combine(idleSet, sets.latent_refresh)
     end
@@ -892,9 +876,6 @@ function customize_idle_set(idleSet)
     end
     if state.Death.value == true then
         idleSet = set_combine(idleSet, sets.defense.Death)
-    end
-    if state.Buff.Battuta then
-        idleSet = set_combine(idleSet, sets.defense.Battuta)
     end
     --if state.CP.current == 'on' then
     --    equip(sets.CP)
@@ -908,7 +889,15 @@ end
 
 -- Modify the default melee set after it was constructed.
 function customize_melee_set(meleeSet)
-    if state.Charm.value == true then
+     if buffactive['Aftermath: Lv.3'] and player.equipment.main == "Epeolatry" 
+	    and state.DefenseMode.value == 'None' then
+        if state.HybridMode.value == "DT" then
+            meleeSet = set_combine(meleeSet, sets.engaged.Aftermath.DT)
+        else
+            meleeSet = set_combine(meleeSet, sets.engaged.Aftermath)
+        end
+    end
+	if state.Charm.value == true then
         meleeSet = set_combine(meleeSet, sets.defense.Charm)
     end
     if state.Knockback.value == true then
@@ -917,21 +906,14 @@ function customize_melee_set(meleeSet)
     if state.Death.value == true then
         meleeSet = set_combine(meleeSet, sets.defense.Death)
     end
-    if state.Buff.Aftermath and state.Greatsword.value == "Epeolatry" then
-        if state.HybridMode.value == "DT" then
-            meleeSet = set_combine(meleeSet, sets.engaged.Aftermath.DT)
-        else
-            meleeSet = set_combine(meleeSet, sets.engaged.Aftermath)
-        end
-    end
-    if state.Buff.Battuta then
-        meleeSet = set_combine(meleeSet, sets.defense.Battuta)
-    end
 
     return meleeSet
 end
 
 function customize_defense_set(defenseSet)
+	if buffactive['Battuta'] then
+		defenseSet = set_combine(defenseSet, sets.defense.Parry)
+	end
     if state.Charm.value == true then
         defenseSet = set_combine(defenseSet, sets.defense.Charm)
     end
@@ -940,9 +922,6 @@ function customize_defense_set(defenseSet)
     end
     if state.Death.value == true then
         defenseSet = set_combine(defenseSet, sets.defense.Death)
-    end
-    if state.Buff.Battuta then
-        defenseSet = set_combine(defenseSet, sets.defense.Battuta)
     end
 
     return defenseSet
