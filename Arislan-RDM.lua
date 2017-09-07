@@ -53,7 +53,7 @@ function user_setup()
     state.MagicBurst = M(false, 'Magic Burst')
 
     -- Additional local binds
-	include('Global-Binds.lua')
+    include('Global-Binds.lua')
 
     send_command('bind ^` input /ja Composure <me>')
     send_command('bind !` gs c toggle MagicBurst')
@@ -64,7 +64,7 @@ function user_setup()
     send_command('bind ^; gs c scholar speed')
     send_command('bind ![ gs c scholar aoe')
     send_command('bind !; gs c scholar cost')
-	send_command('bind !q input /ma "Temper II" <me>')
+    send_command('bind !q input /ma "Temper II" <me>')
     send_command('bind !w input /ma "Flurry II" <stpc>')
     send_command('bind !e input /ma "Haste II" <stpc>')
     send_command('bind !r input /ma "Refresh III" <stpc>')
@@ -496,7 +496,7 @@ function init_gear_sets()
         sub="Enki Strap",
         body="Seidr Cotehardie",
         legs=gear.Merlinic_MAcc_legs,
-		feet="Jhakri Pigaches +2",
+        feet="Jhakri Pigaches +2",
         neck="Erra Pendant",
         })
 
@@ -505,7 +505,7 @@ function init_gear_sets()
         sub="Enki Strap",
         hands="Ea Cuffs",
         body="Atrophy Tabard +3",
-		feet="Jhakri Pigaches +2",
+        feet="Jhakri Pigaches +2",
         neck="Erra Pendant",
         ear1="Hermetic Earring",
         waist="Yamabuki-no-Obi",

@@ -337,7 +337,7 @@ function init_gear_sets()
     sets.midcast.RA = {
         ammo=gear.RAbullet,
         head="Arcadian Beret +1",
-		body="Orion Jerkin +3",
+        body="Orion Jerkin +3",
         hands=gear.Adhemar_RA_hands,
         legs=gear.Adhemar_RA_legs,
         feet=gear.Herc_RA_feet,

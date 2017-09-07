@@ -111,7 +111,7 @@ function user_setup()
     options.ammo_warning_limit = 10
 
     -- Additional local binds
-	include('Global-Binds.lua')
+    include('Global-Binds.lua')
 
     send_command('bind ^` input /ja "Double-up" <me>')
     send_command('bind !` input /ja "Bolter\'s Roll" <me>')
@@ -383,7 +383,7 @@ function init_gear_sets()
         waist="Grunfeld Rope",
         })
 
-	sets.precast.WS['Swift Blade'] = set_combine(sets.precast.WS['Savage Blade'], {
+    sets.precast.WS['Swift Blade'] = set_combine(sets.precast.WS['Savage Blade'], {
         legs="Samnuha Tights",
         neck="Fotia Gorget",
         ear2="Brutal Earring",

@@ -48,7 +48,7 @@ function user_setup()
     lowTierNukes = S{'Stone', 'Water', 'Aero', 'Fire', 'Blizzard', 'Thunder'}
     
     -- Additional local binds
-	include('Global-Binds.lua')
+    include('Global-Binds.lua')
 
     send_command('bind ^` input /ma Stun <t>')--;input /p <wstar> #1 Stun <t>, Articgun next. <wstar> <call14>') 
     send_command('bind !` gs c toggle MagicBurst')
@@ -440,7 +440,7 @@ function init_gear_sets()
         sub="Enki Strap",
         ammo="Ghastly Tathlum +1",
         legs="Amalric Slops",
-		feet="Jhakri Pigaches +2",
+        feet="Jhakri Pigaches +2",
         neck="Erra Pendant",
         back=gear.BLM_Death_Cape,
         })

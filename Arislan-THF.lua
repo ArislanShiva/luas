@@ -57,7 +57,7 @@ function user_setup()
     state.CP = M(false, "Capacity Points Mode")
 
     -- Additional local binds
-	include('Global-Binds.lua')
+    include('Global-Binds.lua')
 
     send_command('bind ^` gs c cycle treasuremode')
     send_command('bind !` input /ja "Flee" <me>')
@@ -179,7 +179,7 @@ function init_gear_sets()
     sets.precast.JA['Trick Attack'] = sets.buff['Trick Attack']
 
     sets.precast.Waltz = {
-		ammo="Yamarang",
+        ammo="Yamarang",
         body="Passion Jacket",
         legs="Dashing Subligar",
         neck="Phalaina Locket",
@@ -231,8 +231,8 @@ function init_gear_sets()
         } -- default set
 
     sets.precast.WS.Acc = set_combine(sets.precast.WS, {
-		ammo="Falcon Eye",
-		legs="Meg. Chausses +2",
+        ammo="Falcon Eye",
+        legs="Meg. Chausses +2",
         ear2="Telos Earring",
         })
 
@@ -334,7 +334,7 @@ function init_gear_sets()
     sets.resting = {}
 
     sets.idle = {
-		ammo="Staunch Tathlum",
+        ammo="Staunch Tathlum",
         head="Dampening Tam",
         body="Turms Harness",
         hands=gear.Adhemar_TP_hands,
@@ -363,7 +363,7 @@ function init_gear_sets()
         })
 
     sets.idle.Town = set_combine(sets.idle, {
-		ammo="Yamarang",
+        ammo="Yamarang",
         head="Skulker's Bonnet +1",
         body="Pillager's Vest +2", 
         legs="Lustr. Subligar +1",
@@ -405,7 +405,7 @@ function init_gear_sets()
     
     -- No Magic Haste (74% DW to cap)
     sets.engaged = {
-		ammo="Yamarang",
+        ammo="Yamarang",
         head="Skulker's Bonnet +1",
         body="Adhemar Jacket", -- 5
         hands=gear.Adhemar_TP_hands,
@@ -449,7 +449,7 @@ function init_gear_sets()
 
     -- 15% Magic Haste (67% DW to cap)
     sets.engaged.LowHaste = {
-		ammo="Yamarang",
+        ammo="Yamarang",
         head="Skulker's Bonnet +1",
         body="Adhemar Jacket", -- 5
         hands=gear.Adhemar_TP_hands,
@@ -493,7 +493,7 @@ function init_gear_sets()
 
     -- 30% Magic Haste (56% DW to cap)
     sets.engaged.MidHaste = {
-		ammo="Yamarang",
+        ammo="Yamarang",
         head="Skulker's Bonnet +1",
         body="Adhemar Jacket", -- 5
         hands=gear.Adhemar_TP_hands,
@@ -538,7 +538,7 @@ function init_gear_sets()
 
     -- 35% Magic Haste (51% DW to cap)
     sets.engaged.HighHaste = {
-		ammo="Yamarang",
+        ammo="Yamarang",
         head="Skulker's Bonnet +1",
         body="Adhemar Jacket", -- 5
         hands=gear.Adhemar_TP_hands,
@@ -583,7 +583,7 @@ function init_gear_sets()
 
     -- 47% Magic Haste (36% DW to cap)
     sets.engaged.MaxHaste = {
-		ammo="Yamarang",
+        ammo="Yamarang",
         head="Skulker's Bonnet +1",
         body="Adhemar Jacket", -- 5
         hands=gear.Adhemar_TP_hands,

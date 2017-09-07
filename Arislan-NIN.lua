@@ -55,7 +55,7 @@ function user_setup()
     state.TH = M(false, "Treasure Hunter Mode")
 
     -- Additional local binds
-	include('Global-Binds.lua')
+    include('Global-Binds.lua')
 
     send_command('bind ^- input /ja "Yonin" <me>')
     send_command('bind ^= input /ja "Innin" <me>')

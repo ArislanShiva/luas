@@ -41,7 +41,7 @@ function user_setup()
     state.CP = M(false, "Capacity Points Mode")
 
     -- Additional local binds
-	include('Global-Binds.lua')
+    include('Global-Binds.lua')
 
     send_command('bind ^` input /ja "Afflatus Solace" <me>')
     send_command('bind !` input /ja "Afflatus Misery" <me>')
@@ -323,10 +323,10 @@ function init_gear_sets()
         })
 
     sets.midcast.RegenDuration = set_combine(sets.midcast.EnhancingDuration, {
-	    body="Telchine Chas.",
-	    hands="Ebers Mitts +1",
+        body="Telchine Chas.",
+        hands="Ebers Mitts +1",
         legs="Th. Pantaloons +2",
-		})
+        })
     
     sets.midcast.Refresh = set_combine(sets.midcast['Enhancing Magic'], {
         waist="Gishdubar Sash",
@@ -607,7 +607,7 @@ function job_post_midcast(spell, action, spellMap, eventArgs)
         end
     end
     if spell.skill == 'Enhancing Magic' then
-	    if classes.NoSkillSpells:contains(spell.english) then
+        if classes.NoSkillSpells:contains(spell.english) then
             equip(sets.midcast.EnhancingDuration)
             if spellMap == 'Refresh' then
                 equip(sets.midcast.Refresh)
@@ -616,7 +616,7 @@ function job_post_midcast(spell, action, spellMap, eventArgs)
         if spellMap == "Regen" and state.RegenMode.value == 'Duration' then
             equip(sets.midcast.RegenDuration)
         end
-	end
+    end
 end
 
 function job_aftercast(spell, action, spellMap, eventArgs)

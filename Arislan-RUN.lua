@@ -63,7 +63,7 @@ function user_setup()
     state.Runes = M{['description']='Runes', "Ignis", "Gelus", "Flabra", "Tellus", "Sulpor", "Unda", "Lux", "Tenebrae"}
     
     -- Additional local binds
-	include('Global-Binds.lua')
+    include('Global-Binds.lua')
 
     send_command('bind ^` input //gs c rune')
     send_command('bind !` input /ja "Vivacious Pulse" <me>')
@@ -352,7 +352,7 @@ function init_gear_sets()
 
     sets.midcast.SpellInterrupt = {
         ammo="Impatiens", --10
-		hands="Regal Gauntlets", --10
+        hands="Regal Gauntlets", --10
         legs="Carmine Cuisses +1", --20
         ring1="Evanescence Ring", --5
         waist="Rumination Sash", --10
@@ -378,7 +378,7 @@ function init_gear_sets()
     sets.midcast['Enhancing Magic'] = {
         head="Erilaz Galea +1",
         --head="Carmine Mask +1",
-		hands="Regal Gauntlets",
+        hands="Regal Gauntlets",
         --legs="Carmine Cuisses +1",
         legs="Futhark Trousers +1",
         neck="Incanter's Torque",
@@ -391,7 +391,7 @@ function init_gear_sets()
 
     sets.midcast.EnhancingDuration = set_combine(sets.midcast['Enhancing Magic'], {
         head="Erilaz Galea +1",
-		hands="Regal Gauntlets",
+        hands="Regal Gauntlets",
         legs="Futhark Trousers +1",
         })
 
@@ -414,7 +414,7 @@ function init_gear_sets()
     sets.midcast.Shell = sets.midcast.Protect
 
     sets.midcast['Divine Magic'] = {
-		ammo="Yamarang",
+        ammo="Yamarang",
         legs="Rune. Trousers +3",
         neck="Incanter's Torque",
         ring1="Stikini Ring",
@@ -442,7 +442,7 @@ function init_gear_sets()
         ammo="Homiliary",
         head="Rawhide Mask",
         body="Runeist's Coat +3",
-		hands="Regal Gauntlets",
+        hands="Regal Gauntlets",
         legs="Carmine Cuisses +1",
         feet="Turms Leggings",
         neck="Bathy Choker +1",
@@ -559,7 +559,7 @@ function init_gear_sets()
         ammo="Staunch Tathlum", --2/2
         head=gear.Adhemar_DT_head, --3/0
         body="Runeist's Coat +3",
-		hands="Regal Gauntlets",
+        hands="Regal Gauntlets",
         legs="Eri. Leg Guards +1", --7/0
         feet="Turms Leggings",
         neck="Loricate Torque +1", --6/6
@@ -692,8 +692,8 @@ function init_gear_sets()
     sets.engaged.Aftermath.DT = {
         head="Aya. Zucchetto +1",
         body="Turms Harness",
-		legs="Samnuha Tights",
-		feet="Carmine Greaves +1",
+        legs="Samnuha Tights",
+        feet="Carmine Greaves +1",
         neck="Loricate Torque +1",
         ear2="Telos Earring",
         waist="Flume Belt +1",
@@ -891,14 +891,14 @@ end
 -- Modify the default melee set after it was constructed.
 function customize_melee_set(meleeSet)
      if buffactive['Aftermath: Lv.3'] and player.equipment.main == "Epeolatry" 
-	    and state.DefenseMode.value == 'None' then
+        and state.DefenseMode.value == 'None' then
         if state.HybridMode.value == "DT" then
             meleeSet = set_combine(meleeSet, sets.engaged.Aftermath.DT)
         else
             meleeSet = set_combine(meleeSet, sets.engaged.Aftermath)
         end
     end
-	if state.Charm.value == true then
+    if state.Charm.value == true then
         meleeSet = set_combine(meleeSet, sets.defense.Charm)
     end
     if state.Knockback.value == true then
@@ -912,9 +912,9 @@ function customize_melee_set(meleeSet)
 end
 
 function customize_defense_set(defenseSet)
-	if buffactive['Battuta'] then
-		defenseSet = set_combine(defenseSet, sets.defense.Parry)
-	end
+    if buffactive['Battuta'] then
+        defenseSet = set_combine(defenseSet, sets.defense.Parry)
+    end
     if state.Charm.value == true then
         defenseSet = set_combine(defenseSet, sets.defense.Charm)
     end

@@ -164,7 +164,7 @@ function user_setup()
     state.Logger = M(false, "Logger Addon")
 
     -- Additional local binds
-	include('Global-Binds.lua')
+    include('Global-Binds.lua')
 
     send_command('bind ^` input /ma "Blank Gaze" <t>')
     send_command('bind !` gs c toggle MagicBurst')

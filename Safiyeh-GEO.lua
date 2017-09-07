@@ -44,7 +44,7 @@ function user_setup()
     state.MagicBurst = M(false, 'Magic Burst')
 
     -- Additional local binds
-	include('Global-Binds.lua')
+    include('Global-Binds.lua')
 
     send_command('bind ^` input /ja "Full Circle" <me>')
     send_command('bind !` gs c toggle MagicBurst')
@@ -114,18 +114,18 @@ function init_gear_sets()
     
     sets.precast.FC = {
     --  /RDM --15
-		--ranged="Dunna", --3
-		main="Solstice",
-		sub="Chanter's Shield", --3
-		head="Vanya Hood", --10
-		hands="Merlinic Dastanas", --7
-		legs="Geo. Pants +1", --11
+        --ranged="Dunna", --3
+        main="Solstice",
+        sub="Chanter's Shield", --3
+        head="Vanya Hood", --10
+        hands="Merlinic Dastanas", --7
+        legs="Geo. Pants +1", --11
         ear1="Loquacious Earring", --2
-		ear2="Etiolation Earring", --1
-		ring1="Kishar Ring", --4
-		ring2="Weather. Ring", --5
+        ear2="Etiolation Earring", --1
+        ring1="Kishar Ring", --4
+        ring2="Weather. Ring", --5
         back="Lifestream Cape", --7
-		waist="Witful Belt", --3
+        waist="Witful Belt", --3
         }
 
     sets.precast.FC['Enhancing Magic'] = set_combine(sets.precast.FC, {
@@ -134,7 +134,7 @@ function init_gear_sets()
         
     sets.precast.FC['Elemental Magic'] = set_combine(sets.precast.FC, {
         hands="Bagua Mitaines +1",
-		ear1="Barkarole Earring",
+        ear1="Barkarole Earring",
         })
 
     sets.precast.FC.Cure = set_combine(sets.precast.FC, {
@@ -156,50 +156,50 @@ function init_gear_sets()
     
     -- Base fast recast for spells
     sets.midcast.FastRecast = {
-		main="Solstice",
-		sub="Chanter's Shield",
-		head="Vanya Hood",
-		hands="Merlinic Dastanas",
-		legs="Geo. Pants +1",
+        main="Solstice",
+        sub="Chanter's Shield",
+        head="Vanya Hood",
+        hands="Merlinic Dastanas",
+        legs="Geo. Pants +1",
         ear1="Loquacious Earring",
-		ear2="Etiolation Earring",
-		ring1="Kishar Ring",
-		ring2="Weather. Ring",
+        ear2="Etiolation Earring",
+        ring1="Kishar Ring",
+        ring2="Weather. Ring",
         back="Lifestream Cape",
-		waist="Witful Belt",
+        waist="Witful Belt",
         } -- Haste
     
    sets.midcast.Geomancy = {
-		main="Solstice",
-		sub="Chanter's Shield",
-		head="Azimuth Hood +1",
-		body="Bagua Tunic +1",
-		hands="Geo. Mitaines +2",
-		ear1="Calamitous Earring",
-		neck="Incanter's Torque",
-		ring1="Stikini Ring",
-		ring2="Stikini Ring",
-		back="Lifestream Cape",
+        main="Solstice",
+        sub="Chanter's Shield",
+        head="Azimuth Hood +1",
+        body="Bagua Tunic +1",
+        hands="Geo. Mitaines +2",
+        ear1="Calamitous Earring",
+        neck="Incanter's Torque",
+        ring1="Stikini Ring",
+        ring2="Stikini Ring",
+        back="Lifestream Cape",
         }
     
     sets.midcast.Geomancy.Indi = set_combine(sets.midcast.Geomancy, {
         hands="Geo. Mitaines +2",
-		legs="Bagua Pants +1",
-		feet="Azimuth Gaiters +1",
+        legs="Bagua Pants +1",
+        feet="Azimuth Gaiters +1",
         })
 
     sets.midcast.Cure = {
-		main="Vadose Rod", --16
-		sub="Sors Shield", --3
-		head="Vanya Hood", --10
-		body="Vanya Robe", --7
-		hands="Telchine Gloves", --17
-		feet="Vanya Clogs", --10
-		neck="Incanter's Torque",
-		ear2="Mendi. Earring", --5
-		ring1="Sirona's Ring",
-		ring2="Ephedra Ring",
-		back="Oretan. Cape +1", --5
+        main="Vadose Rod", --16
+        sub="Sors Shield", --3
+        head="Vanya Hood", --10
+        body="Vanya Robe", --7
+        hands="Telchine Gloves", --17
+        feet="Vanya Clogs", --10
+        neck="Incanter's Torque",
+        ear2="Mendi. Earring", --5
+        ring1="Sirona's Ring",
+        ring2="Ephedra Ring",
+        back="Oretan. Cape +1", --5
         }
 
     sets.midcast.Curaga = set_combine(sets.midcast.Cure, {
@@ -207,15 +207,15 @@ function init_gear_sets()
         })
 
     sets.midcast.Cursna = set_combine(sets.midcast.Cure, {
-		feet="Vanya Clogs",
-		back="Oretan. Cape +1",
+        feet="Vanya Clogs",
+        back="Oretan. Cape +1",
         })
 
     sets.midcast['Enhancing Magic'] = {
-		head="Befouled Crown",
-		neck="Incanter's Torque",
-		ring1="Stikini Ring",
-		ring2="Stikini Ring",
+        head="Befouled Crown",
+        neck="Incanter's Torque",
+        ring1="Stikini Ring",
+        ring2="Stikini Ring",
         }
         
     sets.midcast.EnhancingDuration = {
@@ -230,12 +230,12 @@ function init_gear_sets()
         })
             
     sets.midcast.Stoneskin = set_combine(sets.midcast['Enhancing Magic'], {
-		neck="Nodens Gorget",
+        neck="Nodens Gorget",
         })
 
     sets.midcast.Aquaveil = set_combine(sets.midcast['Enhancing Magic'], {
-		main="Vadose Rod",
-		sub="Culminus",
+        main="Vadose Rod",
+        sub="Culminus",
         })
 
     sets.midcast.Protect = set_combine(sets.midcast.EnhancingDuration, {
@@ -248,39 +248,39 @@ function init_gear_sets()
 
 
     sets.midcast.MndEnfeebles = {
-		head="Befouled Crown",
-		body="Vanya Robe",
-		hands="Geo. Mitaines +2",
- 		legs="Psycloth Lappas",
-		feet="Geo. Sandals +2",
-		neck="Incanter's Torque",
-		ring1="Stikini Ring",
-		ring2="Stikini Ring",
-		waist="Rumination Sash",
+        head="Befouled Crown",
+        body="Vanya Robe",
+        hands="Geo. Mitaines +2",
+         legs="Psycloth Lappas",
+        feet="Geo. Sandals +2",
+        neck="Incanter's Torque",
+        ring1="Stikini Ring",
+        ring2="Stikini Ring",
+        waist="Rumination Sash",
        } -- MND/Magic accuracy
     
     sets.midcast.IntEnfeebles = set_combine(sets.midcast.MndEnfeebles, {
-		ear1="Barkarole Earring",
-		ring1="Shiva Ring",
-		ring2="Shiva Ring",
-		back="Toro Cape",
+        ear1="Barkarole Earring",
+        ring1="Shiva Ring",
+        ring2="Shiva Ring",
+        back="Toro Cape",
         }) -- INT/Magic accuracy
 
     sets.midcast['Dark Magic'] = {
-		head="Merlinic Hood",
- 		body="Geomancy Tunic +2",
-		hands="Geo. Mitaines +2",
-		legs="Merlinic Shalwar",
-		feet="Merlinic Crackows",
-		neck="Incanter's Torque",
-		ear1="Barkarole Earring",
-		ring1="Stikini Ring",
-		ring2="Stikini Ring",
-		back="Toro Cape",
+        head="Merlinic Hood",
+         body="Geomancy Tunic +2",
+        hands="Geo. Mitaines +2",
+        legs="Merlinic Shalwar",
+        feet="Merlinic Crackows",
+        neck="Incanter's Torque",
+        ear1="Barkarole Earring",
+        ring1="Stikini Ring",
+        ring2="Stikini Ring",
+        back="Toro Cape",
         }
     
     sets.midcast.Drain = set_combine(sets.midcast['Dark Magic'], {
-		ring1="Evanescence Ring",
+        ring1="Evanescence Ring",
         })
     
     sets.midcast.Aspir = sets.midcast.Drain
@@ -291,19 +291,19 @@ function init_gear_sets()
     -- Elemental Magic sets
     
     sets.midcast['Elemental Magic'] = {
-		main="Solstice",
-		sub="Culminus",
-		head="Merlinic Hood",
-		body="Count's Garb",
-		hands="Amalric Gages",
-		legs="Merlinic Shalwar",
-		feet="Merlinic Crackows",
-		neck="Mizu. Kubikazari",
-		ear1="Barkarole Earring",
-		ear2="Friomisi Earring",
-		ring1="Shiva Ring",
-		ring2="Shiva Ring",
-		back="Toro Cape",
+        main="Solstice",
+        sub="Culminus",
+        head="Merlinic Hood",
+        body="Count's Garb",
+        hands="Amalric Gages",
+        legs="Merlinic Shalwar",
+        feet="Merlinic Crackows",
+        neck="Mizu. Kubikazari",
+        ear1="Barkarole Earring",
+        ear2="Friomisi Earring",
+        ring1="Shiva Ring",
+        ring2="Shiva Ring",
+        back="Toro Cape",
         waist="Refoccilation Stone",
         }
 
@@ -325,7 +325,7 @@ function init_gear_sets()
 
     sets.midcast.Impact = set_combine(sets.midcast['Elemental Magic'], {
         head=empty,
-		body="Twilight Cloak",
+        body="Twilight Cloak",
         })
 
     -- Initializes trusts at iLvl 119
@@ -336,18 +336,18 @@ function init_gear_sets()
     ------------------------------------------------------------------------------------------------
 
     sets.idle = {
-		main="Solstice",
-		sub="Genbu's Shield",
-		head="Befouled Crown",
-		hands="Bagua Mitaines +1",
-		body="Geomancy Tunic +2",
-		legs="Bagua Pants +1",
-		feet="Geo. Sandals +2",
-		neck="Twilight Torque",
-		ear1="Barkarole Earring",
-		ear2="Infused Earring",
-		ring1="Paguroidea Ring",
-		ring2="Stikini Ring",
+        main="Solstice",
+        sub="Genbu's Shield",
+        head="Befouled Crown",
+        hands="Bagua Mitaines +1",
+        body="Geomancy Tunic +2",
+        legs="Bagua Pants +1",
+        feet="Geo. Sandals +2",
+        neck="Twilight Torque",
+        ear1="Barkarole Earring",
+        ear2="Infused Earring",
+        ring1="Paguroidea Ring",
+        ring2="Stikini Ring",
         back="Moonbeam Cape",
         waist="Refoccilation Stone",
         }
@@ -357,13 +357,13 @@ function init_gear_sets()
         })
 
     sets.idle.DT = set_combine(sets.idle, {
-		head="Azimuth Hood +1",
-		body="Geomancy Tunic +2",
-		hands="Geo. Mitaines +2",
-		legs="Azimuth Tights +1",
-		feet="Azimuth Gaiters +1", --4/0
-		neck="Twilight Torque", --5/5
-		ear2="Etiolation Earring", --0/3
+        head="Azimuth Hood +1",
+        body="Geomancy Tunic +2",
+        hands="Geo. Mitaines +2",
+        legs="Azimuth Tights +1",
+        feet="Azimuth Gaiters +1", --4/0
+        neck="Twilight Torque", --5/5
+        ear2="Etiolation Earring", --0/3
         back="Moonbeam Cape", --5/5
         })
 
@@ -372,18 +372,18 @@ function init_gear_sets()
     -- .Pet sets are for when Luopan is present.
     sets.idle.Pet = set_combine(sets.idle, { 
         -- Pet: -DT (37.5% to cap) / Pet: Regen
-		--ranged="Dunna", --5/0
-		head="Telchine Cap", --0/3
-		body="Telchine Chas.", --0/3
-		hands="Geo. Mitaines +2", --12/0
-		legs="Psycloth Lappas", --4/0
-		feet="Telchine Pigaches", --0/2
-		back="Nantosuelta's Cape", --10/0
+        --ranged="Dunna", --5/0
+        head="Telchine Cap", --0/3
+        body="Telchine Chas.", --0/3
+        hands="Geo. Mitaines +2", --12/0
+        legs="Psycloth Lappas", --4/0
+        feet="Telchine Pigaches", --0/2
+        back="Nantosuelta's Cape", --10/0
         })
 
     sets.idle.DT.Pet = set_combine(sets.idle.Pet, {
-		neck="Twilight Torque", --5/5
-		ear2="Etiolation Earring", --0/3
+        neck="Twilight Torque", --5/5
+        ear2="Etiolation Earring", --0/3
         back="Moonbeam Cape", --5/5
         })
 
@@ -394,9 +394,9 @@ function init_gear_sets()
     sets.idle.DT.Pet.Indi = set_combine(sets.idle.DT.Pet, {legs="Bagua Pants +1"})
 
     sets.idle.Town = set_combine(sets.idle, {
-		head="Azimuth Hood +1",
-		hands="Geo. Mitaines +2",
-		neck="Incanter's Torque",
+        head="Azimuth Hood +1",
+        hands="Geo. Mitaines +2",
+        neck="Incanter's Torque",
         })
         
     -- Defense sets
@@ -405,7 +405,7 @@ function init_gear_sets()
     sets.defense.MDT = sets.idle.DT
 
     sets.Kiting = {
-		feet="Geo. Sandals +2",
+        feet="Geo. Sandals +2",
         }
 
     sets.latent_refresh = {
@@ -431,18 +431,18 @@ function init_gear_sets()
     --------------------------------------
 
     sets.magic_burst = {
-		head="Merlinic Hood", --5
-		hands="Amalric Gages", --(5)
-		legs="Merlinic Shalwar", --11
-		neck="Mizu. Kubikazari", --10
-		ring2="Mujin Band", --(5)
+        head="Merlinic Hood", --5
+        hands="Amalric Gages", --(5)
+        legs="Merlinic Shalwar", --11
+        neck="Mizu. Kubikazari", --10
+        ring2="Mujin Band", --(5)
         }
 
     sets.buff.Doom = {ring1="Saida Ring", ring2="Saida Ring", waist="Gishdubar Sash"}
 
     --sets.Obi = {waist="Hachirin-no-Obi"}
     sets.CP = {back="Aptitude Mantle"}
-	
+    
 end
 
 -------------------------------------------------------------------------------------------------------------------

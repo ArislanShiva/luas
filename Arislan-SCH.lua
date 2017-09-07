@@ -73,7 +73,7 @@ function user_setup()
     state.StormSurge = M(false, 'Stormsurge')
 
     -- Additional local binds
-	include('Global-Binds.lua')
+    include('Global-Binds.lua')
 
     send_command('bind ^` input /ja Immanence <me>')
     send_command('bind !` gs c toggle MagicBurst')
@@ -97,7 +97,7 @@ function user_setup()
 
     send_command('bind ^numpad0 input /Myrkr')
 
-	include('Global-Binds.lua')
+    include('Global-Binds.lua')
     
     select_default_macro_book()
     set_lockstyle()
@@ -453,7 +453,7 @@ function init_gear_sets()
         sub="Enki Strap",
         body="Seidr Cotehardie",
         legs=gear.Merlinic_MAcc_legs,
-		feet="Jhakri Pigaches +2",
+        feet="Jhakri Pigaches +2",
         neck="Erra Pendant",
         })
         
@@ -461,7 +461,7 @@ function init_gear_sets()
         main=gear.Grioavolr_MB,
         sub="Enki Strap",
         legs=gear.Merlinic_MAcc_legs,
-		feet="Jhakri Pigaches +2",
+        feet="Jhakri Pigaches +2",
         neck="Erra Pendant",
         waist="Yamabuki-no-Obi",
         })
