@@ -164,6 +164,8 @@ function user_setup()
     state.Logger = M(false, "Logger Addon")
 
     -- Additional local binds
+	include('Global-Binds.lua')
+
     send_command('bind ^` input /ma "Blank Gaze" <t>')
     send_command('bind !` gs c toggle MagicBurst')
     send_command('bind ^- input /ja "Chain Affinity" <me>')
@@ -174,7 +176,7 @@ function user_setup()
     send_command('bind !e input /ma "Erratic Flutter" <me>')
     send_command('bind !t input /ma "Occultation" <me>')
 
-    if player.sub_job == "RDM"then    
+    if player.sub_job == "RDM" then    
         send_command('bind !q input /ma "Fantod" <me>')
         send_command('bind !w input /ma "Reactor Cool" <me>')
         send_command('bind !r input /ma "Refresh" <stpc>')
@@ -188,17 +190,6 @@ function user_setup()
         send_command('bind !y input /ma "Barrier Tusk" <me>')
         send_command('bind !u input /ma "Diamondhide" <me>')
         send_command('bind !p input /ma "Mighty Guard" <me>')
-    end
-    
-    if player.sub_job == 'DNC' then
-        send_command('bind ^, input /ja "Spectral Jig" <me>')
-        send_command('unbind ^.')
-    elseif player.sub_job == "RDM" then
-        send_command('bind ^, input /ma "Sneak" <stpc>')
-        send_command('bind ^. input /ma "Invisible" <stpc>')
-    else
-        send_command('bind ^, input /item "Silent Oil" <me>')
-        send_command('bind ^. input /item "Prism Powder" <me>')
     end
     
     send_command('bind @c gs c toggle CP')
@@ -410,7 +401,7 @@ function init_gear_sets()
     sets.precast.WS['Sanguine Blade'] = {
         ammo="Pemphredo Tathlum",
         head="Pixie Hairpin +1", 
-        body="Amalric Doublet",
+        body="Vedic Coat",
         hands="Jhakri Cuffs +2",
         legs="Amalric Slops",
         feet="Jhakri Pigaches +2",
@@ -526,7 +517,7 @@ function init_gear_sets()
         ammo="Pemphredo Tathlum",
         head="Jhakri Coronal +1",
         body="Vedic Coat",
-        hands="Amalric Gages",
+        hands="Jhakri Cuffs +2",
         legs="Amalric Slops",
         feet="Jhakri Pigaches +2",
         neck="Baetyl Pendant",
@@ -572,8 +563,8 @@ function init_gear_sets()
     sets.midcast['Blue Magic'].MagicAccuracy = {
         ammo="Pemphredo Tathlum",
         head="Amalric Coif",
-        body="Amalric Doublet",
-        hands="Rawhide Gloves", 
+        body="Jhakri Robe +2",
+        hands="Jhakri Cuffs +2",
         legs="Psycloth Lappas",
         feet="Jhakri Pigaches +2",
         neck="Erra Pendant",
@@ -1028,7 +1019,7 @@ function init_gear_sets()
     sets.Learning = {hands="Assim. Bazu. +1"}
     sets.latent_refresh = {waist="Fucho-no-obi"}
 
-    sets.buff.Doom = {ring1="Saida Ring", ring2="Saida Ring", waist="Gishdubar Sash"}
+    sets.buff.Doom = {ring1="Eshmun's Ring", ring2="Eshmun's Ring", waist="Gishdubar Sash"}
 
     sets.CP = {back="Mecisto. Mantle"}
     sets.Reive = {neck="Ygnas's Resolve +1"}

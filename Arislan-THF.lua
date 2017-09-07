@@ -57,15 +57,10 @@ function user_setup()
     state.CP = M(false, "Capacity Points Mode")
 
     -- Additional local binds
+	include('Global-Binds.lua')
+
     send_command('bind ^` gs c cycle treasuremode')
     send_command('bind !` input /ja "Flee" <me>')
-    if player.sub_job == 'DNC' then
-        send_command('bind ^, input /ja "Spectral Jig" <me>')
-        send_command('unbind ^.')
-    else
-        send_command('bind ^, input /item "Silent Oil" <me>')
-        send_command('bind ^. input /item "Prism Powder" <me>')
-    end
     send_command('bind @h gs c cycle HasteMode')
     send_command('bind @c gs c toggle CP')
 
@@ -140,7 +135,7 @@ function init_gear_sets()
     sets.buff['Trick Attack'] = {
         ammo="Yetshila",
         head="Pillager's Bonnet +1",
-        body="Adhemar Jacket", 
+        body="Pillager's Vest +2", 
         hands="Pillager's Armlets +1",
         legs="Pillager's Culottes +1",
         feet="Meg. Jam. +2",
@@ -166,7 +161,7 @@ function init_gear_sets()
     sets.precast.JA['Collaborator'] = {head="Skulker's Bonnet +1"}
     sets.precast.JA['Accomplice'] = {head="Skulker's Bonnet +1"}
     sets.precast.JA['Flee'] = {feet="Pill. Poulaines +1"}
-    sets.precast.JA['Hide'] = {body="Pillager's Vest +1"}
+    sets.precast.JA['Hide'] = {body="Pillager's Vest +2"}
     sets.precast.JA['Conspirator'] = {body="Skulker's Vest +1"}
 
     sets.precast.JA['Steal'] = {
@@ -184,6 +179,7 @@ function init_gear_sets()
     sets.precast.JA['Trick Attack'] = sets.buff['Trick Attack']
 
     sets.precast.Waltz = {
+		ammo="Yamarang",
         body="Passion Jacket",
         legs="Dashing Subligar",
         neck="Phalaina Locket",
@@ -235,7 +231,8 @@ function init_gear_sets()
         } -- default set
 
     sets.precast.WS.Acc = set_combine(sets.precast.WS, {
-        legs="Meg. Chausses +2",
+		ammo="Falcon Eye",
+		legs="Meg. Chausses +2",
         ear2="Telos Earring",
         })
 
@@ -270,7 +267,7 @@ function init_gear_sets()
     sets.precast.WS['Evisceration'].Acc = set_combine(sets.precast.WS['Evisceration'], {
         ammo="Falcon Eye",
         head="Skulker's Bonnet +1",
-        body="Sayadio's Kaftan",
+        body="Pillager's Vest +2", 
         hands="Meg. Gloves +2",
         legs=gear.Herc_WS_legs,
         feet=gear.Herc_Acc_feet,
@@ -337,7 +334,7 @@ function init_gear_sets()
     sets.resting = {}
 
     sets.idle = {
-        ammo="Ginsen",
+		ammo="Staunch Tathlum",
         head="Dampening Tam",
         body="Turms Harness",
         hands=gear.Adhemar_TP_hands,
@@ -366,8 +363,9 @@ function init_gear_sets()
         })
 
     sets.idle.Town = set_combine(sets.idle, {
+		ammo="Yamarang",
         head="Skulker's Bonnet +1",
-        body="Adhemar Jacket",
+        body="Pillager's Vest +2", 
         legs="Lustr. Subligar +1",
         neck="Combatant's Torque",
         ear1="Sherida Earring",
@@ -407,7 +405,7 @@ function init_gear_sets()
     
     -- No Magic Haste (74% DW to cap)
     sets.engaged = {
-        ammo="Ginsen",
+		ammo="Yamarang",
         head="Skulker's Bonnet +1",
         body="Adhemar Jacket", -- 5
         hands=gear.Adhemar_TP_hands,
@@ -423,7 +421,7 @@ function init_gear_sets()
         } -- 34%
 
     sets.engaged.LowAcc = set_combine(sets.engaged, {
-        ammo="Falcon Eye",
+        body="Pillager's Vest +2", 
         neck="Combatant's Torque",
         })
 
@@ -451,7 +449,7 @@ function init_gear_sets()
 
     -- 15% Magic Haste (67% DW to cap)
     sets.engaged.LowHaste = {
-        ammo="Ginsen",
+		ammo="Yamarang",
         head="Skulker's Bonnet +1",
         body="Adhemar Jacket", -- 5
         hands=gear.Adhemar_TP_hands,
@@ -467,7 +465,7 @@ function init_gear_sets()
         } -- 34%
 
     sets.engaged.LowAcc.LowHaste = set_combine(sets.engaged.LowHaste, {
-        ammo="Falcon Eye",
+        body="Pillager's Vest +2", 
         neck="Combatant's Torque",
         })
 
@@ -495,7 +493,7 @@ function init_gear_sets()
 
     -- 30% Magic Haste (56% DW to cap)
     sets.engaged.MidHaste = {
-        ammo="Ginsen",
+		ammo="Yamarang",
         head="Skulker's Bonnet +1",
         body="Adhemar Jacket", -- 5
         hands=gear.Adhemar_TP_hands,
@@ -511,7 +509,7 @@ function init_gear_sets()
         } -- 26%
 
     sets.engaged.LowAcc.MidHaste = set_combine(sets.engaged.MidHaste, {
-        ammo="Falcon Eye",
+        body="Pillager's Vest +2", 
         neck="Combatant's Torque",
         })
 
@@ -540,7 +538,7 @@ function init_gear_sets()
 
     -- 35% Magic Haste (51% DW to cap)
     sets.engaged.HighHaste = {
-        ammo="Ginsen",
+		ammo="Yamarang",
         head="Skulker's Bonnet +1",
         body="Adhemar Jacket", -- 5
         hands=gear.Adhemar_TP_hands,
@@ -556,12 +554,12 @@ function init_gear_sets()
         } -- 21%
 
     sets.engaged.LowAcc.HighHaste = set_combine(sets.engaged.HighHaste, {
+        body="Pillager's Vest +2", 
         neck="Combatant's Torque",
         waist="Kentarch Belt +1",
         })
 
     sets.engaged.MidAcc.HighHaste = set_combine(sets.engaged.LowAcc.HighHaste, {
-        ammo="Falcon Eye",
         head="Dampening Tam",
         ear1="Cessance Earring",
         ring2="Ilabrat Ring",
@@ -585,7 +583,7 @@ function init_gear_sets()
 
     -- 47% Magic Haste (36% DW to cap)
     sets.engaged.MaxHaste = {
-        ammo="Ginsen",
+		ammo="Yamarang",
         head="Skulker's Bonnet +1",
         body="Adhemar Jacket", -- 5
         hands=gear.Adhemar_TP_hands,
@@ -601,12 +599,12 @@ function init_gear_sets()
         } -- 5%
 
     sets.engaged.LowAcc.MaxHaste = set_combine(sets.engaged.MaxHaste, {
+        body="Pillager's Vest +2", 
         neck="Combatant's Torque",
         waist="Kentarch Belt +1",
         })
 
     sets.engaged.MidAcc.MaxHaste = set_combine(sets.engaged.LowAcc.MaxHaste, {
-        ammo="Falcon Eye",
         head="Dampening Tam",
         ear1="Cessance Earring",
         ring2="Ilabrat Ring",
@@ -674,7 +672,7 @@ function init_gear_sets()
     ---------------------------------------- Special Sets ------------------------------------------
     ------------------------------------------------------------------------------------------------
 
-    sets.buff.Doom = {ring1="Saida Ring", ring2="Saida Ring", waist="Gishdubar Sash"}
+    sets.buff.Doom = {ring1="Eshmun's Ring", ring2="Eshmun's Ring", waist="Gishdubar Sash"}
 
     sets.Reive = {neck="Ygnas's Resolve +1"}
     sets.CP = {back="Mecisto. Mantle"}

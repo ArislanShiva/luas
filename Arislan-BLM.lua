@@ -48,12 +48,11 @@ function user_setup()
     lowTierNukes = S{'Stone', 'Water', 'Aero', 'Fire', 'Blizzard', 'Thunder'}
     
     -- Additional local binds
+	include('Global-Binds.lua')
+
     send_command('bind ^` input /ma Stun <t>')--;input /p <wstar> #1 Stun <t>, Articgun next. <wstar> <call14>') 
     send_command('bind !` gs c toggle MagicBurst')
-    send_command('bind !w input /ma "Aspir III" <t>')
     send_command('bind !p input /ma "Shock Spikes" <me>')
-    send_command('bind ^, input /ma Sneak <stpc>')
-    send_command('bind ^. input /ma Invisible <stpc>')
     send_command('bind @d gs c toggle DeathMode')
     send_command('bind @c gs c toggle CP')
     send_command('bind @w gs c toggle WeaponLock')
@@ -67,7 +66,6 @@ end
 function user_unload()
     send_command('unbind ^`')
     send_command('unbind !`')
-    send_command('unbind !w')
     send_command('unbind !p')
     send_command('unbind ^,')
     send_command('unbind !.')
@@ -290,7 +288,6 @@ function init_gear_sets()
     sets.midcast.Regen = set_combine(sets.midcast['Enhancing Magic'], {
         main="Bolelabunga",
         sub="Ammurapi Shield",
-        sub="Genmei Shield",
         body="Telchine Chas.",
         })
     
@@ -623,7 +620,7 @@ function init_gear_sets()
         back="Relucent Cape",
         }
 
-    sets.buff.Doom = {ring1="Saida Ring", ring2="Saida Ring", waist="Gishdubar Sash"}
+    sets.buff.Doom = {ring1="Eshmun's Ring", ring2="Eshmun's Ring", waist="Gishdubar Sash"}
 
     sets.DarkAffinity = {head="Pixie Hairpin +1",ring2="Archon Ring"}
     sets.Obi = {waist="Hachirin-no-Obi"}

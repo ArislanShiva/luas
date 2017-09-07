@@ -55,17 +55,13 @@ function user_setup()
     state.TH = M(false, "Treasure Hunter Mode")
 
     -- Additional local binds
+	include('Global-Binds.lua')
+
     send_command('bind ^- input /ja "Yonin" <me>')
     send_command('bind ^= input /ja "Innin" <me>')
-    if player.sub_job == 'DNC' then
-        send_command('bind ^, input /ja "Spectral Jig" <me>')
-        send_command('unbind ^.')
-    else
-        send_command('bind ^, input /nin "Monomi: Ichi" <me>')
-        send_command('bind ^. input /ma "Tonko: Ni" <me>')
-    end
-    send_command('bind ^, input /nin "Monomi: Ichi" <me>')
-    send_command('bind ^. input /ma "Tonko: Ni" <me>')
+    --send_command('bind ^, input /nin "Monomi: Ichi" <me>')
+    --send_command('bind ^. input /ma "Tonko: Ni" <me>')\
+
     send_command('bind @h gs c cycle HasteMode')
     send_command('bind @c gs c toggle CP')
     send_command('bind @t gs c toggle TH')
@@ -94,8 +90,6 @@ end
 function user_unload()
     send_command('unbind ^-')
     send_command('unbind ^=')
-    send_command('unbind ^,')
-    send_command('unbind !.')
     send_command('unbind @h')
     send_command('unbind @c')
     send_command('unbind @t')
@@ -110,7 +104,7 @@ function user_unload()
     send_command('unbind ^numpad7')
     send_command('unbind ^numpad8')
     send_command('unbind ^numpad4')
-    send_command('unbind ^numpad5')
+    send_command('unbind ^numpad6')
     send_command('unbind ^numpad1')
 end
 
@@ -126,6 +120,7 @@ function init_gear_sets()
 --    sets.precast.JA['Sange'] = {legs="Mochizuki Chainmail"}
 
     sets.precast.Waltz = {
+        ammo="Yamarang",
         body="Passion Jacket",
         legs="Dashing Subligar",
         neck="Phalaina Locket",
@@ -287,7 +282,7 @@ function init_gear_sets()
     
     -- Idle sets
     sets.idle = {
-        ammo="Ginsen",
+        ammo="Yamarang",
         head="Dampening Tam",
         body="Hiza. Haramaki +1",
         hands=gear.Herc_DT_hands,
@@ -352,7 +347,7 @@ function init_gear_sets()
     
     -- No Magic Haste (74% DW to cap)    
     sets.engaged = {
-        ammo="Ginsen",
+        ammo="Yamarang",
         head="Dampening Tam",
         body="Adhemar Jacket", --5
         hands="Floral Gauntlets", --5
@@ -368,7 +363,6 @@ function init_gear_sets()
         } -- 35%
 
     sets.engaged.LowAcc = set_combine(sets.engaged, {
-        ammo="Falcon Eye",
         neck="Combatant's Torque",
         })
 
@@ -394,7 +388,7 @@ function init_gear_sets()
 
     -- 15% Magic Haste (67% DW to cap)
     sets.engaged.LowHaste = {
-        ammo="Ginsen",
+        ammo="Yamarang",
         head="Dampening Tam",
         body="Adhemar Jacket", --5
         hands="Floral Gauntlets", --5
@@ -410,7 +404,6 @@ function init_gear_sets()
         } -- 35%
 
     sets.engaged.LowAcc.LowHaste = set_combine(sets.engaged.LowHaste, {
-        ammo="Falcon Eye",
         neck="Combatant's Torque",
         })
 
@@ -437,7 +430,7 @@ function init_gear_sets()
 
     -- 30% Magic Haste (56% DW to cap)
     sets.engaged.MidHaste = {
-        ammo="Ginsen",
+        ammo="Yamarang",
         head="Dampening Tam",
         body="Adhemar Jacket", --5
         hands=gear.Adhemar_TP_hands,
@@ -453,7 +446,6 @@ function init_gear_sets()
         } -- 21%
 
     sets.engaged.LowAcc.MidHaste = set_combine(sets.engaged.MidHaste, {
-        ammo="Falcon Eye",
         neck="Combatant's Torque",
         })
 
@@ -480,7 +472,7 @@ function init_gear_sets()
 
     -- 35% Magic Haste (51% DW to cap)
     sets.engaged.HighHaste = {
-        ammo="Ginsen",
+        ammo="Yamarang",
         head="Dampening Tam",
         body="Adhemar Jacket", --5
         hands=gear.Adhemar_TP_hands,
@@ -501,7 +493,6 @@ function init_gear_sets()
         })
 
     sets.engaged.MidAcc.HighHaste = set_combine(sets.engaged.LowAcc.HighHaste, {
-        ammo="Falcon Eye",
         ear1="Cessance Earring",
         ring2="Ilabrat Ring",
         back="Letalis Mantle",
@@ -523,7 +514,7 @@ function init_gear_sets()
 
     -- 47% Magic Haste (36% DW to cap)
     sets.engaged.MaxHaste = {
-        ammo="Ginsen",
+        ammo="Yamarang",
         head="Dampening Tam",
         body=gear.Herc_TA_body,
         hands=gear.Adhemar_TP_hands,
@@ -544,7 +535,6 @@ function init_gear_sets()
         })
 
     sets.engaged.MidAcc.MaxHaste = set_combine(sets.engaged.LowAcc.MaxHaste, {
-        ammo="Falcon Eye",
         ear1="Cessance Earring",
         ring2="Ilabrat Ring",
         back="Letalis Mantle",
@@ -607,7 +597,7 @@ function init_gear_sets()
     --------------------------------------
 
 --    sets.buff.Migawari = {body="Iga Ningi +2"}
-    sets.buff.Doom = {ring1="Saida Ring", ring2="Saida Ring", waist="Gishdubar Sash"}
+    sets.buff.Doom = {ring1="Eshmun's Ring", ring2="Eshmun's Ring", waist="Gishdubar Sash"}
 --    sets.buff.Yonin = {}
 --    sets.buff.Innin = {}
 

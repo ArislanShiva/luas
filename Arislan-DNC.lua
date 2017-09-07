@@ -89,6 +89,8 @@ function user_setup()
     state.IdleMode:options('Normal', 'DT')
 
     -- Additional local binds
+	include('Global-Binds.lua')
+
     send_command('bind ^- gs c cycleback mainstep')
     send_command('bind ^= gs c cycle mainstep')
     send_command('bind !- gs c cycleback altstep')
@@ -97,8 +99,6 @@ function user_setup()
     send_command('bind ![ input /ja "Contradance" <me>')
     send_command('bind ^` input /ja "Saber Dance" <me>')
     send_command('bind !` input /ja "Chocobo Jig II" <me>')
-    send_command('bind ^, input /ja "Spectral Jig" <me>')
-    send_command('unbind ^.')
     send_command('bind @h gs c cycle HasteMode')
     send_command('bind @f gs c toggle ClosedPosition')
     send_command('bind @c gs c toggle CP')
@@ -197,18 +197,19 @@ function init_gear_sets()
     sets.precast.JA['Trance'] = {head="Horos Tiara +1"}
       
     sets.precast.Waltz = {
+		ammo="Yamarang", --5
         head="Anwig Salade",
-        body="Maxixi Casaque +2", --17(7)
-        hands="Meg. Gloves +2",
+        body="Maxixi Casaque +3", --19(8)
+        hands="Maxixi Bangles +3",
         legs="Dashing Subligar", --10
         feet="Maxixi Toeshoes +2", --12
         neck="Unmoving Collar +1",
-        ear1="Roundel Earring", --5
+        ear1="Handler's Earring +1",
         ear2="Enchntr. Earring +1",
         ring1="Carb. Ring +1",
-        ring2="Valseur's Ring", --3
-        back="Toetapper Mantle", --5
-        waist="Chaac Belt",
+        ring2="Carb. Ring +1",
+        back=gear.DNC_WTZ_Cape, --10
+        waist="Aristo Belt",
         } -- Waltz Potency/CHR
     
     sets.precast.WaltzSelf = set_combine(sets.precast.Waltz, {
@@ -221,9 +222,9 @@ function init_gear_sets()
     sets.precast.Jig = {legs="Horos Tights +1", feet="Maxixi Toeshoes +2"}
 
     sets.precast.Step = {
-        ammo="Falcon Eye",
+		ammo="Yamarang",
         head="Maxixi Tiara +2",
-        body="Maxixi Casaque +2",
+        body="Maxixi Casaque +3",
         hands="Maxixi Bangles +3",
         legs="Mummu Kecks +1",
         feet="Maxixi Toeshoes +2",
@@ -257,9 +258,9 @@ function init_gear_sets()
         } -- Magic Accuracy
         
     sets.precast.Flourish1['Desperate Flourish'] = {
-        ammo="Charis Feather",
+		ammo="Yamarang",
         head="Maxixi Tiara +2",
-        body="Maxixi Casaque +2",
+        body="Maxixi Casaque +3",
         hands="Maxixi Bangles +3",
         legs=gear.Herc_WS_legs,
         feet="Maxixi Toeshoes +2",
@@ -319,13 +320,14 @@ function init_gear_sets()
         } -- default set
         
     sets.precast.WS.Acc = set_combine(sets.precast.WS, {
+		ammo="Falcon Eye",
         legs="Meg. Chausses +2",
         ring1="Ramuh Ring +1",
         ear2="Telos Earring",
         })
     
     sets.precast.WS['Exenterator'] = set_combine(sets.precast.WS, {
-        ammo="Ginsen",
+		ammo="Yamarang",
         head=gear.Adhemar_TP_head,
         legs="Meg. Chausses +2",
         feet="Meg. Jam. +2",
@@ -475,9 +477,9 @@ function init_gear_sets()
         })
 
     sets.idle.Town = set_combine (sets.idle, {
-        ammo="Ginsen",
+		ammo="Yamarang",
         head="Maxixi Tiara +2",
-        body="Maxixi Casaque +2",
+        body="Maxixi Casaque +3",
         hands="Maxixi Bangles +3",
         legs="Lustr. Subligar +1",
         neck="Combatant's Torque",
@@ -518,7 +520,7 @@ function init_gear_sets()
     
     -- No Magic Haste (74% DW to cap)
     sets.engaged = {
-        ammo="Ginsen",
+		ammo="Yamarang",
         head="Dampening Tam",
         body="Macu. Casaque +1", --11
         hands=gear.Adhemar_TP_hands,
@@ -534,7 +536,6 @@ function init_gear_sets()
         } -- 41%
 
     sets.engaged.LowAcc = set_combine(sets.engaged, {
-        ammo="Falcon Eye",
         neck="Combatant's Torque",
         })
 
@@ -545,7 +546,8 @@ function init_gear_sets()
         })
 
     sets.engaged.HighAcc = set_combine(sets.engaged.MidAcc, {
-        legs=gear.Herc_WS_legs,
+        body="Maxixi Casaque +3",
+    	legs=gear.Herc_WS_legs,
         feet=gear.Herc_Acc_feet,
         ear1="Cessance Earring",
         ear2="Telos Earring",
@@ -560,7 +562,7 @@ function init_gear_sets()
 
     -- 15% Magic Haste (67% DW to cap)
     sets.engaged.LowHaste = {
-        ammo="Ginsen",
+		ammo="Yamarang",
         head="Dampening Tam",
         body="Macu. Casaque +1", --11
         hands=gear.Adhemar_TP_hands,
@@ -576,7 +578,6 @@ function init_gear_sets()
         } -- 32%
 
     sets.engaged.LowAcc.LowHaste = set_combine(sets.engaged.LowHaste, {
-        ammo="Falcon Eye",
         neck="Combatant's Torque",
         })
 
@@ -587,6 +588,7 @@ function init_gear_sets()
         })
 
     sets.engaged.HighAcc.LowHaste = set_combine(sets.engaged.MidAcc.LowHaste, {
+        body="Maxixi Casaque +3",
         legs=gear.Herc_WS_legs,
         feet=gear.Herc_Acc_feet,
         ear1="Cessance Earring",
@@ -602,7 +604,7 @@ function init_gear_sets()
 
     -- 30% Magic Haste (56% DW to cap)
     sets.engaged.MidHaste = {
-        ammo="Ginsen",
+		ammo="Yamarang",
         head="Dampening Tam",
         body="Adhemar Jacket", --5
         hands=gear.Adhemar_TP_hands,
@@ -618,7 +620,6 @@ function init_gear_sets()
         } -- 21%
 
     sets.engaged.LowAcc.MidHaste = set_combine(sets.engaged.MidHaste, {
-        ammo="Falcon Eye",
         neck="Combatant's Torque",
         })
 
@@ -630,6 +631,7 @@ function init_gear_sets()
         })
 
     sets.engaged.HighAcc.MidHaste = set_combine(sets.engaged.MidAcc.MidHaste, {
+        body="Maxixi Casaque +3",
         legs=gear.Herc_WS_legs,
         feet=gear.Herc_Acc_feet,
         ear2="Telos Earring",
@@ -645,7 +647,7 @@ function init_gear_sets()
 
     -- 35% Magic Haste (51% DW to cap)
     sets.engaged.HighHaste = {
-        ammo="Ginsen",
+		ammo="Yamarang",
         head="Dampening Tam",
         body="Adhemar Jacket", --5
         hands=gear.Adhemar_TP_hands,
@@ -666,12 +668,12 @@ function init_gear_sets()
         })
 
     sets.engaged.MidAcc.HighHaste = set_combine(sets.engaged.LowAcc.HighHaste, {
-        ammo="Falcon Eye",
         ear1="Cessance Earring",
         ring2="Ilabrat Ring",
         })
 
     sets.engaged.HighAcc.HighHaste = set_combine(sets.engaged.MidAcc.HighHaste, {
+        body="Maxixi Casaque +3",
         legs=gear.Herc_WS_legs,
         feet=gear.Herc_Acc_feet,
         ear2="Telos Earring",
@@ -688,7 +690,7 @@ function init_gear_sets()
 
     -- 47% Magic Haste (36% DW to cap)
     sets.engaged.MaxHaste = {
-        ammo="Ginsen",
+		ammo="Yamarang",
         head="Dampening Tam",
         body=gear.Herc_TA_body,
         hands=gear.Adhemar_TP_hands,
@@ -709,12 +711,12 @@ function init_gear_sets()
         })
 
     sets.engaged.MidAcc.MaxHaste = set_combine(sets.engaged.LowAcc.MaxHaste, {
-        ammo="Falcon Eye",
         ear1="Cessance Earring",
         ring2="Ilabrat Ring",
         })
 
     sets.engaged.HighAcc.MaxHaste = set_combine(sets.engaged.MidAcc.MaxHaste, {
+        body="Maxixi Casaque +3",
         legs=gear.Herc_WS_legs,
         feet=gear.Herc_Acc_feet,
         ear2="Telos Earring",
@@ -780,7 +782,7 @@ function init_gear_sets()
     sets.buff['Climactic Flourish'] = {head="Maculele Tiara +1"}
     sets.buff['Closed Position'] = {feet="Horos Toe Shoes +1"}
 
-    sets.buff.Doom = {ring1="Saida Ring", ring2="Saida Ring", waist="Gishdubar Sash"}
+    sets.buff.Doom = {ring1="Eshmun's Ring", ring2="Eshmun's Ring", waist="Gishdubar Sash"}
     sets.CP = {back="Mecisto. Mantle"}
     sets.Reive = {neck="Ygnas's Resolve +1"}
 

@@ -24,6 +24,7 @@ end
 function job_setup()
     state.Buff['Afflatus Solace'] = buffactive['Afflatus Solace'] or false
     state.Buff['Afflatus Misery'] = buffactive['Afflatus Misery'] or false
+    state.RegenMode = M{['description']='Regen Mode', 'Duration', 'Potency'}
 end
 
 -------------------------------------------------------------------------------------------------------------------
@@ -40,33 +41,28 @@ function user_setup()
     state.CP = M(false, "Capacity Points Mode")
 
     -- Additional local binds
+	include('Global-Binds.lua')
+
     send_command('bind ^` input /ja "Afflatus Solace" <me>')
     send_command('bind !` input /ja "Afflatus Misery" <me>')
-    send_command('bind ^- input /ja "Light Arts" <me>')
+    send_command('bind ^- gs c scholar light')
+    send_command('bind ^= gs c scholar dark')
+    send_command('bind !- gs c scholar addendum')
+    send_command('bind != gs c scholar addendum')
+    send_command('bind ^; gs c scholar speed')
+    send_command('bind ![ gs c scholar aoe')
+    send_command('bind !; gs c scholar cost')
     send_command('bind ^[ input /ja "Divine Seal" <me>')
     send_command('bind ^] input /ja "Divine Caress" <me>')
-    send_command('bind ![ input /ja "Accession" <me>')
     send_command('bind !o input /ma "Regen IV" <stpc>')
-    send_command('bind ^, input /ma Sneak <stpc>')
-    send_command('bind ^. input /ma Invisible <stpc>')
     send_command('bind @c gs c toggle CP')
+    send_command('bind @r gs c cycle RegenMode')
     send_command('bind @w gs c toggle WeaponLock')
 
     send_command('bind ^numpad7 input /ws "Black Halo" <t>')
     send_command('bind ^numpad8 input /ws "Hexa Strike" <t>')
     send_command('bind ^numpad9 input /ws "Realmrazer" <t>')
     send_command('bind ^numpad1 input /ws "Flash Nova" <t>')
-
-    send_command('bind !numpad7 input /ma "Paralyna" <t>')
-    send_command('bind !numpad8 input /ma "Silena" <t>')
-    send_command('bind !numpad9 input /ma "Blindna" <t>')
-    send_command('bind !numpad4 input /ma "Poisona" <t>')
-    send_command('bind !numpad5 input /ma "Stona" <t>')
-    send_command('bind !numpad6 input /ma "Viruna" <t>')
-    send_command('bind !numpad1 input /ma "Cursna" <t>')
-    send_command('bind !numpad+ input /ma "Erase" <t>')
-    send_command('bind !numpad0 input /ma "Sacrifice" <t>')
-    send_command('bind !numpad. input /ma "Esuna" <me>')
 
     select_default_macro_book()
     set_lockstyle()
@@ -76,28 +72,22 @@ function user_unload()
     send_command('unbind ^`')
     send_command('unbind !`')
     send_command('unbind ^-')
+    send_command('unbind ^=')
+    send_command('unbind !-')
+    send_command('unbind !=')
+    send_command('unbind ^;')
+    send_command('unbind ![')
+    send_command('unbind !;')
     send_command('unbind ^[')
     send_command('unbind ^]')
-    send_command('unbind ![')
     send_command('unbind !o')
-    send_command('unbind ^,')
-    send_command('unbind !.')
     send_command('unbind @c')
+    send_command('unbind @r')
     send_command('unbind @w')
     send_command('unbind ^numpad7')
     send_command('unbind ^numpad8')
     send_command('unbind ^numpad9')
     send_command('unbind ^numpad1')
-    send_command('unbind !numpad7')
-    send_command('unbind !numpad8')
-    send_command('unbind !numpad9')
-    send_command('unbind !numpad4')
-    send_command('unbind !numpad5')
-    send_command('unbind !numpad6')
-    send_command('unbind !numpad1')
-    send_command('unbind !numpad+')
-    send_command('unbind !numpad0')
-    send_command('unbind !numpad.')
 end
 
 -- Define sets and vars used by this job file.
@@ -285,7 +275,8 @@ function init_gear_sets()
         head="Vanya Hood",
         hands="Fanatic Gloves", --15
         legs="Th. Pantaloons +2", --17
-        feet="Gende. Galosh. +1", --10
+        feet="Vanya Clogs", --5
+        --feet="Gende. Galosh. +1", --10
         neck="Debilis Medallion", --15
         ear1="Beatific Earring",
         ring1="Haoma's Ring", --15
@@ -330,6 +321,12 @@ function init_gear_sets()
         hands="Ebers Mitts +1",
         legs="Th. Pantaloons +2",
         })
+
+    sets.midcast.RegenDuration = set_combine(sets.midcast.EnhancingDuration, {
+	    body="Telchine Chas.",
+	    hands="Ebers Mitts +1",
+        legs="Th. Pantaloons +2",
+		})
     
     sets.midcast.Refresh = set_combine(sets.midcast['Enhancing Magic'], {
         waist="Gishdubar Sash",
@@ -566,7 +563,7 @@ function init_gear_sets()
     sets.buff['Divine Caress'] = {hands="Ebers Mitts +1", back="Mending Cape"}
     sets.buff['Devotion'] = {head="Piety Cap +1"}
 
-    sets.buff.Doom = {ring1="Saida Ring", ring2="Saida Ring", waist="Gishdubar Sash"}
+    sets.buff.Doom = {ring1="Eshmun's Ring", ring2="Eshmun's Ring", waist="Gishdubar Sash"}
 
     sets.Obi = {waist="Hachirin-no-Obi"}
     sets.CP = {back="Mecisto. Mantle"}
@@ -609,12 +606,17 @@ function job_post_midcast(spell, action, spellMap, eventArgs)
             equip(sets.Obi)
         end
     end
-    if spell.skill == 'Enhancing Magic' and classes.NoSkillSpells:contains(spell.english) then
-        equip(sets.midcast.EnhancingDuration)
-        if spellMap == 'Refresh' then
-            equip(sets.midcast.Refresh)
+    if spell.skill == 'Enhancing Magic' then
+	    if classes.NoSkillSpells:contains(spell.english) then
+            equip(sets.midcast.EnhancingDuration)
+            if spellMap == 'Refresh' then
+                equip(sets.midcast.Refresh)
+            end
         end
-    end
+        if spellMap == "Regen" and state.RegenMode.value == 'Duration' then
+            equip(sets.midcast.RegenDuration)
+        end
+	end
 end
 
 function job_aftercast(spell, action, spellMap, eventArgs)
@@ -660,6 +662,17 @@ end
 -------------------------------------------------------------------------------------------------------------------
 -- User code that supplements standard library decisions.
 -------------------------------------------------------------------------------------------------------------------
+
+-- Called for direct player commands.
+function job_self_command(cmdParams, eventArgs)
+    if cmdParams[1]:lower() == 'scholar' then
+        handle_strategems(cmdParams)
+        eventArgs.handled = true
+    elseif cmdParams[1]:lower() == 'nuke' then
+        handle_nuking(cmdParams)
+        eventArgs.handled = true
+    end
+end
 
 -- Custom spell mapping.
 function job_get_spell_map(spell, default_spell_map)
@@ -732,6 +745,63 @@ end
 -------------------------------------------------------------------------------------------------------------------
 -- Utility functions specific to this job.
 -------------------------------------------------------------------------------------------------------------------
+
+-- General handling of strategems in an Arts-agnostic way.
+-- Format: gs c scholar <strategem>
+function handle_strategems(cmdParams)
+    -- cmdParams[1] == 'scholar'
+    -- cmdParams[2] == strategem to use
+
+    if not cmdParams[2] then
+        add_to_chat(123,'Error: No strategem command given.')
+        return
+    end
+    local strategem = cmdParams[2]:lower()
+
+    if strategem == 'light' then
+        if buffactive['light arts'] then
+            send_command('input /ja "Addendum: White" <me>')
+        elseif buffactive['addendum: white'] then
+            add_to_chat(122,'Error: Addendum: White is already active.')
+        else
+            send_command('input /ja "Light Arts" <me>')
+        end
+    elseif strategem == 'dark' then
+        if buffactive['dark arts'] then
+            send_command('input /ja "Addendum: Black" <me>')
+        elseif buffactive['addendum: black'] then
+            add_to_chat(122,'Error: Addendum: Black is already active.')
+        else
+            send_command('input /ja "Dark Arts" <me>')
+        end
+    elseif buffactive['light arts'] or buffactive['addendum: white'] then
+        if strategem == 'cost' then
+            send_command('input /ja Penury <me>')
+        elseif strategem == 'speed' then
+            send_command('input /ja Celerity <me>')
+        elseif strategem == 'aoe' then
+            send_command('input /ja Accession <me>')
+        elseif strategem == 'addendum' then
+            send_command('input /ja "Addendum: White" <me>')
+        else
+            add_to_chat(123,'Error: Unknown strategem ['..strategem..']')
+        end
+    elseif buffactive['dark arts']  or buffactive['addendum: black'] then
+        if strategem == 'cost' then
+            send_command('input /ja Parsimony <me>')
+        elseif strategem == 'speed' then
+            send_command('input /ja Alacrity <me>')
+        elseif strategem == 'aoe' then
+            send_command('input /ja Manifestation <me>')
+        elseif strategem == 'addendum' then
+            send_command('input /ja "Addendum: Black" <me>')
+        else
+            add_to_chat(123,'Error: Unknown strategem ['..strategem..']')
+        end
+    else
+        add_to_chat(123,'No arts has been activated yet.')
+    end
+end
 
 -- Select default macro book on initial load or subjob change.
 function select_default_macro_book()

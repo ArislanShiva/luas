@@ -101,7 +101,7 @@ function user_setup()
     state.IdleMode:options('Normal', 'DT')
 
     state.WeaponLock = M(false, 'Weapon Lock')    
-    state.Gun = M{['description']='Current Gun', 'Death Penalty', 'Fomalhaut', 'Doomsday'}--, 'Armageddon'}
+    state.Gun = M{['description']='Current Gun', 'Death Penalty', 'Fomalhaut'}--, 'Armageddon'
     state.CP = M(false, "Capacity Points Mode")
 
     gear.RAbullet = "Chrono Bullet"
@@ -111,6 +111,8 @@ function user_setup()
     options.ammo_warning_limit = 10
 
     -- Additional local binds
+	include('Global-Binds.lua')
+
     send_command('bind ^` input /ja "Double-up" <me>')
     send_command('bind !` input /ja "Bolter\'s Roll" <me>')
     send_command ('bind @` gs c toggle LuzafRing')
@@ -121,17 +123,6 @@ function user_setup()
     send_command('bind != gs c cycleback altqd')
     send_command('bind ^[ gs c toggle selectqdtarget')
     send_command('bind ^] gs c toggle usealtqd')
-
-    if player.sub_job == 'DNC' then
-        send_command('bind ^, input /ja "Spectral Jig" <me>')
-        send_command('unbind ^.')
-    elseif player.sub_job == "RDM" or player.sub_job == "WHM" then
-        send_command('bind ^, input /ma "Sneak" <stpc>')
-        send_command('bind ^. input /ma "Invisible" <stpc>')
-    else
-        send_command('bind ^, input /item "Silent Oil" <me>')
-        send_command('bind ^. input /item "Prism Powder" <me>')
-    end
 
     send_command('bind @c gs c toggle CP')
     send_command('bind @g gs c cycle Gun')
@@ -151,12 +142,9 @@ function user_setup()
         send_command('bind ^numpad- input /ja "Shadowbind" <me>')
     end
 
-    send_command('bind !numpad7 input /ws "Savage Blade" <t>')
-    send_command('bind @numpad7 input /ws "Exenterator" <t>')
+    send_command('bind ^numpad7 input /ws "Savage Blade" <t>')
     send_command('bind ^numpad8 input /ws "Last Stand" <t>')
     send_command('bind ^numpad4 input /ws "Leaden Salute" <t>')
-    send_command('bind !numpad4 input /ws "Requiescat" <t>')
-    send_command('bind @numpad4 input /ws "Evisceration" <t>')
     send_command('bind ^numpad6 input /ws "Wildfire" <t>')
 
     send_command('bind numpad0 input /ra <t>')
@@ -187,12 +175,8 @@ function user_unload()
     send_command('unbind ^numpad/')
     send_command('unbind ^numpad*')
     send_command('unbind ^numpad-')
-    send_command('unbind !numpad7')
-    send_command('unbind @numpad7')
     send_command('unbind ^numpad8')
     send_command('unbind ^numpad4')
-    send_command('unbind !numpad4')
-    send_command('unbind @numpad4')
     send_command('unbind ^numpad6')
     send_command('unbind numpad0')
 end
@@ -498,7 +482,7 @@ function init_gear_sets()
         ear1="Hermetic Earring",
         ear2="Digni. Earring",
         ring1="Stikini Ring",
-        ring2="Weather. Ring",
+        ring2="Weather. Ring +1",
         waist="Kwahu Kachina Belt",
         })
 
@@ -881,7 +865,7 @@ function init_gear_sets()
     ---------------------------------------- Special Sets ------------------------------------------
     ------------------------------------------------------------------------------------------------
 
-    sets.buff.Doom = {ring1="Saida Ring", ring2="Saida Ring", waist="Gishdubar Sash"}
+    sets.buff.Doom = {ring1="Eshmun's Ring", ring2="Eshmun's Ring", waist="Gishdubar Sash"}
 
     sets.Afterglow = {ring2="Ilabrat Ring"}
     sets.Obi = {waist="Hachirin-no-Obi"}
@@ -1011,8 +995,6 @@ function customize_idle_set(idleSet)
         equip({ranged="Death Penalty"})
     elseif state.Gun.current == 'Fomalhaut' then
         equip({ranged="Fomalhaut"})
-    elseif state.Gun.current == 'Doomsday' then
-        equip({ranged="Doomsday"})
 --    elseif state.Gun.current == 'Armageddon' then
 --        equip({ranged="Armageddon"})
     end
@@ -1028,7 +1010,7 @@ end
 
 -- Modify the default melee set after it was constructed.
 function customize_melee_set(meleeSet)
-    if state.Buff.Aftermath and state.Gun.value == "Death Penalty" 
+    if buffactive['Aftermath: Lv.3'] and player.equipment.ranged == "Death Penalty"
         and state.HybridMode.value ~= 'DT' then
         meleeSet = set_combine(meleeSet, sets.engaged.Aftermath)
     end

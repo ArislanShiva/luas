@@ -73,6 +73,8 @@ function user_setup()
     state.StormSurge = M(false, 'Stormsurge')
 
     -- Additional local binds
+	include('Global-Binds.lua')
+
     send_command('bind ^` input /ja Immanence <me>')
     send_command('bind !` gs c toggle MagicBurst')
     send_command('bind ^- gs c scholar light')
@@ -87,8 +89,6 @@ function user_setup()
     send_command('bind ![ gs c scholar aoe')
     send_command('bind !] gs c scholar duration')
     send_command('bind !; gs c scholar cost')
-    send_command('bind ^, input /ma Sneak <stpc>')
-    send_command('bind ^. input /ma Invisible <stpc>')
     send_command('bind @c gs c toggle CP')
     send_command('bind @h gs c cycle HelixMode')
     send_command('bind @r gs c cycle RegenMode')
@@ -97,14 +97,7 @@ function user_setup()
 
     send_command('bind ^numpad0 input /Myrkr')
 
-    send_command('bind !numpad7 input /ma "Paralyna" <t>')
-    send_command('bind !numpad8 input /ma "Silena" <t>')
-    send_command('bind !numpad9 input /ma "Blindna" <t>')
-    send_command('bind !numpad4 input /ma "Poisona" <t>')
-    send_command('bind !numpad5 input /ma "Stona" <t>')
-    send_command('bind !numpad6 input /ma "Viruna" <t>')
-    send_command('bind !numpad1 input /ma "Cursna" <t>')
-    send_command('bind !numpad+ input /ma "Erase" <t>')
+	include('Global-Binds.lua')
     
     select_default_macro_book()
     set_lockstyle()
@@ -134,14 +127,6 @@ function user_unload()
     send_command('unbind @s')
     send_command('unbind @w')
     send_command('unbind ^numpad0')
-    send_command('unbind !numpad7')
-    send_command('unbind !numpad8')
-    send_command('unbind !numpad9')
-    send_command('unbind !numpad4')
-    send_command('unbind !numpad5')
-    send_command('unbind !numpad6')
-    send_command('unbind !numpad1')
-    send_command('unbind !numpad+')
 end
 
 
@@ -291,7 +276,8 @@ function init_gear_sets()
         main="Gada",
         sub="Genmei Shield",
         hands="Hieros Mittens",
-        feet="Gende. Galosh. +1",
+        feet="Vanya Clogs",
+        --feet="Gende. Galosh. +1",
         neck="Debilis Medallion",
         ear1="Beatific Earring",
         })
@@ -327,8 +313,8 @@ function init_gear_sets()
     sets.midcast.Regen = set_combine(sets.midcast.EnhancingDuration, {
         main="Bolelabunga",
         sub="Ammurapi Shield",
-        sub="Genmei Shield",
         head="Arbatel Bonnet +1",
+        body="Telchine Chas.",
         back="Bookworm's Cape"
         })
     
@@ -373,7 +359,7 @@ function init_gear_sets()
         sub="Enki Strap",
         ammo="Quartz Tathlum +1",
         head="Merlinic Hood",
-        body="Vanya Robe",
+        body="Acad. Gown +2",
         hands="Kaykaus Cuffs",
         legs="Chironic Hose",
         feet="Skaoi Boots",
@@ -398,7 +384,7 @@ function init_gear_sets()
         sub="Enki Strap",
         ammo="Pemphredo Tathlum",
         head="Merlinic Hood",
-        body="Jhakri Robe +2",
+        body="Acad. Gown +2",
         hands="Kaykaus Cuffs",
         legs=gear.Merlinic_MAcc_legs,
         feet="Acad. Loafers +3",
@@ -439,9 +425,6 @@ function init_gear_sets()
     sets.midcast.Aspir = sets.midcast.Drain
 
     sets.midcast.Stun = set_combine(sets.midcast['Dark Magic'], {
-        body="Merlinic Jubbah",
-        ring1="Stikini Ring",
-        ring2="Stikini Ring",
         back=gear.SCH_MAB_Cape,
         waist="Luminary Sash"
         })
@@ -635,10 +618,10 @@ function init_gear_sets()
         body="Peda. Gown +1",
         }
 
-    sets.buff.Doom = {ring1="Saida Ring", ring2="Saida Ring", waist="Gishdubar Sash"}
+    sets.buff.Doom = {ring1="Eshmun's Ring", ring2="Eshmun's Ring", waist="Gishdubar Sash"}
 
     sets.LightArts = {legs="Acad. Pants +2", feet="Acad. Loafers +3"}
-    sets.DarkArts = {feet="Acad. Loafers +3"}
+    sets.DarkArts = {body="Acad. Gown +2", feet="Acad. Loafers +3"}
 
     sets.Obi = {waist="Hachirin-no-Obi"}
     sets.Bookworm = {back="Bookworm's Cape"}

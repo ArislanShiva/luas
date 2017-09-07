@@ -62,6 +62,9 @@ function user_setup()
 
     state.Runes = M{['description']='Runes', "Ignis", "Gelus", "Flabra", "Tellus", "Sulpor", "Unda", "Lux", "Tenebrae"}
     
+    -- Additional local binds
+	include('Global-Binds.lua')
+
     send_command('bind ^` input //gs c rune')
     send_command('bind !` input /ja "Vivacious Pulse" <me>')
     send_command('bind ^- gs c cycleback Runes')
@@ -85,14 +88,6 @@ function user_setup()
     send_command('bind !o input /ma "Regen IV" <stpc>')
     send_command('bind !p input /ma "Shock Spikes" <me>')
     
-    if player.sub_job == 'DNC' then
-        send_command('bind ^, input /ja "Spectral Jig" <me>')
-        send_command('unbind ^.')
-    else
-        send_command('bind ^, input /item "Silent Oil" <me>')
-        send_command('bind ^. input /item "Prism Powder" <me>')
-    end
-    
     send_command('bind @w gs c toggle WeaponLock')
     --send_command('bind @c gs c toggle CP')
 
@@ -113,9 +108,7 @@ function user_setup()
     end
 
     send_command('bind ^numpad7 input /ws "Resolution" <t>')
-    send_command('bind !numpad7 input /ws "Savage Blade" <t>')
     send_command('bind ^numpad9 input /ws "Dimidiation" <t>')
-    send_command('bind !numpad4 input /ws "Requiescat" <t>')
     send_command('bind ^numpad5 input /ws "Ground Strike" <t>')
     send_command('bind ^numpad1 input /ws "Herculean Slash" <t>')
     
@@ -144,9 +137,7 @@ function user_unload()
     send_command('unbind ^numpad*')
     send_command('unbind ^numpad-')
     send_command('unbind ^numpad7')
-    send_command('unbind !numpad7')
     send_command('unbind ^numpad9')
-    send_command('unbind !numpad4')
     send_command('unbind ^numpad5')
     send_command('unbind ^numpad1')
     send_command('unbind @numpad*')
@@ -161,8 +152,8 @@ function init_gear_sets()
 
     -- Enmity set
     sets.Enmity = {
-        main="Epeolatry", --18
-        sub="Alber Strap", --5
+--        main="Epeolatry", --18
+--        sub="Alber Strap", --5
         ammo="Sapience Orb", --2
         head="Halitus Helm", --8
         body="Emet Harness +1", --10
@@ -185,7 +176,7 @@ function init_gear_sets()
     sets.precast.JA['Liement'] = set_combine(sets.Enmity, {body="Futhark Coat +1"})
 
     sets.precast.JA['Lunge'] = {
-        sub="Alber Strap",
+        --sub="Alber Strap",
         ammo="Seeth. Bomblet +1",
         head=gear.Herc_MAB_head,
         body="Samnuha Coat",
@@ -206,7 +197,7 @@ function init_gear_sets()
     sets.precast.JA['Rayke'] = {feet="Futhark Boots +1"}
     sets.precast.JA['Elemental Sforzo'] = set_combine(sets.Enmity, {body="Futhark Coat +1"})
     sets.precast.JA['Swordplay'] = set_combine(sets.Enmity, {hands="Futhark Mitons +1"})
-    sets.precast.JA['Vivacious Pulse'] = set_combine(sets.Enmity, {head="Erilaz Galea +1", neck="Incanter's Torque", legs="Rune. Trousers +2"})
+    sets.precast.JA['Vivacious Pulse'] = set_combine(sets.Enmity, {head="Erilaz Galea +1", neck="Incanter's Torque", legs="Rune. Trousers +3"})
     sets.precast.JA['One For All'] = set_combine(sets.Enmity, {})
     sets.precast.JA['Provoke'] = sets.Enmity
 
@@ -361,6 +352,7 @@ function init_gear_sets()
 
     sets.midcast.SpellInterrupt = {
         ammo="Impatiens", --10
+		hands="Regal Gauntlets", --10
         legs="Carmine Cuisses +1", --20
         ring1="Evanescence Ring", --5
         waist="Rumination Sash", --10
@@ -384,9 +376,11 @@ function init_gear_sets()
         }
 
     sets.midcast['Enhancing Magic'] = {
-        head="Carmine Mask +1",
-        hands="Runeist's Mitons +2",
-        legs="Carmine Cuisses +1",
+        head="Erilaz Galea +1",
+        --head="Carmine Mask +1",
+		hands="Regal Gauntlets",
+        --legs="Carmine Cuisses +1",
+        legs="Futhark Trousers +1",
         neck="Incanter's Torque",
         ear1="Augment. Earring",
         ear2="Andoaa Earring",
@@ -397,7 +391,14 @@ function init_gear_sets()
 
     sets.midcast.EnhancingDuration = set_combine(sets.midcast['Enhancing Magic'], {
         head="Erilaz Galea +1",
+		hands="Regal Gauntlets",
         legs="Futhark Trousers +1",
+        })
+
+    sets.midcast['Temper'] = set_combine(sets.midcast['Enhancing Magic'], {
+        head="Carmine Mask +1",
+        hands="Runeist's Mitons +2",
+        legs="Carmine Cuisses +1",
         })
 
     sets.midcast['Phalanx'] = set_combine(sets.midcast['Enhancing Magic'], {
@@ -407,13 +408,14 @@ function init_gear_sets()
         })
 
     sets.midcast['Regen'] = set_combine(sets.midcast['Enhancing Magic'], {head="Rune. Bandeau +2"})
-    sets.midcast.Refresh = set_combine(sets.midcast.EnhancingDuration, {waist="Gishdubar Sash"})
+    sets.midcast.Refresh = set_combine(sets.midcast['Enhancing Magic'], {waist="Gishdubar Sash"})
     sets.midcast.Stoneskin = set_combine(sets.midcast['Enhancing Magic'], {waist="Siegel Sash"})
-    sets.midcast.Protect = set_combine(sets.midcast.EnhancingDuration, {ring2="Sheltered Ring"})
+    sets.midcast.Protect = set_combine(sets.midcast['Enhancing Magic'], {ring2="Sheltered Ring"})
     sets.midcast.Shell = sets.midcast.Protect
 
     sets.midcast['Divine Magic'] = {
-        legs="Rune. Trousers +2",
+		ammo="Yamarang",
+        legs="Rune. Trousers +3",
         neck="Incanter's Torque",
         ring1="Stikini Ring",
         ring2="Stikini Ring",
@@ -440,7 +442,7 @@ function init_gear_sets()
         ammo="Homiliary",
         head="Rawhide Mask",
         body="Runeist's Coat +3",
-        hands="Turms Mittens",
+		hands="Regal Gauntlets",
         legs="Carmine Cuisses +1",
         feet="Turms Leggings",
         neck="Bathy Choker +1",
@@ -540,7 +542,7 @@ function init_gear_sets()
         head=gear.Herc_DT_head, --3/3
         body="Futhark Coat +1", --7/7
         hands="Erilaz Gauntlets +1",
-        legs="Rune. Trousers +2", --4/0
+        legs="Rune. Trousers +3", --5/0
         feet="Erilaz Greaves +1", --5/0
         neck="Loricate Torque +1", --6/6
         ear1="Genmei Earring", --2/0
@@ -557,7 +559,7 @@ function init_gear_sets()
         ammo="Staunch Tathlum", --2/2
         head=gear.Adhemar_DT_head, --3/0
         body="Runeist's Coat +3",
-        hands="Runeist's Mitons +2", --2/0
+		hands="Regal Gauntlets",
         legs="Eri. Leg Guards +1", --7/0
         feet="Turms Leggings",
         neck="Loricate Torque +1", --6/6
@@ -593,7 +595,7 @@ function init_gear_sets()
 
     sets.engaged = {
         sub="Utu Grip",
-        ammo="Ginsen",
+        ammo="Yamarang",
         head="Dampening Tam",
         body=gear.Herc_TA_body,
         hands=gear.Adhemar_TP_hands,
@@ -613,8 +615,7 @@ function init_gear_sets()
         })
 
     sets.engaged.MidAcc = set_combine(sets.engaged.LowAcc, {
-        sub="Bloodrain Strap",
-        ammo="Falcon Eye",
+--        sub="Bloodrain Strap",
         ear2="Telos Earring",
         ring2="Ilabrat Ring",
         })
@@ -702,7 +703,7 @@ function init_gear_sets()
     ---------------------------------------- Special Sets ------------------------------------------
     ------------------------------------------------------------------------------------------------
 
-    sets.buff.Doom = {ring1="Saida Ring", ring2="Saida Ring", waist="Gishdubar Sash"}
+    sets.buff.Doom = {ring1="Eshmun's Ring", ring2="Eshmun's Ring", waist="Gishdubar Sash"}
 
     sets.Embolden = set_combine(sets.midcast.EnhancingDuration, {back="Evasionist's Cape"})
     sets.CP = {back="Mecisto. Mantle"}

@@ -53,6 +53,8 @@ function user_setup()
     state.MagicBurst = M(false, 'Magic Burst')
 
     -- Additional local binds
+	include('Global-Binds.lua')
+
     send_command('bind ^` input /ja Composure <me>')
     send_command('bind !` gs c toggle MagicBurst')
     send_command('bind ^- gs c scholar light')
@@ -60,34 +62,23 @@ function user_setup()
     send_command('bind !- gs c scholar addendum')
     send_command('bind != gs c scholar addendum')
     send_command('bind ^; gs c scholar speed')
-    send_command('bind !q input /ma "Temper II" <me>')
+    send_command('bind ![ gs c scholar aoe')
+    send_command('bind !; gs c scholar cost')
+	send_command('bind !q input /ma "Temper II" <me>')
     send_command('bind !w input /ma "Flurry II" <stpc>')
     send_command('bind !e input /ma "Haste II" <stpc>')
     send_command('bind !r input /ma "Refresh III" <stpc>')
     send_command('bind !y input /ma "Phalanx II" <stpc>')
     send_command('bind !o input /ma "Regen II" <stpc>')
     send_command('bind !p input /ma "Shock Spikes" <me>')
-    send_command('bind ![ gs c scholar aoe')
-    send_command('bind !; gs c scholar cost')
-    send_command('bind ^, input /ma Sneak <stpc>')
-    send_command('bind ^. input /ma Invisible <stpc>')
+
     send_command('bind @c gs c toggle CP')
     send_command('bind @w gs c toggle WeaponLock')
 
     send_command('bind ^numpad7 input /ws "Savage Blade" <t>')
     send_command('bind ^numpad9 input /ws "Chant du Cygne" <t>')
     send_command('bind ^numpad4 input /ws "Requiescat" <t>')
-    send_command('bind ^numpad5 input /ws "Expiacion" <t>')
     send_command('bind ^numpad1 input /ws "Sanguine Blade" <t>')
-
-    send_command('bind !numpad7 input /ma "Paralyna" <t>')
-    send_command('bind !numpad8 input /ma "Silena" <t>')
-    send_command('bind !numpad9 input /ma "Blindna" <t>')
-    send_command('bind !numpad4 input /ma "Poisona" <t>')
-    send_command('bind !numpad5 input /ma "Stona" <t>')
-    send_command('bind !numpad6 input /ma "Viruna" <t>')
-    send_command('bind !numpad1 input /ma "Cursna" <t>')
-    send_command('bind !numpad+ input /ma "Erase" <t>')
 
     update_offense_mode()    
     select_default_macro_book()
@@ -103,32 +94,21 @@ function user_unload()
     send_command('unbind !-')
     send_command('unbind !=')
     send_command('unbind ^;')
+    send_command('unbind ![')
+    send_command('unbind !;')
     send_command('unbind !q')
     send_command('unbind !w')
     send_command('bind !e input /ma "Haste" <stpc>')
+    send_command('bind !r input /ma "Refresh" <stpc>')
     send_command('bind !y input /ma "Phalanx" <me>')
     send_command('unbind !o')
     send_command('unbind !p')
-    send_command('bind !r input /ma "Refresh" <stpc>')
-    send_command('unbind ![')
-    send_command('unbind !;')
-    send_command('unbind ^,')
-    send_command('unbind !.')
     send_command('unbind @c')
     send_command('unbind @w')
     send_command('unbind ^numpad7')
     send_command('unbind ^numpad9')
     send_command('unbind ^numpad4')
-    send_command('unbind ^numpad5')
     send_command('unbind ^numpad1')
-    send_command('unbind !numpad7')
-    send_command('unbind !numpad8')
-    send_command('unbind !numpad9')
-    send_command('unbind !numpad4')
-    send_command('unbind !numpad5')
-    send_command('unbind !numpad6')
-    send_command('unbind !numpad1')
-    send_command('unbind !numpad+')
 end
 
 -- Define sets and vars used by this job file.
@@ -366,6 +346,7 @@ function init_gear_sets()
     sets.midcast.Regen = set_combine(sets.midcast.EnhancingDuration, {
         main="Bolelabunga",
         sub="Beatific Shield +1",
+        body="Telchine Chas.",
         })
 
     sets.midcast.Refresh = set_combine(sets.midcast.EnhancingDuration, {
@@ -674,7 +655,7 @@ function init_gear_sets()
     
     sets.engaged.DW.Acc = sets.engaged.Acc
 
-    sets.buff.Doom = {ring1="Saida Ring", ring2="Saida Ring", waist="Gishdubar Sash"}
+    sets.buff.Doom = {ring1="Eshmun's Ring", ring2="Eshmun's Ring", waist="Gishdubar Sash"}
 
     sets.Obi = {waist="Hachirin-no-Obi"}
     sets.CP = {back="Mecisto. Mantle"}

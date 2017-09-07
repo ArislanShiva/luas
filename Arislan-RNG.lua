@@ -89,14 +89,8 @@ function user_setup()
     end
 
     send_command('bind ^numpad7 input /ws "Trueflight" <t>')
-    send_command('bind !numpad7 input /ws "Apex Arrow" <t>')
-    send_command('bind @numpad7 input /ws "Exenterator" <t>')
     send_command('bind ^numpad8 input /ws "Last Stand" <t>')
-    send_command('bind !numpad8 input /ws "Jishnu\'s Radiance" <t>')
-    send_command('bind @numpad8 input /ws "Decimation" <t>')
     send_command('bind ^numpad4 input /ws "Wildfire" <t>')
-    send_command('bind @numpad4 input /ws "Evisceration" <t>')
-    send_command('bind @numpad5 input /ws "Ruinator" <t>')
 
     send_command('bind numpad0 input /ra <t>')
 
@@ -121,14 +115,8 @@ function user_unload()
     send_command('unbind ^numpad*')
     send_command('unbind ^numpad-')
     send_command('unbind ^numpad7')
-    send_command('unbind !numpad7')
-    send_command('unbind @numpad7')
     send_command('unbind ^numpad8')
-    send_command('unbind !numpad8')
-    send_command('unbind @numpad8')
     send_command('unbind ^numpad4')
-    send_command('unbind @numpad4')
-    send_command('unbind @numpad5')
     send_command('unbind numpad0')
 end
 
@@ -717,7 +705,7 @@ function init_gear_sets()
     sets.buff['Velocity Shot'] = set_combine(sets.midcast.RA, {body="Amini Caban +1", back=gear.RNG_TP_Cape})
     sets.buff.Camouflage = {body="Orion Jerkin +3"}
     
-    sets.buff.Doom = {ring1="Saida Ring", ring2="Saida Ring", waist="Gishdubar Sash"}
+    sets.buff.Doom = {ring1="Eshmun's Ring", ring2="Eshmun's Ring", waist="Gishdubar Sash"}
 
     sets.Obi = {waist="Hachirin-no-Obi"}
     sets.Reive = {neck="Ygnas's Resolve +1"}
