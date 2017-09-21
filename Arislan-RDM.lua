@@ -36,6 +36,7 @@ function job_setup()
         'Temper', 'Temper II', 'Enfire', 'Enfire II', 'Enblizzard', 'Enblizzard II', 'Enaero', 'Enaero II',
         'Enstone', 'Enstone II', 'Enthunder', 'Enthunder II', 'Enwater', 'Enwater II'}
 
+    determine_haste_group()
 end
 
 
@@ -45,12 +46,15 @@ end
 
 -- Setup vars that are user-dependent.  Can override this function in a sidecar file.
 function user_setup()
-    state.OffenseMode:options('Normal', 'Acc')
+    state.OffenseMode:options('Normal', 'MidAcc', 'HighAcc')
+    state.HybridMode:options('Normal', 'DT')
+    state.WeaponskillMode:options('Normal', 'Acc')
     state.CastingMode:options('Normal', 'Seidr', 'Resistant')
     state.IdleMode:options('Normal', 'DT')
 
     state.WeaponLock = M(false, 'Weapon Lock')    
     state.MagicBurst = M(false, 'Magic Burst')
+    state.CP = M(false, "Capacity Points Mode")
 
     -- Additional local binds
     include('Global-Binds.lua')
@@ -174,7 +178,7 @@ function init_gear_sets()
         ammo="Floestone",
         head="Despair Helm",
         body="Despair Mail",
-        hands="Jhakri Cuffs +2",
+        hands="Atrophy Gloves +3",
         legs="Despair Cuisses",
         feet="Despair Greaves",
         neck="Fotia Gorget",
@@ -182,7 +186,7 @@ function init_gear_sets()
         ear2="Moonshade Earring",
         ring1="Rufescent Ring",
         ring2="Shukuyu Ring",
-        back=gear.RDM_DW_Cape,
+        back=gear.RDM_WS1_Cape,
         waist="Fotia Belt",
         }
 
@@ -196,8 +200,10 @@ function init_gear_sets()
         ear1="Sherida Earring",
         ring1="Begrudging Ring",
         ring2="Ilabrat Ring",
-        back=gear.RDM_WS1_Cape,
+        back=gear.RDM_WS2_Cape,
         })
+
+    sets.precast.WS['Vorpal Blade'] = sets.precast.WS['Chant du Cygne']
 
     sets.precast.WS['Savage Blade'] = set_combine(sets.precast.WS, {
         neck="Caro Necklace",
@@ -205,7 +211,7 @@ function init_gear_sets()
         waist="Prosilio Belt +1",
         })
 
-    sets.precast.WS['Death Blossom'] =     sets.precast.WS['Savage Blade']
+    sets.precast.WS['Death Blossom'] = sets.precast.WS['Savage Blade']
 
     sets.precast.WS['Requiescat'] = set_combine(sets.precast.WS, {
         ammo="Quartz Tathlum +1",
@@ -287,11 +293,9 @@ function init_gear_sets()
         })
 
     sets.midcast.StatusRemoval = {
-        main="Tamaxchi",
-        sub="Sors Shield",
         head="Vanya Hood",
         body="Vanya Robe",
-        legs="Atrophy Tights +1",
+        legs="Atrophy Tights +2",
         feet="Vanya Clogs",
         neck="Incanter's Torque",
         ear2="Healing Earring",
@@ -309,13 +313,13 @@ function init_gear_sets()
         })
 
     sets.midcast['Enhancing Magic'] = {
-        main="Oranyan",
-        sub="Enki Strap",
+        main=gear.Colada_ENH,
+        sub="Ammurapi Shield",
         ammo="Regal Gem",
         head="Befouled Crown",
         body="Viti. Tabard +1",
-        hands="Atrophy Gloves +2",
-        legs="Atrophy Tights +1",
+        hands="Atrophy Gloves +3",
+        legs="Atrophy Tights +2",
         feet="Leth. Houseaux +1",
         neck="Incanter's Torque",
         ear1="Augment. Earring",
@@ -327,14 +331,14 @@ function init_gear_sets()
         }
     
     sets.midcast.EnhancingDuration = {
-        main="Oranyan",
-        sub="Enki Strap",
+        main=gear.Colada_ENH,
+        sub="Ammurapi Shield",
         head="Telchine Cap",
         body="Telchine Chas.",
-        hands="Atrophy Gloves +2",
+        hands="Atrophy Gloves +3",
         legs="Telchine Braconi",
         feet="Leth. Houseaux +1",
-        back=gear.RDM_MND_Cape,
+        back="Ghostfyre Cape",
         }
 
     sets.midcast.EnhancingSkill = {
@@ -345,7 +349,7 @@ function init_gear_sets()
 
     sets.midcast.Regen = set_combine(sets.midcast.EnhancingDuration, {
         main="Bolelabunga",
-        sub="Beatific Shield +1",
+        sub="Ammurapi Shield",
         body="Telchine Chas.",
         })
 
@@ -546,7 +550,7 @@ function init_gear_sets()
         ammo="Homiliary",
         head="Viti. Chapeau +1",
         body="Jhakri Robe +2",
-        hands="Gende. Gages +1",
+        hands="Atrophy Gloves +3",
         legs="Carmine Cuisses +1",
         feet="Carmine Greaves +1",
         neck="Bathy Choker +1",
@@ -574,19 +578,15 @@ function init_gear_sets()
         })
 
     sets.idle.Town = set_combine(sets.idle, {
-        main="Sequence",
         ammo="Regal Gem",
         body="Atrophy Tabard +3",
-        hands="Leth. Gantherots +1",
-        legs="Carmine Cuisses +1",
-        feet="Carmine Greaves +1",
         neck="Incanter's Torque",
         ear1="Sherida Earring",
         ear2="Regal Earring",
         ring1="Levia. Ring +1",
         ring2="Weather. Ring +1",
         back=gear.RDM_INT_Cape,
-        waist="Flume Belt +1",
+		waist="Luminary Sash",
         })
 
     sets.idle.Weak = sets.idle.DT
@@ -619,7 +619,14 @@ function init_gear_sets()
     ------------------------------------------------------------------------------------------------
     ---------------------------------------- Engaged Sets ------------------------------------------
     ------------------------------------------------------------------------------------------------
-    
+
+    -- Engaged sets
+
+    -- Variations for TP weapon and (optional) offense/defense modes.  Code will fall back on previous
+    -- sets if more refined versions aren't defined.
+    -- If you create a set with both offense and defense modes, the offense mode should be first.
+    -- EG: sets.engaged.Dagger.Accuracy.Evasion
+
     sets.engaged = {
         main="Sequence",
         sub="Genmei Shield",
@@ -635,25 +642,223 @@ function init_gear_sets()
         ring1="Petrov Ring",
         ring2="Hetairoi Ring",
         back=gear.RDM_DW_Cape,
-        waist="Kentarch Belt +1",
+        waist="Windbuffet Belt +1",
         }
+		
+    sets.engaged.MidAcc = set_combine(sets.engaged, {
+        neck="Combatant's Torque",
+        waist="Kentarch Belt +1",
+        ring2="Ilabrat Ring",
+        })
 
-    sets.engaged.Acc = set_combine(sets.engaged, {
+    sets.engaged.HighAcc = set_combine(sets.engaged, {
         head="Carmine Mask +1",
         legs="Carmine Cuisses +1",
-        neck="Combatant's Torque",
+        ear1="Cessance Earring",
         ring1="Ramuh Ring +1",
         ring2="Ramuh Ring +1",
         waist="Olseni Belt",
         })
 
-    sets.engaged.DW = set_combine(sets.engaged, {
-        --NIN --25
-        sub="Colada",
+    -- * DW3: +25% (NIN Subjob)
+
+    -- No Magic Haste (74% DW to cap)
+    sets.engaged.DW = {
+        main="Sequence",
+        sub=gear.Colada_DEX,
+        ammo="Ginsen",
+        head=gear.Taeon_TA_head,
+        body="Ayanmo Corazza +1",
+        hands=gear.Taeon_TA_hands,
+        legs="Carmine Cuisses +1", --6
+        feet=gear.Taeon_DW_feet, --9
+        neck="Anu Torque",
+        ear1="Eabani Earring", --4
+        ear2="Suppanomimi", --5
+        ring1="Petrov Ring",
+        ring2="Hetairoi Ring",
+        back=gear.RDM_DW_Cape, --10
         waist="Reiki Yotai", --7
+        } --41
+
+    sets.engaged.DW.MidAcc = set_combine(sets.engaged.DW, {
+        neck="Combatant's Torque",
+        ring2="Ilabrat Ring",
         })
+
+    sets.engaged.DW.HighAcc = set_combine(sets.engaged.DW.MidAcc, {
+        head="Carmine Mask +1",
+        ring1="Ramuh Ring +1",
+        ring2="Ramuh Ring +1",
+        })
+
+    -- 15% Magic Haste (67% DW to cap)
+    sets.engaged.DW.LowHaste = {
+        main="Sequence",
+        sub=gear.Colada_DEX,
+        ammo="Ginsen",
+        head=gear.Taeon_TA_head,
+        body="Ayanmo Corazza +1",
+        hands=gear.Taeon_TA_hands,
+        legs="Carmine Cuisses +1", --6
+        feet=gear.Taeon_DW_feet, --9
+        neck="Anu Torque",
+        ear1="Eabani Earring", --4
+        ear2="Suppanomimi", --5
+        ring1="Petrov Ring",
+        ring2="Hetairoi Ring",
+        back=gear.RDM_DW_Cape, --10
+        waist="Reiki Yotai", --7
+        } --41
+
+    sets.engaged.DW.MidAcc.LowHaste = set_combine(sets.engaged.DW.LowHaste, {
+        neck="Combatant's Torque",
+        ring2="Ilabrat Ring",
+        })
+
+    sets.engaged.DW.HighAcc.LowHaste = set_combine(sets.engaged.DW.MidAcc.LowHaste, {
+        head="Carmine Mask +1",
+        ring1="Ramuh Ring +1",
+        ring2="Ramuh Ring +1",
+        })
+
+    -- 30% Magic Haste (56% DW to cap)
+    sets.engaged.DW.MidHaste = {
+        main="Sequence",
+        sub=gear.Colada_DEX,
+        ammo="Ginsen",
+        head=gear.Taeon_TA_head,
+        body="Ayanmo Corazza +1",
+        hands=gear.Taeon_TA_hands,
+        legs=gear.Taeon_TA_legs,
+        feet=gear.Taeon_DW_feet, --9
+        neck="Anu Torque",
+        ear1="Sherida Earring",
+        ear2="Suppanomimi", --5
+        ring1="Petrov Ring",
+        ring2="Hetairoi Ring",
+        back=gear.RDM_DW_Cape, --10
+        waist="Reiki Yotai", --7
+        } --41
+
+    sets.engaged.DW.MidAcc.MidHaste = set_combine(sets.engaged.DW.MidHaste, {
+        legs="Carmine Cuisses +1", --6
+        neck="Combatant's Torque",
+        ear2="Telos Earring",
+        ring2="Ilabrat Ring",
+        })
+
+    sets.engaged.DW.HighAcc.MidHaste = set_combine(sets.engaged.DW.MidAcc.MidHaste, {
+        head="Carmine Mask +1",
+        ear1="Cessance Earring",
+        ring1="Ramuh Ring +1",
+        ring2="Ramuh Ring +1",
+		waist="Olseni Belt",
+        })
+
+    -- 35% Magic Haste (51% DW to cap)
+    sets.engaged.DW.HighHaste = {
+        main="Sequence",
+        sub=gear.Colada_DEX,
+        ammo="Ginsen",
+        head=gear.Taeon_TA_head,
+        body="Ayanmo Corazza +1",
+        hands=gear.Taeon_TA_hands,
+        legs=gear.Taeon_TA_legs,
+        feet=gear.Taeon_DW_feet, --9
+        neck="Anu Torque",
+        ear1="Sherida Earring",
+        ear2="Telos Earring",
+        ring1="Petrov Ring",
+        ring2="Hetairoi Ring",
+        back=gear.RDM_DW_Cape, --10
+        waist="Reiki Yotai", --7
+        } --26
+
+    sets.engaged.DW.MidAcc.HighHaste = set_combine(sets.engaged.DW.HighHaste, {
+        legs="Carmine Cuisses +1", --6
+        neck="Combatant's Torque",
+        ring2="Ilabrat Ring",
+		waist="Kentarch Belt +1",
+        })
+
+    sets.engaged.DW.HighAcc.HighHaste = set_combine(sets.engaged.DW.MidAcc.HighHaste, {
+        head="Carmine Mask +1",
+        ear1="Cessance Earring",
+        ring1="Ramuh Ring +1",
+        ring2="Ramuh Ring +1",
+		waist="Olseni Belt",
+        })
+
+    -- 47% Magic Haste (36% DW to cap)
+	sets.engaged.DW.MaxHaste = set_combine(sets.engaged, {
+        main="Sequence",
+        sub=gear.Colada_DEX,
+        ammo="Ginsen",
+        head=gear.Taeon_TA_head,
+        body="Ayanmo Corazza +1",
+        hands=gear.Taeon_TA_hands,
+        legs=gear.Taeon_TA_legs,
+        feet="Carmine Greaves +1",
+        neck="Anu Torque",
+        ear1="Sherida Earring",
+        ear2="Telos Earring",
+        ring1="Petrov Ring",
+        ring2="Hetairoi Ring",
+        back=gear.RDM_DW_Cape, --10
+        waist="Windbuffet Belt +1",
+        }) --10
     
-    sets.engaged.DW.Acc = sets.engaged.Acc
+    sets.engaged.DW.MidAcc.MaxHaste = set_combine(sets.engaged.DW.MaxHaste, {
+        neck="Combatant's Torque",
+        ring2="Ilabrat Ring",
+		waist="Kentarch Belt +1",
+        })
+
+    sets.engaged.DW.HighAcc.MaxHaste = set_combine(sets.engaged.DW.MidAcc.MaxHaste, {
+        head="Carmine Mask +1",
+        legs="Carmine Cuisses +1", --6
+        ear1="Cessance Earring",
+        ring1="Ramuh Ring +1",
+        ring2="Ramuh Ring +1",
+		waist="Olseni Belt",
+        })
+
+
+    ------------------------------------------------------------------------------------------------
+    ---------------------------------------- Hybrid Sets -------------------------------------------
+    ------------------------------------------------------------------------------------------------
+--[[
+    sets.engaged.Hybrid = {
+        ammo="Staunch Tathlum", --2/2
+        neck="Loricate Torque +1", --6/6
+        ring2="Defending Ring", --10/10
+        }
+
+    sets.engaged.DT = set_combine(sets.engaged, sets.engaged.Hybrid)
+    sets.engaged.MidAcc.DT = set_combine(sets.engaged.MidAcc, sets.engaged.Hybrid)
+    sets.engaged.HighAcc.DT = set_combine(sets.engaged.HighAcc, sets.engaged.Hybrid)
+
+    sets.engaged.DW.DT.LowHaste = set_combine(sets.engaged.DW.LowHaste, sets.engaged.Hybrid)
+    sets.engaged.DW.MidAcc.DT.LowHaste = set_combine(sets.engaged.DW.MidAcc.LowHaste, sets.engaged.Hybrid)
+	sets.engaged.DW.HighAcc.DT.LowHaste = set_combine(sets.engaged.DW.HighAcc.LowHaste, sets.engaged.Hybrid)
+
+    sets.engaged.DW.DT.MidHaste = set_combine(sets.engaged.DW.MidHaste, sets.engaged.Hybrid)
+    sets.engaged.DW.MidAcc.DT.MidHaste = set_combine(sets.engaged.DW.MidAcc.MidHaste, sets.engaged.Hybrid)
+	sets.engaged.DW.HighAcc.DT.MidHaste = set_combine(sets.engaged.DW.HighAcc.MidHaste, sets.engaged.Hybrid)
+
+    sets.engaged.DW.DT.HighHaste = set_combine(sets.engaged.DW.HighHaste, sets.engaged.Hybrid)
+    sets.engaged.DW.MidAcc.DT.HighHaste = set_combine(sets.engaged.DW.MidAcc.HighHaste, sets.engaged.Hybrid)
+	sets.engaged.DW.HighAcc.DT.HighHaste = set_combine(sets.engaged.DW.HighAcc.HighHaste, sets.engaged.Hybrid)
+
+    sets.engaged.DW.DT.MaxHaste = set_combine(sets.engaged.DW.MaxHaste, sets.engaged.Hybrid)
+    sets.engaged.DW.MidAcc.DT.MaxHaste = set_combine(sets.engaged.DW.MidAcc.MaxHaste, sets.engaged.Hybrid)
+	sets.engaged.DW.HighAcc.DT.MaxHaste = set_combine(sets.engaged.DW.HighAcc.MaxHaste, sets.engaged.Hybrid)
+]]--
+
+    ------------------------------------------------------------------------------------------------
+    ---------------------------------------- Special Sets ------------------------------------------
+    ------------------------------------------------------------------------------------------------
 
     sets.buff.Doom = {ring1="Eshmun's Ring", ring2="Eshmun's Ring", waist="Gishdubar Sash"}
 
@@ -750,6 +955,13 @@ end
 -------------------------------------------------------------------------------------------------------------------
 
 function job_buff_change(buff,gain)
+    -- If we gain or lose any haste buffs, adjust which gear set we target.
+    if S{'haste', 'march', 'mighty guard', 'embrava', 'haste samba', 'geo-haste', 'indi-haste'}:contains(buff:lower()) then
+        determine_haste_group()
+        if not midaction() then
+            handle_equipping_gear(player.status)
+        end
+    end
 
     if buff == "doom" then
         if gain then           
@@ -844,15 +1056,91 @@ function customize_idle_set(idleSet)
     return idleSet
 end
 
+-- Called by the 'update' self-command.
+function job_update(cmdParams, eventArgs)
+    determine_haste_group()
+end
+
 -- Set eventArgs.handled to true if we don't want the automatic display to be run.
 function display_current_job_state(eventArgs)
     display_current_caster_state()
     eventArgs.handled = true
 end
 
+-- Function to display the current relevant user state when doing an update.
+-- Return true if display was handled, and you don't want the default info shown.
+function display_current_job_state(eventArgs)
+    local msg = '[ Melee'
+    
+    if state.CombatForm.has_value then
+        msg = msg .. ' (' .. state.CombatForm.value .. ')'
+    end
+    
+    msg = msg .. ': '
+    
+    msg = msg .. state.OffenseMode.value
+    if state.HybridMode.value ~= 'Normal' then
+        msg = msg .. '/' .. state.HybridMode.value
+    end
+    msg = msg .. ' ][ WS: ' .. state.WeaponskillMode.value .. ' ]'
+    
+    if state.DefenseMode.value ~= 'None' then
+        msg = msg .. '[ Defense: ' .. state.DefenseMode.value .. state[state.DefenseMode.value .. 'DefenseMode'].value .. ' ]'
+    end
+
+    if state.IdleMode.value ~= 'None' then
+        msg = msg .. '[ Idle: ' .. state.IdleMode.value .. ' ]'
+    end
+    
+    if state.Kiting.value then
+        msg = msg .. '[ Kiting Mode: ON ]'
+    end
+
+    add_to_chat(060, msg)
+
+    eventArgs.handled = true
+end
+
 -------------------------------------------------------------------------------------------------------------------
 -- Utility functions specific to this job.
 -------------------------------------------------------------------------------------------------------------------
+
+function determine_haste_group()
+
+    -- Gearswap can't detect the difference between Haste I and Haste II
+    -- so use winkey-H to manually set Haste spell level.
+
+    -- Haste (buffactive[33]) - 15%
+    -- Haste II (buffactive[33]) - 30%
+    -- Haste Samba - 5~10%
+    -- Honor March - 12~16%
+    -- Victory March - 15~28%
+    -- Advancing March - 10~18%
+    -- Embrava - 25%
+    -- Mighty Guard (buffactive[604]) - 15%
+    -- Geo-Haste (buffactive[580]) - 30~40%
+
+    classes.CustomMeleeGroups:clear()
+
+    if state.CombatForm.value == 'DW' then
+        if(((buffactive[33] or buffactive[580] or buffactive.embrava) and (buffactive.march or buffactive[604])) or
+            (buffactive[33] and (buffactive[580] or buffactive.embrava)) or
+            (buffactive.march == 2 and buffactive[604]) or buffactive.march == 3) or buffactive[580] == 2 then
+            add_to_chat(122, 'Magic Haste Level: 43%')
+            classes.CustomMeleeGroups:append('MaxHaste')
+        elseif ((buffactive[33] or buffactive.march == 2 or buffactive[580]) and buffactive['haste samba']) then
+            add_to_chat(122, 'Magic Haste Level: 35%')
+            classes.CustomMeleeGroups:append('HighHaste')
+        elseif ((buffactive[580] or buffactive[33] or buffactive.march == 2) or
+            (buffactive.march == 1 and buffactive[604])) then
+            add_to_chat(122, 'Magic Haste Level: 30%')
+            classes.CustomMeleeGroups:append('MidHaste')
+        elseif (buffactive.march == 1 or buffactive[604]) then
+            add_to_chat(122, 'Magic Haste Level: 15%')
+            classes.CustomMeleeGroups:append('LowHaste')
+        end
+    end
+end
 
 -- General handling of strategems in an Arts-agnostic way.
 -- Format: gs c scholar <strategem>

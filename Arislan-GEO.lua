@@ -134,7 +134,6 @@ function init_gear_sets()
     -- Weaponskill sets
     -- Default set for any weaponskill that isn't any more specifically defined
     sets.precast.WS = {
-        ammo="Floestone",
         head="Jhakri Coronal +1",
         body="Jhakri Robe +2",
         hands="Jhakri Cuffs +2",
@@ -192,7 +191,7 @@ function init_gear_sets()
         })
 
     sets.midcast.Cure = {
-        main="Tamaxchi", --22/(-10)
+        main="Vadose Rod", --22/(-10)
         sub="Sors Shield", --3/(-5)
         body="Vanya Robe",
         hands="Telchine Gloves", --10
@@ -517,15 +516,17 @@ function init_gear_sets()
     
     -- Normal melee group
     sets.engaged = {        
-        head="Telchine Cap",
-        body="Onca Suit",
+        head="Jhakri Coronal +1",
+        body="Jhakri Robe +2",
+        hands="Jhakri Cuffs +2",
+        feet="Jhakri Pigaches +2",
         neck="Combatant's Torque",
         ear1="Cessance Earring",
         ear2="Telos Earring",
-        ring1="Ramuh Ring +1",
-        ring2="Ramuh Ring +1",
-        waist="Grunfeld Rope",
+        ring1="Petrov Ring",
+        ring2="Hetairoi Ring",
         back="Relucent Cape",
+        waist="Shetal Stone",
         }
 
 

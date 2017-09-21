@@ -49,20 +49,20 @@
 
     send_command('bind #` input //send safiyeh /ja "Full Circle" <me>')
 
-    --send_command('bind #1 input //send safiyeh /ma "Geo-Frailty" <t>')
-    --send_command('bind #2 input //send safiyeh /ma "Indi-Fury" <t>')
+    send_command('bind #1 input //send safiyeh /ma "Geo-Frailty" <t>')
+    send_command('bind #2 input //send safiyeh /ma "Indi-Fury" <t>')
     --send_command('bind #1 input //send safiyeh /ma "Geo-Malaise" <t>')
     --send_command('bind #2 input //send safiyeh /ma "Indi-Acumen" <t>')
     send_command('bind #3 input //send safiyeh /ma "Indi-Haste" <t>')
     send_command('bind #4 input //send safiyeh /ma "Indi-Refresh" <t>')
-    --send_command('bind #5 input //send safiyeh /ma "Geo-Fade" <t>')
-    --send_command('bind #6 input //send safiyeh /ma "Indi-Fend" <t>')    
-    send_command('bind #5 input //send safiyeh /ma "Geo-Attunement" <t>')
-    send_command('bind #6 input //send safiyeh /ma "Indi-Fend" <t>')
+    --send_command('bind #5 input //send safiyeh /ma "Geo-Vex" <t>')
+    --send_command('bind #6 input //send safiyeh /ma "Indi-Attunement" <t>')    
+    --send_command('bind #5 input //send safiyeh /ma "Geo-Attunement" <t>')
+    --send_command('bind #6 input //send safiyeh /ma "Indi-Fend" <t>')
     --send_command('bind #5 input //send safiyeh /ma "Geo-Wilt" <t>')
     --send_command('bind #6 input //send safiyeh /ma "Indi-Barrier" <t>')
-    --send_command('bind #5 input //send safiyeh /ma "Geo-INT" <t>')
-    --send_command('bind #6 input //send safiyeh /ma "Indi-Focus" <t>')
+    send_command('bind #5 input //send safiyeh /ma "Geo-Malaise" <t>')
+    send_command('bind #6 input //send safiyeh /ma "Indi-Acumen" <t>')
 
 
     send_command('bind #7 input //send safiyeh /ma "Dia II" <t>')
@@ -70,14 +70,17 @@
     send_command('bind #9 input //send safiyeh /ma "Gravity" <t>')
     send_command('bind #0 input //send safiyeh /ma "Dispel" <t>')
 
-    send_command('bind #o input //send safiyeh /ma "Cure IV" <t>')
-    send_command('bind #p input //send safiyeh /ja "Entrust" <me>')
+    send_command('bind #q input //send safiyeh /ma "Fire II" <t>')
+    send_command('bind #w input //send safiyeh /ma "Aspir II" <t>')
     send_command('bind #e input //send safiyeh /ma "Haste" <t>')
     send_command('bind #r input //send safiyeh /ma "Refresh" <t>')
     send_command('bind #t input //send safiyeh /ma "Blink" <me>')
     send_command('bind #y input //send safiyeh /ma "Phalanx" <me>')
     send_command('bind #u input //send safiyeh /ma "Stoneskin" <me>')
     send_command('bind #i input //send safiyeh /ma "Aquaveil" <me>')
+    send_command('bind #o input //send safiyeh /ma "Cure IV" <t>')
+    send_command('bind #p input //send safiyeh /ja "Entrust" <me>')
+
     send_command('bind #, input //send safiyeh /ma "Sneak" <t>')
     send_command('bind #. input //send safiyeh /ma "Invisible <t>')
 

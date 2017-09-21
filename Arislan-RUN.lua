@@ -37,7 +37,7 @@ function job_setup()
     blue_magic_maps.Buffs = S{'Cocoon', 'Refueling'}
 
     rayke_duration = 47
-    gambit_duration = 94
+    gambit_duration = 96
 
 end
 
@@ -193,7 +193,7 @@ function init_gear_sets()
         }
 
     sets.precast.JA['Swipe'] = sets.precast.JA['Lunge']
-    sets.precast.JA['Gambit'] = {hands="Runeist's Mitons +2"}
+    sets.precast.JA['Gambit'] = {hands="Runeist's Mitons +3"}
     sets.precast.JA['Rayke'] = {feet="Futhark Boots +1"}
     sets.precast.JA['Elemental Sforzo'] = set_combine(sets.Enmity, {body="Futhark Coat +1"})
     sets.precast.JA['Swordplay'] = set_combine(sets.Enmity, {hands="Futhark Mitons +1"})
@@ -397,7 +397,7 @@ function init_gear_sets()
 
     sets.midcast['Temper'] = set_combine(sets.midcast['Enhancing Magic'], {
         head="Carmine Mask +1",
-        hands="Runeist's Mitons +2",
+        hands="Runeist's Mitons +3",
         legs="Carmine Cuisses +1",
         })
 
@@ -460,6 +460,7 @@ function init_gear_sets()
         ammo="Staunch Tathlum", --2/2
         head=gear.Herc_DT_head, --3/3
         body="Runeist's Coat +3",
+		hands="Turms Mittens",
         legs="Carmine Cuisses +1",
         feet="Erilaz Greaves +1", --5/0
         neck="Loricate Torque +1", --6/6
@@ -615,13 +616,14 @@ function init_gear_sets()
         })
 
     sets.engaged.MidAcc = set_combine(sets.engaged.LowAcc, {
---        sub="Bloodrain Strap",
+--      sub="Bloodrain Strap",
         ear2="Telos Earring",
         ring2="Ilabrat Ring",
         })
 
     sets.engaged.HighAcc = set_combine(sets.engaged.MidAcc, {
         head="Carmine Mask +1",
+		hands="Runeist's Mitons +3",
         legs="Carmine Cuisses +1",
         feet=gear.Herc_Acc_feet,
         ring1="Ramuh Ring +1",
@@ -680,6 +682,7 @@ function init_gear_sets()
         })
 
     sets.engaged.HighAcc.DT = set_combine(sets.engaged.MidAcc.DT, {
+		hands="Runeist's Mitons +3", --3/0
         feet=gear.Herc_Acc_feet,
         ear1="Cessance Earring",
         })

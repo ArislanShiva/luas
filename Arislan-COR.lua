@@ -1,4 +1,4 @@
--------------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------
 -- (Original: Motenten / Modified: Arislan)
 -------------------------------------------------------------------------------------------------------------------
 
@@ -510,7 +510,7 @@ function init_gear_sets()
     sets.midcast.RA.Acc = set_combine(sets.midcast.RA, {
         ammo=gear.RAbullet,
         hands="Meg. Gloves +2",
-        legs="Meg. Chausses +2",
+        legs="Laksa. Trews +3",
         feet="Meg. Jam. +2",
         ring1="Hajduk Ring +1",
         ring2="Hajduk Ring +1",
@@ -817,10 +817,6 @@ function init_gear_sets()
         ring1="Petrov Ring",
         })
 
-    sets.engaged.Aftermath = {
-        ring2="Ilabrat Ring",
-        }
-
     ------------------------------------------------------------------------------------------------
     ---------------------------------------- Hybrid Sets -------------------------------------------
     ------------------------------------------------------------------------------------------------
@@ -1008,16 +1004,6 @@ function customize_idle_set(idleSet)
     return idleSet
 end
 
--- Modify the default melee set after it was constructed.
-function customize_melee_set(meleeSet)
-    if buffactive['Aftermath: Lv.3'] and player.equipment.ranged == "Death Penalty"
-        and state.HybridMode.value ~= 'DT' then
-        meleeSet = set_combine(meleeSet, sets.engaged.Aftermath)
-    end
-
-    return meleeSet
-end
-
 -- Return a customized weaponskill mode to use for weaponskill sets.
 -- Don't return anything if you're not overriding the default value.
 
@@ -1115,7 +1101,7 @@ function determine_haste_group()
     if state.HasteMode.value == 'Haste II' then
         if(((buffactive[33] or buffactive[580] or buffactive.embrava) and (buffactive.march or buffactive[604])) or
             (buffactive[33] and (buffactive[580] or buffactive.embrava)) or
-            (buffactive.march == 2 and buffactive[604]) or buffactive.march == 3) then
+            (buffactive.march == 2 and buffactive[604]) or buffactive.march == 3) or buffactive[580] == 2 then
             add_to_chat(122, 'Magic Haste Level: 43%')
             classes.CustomMeleeGroups:append('MaxHaste')
         elseif ((buffactive[33] or buffactive.march == 2 or buffactive[580]) and buffactive['haste samba']) then
@@ -1133,7 +1119,7 @@ function determine_haste_group()
         if (buffactive[580] and ( buffactive.march or buffactive[33] or buffactive.embrava or buffactive[604]) ) or
             (buffactive.embrava and (buffactive.march or buffactive[33] or buffactive[604])) or
             (buffactive.march == 2 and (buffactive[33] or buffactive[604])) or
-            (buffactive[33] and buffactive[604] and buffactive.march ) or buffactive.march == 3 then
+            (buffactive[33] and buffactive[604] and buffactive.march ) or buffactive.march == 3 or buffactive[580] == 2 then
             add_to_chat(122, 'Magic Haste Level: 43%')
             classes.CustomMeleeGroups:append('MaxHaste')
         elseif ((buffactive[604] or buffactive[33]) and buffactive['haste samba'] and buffactive.march == 1) or

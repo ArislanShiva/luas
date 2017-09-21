@@ -455,7 +455,7 @@ function init_gear_sets()
             
     sets.midcast['Elemental Magic'].Spaekona = set_combine(sets.midcast['Elemental Magic'], {
         sub="Enki Strap",
-        body="Spae. Coat +1",
+        body="Spaekona's Coat +2",
         legs=gear.Merlinic_MAcc_legs,
         neck="Erra Pendant",
         })
@@ -608,15 +608,15 @@ function init_gear_sets()
     -- Normal melee group
 
     sets.engaged = {
-        sub="Bloodrain Strap",
-        head="Telchine Cap",
-        body="Onca Suit",
+        head="Jhakri Coronal +1",
+        body="Jhakri Robe +2",
+        hands="Jhakri Cuffs +2",
+        feet="Jhakri Pigaches +2",
         neck="Combatant's Torque",
         ear1="Cessance Earring",
         ear2="Telos Earring",
-        ring1="Hetairoi Ring",
-        ring2="Apate Ring",
-        waist="Witful Belt",
+        ring1="Petrov Ring",
+        ring2="Hetairoi Ring",
         back="Relucent Cape",
         }
 

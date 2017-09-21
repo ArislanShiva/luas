@@ -157,7 +157,10 @@ function init_gear_sets()
     sets.precast.WS = {
         ammo="Floestone",
         head="Chironic Hat",
-        body="Onca Suit",
+        body="Ayanmo Corazza +1",
+        hands="Chironic Gloves",
+        legs="Aya. Cosciales +1",
+        feet="Chironic Slippers",
         neck="Fotia Gorget",
         ear1="Moonshade Earring",
         ear2="Telos Earring",
@@ -274,7 +277,7 @@ function init_gear_sets()
         sub="Genmei Shield",
         head="Vanya Hood",
         hands="Fanatic Gloves", --15
-        legs="Th. Pantaloons +2", --17
+        legs="Th. Pant. +3", --21
         feet="Vanya Clogs", --5
         --feet="Gende. Galosh. +1", --10
         neck="Debilis Medallion", --15
@@ -319,13 +322,13 @@ function init_gear_sets()
         head="Inyanga Tiara +1",
         body="Piety Briault +1",
         hands="Ebers Mitts +1",
-        legs="Th. Pantaloons +2",
+        legs="Th. Pant. +3",
         })
 
     sets.midcast.RegenDuration = set_combine(sets.midcast.EnhancingDuration, {
         body="Telchine Chas.",
         hands="Ebers Mitts +1",
-        legs="Th. Pantaloons +2",
+        legs="Th. Pant. +3",
         })
     
     sets.midcast.Refresh = set_combine(sets.midcast['Enhancing Magic'], {
@@ -377,7 +380,7 @@ function init_gear_sets()
         head="Befouled Crown",
         body="Vanya Robe",
         hands="Fanatic Gloves",
-        legs="Th. Pantaloons +2",
+        legs="Th. Pant. +3",
         feet="Chironic Slippers",
         neck="Incanter's Torque",
         ear1="Hermetic Earring",
@@ -393,7 +396,7 @@ function init_gear_sets()
         sub="Niobid Strap",
         head="Inyanga Tiara +1",
         body="Witching Robe",
-        legs="Th. Pantaloons +2",
+        legs="Th. Pant. +3",
         neck="Sanctity Necklace",
         ear1="Friomisi Earring",
         ear2="Regal Earring",
@@ -409,7 +412,7 @@ function init_gear_sets()
         ammo="Pemphredo Tathlum",
         head="Befouled Crown",
         body="Shango Robe",
-        hands="Inyan. Dastanas +1",
+        hands="Theophany Mitts +3",
         legs="Chironic Hose",
         feet="Medium's Sabots",
         neck="Erra Pendant",
@@ -502,7 +505,7 @@ function init_gear_sets()
         main="Sindri",
         head="Ebers Cap +1",
         body="Theo. Briault +2",
-        legs="Th. Pantaloons +2",
+        legs="Th. Pant. +3",
         neck="Debilis Medallion",
         ring1="Levia. Ring +1",
         ring2="Weather. Ring +1",

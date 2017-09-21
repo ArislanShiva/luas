@@ -258,8 +258,6 @@ function init_gear_sets()
         })
     
     sets.midcast.StatusRemoval = {
-        main="Tamaxchi",
-        sub="Sors Shield",
         head="Vanya Hood",
         body="Vanya Robe",
         legs="Acad. Pants +2",
@@ -568,15 +566,15 @@ function init_gear_sets()
     ------------------------------------------------------------------------------------------------
     
     sets.engaged = {
-        sub="Bloodrain Strap",
-        head="Telchine Cap",
-        body="Onca Suit",
+        head="Jhakri Coronal +1",
+        body="Jhakri Robe +2",
+        hands="Jhakri Cuffs +2",
+        feet="Jhakri Pigaches +2",
         neck="Combatant's Torque",
         ear1="Cessance Earring",
         ear2="Telos Earring",
-        ring1="Hetairoi Ring",
-        ring2="Apate Ring",
-        waist="Witful Belt",
+        ring1="Petrov Ring",
+        ring2="Hetairoi Ring",
         back="Relucent Cape",
         }
     

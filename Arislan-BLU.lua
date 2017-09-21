@@ -161,7 +161,6 @@ function user_setup()
 
     state.MagicBurst = M(false, 'Magic Burst')
     state.CP = M(false, "Capacity Points Mode")
-    state.Logger = M(false, "Logger Addon")
 
     -- Additional local binds
     include('Global-Binds.lua')
@@ -341,6 +340,9 @@ function init_gear_sets()
         ring1="Ramuh Ring +1",
         ring2="Ilabrat Ring",
         })
+
+    sets.precast.WS['Vorpal Blade'] = sets.precast.WS['Chant du Cygne']
+    sets.precast.WS['Vorpal Blade'].Acc = sets.precast.WS['Chant du Cygne'].Acc
 
     sets.precast.WS['Savage Blade'] = set_combine(sets.precast.WS, {
         ammo="Floestone",
@@ -1222,7 +1224,7 @@ function determine_haste_group()
     if state.HasteMode.value == 'Haste II' then
         if(((buffactive[33] or buffactive[580] or buffactive.embrava) and (buffactive.march or buffactive[604])) or
             (buffactive[33] and (buffactive[580] or buffactive.embrava)) or
-            (buffactive.march == 2 and buffactive[604]) or buffactive.march == 3) then
+            (buffactive.march == 2 and buffactive[604]) or buffactive.march == 3) or buffactive[580] == 2 then
             add_to_chat(122, 'Magic Haste Level: 43%')
             classes.CustomMeleeGroups:append('MaxHaste')
         elseif ((buffactive[33] or buffactive.march == 2 or buffactive[580]) and buffactive['haste samba']) then
@@ -1240,7 +1242,7 @@ function determine_haste_group()
         if (buffactive[580] and ( buffactive.march or buffactive[33] or buffactive.embrava or buffactive[604]) ) or
             (buffactive.embrava and (buffactive.march or buffactive[33] or buffactive[604])) or
             (buffactive.march == 2 and (buffactive[33] or buffactive[604])) or
-            (buffactive[33] and buffactive[604] and buffactive.march ) or buffactive.march == 3 then
+            (buffactive[33] and buffactive[604] and buffactive.march ) or buffactive.march == 3 or buffactive[580] == 2 then
             add_to_chat(122, 'Magic Haste Level: 43%')
             classes.CustomMeleeGroups:append('MaxHaste')
         elseif ((buffactive[604] or buffactive[33]) and buffactive['haste samba'] and buffactive.march == 1) or
