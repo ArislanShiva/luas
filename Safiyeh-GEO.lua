@@ -358,7 +358,7 @@ function init_gear_sets()
         legs="Assid. Pants +1",
         feet="Geo. Sandals +3",
         neck="Bathy Choker +1",
-        ear1="Barkarole Earring",
+        ear1="Moonshade Earring",
         ear2="Infused Earring",
         ring1="Paguroidea Ring",
         ring2="Stikini Ring",

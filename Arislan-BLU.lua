@@ -1225,17 +1225,17 @@ function determine_haste_group()
         if(((buffactive[33] or buffactive[580] or buffactive.embrava) and (buffactive.march or buffactive[604])) or
             (buffactive[33] and (buffactive[580] or buffactive.embrava)) or
             (buffactive.march == 2 and buffactive[604]) or buffactive.march == 3) or buffactive[580] == 2 then
-            add_to_chat(122, 'Magic Haste Level: 43%')
+            --add_to_chat(122, 'Magic Haste Level: 43%')
             classes.CustomMeleeGroups:append('MaxHaste')
         elseif ((buffactive[33] or buffactive.march == 2 or buffactive[580]) and buffactive['haste samba']) then
-            add_to_chat(122, 'Magic Haste Level: 35%')
+            --add_to_chat(122, 'Magic Haste Level: 35%')
             classes.CustomMeleeGroups:append('HighHaste')
         elseif ((buffactive[580] or buffactive[33] or buffactive.march == 2) or
             (buffactive.march == 1 and buffactive[604])) then
-            add_to_chat(122, 'Magic Haste Level: 30%')
+            --add_to_chat(122, 'Magic Haste Level: 30%')
             classes.CustomMeleeGroups:append('MidHaste')
         elseif (buffactive.march == 1 or buffactive[604]) then
-            add_to_chat(122, 'Magic Haste Level: 15%')
+            --add_to_chat(122, 'Magic Haste Level: 15%')
             classes.CustomMeleeGroups:append('LowHaste')
         end
     else
@@ -1243,21 +1243,21 @@ function determine_haste_group()
             (buffactive.embrava and (buffactive.march or buffactive[33] or buffactive[604])) or
             (buffactive.march == 2 and (buffactive[33] or buffactive[604])) or
             (buffactive[33] and buffactive[604] and buffactive.march ) or buffactive.march == 3 or buffactive[580] == 2 then
-            add_to_chat(122, 'Magic Haste Level: 43%')
+            --add_to_chat(122, 'Magic Haste Level: 43%')
             classes.CustomMeleeGroups:append('MaxHaste')
         elseif ((buffactive[604] or buffactive[33]) and buffactive['haste samba'] and buffactive.march == 1) or
             (buffactive.march == 2 and buffactive['haste samba']) or
             (buffactive[580] and buffactive['haste samba'] ) then
-            add_to_chat(122, 'Magic Haste Level: 35%')
+            --add_to_chat(122, 'Magic Haste Level: 35%')
             classes.CustomMeleeGroups:append('HighHaste')
         elseif (buffactive.march == 2 ) or
             ((buffactive[33] or buffactive[604]) and buffactive.march == 1 ) or  -- MG or haste + 1 march
             (buffactive[580] ) or  -- geo haste
             (buffactive[33] and buffactive[604]) then
-            add_to_chat(122, 'Magic Haste Level: 30%')
+            --add_to_chat(122, 'Magic Haste Level: 30%')
             classes.CustomMeleeGroups:append('MidHaste')
         elseif buffactive[33] or buffactive[604] or buffactive.march == 1 then
-            add_to_chat(122, 'Magic Haste Level: 15%')
+            --add_to_chat(122, 'Magic Haste Level: 15%')
             classes.CustomMeleeGroups:append('LowHaste')
         end
     end
