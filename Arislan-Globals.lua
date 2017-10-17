@@ -10,7 +10,7 @@ function define_global_sets()
     gear.Akademos_MAB = {name="Akademos", augments={'MP+80','INT+20','"Mag.Atk.Bns."+20',}}
     gear.Akademos_MAC = {name="Akademos", augments={'INT+15','"Mag.Atk.Bns."+15','Mag. Acc.+15',}}
 	
-	gear.Colada_DEX = {name="Colada", augments={'Crit.hit rate+3','DEX+12','Accuracy+14','DMG:+10',}}
+	gear.Colada_ATT = {name="Colada", augments={'"Store TP"+3','STR+10','Accuracy+16','Attack+14','DMG:+12',}}
 	gear.Colada_ENH = {name="Colada", augments={'Enh. Mag. eff. dur. +4','INT+5','Mag. Acc.+9',}}
 
     gear.Lathi_MAB = {name="Lathi", augments={'MP+80','INT+20','"Mag.Atk.Bns."+20',}}
@@ -21,14 +21,15 @@ function define_global_sets()
     gear.Grioavolr_MB = {name="Grioavolr", augments={'Magic burst dmg.+5%','INT+9','Mag. Acc.+27','"Mag.Atk.Bns."+27',}}
 
     -- Adhemar
-    gear.Adhemar_DT_head = {name="Adhemar Bonnet", augments={'HP+80','Attack+10','Phys. dmg. taken -3',}}
-    gear.Adhemar_TP_head = {name="Adhemar Bonnet", augments={'STR+10','DEX+10','Attack+15',}}
+    gear.Adhemar_B_head = {name="Adhemar Bonnet", augments={'STR+10','DEX+10','Attack+15',}}
+    gear.Adhemar_D_head = {name="Adhemar Bonnet", augments={'HP+80','Attack+10','Phys. dmg. taken -3',}}
 
-    gear.Adhemar_RA_hands = {name="Adhemar Wristbands", augments={'AGI+10','Rng.Acc.+15','Rng.Atk.+15',}}
-    gear.Adhemar_TP_hands = {name="Adhemar Wristbands", augments={'STR+10','DEX+10','Attack+15',}}
+    gear.Adhemar_A_hands = {name="Adhemar Wristbands", augments={'AGI+10','DEX+10','Accuracy+15',}}
+    gear.Adhemar_B_hands = {name="Adhemar Wristbands", augments={'STR+10','DEX+10','Attack+15',}}
+    gear.Adhemar_C_hands = {name="Adhemar Wristbands", augments={'AGI+10','Rng.Acc.+15','Rng.Atk.+15',}}
 
-    gear.Adhemar_RA_legs = {name="Adhemar Kecks", augments={'AGI+10','Rng.Acc.+15','Rng.Atk.+15',}}
-    gear.Adhemar_RS_legs = {name="Adhemar Kecks", augments={'AGI+10','"Rapid Shot"+10','Enmity-5',}}
+    gear.Adhemar_C_legs = {name="Adhemar Kecks", augments={'AGI+10','Rng.Acc.+15','Rng.Atk.+15',}}
+    gear.Adhemar_D_legs = {name="Adhemar Kecks", augments={'AGI+10','"Rapid Shot"+10','Enmity-5',}}
 
     -- Herculean
     gear.Herc_TA_body = {name="Herculean Vest", augments={'Accuracy+19 Attack+19','"Triple Atk."+3','STR+9','Accuracy+10',}}
@@ -43,7 +44,7 @@ function define_global_sets()
     gear.Herc_WS_legs = {name="Herculean Trousers", augments={'Accuracy+25 Attack+25','Weapon skill damage +3%','DEX+13','Accuracy+6','Attack+4',}}
     gear.Herc_WS_feet = {name="Herculean Boots", augments={'Pet: "Regen"+2','AGI+14','Weapon skill damage +7%','Accuracy+16 Attack+16','Mag. Acc.+15 "Mag.Atk.Bns."+15',}}
     
-    gear.Herc_MAB_head = {name="Herculean Helm", augments={'Mag. Acc.+20 "Mag.Atk.Bns."+20','"Store TP"+4','INT+1','Mag. Acc.+14','"Mag.Atk.Bns."+14',}}
+    gear.Herc_MAB_head = {name="Herculean Helm", augments={'"Mag.Atk.Bns."+24','Pet: DEX+7','INT+2 MND+2 CHR+2','Mag. Acc.+18 "Mag.Atk.Bns."+18',}}
     gear.Herc_MAB_legs = {name="Herculean Trousers", augments={'Mag. Acc.+16 "Mag.Atk.Bns."+16','"Fast Cast"+3','AGI+10','"Mag.Atk.Bns."+15',}}
     gear.Herc_MAB_feet = {name="Herculean Boots", augments={'"Mag.Atk.Bns."+22','"Fast Cast"+2','Accuracy+10 Attack+10','Mag. Acc.+15 "Mag.Atk.Bns."+15',}}
 
@@ -58,9 +59,9 @@ function define_global_sets()
     gear.Taeon_FC_body = {name="Taeon Tabard", augments={'"Fast Cast"+5','HP+38',}}
 
     gear.Taeon_TA_head = {name="Taeon Chapeau", augments={'Accuracy+19 Attack+19','"Triple Atk."+2','DEX+8',}}
-    gear.Taeon_TA_hands = {name="Taeon Gloves", augments={'Accuracy+18 Attack+18','"Triple Atk."+2','DEX+9',}}
+    gear.Taeon_TA_hands = {name="Taeon Gloves", augments={'Accuracy+20 Attack+20','"Triple Atk."+2','DEX+9',}}
     gear.Taeon_TA_legs = {name="Taeon Tights", augments={'Accuracy+19 Attack+19','"Triple Atk."+2','DEX+9',}}
-    gear.Taeon_DW_feet = {name="Taeon Boots", augments={'Accuracy+20 Attack+20','"Dual Wield"+5','STR+6 DEX+6',}}
+    gear.Taeon_DW_feet = {name="Taeon Boots", augments={'Accuracy+20 Attack+20','"Dual Wield"+5','STR+7 DEX+7',}}
 
     gear.Taeon_RA_head = {name="Taeon Chapeau", augments={'Rng.Acc.+19 Rng.Atk.+19','"Snapshot"+5','"Snapshot"+5',}}
     gear.Taeon_RA_body = {name="Taeon Tabard", augments={'Rng.Acc.+20 Rng.Atk.+20','"Snapshot"+5','"Snapshot"+5',}}
@@ -111,6 +112,7 @@ function define_global_sets()
     gear.SCH_MAB_Cape = {name="Lugh's Cape", augments={'INT+20','Mag. Acc+20 /Mag. Dmg.+20','INT+10','"Mag.Atk.Bns."+10',}} --*
     gear.SCH_FC_Cape = {name="Lugh's Cape", augments={'MND+20','Mag. Acc+20 /Mag. Dmg.+20','MND+10','"Fast Cast"+10',}} --*
 
+	gear.THF_DW_Cape = {name="Toutatis's Cape", augments={'DEX+20','Accuracy+20 Attack+20','"Dual Wield"+10',}}
     gear.THF_TP_Cape = {name="Toutatis's Cape", augments={'DEX+20','Accuracy+20 Attack+20','DEX+10','"Store TP"+10',}} --*
     gear.THF_WS1_Cape = {name="Toutatis's Cape", augments={'DEX+20','Accuracy+20 Attack+20','DEX+10','Weapon skill damage +10%',}} --*
 

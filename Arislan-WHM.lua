@@ -35,7 +35,7 @@ end
 function user_setup()
     state.OffenseMode:options('Normal', 'Acc')
     state.CastingMode:options('Normal', 'Resistant')
-    state.IdleMode:options('Normal', 'DT')
+    state.IdleMode:options('Normal', 'DT', 'MEva')
     
     state.WeaponLock = M(false, 'Weapon Lock')    
     state.CP = M(false, "Capacity Points Mode")
@@ -105,7 +105,7 @@ function init_gear_sets()
         main="Oranyan", --7
         sub="Clerisy Strap +1", --3
         ammo="Sapience Orb", --2
-        body="Inyanga Jubbah +1", --13
+        body="Inyanga Jubbah +2", --14
         hands="Gende. Gages +1", --7
         legs="Kaykaus Tights", --6
         feet="Regal Pumps +1", --7
@@ -198,7 +198,7 @@ function init_gear_sets()
     
     sets.midcast.FC = {
         head="Piety Cap +1",
-        body="Inyanga Jubbah +1",
+        body="Inyanga Jubbah +2",
         hands="Fanatic Gloves",
         legs="Ebers Pant. +1",
         feet="Regal Pumps +1",
@@ -319,7 +319,7 @@ function init_gear_sets()
     sets.midcast.Regen = set_combine(sets.midcast.EnhancingDuration, {
         main="Bolelabunga",
         sub="Ammurapi Shield",
-        head="Inyanga Tiara +1",
+        head="Inyanga Tiara +2",
         body="Piety Briault +1",
         hands="Ebers Mitts +1",
         legs="Th. Pant. +3",
@@ -379,7 +379,7 @@ function init_gear_sets()
         ammo="Pemphredo Tathlum",
         head="Befouled Crown",
         body="Vanya Robe",
-        hands="Fanatic Gloves",
+        hands="Inyan. Dastanas +2",
         legs="Th. Pant. +3",
         feet="Chironic Slippers",
         neck="Incanter's Torque",
@@ -394,7 +394,7 @@ function init_gear_sets()
     sets.midcast.Banish = set_combine(sets.midcast['Divine Magic'], {
         main=gear.Grioavolr_MB,
         sub="Niobid Strap",
-        head="Inyanga Tiara +1",
+        head="Inyanga Tiara +2",
         body="Witching Robe",
         legs="Th. Pant. +3",
         neck="Sanctity Necklace",
@@ -431,7 +431,7 @@ function init_gear_sets()
         ammo="Quartz Tathlum +1",
         head="Befouled Crown",
         body="Theo. Briault +2",
-        hands="Theophany Mitts +3",
+        hands="Inyan. Dastanas +2",
         legs="Chironic Hose",
         feet="Theo. Duckbills +3",
         neck="Erra Pendant",
@@ -455,7 +455,9 @@ function init_gear_sets()
         sub="Niobid Strap",
         head=empty,
         body="Twilight Cloak",
-        legs="Gyve Trousers",
+        hands="Inyan. Dastanas +2",
+        legs="Th. Pant. +3",
+        feet="Theo. Duckbills +3",
         ring2="Archon Ring",
         }
 
@@ -478,7 +480,7 @@ function init_gear_sets()
         ammo="Homiliary",
         head="Befouled Crown",
         body="Witching Robe",
-        hands="Theophany Mitts +3",
+		hands="Inyan. Dastanas +2",
         legs="Assid. Pants +1",
         feet="Herald's Gaiters",
         neck="Bathy Choker +1",
@@ -499,12 +501,27 @@ function init_gear_sets()
         ear1="Genmei Earring", --2/0
         ring2="Defending Ring", --10/10
         back="Moonbeam Cape", --5/5
+		waist="Slipor Sash", --0/3
         })
+
+    sets.idle.MEva = set_combine(sets.idle.DT, {
+		ammo="Staunch Tathlum",
+		head="Inyanga Tiara +2",
+		body="Inyanga Jubbah +2",
+		hands="Inyan. Dastanas +2",
+		legs="Inyanga Shalwar +2",
+		feet="Inyan. Crackows +1",
+		ear1="Eabani Earring",
+		ear2="Hearty Earring",
+		ring1="Inyanga Ring",
+		})
+
 
     sets.idle.Town = set_combine(sets.idle, {
         main="Sindri",
         head="Ebers Cap +1",
         body="Theo. Briault +2",
+        hands="Theophany Mitts +3",
         legs="Th. Pant. +3",
         neck="Debilis Medallion",
         ring1="Levia. Ring +1",

@@ -48,7 +48,7 @@ end
 
 -- Setup vars that are user-dependent.  Can override this function in a sidecar file.
 function user_setup()
-    state.OffenseMode:options('STP', 'Normal', 'LowAcc', 'MidAcc', 'HighAcc')
+    state.OffenseMode:options('Normal', 'LowAcc', 'MidAcc', 'HighAcc', 'STP')
     state.HybridMode:options('Normal', 'DT')
     state.RangedMode:options('Normal', 'Acc')
     state.WeaponskillMode:options('Normal', 'Acc')
@@ -122,7 +122,7 @@ function init_gear_sets()
         ammo="Yetshila",
         head="Dampening Tam",
         body="Adhemar Jacket", 
-        hands=gear.Adhemar_TP_hands,
+        hands=gear.Adhemar_B_hands,
         legs="Lustr. Subligar +1",
         feet="Lustra. Leggings +1",
         neck="Caro Necklace",
@@ -134,7 +134,7 @@ function init_gear_sets()
 
     sets.buff['Trick Attack'] = {
         ammo="Yetshila",
-        head="Pillager's Bonnet +1",
+        head="Pill. Bonnet +2",
         body="Pillager's Vest +2", 
         hands="Pillager's Armlets +1",
         legs="Pillager's Culottes +1",
@@ -236,9 +236,11 @@ function init_gear_sets()
         ear2="Telos Earring",
         })
 
+	sets.precast.WS.Stacked = {ammo="Yetshila", head="Pill. Bonnet +2",}
+
     sets.precast.WS['Exenterator'] = set_combine(sets.precast.WS, {
         ammo="Seeth. Bomblet +1",
-        head=gear.Adhemar_TP_head,
+        head=gear.Adhemar_B_head,
         legs="Meg. Chausses +2",
         feet="Meg. Jam. +2",
         ear1="Sherida Earring",
@@ -253,7 +255,7 @@ function init_gear_sets()
 
     sets.precast.WS['Evisceration'] = set_combine(sets.precast.WS, {
         ammo="Yetshila",
-        head=gear.Adhemar_TP_head,
+        head=gear.Adhemar_B_head,
         body="Abnoba Kaftan",
         hands="Mummu Wrists +1",
         legs="Samnuha Tights", 
@@ -291,8 +293,6 @@ function init_gear_sets()
     sets.precast.WS['Mandalic Stab'] = sets.precast.WS["Rudra's Storm"]
 
     sets.precast.WS['Mandalic Stab'].Acc = sets.precast.WS["Rudra's Storm"].Acc
-
-    sets.precast.WS['Shark Bite'] = sets.precast.WS["Rudra's Storm"]
 
     sets.precast.WS['Aeolian Edge'] = set_combine(sets.precast.WS, {
         ammo="Seeth. Bomblet +1",
@@ -337,7 +337,7 @@ function init_gear_sets()
         ammo="Staunch Tathlum",
         head="Dampening Tam",
         body="Turms Harness",
-        hands=gear.Adhemar_TP_hands,
+        hands=gear.Adhemar_B_hands,
         legs="Samnuha Tights",
         feet="Jute Boots +1",
         neck="Bathy Choker +1",
@@ -408,7 +408,7 @@ function init_gear_sets()
         ammo="Yamarang",
         head="Skulker's Bonnet +1",
         body="Adhemar Jacket", -- 5
-        hands=gear.Adhemar_TP_hands,
+        hands=gear.Adhemar_A_hands,
         legs="Samnuha Tights",
         feet=gear.Taeon_DW_feet, --9
         neck="Erudit. Necklace",
@@ -416,9 +416,9 @@ function init_gear_sets()
         ear2="Suppanomimi", --5
         ring1="Hetairoi Ring",
         ring2="Epona's Ring",
-        back="Canny Cape", --4
+        back=gear.THF_DW_Cape, --10
         waist="Reiki Yotai", --7
-        } -- 34%
+        } -- 40%
 
     sets.engaged.LowAcc = set_combine(sets.engaged, {
         body="Pillager's Vest +2", 
@@ -428,7 +428,6 @@ function init_gear_sets()
     sets.engaged.MidAcc = set_combine(sets.engaged.LowAcc, {
         head="Dampening Tam",
         ring2="Ilabrat Ring",
-        back=gear.THF_TP_Cape,
         waist="Kentarch Belt +1",
         })
 
@@ -452,7 +451,7 @@ function init_gear_sets()
         ammo="Yamarang",
         head="Skulker's Bonnet +1",
         body="Adhemar Jacket", -- 5
-        hands=gear.Adhemar_TP_hands,
+        hands=gear.Adhemar_A_hands,
         legs="Samnuha Tights",
         feet=gear.Taeon_DW_feet, --9
         neck="Erudit. Necklace",
@@ -460,9 +459,9 @@ function init_gear_sets()
         ear2="Suppanomimi", --5
         ring1="Hetairoi Ring",
         ring2="Epona's Ring",
-        back="Canny Cape", --4
+        back=gear.THF_DW_Cape, --10
         waist="Reiki Yotai", --7
-        } -- 34%
+        } -- 40%
 
     sets.engaged.LowAcc.LowHaste = set_combine(sets.engaged.LowHaste, {
         body="Pillager's Vest +2", 
@@ -496,15 +495,15 @@ function init_gear_sets()
         ammo="Yamarang",
         head="Skulker's Bonnet +1",
         body="Adhemar Jacket", -- 5
-        hands=gear.Adhemar_TP_hands,
+        hands=gear.Adhemar_A_hands,
         legs="Samnuha Tights",
-        feet=gear.Taeon_DW_feet, --9
+        feet=gear.Herc_TA_feet,
         neck="Erudit. Necklace",
-        ear1="Sherida Earring",
+        ear1="Eabani Earring", --4
         ear2="Suppanomimi", --5
         ring1="Hetairoi Ring",
         ring2="Epona's Ring",
-        back=gear.THF_TP_Cape,
+        back=gear.THF_DW_Cape, --10
         waist="Reiki Yotai", --7
         } -- 26%
 
@@ -541,17 +540,17 @@ function init_gear_sets()
         ammo="Yamarang",
         head="Skulker's Bonnet +1",
         body="Adhemar Jacket", -- 5
-        hands=gear.Adhemar_TP_hands,
+        hands=gear.Adhemar_A_hands,
         legs="Samnuha Tights",
-        feet=gear.Taeon_DW_feet, --9
+        feet=gear.Herc_TA_feet,
         neck="Erudit. Necklace",
         ear1="Sherida Earring",
-        ear2="Brutal Earring",
+        ear2="Suppanomimi", --5
         ring1="Hetairoi Ring",
         ring2="Epona's Ring",
-        back=gear.THF_TP_Cape,
-        waist="Reiki Yotai", --7
-        } -- 21%
+        back=gear.THF_DW_Cape, --10
+        waist="Windbuffet Belt +1",
+        } -- 20%
 
     sets.engaged.LowAcc.HighHaste = set_combine(sets.engaged.HighHaste, {
         body="Pillager's Vest +2", 
@@ -586,7 +585,7 @@ function init_gear_sets()
         ammo="Yamarang",
         head="Skulker's Bonnet +1",
         body="Adhemar Jacket", -- 5
-        hands=gear.Adhemar_TP_hands,
+        hands=gear.Adhemar_A_hands,
         legs="Samnuha Tights",
         feet=gear.Herc_TA_feet,
         neck="Erudit. Necklace",
@@ -671,7 +670,7 @@ function init_gear_sets()
     ------------------------------------------------------------------------------------------------
     ---------------------------------------- Special Sets ------------------------------------------
     ------------------------------------------------------------------------------------------------
-
+	
     sets.buff.Doom = {ring1="Eshmun's Ring", ring2="Eshmun's Ring", waist="Gishdubar Sash"}
 
     sets.Reive = {neck="Ygnas's Resolve +1"}
@@ -688,11 +687,15 @@ end
 function job_post_precast(spell, action, spellMap, eventArgs)
     if spell.english == 'Aeolian Edge' and state.TreasureMode.value ~= 'None' then
         equip(sets.TreasureHunter)
-    elseif spell.english=='Sneak Attack' or spell.english=='Trick Attack' or spell.type == 'WeaponSkill' then
+    elseif spell.english=='Sneak Attack' or spell.english=='Trick Attack' then
         if state.TreasureMode.value == 'SATA' or state.TreasureMode.value == 'Fulltime' then
             equip(sets.TreasureHunter)
         end
-    end
+    elseif spell.english == 'Rudra\'s Storm' or spell.english == 'Mandalic Stab' then
+		if state.Buff['Sneak Attack'] == true or state.Buff['Trick Attack'] == true then
+			equip(sets.precast.WS.Stacked)
+		end
+	end
 end
 
 -- Run after the general midcast() set is constructed.

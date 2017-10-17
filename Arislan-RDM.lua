@@ -130,10 +130,8 @@ function init_gear_sets()
     -- Fast cast sets for spells
     sets.precast.FC = {
     --    Traits --30
-        main="Oranyan", --7
-        sub="Clerisy Strap +1", --3
         ammo="Sapience Orb", --2
-        head="Carmine Mask +1", --14
+        head="Atrophy Chapeau +3", --16
         hands="Leyline Gloves", --7
         legs="Psycloth Lappas", --7
         feet="Carmine Greaves +1", --8
@@ -143,7 +141,6 @@ function init_gear_sets()
         ring1="Kishar Ring", --4
         ring2="Weather. Ring +1", --5
         back="Swith Cape +1", --4
-        waist="Witful Belt", --3/(3)
         }
 
     sets.precast.FC['Enhancing Magic'] = set_combine(sets.precast.FC, {waist="Siegel Sash"})
@@ -393,7 +390,7 @@ function init_gear_sets()
         main=gear.Grioavolr_MND,
         sub="Enki Strap",
         ammo="Regal Gem",
-        head="Carmine Mask +1",
+        head="Atrophy Chapeau +3",
         body="Lethargy Sayon +1",
         hands="Kaykaus Cuffs",
         legs="Chironic Hose",
@@ -408,6 +405,7 @@ function init_gear_sets()
         }
 
     sets.midcast.MndEnfeeblesAcc = set_combine(sets.midcast.MndEnfeebles, {
+        head="Atrophy Chapeau +3",
         body="Atrophy Tabard +3",
         neck="Sanctity Necklace",
         ring2="Weather. Ring +1",
@@ -426,7 +424,7 @@ function init_gear_sets()
 
     sets.midcast.SkillEnfeebles = {
         sub="Mephitis Grip",
-        head="Befouled Crown",
+        head="Viti. Chapeau +1",
         body="Atrophy Tabard +3",
         hands="Leth. Gantherots +1",
         neck="Incanter's Torque",
@@ -444,7 +442,7 @@ function init_gear_sets()
 
     sets.midcast.ElementalEnfeeble = sets.midcast.IntEnfeebles
 
-    sets.midcast['Dia III'] = set_combine(sets.midcast.SkillEnfeebles, {head="Viti. Chapeau +1"})
+    sets.midcast['Dia III'] = set_combine(sets.midcast.MndEnfeebles, sets.midcast.EffectEnfeebles, {head="Viti. Chapeau +1"})
     sets.midcast['Paralyze II'] = set_combine(sets.midcast.MndEnfeebles, {head="Vitivation Boots +1"})
     sets.midcast['Slow II'] = set_combine(sets.midcast.MndEnfeebles, {head="Viti. Chapeau +1"})
 
@@ -452,7 +450,7 @@ function init_gear_sets()
         main=gear.Grioavolr_MB,
         sub="Enki Strap",
         ammo="Pemphredo Tathlum",
-        head="Amalric Coif",
+        head="Atrophy Chapeau +3",
         body="Atrophy Tabard +3",
         hands="Ea Cuffs",
         legs=gear.Merlinic_MAcc_legs,
@@ -463,7 +461,7 @@ function init_gear_sets()
         ring1="Stikini Ring",
         ring2="Stikini Ring",
         back=gear.RDM_INT_Cape,
-        waist="Casso Sash",
+        waist="Luminary Sash",
         }
 
     sets.midcast.Drain = set_combine(sets.midcast['Dark Magic'], {
@@ -507,6 +505,7 @@ function init_gear_sets()
     sets.midcast['Elemental Magic'].Resistant = set_combine(sets.midcast['Elemental Magic'], {
         main=gear.Grioavolr_MB,
         sub="Enki Strap",
+        head="Atrophy Chapeau +3",
         hands="Ea Cuffs",
         body="Atrophy Tabard +3",
         feet="Jhakri Pigaches +2",
@@ -574,11 +573,12 @@ function init_gear_sets()
         ring1="Gelatinous Ring +1", --7/(-1)
         ring2="Defending Ring", --10/10
         back="Moonbeam Cape", --5/5
-        waist="Flume Belt +1", --4/0
+		waist="Slipor Sash", --0/3
         })
 
     sets.idle.Town = set_combine(sets.idle, {
         ammo="Regal Gem",
+        head="Atrophy Chapeau +3",
         body="Atrophy Tabard +3",
         neck="Incanter's Torque",
         ear1="Sherida Earring",
@@ -665,7 +665,7 @@ function init_gear_sets()
     -- No Magic Haste (74% DW to cap)
     sets.engaged.DW = {
         main="Sequence",
-        sub=gear.Colada_DEX,
+        sub=gear.Colada_ATT,
         ammo="Ginsen",
         head=gear.Taeon_TA_head,
         body="Ayanmo Corazza +1",
@@ -693,9 +693,7 @@ function init_gear_sets()
         })
 
     -- 15% Magic Haste (67% DW to cap)
-    sets.engaged.DW.LowHaste = {
-        main="Sequence",
-        sub=gear.Colada_DEX,
+    sets.engaged.DW.LowHaste = set_combine(sets.engaged.DW, {
         ammo="Ginsen",
         head=gear.Taeon_TA_head,
         body="Ayanmo Corazza +1",
@@ -709,7 +707,7 @@ function init_gear_sets()
         ring2="Hetairoi Ring",
         back=gear.RDM_DW_Cape, --10
         waist="Reiki Yotai", --7
-        } --41
+        }) --41
 
     sets.engaged.DW.MidAcc.LowHaste = set_combine(sets.engaged.DW.LowHaste, {
         neck="Combatant's Torque",
@@ -723,9 +721,7 @@ function init_gear_sets()
         })
 
     -- 30% Magic Haste (56% DW to cap)
-    sets.engaged.DW.MidHaste = {
-        main="Sequence",
-        sub=gear.Colada_DEX,
+    sets.engaged.DW.MidHaste = set_combine(sets.engaged.DW, {
         ammo="Ginsen",
         head=gear.Taeon_TA_head,
         body="Ayanmo Corazza +1",
@@ -739,7 +735,7 @@ function init_gear_sets()
         ring2="Hetairoi Ring",
         back=gear.RDM_DW_Cape, --10
         waist="Reiki Yotai", --7
-        } --41
+        }) --41
 
     sets.engaged.DW.MidAcc.MidHaste = set_combine(sets.engaged.DW.MidHaste, {
         legs="Carmine Cuisses +1", --6
@@ -757,9 +753,7 @@ function init_gear_sets()
         })
 
     -- 35% Magic Haste (51% DW to cap)
-    sets.engaged.DW.HighHaste = {
-        main="Sequence",
-        sub=gear.Colada_DEX,
+    sets.engaged.DW.HighHaste = set_combine(sets.engaged.DW, {
         ammo="Ginsen",
         head=gear.Taeon_TA_head,
         body="Ayanmo Corazza +1",
@@ -773,7 +767,7 @@ function init_gear_sets()
         ring2="Hetairoi Ring",
         back=gear.RDM_DW_Cape, --10
         waist="Reiki Yotai", --7
-        } --26
+        }) --26
 
     sets.engaged.DW.MidAcc.HighHaste = set_combine(sets.engaged.DW.HighHaste, {
         legs="Carmine Cuisses +1", --6
@@ -791,9 +785,7 @@ function init_gear_sets()
         })
 
     -- 47% Magic Haste (36% DW to cap)
-	sets.engaged.DW.MaxHaste = set_combine(sets.engaged, {
-        main="Sequence",
-        sub=gear.Colada_DEX,
+	sets.engaged.DW.MaxHaste = set_combine(sets.engaged.DW, {
         ammo="Ginsen",
         head=gear.Taeon_TA_head,
         body="Ayanmo Corazza +1",

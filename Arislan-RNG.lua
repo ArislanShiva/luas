@@ -49,7 +49,7 @@ end
 function user_setup()
     state.OffenseMode:options('STP', 'Normal', 'LowAcc', 'MidAcc', 'HighAcc')
     state.HybridMode:options('Normal', 'DT')
-    state.RangedMode:options('STP', 'Normal', 'Acc', 'Critical')
+    state.RangedMode:options('STP', 'Normal', 'Acc', 'HighAcc', 'Critical')
     state.WeaponskillMode:options('Normal', 'Acc')
     state.IdleMode:options('Normal', 'DT')
     
@@ -135,7 +135,7 @@ function init_gear_sets()
     sets.precast.JA['Bounty Shot'] = {hands="Amini Glove. +1"}
     sets.precast.JA['Camouflage'] = {body="Orion Jerkin +3"}
     sets.precast.JA['Scavenge'] = {feet="Orion Socks +1"}
-    sets.precast.JA['Shadowbind'] = {hands="Orion Bracers +2"}
+    sets.precast.JA['Shadowbind'] = {hands="Orion Bracers +3"}
     sets.precast.JA['Sharpshot'] = {legs="Orion Braccae +1"}
 
 
@@ -177,22 +177,21 @@ function init_gear_sets()
         head=gear.Taeon_RA_head, --10/0
         body="Oshosi Vest", --12/0
         hands="Carmine Fin. Ga. +1", --8/11
-        legs=gear.Adhemar_RS_legs, --9/10
+        legs=gear.Adhemar_D_legs, --9/10
         feet="Meg. Jam. +2", --10/0
         back=gear.RNG_SNP_Cape, --10/0
-        waist="Impulse Belt", --3/0
-        } --62/11
+        waist="Yemaya Belt", --0/5
+        } --59/16
 
     sets.precast.RA.Flurry1 = set_combine(sets.precast.RA, {
-        head="Orion Beret +3", --0/18
-        waist="Yemaya Belt", --0/5
-        }) --47/40
+		body="Amini Caban +1",
+        }) --47/16
 
     sets.precast.RA.Flurry2 = set_combine(sets.precast.RA.Flurry1, {
-        body="Arcadian Jerkin +1", --0/12
-        legs="Pursuer's Pants", --0/19
+        head="Orion Beret +3", --0/18
+        feet="Pursuer's Gaiters", --0/10
         waist="Impulse Belt", --3/0
-        }) --31/56
+        }) --30/49
 
     ------------------------------------------------------------------------------------------------
     ------------------------------------- Weapon Skill Sets ----------------------------------------
@@ -301,7 +300,7 @@ function init_gear_sets()
     sets.precast.WS['Decimation'] = sets.precast.WS['Rampage']
 
     sets.precast.WS['Evisceration'] = {
-        head=gear.Adhemar_TP_head,
+        head=gear.Adhemar_B_head,
         body="Abnoba Kaftan",
         hands=gear.Herc_WS_hands,
         legs=gear.Herc_WS_legs,
@@ -340,8 +339,8 @@ function init_gear_sets()
         ammo=gear.RAbullet,
         head="Arcadian Beret +1",
         body="Orion Jerkin +3",
-        hands=gear.Adhemar_RA_hands,
-        legs=gear.Adhemar_RA_legs,
+        hands=gear.Adhemar_C_hands,
+        legs=gear.Adhemar_C_legs,
         feet=gear.Herc_RA_feet,
         neck="Iskur Gorget",
         ear1="Enervating Earring",
@@ -353,21 +352,27 @@ function init_gear_sets()
         }
     
     sets.midcast.RA.Acc = set_combine(sets.midcast.RA, {
-        head="Orion Beret +3",
         hands="Meg. Gloves +2",
-        legs="Meg. Chausses +2",
         feet="Meg. Jam. +2",
         ring1="Hajduk Ring +1",
         ring2="Hajduk Ring +1",
+        })
+
+    sets.midcast.RA.HighAcc = set_combine(sets.midcast.RA.Acc, {
+        head="Orion Beret +3",
+        hands="Orion Bracers +3",
+        legs="Meg. Chausses +2",
         waist="Kwahu Kachina Belt",
         })
 
     sets.midcast.RA.Critical = set_combine(sets.midcast.RA, {
         head="Mummu Bonnet +1",
         body="Mummu Jacket +1",
-        hands="Mummu Wrists +1",
+        hands="Kobo Kote",
         legs="Mummu Kecks +1",
         feet="Mummu Gamash. +1",
+		ring1="Begrudging Ring",
+        waist="Kwahu Kachina Belt",
         })
         
     sets.midcast.RA.STP = set_combine(sets.midcast.RA, {
@@ -379,9 +384,10 @@ function init_gear_sets()
     sets.DoubleShot = {
         head="Oshosi Mask", --5
         body="Oshosi Vest", --7
+		hands="Oshosi Gloves", -- 4
         legs="Oshosi Trousers", --6
-        } --18
-
+		feet="Oshosi Leggings", --3
+        } --25
 
         
     ------------------------------------------------------------------------------------------------
@@ -396,7 +402,7 @@ function init_gear_sets()
         ammo=gear.RAbullet,
         head="Orion Beret +3",
         body="Orion Jerkin +3",
-        hands="Carmine Fin. Ga. +1",
+        hands="Orion Bracers +3",
         legs="Carmine Cuisses +1",
         feet="Carmine Greaves +1",
         neck="Bathy Choker +1",
@@ -537,7 +543,7 @@ function init_gear_sets()
     sets.engaged.MidHaste = {
         head="Dampening Tam",
         body="Adhemar Jacket", --5
-        hands=Adhemar_TP_hands,
+        hands=gear.Adhemar_A_hands,
         legs="Carmine Cuisses +1", --6
         feet=gear.Taeon_DW_feet, --9
         neck="Asperity Necklace",
@@ -577,7 +583,7 @@ function init_gear_sets()
     sets.engaged.HighHaste = {
         head="Dampening Tam",
         body="Adhemar Jacket", --5
-        hands=gear.Adhemar_TP_hands,
+        hands=gear.Adhemar_A_hands,
         legs="Samnuha Tights",
         feet=gear.Taeon_DW_feet, --9
         neck="Asperity Necklace",
@@ -619,7 +625,7 @@ function init_gear_sets()
     sets.engaged.MaxHaste = {
         head="Dampening Tam",
         body="Adhemar Jacket", --5
-        hands=gear.Adhemar_TP_hands,
+        hands=gear.Adhemar_A_hands,
         legs="Samnuha Tights",
         feet=gear.Herc_TA_feet,
         neck="Asperity Necklace",
@@ -703,7 +709,7 @@ function init_gear_sets()
     ---------------------------------------- Special Sets ------------------------------------------
     ------------------------------------------------------------------------------------------------
 
-    sets.buff.Barrage = {hands="Orion Bracers +2"}
+    sets.buff.Barrage = {hands="Orion Bracers +3"}
     sets.buff['Velocity Shot'] = set_combine(sets.midcast.RA, {body="Amini Caban +1", back=gear.RNG_TP_Cape})
     sets.buff.Camouflage = {body="Orion Jerkin +3"}
     

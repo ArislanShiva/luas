@@ -151,13 +151,13 @@ end
 
 -- Setup vars that are user-dependent.  Can override this function in a sidecar file.
 function user_setup()
-    state.OffenseMode:options('STP', 'Normal', 'LowAcc', 'MidAcc', 'HighAcc')
+    state.OffenseMode:options('Normal', 'LowAcc', 'MidAcc', 'HighAcc', 'STP')
     state.HybridMode:options('Normal', 'DT')
     state.RangedMode:options('Normal', 'Acc')
     state.WeaponskillMode:options('Normal', 'Acc')
     state.CastingMode:options('Normal', 'Resistant')
     state.PhysicalDefenseMode:options('PDT', 'MDT')
-    state.IdleMode:options('Normal', 'DT', 'Learning')
+    state.IdleMode:options('Normal', 'DT')--, 'Learning')
 
     state.MagicBurst = M(false, 'Magic Burst')
     state.CP = M(false, "Capacity Points Mode")
@@ -250,6 +250,22 @@ function init_gear_sets()
 
     -- Precast sets to enhance JAs
 
+    -- Enmity set
+    sets.Enmity = {
+        ammo="Sapience Orb", --2
+        head="Halitus Helm", --8
+        body="Emet Harness +1", --10
+        hands="Kurys Gloves", --9
+        neck="Unmoving Collar +1", --10
+        ear1="Cryptic Earring", --4
+        ear2="Friomisi Earring", --2
+        ring1="Supershear Ring", --5
+        ring2="Eihwaz Ring", --5
+        waist="Kasiri Belt", --3
+        }
+
+    sets.precast.JA['Provoke'] = sets.Enmity
+
     sets.buff['Burst Affinity'] = {feet="Hashi. Basmak +1"}
     sets.buff['Diffusion'] = {feet="Luhlaza Charuqs +1"}
     sets.buff['Efflux'] = {legs="Hashishin Tayt +1"}
@@ -296,7 +312,7 @@ function init_gear_sets()
     sets.precast.WS = {
         ammo="Focal Orb",
         head="Lilitu Headpiece",
-        body=gear.Herc_TA_body,
+        body="Assim. Jubbah +2",
         hands="Jhakri Cuffs +2",
         legs=gear.Herc_WS_legs,
         feet=gear.Herc_TA_feet,
@@ -311,7 +327,6 @@ function init_gear_sets()
 
     sets.precast.WS.Acc = set_combine(sets.precast.WS, {
         head="Dampening Tam",
-        body=gear.Herc_TA_body,
         hands=gear.Herc_WS_hands,
         ear2="Telos Earring",
         ring1="Ramuh Ring +1",
@@ -320,9 +335,9 @@ function init_gear_sets()
 
     sets.precast.WS['Chant du Cygne'] = set_combine(sets.precast.WS, {
         ammo="Jukukik Feather",
-        head=gear.Adhemar_TP_head,
+        head=gear.Adhemar_B_head,
         body="Abnoba Kaftan",
-        hands=gear.Adhemar_TP_hands,
+        hands=gear.Adhemar_B_hands,
         legs="Samnuha Tights", 
         feet="Thereoid Greaves",
         ear2="Brutal Earring",
@@ -335,6 +350,7 @@ function init_gear_sets()
         ammo="Falcon Eye",
         head="Dampening Tam",
         body="Sayadio's Kaftan",
+        hands=gear.Adhemar_A_hands,
         feet=gear.Herc_Acc_feet,
         ear2="Telos Earring",
         ring1="Ramuh Ring +1",
@@ -346,7 +362,8 @@ function init_gear_sets()
 
     sets.precast.WS['Savage Blade'] = set_combine(sets.precast.WS, {
         ammo="Floestone",
-        hands=gear.Adhemar_TP_hands,
+        body="Assim. Jubbah +2",
+        hands=gear.Adhemar_B_hands,
         neck="Caro Necklace",
         ring1="Ifrit Ring +1",
         ring2="Shukuyu Ring",
@@ -355,7 +372,6 @@ function init_gear_sets()
 
     sets.precast.WS['Savage Blade'].Acc = set_combine(sets.precast.WS['Savage Blade'], {
         ammo="Falcon Eye",
-        body=gear.Herc_TA_body,
         hands=gear.Herc_Acc_hands,
         feet=gear.Herc_Acc_feet,
         neck="Combatant's Torque",
@@ -407,7 +423,6 @@ function init_gear_sets()
         hands="Jhakri Cuffs +2",
         legs="Amalric Slops",
         feet="Jhakri Pigaches +2",
-        --feet="Amalric Nails"
         neck="Fotia Gorget",
         ear1="Moonshade Earring",
         ear2="Regal Earring",
@@ -447,7 +462,7 @@ function init_gear_sets()
     sets.midcast['Blue Magic'] = {
         ammo="Mavi Tathlum",
         head="Luh. Keffiyeh +1",
-        body="Assim. Jubbah +1",
+        body="Assim. Jubbah +2",
         hands="Rawhide Gloves",
         legs="Hashishin Tayt +1", 
         feet="Luhlaza Charuqs +1",
@@ -459,9 +474,9 @@ function init_gear_sets()
 
     sets.midcast['Blue Magic'].Physical = {
         ammo="Ginsen",
-        head=gear.Adhemar_TP_head, 
+        head=gear.Adhemar_B_head, 
         body=gear.Herc_TA_body,
-        hands=gear.Adhemar_TP_hands,
+        hands=gear.Adhemar_B_hands,
         legs=gear.Herc_WS_legs,
         feet=gear.Herc_TA_feet,
         neck="Caro Necklace", 
@@ -496,6 +511,7 @@ function init_gear_sets()
 
     sets.midcast['Blue Magic'].PhysicalAgi = set_combine(sets.midcast['Blue Magic'].Physical, {
         body="Sayadio's Kaftan",
+        hands=gear.Adhemar_A_hands,
         ring1="Garuda Ring +1",
         ring2="Garuda Ring +1",
         })
@@ -517,11 +533,11 @@ function init_gear_sets()
 
     sets.midcast['Blue Magic'].Magical = {
         ammo="Pemphredo Tathlum",
-        head="Jhakri Coronal +1",
-        body="Vedic Coat",
+        head=gear.Herc_MAB_head,
+        body="Jhakri Robe +2",
         hands="Jhakri Cuffs +2",
         legs="Amalric Slops",
-        feet="Jhakri Pigaches +2",
+        feet=gear.Herc_MAB_feet,
         neck="Baetyl Pendant",
         ear1="Friomisi Earring",
         ear2="Regal Earring",
@@ -532,7 +548,6 @@ function init_gear_sets()
         }
 
     sets.midcast['Blue Magic'].Magical.Resistant = set_combine(sets.midcast['Blue Magic'].Magical, {    
-        body="Samnuha Coat",
         neck="Erra Pendant",
         ear1="Digni. Earring",
         ring1="Stikini Ring",
@@ -588,7 +603,6 @@ function init_gear_sets()
         hands="Telchine Gloves", -- 10
         feet="Medium's Sabots", -- 12
         neck="Incanter's Torque",
-        ear1="Calamitous Earring",
         ear2="Mendi. Earring", -- 5
         ring1="Lebeche Ring", -- 3
         ring2="Haoma's Ring",
@@ -677,7 +691,7 @@ function init_gear_sets()
         ammo="Staunch Tathlum",
         head="Rawhide Mask", 
         body="Jhakri Robe +2",
-        hands=gear.Adhemar_TP_hands,
+        hands=gear.Adhemar_B_hands,
         legs="Carmine Cuisses +1",
         feet="Carmine Greaves +1",
         neck="Bathy Choker +1",
@@ -716,7 +730,7 @@ function init_gear_sets()
 
     sets.idle.Weak = sets.idle.DT
 
-    sets.idle.Learning = set_combine(sets.idle, sets.Learning)
+    --sets.idle.Learning = set_combine(sets.idle, sets.Learning)
 
     ------------------------------------------------------------------------------------------------
     ---------------------------------------- Defense Sets ------------------------------------------
@@ -748,7 +762,7 @@ function init_gear_sets()
         ammo="Ginsen",
         head="Dampening Tam",
         body="Adhemar Jacket", --5
-        hands=gear.Adhemar_TP_hands,
+        hands=gear.Adhemar_A_hands,
         legs="Carmine Cuisses +1", --6
         feet=gear.Taeon_DW_feet, --9
         neck="Asperity Necklace", 
@@ -791,7 +805,7 @@ function init_gear_sets()
         ammo="Ginsen",
         head="Dampening Tam",
         body="Adhemar Jacket", --5
-        hands=gear.Adhemar_TP_hands,
+        hands=gear.Adhemar_A_hands,
         legs="Carmine Cuisses +1", --6
         feet=gear.Taeon_DW_feet, --9
         neck="Asperity Necklace", 
@@ -834,7 +848,7 @@ function init_gear_sets()
         ammo="Ginsen",
         head="Dampening Tam",
         body="Adhemar Jacket", --5
-        hands=gear.Adhemar_TP_hands,
+        hands=gear.Adhemar_A_hands,
         legs="Samnuha Tights",
         feet=gear.Taeon_DW_feet, --9
         neck="Asperity Necklace", 
@@ -880,7 +894,7 @@ function init_gear_sets()
         ammo="Ginsen",
         head="Dampening Tam",
         body="Adhemar Jacket", --5
-        hands=gear.Adhemar_TP_hands,
+        hands=gear.Adhemar_A_hands,
         legs="Samnuha Tights",
         feet=gear.Herc_TA_feet,
         neck="Asperity Necklace", 
@@ -924,7 +938,7 @@ function init_gear_sets()
         ammo="Ginsen",
         head="Dampening Tam",
         body="Adhemar Jacket",
-        hands=gear.Adhemar_TP_hands,
+        hands=gear.Adhemar_A_hands,
         legs="Samnuha Tights",
         feet=gear.Herc_TA_feet,
         neck="Asperity Necklace",
@@ -1018,7 +1032,7 @@ function init_gear_sets()
         })
 
     sets.Kiting = {legs="Carmine Cuisses +1"}
-    sets.Learning = {hands="Assim. Bazu. +1"}
+    --sets.Learning = {hands="Assim. Bazu. +1"}
     sets.latent_refresh = {waist="Fucho-no-obi"}
 
     sets.buff.Doom = {ring1="Eshmun's Ring", ring2="Eshmun's Ring", waist="Gishdubar Sash"}
@@ -1147,12 +1161,12 @@ function customize_idle_set(idleSet)
     else
         enable('back')
     end
-    if state.IdleMode.value == 'Learning' then
-        equip(sets.Learning)
-        disable('hands')
-    else
-        enable('hands')
-    end
+    --if state.IdleMode.value == 'Learning' then
+    --    equip(sets.Learning)
+    --    disable('hands')
+    --else
+    --    enable('hands')
+    --end
     
     return idleSet
 end

@@ -166,7 +166,7 @@ function init_gear_sets()
         ammo="Seeth. Bomblet +1",
         head="Lilitu Headpiece",
         body="Adhemar Jacket",
-        hands=gear.Adhemar_TP_hands,
+        hands=gear.Adhemar_B_hands,
         legs="Hiza. Hizayoroi +1",
         feet=gear.Herc_TA_feet,
         neck="Fotia Gorget",
@@ -179,7 +179,7 @@ function init_gear_sets()
         } -- default set
 
     sets.precast.WS.Acc = set_combine(sets.precast.WS, {
-        head=gear.Adhemar_TP_head,
+        head=gear.Adhemar_B_head,
         legs=gear.Herc_WS_legs,
         feet=gear.Herc_Acc_feet,
         ear2="Telos Earring",
@@ -433,7 +433,7 @@ function init_gear_sets()
         ammo="Yamarang",
         head="Dampening Tam",
         body="Adhemar Jacket", --5
-        hands=gear.Adhemar_TP_hands,
+        hands=gear.Adhemar_A_hands,
         legs="Samnuha Tights",
         feet=gear.Herc_TA_feet,
         neck="Erudit. Necklace",
@@ -475,7 +475,7 @@ function init_gear_sets()
         ammo="Yamarang",
         head="Dampening Tam",
         body="Adhemar Jacket", --5
-        hands=gear.Adhemar_TP_hands,
+        hands=gear.Adhemar_A_hands,
         legs="Samnuha Tights",
         feet=gear.Herc_TA_feet,
         neck="Erudit. Necklace",
@@ -517,7 +517,7 @@ function init_gear_sets()
         ammo="Yamarang",
         head="Dampening Tam",
         body=gear.Herc_TA_body,
-        hands=gear.Adhemar_TP_hands,
+        hands=gear.Adhemar_A_hands,
         legs="Samnuha Tights",
         feet=gear.Herc_TA_feet,
         neck="Erudit. Necklace",

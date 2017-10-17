@@ -83,7 +83,7 @@ end
 
 -- Setup vars that are user-dependent.  Can override this function in a sidecar file.
 function user_setup()
-    state.OffenseMode:options('STP', 'Normal', 'LowAcc', 'MidAcc', 'HighAcc')
+    state.OffenseMode:options('Normal', 'LowAcc', 'MidAcc', 'HighAcc', 'STP')
     state.HybridMode:options('Normal', 'DT')
     state.WeaponskillMode:options('Normal', 'Acc')
     state.IdleMode:options('Normal', 'DT')
@@ -218,12 +218,12 @@ function init_gear_sets()
         }) -- Waltz effects received
         
     sets.precast.Waltz['Healing Waltz'] = {}
-    sets.precast.Samba = {head="Maxixi Tiara +2", back=gear.DNC_TP_Cape}
+    sets.precast.Samba = {head="Maxixi Tiara +3", back=gear.DNC_TP_Cape}
     sets.precast.Jig = {legs="Horos Tights +1", feet="Maxixi Toeshoes +2"}
 
     sets.precast.Step = {
         ammo="Yamarang",
-        head="Maxixi Tiara +2",
+        head="Maxixi Tiara +3",
         body="Maxixi Casaque +3",
         hands="Maxixi Bangles +3",
         legs="Mummu Kecks +1",
@@ -259,7 +259,7 @@ function init_gear_sets()
         
     sets.precast.Flourish1['Desperate Flourish'] = {
         ammo="Yamarang",
-        head="Maxixi Tiara +2",
+        head="Maxixi Tiara +3",
         body="Maxixi Casaque +3",
         hands="Maxixi Bangles +3",
         legs=gear.Herc_WS_legs,
@@ -328,7 +328,7 @@ function init_gear_sets()
     
     sets.precast.WS['Exenterator'] = set_combine(sets.precast.WS, {
         ammo="Yamarang",
-        head=gear.Adhemar_TP_head,
+        head=gear.Adhemar_B_head,
         legs="Meg. Chausses +2",
         feet="Meg. Jam. +2",
         ear1="Sherida Earring",
@@ -344,9 +344,9 @@ function init_gear_sets()
 
     sets.precast.WS['Pyrrhic Kleos'] = set_combine(sets.precast.WS, {
         ammo="Cheruski Needle",
-        head=gear.Adhemar_TP_head,
+        head=gear.Adhemar_B_head,
         body="Adhemar Jacket",
-        hands=gear.Adhemar_TP_hands,
+        hands=gear.Adhemar_B_hands,
         legs="Samnuha Tights",
         feet=gear.Herc_TA_feet,
         ear1="Sherida Earring",
@@ -360,7 +360,7 @@ function init_gear_sets()
         ammo="Falcon Eye",
         head="Dampening Tam",
         body=gear.Herc_TA_body,
-        hands="Meg. Gloves +2",
+        hands=gear.Adhemar_A_hands,
         legs=gear.Herc_WS_legs,
         feet=gear.Herc_Acc_feet,
         ear2="Telos Earring",
@@ -370,7 +370,7 @@ function init_gear_sets()
 
     sets.precast.WS['Evisceration'] = set_combine(sets.precast.WS, {
         ammo="Charis Feather",
-        head=gear.Adhemar_TP_head,
+        head=gear.Adhemar_B_head,
         body="Abnoba Kaftan",
         hands="Mummu Wrists +1",
         legs="Samnuha Tights", 
@@ -478,7 +478,7 @@ function init_gear_sets()
 
     sets.idle.Town = set_combine (sets.idle, {
         ammo="Yamarang",
-        head="Maxixi Tiara +2",
+        head="Maxixi Tiara +3",
         body="Maxixi Casaque +3",
         hands="Maxixi Bangles +3",
         legs="Lustr. Subligar +1",
@@ -523,7 +523,7 @@ function init_gear_sets()
         ammo="Yamarang",
         head="Dampening Tam",
         body="Macu. Casaque +1", --11
-        hands=gear.Adhemar_TP_hands,
+        hands=gear.Adhemar_A_hands,
         legs="Samnuha Tights",
         feet=gear.Taeon_DW_feet, --9
         neck="Charis Necklace", --5
@@ -540,17 +540,15 @@ function init_gear_sets()
         })
 
     sets.engaged.MidAcc = set_combine(sets.engaged.LowAcc, {
-        body="Adhemar Jacket",
+        head="Maxixi Tiara +3", --8
+        body="Maxixi Casaque +3",
         ring2="Ilabrat Ring",
         waist="Kentarch Belt +1",
         })
 
     sets.engaged.HighAcc = set_combine(sets.engaged.MidAcc, {
-        body="Maxixi Casaque +3",
         legs=gear.Herc_WS_legs,
         feet=gear.Herc_Acc_feet,
-        ear1="Cessance Earring",
-        ear2="Telos Earring",
         ring1="Ramuh Ring +1",
         ring2="Ramuh Ring +1",
         waist="Olseni Belt",
@@ -565,7 +563,7 @@ function init_gear_sets()
         ammo="Yamarang",
         head="Dampening Tam",
         body="Macu. Casaque +1", --11
-        hands=gear.Adhemar_TP_hands,
+        hands=gear.Adhemar_A_hands,
         legs="Samnuha Tights",
         feet=gear.Herc_TA_feet,
         neck="Charis Necklace", --5
@@ -582,17 +580,15 @@ function init_gear_sets()
         })
 
     sets.engaged.MidAcc.LowHaste = set_combine(sets.engaged.LowAcc.LowHaste, {
-        feet=gear.Herc_TA_feet,
+        head="Maxixi Tiara +3", --8
+        body="Maxixi Casaque +3",
         ring2="Ilabrat Ring",
         waist="Kentarch Belt +1",
         })
 
     sets.engaged.HighAcc.LowHaste = set_combine(sets.engaged.MidAcc.LowHaste, {
-        body="Maxixi Casaque +3",
         legs=gear.Herc_WS_legs,
         feet=gear.Herc_Acc_feet,
-        ear1="Cessance Earring",
-        ear2="Telos Earring",
         ring1="Ramuh Ring +1",
         ring2="Ramuh Ring +1",
         waist="Olseni Belt",
@@ -607,7 +603,7 @@ function init_gear_sets()
         ammo="Yamarang",
         head="Dampening Tam",
         body="Adhemar Jacket", --5
-        hands=gear.Adhemar_TP_hands,
+        hands=gear.Adhemar_A_hands,
         legs="Samnuha Tights",
         feet=gear.Herc_TA_feet,
         neck="Asperity Necklace",
@@ -624,8 +620,8 @@ function init_gear_sets()
         })
 
     sets.engaged.MidAcc.MidHaste = set_combine(sets.engaged.LowAcc.MidHaste, {
-        feet=gear.Herc_TA_feet,
-        ear1="Cessance Earring",
+        head="Maxixi Tiara +3", --8
+        body="Maxixi Casaque +3",
         ring2="Ilabrat Ring",
         waist="Kentarch Belt +1",
         })
@@ -634,7 +630,6 @@ function init_gear_sets()
         body="Maxixi Casaque +3",
         legs=gear.Herc_WS_legs,
         feet=gear.Herc_Acc_feet,
-        ear2="Telos Earring",
         ring1="Ramuh Ring +1",
         ring2="Ramuh Ring +1",
         waist="Olseni Belt",
@@ -650,7 +645,7 @@ function init_gear_sets()
         ammo="Yamarang",
         head="Dampening Tam",
         body="Adhemar Jacket", --5
-        hands=gear.Adhemar_TP_hands,
+        hands=gear.Adhemar_A_hands,
         legs="Samnuha Tights",
         feet=gear.Herc_TA_feet,
         neck="Asperity Necklace",
@@ -668,15 +663,14 @@ function init_gear_sets()
         })
 
     sets.engaged.MidAcc.HighHaste = set_combine(sets.engaged.LowAcc.HighHaste, {
-        ear1="Cessance Earring",
+        body="Maxixi Casaque +3",
         ring2="Ilabrat Ring",
         })
 
     sets.engaged.HighAcc.HighHaste = set_combine(sets.engaged.MidAcc.HighHaste, {
-        body="Maxixi Casaque +3",
+        head="Maxixi Tiara +3", --8
         legs=gear.Herc_WS_legs,
         feet=gear.Herc_Acc_feet,
-        ear2="Telos Earring",
         ring1="Ramuh Ring +1",
         ring2="Ramuh Ring +1",
         waist="Olseni Belt",
@@ -693,7 +687,7 @@ function init_gear_sets()
         ammo="Yamarang",
         head="Dampening Tam",
         body=gear.Herc_TA_body,
-        hands=gear.Adhemar_TP_hands,
+        hands=gear.Adhemar_A_hands,
         legs="Samnuha Tights",
         feet=gear.Herc_TA_feet,
         neck="Asperity Necklace",
@@ -711,12 +705,13 @@ function init_gear_sets()
         })
 
     sets.engaged.MidAcc.MaxHaste = set_combine(sets.engaged.LowAcc.MaxHaste, {
+        body="Maxixi Casaque +3",
         ear1="Cessance Earring",
         ring2="Ilabrat Ring",
         })
 
     sets.engaged.HighAcc.MaxHaste = set_combine(sets.engaged.MidAcc.MaxHaste, {
-        body="Maxixi Casaque +3",
+        head="Maxixi Tiara +3", --8
         legs=gear.Herc_WS_legs,
         feet=gear.Herc_Acc_feet,
         ear2="Telos Earring",

@@ -332,7 +332,7 @@ function init_gear_sets()
         ring1="Kishar Ring",
         ring2="Stikini Ring",
         back=gear.BLM_FC_Cape,
-        waist="Casso Sash",
+        waist="Rumination Sash",
         } -- MND/Magic accuracy
 
     sets.midcast.IntEnfeebles = set_combine(sets.midcast.MndEnfeebles, {
@@ -536,6 +536,7 @@ function init_gear_sets()
         ring1="Gelatinous Ring +1", --7/(-1)
         ring2="Defending Ring", --10/10
         back="Moonbeam Cape", --5/5
+		waist="Slipor Sash", --0/3
         })
 
     sets.idle.ManaWall = {

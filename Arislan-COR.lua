@@ -254,22 +254,21 @@ function init_gear_sets()
         head=gear.Taeon_RA_head, --10/0
         body="Oshosi Vest", --12/0
         hands="Carmine Fin. Ga. +1", --8/11
-        legs=gear.Adhemar_RS_legs, --9/10
+        legs=gear.Adhemar_D_legs, --9/10
         feet="Meg. Jam. +2", --10/0
         back=gear.COR_SNP_Cape, --10/0
-        waist="Impulse Belt", --3/0
-        } --62/21
+        waist="Yemaya Belt", --0/5
+        } --59/26
 
     sets.precast.RA.Flurry1 = set_combine(sets.precast.RA, {
         body="Laksa. Frac +3", --0/20
-        waist="Yemaya Belt", --0/5
         }) --47/46
 
     sets.precast.RA.Flurry2 = set_combine(sets.precast.RA.Flurry1, {
         head="Chass. Tricorne +1", --0/14
-        legs="Pursuer's Pants", --0/19
+        feet="Pursuer's Gaiters", --0/10
         waist="Impulse Belt", --3/0
-        }) --31/64
+        }) --30/65
 
 
     ------------------------------------------------------------------------------------------------
@@ -347,7 +346,7 @@ function init_gear_sets()
     sets.precast.WS['Leaden Salute'].FullTP = {ear1="Novio Earring", waist="Svelt. Gouriz +1"}
         
     sets.precast.WS['Evisceration'] = {
-        head=gear.Adhemar_TP_head,
+        head=gear.Adhemar_B_head,
         body="Meg. Cuirie +2",
         hands="Mummu Wrists +1",
         legs="Samnuha Tights",
@@ -444,7 +443,7 @@ function init_gear_sets()
         ammo=gear.QDbullet,
         head=gear.Herc_MAB_head,
         body=gear.Herc_RA_body,
-        hands=gear.Adhemar_RA_hands,
+        hands=gear.Adhemar_C_hands,
         legs="Chas. Culottes +1",
         feet="Carmine Greaves +1",
         neck="Ainia Collar",
@@ -495,8 +494,8 @@ function init_gear_sets()
         ammo=gear.RAbullet,    
         head="Meghanada Visor +2",
         body="Laksa. Frac +3",
-        hands=gear.Adhemar_RA_hands,
-        legs=gear.Adhemar_RA_legs,
+        hands=gear.Adhemar_C_hands,
+        legs=gear.Adhemar_C_legs,
         feet=gear.Herc_RA_feet,
         neck="Iskur Gorget",
         ear1="Enervating Earring",
@@ -535,8 +534,10 @@ function init_gear_sets()
     sets.TripleShot = {
         head="Oshosi Mask", --4
         body="Chasseur's Frac +1", --12
-        legs="Oshosi Trousers", --5
-        } --21
+ 		hands="Oshosi Gloves", -- 3
+		legs="Oshosi Trousers", --5
+		feet="Oshosi Leggings", --2
+        } --27
 
 
 
@@ -695,7 +696,7 @@ function init_gear_sets()
     sets.engaged.MidHaste = {
         head="Dampening Tam",
         body="Adhemar Jacket", --5
-        hands=gear.Adhemar_TP_hands,
+        hands=gear.Adhemar_A_hands,
         legs="Samnuha Tights",
         feet=gear.Taeon_DW_feet, --9
         neck="Asperity Necklace",
@@ -737,7 +738,7 @@ function init_gear_sets()
     sets.engaged.HighHaste = {
         head="Dampening Tam",
         body="Adhemar Jacket", --5
-        hands=gear.Adhemar_TP_hands,
+        hands=gear.Adhemar_A_hands,
         legs="Samnuha Tights",
         feet=gear.Herc_TA_feet,
         neck="Asperity Necklace",
@@ -779,7 +780,7 @@ function init_gear_sets()
     sets.engaged.MaxHaste = {
         head="Dampening Tam",
         body="Adhemar Jacket", --5
-        hands=gear.Adhemar_TP_hands,
+        hands=gear.Adhemar_A_hands,
         legs="Samnuha Tights",
         feet=gear.Herc_TA_feet,
         neck="Asperity Necklace",

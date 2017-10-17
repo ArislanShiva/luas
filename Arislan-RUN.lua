@@ -269,8 +269,9 @@ function init_gear_sets()
         })
 
     sets.precast.WS['Resolution'] = set_combine(sets.precast.WS, {
-        head=gear.Adhemar_TP_head,
+        head=gear.Adhemar_B_head,
         body=gear.Herc_TA_body,
+        hands=gear.Adhemar_B_hands,
         legs="Meg. Chausses +2",
         ring1="Shukuyu Ring",
         ring2="Epona's Ring",
@@ -280,6 +281,7 @@ function init_gear_sets()
     sets.precast.WS['Resolution'].Acc = set_combine(sets.precast.WS['Resolution'], {
         ammo="Seeth. Bomblet +1",
         head="Dampening Tam",
+        hands=gear.Adhemar_A_hands,
         feet=gear.Herc_Acc_feet,
         ear2="Telos Earring",
         ring1="Rufescent Ring",
@@ -558,7 +560,7 @@ function init_gear_sets()
         main="Epeolatry", --(25)/0
         sub="Refined Grip +1", --3/3
         ammo="Staunch Tathlum", --2/2
-        head=gear.Adhemar_DT_head, --3/0
+        head=gear.Adhemar_D_head, --3/0
         body="Runeist's Coat +3",
         hands="Regal Gauntlets",
         legs="Eri. Leg Guards +1", --7/0
@@ -599,7 +601,7 @@ function init_gear_sets()
         ammo="Yamarang",
         head="Dampening Tam",
         body=gear.Herc_TA_body,
-        hands=gear.Adhemar_TP_hands,
+        hands=gear.Adhemar_A_hands,
         legs="Samnuha Tights",
         feet=gear.Herc_TA_feet,
         neck="Asperity Necklace",
@@ -657,10 +659,10 @@ function init_gear_sets()
         --sub="Mensch Strap +1", --5/0
         ammo="Staunch Tathlum", --2/2
         head="Dampening Tam",
-        --head=gear.Adhemar_DT_head, --3/0
+        --head=gear.Adhemar_D_head, --3/0
         body="Ayanmo Corazza +1", --5/5
         --hands=gear.Herc_DT_hands, --6/4
-        hands=gear.Adhemar_TP_hands,
+        hands=gear.Adhemar_B_hands,
         legs="Meg. Chausses +2", --6/0
         feet=gear.Herc_TA_feet,
         neck="Loricate Torque +1", --6/6
