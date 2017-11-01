@@ -299,8 +299,7 @@ function init_gear_sets()
 
     sets.idle.DT = set_combine (sets.idle, {
         ammo="Staunch Tathlum", --2/2
-        head=gear.Herc_DT_head, --3/3
-        hands=gear.Herc_DT_hands, --6/4
+        hands=gear.Herc_DT_hands, --7/5
         feet="Amm Greaves", --3/3
         neck="Loricate Torque +1", --6/6
         ear1="Genmei Earring", --2/0
@@ -610,6 +609,19 @@ end
 -------------------------------------------------------------------------------------------------------------------
 -- Job-specific hooks for standard casting events.
 -------------------------------------------------------------------------------------------------------------------
+
+function job_precast(spell, action, spellMap, eventArgs)
+    if spellMap == 'Utsusemi' then
+        if buffactive['Copy Image (3)'] or buffactive['Copy Image (4+)'] then
+            cancel_spell()
+            add_to_chat(123, '**!! '..spell.english..' Canceled: [3+ IMAGES] !!**')
+            eventArgs.handled = true
+            return
+        elseif buffactive['Copy Image'] or buffactive['Copy Image (2)'] then
+            send_command('cancel 66; cancel 444; cancel Copy Image; cancel Copy Image (2)')
+        end
+    end
+end
 
 -- Run after the general midcast() is done.
 -- eventArgs is the same one used in job_midcast, in case information needs to be persisted.

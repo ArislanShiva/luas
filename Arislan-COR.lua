@@ -101,7 +101,7 @@ function user_setup()
     state.IdleMode:options('Normal', 'DT')
 
     state.WeaponLock = M(false, 'Weapon Lock')    
-    state.Gun = M{['description']='Current Gun', 'Death Penalty', 'Fomalhaut'}--, 'Armageddon'
+    state.Gun = M{['description']='Current Gun', 'Death Penalty', 'Fomalhaut', 'Ataktos'}--, 'Armageddon'
     state.CP = M(false, "Capacity Points Mode")
 
     gear.RAbullet = "Chrono Bullet"
@@ -146,6 +146,8 @@ function user_setup()
     send_command('bind ^numpad8 input /ws "Last Stand" <t>')
     send_command('bind ^numpad4 input /ws "Leaden Salute" <t>')
     send_command('bind ^numpad6 input /ws "Wildfire" <t>')
+    send_command('bind ^numpad1 input /ws "Detonator" <t>')
+
 
     send_command('bind numpad0 input /ra <t>')
 
@@ -178,6 +180,7 @@ function user_unload()
     send_command('unbind ^numpad8')
     send_command('unbind ^numpad4')
     send_command('unbind ^numpad6')
+    send_command('unbind ^numpad1')
     send_command('unbind numpad0')
 end
 
@@ -326,8 +329,8 @@ function init_gear_sets()
         back=gear.COR_WS1_Cape,
         waist="Eschan Stone",
         }
-    
-    sets.precast.WS['Leaden Salute'] =     {
+
+    sets.precast.WS['Leaden Salute'] = {
         ammo=gear.MAbullet,
         head="Pixie Hairpin +1",
         body="Samnuha Coat",
@@ -367,7 +370,7 @@ function init_gear_sets()
         legs=gear.Herc_WS_legs,
         feet=gear.Herc_TA_feet,
         neck="Caro Necklace",
-        ring1="Ifrit Ring +1",
+        ring1="Rufescent Ring",
         ring2="Shukuyu Ring",
         back=gear.COR_WS2_Cape,
         waist="Prosilio Belt +1",
@@ -378,7 +381,6 @@ function init_gear_sets()
         feet=gear.Herc_Acc_feet,
         neck="Combatant's Torque",
         ear2="Telos Earring",
-        ring1="Rufescent Ring",
         waist="Grunfeld Rope",
         })
 
@@ -473,7 +475,7 @@ function init_gear_sets()
 
     sets.midcast.CorsairShot.Resistant = set_combine(sets.midcast.CorsairShot, {
         head="Carmine Mask +1",
-        body="Mummu Jacket +1",
+        body="Mummu Jacket +2",
         hands="Mummu Wrists +1",
         legs="Mummu Kecks +1",
         feet="Mummu Gamash. +1",
@@ -493,7 +495,7 @@ function init_gear_sets()
     sets.midcast.RA = {
         ammo=gear.RAbullet,    
         head="Meghanada Visor +2",
-        body="Laksa. Frac +3",
+        body="Mummu Jacket +2",
         hands=gear.Adhemar_C_hands,
         legs=gear.Adhemar_C_legs,
         feet=gear.Herc_RA_feet,
@@ -508,6 +510,7 @@ function init_gear_sets()
 
     sets.midcast.RA.Acc = set_combine(sets.midcast.RA, {
         ammo=gear.RAbullet,
+        body="Laksa. Frac +3",
         hands="Meg. Gloves +2",
         legs="Laksa. Trews +3",
         feet="Meg. Jam. +2",
@@ -518,7 +521,7 @@ function init_gear_sets()
 
     sets.midcast.RA.Critical = set_combine(sets.midcast.RA, {
         head="Mummu Bonnet +1",
-        body="Mummu Jacket +1",
+        body="Mummu Jacket +2",
         hands="Mummu Wrists +1",
         legs="Mummu Kecks +1",
         feet="Mummu Gamash. +1",
@@ -564,11 +567,11 @@ function init_gear_sets()
         }
 
     sets.idle.DT = set_combine (sets.idle, {
-        head=gear.Herc_DT_head, --3/3
         body="Meg. Cuirie +2", --8/0
-        hands=gear.Herc_DT_hands, --6/4
+        hands=gear.Herc_DT_hands, --7/5
         feet="Lanun Bottes +1", --4/0
         neck="Loricate Torque +1", --6/6
+		ear2="Etiolation Earring", --0/3
         ring1="Gelatinous Ring +1", --7/(-1)
         ring2="Defending Ring", --10/10
         back="Moonbeam Cape", --5/5
@@ -897,6 +900,16 @@ function job_precast(spell, action, spellMap, eventArgs)
             eventArgs.handled = true
         end
     end
+    if spellMap == 'Utsusemi' then
+        if buffactive['Copy Image (3)'] or buffactive['Copy Image (4+)'] then
+            cancel_spell()
+            add_to_chat(123, '**!! '..spell.english..' Canceled: [3+ IMAGES] !!**')
+            eventArgs.handled = true
+            return
+        elseif buffactive['Copy Image'] or buffactive['Copy Image (2)'] then
+            send_command('cancel 66; cancel 444; cancel Copy Image; cancel Copy Image (2)')
+        end
+    end
 end
 
 function job_post_precast(spell, action, spellMap, eventArgs)
@@ -992,6 +1005,8 @@ function customize_idle_set(idleSet)
         equip({ranged="Death Penalty"})
     elseif state.Gun.current == 'Fomalhaut' then
         equip({ranged="Fomalhaut"})
+    elseif state.Gun.current == 'Ataktos' then
+        equip({ranged="Ataktos"})
 --    elseif state.Gun.current == 'Armageddon' then
 --        equip({ranged="Armageddon"})
     end

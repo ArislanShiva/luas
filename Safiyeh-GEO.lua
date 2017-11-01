@@ -119,7 +119,7 @@ function init_gear_sets()
         sub="Chanter's Shield", --3
         head="Psycloth Tiara", --10
         hands="Merlinic Dastanas", --7
-        legs="Geomancy Pants +2", --13
+        legs="Geomancy Pants +3", --15
 		feet="Regal Pumps +1", --7%
         ear1="Loquacious Earring", --2
         ear2="Etiolation Earring", --1
@@ -161,7 +161,7 @@ function init_gear_sets()
         sub="Chanter's Shield", 
         head="Psycloth Tiara",
         hands="Merlinic Dastanas",
-        legs="Geomancy Pants +2",
+        legs="Geomancy Pants +3",
         ear1="Loquacious Earring",
         ear2="Etiolation Earring",
         ring1="Kishar Ring",
@@ -275,12 +275,12 @@ function init_gear_sets()
         head="Geo. Galero +2",
         body="Geomancy Tunic +3",
         hands="Geo. Mitaines +3",
-        legs="Psycloth Lappas",
+        legs="Geomancy Pants +3",
         feet="Geo. Sandals +3",
         neck="Erra Pendant",
         ear1="Barkarole Earring",
 		ear2="Digni. Earring",
-        ring1="Stikini Ring",
+        ring1="Kishar Ring",
         ring2="Stikini Ring",
 		back="Refraction Cape",
         waist="Rumination Sash",
@@ -297,7 +297,7 @@ function init_gear_sets()
         head="Geo. Galero +2",
         body="Geomancy Tunic +3",
         hands="Geo. Mitaines +3",
-        legs="Merlinic Shalwar",
+        legs="Geomancy Pants +3",
         feet="Merlinic Crackows",
         neck="Erra Pendant",
         ear1="Barkarole Earring",
@@ -410,6 +410,7 @@ function init_gear_sets()
         head="Telchine Cap", --0/3
         body="Telchine Chas.", --0/3
         hands="Geo. Mitaines +3", --13/0
+		legs="Telchine Braconi",
         feet="Telchine Pigaches", --0/2
         ear1="Handler's Earring", --3*/0
         ear2="Handler's Earring +1", --4*/0
@@ -418,7 +419,6 @@ function init_gear_sets()
         })
 
     sets.idle.DT.Pet = set_combine(sets.idle.Pet, {
-        legs="Psycloth Lappas", --4/0
         neck="Loricate Torque +1", --6/6
         ring1="Gelatinous Ring +1", --7/(-1)
         ring2="Defending Ring",
@@ -434,6 +434,7 @@ function init_gear_sets()
     sets.idle.Town = set_combine(sets.idle, {
         head="Geo. Galero +2",
         hands="Geo. Mitaines +3",
+        legs="Geomancy Pants +3",
         neck="Incanter's Torque",
         })
         

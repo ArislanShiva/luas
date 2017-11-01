@@ -150,10 +150,8 @@ function init_gear_sets()
     ---------------------------------------- Precast Sets ------------------------------------------
     ------------------------------------------------------------------------------------------------
 
-    -- Enmity set
+    -- Enmity sets
     sets.Enmity = {
---        main="Epeolatry", --18
---        sub="Alber Strap", --5
         ammo="Sapience Orb", --2
         head="Halitus Helm", --8
         body="Emet Harness +1", --10
@@ -169,6 +167,13 @@ function init_gear_sets()
         waist="Kasiri Belt", --3
         }
 
+    sets.Enmity.HP = set_combine(sets.Enmity, {
+        ear2="Odnowa Earring +1",
+        ring1="Moonbeam Ring",
+		back="Moonbeam Cape",
+		waist="Oneiros Belt",
+		})
+
     sets.precast.JA['Vallation'] = set_combine(sets.Enmity, {body="Runeist's Coat +3", legs="Futhark Trousers +1", back="Ogma's Cape"})
     sets.precast.JA['Valiance'] = sets.precast.JA['Vallation']
     sets.precast.JA['Pflug'] = set_combine(sets.Enmity, {feet="Runeist's Boots +2"})
@@ -176,7 +181,6 @@ function init_gear_sets()
     sets.precast.JA['Liement'] = set_combine(sets.Enmity, {body="Futhark Coat +1"})
 
     sets.precast.JA['Lunge'] = {
-        --sub="Alber Strap",
         ammo="Seeth. Bomblet +1",
         head=gear.Herc_MAB_head,
         body="Samnuha Coat",
@@ -218,11 +222,13 @@ function init_gear_sets()
         waist="Rumination Sash",
         }
 
-    sets.precast.FC.HP = {
-        ammo="Sapience Orb", --2
-        neck="Orunmila's Torque", --5
-        ring2="Weather. Ring +1", --6(4)
-        }
+    sets.precast.FC.HP = set_combine(sets.precast.FC, {
+		body="Runeist's Coat +3",
+        ear1="Odnowa Earring",
+        ear2="Odnowa Earring +1",
+        ring1="Moonbeam Ring",
+		waist="Oneiros Belt",
+        })
 
     sets.precast.FC['Enhancing Magic'] = set_combine(sets.precast.FC, {
         legs="Futhark Trousers +1",
@@ -426,7 +432,6 @@ function init_gear_sets()
 
     sets.midcast.Flash = sets.Enmity
     sets.midcast.Foil = sets.Enmity
-    sets.midcast.Diaga = sets.Enmity
     sets.midcast.Utsusemi = sets.midcast.SpellInterrupt
     
     sets.midcast['Blue Magic'] = {}
@@ -442,7 +447,7 @@ function init_gear_sets()
     sets.idle = {
         sub="Mensch Strap +1",
         ammo="Homiliary",
-        head="Rawhide Mask",
+        head=gear.Herc_Idle_head,
         body="Runeist's Coat +3",
         hands="Regal Gauntlets",
         legs="Carmine Cuisses +1",
@@ -508,7 +513,7 @@ function init_gear_sets()
         ammo="Staunch Tathlum", --2/2
         head=gear.Herc_DT_head, --3/3
         body="Erilaz Surcoat +1",
-        hands=gear.Herc_DT_hands, --6/4
+        hands=gear.Herc_DT_hands, --7/5
         legs="Eri. Leg Guards +1", --7/0
         feet="Turms Leggings",
         neck="Loricate Torque +1", --6/6
@@ -526,7 +531,7 @@ function init_gear_sets()
         ammo="Staunch Tathlum", --2/2
         head=gear.Herc_DT_head, --3/3
         body="Runeist's Coat +3",
-        hands=gear.Herc_DT_hands, --6/4
+        hands=gear.Herc_DT_hands, --7/5
         legs="Eri. Leg Guards +1", --7/0
         feet="Erilaz Greaves +1",--5/0
         neck="Warder's Charm +1",
@@ -543,7 +548,7 @@ function init_gear_sets()
         sub="Mensch Strap +1", --5/0
         ammo="Staunch Tathlum", --2/2
         head=gear.Herc_DT_head, --3/3
-        body="Futhark Coat +1", --7/7
+        body="Ayanmo Corazza +2", --6/6
         hands="Erilaz Gauntlets +1",
         legs="Rune. Trousers +3", --5/0
         feet="Erilaz Greaves +1", --5/0
@@ -562,7 +567,7 @@ function init_gear_sets()
         ammo="Staunch Tathlum", --2/2
         head=gear.Adhemar_D_head, --3/0
         body="Runeist's Coat +3",
-        hands="Regal Gauntlets",
+        hands="Runeist's Mitons +3", --3/0
         legs="Eri. Leg Guards +1", --7/0
         feet="Turms Leggings",
         neck="Loricate Torque +1", --6/6
@@ -658,10 +663,10 @@ function init_gear_sets()
     sets.engaged.DT = {
         --sub="Mensch Strap +1", --5/0
         ammo="Staunch Tathlum", --2/2
-        head="Dampening Tam",
+        head="Dampening Tam", --0/4
         --head=gear.Adhemar_D_head, --3/0
-        body="Ayanmo Corazza +1", --5/5
-        --hands=gear.Herc_DT_hands, --6/4
+        body="Ayanmo Corazza +2", --6/6
+        --hands=gear.Herc_DT_hands, --7/5
         hands=gear.Adhemar_B_hands,
         legs="Meg. Chausses +2", --6/0
         feet=gear.Herc_TA_feet,
@@ -721,9 +726,18 @@ end
 -------------------------------------------------------------------------------------------------------------------
 
 function job_precast(spell, action, spellMap, eventArgs)
-    if spell.action_type == 'Magic' and state.PhysicalDefenseMode.value == 'HP' then
-        eventArgs.handled = true
-        equip(sets.precast.FC.HP)
+    if state.PhysicalDefenseMode.value == 'HP' then
+	    eventArgs.handled = true
+		if spell.action_type == 'Magic' then
+		    if spell.English == 'Flash' or spell.English == 'Foil' or spell.English == 'Stun'
+			    or blue_magic_maps.Enmity:contains(spell.english) then
+                equip(sets.Enmity.HP)
+			else
+                equip(sets.precast.FC.HP)
+			end
+		elseif spell.action_type == 'Ability' then
+            equip(sets.Enmity.HP)
+		end
     end
     if spell.english == 'Lunge' then
         local abil_recasts = windower.ffxi.get_ability_recasts()
@@ -755,6 +769,13 @@ function job_precast(spell, action, spellMap, eventArgs)
             send_command('cancel 66; cancel 444; cancel Copy Image; cancel Copy Image (2)')
         end
     end
+end
+
+function job_midcast(spell, action, spellMap, eventArgs)
+    if state.PhysicalDefenseMode.value == 'HP' and spell.action_type == 'Magic' then
+		eventArgs.handled = true
+		equip(sets.Enmity.HP)
+	end
 end
 
 -- Run after the default midcast() is done.

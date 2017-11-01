@@ -449,7 +449,7 @@ function init_gear_sets()
 
     sets.idle = {
         ammo="Staunch Tathlum",
-        head=gear.Herc_DT_head,
+        head="Maxixi Tiara +3",
         body="Turms Harness",
         hands=gear.Herc_DT_hands,
         legs="Meg. Chausses +2",
@@ -465,11 +465,11 @@ function init_gear_sets()
 
     sets.idle.DT = set_combine (sets.idle, {
         ammo="Staunch Tathlum", --2/2
-        head=gear.Herc_DT_head, --3/3
         body="Meg. Cuirie +2", --8/0
-        hands=gear.Herc_DT_hands, --6/4
+        hands=gear.Herc_DT_hands, --7/5
         neck="Loricate Torque +1", --6/6
         ear1="Genmei Earring", --2/0
+		ear2="Etiolation Earring", --0/3
         ring1="Gelatinous Ring +1", --7/(-1)
         ring2="Defending Ring", --10/10
         back="Moonbeam Cape", --5/5
@@ -478,7 +478,6 @@ function init_gear_sets()
 
     sets.idle.Town = set_combine (sets.idle, {
         ammo="Yamarang",
-        head="Maxixi Tiara +3",
         body="Maxixi Casaque +3",
         hands="Maxixi Bangles +3",
         legs="Lustr. Subligar +1",
@@ -792,6 +791,16 @@ end
 -- Set eventArgs.useMidcastGear to true if we want midcast gear equipped on precast.
 function job_precast(spell, action, spellMap, eventArgs)
     --auto_presto(spell)
+    if spellMap == 'Utsusemi' then
+        if buffactive['Copy Image (3)'] or buffactive['Copy Image (4+)'] then
+            cancel_spell()
+            add_to_chat(123, '**!! '..spell.english..' Canceled: [3+ IMAGES] !!**')
+            eventArgs.handled = true
+            return
+        elseif buffactive['Copy Image'] or buffactive['Copy Image (2)'] then
+            send_command('cancel 66; cancel 444; cancel Copy Image; cancel Copy Image (2)')
+        end
+    end
 end
 
 

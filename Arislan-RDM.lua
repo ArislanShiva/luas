@@ -173,11 +173,11 @@ function init_gear_sets()
 
     sets.precast.WS = {
         ammo="Floestone",
-        head="Despair Helm",
-        body="Despair Mail",
+        head="Jhakri Coronal +2",
+        body="Jhakri Robe +2",
         hands="Atrophy Gloves +3",
-        legs="Despair Cuisses",
-        feet="Despair Greaves",
+        legs="Jhakri Slops +1",
+        feet="Jhakri Pigaches +2",
         neck="Fotia Gorget",
         ear1="Ishvara Earring",
         ear2="Moonshade Earring",
@@ -189,10 +189,10 @@ function init_gear_sets()
 
     sets.precast.WS['Chant du Cygne'] = set_combine(sets.precast.WS, {
         ammo="Yetshila",
-        head=gear.Taeon_TA_head,
-        body="Ayanmo Corazza +1",
-        hands=gear.Taeon_TA_hands,
-        legs=gear.Taeon_TA_legs,
+        head=gear.Taeon_Crit_head,
+        body=gear.Taeon_Crit_body,
+        hands=gear.Taeon_Crit_hands,
+        legs=gear.Taeon_Crit_legs,
         feet="Thereoid Greaves",
         ear1="Sherida Earring",
         ring1="Begrudging Ring",
@@ -211,20 +211,15 @@ function init_gear_sets()
     sets.precast.WS['Death Blossom'] = sets.precast.WS['Savage Blade']
 
     sets.precast.WS['Requiescat'] = set_combine(sets.precast.WS, {
-        ammo="Quartz Tathlum +1",
-        head="Jhakri Coronal +1",
-        body="Jhakri Robe +2",
-        feet="Carmine Greaves +1",
+        ammo="Regal Gem",
         ear1="Sherida Earring",
-        ring1="Rufescent Ring",
-        ring2="Shukuyu Ring",
         })
 
     sets.precast.WS['Sanguine Blade'] = {
         ammo="Pemphredo Tathlum",
         head="Pixie Hairpin +1",
         body="Merlinic Jubbah",
-        hands="Amalric Gages",
+        hands="Jhakri Cuffs +2",
         legs=gear.Merlinic_MB_legs,
         feet="Merlinic Crackows",
         neck="Baetyl Pendant",
@@ -366,9 +361,7 @@ function init_gear_sets()
         waist="Siegel Sash",
         })
 
-    sets.midcast['Phalanx'] = set_combine(sets.midcast['Enhancing Magic'], {
---        feet=gear.Taeon_PH_feet
-        })
+    sets.midcast['Phalanx'] = set_combine(sets.midcast['Enhancing Magic'], {})
 
     sets.midcast.Aquaveil = set_combine(sets.midcast['Enhancing Magic'], {
         head="Amalric Coif",
@@ -566,7 +559,7 @@ function init_gear_sets()
         sub="Beatific Shield +1", --4/29
         ammo="Staunch Tathlum", --2/2
         head="Gende. Caubeen +1", --4/4
-        body="Emet Harness +1", --6/0
+        body="Ayanmo Corazza +2", --6/6
         hands="Gende. Gages +1", --4/3
         neck="Loricate Torque +1", --6/6
         ear1="Genmei Earring", --2/0
@@ -632,7 +625,7 @@ function init_gear_sets()
         sub="Genmei Shield",
         ammo="Ginsen",
         head=gear.Taeon_TA_head,
-        body="Ayanmo Corazza +1",
+        body="Ayanmo Corazza +2",
         hands=gear.Taeon_TA_hands,
         legs=gear.Taeon_TA_legs,
         feet="Carmine Greaves +1",
@@ -668,7 +661,7 @@ function init_gear_sets()
         sub=gear.Colada_ATT,
         ammo="Ginsen",
         head=gear.Taeon_TA_head,
-        body="Ayanmo Corazza +1",
+        body="Ayanmo Corazza +2",
         hands=gear.Taeon_TA_hands,
         legs="Carmine Cuisses +1", --6
         feet=gear.Taeon_DW_feet, --9
@@ -696,7 +689,7 @@ function init_gear_sets()
     sets.engaged.DW.LowHaste = set_combine(sets.engaged.DW, {
         ammo="Ginsen",
         head=gear.Taeon_TA_head,
-        body="Ayanmo Corazza +1",
+        body="Ayanmo Corazza +2",
         hands=gear.Taeon_TA_hands,
         legs="Carmine Cuisses +1", --6
         feet=gear.Taeon_DW_feet, --9
@@ -724,7 +717,7 @@ function init_gear_sets()
     sets.engaged.DW.MidHaste = set_combine(sets.engaged.DW, {
         ammo="Ginsen",
         head=gear.Taeon_TA_head,
-        body="Ayanmo Corazza +1",
+        body="Ayanmo Corazza +2",
         hands=gear.Taeon_TA_hands,
         legs=gear.Taeon_TA_legs,
         feet=gear.Taeon_DW_feet, --9
@@ -756,7 +749,7 @@ function init_gear_sets()
     sets.engaged.DW.HighHaste = set_combine(sets.engaged.DW, {
         ammo="Ginsen",
         head=gear.Taeon_TA_head,
-        body="Ayanmo Corazza +1",
+        body="Ayanmo Corazza +2",
         hands=gear.Taeon_TA_hands,
         legs=gear.Taeon_TA_legs,
         feet=gear.Taeon_DW_feet, --9
@@ -788,7 +781,7 @@ function init_gear_sets()
 	sets.engaged.DW.MaxHaste = set_combine(sets.engaged.DW, {
         ammo="Ginsen",
         head=gear.Taeon_TA_head,
-        body="Ayanmo Corazza +1",
+        body="Ayanmo Corazza +2",
         hands=gear.Taeon_TA_hands,
         legs=gear.Taeon_TA_legs,
         feet="Carmine Greaves +1",
@@ -862,6 +855,19 @@ end
 -------------------------------------------------------------------------------------------------------------------
 -- Job-specific hooks for standard casting events.
 -------------------------------------------------------------------------------------------------------------------
+
+function job_precast(spell, action, spellMap, eventArgs)
+    if spellMap == 'Utsusemi' then
+        if buffactive['Copy Image (3)'] or buffactive['Copy Image (4+)'] then
+            cancel_spell()
+            add_to_chat(123, '**!! '..spell.english..' Canceled: [3+ IMAGES] !!**')
+            eventArgs.handled = true
+            return
+        elseif buffactive['Copy Image'] or buffactive['Copy Image (2)'] then
+            send_command('cancel 66; cancel 444; cancel Copy Image; cancel Copy Image (2)')
+        end
+    end
+end
 
 function job_post_precast(spell, action, spellMap, eventArgs)
     if spell.name == 'Impact' then

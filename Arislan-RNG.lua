@@ -367,7 +367,7 @@ function init_gear_sets()
 
     sets.midcast.RA.Critical = set_combine(sets.midcast.RA, {
         head="Mummu Bonnet +1",
-        body="Mummu Jacket +1",
+        body="Mummu Jacket +2",
         hands="Kobo Kote",
         legs="Mummu Kecks +1",
         feet="Mummu Gamash. +1",
@@ -415,11 +415,11 @@ function init_gear_sets()
         }
 
     sets.idle.DT = set_combine (sets.idle, {
-        head=gear.Herc_DT_head, --3/3
+        head="Meghanada Visor +2", --5/0
         body="Meg. Cuirie +2", --8/0
-        hands=gear.Herc_DT_hands, --6/4
+        hands=gear.Herc_DT_hands, --7/5
         neck="Loricate Torque +1", --6/6
-        ear1="Genmei Earring", --2/0
+		ear2="Etiolation Earring", --0/3
         ring1="Gelatinous Ring +1", --7/(-1)
         ring2="Defending Ring", --10/10
         back="Moonbeam Cape", --5/5
@@ -731,6 +731,16 @@ function job_precast(spell, action, spellMap, eventArgs)
     -- Check that proper ammo is available if we're using ranged attacks or similar.
     if spell.action_type == 'Ranged Attack' or spell.type == 'WeaponSkill' or spell.type == 'CorsairShot' then
         do_bullet_checks(spell, spellMap, eventArgs)
+    end
+    if spellMap == 'Utsusemi' then
+        if buffactive['Copy Image (3)'] or buffactive['Copy Image (4+)'] then
+            cancel_spell()
+            add_to_chat(123, '**!! '..spell.english..' Canceled: [3+ IMAGES] !!**')
+            eventArgs.handled = true
+            return
+        elseif buffactive['Copy Image'] or buffactive['Copy Image (2)'] then
+            send_command('cancel 66; cancel 444; cancel Copy Image; cancel Copy Image (2)')
+        end
     end
 end
 

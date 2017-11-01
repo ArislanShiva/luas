@@ -382,7 +382,7 @@ function init_gear_sets()
 
     sets.precast.WS['Requiescat'] = {
         ammo="Quartz Tathlum +1",
-        head="Jhakri Coronal +1",
+        head="Jhakri Coronal +2",
         body="Jhakri Robe +2",
         hands="Jhakri Cuffs +2",
         legs=gear.Herc_WS_legs,
@@ -419,9 +419,9 @@ function init_gear_sets()
     sets.precast.WS['Sanguine Blade'] = {
         ammo="Pemphredo Tathlum",
         head="Pixie Hairpin +1", 
-        body="Vedic Coat",
+        body="Jhakri Robe +2",
         hands="Jhakri Cuffs +2",
-        legs="Amalric Slops",
+        legs="Jhakri Slops +1",
         feet="Jhakri Pigaches +2",
         neck="Fotia Gorget",
         ear1="Moonshade Earring",
@@ -442,7 +442,7 @@ function init_gear_sets()
     sets.precast.WS['Realmrazer'].Acc = sets.precast.WS['Requiescat'].Acc
     
     sets.precast.WS['Flash Nova'] = set_combine(sets.precast.WS['Sanguine Blade'], {
-        head="Jhakri Coronal +1",
+        head="Jhakri Coronal +2",
         ring1="Levia. Ring +1",
         ring2="Weather. Ring +1",
         })
@@ -666,7 +666,7 @@ function init_gear_sets()
 
     sets.midcast.Refresh = set_combine(sets.midcast['Enhancing Magic'], {head="Amalric Coif", waist="Gishdubar Sash", back="Grapevine Cape"})
     sets.midcast.Stoneskin = set_combine(sets.midcast['Enhancing Magic'], {waist="Siegel Sash"})
-    sets.midcast.Phalanx = set_combine(sets.midcast['Enhancing Magic'], {feet=gear.Taeon_PH_feet})
+    sets.midcast.Phalanx = set_combine(sets.midcast['Enhancing Magic'], {})
     sets.midcast.Aquaveil = set_combine(sets.midcast['Enhancing Magic'], {head="Amalric Coif", waist="Emphatikos Rope"})
 
     sets.midcast.Protect = {ring1="Sheltered Ring"}
@@ -689,9 +689,9 @@ function init_gear_sets()
 
     sets.idle = {
         ammo="Staunch Tathlum",
-        head="Rawhide Mask", 
+        head=gear.Herc_Idle_head, 
         body="Jhakri Robe +2",
-        hands=gear.Adhemar_B_hands,
+        hands=gear.Herc_DT_hands,
         legs="Carmine Cuisses +1",
         feet="Carmine Greaves +1",
         neck="Bathy Choker +1",
@@ -705,9 +705,8 @@ function init_gear_sets()
 
     sets.idle.DT = set_combine(sets.idle, {
         ammo="Staunch Tathlum", --2/2
-        head=gear.Herc_DT_head, --3/3
         body="Hagondes Coat +1", --4/4
-        hands=gear.Herc_DT_hands, --6/4
+        hands=gear.Herc_DT_hands, --7/5
         feet="Battlecast Gaiters", --3/0
         neck="Loricate Torque +1", --6/6
         ear1="Genmei Earring", --2/0
@@ -718,7 +717,6 @@ function init_gear_sets()
         })
 
     sets.idle.Town = set_combine(sets.idle, {
-        head="Dampening Tam",
         neck="Combatant's Torque",
         ear1="Eabani Earring",
         ear2="Telos Earring",
@@ -984,6 +982,7 @@ function init_gear_sets()
 
     sets.engaged.Hybrid = {
         ammo="Staunch Tathlum", --2/2
+		body="Ayanmo Corazza +2", --6/6
         neck="Loricate Torque +1", --6/6
         ring2="Defending Ring", --10/10
         }
@@ -1053,6 +1052,16 @@ function job_precast(spell, action, spellMap, eventArgs)
     if unbridled_spells:contains(spell.english) and not state.Buff['Unbridled Learning'] then
         eventArgs.cancel = true
         windower.send_command('@input /ja "Unbridled Learning" <me>; wait 1.5; input /ma "'..spell.name..'" '..spell.target.name)
+    end
+    if spellMap == 'Utsusemi' then
+        if buffactive['Copy Image (3)'] or buffactive['Copy Image (4+)'] then
+            cancel_spell()
+            add_to_chat(123, '**!! '..spell.english..' Canceled: [3+ IMAGES] !!**')
+            eventArgs.handled = true
+            return
+        elseif buffactive['Copy Image'] or buffactive['Copy Image (2)'] then
+            send_command('cancel 66; cancel 444; cancel Copy Image; cancel Copy Image (2)')
+        end
     end
 end
 

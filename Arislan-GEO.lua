@@ -134,7 +134,7 @@ function init_gear_sets()
     -- Weaponskill sets
     -- Default set for any weaponskill that isn't any more specifically defined
     sets.precast.WS = {
-        head="Jhakri Coronal +1",
+        head="Jhakri Coronal +2",
         body="Jhakri Robe +2",
         hands="Jhakri Cuffs +2",
         legs="Telchine Braconi",
@@ -517,7 +517,7 @@ function init_gear_sets()
     
     -- Normal melee group
     sets.engaged = {        
-        head="Jhakri Coronal +1",
+        head="Jhakri Coronal +2",
         body="Jhakri Robe +2",
         hands="Jhakri Cuffs +2",
         feet="Jhakri Pigaches +2",
