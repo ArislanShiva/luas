@@ -120,7 +120,7 @@ function init_gear_sets()
         head="Psycloth Tiara", --10
         hands="Merlinic Dastanas", --7
         legs="Geomancy Pants +3", --15
-		feet="Regal Pumps +1", --7%
+        feet="Regal Pumps +1", --7%
         ear1="Loquacious Earring", --2
         ear2="Etiolation Earring", --1
         ring1="Kishar Ring", --4
@@ -176,8 +176,8 @@ function init_gear_sets()
         head="Azimuth Hood +1",
         body="Azimuth Coat +1",
         hands="Geo. Mitaines +3",
-		legs="Azimuth Tights +1",
-		feet="Azimuth Gaiters +1",
+        legs="Azimuth Tights +1",
+        feet="Azimuth Gaiters +1",
         ear1="Calamitous Earring",
         neck="Incanter's Torque",
         ring1="Stikini Ring",
@@ -200,7 +200,7 @@ function init_gear_sets()
         hands="Telchine Gloves", --17
         feet="Vanya Clogs", --5
         neck="Incanter's Torque",
-		ear1="Beatific Earring",
+        ear1="Beatific Earring",
         ear2="Mendi. Earring", --5
         ring1="Haoma's Ring",
         ring2="Haoma's Ring",
@@ -214,15 +214,15 @@ function init_gear_sets()
 
     sets.midcast.Cursna = set_combine(sets.midcast.Cure, {
         feet="Vanya Clogs",
-		neck="Malison Medallion",
-		ear1="Beatific Earring",
+        neck="Malison Medallion",
+        ear1="Beatific Earring",
         ring1="Haoma's Ring",
         ring2="Haoma's Ring",
         back="Oretan. Cape +1",
         })
 
     sets.midcast['Enhancing Magic'] = {
-		main="Gada",
+        main="Gada",
         sub="Chanter's Shield",
         head="Befouled Crown",
         body="Telchine Chas.",
@@ -236,7 +236,7 @@ function init_gear_sets()
         }
 
     sets.midcast.EnhancingDuration = {
-		main="Gada",
+        main="Gada",
         sub="Chanter's Shield",
         head="Telchine Cap",
         body="Telchine Chas.",
@@ -279,10 +279,10 @@ function init_gear_sets()
         feet="Geo. Sandals +3",
         neck="Erra Pendant",
         ear1="Barkarole Earring",
-		ear2="Digni. Earring",
+        ear2="Digni. Earring",
         ring1="Kishar Ring",
         ring2="Stikini Ring",
-		back="Refraction Cape",
+        back="Refraction Cape",
         waist="Rumination Sash",
        } -- MND/Magic accuracy
     
@@ -290,7 +290,7 @@ function init_gear_sets()
         ear1="Barkarole Earring",
         ring1="Shiva Ring",
         ring2="Shiva Ring",
-		back="Refraction Cape",
+        back="Refraction Cape",
         }) -- INT/Magic accuracy
 
     sets.midcast['Dark Magic'] = {
@@ -301,15 +301,15 @@ function init_gear_sets()
         feet="Merlinic Crackows",
         neck="Erra Pendant",
         ear1="Barkarole Earring",
-		ear2="Digni. Earring",
+        ear2="Digni. Earring",
         ring1="Stikini Ring",
         ring2="Stikini Ring",
-		back="Refraction Cape",
+        back="Refraction Cape",
         }
     
     sets.midcast.Drain = set_combine(sets.midcast['Dark Magic'], {
         ring1="Evanescence Ring",
-		waist="Fucho-no-Obi",
+        waist="Fucho-no-Obi",
         })
     
     sets.midcast.Aspir = sets.midcast.Drain
@@ -339,7 +339,7 @@ function init_gear_sets()
     sets.midcast['Elemental Magic'].Resistant = set_combine(sets.midcast['Elemental Magic'], {
         head="Geo. Galero +2",
         neck="Erra Pendant",
- 		ear2="Digni. Earring",
+         ear2="Digni. Earring",
         })
 
     sets.midcast.GeoElem = set_combine(sets.midcast['Elemental Magic'], {
@@ -410,7 +410,7 @@ function init_gear_sets()
         head="Telchine Cap", --0/3
         body="Telchine Chas.", --0/3
         hands="Geo. Mitaines +3", --13/0
-		legs="Telchine Braconi",
+        legs="Telchine Braconi",
         feet="Telchine Pigaches", --0/2
         ear1="Handler's Earring", --3*/0
         ear2="Handler's Earring +1", --4*/0
@@ -448,7 +448,7 @@ function init_gear_sets()
         }
 
     sets.latent_refresh = {
-		waist="Fucho-no-Obi",
+        waist="Fucho-no-Obi",
         }
     
     --------------------------------------
@@ -462,13 +462,13 @@ function init_gear_sets()
     
     -- Normal melee group
     sets.engaged = {        
-		hands="Jhakri Cuffs +1",
-		feet="Jhakri Pigaches +1",
-		ear1="Cessance Earring",
-		ear2="Suppanomimi",
-		ring1="Apate Ring",
-		ring2="Rajas Ring",
-		waist="Cetl Belt",
+        hands="Jhakri Cuffs +1",
+        feet="Jhakri Pigaches +1",
+        ear1="Cessance Earring",
+        ear2="Suppanomimi",
+        ring1="Apate Ring",
+        ring2="Rajas Ring",
+        waist="Cetl Belt",
         }
 
 

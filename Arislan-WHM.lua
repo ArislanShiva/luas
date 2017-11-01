@@ -480,7 +480,7 @@ function init_gear_sets()
         ammo="Homiliary",
         head="Befouled Crown",
         body="Witching Robe",
-		hands="Inyan. Dastanas +2",
+        hands="Inyan. Dastanas +2",
         legs="Assid. Pants +1",
         feet="Herald's Gaiters",
         neck="Bathy Choker +1",
@@ -501,20 +501,20 @@ function init_gear_sets()
         ear1="Genmei Earring", --2/0
         ring2="Defending Ring", --10/10
         back="Moonbeam Cape", --5/5
-		waist="Slipor Sash", --0/3
+        waist="Slipor Sash", --0/3
         })
 
     sets.idle.MEva = set_combine(sets.idle.DT, {
-		ammo="Staunch Tathlum",
-		head="Inyanga Tiara +2",
-		body="Inyanga Jubbah +2",
-		hands="Inyan. Dastanas +2",
-		legs="Inyanga Shalwar +2",
-		feet="Inyan. Crackows +2",
-		ear1="Eabani Earring",
-		ear2="Hearty Earring",
-		ring1="Inyanga Ring",
-		})
+        ammo="Staunch Tathlum",
+        head="Inyanga Tiara +2",
+        body="Inyanga Jubbah +2",
+        hands="Inyan. Dastanas +2",
+        legs="Inyanga Shalwar +2",
+        feet="Inyan. Crackows +2",
+        ear1="Eabani Earring",
+        ear2="Hearty Earring",
+        ring1="Inyanga Ring",
+        })
 
 
     sets.idle.Town = set_combine(sets.idle, {

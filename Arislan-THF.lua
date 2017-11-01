@@ -236,7 +236,7 @@ function init_gear_sets()
         ear2="Telos Earring",
         })
 
-	sets.precast.WS.Stacked = {ammo="Yetshila", head="Pill. Bonnet +3",}
+    sets.precast.WS.Stacked = {ammo="Yetshila", head="Pill. Bonnet +3",}
 
     sets.precast.WS['Exenterator'] = set_combine(sets.precast.WS, {
         ammo="Seeth. Bomblet +1",
@@ -264,7 +264,7 @@ function init_gear_sets()
         ear2="Brutal Earring",
         ring1="Begrudging Ring",
         ring2="Epona's Ring",
-		back=gear.THF_WS2_Cape,
+        back=gear.THF_WS2_Cape,
         })
 
     sets.precast.WS['Evisceration'].Acc = set_combine(sets.precast.WS['Evisceration'], {
@@ -669,7 +669,7 @@ function init_gear_sets()
     ------------------------------------------------------------------------------------------------
     ---------------------------------------- Special Sets ------------------------------------------
     ------------------------------------------------------------------------------------------------
-	
+    
     sets.buff.Doom = {ring1="Eshmun's Ring", ring2="Eshmun's Ring", waist="Gishdubar Sash"}
 
     sets.Reive = {neck="Ygnas's Resolve +1"}
@@ -704,10 +704,10 @@ function job_post_precast(spell, action, spellMap, eventArgs)
             equip(sets.TreasureHunter)
         end
     elseif spell.english == 'Rudra\'s Storm' or spell.english == 'Mandalic Stab' then
-		if state.Buff['Sneak Attack'] == true or state.Buff['Trick Attack'] == true then
-			equip(sets.precast.WS.Stacked)
-		end
-	end
+        if state.Buff['Sneak Attack'] == true or state.Buff['Trick Attack'] == true then
+            equip(sets.precast.WS.Stacked)
+        end
+    end
 end
 
 -- Run after the general midcast() set is constructed.

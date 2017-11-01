@@ -566,7 +566,7 @@ function init_gear_sets()
         ring1="Gelatinous Ring +1", --7/(-1)
         ring2="Defending Ring", --10/10
         back="Moonbeam Cape", --5/5
-		waist="Slipor Sash", --0/3
+        waist="Slipor Sash", --0/3
         })
 
     sets.idle.Town = set_combine(sets.idle, {
@@ -579,7 +579,7 @@ function init_gear_sets()
         ring1="Levia. Ring +1",
         ring2="Weather. Ring +1",
         back=gear.RDM_INT_Cape,
-		waist="Luminary Sash",
+        waist="Luminary Sash",
         })
 
     sets.idle.Weak = sets.idle.DT
@@ -637,7 +637,7 @@ function init_gear_sets()
         back=gear.RDM_DW_Cape,
         waist="Windbuffet Belt +1",
         }
-		
+        
     sets.engaged.MidAcc = set_combine(sets.engaged, {
         neck="Combatant's Torque",
         waist="Kentarch Belt +1",
@@ -742,7 +742,7 @@ function init_gear_sets()
         ear1="Cessance Earring",
         ring1="Ramuh Ring +1",
         ring2="Ramuh Ring +1",
-		waist="Olseni Belt",
+        waist="Olseni Belt",
         })
 
     -- 35% Magic Haste (51% DW to cap)
@@ -766,7 +766,7 @@ function init_gear_sets()
         legs="Carmine Cuisses +1", --6
         neck="Combatant's Torque",
         ring2="Ilabrat Ring",
-		waist="Kentarch Belt +1",
+        waist="Kentarch Belt +1",
         })
 
     sets.engaged.DW.HighAcc.HighHaste = set_combine(sets.engaged.DW.MidAcc.HighHaste, {
@@ -774,11 +774,11 @@ function init_gear_sets()
         ear1="Cessance Earring",
         ring1="Ramuh Ring +1",
         ring2="Ramuh Ring +1",
-		waist="Olseni Belt",
+        waist="Olseni Belt",
         })
 
     -- 47% Magic Haste (36% DW to cap)
-	sets.engaged.DW.MaxHaste = set_combine(sets.engaged.DW, {
+    sets.engaged.DW.MaxHaste = set_combine(sets.engaged.DW, {
         ammo="Ginsen",
         head=gear.Taeon_TA_head,
         body="Ayanmo Corazza +2",
@@ -797,7 +797,7 @@ function init_gear_sets()
     sets.engaged.DW.MidAcc.MaxHaste = set_combine(sets.engaged.DW.MaxHaste, {
         neck="Combatant's Torque",
         ring2="Ilabrat Ring",
-		waist="Kentarch Belt +1",
+        waist="Kentarch Belt +1",
         })
 
     sets.engaged.DW.HighAcc.MaxHaste = set_combine(sets.engaged.DW.MidAcc.MaxHaste, {
@@ -806,7 +806,7 @@ function init_gear_sets()
         ear1="Cessance Earring",
         ring1="Ramuh Ring +1",
         ring2="Ramuh Ring +1",
-		waist="Olseni Belt",
+        waist="Olseni Belt",
         })
 
 
@@ -826,19 +826,19 @@ function init_gear_sets()
 
     sets.engaged.DW.DT.LowHaste = set_combine(sets.engaged.DW.LowHaste, sets.engaged.Hybrid)
     sets.engaged.DW.MidAcc.DT.LowHaste = set_combine(sets.engaged.DW.MidAcc.LowHaste, sets.engaged.Hybrid)
-	sets.engaged.DW.HighAcc.DT.LowHaste = set_combine(sets.engaged.DW.HighAcc.LowHaste, sets.engaged.Hybrid)
+    sets.engaged.DW.HighAcc.DT.LowHaste = set_combine(sets.engaged.DW.HighAcc.LowHaste, sets.engaged.Hybrid)
 
     sets.engaged.DW.DT.MidHaste = set_combine(sets.engaged.DW.MidHaste, sets.engaged.Hybrid)
     sets.engaged.DW.MidAcc.DT.MidHaste = set_combine(sets.engaged.DW.MidAcc.MidHaste, sets.engaged.Hybrid)
-	sets.engaged.DW.HighAcc.DT.MidHaste = set_combine(sets.engaged.DW.HighAcc.MidHaste, sets.engaged.Hybrid)
+    sets.engaged.DW.HighAcc.DT.MidHaste = set_combine(sets.engaged.DW.HighAcc.MidHaste, sets.engaged.Hybrid)
 
     sets.engaged.DW.DT.HighHaste = set_combine(sets.engaged.DW.HighHaste, sets.engaged.Hybrid)
     sets.engaged.DW.MidAcc.DT.HighHaste = set_combine(sets.engaged.DW.MidAcc.HighHaste, sets.engaged.Hybrid)
-	sets.engaged.DW.HighAcc.DT.HighHaste = set_combine(sets.engaged.DW.HighAcc.HighHaste, sets.engaged.Hybrid)
+    sets.engaged.DW.HighAcc.DT.HighHaste = set_combine(sets.engaged.DW.HighAcc.HighHaste, sets.engaged.Hybrid)
 
     sets.engaged.DW.DT.MaxHaste = set_combine(sets.engaged.DW.MaxHaste, sets.engaged.Hybrid)
     sets.engaged.DW.MidAcc.DT.MaxHaste = set_combine(sets.engaged.DW.MidAcc.MaxHaste, sets.engaged.Hybrid)
-	sets.engaged.DW.HighAcc.DT.MaxHaste = set_combine(sets.engaged.DW.HighAcc.MaxHaste, sets.engaged.Hybrid)
+    sets.engaged.DW.HighAcc.DT.MaxHaste = set_combine(sets.engaged.DW.HighAcc.MaxHaste, sets.engaged.Hybrid)
 ]]--
 
     ------------------------------------------------------------------------------------------------

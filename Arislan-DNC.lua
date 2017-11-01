@@ -469,7 +469,7 @@ function init_gear_sets()
         hands=gear.Herc_DT_hands, --7/5
         neck="Loricate Torque +1", --6/6
         ear1="Genmei Earring", --2/0
-		ear2="Etiolation Earring", --0/3
+        ear2="Etiolation Earring", --0/3
         ring1="Gelatinous Ring +1", --7/(-1)
         ring2="Defending Ring", --10/10
         back="Moonbeam Cape", --5/5

@@ -170,9 +170,9 @@ function init_gear_sets()
     sets.Enmity.HP = set_combine(sets.Enmity, {
         ear2="Odnowa Earring +1",
         ring1="Moonbeam Ring",
-		back="Moonbeam Cape",
-		waist="Oneiros Belt",
-		})
+        back="Moonbeam Cape",
+        waist="Oneiros Belt",
+        })
 
     sets.precast.JA['Vallation'] = set_combine(sets.Enmity, {body="Runeist's Coat +3", legs="Futhark Trousers +1", back="Ogma's Cape"})
     sets.precast.JA['Valiance'] = sets.precast.JA['Vallation']
@@ -223,11 +223,11 @@ function init_gear_sets()
         }
 
     sets.precast.FC.HP = set_combine(sets.precast.FC, {
-		body="Runeist's Coat +3",
+        body="Runeist's Coat +3",
         ear1="Odnowa Earring",
         ear2="Odnowa Earring +1",
         ring1="Moonbeam Ring",
-		waist="Oneiros Belt",
+        waist="Oneiros Belt",
         })
 
     sets.precast.FC['Enhancing Magic'] = set_combine(sets.precast.FC, {
@@ -467,7 +467,7 @@ function init_gear_sets()
         ammo="Staunch Tathlum", --2/2
         head=gear.Herc_DT_head, --3/3
         body="Runeist's Coat +3",
-		hands="Turms Mittens",
+        hands="Turms Mittens",
         legs="Carmine Cuisses +1",
         feet="Erilaz Greaves +1", --5/0
         neck="Loricate Torque +1", --6/6
@@ -630,7 +630,7 @@ function init_gear_sets()
 
     sets.engaged.HighAcc = set_combine(sets.engaged.MidAcc, {
         head="Carmine Mask +1",
-		hands="Runeist's Mitons +3",
+        hands="Runeist's Mitons +3",
         legs="Carmine Cuisses +1",
         feet=gear.Herc_Acc_feet,
         ring1="Ramuh Ring +1",
@@ -689,7 +689,7 @@ function init_gear_sets()
         })
 
     sets.engaged.HighAcc.DT = set_combine(sets.engaged.MidAcc.DT, {
-		hands="Runeist's Mitons +3", --3/0
+        hands="Runeist's Mitons +3", --3/0
         feet=gear.Herc_Acc_feet,
         ear1="Cessance Earring",
         })
@@ -727,17 +727,17 @@ end
 
 function job_precast(spell, action, spellMap, eventArgs)
     if state.PhysicalDefenseMode.value == 'HP' then
-	    eventArgs.handled = true
-		if spell.action_type == 'Magic' then
-		    if spell.English == 'Flash' or spell.English == 'Foil' or spell.English == 'Stun'
-			    or blue_magic_maps.Enmity:contains(spell.english) then
+        eventArgs.handled = true
+        if spell.action_type == 'Magic' then
+            if spell.English == 'Flash' or spell.English == 'Foil' or spell.English == 'Stun'
+                or blue_magic_maps.Enmity:contains(spell.english) then
                 equip(sets.Enmity.HP)
-			else
+            else
                 equip(sets.precast.FC.HP)
-			end
-		elseif spell.action_type == 'Ability' then
+            end
+        elseif spell.action_type == 'Ability' then
             equip(sets.Enmity.HP)
-		end
+        end
     end
     if spell.english == 'Lunge' then
         local abil_recasts = windower.ffxi.get_ability_recasts()
@@ -773,9 +773,9 @@ end
 
 function job_midcast(spell, action, spellMap, eventArgs)
     if state.PhysicalDefenseMode.value == 'HP' and spell.action_type == 'Magic' then
-		eventArgs.handled = true
-		equip(sets.Enmity.HP)
-	end
+        eventArgs.handled = true
+        equip(sets.Enmity.HP)
+    end
 end
 
 -- Run after the default midcast() is done.

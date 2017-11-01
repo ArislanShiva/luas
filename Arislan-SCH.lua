@@ -527,7 +527,7 @@ function init_gear_sets()
         ring1="Gelatinous Ring +1", --7/(-1)
         ring2="Defending Ring", --10/10
         back="Moonbeam Cape", --5/5
-		waist="Slipor Sash", --0/3
+        waist="Slipor Sash", --0/3
         })
 
     sets.idle.Refresh = {main="Bolelabunga", sub="Genmei Shield"}

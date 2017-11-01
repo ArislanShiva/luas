@@ -537,9 +537,9 @@ function init_gear_sets()
     sets.TripleShot = {
         head="Oshosi Mask", --4
         body="Chasseur's Frac +1", --12
- 		hands="Oshosi Gloves", -- 3
-		legs="Oshosi Trousers", --5
-		feet="Oshosi Leggings", --2
+         hands="Oshosi Gloves", -- 3
+        legs="Oshosi Trousers", --5
+        feet="Oshosi Leggings", --2
         } --27
 
 
@@ -571,7 +571,7 @@ function init_gear_sets()
         hands=gear.Herc_DT_hands, --7/5
         feet="Lanun Bottes +1", --4/0
         neck="Loricate Torque +1", --6/6
-		ear2="Etiolation Earring", --0/3
+        ear2="Etiolation Earring", --0/3
         ring1="Gelatinous Ring +1", --7/(-1)
         ring2="Defending Ring", --10/10
         back="Moonbeam Cape", --5/5

@@ -17,7 +17,7 @@
 -- Initialization function for this job file.
 function get_sets()
     mote_include_version = 2
-    
+
     -- Load and initialize the include file.
     include('Mote-Include.lua')
 end
@@ -536,7 +536,7 @@ function init_gear_sets()
         ring1="Gelatinous Ring +1", --7/(-1)
         ring2="Defending Ring", --10/10
         back="Moonbeam Cape", --5/5
-		waist="Slipor Sash", --0/3
+        waist="Slipor Sash", --0/3
         })
 
     sets.idle.ManaWall = {
@@ -612,7 +612,7 @@ function init_gear_sets()
         head="Jhakri Coronal +2",
         body="Jhakri Robe +2",
         hands="Jhakri Cuffs +2",
-		legs="Jhakri Slops +1",
+        legs="Jhakri Slops +1",
         feet="Jhakri Pigaches +2",
         neck="Combatant's Torque",
         ear1="Cessance Earring",

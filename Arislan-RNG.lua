@@ -184,7 +184,7 @@ function init_gear_sets()
         } --59/16
 
     sets.precast.RA.Flurry1 = set_combine(sets.precast.RA, {
-		body="Amini Caban +1",
+        body="Amini Caban +1",
         }) --47/16
 
     sets.precast.RA.Flurry2 = set_combine(sets.precast.RA.Flurry1, {
@@ -371,7 +371,7 @@ function init_gear_sets()
         hands="Kobo Kote",
         legs="Mummu Kecks +1",
         feet="Mummu Gamash. +1",
-		ring1="Begrudging Ring",
+        ring1="Begrudging Ring",
         waist="Kwahu Kachina Belt",
         })
         
@@ -384,9 +384,9 @@ function init_gear_sets()
     sets.DoubleShot = {
         head="Oshosi Mask", --5
         body="Oshosi Vest", --7
-		hands="Oshosi Gloves", -- 4
+        hands="Oshosi Gloves", -- 4
         legs="Oshosi Trousers", --6
-		feet="Oshosi Leggings", --3
+        feet="Oshosi Leggings", --3
         } --25
 
         
@@ -419,7 +419,7 @@ function init_gear_sets()
         body="Meg. Cuirie +2", --8/0
         hands=gear.Herc_DT_hands, --7/5
         neck="Loricate Torque +1", --6/6
-		ear2="Etiolation Earring", --0/3
+        ear2="Etiolation Earring", --0/3
         ring1="Gelatinous Ring +1", --7/(-1)
         ring2="Defending Ring", --10/10
         back="Moonbeam Cape", --5/5
