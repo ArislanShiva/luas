@@ -369,7 +369,7 @@ function init_gear_sets()
 
     sets.midcast.GeoElem = set_combine(sets.midcast['Elemental Magic'], {
         main="Solstice",
-        sub="Culminus",
+        sub="Ammurapi Shield",
         ring1="Fenrir Ring +1",
         ring2="Fenrir Ring +1",
         })
@@ -385,7 +385,7 @@ function init_gear_sets()
 
     sets.midcast.GeoElem.Seidr = set_combine(sets.midcast['Elemental Magic'].Seidr, {
         main="Solstice",
-        sub="Culminus",        
+        sub="Ammurapi Shield",
         body="Seidr Cotehardie",
         hands="Ea Cuffs",
         neck="Erra Pendant",
@@ -413,7 +413,7 @@ function init_gear_sets()
         sub="Genmei Shield",
         ranged="Dunna",
         head="Befouled Crown",
-        body="Witching Robe",
+        body="Jhakri Robe +2",
         hands="Bagua Mitaines +1",
         legs="Assid. Pants +1",
         feet="Geo. Sandals +1",
@@ -481,7 +481,7 @@ function init_gear_sets()
 
     sets.idle.Town = set_combine(sets.idle, {
         main="Sucellus",
-        sub="Culminus",
+        sub="Ammurapi Shield",
         head="Azimuth Hood +1",
         body="Azimuth Coat +1",
         hands="Bagua Mitaines +1",
@@ -527,7 +527,7 @@ function init_gear_sets()
         ring1="Petrov Ring",
         ring2="Hetairoi Ring",
         back="Relucent Cape",
-        waist="Shetal Stone",
+        waist="Windbuffet Belt +1",
         }
 
 

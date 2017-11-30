@@ -107,7 +107,7 @@ function init_gear_sets()
     -- Precast sets to enhance JAs
     sets.precast.JA.Bolster = {body="Bagua Tunic +1"}
     sets.precast.JA['Full Circle'] = {head="Azimuth Hood +1"}
-    sets.precast.JA['Life Cycle'] = {body="Geomancy Tunic +3", back="Nantosuelta's Cape"}
+    sets.precast.JA['Life Cycle'] = {body="Geomancy Tunic +3", back=gear.GEO_Idle_Cape,}
 
   
     -- Fast cast sets for spells
@@ -117,10 +117,11 @@ function init_gear_sets()
         --ranged="Dunna", --3
         main="Solstice",
         sub="Chanter's Shield", --3
-        head="Psycloth Tiara", --10
+        head="Amalric Coif", --10
         hands="Merlinic Dastanas", --7
         legs="Geomancy Pants +3", --15
-        feet="Regal Pumps +1", --7%
+        feet="Regal Pumps +1", --7
+		neck="Voltsurge Torque", --4
         ear1="Loquacious Earring", --2
         ear2="Etiolation Earring", --1
         ring1="Kishar Ring", --4
@@ -148,8 +149,14 @@ function init_gear_sets()
      
     -- Weaponskill sets
     -- Default set for any weaponskill that isn't any more specifically defined
-    sets.precast.WS = {}
-
+    sets.precast.WS = {
+        body="Jhakri Robe +2",
+        hands="Jhakri Cuffs +1",
+        feet="Jhakri Pigaches +1",
+        ear2="Regal Earring",
+        ring1="Rajas Ring",
+        ring2="Apate Ring",
+        }
     
     ------------------------------------------------------------------------
     ----------------------------- Midcast Sets -----------------------------
@@ -159,7 +166,7 @@ function init_gear_sets()
     sets.midcast.FastRecast = {
         main="Solstice",
         sub="Chanter's Shield", 
-        head="Psycloth Tiara",
+        head="Amalric Coif",
         hands="Merlinic Dastanas",
         legs="Geomancy Pants +3",
         ear1="Loquacious Earring",
@@ -173,12 +180,13 @@ function init_gear_sets()
    sets.midcast.Geomancy = {
         main="Solstice",
         sub="Chanter's Shield",
-        head="Azimuth Hood +1",
+        head="Vanya Hood",
         body="Azimuth Coat +1",
-        hands="Geo. Mitaines +3",
+        hands="Shrieker's Cuffs",
         legs="Azimuth Tights +1",
-        feet="Azimuth Gaiters +1",
+        feet="Merlinic Crackows",
         ear1="Calamitous Earring",
+        ear2="Mendi. Earring",
         neck="Incanter's Torque",
         ring1="Stikini Ring",
         ring2="Stikini Ring",
@@ -223,7 +231,7 @@ function init_gear_sets()
 
     sets.midcast['Enhancing Magic'] = {
         main="Gada",
-        sub="Chanter's Shield",
+        sub="Ammurapi Shield",
         head="Befouled Crown",
         body="Telchine Chas.",
         hands="Telchine Gloves",
@@ -237,7 +245,7 @@ function init_gear_sets()
 
     sets.midcast.EnhancingDuration = {
         main="Gada",
-        sub="Chanter's Shield",
+        sub="Ammurapi Shield",
         head="Telchine Cap",
         body="Telchine Chas.",
         hands="Telchine Gloves",
@@ -247,10 +255,11 @@ function init_gear_sets()
 
     sets.midcast.Regen = set_combine(sets.midcast['Enhancing Magic'], {
         main="Bolelabunga",
-        sub="Chanter's Shield",
+        sub="Ammurapi Shield",
         })
     
     sets.midcast.Refresh = set_combine(sets.midcast['Enhancing Magic'], {
+        head="Amalric Coif",
         })
             
     sets.midcast.Stoneskin = set_combine(sets.midcast['Enhancing Magic'], {
@@ -259,7 +268,8 @@ function init_gear_sets()
 
     sets.midcast.Aquaveil = set_combine(sets.midcast['Enhancing Magic'], {
         main="Vadose Rod",
-        sub="Culminus",
+        sub="Ammurapi Shield",
+        head="Amalric Coif",
         })
 
     sets.midcast.Protect = set_combine(sets.midcast.EnhancingDuration, {
@@ -272,6 +282,8 @@ function init_gear_sets()
 
 
     sets.midcast.MndEnfeebles = {
+        main="Grioavolr",
+        sub="Enki Strap",
         head="Geo. Galero +2",
         body="Geomancy Tunic +3",
         hands="Geo. Mitaines +3",
@@ -283,7 +295,7 @@ function init_gear_sets()
         ring1="Kishar Ring",
         ring2="Stikini Ring",
         back="Refraction Cape",
-        waist="Rumination Sash",
+        waist="Luminary Sash",
        } -- MND/Magic accuracy
     
     sets.midcast.IntEnfeebles = set_combine(sets.midcast.MndEnfeebles, {
@@ -294,6 +306,8 @@ function init_gear_sets()
         }) -- INT/Magic accuracy
 
     sets.midcast['Dark Magic'] = {
+        main="Grioavolr",
+        sub="Enki Strap",
         head="Geo. Galero +2",
         body="Geomancy Tunic +3",
         hands="Geo. Mitaines +3",
@@ -305,6 +319,7 @@ function init_gear_sets()
         ring1="Stikini Ring",
         ring2="Stikini Ring",
         back="Refraction Cape",
+        waist="Luminary Sash",
         }
     
     sets.midcast.Drain = set_combine(sets.midcast['Dark Magic'], {
@@ -321,25 +336,25 @@ function init_gear_sets()
     
     sets.midcast['Elemental Magic'] = {
         main="Solstice",
-        sub="Culminus",
+        sub="Ammurapi Shield",
         head="Merlinic Hood",
-        body="Count's Garb",
+        body="Jhakri Robe +2",
         hands="Amalric Gages",
         legs="Merlinic Shalwar",
         feet="Merlinic Crackows",
         neck="Mizu. Kubikazari",
         ear1="Barkarole Earring",
-        ear2="Friomisi Earring",
+        ear2="Regal Earring",
         ring1="Shiva Ring",
         ring2="Shiva Ring",
-        back="Toro Cape",
+        back=gear.GEO_MAB_Cape,
         waist="Refoccilation Stone",
         }
 
     sets.midcast['Elemental Magic'].Resistant = set_combine(sets.midcast['Elemental Magic'], {
         head="Geo. Galero +2",
         neck="Erra Pendant",
-         ear2="Digni. Earring",
+        ear2="Digni. Earring",
         })
 
     sets.midcast.GeoElem = set_combine(sets.midcast['Elemental Magic'], {
@@ -347,11 +362,11 @@ function init_gear_sets()
         })
 
     sets.midcast['Elemental Magic'].Seidr = set_combine(sets.midcast['Elemental Magic'], {
-
+        body="Seidr Cotehardie",
         })
 
     sets.midcast.GeoElem.Seidr = set_combine(sets.midcast['Elemental Magic'].Seidr, {
-
+        body="Seidr Cotehardie",
         })
 
     sets.midcast.Impact = set_combine(sets.midcast['Elemental Magic'], {
@@ -370,7 +385,7 @@ function init_gear_sets()
         main="Bolelabunga",
         sub="Genbu's Shield",
         head="Befouled Crown",
-        body="Geomancy Tunic +3",
+        body="Jhakri Robe +2",
         hands="Bagua Mitaines +1",
         legs="Assid. Pants +1",
         feet="Geo. Sandals +3",
@@ -388,10 +403,8 @@ function init_gear_sets()
         })
 
     sets.idle.DT = set_combine(sets.idle, {
-        main="Bolelabunga",
         sub="Genbu's Shield", --10/0
-        head="Geo. Galero +2",
-        body="Geomancy Tunic +3",
+        body="Mallquis Saio +2", --8/8
         hands="Geo. Mitaines +3", --3/0
         feet="Azimuth Gaiters +1", --4/0
         neck="Loricate Torque +1", --6/6
@@ -410,11 +423,11 @@ function init_gear_sets()
         head="Telchine Cap", --0/3
         body="Telchine Chas.", --0/3
         hands="Geo. Mitaines +3", --13/0
-        legs="Telchine Braconi",
-        feet="Telchine Pigaches", --0/2
+        legs="Telchine Braconi", --0/2
+        feet="Telchine Pigaches", --0/3
         ear1="Handler's Earring", --3*/0
         ear2="Handler's Earring +1", --4*/0
-        back="Nantosuelta's Cape", --10/0
+        back=gear.GEO_Idle_Cape, --0/10
         waist="Isa Belt" --3/1
         })
 
@@ -432,10 +445,13 @@ function init_gear_sets()
     --sets.idle.DT.Pet.Indi = set_combine(sets.idle.DT.Pet, {legs="Bagua Pants +1"})
 
     sets.idle.Town = set_combine(sets.idle, {
+        sub="Ammurapi Shield",
         head="Geo. Galero +2",
+        body="Geomancy Tunic +3",
         hands="Geo. Mitaines +3",
         legs="Geomancy Pants +3",
         neck="Incanter's Torque",
+        ear2="Regal Earring",
         })
         
     -- Defense sets
@@ -462,12 +478,13 @@ function init_gear_sets()
     
     -- Normal melee group
     sets.engaged = {        
+        body="Jhakri Robe +2",
         hands="Jhakri Cuffs +1",
         feet="Jhakri Pigaches +1",
         ear1="Cessance Earring",
-        ear2="Suppanomimi",
-        ring1="Apate Ring",
-        ring2="Rajas Ring",
+        ear2="Regal Earring",
+        ring1="Rajas Ring",
+        ring2="Apate Ring",
         waist="Cetl Belt",
         }
 

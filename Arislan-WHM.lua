@@ -102,8 +102,8 @@ function init_gear_sets()
 
     sets.precast.FC = {
     --    /SCH --3
-        main="Oranyan", --7
-        sub="Clerisy Strap +1", --3
+        main="Sucellus", --5
+        sub="Chanter's Shield +1", --8
         ammo="Sapience Orb", --2
         body="Inyanga Jubbah +2", --14
         hands="Gende. Gages +1", --7
@@ -124,8 +124,6 @@ function init_gear_sets()
         })
 
     sets.precast.FC['Healing Magic'] = set_combine(sets.precast.FC, {
-        main="Oranyan",
-        sub="Clerisy Strap +1",
         head="Vanya Hood", --7
         legs="Ebers Pant. +1",
         back="Perimede Cape",
@@ -134,8 +132,6 @@ function init_gear_sets()
     sets.precast.FC.StatusRemoval = sets.precast.FC['Healing Magic']
 
     sets.precast.FC.Cure = set_combine(sets.precast.FC['Healing Magic'], {
-        main="Oranyan",
-        sub="Clerisy Strap +1",
         ammo="Impatiens",
         head="Piety Cap +1", --13
         ear1="Nourish. Earring +1", --4
@@ -156,11 +152,8 @@ function init_gear_sets()
     -- Default set for any weaponskill that isn't any more specifically defined
     sets.precast.WS = {
         ammo="Floestone",
-        head="Chironic Hat",
         body="Ayanmo Corazza +2",
-        hands="Chironic Gloves",
-        legs="Aya. Cosciales +1",
-        feet="Chironic Slippers",
+        legs="Aya. Cosciales +2",
         neck="Fotia Gorget",
         ear1="Moonshade Earring",
         ear2="Telos Earring",
@@ -184,7 +177,6 @@ function init_gear_sets()
         body="Vedic Coat",
         hands="Fanatic Gloves",
         legs="Gyve Trousers",
-        feet="Chironic Slippers",
         neck="Baetyl Pendant",
         ear1="Friomisi Earring",
         ear2="Regal Earring",
@@ -257,31 +249,33 @@ function init_gear_sets()
     sets.midcast.CureMelee = sets.midcast.CureSolace
 
     sets.midcast.StatusRemoval = {
-        main="Oranyan",
-        sub="Clemency Grip",
-        head="Ebers Cap +1",
-        body="Ebers Bliaud +1",
-        hands="Theophany Mitts +3",
-        legs="Piety Pantaln. +1",
-        feet="Vanya Clogs",
-        neck="Incanter's Torque",
-        ear2="Healing Earring",
+        main="Yagrush",
+        sub="Chanter's Shield",
+        head="Vanya Hood",
+        body="Inyanga Jubbah +2",
+        hands="Fanatic Gloves",
+        legs="Aya. Cosciales +2",
+        feet="Medium's Sabots",
+        neck="Orunmila's Torque",
+        ear1="Loquacious Earring",
+        ear2="Etiolation Earring",
         ring1="Haoma's Ring",
         ring2="Haoma's Ring",
-        back="Mending Cape",
+        back="Alaunus's Cape",
         waist="Witful Belt",
         }
         
     sets.midcast.Cursna = set_combine(sets.midcast.StatusRemoval, {
-        main="Gada",
-        sub="Genmei Shield",
-        head="Vanya Hood",
+        main="Yagrush",
+        sub="Chanter's Shield",
+		body="Ebers Bliaud +1",
         hands="Fanatic Gloves", --15
         legs="Th. Pant. +3", --21
         feet="Vanya Clogs", --5
         --feet="Gende. Galosh. +1", --10
         neck="Debilis Medallion", --15
         ear1="Beatific Earring",
+        ear2="Healing Earring",
         ring1="Haoma's Ring", --15
         ring2="Haoma's Ring", --15
         back="Alaunus's Cape", --25
@@ -381,7 +375,6 @@ function init_gear_sets()
         body="Vanya Robe",
         hands="Inyan. Dastanas +2",
         legs="Th. Pant. +3",
-        feet="Chironic Slippers",
         neck="Incanter's Torque",
         ear1="Hermetic Earring",
         ear2="Regal Earring",
@@ -518,7 +511,8 @@ function init_gear_sets()
 
 
     sets.idle.Town = set_combine(sets.idle, {
-        main="Sindri",
+        main="Yagrush",
+		sub="Ammurapi Shield",
         head="Ebers Cap +1",
         body="Theo. Briault +2",
         hands="Theophany Mitts +3",
@@ -558,11 +552,8 @@ function init_gear_sets()
         main="Sindri",
         sub="Genmei Shield",
         ammo="Vanir Battery",
-        head="Chironic Hat",
         body="Ayanmo Corazza +2",
-        hands="Chironic Gloves",
-        legs="Aya. Cosciales +1",
-        feet="Chironic Slippers",
+        legs="Aya. Cosciales +2",
         neck="Asperity Necklace",
         ear1="Cessance Earring",
         ear2="Brutal Earring",
