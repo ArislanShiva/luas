@@ -229,7 +229,7 @@ function init_gear_sets()
 
     sets.precast.WS['Jishnu\'s Radiance'] = set_combine(sets.precast.WS, {
         head="Mummu Bonnet +1",
-        body="Adbona Kaftan",
+        body="Abnoba Kaftan",
         hands="Mummu Wrists +2",
         legs="Mummu Kecks +1",
         feet="Thereoid Greaves",
@@ -328,7 +328,7 @@ function init_gear_sets()
         body="Orion Jerkin +3",
         hands=gear.Adhemar_C_hands,
         legs=gear.Adhemar_C_legs,
-        feet=gear.Herc_RA_feet,
+        feet="Meg. Jam. +2",
         neck="Iskur Gorget",
         ear1="Enervating Earring",
         ear2="Telos Earring",
@@ -340,7 +340,6 @@ function init_gear_sets()
     
     sets.midcast.RA.Acc = set_combine(sets.midcast.RA, {
         hands="Meg. Gloves +2",
-        feet="Meg. Jam. +2",
         ring2="Hajduk Ring +1",
         })
 
@@ -1059,5 +1058,5 @@ function select_default_macro_book()
 end
 
 function set_lockstyle()
-    send_command('wait 2; input /lockstyleset 5')
+    send_command('wait 2; input /lockstyleset 1')
 end

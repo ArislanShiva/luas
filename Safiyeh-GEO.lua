@@ -121,7 +121,7 @@ function init_gear_sets()
         hands="Merlinic Dastanas", --7
         legs="Geomancy Pants +3", --15
         feet="Regal Pumps +1", --7
-		neck="Voltsurge Torque", --4
+		neck="Baetyl Pendant", --4
         ear1="Loquacious Earring", --2
         ear2="Etiolation Earring", --1
         ring1="Kishar Ring", --4
@@ -342,7 +342,7 @@ function init_gear_sets()
         hands="Amalric Gages",
         legs="Merlinic Shalwar",
         feet="Merlinic Crackows",
-        neck="Mizu. Kubikazari",
+		neck="Baetyl Pendant",
         ear1="Barkarole Earring",
         ear2="Regal Earring",
         ring1="Shiva Ring",
@@ -383,7 +383,7 @@ function init_gear_sets()
 
     sets.idle = {
         main="Bolelabunga",
-        sub="Genbu's Shield",
+        sub="Genmei Shield",
         head="Befouled Crown",
         body="Jhakri Robe +2",
         hands="Bagua Mitaines +1",
@@ -403,7 +403,7 @@ function init_gear_sets()
         })
 
     sets.idle.DT = set_combine(sets.idle, {
-        sub="Genbu's Shield", --10/0
+        sub="Genmei Shield", --10/0
         body="Mallquis Saio +2", --8/8
         hands="Geo. Mitaines +3", --3/0
         feet="Azimuth Gaiters +1", --4/0

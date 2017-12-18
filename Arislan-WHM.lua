@@ -63,6 +63,7 @@ function user_setup()
     send_command('bind ^numpad8 input /ws "Hexa Strike" <t>')
     send_command('bind ^numpad9 input /ws "Realmrazer" <t>')
     send_command('bind ^numpad1 input /ws "Flash Nova" <t>')
+    send_command('bind ^numpad0 input /ws "Mystic Boon" <t>')
 
     select_default_macro_book()
     set_lockstyle()
@@ -88,6 +89,7 @@ function user_unload()
     send_command('unbind ^numpad8')
     send_command('unbind ^numpad9')
     send_command('unbind ^numpad1')
+    send_command('unbind ^numpad0')
 end
 
 -- Define sets and vars used by this job file.
@@ -103,7 +105,7 @@ function init_gear_sets()
     sets.precast.FC = {
     --    /SCH --3
         main="Sucellus", --5
-        sub="Chanter's Shield +1", --8
+        sub="Chanter's Shield", --8
         ammo="Sapience Orb", --2
         body="Inyanga Jubbah +2", --14
         hands="Gende. Gages +1", --7
@@ -114,7 +116,7 @@ function init_gear_sets()
         ear2="Enchntr. Earring +1", --2
         ring1="Kishar Ring", --4
         ring2="Weather. Ring +1", --5
-        back="Alaunus's Cape", --10
+        back=gear.WHM_FC_Cape, --10
         waist="Witful Belt", --3/(2)
         }
         
@@ -152,14 +154,18 @@ function init_gear_sets()
     -- Default set for any weaponskill that isn't any more specifically defined
     sets.precast.WS = {
         ammo="Floestone",
+		head="Aya. Zucchetto +1",
         body="Ayanmo Corazza +2",
+		hands="Chironic Gloves",
         legs="Aya. Cosciales +2",
+		feet="Battlecast Gaiters",
         neck="Fotia Gorget",
         ear1="Moonshade Earring",
         ear2="Telos Earring",
         ring1="Rufescent Ring",
         ring2="Shukuyu Ring",
         waist="Fotia Belt",
+        back=gear.WHM_TP_Cape,
         }
 
     sets.precast.WS['Black Halo'] = set_combine(sets.precast.WS, {
@@ -197,7 +203,7 @@ function init_gear_sets()
         ear1="Loquacious Earring",
         ear2="Etiolation Earring",
         ring1="Kishar Ring",
-        back="Alaunus's Cape",
+        back=gear.WHM_FC_Cape,
         waist="Witful Belt",
         } -- Haste
     
@@ -218,11 +224,20 @@ function init_gear_sets()
         ear2="Glorious Earring", -- (+2)/(-5)
         ring1="Lebeche Ring", --3/(-5)
         ring2="Haoma's Ring",
-        back="Alaunus's Cape",
+        back=gear.WHM_FC_Cape,
         waist="Bishop's Sash",
         } -- 16% Cure Potency from JP
 
-    sets.midcast.Cure = sets.midcast.CureSolace
+    sets.midcast.CureSolaceWeather = set_combine(sets.midcast.CureSolace, {
+        main="Chatoyant Staff", --10
+        sub="Achaq Grip", --0/(-4)
+        back="Mending Cape", --(-6)
+        waist="Hachirin-no-Obi",
+        })
+
+    sets.midcast.CureNormal = set_combine(sets.midcast.CureSolace, {
+        body="Theo. Briault +3", --0(+6)/(-6)
+        })
 
     sets.midcast.CureWeather = set_combine(sets.midcast.Cure, {
         main="Chatoyant Staff", --10
@@ -231,22 +246,26 @@ function init_gear_sets()
         waist="Hachirin-no-Obi",
         })
 
-    sets.midcast.Curaga = set_combine(sets.midcast.Cure, {
-        body="Kaykaus Bliaut", --5(+3)
+    sets.midcast.CuragaNormal = set_combine(sets.midcast.Cure, {
+        body="Theo. Briaut +3", --0(+6)/(-6)
         neck="Nuna Gorget +1",
         ring1="Levia. Ring +1",
         ring2="Levia. Ring +1",
         waist="Luminary Sash",
         })
 
-    sets.midcast.CuragaWeather = set_combine(sets.midcast.Curaga, {
+    sets.midcast.CuragaWeather = {
         main="Chatoyant Staff", --10
         sub="Achaq Grip", --0/(-4)
+        body="Theo. Briaut +3", --0(+6)/(-6)
+        neck="Nuna Gorget +1",
         back="Twilight Cape",
+        ring1="Levia. Ring +1",
+        ring2="Levia. Ring +1",
         waist="Hachirin-no-Obi",
-        })
+        }
 
-    sets.midcast.CureMelee = sets.midcast.CureSolace
+    --sets.midcast.CureMelee = sets.midcast.CureSolace
 
     sets.midcast.StatusRemoval = {
         main="Yagrush",
@@ -261,7 +280,7 @@ function init_gear_sets()
         ear2="Etiolation Earring",
         ring1="Haoma's Ring",
         ring2="Haoma's Ring",
-        back="Alaunus's Cape",
+        back=gear.WHM_FC_Cape,
         waist="Witful Belt",
         }
         
@@ -278,7 +297,7 @@ function init_gear_sets()
         ear2="Healing Earring",
         ring1="Haoma's Ring", --15
         ring2="Haoma's Ring", --15
-        back="Alaunus's Cape", --25
+        back=gear.WHM_FC_Cape, --25
         waist="Bishop's Sash",
         })
 
@@ -380,7 +399,7 @@ function init_gear_sets()
         ear2="Regal Earring",
         ring1="Kishar Ring",
         ring2="Stikini Ring",
-        back="Alaunus's Cape",
+        back=gear.WHM_FC_Cape,
         waist="Refoccilation Stone",
         }
 
@@ -388,7 +407,7 @@ function init_gear_sets()
         main=gear.Grioavolr_MB,
         sub="Niobid Strap",
         head="Inyanga Tiara +2",
-        body="Witching Robe",
+        body="Vedic Coat",
         legs="Th. Pant. +3",
         neck="Sanctity Necklace",
         ear1="Friomisi Earring",
@@ -413,7 +432,7 @@ function init_gear_sets()
         ear2="Regal Earring",
         ring1="Evanescence Ring",
         ring2="Stikini Ring",
-        back="Alaunus's Cape",
+        back=gear.WHM_FC_Cape,
         waist="Yamabuki-no-Obi",
         }
 
@@ -423,7 +442,7 @@ function init_gear_sets()
         sub="Enki Strap",
         ammo="Quartz Tathlum +1",
         head="Befouled Crown",
-        body="Theo. Briault +2",
+        body="Theo. Briault +3",
         hands="Inyan. Dastanas +2",
         legs="Chironic Hose",
         feet="Theo. Duckbills +3",
@@ -432,7 +451,7 @@ function init_gear_sets()
         ear2="Regal Earring",
         ring1="Kishar Ring",
         ring2="Stikini Ring",
-        back="Alaunus's Cape",
+        back=gear.WHM_FC_Cape,
         waist="Luminary Sash",
         }
 
@@ -472,7 +491,7 @@ function init_gear_sets()
         sub="Genmei Shield",
         ammo="Homiliary",
         head="Befouled Crown",
-        body="Witching Robe",
+        body="Theo. Briault +3",
         hands="Inyan. Dastanas +2",
         legs="Assid. Pants +1",
         feet="Herald's Gaiters",
@@ -514,7 +533,6 @@ function init_gear_sets()
         main="Yagrush",
 		sub="Ammurapi Shield",
         head="Ebers Cap +1",
-        body="Theo. Briault +2",
         hands="Theophany Mitts +3",
         legs="Th. Pant. +3",
         neck="Debilis Medallion",
@@ -522,7 +540,7 @@ function init_gear_sets()
         ring2="Weather. Ring +1",
         ear1="Nourish. Earring +1",
         ear2="Glorious Earring",
-        back="Alaunus's Cape",
+        back=gear.WHM_FC_Cape,
         })
     
     sets.idle.Weak = sets.idle.DT
@@ -549,18 +567,21 @@ function init_gear_sets()
     
     -- Basic set for if no TP weapon is defined.
     sets.engaged = {
-        main="Sindri",
-        sub="Genmei Shield",
+        main="Yagrush",
+        sub="Tamaxchi",
         ammo="Vanir Battery",
+		head="Aya. Zucchetto +1",
         body="Ayanmo Corazza +2",
+		hands="Chironic Gloves",
         legs="Aya. Cosciales +2",
+		feet="Battlecast Gaiters",
         neck="Asperity Necklace",
-        ear1="Cessance Earring",
+        ear1="Eabani Earring",
         ear2="Brutal Earring",
         ring1="Ilabrat Ring",
         ring2="Hetairoi Ring",
-        waist="Windbuffet Belt +1",
-        back="Relucent Cape",
+        waist="Shetal Stone",
+        back=gear.WHM_TP_Cape,
         }
 
     sets.engaged.DW = set_combine(sets.engaged, {
@@ -604,13 +625,6 @@ function job_post_midcast(spell, action, spellMap, eventArgs)
     -- Apply Divine Caress boosting items as highest priority over other gear, if applicable.
     if spellMap == 'StatusRemoval' and buffactive['Divine Caress'] then
         equip(sets.buff['Divine Caress'])
-    end
-    if spell.skill == 'Healing Magic' and (world.weather_element == 'Light' or world.day_element == 'Light') then
-        if spellMap == 'Cure' then
-            equip(sets.midcast.CureWeather)
-        elseif spellMap == 'Curaga' then
-            equip(sets.midcast.CuragaWeather)
-        end
     end
     if spellMap == 'Banish' or spellMap == "Holy" then
         if (world.weather_element == 'Light' or world.day_element == 'Light') then
@@ -688,10 +702,28 @@ end
 -- Custom spell mapping.
 function job_get_spell_map(spell, default_spell_map)
     if spell.action_type == 'Magic' then
-        if (default_spell_map == 'Cure' or default_spell_map == 'Curaga') and player.status == 'Engaged' then
-            return "CureMelee"
-        elseif default_spell_map == 'Cure' and state.Buff['Afflatus Solace'] then
-            return "CureSolace"
+--      if (default_spell_map == 'Cure' or default_spell_map == 'Curaga') and player.status == 'Engaged' then
+--          return "CureMelee"
+        if default_spell_map == 'Cure' then
+			if buffactive['Afflatus Solace'] then
+				if (world.weather_element == 'Light' or world.day_element == 'Light') then
+					return "CureSolaceWeather"
+				else
+					return "CureSolace"
+				end
+			else
+				if (world.weather_element == 'Light' or world.day_element == 'Light') then
+					return "CureWeather"
+				else
+					return "CureNormal"
+				end				
+			end
+        elseif default_spell_map == 'Curaga' then
+			if (world.weather_element == 'Light' or world.day_element == 'Light') then
+				return "CuragaWeather"
+			else
+				return "CuragaNormal"
+			end
         elseif spell.skill == "Enfeebling Magic" then
             if spell.type == "WhiteMagic" then
                 return "MndEnfeebles"

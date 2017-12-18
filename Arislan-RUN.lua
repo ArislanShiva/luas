@@ -256,7 +256,7 @@ function init_gear_sets()
     sets.precast.WS = {
         ammo="Knobkierrie",
         head="Lilitu Headpiece",
-        body=gear.Herc_WS_body,
+        body="Meg. Cuirie +2",
         hands="Meg. Gloves +2",
         legs=gear.Herc_WS_legs,
         feet=gear.Herc_TA_feet,

@@ -319,7 +319,7 @@ function init_gear_sets()
         neck="Fotia Gorget",
         ear1="Moonshade Earring",
         ear2="Ishvara Earring",
-        ring1="Regal Ring",
+        ring1="Shukuyu Ring",
         ring2="Ilabrat Ring",
         back=gear.BLU_WS2_Cape,
         waist="Fotia Belt",
@@ -350,7 +350,6 @@ function init_gear_sets()
         hands=gear.Adhemar_A_hands,
         feet=gear.Herc_STP_feet,
         ear2="Telos Earring",
-        ring1="Regal Ring",
         })
 
     sets.precast.WS['Vorpal Blade'] = sets.precast.WS['Chant du Cygne']
@@ -361,7 +360,7 @@ function init_gear_sets()
         body="Assim. Jubbah +3",
         hands=gear.Adhemar_B_hands,
         neck="Caro Necklace",
-        ring1="Regal Ring",
+        ring1="Shukuyu Ring",
         ring2="Rufescent Ring",
         waist="Prosilio Belt +1",
         })
@@ -385,7 +384,7 @@ function init_gear_sets()
         neck="Fotia Gorget",
         ear1="Moonshade Earring",
         ear2="Brutal Earring",
-        ring1="Regal Ring",
+        ring1="Rufescent Ring",
         ring2="Epona's Ring",
         back=gear.BLU_WS1_Cape,
         waist="Fotia Belt",
@@ -399,7 +398,6 @@ function init_gear_sets()
         feet=gear.Herc_STP_feet,
         ear1="Cessance Earring",
         ear2="Telos Earring",
-        ring2="Rufescent Ring",
         })
 
     sets.precast.WS['Expiacion'] = sets.precast.WS['Savage Blade']
@@ -420,8 +418,8 @@ function init_gear_sets()
         neck="Fotia Gorget",
         ear1="Moonshade Earring",
         ear2="Regal Earring",
-        ring1="Archon Ring",
-        ring2="Rufescent Ring",
+        ring1="Rufescent Ring",
+        ring2="Archon Ring",
         back=gear.BLU_MAB_Cape,
         waist="Fotia Belt",
         }
@@ -474,8 +472,8 @@ function init_gear_sets()
         legs="Jhakri Slops +2",
         feet="Jhakri Pigaches +2",
         neck="Caro Necklace", 
-        ring1="Regal Ring",
-        ring2="Shukuyu Ring",
+        ring1="Shukuyu Ring",
+		ring2="Ilabrat Ring",
         back=gear.BLU_WS2_Cape,
         waist="Prosilio Belt +1",
         }
@@ -549,7 +547,7 @@ function init_gear_sets()
 
     sets.midcast['Blue Magic'].MagicalDark = set_combine(sets.midcast['Blue Magic'].Magical, {
         head="Pixie Hairpin +1",
-        ring1="Archon Ring",
+        ring2="Archon Ring",
         })
 
     sets.midcast['Blue Magic'].MagicalLight = set_combine(sets.midcast['Blue Magic'].Magical, {
@@ -562,11 +560,11 @@ function init_gear_sets()
         })
 
     sets.midcast['Blue Magic'].MagicalDex = set_combine(sets.midcast['Blue Magic'].Magical, {
-        ring1="Regal Ring",
+        ring1="Ramuh Ring +1",
         ring2="Ilabrat Ring",
         })
 
-    sets.midcast['Blue Magic'].MagicalVit = set_combine(sets.midcast['Blue Magic'].Magical, {ring1="Regal Ring"})
+    sets.midcast['Blue Magic'].MagicalVit = set_combine(sets.midcast['Blue Magic'].Magical, {})
     sets.midcast['Blue Magic'].MagicalChr = set_combine(sets.midcast['Blue Magic'].Magical, {ear1="Regal Earring", ear2="Enchntr. Earring +1"})
 
     sets.midcast['Blue Magic'].MagicAccuracy = {
@@ -579,7 +577,7 @@ function init_gear_sets()
         neck="Erra Pendant",
         ear1="Digni. Earring",
         ear2="Regal Earring",
-        ring1="Regal Ring",
+        ring1="Stikini Ring",
         ring2="Weather. Ring +1",
         back=gear.BLU_MAB_Cape,
         waist="Luminary Sash",
@@ -716,7 +714,7 @@ function init_gear_sets()
         neck="Combatant's Torque",
         ear1="Eabani Earring",
         ear2="Telos Earring",
-        ring1="Regal Ring",
+        ring1="Ramuh Ring +1",
         ring2="Weather. Ring +1",
         back=gear.BLU_WS1_Cape,
         waist="Windbuffet Belt +1",
@@ -784,8 +782,7 @@ function init_gear_sets()
         feet=gear.Herc_STP_feet,
         ear1="Cessance Earring",
         ear2="Telos Earring",
-        ring1="Regal Ring",
-        ring2="Ramuh Ring +1",
+        ring1="Ramuh Ring +1",
         waist="Olseni Belt",
         })
 
@@ -827,8 +824,7 @@ function init_gear_sets()
         head="Carmine Mask +1",
         feet=gear.Herc_STP_feet,
         ear1="Cessance Earring",
-        ring1="Regal Ring",
-        ring2="Ramuh Ring +1",
+        ring1="Ramuh Ring +1",
         waist="Olseni Belt",
         })
 
@@ -872,8 +868,7 @@ function init_gear_sets()
         legs="Carmine Cuisses +1",
         feet=gear.Herc_STP_feet,
         ear1="Cessance Earring",
-        ring1="Regal Ring",
-        ring2="Ramuh Ring +1",
+        ring1="Ramuh Ring +1",
         waist="Olseni Belt",
         })
 
@@ -917,8 +912,7 @@ function init_gear_sets()
         legs="Carmine Cuisses +1",
         feet=gear.Herc_STP_feet,
         ear1="Cessance Earring",
-        ring1="Regal Ring",
-        ring2="Ramuh Ring +1",
+        ring1="Ramuh Ring +1",
         waist="Olseni Belt",
         })
 
@@ -959,8 +953,7 @@ function init_gear_sets()
         head="Carmine Mask +1",
         legs="Carmine Cuisses +1",
         feet=gear.Herc_STP_feet,
-        ring1="Regal Ring",
-        ring2="Ramuh Ring +1",
+        ring1="Ramuh Ring +1",
         waist="Olseni Belt",
         })
 

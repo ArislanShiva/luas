@@ -4,13 +4,13 @@
 
 --[[    Custom Features:
 
-        QuickDraw Selector    Cycle through available primary and secondary shot types,
+        QuickDraw Selector  Cycle through available primary and secondary shot types,
                             and trigger with a single macro
-        Haste Detection        Detects current magic haste level and equips corresponding engaged set to
+        Haste Detection     Detects current magic haste level and equips corresponding engaged set to
                             optimize delay reduction (automatic)
-        Haste Mode            Toggles between Haste II and Haste I recieved, used by Haste Detection [WinKey-H]
-        Capacity Pts. Mode    Capacity Points Mode Toggle [WinKey-C]
-        Auto. Lockstyle        Automatically locks specified equipset on file load
+        Haste Mode          Toggles between Haste II and Haste I recieved, used by Haste Detection [WinKey-H]
+        Capacity Pts. Mode  Capacity Points Mode Toggle [WinKey-C]
+        Auto. Lockstyle     Automatically locks specified equipset on file load
 --]]
 
 
@@ -476,15 +476,15 @@ function init_gear_sets()
         }
 
     sets.midcast.CorsairShot.Resistant = set_combine(sets.midcast.CorsairShot, {
-        head="Carmine Mask +1",
+        head="Laksa. Tricorne +2",
         body="Mummu Jacket +2",
-        hands="Mummu Wrists +2",
+        hands="Laksa. Gants +2",
         legs="Mummu Kecks +1",
-        feet="Mummu Gamash. +1",
+        feet="Laksa. Boots +2",
         neck="Sanctity Necklace",
         ear1="Hermetic Earring",
         ear2="Digni. Earring",
-        ring1="Stikini Ring",
+        ring1="Regal Ring",
         ring2="Weather. Ring +1",
         waist="Kwahu Kachina Belt",
         })
@@ -500,7 +500,7 @@ function init_gear_sets()
         body="Mummu Jacket +2",
         hands=gear.Adhemar_C_hands,
         legs=gear.Adhemar_C_legs,
-        feet=gear.Herc_RA_feet,
+        feet="Meg. Jam. +2",
         neck="Iskur Gorget",
         ear1="Enervating Earring",
         ear2="Telos Earring",
@@ -515,7 +515,6 @@ function init_gear_sets()
         body="Laksa. Frac +3",
         hands="Meg. Gloves +2",
         legs="Laksa. Trews +3",
-        feet="Meg. Jam. +2",
         ring2="Hajduk Ring +1",
         waist="Kwahu Kachina Belt",
         })

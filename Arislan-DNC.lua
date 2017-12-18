@@ -389,7 +389,6 @@ function init_gear_sets()
 
     sets.precast.WS['Rudra\'s Storm'] = set_combine(sets.precast.WS, {
         ammo="Charis Feather",
-        body=gear.Herc_WS_body,
         neck="Caro Necklace",
         waist="Grunfeld Rope",
         })
@@ -769,7 +768,7 @@ function init_gear_sets()
 
 --    sets.buff['Saber Dance'] = {legs="Horos Tights +1"}
 --    sets.buff['Fan Dance'] = {body="Horos Bangles +1"}
-    sets.buff['Climactic Flourish'] = {head="Maculele Tiara +1", body="Meg. Cuirie +2"}
+    sets.buff['Climactic Flourish'] = {head="Maculele Tiara +1"} --body="Meg. Cuirie +2"}
     sets.buff['Closed Position'] = {feet="Horos Toe Shoes +1"}
 
     sets.buff.Doom = {ring1="Eshmun's Ring", ring2="Eshmun's Ring", waist="Gishdubar Sash"}
