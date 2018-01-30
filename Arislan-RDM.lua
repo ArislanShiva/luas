@@ -113,6 +113,18 @@ function user_unload()
     send_command('unbind ^numpad9')
     send_command('unbind ^numpad4')
     send_command('unbind ^numpad1')
+
+    send_command('unbind #`')
+    send_command('unbind #1')
+    send_command('unbind #2')
+    send_command('unbind #3')
+    send_command('unbind #4')
+    send_command('unbind #5')
+    send_command('unbind #6')
+    send_command('unbind #7')
+    send_command('unbind #8')
+    send_command('unbind #9')
+    send_command('unbind #0')
 end
 
 -- Define sets and vars used by this job file.
@@ -392,7 +404,10 @@ function init_gear_sets()
         waist="Siegel Sash",
         })
 
-    sets.midcast['Phalanx'] = set_combine(sets.midcast['Enhancing Magic'], {})
+    sets.midcast['Phalanx'] = set_combine(sets.midcast.EnhancingDuration, {
+        body=gear.Taeon_Phalanx_body, --3
+        feet=gear.Taeon_Phalanx_feet, --3
+		})
 
     sets.midcast.Aquaveil = set_combine(sets.midcast['Enhancing Magic'], {
         head="Amalric Coif",
@@ -589,7 +604,7 @@ function init_gear_sets()
         main="Mafic Cudgel", --10/0
         sub="Beatific Shield +1", --4/29
         ammo="Staunch Tathlum", --2/2
-        head="Gende. Caubeen +1", --4/4
+		head="Aya. Zucchetto +2", --3/3
         body="Ayanmo Corazza +2", --6/6
         neck="Loricate Torque +1", --6/6
         ear1="Genmei Earring", --2/0

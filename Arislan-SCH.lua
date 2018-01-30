@@ -127,6 +127,18 @@ function user_unload()
     send_command('unbind @s')
     send_command('unbind @w')
     send_command('unbind ^numpad0')
+
+    send_command('unbind #`')
+    send_command('unbind #1')
+    send_command('unbind #2')
+    send_command('unbind #3')
+    send_command('unbind #4')
+    send_command('unbind #5')
+    send_command('unbind #6')
+    send_command('unbind #7')
+    send_command('unbind #8')
+    send_command('unbind #9')
+    send_command('unbind #0')
 end
 
 

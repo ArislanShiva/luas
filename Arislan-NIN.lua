@@ -44,19 +44,21 @@ end
 
 -- Setup vars that are user-dependent.  Can override this function in a sidecar file.
 function user_setup()
-    state.OffenseMode:options('STP', 'Normal', 'LowAcc', 'MidAcc', 'HighAcc', 'Fodder')
+    state.OffenseMode:options('STP', 'Normal', 'LowAcc', 'MidAcc', 'HighAcc')
     state.HybridMode:options('Normal', 'DT')
     state.WeaponskillMode:options('Normal', 'Acc')
     state.CastingMode:options('Normal', 'Resistant')
     state.IdleMode:options('Normal', 'DT')
     state.PhysicalDefenseMode:options('PDT', 'Evasion')
 
+    state.MagicBurst = M(false, 'Magic Burst')
     state.CP = M(false, "Capacity Points Mode")
     state.TH = M(false, "Treasure Hunter Mode")
 
     -- Additional local binds
     include('Global-Binds.lua')
 
+    send_command('bind !` gs c toggle MagicBurst')
     send_command('bind ^- input /ja "Yonin" <me>')
     send_command('bind ^= input /ja "Innin" <me>')
     send_command('bind ^, input /nin "Monomi: Ichi" <me>')
@@ -91,6 +93,7 @@ function user_setup()
 end
 
 function user_unload()
+    send_command('unbind !`')
     send_command('unbind ^-')
     send_command('unbind ^=')
 	send_command('unbind @/')
@@ -112,6 +115,18 @@ function user_unload()
     send_command('unbind ^numpad1')
     send_command('unbind ^numpad2')
     send_command('unbind ^numpad3')
+
+    send_command('unbind #`')
+    send_command('unbind #1')
+    send_command('unbind #2')
+    send_command('unbind #3')
+    send_command('unbind #4')
+    send_command('unbind #5')
+    send_command('unbind #6')
+    send_command('unbind #7')
+    send_command('unbind #8')
+    send_command('unbind #9')
+    send_command('unbind #0')
 end
 
 -- Define sets and vars used by this job file.
@@ -135,8 +150,8 @@ function init_gear_sets()
         }
 
     sets.precast.JA['Provoke'] = sets.Enmity
---  sets.precast.JA['Mijin Gakure'] = {legs="Mochizuki Hakama"}
---  sets.precast.JA['Futae'] = {legs="Iga Tekko +2"}
+--  sets.precast.JA['Mijin Gakure'] = {legs="Mochi. Hakama +1"}
+    sets.precast.JA['Futae'] = {legs="Hattori Tekko +1"}
     sets.precast.JA['Sange'] = {body="Mochi. Chainmail +1"}
 
     sets.precast.Waltz = {
@@ -192,7 +207,7 @@ function init_gear_sets()
         ear2="Ishvara Earring",
         ring1="Regal Ring",
         ring2="Shukuyu Ring",
-        back=gear.NIN_TP_Cape,
+        back=gear.NIN_WS1_Cape,
         waist="Fotia Belt",
         } -- default set
 
@@ -208,8 +223,9 @@ function init_gear_sets()
         ammo="Yetshila",
         head=gear.Adhemar_B_head,
 		hands="Mummu Wrists +2",
-		feet="Mummu Gamash. +1",
+		feet="Mummu Gamash. +2",
         ring2="Mummu Ring",
+        back=gear.NIN_WS1_Cape,
         })
 
     sets.precast.WS['Blade: Ten'] = set_combine(sets.precast.WS, {
@@ -217,9 +233,12 @@ function init_gear_sets()
         ear2="Lugra Earring +1",
         ring2="Ilabrat Ring",
         waist="Grunfeld Rope",
+        back=gear.NIN_WS1_Cape,
         })
 
     sets.precast.WS['Blade: Shun'] = set_combine(sets.precast.WS, {
+		head=gear.Adhemar_B_head,
+		body=gear.Adhemar_B_body,
         legs="Jokushu Haidate",
         ear1="Lugra Earring",
         ear2="Lugra Earring +1",
@@ -244,7 +263,7 @@ function init_gear_sets()
         ear1="Moonshade Earring",
         ear2="Friomisi Earring",
         ring1="Shiva Ring +1",
-        ring2="Shiva Ring +1",
+        ring2="Dingir Ring",
         back="Argocham. Mantle",
         waist="Eschan Stone",
         })
@@ -292,8 +311,8 @@ function init_gear_sets()
 	    head="Hachiya Hatsu. +2",
         body="Mummu Jacket +2",
         hands="Mummu Wrists +2",
-		legs="Mummu Kecks +1",
-		feet="Mummu Gamash. +1",
+		legs="Mummu Kecks +2",
+		feet="Mummu Gamash. +2",
 		neck="Sanctity Necklace",
 		ear1="Hermetic Earring",
 		ear2="Digni. Earring",
@@ -304,6 +323,7 @@ function init_gear_sets()
 
     sets.midcast.NinjutsuBuff = {
 		head="Hachiya Hatsu. +2",
+		feet="Mochi. Kyahan +1",
 		neck="Incanter's Torque",
 		ear1="Stealth Earring",
 		ring1="Stikini Ring",
@@ -313,11 +333,11 @@ function init_gear_sets()
 		}
 
     sets.midcast.RA = {
-		head="Mummu Bonnet +1",
+		head="Mummu Bonnet +2",
         body="Mummu Jacket +2",
         hands="Mummu Wrists +2",
-		legs="Mummu Kecks +1",
-		feet="Mummu Gamash. +1",
+		legs="Mummu Kecks +2",
+		feet="Mummu Gamash. +2",
 		neck="Iskur Gorget",
 		ear1="Enervating Earring",
 		ear2="Telos Earring",
@@ -354,15 +374,16 @@ function init_gear_sets()
     sets.idle.DT = set_combine(sets.idle, {
         ammo="Staunch Tathlum", --2/2
         hands=gear.Herc_DT_hands, --7/5
+        legs="Mummu Kecks +2", --5/5
         neck="Loricate Torque +1", --6/6
-        ear1="Genmei Earring", --2/0
         ring1="Gelatinous Ring +1", --7/(-1)
         ring2="Defending Ring", --10/10
         back="Moonbeam Cape", --5/5
-        waist="Flume Belt +1", --4/0
         })
 
     sets.idle.Town = set_combine(sets.idle, {
+        body=gear.Adhemar_B_body,
+        hands=gear.Adhemar_B_hands,
         neck="Combatant's Torque",
         ear1="Cessance Earring",
         ear2="Telos Earring",
@@ -381,7 +402,7 @@ function init_gear_sets()
     sets.Kiting = {feet="Danzo sune-ate"}
     
     sets.DayMovement = {feet="Danzo sune-ate"}
-    sets.NightMovement = {feet="Hachi. Kyahan +1"}
+    sets.NightMovement = {feet="Hachiya Kyahan +2"}
 
 
     --------------------------------------
@@ -441,7 +462,7 @@ function init_gear_sets()
     sets.engaged.LowHaste = {
         ammo="Seki Shuriken",
         head="Dampening Tam",
-        body="Adhemar Jacket", --5
+        body=gear.Adhemar_B_body, --6
         hands="Floral Gauntlets", --5
         legs="Samnuha Tights",
         feet="Hiza. Sune-Ate +1", --7
@@ -452,7 +473,7 @@ function init_gear_sets()
         ring2="Epona's Ring",
 		back=gear.NIN_TP_Cape,
         waist="Reiki Yotai", --7
-        } -- 33%
+        } -- 34%
 
     sets.engaged.LowAcc.LowHaste = set_combine(sets.engaged.LowHaste, {
         neck="Combatant's Torque",
@@ -482,7 +503,7 @@ function init_gear_sets()
     sets.engaged.MidHaste = {
         ammo="Seki Shuriken",
         head="Dampening Tam",
-        body="Adhemar Jacket", --5
+        body=gear.Adhemar_B_body, --6
         hands=gear.Adhemar_A_hands,
         legs="Samnuha Tights",
         feet=gear.Herc_TA_feet,
@@ -493,7 +514,7 @@ function init_gear_sets()
         ring2="Epona's Ring",
 		back=gear.NIN_TP_Cape,
         waist="Reiki Yotai", --7
-        } -- 21%
+        } -- 22%
 
     sets.engaged.LowAcc.MidHaste = set_combine(sets.engaged.MidHaste, {
         neck="Combatant's Torque",
@@ -523,8 +544,8 @@ function init_gear_sets()
     sets.engaged.HighHaste = {
         ammo="Seki Shuriken",
         head="Dampening Tam",
-        body="Adhemar Jacket", --5
-        hands=gear.Adhemar_A_hands,
+        body=gear.Adhemar_B_body, --6
+        hands=gear.Adhemar_B_hands,
         legs="Samnuha Tights",
         feet=gear.Herc_TA_feet,
         neck="Erudit. Necklace",
@@ -534,7 +555,7 @@ function init_gear_sets()
         ring2="Epona's Ring",
 		back=gear.NIN_TP_Cape,
         waist="Windbuffet Belt +1",
-        } -- 14% Gear
+        } -- 15% Gear
 
     sets.engaged.LowAcc.HighHaste = set_combine(sets.engaged.HighHaste, {
         neck="Combatant's Torque",
@@ -565,7 +586,7 @@ function init_gear_sets()
         ammo="Seki Shuriken",
         head="Dampening Tam",
         body=gear.Herc_TA_body,
-        hands=gear.Adhemar_A_hands,
+        hands=gear.Adhemar_B_hands,
         legs="Samnuha Tights",
         feet=gear.Herc_TA_feet,
         neck="Erudit. Necklace",
@@ -643,6 +664,12 @@ function init_gear_sets()
     -- Custom buff sets
     --------------------------------------
 
+    sets.magic_burst = {
+        legs="Hachiya Kyahan +2",
+		ring1="Locus Ring",
+        ring2="Mujin Band", --(5)
+        }
+
 --    sets.buff.Migawari = {body="Iga Ningi +2"}
     sets.buff.Doom = {ring1="Eshmun's Ring", ring2="Eshmun's Ring", waist="Gishdubar Sash"}
 --    sets.buff.Yonin = {}
@@ -674,6 +701,20 @@ end
 -- Run after the general midcast() is done.
 -- eventArgs is the same one used in job_midcast, in case information needs to be persisted.
 function job_post_midcast(spell, action, spellMap, eventArgs)
+    if default_spell_map == 'ElementalNinjutsu' then
+        if state.MagicBurst.value then
+            equip(sets.magic_burst)
+            if spell.english == "Impact" then
+                equip(sets.midcast.Impact)
+            end
+        end
+        if (spell.element == world.day_element or spell.element == world.weather_element) then
+            equip(sets.Obi)
+        end
+        if state.Buff.Futae then
+            equip(sets.precast.JA['Futae'])
+        end
+    end
     if state.Buff.Doom then
         equip(sets.buff.Doom)
     end
@@ -904,5 +945,5 @@ function select_default_macro_book()
 end
 
 function set_lockstyle()
-    send_command('wait 2; input /lockstyleset 6')
+    send_command('wait 2; input /lockstyleset 1')
 end

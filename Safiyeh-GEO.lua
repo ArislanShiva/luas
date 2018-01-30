@@ -115,9 +115,10 @@ function init_gear_sets()
     sets.precast.FC = {
     --  /RDM --15
         --ranged="Dunna", --3
-        main="Solstice",
+        main="Sucellus",
         sub="Chanter's Shield", --3
         head="Amalric Coif", --10
+		body="Merlinic Jubbah", --6
         hands="Merlinic Dastanas", --7
         legs="Geomancy Pants +3", --15
         feet="Regal Pumps +1", --7
@@ -126,7 +127,7 @@ function init_gear_sets()
         ear2="Etiolation Earring", --1
         ring1="Kishar Ring", --4
         ring2="Weather. Ring", --5
-        back="Lifestream Cape", --7
+        back=gear.GEO_FC_Cape, --10
         waist="Witful Belt", --3
         }
 
@@ -173,12 +174,12 @@ function init_gear_sets()
         ear2="Etiolation Earring",
         ring1="Kishar Ring",
         ring2="Weather. Ring",
-        back="Lifestream Cape",
+        back=gear.GEO_FC_Cape,
         waist="Witful Belt",
         } -- Haste
     
    sets.midcast.Geomancy = {
-        main="Solstice",
+        main="Sucellus",
         sub="Chanter's Shield",
         head="Vanya Hood",
         body="Azimuth Coat +1",
@@ -291,10 +292,10 @@ function init_gear_sets()
         feet="Geo. Sandals +3",
         neck="Erra Pendant",
         ear1="Barkarole Earring",
-        ear2="Digni. Earring",
+        ear2="Regal Earring",
         ring1="Kishar Ring",
         ring2="Stikini Ring",
-        back="Refraction Cape",
+        back=gear.GEO_FC_Cape,
         waist="Luminary Sash",
        } -- MND/Magic accuracy
     
@@ -302,7 +303,7 @@ function init_gear_sets()
         ear1="Barkarole Earring",
         ring1="Shiva Ring",
         ring2="Shiva Ring",
-        back="Refraction Cape",
+        back=gear.GEO_MAB_Cape,
         }) -- INT/Magic accuracy
 
     sets.midcast['Dark Magic'] = {
@@ -318,11 +319,12 @@ function init_gear_sets()
         ear2="Digni. Earring",
         ring1="Stikini Ring",
         ring2="Stikini Ring",
-        back="Refraction Cape",
+        back=gear.GEO_MAB_Cape,
         waist="Luminary Sash",
         }
     
     sets.midcast.Drain = set_combine(sets.midcast['Dark Magic'], {
+		head="Bagua Galero +1",
         ring1="Evanescence Ring",
         waist="Fucho-no-Obi",
         })
@@ -419,6 +421,8 @@ function init_gear_sets()
     -- .Pet sets are for when Luopan is present.
     sets.idle.Pet = set_combine(sets.idle, { 
         -- Pet: -DT (37.5% to cap) / Pet: Regen
+        main="Sucellus", --3/3
+        sub="Genmei Shield",
         --ranged="Dunna", --5/0
         head="Telchine Cap", --0/3
         body="Telchine Chas.", --0/3
@@ -496,6 +500,7 @@ function init_gear_sets()
     sets.magic_burst = {
         head="Merlinic Hood", --5
         hands="Amalric Gages", --(5)
+		body="Merlinic Jubbah", --10
         legs="Merlinic Shalwar", --11
         neck="Mizu. Kubikazari", --10
         ring2="Mujin Band", --(5)

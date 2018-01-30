@@ -90,6 +90,18 @@ function user_unload()
     send_command('unbind ^numpad9')
     send_command('unbind ^numpad1')
     send_command('unbind ^numpad0')
+
+    send_command('unbind #`')
+    send_command('unbind #1')
+    send_command('unbind #2')
+    send_command('unbind #3')
+    send_command('unbind #4')
+    send_command('unbind #5')
+    send_command('unbind #6')
+    send_command('unbind #7')
+    send_command('unbind #8')
+    send_command('unbind #9')
+    send_command('unbind #0')
 end
 
 -- Define sets and vars used by this job file.
@@ -154,7 +166,7 @@ function init_gear_sets()
     -- Default set for any weaponskill that isn't any more specifically defined
     sets.precast.WS = {
         ammo="Floestone",
-		head="Aya. Zucchetto +1",
+		head="Aya. Zucchetto +2",
         body="Ayanmo Corazza +2",
 		hands="Chironic Gloves",
         legs="Aya. Cosciales +2",
@@ -247,7 +259,7 @@ function init_gear_sets()
         })
 
     sets.midcast.CuragaNormal = set_combine(sets.midcast.Cure, {
-        body="Theo. Briaut +3", --0(+6)/(-6)
+        body="Theo. Briault +3", --0(+6)/(-6)
         neck="Nuna Gorget +1",
         ring1="Levia. Ring +1",
         ring2="Levia. Ring +1",
@@ -257,7 +269,7 @@ function init_gear_sets()
     sets.midcast.CuragaWeather = {
         main="Chatoyant Staff", --10
         sub="Achaq Grip", --0/(-4)
-        body="Theo. Briaut +3", --0(+6)/(-6)
+        body="Theo. Briault +3", --0(+6)/(-6)
         neck="Nuna Gorget +1",
         back="Twilight Cape",
         ring1="Levia. Ring +1",
@@ -507,7 +519,7 @@ function init_gear_sets()
     sets.idle.DT = set_combine(sets.idle, {
         main="Mafic Cudgel", --10/0
         sub="Genmei Shield", --10/0
-        head="Gende. Caubeen +1", --4/4
+		head="Aya. Zucchetto +2",  --3/3
         hands="Gende. Gages +1", --4/3
         neck="Loricate Torque +1", --6/6
         ear1="Genmei Earring", --2/0
@@ -570,7 +582,7 @@ function init_gear_sets()
         main="Yagrush",
         sub="Tamaxchi",
         ammo="Vanir Battery",
-		head="Aya. Zucchetto +1",
+		head="Aya. Zucchetto +2",
         body="Ayanmo Corazza +2",
 		hands="Chironic Gloves",
         legs="Aya. Cosciales +2",

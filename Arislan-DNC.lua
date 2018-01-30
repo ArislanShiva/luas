@@ -166,6 +166,18 @@ function user_unload()
     send_command('unbind numpad0')
     send_command('unbind ^numpad0')
     send_command('unbind ^numpad.')
+
+    send_command('unbind #`')
+    send_command('unbind #1')
+    send_command('unbind #2')
+    send_command('unbind #3')
+    send_command('unbind #4')
+    send_command('unbind #5')
+    send_command('unbind #6')
+    send_command('unbind #7')
+    send_command('unbind #8')
+    send_command('unbind #9')
+    send_command('unbind #0')
 end
 
 
@@ -211,7 +223,7 @@ function init_gear_sets()
         } -- Waltz Potency/CHR
     
     sets.precast.WaltzSelf = set_combine(sets.precast.Waltz, {
-        head="Mummu Bonnet +1", --8
+        head="Mummu Bonnet +2", --8
         ring1="Asklepian Ring", --3
         }) -- Waltz effects received
         
@@ -224,7 +236,7 @@ function init_gear_sets()
         head="Maxixi Tiara +3",
         body="Maxixi Casaque +3",
         hands="Maxixi Bangles +3",
-        legs="Mummu Kecks +1",
+        legs="Mummu Kecks +2",
         feet="Maxixi Toeshoes +3",
         neck="Combatant's Torque",
         ear1="Digni. Earring",
@@ -241,10 +253,10 @@ function init_gear_sets()
 
     sets.precast.Flourish1['Violent Flourish'] = {
         ammo="Hydrocera",
-        head="Mummu Bonnet +1",
+        head="Mummu Bonnet +2",
         body="Horos Casaque +1",
         hands="Mummu Wrists +2",
-        legs="Mummu Kecks +1",
+        legs="Mummu Kecks +2",
         feet="Mummu Gamashes +1",
         neck="Sanctity Necklace",
         ear1="Digni. Earring",
@@ -343,7 +355,7 @@ function init_gear_sets()
     sets.precast.WS['Pyrrhic Kleos'] = set_combine(sets.precast.WS, {
         ammo="Cheruski Needle",
         head=gear.Adhemar_B_head,
-        body="Adhemar Jacket",
+        body=gear.Adhemar_B_body,
         hands=gear.Adhemar_B_hands,
         legs="Samnuha Tights",
         feet=gear.Herc_TA_feet,
@@ -357,7 +369,7 @@ function init_gear_sets()
         ammo="Falcon Eye",
         head="Dampening Tam",
         body=gear.Herc_TA_body,
-        hands=gear.Adhemar_A_hands,
+        hands=gear.Adhemar_B_hands,
         legs=gear.Herc_WS_legs,
         feet=gear.Herc_STP_feet,
         ear2="Telos Earring",
@@ -461,19 +473,18 @@ function init_gear_sets()
         ammo="Staunch Tathlum", --2/2
         body="Meg. Cuirie +2", --8/0
         hands=gear.Herc_DT_hands, --7/5
+        legs="Mummu Kecks +2", --5/5
         neck="Loricate Torque +1", --6/6
-        ear1="Genmei Earring", --2/0
         ear2="Etiolation Earring", --0/3
         ring1="Gelatinous Ring +1", --7/(-1)
         ring2="Defending Ring", --10/10
         back="Moonbeam Cape", --5/5
-        waist="Flume Belt +1", --4/0
         })
 
     sets.idle.Town = set_combine(sets.idle, {
         ammo="Yamarang",
-        body="Maxixi Casaque +3",
-        hands="Maxixi Bangles +3",
+        body=gear.Adhemar_B_body,
+        hands=gear.Adhemar_B_hands,
         legs="Dashing Subligar",
         neck="Combatant's Torque",
         ear1="Sherida Earring",
@@ -516,7 +527,7 @@ function init_gear_sets()
         ammo="Yamarang",
         head="Dampening Tam",
         body="Macu. Casaque +1", --11
-        hands=gear.Adhemar_A_hands,
+        hands=gear.Adhemar_B_hands,
         legs="Samnuha Tights",
         feet=gear.Taeon_DW_feet, --9
         neck="Charis Necklace", --5
@@ -556,7 +567,7 @@ function init_gear_sets()
         ammo="Yamarang",
         head="Dampening Tam",
         body="Macu. Casaque +1", --11
-        hands=gear.Adhemar_A_hands,
+        hands=gear.Adhemar_B_hands,
         legs="Samnuha Tights",
         feet=gear.Herc_TA_feet,
         neck="Charis Necklace", --5
@@ -595,8 +606,8 @@ function init_gear_sets()
     sets.engaged.MidHaste = {
         ammo="Yamarang",
         head="Dampening Tam",
-        body="Adhemar Jacket", --5
-        hands=gear.Adhemar_A_hands,
+        body=gear.Adhemar_B_body, --6
+        hands=gear.Adhemar_B_hands,
         legs="Samnuha Tights",
         feet=gear.Herc_TA_feet,
         neck="Asperity Necklace",
@@ -606,7 +617,7 @@ function init_gear_sets()
         ring2="Epona's Ring",
         back=gear.DNC_TP_Cape,
         waist="Reiki Yotai", --7
-        } -- 21%
+        } -- 22%
 
     sets.engaged.LowAcc.MidHaste = set_combine(sets.engaged.MidHaste, {
         neck="Combatant's Torque",
@@ -637,8 +648,8 @@ function init_gear_sets()
     sets.engaged.HighHaste = {
         ammo="Yamarang",
         head="Dampening Tam",
-        body="Adhemar Jacket", --5
-        hands=gear.Adhemar_A_hands,
+        body=gear.Adhemar_B_body, --6
+        hands=gear.Adhemar_B_hands,
         legs="Samnuha Tights",
         feet=gear.Herc_TA_feet,
         neck="Asperity Necklace",
@@ -648,7 +659,7 @@ function init_gear_sets()
         ring2="Epona's Ring",
         back=gear.DNC_TP_Cape,
         waist="Windbuffet Belt +1",
-        } -- 14% Gear
+        } -- 15% Gear
 
     sets.engaged.LowAcc.HighHaste = set_combine(sets.engaged.HighHaste, {
         neck="Combatant's Torque",
@@ -680,7 +691,7 @@ function init_gear_sets()
         ammo="Yamarang",
         head="Dampening Tam",
         body=gear.Herc_TA_body,
-        hands=gear.Adhemar_A_hands,
+        hands=gear.Adhemar_B_hands,
         legs="Samnuha Tights",
         feet=gear.Herc_TA_feet,
         neck="Asperity Necklace",
