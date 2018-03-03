@@ -732,8 +732,6 @@ function init_gear_sets()
         neck="Iskur Gorget",
         ring1="Petrov Ring",
         })
-    
-    sets.engaged.STP.LowHaste.NIN = set_combine(sets.engaged.LowHaste, {back=gear.COR_STP_Cape})
 
     -- 30% Magic Haste (56% DW to cap)
     sets.engaged.MidHaste = {
@@ -1204,16 +1202,22 @@ function determine_haste_group()
             (buffactive.march == 2 and buffactive[604]) or buffactive.march == 3) or buffactive[580] == 2 then
             --add_to_chat(122, 'Magic Haste Level: 43%')
             classes.CustomMeleeGroups:append('MaxHaste')
+            state.DualWield:set()
         elseif ((buffactive[33] or buffactive.march == 2 or buffactive[580]) and buffactive['haste samba']) then
             --add_to_chat(122, 'Magic Haste Level: 35%')
             classes.CustomMeleeGroups:append('HighHaste')
+            state.DualWield:set()
         elseif ((buffactive[580] or buffactive[33] or buffactive.march == 2) or
             (buffactive.march == 1 and buffactive[604])) then
             --add_to_chat(122, 'Magic Haste Level: 30%')
             classes.CustomMeleeGroups:append('MidHaste')
+            state.DualWield:set()
         elseif (buffactive.march == 1 or buffactive[604]) then
             --add_to_chat(122, 'Magic Haste Level: 15%')
             classes.CustomMeleeGroups:append('LowHaste')
+            state.DualWield:set()
+        else
+            state.DualWield:set(false)
         end
     else
         if (buffactive[580] and ( buffactive.march or buffactive[33] or buffactive.embrava or buffactive[604]) ) or
@@ -1222,23 +1226,30 @@ function determine_haste_group()
             (buffactive[33] and buffactive[604] and buffactive.march ) or buffactive.march == 3 or buffactive[580] == 2 then
             --add_to_chat(122, 'Magic Haste Level: 43%')
             classes.CustomMeleeGroups:append('MaxHaste')
+            state.DualWield:set()
         elseif ((buffactive[604] or buffactive[33]) and buffactive['haste samba'] and buffactive.march == 1) or
             (buffactive.march == 2 and buffactive['haste samba']) or
             (buffactive[580] and buffactive['haste samba'] ) then
             --add_to_chat(122, 'Magic Haste Level: 35%')
             classes.CustomMeleeGroups:append('HighHaste')
+            state.DualWield:set()
         elseif (buffactive.march == 2 ) or
             ((buffactive[33] or buffactive[604]) and buffactive.march == 1 ) or  -- MG or haste + 1 march
             (buffactive[580] ) or  -- geo haste
             (buffactive[33] and buffactive[604]) then
             --add_to_chat(122, 'Magic Haste Level: 30%')
             classes.CustomMeleeGroups:append('MidHaste')
+            state.DualWield:set()
         elseif buffactive[33] or buffactive[604] or buffactive.march == 1 then
             --add_to_chat(122, 'Magic Haste Level: 15%')
             classes.CustomMeleeGroups:append('LowHaste')
+            state.DualWield:set()
+        else
+            state.DualWield:set(false)
         end
     end
 end
+
 
 function define_roll_values()
     rolls = {
