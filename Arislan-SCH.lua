@@ -368,11 +368,11 @@ function init_gear_sets()
         main=gear.Grioavolr_MND,
         sub="Enki Strap",
         ammo="Quartz Tathlum +1",
-        head="Merlinic Hood",
+        head="Acad. Mortar. +2",
         body="Acad. Gown +2",
         hands="Kaykaus Cuffs",
         legs="Chironic Hose",
-        feet="Skaoi Boots",
+        feet="Acad. Loafers +3",
         neck="Erra Pendant",
         ear1="Barkaro. Earring",
         ear2="Regal Earring",
@@ -393,7 +393,7 @@ function init_gear_sets()
         main=gear.Grioavolr_MB,
         sub="Enki Strap",
         ammo="Pemphredo Tathlum",
-        head="Merlinic Hood",
+        head="Acad. Mortar. +2",
         body="Acad. Gown +2",
         hands="Kaykaus Cuffs",
         legs=gear.Merlinic_MAcc_legs,
@@ -624,7 +624,7 @@ function init_gear_sets()
     sets.buff['Klimaform'] = {feet="Arbatel Loafers +1"}
     
     sets.buff.FullSublimation = {
-        head="Acad. Mortar. +1",
+        head="Acad. Mortar. +2",
         ear1="Savant's Earring",
         body="Peda. Gown +1",
         }

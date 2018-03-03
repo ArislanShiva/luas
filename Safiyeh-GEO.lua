@@ -118,11 +118,11 @@ function init_gear_sets()
         main="Sucellus",
         sub="Chanter's Shield", --3
         head="Amalric Coif", --10
-		body="Merlinic Jubbah", --6
+        body="Merlinic Jubbah", --6
         hands="Merlinic Dastanas", --7
         legs="Geomancy Pants +3", --15
         feet="Regal Pumps +1", --7
-		neck="Baetyl Pendant", --4
+        neck="Baetyl Pendant", --4
         ear1="Loquacious Earring", --2
         ear2="Etiolation Earring", --1
         ring1="Kishar Ring", --4
@@ -132,7 +132,7 @@ function init_gear_sets()
         }
 
     sets.precast.FC['Enhancing Magic'] = set_combine(sets.precast.FC, {
-
+        back="Perimede Cape",
         })
         
     sets.precast.FC['Elemental Magic'] = set_combine(sets.precast.FC, {
@@ -142,6 +142,7 @@ function init_gear_sets()
 
     sets.precast.FC.Cure = set_combine(sets.precast.FC, {
         ear1="Mendi. Earring", --5
+        back="Perimede Cape", --(4)
         })
 
     sets.precast.FC.Curaga = sets.precast.FC.Cure
@@ -155,7 +156,7 @@ function init_gear_sets()
         hands="Jhakri Cuffs +1",
         feet="Jhakri Pigaches +1",
         ear2="Regal Earring",
-        ring1="Rajas Ring",
+        ring1="Hetairoi Ring",
         ring2="Apate Ring",
         }
     
@@ -307,8 +308,8 @@ function init_gear_sets()
         }) -- INT/Magic accuracy
 
     sets.midcast['Dark Magic'] = {
-        main="Grioavolr",
-        sub="Enki Strap",
+        main="Rubicundity",
+        sub="Ammurapi Shield",
         head="Geo. Galero +2",
         body="Geomancy Tunic +3",
         hands="Geo. Mitaines +3",
@@ -324,7 +325,7 @@ function init_gear_sets()
         }
     
     sets.midcast.Drain = set_combine(sets.midcast['Dark Magic'], {
-		head="Bagua Galero +1",
+        head="Bagua Galero +1",
         ring1="Evanescence Ring",
         waist="Fucho-no-Obi",
         })
@@ -344,7 +345,7 @@ function init_gear_sets()
         hands="Amalric Gages",
         legs="Merlinic Shalwar",
         feet="Merlinic Crackows",
-		neck="Baetyl Pendant",
+        neck="Baetyl Pendant",
         ear1="Barkarole Earring",
         ear2="Regal Earring",
         ring1="Shiva Ring",
@@ -487,7 +488,7 @@ function init_gear_sets()
         feet="Jhakri Pigaches +1",
         ear1="Cessance Earring",
         ear2="Regal Earring",
-        ring1="Rajas Ring",
+        ring1="Hetairoi Ring",
         ring2="Apate Ring",
         waist="Cetl Belt",
         }
@@ -500,7 +501,7 @@ function init_gear_sets()
     sets.magic_burst = {
         head="Merlinic Hood", --5
         hands="Amalric Gages", --(5)
-		body="Merlinic Jubbah", --10
+        body="Merlinic Jubbah", --10
         legs="Merlinic Shalwar", --11
         neck="Mizu. Kubikazari", --10
         ring2="Mujin Band", --(5)

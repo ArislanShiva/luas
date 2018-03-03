@@ -166,11 +166,11 @@ function init_gear_sets()
     -- Default set for any weaponskill that isn't any more specifically defined
     sets.precast.WS = {
         ammo="Floestone",
-		head="Aya. Zucchetto +2",
+        head="Aya. Zucchetto +2",
         body="Ayanmo Corazza +2",
-		hands="Chironic Gloves",
+        hands="Chironic Gloves",
         legs="Aya. Cosciales +2",
-		feet="Battlecast Gaiters",
+        feet="Battlecast Gaiters",
         neck="Fotia Gorget",
         ear1="Moonshade Earring",
         ear2="Telos Earring",
@@ -299,7 +299,7 @@ function init_gear_sets()
     sets.midcast.Cursna = set_combine(sets.midcast.StatusRemoval, {
         main="Yagrush",
         sub="Chanter's Shield",
-		body="Ebers Bliaud +1",
+        body="Ebers Bliaud +1",
         hands="Fanatic Gloves", --15
         legs="Th. Pant. +3", --21
         feet="Vanya Clogs", --5
@@ -453,7 +453,7 @@ function init_gear_sets()
         main=gear.Grioavolr_MND,
         sub="Enki Strap",
         ammo="Quartz Tathlum +1",
-        head="Befouled Crown",
+        head="Theophany Cap +3",
         body="Theo. Briault +3",
         hands="Inyan. Dastanas +2",
         legs="Chironic Hose",
@@ -519,7 +519,7 @@ function init_gear_sets()
     sets.idle.DT = set_combine(sets.idle, {
         main="Mafic Cudgel", --10/0
         sub="Genmei Shield", --10/0
-		head="Aya. Zucchetto +2",  --3/3
+        head="Aya. Zucchetto +2",  --3/3
         hands="Gende. Gages +1", --4/3
         neck="Loricate Torque +1", --6/6
         ear1="Genmei Earring", --2/0
@@ -543,8 +543,8 @@ function init_gear_sets()
 
     sets.idle.Town = set_combine(sets.idle, {
         main="Yagrush",
-		sub="Ammurapi Shield",
-        head="Ebers Cap +1",
+        sub="Ammurapi Shield",
+        head="Theophany Cap +3",
         hands="Theophany Mitts +3",
         legs="Th. Pant. +3",
         neck="Debilis Medallion",
@@ -582,11 +582,11 @@ function init_gear_sets()
         main="Yagrush",
         sub="Tamaxchi",
         ammo="Vanir Battery",
-		head="Aya. Zucchetto +2",
+        head="Aya. Zucchetto +2",
         body="Ayanmo Corazza +2",
-		hands="Chironic Gloves",
+        hands="Chironic Gloves",
         legs="Aya. Cosciales +2",
-		feet="Battlecast Gaiters",
+        feet="Battlecast Gaiters",
         neck="Asperity Necklace",
         ear1="Eabani Earring",
         ear2="Brutal Earring",
@@ -717,25 +717,25 @@ function job_get_spell_map(spell, default_spell_map)
 --      if (default_spell_map == 'Cure' or default_spell_map == 'Curaga') and player.status == 'Engaged' then
 --          return "CureMelee"
         if default_spell_map == 'Cure' then
-			if buffactive['Afflatus Solace'] then
-				if (world.weather_element == 'Light' or world.day_element == 'Light') then
-					return "CureSolaceWeather"
-				else
-					return "CureSolace"
-				end
-			else
-				if (world.weather_element == 'Light' or world.day_element == 'Light') then
-					return "CureWeather"
-				else
-					return "CureNormal"
-				end				
-			end
+            if buffactive['Afflatus Solace'] then
+                if (world.weather_element == 'Light' or world.day_element == 'Light') then
+                    return "CureSolaceWeather"
+                else
+                    return "CureSolace"
+                end
+            else
+                if (world.weather_element == 'Light' or world.day_element == 'Light') then
+                    return "CureWeather"
+                else
+                    return "CureNormal"
+                end                
+            end
         elseif default_spell_map == 'Curaga' then
-			if (world.weather_element == 'Light' or world.day_element == 'Light') then
-				return "CuragaWeather"
-			else
-				return "CuragaNormal"
-			end
+            if (world.weather_element == 'Light' or world.day_element == 'Light') then
+                return "CuragaWeather"
+            else
+                return "CuragaNormal"
+            end
         elseif spell.skill == "Enfeebling Magic" then
             if spell.type == "WhiteMagic" then
                 return "MndEnfeebles"

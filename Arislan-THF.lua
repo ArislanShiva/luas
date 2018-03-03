@@ -153,7 +153,7 @@ function init_gear_sets()
         head="Pill. Bonnet +3",
         body="Pillager's Vest +3", 
         hands="Pillager's Armlets +1",
-        legs="Pillager's Culottes +1",
+        legs="Pill. Culottes +3",
         feet="Meg. Jam. +2",
         neck="Magoraga Beads",
         ear2="Infused Earring",
@@ -184,7 +184,6 @@ function init_gear_sets()
         ammo="Barathrum", --3
         --head="Asn. Bonnet +2",
         hands="Pillager's Armlets +1",
-        legs="Pillager's Culottes +1",
         feet="Pill. Poulaines +2",
         }
 
@@ -209,7 +208,7 @@ function init_gear_sets()
         ammo="Sapience Orb",
         head=gear.Herc_MAB_head, --7
         body=gear.Taeon_FC_body, --8
-        hands="Leyline Gloves", --7
+        hands="Leyline Gloves", --8
         legs="Rawhide Trousers", --5
         feet=gear.Herc_MAB_feet, --2
         neck="Orunmila's Torque", --5
@@ -231,7 +230,7 @@ function init_gear_sets()
     sets.precast.WS = {
         ammo="Focal Orb",
         head="Lilitu Headpiece",
-		body="Meg. Cuirie +2",
+        body="Meg. Cuirie +2",
         hands="Meg. Gloves +2",
         legs="Lustr. Subligar +1",
         feet="Lustra. Leggings +1",
@@ -271,8 +270,8 @@ function init_gear_sets()
         head=gear.Adhemar_B_head,
         body="Pillager's Vest +3",
         hands="Mummu Wrists +2",
-        legs="Lustr. Subligar +1",
-        feet=gear.Herc_STP_feet,
+        legs="Pill. Culottes +3",
+        feet=gear.Herc_TA_feet,
         ear1="Sherida Earring",
         ear2="Brutal Earring",
         ring1="Begrudging Ring",
@@ -283,7 +282,6 @@ function init_gear_sets()
     sets.precast.WS['Evisceration'].Acc = set_combine(sets.precast.WS['Evisceration'], {
         ammo="Falcon Eye",
         head="Skulker's Bonnet +1",
-        legs="Pill. Culottes +2",
         ear2="Telos Earring",
         ring1="Regal Ring",
         })
@@ -291,6 +289,7 @@ function init_gear_sets()
     sets.precast.WS['Rudra\'s Storm'] = set_combine(sets.precast.WS, {
         ammo="Expeditious Pinion",
         neck="Caro Necklace",
+        ear1="Sherida Earring",
         waist="Grunfeld Rope",
         })
 
@@ -348,7 +347,7 @@ function init_gear_sets()
         head="Pill. Bonnet +3",
         body="Turms Harness",
         hands=gear.Herc_DT_hands,
-        legs="Samnuha Tights",
+        legs="Mummu Kecks +2",
         feet="Jute Boots +1",
         neck="Bathy Choker +1",
         ear1="Genmei Earring",
@@ -414,7 +413,7 @@ function init_gear_sets()
     -- No Magic Haste (74% DW to cap)
     sets.engaged = {
         ammo="Yamarang",
-        head="Skulker's Bonnet +1",
+        head=gear.Adhemar_B_head,
         body=gear.Adhemar_B_body, -- 6
         hands=gear.Adhemar_B_hands,
         legs="Samnuha Tights",
@@ -429,18 +428,19 @@ function init_gear_sets()
         } -- 41%
 
     sets.engaged.LowAcc = set_combine(sets.engaged, {
-        body="Pillager's Vest +3", 
+        head="Skulker's Bonnet +1",
         neck="Combatant's Torque",
         })
 
     sets.engaged.MidAcc = set_combine(sets.engaged.LowAcc, {
         head="Dampening Tam",
+        body="Pillager's Vest +3", 
         ring2="Ilabrat Ring",
         waist="Kentarch Belt +1",
         })
 
     sets.engaged.HighAcc = set_combine(sets.engaged.MidAcc, {
-        legs="Pill. Culottes +2",
+        legs="Pill. Culottes +3",
         feet=gear.Herc_STP_feet,
         ear1="Cessance Earring",
         ear2="Telos Earring",
@@ -457,35 +457,35 @@ function init_gear_sets()
     -- 15% Magic Haste (67% DW to cap)
     sets.engaged.LowHaste = {
         ammo="Yamarang",
-        head="Skulker's Bonnet +1",
-        body="Pillager's Vest +3", 
+        head=gear.Adhemar_B_head,
+        body=gear.Adhemar_B_body, -- 6
         hands=gear.Adhemar_B_hands,
         legs="Samnuha Tights",
         feet=gear.Taeon_DW_feet, --9
         neck="Erudit. Necklace",
-        ear1="Eabani Earring", --4
+        ear1="Cessance Earring",
         ear2="Suppanomimi", --5
         ring1="Hetairoi Ring",
         ring2="Epona's Ring",
         back=gear.THF_DW_Cape, --10
         waist="Reiki Yotai", --7
-        } -- 35%
+        } -- 37%
 
     sets.engaged.LowAcc.LowHaste = set_combine(sets.engaged.LowHaste, {
+        head="Skulker's Bonnet +1",
         neck="Combatant's Torque",
         })
 
     sets.engaged.MidAcc.LowHaste = set_combine(sets.engaged.LowAcc.LowHaste, {
         head="Dampening Tam",
+        body="Pillager's Vest +3", 
         ring2="Ilabrat Ring",
-        back=gear.THF_TP_Cape,
         waist="Kentarch Belt +1",
         })
 
     sets.engaged.HighAcc.LowHaste = set_combine(sets.engaged.MidAcc.LowHaste, {
-        legs="Pill. Culottes +2",
+        legs="Pill. Culottes +3",
         feet=gear.Herc_STP_feet,
-        ear1="Cessance Earring",
         ear2="Telos Earring",
         ring1="Regal Ring",
         ring2="Ramuh Ring +1",
@@ -500,7 +500,7 @@ function init_gear_sets()
     -- 30% Magic Haste (56% DW to cap)
     sets.engaged.MidHaste = {
         ammo="Yamarang",
-        head="Skulker's Bonnet +1",
+        head=gear.Adhemar_B_head,
         body="Pillager's Vest +3", 
         hands=gear.Adhemar_B_hands,
         legs="Samnuha Tights",
@@ -515,19 +515,19 @@ function init_gear_sets()
         } -- 26%
 
     sets.engaged.LowAcc.MidHaste = set_combine(sets.engaged.MidHaste, {
+        head="Skulker's Bonnet +1",
         neck="Combatant's Torque",
         })
 
     sets.engaged.MidHaste.MidAcc = set_combine(sets.engaged.LowAcc.MidHaste, {
         head="Dampening Tam",
-        feet=gear.Herc_TA_feet,
         ear1="Cessance Earring",
         ring2="Ilabrat Ring",
         waist="Kentarch Belt +1",
         })
 
     sets.engaged.HighAcc.MidHaste = set_combine(sets.engaged.MidHaste.MidAcc, {
-        legs="Pill. Culottes +2",
+        legs="Pill. Culottes +3",
         feet=gear.Herc_STP_feet,
         ear2="Telos Earring",
         ring1="Regal Ring",
@@ -544,33 +544,34 @@ function init_gear_sets()
     -- 35% Magic Haste (51% DW to cap)
     sets.engaged.HighHaste = {
         ammo="Yamarang",
-        head="Skulker's Bonnet +1",
+        head=gear.Adhemar_B_head,
         body="Pillager's Vest +3", 
         hands=gear.Adhemar_B_hands,
         legs="Samnuha Tights",
         feet=gear.Herc_TA_feet,
         neck="Erudit. Necklace",
-        ear1="Eabani Earring", --4
+        ear1="Sherida Earring",
         ear2="Suppanomimi", --5
         ring1="Hetairoi Ring",
         ring2="Epona's Ring",
         back=gear.THF_DW_Cape, --10
-        waist="Windbuffet Belt +1",
-        } -- 19%
+        waist="Reiki Yotai", --7
+        } -- 22%
 
     sets.engaged.LowAcc.HighHaste = set_combine(sets.engaged.HighHaste, {
+        head="Skulker's Bonnet +1",
         neck="Combatant's Torque",
-        waist="Kentarch Belt +1",
         })
 
     sets.engaged.MidAcc.HighHaste = set_combine(sets.engaged.LowAcc.HighHaste, {
         head="Dampening Tam",
         ear1="Cessance Earring",
         ring2="Ilabrat Ring",
+        waist="Kentarch Belt +1",
         })
 
     sets.engaged.HighAcc.HighHaste = set_combine(sets.engaged.MidAcc.HighHaste, {
-        legs="Pill. Culottes +2",
+        legs="Pill. Culottes +3",
         feet=gear.Herc_STP_feet,
         ear2="Telos Earring",
         ring1="Regal Ring",
@@ -585,10 +586,10 @@ function init_gear_sets()
         ring1="Petrov Ring",
         })
 
-    -- 47% Magic Haste (36% DW to cap)
+    -- 45% Magic Haste (36% DW to cap)
     sets.engaged.MaxHaste = {
         ammo="Yamarang",
-        head="Skulker's Bonnet +1",
+        head=gear.Adhemar_B_head,
         body="Pillager's Vest +3", 
         hands=gear.Adhemar_B_hands,
         legs="Samnuha Tights",
@@ -603,6 +604,7 @@ function init_gear_sets()
         } -- 5%
 
     sets.engaged.LowAcc.MaxHaste = set_combine(sets.engaged.MaxHaste, {
+        head="Skulker's Bonnet +1",
         neck="Combatant's Torque",
         waist="Kentarch Belt +1",
         })
@@ -614,7 +616,7 @@ function init_gear_sets()
         })
 
     sets.engaged.HighAcc.MaxHaste = set_combine(sets.engaged.MidAcc.MaxHaste, {
-        legs="Pill. Culottes +2",
+        legs="Pill. Culottes +3",
         feet=gear.Herc_STP_feet,
         ear2="Telos Earring",
         ring1="Regal Ring",
@@ -637,7 +639,7 @@ function init_gear_sets()
 
     sets.engaged.Hybrid = {
         neck="Loricate Torque +1", --6/6
-		ring1="Moonbeam Ring", --4/4
+        ring1="Moonbeam Ring", --4/4
         ring2="Defending Ring", --10/10
         }
     

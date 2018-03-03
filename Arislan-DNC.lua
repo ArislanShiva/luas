@@ -257,7 +257,7 @@ function init_gear_sets()
         body="Horos Casaque +1",
         hands="Mummu Wrists +2",
         legs="Mummu Kecks +2",
-        feet="Mummu Gamashes +1",
+        feet="Mummu Gamash. +2",
         neck="Sanctity Necklace",
         ear1="Digni. Earring",
         ear2="Hermetic Earring",
@@ -292,7 +292,7 @@ function init_gear_sets()
         ammo="Sapience Orb",
         head=gear.Herc_MAB_head, --7
         body=gear.Taeon_FC_body, --8
-        hands="Leyline Gloves", --7
+        hands="Leyline Gloves", --8
         legs="Rawhide Trousers", --5
         feet=gear.Herc_MAB_feet, --2
         neck="Orunmila's Torque", --5
@@ -331,7 +331,7 @@ function init_gear_sets()
         
     sets.precast.WS.Acc = set_combine(sets.precast.WS, {
         ammo="Falcon Eye",
-		head="Dampening Tam",
+        head="Dampening Tam",
         legs="Meg. Chausses +2",
         feet="Meg. Jam. +2",
         ear2="Telos Earring",
@@ -392,8 +392,8 @@ function init_gear_sets()
     sets.precast.WS['Evisceration'].Acc = set_combine(sets.precast.WS['Evisceration'], {
         ammo="Falcon Eye",
         head="Dampening Tam",
-        body="Sayadio's Kaftan",
-		legs="Meg. Chausses +2",
+        body=gear.Adhemar_B_body,
+        legs="Meg. Chausses +2",
         feet="Maxixi Toeshoes +3",
         ear2="Telos Earring",
         ring1="Regal Ring",
@@ -402,6 +402,7 @@ function init_gear_sets()
     sets.precast.WS['Rudra\'s Storm'] = set_combine(sets.precast.WS, {
         ammo="Charis Feather",
         neck="Caro Necklace",
+        ear1="Sherida Earring",
         waist="Grunfeld Rope",
         })
 
@@ -483,6 +484,7 @@ function init_gear_sets()
 
     sets.idle.Town = set_combine(sets.idle, {
         ammo="Yamarang",
+        head=gear.Adhemar_B_head,
         body=gear.Adhemar_B_body,
         hands=gear.Adhemar_B_hands,
         legs="Dashing Subligar",
@@ -525,7 +527,7 @@ function init_gear_sets()
     -- No Magic Haste (74% DW to cap)
     sets.engaged = {
         ammo="Yamarang",
-        head="Dampening Tam",
+        head=gear.Adhemar_B_head,
         body="Macu. Casaque +1", --11
         hands=gear.Adhemar_B_hands,
         legs="Samnuha Tights",
@@ -540,6 +542,7 @@ function init_gear_sets()
         } -- 41%
 
     sets.engaged.LowAcc = set_combine(sets.engaged, {
+        head="Dampening Tam",
         neck="Combatant's Torque",
         })
 
@@ -565,7 +568,7 @@ function init_gear_sets()
     -- 15% Magic Haste (67% DW to cap)
     sets.engaged.LowHaste = {
         ammo="Yamarang",
-        head="Dampening Tam",
+        head=gear.Adhemar_B_head,
         body="Macu. Casaque +1", --11
         hands=gear.Adhemar_B_hands,
         legs="Samnuha Tights",
@@ -580,6 +583,7 @@ function init_gear_sets()
         } -- 32%
 
     sets.engaged.LowAcc.LowHaste = set_combine(sets.engaged.LowHaste, {
+        head="Dampening Tam",
         neck="Combatant's Torque",
         })
 
@@ -605,7 +609,7 @@ function init_gear_sets()
     -- 30% Magic Haste (56% DW to cap)
     sets.engaged.MidHaste = {
         ammo="Yamarang",
-        head="Dampening Tam",
+        head=gear.Adhemar_B_head,
         body=gear.Adhemar_B_body, --6
         hands=gear.Adhemar_B_hands,
         legs="Samnuha Tights",
@@ -620,6 +624,7 @@ function init_gear_sets()
         } -- 22%
 
     sets.engaged.LowAcc.MidHaste = set_combine(sets.engaged.MidHaste, {
+        head="Dampening Tam",
         neck="Combatant's Torque",
         })
 
@@ -647,7 +652,7 @@ function init_gear_sets()
     -- 35% Magic Haste (51% DW to cap)
     sets.engaged.HighHaste = {
         ammo="Yamarang",
-        head="Dampening Tam",
+        head=gear.Adhemar_B_head,
         body=gear.Adhemar_B_body, --6
         hands=gear.Adhemar_B_hands,
         legs="Samnuha Tights",
@@ -662,6 +667,7 @@ function init_gear_sets()
         } -- 15% Gear
 
     sets.engaged.LowAcc.HighHaste = set_combine(sets.engaged.HighHaste, {
+        head="Dampening Tam",
         neck="Combatant's Torque",
         waist="Kentarch Belt +1",
         })
@@ -686,10 +692,10 @@ function init_gear_sets()
         waist="Kentarch Belt +1",
         })
 
-    -- 47% Magic Haste (36% DW to cap)
+    -- 45% Magic Haste (36% DW to cap)
     sets.engaged.MaxHaste = {
         ammo="Yamarang",
-        head="Dampening Tam",
+        head=gear.Adhemar_B_head,
         body=gear.Herc_TA_body,
         hands=gear.Adhemar_B_hands,
         legs="Samnuha Tights",
@@ -704,6 +710,7 @@ function init_gear_sets()
         } -- 0%
 
     sets.engaged.LowAcc.MaxHaste = set_combine(sets.engaged.MaxHaste, {
+        head="Dampening Tam",
         neck="Combatant's Torque",
         waist="Kentarch Belt +1",
         })
@@ -738,7 +745,7 @@ function init_gear_sets()
 
     sets.engaged.Hybrid = {
         neck="Loricate Torque +1", --6/6
-		ring1="Moonbeam Ring", --4/4
+        ring1="Moonbeam Ring", --4/4
         ring2="Defending Ring", --10/10
         }
     

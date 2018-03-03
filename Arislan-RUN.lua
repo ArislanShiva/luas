@@ -216,16 +216,16 @@ function init_gear_sets()
     sets.precast.JA['Rayke'] = {feet="Futhark Boots +1"}
     sets.precast.JA['Elemental Sforzo'] = set_combine(sets.Enmity, {body="Futhark Coat +1"})
     sets.precast.JA['Swordplay'] = set_combine(sets.Enmity, {hands="Futhark Mitons +1"})
-	
+    
     sets.precast.JA['Vivacious Pulse'] = set_combine(sets.Enmity, {
         head="Erilaz Galea +1",
-		legs="Rune. Trousers +3",
-		neck="Incanter's Torque",
-		ear1="Beatific Earring",
-		ring1="Globidonta Ring",
-		waist="Bishop's Sash",
-		back="Merciful Cape",
-		})
+        legs="Rune. Trousers +3",
+        neck="Incanter's Torque",
+        ear1="Beatific Earring",
+        ring1="Globidonta Ring",
+        waist="Bishop's Sash",
+        back="Merciful Cape",
+        })
 
     sets.precast.JA['One For All'] = set_combine(sets.Enmity, {})
     sets.precast.JA['Provoke'] = sets.Enmity
@@ -233,9 +233,9 @@ function init_gear_sets()
     -- Fast cast sets for spells
     sets.precast.FC = {
         ammo="Sapience Orb", --2
-        head="Carmine Mask +1", --14
+        head="Rune. Bandeau +3", --14
         body=gear.Taeon_FC_body, --8
-        hands="Leyline Gloves", --7
+        hands="Leyline Gloves", --8
         legs="Aya. Cosciales +2", --6
         feet="Carmine Greaves +1", --8
         neck="Orunmila's Torque", --5
@@ -248,6 +248,7 @@ function init_gear_sets()
         }
 
     sets.precast.FC.HP = set_combine(sets.precast.FC, {
+        head="Rune. Bandeau +3",
         body="Runeist's Coat +3",
         ear1="Odnowa Earring",
         ear2="Odnowa Earring +1",
@@ -302,7 +303,7 @@ function init_gear_sets()
         head=gear.Adhemar_B_head,
         body=gear.Adhemar_B_body,
         hands=gear.Adhemar_B_hands,
-		legs="Samnuha Tights",
+        legs="Samnuha Tights",
         ring1="Regal Ring",
         ring2="Niqmaddu Ring",
         back=gear.RUN_WS1_Cape,
@@ -417,7 +418,7 @@ function init_gear_sets()
         ear2="Andoaa Earring",
         ring1="Stikini Ring",
         ring2="Stikini Ring",
-		back="Merciful Cape",
+        back="Merciful Cape",
         waist="Olympus Sash",
         }
 
@@ -444,7 +445,7 @@ function init_gear_sets()
         feet=gear.Taeon_Phalanx_feet, --3
         })
 
-    sets.midcast['Regen'] = set_combine(sets.midcast['Enhancing Magic'], {head="Rune. Bandeau +2"})
+    sets.midcast['Regen'] = set_combine(sets.midcast['Enhancing Magic'], {head="Rune. Bandeau +3"})
     sets.midcast.Refresh = set_combine(sets.midcast['Enhancing Magic'], {waist="Gishdubar Sash"})
     sets.midcast.Stoneskin = set_combine(sets.midcast['Enhancing Magic'], {waist="Siegel Sash"})
     sets.midcast.Protect = set_combine(sets.midcast['Enhancing Magic'], {ring2="Sheltered Ring"})
@@ -509,6 +510,7 @@ function init_gear_sets()
 
     sets.idle.Town = set_combine(sets.idle, {
         ammo="Knobkierrie",
+        head="Rune. Bandeau +3",
         feet="Runeist's Boots +3",
         neck="Loricate Torque +1",
         ear1="Sherida Earring",
@@ -627,7 +629,7 @@ function init_gear_sets()
     sets.engaged = {
         sub="Utu Grip",
         ammo="Yamarang",
-        head="Dampening Tam",
+        head=gear.Adhemar_B_head,
         body=gear.Adhemar_B_body,
         hands=gear.Adhemar_B_hands,
         legs="Samnuha Tights",
@@ -642,11 +644,11 @@ function init_gear_sets()
         }
 
     sets.engaged.LowAcc = set_combine(sets.engaged, {
+        head="Dampening Tam",
         neck="Combatant's Torque",
         })
 
     sets.engaged.MidAcc = set_combine(sets.engaged.LowAcc, {
---      sub="Bloodrain Strap",
         ear2="Telos Earring",
         ring1="Regal Ring",
         })
@@ -668,7 +670,7 @@ function init_gear_sets()
         })
 
     sets.engaged.Aftermath = {
-		head="Aya. Zucchetto +2",
+        head="Aya. Zucchetto +2",
         body="Turms Harness",
         neck="Anu Torque",
         ear2="Telos Earring",
@@ -720,7 +722,7 @@ function init_gear_sets()
         })
 
     sets.engaged.Aftermath.DT = {
-		head="Aya. Zucchetto +2",
+        head="Aya. Zucchetto +2",
         body="Turms Harness",
         legs="Samnuha Tights",
         feet="Carmine Greaves +1",

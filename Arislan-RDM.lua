@@ -144,7 +144,7 @@ function init_gear_sets()
     --    Traits --30
         ammo="Sapience Orb", --2
         head="Atrophy Chapeau +3", --16
-        hands="Leyline Gloves", --7
+        hands="Leyline Gloves", --8
         legs="Aya. Cosciales +2", --6
         feet="Carmine Greaves +1", --8
         neck="Orunmila's Torque", --5
@@ -407,7 +407,7 @@ function init_gear_sets()
     sets.midcast['Phalanx'] = set_combine(sets.midcast.EnhancingDuration, {
         body=gear.Taeon_Phalanx_body, --3
         feet=gear.Taeon_Phalanx_feet, --3
-		})
+        })
 
     sets.midcast.Aquaveil = set_combine(sets.midcast['Enhancing Magic'], {
         head="Amalric Coif",
@@ -604,7 +604,7 @@ function init_gear_sets()
         main="Mafic Cudgel", --10/0
         sub="Beatific Shield +1", --4/29
         ammo="Staunch Tathlum", --2/2
-		head="Aya. Zucchetto +2", --3/3
+        head="Aya. Zucchetto +2", --3/3
         body="Ayanmo Corazza +2", --6/6
         neck="Loricate Torque +1", --6/6
         ear1="Genmei Earring", --2/0
@@ -817,7 +817,7 @@ function init_gear_sets()
         waist="Olseni Belt",
         })
 
-    -- 47% Magic Haste (36% DW to cap)
+    -- 45% Magic Haste (36% DW to cap)
     sets.engaged.DW.MaxHaste = set_combine(sets.engaged.DW, {
         ammo="Ginsen",
         head=gear.Taeon_TA_head,
