@@ -146,7 +146,7 @@ function init_gear_sets()
         body="Jhakri Robe +2",
         hands="Jhakri Cuffs +1",
         feet="Jhakri Pigaches +1",
-		ear1="Moonshade Earring",
+        ear1="Moonshade Earring",
         ear2="Regal Earring",
         ring1="Hetairoi Ring",
         ring2="Apate Ring",

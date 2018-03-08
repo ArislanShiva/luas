@@ -389,7 +389,7 @@ function init_gear_sets()
     sets.precast.WS['Swift Blade'] = set_combine(sets.precast.WS['Savage Blade'], {
         legs="Samnuha Tights",
         --neck="Fotia Gorget",
-		ear1="Cessance Earring",
+        ear1="Cessance Earring",
         ear2="Brutal Earring",
         --waist="Fotia Belt",
         })
@@ -560,15 +560,15 @@ function init_gear_sets()
 
     sets.idle.Refresh = set_combine(sets.idle, {
         head="Rawhide Mask",
-		body="Mekosu. Harness",
-		legs="Rawhide Trousers",
+        body="Mekosu. Harness",
+        legs="Rawhide Trousers",
         })
 
     sets.idle.Town = set_combine(sets.idle, {
         hands="Carmine Fin. Ga. +1",
         neck="Iskur Gorget",
         back=gear.COR_WS3_Cape,
-		waist="Eschan Stone",
+        waist="Eschan Stone",
         })
 
 

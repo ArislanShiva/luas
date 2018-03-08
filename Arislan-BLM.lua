@@ -50,7 +50,7 @@ function user_setup()
     -- Additional local binds
     include('Global-Binds.lua') -- OK to remove this line
     include('Global-GEO-Binds.lua') -- OK to remove this line
-	
+    
     send_command('bind ^` input /ma Stun <t>')--;input /p <wstar> #1 Stun <t>, Articgun next. <wstar> <call14>') 
     send_command('bind !` gs c toggle MagicBurst')
     send_command('bind !p input /ma "Shock Spikes" <me>')

@@ -255,7 +255,7 @@ function init_gear_sets()
     sets.precast.WS['Exenterator'] = set_combine(sets.precast.WS, {
         ammo="Seeth. Bomblet +1",
         head=gear.Adhemar_B_head,
-		body=gear.Adhemar_B_body,
+        body=gear.Adhemar_B_body,
         legs="Meg. Chausses +2",
         feet="Meg. Jam. +2",
         ear1="Sherida Earring",

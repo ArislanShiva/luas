@@ -394,7 +394,7 @@ function init_gear_sets()
         body="Meg. Cuirie +2",
         feet=gear.Herc_STP_feet,
         ear2="Telos Earring",
-		ring2="Rufescent Ring",
+        ring2="Rufescent Ring",
         waist="Grunfeld Rope",
         })
 
@@ -402,10 +402,10 @@ function init_gear_sets()
         head=gear.Adhemar_B_head,
         body=gear.Adhemar_B_body,
         hands=gear.Adhemar_B_hands,
-		legs="Meg. Chausses +2",
+        legs="Meg. Chausses +2",
         feet=gear.Herc_TA_feet,
         ear1="Cessance Earring",
-		ear2="Brutal Earring",
+        ear2="Brutal Earring",
         ring1="Regal Ring",
         ring2="Epona's Ring",
         back=gear.COR_WS2_Cape,
@@ -421,8 +421,8 @@ function init_gear_sets()
     sets.precast.WS['Requiescat'] = set_combine(sets.precast.WS['Swift Blade'], {
         hands="Meg. Gloves +2",
         ear1="Moonshade Earring",
-		ear2="Telos Earring",
-		ring2="Rufescent Ring",
+        ear2="Telos Earring",
+        ring2="Rufescent Ring",
         }) --MND
 
     sets.precast.WS['Requiescat'].Acc = set_combine(sets.precast.WS['Requiescat'], {
@@ -431,10 +431,10 @@ function init_gear_sets()
         ear1="Cessance Earring",
         })
 
-	sets.precast.WS['Aeolian Edge'] = set_combine(sets.precast.WS['Wildfire'], {
+    sets.precast.WS['Aeolian Edge'] = set_combine(sets.precast.WS['Wildfire'], {
         ear1="Moonshade Earring",
-		ring1="Shiva Ring +1",
-		})
+        ring1="Shiva Ring +1",
+        })
 
     ------------------------------------------------------------------------------------------------
     ---------------------------------------- Midcast Sets ------------------------------------------
@@ -458,7 +458,7 @@ function init_gear_sets()
 
     sets.midcast.Utsusemi = sets.midcast.SpellInterrupt
 
-	-- Occult Acumen Set
+    -- Occult Acumen Set
     sets.midcast['Dark Magic'] = {
         ammo=gear.QDbullet,
         head=gear.Herc_MAB_head,
@@ -549,7 +549,7 @@ function init_gear_sets()
         ring1="Regal Ring",
         })
 
-	sets.midcast.RA.HighAcc = set_combine(sets.midcast.RA.Acc, {
+    sets.midcast.RA.HighAcc = set_combine(sets.midcast.RA.Acc, {
         legs="Laksa. Trews +3",
         ring2="Hajduk Ring +1",
         waist="Kwahu Kachina Belt",
@@ -561,7 +561,7 @@ function init_gear_sets()
         hands="Mummu Wrists +2",
         legs="Mummu Kecks +2",
         feet="Oshosi Leggings",
-		ring1="Begrudging Ring",
+        ring1="Begrudging Ring",
         ring2="Mummu Ring",
         waist="Kwahu Kachina Belt",
         })

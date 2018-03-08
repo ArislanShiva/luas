@@ -295,7 +295,7 @@ function init_gear_sets()
 
     sets.precast.WS.Acc = set_combine(sets.precast.WS, {
         ammo="Seeth. Bomblet +1",
-		body=gear.Adhemar_B_body,
+        body=gear.Adhemar_B_body,
         legs="Meg. Chausses +2",
         ear2="Telos Earring",
         })
@@ -377,8 +377,8 @@ function init_gear_sets()
         ring2="Weather. Ring +1",
         })
 
-	sets.precast.WS['Upheaval'] = sets.precast.WS['Resolution']
-	sets.precast.WS['Fell Cleave'] = sets.precast.WS['Savage Blade']
+    sets.precast.WS['Upheaval'] = sets.precast.WS['Resolution']
+    sets.precast.WS['Fell Cleave'] = sets.precast.WS['Savage Blade']
 
     sets.precast.WS['Full Break'] = {
         ammo="Pemphredo Tathlum",
@@ -395,8 +395,8 @@ function init_gear_sets()
         back=gear.RUN_WS1_Cape,
         waist="Eschan Stone",
         }
-	
-	sets.precast.WS['Shockwave'] = sets.precast.WS['Full Break']
+    
+    sets.precast.WS['Shockwave'] = sets.precast.WS['Full Break']
 
 
     ------------------------------------------------------------------------------------------------

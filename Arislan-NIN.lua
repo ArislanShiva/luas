@@ -276,8 +276,8 @@ function init_gear_sets()
         waist="Eschan Stone",
         })
 
-	sets.LugraLeft = {ear1="Lugra Earring"}
-	sets.LugraRight = {ear2="Lugra Earring +1"}
+    sets.LugraLeft = {ear1="Lugra Earring"}
+    sets.LugraRight = {ear2="Lugra Earring +1"}
 
     --------------------------------------
     -- Midcast sets
@@ -721,9 +721,9 @@ function job_post_precast(spell, action, spellMap, eventArgs)
     if spell.type == 'WeaponSkill' then
         if lugra_ws:contains(spell.english) and state.Night.value == true then
             equip(sets.LugraRight)
-			if spell.english == 'Blade: Kamu' then
-				equip(sets.LugraLeft)
-			end
+            if spell.english == 'Blade: Kamu' then
+                equip(sets.LugraLeft)
+            end
         elseif spell.english == 'Blade: Yu' and (world.weather_element == 'Water' or world.day_element == 'Water') then
             equip(sets.Obi)
         end
@@ -944,10 +944,10 @@ end
 
 function select_movement_feet()
     if world.time >= (17*60) or world.time <= (7*60) then
-	    state.Night:set()
-		return sets.NightMovement
+        state.Night:set()
+        return sets.NightMovement
     else
-	    state.Night:reset()
+        state.Night:reset()
         return sets.DayMovement
     end
 end
@@ -959,9 +959,8 @@ function do_ninja_tool_checks(spell, spellMap, eventArgs)
     
     if spell.skill == "Ninjutsu" then
         if spellMap == 'Utsusemi' then
-			add_to_chat(120,'Utsusemi Test')
             ninja_tool_name = "Shihei"
-		elseif spellMap == 'ElementalNinjutsu' then
+        elseif spellMap == 'ElementalNinjutsu' then
             ninja_tool_name = "Inoshishinofuda"
         elseif spellMap == 'EnfeeblingNinjutsu' then
             ninja_tool_name = "Chonofuda"
@@ -973,8 +972,6 @@ function do_ninja_tool_checks(spell, spellMap, eventArgs)
     end
     
     local available_ninja_tools = player.inventory[ninja_tool_name] or player.wardrobe[ninja_tool_name]
-			add_to_chat(120,available_ninja_tools.count)
-
 
     -- If no tools are available, cancel and end.
     if not available_ninja_tools then

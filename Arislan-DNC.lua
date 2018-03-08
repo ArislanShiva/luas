@@ -344,7 +344,7 @@ function init_gear_sets()
     sets.precast.WS['Exenterator'] = set_combine(sets.precast.WS, {
         ammo="Yamarang",
         head=gear.Adhemar_B_head,
-		body=gear.Adhemar_B_body,
+        body=gear.Adhemar_B_body,
         legs="Meg. Chausses +2",
         feet="Meg. Jam. +2",
         ear1="Sherida Earring",
@@ -830,7 +830,7 @@ function job_post_precast(spell, action, spellMap, eventArgs)
             equip(sets.buff['Climactic Flourish'])
         end
     end
-	if spell.type=='Waltz' and spell.target.type == 'SELF' then
+    if spell.type=='Waltz' and spell.target.type == 'SELF' then
         equip(sets.precast.WaltzSelf)
     end
 end
