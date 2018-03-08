@@ -41,7 +41,8 @@ function user_setup()
     state.CP = M(false, "Capacity Points Mode")
 
     -- Additional local binds
-    include('Global-Binds.lua')
+    include('Global-Binds.lua') -- OK to remove this line
+    include('Global-COR-Binds.lua') -- OK to remove this line
 
     send_command('bind ^` input /ja "Afflatus Solace" <me>')
     send_command('bind !` input /ja "Afflatus Misery" <me>')

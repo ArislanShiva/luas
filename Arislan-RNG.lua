@@ -61,7 +61,8 @@ function user_setup()
     options.ammo_warning_limit = 10
 
     -- Additional local binds
-    include('Global-Binds.lua')
+    include('Global-Binds.lua') -- OK to remove this line
+    include('Global-GEO-Binds.lua') -- OK to remove this line
 
     send_command('bind ^` input /ja "Velocity Shot" <me>')
     send_command ('bind @` input /ja "Scavenge" <me>')
@@ -306,7 +307,7 @@ function init_gear_sets()
         ear2="Brutal Earring",
         ring1="Begrudging Ring",
         ring2="Mummu Ring",
-        back=gear.RNG_STP_Cape,
+        back=gear.RNG_TP_Cape,
         waist="Fotia Belt",
         }
 
@@ -352,7 +353,7 @@ function init_gear_sets()
         ear2="Telos Earring",
         ring1="Regal Ring",
         ring2="Dingir Ring",
-        back=gear.RNG_TP_Cape,
+        back=gear.RNG_RA_Cape,
         waist="Yemaya Belt",
         }
     
@@ -437,7 +438,7 @@ function init_gear_sets()
         ear2="Telos Earring",
         ring1="Regal Ring",
         ring2="Dingir Ring",
-        back=gear.RNG_TP_Cape,
+        back=gear.RNG_RA_Cape,
         })
 
         
@@ -478,7 +479,7 @@ function init_gear_sets()
         ear2="Suppanomimi", --5
         ring1="Hetairoi Ring",
         ring2="Epona's Ring",
-        back=gear.RNG_STP_Cape,
+        back=gear.RNG_TP_Cape,
         waist="Reiki Yotai", --7
         } -- 42%
 
@@ -518,7 +519,7 @@ function init_gear_sets()
         ear2="Suppanomimi", --5
         ring1="Hetairoi Ring",
         ring2="Epona's Ring",
-        back=gear.RNG_STP_Cape,
+        back=gear.RNG_TP_Cape,
         waist="Reiki Yotai", --7
         } -- 42%
 
@@ -558,7 +559,7 @@ function init_gear_sets()
         ear2="Suppanomimi", --5
         ring1="Hetairoi Ring",
         ring2="Epona's Ring",
-        back=gear.RNG_STP_Cape,
+        back=gear.RNG_TP_Cape,
         waist="Reiki Yotai", --7
         } -- 33%
 
@@ -599,7 +600,7 @@ function init_gear_sets()
         ear2="Suppanomimi", --5
         ring1="Hetairoi Ring",
         ring2="Epona's Ring",
-        back=gear.RNG_STP_Cape,
+        back=gear.RNG_TP_Cape,
         waist="Reiki Yotai", --7
         } -- 27%
 
@@ -642,7 +643,7 @@ function init_gear_sets()
         ear2="Suppanomimi", --5
         ring1="Hetairoi Ring",
         ring2="Epona's Ring",
-        back=gear.RNG_STP_Cape,
+        back=gear.RNG_TP_Cape,
         waist="Windbuffet Belt +1",
         } -- 11%
 

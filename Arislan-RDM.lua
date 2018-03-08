@@ -57,7 +57,8 @@ function user_setup()
     state.CP = M(false, "Capacity Points Mode")
 
     -- Additional local binds
-    include('Global-Binds.lua')
+    include('Global-Binds.lua') -- OK to remove this line
+    include('Global-GEO-Binds.lua') -- OK to remove this line
 
     send_command('bind ^` input /ja Composure <me>')
     send_command('bind !` gs c toggle MagicBurst')

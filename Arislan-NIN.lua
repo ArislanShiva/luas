@@ -35,6 +35,8 @@ function job_setup()
 
     state.HasteMode = M{['description']='Haste Mode', 'Haste II', 'Haste I'}
 
+    lugra_ws = S{'Blade: Kamu', 'Blade: Shun', 'Blade: Ten'}
+
     determine_haste_group()
 end
 
@@ -55,8 +57,12 @@ function user_setup()
     state.CP = M(false, "Capacity Points Mode")
     state.TH = M(false, "Treasure Hunter Mode")
 
+    state.Night = M(false, "Dusk to Dawn")
+    options.ninja_tool_warning_limit = 10
+
     -- Additional local binds
-    include('Global-Binds.lua')
+    include('Global-Binds.lua') -- OK to remove this line
+    include('Global-COR-Binds.lua') -- OK to remove this line
 
     send_command('bind !` gs c toggle MagicBurst')
     send_command('bind ^- input /ja "Yonin" <me>')
@@ -80,12 +86,15 @@ function user_setup()
     end
 
     send_command('bind ^numpad7 input /ws "Blade: Kamu" <t>')
-    send_command('bind ^numpad8 input /ws "Blade: Shun" <t>')
+    send_command('bind ^numpad8 input /ws "Blade: Shun" <t>; input /p Message for Pigs Only <call9>')
     send_command('bind ^numpad4 input /ws "Blade: Ten" <t>')
     send_command('bind ^numpad6 input /ws "Blade: Hi" <t>')
     send_command('bind ^numpad1 input /ws "Blade: Yu" <t>')
     send_command('bind ^numpad2 input /ws "Blade: Rin" <t>')
     send_command('bind ^numpad3 input /ws "Blade: Retsu" <t>')
+
+    -- Whether a warning has been given for low ninja tools
+    state.warned = M(false)
 
     select_movement_feet()
     select_default_macro_book()
@@ -228,9 +237,7 @@ function init_gear_sets()
         })
 
     sets.precast.WS['Blade: Ten'] = set_combine(sets.precast.WS, {
-        body=gear.Adhemar_B_body,
         neck="Caro Necklace",
-        ear2="Lugra Earring +1",
         ring2="Ilabrat Ring",
         waist="Grunfeld Rope",
         back=gear.NIN_WS1_Cape,
@@ -244,15 +251,12 @@ function init_gear_sets()
         head=gear.Adhemar_B_head,
         body=gear.Adhemar_B_body,
         legs="Jokushu Haidate",
-        ear1="Lugra Earring",
-        ear2="Lugra Earring +1",
+        ear2="Brutal Earring",
         ring2="Ilabrat Ring",
         back=gear.NIN_TP_Cape,
         })
 
     sets.precast.WS['Blade: Kamu'] = set_combine(sets.precast.WS, {
-        ear1="Lugra Earring",
-        ear2="Lugra Earring +1",
         ring2="Ilabrat Ring",
         })
 
@@ -272,6 +276,8 @@ function init_gear_sets()
         waist="Eschan Stone",
         })
 
+	sets.LugraLeft = {ear1="Lugra Earring"}
+	sets.LugraRight = {ear2="Lugra Earring +1"}
 
     --------------------------------------
     -- Midcast sets
@@ -310,7 +316,7 @@ function init_gear_sets()
         ear1="Hermetic Earring",
         })
 
-    sets.midcast.NinjutsuDebuff = {
+    sets.midcast.EnfeeblingNinjutsu = {
         ammo="Yamarang",
         head="Hachiya Hatsu. +3",
         body="Mummu Jacket +2",
@@ -325,7 +331,7 @@ function init_gear_sets()
         waist="Eschan Stone",
         }
 
-    sets.midcast.NinjutsuBuff = {
+    sets.midcast.EnhancingNinjutsu = {
         head="Hachiya Hatsu. +3",
         feet="Mochi. Kyahan +1",
         neck="Incanter's Torque",
@@ -696,6 +702,9 @@ end
 -------------------------------------------------------------------------------------------------------------------
 
 function job_precast(spell, action, spellMap, eventArgs)
+    if spell.skill == "Ninjutsu" then
+        do_ninja_tool_checks(spell, spellMap, eventArgs)
+    end
     if spellMap == 'Utsusemi' then
         if buffactive['Copy Image (3)'] or buffactive['Copy Image (4+)'] then
             cancel_spell()
@@ -704,6 +713,19 @@ function job_precast(spell, action, spellMap, eventArgs)
             return
         elseif buffactive['Copy Image'] or buffactive['Copy Image (2)'] then
             send_command('cancel 66; cancel 444; cancel Copy Image; cancel Copy Image (2)')
+        end
+    end
+end
+
+function job_post_precast(spell, action, spellMap, eventArgs)
+    if spell.type == 'WeaponSkill' then
+        if lugra_ws:contains(spell.english) and state.Night.value == true then
+            equip(sets.LugraRight)
+			if spell.english == 'Blade: Kamu' then
+				equip(sets.LugraLeft)
+			end
+        elseif spell.english == 'Blade: Yu' and (world.weather_element == 'Water' or world.day_element == 'Water') then
+            equip(sets.Obi)
         end
     end
 end
@@ -786,19 +808,6 @@ end
 -------------------------------------------------------------------------------------------------------------------
 -- User code that supplements standard library decisions.
 -------------------------------------------------------------------------------------------------------------------
-
--- Get custom spell maps
-function job_get_spell_map(spell, default_spell_map)
-    if spell.skill == "Ninjutsu" then
-        if not default_spell_map then
-            if spell.target.type == 'SELF' then
-                return 'NinjutsuBuff'
-            else
-                return 'NinjutsuDebuff'
-            end
-        end
-    end
-end
 
 -- Modify the default idle set after it was constructed.
 function customize_idle_set(idleSet)
@@ -935,9 +944,63 @@ end
 
 function select_movement_feet()
     if world.time >= (17*60) or world.time <= (7*60) then
-       return sets.NightMovement
+	    state.Night:set()
+		return sets.NightMovement
     else
-       return sets.DayMovement
+	    state.Night:reset()
+        return sets.DayMovement
+    end
+end
+
+-- Determine whether we have sufficient tools for the spell being attempted.
+function do_ninja_tool_checks(spell, spellMap, eventArgs)
+    local ninja_tool_name
+    local ninja_tool_min_count = 1
+    
+    if spell.skill == "Ninjutsu" then
+        if spellMap == 'Utsusemi' then
+			add_to_chat(120,'Utsusemi Test')
+            ninja_tool_name = "Shihei"
+		elseif spellMap == 'ElementalNinjutsu' then
+            ninja_tool_name = "Inoshishinofuda"
+        elseif spellMap == 'EnfeeblingNinjutsu' then
+            ninja_tool_name = "Chonofuda"
+        elseif spellMap == 'EnhancingNinjutsu' then
+            ninja_tool_name = "Shikanofuda"
+        else
+            return
+        end
+    end
+    
+    local available_ninja_tools = player.inventory[ninja_tool_name] or player.wardrobe[ninja_tool_name]
+			add_to_chat(120,available_ninja_tools.count)
+
+
+    -- If no tools are available, cancel and end.
+    if not available_ninja_tools then
+        if spell.skill == "Ninjutsu" then
+            eventArgs.cancel = true
+            return
+        end
+    end
+    
+    -- Low ninja tools warning.
+    if spell.skill == "Ninjutsu" and state.warned.value == false
+        and available_ninja_tools.count > 1 and available_ninja_tools.count <= options.ninja_tool_warning_limit then
+        local msg = '*****  LOW TOOLS WARNING: '..ninja_tool_name..' *****'
+        --local border = string.repeat("*", #msg)
+        local border = ""
+        for i = 1, #msg do
+            border = border .. "*"
+        end
+        
+        add_to_chat(104, border)
+        add_to_chat(104, msg)
+        add_to_chat(104, border)
+
+        state.warned:set()
+    elseif available_ninja_tools.count > options.ninja_tool_warning_limit and state.warned then
+        state.warned:reset()
     end
 end
 

@@ -58,6 +58,7 @@ end
 -- Setup vars that are user-independent.  state.Buff vars initialized here will automatically be tracked.
 function job_setup()
     state.Buff['Climactic Flourish'] = buffactive['climactic flourish'] or false
+    state.Buff['Sneak Attack'] = buffactive['sneak attack'] or false
 
     state.MainStep = M{['description']='Main Step', 'Box Step', 'Quickstep', 'Feather Step', 'Stutter Step'}
     state.AltStep = M{['description']='Alt Step', 'Quickstep', 'Feather Step', 'Stutter Step', 'Box Step'}
@@ -89,7 +90,8 @@ function user_setup()
     state.IdleMode:options('Normal', 'DT')
 
     -- Additional local binds
-    include('Global-Binds.lua')
+    include('Global-Binds.lua') -- OK to remove this line
+    include('Global-GEO-Binds.lua') -- OK to remove this line
 
     send_command('bind ^- gs c cycleback mainstep')
     send_command('bind ^= gs c cycle mainstep')
@@ -316,7 +318,7 @@ function init_gear_sets()
     sets.precast.WS = {
         ammo="Focal Orb",
         head="Lilitu Headpiece",
-        body="Meg. Cuirie +2",
+        body=gear.Herc_WS_body,
         hands="Maxixi Bangles +3",
         legs="Lustr. Subligar +1",
         feet="Lustra. Leggings +1",
@@ -336,10 +338,13 @@ function init_gear_sets()
         feet="Meg. Jam. +2",
         ear2="Telos Earring",
         })
+
+    sets.precast.WS.Critical = {body="Meg. Cuirie +2"}
     
     sets.precast.WS['Exenterator'] = set_combine(sets.precast.WS, {
         ammo="Yamarang",
         head=gear.Adhemar_B_head,
+		body=gear.Adhemar_B_body,
         legs="Meg. Chausses +2",
         feet="Meg. Jam. +2",
         ear1="Sherida Earring",
@@ -368,7 +373,6 @@ function init_gear_sets()
     sets.precast.WS['Pyrrhic Kleos'].Acc = set_combine(sets.precast.WS['Pyrrhic Kleos'], {
         ammo="Falcon Eye",
         head="Dampening Tam",
-        body=gear.Herc_TA_body,
         hands=gear.Adhemar_B_hands,
         legs=gear.Herc_WS_legs,
         feet=gear.Herc_STP_feet,
@@ -819,12 +823,23 @@ end
 
 function job_post_precast(spell, action, spellMap, eventArgs)
     if spell.type == "WeaponSkill" then
+        if state.Buff['Sneak Attack'] == true then
+            equip(sets.precast.WS.Critical)
+        end
         if state.Buff['Climactic Flourish'] then
             equip(sets.buff['Climactic Flourish'])
         end
     end
-    if spell.type=='Waltz' and spell.target.type == 'SELF' then
+	if spell.type=='Waltz' and spell.target.type == 'SELF' then
         equip(sets.precast.WaltzSelf)
+    end
+end
+
+-- Set eventArgs.handled to true if we don't want any automatic gear equipping to be done.
+function job_aftercast(spell, action, spellMap, eventArgs)
+    -- Weaponskills wipe SATA.  Turn those state vars off before default gearing is attempted.
+    if spell.type == 'WeaponSkill' and not spell.interrupted then
+        state.Buff['Sneak Attack'] = false
     end
 end
 
@@ -885,6 +900,15 @@ function job_update(cmdParams, eventArgs)
     determine_haste_group()
 end
 
+function get_custom_wsmode(spell, spellMap, defaut_wsmode)
+    local wsmode
+
+    if state.Buff['Sneak Attack'] then
+        wsmode = 'SA'
+    end
+
+    return wsmode
+end
 
 function customize_idle_set(idleSet)
     if player.hpp < 80 and not areas.Cities:contains(world.area) then

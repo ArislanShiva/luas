@@ -73,7 +73,8 @@ function user_setup()
     state.StormSurge = M(false, 'Stormsurge')
 
     -- Additional local binds
-    include('Global-Binds.lua')
+    include('Global-Binds.lua') -- OK to remove this line
+    include('Global-GEO-Binds.lua') -- OK to remove this line
 
     send_command('bind ^` input /ja Immanence <me>')
     send_command('bind !` gs c toggle MagicBurst')

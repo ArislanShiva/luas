@@ -59,15 +59,6 @@ function user_setup()
     send_command('bind ^numpad9 input /ws "Realmrazer" <t>')
     send_command('bind ^numpad6 input /ws "Exudation" <t>')
     send_command('bind ^numpad1 input /ws "Flash Nova" <t>')
-
-    send_command('bind !numpad7 input /ma "Paralyna" <t>')
-    send_command('bind !numpad8 input /ma "Silena" <t>')
-    send_command('bind !numpad9 input /ma "Blindna" <t>')
-    send_command('bind !numpad4 input /ma "Poisona" <t>')
-    send_command('bind !numpad5 input /ma "Stona" <t>')
-    send_command('bind !numpad6 input /ma "Viruna" <t>')
-    send_command('bind !numpad1 input /ma "Cursna" <t>')
-    send_command('bind !numpad+ input /ma "Erase" <t>')
     
     select_default_macro_book()
     set_lockstyle()
@@ -155,6 +146,7 @@ function init_gear_sets()
         body="Jhakri Robe +2",
         hands="Jhakri Cuffs +1",
         feet="Jhakri Pigaches +1",
+		ear1="Moonshade Earring",
         ear2="Regal Earring",
         ring1="Hetairoi Ring",
         ring2="Apate Ring",
@@ -393,7 +385,6 @@ function init_gear_sets()
         legs="Assid. Pants +1",
         feet="Geo. Sandals +3",
         neck="Bathy Choker +1",
-        ear1="Moonshade Earring",
         ear2="Infused Earring",
         ring1="Paguroidea Ring",
         ring2="Sheltered Ring",

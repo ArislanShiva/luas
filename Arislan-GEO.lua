@@ -44,7 +44,8 @@ function user_setup()
     state.MagicBurst = M(false, 'Magic Burst')
 
     -- Additional local binds
-    include('Global-Binds.lua')
+    include('Global-Binds.lua') -- OK to remove this line
+    include('Global-GEO-Binds.lua') -- OK to remove this line
 
     send_command('bind ^` input /ja "Full Circle" <me>')
     send_command('bind !` gs c toggle MagicBurst')

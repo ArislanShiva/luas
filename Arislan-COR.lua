@@ -66,8 +66,8 @@ end
 -- Setup vars that are user-independent.  state.Buff vars initialized here will automatically be tracked.
 function job_setup()
     -- QuickDraw Selector
-    state.Mainqd = M{['description']='Primary Shot', 'Earth Shot', 'Water Shot', 'Wind Shot', 'Fire Shot', 'Ice Shot', 'Thunder Shot'}
-    state.Altqd = M{['description']='Secondary Shot', 'Earth Shot', 'Water Shot', 'Wind Shot', 'Fire Shot', 'Ice Shot', 'Thunder Shot'}
+    state.Mainqd = M{['description']='Primary Shot', 'Fire Shot', 'Ice Shot', 'Wind Shot', 'Earth Shot', 'Thunder Shot', 'Water Shot'}
+    state.Altqd = M{['description']='Secondary Shot', 'Fire Shot', 'Ice Shot', 'Wind Shot', 'Earth Shot', 'Thunder Shot', 'Water Shot'}
     state.UseAltqd = M(false, 'Use Secondary Shot')
     state.SelectqdTarget = M(false, 'Select Quick Draw Target')
     state.IgnoreTargetting = M(false, 'Ignore Targetting')
@@ -113,9 +113,13 @@ function user_setup()
     options.ammo_warning_limit = 10
 
     -- Additional local binds
-    include('Global-Binds.lua')
+    include('Global-Binds.lua') -- OK to remove this line
+    include('Global-GEO-Binds.lua') -- OK to remove this line
 
     send_command('bind ^` input /ja "Double-up" <me>')
+    send_command('bind ^c input /ja "Crooked Cards" <me>')
+    send_command('bind ^s input /ja "Snake Eye" <me>')
+    send_command('bind ^x input /ja "Fold" <me>')
     send_command('bind !` input /ja "Bolter\'s Roll" <me>')
     send_command ('bind @` gs c toggle LuzafRing')
 
@@ -152,7 +156,6 @@ function user_setup()
     send_command('bind ^numpad1 input /ws "Requiescat" <t>')
     send_command('bind ^numpad2 input /ws "Sniper Shot" <t>')
     send_command('bind ^numpad3 input /ws "Numbing Shot" <t>')
-
 
     send_command('bind numpad0 input /ra <t>')
 
@@ -238,7 +241,7 @@ function init_gear_sets()
     sets.precast.CorsairRoll["Allies' Roll"] = set_combine(sets.precast.CorsairRoll, {hands="Chasseur's Gants +1"})
     
     sets.precast.LuzafRing = set_combine(sets.precast.CorsairRoll, {ring1="Luzaf's Ring"})
-    sets.precast.FoldDoubleBust = {hands="Lanun Gants +1"}
+    sets.precast.FoldDoubleBust = {hands="Lanun Gants +2"}
 
     sets.precast.Waltz = {
         body="Passion Jacket",
@@ -273,12 +276,12 @@ function init_gear_sets()
         ammo=gear.RAbullet,
         head=gear.Taeon_RA_head, --10/0
         body="Oshosi Vest", --12/0
-        hands="Lanun Gants +1", --9/0
+        hands="Lanun Gants +2", --11/0
         legs=gear.Adhemar_D_legs, --9/10
         feet="Meg. Jam. +2", --10/0
         back=gear.COR_SNP_Cape, --10/0
         waist="Yemaya Belt", --0/5
-        } --59/26
+        } --62/26
 
     sets.precast.RA.Flurry1 = set_combine(sets.precast.RA, {
         body="Laksa. Frac +3", --0/20
@@ -588,8 +591,8 @@ function init_gear_sets()
 
     sets.idle = {
         ammo=gear.MAbullet,
-        head="Oshosi Mask",
-        body="Oshosi Vest",
+        head="Meghanada Visor +2",
+        body="Meg. Cuirie +2",
         hands=gear.Herc_DT_hands,
         legs="Carmine Cuisses +1",
         feet="Meg. Jam. +2",
@@ -603,12 +606,12 @@ function init_gear_sets()
         }
 
     sets.idle.DT = set_combine(sets.idle, {
+        head="Meghanada Visor +2", --5/0
         body="Meg. Cuirie +2", --8/0
         hands=gear.Herc_DT_hands, --7/5
         feet="Lanun Bottes +2", --5/0
         neck="Loricate Torque +1", --6/6
         ear2="Etiolation Earring", --0/3
-        ring1="Gelatinous Ring +1", --7/(-1)
         ring2="Defending Ring", --10/10
         back="Moonbeam Cape", --5/5
         waist="Flume Belt +1", --4/0

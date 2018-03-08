@@ -57,7 +57,8 @@ function user_setup()
     state.CP = M(false, "Capacity Points Mode")
 
     -- Additional local binds
-    include('Global-Binds.lua')
+    include('Global-Binds.lua') -- OK to remove this line
+    include('Global-GEO-Binds.lua') -- OK to remove this line
 
     send_command('bind ^` gs c cycle treasuremode')
     send_command('bind !` input /ja "Flee" <me>')
@@ -229,8 +230,8 @@ function init_gear_sets()
 
     sets.precast.WS = {
         ammo="Focal Orb",
-        head="Lilitu Headpiece",
-        body="Meg. Cuirie +2",
+        head="Pill. Bonnet +3", 
+        body=gear.Herc_WS_body,
         hands="Meg. Gloves +2",
         legs="Lustr. Subligar +1",
         feet="Lustra. Leggings +1",
@@ -249,11 +250,12 @@ function init_gear_sets()
         ear2="Telos Earring",
         })
 
-    sets.precast.WS.Stacked = {ammo="Yetshila", head="Pill. Bonnet +3", body="Meg. Cuirie +2"}
+    sets.precast.WS.Critical = {ammo="Yetshila", body="Meg. Cuirie +2"}
 
     sets.precast.WS['Exenterator'] = set_combine(sets.precast.WS, {
         ammo="Seeth. Bomblet +1",
         head=gear.Adhemar_B_head,
+		body=gear.Adhemar_B_body,
         legs="Meg. Chausses +2",
         feet="Meg. Jam. +2",
         ear1="Sherida Earring",
@@ -371,6 +373,7 @@ function init_gear_sets()
 
     sets.idle.Town = set_combine(sets.idle, {
         ammo="Yamarang",
+        head=gear.Adhemar_B_head,
         body=gear.Adhemar_B_body,
         hands=gear.Adhemar_B_hands,
         legs="Lustr. Subligar +1",
@@ -711,9 +714,10 @@ function job_post_precast(spell, action, spellMap, eventArgs)
         if state.TreasureMode.value == 'SATA' or state.TreasureMode.value == 'Fulltime' then
             equip(sets.TreasureHunter)
         end
-    elseif spell.english == 'Rudra\'s Storm' or spell.english == 'Mandalic Stab' then
+    end
+    if spell.type == "WeaponSkill" then
         if state.Buff['Sneak Attack'] == true or state.Buff['Trick Attack'] == true then
-            equip(sets.precast.WS.Stacked)
+            equip(sets.precast.WS.Critical)
         end
     end
 end

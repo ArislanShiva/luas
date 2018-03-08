@@ -163,7 +163,8 @@ function user_setup()
     state.CP = M(false, "Capacity Points Mode")
 
     -- Additional local binds
-    include('Global-Binds.lua')
+    include('Global-Binds.lua') -- OK to remove this line
+    include('Global-GEO-Binds.lua') -- OK to remove this line
 
     send_command('bind ^` input /ma "Blank Gaze" <t>')
     send_command('bind !` gs c toggle MagicBurst')
@@ -417,7 +418,7 @@ function init_gear_sets()
     sets.precast.WS['Expiacion'] = sets.precast.WS['Savage Blade']
 
     sets.precast.WS['Expiacion'].Acc = set_combine(sets.precast.WS['Expiacion'], {
-        body=gear.Herc_TA_body,
+        body=gear.Adhemar_B_body,
         feet=gear.Herc_STP_feet,
         ear2="Telos Earring",
         })

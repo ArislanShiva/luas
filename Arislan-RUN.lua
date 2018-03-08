@@ -64,7 +64,8 @@ function user_setup()
     state.Runes = M{['description']='Runes', 'Ignis', 'Gelus', 'Flabra', 'Tellus', 'Sulpor', 'Unda', 'Lux', 'Tenebrae'}
     
     -- Additional local binds
-    include('Global-Binds.lua')
+    include('Global-Binds.lua') -- OK to remove this line
+    include('Global-GEO-Binds.lua') -- OK to remove this line
 
     send_command('bind ^` input //gs c rune')
     send_command('bind !` input /ja "Vivacious Pulse" <me>')
@@ -279,7 +280,7 @@ function init_gear_sets()
     sets.precast.WS = {
         ammo="Knobkierrie",
         head="Lilitu Headpiece",
-        body="Meg. Cuirie +2",
+        body=gear.Herc_WS_body,
         hands="Meg. Gloves +2",
         legs=gear.Herc_WS_legs,
         feet=gear.Herc_TA_feet,
@@ -294,6 +295,7 @@ function init_gear_sets()
 
     sets.precast.WS.Acc = set_combine(sets.precast.WS, {
         ammo="Seeth. Bomblet +1",
+		body=gear.Adhemar_B_body,
         legs="Meg. Chausses +2",
         ear2="Telos Earring",
         })
@@ -311,7 +313,6 @@ function init_gear_sets()
         
     sets.precast.WS['Resolution'].Acc = set_combine(sets.precast.WS['Resolution'], {
         head="Dampening Tam",
-        body=gear.Herc_TA_body,
         hands=gear.Adhemar_A_hands,
         legs="Meg. Chausses +2",
         feet=gear.Herc_STP_feet,
@@ -319,7 +320,6 @@ function init_gear_sets()
         })
     
     sets.precast.WS['Dimidiation'] = set_combine(sets.precast.WS, {
-        body=gear.Adhemar_B_body,
         legs="Lustr. Subligar +1",
         feet="Lustra. Leggings +1",
         neck="Caro Necklace",
@@ -329,7 +329,7 @@ function init_gear_sets()
         
     sets.precast.WS['Dimidiation'].Acc = set_combine(sets.precast.WS['Dimidiation'], {
         ammo="Seeth. Bomblet +1",
-        body="Meg. Cuirie +2",
+        body=gear.Adhemar_B_body,
         legs="Samnuha Tights",
         feet=gear.Herc_STP_feet,
         ear2="Telos Earring",
@@ -338,9 +338,11 @@ function init_gear_sets()
     sets.precast.WS['Herculean Slash'] = sets.precast.JA['Lunge']
 
     sets.precast.WS['Savage Blade'] = set_combine(sets.precast.WS, {
+        body=gear.Herc_WS_body,
         legs="Meg. Chausses +2",
-        feet=gear.Herc_TA_feet,
+        feet="Meg. Jam. +2",
         neck="Caro Necklace",
+        ear1="Ishvara Earring",
         ring1="Regal Ring",
         ring2="Niqmaddu Ring",
         waist="Prosilio Belt +1",
@@ -355,7 +357,7 @@ function init_gear_sets()
         legs=gear.Herc_MAB_legs,
         feet=gear.Herc_MAB_feet,
         neck="Baetyl Pendant",
-        ear1="Moonshade Earring",
+        ear1="Novio Earring",
         ear2="Friomisi Earring",
         ring1="Archon Ring",
         ring2="Levia. Ring +1",
@@ -363,9 +365,9 @@ function init_gear_sets()
         waist="Eschan Stone",
         }
 
-    sets.precast.WS['True Strike']= sets.precast.WS['Resolution']
+    sets.precast.WS['True Strike'] = sets.precast.WS['Resolution']
 
-    sets.precast.WS['True Strike']= sets.precast.WS['Savage Blade']
+    sets.precast.WS['True Strike'] = sets.precast.WS['Savage Blade']
     sets.precast.WS['Judgment'] = sets.precast.WS['Savage Blade']
     sets.precast.WS['Black Halo'] = sets.precast.WS['Savage Blade']
 
@@ -374,6 +376,27 @@ function init_gear_sets()
         ring1="Shiva Ring +1",
         ring2="Weather. Ring +1",
         })
+
+	sets.precast.WS['Upheaval'] = sets.precast.WS['Resolution']
+	sets.precast.WS['Fell Cleave'] = sets.precast.WS['Savage Blade']
+
+    sets.precast.WS['Full Break'] = {
+        ammo="Pemphredo Tathlum",
+        head="Aya. Zucchetto +2",
+        body="Ayanmo Corazza +2",
+        hands="Leyline Gloves",
+        legs="Aya. Cosciales +2",
+        feet="Aya. Gambieras +2",
+        neck="Erra Pendant",
+        ear1="Digni. Earring",
+        ear2="Moonshade Earring",
+        ring1="Ayanmo Ring",
+        ring2="Weather. Ring +1",
+        back=gear.RUN_WS1_Cape,
+        waist="Eschan Stone",
+        }
+	
+	sets.precast.WS['Shockwave'] = sets.precast.WS['Full Break']
 
 
     ------------------------------------------------------------------------------------------------
