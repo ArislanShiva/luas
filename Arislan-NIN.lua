@@ -86,7 +86,7 @@ function user_setup()
     end
 
     send_command('bind ^numpad7 input /ws "Blade: Kamu" <t>')
-    send_command('bind ^numpad8 input /ws "Blade: Shun" <t>; input /p Message for Pigs Only <call9>')
+    send_command('bind ^numpad8 input /ws "Blade: Shun" <t>')
     send_command('bind ^numpad4 input /ws "Blade: Ten" <t>')
     send_command('bind ^numpad6 input /ws "Blade: Hi" <t>')
     send_command('bind ^numpad1 input /ws "Blade: Yu" <t>')
@@ -272,7 +272,7 @@ function init_gear_sets()
         ear2="Friomisi Earring",
         ring1="Shiva Ring +1",
         ring2="Dingir Ring",
-        back="Argocham. Mantle",
+        back=gear.NIN_MAB_Cape,
         waist="Eschan Stone",
         })
 
@@ -305,7 +305,7 @@ function init_gear_sets()
         ear2="Friomisi Earring",
         ring1="Shiva Ring +1",
         ring2="Shiva Ring +1",
-        back="Argocham. Mantle",
+        back=gear.NIN_MAB_Cape,
         waist="Eschan Stone",
         }
 
@@ -322,12 +322,13 @@ function init_gear_sets()
         body="Mummu Jacket +2",
         hands="Mummu Wrists +2",
         legs="Mummu Kecks +2",
-        feet="Mummu Gamash. +2",
+        feet="Hachiya Kyahan +3",
         neck="Sanctity Necklace",
         ear1="Hermetic Earring",
         ear2="Digni. Earring",
         ring1="Stikini Ring",
         ring2="Stikini Ring",
+        back=gear.NIN_MAB_Cape,
         waist="Eschan Stone",
         }
 
@@ -736,9 +737,6 @@ function job_post_midcast(spell, action, spellMap, eventArgs)
     if default_spell_map == 'ElementalNinjutsu' then
         if state.MagicBurst.value then
             equip(sets.magic_burst)
-            if spell.english == "Impact" then
-                equip(sets.midcast.Impact)
-            end
         end
         if (spell.element == world.day_element or spell.element == world.weather_element) then
             equip(sets.Obi)
@@ -956,7 +954,8 @@ end
 function do_ninja_tool_checks(spell, spellMap, eventArgs)
     local ninja_tool_name
     local ninja_tool_min_count = 1
-    
+
+    -- Only checks for universal tools and shihei
     if spell.skill == "Ninjutsu" then
         if spellMap == 'Utsusemi' then
             ninja_tool_name = "Shihei"
@@ -973,10 +972,9 @@ function do_ninja_tool_checks(spell, spellMap, eventArgs)
     
     local available_ninja_tools = player.inventory[ninja_tool_name] or player.wardrobe[ninja_tool_name]
 
-    -- If no tools are available, cancel and end.
+    -- If no tools are available, end.
     if not available_ninja_tools then
         if spell.skill == "Ninjutsu" then
-            eventArgs.cancel = true
             return
         end
     end

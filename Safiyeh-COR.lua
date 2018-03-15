@@ -2,54 +2,28 @@
 -- (Original: Motenten / Modified: Arislan)
 -------------------------------------------------------------------------------------------------------------------
 
---[[    Custom Features:
+--[[Custom Features:
 
-        QuickDraw Selector  Cycle through available primary and secondary shot types,
-                            and trigger with a single macro
-        Haste Detection     Detects current magic haste level and equips corresponding engaged set to
-                            optimize delay reduction (automatic)
-        Haste Mode          Toggles between Haste II and Haste I recieved, used by Haste Detection [WinKey-H]
-        Capacity Pts. Mode  Capacity Points Mode Toggle [WinKey-C]
-        Auto. Lockstyle     Automatically locks specified equipset on file load
+    QuickDraw Selector          Cycle through available primary and secondary shot types, and trigger with a single macro
+    Haste Detection             Detects current magic haste level and equips corresponding engaged set to optimize delay reduction (automatic)
+    Haste Mode                  Toggles between Haste II and Haste I recieved, used by Haste Detection [WinKey-H]
+    Capacity Pts. Mode          Capacity Points Mode Toggle [WinKey-C]
+    Auto. Lockstyle             Automatically locks specified equipset on file load
 --]]
-
-
 -------------------------------------------------------------------------------------------------------------------
-
 --[[
-
     Custom commands:
     
-    gs c qd
-        Uses the currently configured shot on the target, with either <t> or <stnpc> depending on setting.
+    gs c qd                     Uses the currently configured shot on the target, with either <t> or <stnpc> depending on setting.
+    gs c qd t                   Uses the currently configured shot on the target, but forces use of <t>.
 
-    gs c qd t
-        Uses the currently configured shot on the target, but forces use of <t>.
-    
-    
-    Configuration commands:
-    
-    gs c cycle mainqd
-        Cycles through the available steps to use as the primary shot when using one of the above commands.
-        
-    gs c cycle altqd
-        Cycles through the available steps to use for alternating with the configured main shot.
-        
-    gs c toggle usealtqd
-        Toggles whether or not to use an alternate shot.
-        
-    gs c toggle selectqdtarget
-        Toggles whether or not to use <stnpc> (as opposed to <t>) when using a shot.
-        
-        
-    gs c toggle LuzafRing -- Toggles use of Luzaf Ring on and off
-    
-    Offense mode is melee or ranged.  Used ranged offense mode if you are engaged
-    for ranged weaponskills, but not actually meleeing.
-    
-    Weaponskill mode, if set to 'Normal', is handled separately for melee and ranged weaponskills.
+    gs c cycle mainqd           Cycles through the available steps to use as the primary shot when using one of the above commands.
+    gs c cycle altqd            Cycles through the available steps to use for alternating with the configured main shot.
+    gs c toggle usealtqd        Toggles whether or not to use an alternate shot.
+    gs c toggle selectqdtarget  Toggles whether or not to use <stnpc> (as opposed to <t>) when using a shot.
+
+    gs c toggle LuzafRing       Toggles use of Luzaf Ring on and off
 --]]
-
 
 -------------------------------------------------------------------------------------------------------------------
 -- Setup functions for this job.  Generally should not be modified.
@@ -75,7 +49,7 @@ function job_setup()
     state.FlurryMode = M{['description']='Flurry Mode', 'Flurry II', 'Flurry I'}
     state.HasteMode = M{['description']='Haste Mode', 'Haste II', 'Haste I'}
     state.DualWield = M(false, 'Dual Wield III')
-    state.QDMode = M{['description']='Quick Draw Mode', 'Magic Enhance', 'Magic Attack'}
+    state.QDMode = M{['description']='Quick Draw Mode', 'STP', 'Magic Enhance', 'Magic Attack'}
 
     state.Currentqd = M{['description']='Current Quick Draw', 'Main', 'Alt'}
     
@@ -116,6 +90,9 @@ function user_setup()
     include('Global-Binds.lua')
 
     send_command('bind ^` input /ja "Double-up" <me>')
+    send_command('bind ^c input /ja "Crooked Cards" <me>')
+    send_command('bind ^s input /ja "Snake Eye" <me>')
+    send_command('bind ^x input /ja "Fold" <me>')
     send_command('bind !` input /ja "Bolter\'s Roll" <me>')
     send_command ('bind @` gs c toggle LuzafRing')
 
@@ -153,6 +130,8 @@ function user_setup()
 
     send_command('bind numpad0 input /ra <t>')
 
+    send_command('bind #- input /follow <t>')
+
     select_default_macro_book()
     set_lockstyle()
 end
@@ -161,6 +140,9 @@ end
 -- Called when this job file is unloaded (eg: job change)
 function user_unload()
     send_command('unbind ^`')
+	send_command('unbind ^c')
+	send_command('unbind ^s')
+	send_command('unbind ^x')
     send_command('unbind !`')
     send_command('unbind @`')
     send_command('unbind ^-')
@@ -194,7 +176,7 @@ function init_gear_sets()
     ---------------------------------------- Precast Sets ------------------------------------------
     ------------------------------------------------------------------------------------------------
 
-    sets.precast.JA['Snake Eye'] = {legs="Lanun Culottes +1"}
+    sets.precast.JA['Snake Eye'] = {legs="Lanun Trews +1"}
     sets.precast.JA['Wild Card'] = {feet="Lanun Bottes +1"}
     sets.precast.JA['Random Deal'] = {body="Lanun Frac +1"}
 
@@ -202,7 +184,7 @@ function init_gear_sets()
         head="Lanun Tricorne +1",
         body="Meg. Cuirie +2", --8/0
         hands="Chasseur's Gants +1",
-        --legs="Desultor Tassets",
+        legs="Desultor Tassets",
         feet="Meg. Jam. +2", --3/0
         neck="Loricate Torque +1",
         --ear1="Genmei Earring", --2/0
@@ -256,13 +238,13 @@ function init_gear_sets()
     -- (10% Snapshot from JP Gifts)
     sets.precast.RA = {
         ammo=gear.RAbullet,
-        --head=gear.Taeon_RA_head, --10/0
+        head="Taeon Chapeau", --9/0
         --body="Oshosi Vest", --12/0
         hands="Lanun Gants +1", --9/0
         legs="Adhemar Kecks", --9/0
         feet="Meg. Jam. +2", --10/0
         back=gear.COR_SNP_Cape, --10/0
-        --waist="Yemaya Belt", --0/5
+        waist="Impulse Belt", --3/0
         }
 
     sets.precast.RA.Flurry1 = set_combine(sets.precast.RA, {
@@ -273,7 +255,7 @@ function init_gear_sets()
     sets.precast.RA.Flurry2 = set_combine(sets.precast.RA.Flurry1, {
         head="Chass. Tricorne +1", --0/14
         --feet="Pursuer's Gaiters", --0/10
-        --waist="Impulse Belt", --3/0
+        waist="Impulse Belt", --3/0
         })
 
 
@@ -286,16 +268,15 @@ function init_gear_sets()
         head="Meghanada Visor +2",
         body="Meg. Cuirie +2",
         hands="Meg. Gloves +2",
-        legs="Meg. Chausses +1",
+        legs="Meg. Chausses +2",
         feet="Meg. Jam. +2",
-        neck="Iskur Gorget",
-        ear1="Enervating Earring",
+        neck="Fotia Gorget",
         ear1="Moonshade Earring",
         ear2="Ishvara Earring",
-        --ring1="Regal Ring",
+        ring1="Garuda Ring +1",
         ring2="Dingir Ring",
         back=gear.COR_WS3_Cape,
-        --waist="Fotia Belt",
+        waist="Fotia Belt",
         }
 
     sets.precast.WS.Acc = set_combine(sets.precast.WS, {
@@ -322,7 +303,7 @@ function init_gear_sets()
         neck="Baetyl Pendant",
         ear1="Hecate's Earring",
         ear2="Friomisi Earring",
-        ring1="Apate Ring",
+        ring1="Garuda Ring +1",
         ring2="Dingir Ring",
         back=gear.COR_WS3_Cape,
         waist="Eschan Stone",
@@ -338,7 +319,7 @@ function init_gear_sets()
         neck="Baetyl Pendant",
         ear1="Moonshade Earring",
         ear2="Friomisi Earring",
-        ring1="Apate Ring",
+        ring1="Garuda Ring +1",
         --ring1="Archon Ring",
         ring2="Dingir Ring",
         back=gear.COR_WS3_Cape,
@@ -349,16 +330,17 @@ function init_gear_sets()
         
     sets.precast.WS['Evisceration'] = {
         head="Adhemar Bonnet",
-        body="Adhemar Jacket",
+        body="Abnoba Kaftan",
         hands="Mummu Wrists +2",
         legs="Samnuha Tights",
         feet="Herculean Boots",
-        neck="Caro Necklace",
+        neck="Fotia Gorget",
         ear1="Moonshade Earring",
         ear2="Brutal Earring",
         --ring1="Begrudging Ring",
         ring2="Mummu Ring",
-        --waist="Fotia Belt",
+		back="Bleating Mantle",
+        waist="Fotia Belt",
         }
 
     sets.precast.WS['Evisceration'].Acc = set_combine(sets.precast.WS['Evisceration'], {
@@ -388,10 +370,10 @@ function init_gear_sets()
 
     sets.precast.WS['Swift Blade'] = set_combine(sets.precast.WS['Savage Blade'], {
         legs="Samnuha Tights",
-        --neck="Fotia Gorget",
+        neck="Fotia Gorget",
         ear1="Cessance Earring",
         ear2="Brutal Earring",
-        --waist="Fotia Belt",
+        waist="Fotia Belt",
         })
 
     sets.precast.WS['Swift Blade'].Acc = set_combine(sets.precast.WS['Swift Blade'], {
@@ -404,10 +386,10 @@ function init_gear_sets()
         body="Adhemar Jacket",
         legs="Samnuha Tights",
         feet="Carmine Greaves +1",
-        --neck="Fotia Gorget",
+        neck="Fotia Gorget",
         ring2="Epona's Ring",
         --back=gear.COR_WS2_Cape,
-        --waist="Fotia Belt",
+        waist="Fotia Belt",
         }) --MND
 
     sets.precast.WS['Requiescat'].Acc = set_combine(sets.precast.WS['Requiescat'], {
@@ -449,7 +431,7 @@ function init_gear_sets()
         neck="Baetyl Pendant",
         ear1="Hecate's Earring",
         ear2="Friomisi Earring",
-        --ring1="Fenrir Ring +1",
+        ring1="Garuda Ring +1",
         ring2="Dingir Ring",
         back=gear.COR_WS3_Cape,
         waist="Eschan Stone",
@@ -471,7 +453,7 @@ function init_gear_sets()
 
     sets.midcast.CorsairShot['Light Shot'] = sets.midcast.CorsairShot.Resistant
     sets.midcast.CorsairShot['Dark Shot'] = sets.midcast.CorsairShot.Resistant
-    sets.midcast.CorsairShot.Enhance = {feet="Chass. Bottes +1"}
+    sets.midcast.CorsairShot.Enhance = {body="Mirke Wardecors", feet="Chass. Bottes +1"}
 
 
     -- Ranged gear
@@ -485,7 +467,7 @@ function init_gear_sets()
         neck="Iskur Gorget",
         ear1="Enervating Earring",
         ear2="Neritic Earring",
-        ring1="Apate Ring",
+        ring1="Garuda Ring +1",
         ring2="Dingir Ring",
         back=gear.COR_RA_Cape,
         --waist="Yemaya Belt",
@@ -494,7 +476,7 @@ function init_gear_sets()
     sets.midcast.RA.Acc = set_combine(sets.midcast.RA, {
         ammo=gear.RAbullet,
         --body="Laksa. Frac +3",
-        legs="Meg. Chausses +1",
+        legs="Meg. Chausses +2",
         --ring2="Hajduk Ring +1",
         --waist="Kwahu Kachina Belt",
         })
@@ -567,6 +549,8 @@ function init_gear_sets()
     sets.idle.Town = set_combine(sets.idle, {
         hands="Carmine Fin. Ga. +1",
         neck="Iskur Gorget",
+        ring1="Garuda Ring +1",
+		ring2="Dingir Ring",
         back=gear.COR_WS3_Cape,
         waist="Eschan Stone",
         })
@@ -600,7 +584,7 @@ function init_gear_sets()
         body="Adhemar Jacket", --5
         hands="Floral Gauntlets", --5
         legs="Carmine Cuisses +1", --6
-        feet="Herculean Boots",
+        feet="Taeon Boots", --9
         neck="Caro Necklace",
         ear1="Cessance Earring",
         ear2="Suppanomimi", --5
@@ -638,7 +622,7 @@ function init_gear_sets()
         body="Adhemar Jacket",
         hands="Floral Gauntlets", --5
         legs="Carmine Cuisses +1", --6
-        feet="Herculean Boots",
+        feet="Taeon Boots", --9
         neck="Caro Necklace",
         ear1="Cessance Earring",
         ear2="Suppanomimi", --5
@@ -676,7 +660,7 @@ function init_gear_sets()
         body="Adhemar Jacket",
         hands="Adhemar Wristbands",
         legs="Carmine Cuisses +1", --6
-        feet="Herculean Boots",
+        feet="Taeon Boots", --9
         neck="Caro Necklace",
         ear1="Cessance Earring",
         ear2="Suppanomimi", --5
@@ -691,7 +675,7 @@ function init_gear_sets()
         })
 
     sets.engaged.MidAcc.MidHaste = set_combine(sets.engaged.LowAcc.MidHaste, {
-        legs="Meg. Chausses +1",
+        legs="Meg. Chausses +2",
         --neck="Combatant's Torque",
         --ear2="Telos Earring",
         --ring2="Ilabrat Ring",
@@ -715,7 +699,7 @@ function init_gear_sets()
         body="Adhemar Jacket",
         hands="Adhemar Wristbands",
         legs="Carmine Cuisses +1", --6
-        feet="Herculean Boots",
+        feet="Taeon Boots", --9
         neck="Caro Necklace",
         ear1="Cessance Earring",
         ear2="Suppanomimi", --5
@@ -730,7 +714,7 @@ function init_gear_sets()
         })
 
     sets.engaged.MidAcc.HighHaste = set_combine(sets.engaged.LowAcc.HighHaste, {
-        legs="Meg. Chausses +1",
+        legs="Meg. Chausses +2",
         --neck="Combatant's Torque",
         --ear2="Telos Earring",
         --ring2="Ilabrat Ring",
@@ -769,7 +753,7 @@ function init_gear_sets()
         })
 
     sets.engaged.MidAcc.MaxHaste = set_combine(sets.engaged.LowAcc.MaxHaste, {
-        legs="Meg. Chausses +1",
+        legs="Meg. Chausses +2",
         --neck="Combatant's Torque",
         --ear2="Telos Earring",
         --ring2="Ilabrat Ring",

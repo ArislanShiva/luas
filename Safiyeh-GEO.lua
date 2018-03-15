@@ -59,6 +59,8 @@ function user_setup()
     send_command('bind ^numpad9 input /ws "Realmrazer" <t>')
     send_command('bind ^numpad6 input /ws "Exudation" <t>')
     send_command('bind ^numpad1 input /ws "Flash Nova" <t>')
+
+    send_command('bind #- input /follow <t>')
     
     select_default_macro_book()
     set_lockstyle()
@@ -123,6 +125,7 @@ function init_gear_sets()
         }
 
     sets.precast.FC['Enhancing Magic'] = set_combine(sets.precast.FC, {
+		waist="Siegel Sash",
         back="Perimede Cape",
         })
         
@@ -146,10 +149,12 @@ function init_gear_sets()
         body="Jhakri Robe +2",
         hands="Jhakri Cuffs +1",
         feet="Jhakri Pigaches +1",
+		neck="Fotia Gorget",
         ear1="Moonshade Earring",
         ear2="Regal Earring",
         ring1="Hetairoi Ring",
         ring2="Apate Ring",
+		waist="Fotia Belt",
         }
     
     ------------------------------------------------------------------------
@@ -180,7 +185,7 @@ function init_gear_sets()
         legs="Azimuth Tights +1",
         feet="Merlinic Crackows",
         ear1="Calamitous Earring",
-        ear2="Mendi. Earring",
+        ear2="Gifted Earring",
         neck="Incanter's Torque",
         ring1="Stikini Ring",
         ring2="Stikini Ring",
@@ -258,6 +263,7 @@ function init_gear_sets()
             
     sets.midcast.Stoneskin = set_combine(sets.midcast['Enhancing Magic'], {
         neck="Nodens Gorget",
+		waist="Siegel Sash",
         })
 
     sets.midcast.Aquaveil = set_combine(sets.midcast['Enhancing Magic'], {
