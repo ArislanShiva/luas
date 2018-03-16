@@ -169,7 +169,7 @@ function init_gear_sets()
         neck="Orunmila's Torque", --5
         ear1="Loquacious Earring", --2
         ear2="Enchntr. Earring +1", --2
-            ="Kishar Ring", --4
+        ring1="Kishar Ring", --4
         ring2="Weather. Ring +1", --5/(3)
         back=gear.SCH_FC_Cape, --10
         waist="Witful Belt", --3/(3)
@@ -184,7 +184,7 @@ function init_gear_sets()
         sub="Clerisy Strap +1", --3
         ammo="Impatiens",
         ear1="Mendi. Earring", --5
-            ="Lebeche Ring", --(2)
+        ring1="Lebeche Ring", --(2)
         back="Perimede Cape", --(4)
         })
     
@@ -207,7 +207,7 @@ function init_gear_sets()
         neck="Fotia Gorget",
         ear1="Moonshade Earring",
         ear2="Telos Earring",
-            ="Rufescent Ring",
+        ring1="Rufescent Ring",
         ring2="Shukuyu Ring",
         back="Relucent Cape",
         waist="Fotia Belt",
@@ -223,7 +223,7 @@ function init_gear_sets()
         neck="Orunmila's Torque",
         ear1="Loquacious Earring",
         ear2="Etiolation Earring",
-            ="Mephitas's Ring +1",
+        ring1="Mephitas's Ring +1",
         ring2="Mephitas's Ring",
         back="Fi Follet Cape +1",
         waist="Shinjutsu-no-Obi +1",
@@ -248,7 +248,7 @@ function init_gear_sets()
         neck="Incanter's Torque",
         ear1="Mendi. Earring", --5
         ear2="Regal Earring",
-            ="Lebeche Ring", --3/(-5)
+        ring1="Lebeche Ring", --3/(-5)
         ring2="Haoma's Ring",
         back="Oretan. Cape +1", --6
         waist="Bishop's Sash",
@@ -264,7 +264,7 @@ function init_gear_sets()
     
     sets.midcast.Curaga = set_combine(sets.midcast.Cure, {
         neck="Nuna Gorget +1",
-            ="Levia. Ring +1",
+        ring1="Levia. Ring +1",
         ring2="Levia. Ring +1",
         back=gear.SCH_FC_Cape,
         waist="Luminary Sash",
@@ -277,7 +277,7 @@ function init_gear_sets()
         feet="Vanya Clogs",
         neck="Incanter's Torque",
         ear2="Healing Earring",
-            ="Haoma's Ring",
+        ring1="Haoma's Ring",
         ring2="Haoma's Ring",
         back="Oretan. Cape +1",
         waist="Bishop's Sash",
@@ -305,7 +305,7 @@ function init_gear_sets()
         neck="Incanter's Torque",
         ear1="Augment. Earring",
         ear2="Andoaa Earring",
-            ="Stikini Ring",
+        ring1="Stikini Ring",
         ring2="Stikini Ring",
         back="Fi Follet Cape +1",
         waist="Olympus Sash",
@@ -377,7 +377,7 @@ function init_gear_sets()
         neck="Erra Pendant",
         ear1="Barkaro. Earring",
         ear2="Regal Earring",
-            ="Kishar Ring",
+        ring1="Kishar Ring",
         ring2="Stikini Ring",
         back=gear.SCH_FC_Cape,
         waist="Luminary Sash",
@@ -402,7 +402,7 @@ function init_gear_sets()
         neck="Erra Pendant",
         ear1="Barkaro. Earring",
         ear2="Regal Earring",
-            ="Stikini Ring",
+        ring1="Stikini Ring",
         ring2="Stikini Ring",
         back="Perimede Cape",
         waist="Luminary Sash",
@@ -420,7 +420,7 @@ function init_gear_sets()
         neck="Mizu. Kubikazari", --10
         ear1="Barkaro. Earring",
         ear2="Regal Earring",
-            ="Shiva Ring +1",
+        ring1="Shiva Ring +1",
         ring2="Archon Ring",
         back=gear.SCH_MAB_Cape,
         waist="Yamabuki-no-Obi",
@@ -453,7 +453,7 @@ function init_gear_sets()
         neck="Baetyl Pendant",
         ear1="Barkaro. Earring",
         ear2="Regal Earring",
-            ="Shiva Ring +1",
+        ring1="Shiva Ring +1",
         ring2="Shiva Ring +1",
         back=gear.SCH_MAB_Cape,
         waist="Refoccilation Stone",
@@ -482,7 +482,7 @@ function init_gear_sets()
         sub="Niobid Strap",
         head=empty,
         body="Twilight Cloak",
-            ="Archon Ring",
+        ring1="Archon Ring",
         })
     
     sets.midcast.Helix = {
@@ -521,7 +521,7 @@ function init_gear_sets()
         neck="Bathy Choker +1",
         ear1="Genmei Earring",
         ear2="Infused Earring",
-            ="Paguroidea Ring",
+        ring1="Paguroidea Ring",
         ring2="Sheltered Ring",
         back="Moonbeam Cape",
         waist="Refoccilation Stone",
@@ -537,7 +537,7 @@ function init_gear_sets()
          neck="Loricate Torque +1", --6/6
         ear1="Genmei Earring", --2/0
         ear2="Etiolation Earring", --0/3
-            ="Gelatinous Ring +1", --7/(-1)
+        ring1="Gelatinous Ring +1", --7/(-1)
         ring2="Defending Ring", --10/10
         back="Moonbeam Cape", --5/5
         waist="Slipor Sash", --0/3
@@ -554,7 +554,7 @@ function init_gear_sets()
         neck="Incanter's Torque",
         ear1="Barkaro. Earring",
         ear2="Regal Earring",
-            ="Shiva Ring +1",
+        ring1="Shiva Ring +1",
         ring2="Weather. Ring +1",
         back=gear.SCH_MAB_Cape,
         })
@@ -587,7 +587,7 @@ function init_gear_sets()
         neck="Combatant's Torque",
         ear1="Cessance Earring",
         ear2="Telos Earring",
-            ="Petrov Ring",
+        ring1="Petrov Ring",
         ring2="Hetairoi Ring",
         back="Relucent Cape",
         }
@@ -603,7 +603,7 @@ function init_gear_sets()
         legs=gear.Merlinic_MB_legs, --6
         feet="Merlinic Crackows", --11
         neck="Mizu. Kubikazari", --10
-            ="Mujin Band", --(5)
+        ring1="Mujin Band", --(5)
         }
 
     sets.magic_burst.Resistant = { 
@@ -630,7 +630,7 @@ function init_gear_sets()
         body="Peda. Gown +1",
         }
 
-    sets.buff.Doom = {    ="Eshmun's Ring", ring2="Eshmun's Ring", waist="Gishdubar Sash"}
+    sets.buff.Doom = {ring1="Eshmun's Ring", ring2="Eshmun's Ring", waist="Gishdubar Sash"}
 
     sets.LightArts = {legs="Acad. Pants +2", feet="Acad. Loafers +3"}
     sets.DarkArts = {body="Acad. Gown +2", feet="Acad. Loafers +3"}

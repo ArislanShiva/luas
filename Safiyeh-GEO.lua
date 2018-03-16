@@ -118,7 +118,7 @@ function init_gear_sets()
         neck="Baetyl Pendant", --4
         ear1="Loquacious Earring", --2
         ear2="Etiolation Earring", --1
-            ="Kishar Ring", --4
+        ring1="Kishar Ring", --4
         ring2="Weather. Ring", --5
         back=gear.GEO_FC_Cape, --10
         waist="Witful Belt", --3
@@ -152,7 +152,7 @@ function init_gear_sets()
 		neck="Fotia Gorget",
         ear1="Moonshade Earring",
         ear2="Regal Earring",
-            ="Hetairoi Ring",
+        ring1="Hetairoi Ring",
         ring2="Apate Ring",
 		waist="Fotia Belt",
         }
@@ -170,7 +170,7 @@ function init_gear_sets()
         legs="Geomancy Pants +3",
         ear1="Loquacious Earring",
         ear2="Etiolation Earring",
-            ="Kishar Ring",
+        ring1="Kishar Ring",
         ring2="Weather. Ring",
         back=gear.GEO_FC_Cape,
         waist="Witful Belt",
@@ -187,7 +187,7 @@ function init_gear_sets()
         ear1="Calamitous Earring",
         ear2="Gifted Earring",
         neck="Incanter's Torque",
-            ="Stikini Ring",
+        ring1="Stikini Ring",
         ring2="Stikini Ring",
         back="Lifestream Cape",
         waist="Austerity Belt +1",
@@ -209,7 +209,7 @@ function init_gear_sets()
         neck="Incanter's Torque",
         ear1="Beatific Earring",
         ear2="Mendi. Earring", --5
-            ="Haoma's Ring",
+        ring1="Haoma's Ring",
         ring2="Haoma's Ring",
         back="Oretan. Cape +1", --5
         waist="Bishop's Sash",
@@ -223,7 +223,7 @@ function init_gear_sets()
         feet="Vanya Clogs",
         neck="Malison Medallion",
         ear1="Beatific Earring",
-            ="Haoma's Ring",
+        ring1="Haoma's Ring",
         ring2="Haoma's Ring",
         back="Oretan. Cape +1",
         })
@@ -237,7 +237,7 @@ function init_gear_sets()
         legs="Telchine Braconi",
         feet="Telchine Pigaches",
         neck="Incanter's Torque",
-            ="Stikini Ring",
+        ring1="Stikini Ring",
         ring2="Stikini Ring",
         waist="Olympus Sash",
         }
@@ -292,7 +292,7 @@ function init_gear_sets()
         neck="Erra Pendant",
         ear1="Barkarole Earring",
         ear2="Regal Earring",
-            ="Kishar Ring",
+        ring1="Kishar Ring",
         ring2="Stikini Ring",
         back=gear.GEO_FC_Cape,
         waist="Luminary Sash",
@@ -300,7 +300,7 @@ function init_gear_sets()
     
     sets.midcast.IntEnfeebles = set_combine(sets.midcast.MndEnfeebles, {
         ear1="Barkarole Earring",
-            ="Shiva Ring",
+        ring1="Shiva Ring",
         ring2="Shiva Ring",
         back=gear.GEO_MAB_Cape,
         }) -- INT/Magic accuracy
@@ -316,7 +316,7 @@ function init_gear_sets()
         neck="Erra Pendant",
         ear1="Barkarole Earring",
         ear2="Digni. Earring",
-            ="Stikini Ring",
+        ring1="Stikini Ring",
         ring2="Stikini Ring",
         back=gear.GEO_MAB_Cape,
         waist="Luminary Sash",
@@ -324,7 +324,7 @@ function init_gear_sets()
     
     sets.midcast.Drain = set_combine(sets.midcast['Dark Magic'], {
         head="Bagua Galero +1",
-            ="Evanescence Ring",
+        ring1="Evanescence Ring",
         waist="Fucho-no-Obi",
         })
     
@@ -346,7 +346,7 @@ function init_gear_sets()
         neck="Baetyl Pendant",
         ear1="Barkarole Earring",
         ear2="Regal Earring",
-            ="Shiva Ring",
+        ring1="Shiva Ring",
         ring2="Shiva Ring",
         back=gear.GEO_MAB_Cape,
         waist="Refoccilation Stone",
@@ -392,7 +392,7 @@ function init_gear_sets()
         feet="Geo. Sandals +3",
         neck="Bathy Choker +1",
         ear2="Infused Earring",
-            ="Paguroidea Ring",
+        ring1="Paguroidea Ring",
         ring2="Sheltered Ring",
         back="Moonbeam Cape",
         waist="Austerity Belt +1",
@@ -409,7 +409,7 @@ function init_gear_sets()
         feet="Azimuth Gaiters +1", --4/0
         neck="Loricate Torque +1", --6/6
         ear2="Etiolation Earring", --0/3
-            ="Gelatinous Ring +1", --7/(-1)
+        ring1="Gelatinous Ring +1", --7/(-1)
         ring2="Defending Ring", --10/10
         back="Moonbeam Cape", --5/5
         })
@@ -435,7 +435,7 @@ function init_gear_sets()
 
     sets.idle.DT.Pet = set_combine(sets.idle.Pet, {
         neck="Loricate Torque +1", --6/6
-            ="Gelatinous Ring +1", --7/(-1)
+        ring1="Gelatinous Ring +1", --7/(-1)
         ring2="Defending Ring",
         back="Moonbeam Cape", --5/5
         })
@@ -485,7 +485,7 @@ function init_gear_sets()
         feet="Jhakri Pigaches +1",
         ear1="Cessance Earring",
         ear2="Regal Earring",
-            ="Hetairoi Ring",
+        ring1="Hetairoi Ring",
         ring2="Apate Ring",
         waist="Cetl Belt",
         }
@@ -504,7 +504,7 @@ function init_gear_sets()
         ring2="Mujin Band", --(5)
         }
 
-    sets.buff.Doom = {    ="Saida Ring", ring2="Saida Ring", waist="Gishdubar Sash"}
+    sets.buff.Doom = {ring1="Saida Ring", ring2="Saida Ring", waist="Gishdubar Sash"}
 
     sets.Obi = {waist="Hachirin-no-Obi"}
     sets.CP = {back="Mecisto. Mantle"}

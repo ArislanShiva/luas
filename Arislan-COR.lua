@@ -210,7 +210,7 @@ function init_gear_sets()
         neck="Regal Necklace",
         ear1="Genmei Earring", --2/0
         ear2="Etiolation Earring", --0/3
-            ="Gelatinous Ring +1", --7/(-1)
+        ring1="Gelatinous Ring +1", --7/(-1)
         ring2="Defending Ring", --10/10
         back=gear.COR_SNP_Cape,
         waist="Flume Belt +1", --4/0
@@ -223,13 +223,13 @@ function init_gear_sets()
     sets.precast.CorsairRoll["Tactician's Roll"] = set_combine(sets.precast.CorsairRoll, {body="Chasseur's Frac +1"})
     sets.precast.CorsairRoll["Allies' Roll"] = set_combine(sets.precast.CorsairRoll, {hands="Chasseur's Gants +1"})
     
-    sets.precast.LuzafRing = set_combine(sets.precast.CorsairRoll, {    ="Luzaf's Ring"})
+    sets.precast.LuzafRing = set_combine(sets.precast.CorsairRoll, {ring1="Luzaf's Ring"})
     sets.precast.FoldDoubleBust = {hands="Lanun Gants +2"}
 
     sets.precast.Waltz = {
         body="Passion Jacket",
         neck="Phalaina Locket",
-            ="Asklepian Ring",
+        ring1="Asklepian Ring",
         waist="Gishdubar Sash",
         }
 
@@ -244,14 +244,14 @@ function init_gear_sets()
         neck="Orunmila's Torque", --5
         ear1="Loquacious Earring", --2
         ear2="Enchntr. Earring +1", --2
-            ="Weather. Ring +1", --6(4)
+        ring1="Weather. Ring +1", --6(4)
         ring2="Kishar Ring", --4
         }
 
     sets.precast.FC.Utsusemi = set_combine(sets.precast.FC, {
         body="Passion Jacket",
         neck="Magoraga Beads",
-            ="Lebeche Ring",
+        ring1="Lebeche Ring",
         })
 
     -- (10% Snapshot from JP Gifts)
@@ -291,7 +291,7 @@ function init_gear_sets()
         neck="Fotia Gorget",
         ear1="Moonshade Earring",
         ear2="Ishvara Earring",
-            ="Regal Ring",
+        ring1="Regal Ring",
         ring2="Dingir Ring",
         back=gear.COR_WS3_Cape,
         waist="Fotia Belt",
@@ -327,7 +327,7 @@ function init_gear_sets()
         neck="Baetyl Pendant",
         ear1="Novio Earring",
         ear2="Friomisi Earring",
-            ="Ilabrat Ring",
+        ring1="Ilabrat Ring",
         ring2="Dingir Ring",
         back=gear.COR_WS1_Cape,
         waist="Eschan Stone",
@@ -336,7 +336,7 @@ function init_gear_sets()
     sets.precast.WS['Leaden Salute'] = set_combine(sets.precast.WS['Wildfire'], {
         head="Pixie Hairpin +1",
         ear1="Moonshade Earring",
-            ="Archon Ring",
+        ring1="Archon Ring",
         })
 
     sets.precast.WS['Leaden Salute'].FullTP = {ear1="Novio Earring", waist="Svelt. Gouriz +1"}
@@ -349,7 +349,7 @@ function init_gear_sets()
         feet="Mummu Gamash. +2",
         neck="Fotia Gorget",
         ear2="Brutal Earring",
-            ="Regal Ring",
+        ring1="Regal Ring",
         ring2="Mummu Ring",
         back=gear.COR_TP_Cape,
         waist="Fotia Belt",
@@ -366,7 +366,7 @@ function init_gear_sets()
         head="Lilitu Headpiece",
         hands="Meg. Gloves +2",
         legs=gear.Herc_WS_legs,
-            ="Regal Ring",
+        ring1="Regal Ring",
         ring2="Shukuyu Ring",
         back=gear.COR_WS2_Cape,
         waist="Prosilio Belt +1",
@@ -387,7 +387,7 @@ function init_gear_sets()
         feet=gear.Herc_TA_feet,
         ear1="Cessance Earring",
         ear2="Brutal Earring",
-            ="Regal Ring",
+        ring1="Regal Ring",
         ring2="Epona's Ring",
         back=gear.COR_WS2_Cape,
         })
@@ -414,7 +414,7 @@ function init_gear_sets()
 
     sets.precast.WS['Aeolian Edge'] = set_combine(sets.precast.WS['Wildfire'], {
         ear1="Moonshade Earring",
-            ="Shiva Ring +1",
+        ring1="Shiva Ring +1",
         })
 
     ------------------------------------------------------------------------------------------------
@@ -425,14 +425,14 @@ function init_gear_sets()
 
     sets.midcast.SpellInterrupt = {
         legs="Carmine Cuisses +1", --20
-            ="Evanescence Ring", --5
+        ring1="Evanescence Ring", --5
         }
 
     sets.midcast.Cure = {
         neck="Incanter's Torque",
         ear1="Roundel Earring",
         ear2="Mendi. Earring",
-            ="Lebeche Ring",
+        ring1="Lebeche Ring",
         ring2="Haoma's Ring",
         waist="Bishop's Sash",
         }    
@@ -450,7 +450,7 @@ function init_gear_sets()
         neck="Iskur Gorget",
         ear1="Dedition Earring",
         ear2="Telos Earring",
-            ="Archon Ring",
+        ring1="Archon Ring",
         ring2="Dingir Ring",
         back=gear.COR_RA_Cape,
         waist="Oneiros Rope",        
@@ -466,7 +466,7 @@ function init_gear_sets()
         neck="Baetyl Pendant",
         ear1="Novio Earring",
         ear2="Friomisi Earring",
-            ="Fenrir Ring +1",
+        ring1="Fenrir Ring +1",
         ring2="Dingir Ring",
         back="Gunslinger's Cape",
         waist="Eschan Stone",
@@ -482,7 +482,7 @@ function init_gear_sets()
         neck="Iskur Gorget",
         ear1="Dedition Earring",
         ear2="Telos Earring",
-            ="Ilabrat Ring",
+        ring1="Ilabrat Ring",
         ring2="Apate Ring",
         back=gear.COR_RA_Cape,
         waist="Kentarch Belt +1",
@@ -497,7 +497,7 @@ function init_gear_sets()
         neck="Sanctity Necklace",
         ear1="Hermetic Earring",
         ear2="Digni. Earring",
-            ="Regal Ring",
+        ring1="Regal Ring",
         ring2="Weather. Ring +1",
         back=gear.COR_WS1_Cape,
         waist="Kwahu Kachina Belt",
@@ -518,7 +518,7 @@ function init_gear_sets()
         neck="Iskur Gorget",
         ear1="Enervating Earring",
         ear2="Telos Earring",
-            ="Ilabrat Ring",
+        ring1="Ilabrat Ring",
         ring2="Dingir Ring",
         back=gear.COR_RA_Cape,
         waist="Yemaya Belt",
@@ -527,7 +527,7 @@ function init_gear_sets()
     sets.midcast.RA.Acc = set_combine(sets.midcast.RA, {
         body="Laksa. Frac +3",
         hands="Meg. Gloves +2",
-            ="Regal Ring",
+        ring1="Regal Ring",
         })
 
     sets.midcast.RA.HighAcc = set_combine(sets.midcast.RA.Acc, {
@@ -542,7 +542,7 @@ function init_gear_sets()
         hands="Mummu Wrists +2",
         legs="Mummu Kecks +2",
         feet="Oshosi Leggings",
-            ="Begrudging Ring",
+        ring1="Begrudging Ring",
         ring2="Mummu Ring",
         waist="Kwahu Kachina Belt",
         })
@@ -551,7 +551,7 @@ function init_gear_sets()
         body="Oshosi Vest",
         feet="Carmine Greaves +1",
         ear1="Dedition Earring",
-            ="Petrov Ring",
+        ring1="Petrov Ring",
         })
 
     sets.TripleShot = {
@@ -580,7 +580,7 @@ function init_gear_sets()
         neck="Bathy Choker +1",
         ear1="Genmei Earring",
         ear2="Infused Earring",
-            ="Paguroidea Ring",
+        ring1="Paguroidea Ring",
         ring2="Sheltered Ring",
         back="Moonbeam Cape",
         waist="Flume Belt +1",
@@ -606,7 +606,7 @@ function init_gear_sets()
         neck="Iskur Gorget",
         ear1="Suppanomimi",
         ear2="Telos Earring",
-            ="Regal Ring",
+        ring1="Regal Ring",
         ring2="Dingir Ring",
         back=gear.COR_WS1_Cape,
         waist="Windbuffet Belt +1",
@@ -645,7 +645,7 @@ function init_gear_sets()
         neck="Iskur Gorget",
         ear1="Suppanomimi", --5
         ear2="Eabani Earring", --4
-            ="Hetairoi Ring",
+        ring1="Hetairoi Ring",
         ring2="Epona's Ring",
         back=gear.COR_DW_Cape, --10
         waist="Reiki Yotai", --7
@@ -666,13 +666,13 @@ function init_gear_sets()
         head="Carmine Mask +1",
         feet=gear.Herc_STP_feet,
         ear2="Telos Earring",
-            ="Regal Ring",
+        ring1="Regal Ring",
         ring2="Ramuh Ring +1",
         waist="Olseni Belt",
         })
 
     sets.engaged.STP = set_combine(sets.engaged, {
-            ="Petrov Ring",
+        ring1="Petrov Ring",
         })
 
     -- 15% Magic Haste (67% DW to cap)
@@ -685,7 +685,7 @@ function init_gear_sets()
         neck="Iskur Gorget",
         ear1="Suppanomimi", --5
         ear2="Eabani Earring", --4
-            ="Hetairoi Ring",
+        ring1="Hetairoi Ring",
         ring2="Epona's Ring",
         back=gear.COR_DW_Cape, --10
         waist="Reiki Yotai", --7
@@ -706,13 +706,13 @@ function init_gear_sets()
         head="Carmine Mask +1",
         feet=gear.Herc_STP_feet,
         ear1="Cessance Earring",
-            ="Regal Ring",
+        ring1="Regal Ring",
         ring2="Ramuh Ring +1",
         waist="Olseni Belt",
         })
 
     sets.engaged.STP.LowHaste = set_combine(sets.engaged.LowHaste, {
-            ="Petrov Ring",
+        ring1="Petrov Ring",
         })
 
     -- 30% Magic Haste (56% DW to cap)
@@ -725,7 +725,7 @@ function init_gear_sets()
         neck="Iskur Gorget",
         ear1="Suppanomimi", --5
         ear2="Eabani Earring", --4
-            ="Hetairoi Ring",
+        ring1="Hetairoi Ring",
         ring2="Epona's Ring",
         back=gear.COR_DW_Cape, --10
         waist="Reiki Yotai", --7
@@ -748,13 +748,13 @@ function init_gear_sets()
         legs="Carmine Cuisses +1",
         feet=gear.Herc_STP_feet,
         ear1="Cessance Earring",
-            ="Regal Ring",
+        ring1="Regal Ring",
         ring2="Ramuh Ring +1",
         waist="Olseni Belt",
         })
 
     sets.engaged.STP.MidHaste = set_combine(sets.engaged.MidHaste, {
-            ="Petrov Ring",
+        ring1="Petrov Ring",
         })
 
     -- 35% Magic Haste (51% DW to cap)
@@ -767,7 +767,7 @@ function init_gear_sets()
         neck="Iskur Gorget",
         ear1="Suppanomimi", --5
         ear2="Eabani Earring", --4
-            ="Hetairoi Ring",
+        ring1="Hetairoi Ring",
         ring2="Epona's Ring",
         back=gear.COR_DW_Cape, --10
         waist="Reiki Yotai", --7
@@ -790,13 +790,13 @@ function init_gear_sets()
         legs="Carmine Cuisses +1",
         feet=gear.Herc_STP_feet,
         ear1="Cessance Earring",
-            ="Regal Ring",
+        ring1="Regal Ring",
         ring2="Ramuh Ring +1",
         waist="Olseni Belt",
         })
 
     sets.engaged.STP.HighHaste = set_combine(sets.engaged.HighHaste, {
-            ="Petrov Ring",
+        ring1="Petrov Ring",
         })
         
     -- 45% Magic Haste (36% DW to cap)
@@ -809,7 +809,7 @@ function init_gear_sets()
         neck="Iskur Gorget",
         ear1="Suppanomimi", --5
         ear2="Telos Earring",
-            ="Hetairoi Ring",
+        ring1="Hetairoi Ring",
         ring2="Epona's Ring",
         back=gear.COR_DW_Cape,
         waist="Windbuffet Belt +1",
@@ -831,13 +831,13 @@ function init_gear_sets()
         head="Carmine Mask +1",
         legs="Carmine Cuisses +1",
         feet=gear.Herc_STP_feet,
-            ="Regal Ring",
+        ring1="Regal Ring",
         ring2="Ramuh Ring +1",
         waist="Olseni Belt",
         })
 
     sets.engaged.STP.MaxHaste = set_combine(sets.engaged.MaxHaste, {
-            ="Petrov Ring",
+        ring1="Petrov Ring",
         })
 
     sets.LessDualWield = {back=gear.COR_TP_Cape}
@@ -886,7 +886,7 @@ function init_gear_sets()
     ---------------------------------------- Special Sets ------------------------------------------
     ------------------------------------------------------------------------------------------------
 
-    sets.buff.Doom = {    ="Eshmun's Ring", ring2="Eshmun's Ring", waist="Gishdubar Sash"}
+    sets.buff.Doom = {ring1="Eshmun's Ring", ring2="Eshmun's Ring", waist="Gishdubar Sash"}
 
     sets.Obi = {waist="Hachirin-no-Obi"}
     sets.CP = {back="Mecisto. Mantle"}
@@ -1233,34 +1233,34 @@ end
 function define_roll_values()
     rolls = {
         ["Corsair's Roll"]   = {lucky=5, unlucky=9, bonus="Experience Points"},
-        ["Ninja Roll"]       = {lucky=4, unlucky=8, bonus="Evasion"},
-        ["Hunter's Roll"]    = {lucky=4, unlucky=8, bonus="Accuracy"},
-        ["Chaos Roll"]       = {lucky=4, unlucky=8, bonus="Attack"},
-        ["Magus's Roll"]     = {lucky=2, unlucky=6, bonus="Magic Defense"},
-        ["Healer's Roll"]    = {lucky=3, unlucky=7, bonus="Cure Potency Received"},
-        ["Drachen Roll"]      = {lucky=4, unlucky=8, bonus="Pet Magic Accuracy/Attack"},
-        ["Choral Roll"]      = {lucky=2, unlucky=6, bonus="Spell Interruption Rate"},
-        ["Monk's Roll"]      = {lucky=3, unlucky=7, bonus="Subtle Blow"},
-        ["Beast Roll"]       = {lucky=4, unlucky=8, bonus="Pet Attack"},
-        ["Samurai Roll"]     = {lucky=2, unlucky=6, bonus="Store TP"},
-        ["Evoker's Roll"]    = {lucky=5, unlucky=9, bonus="Refresh"},
-        ["Rogue's Roll"]     = {lucky=5, unlucky=9, bonus="Critical Hit Rate"},
+        ["Ninja Roll"]   ring1 {lucky=4, unlucky=8, bonus="Evasion"},
+        ["Hunter's Roll"]ring1 {lucky=4, unlucky=8, bonus="Accuracy"},
+        ["Chaos Roll"]   ring1 {lucky=4, unlucky=8, bonus="Attack"},
+        ["Magus's Roll"] ring1 {lucky=2, unlucky=6, bonus="Magic Defense"},
+        ["Healer's Roll"]ring1 {lucky=3, unlucky=7, bonus="Cure Potency Received"},
+        ["Drachen Roll"]  ring1 {lucky=4, unlucky=8, bonus="Pet Magic Accuracy/Attack"},
+        ["Choral Roll"]  ring1 {lucky=2, unlucky=6, bonus="Spell Interruption Rate"},
+        ["Monk's Roll"]  ring1 {lucky=3, unlucky=7, bonus="Subtle Blow"},
+        ["Beast Roll"]   ring1 {lucky=4, unlucky=8, bonus="Pet Attack"},
+        ["Samurai Roll"] ring1 {lucky=2, unlucky=6, bonus="Store TP"},
+        ["Evoker's Roll"]ring1 {lucky=5, unlucky=9, bonus="Refresh"},
+        ["Rogue's Roll"] ring1 {lucky=5, unlucky=9, bonus="Critical Hit Rate"},
         ["Warlock's Roll"]   = {lucky=4, unlucky=8, bonus="Magic Accuracy"},
         ["Fighter's Roll"]   = {lucky=5, unlucky=9, bonus="Double Attack Rate"},
-        ["Puppet Roll"]     = {lucky=3, unlucky=7, bonus="Pet Magic Attack/Accuracy"},
+        ["Puppet Roll"] ring1 {lucky=3, unlucky=7, bonus="Pet Magic Attack/Accuracy"},
         ["Gallant's Roll"]   = {lucky=3, unlucky=7, bonus="Defense"},
-        ["Wizard's Roll"]    = {lucky=5, unlucky=9, bonus="Magic Attack"},
-        ["Dancer's Roll"]    = {lucky=3, unlucky=7, bonus="Regen"},
+        ["Wizard's Roll"]ring1 {lucky=5, unlucky=9, bonus="Magic Attack"},
+        ["Dancer's Roll"]ring1 {lucky=3, unlucky=7, bonus="Regen"},
         ["Scholar's Roll"]   = {lucky=2, unlucky=6, bonus="Conserve MP"},
-        ["Naturalist's Roll"]       = {lucky=3, unlucky=7, bonus="Enh. Magic Duration"},
-        ["Runeist's Roll"]       = {lucky=4, unlucky=8, bonus="Magic Evasion"},
-        ["Bolter's Roll"]    = {lucky=3, unlucky=9, bonus="Movement Speed"},
-        ["Caster's Roll"]    = {lucky=2, unlucky=7, bonus="Fast Cast"},
+        ["Naturalist's Roll"]   ring1 {lucky=3, unlucky=7, bonus="Enh. Magic Duration"},
+        ["Runeist's Roll"]   ring1 {lucky=4, unlucky=8, bonus="Magic Evasion"},
+        ["Bolter's Roll"]ring1 {lucky=3, unlucky=9, bonus="Movement Speed"},
+        ["Caster's Roll"]ring1 {lucky=2, unlucky=7, bonus="Fast Cast"},
         ["Courser's Roll"]   = {lucky=3, unlucky=9, bonus="Snapshot"},
         ["Blitzer's Roll"]   = {lucky=4, unlucky=9, bonus="Attack Delay"},
         ["Tactician's Roll"] = {lucky=5, unlucky=8, bonus="Regain"},
-        ["Allies' Roll"]    = {lucky=3, unlucky=10, bonus="Skillchain Damage"},
-        ["Miser's Roll"]     = {lucky=5, unlucky=7, bonus="Save TP"},
+        ["Allies' Roll"]ring1 {lucky=3, unlucky=10, bonus="Skillchain Damage"},
+        ["Miser's Roll"] ring1 {lucky=5, unlucky=7, bonus="Save TP"},
         ["Companion's Roll"] = {lucky=2, unlucky=10, bonus="Pet Regain and Regen"},
         ["Avenger's Roll"]   = {lucky=4, unlucky=8, bonus="Counter Rate"},
     }

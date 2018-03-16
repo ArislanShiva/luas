@@ -162,7 +162,7 @@ function init_gear_sets()
     sets.precast.Waltz = {
         body="Passion Jacket",
         neck="Phalaina Locket",
-            ="Asklepian Ring",
+        ring1="Asklepian Ring",
         waist="Gishdubar Sash",
         }
 
@@ -177,7 +177,7 @@ function init_gear_sets()
         neck="Orunmila's Torque", --5
         ear1="Loquacious Earring", --2
         ear2="Enchntr. Earring +1", --2
-            ="Weather. Ring +1", --6(4)
+        ring1="Weather. Ring +1", --6(4)
         waist="Rumination Sash",
         }
 
@@ -224,7 +224,7 @@ function init_gear_sets()
         neck="Fotia Gorget",
         ear1="Ishvara Earring",
         ear2="Moonshade Earring",
-            ="Regal Ring",
+        ring1="Regal Ring",
         ring2="Dingir Ring",
         back=gear.RNG_WS2_Cape,
         waist="Fotia Belt",
@@ -253,7 +253,7 @@ function init_gear_sets()
         legs="Mummu Kecks +2",
         feet="Thereoid Greaves",
         ear1="Sherida Earring",
-            ="Begrudging Ring",
+        ring1="Begrudging Ring",
         ring2="Mummu Ring",
         })
 
@@ -262,7 +262,7 @@ function init_gear_sets()
         neck="Iskur Gorget",
         ear1="Enervating Earring",
         ear2="Telos Earring",
-            ="Regal Ring",
+        ring1="Regal Ring",
         ring2="Hajduk Ring +1",
         waist="Kwahu Kachina Belt",
         })
@@ -289,14 +289,14 @@ function init_gear_sets()
         neck="Baetyl Pendant",
         ear1="Moonshade Earring",
         ear2="Friomisi Earring",
-            ="Weather. Ring +1",
+        ring1="Weather. Ring +1",
         ring2="Dingir Ring",
         back=gear.RNG_WS1_Cape,
         waist="Eschan Stone",
         }
 
     sets.precast.WS["Trueflight"].FullTP = {ear1="Novio Earring", waist="Svelt. Gouriz +1"}
-    sets.precast.WS["Wildfire"] = set_combine(sets.precast.WS["Trueflight"], {    ="Regal Ring"})
+    sets.precast.WS["Wildfire"] = set_combine(sets.precast.WS["Trueflight"], {ring1="Regal Ring"})
 
     sets.precast.WS['Evisceration'] = {
         head=gear.Adhemar_B_head,
@@ -306,7 +306,7 @@ function init_gear_sets()
         feet=gear.Herc_STP_feet,
         neck="Fotia Gorget",
         ear2="Brutal Earring",
-            ="Begrudging Ring",
+        ring1="Begrudging Ring",
         ring2="Mummu Ring",
         back=gear.RNG_TP_Cape,
         waist="Fotia Belt",
@@ -317,7 +317,7 @@ function init_gear_sets()
         body=gear.Adhemar_B_body,
         legs=gear.Herc_WS_legs,
         ear2="Telos Earring",
-            ="Regal Ring",
+        ring1="Regal Ring",
         })
 
     sets.precast.WS['Rampage'] = set_combine(sets.precast.WS['Evisceration'], {feet=gear.Herc_TA_feet})
@@ -334,7 +334,7 @@ function init_gear_sets()
 
     sets.midcast.SpellInterrupt = {
         legs="Carmine Cuisses +1", --20
-            ="Evanescence Ring", --5
+        ring1="Evanescence Ring", --5
         waist="Rumination Sash", --10
         }
 
@@ -352,7 +352,7 @@ function init_gear_sets()
         neck="Iskur Gorget",
         ear1="Enervating Earring",
         ear2="Telos Earring",
-            ="Regal Ring",
+        ring1="Regal Ring",
         ring2="Dingir Ring",
         back=gear.RNG_RA_Cape,
         waist="Yemaya Belt",
@@ -377,7 +377,7 @@ function init_gear_sets()
         hands="Kobo Kote",
         legs="Mummu Kecks +2",
         feet="Mummu Gamash. +2",
-            ="Begrudging Ring",
+        ring1="Begrudging Ring",
         ring2="Mummu Ring",
         waist="Kwahu Kachina Belt",
         })
@@ -385,7 +385,7 @@ function init_gear_sets()
     sets.midcast.RA.STP = set_combine(sets.midcast.RA, {
         feet="Carmine Greaves +1",
         ear1="Dedition Earring",
-            ="Ilabrat Ring",
+        ring1="Ilabrat Ring",
         })
 
     sets.DoubleShot = {
@@ -415,7 +415,7 @@ function init_gear_sets()
         neck="Bathy Choker +1",
         ear1="Genmei Earring",
         ear2="Infused Earring",
-            ="Paguroidea Ring",
+        ring1="Paguroidea Ring",
         ring2="Sheltered Ring",
         back="Moonbeam Cape",
         waist="Kwahu Kachina Belt",
@@ -427,7 +427,7 @@ function init_gear_sets()
         hands=gear.Herc_DT_hands, --7/5
         neck="Loricate Torque +1", --6/6
         ear2="Etiolation Earring", --0/3
-            ="Gelatinous Ring +1", --7/(-1)
+        ring1="Gelatinous Ring +1", --7/(-1)
         ring2="Defending Ring", --10/10
         back="Moonbeam Cape", --5/5
         waist="Flume Belt +1", --4/0
@@ -437,7 +437,7 @@ function init_gear_sets()
         neck="Iskur Gorget",
         ear1="Enervating Earring",
         ear2="Telos Earring",
-            ="Regal Ring",
+        ring1="Regal Ring",
         ring2="Dingir Ring",
         back=gear.RNG_RA_Cape,
         })
@@ -477,7 +477,7 @@ function init_gear_sets()
         neck="Iskur Gorget",
         ear1="Suppanomimi", --5
         ear2="Eabani Earring", --4
-            ="Hetairoi Ring",
+        ring1="Hetairoi Ring",
         ring2="Epona's Ring",
         back=gear.RNG_DW_Cape, --10
         waist="Reiki Yotai", --7
@@ -498,13 +498,13 @@ function init_gear_sets()
         head="Carmine Mask +1",
         feet=gear.Herc_STP_feet,
         ear2="Telos Earring",
-            ="Regal Ring",
+        ring1="Regal Ring",
         ring2="Ramuh Ring +1",
         waist="Olseni Belt",
         })
 
     sets.engaged.STP = set_combine(sets.engaged, {
-            ="Petrov Ring",
+        ring1="Petrov Ring",
         })
 
     -- 15% Magic Haste (67% DW to cap)
@@ -517,7 +517,7 @@ function init_gear_sets()
         neck="Iskur Gorget",
         ear1="Suppanomimi", --5
         ear2="Eabani Earring", --4
-            ="Hetairoi Ring",
+        ring1="Hetairoi Ring",
         ring2="Epona's Ring",
         back=gear.RNG_DW_Cape, --10
         waist="Reiki Yotai", --7
@@ -538,13 +538,13 @@ function init_gear_sets()
         head="Carmine Mask +1",
         feet=gear.Herc_STP_feet,
         ear1="Cessance Earring",
-            ="Regal Ring",
+        ring1="Regal Ring",
         ring2="Ramuh Ring +1",
         waist="Olseni Belt",
         })
 
     sets.engaged.STP.LowHaste = set_combine(sets.engaged.LowHaste, {
-            ="Petrov Ring",
+        ring1="Petrov Ring",
         })
 
     -- 30% Magic Haste (56% DW to cap)
@@ -557,7 +557,7 @@ function init_gear_sets()
         neck="Iskur Gorget",
         ear1="Suppanomimi", --5
         ear2="Eabani Earring", --4
-            ="Hetairoi Ring",
+        ring1="Hetairoi Ring",
         ring2="Epona's Ring",
         back=gear.RNG_DW_Cape, --10
         waist="Reiki Yotai", --7
@@ -580,13 +580,13 @@ function init_gear_sets()
         legs="Carmine Cuisses +1",
         feet=gear.Herc_STP_feet,
         ear1="Cessance Earring",
-            ="Regal Ring",
+        ring1="Regal Ring",
         ring2="Ramuh Ring +1",
         waist="Olseni Belt",
         })
 
     sets.engaged.STP.MidHaste = set_combine(sets.engaged.MidHaste, {
-            ="Petrov Ring",
+        ring1="Petrov Ring",
         })
 
     -- 35% Magic Haste (51% DW to cap)
@@ -599,7 +599,7 @@ function init_gear_sets()
         neck="Iskur Gorget",
         ear1="Suppanomimi", --5
         ear2="Eabani Earring", --4
-            ="Hetairoi Ring",
+        ring1="Hetairoi Ring",
         ring2="Epona's Ring",
         back=gear.RNG_DW_Cape, --10
         waist="Reiki Yotai", --7
@@ -622,7 +622,7 @@ function init_gear_sets()
         legs="Carmine Cuisses +1",
         feet=gear.Herc_STP_feet,
         ear1="Cessance Earring",
-            ="Regal Ring",
+        ring1="Regal Ring",
         ring2="Ramuh Ring +1",
         waist="Olseni Belt",
         })
@@ -637,7 +637,7 @@ function init_gear_sets()
         neck="Iskur Gorget",
         ear1="Suppanomimi", --5
         ear2="Telos Earring",
-            ="Hetairoi Ring",
+        ring1="Hetairoi Ring",
         ring2="Epona's Ring",
         back=gear.RNG_DW_Cape, --10
         waist="Windbuffet Belt +1",
@@ -659,13 +659,13 @@ function init_gear_sets()
         head="Carmine Mask +1",
         legs="Carmine Cuisses +1",
         feet=gear.Herc_STP_feet,
-            ="Regal Ring",
+        ring1="Regal Ring",
         ring2="Ramuh Ring +1",
         waist="Olseni Belt",
         })
 
     sets.engaged.STP.MaxHaste = set_combine(sets.engaged.MaxHaste, {
-            ="Petrov Ring",
+        ring1="Petrov Ring",
         })
 
     sets.LessDualWield = {back=gear.RNG_TP_Cape}
@@ -718,7 +718,7 @@ function init_gear_sets()
     sets.buff['Velocity Shot'] = set_combine(sets.midcast.RA, {body="Amini Caban +1", back=gear.RNG_TP_Cape})
     sets.buff.Camouflage = {body="Orion Jerkin +3"}
     
-    sets.buff.Doom = {    ="Eshmun's Ring", ring2="Eshmun's Ring", waist="Gishdubar Sash"}
+    sets.buff.Doom = {ring1="Eshmun's Ring", ring2="Eshmun's Ring", waist="Gishdubar Sash"}
 
     sets.Obi = {waist="Hachirin-no-Obi"}
     sets.Reive = {neck="Ygnas's Resolve +1"}
