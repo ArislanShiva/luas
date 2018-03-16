@@ -150,7 +150,7 @@ function user_setup()
         send_command('bind ^numpad/ input /ja "Berserk" <me>')
         send_command('bind ^numpad* input /ja "Warcry" <me>')
         send_command('bind ^numpad- input /ja "Aggressor" <me>')
-	end
+    end
 
     send_command('bind ^numpad7 input /ws "Savage Blade" <t>')
     send_command('bind ^numpad8 input /ws "Last Stand" <t>')
@@ -651,6 +651,45 @@ function init_gear_sets()
     -- If you create a set with both offense and defense modes, the offense mode should be first.
     -- EG: sets.engaged.Dagger.Accuracy.Evasion
 
+    sets.engaged = {
+        head=gear.Adhemar_B_head,
+        body=gear.Adhemar_B_body,
+        hands=gear.Adhemar_B_hands,
+        legs="Samnuha Tights",
+        feet=gear.Herc_TA_feet,
+        neck="Iskur Gorget",
+        ear1="Cessance Earring",
+        ear2="Brutal Earring",
+        ring1="Hetairoi Ring",
+        ring2="Epona's Ring",
+        back=gear.COR_TP_Cape,
+        waist="Windbuffet Belt +1",
+        }
+
+    sets.engaged.LowAcc = set_combine(sets.engaged, {
+        head="Dampening Tam",
+        neck="Combatant's Torque",
+        })
+
+    sets.engaged.MidAcc = set_combine(sets.engaged.LowAcc, {
+        ear2="Telos Earring",
+        ring1="Regal Ring",
+        ring2="Ilabrat Ring",
+        waist="Kentarch Belt +1",
+        })
+
+    sets.engaged.HighAcc = set_combine(sets.engaged.MidAcc, {
+        head="Carmine Mask +1",
+        feet=gear.Herc_STP_feet,
+        ring2="Ramuh Ring +1",
+        waist="Olseni Belt",
+        })
+
+    sets.engaged.STP = set_combine(sets.engaged, {
+        feet="Carmine Greaves +1",
+        ring1="Petrov Ring",
+        })
+
     -- * DNC Subjob DW Trait: +15%
     -- * NIN Subjob DW Trait: +25%
     
@@ -677,6 +716,7 @@ function init_gear_sets()
 
     sets.engaged.DW.MidAcc = set_combine(sets.engaged.DW.LowAcc, {
         ear1="Cessance Earring",
+        ring1="Regal Ring",
         ring2="Ilabrat Ring",
         waist="Kentarch Belt +1",
         })
@@ -685,7 +725,6 @@ function init_gear_sets()
         head="Carmine Mask +1",
         feet=gear.Herc_STP_feet,
         ear2="Telos Earring",
-        ring1="Regal Ring",
         ring2="Ramuh Ring +1",
         waist="Olseni Belt",
         })
@@ -717,6 +756,7 @@ function init_gear_sets()
 
     sets.engaged.DW.MidAcc.LowHaste = set_combine(sets.engaged.DW.LowAcc.LowHaste, {
         ear2="Telos Earring",
+        ring1="Regal Ring",
         ring2="Ilabrat Ring",
         waist="Kentarch Belt +1",
         })
@@ -725,7 +765,6 @@ function init_gear_sets()
         head="Carmine Mask +1",
         feet=gear.Herc_STP_feet,
         ear1="Cessance Earring",
-        ring1="Regal Ring",
         ring2="Ramuh Ring +1",
         waist="Olseni Belt",
         })
@@ -758,6 +797,7 @@ function init_gear_sets()
     sets.engaged.DW.MidAcc.MidHaste = set_combine(sets.engaged.DW.LowAcc.MidHaste, {
         legs="Meg. Chausses +2",
         ear2="Telos Earring",
+        ring1="Regal Ring",
         ring2="Ilabrat Ring",
         waist="Kentarch Belt +1",
         })
@@ -767,7 +807,6 @@ function init_gear_sets()
         legs="Carmine Cuisses +1",
         feet=gear.Herc_STP_feet,
         ear1="Cessance Earring",
-        ring1="Regal Ring",
         ring2="Ramuh Ring +1",
         waist="Olseni Belt",
         })
@@ -800,6 +839,7 @@ function init_gear_sets()
     sets.engaged.DW.MidAcc.HighHaste = set_combine(sets.engaged.DW.LowAcc.HighHaste, {
         legs="Meg. Chausses +2",
         ear2="Telos Earring",
+        ring1="Regal Ring",
         ring2="Ilabrat Ring",
         waist="Kentarch Belt +1",
         })
@@ -809,7 +849,6 @@ function init_gear_sets()
         legs="Carmine Cuisses +1",
         feet=gear.Herc_STP_feet,
         ear1="Cessance Earring",
-        ring1="Regal Ring",
         ring2="Ramuh Ring +1",
         waist="Olseni Belt",
         })
@@ -843,6 +882,7 @@ function init_gear_sets()
         legs="Meg. Chausses +2",
         neck="Combatant's Torque",
         ear1="Cessance Earring",
+        ring1="Regal Ring",
         ring2="Ilabrat Ring",
         })
 
@@ -850,12 +890,12 @@ function init_gear_sets()
         head="Carmine Mask +1",
         legs="Carmine Cuisses +1",
         feet=gear.Herc_STP_feet,
-        ring1="Regal Ring",
         ring2="Ramuh Ring +1",
         waist="Olseni Belt",
         })
 
     sets.engaged.DW.STP.MaxHaste = set_combine(sets.engaged.DW.MaxHaste, {
+        feet="Carmine Greaves +1",
         ring1="Petrov Ring",
         })
 
@@ -870,6 +910,12 @@ function init_gear_sets()
         ring2="Defending Ring", --10/10
         }
     
+    sets.engaged.DT = set_combine(sets.engaged, sets.engaged.Hybrid)
+    sets.engaged.LowAcc.DT = set_combine(sets.engaged.LowAcc, sets.engaged.Hybrid)
+    sets.engaged.MidAcc.DT = set_combine(sets.engaged.MidAcc, sets.engaged.Hybrid)
+    sets.engaged.HighAcc.DT = set_combine(sets.engaged.HighAcc, sets.engaged.Hybrid)
+    sets.engaged.STP.DT = set_combine(sets.engaged.STP, sets.engaged.Hybrid)
+
     sets.engaged.DW.DT = set_combine(sets.engaged.DW, sets.engaged.Hybrid)
     sets.engaged.DW.LowAcc.DT = set_combine(sets.engaged.DW.LowAcc, sets.engaged.Hybrid)
     sets.engaged.DW.MidAcc.DT = set_combine(sets.engaged.DW.MidAcc, sets.engaged.Hybrid)
@@ -1227,37 +1273,37 @@ function determine_haste_group()
 
     classes.CustomMeleeGroups:clear()
 
-if state.CombatForm.value == 'DW' then
+    if state.CombatForm.value == 'DW' then
 
-    if(((haste == 2 or buffactive[580] or buffactive.embrava) and (buffactive.march or buffactive[604] or haste == 1)) or
-        (haste == 2 and (buffactive[580] or buffactive.embrava)) or
-        (buffactive.march == 2 and buffactive[604]) or buffactive.march == 3 or buffactive[580] == 2) then
-        add_to_chat(122, 'Magic Haste Level: 43%')
-        classes.CustomMeleeGroups:append('MaxHaste')
-        state.DualWield:set()
-    elseif ((haste == 2 or buffactive.march == 2 or buffactive[580]) and buffactive['haste samba']) then
-        add_to_chat(122, 'Magic Haste Level: 35%')
-        classes.CustomMeleeGroups:append('HighHaste')
-        state.DualWield:set()
-    elseif ((buffactive[580] or haste == 2 or buffactive.march == 2) or
-        (buffactive.march == 1 and buffactive[604]) or (buffactive.march == 1 and haste == 1)) then
-        add_to_chat(122, 'Magic Haste Level: 30%')
-        classes.CustomMeleeGroups:append('MidHaste')
-        state.DualWield:set()
-    elseif (buffactive.march == 1 or buffactive[604] or haste == 1) then
-        add_to_chat(122, 'Magic Haste Level: 15%')
-        classes.CustomMeleeGroups:append('LowHaste')
-        state.DualWield:set()
-    else
-        state.DualWield:set(false)
+        if(((haste == 2 or buffactive[580] or buffactive.embrava) and (buffactive.march or buffactive[604] or haste == 1)) or
+            (haste == 2 and (buffactive[580] or buffactive.embrava)) or
+            (buffactive.march == 2 and buffactive[604]) or buffactive.march == 3 or buffactive[580] == 2) then
+            add_to_chat(122, 'Magic Haste Level: 43%')
+            classes.CustomMeleeGroups:append('MaxHaste')
+            state.DualWield:set()
+        elseif ((haste == 2 or buffactive.march == 2 or buffactive[580]) and buffactive['haste samba']) then
+            add_to_chat(122, 'Magic Haste Level: 35%')
+            classes.CustomMeleeGroups:append('HighHaste')
+            state.DualWield:set()
+        elseif ((buffactive[580] or haste == 2 or buffactive.march == 2) or
+            (buffactive.march == 1 and buffactive[604]) or (buffactive.march == 1 and haste == 1)) then
+            add_to_chat(122, 'Magic Haste Level: 30%')
+            classes.CustomMeleeGroups:append('MidHaste')
+            state.DualWield:set()
+        elseif (buffactive.march == 1 or buffactive[604] or haste == 1) then
+            add_to_chat(122, 'Magic Haste Level: 15%')
+            classes.CustomMeleeGroups:append('LowHaste')
+            state.DualWield:set()
+        else
+            state.DualWield:set(false)
+        end
     end
-end
 end
 
 
 function define_roll_values()
     rolls = {
-        ["Corsair's Roll"] = 	{lucky=5, unlucky=9, bonus="Experience Points"},
+        ["Corsair's Roll"] =    {lucky=5, unlucky=9, bonus="Experience Points"},
         ["Ninja Roll"] =        {lucky=4, unlucky=8, bonus="Evasion"},
         ["Hunter's Roll"] =     {lucky=4, unlucky=8, bonus="Accuracy"},
         ["Chaos Roll"] =        {lucky=4, unlucky=8, bonus="Attack"},
