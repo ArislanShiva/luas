@@ -9,9 +9,9 @@
 	[CTRl+G]			Cycles between avail. ranged weapons
 	[CTRL+W]            Toggles Weapon Lock (Ranged)
 	[CTRL+`]            Double-Up
-	[CTRL+S]			Snake Eye
-	[CTRL+X]			Fold
-	[WIN+`]             Toggles use of Luzaf Ring.
+	[CTRL+S]            Snake Eye
+    [CTRL+X]            Fold
+    [WIN+`]             Toggles use of Luzaf Ring.
     [WIN+F]             Cycles between Flurry I & Flurry II received
     [WIN+H]             Cycles between Haste I & Haste II received
     [WIN+C]             Toggles Capacity Points Mode
@@ -147,9 +147,9 @@ end
 -- Called when this job file is unloaded (eg: job change)
 function user_unload()
     send_command('unbind ^`')
-	send_command('unbind ^c')
-	send_command('unbind ^s')
-	send_command('unbind ^x')
+    send_command('unbind ^c')
+    send_command('unbind ^s')
+    send_command('unbind ^x')
     send_command('unbind !`')
     send_command('unbind @`')
     send_command('unbind ^-')
