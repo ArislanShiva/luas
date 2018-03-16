@@ -1,7 +1,7 @@
--- (Original: Motenten / Modified: Arislan
+-- Original: Motenten / Modified: Arislan
 
 -------------------------------------------------------------------------------------------------------------------
---  KEYBINDS
+--  Keybinds
 -------------------------------------------------------------------------------------------------------------------
 
 --  Modes:      [ WIN+` ]           Toggles use of Luzaf Ring.
@@ -34,10 +34,13 @@
 --              [ CTRL+Numpad1 ]    Requiescat
 --
 --  RA:         [ Numpad0 ]         Ranged Attack
+--
+--
+--              (Global-Binds.lua contains additional non-job-related keybinds)
 
 
 -------------------------------------------------------------------------------------------------------------------
---  Custom Commands
+--  Custom Commands (preface with /console to use these in macros)
 -------------------------------------------------------------------------------------------------------------------
     
 --  gs c qd                         Uses the currently configured shot on the target, with either <t> or
@@ -75,8 +78,6 @@ function job_setup()
     state.SelectqdTarget = M(false, 'Select Quick Draw Target')
     state.IgnoreTargetting = M(false, 'Ignore Targetting')
 
-    state.FlurryMode = M{['description']='Flurry Mode', 'Flurry I', 'Flurry II'}
-    state.HasteMode = M{['description']='Haste Mode', 'Haste II', 'Haste I'}
     state.DualWield = M(false, 'Dual Wield III')
     state.QDMode = M{['description']='Quick Draw Mode', 'STP', 'Magic Enhance', 'Magic Attack'}
 
@@ -88,6 +89,11 @@ function job_setup()
     state.warned = M(false)
     
     define_roll_values()
+
+    -- Setup Haste Detection
+    haste = nil
+    flurry = nil
+    p = require('packets')
     determine_haste_group()
 
 end
@@ -122,7 +128,7 @@ function user_setup()
     send_command('bind ^` input /ja "Double-up" <me>')
     send_command('bind ^c input /ja "Crooked Cards" <me>')
     send_command('bind ^s input /ja "Snake Eye" <me>')
-    send_command('bind ^x input /ja "Fold" <me>')
+    send_command('bind ^f input /ja "Fold" <me>')
     send_command('bind !` input /ja "Bolter\'s Roll" <me>')
     send_command ('bind @` gs c toggle LuzafRing')
 
@@ -136,8 +142,6 @@ function user_setup()
     send_command('bind @c gs c toggle CP')
     send_command('bind @q gs c cycle QDMode')
     send_command('bind @g gs c cycle Gun')
-    send_command('bind @f gs c cycle FlurryMode')
-    send_command('bind @h gs c cycle HasteMode')
     send_command('bind @w gs c toggle WeaponLock')
 
     send_command('bind ^numlock input /ja "Triple Shot" <me>')
@@ -166,7 +170,7 @@ function user_unload()
     send_command('unbind ^`')
     send_command('unbind ^c')
     send_command('unbind ^s')
-    send_command('unbind ^x')
+    send_command('unbind ^f')
     send_command('unbind !`')
     send_command('unbind @`')
     send_command('unbind ^-')
@@ -179,8 +183,6 @@ function user_unload()
     send_command('unbind @c')
     send_command('unbind @q')
     send_command('unbind @g')
-    send_command('unbind @f')
-    send_command('unbind @h')
     send_command('unbind @w')
     send_command('unbind ^numlock')
     send_command('unbind ^numpad/')
@@ -960,9 +962,9 @@ function job_post_precast(spell, action, spellMap, eventArgs)
             equip(sets.precast.CorsairRoll.Gun)
         end
     elseif spell.action_type == 'Ranged Attack' then
-        if state.FlurryMode.value == 'Flurry II' and (buffactive[265] or buffactive[581]) then
+        if flurry == 2 then
             equip(sets.precast.RA.Flurry2)
-        elseif state.FlurryMode.value == 'Flurry I' and (buffactive[265] or buffactive[581]) then
+        elseif flurry == 1 then
             equip(sets.precast.RA.Flurry1)
         end
     -- Equip obi if weather/day matches for WS.
@@ -1012,6 +1014,21 @@ function job_buff_change(buff,gain)
     if S{'haste', 'march', 'mighty guard', 'embrava', 'haste samba', 'geo-haste', 'indi-haste'}:contains(buff:lower()) then
         determine_haste_group()
         customize_melee_set()
+        if not gain then
+            haste = nil
+            add_to_chat(122, "Haste status cleared.")
+        end
+        if not midaction() then
+            handle_equipping_gear(player.status)
+        end
+    end
+
+-- If we gain or lose any flurry buffs, adjust which gear set we target.
+    if S{'flurry'}:contains(buff:lower()) then
+        if not gain then
+            flurry = nil
+            add_to_chat(122, "Flurry status cleared.")
+        end
         if not midaction() then
             handle_equipping_gear(player.status)
         end
@@ -1126,18 +1143,16 @@ function display_current_job_state(eventArgs)
         msg = msg .. '[ Kiting Mode: ON ]'
     end
 
-    msg = msg .. '[ ' .. state.HasteMode.value .. ' ][ ' .. state.FlurryMode.value .. ' ]'
-
     msg = msg .. '[ *'..state.Mainqd.current
 
     if state.UseAltqd.value == true then
         msg = msg .. '/'..state.Altqd.current
     end
     
-    msg = msg .. '* '
+    msg = msg .. ' ('
 
-    if state.QDMode.value == 'Magic Enhance' then
-        msg = msg .. '(E)'
+    if state.QDMode.value then
+        msg = msg .. state.QDMode.current .. ') '
     end    
 
     msg = msg .. ']'
@@ -1175,111 +1190,96 @@ end
 -- Utility functions specific to this job.
 -------------------------------------------------------------------------------------------------------------------
 
+--Read incoming packet to differentiate between Haste I and Haste II
+windower.raw_register_event("incoming chunk", function(id, data)
+    if id == 0x028 then
+        local packet = p.parse('incoming', data)
+        if packet["Category"] == 4 then
+            if packet["Param"] == 57 then
+                add_to_chat(122, 'Haste')
+                haste = 1
+            elseif packet["Param"] == 511 then
+                add_to_chat(122, 'Haste2')
+                haste = 2
+            end
+        end
+    end
+end)
+
 function determine_haste_group()
 
-    -- Gearswap can't detect the difference between Haste I and Haste II
-    -- so use winkey-H to manually set Haste spell level.
+    -- Assuming the following values:
 
-    -- Haste (buffactive[33]) - 15%
-    -- Haste II (buffactive[33]) - 30%
-    -- Haste Samba - 5~10%
-    -- Honor March - 12~16%
-    -- Victory March - 15~28%
-    -- Advancing March - 10~18%
+    -- Haste - 15%
+    -- Haste II - 30%
+    -- Haste Samba - 5%
+    -- Honor March - 15%
+    -- Victory March - 25%
+    -- Advancing March - 15%
     -- Embrava - 25%
     -- Mighty Guard (buffactive[604]) - 15%
-    -- Geo-Haste (buffactive[580]) - 30~40%
+    -- Geo-Haste (buffactive[580]) - 30%
 
     classes.CustomMeleeGroups:clear()
 
-    if state.HasteMode.value == 'Haste II' then
-        if(((buffactive[33] or buffactive[580] or buffactive.embrava) and (buffactive.march or buffactive[604])) or
-            (buffactive[33] and (buffactive[580] or buffactive.embrava)) or
-            (buffactive.march == 2 and buffactive[604]) or buffactive.march == 3) or buffactive[580] == 2 then
-            --add_to_chat(122, 'Magic Haste Level: 43%')
-            classes.CustomMeleeGroups:append('MaxHaste')
-            state.DualWield:set()
-        elseif ((buffactive[33] or buffactive.march == 2 or buffactive[580]) and buffactive['haste samba']) then
-            --add_to_chat(122, 'Magic Haste Level: 35%')
-            classes.CustomMeleeGroups:append('HighHaste')
-            state.DualWield:set()
-        elseif ((buffactive[580] or buffactive[33] or buffactive.march == 2) or
-            (buffactive.march == 1 and buffactive[604])) then
-            --add_to_chat(122, 'Magic Haste Level: 30%')
-            classes.CustomMeleeGroups:append('MidHaste')
-            state.DualWield:set()
-        elseif (buffactive.march == 1 or buffactive[604]) then
-            --add_to_chat(122, 'Magic Haste Level: 15%')
-            classes.CustomMeleeGroups:append('LowHaste')
-            state.DualWield:set()
-        else
-            state.DualWield:set(false)
-        end
+    if(((haste == 2 or buffactive[580] or buffactive.embrava) and (buffactive.march or buffactive[604] or haste == 1)) or
+        (haste == 2 and (buffactive[580] or buffactive.embrava)) or
+        (buffactive.march == 2 and buffactive[604]) or buffactive.march == 3 or buffactive[580] == 2) then
+        add_to_chat(122, 'Magic Haste Level: 43%')
+        classes.CustomMeleeGroups:append('MaxHaste')
+        state.DualWield:set()
+    elseif ((haste == 2 or buffactive.march == 2 or buffactive[580]) and buffactive['haste samba']) then
+        add_to_chat(122, 'Magic Haste Level: 35%')
+        classes.CustomMeleeGroups:append('HighHaste')
+        state.DualWield:set()
+    elseif ((buffactive[580] or haste == 2 or buffactive.march == 2) or
+        (buffactive.march == 1 and buffactive[604]) or (buffactive.march == 1 and haste == 1)) then
+        add_to_chat(122, 'Magic Haste Level: 30%')
+        classes.CustomMeleeGroups:append('MidHaste')
+        state.DualWield:set()
+    elseif (buffactive.march == 1 or buffactive[604] or haste == 1) then
+        add_to_chat(122, 'Magic Haste Level: 15%')
+        classes.CustomMeleeGroups:append('LowHaste')
+        state.DualWield:set()
     else
-        if (buffactive[580] and ( buffactive.march or buffactive[33] or buffactive.embrava or buffactive[604]) ) or
-            (buffactive.embrava and (buffactive.march or buffactive[33] or buffactive[604])) or
-            (buffactive.march == 2 and (buffactive[33] or buffactive[604])) or
-            (buffactive[33] and buffactive[604] and buffactive.march ) or buffactive.march == 3 or buffactive[580] == 2 then
-            --add_to_chat(122, 'Magic Haste Level: 43%')
-            classes.CustomMeleeGroups:append('MaxHaste')
-            state.DualWield:set()
-        elseif ((buffactive[604] or buffactive[33]) and buffactive['haste samba'] and buffactive.march == 1) or
-            (buffactive.march == 2 and buffactive['haste samba']) or
-            (buffactive[580] and buffactive['haste samba'] ) then
-            --add_to_chat(122, 'Magic Haste Level: 35%')
-            classes.CustomMeleeGroups:append('HighHaste')
-            state.DualWield:set()
-        elseif (buffactive.march == 2 ) or
-            ((buffactive[33] or buffactive[604]) and buffactive.march == 1 ) or  -- MG or haste + 1 march
-            (buffactive[580] ) or  -- geo haste
-            (buffactive[33] and buffactive[604]) then
-            --add_to_chat(122, 'Magic Haste Level: 30%')
-            classes.CustomMeleeGroups:append('MidHaste')
-            state.DualWield:set()
-        elseif buffactive[33] or buffactive[604] or buffactive.march == 1 then
-            --add_to_chat(122, 'Magic Haste Level: 15%')
-            classes.CustomMeleeGroups:append('LowHaste')
-            state.DualWield:set()
-        else
-            state.DualWield:set(false)
-        end
+        state.DualWield:set(false)
     end
 end
 
 
 function define_roll_values()
     rolls = {
-        ["Corsair's Roll"]   = {lucky=5, unlucky=9, bonus="Experience Points"},
-        ["Ninja Roll"]   ring1 {lucky=4, unlucky=8, bonus="Evasion"},
-        ["Hunter's Roll"]ring1 {lucky=4, unlucky=8, bonus="Accuracy"},
-        ["Chaos Roll"]   ring1 {lucky=4, unlucky=8, bonus="Attack"},
-        ["Magus's Roll"] ring1 {lucky=2, unlucky=6, bonus="Magic Defense"},
-        ["Healer's Roll"]ring1 {lucky=3, unlucky=7, bonus="Cure Potency Received"},
-        ["Drachen Roll"]  ring1 {lucky=4, unlucky=8, bonus="Pet Magic Accuracy/Attack"},
-        ["Choral Roll"]  ring1 {lucky=2, unlucky=6, bonus="Spell Interruption Rate"},
-        ["Monk's Roll"]  ring1 {lucky=3, unlucky=7, bonus="Subtle Blow"},
-        ["Beast Roll"]   ring1 {lucky=4, unlucky=8, bonus="Pet Attack"},
-        ["Samurai Roll"] ring1 {lucky=2, unlucky=6, bonus="Store TP"},
-        ["Evoker's Roll"]ring1 {lucky=5, unlucky=9, bonus="Refresh"},
-        ["Rogue's Roll"] ring1 {lucky=5, unlucky=9, bonus="Critical Hit Rate"},
-        ["Warlock's Roll"]   = {lucky=4, unlucky=8, bonus="Magic Accuracy"},
-        ["Fighter's Roll"]   = {lucky=5, unlucky=9, bonus="Double Attack Rate"},
-        ["Puppet Roll"] ring1 {lucky=3, unlucky=7, bonus="Pet Magic Attack/Accuracy"},
-        ["Gallant's Roll"]   = {lucky=3, unlucky=7, bonus="Defense"},
-        ["Wizard's Roll"]ring1 {lucky=5, unlucky=9, bonus="Magic Attack"},
-        ["Dancer's Roll"]ring1 {lucky=3, unlucky=7, bonus="Regen"},
-        ["Scholar's Roll"]   = {lucky=2, unlucky=6, bonus="Conserve MP"},
-        ["Naturalist's Roll"]   ring1 {lucky=3, unlucky=7, bonus="Enh. Magic Duration"},
-        ["Runeist's Roll"]   ring1 {lucky=4, unlucky=8, bonus="Magic Evasion"},
-        ["Bolter's Roll"]ring1 {lucky=3, unlucky=9, bonus="Movement Speed"},
-        ["Caster's Roll"]ring1 {lucky=2, unlucky=7, bonus="Fast Cast"},
-        ["Courser's Roll"]   = {lucky=3, unlucky=9, bonus="Snapshot"},
-        ["Blitzer's Roll"]   = {lucky=4, unlucky=9, bonus="Attack Delay"},
-        ["Tactician's Roll"] = {lucky=5, unlucky=8, bonus="Regain"},
-        ["Allies' Roll"]ring1 {lucky=3, unlucky=10, bonus="Skillchain Damage"},
-        ["Miser's Roll"] ring1 {lucky=5, unlucky=7, bonus="Save TP"},
-        ["Companion's Roll"] = {lucky=2, unlucky=10, bonus="Pet Regain and Regen"},
-        ["Avenger's Roll"]   = {lucky=4, unlucky=8, bonus="Counter Rate"},
+        ["Corsair's Roll"] = 	{lucky=5, unlucky=9, bonus="Experience Points"},
+        ["Ninja Roll"] =        {lucky=4, unlucky=8, bonus="Evasion"},
+        ["Hunter's Roll"] =     {lucky=4, unlucky=8, bonus="Accuracy"},
+        ["Chaos Roll"] =        {lucky=4, unlucky=8, bonus="Attack"},
+        ["Magus's Roll"] =      {lucky=2, unlucky=6, bonus="Magic Defense"},
+        ["Healer's Roll"] =     {lucky=3, unlucky=7, bonus="Cure Potency Received"},
+        ["Drachen Roll"] =      {lucky=4, unlucky=8, bonus="Pet Magic Accuracy/Attack"},
+        ["Choral Roll"] =       {lucky=2, unlucky=6, bonus="Spell Interruption Rate"},
+        ["Monk's Roll"] =       {lucky=3, unlucky=7, bonus="Subtle Blow"},
+        ["Beast Roll"] =        {lucky=4, unlucky=8, bonus="Pet Attack"},
+        ["Samurai Roll"] =      {lucky=2, unlucky=6, bonus="Store TP"},
+        ["Evoker's Roll"] =     {lucky=5, unlucky=9, bonus="Refresh"},
+        ["Rogue's Roll"] =      {lucky=5, unlucky=9, bonus="Critical Hit Rate"},
+        ["Warlock's Roll"] =    {lucky=4, unlucky=8, bonus="Magic Accuracy"},
+        ["Fighter's Roll"] =    {lucky=5, unlucky=9, bonus="Double Attack Rate"},
+        ["Puppet Roll"] =       {lucky=3, unlucky=7, bonus="Pet Magic Attack/Accuracy"},
+        ["Gallant's Roll"] =    {lucky=3, unlucky=7, bonus="Defense"},
+        ["Wizard's Roll"] =     {lucky=5, unlucky=9, bonus="Magic Attack"},
+        ["Dancer's Roll"] =     {lucky=3, unlucky=7, bonus="Regen"},
+        ["Scholar's Roll"] =    {lucky=2, unlucky=6, bonus="Conserve MP"},
+        ["Naturalist's Roll"] = {lucky=3, unlucky=7, bonus="Enh. Magic Duration"},
+        ["Runeist's Roll"] =    {lucky=4, unlucky=8, bonus="Magic Evasion"},
+        ["Bolter's Roll"] =     {lucky=3, unlucky=9, bonus="Movement Speed"},
+        ["Caster's Roll"] =     {lucky=2, unlucky=7, bonus="Fast Cast"},
+        ["Courser's Roll"] =    {lucky=3, unlucky=9, bonus="Snapshot"},
+        ["Blitzer's Roll"] =    {lucky=4, unlucky=9, bonus="Attack Delay"},
+        ["Tactician's Roll"] =  {lucky=5, unlucky=8, bonus="Regain"},
+        ["Allies' Roll"] =      {lucky=3, unlucky=10, bonus="Skillchain Damage"},
+        ["Miser's Roll"] =      {lucky=5, unlucky=7, bonus="Save TP"},
+        ["Companion's Roll"] =  {lucky=2, unlucky=10, bonus="Pet Regain and Regen"},
+        ["Avenger's Roll"] =    {lucky=4, unlucky=8, bonus="Counter Rate"},
     }
 end
 
