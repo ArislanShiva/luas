@@ -87,8 +87,10 @@ function job_setup()
     state.LuzafRing = M(false, "Luzaf's Ring")
     -- Whether a warning has been given for low ammo
     state.warned = M(false)
-    
+
     define_roll_values()
+
+    lockstyleset = 1
 
     -- Setup Haste Detection
     haste = nil
@@ -1436,5 +1438,5 @@ function select_default_macro_book()
 end
 
 function set_lockstyle()
-    send_command('wait 2; input /lockstyleset 1')
+    send_command('wait 2; input /lockstyleset ' .. lockstyleset)
 end
