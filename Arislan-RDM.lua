@@ -36,6 +36,9 @@ function job_setup()
         'Temper', 'Temper II', 'Enfire', 'Enfire II', 'Enblizzard', 'Enblizzard II', 'Enaero', 'Enaero II',
         'Enstone', 'Enstone II', 'Enthunder', 'Enthunder II', 'Enwater', 'Enwater II'}
 
+	-- Setup Haste Detection
+	haste = nil
+	p = require('packets')
     determine_haste_group()
 end
 
@@ -996,6 +999,10 @@ function job_buff_change(buff,gain)
     -- If we gain or lose any haste buffs, adjust which gear set we target.
     if S{'haste', 'march', 'mighty guard', 'embrava', 'haste samba', 'geo-haste', 'indi-haste'}:contains(buff:lower()) then
         determine_haste_group()
+		if not gain then
+			haste = nil
+			add_to_chat(122, "Haste status cleared.")
+		end
         if not midaction() then
             handle_equipping_gear(player.status)
         end
@@ -1143,37 +1150,52 @@ end
 -- Utility functions specific to this job.
 -------------------------------------------------------------------------------------------------------------------
 
+--Read incoming packet to differentiate between Haste I and Haste II
+windower.raw_register_event("incoming chunk", function(id, data)
+    if id == 0x028 then
+        local packet = p.parse('incoming', data)
+        if packet["Category"] == 4 then
+            if packet["Param"] == 57 then
+                add_to_chat(122, 'Haste')
+                haste = 1
+            elseif packet["Param"] == 511 then
+                add_to_chat(122, 'Haste2')
+                haste = 2
+            end
+        end
+    end
+end)
+
 function determine_haste_group()
 
-    -- Gearswap can't detect the difference between Haste I and Haste II
-    -- so use winkey-H to manually set Haste spell level.
+    -- Assuming the following values:
 
-    -- Haste (buffactive[33]) - 15%
-    -- Haste II (buffactive[33]) - 30%
-    -- Haste Samba - 5~10%
-    -- Honor March - 12~16%
-    -- Victory March - 15~28%
-    -- Advancing March - 10~18%
+    -- Haste - 15%
+    -- Haste II - 30%
+    -- Haste Samba - 5%
+    -- Honor March - 15%
+    -- Victory March - 25%
+    -- Advancing March - 15%
     -- Embrava - 25%
     -- Mighty Guard (buffactive[604]) - 15%
-    -- Geo-Haste (buffactive[580]) - 30~40%
+    -- Geo-Haste (buffactive[580]) - 30%
 
     classes.CustomMeleeGroups:clear()
 
     if state.CombatForm.value == 'DW' then
-        if(((buffactive[33] or buffactive[580] or buffactive.embrava) and (buffactive.march or buffactive[604])) or
-            (buffactive[33] and (buffactive[580] or buffactive.embrava)) or
-            (buffactive.march == 2 and buffactive[604]) or buffactive.march == 3) or buffactive[580] == 2 then
+        if(((haste == 2 or buffactive[580] or buffactive.embrava) and (buffactive.march or buffactive[604] or haste == 1)) or
+            (haste == 2 and (buffactive[580] or buffactive.embrava)) or
+            (buffactive.march == 2 and buffactive[604]) or buffactive.march == 3 or buffactive[580] == 2) then
             add_to_chat(122, 'Magic Haste Level: 43%')
             classes.CustomMeleeGroups:append('MaxHaste')
-        elseif ((buffactive[33] or buffactive.march == 2 or buffactive[580]) and buffactive['haste samba']) then
+        elseif ((haste == 2 or buffactive.march == 2 or buffactive[580]) and buffactive['haste samba']) then
             add_to_chat(122, 'Magic Haste Level: 35%')
             classes.CustomMeleeGroups:append('HighHaste')
-        elseif ((buffactive[580] or buffactive[33] or buffactive.march == 2) or
-            (buffactive.march == 1 and buffactive[604])) then
+        elseif ((buffactive[580] or haste == 2 or buffactive.march == 2) or
+            (buffactive.march == 1 and buffactive[604]) or (buffactive.march == 1 and haste == 1)) then
             add_to_chat(122, 'Magic Haste Level: 30%')
             classes.CustomMeleeGroups:append('MidHaste')
-        elseif (buffactive.march == 1 or buffactive[604]) then
+        elseif (buffactive.march == 1 or buffactive[604] or haste == 1) then
             add_to_chat(122, 'Magic Haste Level: 15%')
             classes.CustomMeleeGroups:append('LowHaste')
         end
@@ -1182,6 +1204,7 @@ end
 
 -- General handling of strategems in an Arts-agnostic way.
 -- Format: gs c scholar <strategem>
+
 function handle_strategems(cmdParams)
     -- cmdParams[1] == 'scholar'
     -- cmdParams[2] == strategem to use
