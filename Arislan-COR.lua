@@ -5,11 +5,11 @@
     Keybinds:
 
     [CTRL+-]/[CTRL+=]   Quick Draw shot element selector.
-	[CTRL+Q]            Quick Draw shot mode selector.
-	[CTRl+G]			Cycles between avail. ranged weapons
-	[CTRL+W]            Toggles Weapon Lock (Ranged)
-	[CTRL+`]            Double-Up
-	[CTRL+S]            Snake Eye
+    [CTRL+Q]            Quick Draw shot mode selector.
+    [CTRl+G]            Cycles between avail. ranged weapons
+    [CTRL+W]            Toggles Weapon Lock (Ranged)
+    [CTRL+`]            Double-Up
+    [CTRL+S]            Snake Eye
     [CTRL+X]            Fold
     [WIN+`]             Toggles use of Luzaf Ring.
     [WIN+F]             Cycles between Flurry I & Flurry II received

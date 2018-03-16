@@ -36,9 +36,9 @@ function job_setup()
         'Temper', 'Temper II', 'Enfire', 'Enfire II', 'Enblizzard', 'Enblizzard II', 'Enaero', 'Enaero II',
         'Enstone', 'Enstone II', 'Enthunder', 'Enthunder II', 'Enwater', 'Enwater II'}
 
-	-- Setup Haste Detection
-	haste = nil
-	p = require('packets')
+    -- Setup Haste Detection
+    haste = nil
+    p = require('packets')
     determine_haste_group()
 end
 
@@ -999,10 +999,10 @@ function job_buff_change(buff,gain)
     -- If we gain or lose any haste buffs, adjust which gear set we target.
     if S{'haste', 'march', 'mighty guard', 'embrava', 'haste samba', 'geo-haste', 'indi-haste'}:contains(buff:lower()) then
         determine_haste_group()
-		if not gain then
-			haste = nil
-			add_to_chat(122, "Haste status cleared.")
-		end
+        if not gain then
+            haste = nil
+            add_to_chat(122, "Haste status cleared.")
+        end
         if not midaction() then
             handle_equipping_gear(player.status)
         end
