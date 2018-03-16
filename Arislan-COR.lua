@@ -1,35 +1,58 @@
---------------------------------------------------------------------------------------------------------------------
--- (Original: Motenten / Modified: Arislan)
--------------------------------------------------------------------------------------------------------------------
---[[
-    Keybinds:
+-- (Original: Motenten / Modified: Arislan
 
-    [CTRL+-]/[CTRL+=]   Quick Draw shot element selector.
-    [CTRL+Q]            Quick Draw shot mode selector.
-    [CTRl+G]            Cycles between avail. ranged weapons
-    [CTRL+W]            Toggles Weapon Lock (Ranged)
-    [CTRL+`]            Double-Up
-    [CTRL+S]            Snake Eye
-    [CTRL+X]            Fold
-    [WIN+`]             Toggles use of Luzaf Ring.
-    [WIN+F]             Cycles between Flurry I & Flurry II received
-    [WIN+H]             Cycles between Haste I & Haste II received
-    [WIN+C]             Toggles Capacity Points Mode
---]]
 -------------------------------------------------------------------------------------------------------------------
---[[
-    Custom commands:
+--  KEYBINDS
+-------------------------------------------------------------------------------------------------------------------
+
+--  Modes:      [ WIN+` ]           Toggles use of Luzaf Ring.
+--              [ WIN+Q ]           Quick Draw shot mode selector.
+--              [ WIN+C ]           Toggles Capacity Points Mode
+--
+--  Abilities:  [ CTRL+- ]          Quick Draw primary shot element cycle forward.
+--              [ CTRL+= ]          Quick Draw primary shot element cycle backward.
+--              [ ALT+- ]           Quick Draw secondary shot element cycle forward.
+--              [ ALT+= ]           Quick Draw secondary shot element cycle backward.
+--              [ CTRL+[ ]          Quick Draw toggle target type.
+--              [ CTRL+] ]          Quick Draw toggle use secondary shot.
+--
+--              [ CTRL+C ]          Crooked Cards
+--              [ CTRL+` ]          Double-Up
+--              [ CTRL+X ]          Fold
+--              [ CTRL+S ]          Snake Eye
+--              [ CTRL+NumLock ]    Triple Shot
+--              [ CTRL+Numpad/ ]    Berserk
+--              [ CTRL+Numpad* ]    Warcry
+--              [ CTRL+Numpad- ]    Aggressor
+--
+--  Weapons:    [ CTRL+G ]          Cycles between available ranged weapons
+--              [ CTRL+W ]          Toggles Ranged Weapon Lock
+--
+--  WS:         [ CTRL+Numpad7 ]    Savage Blade
+--              [ CTRL+Numpad8 ]    Last Stand
+--              [ CTRL+Numpad4 ]    Leaden Salute
+--              [ CTRL+Numpad6 ]    Wildfire
+--              [ CTRL+Numpad1 ]    Requiescat
+--
+--  RA:         [ Numpad0 ]         Ranged Attack
+
+
+-------------------------------------------------------------------------------------------------------------------
+--  Custom Commands
+-------------------------------------------------------------------------------------------------------------------
     
-    gs c qd                     Uses the currently configured shot on the target, with either <t> or <stnpc> depending on setting.
-    gs c qd t                   Uses the currently configured shot on the target, but forces use of <t>.
+--  gs c qd                         Uses the currently configured shot on the target, with either <t> or
+--                                  <stnpc> depending on setting.
+--  gs c qd t                       Uses the currently configured shot on the target, but forces use of <t>.
+--
+--  gs c cycle mainqd               Cycles through the available steps to use as the primary shot when using
+--                                  one of the above commands.
+--  gs c cycle altqd                Cycles through the available steps to use for alternating with the
+--                                  configured main shot.
+--  gs c toggle usealtqd            Toggles whether or not to use an alternate shot.
+--  gs c toggle selectqdtarget      Toggles whether or not to use <stnpc> (as opposed to <t>) when using a shot.
+--
+--  gs c toggle LuzafRing           Toggles use of Luzaf Ring on and off
 
-    gs c cycle mainqd           Cycles through the available steps to use as the primary shot when using one of the above commands.
-    gs c cycle altqd            Cycles through the available steps to use for alternating with the configured main shot.
-    gs c toggle usealtqd        Toggles whether or not to use an alternate shot.
-    gs c toggle selectqdtarget  Toggles whether or not to use <stnpc> (as opposed to <t>) when using a shot.
-
-    gs c toggle LuzafRing       Toggles use of Luzaf Ring on and off
---]]
 
 -------------------------------------------------------------------------------------------------------------------
 -- Setup functions for this job.  Generally should not be modified.
@@ -123,19 +146,13 @@ function user_setup()
         send_command('bind ^numpad/ input /ja "Berserk" <me>')
         send_command('bind ^numpad* input /ja "Warcry" <me>')
         send_command('bind ^numpad- input /ja "Aggressor" <me>')
-    elseif player.sub_job == 'RNG' then
-        send_command('bind ^numpad/ input /ja "Barrage" <me>')
-        send_command('bind ^numpad* input /ja "Sharpshot" <me>')
-        send_command('bind ^numpad- input /ja "Shadowbind" <me>')
-    end
+	end
 
     send_command('bind ^numpad7 input /ws "Savage Blade" <t>')
     send_command('bind ^numpad8 input /ws "Last Stand" <t>')
     send_command('bind ^numpad4 input /ws "Leaden Salute" <t>')
     send_command('bind ^numpad6 input /ws "Wildfire" <t>')
     send_command('bind ^numpad1 input /ws "Requiescat" <t>')
-    send_command('bind ^numpad2 input /ws "Sniper Shot" <t>')
-    send_command('bind ^numpad3 input /ws "Numbing Shot" <t>')
 
     send_command('bind numpad0 input /ra <t>')
 
