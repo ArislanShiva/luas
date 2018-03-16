@@ -119,7 +119,7 @@ function init_gear_sets()
         neck="Orunmila's Torque", --5
         ear1="Loquacious Earring", --2
         ear2="Enchntr. Earring +1", --2
-        ring1="Kishar Ring", --4
+            ="Kishar Ring", --4
         ring2="Weather. Ring +1", --5
         back=gear.BLM_FC_Cape, --10
         waist="Witful Belt", --3/(2)
@@ -139,7 +139,7 @@ function init_gear_sets()
         sub="Clerisy Strap +1", --3
         ammo="Impatiens",
         ear1="Mendi. Earring", --5
-        ring1="Lebeche Ring", --(2)
+            ="Lebeche Ring", --(2)
         back="Perimede Cape", --(4)
         })
 
@@ -157,7 +157,7 @@ function init_gear_sets()
         neck="Orunmila's Torque", --5
         ear1="Etiolation Earring", --1
         ear2="Loquacious Earring", --2
-        ring1="Mephitas's Ring +1",
+            ="Mephitas's Ring +1",
         ring2="Weather. Ring +1", --5
         back="Bane Cape", --4
         waist="Witful Belt", --3/(2)
@@ -178,7 +178,7 @@ function init_gear_sets()
         neck="Fotia Gorget",
         ear1="Moonshade Earring",
         ear2="Telos Earring",
-        ring1="Rufescent Ring",
+            ="Rufescent Ring",
         ring2="Shukuyu Ring",
         back="Relucent Cape",
         waist="Fotia Belt",
@@ -196,7 +196,7 @@ function init_gear_sets()
         neck="Baetyl Pendant",
         ear1="Barkaro. Earring",
         ear2="Moonshade Earring",
-        ring1="Shiva Ring +1",
+            ="Shiva Ring +1",
         ring2="Archon Ring",
         back=gear.BLM_MAB_Cape,
         waist="Yamabuki-no-Obi",
@@ -212,7 +212,7 @@ function init_gear_sets()
         neck="Orunmila's Torque",
         ear1="Etiolation Earring",
         ear2="Loquacious Earring",
-        ring1="Mephitas's Ring +1",
+            ="Mephitas's Ring +1",
         ring2="Mephitas's Ring",
         back="Bane Cape",
         waist="Shinjutsu-no-Obi +1",
@@ -228,7 +228,7 @@ function init_gear_sets()
         feet="Regal Pumps +1",
         ear1="Etiolation Earring",
         ear2="Loquacious Earring",
-        ring1="Kishar Ring",
+            ="Kishar Ring",
         back=gear.BLM_FC_Cape,
         waist="Witful Belt",
         } -- Haste
@@ -244,7 +244,7 @@ function init_gear_sets()
         neck="Nodens Gorget", --5
         ear1="Mendi. Earring", --5
         ear2="Roundel Earring", --5
-        ring1="Lebeche Ring", --3/(-5)
+            ="Lebeche Ring", --3/(-5)
         ring2="Haoma's Ring",
         back="Oretan. Cape +1", --6
         waist="Bishop's Sash",
@@ -252,7 +252,7 @@ function init_gear_sets()
 
     sets.midcast.Curaga = set_combine(sets.midcast.Cure, {
         neck="Nuna Gorget +1",
-        ring1="Levia. Ring +1",
+            ="Levia. Ring +1",
         ring2="Levia. Ring +1",
         waist="Luminary Sash",
         })
@@ -267,7 +267,7 @@ function init_gear_sets()
         neck="Debilis Medallion",
         ear1="Beatific Earring",
         ear2="Healing Earring",
-        ring1="Haoma's Ring",
+            ="Haoma's Ring",
         ring2="Haoma's Ring",
         })
 
@@ -282,7 +282,7 @@ function init_gear_sets()
         neck="Incanter's Torque",
         ear1="Augment. Earring",
         ear2="Andoaa Earring",
-        ring1="Stikini Ring",
+            ="Stikini Ring",
         ring2="Stikini Ring",
         back="Fi Follet Cape +1",
         waist="Olympus Sash",
@@ -324,7 +324,7 @@ function init_gear_sets()
         })
 
     sets.midcast.Protect = set_combine(sets.midcast.EnhancingDuration, {
-        ring1="Sheltered Ring",
+            ="Sheltered Ring",
         })
     sets.midcast.Protectra = sets.midcast.Protect
     sets.midcast.Shell = sets.midcast.Protect
@@ -342,7 +342,7 @@ function init_gear_sets()
         neck="Erra Pendant",
         ear1="Barkaro. Earring",
         ear2="Regal Earring",
-        ring1="Kishar Ring",
+            ="Kishar Ring",
         ring2="Stikini Ring",
         back=gear.BLM_FC_Cape,
         waist="Rumination Sash",
@@ -368,7 +368,7 @@ function init_gear_sets()
         neck="Erra Pendant",
         ear1="Barkaro. Earring",
         ear2="Regal Earring",
-        ring1="Stikini Ring",
+            ="Stikini Ring",
         ring2="Stikini Ring",
         back=gear.BLM_MAB_Cape,
         waist="Luminary Sash",
@@ -378,7 +378,7 @@ function init_gear_sets()
         head="Pixie Hairpin +1",
         feet="Merlinic Crackows",
         ear1="Hirudinea Earring",
-        ring1="Evanescence Ring",
+            ="Evanescence Ring",
         ring2="Archon Ring",
         waist="Fucho-no-obi",
         })
@@ -402,7 +402,7 @@ function init_gear_sets()
         neck="Mizu. Kubikazari", --10
         ear1="Barkaro. Earring",
         ear2="Regal Earring",
-        ring1="Mephitas's Ring +1",
+            ="Mephitas's Ring +1",
         back=gear.BLM_Death_Cape, --5
         waist="Yamabuki-no-Obi",
         }
@@ -423,7 +423,7 @@ function init_gear_sets()
         neck="Seraphic Ampulla",
         ear1="Dedition Earring",
         ear2="Telos Earring",
-        ring1="Petrov Ring",
+            ="Petrov Ring",
         ring2="Apate Ring",
         waist="Oneiros Rope",
         })
@@ -442,7 +442,7 @@ function init_gear_sets()
         neck="Baetyl Pendant",
         ear1="Barkaro. Earring",
         ear2="Regal Earring",
-        ring1="Shiva Ring +1",
+            ="Shiva Ring +1",
         ring2="Shiva Ring +1",
         back=gear.BLM_MAB_Cape,
         waist="Refoccilation Stone",
@@ -481,7 +481,7 @@ function init_gear_sets()
         neck="Seraphic Ampulla",
         ear1="Dedition Earring",
         ear2="Telos Earring",
-        ring1="Petrov Ring",
+            ="Petrov Ring",
         ring2="Apate Ring",
         waist="Oneiros Rope",
         })
@@ -506,7 +506,7 @@ function init_gear_sets()
         neck="Seraphic Ampulla",
         ear1="Dedition Earring",
         ear2="Telos Earring",
-        ring1="Petrov Ring",
+            ="Petrov Ring",
         ring2="Apate Ring",
         waist="Oneiros Rope",
         })
@@ -533,7 +533,7 @@ function init_gear_sets()
         neck="Bathy Choker +1",
         ear1="Genmei Earring",
         ear2="Infused Earring",
-        ring1="Paguroidea Ring",
+            ="Paguroidea Ring",
         ring2="Sheltered Ring",
         back="Moonbeam Cape",
         waist="Refoccilation Stone",
@@ -546,7 +546,7 @@ function init_gear_sets()
         body="Mallquis Saio +1", --6/6
         neck="Loricate Torque +1", --6/6
         ear1="Genmei Earring", --2/0
-        ring1="Gelatinous Ring +1", --7/(-1)
+            ="Gelatinous Ring +1", --7/(-1)
         ring2="Defending Ring", --10/10
         back="Moonbeam Cape", --5/5
         waist="Slipor Sash", --0/3
@@ -569,7 +569,7 @@ function init_gear_sets()
         neck="Sanctity Necklace",
         ear1="Barkaro. Earring",
         ear2="Regal Earring",
-        ring1="Mephitas's Ring +1",
+            ="Mephitas's Ring +1",
         ring2="Mephitas's Ring",
         back=gear.BLM_Death_Cape,
         waist="Shinjutsu-no-Obi +1",
@@ -585,7 +585,7 @@ function init_gear_sets()
         neck="Incanter's Torque",
         ear1="Barkaro. Earring",
         ear2="Regal Earring",
-        ring1="Shiva Ring +1",
+            ="Shiva Ring +1",
         ring2="Weather. Ring +1",
         back=gear.BLM_MAB_Cape,
         })
@@ -606,7 +606,7 @@ function init_gear_sets()
         hands="Ea Cuffs", --5(5)
         feet="Merlinic Crackows", --11
         neck="Mizu. Kubikazari", --10
-        ring1="Mujin Band", --(5)
+            ="Mujin Band", --(5)
         back=gear.BLM_MAB_Cape, --5
         }
 
@@ -630,12 +630,12 @@ function init_gear_sets()
         neck="Combatant's Torque",
         ear1="Cessance Earring",
         ear2="Telos Earring",
-        ring1="Petrov Ring",
+            ="Petrov Ring",
         ring2="Hetairoi Ring",
         back="Relucent Cape",
         }
 
-    sets.buff.Doom = {ring1="Eshmun's Ring", ring2="Eshmun's Ring", waist="Gishdubar Sash"}
+    sets.buff.Doom = {    ="Eshmun's Ring", ring2="Eshmun's Ring", waist="Gishdubar Sash"}
 
     sets.DarkAffinity = {head="Pixie Hairpin +1",ring2="Archon Ring"}
     sets.Obi = {waist="Hachirin-no-Obi"}
@@ -754,9 +754,9 @@ function job_buff_change(buff, gain)
         if gain then           
             equip(sets.buff.Doom)
             send_command('@input /p Doomed.')
-            disable('ring1','ring2','waist')
+            disable('    ','ring2','waist')
         else
-            enable('ring1','ring2','waist')
+            enable('    ','ring2','waist')
             handle_equipping_gear(player.status)
         end
     end
