@@ -1,15 +1,28 @@
+-- Original: Motenten / Modified: Arislan
+
 -------------------------------------------------------------------------------------------------------------------
--- (Original: Motenten / Modified: Arislan)
+--  Keybinds
 -------------------------------------------------------------------------------------------------------------------
 
---[[    Custom Features:
+--  Modes:      [ WIN+C ]           Toggles Capacity Points Mode
+--
+--  Abilities:  [ CTRL+NumLock ]    Double Shot
+--              [ CTRL+Numpad/ ]    Berserk/Meditate
+--              [ CTRL+Numpad* ]    Warcry/Sekkanoki
+--              [ CTRL+Numpad- ]    Aggressor/Third Eye
+--
+--  Spells:     [ WIN+, ]           Utsusemi: Ichi
+--              [ WIN+. ]           Utsusemi: Ni
+--
+--  WS:         [ CTRL+Numpad7 ]    Trueflight
+--              [ CTRL+Numpad8 ]    Last Stand
+--              [ CTRL+Numpad4 ]    Wildfire
+--
+--  RA:         [ Numpad0 ]         Ranged Attack
+--
+--
+--              (Global-Binds.lua contains additional non-job-related keybinds)
 
-        Haste Detection        Detects current magic haste level and equips corresponding engaged set to
-                            optimize delay reduction (automatic)
-        Haste Mode            Toggles between Haste II and Haste I recieved, used by Haste Detection [WinKey-H]
-        Capacity Pts. Mode    Capacity Points Mode Toggle [WinKey-C]
-        Auto. Lockstyle        Automatically locks specified equipset on file load
---]]
 
 -------------------------------------------------------------------------------------------------------------------
 -- Setup functions for this job.  Generally should not be modified.
@@ -32,13 +45,18 @@ function job_setup()
     state.Buff['Velocity Shot'] = buffactive['Velocity Shot'] or false
     state.Buff['Double Shot'] = buffactive['Double Shot'] or false
 
-    state.FlurryMode = M{['description']='Flurry Mode', 'Flurry II', 'Flurry I'}
-    state.HasteMode = M{['description']='Haste Mode', 'Haste II', 'Haste I'}
     state.DualWield = M(false, 'Dual Wield III')
 
     -- Whether a warning has been given for low ammo
     state.warned = M(false)
 
+    lockstyleset = 1
+
+    -- Setup Haste/Flurry Detection
+    haste = nil
+    flurry = nil
+    p = require('packets')
+    update_offense_mode()    
     determine_haste_group()
 end
 
@@ -76,8 +94,6 @@ function user_setup()
         send_command('bind ^. input /item "Prism Powder" <me>')
     end
 
-    send_command('bind @f gs c cycle FlurryMode')
-    send_command('bind @h gs c cycle HasteMode')
     send_command('bind @c gs c toggle CP')
 
     send_command('bind ^numlock input /ja "Double Shot" <me>')
@@ -464,32 +480,29 @@ function init_gear_sets()
     -- If you create a set with both offense and defense modes, the offense mode should be first.
     -- EG: sets.engaged.Dagger.Accuracy.Evasion
 
-    -- * DNC Subjob DW Trait: +15%
-    -- * NIN Subjob DW Trait: +25%
-    
-    -- No Magic Haste (74% DW to cap)    
     sets.engaged = {
         head=gear.Adhemar_B_head,
-        body=gear.Adhemar_B_body, --6
-        hands="Floral Gauntlets", --5
-        legs="Carmine Cuisses +1", --6
-        feet=gear.Taeon_DW_feet, --9
+        body=gear.Adhemar_B_body,
+        hands=gear.Adhemar_B_hands,
+        legs="Samnuha Tights",
+        feet=gear.Herc_TA_feet,
         neck="Iskur Gorget",
-        ear1="Suppanomimi", --5
-        ear2="Eabani Earring", --4
+        ear1="Cessance Earring",
+        ear2="Brutal Earring",
         ring1="Hetairoi Ring",
         ring2="Epona's Ring",
-        back=gear.RNG_DW_Cape, --10
-        waist="Reiki Yotai", --7
-        } -- 52%
+        back=gear.RNG_TP_Cape,
+        waist="Windbuffet Belt +1",
+        }
 
     sets.engaged.LowAcc = set_combine(sets.engaged, {
         head="Dampening Tam",
+        neck="Combatant's Torque",
         })
 
     sets.engaged.MidAcc = set_combine(sets.engaged.LowAcc, {
-        neck="Combatant's Torque",
-        ear1="Cessance Earring",
+        ear2="Telos Earring",
+        ring1="Regal Ring",
         ring2="Ilabrat Ring",
         waist="Kentarch Belt +1",
         })
@@ -497,18 +510,20 @@ function init_gear_sets()
     sets.engaged.HighAcc = set_combine(sets.engaged.MidAcc, {
         head="Carmine Mask +1",
         feet=gear.Herc_STP_feet,
-        ear2="Telos Earring",
-        ring1="Regal Ring",
         ring2="Ramuh Ring +1",
         waist="Olseni Belt",
         })
 
     sets.engaged.STP = set_combine(sets.engaged, {
+        feet="Carmine Greaves +1",
         ring1="Petrov Ring",
         })
 
-    -- 15% Magic Haste (67% DW to cap)
-    sets.engaged.LowHaste = {
+    -- * DNC Subjob DW Trait: +15%
+    -- * NIN Subjob DW Trait: +25%
+    
+    -- No Magic Haste (74% DW to cap)    
+    sets.engaged.DW = {
         head=gear.Adhemar_B_head,
         body=gear.Adhemar_B_body, --6
         hands="Floral Gauntlets", --5
@@ -523,18 +538,58 @@ function init_gear_sets()
         waist="Reiki Yotai", --7
         } -- 52%
 
-    sets.engaged.LowAcc.LowHaste = set_combine(sets.engaged.LowHaste, {
+    sets.engaged.DW.LowAcc = set_combine(sets.engaged.DW, {
+        head="Dampening Tam",
+        })
+
+    sets.engaged.DW.MidAcc = set_combine(sets.engaged.DW.LowAcc, {
+        neck="Combatant's Torque",
+        ear1="Cessance Earring",
+        ring2="Ilabrat Ring",
+        waist="Kentarch Belt +1",
+        })
+
+    sets.engaged.DW.HighAcc = set_combine(sets.engaged.DW.MidAcc, {
+        head="Carmine Mask +1",
+        feet=gear.Herc_STP_feet,
+        ear2="Telos Earring",
+        ring1="Regal Ring",
+        ring2="Ramuh Ring +1",
+        waist="Olseni Belt",
+        })
+
+    sets.engaged.DW.STP = set_combine(sets.engaged.DW, {
+        ring1="Petrov Ring",
+        })
+
+    -- 15% Magic Haste (67% DW to cap)
+    sets.engaged.DW.LowHaste = {
+        head=gear.Adhemar_B_head,
+        body=gear.Adhemar_B_body, --6
+        hands="Floral Gauntlets", --5
+        legs="Carmine Cuisses +1", --6
+        feet=gear.Taeon_DW_feet, --9
+        neck="Iskur Gorget",
+        ear1="Suppanomimi", --5
+        ear2="Eabani Earring", --4
+        ring1="Hetairoi Ring",
+        ring2="Epona's Ring",
+        back=gear.RNG_DW_Cape, --10
+        waist="Reiki Yotai", --7
+        } -- 52%
+
+    sets.engaged.DW.LowAcc.LowHaste = set_combine(sets.engaged.DW.LowHaste, {
         head="Dampening Tam",
         neck="Combatant's Torque",
         })
 
-    sets.engaged.MidAcc.LowHaste = set_combine(sets.engaged.LowAcc.LowHaste, {
+    sets.engaged.DW.MidAcc.LowHaste = set_combine(sets.engaged.DW.LowAcc.LowHaste, {
         ear2="Telos Earring",
         ring2="Ilabrat Ring",
         waist="Kentarch Belt +1",
         })
 
-    sets.engaged.HighAcc.LowHaste = set_combine(sets.engaged.MidAcc.LowHaste, {
+    sets.engaged.DW.HighAcc.LowHaste = set_combine(sets.engaged.DW.MidAcc.LowHaste, {
         head="Carmine Mask +1",
         feet=gear.Herc_STP_feet,
         ear1="Cessance Earring",
@@ -543,12 +598,12 @@ function init_gear_sets()
         waist="Olseni Belt",
         })
 
-    sets.engaged.STP.LowHaste = set_combine(sets.engaged.LowHaste, {
+    sets.engaged.DW.STP.LowHaste = set_combine(sets.engaged.DW.LowHaste, {
         ring1="Petrov Ring",
         })
 
     -- 30% Magic Haste (56% DW to cap)
-    sets.engaged.MidHaste = {
+    sets.engaged.DW.MidHaste = {
         head=gear.Adhemar_B_head,
         body=gear.Adhemar_B_body, --6
         hands=gear.Adhemar_B_hands,
@@ -563,19 +618,19 @@ function init_gear_sets()
         waist="Reiki Yotai", --7
         } -- 41%
 
-    sets.engaged.LowAcc.MidHaste = set_combine(sets.engaged.MidHaste, {
+    sets.engaged.DW.LowAcc.MidHaste = set_combine(sets.engaged.DW.MidHaste, {
         head="Dampening Tam",
         neck="Combatant's Torque",
         })
 
-    sets.engaged.MidAcc.MidHaste = set_combine(sets.engaged.LowAcc.MidHaste, {
+    sets.engaged.DW.MidAcc.MidHaste = set_combine(sets.engaged.DW.LowAcc.MidHaste, {
         legs="Meg. Chausses +2",
         ear2="Telos Earring",
         ring2="Ilabrat Ring",
         waist="Kentarch Belt +1",
         })
 
-    sets.engaged.HighAcc.MidHaste = set_combine(sets.engaged.MidAcc.MidHaste, {
+    sets.engaged.DW.HighAcc.MidHaste = set_combine(sets.engaged.DW.MidAcc.MidHaste, {
         head="Carmine Mask +1",
         legs="Carmine Cuisses +1",
         feet=gear.Herc_STP_feet,
@@ -585,12 +640,12 @@ function init_gear_sets()
         waist="Olseni Belt",
         })
 
-    sets.engaged.STP.MidHaste = set_combine(sets.engaged.MidHaste, {
+    sets.engaged.DW.STP.MidHaste = set_combine(sets.engaged.DW.MidHaste, {
         ring1="Petrov Ring",
         })
 
     -- 35% Magic Haste (51% DW to cap)
-    sets.engaged.HighHaste = {
+    sets.engaged.DW.HighHaste = {
         head=gear.Adhemar_B_head,
         body=gear.Adhemar_B_body, --6
         hands=gear.Adhemar_B_hands,
@@ -605,19 +660,19 @@ function init_gear_sets()
         waist="Reiki Yotai", --7
         } -- 37%
 
-    sets.engaged.LowAcc.HighHaste = set_combine(sets.engaged.HighHaste, {
+    sets.engaged.DW.LowAcc.HighHaste = set_combine(sets.engaged.DW.HighHaste, {
         head="Dampening Tam",
         neck="Combatant's Torque",
         })
 
-    sets.engaged.MidAcc.HighHaste = set_combine(sets.engaged.LowAcc.HighHaste, {
+    sets.engaged.DW.MidAcc.HighHaste = set_combine(sets.engaged.DW.LowAcc.HighHaste, {
         legs="Meg. Chausses +2",
         ear2="Telos Earring",
         ring2="Ilabrat Ring",
         waist="Kentarch Belt +1",
         })
 
-    sets.engaged.HighAcc.HighHaste = set_combine(sets.engaged.MidAcc.HighHaste, {
+    sets.engaged.DW.HighAcc.HighHaste = set_combine(sets.engaged.DW.MidAcc.HighHaste, {
         head="Carmine Mask +1",
         legs="Carmine Cuisses +1",
         feet=gear.Herc_STP_feet,
@@ -627,8 +682,12 @@ function init_gear_sets()
         waist="Olseni Belt",
         })
 
+    sets.engaged.DW.STP.HighHaste = set_combine(sets.engaged.DW.HighHaste, {
+        ring1="Petrov Ring",
+        })
+
     -- 45% Magic Haste (36% DW to cap)
-    sets.engaged.MaxHaste = {
+    sets.engaged.DW.MaxHaste = {
         head=gear.Adhemar_B_head,
         body=gear.Adhemar_B_body, --6
         hands=gear.Adhemar_B_hands,
@@ -643,19 +702,19 @@ function init_gear_sets()
         waist="Windbuffet Belt +1",
         } -- 21%
 
-    sets.engaged.LowAcc.MaxHaste = set_combine(sets.engaged.MaxHaste, {
+    sets.engaged.DW.LowAcc.MaxHaste = set_combine(sets.engaged.DW.MaxHaste, {
         head="Dampening Tam",
         waist="Kentarch Belt +1",
         })
 
-    sets.engaged.MidAcc.MaxHaste = set_combine(sets.engaged.LowAcc.MaxHaste, {
+    sets.engaged.DW.MidAcc.MaxHaste = set_combine(sets.engaged.DW.LowAcc.MaxHaste, {
         legs="Meg. Chausses +2",
         neck="Combatant's Torque",
         ear1="Cessance Earring",
         ring2="Ilabrat Ring",
         })
 
-    sets.engaged.HighAcc.MaxHaste = set_combine(sets.engaged.MidAcc.MaxHaste, {
+    sets.engaged.DW.HighAcc.MaxHaste = set_combine(sets.engaged.DW.MidAcc.MaxHaste, {
         head="Carmine Mask +1",
         legs="Carmine Cuisses +1",
         feet=gear.Herc_STP_feet,
@@ -664,7 +723,7 @@ function init_gear_sets()
         waist="Olseni Belt",
         })
 
-    sets.engaged.STP.MaxHaste = set_combine(sets.engaged.MaxHaste, {
+    sets.engaged.DW.STP.MaxHaste = set_combine(sets.engaged.DW.MaxHaste, {
         ring1="Petrov Ring",
         })
 
@@ -685,29 +744,35 @@ function init_gear_sets()
     sets.engaged.HighAcc.DT = set_combine(sets.engaged.HighAcc, sets.engaged.Hybrid)
     sets.engaged.STP.DT = set_combine(sets.engaged.STP, sets.engaged.Hybrid)
 
-    sets.engaged.DT.LowHaste = set_combine(sets.engaged.LowHaste, sets.engaged.Hybrid)
-    sets.engaged.LowAcc.DT.LowHaste = set_combine(sets.engaged.LowAcc.LowHaste, sets.engaged.Hybrid)
-    sets.engaged.MidAcc.DT.LowHaste = set_combine(sets.engaged.MidAcc.LowHaste, sets.engaged.Hybrid)
-    sets.engaged.HighAcc.DT.LowHaste = set_combine(sets.engaged.HighAcc.LowHaste, sets.engaged.Hybrid)    
-    sets.engaged.STP.DT.LowHaste = set_combine(sets.engaged.STP.LowHaste, sets.engaged.Hybrid)
+    sets.engaged.DW.DT = set_combine(sets.engaged.DW, sets.engaged.Hybrid)
+    sets.engaged.DW.LowAcc.DT = set_combine(sets.engaged.DW.LowAcc, sets.engaged.Hybrid)
+    sets.engaged.DW.MidAcc.DT = set_combine(sets.engaged.DW.MidAcc, sets.engaged.Hybrid)
+    sets.engaged.DW.HighAcc.DT = set_combine(sets.engaged.DW.HighAcc, sets.engaged.Hybrid)
+    sets.engaged.DW.STP.DT = set_combine(sets.engaged.DW.STP, sets.engaged.Hybrid)
 
-    sets.engaged.DT.MidHaste = set_combine(sets.engaged.MidHaste, sets.engaged.Hybrid)
-    sets.engaged.LowAcc.DT.MidHaste = set_combine(sets.engaged.LowAcc.MidHaste, sets.engaged.Hybrid)
-    sets.engaged.MidAcc.DT.MidHaste = set_combine(sets.engaged.MidAcc.MidHaste, sets.engaged.Hybrid)
-    sets.engaged.HighAcc.DT.MidHaste = set_combine(sets.engaged.HighAcc.MidHaste, sets.engaged.Hybrid)    
-    sets.engaged.STP.DT.MidHaste = set_combine(sets.engaged.STP.MidHaste, sets.engaged.Hybrid)
+    sets.engaged.DW.DT.LowHaste = set_combine(sets.engaged.DW.LowHaste, sets.engaged.Hybrid)
+    sets.engaged.DW.LowAcc.DT.LowHaste = set_combine(sets.engaged.DW.LowAcc.LowHaste, sets.engaged.Hybrid)
+    sets.engaged.DW.MidAcc.DT.LowHaste = set_combine(sets.engaged.DW.MidAcc.LowHaste, sets.engaged.Hybrid)
+    sets.engaged.DW.HighAcc.DT.LowHaste = set_combine(sets.engaged.DW.HighAcc.LowHaste, sets.engaged.Hybrid)    
+    sets.engaged.DW.STP.DT.LowHaste = set_combine(sets.engaged.DW.STP.LowHaste, sets.engaged.Hybrid)
 
-    sets.engaged.DT.HighHaste = set_combine(sets.engaged.HighHaste, sets.engaged.Hybrid)
-    sets.engaged.LowAcc.DT.HighHaste = set_combine(sets.engaged.LowAcc.HighHaste, sets.engaged.Hybrid)
-    sets.engaged.MidAcc.DT.HighHaste = set_combine(sets.engaged.MidAcc.HighHaste, sets.engaged.Hybrid)
-    sets.engaged.HighAcc.DT.HighHaste = set_combine(sets.engaged.HighAcc.HighHaste, sets.engaged.Hybrid)    
-    sets.engaged.STP.DT.HighHaste = set_combine(sets.engaged.HighHaste.STP, sets.engaged.Hybrid)
+    sets.engaged.DW.DT.MidHaste = set_combine(sets.engaged.DW.MidHaste, sets.engaged.Hybrid)
+    sets.engaged.DW.LowAcc.DT.MidHaste = set_combine(sets.engaged.DW.LowAcc.MidHaste, sets.engaged.Hybrid)
+    sets.engaged.DW.MidAcc.DT.MidHaste = set_combine(sets.engaged.DW.MidAcc.MidHaste, sets.engaged.Hybrid)
+    sets.engaged.DW.HighAcc.DT.MidHaste = set_combine(sets.engaged.DW.HighAcc.MidHaste, sets.engaged.Hybrid)    
+    sets.engaged.DW.STP.DT.MidHaste = set_combine(sets.engaged.DW.STP.MidHaste, sets.engaged.Hybrid)
 
-    sets.engaged.DT.MaxHaste = set_combine(sets.engaged.MaxHaste, sets.engaged.Hybrid)
-    sets.engaged.LowAcc.DT.MaxHaste = set_combine(sets.engaged.LowAcc.MaxHaste, sets.engaged.Hybrid)
-    sets.engaged.MidAcc.DT.MaxHaste = set_combine(sets.engaged.MidAcc.MaxHaste, sets.engaged.Hybrid)
-    sets.engaged.HighAcc.DT.MaxHaste = set_combine(sets.engaged.HighAcc.MaxHaste, sets.engaged.Hybrid)    
-    sets.engaged.STP.DT.MaxHaste = set_combine(sets.engaged.STP.MaxHaste, sets.engaged.Hybrid)
+    sets.engaged.DW.DT.HighHaste = set_combine(sets.engaged.DW.HighHaste, sets.engaged.Hybrid)
+    sets.engaged.DW.LowAcc.DT.HighHaste = set_combine(sets.engaged.DW.LowAcc.HighHaste, sets.engaged.Hybrid)
+    sets.engaged.DW.MidAcc.DT.HighHaste = set_combine(sets.engaged.DW.MidAcc.HighHaste, sets.engaged.Hybrid)
+    sets.engaged.DW.HighAcc.DT.HighHaste = set_combine(sets.engaged.DW.HighAcc.HighHaste, sets.engaged.Hybrid)    
+    sets.engaged.DW.STP.DT.HighHaste = set_combine(sets.engaged.DW.HighHaste.STP, sets.engaged.Hybrid)
+
+    sets.engaged.DW.DT.MaxHaste = set_combine(sets.engaged.DW.MaxHaste, sets.engaged.Hybrid)
+    sets.engaged.DW.LowAcc.DT.MaxHaste = set_combine(sets.engaged.DW.LowAcc.MaxHaste, sets.engaged.Hybrid)
+    sets.engaged.DW.MidAcc.DT.MaxHaste = set_combine(sets.engaged.DW.MidAcc.MaxHaste, sets.engaged.Hybrid)
+    sets.engaged.DW.HighAcc.DT.MaxHaste = set_combine(sets.engaged.DW.HighAcc.MaxHaste, sets.engaged.Hybrid)    
+    sets.engaged.DW.STP.DT.MaxHaste = set_combine(sets.engaged.DW.STP.MaxHaste, sets.engaged.Hybrid)
 
 
     ------------------------------------------------------------------------------------------------
@@ -754,12 +819,13 @@ function job_post_precast(spell, action, spellMap, eventArgs)
 --        if state.Buff['Velocity Shot'] then
 --            equip( sets.buff['Velocity Shot'])
 --        end
-        if state.FlurryMode.value == 'Flurry II' and (buffactive[265] or buffactive[581]) then
-            equip(sets.precast.RA.Flurry2)
-        elseif state.FlurryMode.value == 'Flurry I' and (buffactive[265] or buffactive[581]) then
-            equip(sets.precast.RA.Flurry1)
+        if spell.action_type == 'Ranged Attack' then
+            if flurry == 2 then
+                equip(sets.precast.RA.Flurry2)
+            elseif flurry == 1 then
+                equip(sets.precast.RA.Flurry1)
+            end
         end
-    end
     -- Equip obi if weather/day matches for WS.
     if spell.type == 'WeaponSkill' then
         if spell.english == 'Trueflight' then
@@ -771,8 +837,8 @@ function job_post_precast(spell, action, spellMap, eventArgs)
             end    
         elseif spell.english == 'Wildfire' and (world.weather_element == 'Fire' or world.day_element == 'Fire') then
             equip(sets.Obi)
+            end
         end
-    end
 end
 
 
@@ -806,9 +872,25 @@ end
 -- buff == buff gained or lost
 -- gain == true if the buff was gained, false if it was lost.
 function job_buff_change(buff,gain)
-    -- If we gain or lose any haste buffs, adjust which gear set we target.
+    -- If we gain or lose any haste buffs, adjust gear.
     if S{'haste', 'march', 'mighty guard', 'embrava', 'haste samba', 'geo-haste', 'indi-haste'}:contains(buff:lower()) then
         determine_haste_group()
+        customize_melee_set()
+        if not gain then
+            haste = nil
+            add_to_chat(122, "Haste status cleared.")
+        end
+        if not midaction() then
+            handle_equipping_gear(player.status)
+        end
+    end
+
+-- If we gain or lose any flurry buffs, adjust gear.
+    if S{'flurry'}:contains(buff:lower()) then
+        if not gain then
+            flurry = nil
+            add_to_chat(122, "Flurry status cleared.")
+        end
         if not midaction() then
             handle_equipping_gear(player.status)
         end
@@ -855,6 +937,13 @@ end
 -- User code that supplements standard library decisions.
 -------------------------------------------------------------------------------------------------------------------
 
+-- Called by the 'update' self-command, for common needs.
+-- Set eventArgs.handled to true if we don't want automatic equipping of gear.
+function job_update(cmdParams, eventArgs)
+    update_offense_mode()
+    determine_haste_group()
+end
+
 function customize_idle_set(idleSet)
     if state.CP.current == 'on' then
         equip(sets.CP)
@@ -873,16 +962,6 @@ function customize_melee_set(meleeSet)
     end
 
     return meleeSet
-end
-
-function job_update(cmdParams, eventArgs)
-    determine_haste_group()
-end
-
--- Set eventArgs.handled to true if we don't want the automatic display to be run.
-
-function job_update(cmdParams, eventArgs)
-    determine_haste_group()
 end
 
 function display_current_job_state(eventArgs)
@@ -910,69 +989,63 @@ end
 -- Utility functions specific to this job.
 -------------------------------------------------------------------------------------------------------------------
 
+--Read incoming packet to determine Haste/Flurry I or II
+windower.raw_register_event("incoming chunk", function(id, data)
+    if id == 0x028 then
+        local packet = p.parse('incoming', data)
+        if packet["Category"] == 4 then
+            if packet["Param"] == 845 then
+                add_to_chat(122, 'Flurry')
+                flurry = 1
+            elseif packet["Param"] == 846 then
+                add_to_chat(122, 'Flurry II')
+                flurry = 2
+            elseif packet["Param"] == 57 then
+                add_to_chat(122, 'Haste')
+                haste = 1
+            elseif packet["Param"] == 511 then
+                add_to_chat(122, 'Haste II')
+                haste = 2
+            end
+        end
+    end
+end)
+
 function determine_haste_group()
 
-    -- Gearswap can't detect the difference between Haste I and Haste II
-    -- so use winkey-H to manually set Haste spell level.
+    -- Assuming the following values:
 
-    -- Haste (buffactive[33]) - 15%
-    -- Haste II (buffactive[33]) - 30%
-    -- Haste Samba - 5~10%
-    -- Honor March - 12~16%
-    -- Victory March - 15~28%
-    -- Advancing March - 10~18%
+    -- Haste - 15%
+    -- Haste II - 30%
+    -- Haste Samba - 5%
+    -- Honor March - 15%
+    -- Victory March - 25%
+    -- Advancing March - 15%
     -- Embrava - 25%
     -- Mighty Guard (buffactive[604]) - 15%
-    -- Geo-Haste (buffactive[580]) - 30~40%
+    -- Geo-Haste (buffactive[580]) - 30%
 
     classes.CustomMeleeGroups:clear()
 
-    if state.HasteMode.value == 'Haste II' then
-        if(((buffactive[33] or buffactive[580] or buffactive.embrava) and (buffactive.march or buffactive[604])) or
-            (buffactive[33] and (buffactive[580] or buffactive.embrava)) or
-            (buffactive.march == 2 and buffactive[604]) or buffactive.march == 3) or buffactive[580] == 2 then
-            --add_to_chat(122, 'Magic Haste Level: 43%')
+    if state.CombatForm.value == 'DW' then
+
+        if(((haste == 2 or buffactive[580] or buffactive.embrava) and (buffactive.march or buffactive[604] or haste == 1)) or
+            (haste == 2 and (buffactive[580] or buffactive.embrava)) or
+            (buffactive.march == 2 and buffactive[604]) or buffactive.march == 3 or buffactive[580] == 2) then
+            add_to_chat(122, 'Magic Haste Level: 43%')
             classes.CustomMeleeGroups:append('MaxHaste')
             state.DualWield:set()
-        elseif ((buffactive[33] or buffactive.march == 2 or buffactive[580]) and buffactive['haste samba']) then
-            --add_to_chat(122, 'Magic Haste Level: 35%')
+        elseif ((haste == 2 or buffactive.march == 2 or buffactive[580]) and buffactive['haste samba']) then
+            add_to_chat(122, 'Magic Haste Level: 35%')
             classes.CustomMeleeGroups:append('HighHaste')
             state.DualWield:set()
-        elseif ((buffactive[580] or buffactive[33] or buffactive.march == 2) or
-            (buffactive.march == 1 and buffactive[604])) then
-            --add_to_chat(122, 'Magic Haste Level: 30%')
+        elseif ((buffactive[580] or haste == 2 or buffactive.march == 2) or
+            (buffactive.march == 1 and buffactive[604]) or (buffactive.march == 1 and haste == 1)) then
+            add_to_chat(122, 'Magic Haste Level: 30%')
             classes.CustomMeleeGroups:append('MidHaste')
             state.DualWield:set()
-        elseif (buffactive.march == 1 or buffactive[604]) then
-            --add_to_chat(122, 'Magic Haste Level: 15%')
-            classes.CustomMeleeGroups:append('LowHaste')
-            state.DualWield:set()
-        else
-            state.DualWield:set(false)
-        end
-    else
-        if (buffactive[580] and ( buffactive.march or buffactive[33] or buffactive.embrava or buffactive[604]) ) or
-            (buffactive.embrava and (buffactive.march or buffactive[33] or buffactive[604])) or
-            (buffactive.march == 2 and (buffactive[33] or buffactive[604])) or
-            (buffactive[33] and buffactive[604] and buffactive.march ) or buffactive.march == 3 or buffactive[580] == 2 then
-            --add_to_chat(122, 'Magic Haste Level: 43%')
-            classes.CustomMeleeGroups:append('MaxHaste')
-            state.DualWield:set()
-        elseif ((buffactive[604] or buffactive[33]) and buffactive['haste samba'] and buffactive.march == 1) or
-            (buffactive.march == 2 and buffactive['haste samba']) or
-            (buffactive[580] and buffactive['haste samba'] ) then
-            --add_to_chat(122, 'Magic Haste Level: 35%')
-            classes.CustomMeleeGroups:append('HighHaste')
-            state.DualWield:set()
-        elseif (buffactive.march == 2 ) or
-            ((buffactive[33] or buffactive[604]) and buffactive.march == 1 ) or  -- MG or haste + 1 march
-            (buffactive[580] ) or  -- geo haste
-            (buffactive[33] and buffactive[604]) then
-            --add_to_chat(122, 'Magic Haste Level: 30%')
-            classes.CustomMeleeGroups:append('MidHaste')
-            state.DualWield:set()
-        elseif buffactive[33] or buffactive[604] or buffactive.march == 1 then
-            --add_to_chat(122, 'Magic Haste Level: 15%')
+        elseif (buffactive.march == 1 or buffactive[604] or haste == 1) then
+            add_to_chat(122, 'Magic Haste Level: 15%')
             classes.CustomMeleeGroups:append('LowHaste')
             state.DualWield:set()
         else
@@ -1086,17 +1159,23 @@ function do_bullet_checks(spell, spellMap, eventArgs)
     end
 end
 
--- Select default macro book on initial load or subjob change.
-
-function select_default_macro_book()
-    -- Default macro set/book: (set, book)
-    if player.sub_job == 'DNC' then
-        set_macro_page(1, 6)    
+function update_offense_mode()  
+    if player.sub_job == 'NIN' or player.sub_job == 'DNC' then
+        state.CombatForm:set('DW')
     else
-        set_macro_page(2, 6)    
+        state.CombatForm:reset()
+    end
+end
+
+-- Select default macro book on initial load or subjob change.
+function select_default_macro_book()
+    if player.sub_job == 'DNC' then
+        set_macro_page(1, 7)
+    else
+        set_macro_page(1, 7)
     end
 end
 
 function set_lockstyle()
-    send_command('wait 2; input /lockstyleset 1')
+    send_command('wait 2; input /lockstyleset ' .. lockstyleset)
 end

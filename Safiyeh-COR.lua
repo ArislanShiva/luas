@@ -1,29 +1,64 @@
---------------------------------------------------------------------------------------------------------------------
--- (Original: Motenten / Modified: Arislan)
+-- Original: Motenten / Modified: Arislan
+
+-------------------------------------------------------------------------------------------------------------------
+--  Keybinds
 -------------------------------------------------------------------------------------------------------------------
 
---[[Custom Features:
+--  Modes:      [ WIN+` ]           Toggles use of Luzaf Ring.
+--              [ WIN+Q ]           Quick Draw shot mode selector.
+--              [ WIN+C ]           Toggles Capacity Points Mode
+--
+--  Abilities:  [ CTRL+- ]          Quick Draw primary shot element cycle forward.
+--              [ CTRL+= ]          Quick Draw primary shot element cycle backward.
+--              [ ALT+- ]           Quick Draw secondary shot element cycle forward.
+--              [ ALT+= ]           Quick Draw secondary shot element cycle backward.
+--              [ CTRL+[ ]          Quick Draw toggle target type.
+--              [ CTRL+] ]          Quick Draw toggle use secondary shot.
+--
+--              [ CTRL+C ]          Crooked Cards
+--              [ CTRL+` ]          Double-Up
+--              [ CTRL+X ]          Fold
+--              [ CTRL+S ]          Snake Eye
+--              [ CTRL+NumLock ]    Triple Shot
+--              [ CTRL+Numpad/ ]    Berserk
+--              [ CTRL+Numpad* ]    Warcry
+--              [ CTRL+Numpad- ]    Aggressor
+--
+--  Spells:     [ WIN+, ]           Utsusemi: Ichi
+--              [ WIN+. ]           Utsusemi: Ni
+--
+--  Weapons:    [ CTRL+G ]          Cycles between available ranged weapons
+--              [ CTRL+W ]          Toggles Ranged Weapon Lock
+--
+--  WS:         [ CTRL+Numpad7 ]    Savage Blade
+--              [ CTRL+Numpad8 ]    Last Stand
+--              [ CTRL+Numpad4 ]    Leaden Salute
+--              [ CTRL+Numpad6 ]    Wildfire
+--              [ CTRL+Numpad1 ]    Requiescat
+--
+--  RA:         [ Numpad0 ]         Ranged Attack
+--
+--
+--              (Global-Binds.lua contains additional non-job-related keybinds)
 
-    QuickDraw Selector          Cycle through available primary and secondary shot types, and trigger with a single macro
-    Haste Detection             Detects current magic haste level and equips corresponding engaged set to optimize delay reduction (automatic)
-    Haste Mode                  Toggles between Haste II and Haste I recieved, used by Haste Detection [WinKey-H]
-    Capacity Pts. Mode          Capacity Points Mode Toggle [WinKey-C]
-    Auto. Lockstyle             Automatically locks specified equipset on file load
---]]
+
 -------------------------------------------------------------------------------------------------------------------
---[[
-    Custom commands:
+--  Custom Commands (preface with /console to use these in macros)
+-------------------------------------------------------------------------------------------------------------------
     
-    gs c qd                     Uses the currently configured shot on the target, with either <t> or <stnpc> depending on setting.
-    gs c qd t                   Uses the currently configured shot on the target, but forces use of <t>.
+--  gs c qd                         Uses the currently configured shot on the target, with either <t> or
+--                                  <stnpc> depending on setting.
+--  gs c qd t                       Uses the currently configured shot on the target, but forces use of <t>.
+--
+--  gs c cycle mainqd               Cycles through the available steps to use as the primary shot when using
+--                                  one of the above commands.
+--  gs c cycle altqd                Cycles through the available steps to use for alternating with the
+--                                  configured main shot.
+--  gs c toggle usealtqd            Toggles whether or not to use an alternate shot.
+--  gs c toggle selectqdtarget      Toggles whether or not to use <stnpc> (as opposed to <t>) when using a shot.
+--
+--  gs c toggle LuzafRing           Toggles use of Luzaf Ring on and off
 
-    gs c cycle mainqd           Cycles through the available steps to use as the primary shot when using one of the above commands.
-    gs c cycle altqd            Cycles through the available steps to use for alternating with the configured main shot.
-    gs c toggle usealtqd        Toggles whether or not to use an alternate shot.
-    gs c toggle selectqdtarget  Toggles whether or not to use <stnpc> (as opposed to <t>) when using a shot.
-
-    gs c toggle LuzafRing       Toggles use of Luzaf Ring on and off
---]]
 
 -------------------------------------------------------------------------------------------------------------------
 -- Setup functions for this job.  Generally should not be modified.
@@ -46,8 +81,6 @@ function job_setup()
     state.SelectqdTarget = M(false, 'Select Quick Draw Target')
     state.IgnoreTargetting = M(false, 'Ignore Targetting')
 
-    state.FlurryMode = M{['description']='Flurry Mode', 'Flurry II', 'Flurry I'}
-    state.HasteMode = M{['description']='Haste Mode', 'Haste II', 'Haste I'}
     state.DualWield = M(false, 'Dual Wield III')
     state.QDMode = M{['description']='Quick Draw Mode', 'STP', 'Magic Enhance', 'Magic Attack'}
 
@@ -59,8 +92,15 @@ function job_setup()
     state.warned = M(false)
     
     define_roll_values()
-    determine_haste_group()
 
+    lockstyleset = 1
+
+    -- Setup Haste/Flurry Detection
+    haste = nil
+    flurry = nil
+    p = require('packets')
+    update_offense_mode()    
+    determine_haste_group()
 end
 
 -------------------------------------------------------------------------------------------------------------------
@@ -71,7 +111,7 @@ end
 function user_setup()
     state.OffenseMode:options('STP', 'Normal', 'LowAcc', 'MidAcc', 'HighAcc')
     state.HybridMode:options('Normal', 'DT')
-    state.RangedMode:options('STP', 'Normal', 'Acc', 'Critical')
+    state.RangedMode:options('STP', 'Normal', 'Acc', 'HighAcc', 'Critical')
     state.WeaponskillMode:options('Normal', 'Acc')
     state.CastingMode:options('Normal', 'Resistant')
     state.IdleMode:options('Normal', 'DT', 'Refresh')
@@ -92,7 +132,7 @@ function user_setup()
     send_command('bind ^` input /ja "Double-up" <me>')
     send_command('bind ^c input /ja "Crooked Cards" <me>')
     send_command('bind ^s input /ja "Snake Eye" <me>')
-    send_command('bind ^x input /ja "Fold" <me>')
+    send_command('bind ^f input /ja "Fold" <me>')
     send_command('bind !` input /ja "Bolter\'s Roll" <me>')
     send_command ('bind @` gs c toggle LuzafRing')
 
@@ -106,8 +146,6 @@ function user_setup()
     send_command('bind @c gs c toggle CP')
     send_command('bind @q gs c cycle QDMode')
     send_command('bind @g gs c cycle Gun')
-    send_command('bind @f gs c cycle FlurryMode')
-    send_command('bind @h gs c cycle HasteMode')
     send_command('bind @w gs c toggle WeaponLock')
 
     send_command('bind ^numlock input /ja "Triple Shot" <me>')
@@ -116,10 +154,6 @@ function user_setup()
         send_command('bind ^numpad/ input /ja "Berserk" <me>')
         send_command('bind ^numpad* input /ja "Warcry" <me>')
         send_command('bind ^numpad- input /ja "Aggressor" <me>')
-    elseif player.sub_job == 'RNG' then
-        send_command('bind ^numpad/ input /ja "Barrage" <me>')
-        send_command('bind ^numpad* input /ja "Sharpshot" <me>')
-        send_command('bind ^numpad- input /ja "Shadowbind" <me>')
     end
 
     send_command('bind ^numpad7 input /ws "Savage Blade" <t>')
@@ -142,7 +176,7 @@ function user_unload()
     send_command('unbind ^`')
 	send_command('unbind ^c')
 	send_command('unbind ^s')
-	send_command('unbind ^x')
+	send_command('unbind ^f')
     send_command('unbind !`')
     send_command('unbind @`')
     send_command('unbind ^-')
@@ -155,8 +189,6 @@ function user_unload()
     send_command('unbind @c')
     send_command('unbind @q')
     send_command('unbind @g')
-    send_command('unbind @f')
-    send_command('unbind @h')
     send_command('unbind @w')
     send_command('unbind ^numlock')
     send_command('unbind ^numpad/')
@@ -474,9 +506,12 @@ function init_gear_sets()
         }
 
     sets.midcast.RA.Acc = set_combine(sets.midcast.RA, {
-        ammo=gear.RAbullet,
         --body="Laksa. Frac +3",
-        legs="Meg. Chausses +2",
+        hands="Meg. Gloves +2",
+        })
+
+    sets.midcast.RA.HighAcc = set_combine(sets.midcast.RA.Acc, {
+        --legs="Laksa. Trews +3",
         --ring2="Hajduk Ring +1",
         --waist="Kwahu Kachina Belt",
         })
@@ -575,171 +610,13 @@ function init_gear_sets()
     -- If you create a set with both offense and defense modes, the offense mode should be first.
     -- EG: sets.engaged.Dagger.Accuracy.Evasion
 
-    -- * DNC Subjob DW Trait: +15%
-    -- * NIN Subjob DW Trait: +25%
-    
-    -- No Magic Haste (74% DW to cap)
     sets.engaged = {
-        head="Adhemar Bonnet",
-        body="Adhemar Jacket", --5
-        hands="Floral Gauntlets", --5
-        legs="Carmine Cuisses +1", --6
-        feet="Taeon Boots", --9
-        neck="Caro Necklace",
-        ear1="Cessance Earring",
-        ear2="Suppanomimi", --5
-        ring1="Hetairoi Ring",
-        ring2="Epona's Ring",
-        --back=gear.COR_DW_Cape, --10
-        waist="Kentarch Belt +1",
-        }
-
-    sets.engaged.LowAcc = set_combine(sets.engaged, {
-        waist="Kentarch Belt +1",
-        })
-
-    sets.engaged.MidAcc = set_combine(sets.engaged.LowAcc, {
-        --neck="Combatant's Torque",
-        --ring2="Ilabrat Ring",
-        })
-
-    sets.engaged.HighAcc = set_combine(sets.engaged.MidAcc, {
-        head="Carmine Mask +1",
-        --ear2="Telos Earring",
-        --ring1="Regal Ring",
-        --ring2="Ramuh Ring +1",
-        --waist="Olseni Belt",
-        })
-
-    sets.engaged.STP = set_combine(sets.engaged, {
-        neck="Iskur Gorget",
-        ring1="Petrov Ring",
-        })
-
-    -- 15% Magic Haste (67% DW to cap)
-    sets.engaged.LowHaste = {
-        head="Adhemar Bonnet",
-        body="Adhemar Jacket",
-        hands="Floral Gauntlets", --5
-        legs="Carmine Cuisses +1", --6
-        feet="Taeon Boots", --9
-        neck="Caro Necklace",
-        ear1="Cessance Earring",
-        ear2="Suppanomimi", --5
-        ring1="Hetairoi Ring",
-        ring2="Epona's Ring",
-        --back=gear.COR_DW_Cape, --10
-        waist="Kentarch Belt +1",
-        }
-
-    sets.engaged.LowAcc.LowHaste = set_combine(sets.engaged.LowHaste, {
-        waist="Kentarch Belt +1",
-        })
-
-    sets.engaged.MidAcc.LowHaste = set_combine(sets.engaged.LowAcc.LowHaste, {
-        --neck="Combatant's Torque",
-        --ear2="Telos Earring",
-        --ring2="Ilabrat Ring",
-        })
-
-    sets.engaged.HighAcc.LowHaste = set_combine(sets.engaged.MidAcc.LowHaste, {
-        head="Carmine Mask +1",
-        --ring1="Regal Ring",
-        --ring2="Ramuh Ring +1",
-        --waist="Olseni Belt",
-        })
-
-    sets.engaged.STP.LowHaste = set_combine(sets.engaged.LowHaste, {
-        neck="Iskur Gorget",
-        ring1="Petrov Ring",
-        })
-
-    -- 30% Magic Haste (56% DW to cap)
-    sets.engaged.MidHaste = {
-        head="Adhemar Bonnet",
-        body="Adhemar Jacket",
-        hands="Adhemar Wristbands",
-        legs="Carmine Cuisses +1", --6
-        feet="Taeon Boots", --9
-        neck="Caro Necklace",
-        ear1="Cessance Earring",
-        ear2="Suppanomimi", --5
-        ring1="Hetairoi Ring",
-        ring2="Epona's Ring",
-        --back=gear.COR_DW_Cape, --10
-        waist="Kentarch Belt +1",
-        }
-
-    sets.engaged.LowAcc.MidHaste = set_combine(sets.engaged.MidHaste, {
-        waist="Kentarch Belt +1",
-        })
-
-    sets.engaged.MidAcc.MidHaste = set_combine(sets.engaged.LowAcc.MidHaste, {
-        legs="Meg. Chausses +2",
-        --neck="Combatant's Torque",
-        --ear2="Telos Earring",
-        --ring2="Ilabrat Ring",
-        })
-
-    sets.engaged.HighAcc.MidHaste = set_combine(sets.engaged.MidAcc.MidHaste, {
-        head="Carmine Mask +1",
-        --ring1="Regal Ring",
-        --ring2="Ramuh Ring +1",
-        --waist="Olseni Belt",
-        })
-
-    sets.engaged.STP.MidHaste = set_combine(sets.engaged.MidHaste, {
-        neck="Iskur Gorget",
-        ring1="Petrov Ring",
-        })
-
-    -- 35% Magic Haste (51% DW to cap)
-    sets.engaged.HighHaste = {
-        head="Adhemar Bonnet",
-        body="Adhemar Jacket",
-        hands="Adhemar Wristbands",
-        legs="Carmine Cuisses +1", --6
-        feet="Taeon Boots", --9
-        neck="Caro Necklace",
-        ear1="Cessance Earring",
-        ear2="Suppanomimi", --5
-        ring1="Hetairoi Ring",
-        ring2="Epona's Ring",
-        --back=gear.COR_DW_Cape, --10
-        waist="Kentarch Belt +1",
-        }
-
-    sets.engaged.LowAcc.HighHaste = set_combine(sets.engaged.HighHaste, {
-        waist="Kentarch Belt +1",
-        })
-
-    sets.engaged.MidAcc.HighHaste = set_combine(sets.engaged.LowAcc.HighHaste, {
-        legs="Meg. Chausses +2",
-        --neck="Combatant's Torque",
-        --ear2="Telos Earring",
-        --ring2="Ilabrat Ring",
-        })
-
-    sets.engaged.HighAcc.HighHaste = set_combine(sets.engaged.MidAcc.HighHaste, {
-        head="Carmine Mask +1",
-        --ring1="Regal Ring",
-        --ring2="Ramuh Ring +1",
-        --waist="Olseni Belt",
-        })
-
-    sets.engaged.STP.HighHaste = set_combine(sets.engaged.HighHaste, {
-        neck="Iskur Gorget",
-        ring1="Petrov Ring",
-        })
-        
-    -- 45% Magic Haste (36% DW to cap)
-    sets.engaged.MaxHaste = {
         head="Adhemar Bonnet",
         body="Adhemar Jacket",
         hands="Adhemar Wristbands",
         legs="Samnuha Tights",
         feet="Herculean Boots",
-        neck="Caro Necklace",
+        neck="Iskur Gorget",
         ear1="Cessance Earring",
         ear2="Suppanomimi", --5
         ring1="Hetairoi Ring",
@@ -772,6 +649,206 @@ function init_gear_sets()
         ring1="Petrov Ring",
         })
 
+    -- * DNC Subjob DW Trait: +15%
+    -- * NIN Subjob DW Trait: +25%
+    
+    -- No Magic Haste (74% DW to cap)
+    sets.engaged.DW = {
+        head="Adhemar Bonnet",
+        body="Adhemar Jacket", --5
+        hands="Floral Gauntlets", --5
+        legs="Carmine Cuisses +1", --6
+        feet="Taeon Boots", --9
+        neck="Iskur Gorget",
+        ear1="Cessance Earring",
+        ear2="Suppanomimi", --5
+        ring1="Hetairoi Ring",
+        ring2="Epona's Ring",
+        --back=gear.COR_DW_Cape, --10
+        waist="Kentarch Belt +1",
+        }
+
+    sets.engaged.DW.LowAcc = set_combine(sets.engaged.DW, {
+        waist="Kentarch Belt +1",
+        })
+
+    sets.engaged.DW.MidAcc = set_combine(sets.engaged.DW.LowAcc, {
+        --neck="Combatant's Torque",
+        --ring2="Ilabrat Ring",
+        })
+
+    sets.engaged.DW.HighAcc = set_combine(sets.engaged.DW.MidAcc, {
+        head="Carmine Mask +1",
+        --ear2="Telos Earring",
+        --ring1="Regal Ring",
+        --ring2="Ramuh Ring +1",
+        --waist="Olseni Belt",
+        })
+
+    sets.engaged.DW.STP = set_combine(sets.engaged.DW, {
+        neck="Iskur Gorget",
+        ring1="Petrov Ring",
+        })
+
+    -- 15% Magic Haste (67% DW to cap)
+    sets.engaged.DW.LowHaste = {
+        head="Adhemar Bonnet",
+        body="Adhemar Jacket",
+        hands="Floral Gauntlets", --5
+        legs="Carmine Cuisses +1", --6
+        feet="Taeon Boots", --9
+        neck="Iskur Gorget",
+        ear1="Cessance Earring",
+        ear2="Suppanomimi", --5
+        ring1="Hetairoi Ring",
+        ring2="Epona's Ring",
+        --back=gear.COR_DW_Cape, --10
+        waist="Kentarch Belt +1",
+        }
+
+    sets.engaged.DW.LowAcc.LowHaste = set_combine(sets.engaged.DW.LowHaste, {
+        waist="Kentarch Belt +1",
+        })
+
+    sets.engaged.DW.MidAcc.LowHaste = set_combine(sets.engaged.DW.LowAcc.LowHaste, {
+        --neck="Combatant's Torque",
+        --ear2="Telos Earring",
+        --ring2="Ilabrat Ring",
+        })
+
+    sets.engaged.DW.HighAcc.LowHaste = set_combine(sets.engaged.DW.MidAcc.LowHaste, {
+        head="Carmine Mask +1",
+        --ring1="Regal Ring",
+        --ring2="Ramuh Ring +1",
+        --waist="Olseni Belt",
+        })
+
+    sets.engaged.DW.STP.LowHaste = set_combine(sets.engaged.DW.LowHaste, {
+        neck="Iskur Gorget",
+        ring1="Petrov Ring",
+        })
+
+    -- 30% Magic Haste (56% DW to cap)
+    sets.engaged.DW.MidHaste = {
+        head="Adhemar Bonnet",
+        body="Adhemar Jacket",
+        hands="Adhemar Wristbands",
+        legs="Carmine Cuisses +1", --6
+        feet="Taeon Boots", --9
+        neck="Iskur Gorget",
+        ear1="Cessance Earring",
+        ear2="Suppanomimi", --5
+        ring1="Hetairoi Ring",
+        ring2="Epona's Ring",
+        --back=gear.COR_DW_Cape, --10
+        waist="Kentarch Belt +1",
+        }
+
+    sets.engaged.DW.LowAcc.MidHaste = set_combine(sets.engaged.DW.MidHaste, {
+        waist="Kentarch Belt +1",
+        })
+
+    sets.engaged.DW.MidAcc.MidHaste = set_combine(sets.engaged.DW.LowAcc.MidHaste, {
+        legs="Meg. Chausses +2",
+        --neck="Combatant's Torque",
+        --ear2="Telos Earring",
+        --ring2="Ilabrat Ring",
+        })
+
+    sets.engaged.DW.HighAcc.MidHaste = set_combine(sets.engaged.DW.MidAcc.MidHaste, {
+        head="Carmine Mask +1",
+        --ring1="Regal Ring",
+        --ring2="Ramuh Ring +1",
+        --waist="Olseni Belt",
+        })
+
+    sets.engaged.DW.STP.MidHaste = set_combine(sets.engaged.DW.MidHaste, {
+        neck="Iskur Gorget",
+        ring1="Petrov Ring",
+        })
+
+    -- 35% Magic Haste (51% DW to cap)
+    sets.engaged.DW.HighHaste = {
+        head="Adhemar Bonnet",
+        body="Adhemar Jacket",
+        hands="Adhemar Wristbands",
+        legs="Carmine Cuisses +1", --6
+        feet="Taeon Boots", --9
+        neck="Iskur Gorget",
+        ear1="Cessance Earring",
+        ear2="Suppanomimi", --5
+        ring1="Hetairoi Ring",
+        ring2="Epona's Ring",
+        --back=gear.COR_DW_Cape, --10
+        waist="Kentarch Belt +1",
+        }
+
+    sets.engaged.DW.LowAcc.HighHaste = set_combine(sets.engaged.DW.HighHaste, {
+        waist="Kentarch Belt +1",
+        })
+
+    sets.engaged.DW.MidAcc.HighHaste = set_combine(sets.engaged.DW.LowAcc.HighHaste, {
+        legs="Meg. Chausses +2",
+        --neck="Combatant's Torque",
+        --ear2="Telos Earring",
+        --ring2="Ilabrat Ring",
+        })
+
+    sets.engaged.DW.HighAcc.HighHaste = set_combine(sets.engaged.DW.MidAcc.HighHaste, {
+        head="Carmine Mask +1",
+        --ring1="Regal Ring",
+        --ring2="Ramuh Ring +1",
+        --waist="Olseni Belt",
+        })
+
+    sets.engaged.DW.STP.HighHaste = set_combine(sets.engaged.DW.HighHaste, {
+        neck="Iskur Gorget",
+        ring1="Petrov Ring",
+        })
+        
+    -- 45% Magic Haste (36% DW to cap)
+    sets.engaged.DW.MaxHaste = {
+        head="Adhemar Bonnet",
+        body="Adhemar Jacket",
+        hands="Adhemar Wristbands",
+        legs="Samnuha Tights",
+        feet="Herculean Boots",
+        neck="Iskur Gorget",
+        ear1="Cessance Earring",
+        ear2="Suppanomimi", --5
+        ring1="Hetairoi Ring",
+        ring2="Epona's Ring",
+        --back=gear.COR_DW_Cape, --10
+        waist="Kentarch Belt +1",
+        }
+
+    sets.engaged.DW.LowAcc.MaxHaste = set_combine(sets.engaged.DW.MaxHaste, {
+        waist="Kentarch Belt +1",
+        })
+
+    sets.engaged.DW.MidAcc.MaxHaste = set_combine(sets.engaged.DW.LowAcc.MaxHaste, {
+        legs="Meg. Chausses +2",
+        --neck="Combatant's Torque",
+        --ear2="Telos Earring",
+        --ring2="Ilabrat Ring",
+        })
+
+    sets.engaged.DW.HighAcc.MaxHaste = set_combine(sets.engaged.DW.MidAcc.MaxHaste, {
+        head="Carmine Mask +1",
+        legs="Carmine Cuisses +1",
+        --ring1="Regal Ring",
+        --ring2="Ramuh Ring +1",
+        --waist="Olseni Belt",
+        })
+
+    sets.engaged.DW.STP.MaxHaste = set_combine(sets.engaged.DW.MaxHaste, {
+        neck="Iskur Gorget",
+        ring1="Petrov Ring",
+        })
+
+
+    sets.LessDualWield = {)--back=gear.COR_TP_Cape}
+
     ------------------------------------------------------------------------------------------------
     ---------------------------------------- Hybrid Sets -------------------------------------------
     ------------------------------------------------------------------------------------------------
@@ -787,29 +864,35 @@ function init_gear_sets()
     sets.engaged.HighAcc.DT = set_combine(sets.engaged.HighAcc, sets.engaged.Hybrid)
     sets.engaged.STP.DT = set_combine(sets.engaged.STP, sets.engaged.Hybrid)
 
-    sets.engaged.DT.LowHaste = set_combine(sets.engaged.LowHaste, sets.engaged.Hybrid)
-    sets.engaged.LowAcc.DT.LowHaste = set_combine(sets.engaged.LowAcc.LowHaste, sets.engaged.Hybrid)
-    sets.engaged.MidAcc.DT.LowHaste = set_combine(sets.engaged.MidAcc.LowHaste, sets.engaged.Hybrid)
-    sets.engaged.HighAcc.DT.LowHaste = set_combine(sets.engaged.HighAcc.LowHaste, sets.engaged.Hybrid)    
-    sets.engaged.STP.DT.LowHaste = set_combine(sets.engaged.STP.LowHaste, sets.engaged.Hybrid)
+    sets.engaged.DW.DT = set_combine(sets.engaged.DW, sets.engaged.Hybrid)
+    sets.engaged.DW.LowAcc.DT = set_combine(sets.engaged.DW.LowAcc, sets.engaged.Hybrid)
+    sets.engaged.DW.MidAcc.DT = set_combine(sets.engaged.DW.MidAcc, sets.engaged.Hybrid)
+    sets.engaged.DW.HighAcc.DT = set_combine(sets.engaged.DW.HighAcc, sets.engaged.Hybrid)
+    sets.engaged.DW.STP.DT = set_combine(sets.engaged.DW.STP, sets.engaged.Hybrid)
 
-    sets.engaged.DT.MidHaste = set_combine(sets.engaged.MidHaste, sets.engaged.Hybrid)
-    sets.engaged.LowAcc.DT.MidHaste = set_combine(sets.engaged.LowAcc.MidHaste, sets.engaged.Hybrid)
-    sets.engaged.MidAcc.DT.MidHaste = set_combine(sets.engaged.MidAcc.MidHaste, sets.engaged.Hybrid)
-    sets.engaged.HighAcc.DT.MidHaste = set_combine(sets.engaged.HighAcc.MidHaste, sets.engaged.Hybrid)    
-    sets.engaged.STP.DT.MidHaste = set_combine(sets.engaged.STP.MidHaste, sets.engaged.Hybrid)
+    sets.engaged.DW.DT.LowHaste = set_combine(sets.engaged.DW.LowHaste, sets.engaged.Hybrid)
+    sets.engaged.DW.LowAcc.DT.LowHaste = set_combine(sets.engaged.DW.LowAcc.LowHaste, sets.engaged.Hybrid)
+    sets.engaged.DW.MidAcc.DT.LowHaste = set_combine(sets.engaged.DW.MidAcc.LowHaste, sets.engaged.Hybrid)
+    sets.engaged.DW.HighAcc.DT.LowHaste = set_combine(sets.engaged.DW.HighAcc.LowHaste, sets.engaged.Hybrid)    
+    sets.engaged.DW.STP.DT.LowHaste = set_combine(sets.engaged.DW.STP.LowHaste, sets.engaged.Hybrid)
 
-    sets.engaged.DT.HighHaste = set_combine(sets.engaged.HighHaste, sets.engaged.Hybrid)
-    sets.engaged.LowAcc.DT.HighHaste = set_combine(sets.engaged.LowAcc.HighHaste, sets.engaged.Hybrid)
-    sets.engaged.MidAcc.DT.HighHaste = set_combine(sets.engaged.MidAcc.HighHaste, sets.engaged.Hybrid)
-    sets.engaged.HighAcc.DT.HighHaste = set_combine(sets.engaged.HighAcc.HighHaste, sets.engaged.Hybrid)    
-    sets.engaged.STP.DT.HighHaste = set_combine(sets.engaged.HighHaste.STP, sets.engaged.Hybrid)
+    sets.engaged.DW.DT.MidHaste = set_combine(sets.engaged.DW.MidHaste, sets.engaged.Hybrid)
+    sets.engaged.DW.LowAcc.DT.MidHaste = set_combine(sets.engaged.DW.LowAcc.MidHaste, sets.engaged.Hybrid)
+    sets.engaged.DW.MidAcc.DT.MidHaste = set_combine(sets.engaged.DW.MidAcc.MidHaste, sets.engaged.Hybrid)
+    sets.engaged.DW.HighAcc.DT.MidHaste = set_combine(sets.engaged.DW.HighAcc.MidHaste, sets.engaged.Hybrid)    
+    sets.engaged.DW.STP.DT.MidHaste = set_combine(sets.engaged.DW.STP.MidHaste, sets.engaged.Hybrid)
 
-    sets.engaged.DT.MaxHaste = set_combine(sets.engaged.MaxHaste, sets.engaged.Hybrid)
-    sets.engaged.LowAcc.DT.MaxHaste = set_combine(sets.engaged.LowAcc.MaxHaste, sets.engaged.Hybrid)
-    sets.engaged.MidAcc.DT.MaxHaste = set_combine(sets.engaged.MidAcc.MaxHaste, sets.engaged.Hybrid)
-    sets.engaged.HighAcc.DT.MaxHaste = set_combine(sets.engaged.HighAcc.MaxHaste, sets.engaged.Hybrid)    
-    sets.engaged.STP.DT.MaxHaste = set_combine(sets.engaged.STP.MaxHaste, sets.engaged.Hybrid)
+    sets.engaged.DW.DT.HighHaste = set_combine(sets.engaged.DW.HighHaste, sets.engaged.Hybrid)
+    sets.engaged.DW.LowAcc.DT.HighHaste = set_combine(sets.engaged.DW.LowAcc.HighHaste, sets.engaged.Hybrid)
+    sets.engaged.DW.MidAcc.DT.HighHaste = set_combine(sets.engaged.DW.MidAcc.HighHaste, sets.engaged.Hybrid)
+    sets.engaged.DW.HighAcc.DT.HighHaste = set_combine(sets.engaged.DW.HighAcc.HighHaste, sets.engaged.Hybrid)    
+    sets.engaged.DW.STP.DT.HighHaste = set_combine(sets.engaged.DW.HighHaste.STP, sets.engaged.Hybrid)
+
+    sets.engaged.DW.DT.MaxHaste = set_combine(sets.engaged.DW.MaxHaste, sets.engaged.Hybrid)
+    sets.engaged.DW.LowAcc.DT.MaxHaste = set_combine(sets.engaged.DW.LowAcc.MaxHaste, sets.engaged.Hybrid)
+    sets.engaged.DW.MidAcc.DT.MaxHaste = set_combine(sets.engaged.DW.MidAcc.MaxHaste, sets.engaged.Hybrid)
+    sets.engaged.DW.HighAcc.DT.MaxHaste = set_combine(sets.engaged.DW.HighAcc.MaxHaste, sets.engaged.Hybrid)    
+    sets.engaged.DW.STP.DT.MaxHaste = set_combine(sets.engaged.DW.STP.MaxHaste, sets.engaged.Hybrid)
 
 
     ------------------------------------------------------------------------------------------------
@@ -872,9 +955,9 @@ function job_post_precast(spell, action, spellMap, eventArgs)
             equip(sets.precast.CorsairRoll.Gun)
         end
     elseif spell.action_type == 'Ranged Attack' then
-        if state.FlurryMode.value == 'Flurry II' and (buffactive[265] or buffactive[581]) then
+        if flurry == 2 then
             equip(sets.precast.RA.Flurry2)
-        elseif state.FlurryMode.value == 'Flurry I' and (buffactive[265] or buffactive[581]) then
+        elseif flurry == 1 then
             equip(sets.precast.RA.Flurry1)
         end
     -- Equip obi if weather/day matches for WS.
@@ -899,8 +982,10 @@ function job_post_midcast(spell, action, spellMap, eventArgs)
         (spell.english ~= "Light Shot" and spell.english ~= "Dark Shot") then
             equip(sets.Obi)
         end
-        if state.QDMode.value == "Magic Enhance" then
+        if state.QDMode.value == 'Magic Enhance' then
             equip(sets.midcast.CorsairShot.Enhance)
+        elseif state.QDMode.value == 'STP' then
+            equip(sets.midcast.CorsairShot.STP)
         end
     elseif spell.action_type == 'Ranged Attack' and buffactive['Triple Shot'] then
         equip(sets.TripleShot)
@@ -918,10 +1003,25 @@ function job_aftercast(spell, action, spellMap, eventArgs)
 end
 
 function job_buff_change(buff,gain)
-    -- If we gain or lose any haste buffs, adjust which gear set we target.
+    -- If we gain or lose any haste buffs, adjust gear.
     if S{'haste', 'march', 'mighty guard', 'embrava', 'haste samba', 'geo-haste', 'indi-haste'}:contains(buff:lower()) then
         determine_haste_group()
         customize_melee_set()
+        if not gain then
+            haste = nil
+            add_to_chat(122, "Haste status cleared.")
+        end
+        if not midaction() then
+            handle_equipping_gear(player.status)
+        end
+    end
+
+-- If we gain or lose any flurry buffs, adjust gear.
+    if S{'flurry'}:contains(buff:lower()) then
+        if not gain then
+            flurry = nil
+            add_to_chat(122, "Flurry status cleared.")
+        end
         if not midaction() then
             handle_equipping_gear(player.status)
         end
@@ -962,6 +1062,13 @@ end
 -- User code that supplements standard library decisions.
 -------------------------------------------------------------------------------------------------------------------
 
+-- Called by the 'update' self-command, for common needs.
+-- Set eventArgs.handled to true if we don't want automatic equipping of gear.
+function job_update(cmdParams, eventArgs)
+    update_offense_mode()
+    determine_haste_group()
+end
+
 -- Modify the default idle set after it was constructed.
 function customize_idle_set(idleSet)
     if state.Gun.current == 'Holliday' then
@@ -990,14 +1097,6 @@ function customize_melee_set(meleeSet)
     end
 
     return meleeSet
-end
-
-
--- Return a customized weaponskill mode to use for weaponskill sets.
--- Don't return anything if you're not overriding the default value.
-
-function job_update(cmdParams, eventArgs)
-    determine_haste_group()
 end
 
 -- Handle auto-targetting based on local setup.
@@ -1036,18 +1135,16 @@ function display_current_job_state(eventArgs)
         msg = msg .. '[ Kiting Mode: ON ]'
     end
 
-    msg = msg .. '[ ' .. state.HasteMode.value .. ' ][ ' .. state.FlurryMode.value .. ' ]'
-
     msg = msg .. '[ *'..state.Mainqd.current
 
     if state.UseAltqd.value == true then
         msg = msg .. '/'..state.Altqd.current
     end
     
-    msg = msg .. '* '
+    msg = msg .. ' ('
 
-    if state.QDMode.value == 'Magic Enhance' then
-        msg = msg .. '(E)'
+    if state.QDMode.value then
+        msg = msg .. state.QDMode.current .. ') '
     end    
 
     msg = msg .. ']'
@@ -1085,69 +1182,63 @@ end
 -- Utility functions specific to this job.
 -------------------------------------------------------------------------------------------------------------------
 
+--Read incoming packet to determine Haste/Flurry I or II
+windower.raw_register_event("incoming chunk", function(id, data)
+    if id == 0x028 then
+        local packet = p.parse('incoming', data)
+        if packet["Category"] == 4 then
+            if packet["Param"] == 845 then
+                add_to_chat(122, 'Flurry')
+                flurry = 1
+            elseif packet["Param"] == 846 then
+                add_to_chat(122, 'Flurry II')
+                flurry = 2
+            elseif packet["Param"] == 57 then
+                add_to_chat(122, 'Haste')
+                haste = 1
+            elseif packet["Param"] == 511 then
+                add_to_chat(122, 'Haste II')
+                haste = 2
+            end
+        end
+    end
+end)
+
 function determine_haste_group()
 
-    -- Gearswap can't detect the difference between Haste I and Haste II
-    -- so use winkey-H to manually set Haste spell level.
+    -- Assuming the following values:
 
-    -- Haste (buffactive[33]) - 15%
-    -- Haste II (buffactive[33]) - 30%
-    -- Haste Samba - 5~10%
-    -- Honor March - 12~16%
-    -- Victory March - 15~28%
-    -- Advancing March - 10~18%
+    -- Haste - 15%
+    -- Haste II - 30%
+    -- Haste Samba - 5%
+    -- Honor March - 15%
+    -- Victory March - 25%
+    -- Advancing March - 15%
     -- Embrava - 25%
     -- Mighty Guard (buffactive[604]) - 15%
-    -- Geo-Haste (buffactive[580]) - 30~40%
+    -- Geo-Haste (buffactive[580]) - 30%
 
     classes.CustomMeleeGroups:clear()
 
-    if state.HasteMode.value == 'Haste II' then
-        if(((buffactive[33] or buffactive[580] or buffactive.embrava) and (buffactive.march or buffactive[604])) or
-            (buffactive[33] and (buffactive[580] or buffactive.embrava)) or
-            (buffactive.march == 2 and buffactive[604]) or buffactive.march == 3) or buffactive[580] == 2 then
-            --add_to_chat(122, 'Magic Haste Level: 43%')
+    if state.CombatForm.value == 'DW' then
+
+        if(((haste == 2 or buffactive[580] or buffactive.embrava) and (buffactive.march or buffactive[604] or haste == 1)) or
+            (haste == 2 and (buffactive[580] or buffactive.embrava)) or
+            (buffactive.march == 2 and buffactive[604]) or buffactive.march == 3 or buffactive[580] == 2) then
+            add_to_chat(122, 'Magic Haste Level: 43%')
             classes.CustomMeleeGroups:append('MaxHaste')
             state.DualWield:set()
-        elseif ((buffactive[33] or buffactive.march == 2 or buffactive[580]) and buffactive['haste samba']) then
-            --add_to_chat(122, 'Magic Haste Level: 35%')
+        elseif ((haste == 2 or buffactive.march == 2 or buffactive[580]) and buffactive['haste samba']) then
+            add_to_chat(122, 'Magic Haste Level: 35%')
             classes.CustomMeleeGroups:append('HighHaste')
             state.DualWield:set()
-        elseif ((buffactive[580] or buffactive[33] or buffactive.march == 2) or
-            (buffactive.march == 1 and buffactive[604])) then
-            --add_to_chat(122, 'Magic Haste Level: 30%')
+        elseif ((buffactive[580] or haste == 2 or buffactive.march == 2) or
+            (buffactive.march == 1 and buffactive[604]) or (buffactive.march == 1 and haste == 1)) then
+            add_to_chat(122, 'Magic Haste Level: 30%')
             classes.CustomMeleeGroups:append('MidHaste')
             state.DualWield:set()
-        elseif (buffactive.march == 1 or buffactive[604]) then
-            --add_to_chat(122, 'Magic Haste Level: 15%')
-            classes.CustomMeleeGroups:append('LowHaste')
-            state.DualWield:set()
-        else
-            state.DualWield:set(false)
-        end
-    else
-        if (buffactive[580] and ( buffactive.march or buffactive[33] or buffactive.embrava or buffactive[604]) ) or
-            (buffactive.embrava and (buffactive.march or buffactive[33] or buffactive[604])) or
-            (buffactive.march == 2 and (buffactive[33] or buffactive[604])) or
-            (buffactive[33] and buffactive[604] and buffactive.march ) or buffactive.march == 3 or buffactive[580] == 2 then
-            --add_to_chat(122, 'Magic Haste Level: 43%')
-            classes.CustomMeleeGroups:append('MaxHaste')
-            state.DualWield:set()
-        elseif ((buffactive[604] or buffactive[33]) and buffactive['haste samba'] and buffactive.march == 1) or
-            (buffactive.march == 2 and buffactive['haste samba']) or
-            (buffactive[580] and buffactive['haste samba'] ) then
-            --add_to_chat(122, 'Magic Haste Level: 35%')
-            classes.CustomMeleeGroups:append('HighHaste')
-            state.DualWield:set()
-        elseif (buffactive.march == 2 ) or
-            ((buffactive[33] or buffactive[604]) and buffactive.march == 1 ) or  -- MG or haste + 1 march
-            (buffactive[580] ) or  -- geo haste
-            (buffactive[33] and buffactive[604]) then
-            --add_to_chat(122, 'Magic Haste Level: 30%')
-            classes.CustomMeleeGroups:append('MidHaste')
-            state.DualWield:set()
-        elseif buffactive[33] or buffactive[604] or buffactive.march == 1 then
-            --add_to_chat(122, 'Magic Haste Level: 15%')
+        elseif (buffactive.march == 1 or buffactive[604] or haste == 1) then
+            add_to_chat(122, 'Magic Haste Level: 15%')
             classes.CustomMeleeGroups:append('LowHaste')
             state.DualWield:set()
         else
@@ -1158,39 +1249,38 @@ end
 
 function define_roll_values()
     rolls = {
-        ["Corsair's Roll"]   = {lucky=5, unlucky=9, bonus="Experience Points"},
-        ["Ninja Roll"]   ring1= {lucky=4, unlucky=8, bonus="Evasion"},
-        ["Hunter's Roll"]ring1= {lucky=4, unlucky=8, bonus="Accuracy"},
-        ["Chaos Roll"]   ring1= {lucky=4, unlucky=8, bonus="Attack"},
-        ["Magus's Roll"] ring1= {lucky=2, unlucky=6, bonus="Magic Defense"},
-        ["Healer's Roll"]ring1= {lucky=3, unlucky=7, bonus="Cure Potency Received"},
-        ["Drachen Roll"]  ring1= {lucky=4, unlucky=8, bonus="Pet Magic Accuracy/Attack"},
-        ["Choral Roll"]  ring1= {lucky=2, unlucky=6, bonus="Spell Interruption Rate"},
-        ["Monk's Roll"]  ring1= {lucky=3, unlucky=7, bonus="Subtle Blow"},
-        ["Beast Roll"]   ring1= {lucky=4, unlucky=8, bonus="Pet Attack"},
-        ["Samurai Roll"] ring1= {lucky=2, unlucky=6, bonus="Store TP"},
-        ["Evoker's Roll"]ring1= {lucky=5, unlucky=9, bonus="Refresh"},
-        ["Rogue's Roll"] ring1= {lucky=5, unlucky=9, bonus="Critical Hit Rate"},
-        ["Warlock's Roll"]   = {lucky=4, unlucky=8, bonus="Magic Accuracy"},
-        ["Fighter's Roll"]   = {lucky=5, unlucky=9, bonus="Double Attack Rate"},
-        ["Puppet Roll"] ring1= {lucky=3, unlucky=7, bonus="Pet Magic Attack/Accuracy"},
-        ["Gallant's Roll"]   = {lucky=3, unlucky=7, bonus="Defense"},
-        ["Wizard's Roll"]ring1= {lucky=5, unlucky=9, bonus="Magic Attack"},
-        ["Dancer's Roll"]ring1= {lucky=3, unlucky=7, bonus="Regen"},
-        ["Scholar's Roll"]   = {lucky=2, unlucky=6, bonus="Conserve MP"},
-        ["Naturalist's Roll"]   ring1= {lucky=3, unlucky=7, bonus="Enh. Magic Duration"},
-        ["Runeist's Roll"]   ring1= {lucky=4, unlucky=8, bonus="Magic Evasion"},
-        ["Bolter's Roll"]ring1= {lucky=3, unlucky=9, bonus="Movement Speed"},
-        ["Caster's Roll"]ring1= {lucky=2, unlucky=7, bonus="Fast Cast"},
-        ["Courser's Roll"]   = {lucky=3, unlucky=9, bonus="Snapshot"},
-        ["Blitzer's Roll"]   = {lucky=4, unlucky=9, bonus="Attack Delay"},
-        ["Tactician's Roll"] = {lucky=5, unlucky=8, bonus="Regain"},
-        ["Allies' Roll"]ring1= {lucky=3, unlucky=10, bonus="Skillchain Damage"},
-        ["Miser's Roll"] ring1= {lucky=5, unlucky=7, bonus="Save TP"},
-        ["Companion's Roll"] = {lucky=2, unlucky=10, bonus="Pet Regain and Regen"},
-        ["Avenger's Roll"]   = {lucky=4, unlucky=8, bonus="Counter Rate"},
+        ["Corsair's Roll"] =    {lucky=5, unlucky=9, bonus="Experience Points"},
+        ["Ninja Roll"] =        {lucky=4, unlucky=8, bonus="Evasion"},
+        ["Hunter's Roll"] =     {lucky=4, unlucky=8, bonus="Accuracy"},
+        ["Chaos Roll"] =        {lucky=4, unlucky=8, bonus="Attack"},
+        ["Magus's Roll"] =      {lucky=2, unlucky=6, bonus="Magic Defense"},
+        ["Healer's Roll"] =     {lucky=3, unlucky=7, bonus="Cure Potency Received"},
+        ["Drachen Roll"] =      {lucky=4, unlucky=8, bonus="Pet Magic Accuracy/Attack"},
+        ["Choral Roll"] =       {lucky=2, unlucky=6, bonus="Spell Interruption Rate"},
+        ["Monk's Roll"] =       {lucky=3, unlucky=7, bonus="Subtle Blow"},
+        ["Beast Roll"] =        {lucky=4, unlucky=8, bonus="Pet Attack"},
+        ["Samurai Roll"] =      {lucky=2, unlucky=6, bonus="Store TP"},
+        ["Evoker's Roll"] =     {lucky=5, unlucky=9, bonus="Refresh"},
+        ["Rogue's Roll"] =      {lucky=5, unlucky=9, bonus="Critical Hit Rate"},
+        ["Warlock's Roll"] =    {lucky=4, unlucky=8, bonus="Magic Accuracy"},
+        ["Fighter's Roll"] =    {lucky=5, unlucky=9, bonus="Double Attack Rate"},
+        ["Puppet Roll"] =       {lucky=3, unlucky=7, bonus="Pet Magic Attack/Accuracy"},
+        ["Gallant's Roll"] =    {lucky=3, unlucky=7, bonus="Defense"},
+        ["Wizard's Roll"] =     {lucky=5, unlucky=9, bonus="Magic Attack"},
+        ["Dancer's Roll"] =     {lucky=3, unlucky=7, bonus="Regen"},
+        ["Scholar's Roll"] =    {lucky=2, unlucky=6, bonus="Conserve MP"},
+        ["Naturalist's Roll"] = {lucky=3, unlucky=7, bonus="Enh. Magic Duration"},
+        ["Runeist's Roll"] =    {lucky=4, unlucky=8, bonus="Magic Evasion"},
+        ["Bolter's Roll"] =     {lucky=3, unlucky=9, bonus="Movement Speed"},
+        ["Caster's Roll"] =     {lucky=2, unlucky=7, bonus="Fast Cast"},
+        ["Courser's Roll"] =    {lucky=3, unlucky=9, bonus="Snapshot"},
+        ["Blitzer's Roll"] =    {lucky=4, unlucky=9, bonus="Attack Delay"},
+        ["Tactician's Roll"] =  {lucky=5, unlucky=8, bonus="Regain"},
+        ["Allies' Roll"] =      {lucky=3, unlucky=10, bonus="Skillchain Damage"},
+        ["Miser's Roll"] =      {lucky=5, unlucky=7, bonus="Save TP"},
+        ["Companion's Roll"] =  {lucky=2, unlucky=10, bonus="Pet Regain and Regen"},
+        ["Avenger's Roll"] =    {lucky=4, unlucky=8, bonus="Counter Rate"},
     }
-end
 
 function display_roll_info(spell)
     rollinfo = rolls[spell.english]
@@ -1273,15 +1363,23 @@ function do_bullet_checks(spell, spellMap, eventArgs)
     end
 end
 
+function update_offense_mode()  
+    if player.sub_job == 'NIN' or player.sub_job == 'DNC' then
+        state.CombatForm:set('DW')
+    else
+        state.CombatForm:reset()
+    end
+end
+
 -- Select default macro book on initial load or subjob change.
 function select_default_macro_book()
     if player.sub_job == 'DNC' then
-        set_macro_page(1, 2)
+        set_macro_page(1, 7)
     else
-        set_macro_page(1, 2)
+        set_macro_page(1, 7)
     end
 end
 
 function set_lockstyle()
-    send_command('wait 2; input /lockstyleset 2')
+    send_command('wait 2; input /lockstyleset ' .. lockstyleset)
 end

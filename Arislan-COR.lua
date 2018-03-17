@@ -24,6 +24,9 @@
 --              [ CTRL+Numpad* ]    Warcry
 --              [ CTRL+Numpad- ]    Aggressor
 --
+--  Spells:     [ WIN+, ]           Utsusemi: Ichi
+--              [ WIN+. ]           Utsusemi: Ni
+--
 --  Weapons:    [ CTRL+G ]          Cycles between available ranged weapons
 --              [ CTRL+W ]          Toggles Ranged Weapon Lock
 --
@@ -92,7 +95,7 @@ function job_setup()
 
     lockstyleset = 1
 
-    -- Setup Haste Detection
+    -- Setup Haste/Flurry Detection
     haste = nil
     flurry = nil
     p = require('packets')
@@ -111,7 +114,7 @@ function user_setup()
     state.RangedMode:options('STP', 'Normal', 'Acc', 'HighAcc', 'Critical')
     state.WeaponskillMode:options('Normal', 'Acc')
     state.CastingMode:options('Normal', 'Resistant')
-    state.IdleMode:options('Normal', 'DT')
+    state.IdleMode:options('Normal', 'DT', 'Refresh')
 
     state.WeaponLock = M(false, 'Weapon Lock')    
     state.Gun = M{['description']='Current Gun', 'Death Penalty', 'Fomalhaut', 'Ataktos'}--, 'Armageddon'
@@ -194,8 +197,6 @@ function user_unload()
     send_command('unbind ^numpad4')
     send_command('unbind ^numpad6')
     send_command('unbind ^numpad1')
-    send_command('unbind ^numpad2')
-    send_command('unbind ^numpad3')
     send_command('unbind numpad0')
 
     send_command('unbind #`')
@@ -617,6 +618,12 @@ function init_gear_sets()
         ring2="Defending Ring", --10/10
         back="Moonbeam Cape", --5/5
         waist="Flume Belt +1", --4/0
+        })
+
+    sets.idle.Refresh = set_combine(sets.idle, {
+        head="Rawhide Mask",
+        --body="Mekosu. Harness",
+        legs="Rawhide Trousers",
         })
 
     sets.idle.Town = set_combine(sets.idle, {
@@ -1058,7 +1065,7 @@ function job_aftercast(spell, action, spellMap, eventArgs)
 end
 
 function job_buff_change(buff,gain)
-    -- If we gain or lose any haste buffs, adjust which gear set we target.
+    -- If we gain or lose any haste buffs, adjust gear.
     if S{'haste', 'march', 'mighty guard', 'embrava', 'haste samba', 'geo-haste', 'indi-haste'}:contains(buff:lower()) then
         determine_haste_group()
         customize_melee_set()
@@ -1071,7 +1078,7 @@ function job_buff_change(buff,gain)
         end
     end
 
--- If we gain or lose any flurry buffs, adjust which gear set we target.
+-- If we gain or lose any flurry buffs, adjust gear.
     if S{'flurry'}:contains(buff:lower()) then
         if not gain then
             flurry = nil
@@ -1237,7 +1244,7 @@ end
 -- Utility functions specific to this job.
 -------------------------------------------------------------------------------------------------------------------
 
---Read incoming packet to differentiate between Haste I and Haste II, Flurry I and Flurry II
+--Read incoming packet to determine Haste/Flurry I or II
 windower.raw_register_event("incoming chunk", function(id, data)
     if id == 0x028 then
         local packet = p.parse('incoming', data)
