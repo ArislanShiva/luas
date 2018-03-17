@@ -93,7 +93,7 @@ function job_setup()
     
     define_roll_values()
 
-    lockstyleset = 1
+    lockstyleset = 2
 
     -- Setup Haste/Flurry Detection
     haste = nil
@@ -625,18 +625,18 @@ function init_gear_sets()
         waist="Kentarch Belt +1",
         }
 
-    sets.engaged.LowAcc.MaxHaste = set_combine(sets.engaged.MaxHaste, {
+    sets.engaged.LowAcc = set_combine(sets.engaged, {
         waist="Kentarch Belt +1",
         })
 
-    sets.engaged.MidAcc.MaxHaste = set_combine(sets.engaged.LowAcc.MaxHaste, {
+    sets.engaged.MidAcc = set_combine(sets.engaged.LowAcc, {
         legs="Meg. Chausses +2",
         --neck="Combatant's Torque",
         --ear2="Telos Earring",
         --ring2="Ilabrat Ring",
         })
 
-    sets.engaged.HighAcc.MaxHaste = set_combine(sets.engaged.MidAcc.MaxHaste, {
+    sets.engaged.HighAcc = set_combine(sets.engaged.MidAcc, {
         head="Carmine Mask +1",
         legs="Carmine Cuisses +1",
         --ring1="Regal Ring",
@@ -644,7 +644,7 @@ function init_gear_sets()
         --waist="Olseni Belt",
         })
 
-    sets.engaged.STP.MaxHaste = set_combine(sets.engaged.MaxHaste, {
+    sets.engaged.STP = set_combine(sets.engaged, {
         neck="Iskur Gorget",
         ring1="Petrov Ring",
         })
@@ -847,7 +847,7 @@ function init_gear_sets()
         })
 
 
-    sets.LessDualWield = {)--back=gear.COR_TP_Cape}
+    sets.LessDualWield = {}--back=gear.COR_TP_Cape}
 
     ------------------------------------------------------------------------------------------------
     ---------------------------------------- Hybrid Sets -------------------------------------------
@@ -1040,9 +1040,9 @@ function job_buff_change(buff,gain)
         if gain then           
             equip(sets.buff.Doom)
             send_command('@input /p Doomed.')
-            disable('    ','ring2','waist')
+            disable('ring1','ring2','waist')
         else
-            enable('    ','ring2','waist')
+            enable('ring1','ring2','waist')
             handle_equipping_gear(player.status)
         end
     end
@@ -1281,6 +1281,7 @@ function define_roll_values()
         ["Companion's Roll"] =  {lucky=2, unlucky=10, bonus="Pet Regain and Regen"},
         ["Avenger's Roll"] =    {lucky=4, unlucky=8, bonus="Counter Rate"},
     }
+end
 
 function display_roll_info(spell)
     rollinfo = rolls[spell.english]
