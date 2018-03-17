@@ -824,7 +824,8 @@ function job_post_precast(spell, action, spellMap, eventArgs)
                 equip(sets.precast.RA.Flurry2)
             elseif flurry == 1 then
                 equip(sets.precast.RA.Flurry1)
-            end
+                end
+			end
         end
     -- Equip obi if weather/day matches for WS.
     if spell.type == 'WeaponSkill' then
