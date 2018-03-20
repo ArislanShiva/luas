@@ -1,13 +1,32 @@
+-- Original: Motenten / Modified: Arislan
+
 -------------------------------------------------------------------------------------------------------------------
--- (Original: Motenten / Modified: Arislan)
+--  Keybinds
 -------------------------------------------------------------------------------------------------------------------
 
---[[    Custom Features:
-        
-        Magic Burst            Toggle Magic Burst Mode  [Alt-`]
-        Capacity Pts. Mode    Capacity Points Mode Toggle [WinKey-C]
-        Auto. Lockstyle        Automatically locks desired equipset on file load
---]]
+--  Modes:      [ F10 ]             Emergency -PDT Mode
+--              [ ALT+F10 ]         Toggle Kiting Mode
+--              [ F11 ]             Emergency -MDT Mode
+--              [ CTRL+F11 ]        Cycle Casting Modes
+--              [ F12 ]             Update Current Gear / Report Current Status
+--              [ CTRL+F12 ]        Cycle Idle Modes
+--              [ ALT+F12 ]         Cancel Emergency -PDT/-MDT Mode
+--              [ ALT+` ]           Magic Burst Mode Toggle
+--              [ WIN+C ]           Toggle Capacity Points Mode
+--
+--  Abilities:  [ CTRL+` ]          Full Circle
+--              [ CTRL+B ]          Blaze of Glory
+--              [ CTRL+A ]          Ecliptic Attrition
+--              [ CTRL+D ]          Dematerialize
+--              [ CTRL+L ]          Life Cycle
+--
+--  Weapons:    [ CTRL+W ]          Toggles Weapon Lock
+--
+--  WS:         [ CTRL+Numpad0 ]    Myrkr
+--
+--
+--              (Global-Binds.lua contains additional non-job-related keybinds)
+
 
 -------------------------------------------------------------------------------------------------------------------
 -- Setup functions for this job.  Generally should not be modified.
@@ -584,9 +603,9 @@ function job_buff_change(buff, gain)
         if gain then           
             equip(sets.buff.Doom)
             send_command('@input /p Doomed.')
-            disable('    ','ring2','waist')
+             disable('ring1','ring2','waist')
         else
-            enable('    ','ring2','waist')
+            enable('ring1','ring2','waist')
             handle_equipping_gear(player.status)
         end
     end

@@ -1,13 +1,32 @@
+-- Original: Motenten / Modified: Arislan
+
 -------------------------------------------------------------------------------------------------------------------
--- (Original: Motenten / Modified: Arislan)
+--  Keybinds
 -------------------------------------------------------------------------------------------------------------------
 
---[[    Custom Features:
-        
-        Magic Burst            Toggle Magic Burst Mode  [Alt-`]
-        Capacity Pts. Mode    Capacity Points Mode Toggle [WinKey-C]
-        Auto. Lockstyle        Automatically locks desired equipset on file load
---]]
+--  Modes:      [ F10 ]             Emergency -PDT Mode
+--              [ ALT+F10 ]         Toggle Kiting Mode
+--              [ F11 ]             Emergency -MDT Mode
+--              [ CTRL+F11 ]        Cycle Casting Modes
+--              [ F12 ]             Update Current Gear / Report Current Status
+--              [ CTRL+F12 ]        Cycle Idle Modes
+--              [ ALT+F12 ]         Cancel Emergency -PDT/-MDT Mode
+--              [ ALT+` ]           Magic Burst Mode Toggle
+--              [ WIN+C ]           Toggle Capacity Points Mode
+--
+--  Abilities:  [ CTRL+` ]          Full Circle
+--              [ CTRL+B ]          Blaze of Glory
+--              [ CTRL+A ]          Ecliptic Attrition
+--              [ CTRL+D ]          Dematerialize
+--              [ CTRL+L ]          Life Cycle
+--
+--  Weapons:    [ CTRL+W ]          Toggles Weapon Lock
+--
+--  WS:         [ CTRL+Numpad0 ]    Myrkr
+--
+--
+--              (Global-Binds.lua contains additional non-job-related keybinds)
+
 
 -------------------------------------------------------------------------------------------------------------------
 -- Setup functions for this job.  Generally should not be modified.
@@ -27,6 +46,7 @@ function job_setup()
     indi_duration = 180
 
     state.CP = M(false, "Capacity Points Mode")
+    lockstyleset = 10
     
 end
 
@@ -36,7 +56,6 @@ end
 
 -- Setup vars that are user-dependent.  Can override this function in a sidecar file.
 function user_setup()
-    state.OffenseMode:options('Normal', 'Acc')
     state.CastingMode:options('Normal', 'Seidr', 'Resistant')
     state.IdleMode:options('Normal', 'DT')
 
@@ -48,15 +67,13 @@ function user_setup()
     include('Global-GEO-Binds.lua') -- OK to remove this line
 
     send_command('bind ^` input /ja "Full Circle" <me>')
+    send_command('bind ^b input /ja "Blaze of Glory" <me>')
+    send_command('bind ^a input /ja "Ecliptic Attrition" <me>')
+    send_command('bind ^d input /ja "Dematerialize" <me>')
+    send_command('bind ^l input /ja "Life Cycle" <me>')
     send_command('bind !` gs c toggle MagicBurst')
     send_command('bind @c gs c toggle CP')
     send_command('bind @w gs c toggle WeaponLock')
-
-    send_command('bind ^numpad7 input /ws "Black Halo" <t>')
-    send_command('bind ^numpad8 input /ws "Hexa Strike" <t>')
-    send_command('bind ^numpad9 input /ws "Realmrazer" <t>')
-    send_command('bind ^numpad6 input /ws "Exudation" <t>')
-    send_command('bind ^numpad1 input /ws "Flash Nova" <t>')
     
     select_default_macro_book()
     set_lockstyle()
@@ -67,8 +84,13 @@ function user_unload()
     send_command('unbind !`')
     send_command('unbind ^,')
     send_command('unbind !.')
+    send_command('unbind ^b')
+    send_command('unbind ^b')
+    send_command('unbind ^a')
+    send_command('unbind ^d')
+    send_command('unbind ^lk')
     send_command('unbind @c')
-    send_command('unbind @w')
+	send_command('unbind @w')
     send_command('unbind ^numpad7')
     send_command('unbind ^numpad8')
     send_command('unbind ^numpad9')
@@ -637,9 +659,9 @@ function job_buff_change(buff, gain)
         if gain then           
             equip(sets.buff.Doom)
             send_command('@input /p Doomed.')
-            disable('    ','ring2','waist')
+             disable('ring1','ring2','waist')
         else
-            enable('    ','ring2','waist')
+            enable('ring1','ring2','waist')
             handle_equipping_gear(player.status)
         end
     end
@@ -724,5 +746,5 @@ function select_default_macro_book()
 end
 
 function set_lockstyle()
-    send_command('wait 2; input /lockstyleset 10')
+    send_command('wait 2; input /lockstyleset ' .. lockstyleset)
 end

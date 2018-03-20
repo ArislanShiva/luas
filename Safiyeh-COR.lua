@@ -4,9 +4,19 @@
 --  Keybinds
 -------------------------------------------------------------------------------------------------------------------
 
---  Modes:      [ WIN+` ]           Toggles use of Luzaf Ring.
+--  Modes:      [ F9 ]              Cycle Offense Modes
+--              [ CTRL+F9 ]         Cycle Hybrid Modes
+--              [ ALT+F9 ]          Cycle Ranged Modes
+--              [ WIN+F9 ]          Cycle Weapon Skill Modes
+--              [ F10 ]             Emergency -PDT Mode
+--              [ ALT+F10 ]         Toggle Kiting Mode
+--              [ F11 ]             Emergency -MDT Mode
+--              [ F12 ]             Update Current Gear / Report Current Status
+--              [ CTRL+F12 ]        Cycle Idle Modes
+--              [ ALT+F12 ]         Cancel Emergency -PDT/-MDT Mode
+--              [ WIN+C ]           Toggle Capacity Points Mode
+--              [ WIN+` ]           Toggle use of Luzaf Ring.
 --              [ WIN+Q ]           Quick Draw shot mode selector.
---              [ WIN+C ]           Toggles Capacity Points Mode
 --
 --  Abilities:  [ CTRL+- ]          Quick Draw primary shot element cycle forward.
 --              [ CTRL+= ]          Quick Draw primary shot element cycle backward.
@@ -28,7 +38,7 @@
 --              [ WIN+. ]           Utsusemi: Ni
 --
 --  Weapons:    [ CTRL+G ]          Cycles between available ranged weapons
---              [ CTRL+W ]          Toggles Ranged Weapon Lock
+--              [ CTRL+W ]          Toggle Ranged Weapon Lock
 --
 --  WS:         [ CTRL+Numpad7 ]    Savage Blade
 --              [ CTRL+Numpad8 ]    Last Stand
@@ -273,7 +283,7 @@ function init_gear_sets()
         head="Taeon Chapeau", --9/0
         --body="Oshosi Vest", --12/0
         hands="Lanun Gants +1", --9/0
-        legs="Adhemar Kecks", --9/0
+        legs=gear.Adhemar_D_legs, --9/0
         feet="Meg. Jam. +2", --10/0
         back=gear.COR_SNP_Cape, --10/0
         waist="Impulse Belt", --3/0
@@ -333,7 +343,7 @@ function init_gear_sets()
         legs="Herculean Trousers",
         feet="Lanun Bottes +1",
         neck="Baetyl Pendant",
-        ear1="Hecate's Earring",
+        ear1="Novio Earring",
         ear2="Friomisi Earring",
         ring1="Garuda Ring +1",
         ring2="Dingir Ring",
@@ -461,7 +471,7 @@ function init_gear_sets()
         legs="Herculean Trousers",
         feet="Lanun Bottes +1",
         neck="Baetyl Pendant",
-        ear1="Hecate's Earring",
+        ear1="Novio Earring",
         ear2="Friomisi Earring",
         ring1="Garuda Ring +1",
         ring2="Dingir Ring",
@@ -494,7 +504,7 @@ function init_gear_sets()
         head="Meghanada Visor +2",
         body="Mummu Jacket +2",
         hands="Meg. Gloves +2",
-        legs="Adhemar Kecks",
+        legs=gear.Adhemar_C_legs,
         feet="Meg. Jam. +2",
         neck="Iskur Gorget",
         ear1="Enervating Earring",
@@ -1375,9 +1385,9 @@ end
 -- Select default macro book on initial load or subjob change.
 function select_default_macro_book()
     if player.sub_job == 'DNC' then
-        set_macro_page(1, 7)
+        set_macro_page(1, 2)
     else
-        set_macro_page(1, 7)
+        set_macro_page(1, 2)
     end
 end
 

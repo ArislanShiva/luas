@@ -1,14 +1,30 @@
+-- Original: Motenten / Modified: Arislan
+
 -------------------------------------------------------------------------------------------------------------------
--- (Original: Motenten / Modified: Arislan)
+--  Keybinds
 -------------------------------------------------------------------------------------------------------------------
 
---[[    Custom Features:
-        
-        Magic Burst            Toggle Magic Burst Mode  [Alt-`]
-        Death Mode            Casting and Idle modes that maximize MP pool throughout precast/midcast/idle swaps
-        Capacity Pts. Mode    Capacity Points Mode Toggle [WinKey-C]
-        Auto. Lockstyle        Automatically locks desired equipset on file load
---]]
+--  Modes:      [ F10 ]             Emergency -PDT Mode
+--              [ ALT+F10 ]         Toggle Kiting Mode
+--              [ F11 ]             Emergency -MDT Mode
+--              [ CTRL+F11 ]        Cycle Casting Modes
+--              [ F12 ]             Update Current Gear / Report Current Status
+--              [ CTRL+F12 ]        Cycle Idle Modes
+--              [ ALT+F12 ]         Cancel Emergency -PDT/-MDT Mode
+--              [ ALT+` ]           Toggle Magic Burst Mode
+--              [ WIN+D ]           Toggle Death Casting Mode Toggle
+--              [ WIN+C ]           Toggle Capacity Points Mode
+--
+--  Spells:     [ CTRL+` ]          Stun
+--              [ ALT+P ]           Shock Spikes
+--
+--  Weapons:    [ CTRL+W ]          Toggles Weapon Lock
+--
+--  WS:         [ CTRL+Numpad0 ]    Myrkr
+--
+--
+--              (Global-Binds.lua contains additional non-job-related keybinds)
+
 
 -------------------------------------------------------------------------------------------------------------------
 -- Setup functions for this job.  Generally should not be modified.
@@ -27,6 +43,7 @@ end
 function job_setup()
 
     state.CP = M(false, "Capacity Points Mode")
+    lockstyleset = 10
 
 end
 
@@ -36,7 +53,6 @@ end
 
 -- Setup vars that are user-dependent.  Can override this function in a sidecar file.
 function user_setup()
-    state.OffenseMode:options('Normal', 'Acc')
     state.CastingMode:options('Normal', 'Resistant', 'Spaekona', 'Occult')
     state.IdleMode:options('Normal', 'DT')
 
@@ -51,7 +67,7 @@ function user_setup()
     include('Global-Binds.lua') -- OK to remove this line
     include('Global-GEO-Binds.lua') -- OK to remove this line
     
-    send_command('bind ^` input /ma Stun <t>')--;input /p <wstar> #1 Stun <t>, Articgun next. <wstar> <call14>') 
+    send_command('bind ^` input /ma Stun <t>')
     send_command('bind !` gs c toggle MagicBurst')
     send_command('bind !p input /ma "Shock Spikes" <me>')
     send_command('bind @d gs c toggle DeathMode')
@@ -754,9 +770,9 @@ function job_buff_change(buff, gain)
         if gain then           
             equip(sets.buff.Doom)
             send_command('@input /p Doomed.')
-            disable('    ','ring2','waist')
+             disable('ring1','ring2','waist')
         else
-            enable('    ','ring2','waist')
+            enable('ring1','ring2','waist')
             handle_equipping_gear(player.status)
         end
     end
@@ -856,5 +872,5 @@ function select_default_macro_book()
 end
 
 function set_lockstyle()
-    send_command('wait 2; input /lockstyleset 10')
+    send_command('wait 2; input /lockstyleset ' .. lockstyleset)
 end

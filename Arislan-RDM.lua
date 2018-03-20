@@ -1,12 +1,68 @@
+-- Original: Motenten / Modified: Arislan
+
 -------------------------------------------------------------------------------------------------------------------
--- (Original: Motenten / Modified: Arislan)
+--  Keybinds
 -------------------------------------------------------------------------------------------------------------------
 
---[[    Custom Features:
-        
-        Capacity Pts. Mode    Capacity Points Mode Toggle [WinKey-C]
-        Auto. Lockstyle        Automatically locks desired equipset on file load
---]]
+--  Modes:      [ F9 ]              Cycle Offense Mode
+--              [ CTRL+F9 ]         Cycle Hybrid Modes
+--              [ WIN+F9 ]          Cycle Weapon Skill Modes
+--              [ F10 ]             Emergency -PDT Mode
+--              [ ALT+F10 ]         Toggle Kiting Mode
+--              [ F11 ]             Emergency -MDT Mode
+--              [ CTRL+F11 ]        Cycle Casting Modes
+--              [ F12 ]             Update Current Gear / Report Current Status
+--              [ CTRL+F12 ]        Cycle Idle Modes
+--              [ ALT+F12 ]         Cancel Emergency -PDT/-MDT Mode
+--              [ ALT+` ]           Toggle Magic Burst Mode
+--              [ WIN+D ]           Toggle Death Casting Mode Toggle
+--              [ WIN+C ]           Toggle Capacity Points Mode
+--
+--  Abilities:  [ CTRL+` ]          Composure
+--              [ CTRL+- ]          Light Arts/Addendum: White
+--              [ CTRL+= ]          Dark Arts/Addendum: Black
+--              [ CTRL+; ]          Celerity/Alacrity
+--              [ ALT+[ ]           Accesion/Manifestation
+--              [ ALT+; ]           Penury/Parsimony
+--
+--  Spells:     [ CTRL+` ]          Stun
+--              [ ALT+Q ]           Temper
+--              [ ALT+W ]           Flurry II
+--              [ ALT+E ]           Haste II
+--              [ ALT+R ]           Refresh II
+--              [ ALT+Y ]           Phalanx
+--              [ ALT+O ]           Regen II
+--              [ ALT+P ]           Shock Spikes
+--              [ WIN+, ]           Utsusemi: Ichi
+--              [ WIN+. ]           Utsusemi: Ni
+--
+--  Weapons:    [ CTRL+W ]          Toggles Weapon Lock
+--
+--  WS:         [ CTRL+Numpad7 ]    Savage Blade
+--              [ CTRL+Numpad9 ]    Chant Du Cygne
+--              [ CTRL+Numpad4 ]    Requiescat
+--              [ CTRL+Numpad1 ]    Sanguine Blade
+--
+--
+--              (Global-Binds.lua contains additional non-job-related keybinds)
+
+
+-------------------------------------------------------------------------------------------------------------------
+-- Setup functions for this job.  Generally should not be modified.
+-------------------------------------------------------------------------------------------------------------------
+
+--              Addendum Commands:
+--              Shorthand versions for each strategem type that uses the version appropriate for
+--              the current Arts.
+--                                          Light Arts					Dark Arts
+--                                          ----------                  ---------
+--		        gs c scholar light          Light Arts/Addendum
+--              gs c scholar dark                                       Dark Arts/Addendum
+--              gs c scholar cost           Penury                      Parsimony
+--              gs c scholar speed          Celerity                    Alacrity
+--              gs c scholar aoe            Accession                   Manifestation
+--              gs c scholar addendum       Addendum: White             Addendum: Black
+
 
 -------------------------------------------------------------------------------------------------------------------
 -- Setup functions for this job.  Generally should not be modified.
@@ -36,9 +92,12 @@ function job_setup()
         'Temper', 'Temper II', 'Enfire', 'Enfire II', 'Enblizzard', 'Enblizzard II', 'Enaero', 'Enaero II',
         'Enstone', 'Enstone II', 'Enthunder', 'Enthunder II', 'Enwater', 'Enwater II'}
 
+    lockstyleset = 14
+
     -- Setup Haste Detection
     haste = nil
     p = require('packets')
+    update_offense_mode()    
     determine_haste_group()
 end
 
@@ -65,13 +124,17 @@ function user_setup()
 
     send_command('bind ^` input /ja Composure <me>')
     send_command('bind !` gs c toggle MagicBurst')
-    send_command('bind ^- gs c scholar light')
-    send_command('bind ^= gs c scholar dark')
-    send_command('bind !- gs c scholar addendum')
-    send_command('bind != gs c scholar addendum')
-    send_command('bind ^; gs c scholar speed')
-    send_command('bind ![ gs c scholar aoe')
-    send_command('bind !; gs c scholar cost')
+
+    if player.sub_job == 'SCH' then
+        send_command('bind ^- gs c scholar light')
+        send_command('bind ^= gs c scholar dark')
+        send_command('bind !- gs c scholar addendum')
+        send_command('bind != gs c scholar addendum')
+        send_command('bind ^; gs c scholar speed')
+        send_command('bind ![ gs c scholar aoe')
+        send_command('bind !; gs c scholar cost')
+    end
+
     send_command('bind !q input /ma "Temper II" <me>')
     send_command('bind !w input /ma "Flurry II" <stpc>')
     send_command('bind !e input /ma "Haste II" <stpc>')
@@ -87,8 +150,9 @@ function user_setup()
     send_command('bind ^numpad9 input /ws "Chant du Cygne" <t>')
     send_command('bind ^numpad4 input /ws "Requiescat" <t>')
     send_command('bind ^numpad1 input /ws "Sanguine Blade" <t>')
+    send_command('bind ^numpad2 input /ws "Red Lotus Blade" <t>')
+    send_command('bind ^numpad3 input /ws "Flat Blade" <t>')
 
-    update_offense_mode()    
     select_default_macro_book()
     set_lockstyle()
 end
@@ -117,6 +181,8 @@ function user_unload()
     send_command('unbind ^numpad9')
     send_command('unbind ^numpad4')
     send_command('unbind ^numpad1')
+    send_command('unbind ^numpad2')
+    send_command('unbind ^numpad3')
 
     send_command('unbind #`')
     send_command('unbind #1')
@@ -701,8 +767,6 @@ function init_gear_sets()
         waist="Olseni Belt",
         })
 
-    -- * DW3: +25% (NIN Subjob)
-
     -- No Magic Haste (74% DW to cap)
     sets.engaged.DW = {
         main="Sequence",
@@ -856,33 +920,36 @@ function init_gear_sets()
     ------------------------------------------------------------------------------------------------
     ---------------------------------------- Hybrid Sets -------------------------------------------
     ------------------------------------------------------------------------------------------------
---[[
+
     sets.engaged.Hybrid = {
-        ammo="Staunch Tathlum", --2/2
         neck="Loricate Torque +1", --6/6
         ring2="Defending Ring", --10/10
         }
-
+    
     sets.engaged.DT = set_combine(sets.engaged, sets.engaged.Hybrid)
     sets.engaged.MidAcc.DT = set_combine(sets.engaged.MidAcc, sets.engaged.Hybrid)
     sets.engaged.HighAcc.DT = set_combine(sets.engaged.HighAcc, sets.engaged.Hybrid)
 
+    sets.engaged.DW.DT = set_combine(sets.engaged.DW, sets.engaged.Hybrid)
+    sets.engaged.DW.MidAcc.DT = set_combine(sets.engaged.DW.MidAcc, sets.engaged.Hybrid)
+    sets.engaged.DW.HighAcc.DT = set_combine(sets.engaged.DW.HighAcc, sets.engaged.Hybrid)
+
     sets.engaged.DW.DT.LowHaste = set_combine(sets.engaged.DW.LowHaste, sets.engaged.Hybrid)
     sets.engaged.DW.MidAcc.DT.LowHaste = set_combine(sets.engaged.DW.MidAcc.LowHaste, sets.engaged.Hybrid)
-    sets.engaged.DW.HighAcc.DT.LowHaste = set_combine(sets.engaged.DW.HighAcc.LowHaste, sets.engaged.Hybrid)
+    sets.engaged.DW.HighAcc.DT.LowHaste = set_combine(sets.engaged.DW.HighAcc.LowHaste, sets.engaged.Hybrid)    
 
     sets.engaged.DW.DT.MidHaste = set_combine(sets.engaged.DW.MidHaste, sets.engaged.Hybrid)
     sets.engaged.DW.MidAcc.DT.MidHaste = set_combine(sets.engaged.DW.MidAcc.MidHaste, sets.engaged.Hybrid)
-    sets.engaged.DW.HighAcc.DT.MidHaste = set_combine(sets.engaged.DW.HighAcc.MidHaste, sets.engaged.Hybrid)
+    sets.engaged.DW.HighAcc.DT.MidHaste = set_combine(sets.engaged.DW.HighAcc.MidHaste, sets.engaged.Hybrid)    
 
     sets.engaged.DW.DT.HighHaste = set_combine(sets.engaged.DW.HighHaste, sets.engaged.Hybrid)
     sets.engaged.DW.MidAcc.DT.HighHaste = set_combine(sets.engaged.DW.MidAcc.HighHaste, sets.engaged.Hybrid)
-    sets.engaged.DW.HighAcc.DT.HighHaste = set_combine(sets.engaged.DW.HighAcc.HighHaste, sets.engaged.Hybrid)
+    sets.engaged.DW.HighAcc.DT.HighHaste = set_combine(sets.engaged.DW.HighAcc.HighHaste, sets.engaged.Hybrid)    
 
     sets.engaged.DW.DT.MaxHaste = set_combine(sets.engaged.DW.MaxHaste, sets.engaged.Hybrid)
     sets.engaged.DW.MidAcc.DT.MaxHaste = set_combine(sets.engaged.DW.MidAcc.MaxHaste, sets.engaged.Hybrid)
-    sets.engaged.DW.HighAcc.DT.MaxHaste = set_combine(sets.engaged.DW.HighAcc.MaxHaste, sets.engaged.Hybrid)
-]]--
+    sets.engaged.DW.HighAcc.DT.MaxHaste = set_combine(sets.engaged.DW.HighAcc.MaxHaste, sets.engaged.Hybrid)    
+
 
     ------------------------------------------------------------------------------------------------
     ---------------------------------------- Special Sets ------------------------------------------
@@ -997,7 +1064,7 @@ end
 
 function job_buff_change(buff,gain)
     -- If we gain or lose any haste buffs, adjust which gear set we target.
-    if S{'haste', 'march', 'mighty guard', 'embrava', 'haste samba', 'geo-haste', 'indi-haste'}:contains(buff:lower()) then
+    if S{'haste', 'march', 'mighty guard', 'embrava', 'haste samba', 'geo-haste', 'indi-haste'}:contains(buff:lower()) then		
         determine_haste_group()
         if not gain then
             haste = nil
@@ -1012,9 +1079,9 @@ function job_buff_change(buff,gain)
         if gain then           
             equip(sets.buff.Doom)
             send_command('@input /p Doomed.')
-            disable('    ','ring2','waist')
+             disable('ring1','ring2','waist')
         else
-            enable('    ','ring2','waist')
+            enable('ring1','ring2','waist')
             handle_equipping_gear(player.status)
         end
     end
@@ -1085,6 +1152,7 @@ end
 -- Set eventArgs.handled to true if we don't want automatic equipping of gear.
 function job_update(cmdParams, eventArgs)
     update_offense_mode()
+    determine_haste_group()
 end
 
 -- Modify the default idle set after it was constructed.
@@ -1099,11 +1167,6 @@ function customize_idle_set(idleSet)
     end
     
     return idleSet
-end
-
--- Called by the 'update' self-command.
-function job_update(cmdParams, eventArgs)
-    determine_haste_group()
 end
 
 -- Set eventArgs.handled to true if we don't want the automatic display to be run.
@@ -1275,5 +1338,5 @@ function select_default_macro_book()
 end
 
 function set_lockstyle()
-    send_command('wait 2; input /lockstyleset 14')
+    send_command('wait 2; input /lockstyleset ' .. lockstyleset)
 end

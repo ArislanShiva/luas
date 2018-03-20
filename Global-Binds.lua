@@ -15,7 +15,8 @@
 --              [ ALT+Numpad0 ]     Sacrifice
 --              [ ALT+Numpad. ]     Esuna
 --
---  Items:      [ WIN+Numpad7 ]     Remedy
+--  Items:      [ WIN+Numpad/ ]     Soldier's Drink
+--              [ WIN+Numpad7 ]     Remedy
 --              [ WIN+Numpad8 ]     Echo Drops
 --              [ WIN+Numpad9 ]     Eye Drops
 --              [ WIN+Numpad4 ]     Antidote
@@ -57,6 +58,7 @@
     send_command('bind !numpad. input /ma "Esuna" <me>')
 
     -- Default Item HotKeys
+    send_command('bind @numpad7 input /item "Soldier\'s Drink" <me>')
     send_command('bind @numpad7 input /item "Remedy" <me>')
     send_command('bind @numpad8 input /item "Echo Drops" <me>')
     send_command('bind @numpad9 input /item "Eye Drops" <me>')

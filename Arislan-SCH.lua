@@ -1,37 +1,61 @@
--------------------------------------------------------------------------------------------------------------------
--- (Original: Motenten / Modified: Arislan)
--------------------------------------------------------------------------------------------------------------------
-
---[[    Custom Features:
-        
-        Magic Burst            Toggle Magic Burst Mode  [Alt-`]
-        Helix Mode            Toggle between Lugh's Cape for potency and Bookworm's Cape for duration [WinKey-H]
-        Stormsurge Mode        Toggle to activate Peda. Loafers +1 bonus for storm spells.
-        Capacity Pts. Mode    Capacity Points Mode Toggle [WinKey-C]
-        Auto. Lockstyle        Automatically locks desired equipset on file load
-
+-- Original: Motenten / Modified: Arislan
 
 -------------------------------------------------------------------------------------------------------------------
+--  Keybinds
+-------------------------------------------------------------------------------------------------------------------
 
-        Addendum Commands:
+--  Modes:      [ F10 ]             Emergency -PDT Mode
+--              [ ALT+F10 ]         Toggle Kiting Mode
+--              [ F11 ]             Emergency -MDT Mode
+--              [ CTRL+F11 ]        Cycle Casting Modes
+--              [ F12 ]             Update Current Gear / Report Current Status
+--              [ CTRL+F12 ]        Cycle Idle Modes
+--              [ ALT+F12 ]         Cancel Emergency -PDT/-MDT Mode
+--              [ ALT+` ]           Toggle Magic Burst Mode
+--              [ WIN+C ]           Toggle Capacity Points Mode
+--              [ WIN+H ]           Cycle Helix Mode
+--              [ WIN+R ]           Cycle Regen Mode
+--              [ WIN+S ]           Toggle Storm Surge 
+--
+--  Abilities:  [ CTRL+` ]          Immanence
+--              [ CTRL+- ]          Light Arts/Addendum: White
+--              [ CTRL+= ]          Dark Arts/Addendum: Black
+--              [ CTRL+[ ]          Rapture/Ebullience
+--              [ CTRL+] ]          Altruism/Focalization
+--              [ CTRL+; ]          Celerity/Alacrity
+--              [ ALT+[ ]           Accesion/Manifestation
+--              [ ALT+] ]           Perpetuance
+--              [ ALT+; ]           Penury/Parsimony
+--
+--  Weapons:    [ CTRL+W ]          Toggles Weapon Lock
+--
+--  WS:         [ CTRL+Numpad0 ]    Myrkr
+--
+--
+--              (Global-Binds.lua contains additional non-job-related keybinds)
 
-        Shorthand versions for each strategem type that uses the version appropriate for
-        the current Arts.
 
-                                        Light Arts                Dark Arts
+-------------------------------------------------------------------------------------------------------------------
+-- Setup functions for this job.  Generally should not be modified.
+-------------------------------------------------------------------------------------------------------------------
 
-        gs c scholar light                  Light Arts/Addendum
-        gs c scholar dark                                        Dark Arts/Addendum
-        gs c scholar cost                   Penury                      Parsimony
-        gs c scholar speed                  Celerity                Alacrity
-        gs c scholar aoe                Accession                   Manifestation
-        gs c scholar power                  Rapture                     Ebullience
-        gs c scholar duration               Perpetuance
-        gs c scholar accuracy               Altruism                Focalization
-        gs c scholar enmity                 Tranquility                 Equanimity
-        gs c scholar skillchain                                     Immanence
-        gs c scholar addendum            Addendum: White             Addendum: Black
---]]
+--              Addendum Commands:
+--              Shorthand versions for each strategem type that uses the version appropriate for
+--              the current Arts.
+--                                          Light Arts					Dark Arts
+--                                          ----------                  ---------
+--		        gs c scholar light          Light Arts/Addendum
+--              gs c scholar dark                                       Dark Arts/Addendum
+--              gs c scholar cost           Penury                      Parsimony
+--              gs c scholar speed          Celerity                    Alacrity
+--              gs c scholar aoe            Accession                   Manifestation
+--              gs c scholar power          Rapture                     Ebullience
+--              gs c scholar duration       Perpetuance
+--              gs c scholar accuracy       Altruism                    Focalization
+--              gs c scholar enmity         Tranquility                 Equanimity
+--              gs c scholar skillchain                                 Immanence
+--              gs c scholar addendum       Addendum: White             Addendum: Black
+
 
 -------------------------------------------------------------------------------------------------------------------
 -- Setup functions for this job.  Generally should not be modified.
@@ -56,6 +80,9 @@ function job_setup()
     state.CP = M(false, "Capacity Points Mode")
 
     update_active_strategems()
+
+    lockstyleset = 10
+
 end
 
 -------------------------------------------------------------------------------------------------------------------
@@ -80,8 +107,6 @@ function user_setup()
     send_command('bind !` gs c toggle MagicBurst')
     send_command('bind ^- gs c scholar light')
     send_command('bind ^= gs c scholar dark')
-    send_command('bind !- gs c scholar addendum')
-    send_command('bind != gs c scholar addendum')
     send_command('bind ^[ gs c scholar power')
     send_command('bind ^] gs c scholar accuracy')
     send_command('bind ^; gs c scholar speed')
@@ -110,8 +135,6 @@ function user_unload()
     send_command('unbind !`')
     send_command('unbind ^-')
     send_command('unbind ^=')
-    send_command('unbind !-')
-    send_command('unbind !=')
     send_command('unbind ^[')
     send_command('unbind ^]')
     send_command('unbind ^;')
@@ -742,9 +765,9 @@ function job_buff_change(buff, gain)
         if gain then           
             equip(sets.buff.Doom)
             send_command('@input /p Doomed.')
-            disable('    ','ring2','waist')
+             disable('ring1','ring2','waist')
         else
-            enable('    ','ring2','waist')
+            enable('ring1','ring2','waist')
             handle_equipping_gear(player.status)
         end
     end
@@ -980,5 +1003,5 @@ function select_default_macro_book()
 end
 
 function set_lockstyle()
-    send_command('wait 2; input /lockstyleset 10')
+    send_command('wait 2; input /lockstyleset ' .. lockstyleset)
 end

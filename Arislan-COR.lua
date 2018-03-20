@@ -4,9 +4,19 @@
 --  Keybinds
 -------------------------------------------------------------------------------------------------------------------
 
---  Modes:      [ WIN+` ]           Toggles use of Luzaf Ring.
+--  Modes:      [ F9 ]              Cycle Offense Modes
+--              [ CTRL+F9 ]         Cycle Hybrid Modes
+--              [ ALT+F9 ]          Cycle Ranged Modes
+--              [ WIN+F9 ]          Cycle Weapon Skill Modes
+--              [ F10 ]             Emergency -PDT Mode
+--              [ ALT+F10 ]         Toggle Kiting Mode
+--              [ F11 ]             Emergency -MDT Mode
+--              [ F12 ]             Update Current Gear / Report Current Status
+--              [ CTRL+F12 ]        Cycle Idle Modes
+--              [ ALT+F12 ]         Cancel Emergency -PDT/-MDT Mode
+--              [ WIN+C ]           Toggle Capacity Points Mode
+--              [ WIN+` ]           Toggle use of Luzaf Ring.
 --              [ WIN+Q ]           Quick Draw shot mode selector.
---              [ WIN+C ]           Toggles Capacity Points Mode
 --
 --  Abilities:  [ CTRL+- ]          Quick Draw primary shot element cycle forward.
 --              [ CTRL+= ]          Quick Draw primary shot element cycle backward.
@@ -28,7 +38,7 @@
 --              [ WIN+. ]           Utsusemi: Ni
 --
 --  Weapons:    [ CTRL+G ]          Cycles between available ranged weapons
---              [ CTRL+W ]          Toggles Ranged Weapon Lock
+--              [ CTRL+W ]          Toggle Ranged Weapon Lock
 --
 --  WS:         [ CTRL+Numpad7 ]    Savage Blade
 --              [ CTRL+Numpad8 ]    Last Stand
@@ -220,7 +230,7 @@ function init_gear_sets()
     ------------------------------------------------------------------------------------------------
 
     sets.precast.JA['Snake Eye'] = {legs="Lanun Trews +1"}
-    sets.precast.JA['Wild Card'] = {feet="Lanun Bottes +2"}
+    sets.precast.JA['Wild Card'] = {feet="Lanun Bottes +3"}
     sets.precast.JA['Random Deal'] = {body="Lanun Frac +1"}
 
     sets.precast.CorsairRoll = {
@@ -612,7 +622,7 @@ function init_gear_sets()
         head="Meghanada Visor +2", --5/0
         body="Meg. Cuirie +2", --8/0
         hands=gear.Herc_DT_hands, --7/5
-        feet="Lanun Bottes +2", --5/0
+        feet="Lanun Bottes +3", --6/0
         neck="Loricate Torque +1", --6/6
         ear2="Etiolation Earring", --0/3
         ring2="Defending Ring", --10/10
