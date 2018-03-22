@@ -105,10 +105,6 @@ function job_setup()
 
     lockstyleset = 1
 
-    -- Setup Haste/Flurry Detection
-    haste = nil
-    flurry = nil
-    p = require('packets')
     update_offense_mode()    
     determine_haste_group()
 end
@@ -631,7 +627,7 @@ function init_gear_sets()
         })
 
     sets.idle.Refresh = set_combine(sets.idle, {
-        head="Rawhide Mask",
+        head=gear.Herc_Idle_head,
         --body="Mekosu. Harness",
         legs="Rawhide Trousers",
         })
@@ -1254,27 +1250,52 @@ end
 -- Utility functions specific to this job.
 -------------------------------------------------------------------------------------------------------------------
 
---Read incoming packet to determine Haste/Flurry I or II
-windower.raw_register_event("incoming chunk", function(id, data)
-    if id == 0x028 then
-        local packet = p.parse('incoming', data)
-        if packet["Category"] == 4 then
-            if packet["Param"] == 845 then
-                add_to_chat(122, 'Flurry')
-                flurry = 1
-            elseif packet["Param"] == 846 then
-                add_to_chat(122, 'Flurry II')
-                flurry = 2
-            elseif packet["Param"] == 57 then
-                add_to_chat(122, 'Haste')
-                haste = 1
-            elseif packet["Param"] == 511 then
-                add_to_chat(122, 'Haste II')
-                haste = 2
+--Read incoming packet to differentiate between Haste I and Haste II
+windower.register_event('action', 
+    function(act)
+        --check if you are a target of spell
+        local actionTargets = act.targets
+        playerId = windower.ffxi.get_player().id
+        isTarget = false
+        for _, target in ipairs(actionTargets) do
+            if playerId == target.id then
+                isTarget = true
             end
         end
-    end
-end)
+        if isTarget == true then
+            if act.category == 4 then
+                local param = act.param
+                if param == 845 then
+                    add_to_chat(122, 'Flurry Status: Flurry I')
+                    flurry = 1
+                elseif param == 846 then
+                    add_to_chat(122, 'Flurry Status: Flurry II')
+                    flurry = 2				
+                elseif param == 57 then
+                    add_to_chat(122, 'Haste Status: Haste I (Haste)')
+                    haste = 1
+                elseif param == 511 then
+                    add_to_chat(122, 'Haste Status: Haste II (Haste II)')
+                    haste = 2
+                end
+            elseif act.category == 5 then
+                if act.param == 5389 then
+                    add_to_chat(122, 'Haste Status: Haste II (Spy Drink)')
+                    haste = 2
+                end
+            elseif act.category == 13 then
+                local param = act.param
+                --595 haste 1 -602 hastega 2
+                if param == 595 then 
+                    add_to_chat(122, 'Haste Status: Haste I (Hastega)')
+                    haste = 1
+                elseif param == 602 then
+                    add_to_chat(122, 'Haste Status: Haste II (Hastega2)')
+                    haste = 2
+                end
+            end
+        end
+    end)
 
 function determine_haste_group()
 

@@ -15,7 +15,6 @@
 --              [ CTRL+F12 ]        Cycle Idle Modes
 --              [ ALT+F12 ]         Cancel Emergency -PDT/-MDT Mode
 --              [ ALT+` ]           Toggle Magic Burst Mode
---              [ WIN+D ]           Toggle Death Casting Mode Toggle
 --              [ WIN+C ]           Toggle Capacity Points Mode
 --
 --  Abilities:  [ CTRL+` ]          Composure
@@ -94,10 +93,6 @@ function job_setup()
 
     lockstyleset = 14
 
-    -- Setup Haste Detection
-    haste = nil
-    p = require('packets')
-    update_offense_mode()    
     determine_haste_group()
 end
 
@@ -1214,20 +1209,44 @@ end
 -------------------------------------------------------------------------------------------------------------------
 
 --Read incoming packet to differentiate between Haste I and Haste II
-windower.raw_register_event("incoming chunk", function(id, data)
-    if id == 0x028 then
-        local packet = p.parse('incoming', data)
-        if packet["Category"] == 4 then
-            if packet["Param"] == 57 then
-                add_to_chat(122, 'Haste')
-                haste = 1
-            elseif packet["Param"] == 511 then
-                add_to_chat(122, 'Haste2')
-                haste = 2
+windower.register_event('action', 
+    function(act)
+        --check if you are a target of spell
+        local actionTargets = act.targets
+        playerId = windower.ffxi.get_player().id
+        isTarget = false
+        for _, target in ipairs(actionTargets) do
+            if playerId == target.id then
+                isTarget = true
             end
         end
-    end
-end)
+        if isTarget == true then
+            if act.category == 4 then
+                local param = act.param
+                if param == 57 then
+                    add_to_chat(122, 'Haste Status: Haste I (Haste)')
+                    haste = 1
+                elseif param == 511 then
+                    add_to_chat(122, 'Haste Status: Haste II (Haste II)')
+                    haste = 2
+                end
+            elseif act.category == 5 then
+                if act.param == 5389 then
+                    add_to_chat(122, 'Haste Status: Haste II (Spy Drink)')
+                    haste = 2
+                end
+            elseif act.category == 13 then
+                local param = act.param
+                if param == 595 then 
+                    add_to_chat(122, 'Haste Status: Haste I (Hastega)')
+                    haste = 1
+                elseif param == 602 then
+                    add_to_chat(122, 'Haste Status: Haste II (Hastega2)')
+                    haste = 2
+                end
+            end
+        end
+    end)
 
 function determine_haste_group()
 
