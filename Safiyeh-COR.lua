@@ -105,10 +105,6 @@ function job_setup()
 
     lockstyleset = 2
 
-    -- Setup Haste/Flurry Detection
-    haste = nil
-    flurry = nil
-    p = require('packets')
     update_offense_mode()    
     determine_haste_group()
 end
@@ -127,7 +123,7 @@ function user_setup()
     state.IdleMode:options('Normal', 'DT', 'Refresh')
 
     state.WeaponLock = M(false, 'Weapon Lock')    
-    state.Gun = M{['description']='Current Gun', 'Holliday'}
+    state.Gun = M{['description']='Current Gun', 'Compensator', 'Holliday'}
     state.CP = M(false, "Capacity Points Mode")
 
     gear.RAbullet = "Eminent Bullet"
@@ -267,7 +263,7 @@ function init_gear_sets()
         neck="Baetyl Pendant", --4
         ear1="Loquacious Earring", --2
         ear2="Etiolation Earring", --1
-        ring1="Weather. Ring", --5(3)
+        ring1="Weather. Ring +1", --6(4)
         ring2="Kishar Ring", --4
         }
 
@@ -489,7 +485,7 @@ function init_gear_sets()
         ear1="Gwati Earring",
         ear2="Digni. Earring",
         ring1="Stikini Ring",
-        ring2="Weather. Ring",
+        ring2="Weather. Ring +1",
         --waist="Kwahu Kachina Belt",
         })
 
@@ -1019,7 +1015,7 @@ function job_buff_change(buff,gain)
         customize_melee_set()
         if not gain then
             haste = nil
-            add_to_chat(122, "Haste status cleared.")
+            --add_to_chat(122, "Haste Status: Cleared")
         end
         if not midaction() then
             handle_equipping_gear(player.status)
@@ -1081,7 +1077,9 @@ end
 
 -- Modify the default idle set after it was constructed.
 function customize_idle_set(idleSet)
-    if state.Gun.current == 'Holliday' then
+    if state.Gun.current == 'Compensator' then
+        equip({ranged="Compensator"})
+    elseif state.Gun.current == 'Holliday' then
         equip({ranged="Holliday"})
 --    elseif state.Gun.current == 'Fomalhaut' then
 --        equip({ranged="Fomalhaut"})
@@ -1192,27 +1190,52 @@ end
 -- Utility functions specific to this job.
 -------------------------------------------------------------------------------------------------------------------
 
---Read incoming packet to determine Haste/Flurry I or II
-windower.raw_register_event("incoming chunk", function(id, data)
-    if id == 0x028 then
-        local packet = p.parse('incoming', data)
-        if packet["Category"] == 4 then
-            if packet["Param"] == 845 then
-                add_to_chat(122, 'Flurry')
-                flurry = 1
-            elseif packet["Param"] == 846 then
-                add_to_chat(122, 'Flurry II')
-                flurry = 2
-            elseif packet["Param"] == 57 then
-                add_to_chat(122, 'Haste')
-                haste = 1
-            elseif packet["Param"] == 511 then
-                add_to_chat(122, 'Haste II')
-                haste = 2
+--Read incoming packet to differentiate between Haste/Flurry I and II
+windower.register_event('action', 
+    function(act)
+        --check if you are a target of spell
+        local actionTargets = act.targets
+        playerId = windower.ffxi.get_player().id
+        isTarget = false
+        for _, target in ipairs(actionTargets) do
+            if playerId == target.id then
+                isTarget = true
             end
         end
-    end
-end)
+        if isTarget == true then
+            if act.category == 4 then
+                local param = act.param
+                if param == 845 then
+                    --add_to_chat(122, 'Flurry Status: Flurry I')
+                    flurry = 1
+                elseif param == 846 then
+                    --add_to_chat(122, 'Flurry Status: Flurry II')
+                    flurry = 2				
+                elseif param == 57 then
+                    --add_to_chat(122, 'Haste Status: Haste I (Haste)')
+                    haste = 1
+                elseif param == 511 then
+                    --add_to_chat(122, 'Haste Status: Haste II (Haste II)')
+                    haste = 2
+                end
+            elseif act.category == 5 then
+                if act.param == 5389 then
+                    --add_to_chat(122, 'Haste Status: Haste II (Spy Drink)')
+                    haste = 2
+                end
+            elseif act.category == 13 then
+                local param = act.param
+                --595 haste 1 -602 hastega 2
+                if param == 595 then 
+                    --add_to_chat(122, 'Haste Status: Haste I (Hastega)')
+                    haste = 1
+                elseif param == 602 then
+                    --add_to_chat(122, 'Haste Status: Haste II (Hastega2)')
+                    haste = 2
+                end
+            end
+        end
+    end)
 
 function determine_haste_group()
 
@@ -1235,20 +1258,20 @@ function determine_haste_group()
         if(((haste == 2 or buffactive[580] or buffactive.embrava) and (buffactive.march or buffactive[604] or haste == 1)) or
             (haste == 2 and (buffactive[580] or buffactive.embrava)) or
             (buffactive.march == 2 and buffactive[604]) or buffactive.march == 3 or buffactive[580] == 2) then
-            add_to_chat(122, 'Magic Haste Level: 43%')
+            --add_to_chat(122, 'Magic Haste Level: 43%')
             classes.CustomMeleeGroups:append('MaxHaste')
             state.DualWield:set()
         elseif ((haste == 2 or buffactive.march == 2 or buffactive[580]) and buffactive['haste samba']) then
-            add_to_chat(122, 'Magic Haste Level: 35%')
+            --add_to_chat(122, 'Magic Haste Level: 35%')
             classes.CustomMeleeGroups:append('HighHaste')
             state.DualWield:set()
         elseif ((buffactive[580] or haste == 2 or buffactive.march == 2) or
             (buffactive.march == 1 and buffactive[604]) or (buffactive.march == 1 and haste == 1)) then
-            add_to_chat(122, 'Magic Haste Level: 30%')
+            --add_to_chat(122, 'Magic Haste Level: 30%')
             classes.CustomMeleeGroups:append('MidHaste')
             state.DualWield:set()
         elseif (buffactive.march == 1 or buffactive[604] or haste == 1) then
-            add_to_chat(122, 'Magic Haste Level: 15%')
+            --add_to_chat(122, 'Magic Haste Level: 15%')
             classes.CustomMeleeGroups:append('LowHaste')
             state.DualWield:set()
         else

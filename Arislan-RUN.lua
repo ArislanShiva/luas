@@ -1,17 +1,59 @@
+-- Original: Motenten / Modified: Arislan
+
 -------------------------------------------------------------------------------------------------------------------
--- (Original: Motenten / Modified: Arislan)
+--  Keybinds
 -------------------------------------------------------------------------------------------------------------------
 
---[[    Custom Features:
+--  Modes:      [ F9 ]              Cycle Offense Modes
+--              [ CTRL+F9 ]         Cycle Hybrid Modes
+--              [ WIN+F9 ]          Cycle Weapon Skill Modes
+--              [ F10 ]             Emergency -PDT Mode
+--              [ ALT+F10 ]         Toggle Kiting Mode
+--              [ F11 ]             Emergency -MDT Mode
+--              [ F12 ]             Update Current Gear / Report Current Status
+--              [ CTRL+F12 ]        Cycle Idle Modes
+--              [ ALT+F12 ]         Cancel Emergency -PDT/-MDT Mode
+--              [ WIN+H ]           Toggle Charm Defense Mods
+--              [ WIN+D ]           Toggle Death Defense Mods
+--              [ WIN+K ]           Toggle Knockback Defense Mods
+--              [ WIN+C ]           Toggle Capacity Points Mode
+--
+--  Abilities:  [ CTRL+` ]          Use current Rune
+--              [ CTRL+- ]          Rune element cycle forward.
+--              [ CTRL+= ]          Rune element cycle backward.
+--              [ CTRL+` ]          Use current Rune
+--
+--              [ CTRL+Numpad/ ]    Berserk/Meditate/Souleater
+--              [ CTRL+Numpad* ]    Warcry/Sekkanoki/Arcane Circle
+--              [ CTRL+Numpad- ]    Aggressor/Third Eye/Weapon Bash
+--
+--  Spells:     [ WIN+, ]           Utsusemi: Ichi
+--              [ WIN+. ]           Utsusemi: Ni
+--
+--  Weapons:    [ CTRL+G ]          Cycles between available greatswords
+--              [ CTRL+W ]          Toggle Weapon Lock
+--
+--  WS:         [ CTRL+Numpad7 ]    Resolution
+--              [ CTRL+Numpad8 ]    Upheaval
+--              [ CTRL+Numpad9 ]    Dimidiation
+--              [ CTRL+Numpad5 ]    Ground Strike
+--              [ CTRL+Numpad6 ]    Full Break
+--              [ CTRL+Numpad1 ]    Herculean Slash
+--              [ CTRL+Numpad2 ]    Shockwave
+--              [ CTRL+Numpad3 ]    Armor Break
+--
+--
+--              (Global-Binds.lua contains additional non-job-related keybinds)
 
-        Rune Selector        Cycle through available runes and trigger with a single macro [Ctl-`]
-        Charm Mode            Equips charm prevention gear (WinKey-h)
-        Knockback Mode        Equips knockback prevention gear (WinKey-k)
-        Death Mode            Equips death prevention gear (WinKey-d)
-        Auto. Doom            Automatically equips cursna received gear on doom status
-        Capacity Pts. Mode    Capacity Points Mode Toggle [WinKey-C]
-        Auto. Lockstyle        Automatically locks specified equipset on file load
---]]
+
+-------------------------------------------------------------------------------------------------------------------
+--  Custom Commands (preface with /console to use these in macros)
+-------------------------------------------------------------------------------------------------------------------
+
+
+--  gs c rune                       Uses current rune
+--  gs c cycle Runes                Cycles forward through rune elements
+--  gs c cycleback Runes            Cycles backward through rune elements
 
 
 -------------------------------------------------------------------------------------------------------------------
@@ -39,6 +81,8 @@ function job_setup()
     rayke_duration = 47
     gambit_duration = 96
 
+    lockstyleset = 2
+
 end
 
 -------------------------------------------------------------------------------------------------------------------
@@ -59,7 +103,7 @@ function user_setup()
     state.Charm = M(false, 'Charm Resistance')
     state.Knockback = M(false, 'Knockback')
     state.Death = M(false, "Death Resistance")
-    --state.CP = M(false, "Capacity Points Mode")
+    state.CP = M(false, "Capacity Points Mode")
 
     state.Runes = M{['description']='Runes', 'Ignis', 'Gelus', 'Flabra', 'Tellus', 'Sulpor', 'Unda', 'Lux', 'Tenebrae'}
     
@@ -72,9 +116,9 @@ function user_setup()
     send_command('bind ^- gs c cycleback Runes')
     send_command('bind ^= gs c cycle Runes')
     send_command('bind ^f11 gs c cycle MagicalDefenseMode')
-    send_command('bind @c gs c toggle Charm')
-    --send_command('bind @c gs c toggle CP')
+    send_command('bind @c gs c toggle CP')
     send_command('bind @g gs c cycle Greatsword')
+    send_command('bind @h gs c toggle Charm')
     send_command('bind @k gs c toggle Knockback')
     send_command('bind @d gs c toggle Death')
     send_command('bind !q input /ma "Temper" <me>')
@@ -93,28 +137,30 @@ function user_setup()
     send_command('bind !p input /ma "Shock Spikes" <me>')
     
     send_command('bind @w gs c toggle WeaponLock')
-    --send_command('bind @c gs c toggle CP')
+    send_command('bind @c gs c toggle CP')
 
     if player.sub_job == 'WAR' then
         send_command('bind ^numpad/ input /ja "Berserk" <me>')
         send_command('bind ^numpad* input /ja "Warcry" <me>')
         send_command('bind ^numpad- input /ja "Aggressor" <me>')
     elseif player.sub_job == 'DRK' then
-        send_command('bind ^numlock input /ja "Last Resort" <me>')
         send_command('bind ^numpad/ input /ja "Souleater" <me>')
         send_command('bind ^numpad* input /ja "Arcane Circle" <me>')
         send_command('bind ^numpad- input /ja "Weapon Bash" <me>')
     elseif player.sub_job == 'SAM' then
-        send_command('bind ^numlock input /ja "Hasso" <me>')
         send_command('bind ^numpad/ input /ja "Meditate" <me>')
         send_command('bind ^numpad* input /ja "Sekkanoki" <me>')
         send_command('bind ^numpad- input /ja "Third Eye" <me>')
     end
 
     send_command('bind ^numpad7 input /ws "Resolution" <t>')
+    send_command('bind ^numpad8 input /ws "Upheaval" <t>')
     send_command('bind ^numpad9 input /ws "Dimidiation" <t>')
     send_command('bind ^numpad5 input /ws "Ground Strike" <t>')
+    send_command('bind ^numpad6 input /ws "Full Break" <t>')
     send_command('bind ^numpad1 input /ws "Herculean Slash" <t>')
+    send_command('bind ^numpad2 input /ws "Shockwave" <t>')
+    send_command('bind ^numpad3 input /ws "Armor Break" <t>')
     
     select_default_macro_book()
     set_lockstyle()
@@ -127,6 +173,7 @@ function user_unload()
     send_command('unbind ^=')
     send_command('unbind ^f11')
     send_command('unbind @c')
+    send_command('unbind @h')
     send_command('unbind @g')
     send_command('unbind @k')
     send_command('unbind @d')
@@ -136,7 +183,6 @@ function user_unload()
     send_command('unbind !p')
     send_command('unbind ^,')
     send_command('unbind @w')
-    send_command('unbind ^numlock')
     send_command('unbind ^numpad/')
     send_command('unbind ^numpad*')
     send_command('unbind ^numpad-')
@@ -893,9 +939,9 @@ function job_buff_change(buff,gain)
         if gain then           
             equip(sets.buff.Doom)
             send_command('@input /p Doomed.')
-            disable('    ','ring2','waist')
+             disable('ring1','ring2','waist')
         else
-            enable('    ','ring2','waist')
+            enable('ring1','ring2','waist')
             handle_equipping_gear(player.status)
         end
     end
@@ -1079,34 +1125,6 @@ end
 -------------------------------------------------------------------------------------------------------------------
 
 -- Select default macro book on initial load or subjob change.
-function get_rune_obi_element()
-    weather_rune = buffactive[elements.rune_of[world.weather_element] or '']
-    day_rune = buffactive[elements.rune_of[world.day_element] or '']
-    
-    local found_rune_element
-    
-    if weather_rune and day_rune then
-        if weather_rune > day_rune then
-            found_rune_element = world.weather_element
-        else
-            found_rune_element = world.day_element
-        end
-    elseif weather_rune then
-        found_rune_element = world.weather_element
-    elseif day_rune then
-        found_rune_element = world.day_element
-    end
-    
-    return found_rune_element
-end
-
-function get_obi(element)
-    if element and elements.obi_of[element] then
-        return (player.inventory[elements.obi_of[element]] or player.wardrobe[elements.obi_of[element]]) and elements.obi_of[element]
-    end
-end
-
--- Select default macro book on initial load or subjob change.
 function select_default_macro_book()
     -- Default macro set/book: (set, book)
     if player.sub_job == 'BLU' then
@@ -1121,5 +1139,5 @@ function select_default_macro_book()
 end
 
 function set_lockstyle()
-    send_command('wait 2; input /lockstyleset 2')
+    send_command('wait 2; input /lockstyleset ' .. lockstyleset)
 end

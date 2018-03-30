@@ -176,9 +176,6 @@ function job_setup()
 
     lockstyleset = 3
 
-    -- Setup Haste Detection
-    haste = nil
-    p = require('packets')
     update_offense_mode()    
     determine_haste_group()
 end
@@ -202,7 +199,7 @@ function user_setup()
 
     -- Additional local binds
     include('Global-Binds.lua') -- OK to remove this line
-    include('Global-COR-Binds.lua') -- OK to remove this line
+    include('Global-GEO-Binds.lua') -- OK to remove this line
 
     send_command('bind ^` input /ma "Blank Gaze" <t>')
     send_command('bind !` gs c toggle MagicBurst')
@@ -830,7 +827,7 @@ function init_gear_sets()
 
     sets.engaged.STP = set_combine(sets.engaged, {
         feet="Carmine Greaves +1",
-        ring1="Petrov Ring",
+        ring1="Chirich Ring",
         })
 
     -- * DW6: +37%
@@ -879,7 +876,7 @@ function init_gear_sets()
 
     sets.engaged.DW.STP = set_combine(sets.engaged.DW, {
         neck="Ainia Collar",
-        ring1="Petrov Ring",
+        ring1="Chirich Ring",
         })
 
     -- 15% Magic Haste (67% DW to cap)
@@ -921,7 +918,7 @@ function init_gear_sets()
 
     sets.engaged.DW.STP.LowHaste = set_combine(sets.engaged.DW.LowHaste, {
         neck="Ainia Collar",
-        ring1="Petrov Ring",
+        ring1="Chirich Ring",
         })
 
     -- 30% Magic Haste (56% DW to cap)
@@ -966,7 +963,7 @@ function init_gear_sets()
     sets.engaged.DW.STP.MidHaste = set_combine(sets.engaged.DW.MidHaste, {
         neck="Ainia Collar",
         ear1="Dedition Earring",
-        ring1="Petrov Ring",
+        ring1="Chirich Ring",
         })
         
     -- 35% Magic Haste (51% DW to cap)
@@ -1009,7 +1006,7 @@ function init_gear_sets()
 
     sets.engaged.DW.STP.HighHaste = set_combine(sets.engaged.DW.HighHaste, {
         neck="Ainia Collar",
-        ring1="Petrov Ring",
+        ring1="Chirich Ring",
         })
 
     -- 45% Magic Haste (36% DW to cap)
@@ -1052,7 +1049,7 @@ function init_gear_sets()
         neck="Ainia Collar",
         ear1="Dedition Earring",
         ear2="Telos Earring",
-        ring1="Petrov Ring",
+        ring1="Chirich Ring",
         waist="Kentarch Belt +1",
         })
 
@@ -1207,7 +1204,7 @@ function job_buff_change(buff,gain)
         determine_haste_group()
         if not gain then
             haste = nil
-            add_to_chat(122, "Haste status cleared.")
+            --add_to_chat(122, "Haste Status: Cleared")
         end
         if not midaction() then
             handle_equipping_gear(player.status)
@@ -1320,21 +1317,45 @@ end
 -- Utility functions specific to this job.
 -------------------------------------------------------------------------------------------------------------------
 
---Read incoming packet to differentiate between Haste I and Haste II
-windower.raw_register_event("incoming chunk", function(id, data)
-    if id == 0x028 then
-        local packet = p.parse('incoming', data)
-        if packet["Category"] == 4 then
-            if packet["Param"] == 57 then
-                add_to_chat(122, 'Haste')
-                haste = 1
-            elseif packet["Param"] == 511 then
-                add_to_chat(122, 'Haste2')
-                haste = 2
+--Read incoming packet to differentiate between Haste I and II
+windower.register_event('action', 
+    function(act)
+        --check if you are a target of spell
+        local actionTargets = act.targets
+        playerId = windower.ffxi.get_player().id
+        isTarget = false
+        for _, target in ipairs(actionTargets) do
+            if playerId == target.id then
+                isTarget = true
             end
         end
-    end
-end)
+        if isTarget == true then
+            if act.category == 4 then
+                local param = act.param
+                if param == 57 then
+                    --add_to_chat(122, 'Haste Status: Haste I (Haste)')
+                    haste = 1
+                elseif param == 511 then
+                    --add_to_chat(122, 'Haste Status: Haste II (Haste II)')
+                    haste = 2
+                end
+            elseif act.category == 5 then
+                if act.param == 5389 then
+                    --add_to_chat(122, 'Haste Status: Haste II (Spy Drink)')
+                    haste = 2
+                end
+            elseif act.category == 13 then
+                local param = act.param
+                if param == 595 then 
+                    --add_to_chat(122, 'Haste Status: Haste I (Hastega)')
+                    haste = 1
+                elseif param == 602 then
+                    --add_to_chat(122, 'Haste Status: Haste II (Hastega2)')
+                    haste = 2
+                end
+            end
+        end
+    end)
 
 function determine_haste_group()
 
@@ -1352,21 +1373,24 @@ function determine_haste_group()
 
     classes.CustomMeleeGroups:clear()
 
-    if state.CombatForm.value == 'DW' then
-        if(((haste == 2 or buffactive[580] or buffactive.embrava) and (buffactive.march or buffactive[604] or haste == 1)) or
-            (haste == 2 and (buffactive[580] or buffactive.embrava)) or
-            (buffactive.march == 2 and buffactive[604]) or buffactive.march == 3 or buffactive[580] == 2) then
-            add_to_chat(122, 'Magic Haste Level: 43%')
+        if (haste == 2 and (buffactive[580] or buffactive.march or buffactive.embrava or buffactive[604])) or
+            (haste == 1 and (buffactive[580] or buffactive.march == 2 or (buffactive.embrava and buffactive['haste samba']) or (buffactive.march and buffactive[604]))) or
+            (buffactive[580] and (buffactive.march or buffactive.embrava or buffactive[604])) or
+            (buffactive.march == 2 and (buffactive.embrava or buffactive[604])) or
+            (buffactive.march and (buffactive.embrava and buffactive['haste samba'])) then
+            --add_to_chat(122, 'Magic Haste Level: 43%')
             classes.CustomMeleeGroups:append('MaxHaste')
-        elseif ((haste == 2 or buffactive.march == 2 or buffactive[580]) and buffactive['haste samba']) then
-            add_to_chat(122, 'Magic Haste Level: 35%')
+        elseif ((haste == 2 or buffactive[580] or buffactive.march == 2) and buffactive['haste samba']) or
+            (haste == 1 and buffactive['haste samba'] and (buffactive.march or buffactive[604])) or
+            (buffactive.march and buffactive['haste samba'] and buffactive[604]) then
+            --add_to_chat(122, 'Magic Haste Level: 35%')
             classes.CustomMeleeGroups:append('HighHaste')
-        elseif ((buffactive[580] or haste == 2 or buffactive.march == 2) or
-            (buffactive.march == 1 and buffactive[604]) or (buffactive.march == 1 and haste == 1)) then
-            add_to_chat(122, 'Magic Haste Level: 30%')
+        elseif (haste == 2 or buffactive[580] or buffactive.march == 2 or (buffactive.embrava and buffactive['haste samba']) or
+            (haste == 1 and (buffactive.march or buffactive[604])) or (buffactive.march and buffactive[604])) then
+            --add_to_chat(122, 'Magic Haste Level: 30%')
             classes.CustomMeleeGroups:append('MidHaste')
-        elseif (buffactive.march == 1 or buffactive[604] or haste == 1) then
-            add_to_chat(122, 'Magic Haste Level: 15%')
+        elseif (haste == 1 or buffactive.march or buffactive[604] or buffactive.embrava) then
+            --add_to_chat(122, 'Magic Haste Level: 15%')
             classes.CustomMeleeGroups:append('LowHaste')
         end
     end

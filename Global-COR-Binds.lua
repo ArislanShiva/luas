@@ -5,7 +5,7 @@
     send_command('bind #f4 input //send safiyeh /ta <p3>')
     send_command('bind #f5 input //send safiyeh /ta <p4>')
     send_command('bind #f6 input //send safiyeh /ta <p5>')
-    send_command('bind #f7 input //send safiyeh /ta Arislan')
+    send_command('bind #f7 input //send safiyeh /ta Arislan; wait1; input //send safiyeh /follow <t>')
     send_command('bind #f8 input //send safiyeh /ta <bt>')
 
     send_command('bind #f9 input //send safiyeh //gs c cycle offensemode')

@@ -1,12 +1,61 @@
+-- Original: Motenten / Modified: Arislan
+
 -------------------------------------------------------------------------------------------------------------------
--- (Original: Motenten / Modified: Arislan)
+--  Keybinds
 -------------------------------------------------------------------------------------------------------------------
 
---[[    Custom Features:
-        
-        Capacity Pts. Mode    Capacity Points Mode Toggle [WinKey-C]
-        Auto. Lockstyle        Automatically locks desired equipset on file load
---]]
+--  Modes:      [ F9 ]              Cycle Offense Mode
+--              [ F10 ]             Emergency -PDT Mode
+--              [ ALT+F10 ]         Toggle Kiting Mode
+--              [ F11 ]             Emergency -MDT Mode
+--              [ CTRL+F11 ]        Cycle Casting Modes
+--              [ F12 ]             Update Current Gear / Report Current Status
+--              [ CTRL+F12 ]        Cycle Idle Modes
+--              [ ALT+F12 ]         Cancel Emergency -PDT/-MDT Mode
+--              [ WIN+R ]           Toggle Regen Mode
+--              [ WIN+C ]           Toggle Capacity Points Mode
+--
+--  Abilities:  [ CTRL+` ]          Afflatus Solace
+--              [ ALT+` ]           Afflatus Misery
+--              [ CTRL+[ ]          Divine Seal
+--              [ CTRL+] ]          Divine Caress
+--              [ CTRL+` ]          Composure
+--              [ CTRL+- ]          Light Arts/Addendum: White
+--              [ CTRL+= ]          Dark Arts/Addendum: Black
+--              [ CTRL+; ]          Celerity/Alacrity
+--              [ ALT+[ ]           Accesion/Manifestation
+--              [ ALT+; ]           Penury/Parsimony
+--
+--  Spells:     [ ALT+O ]           Regen IV
+--
+--  Weapons:    [ CTRL+W ]          Toggles Weapon Lock
+--
+--  WS:         [ CTRL+Numpad7 ]    Black Halo
+--              [ CTRL+Numpad8 ]    Hexa Strike
+--              [ CTRL+Numpad9 ]    Realmrazer
+--              [ CTRL+Numpad1 ]    Flash Nova
+--              [ CTRL+Numpad0 ]    Mystic Boon
+--
+--
+--              (Global-Binds.lua contains additional non-job-related keybinds)
+
+
+-------------------------------------------------------------------------------------------------------------------
+-- Setup functions for this job.  Generally should not be modified.
+-------------------------------------------------------------------------------------------------------------------
+
+--              Addendum Commands:
+--              Shorthand versions for each strategem type that uses the version appropriate for
+--              the current Arts.
+--                                          Light Arts					Dark Arts
+--                                          ----------                  ---------
+--		        gs c scholar light          Light Arts/Addendum
+--              gs c scholar dark                                       Dark Arts/Addendum
+--              gs c scholar cost           Penury                      Parsimony
+--              gs c scholar speed          Celerity                    Alacrity
+--              gs c scholar aoe            Accession                   Manifestation
+--              gs c scholar addendum       Addendum: White             Addendum: Black
+
 
 -------------------------------------------------------------------------------------------------------------------
 -- Setup functions for this job.  Generally should not be modified.
@@ -25,6 +74,9 @@ function job_setup()
     state.Buff['Afflatus Solace'] = buffactive['Afflatus Solace'] or false
     state.Buff['Afflatus Misery'] = buffactive['Afflatus Misery'] or false
     state.RegenMode = M{['description']='Regen Mode', 'Duration', 'Potency'}
+
+    lockstyleset = 1
+
 end
 
 -------------------------------------------------------------------------------------------------------------------
@@ -62,7 +114,7 @@ function user_setup()
 
     send_command('bind ^numpad7 input /ws "Black Halo" <t>')
     send_command('bind ^numpad8 input /ws "Hexa Strike" <t>')
-    send_command('bind ^numpad9 input /ws "Realmrazer" <t>')
+    send_command('bind ^numpad5 input /ws "Realmrazer" <t>')
     send_command('bind ^numpad1 input /ws "Flash Nova" <t>')
     send_command('bind ^numpad0 input /ws "Mystic Boon" <t>')
 
@@ -88,7 +140,7 @@ function user_unload()
     send_command('unbind @w')
     send_command('unbind ^numpad7')
     send_command('unbind ^numpad8')
-    send_command('unbind ^numpad9')
+    send_command('unbind ^numpad5')
     send_command('unbind ^numpad1')
     send_command('unbind ^numpad0')
 
@@ -678,9 +730,9 @@ function job_buff_change(buff,gain)
         if gain then           
             equip(sets.buff.Doom)
             --send_command('@input /p Doomed.')
-            disable('    ','ring2','waist')
+             disable('ring1','ring2','waist')
         else
-            enable('    ','ring2','waist')
+            enable('ring1','ring2','waist')
             handle_equipping_gear(player.status)
         end
     end
@@ -790,14 +842,6 @@ function display_current_job_state(eventArgs)
     eventArgs.handled = true
 end
 
-function update_offense_mode()  
-    if player.sub_job == 'NIN' or player.sub_job == 'DNC' then
-        state.CombatForm:set('DW')
-    else
-        state.CombatForm:reset()
-    end
-end
-
 -------------------------------------------------------------------------------------------------------------------
 -- Utility functions specific to this job.
 -------------------------------------------------------------------------------------------------------------------
@@ -865,6 +909,14 @@ function select_default_macro_book()
     set_macro_page(1, 4)
 end
 
+function update_offense_mode()  
+    if player.sub_job == 'NIN' or player.sub_job == 'DNC' then
+        state.CombatForm:set('DW')
+    else
+        state.CombatForm:reset()
+    end
+end
+
 function set_lockstyle()
-    send_command('wait 2; input /lockstyleset 12')
+    send_command('wait 2; input /lockstyleset ' .. lockstyleset)
 end

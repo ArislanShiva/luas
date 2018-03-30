@@ -5,7 +5,7 @@
     send_command('bind #f4 input //send safiyeh /ta <p3>')
     send_command('bind #f5 input //send safiyeh /ta <p4>')
     send_command('bind #f6 input //send safiyeh /ta <p5>')
-    send_command('bind #f7 input //send safiyeh /ta Arislan')
+    send_command('bind #f7 input //send safiyeh /ta Arislan; wait1; input //send safiyeh /follow <t>')
     send_command('bind #f8 input //send safiyeh /ta <bt>')
 
     send_command('bind #f9 input //send safiyeh //gs c cycle offensemode')
@@ -16,11 +16,11 @@
     send_command('bind #` input //send safiyeh /ja "Full Circle" <me>')
 
     send_command('bind #1 input //send safiyeh /ma "Geo-Frailty" <t>')
-    send_command('bind #2 input //send safiyeh /ma "Indi-Fury" <t>')
+    send_command('bind #2 input //send safiyeh /ma "Indi-Fend" <t>')
     send_command('bind #3 input //send safiyeh /ma "Indi-Haste" <t>')
     send_command('bind #4 input //send safiyeh /ma "Indi-Refresh" <t>')
-    send_command('bind #5 input //send safiyeh /ma "Geo-Fend" <t>')
-    send_command('bind #6 input //send safiyeh /ma "Indi-Fade" <t>')
+    send_command('bind #5 input //send safiyeh /ma "Geo-Malaise" <t>')
+    send_command('bind #6 input //send safiyeh /ma "Indi-Acumen" <t>')
 
     send_command('bind #7 input //send safiyeh /ma "Dia II" <t>')
     send_command('bind #8 input //send safiyeh /ma "Silence" <t>')

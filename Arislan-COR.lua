@@ -168,6 +168,8 @@ function user_setup()
     send_command('bind ^numpad4 input /ws "Leaden Salute" <t>')
     send_command('bind ^numpad6 input /ws "Wildfire" <t>')
     send_command('bind ^numpad1 input /ws "Requiescat" <t>')
+    send_command('bind ^numpad2 input /ws "Burning Blade" <t>')
+    send_command('bind ^numpad3 input /ws "Flat Blade" <t>')
 
     send_command('bind numpad0 input /ra <t>')
 
@@ -203,6 +205,8 @@ function user_unload()
     send_command('unbind ^numpad4')
     send_command('unbind ^numpad6')
     send_command('unbind ^numpad1')
+    send_command('unbind ^numpad2')
+    send_command('unbind ^numpad3')
     send_command('unbind numpad0')
 
     send_command('unbind #`')
@@ -579,7 +583,7 @@ function init_gear_sets()
         body="Oshosi Vest",
         feet="Carmine Greaves +1",
         ear1="Dedition Earring",
-        ring1="Petrov Ring",
+        ring1="Chirich Ring",
         })
 
     sets.TripleShot = {
@@ -702,7 +706,7 @@ function init_gear_sets()
 
     sets.engaged.STP = set_combine(sets.engaged, {
         feet="Carmine Greaves +1",
-        ring1="Petrov Ring",
+        ring1="Chirich Ring",
         })
 
     -- * DNC Subjob DW Trait: +15%
@@ -745,7 +749,7 @@ function init_gear_sets()
         })
 
     sets.engaged.DW.STP = set_combine(sets.engaged.DW, {
-        ring1="Petrov Ring",
+        ring1="Chirich Ring",
         })
 
     -- 15% Magic Haste (67% DW to cap)
@@ -785,7 +789,7 @@ function init_gear_sets()
         })
 
     sets.engaged.DW.STP.LowHaste = set_combine(sets.engaged.DW.LowHaste, {
-        ring1="Petrov Ring",
+        ring1="Chirich Ring",
         })
 
     -- 30% Magic Haste (56% DW to cap)
@@ -827,7 +831,7 @@ function init_gear_sets()
         })
 
     sets.engaged.DW.STP.MidHaste = set_combine(sets.engaged.DW.MidHaste, {
-        ring1="Petrov Ring",
+        ring1="Chirich Ring",
         })
 
     -- 35% Magic Haste (51% DW to cap)
@@ -869,7 +873,7 @@ function init_gear_sets()
         })
 
     sets.engaged.DW.STP.HighHaste = set_combine(sets.engaged.DW.HighHaste, {
-        ring1="Petrov Ring",
+        ring1="Chirich Ring",
         })
         
     -- 45% Magic Haste (36% DW to cap)
@@ -911,7 +915,7 @@ function init_gear_sets()
 
     sets.engaged.DW.STP.MaxHaste = set_combine(sets.engaged.DW.MaxHaste, {
         feet="Carmine Greaves +1",
-        ring1="Petrov Ring",
+        ring1="Chirich Ring",
         })
 
     sets.LessDualWield = {back=gear.COR_TP_Cape}
@@ -1077,7 +1081,7 @@ function job_buff_change(buff,gain)
         customize_melee_set()
         if not gain then
             haste = nil
-            add_to_chat(122, "Haste status cleared.")
+            --add_to_chat(122, "Haste Status: Cleared")
         end
         if not midaction() then
             handle_equipping_gear(player.status)
@@ -1088,7 +1092,7 @@ function job_buff_change(buff,gain)
     if S{'flurry'}:contains(buff:lower()) then
         if not gain then
             flurry = nil
-            add_to_chat(122, "Flurry status cleared.")
+            --add_to_chat(122, "Flurry status cleared.")
         end
         if not midaction() then
             handle_equipping_gear(player.status)
@@ -1250,7 +1254,7 @@ end
 -- Utility functions specific to this job.
 -------------------------------------------------------------------------------------------------------------------
 
---Read incoming packet to differentiate between Haste I and Haste II
+--Read incoming packet to differentiate between Haste/Flurry I and II
 windower.register_event('action', 
     function(act)
         --check if you are a target of spell
@@ -1266,31 +1270,31 @@ windower.register_event('action',
             if act.category == 4 then
                 local param = act.param
                 if param == 845 then
-                    add_to_chat(122, 'Flurry Status: Flurry I')
+                    --add_to_chat(122, 'Flurry Status: Flurry I')
                     flurry = 1
                 elseif param == 846 then
-                    add_to_chat(122, 'Flurry Status: Flurry II')
+                    --add_to_chat(122, 'Flurry Status: Flurry II')
                     flurry = 2				
                 elseif param == 57 then
-                    add_to_chat(122, 'Haste Status: Haste I (Haste)')
+                    --add_to_chat(122, 'Haste Status: Haste I (Haste)')
                     haste = 1
                 elseif param == 511 then
-                    add_to_chat(122, 'Haste Status: Haste II (Haste II)')
+                    --add_to_chat(122, 'Haste Status: Haste II (Haste II)')
                     haste = 2
                 end
             elseif act.category == 5 then
                 if act.param == 5389 then
-                    add_to_chat(122, 'Haste Status: Haste II (Spy Drink)')
+                    --add_to_chat(122, 'Haste Status: Haste II (Spy Drink)')
                     haste = 2
                 end
             elseif act.category == 13 then
                 local param = act.param
                 --595 haste 1 -602 hastega 2
                 if param == 595 then 
-                    add_to_chat(122, 'Haste Status: Haste I (Hastega)')
+                    --add_to_chat(122, 'Haste Status: Haste I (Hastega)')
                     haste = 1
                 elseif param == 602 then
-                    add_to_chat(122, 'Haste Status: Haste II (Hastega2)')
+                    --add_to_chat(122, 'Haste Status: Haste II (Hastega2)')
                     haste = 2
                 end
             end
@@ -1315,23 +1319,27 @@ function determine_haste_group()
 
     if state.CombatForm.value == 'DW' then
 
-        if(((haste == 2 or buffactive[580] or buffactive.embrava) and (buffactive.march or buffactive[604] or haste == 1)) or
-            (haste == 2 and (buffactive[580] or buffactive.embrava)) or
-            (buffactive.march == 2 and buffactive[604]) or buffactive.march == 3 or buffactive[580] == 2) then
-            add_to_chat(122, 'Magic Haste Level: 43%')
+        if (haste == 2 and (buffactive[580] or buffactive.march or buffactive.embrava or buffactive[604])) or
+            (haste == 1 and (buffactive[580] or buffactive.march == 2 or (buffactive.embrava and buffactive['haste samba']) or (buffactive.march and buffactive[604]))) or
+            (buffactive[580] and (buffactive.march or buffactive.embrava or buffactive[604])) or
+            (buffactive.march == 2 and (buffactive.embrava or buffactive[604])) or
+            (buffactive.march and (buffactive.embrava and buffactive['haste samba'])) then
+            --add_to_chat(122, 'Magic Haste Level: 43%')
             classes.CustomMeleeGroups:append('MaxHaste')
             state.DualWield:set()
-        elseif ((haste == 2 or buffactive.march == 2 or buffactive[580]) and buffactive['haste samba']) then
-            add_to_chat(122, 'Magic Haste Level: 35%')
+        elseif ((haste == 2 or buffactive[580] or buffactive.march == 2) and buffactive['haste samba']) or
+            (haste == 1 and buffactive['haste samba'] and (buffactive.march or buffactive[604])) or
+            (buffactive.march and buffactive['haste samba'] and buffactive[604]) then
+            --add_to_chat(122, 'Magic Haste Level: 35%')
             classes.CustomMeleeGroups:append('HighHaste')
             state.DualWield:set()
-        elseif ((buffactive[580] or haste == 2 or buffactive.march == 2) or
-            (buffactive.march == 1 and buffactive[604]) or (buffactive.march == 1 and haste == 1)) then
-            add_to_chat(122, 'Magic Haste Level: 30%')
+        elseif (haste == 2 or buffactive[580] or buffactive.march == 2 or (buffactive.embrava and buffactive['haste samba']) or
+            (haste == 1 and (buffactive.march or buffactive[604])) or (buffactive.march and buffactive[604])) then
+            --add_to_chat(122, 'Magic Haste Level: 30%')
             classes.CustomMeleeGroups:append('MidHaste')
             state.DualWield:set()
-        elseif (buffactive.march == 1 or buffactive[604] or haste == 1) then
-            add_to_chat(122, 'Magic Haste Level: 15%')
+        elseif (haste == 1 or buffactive.march or buffactive[604] or buffactive.embrava) then
+            --add_to_chat(122, 'Magic Haste Level: 15%')
             classes.CustomMeleeGroups:append('LowHaste')
             state.DualWield:set()
         else

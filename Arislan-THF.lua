@@ -1,19 +1,57 @@
+-- Original: Motenten / Modified: Arislan
+
+-------------------------------------------------------------------------------------------------------------------
+--  Keybinds
+-------------------------------------------------------------------------------------------------------------------
+
+--  Modes:      [ F9 ]              Cycle Offense Modes
+--              [ CTRL+F9 ]         Cycle Hybrid Modes
+--              [ WIN+F9 ]          Cycle Weapon Skill Modes
+--              [ F10 ]             Emergency -PDT Mode
+--              [ ALT+F10 ]         Toggle Kiting Mode
+--              [ F11 ]             Emergency -MDT Mode
+--              [ F12 ]             Update Current Gear / Report Current Status
+--              [ CTRL+F12 ]        Cycle Idle Modes
+--              [ ALT+F12 ]         Cancel Emergency -PDT/-MDT Mode
+--              [ CTRL+` ]          Cycle Treasure Hunter Mode
+--              [ WIN+C ]           Toggle Capacity Points Mode
+--
+--  Abilities:  [ ALT+` ]           Flee
+--              [ CTRL+Numpad/ ]    Berserk
+--              [ CTRL+Numpad* ]    Warcry
+--              [ CTRL+Numpad- ]    Aggressor
+--              [ CTRL+Numpad0 ]    Sneak Attack
+--              [ CTRL+Numpad. ]    Trick Attack
+--
+--  Spells:     [ WIN+, ]           Utsusemi: Ichi
+--              [ WIN+. ]           Utsusemi: Ni
+--
+--  WS:         [ CTRL+Numpad7 ]    Exenterator
+--              [ CTRL+Numpad8 ]    Mandalic Stab
+--              [ CTRL+Numpad4 ]    Evisceration
+--              [ CTRL+Numpad5 ]    Rudra's Storm
+--              [ CTRL+Numpad1 ]    Aeolian Edge
+--
+--
+--              (Global-Binds.lua contains additional non-job-related keybinds)
+
+
+-------------------------------------------------------------------------------------------------------------------
+--  Custom Commands (preface with /console to use these in macros)
+-------------------------------------------------------------------------------------------------------------------
+
+--  gs c cycle treasuremode (set on ctrl-= by default): Cycles through the available treasure hunter modes.
+-- 
+--  TH Modes:  None                 Will never equip TH gear
+--             Tag                  Will equip TH gear sufficient for initial contact with a mob (either melee,
+--
+--             SATA - Will equip TH gear sufficient for initial contact with a mob, and when using SATA
+--             Fulltime - Will keep TH gear equipped fulltime
+
+
 -------------------------------------------------------------------------------------------------------------------
 -- Setup functions for this job.  Generally should not be modified.
 -------------------------------------------------------------------------------------------------------------------
-
---[[
-    Custom commands:
-
-    gs c cycle treasuremode (set on ctrl-= by default): Cycles through the available treasure hunter modes.
-    
-    Treasure hunter modes:
-        None - Will never equip TH gear
-        Tag - Will equip TH gear sufficient for initial contact with a mob (either melee, ranged hit, or Aeolian Edge AOE)
-        SATA - Will equip TH gear sufficient for initial contact with a mob, and when using SATA
-        Fulltime - Will keep TH gear equipped fulltime
-
---]]
 
 -- Initialization function for this job file.
 function get_sets()
@@ -37,7 +75,7 @@ function job_setup()
     -- Unblinkable JA IDs for actions that always have TH: Quick/Box/Stutter Step, Desperate/Violent Flourish
     info.default_u_ja_ids = S{201, 202, 203, 205, 207}
 
-    state.HasteMode = M{['description']='Haste Mode', 'Haste II', 'Haste I'}
+    lockstyleset = 1
 
     determine_haste_group()
 end
@@ -62,7 +100,6 @@ function user_setup()
 
     send_command('bind ^` gs c cycle treasuremode')
     send_command('bind !` input /ja "Flee" <me>')
-    send_command('bind @h gs c cycle HasteMode')
     send_command('bind @c gs c toggle CP')
 
     send_command('bind ^numlock input /ja "Assassin\'s Charge" <me>')
@@ -71,15 +108,17 @@ function user_setup()
         send_command('bind ^numpad/ input /ja "Berserk" <me>')
         send_command('bind ^numpad* input /ja "Warcry" <me>')
         send_command('bind ^numpad- input /ja "Aggressor" <me>')
+    elseif player.sub_job == 'SAM' then
+        send_command('bind ^numpad/ input /ja "Meditate" <me>')
+        send_command('bind ^numpad* input /ja "Sekkanoki" <me>')
+        send_command('bind ^numpad- input /ja "Third Eye" <me>')
     end
-
-    send_command('bind ^numpad7 input /ws "Exenterator" <t>')--;input /p Exenterator')
-    send_command('bind ^numpad8 input /ws "Mandalic Stab" <t>')--;input /p Mandalic Stab')
-    send_command('bind ^numpad4 input /ws "Evisceration" <t>')--;input /p Evisceration')
-    send_command('bind ^numpad5 input /ws "Rudra\'s Storm" <t>')--;input /p Rudra\'s Storm')
+	
+    send_command('bind ^numpad7 input /ws "Exenterator" <t>')
+    send_command('bind ^numpad8 input /ws "Mandalic Stab" <t>')
+    send_command('bind ^numpad4 input /ws "Evisceration" <t>')
+    send_command('bind ^numpad5 input /ws "Rudra\'s Storm" <t>')
     send_command('bind ^numpad1 input /ws "Aeolian Edge" <t>')
-    send_command('bind ^numpad2 input /ws "Wasp Sting" <t>')
-    send_command('bind ^numpad3 input /ws "Gust Slash" <t>')
 
     send_command('bind ^numpad0 input /ja "Sneak Attack" <me>')
     send_command('bind ^numpad. input /ja "Trick Attack" <me>')
@@ -93,7 +132,6 @@ function user_unload()
     send_command('unbind ^`')
     send_command('unbind !`')
     send_command('unbind ^,')
-    send_command('unbind @h')
     send_command('unbind @c')
     send_command('unbind ^numlock')
     send_command('unbind ^numpad/')
@@ -104,8 +142,6 @@ function user_unload()
     send_command('unbind ^numpad4')
     send_command('unbind ^numpad5')
     send_command('unbind ^numpad1')
-    send_command('unbind ^numpad2')
-    send_command('unbind ^numpad3')
     send_command('unbind ^numpad0')
     send_command('unbind ^numpad.')
 
@@ -454,7 +490,7 @@ function init_gear_sets()
 
     sets.engaged.STP = set_combine(sets.engaged, {
         neck="Anu Torque",
-        ring1="Petrov Ring",
+        ring1="Chirich Ring",
         })
 
     -- 15% Magic Haste (67% DW to cap)
@@ -497,7 +533,7 @@ function init_gear_sets()
 
     sets.engaged.STP.LowHaste = set_combine(sets.engaged.LowHaste, {
         neck="Anu Torque",
-        ring1="Petrov Ring",
+        ring1="Chirich Ring",
         })
 
     -- 30% Magic Haste (56% DW to cap)
@@ -541,7 +577,7 @@ function init_gear_sets()
     sets.engaged.STP.MidHaste = set_combine(sets.engaged.MidHaste, {
         neck="Anu Torque",
         ear1="Sherida Earring",
-        ring1="Petrov Ring",
+        ring1="Chirich Ring",
         })
 
     -- 35% Magic Haste (51% DW to cap)
@@ -586,7 +622,7 @@ function init_gear_sets()
         neck="Anu Torque",
         ear1="Sherida Earring",
         ear2="Telos Earring",
-        ring1="Petrov Ring",
+        ring1="Chirich Ring",
         })
 
     -- 45% Magic Haste (36% DW to cap)
@@ -631,7 +667,7 @@ function init_gear_sets()
         neck="Anu Torque",
         ear1="Sherida Earring",
         ear2="Telos Earring",
-        ring1="Petrov Ring",
+        ring1="Chirich Ring",
         waist="Kentarch Belt +1",
         })
 
@@ -755,9 +791,13 @@ end
 -- buff == buff gained or lost
 -- gain == true if the buff was gained, false if it was lost.
 function job_buff_change(buff,gain)
-    -- If we gain or lose any haste buffs, adjust which gear set we target.
+    -- If we gain or lose any haste buffs, adjust gear.
     if S{'haste', 'march', 'mighty guard', 'embrava', 'haste samba', 'geo-haste', 'indi-haste'}:contains(buff:lower()) then
         determine_haste_group()
+        if not gain then
+            haste = nil
+            --add_to_chat(122, "Haste Status: Cleared")
+        end
         if not midaction() then
             handle_equipping_gear(player.status)
         end
@@ -776,9 +816,9 @@ function job_buff_change(buff,gain)
         if gain then           
             equip(sets.buff.Doom)
             send_command('@input /p Doomed.')
-            disable('    ','ring2','waist')
+             disable('ring1','ring2','waist')
         else
-            enable('    ','ring2','waist')
+            enable('ring1','ring2','waist')
             handle_equipping_gear(player.status)
         end
     end
@@ -796,8 +836,11 @@ end
 -- User code that supplements standard library decisions.
 -------------------------------------------------------------------------------------------------------------------
 
+-- Called by the 'update' self-command, for common needs.
+-- Set eventArgs.handled to true if we don't want automatic equipping of gear.
 function job_update(cmdParams, eventArgs)
     determine_haste_group()
+    th_update(cmdParams, eventArgs)
 end
 
 function get_custom_wsmode(spell, spellMap, defaut_wsmode)
@@ -846,11 +889,6 @@ function customize_melee_set(meleeSet)
 end
 
 
--- Called by the 'update' self-command.
-function job_update(cmdParams, eventArgs)
-    th_update(cmdParams, eventArgs)
-end
-
 -- Function to display the current relevant user state when doing an update.
 -- Return true if display was handled, and you don't want the default info shown.
 function display_current_job_state(eventArgs)
@@ -889,62 +927,82 @@ end
 -- Utility functions specific to this job.
 -------------------------------------------------------------------------------------------------------------------
 
+--Read incoming packet to differentiate between Haste I and II
+windower.register_event('action', 
+    function(act)
+        --check if you are a target of spell
+        local actionTargets = act.targets
+        playerId = windower.ffxi.get_player().id
+        isTarget = false
+        for _, target in ipairs(actionTargets) do
+            if playerId == target.id then
+                isTarget = true
+            end
+        end
+        if isTarget == true then
+            if act.category == 4 then
+                local param = act.param
+                if param == 57 then
+                    --add_to_chat(122, 'Haste Status: Haste I (Haste)')
+                    haste = 1
+                elseif param == 511 then
+                    --add_to_chat(122, 'Haste Status: Haste II (Haste II)')
+                    haste = 2
+                end
+            elseif act.category == 5 then
+                if act.param == 5389 then
+                    --add_to_chat(122, 'Haste Status: Haste II (Spy Drink)')
+                    haste = 2
+                end
+            elseif act.category == 13 then
+                local param = act.param
+                if param == 595 then 
+                    --add_to_chat(122, 'Haste Status: Haste I (Hastega)')
+                    haste = 1
+                elseif param == 602 then
+                    --add_to_chat(122, 'Haste Status: Haste II (Hastega2)')
+                    haste = 2
+                end
+            end
+        end
+    end)
+
 function determine_haste_group()
 
-    -- Gearswap can't detect the difference between Haste I and Haste II
-    -- so use winkey-H to manually set Haste spell level.
+    -- Assuming the following values:
 
-    -- Haste (buffactive[33]) - 15%
-    -- Haste II (buffactive[33]) - 30%
-    -- Haste Samba - 5~10%
-    -- Honor March - 12~16%
-    -- Victory March - 15~28%
-    -- Advancing March - 10~18%
+    -- Haste - 15%
+    -- Haste II - 30%
+    -- Haste Samba - 5%
+    -- Honor March - 15%
+    -- Victory March - 25%
+    -- Advancing March - 15%
     -- Embrava - 25%
     -- Mighty Guard (buffactive[604]) - 15%
-    -- Geo-Haste (buffactive[580]) - 30~40%
+    -- Geo-Haste (buffactive[580]) - 30%
 
     classes.CustomMeleeGroups:clear()
 
-    if state.HasteMode.value == 'Haste II' then
-        if(((buffactive[33] or buffactive[580] or buffactive.embrava) and (buffactive.march or buffactive[604])) or
-            (buffactive[33] and (buffactive[580] or buffactive.embrava)) or
-            (buffactive.march == 2 and buffactive[604]) or buffactive.march == 3) or buffactive[580] == 2 then
-            --add_to_chat(122, 'Magic Haste Level: 43%')
-            classes.CustomMeleeGroups:append('MaxHaste')
-        elseif ((buffactive[33] or buffactive.march == 2 or buffactive[580]) and buffactive['haste samba']) then
-            --add_to_chat(122, 'Magic Haste Level: 35%')
-            classes.CustomMeleeGroups:append('HighHaste')
-        elseif ((buffactive[580] or buffactive[33] or buffactive.march == 2) or
-            (buffactive.march == 1 and buffactive[604])) then
-            --add_to_chat(122, 'Magic Haste Level: 30%')
-            classes.CustomMeleeGroups:append('MidHaste')
-        elseif (buffactive.march == 1 or buffactive[604]) then
-            --add_to_chat(122, 'Magic Haste Level: 15%')
-            classes.CustomMeleeGroups:append('LowHaste')
-        end
-    else
-        if (buffactive[580] and ( buffactive.march or buffactive[33] or buffactive.embrava or buffactive[604]) ) or
-            (buffactive.embrava and (buffactive.march or buffactive[33] or buffactive[604])) or
-            (buffactive.march == 2 and (buffactive[33] or buffactive[604])) or
-            (buffactive[33] and buffactive[604] and buffactive.march ) or buffactive.march == 3 or buffactive[580] == 2 then
-            --add_to_chat(122, 'Magic Haste Level: 43%')
-            classes.CustomMeleeGroups:append('MaxHaste')
-        elseif ((buffactive[604] or buffactive[33]) and buffactive['haste samba'] and buffactive.march == 1) or
-            (buffactive.march == 2 and buffactive['haste samba']) or
-            (buffactive[580] and buffactive['haste samba'] ) then
-            --add_to_chat(122, 'Magic Haste Level: 35%')
-            classes.CustomMeleeGroups:append('HighHaste')
-        elseif (buffactive.march == 2 ) or
-            ((buffactive[33] or buffactive[604]) and buffactive.march == 1 ) or  -- MG or haste + 1 march
-            (buffactive[580] ) or  -- geo haste
-            (buffactive[33] and buffactive[604]) then
-            --add_to_chat(122, 'Magic Haste Level: 30%')
-            classes.CustomMeleeGroups:append('MidHaste')
-        elseif buffactive[33] or buffactive[604] or buffactive.march == 1 then
-            --add_to_chat(122, 'Magic Haste Level: 15%')
-            classes.CustomMeleeGroups:append('LowHaste')
-        end
+    if (haste == 2 and (buffactive[580] or buffactive.march or buffactive.embrava or buffactive[604])) or
+        (haste == 1 and (buffactive[580] or buffactive.march == 2 or (buffactive.embrava and buffactive['haste samba']) or (buffactive.march and buffactive[604]))) or
+        (buffactive[580] and (buffactive.march or buffactive.embrava or buffactive[604])) or
+        (buffactive.march == 2 and (buffactive.embrava or buffactive[604])) or
+        (buffactive.march and (buffactive.embrava and buffactive['haste samba'])) then
+        --add_to_chat(122, 'Magic Haste Level: 43%')
+        classes.CustomMeleeGroups:append('MaxHaste')
+    elseif ((haste == 2 or buffactive[580] or buffactive.march == 2) and buffactive['haste samba']) or
+        (haste == 1 and buffactive['haste samba'] and (buffactive.march or buffactive[604])) or
+        (buffactive.march and buffactive['haste samba'] and buffactive[604]) then
+        --add_to_chat(122, 'Magic Haste Level: 35%')
+        classes.CustomMeleeGroups:append('HighHaste')
+    elseif (haste == 2 or buffactive[580] or buffactive.march == 2 or (buffactive.embrava and buffactive['haste samba']) or
+        (haste == 1 and (buffactive.march or buffactive[604])) or (buffactive.march and buffactive[604])) then
+        (buffactive.march == 1 and buffactive[604]) or (buffactive.march == 1 and haste == 1)) then
+        --add_to_chat(122, 'Magic Haste Level: 30%')
+        classes.CustomMeleeGroups:append('MidHaste')
+    elseif (haste == 1 or buffactive.march or buffactive[604] or buffactive.embrava) then
+        --add_to_chat(122, 'Magic Haste Level: 15%')
+        classes.CustomMeleeGroups:append('LowHaste')
     end
 end
 
@@ -1000,5 +1058,5 @@ function select_default_macro_book()
 end
 
 function set_lockstyle()
-    send_command('wait 2; input /lockstyleset 1')
+    send_command('wait 2; input /lockstyleset ' .. lockstyleset)
 end
