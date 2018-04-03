@@ -479,7 +479,7 @@ function init_gear_sets()
         head="Mummu Bonnet +1",
         body="Mummu Jacket +2",
         hands="Mummu Wrists +2",
-        legs="Mummu Kecks +1",
+        legs="Mummu Kecks +2",
         feet="Mummu Gamash. +2",
         --neck="Sanctity Necklace",
         ear1="Gwati Earring",
@@ -526,7 +526,7 @@ function init_gear_sets()
         head="Mummu Bonnet +1",
         body="Mummu Jacket +2",
         hands="Mummu Wrists +2",
-        legs="Mummu Kecks +1",
+        legs="Mummu Kecks +2",
         feet="Mummu Gamash. +2",
         ring2="Mummu Ring",
         --waist="Kwahu Kachina Belt",
@@ -627,7 +627,7 @@ function init_gear_sets()
         ear2="Suppanomimi", --5
         ring1="Hetairoi Ring",
         ring2="Epona's Ring",
-        --back=gear.COR_DW_Cape, --10
+        back=gear.COR_DW_Cape, --10
         waist="Kentarch Belt +1",
         }
 
@@ -670,7 +670,7 @@ function init_gear_sets()
         ear2="Suppanomimi", --5
         ring1="Hetairoi Ring",
         ring2="Epona's Ring",
-        --back=gear.COR_DW_Cape, --10
+        back=gear.COR_DW_Cape, --10
         waist="Kentarch Belt +1",
         }
 
@@ -708,7 +708,7 @@ function init_gear_sets()
         ear2="Suppanomimi", --5
         ring1="Hetairoi Ring",
         ring2="Epona's Ring",
-        --back=gear.COR_DW_Cape, --10
+        back=gear.COR_DW_Cape, --10
         waist="Kentarch Belt +1",
         }
 
@@ -746,7 +746,7 @@ function init_gear_sets()
         ear2="Suppanomimi", --5
         ring1="Hetairoi Ring",
         ring2="Epona's Ring",
-        --back=gear.COR_DW_Cape, --10
+        back=gear.COR_DW_Cape, --10
         waist="Kentarch Belt +1",
         }
 
@@ -785,7 +785,7 @@ function init_gear_sets()
         ear2="Suppanomimi", --5
         ring1="Hetairoi Ring",
         ring2="Epona's Ring",
-        --back=gear.COR_DW_Cape, --10
+        back=gear.COR_DW_Cape, --10
         waist="Kentarch Belt +1",
         }
 
@@ -824,7 +824,7 @@ function init_gear_sets()
         ear2="Suppanomimi", --5
         ring1="Hetairoi Ring",
         ring2="Epona's Ring",
-        --back=gear.COR_DW_Cape, --10
+        back=gear.COR_DW_Cape, --10
         waist="Kentarch Belt +1",
         }
 
@@ -1205,13 +1205,13 @@ windower.register_event('action',
         if isTarget == true then
             if act.category == 4 then
                 local param = act.param
-                if param == 845 then
+                if param == 845 and flurry ~= 2 then
                     --add_to_chat(122, 'Flurry Status: Flurry I')
                     flurry = 1
                 elseif param == 846 then
                     --add_to_chat(122, 'Flurry Status: Flurry II')
                     flurry = 2				
-                elseif param == 57 then
+                elseif param == 57 and haste ~=2 then
                     --add_to_chat(122, 'Haste Status: Haste I (Haste)')
                     haste = 1
                 elseif param == 511 then
@@ -1226,7 +1226,7 @@ windower.register_event('action',
             elseif act.category == 13 then
                 local param = act.param
                 --595 haste 1 -602 hastega 2
-                if param == 595 then 
+                if param == 595 and haste ~=2 then 
                     --add_to_chat(122, 'Haste Status: Haste I (Hastega)')
                     haste = 1
                 elseif param == 602 then
@@ -1255,22 +1255,26 @@ function determine_haste_group()
 
     if state.CombatForm.value == 'DW' then
 
-        if(((haste == 2 or buffactive[580] or buffactive.embrava) and (buffactive.march or buffactive[604] or haste == 1)) or
-            (haste == 2 and (buffactive[580] or buffactive.embrava)) or
-            (buffactive.march == 2 and buffactive[604]) or buffactive.march == 3 or buffactive[580] == 2) then
+        if (haste == 2 and (buffactive[580] or buffactive.march or buffactive.embrava or buffactive[604])) or
+            (haste == 1 and (buffactive[580] or buffactive.march == 2 or (buffactive.embrava and buffactive['haste samba']) or (buffactive.march and buffactive[604]))) or
+            (buffactive[580] and (buffactive.march or buffactive.embrava or buffactive[604])) or
+            (buffactive.march == 2 and (buffactive.embrava or buffactive[604])) or
+            (buffactive.march and (buffactive.embrava and buffactive['haste samba'])) then
             --add_to_chat(122, 'Magic Haste Level: 43%')
             classes.CustomMeleeGroups:append('MaxHaste')
             state.DualWield:set()
-        elseif ((haste == 2 or buffactive.march == 2 or buffactive[580]) and buffactive['haste samba']) then
+        elseif ((haste == 2 or buffactive[580] or buffactive.march == 2) and buffactive['haste samba']) or
+            (haste == 1 and buffactive['haste samba'] and (buffactive.march or buffactive[604])) or
+            (buffactive.march and buffactive['haste samba'] and buffactive[604]) then
             --add_to_chat(122, 'Magic Haste Level: 35%')
             classes.CustomMeleeGroups:append('HighHaste')
             state.DualWield:set()
-        elseif ((buffactive[580] or haste == 2 or buffactive.march == 2) or
-            (buffactive.march == 1 and buffactive[604]) or (buffactive.march == 1 and haste == 1)) then
+        elseif (haste == 2 or buffactive[580] or buffactive.march == 2 or (buffactive.embrava and buffactive['haste samba']) or
+            (haste == 1 and (buffactive.march or buffactive[604])) or (buffactive.march and buffactive[604])) then
             --add_to_chat(122, 'Magic Haste Level: 30%')
             classes.CustomMeleeGroups:append('MidHaste')
             state.DualWield:set()
-        elseif (buffactive.march == 1 or buffactive[604] or haste == 1) then
+        elseif (haste == 1 or buffactive.march or buffactive[604] or buffactive.embrava) then
             --add_to_chat(122, 'Magic Haste Level: 15%')
             classes.CustomMeleeGroups:append('LowHaste')
             state.DualWield:set()

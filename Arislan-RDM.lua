@@ -93,6 +93,7 @@ function job_setup()
 
     lockstyleset = 14
 
+    update_offense_mode()    
     determine_haste_group()
 end
 
@@ -1223,7 +1224,7 @@ windower.register_event('action',
         if isTarget == true then
             if act.category == 4 then
                 local param = act.param
-                if param == 57 then
+                if param == 57 and haste ~= 2 then
                     --add_to_chat(122, 'Haste Status: Haste I (Haste)')
                     haste = 1
                 elseif param == 511 then
@@ -1237,7 +1238,7 @@ windower.register_event('action',
                 end
             elseif act.category == 13 then
                 local param = act.param
-                if param == 595 then 
+                if param == 595 and haste ~= 2 then 
                     --add_to_chat(122, 'Haste Status: Haste I (Hastega)')
                     haste = 1
                 elseif param == 602 then

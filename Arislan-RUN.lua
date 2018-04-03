@@ -550,7 +550,7 @@ function init_gear_sets()
         body="Runeist's Coat +3",
         hands="Regal Gauntlets",
         legs="Carmine Cuisses +1",
-        feet="Turms Leggings",
+        feet="Turms Leggings +1",
         neck="Bathy Choker +1",
         ear1="Genmei Earring",
         ear2="Infused Earring",
@@ -580,7 +580,7 @@ function init_gear_sets()
     sets.idle.Town = set_combine(sets.idle, {
         ammo="Knobkierrie",
         head="Rune. Bandeau +3",
-        feet="Runeist's Boots +3",
+        feet="Turms Leggings +1",
         neck="Loricate Torque +1",
         ear1="Sherida Earring",
         ear2="Telos Earring",
@@ -613,7 +613,7 @@ function init_gear_sets()
         body="Erilaz Surcoat +1",
         hands=gear.Herc_DT_hands, --7/5
         legs="Eri. Leg Guards +1", --7/0
-        feet="Turms Leggings",
+        feet="Turms Leggings +1",
         neck="Loricate Torque +1", --6/6
         ear1="Genmei Earring", --2/0
         ear2="Ethereal Earring",
@@ -664,7 +664,7 @@ function init_gear_sets()
         body="Runeist's Coat +3",
         hands="Runeist's Mitons +3", --3/0
         legs="Eri. Leg Guards +1", --7/0
-        feet="Turms Leggings",
+        feet="Turms Leggings +1",
         neck="Loricate Torque +1", --6/6
         ear1="Odnowa Earring", --0/1
         ear2="Odnowa Earring +1", --0/2
@@ -681,7 +681,7 @@ function init_gear_sets()
         body="Meg. Cuirie +2", --8/0
         hands="Turms Mittens",
         legs="Eri. Leg Guards +1", --7/0
-        feet="Turms Leggings",
+        feet="Turms Leggings +1",
         neck="Loricate Torque +1", --6/6
         ear1="Odnowa Earring", --0/1
         ear2="Odnowa Earring +1", --0/2

@@ -1011,13 +1011,13 @@ windower.register_event('action',
         if isTarget == true then
             if act.category == 4 then
                 local param = act.param
-                if param == 845 then
+                if param == 845 and flurry ~= 2 then
                     --add_to_chat(122, 'Flurry Status: Flurry I')
                     flurry = 1
                 elseif param == 846 then
                     --add_to_chat(122, 'Flurry Status: Flurry II')
                     flurry = 2				
-                elseif param == 57 then
+                elseif param == 57 and haste ~=2 then
                     --add_to_chat(122, 'Haste Status: Haste I (Haste)')
                     haste = 1
                 elseif param == 511 then
@@ -1032,7 +1032,7 @@ windower.register_event('action',
             elseif act.category == 13 then
                 local param = act.param
                 --595 haste 1 -602 hastega 2
-                if param == 595 then 
+                if param == 595 and haste ~=2 then 
                     --add_to_chat(122, 'Haste Status: Haste I (Hastega)')
                     haste = 1
                 elseif param == 602 then

@@ -1346,7 +1346,7 @@ windower.register_event('action',
                 end
             elseif act.category == 13 then
                 local param = act.param
-                if param == 595 then 
+                if param == 595 and haste ~= 2 then 
                     --add_to_chat(122, 'Haste Status: Haste I (Hastega)')
                     haste = 1
                 elseif param == 602 then
@@ -1393,7 +1393,6 @@ function determine_haste_group()
             --add_to_chat(122, 'Magic Haste Level: 15%')
             classes.CustomMeleeGroups:append('LowHaste')
         end
-    end
 end
 
 function update_active_abilities()

@@ -74,7 +74,7 @@ function define_global_sets()
     gear.Taeon_DW_feet = {name="Taeon Boots", augments={'Accuracy+20 Attack+20','"Dual Wield"+5','STR+7 DEX+7',}}
 
     gear.Taeon_Crit_head = {name="Taeon Chapeau", augments={'Accuracy+17 Attack+17','Crit.hit rate+3','Crit. hit damage +3%',}}
-    gear.Taeon_Crit_body = {name="Taeon Tabard", augments={'Accuracy+17 Attack+17','Crit.hit rate+3','Crit. hit damage +3%',}}
+    gear.Taeon_Crit_body = {name="Taeon Tabard", augments={'Accuracy+19 Attack+19','Crit.hit rate+3','Crit. hit damage +3%',}}
     gear.Taeon_Crit_hands = {name="Taeon Gloves", augments={'Accuracy+20 Attack+20','Crit.hit rate+3','Crit. hit damage +3%',}}
     gear.Taeon_Crit_legs = {name="Taeon Tights", augments={'Accuracy+17 Attack+17','Crit.hit rate+3','Crit. hit damage +3%',}}
 
