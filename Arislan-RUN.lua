@@ -92,7 +92,7 @@ end
 function user_setup()
     state.OffenseMode:options('STP', 'Normal', 'LowAcc', 'MidAcc', 'HighAcc')
     state.WeaponskillMode:options('Normal', 'Acc')
-    state.HybridMode:options('Normal', 'DT')
+    state.HybridMode:options('Normal', 'DT', 'DTPlus')
     state.CastingMode:options('Normal', 'Resistant')
     state.IdleMode:options('Normal', 'DT')
     state.PhysicalDefenseMode:options('PDT', 'Parry', 'HP')
@@ -752,50 +752,35 @@ function init_gear_sets()
     ---------------------------------------- Hybrid Sets -------------------------------------------
     ------------------------------------------------------------------------------------------------
 
-    sets.engaged.DT = {
-        --sub="Mensch Strap +1", --5/0
-        ammo="Yamarang",
+    sets.Hybrid = {
         head=gear.Adhemar_D_head, --3/0
         body="Ayanmo Corazza +2", --6/6
-        --hands=gear.Herc_DT_hands, --7/5
-        hands=gear.Adhemar_B_hands,
-        legs="Meg. Chausses +2", --6/0
-        feet=gear.Herc_TA_feet,
         neck="Loricate Torque +1", --6/6
-        ear1="Sherida Earring",
-        ear2="Brutal Earring",
-        ring1="Moonbeam Ring",  --4/4
+        ring1="Moonbeam Ring",  --4/4        
         ring2="Defending Ring", --10/10
-        back=gear.RUN_TP_Cape,
-        waist="Ioskeha Belt",
         }
-    
-    sets.engaged.LowAcc.DT = set_combine(sets.engaged.DT, {
-        ear2="Telos Earring",
-        })
-    
-    sets.engaged.MidAcc.DT = set_combine(sets.engaged.LowAcc.DT, {
-        head="Meghanada Visor +2", --5/0
-        hands="Meg. Gloves +2", --4/0
-        })
 
-    sets.engaged.HighAcc.DT = set_combine(sets.engaged.MidAcc.DT, {
-        hands="Runeist's Mitons +3", --3/0
-        feet=gear.Herc_STP_feet,
-        ear1="Cessance Earring",
-        })
+	sets.HybridPlus = {
+        hands=gear.Herc_DT_hands, --7/5
+        legs="Meg. Chausses +2", --6/0
+        }
 
-    sets.engaged.STP.DT = set_combine(sets.engaged.DT, {
-        ear1="Sherida Earring",
-        ear2="Telos Earring",
-        })
+    sets.engaged.DT = set_combine(sets.engaged, sets.Hybrid)
+    sets.engaged.LowAcc.DT = set_combine(sets.engaged.LowAcc, sets.Hybrid)
+    sets.engaged.MidAcc.DT = set_combine(sets.engaged.MidAcc, sets.Hybrid)
+    sets.engaged.HighAcc.DT = set_combine(sets.engaged.HighAcc, sets.Hybrid)
+    sets.engaged.STP.DT = set_combine(sets.engaged.STP, sets.Hybrid)
+
+    sets.engaged.DTPlus = set_combine(sets.engaged, sets.Hybrid, sets.HybridPlus)
+    sets.engaged.LowAcc.DTPlus = set_combine(sets.engaged.LowAcc, sets.Hybrid, sets.HybridPlus)
+    sets.engaged.MidAcc.DTPlus = set_combine(sets.engaged.MidAcc, sets.Hybrid, sets.HybridPlus)
+    sets.engaged.HighAcc.DTPlus = set_combine(sets.engaged.HighAcc, sets.Hybrid, sets.HybridPlus)
+    sets.engaged.STP.DTPlus = set_combine(sets.engaged.STP, sets.Hybrid, sets.HybridPlus)
 
     sets.engaged.Aftermath.DT = {
         head="Aya. Zucchetto +2",
         body="Turms Harness",
-        legs="Samnuha Tights",
         feet="Carmine Greaves +1",
-        neck="Loricate Torque +1",
         ear2="Telos Earring",
         waist="Flume Belt +1",
         }
@@ -1018,7 +1003,7 @@ end
 function customize_melee_set(meleeSet)
      if buffactive['Aftermath: Lv.3'] and player.equipment.main == "Epeolatry" 
         and state.DefenseMode.value == 'None' then
-        if state.HybridMode.value == "DT" then
+        if state.HybridMode.value == "DT" or state.HybridMode.value == "DTPlus" then
             meleeSet = set_combine(meleeSet, sets.engaged.Aftermath.DT)
         else
             meleeSet = set_combine(meleeSet, sets.engaged.Aftermath)

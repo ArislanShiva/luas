@@ -6,7 +6,7 @@
 
 function define_global_sets()
 
-    gear.Adhemar_C_legs = {name="Adhemar Kecks +1", augments={'AGI+10','Rng.Acc.+15','Rng.Atk.+15',}}
+    gear.Adhemar_C_legs = {name="Adhemar Kecks", augments={'AGI+10','Rng.Acc.+15','Rng.Atk.+15',}}
     gear.Adhemar_D_legs = {name="Adhemar Kecks", augments={'AGI+10','"Rapid Shot"+10','Enmity-5',}}
 
     gear.COR_DW_Cape = {name="Camulus's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','Accuracy+10','"Dual Wield"+10',}} --*

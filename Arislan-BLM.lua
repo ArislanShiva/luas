@@ -433,7 +433,7 @@ function init_gear_sets()
 
     sets.midcast.Death.Occult = set_combine(sets.midcast.Death, {
         sub="Bloodrain Strap",
-        head="Mallquis Chapeau +1",
+        head="Mallquis Chapeau +2",
         legs="Perdition Slops",
         feet="Battlecast Gaiters",
         neck="Seraphic Ampulla",
@@ -491,7 +491,7 @@ function init_gear_sets()
 
     sets.midcast['Elemental Magic'].Occult = set_combine(sets.midcast['Elemental Magic'], {
         sub="Bloodrain Strap",
-        head="Mallquis Chapeau +1",
+        head="Mallquis Chapeau +2",
         legs="Perdition Slops",
         feet="Battlecast Gaiters",
         neck="Seraphic Ampulla",
