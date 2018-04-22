@@ -1059,6 +1059,7 @@ function init_gear_sets()
 
     sets.engaged.Hybrid = {
         ammo="Staunch Tathlum", --2/2
+        head=gear.Adhemar_D_head, --4/0
         body="Ayanmo Corazza +2", --6/6
         neck="Loricate Torque +1", --6/6
         ring2="Defending Ring", --10/10

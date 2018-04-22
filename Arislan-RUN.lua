@@ -99,7 +99,7 @@ function user_setup()
     state.MagicalDefenseMode:options('MDT', 'Status')
     
     state.WeaponLock = M(false, 'Weapon Lock')    
-    state.Greatsword = M{['description']='Current Weapon', 'Epeolatry', 'Lionheart', 'Aettir'}
+    state.Greatsword = M{['description']='Current Weapon', 'Epeolatry', 'Lionheart', 'Aettir', "Hepatizon Axe +1"}
     state.Charm = M(false, 'Charm Resistance')
     state.Knockback = M(false, 'Knockback')
     state.Death = M(false, "Death Resistance")
@@ -222,7 +222,7 @@ function init_gear_sets()
         feet="Erilaz Greaves +1",--6
         neck="Unmoving Collar +1", --10
         ear1="Cryptic Earring", --4
-        ear2="Friomisi Earring", --2
+        ear2="Trux Earring", --5
         ring1="Supershear Ring", --5
         ring2="Eihwaz Ring", --5
         back="Evasionist's Cape", --4
@@ -565,7 +565,7 @@ function init_gear_sets()
         ammo="Staunch Tathlum", --2/2
         head=gear.Herc_DT_head, --3/3
         body="Runeist's Coat +3",
-        hands="Turms Mittens",
+        hands="Turms Mittens +1",
         legs="Carmine Cuisses +1",
         feet="Erilaz Greaves +1", --5/0
         neck="Loricate Torque +1", --6/6
@@ -579,7 +579,8 @@ function init_gear_sets()
 
     sets.idle.Town = set_combine(sets.idle, {
         ammo="Knobkierrie",
-        head="Rune. Bandeau +3",
+        head=gear.Adhemar_D_head,
+        hands="Turms Mittens +1",
         feet="Turms Leggings +1",
         neck="Loricate Torque +1",
         ear1="Sherida Earring",
@@ -653,7 +654,7 @@ function init_gear_sets()
         ear2="Hearty Earring",
         ring1="Gelatinous Ring +1", --7/(-1)
         ring2="Defending Ring", --10/10
-        back=gear.RUN_HP_Cape,
+        back=gear.RUN_FC_Cape,
         waist="Engraved Belt",
         }
     
@@ -679,7 +680,7 @@ function init_gear_sets()
         ammo="Staunch Tathlum", --2/2
         head=gear.Herc_DT_head, --3/3
         body="Meg. Cuirie +2", --8/0
-        hands="Turms Mittens",
+        hands="Turms Mittens +1",
         legs="Eri. Leg Guards +1", --7/0
         feet="Turms Leggings +1",
         neck="Loricate Torque +1", --6/6
@@ -758,6 +759,7 @@ function init_gear_sets()
         neck="Loricate Torque +1", --6/6
         ring1="Moonbeam Ring",  --4/4        
         ring2="Defending Ring", --10/10
+        back=gear.RUN_TP_Cape, --5/5
         }
 
 	sets.HybridPlus = {
@@ -792,6 +794,7 @@ function init_gear_sets()
     sets.buff.Doom = {ring1="Eshmun's Ring", ring2="Eshmun's Ring", waist="Gishdubar Sash"}
 
     sets.Embolden = set_combine(sets.midcast.EnhancingDuration, {back="Evasionist's Cape"})
+    sets.Obi = {waist="Hachirin-no-Obi"}
     sets.CP = {back="Mecisto. Mantle"}
     sets.Reive = {neck="Ygnas's Resolve +1"}
 
@@ -858,9 +861,8 @@ end
 -- eventArgs is the same one used in job_midcast, in case information needs to be persisted.
 function job_post_midcast(spell, action, spellMap, eventArgs)
     if spell.english == 'Lunge' or spell.english == 'Swipe' then
-        local obi = get_obi(get_rune_obi_element())
-        if obi then
-            equip({waist=obi})
+        if (spell.element == world.day_element or spell.element == world.weather_element) then
+            equip(sets.Obi)
         end
     end
     if spell.skill == 'Enhancing Magic' and classes.NoSkillSpells:contains(spell.english) then
@@ -987,6 +989,8 @@ function customize_idle_set(idleSet)
         equip({main="Lionheart"})
     elseif state.Greatsword.current == 'Aettir' then
         equip({main="Aettir"})
+    elseif state.Greatsword.current == 'Hepatizon Axe +1' then
+        equip({main="Hepatizon Axe +1"})
     end
 
     --if state.CP.current == 'on' then

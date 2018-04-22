@@ -318,7 +318,7 @@ function init_gear_sets()
         head="Meghanada Visor +2",
         body="Laksa. Frac +3",
         hands="Meg. Gloves +2",
-        legs="Meg. Chausses +2",
+        legs=gear.Herc_RA_legs,
         feet="Lanun Bottes +3",
         neck="Fotia Gorget",
         ear1="Moonshade Earring",
@@ -523,7 +523,7 @@ function init_gear_sets()
     sets.midcast.CorsairShot.Resistant = set_combine(sets.midcast.CorsairShot, {
         head="Laksa. Tricorne +3",
         body="Mummu Jacket +2",
-        hands="Laksa. Gants +2",
+        hands="Laksa. Gants +3",
         legs="Mummu Kecks +2",
         feet="Laksa. Boots +3",
         neck="Sanctity Necklace",
@@ -925,6 +925,7 @@ function init_gear_sets()
     ------------------------------------------------------------------------------------------------
 
     sets.engaged.Hybrid = {
+        head=gear.Adhemar_D_head, --4/0
         neck="Loricate Torque +1", --6/6
         ring2="Defending Ring", --10/10
         }

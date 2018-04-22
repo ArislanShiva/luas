@@ -241,7 +241,7 @@ function init_gear_sets()
         head="Orion Beret +3",
         body=gear.Herc_RA_body,
         hands="Meg. Gloves +2",
-        legs="Meg. Chausses +2",
+        legs=gear.Herc_RA_legs,
         feet=gear.Herc_RA_feet,
         neck="Fotia Gorget",
         ear1="Ishvara Earring",
@@ -272,7 +272,7 @@ function init_gear_sets()
         head="Mummu Bonnet +2",
         body="Abnoba Kaftan",
         hands="Mummu Wrists +2",
-        legs="Mummu Kecks +2",
+        legs=gear.Herc_RA_legs,
         feet="Thereoid Greaves",
         ear1="Sherida Earring",
         ring1="Begrudging Ring",
@@ -281,6 +281,7 @@ function init_gear_sets()
 
     sets.precast.WS['Jishnu\'s Radiance'].Acc = set_combine(sets.precast.WS['Jishnu\'s Radiance'], {
         body="Sayadio's Kaftan",
+        legs="Mummu Kecks +2",
         neck="Iskur Gorget",
         ear1="Enervating Earring",
         ear2="Telos Earring",
@@ -294,7 +295,8 @@ function init_gear_sets()
         })
 
     sets.precast.WS['Last Stand'].Acc = set_combine(sets.precast.WS['Last Stand'], {
-        feet="Orion Socks +3",
+        legs=gear.Adhemar_C_legs,
+    	feet="Orion Socks +3",
         neck="Iskur Gorget",
         ear2="Telos Earring",
         ring2="Hajduk Ring +1",
@@ -740,6 +742,7 @@ function init_gear_sets()
     ------------------------------------------------------------------------------------------------
 
     sets.engaged.Hybrid = {
+        head=gear.Adhemar_D_head, --4/0
         neck="Loricate Torque +1", --6/6
         ring2="Defending Ring", --10/10
         }

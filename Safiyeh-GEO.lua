@@ -66,8 +66,13 @@ function user_setup()
     include('Global-Binds.lua')
 
     send_command('bind ^` input /ja "Full Circle" <me>')
+	send_command('bind ^b input /ja "Blaze of Glory" <me>')
+	send_command('bind ^a input /ja "Ecliptic Attrition" <me>')
+	send_command('bind ^d input /ja "Dematerialize" <me>')
+	send_command('bind ^c input /ja "Life Cycle" <me>')
     send_command('bind !` gs c toggle MagicBurst')
-    send_command('bind !w input /ma "Aspir III" <t>')
+	send_command('bind !w input /ma "Flurry" <stpc>')
+	send_command('bind !p input /ja "Entrust" <me>')
     send_command('bind ^, input /ma Sneak <stpc>')
     send_command('bind ^. input /ma Invisible <stpc>')
     send_command('bind @c gs c toggle CP')
@@ -87,8 +92,13 @@ end
 
 function user_unload()
     send_command('unbind ^`')
+    send_command('unbind ^b')
+    send_command('unbind ^a')
+    send_command('unbind ^d')
+    send_command('unbind ^c')
     send_command('unbind !`')
     send_command('unbind !w')
+    send_command('unbind !p')
     send_command('unbind ^,')
     send_command('unbind !.')
     send_command('unbind @c')
@@ -230,7 +240,7 @@ function init_gear_sets()
         ear2="Mendi. Earring", --5
         ring1="Haoma's Ring",
         ring2="Haoma's Ring",
-        back="Oretan. Cape +1", --5
+        back=gear.GEO_Idle_Cape, --10
         waist="Bishop's Sash",
         }
 
@@ -410,7 +420,7 @@ function init_gear_sets()
         ear2="Infused Earring",
         ring1="Paguroidea Ring",
         ring2="Sheltered Ring",
-        back="Moonbeam Cape",
+        back=gear.GEO_Idle_Cape,
         waist="Austerity Belt +1",
         }
     
@@ -431,7 +441,7 @@ function init_gear_sets()
         back="Moonbeam Cape", --5/5
         })
 
-    sets.idle.Weak = set_combine(sets.idle, {
+--[[    sets.idle.Weak = set_combine(sets.idle, {
 		sub="Ammurapi Shield",
         head="Geo. Galero +3",
         body="Geomancy Tunic +3",
@@ -446,7 +456,7 @@ function init_gear_sets()
         back="Moonbeam Cape",
 		waist="Eschan Stone",
 		})
-
+]]--
     -- .Pet sets are for when Luopan is present.
     sets.idle.Pet = set_combine(sets.idle, { 
         -- Pet: -DT (37.5% to cap) / Pet: Regen
@@ -457,7 +467,7 @@ function init_gear_sets()
         hands="Geo. Mitaines +3", --13/0
         legs="Telchine Braconi", --0/2
         feet="Telchine Pigaches", --0/3
-        back=gear.GEO_Idle_Cape, --0/10
+        back=gear.GEO_Pet_Cape, --0/10
         waist="Isa Belt" --3/1
         })
 
@@ -487,7 +497,7 @@ function init_gear_sets()
         ear2="Regal Earring",
         ring1="Kishar Ring",
         ring2="Weather. Ring +1",
-        back=gear.GEO_Idle_Cape,
+        back=gear.GEO_Pet_Cape,
         })
         
     -- Defense sets
@@ -522,8 +532,6 @@ function init_gear_sets()
         ear1="Cessance Earring",
         ear2="Regal Earring",
         ring1="Hetairoi Ring",
-        ring2="Apate Ring",
-        waist="Cetl Belt",
         }
 
 

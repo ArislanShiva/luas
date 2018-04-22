@@ -666,6 +666,7 @@ function init_gear_sets()
         })
 
     sets.engaged.Hybrid = {
+        head=gear.Adhemar_D_head, --4/0
         neck="Loricate Torque +1", --6/6
         ring2="Defending Ring", --10/10
         }
