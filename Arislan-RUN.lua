@@ -97,8 +97,8 @@ function user_setup()
     state.IdleMode:options('Normal', 'DT')
     state.PhysicalDefenseMode:options('PDT', 'Parry', 'HP')
     state.MagicalDefenseMode:options('MDT', 'Status')
-    
-    state.WeaponLock = M(false, 'Weapon Lock')    
+
+    state.WeaponLock = M(false, 'Weapon Lock')
     state.Greatsword = M{['description']='Current Weapon', 'Epeolatry', 'Lionheart', 'Aettir', "Hepatizon Axe +1"}
     state.Charm = M(false, 'Charm Resistance')
     state.Knockback = M(false, 'Knockback')
@@ -106,7 +106,7 @@ function user_setup()
     state.CP = M(false, "Capacity Points Mode")
 
     state.Runes = M{['description']='Runes', 'Ignis', 'Gelus', 'Flabra', 'Tellus', 'Sulpor', 'Unda', 'Lux', 'Tenebrae'}
-    
+
     -- Additional local binds
     include('Global-Binds.lua') -- OK to remove this line
     include('Global-GEO-Binds.lua') -- OK to remove this line
@@ -117,7 +117,7 @@ function user_setup()
     send_command('bind ^= gs c cycle Runes')
     send_command('bind ^f11 gs c cycle MagicalDefenseMode')
     send_command('bind @c gs c toggle CP')
-    send_command('bind @g gs c cycle Greatsword')
+    send_command('bind @e gs c cycle Greatsword')
     send_command('bind @h gs c toggle Charm')
     send_command('bind @k gs c toggle Knockback')
     send_command('bind @d gs c toggle Death')
@@ -135,7 +135,7 @@ function user_setup()
 
     send_command('bind !o input /ma "Regen IV" <stpc>')
     send_command('bind !p input /ma "Shock Spikes" <me>')
-    
+
     send_command('bind @w gs c toggle WeaponLock')
     send_command('bind @c gs c toggle CP')
 
@@ -161,7 +161,7 @@ function user_setup()
     send_command('bind ^numpad1 input /ws "Herculean Slash" <t>')
     send_command('bind ^numpad2 input /ws "Shockwave" <t>')
     send_command('bind ^numpad3 input /ws "Armor Break" <t>')
-    
+
     select_default_macro_book()
     set_lockstyle()
 end
@@ -174,7 +174,7 @@ function user_unload()
     send_command('unbind ^f11')
     send_command('unbind @c')
     send_command('unbind @h')
-    send_command('unbind @g')
+    send_command('unbind @e')
     send_command('unbind @k')
     send_command('unbind @d')
     send_command('unbind !q')
@@ -263,7 +263,7 @@ function init_gear_sets()
     sets.precast.JA['Rayke'] = {feet="Futhark Boots +1"}
     sets.precast.JA['Elemental Sforzo'] = set_combine(sets.Enmity, {body="Futhark Coat +1"})
     sets.precast.JA['Swordplay'] = set_combine(sets.Enmity, {hands="Futhark Mitons +1"})
-    
+
     sets.precast.JA['Vivacious Pulse'] = set_combine(sets.Enmity, {
         head="Erilaz Galea +1",
         legs="Rune. Trousers +3",
@@ -356,7 +356,7 @@ function init_gear_sets()
         ring2="Niqmaddu Ring",
         back=gear.RUN_WS1_Cape,
         })
-        
+
     sets.precast.WS['Resolution'].Acc = set_combine(sets.precast.WS['Resolution'], {
         head="Dampening Tam",
         hands=gear.Adhemar_A_hands,
@@ -364,7 +364,7 @@ function init_gear_sets()
         feet=gear.Herc_STP_feet,
         ear2="Telos Earring",
         })
-    
+
     sets.precast.WS['Dimidiation'] = set_combine(sets.precast.WS, {
         legs="Lustr. Subligar +1",
         feet="Lustra. Leggings +1",
@@ -372,7 +372,7 @@ function init_gear_sets()
         back=gear.RUN_WS2_Cape,
         waist="Grunfeld Rope",
         })
-        
+
     sets.precast.WS['Dimidiation'].Acc = set_combine(sets.precast.WS['Dimidiation'], {
         ammo="Seeth. Bomblet +1",
         body=gear.Adhemar_B_body,
@@ -441,7 +441,7 @@ function init_gear_sets()
         back=gear.RUN_WS1_Cape,
         waist="Eschan Stone",
         }
-    
+
     sets.precast.WS['Shockwave'] = sets.precast.WS['Full Break']
 
 
@@ -498,8 +498,8 @@ function init_gear_sets()
         })
 
     sets.midcast['Temper'] = set_combine(sets.midcast['Enhancing Magic'], {
-        main="Pukulatmuj +1", 
-        sub="Pukulatmuj", 
+        main="Pukulatmuj +1",
+        sub="Pukulatmuj",
         head="Carmine Mask +1",
         body="Manasa Chasuble",
         hands="Runeist's Mitons +3",
@@ -532,13 +532,13 @@ function init_gear_sets()
     sets.midcast.Flash = sets.Enmity
     sets.midcast.Foil = sets.Enmity
     sets.midcast.Utsusemi = sets.midcast.SpellInterrupt
-    
+
     sets.midcast['Blue Magic'] = {}
     sets.midcast['Blue Magic'].Enmity = sets.Enmity
     sets.midcast['Blue Magic'].Cure = sets.midcast.Cure
     sets.midcast['Blue Magic'].Buff = sets.midcast['Enhancing Magic']
 
-    
+
     ------------------------------------------------------------------------------------------------
     ----------------------------------------- Idle Sets --------------------------------------------
     ------------------------------------------------------------------------------------------------
@@ -623,7 +623,7 @@ function init_gear_sets()
         back=gear.RUN_HP_Cape,
         waist="Flume Belt +1", --4/0
         }
-    
+
     sets.defense.MDT = {
         sub="Irenic Strap +1", --0/5
         ammo="Staunch Tathlum", --2/2
@@ -657,7 +657,7 @@ function init_gear_sets()
         back=gear.RUN_FC_Cape,
         waist="Engraved Belt",
         }
-    
+
     sets.defense.HP = {
         sub="Refined Grip +1", --3/3
         ammo="Staunch Tathlum", --2/2
@@ -757,7 +757,7 @@ function init_gear_sets()
         head=gear.Adhemar_D_head, --3/0
         body="Ayanmo Corazza +2", --6/6
         neck="Loricate Torque +1", --6/6
-        ring1="Moonbeam Ring",  --4/4        
+        ring1="Moonbeam Ring",  --4/4
         ring2="Defending Ring", --10/10
         back=gear.RUN_TP_Cape, --5/5
         }
@@ -914,7 +914,7 @@ end
 function job_buff_change(buff,gain)
     -- If we gain or lose any haste buffs, adjust which gear set we target.
 --    if buffactive['Reive Mark'] then
---        if gain then           
+--        if gain then
 --            equip(sets.Reive)
 --            disable('neck')
 --        else
@@ -923,7 +923,7 @@ function job_buff_change(buff,gain)
 --    end
 
     if buff == "doom" then
-        if gain then           
+        if gain then
             equip(sets.buff.Doom)
             send_command('@input /p Doomed.')
              disable('ring1','ring2','waist')
@@ -934,11 +934,11 @@ function job_buff_change(buff,gain)
     end
 
     if buff == 'Embolden' then
-        if gain then 
+        if gain then
             equip(sets.Embolden)
-            disable('head','legs','back')            
+            disable('head','legs','back')
         else
-            enable('head','legs','back')            
+            enable('head','legs','back')
             status_change(player.status)
         end
     end
@@ -954,7 +954,7 @@ function job_buff_change(buff,gain)
     end
 
 end
-    
+
 -- Handle notifications of general user state change.
 function job_state_change(stateField, newValue, oldValue)
     if state.WeaponLock.value == true then
@@ -975,7 +975,7 @@ function customize_idle_set(idleSet)
     end
     if state.Charm.value == true then
         idleSet = set_combine(idleSet, sets.defense.Charm)
-    end    
+    end
     if state.Knockback.value == true then
         idleSet = set_combine(idleSet, sets.defense.Knockback)
     end
@@ -1005,7 +1005,7 @@ end
 
 -- Modify the default melee set after it was constructed.
 function customize_melee_set(meleeSet)
-     if buffactive['Aftermath: Lv.3'] and player.equipment.main == "Epeolatry" 
+     if buffactive['Aftermath: Lv.3'] and player.equipment.main == "Epeolatry"
         and state.DefenseMode.value == 'None' then
         if state.HybridMode.value == "DT" or state.HybridMode.value == "DTPlus" then
             meleeSet = set_combine(meleeSet, sets.engaged.Aftermath.DT)
@@ -1047,23 +1047,23 @@ end
 -- Set eventArgs.handled to true if display was handled, and you don't want the default info shown.
 function display_current_job_state(eventArgs)
     local msg = '[ Melee'
-    
+
     if state.CombatForm.has_value then
         msg = msg .. ' (' .. state.CombatForm.value .. ')'
     end
-    
+
     msg = msg .. ': '
-    
+
     msg = msg .. state.OffenseMode.value
     if state.HybridMode.value ~= 'Normal' then
-        msg = msg .. '/' .. state.HybridMode.value 
+        msg = msg .. '/' .. state.HybridMode.value
     end
     msg = msg .. ' ][ WS: ' .. state.WeaponskillMode.value .. ' ]'
-    
+
     if state.DefenseMode.value ~= 'None' then
         msg = msg .. '[ Defense: ' .. state.DefenseMode.value .. state[state.DefenseMode.value .. 'DefenseMode'].value .. ' ]'
     end
-    
+
     if state.Charm.value == true then
         msg = msg .. '[ Charm ]'
     end
@@ -1071,7 +1071,7 @@ function display_current_job_state(eventArgs)
     if state.Knockback.value == true then
         msg = msg .. '[ Knockback ]'
     end
-    
+
     if state.Death.value == true then
         msg = msg .. '[ Death ]'
     end
@@ -1079,9 +1079,9 @@ function display_current_job_state(eventArgs)
     if state.Kiting.value then
         msg = msg .. '[ Kiting Mode ]'
     end
-    
+
     msg = msg .. '[ *' .. state.Runes.current .. '* ]'
-    
+
     add_to_chat(060, msg)
 
     eventArgs.handled = true

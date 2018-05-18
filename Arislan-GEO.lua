@@ -35,7 +35,7 @@
 -- Initialization function for this job file.
 function get_sets()
     mote_include_version = 2
-    
+
     -- Load and initialize the include file.
     include('Mote-Include.lua')
 end
@@ -47,7 +47,7 @@ function job_setup()
 
     state.CP = M(false, "Capacity Points Mode")
     lockstyleset = 10
-    
+
 end
 
 -------------------------------------------------------------------------------------------------------------------
@@ -59,12 +59,12 @@ function user_setup()
     state.CastingMode:options('Normal', 'Seidr', 'Resistant')
     state.IdleMode:options('Normal', 'DT')
 
-    state.WeaponLock = M(false, 'Weapon Lock')    
+    state.WeaponLock = M(false, 'Weapon Lock')
     state.MagicBurst = M(false, 'Magic Burst')
 
     -- Additional local binds
     include('Global-Binds.lua') -- OK to remove this line
-    include('Global-GEO-Binds.lua') -- OK to remove this line
+    include('Global-COR-Binds.lua') -- OK to remove this line
 
     send_command('bind ^` input /ja "Full Circle" <me>')
     send_command('bind ^b input /ja "Blaze of Glory" <me>')
@@ -73,7 +73,7 @@ function user_setup()
     send_command('bind !` gs c toggle MagicBurst')
     send_command('bind @c gs c toggle CP')
     send_command('bind @w gs c toggle WeaponLock')
-    
+
     select_default_macro_book()
     set_lockstyle()
 end
@@ -115,14 +115,14 @@ function init_gear_sets()
     ------------------------------------------------------------------------------------------------
     ----------------------------------------- Precast Sets -----------------------------------------
     ------------------------------------------------------------------------------------------------
-    
+
     -- Precast sets to enhance JAs
     sets.precast.JA.Bolster = {body="Bagua Tunic +1"}
     sets.precast.JA['Full Circle'] = {head="Azimuth Hood +1"}
     sets.precast.JA['Life Cycle'] = {body="Geo. Tunic +1", back="Nantosuelta's Cape"}
-  
+
     -- Fast cast sets for spells
-    
+
     sets.precast.FC = {
     --  /RDM --15
         main="Oranyan", --7
@@ -146,7 +146,7 @@ function init_gear_sets()
         waist="Siegel Sash",
         back="Perimede Cape",
         })
-        
+
     sets.precast.FC['Elemental Magic'] = set_combine(sets.precast.FC, {
         hands="Bagua Mitaines +1",
         waist="Channeler's Stone",
@@ -163,7 +163,7 @@ function init_gear_sets()
     sets.precast.FC.Curaga = sets.precast.FC.Cure
     sets.precast.FC.Impact = set_combine(sets.precast.FC, {head=empty, body="Twilight Cloak"})
 
-     
+
     -- Weaponskill sets
     -- Default set for any weaponskill that isn't any more specifically defined
     sets.precast.WS = {
@@ -181,11 +181,11 @@ function init_gear_sets()
         waist="Fotia Belt",
         }
 
-    
+
     ------------------------------------------------------------------------
     ----------------------------- Midcast Sets -----------------------------
     ------------------------------------------------------------------------
-    
+
     -- Base fast recast for spells
     sets.midcast.FastRecast = {
         main="Oranyan",
@@ -199,7 +199,7 @@ function init_gear_sets()
         ring1="Kishar Ring",
         back="Lifestream Cape",
         } -- Haste
-    
+
    sets.midcast.Geomancy = {
         main="Sucellus",
         sub="Genmei Shield",
@@ -217,7 +217,7 @@ function init_gear_sets()
         back="Lifestream Cape",
         waist="Austerity Belt +1",
         }
-    
+
     sets.midcast.Geomancy.Indi = set_combine(sets.midcast.Geomancy, {
         hands="Geo. Mitaines +1",
         legs="Bagua Pants +1",
@@ -275,7 +275,7 @@ function init_gear_sets()
         back="Fi Follet Cape +1",
         waist="Olympus Sash",
         }
-        
+
     sets.midcast.EnhancingDuration = {
         main="Gada",
         sub="Ammurapi Shield",
@@ -291,13 +291,13 @@ function init_gear_sets()
         sub="Ammurapi Shield",
         body="Telchine Chas.",
         })
-    
+
     sets.midcast.Refresh = set_combine(sets.midcast['Enhancing Magic'], {
         head="Amalric Coif",
         waist="Gishdubar Sash",
         back="Grapevine Cape",
         })
-            
+
     sets.midcast.Stoneskin = set_combine(sets.midcast['Enhancing Magic'], {
         neck="Nodens Gorget",
         waist="Siegel Sash",
@@ -334,7 +334,7 @@ function init_gear_sets()
         back="Aurist's Cape +1",
         waist="Luminary Sash",
         } -- MND/Magic accuracy
-    
+
     sets.midcast.IntEnfeebles = set_combine(sets.midcast.MndEnfeebles, {
         main=gear.Grioavolr_MB,
         back="Nantosuelta's Cape",
@@ -356,7 +356,7 @@ function init_gear_sets()
         back="Perimede Cape",
         waist="Luminary Sash",
         }
-    
+
     sets.midcast.Drain = set_combine(sets.midcast['Dark Magic'], {
         head="Bagua Galero +1",
         feet="Merlinic Crackows",
@@ -364,7 +364,7 @@ function init_gear_sets()
         ring2="Archon Ring",
         waist="Fucho-no-obi",
         })
-    
+
     sets.midcast.Aspir = sets.midcast.Drain
 
     sets.midcast.Stun = set_combine(sets.midcast['Dark Magic'], {
@@ -372,13 +372,13 @@ function init_gear_sets()
         })
 
     -- Elemental Magic sets
-    
+
     sets.midcast['Elemental Magic'] = {
         main=gear.Grioavolr_MB,
         sub="Niobid Strap",
         head="Merlinic Hood",
         body="Merlinic Jubbah",
-        hands="Amalric Gages",
+        hands="Amalric Gages +1",
         legs=gear.Merlinic_MAcc_legs,
         feet="Merlinic Crackows",
         neck="Baetyl Pendant",
@@ -393,7 +393,6 @@ function init_gear_sets()
     sets.midcast['Elemental Magic'].Resistant = set_combine(sets.midcast['Elemental Magic'], {
         main=gear.Grioavolr_MB,
         sub="Enki Strap",
-        hands="Ea Cuffs",
         feet="Jhakri Pigaches +2",
         neck="Erra Pendant",
         back="Aurist's Cape +1",
@@ -410,7 +409,6 @@ function init_gear_sets()
     sets.midcast['Elemental Magic'].Seidr = set_combine(sets.midcast['Elemental Magic'], {
         sub="Enki Strap",
         body="Seidr Cotehardie",
-        hands="Ea Cuffs",
         legs=gear.Merlinic_MAcc_legs,
         feet="Jhakri Pigaches +2",
         neck="Sanctity Necklace",
@@ -420,7 +418,6 @@ function init_gear_sets()
         main="Solstice",
         sub="Ammurapi Shield",
         body="Seidr Cotehardie",
-        hands="Ea Cuffs",
         neck="Erra Pendant",
         ring1="Fenrir Ring +1",
         ring2="Fenrir Ring +1",
@@ -458,7 +455,7 @@ function init_gear_sets()
         back="Moonbeam Cape",
         waist="Austerity Belt +1",
         }
-    
+
     sets.resting = set_combine(sets.idle, {
         main="Chatoyant Staff",
         waist="Shinjutsu-no-Obi +1",
@@ -481,8 +478,8 @@ function init_gear_sets()
     sets.idle.Weak = sets.idle.DT
 
     -- .Pet sets are for when Luopan is present.
-    sets.idle.Pet = set_combine(sets.idle, { 
-        -- Pet: -DT (37.5% to cap) / Pet: Regen 
+    sets.idle.Pet = set_combine(sets.idle, {
+        -- Pet: -DT (37.5% to cap) / Pet: Regen
         main="Sucellus", --3/3
         sub="Genmei Shield",
         range="Dunna", --5/0
@@ -525,7 +522,7 @@ function init_gear_sets()
         ring1="Fenrir Ring +1",
         ring2="Weather. Ring +1",
         })
-        
+
     -- Defense sets
 
     sets.defense.PDT = sets.idle.DT
@@ -538,7 +535,7 @@ function init_gear_sets()
     sets.latent_refresh = {
         waist="Fucho-no-obi"
         }
-    
+
     --------------------------------------
     -- Engaged sets
     --------------------------------------
@@ -547,9 +544,9 @@ function init_gear_sets()
     -- sets if more refined versions aren't defined.
     -- If you create a set with both offense and defense modes, the offense mode should be first.
     -- EG: sets.engaged.Dagger.Accuracy.Evasion
-    
+
     -- Normal melee group
-    sets.engaged = {        
+    sets.engaged = {
         head="Jhakri Coronal +2",
         body="Jhakri Robe +2",
         hands="Jhakri Cuffs +2",
@@ -570,7 +567,7 @@ function init_gear_sets()
 
     sets.magic_burst = {
         body="Merlinic Jubbah", --10
-        hands="Ea Cuffs", --5(5)
+        hands="Amalric Gages +1", --(6)
         feet="Merlinic Crackows", --11
         neck="Mizu. Kubikazari", --10
         ring1="Mujin Band", --(5)
@@ -595,7 +592,7 @@ function job_post_precast(spell, action, spellMap, eventArgs)
 end
 
 function job_post_midcast(spell, action, spellMap, eventArgs)
-    if spell.skill == 'Elemental Magic' then 
+    if spell.skill == 'Elemental Magic' then
         if state.MagicBurst.value then
             equip(sets.magic_burst)
             if spell.english == "Impact" then
@@ -630,7 +627,7 @@ function job_aftercast(spell, action, spellMap, eventArgs)
             send_command('@timers c "Sleep II ['..spell.target.name..']" 90 down spells/00259.png')
         elseif spell.english == "Sleep" or spell.english == "Sleepga" then -- Sleep & Sleepga Countdown --
             send_command('@timers c "Sleep ['..spell.target.name..']" 60 down spells/00253.png')
-        end 
+        end
     elseif not player.indi then
         classes.CustomIdleGroups:clear()
     end
@@ -654,7 +651,7 @@ function job_buff_change(buff, gain)
     end
 
     if buff == "doom" then
-        if gain then           
+        if gain then
             equip(sets.buff.Doom)
             send_command('@input /p Doomed.')
              disable('ring1','ring2','waist')

@@ -35,7 +35,7 @@
 -- Initialization function for this job file.
 function get_sets()
     mote_include_version = 2
-    
+
     -- Load and initialize the include file.
     include('Mote-Include.lua')
 end
@@ -46,7 +46,7 @@ function job_setup()
     indi_duration = 180
 
     state.CP = M(false, "Capacity Points Mode")
-    
+
 end
 
 -------------------------------------------------------------------------------------------------------------------
@@ -59,7 +59,7 @@ function user_setup()
     state.CastingMode:options('Normal', 'Seidr', 'Resistant')
     state.IdleMode:options('Normal', 'DT')
 
-    state.WeaponLock = M(false, 'Weapon Lock')    
+    state.WeaponLock = M(false, 'Weapon Lock')
     state.MagicBurst = M(false, 'Magic Burst')
 
     -- Additional local binds
@@ -85,7 +85,7 @@ function user_setup()
     send_command('bind ^numpad1 input /ws "Flash Nova" <t>')
 
     send_command('bind #- input /follow <t>')
-    
+
     select_default_macro_book()
     set_lockstyle()
 end
@@ -125,15 +125,15 @@ function init_gear_sets()
     ------------------------------------------------------------------------------------------------
     ----------------------------------------- Precast Sets -----------------------------------------
     ------------------------------------------------------------------------------------------------
-    
+
     -- Precast sets to enhance JAs
     sets.precast.JA.Bolster = {body="Bagua Tunic +1"}
     sets.precast.JA['Full Circle'] = {head="Azimuth Hood +1"}
     sets.precast.JA['Life Cycle'] = {body="Geomancy Tunic +3", back=gear.GEO_Idle_Cape,}
 
-  
+
     -- Fast cast sets for spells
-    
+
     sets.precast.FC = {
     --  /RDM --15
         ranged="Dunna", --3
@@ -157,7 +157,7 @@ function init_gear_sets()
 		waist="Siegel Sash",
         back="Perimede Cape",
         })
-        
+
     sets.precast.FC['Elemental Magic'] = set_combine(sets.precast.FC, {
         hands="Bagua Mitaines +1",
         ear1="Barkarole Earring",
@@ -171,7 +171,7 @@ function init_gear_sets()
     sets.precast.FC.Curaga = sets.precast.FC.Cure
     sets.precast.FC.Impact = set_combine(sets.precast.FC, {head=empty, body="Twilight Cloak"})
 
-     
+
     -- Weaponskill sets
     -- Default set for any weaponskill that isn't any more specifically defined
     sets.precast.WS = {
@@ -185,15 +185,15 @@ function init_gear_sets()
         ring2="Apate Ring",
 		waist="Fotia Belt",
         }
-    
+
     ------------------------------------------------------------------------
     ----------------------------- Midcast Sets -----------------------------
     ------------------------------------------------------------------------
-    
+
     -- Base fast recast for spells
     sets.midcast.FastRecast = {
         main="Sucellus",
-        sub="Chanter's Shield", 
+        sub="Chanter's Shield",
         head="Amalric Coif",
         hands="Merlinic Dastanas",
         legs="Geomancy Pants +3",
@@ -204,7 +204,7 @@ function init_gear_sets()
         back=gear.GEO_FC_Cape,
         waist="Witful Belt",
         } -- Haste
-    
+
    sets.midcast.Geomancy = {
         main="Idris",
         sub="Chanter's Shield",
@@ -221,7 +221,7 @@ function init_gear_sets()
         back="Lifestream Cape",
         waist="Austerity Belt +1",
         }
-    
+
     sets.midcast.Geomancy.Indi = set_combine(sets.midcast.Geomancy, {
         hands="Geo. Mitaines +3",
         legs="Bagua Pants +1",
@@ -285,11 +285,11 @@ function init_gear_sets()
         main="Bolelabunga",
         sub="Ammurapi Shield",
         })
-    
+
     sets.midcast.Refresh = set_combine(sets.midcast['Enhancing Magic'], {
         head="Amalric Coif",
         })
-            
+
     sets.midcast.Stoneskin = set_combine(sets.midcast['Enhancing Magic'], {
         neck="Nodens Gorget",
 		waist="Siegel Sash",
@@ -326,7 +326,7 @@ function init_gear_sets()
         back=gear.GEO_FC_Cape,
         waist="Luminary Sash",
        } -- MND/Magic accuracy
-    
+
     sets.midcast.IntEnfeebles = set_combine(sets.midcast.MndEnfeebles, {
         ear1="Barkarole Earring",
         ring1="Shiva Ring",
@@ -350,20 +350,21 @@ function init_gear_sets()
         back=gear.GEO_MAB_Cape,
         waist="Luminary Sash",
         }
-    
+
     sets.midcast.Drain = set_combine(sets.midcast['Dark Magic'], {
         head="Bagua Galero +1",
         ring1="Evanescence Ring",
+        ring2="Archon Ring",
         waist="Fucho-no-Obi",
         })
-    
+
     sets.midcast.Aspir = sets.midcast.Drain
 
     sets.midcast.Stun = set_combine(sets.midcast['Dark Magic'], {
         })
 
     -- Elemental Magic sets
-    
+
     sets.midcast['Elemental Magic'] = {
         main="Idris",
         sub="Ammurapi Shield",
@@ -398,6 +399,7 @@ function init_gear_sets()
     sets.midcast.Impact = set_combine(sets.midcast['Elemental Magic'], {
         head=empty,
         body="Twilight Cloak",
+        ring2="Archon Ring",
         })
 
     -- Initializes trusts at iLvl 119
@@ -416,14 +418,14 @@ function init_gear_sets()
         legs="Assid. Pants +1",
         feet="Geo. Sandals +3",
         neck="Bathy Choker +1",
-		ear1="Odnowa Earring +1",
+		    ear1="Lugalbanda Earring",
         ear2="Infused Earring",
         ring1="Paguroidea Ring",
         ring2="Sheltered Ring",
         back=gear.GEO_Idle_Cape,
         waist="Austerity Belt +1",
         }
-    
+
     sets.resting = set_combine(sets.idle, {
         waist="Austerity Belt +1",
         })
@@ -434,7 +436,7 @@ function init_gear_sets()
         hands="Geo. Mitaines +3", --3/0
         feet="Azimuth Gaiters +1", --4/0
         neck="Loricate Torque +1", --6/6
-		ear1="Odnowa Earring +1", --2/0
+		    ear1="Odnowa Earring +1", --2/0
         ear2="Etiolation Earring", --0/3
         ring1="Gelatinous Ring +1", --7/(-1)
         ring2="Defending Ring", --10/10
@@ -458,7 +460,7 @@ function init_gear_sets()
 		})
 ]]--
     -- .Pet sets are for when Luopan is present.
-    sets.idle.Pet = set_combine(sets.idle, { 
+    sets.idle.Pet = set_combine(sets.idle, {
         -- Pet: -DT (37.5% to cap) / Pet: Regen
         main="Idris",
         sub="Genmei Shield",
@@ -499,7 +501,7 @@ function init_gear_sets()
         ring2="Weather. Ring +1",
         back=gear.GEO_Pet_Cape,
         })
-        
+
     -- Defense sets
 
     sets.defense.PDT = sets.idle.DT
@@ -512,7 +514,7 @@ function init_gear_sets()
     sets.latent_refresh = {
         waist="Fucho-no-Obi",
         }
-    
+
     --------------------------------------
     -- Engaged sets
     --------------------------------------
@@ -521,9 +523,9 @@ function init_gear_sets()
     -- sets if more refined versions aren't defined.
     -- If you create a set with both offense and defense modes, the offense mode should be first.
     -- EG: sets.engaged.Dagger.Accuracy.Evasion
-    
+
     -- Normal melee group
-    sets.engaged = {        
+    sets.engaged = {
         main="Idris",
         sub="Tamaxchi",
         body="Jhakri Robe +2",
@@ -552,7 +554,7 @@ function init_gear_sets()
 
     sets.Obi = {waist="Hachirin-no-Obi"}
     sets.CP = {back="Mecisto. Mantle"}
-    
+
 end
 
 -------------------------------------------------------------------------------------------------------------------
@@ -566,7 +568,7 @@ function job_post_precast(spell, action, spellMap, eventArgs)
 end
 
 function job_post_midcast(spell, action, spellMap, eventArgs)
-    if spell.skill == 'Elemental Magic' then 
+    if spell.skill == 'Elemental Magic' then
         if state.MagicBurst.value then
             equip(sets.magic_burst)
             if spell.english == "Impact" then
@@ -601,7 +603,7 @@ function job_aftercast(spell, action, spellMap, eventArgs)
             send_command('@timers c "Sleep II ['..spell.target.name..']" 90 down spells/00259.png')
         elseif spell.english == "Sleep" or spell.english == "Sleepga" then -- Sleep & Sleepga Countdown --
             send_command('@timers c "Sleep ['..spell.target.name..']" 60 down spells/00253.png')
-        end 
+        end
     elseif not player.indi then
         classes.CustomIdleGroups:clear()
     end
@@ -625,7 +627,7 @@ function job_buff_change(buff, gain)
     end
 
     if buff == "doom" then
-        if gain then           
+        if gain then
             equip(sets.buff.Doom)
             send_command('@input /p Doomed.')
              disable('ring1','ring2','waist')

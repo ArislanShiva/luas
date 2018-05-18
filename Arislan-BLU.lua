@@ -1108,7 +1108,7 @@ function init_gear_sets()
 
     sets.magic_burst = set_combine(sets.midcast['Blue Magic'].Magical, {
         body="Samnuha Coat", --(8)
-        hands="Amalric Gages", --(5)
+        hands="Amalric Gages +1", --(5)
         legs="Assim. Shalwar +2", --5
         feet="Jhakri Pigaches +2", --5
         ring1="Mujin Band", --(5)

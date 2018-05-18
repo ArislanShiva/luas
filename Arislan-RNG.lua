@@ -62,7 +62,7 @@ function job_setup()
 
     lockstyleset = 1
 
-    update_offense_mode()    
+    update_offense_mode()
     determine_haste_group()
 end
 
@@ -77,11 +77,12 @@ function user_setup()
     state.RangedMode:options('STP', 'Normal', 'Acc', 'HighAcc', 'Critical')
     state.WeaponskillMode:options('Normal', 'Acc')
     state.IdleMode:options('Normal', 'DT')
-    
+
     state.CP = M(false, "Capacity Points Mode")
-    
+
     gear.RAbullet = "Chrono Bullet"
     gear.WSbullet = "Chrono Bullet"
+    gear.ACCbullet = "Eradicating Bullet"
     gear.MAbullet = "Chrono Bullet"
     options.ammo_warning_limit = 10
 
@@ -117,6 +118,7 @@ function user_setup()
     send_command('bind ^numpad7 input /ws "Trueflight" <t>')
     send_command('bind ^numpad8 input /ws "Last Stand" <t>')
     send_command('bind ^numpad4 input /ws "Wildfire" <t>')
+    send_command('bind ^numpad6 input /ws "Coronach" <t>')
     send_command('bind ^numpad2 input /ws "Sniper Shot" <t>')
     send_command('bind ^numpad3 input /ws "Numbing Shot" <t>')
 
@@ -145,6 +147,7 @@ function user_unload()
     send_command('unbind ^numpad7')
     send_command('unbind ^numpad8')
     send_command('unbind ^numpad4')
+    send_command('unbind ^numpad6')
     send_command('unbind ^numpad2')
     send_command('unbind ^numpad3')
     send_command('unbind numpad0')
@@ -253,6 +256,7 @@ function init_gear_sets()
         }
 
     sets.precast.WS.Acc = set_combine(sets.precast.WS, {
+        ammo=gear.ACCbullet,
         legs=gear.Adhemar_C_legs,
         feet="Orion Socks +3",
         neck="Combatant's Torque",
@@ -295,21 +299,30 @@ function init_gear_sets()
         })
 
     sets.precast.WS['Last Stand'].Acc = set_combine(sets.precast.WS['Last Stand'], {
+        ammo=gear.ACCbullet,
         legs=gear.Adhemar_C_legs,
-    	feet="Orion Socks +3",
+    	  feet="Orion Socks +3",
         neck="Iskur Gorget",
         ear2="Telos Earring",
         ring2="Hajduk Ring +1",
         waist="Kwahu Kachina Belt",
         })
-        
+
+    sets.precast.WS["Coronach"] = set_combine(sets.precast.WS['Last Stand'], {
+        ear2="Sherida Earring",
+        })
+
+    sets.precast.WS["Coronach"].Acc = set_combine(sets.precast.WS['Coronach'], {
+      ear2="Telos Earring",
+      })
+
     sets.precast.WS["Trueflight"] = {
         ammo=gear.MAbullet,
         head="Orion Beret +3",
         body="Samnuha Coat",
         hands="Carmine Fin. Ga. +1",
         legs=gear.Herc_MAB_legs,
-        feet=gear.Herc_WS_feet,        
+        feet=gear.Herc_WS_feet,
         neck="Baetyl Pendant",
         ear1="Moonshade Earring",
         ear2="Friomisi Earring",
@@ -347,13 +360,13 @@ function init_gear_sets()
     sets.precast.WS['Rampage'] = set_combine(sets.precast.WS['Evisceration'], {feet=gear.Herc_TA_feet})
     sets.precast.WS['Rampage'].Acc = sets.precast.WS['Evisceration'].Acc
 
-        
+
     ------------------------------------------------------------------------------------------------
     ---------------------------------------- Midcast Sets ------------------------------------------
     ------------------------------------------------------------------------------------------------
 
     -- Fast recast for spells
-    
+
     sets.midcast.FastRecast = sets.precast.FC
 
     sets.midcast.SpellInterrupt = {
@@ -381,8 +394,9 @@ function init_gear_sets()
         back=gear.RNG_RA_Cape,
         waist="Yemaya Belt",
         }
-    
+
     sets.midcast.RA.Acc = set_combine(sets.midcast.RA, {
+        ammo=gear.ACCbullet,
         hands="Meg. Gloves +2",
         feet="Orion Socks +3",
         ring2="Hajduk Ring +1",
@@ -405,7 +419,7 @@ function init_gear_sets()
         ring2="Mummu Ring",
         waist="Kwahu Kachina Belt",
         })
-        
+
     sets.midcast.RA.STP = set_combine(sets.midcast.RA, {
         feet="Carmine Greaves +1",
         ear1="Dedition Earring",
@@ -420,7 +434,7 @@ function init_gear_sets()
         feet="Oshosi Leggings", --3
         } --25
 
-        
+
     ------------------------------------------------------------------------------------------------
     ----------------------------------------- Idle Sets --------------------------------------------
     ------------------------------------------------------------------------------------------------
@@ -429,7 +443,6 @@ function init_gear_sets()
 
     -- Idle sets
     sets.idle = {
-        ranged="Fomalhaut",
         ammo=gear.RAbullet,
         head="Orion Beret +3",
         body="Orion Jerkin +3",
@@ -456,8 +469,9 @@ function init_gear_sets()
         back="Moonbeam Cape", --5/5
         waist="Flume Belt +1", --4/0
         })
-        
+
     sets.idle.Town = set_combine(sets.idle, {
+        ammo=gear.ACCbullet,
         neck="Iskur Gorget",
         ear1="Enervating Earring",
         ear2="Telos Earring",
@@ -466,7 +480,7 @@ function init_gear_sets()
         back=gear.RNG_RA_Cape,
         })
 
-        
+
     ------------------------------------------------------------------------------------------------
     ---------------------------------------- Defense Sets ------------------------------------------
     ------------------------------------------------------------------------------------------------
@@ -529,8 +543,8 @@ function init_gear_sets()
 
     -- * DNC Subjob DW Trait: +15%
     -- * NIN Subjob DW Trait: +25%
-    
-    -- No Magic Haste (74% DW to cap)    
+
+    -- No Magic Haste (74% DW to cap)
     sets.engaged.DW = {
         head=gear.Adhemar_B_head,
         body=gear.Adhemar_B_body, --6
@@ -746,7 +760,7 @@ function init_gear_sets()
         neck="Loricate Torque +1", --6/6
         ring2="Defending Ring", --10/10
         }
-    
+
     sets.engaged.DT = set_combine(sets.engaged, sets.engaged.Hybrid)
     sets.engaged.LowAcc.DT = set_combine(sets.engaged.LowAcc, sets.engaged.Hybrid)
     sets.engaged.MidAcc.DT = set_combine(sets.engaged.MidAcc, sets.engaged.Hybrid)
@@ -762,25 +776,25 @@ function init_gear_sets()
     sets.engaged.DW.DT.LowHaste = set_combine(sets.engaged.DW.LowHaste, sets.engaged.Hybrid)
     sets.engaged.DW.LowAcc.DT.LowHaste = set_combine(sets.engaged.DW.LowAcc.LowHaste, sets.engaged.Hybrid)
     sets.engaged.DW.MidAcc.DT.LowHaste = set_combine(sets.engaged.DW.MidAcc.LowHaste, sets.engaged.Hybrid)
-    sets.engaged.DW.HighAcc.DT.LowHaste = set_combine(sets.engaged.DW.HighAcc.LowHaste, sets.engaged.Hybrid)    
+    sets.engaged.DW.HighAcc.DT.LowHaste = set_combine(sets.engaged.DW.HighAcc.LowHaste, sets.engaged.Hybrid)
     sets.engaged.DW.STP.DT.LowHaste = set_combine(sets.engaged.DW.STP.LowHaste, sets.engaged.Hybrid)
 
     sets.engaged.DW.DT.MidHaste = set_combine(sets.engaged.DW.MidHaste, sets.engaged.Hybrid)
     sets.engaged.DW.LowAcc.DT.MidHaste = set_combine(sets.engaged.DW.LowAcc.MidHaste, sets.engaged.Hybrid)
     sets.engaged.DW.MidAcc.DT.MidHaste = set_combine(sets.engaged.DW.MidAcc.MidHaste, sets.engaged.Hybrid)
-    sets.engaged.DW.HighAcc.DT.MidHaste = set_combine(sets.engaged.DW.HighAcc.MidHaste, sets.engaged.Hybrid)    
+    sets.engaged.DW.HighAcc.DT.MidHaste = set_combine(sets.engaged.DW.HighAcc.MidHaste, sets.engaged.Hybrid)
     sets.engaged.DW.STP.DT.MidHaste = set_combine(sets.engaged.DW.STP.MidHaste, sets.engaged.Hybrid)
 
     sets.engaged.DW.DT.HighHaste = set_combine(sets.engaged.DW.HighHaste, sets.engaged.Hybrid)
     sets.engaged.DW.LowAcc.DT.HighHaste = set_combine(sets.engaged.DW.LowAcc.HighHaste, sets.engaged.Hybrid)
     sets.engaged.DW.MidAcc.DT.HighHaste = set_combine(sets.engaged.DW.MidAcc.HighHaste, sets.engaged.Hybrid)
-    sets.engaged.DW.HighAcc.DT.HighHaste = set_combine(sets.engaged.DW.HighAcc.HighHaste, sets.engaged.Hybrid)    
+    sets.engaged.DW.HighAcc.DT.HighHaste = set_combine(sets.engaged.DW.HighAcc.HighHaste, sets.engaged.Hybrid)
     sets.engaged.DW.STP.DT.HighHaste = set_combine(sets.engaged.DW.HighHaste.STP, sets.engaged.Hybrid)
 
     sets.engaged.DW.DT.MaxHaste = set_combine(sets.engaged.DW.MaxHaste, sets.engaged.Hybrid)
     sets.engaged.DW.LowAcc.DT.MaxHaste = set_combine(sets.engaged.DW.LowAcc.MaxHaste, sets.engaged.Hybrid)
     sets.engaged.DW.MidAcc.DT.MaxHaste = set_combine(sets.engaged.DW.MidAcc.MaxHaste, sets.engaged.Hybrid)
-    sets.engaged.DW.HighAcc.DT.MaxHaste = set_combine(sets.engaged.DW.HighAcc.MaxHaste, sets.engaged.Hybrid)    
+    sets.engaged.DW.HighAcc.DT.MaxHaste = set_combine(sets.engaged.DW.HighAcc.MaxHaste, sets.engaged.Hybrid)
     sets.engaged.DW.STP.DT.MaxHaste = set_combine(sets.engaged.DW.STP.MaxHaste, sets.engaged.Hybrid)
 
 
@@ -791,7 +805,7 @@ function init_gear_sets()
     sets.buff.Barrage = {hands="Orion Bracers +3"}
     sets.buff['Velocity Shot'] = set_combine(sets.midcast.RA, {body="Amini Caban +1", back=gear.RNG_TP_Cape})
     sets.buff.Camouflage = {body="Orion Jerkin +3"}
-    
+
     sets.buff.Doom = {ring1="Eshmun's Ring", ring2="Eshmun's Ring", waist="Gishdubar Sash"}
 
     sets.Obi = {waist="Hachirin-no-Obi"}
@@ -844,7 +858,7 @@ function job_post_precast(spell, action, spellMap, eventArgs)
             end
             if player.tp > 2900 then
                 equip(sets.precast.WS["Trueflight"].FullTP)
-            end    
+            end
         elseif spell.english == 'Wildfire' and (world.weather_element == 'Fire' or world.day_element == 'Fire') then
             equip(sets.Obi)
             end
@@ -916,7 +930,7 @@ function job_buff_change(buff,gain)
     end
 
 --    if buffactive['Reive Mark'] then
---        if gain then           
+--        if gain then
 --            equip(sets.Reive)
 --            disable('neck')
 --        else
@@ -925,7 +939,7 @@ function job_buff_change(buff,gain)
 --    end
 
     if buff == "doom" then
-        if gain then           
+        if gain then
             equip(sets.buff.Doom)
             send_command('@input /p Doomed.')
             disable('ring1','ring2','waist')
@@ -961,7 +975,7 @@ function customize_idle_set(idleSet)
     else
         enable('back')
     end
-    
+
     return idleSet
 end
 
@@ -976,20 +990,20 @@ end
 
 function display_current_job_state(eventArgs)
     local msg = ''
-    
+
     msg = msg .. '[ Offense/Ranged: '..state.OffenseMode.current..'/'..state.RangedMode.current
     msg = msg .. ' ][ WS: '..state.WeaponskillMode.current
 
     if state.DefenseMode.value ~= 'None' then
         msg = msg .. ' ][ Defense: ' .. state.DefenseMode.value .. state[state.DefenseMode.value .. 'DefenseMode'].value
     end
-    
+
     if state.Kiting.value then
         msg = msg .. ' ][ Kiting Mode: ON'
     end
 
     msg = msg .. ' ]'
-    
+
     add_to_chat(060, msg)
 
     eventArgs.handled = true
@@ -1000,7 +1014,7 @@ end
 -------------------------------------------------------------------------------------------------------------------
 
 --Read incoming packet to differentiate between Haste/Flurry I and II
-windower.register_event('action', 
+windower.register_event('action',
     function(act)
         --check if you are a target of spell
         local actionTargets = act.targets
@@ -1019,7 +1033,7 @@ windower.register_event('action',
                     flurry = 1
                 elseif param == 846 then
                     --add_to_chat(122, 'Flurry Status: Flurry II')
-                    flurry = 2				
+                    flurry = 2
                 elseif param == 57 and haste ~=2 then
                     --add_to_chat(122, 'Haste Status: Haste I (Haste)')
                     haste = 1
@@ -1035,7 +1049,7 @@ windower.register_event('action',
             elseif act.category == 13 then
                 local param = act.param
                 --595 haste 1 -602 hastega 2
-                if param == 595 and haste ~=2 then 
+                if param == 595 and haste ~=2 then
                     --add_to_chat(122, 'Haste Status: Haste I (Hastega)')
                     haste = 1
                 elseif param == 602 then
@@ -1143,12 +1157,16 @@ end
 function do_bullet_checks(spell, spellMap, eventArgs)
     local bullet_name
     local bullet_min_count = 1
-    
+
     if spell.type == 'WeaponSkill' then
         if spell.skill == "Marksmanship" then
             if spell.element == 'None' then
                 -- physical weaponskills
-                bullet_name = gear.WSbullet
+                if state.WeaponskillMode.value == 'Acc' then
+                    bullet_name = gear.ACCbullet
+                else
+                    bullet_name = gear.WSbullet
+                end
             else
                 -- magical weaponskills
                 bullet_name = gear.MAbullet
@@ -1158,26 +1176,33 @@ function do_bullet_checks(spell, spellMap, eventArgs)
             return
         end
     elseif spell.action_type == 'Ranged Attack' then
-        bullet_name = gear.RAbullet
+        if state.RangedMode.value == 'Acc' or state.RangedMode == 'HighAcc' then
+            bullet_name = gear.ACCbullet
+        else
+            bullet_name = gear.RAbullet
+        end
         if buffactive['Double Shot'] then
             bullet_min_count = 2
         end
     end
-    
+
     local available_bullets = player.inventory[bullet_name] or player.wardrobe[bullet_name]
-    
+
     -- If no ammo is available, give appropriate warning and end.
     if not available_bullets then
-        if spell.type == 'WeaponSkill' and player.equipment.ammo == gear.RAbullet then
-            add_to_chat(104, 'No weaponskill ammo left.  Using what\'s currently equipped (standard ranged bullets: '..player.equipment.ammo..').')
-            return
-        else
-            add_to_chat(104, 'No ammo ('..tostring(bullet_name)..') available for that action.')
-            eventArgs.cancel = true
-            return
+        if spell.type == 'WeaponSkill' then
+            if (state.WeaponskillMode.value == 'Acc' and player.equipment.ammo == gear.ACCbullet) or
+            (state.WeaponskillMode.value ~= 'Acc' and players.equipment.ammo == gear.RAbullet) then
+                add_to_chat(104, 'No weaponskill ammo left.  Using what\'s currently equipped (standard ranged bullets: '..player.equipment.ammo..').')
+                return
+            else
+                add_to_chat(104, 'No ammo ('..tostring(bullet_name)..') available for that action.')
+                eventArgs.cancel = true
+                return
+            end
         end
     end
-    
+
     -- Low ammo warning.
     if state.warned.value == false
         and available_bullets.count > 1 and available_bullets.count <= options.ammo_warning_limit then
@@ -1187,7 +1212,7 @@ function do_bullet_checks(spell, spellMap, eventArgs)
         for i = 1, #msg do
             border = border .. "*"
         end
-        
+
         add_to_chat(104, border)
         add_to_chat(104, msg)
         add_to_chat(104, border)
@@ -1198,7 +1223,7 @@ function do_bullet_checks(spell, spellMap, eventArgs)
     end
 end
 
-function update_offense_mode()  
+function update_offense_mode()
     if player.sub_job == 'NIN' or player.sub_job == 'DNC' then
         state.CombatForm:set('DW')
     else

@@ -81,7 +81,7 @@ function job_setup()
 
     state.CP = M(false, "Capacity Points Mode")
     state.Buff.Saboteur = buffactive.Saboteur or false
-    
+
     enfeebling_magic_acc = S{'Bind', 'Break', 'Dispel', 'Distract', 'Distract II', 'Frazzle',
         'Frazzle II',  'Gravity', 'Gravity II', 'Silence', 'Sleep', 'Sleep II', 'Sleepga'}
     enfeebling_magic_skill = S{'Distract III', 'Frazzle III', 'Poison II'}
@@ -93,7 +93,7 @@ function job_setup()
 
     lockstyleset = 14
 
-    update_offense_mode()    
+    update_offense_mode()
     determine_haste_group()
 end
 
@@ -110,7 +110,7 @@ function user_setup()
     state.CastingMode:options('Normal', 'Seidr', 'Resistant')
     state.IdleMode:options('Normal', 'DT')
 
-    state.WeaponLock = M(false, 'Weapon Lock')    
+    state.WeaponLock = M(false, 'Weapon Lock')
     state.MagicBurst = M(false, 'Magic Burst')
     state.CP = M(false, "Capacity Points Mode")
 
@@ -195,16 +195,16 @@ end
 
 -- Define sets and vars used by this job file.
 function init_gear_sets()
-    
+
     ------------------------------------------------------------------------------------------------
     ---------------------------------------- Precast Sets ------------------------------------------
     ------------------------------------------------------------------------------------------------
-    
+
     -- Precast sets to enhance JAs
     sets.precast.JA['Chainspell'] = {body="Viti. Tabard +1"}
-    
+
     -- Fast cast sets for spells
-    
+
     -- Fast cast sets for spells
     sets.precast.FC = {
     --    Traits --30
@@ -328,7 +328,7 @@ function init_gear_sets()
         ammo="Pemphredo Tathlum",
         head="Pixie Hairpin +1",
         body="Merlinic Jubbah",
-        hands="Jhakri Cuffs +2",
+        hands="Amalric Gages +1",
         legs=gear.Merlinic_MB_legs,
         feet="Merlinic Crackows",
         neck="Baetyl Pendant",
@@ -343,7 +343,7 @@ function init_gear_sets()
     ------------------------------------------------------------------------------------------------
     ---------------------------------------- Midcast Sets ------------------------------------------
     ------------------------------------------------------------------------------------------------
-    
+
     sets.midcast.FastRecast = sets.precast.FC
 
     sets.midcast.SpellInterrupt = {
@@ -405,7 +405,7 @@ function init_gear_sets()
         back=gear.RDM_MND_Cape,
         waist="Bishop's Sash",
         }
-        
+
     sets.midcast.Cursna = set_combine(sets.midcast.StatusRemoval, {
         hands="Hieros Mittens",
         neck="Debilis Medallion",
@@ -430,7 +430,7 @@ function init_gear_sets()
         back="Ghostfyre Cape",
         waist="Olympus Sash",
         }
-    
+
     sets.midcast.EnhancingDuration = {
         main=gear.Colada_ENH,
         sub="Ammurapi Shield",
@@ -443,8 +443,8 @@ function init_gear_sets()
         }
 
     sets.midcast.EnhancingSkill = {
-        main="Pukulatmuj +1", 
-        sub="Pukulatmuj", 
+        main="Pukulatmuj +1",
+        sub="Pukulatmuj",
         hands="Viti. Gloves +1",
         }
 
@@ -459,7 +459,7 @@ function init_gear_sets()
         body="Atrophy Tabard +3", -- +3
         legs="Leth. Fuseau +1", -- +2
         })
-    
+
     sets.midcast.RefreshSelf = {
         waist="Gishdubar Sash",
         back="Grapevine Cape"
@@ -515,7 +515,7 @@ function init_gear_sets()
         neck="Sanctity Necklace",
         ring2="Weather. Ring +1",
         })
-    
+
     sets.midcast.IntEnfeebles = set_combine(sets.midcast.MndEnfeebles, {
         main=gear.Grioavolr_MB,
         back=gear.RDM_INT_Cape,
@@ -576,7 +576,7 @@ function init_gear_sets()
         ring2="Archon Ring",
         waist="Fucho-no-obi",
         })
-    
+
     sets.midcast.Aspir = sets.midcast.Drain
     sets.midcast.Stun = set_combine(sets.midcast['Dark Magic'], {waist="Luminary Sash"})
 
@@ -586,7 +586,7 @@ function init_gear_sets()
         ammo="Pemphredo Tathlum",
         head="Merlinic Hood",
         body="Merlinic Jubbah",
-        hands="Amalric Gages",
+        hands="Amalric Gages +1",
         legs=gear.Merlinic_MAcc_legs,
         feet="Merlinic Crackows",
         neck="Baetyl Pendant",
@@ -611,14 +611,13 @@ function init_gear_sets()
         main=gear.Grioavolr_MB,
         sub="Enki Strap",
         head="Atrophy Chapeau +3",
-        hands="Ea Cuffs",
         body="Atrophy Tabard +3",
         feet="Jhakri Pigaches +2",
         neck="Erra Pendant",
         ear1="Hermetic Earring",
         waist="Yamabuki-no-Obi",
         })
-        
+
     sets.midcast.Impact = set_combine(sets.midcast['Elemental Magic'], {
         main=gear.Grioavolr_MB,
         sub="Niobid Strap",
@@ -626,12 +625,12 @@ function init_gear_sets()
         body="Twilight Cloak",
         ring1="Archon Ring",
         })
-    
+
     sets.midcast.Utsusemi = sets.midcast.SpellInterrupt
 
     -- Initializes trusts at iLvl 119
     sets.midcast.Trust = sets.precast.FC
-        
+
     -- Job-specific buff sets
     sets.buff.ComposureOther = {
         head="Leth. Chappel +1",
@@ -643,11 +642,11 @@ function init_gear_sets()
 
     sets.buff.Saboteur = {hands="Leth. Gantherots +1"}
 
-    
+
     ------------------------------------------------------------------------------------------------
     ----------------------------------------- Idle Sets --------------------------------------------
     ------------------------------------------------------------------------------------------------
-    
+
     sets.idle = {
         main="Bolelabunga",
         sub="Beatific Shield +1",
@@ -684,6 +683,7 @@ function init_gear_sets()
         ammo="Regal Gem",
         head="Atrophy Chapeau +3",
         body="Atrophy Tabard +3",
+        hands="Amalric Gages +1",
         neck="Incanter's Torque",
         ear1="Sherida Earring",
         ear2="Regal Earring",
@@ -699,15 +699,15 @@ function init_gear_sets()
         main="Chatoyant Staff",
         waist="Shinjutsu-no-Obi +1",
         })
-    
+
     ------------------------------------------------------------------------------------------------
     ---------------------------------------- Defense Sets ------------------------------------------
     ------------------------------------------------------------------------------------------------
-    
-    sets.defense.PDT = sets.idle.DT
-    sets.defense.MDT = sets.idle.DT    
 
-    sets.magic_burst = { 
+    sets.defense.PDT = sets.idle.DT
+    sets.defense.MDT = sets.idle.DT
+
+    sets.magic_burst = {
         main=gear.Grioavolr_MB, --5
         body="Merlinic Jubbah", --10
         hands="Ea Cuffs", --5(5)
@@ -748,7 +748,7 @@ function init_gear_sets()
         back=gear.RDM_DW_Cape,
         waist="Windbuffet Belt +1",
         }
-        
+
     sets.engaged.MidAcc = set_combine(sets.engaged, {
         neck="Combatant's Torque",
         waist="Kentarch Belt +1",
@@ -897,7 +897,7 @@ function init_gear_sets()
         back=gear.RDM_DW_Cape, --10
         waist="Windbuffet Belt +1",
         }) --10
-    
+
     sets.engaged.DW.MidAcc.MaxHaste = set_combine(sets.engaged.DW.MaxHaste, {
         neck="Combatant's Torque",
         ring2="Ilabrat Ring",
@@ -921,7 +921,7 @@ function init_gear_sets()
         neck="Loricate Torque +1", --6/6
         ring2="Defending Ring", --10/10
         }
-    
+
     sets.engaged.DT = set_combine(sets.engaged, sets.engaged.Hybrid)
     sets.engaged.MidAcc.DT = set_combine(sets.engaged.MidAcc, sets.engaged.Hybrid)
     sets.engaged.HighAcc.DT = set_combine(sets.engaged.HighAcc, sets.engaged.Hybrid)
@@ -932,19 +932,19 @@ function init_gear_sets()
 
     sets.engaged.DW.DT.LowHaste = set_combine(sets.engaged.DW.LowHaste, sets.engaged.Hybrid)
     sets.engaged.DW.MidAcc.DT.LowHaste = set_combine(sets.engaged.DW.MidAcc.LowHaste, sets.engaged.Hybrid)
-    sets.engaged.DW.HighAcc.DT.LowHaste = set_combine(sets.engaged.DW.HighAcc.LowHaste, sets.engaged.Hybrid)    
+    sets.engaged.DW.HighAcc.DT.LowHaste = set_combine(sets.engaged.DW.HighAcc.LowHaste, sets.engaged.Hybrid)
 
     sets.engaged.DW.DT.MidHaste = set_combine(sets.engaged.DW.MidHaste, sets.engaged.Hybrid)
     sets.engaged.DW.MidAcc.DT.MidHaste = set_combine(sets.engaged.DW.MidAcc.MidHaste, sets.engaged.Hybrid)
-    sets.engaged.DW.HighAcc.DT.MidHaste = set_combine(sets.engaged.DW.HighAcc.MidHaste, sets.engaged.Hybrid)    
+    sets.engaged.DW.HighAcc.DT.MidHaste = set_combine(sets.engaged.DW.HighAcc.MidHaste, sets.engaged.Hybrid)
 
     sets.engaged.DW.DT.HighHaste = set_combine(sets.engaged.DW.HighHaste, sets.engaged.Hybrid)
     sets.engaged.DW.MidAcc.DT.HighHaste = set_combine(sets.engaged.DW.MidAcc.HighHaste, sets.engaged.Hybrid)
-    sets.engaged.DW.HighAcc.DT.HighHaste = set_combine(sets.engaged.DW.HighAcc.HighHaste, sets.engaged.Hybrid)    
+    sets.engaged.DW.HighAcc.DT.HighHaste = set_combine(sets.engaged.DW.HighAcc.HighHaste, sets.engaged.Hybrid)
 
     sets.engaged.DW.DT.MaxHaste = set_combine(sets.engaged.DW.MaxHaste, sets.engaged.Hybrid)
     sets.engaged.DW.MidAcc.DT.MaxHaste = set_combine(sets.engaged.DW.MidAcc.MaxHaste, sets.engaged.Hybrid)
-    sets.engaged.DW.HighAcc.DT.MaxHaste = set_combine(sets.engaged.DW.HighAcc.MaxHaste, sets.engaged.Hybrid)    
+    sets.engaged.DW.HighAcc.DT.MaxHaste = set_combine(sets.engaged.DW.HighAcc.MaxHaste, sets.engaged.Hybrid)
 
 
     ------------------------------------------------------------------------------------------------
@@ -1020,7 +1020,7 @@ function job_post_midcast(spell, action, spellMap, eventArgs)
                 end
             end
         elseif skill_spells:contains(spell.english) then
-            equip(sets.midcast.EnhancingSkill)    
+            equip(sets.midcast.EnhancingSkill)
         end
         if (spell.target.type == 'PLAYER' or spell.target.type == 'NPC') and buffactive.Composure then
             equip(sets.buff.ComposureOther)
@@ -1050,7 +1050,7 @@ function job_aftercast(spell, action, spellMap, eventArgs)
             send_command('@timers c "Sleep ['..spell.target.name..']" 60 down spells/00253.png')
         elseif spell.english == "Break" then
             send_command('@timers c "Break ['..spell.target.name..']" 30 down spells/00255.png')
-        end 
+        end
     end
 end
 
@@ -1060,7 +1060,7 @@ end
 
 function job_buff_change(buff,gain)
     -- If we gain or lose any haste buffs, adjust which gear set we target.
-    if S{'haste', 'march', 'mighty guard', 'embrava', 'haste samba', 'geo-haste', 'indi-haste'}:contains(buff:lower()) then        
+    if S{'haste', 'march', 'mighty guard', 'embrava', 'haste samba', 'geo-haste', 'indi-haste'}:contains(buff:lower()) then
         determine_haste_group()
         if not gain then
             haste = nil
@@ -1072,7 +1072,7 @@ function job_buff_change(buff,gain)
     end
 
     if buff == "doom" then
-        if gain then           
+        if gain then
             equip(sets.buff.Doom)
             send_command('@input /p Doomed.')
              disable('ring1','ring2','waist')
@@ -1139,7 +1139,7 @@ function job_get_spell_map(spell, default_spell_map)
                 end
             else
                 return "MndEnfeebles"
-            end 
+            end
         end
     end
 end
@@ -1161,7 +1161,7 @@ function customize_idle_set(idleSet)
     else
         enable('back')
     end
-    
+
     return idleSet
 end
 
@@ -1175,19 +1175,19 @@ end
 -- Return true if display was handled, and you don't want the default info shown.
 function display_current_job_state(eventArgs)
     local msg = '[ Melee'
-    
+
     if state.CombatForm.has_value then
         msg = msg .. ' (' .. state.CombatForm.value .. ')'
     end
-    
+
     msg = msg .. ': '
-    
+
     msg = msg .. state.OffenseMode.value
     if state.HybridMode.value ~= 'Normal' then
         msg = msg .. '/' .. state.HybridMode.value
     end
     msg = msg .. ' ][ WS: ' .. state.WeaponskillMode.value .. ' ]'
-    
+
     if state.DefenseMode.value ~= 'None' then
         msg = msg .. '[ Defense: ' .. state.DefenseMode.value .. state[state.DefenseMode.value .. 'DefenseMode'].value .. ' ]'
     end
@@ -1195,7 +1195,7 @@ function display_current_job_state(eventArgs)
     if state.IdleMode.value ~= 'None' then
         msg = msg .. '[ Idle: ' .. state.IdleMode.value .. ' ]'
     end
-    
+
     if state.Kiting.value then
         msg = msg .. '[ Kiting Mode: ON ]'
     end
@@ -1210,7 +1210,7 @@ end
 -------------------------------------------------------------------------------------------------------------------
 
 --Read incoming packet to differentiate between Haste I and II
-windower.register_event('action', 
+windower.register_event('action',
     function(act)
         --check if you are a target of spell
         local actionTargets = act.targets
@@ -1238,7 +1238,7 @@ windower.register_event('action',
                 end
             elseif act.category == 13 then
                 local param = act.param
-                if param == 595 and haste ~= 2 then 
+                if param == 595 and haste ~= 2 then
                     --add_to_chat(122, 'Haste Status: Haste I (Hastega)')
                     haste = 1
                 elseif param == 602 then
@@ -1348,7 +1348,7 @@ function handle_strategems(cmdParams)
     end
 end
 
-function update_offense_mode()  
+function update_offense_mode()
     if player.sub_job == 'NIN' or player.sub_job == 'DNC' then
         state.CombatForm:set('DW')
     else

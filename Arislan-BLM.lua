@@ -56,17 +56,17 @@ function user_setup()
     state.CastingMode:options('Normal', 'Resistant', 'Spaekona', 'Occult')
     state.IdleMode:options('Normal', 'DT')
 
-    state.WeaponLock = M(false, 'Weapon Lock')    
+    state.WeaponLock = M(false, 'Weapon Lock')
     state.MagicBurst = M(false, 'Magic Burst')
     state.DeathMode = M(false, 'Death Mode')
     state.CP = M(false, "Capacity Points Mode")
 
     lowTierNukes = S{'Stone', 'Water', 'Aero', 'Fire', 'Blizzard', 'Thunder'}
-    
+
     -- Additional local binds
     include('Global-Binds.lua') -- OK to remove this line
     include('Global-GEO-Binds.lua') -- OK to remove this line
-    
+
     send_command('bind ^` input /ma Stun <t>')
     send_command('bind !` gs c toggle MagicBurst')
     send_command('bind !p input /ma "Shock Spikes" <me>')
@@ -110,9 +110,9 @@ function init_gear_sets()
     --------------------------------------
     -- Start defining the sets
     --------------------------------------
-    
+
     ---- Precast Sets ----
-    
+
     -- Precast sets to enhance JAs
     sets.precast.JA['Mana Wall'] = {
         feet="Wicce Sabots +1",
@@ -162,7 +162,7 @@ function init_gear_sets()
     sets.precast.FC.Curaga = sets.precast.FC.Cure
     sets.precast.FC.Impact = set_combine(sets.precast.FC, {head=empty, body="Twilight Cloak"})
     sets.precast.Storm = set_combine(sets.precast.FC, {ring2="Levia. Ring +1", waist="Channeler's Stone"}) -- stop quick cast
-    
+
     sets.precast.FC.DeathMode = {
         ammo="Ghastly Tathlum +1",
         head="Amalric Coif", --10
@@ -182,7 +182,7 @@ function init_gear_sets()
     sets.precast.FC.Impact.DeathMode = set_combine(sets.precast.FC.DeathMode, {head=empty, body="Twilight Cloak"})
 
     -- Weaponskill sets
-    
+
     -- Default set for any weaponskill that isn't any more specifically defined
     sets.precast.WS = {
         ammo="Floestone",
@@ -206,7 +206,7 @@ function init_gear_sets()
         ammo="Ghastly Tathlum +1",
         head="Pixie Hairpin +1",
         body="Amalric Doublet",
-        hands="Amalric Gages",
+        hands="Amalric Gages +1",
         legs=gear.Merlinic_MB_legs,
         feet="Merlinic Crackows",
         neck="Baetyl Pendant",
@@ -234,7 +234,7 @@ function init_gear_sets()
         waist="Shinjutsu-no-Obi +1",
         } -- Max MP
 
-    
+
     ---- Midcast Sets ----
 
     sets.midcast.FastRecast = {
@@ -319,14 +319,14 @@ function init_gear_sets()
         sub="Ammurapi Shield",
         body="Telchine Chas.",
         })
-    
+
     sets.midcast.Refresh = set_combine(sets.midcast['Enhancing Magic'], {
         head="Amalric Coif",
         --feet="Inspirited Boots",
         waist="Gishdubar Sash",
         back="Grapevine Cape",
         })
-    
+
     sets.midcast.Stoneskin = set_combine(sets.midcast['Enhancing Magic'], {
         neck="Nodens Gorget",
         waist="Siegel Sash",
@@ -369,7 +369,7 @@ function init_gear_sets()
         ammo="Pemphredo Tathlum",
         back=gear.BLM_MAB_Cape,
         }) -- INT/Magic accuracy
-        
+
     sets.midcast.ElementalEnfeeble = sets.midcast.IntEnfeebles
 
     sets.midcast['Dark Magic'] = {
@@ -412,7 +412,7 @@ function init_gear_sets()
         ammo="Ghastly Tathlum +1",
         head="Pixie Hairpin +1",
         body="Merlinic Jubbah", --10
-        hands="Ea Cuffs", --5(5)
+        hands="Amalric Gages", --(5)
         legs="Amalric Slops",
         feet="Merlinic Crackows", --11
         neck="Mizu. Kubikazari", --10
@@ -445,14 +445,14 @@ function init_gear_sets()
         })
 
     -- Elemental Magic sets
-    
+
     sets.midcast['Elemental Magic'] = {
         main=gear.Lathi_MAB,
         sub="Niobid Strap",
         ammo="Pemphredo Tathlum",
         head="Merlinic Hood",
         body="Merlinic Jubbah",
-        hands="Amalric Gages",
+        hands="Amalric Gages +1",
         legs=gear.Merlinic_MAcc_legs,
         feet="Merlinic Crackows",
         neck="Baetyl Pendant",
@@ -477,11 +477,10 @@ function init_gear_sets()
     sets.midcast['Elemental Magic'].Resistant = set_combine(sets.midcast['Elemental Magic'], {
         main=gear.Grioavolr_MB,
         sub="Enki Strap",
-        hands="Ea Cuffs",
         neck="Sanctity Necklace",
         waist="Yamabuki-no-Obi",
         })
-            
+
     sets.midcast['Elemental Magic'].Spaekona = set_combine(sets.midcast['Elemental Magic'], {
         sub="Enki Strap",
         body="Spaekona's Coat +2",
@@ -529,14 +528,14 @@ function init_gear_sets()
 
     -- Initializes trusts at iLvl 119
     sets.midcast.Trust = sets.precast.FC
-    
+
     sets.resting = {
         main="Chatoyant Staff",
         waist="Shinjutsu-no-Obi +1",
         }
 
     -- Idle sets
-    
+
     sets.idle = {
         main="Bolelabunga",
         sub="Genmei Shield",
@@ -596,7 +595,7 @@ function init_gear_sets()
         sub="Enki Strap",
         head="Merlinic Hood",
         body="Merlinic Jubbah",
-        hands="Ea Cuffs",
+        hands="Amalric Gages +1",
         legs=gear.Merlinic_MB_legs,
         neck="Incanter's Torque",
         ear1="Barkaro. Earring",
@@ -607,7 +606,7 @@ function init_gear_sets()
         })
 
     sets.idle.Weak = sets.idle.DT
-        
+
     -- Defense sets
 
     sets.defense.PDT = sets.idle.DT
@@ -617,16 +616,16 @@ function init_gear_sets()
     sets.latent_refresh = {waist="Fucho-no-obi"}
     sets.latent_dt = {ear2="Sorcerer's Earring"}
 
-    sets.magic_burst = { 
+    sets.magic_burst = {
         body="Merlinic Jubbah", --10
-        hands="Ea Cuffs", --5(5)
+        hands="Amalric Cuffs +1", --(6)
         feet="Merlinic Crackows", --11
         neck="Mizu. Kubikazari", --10
         ring1="Mujin Band", --(5)
         back=gear.BLM_MAB_Cape, --5
         }
 
-    sets.magic_burst.Resistant = {} 
+    sets.magic_burst.Resistant = {}
 
     -- Engaged sets
 
@@ -634,7 +633,7 @@ function init_gear_sets()
     -- sets if more refined versions aren't defined.
     -- If you create a set with both offense and defense modes, the offense mode should be first.
     -- EG: sets.engaged.Dagger.Accuracy.Evasion
-    
+
     -- Normal melee group
 
     sets.engaged = {
@@ -672,7 +671,7 @@ function job_precast(spell, action, spellMap, eventArgs)
             equip(sets.precast.FC.Impact.DeathMode)
         end
     end
-    
+
     if buffactive['Mana Wall'] then
         equip(sets.precast.JA['Mana Wall'])
     end
@@ -712,7 +711,7 @@ function job_post_midcast(spell, action, spellMap, eventArgs)
         end
     end
     if spell.skill == 'Elemental Magic' and spell.english == "Comet" then
-        equip(sets.DarkAffinity)        
+        equip(sets.DarkAffinity)
     end
     if spell.skill == 'Elemental Magic' then
         if state.MagicBurst.value and spell.english ~= 'Death' then
@@ -742,7 +741,7 @@ function job_aftercast(spell, action, spellMap, eventArgs)
             send_command('@timers c "Sleep ['..spell.target.name..']" 60 down spells/00253.png')
         elseif spell.english == "Break" or spell.english == "Breakga" then
             send_command('@timers c "Break ['..spell.target.name..']" 30 down spells/00255.png')
-        end 
+        end
     end
 end
 
@@ -767,7 +766,7 @@ function job_buff_change(buff, gain)
     end
 
     if buff == "doom" then
-        if gain then           
+        if gain then
             equip(sets.buff.Doom)
             send_command('@input /p Doomed.')
              disable('ring1','ring2','waist')
@@ -833,7 +832,7 @@ function customize_idle_set(idleSet)
     if buffactive['Mana Wall'] then
         idleSet = set_combine(idleSet, sets.precast.JA['Mana Wall'])
     end
-    
+
     return idleSet
 end
 
