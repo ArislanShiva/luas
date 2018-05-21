@@ -25,7 +25,7 @@
     send_command('bind #7 input //send safiyeh /ma "Dia II" <t>')
     send_command('bind #8 input //send safiyeh /ma "Silence" <t>')
     send_command('bind #9 input //send safiyeh /ma "Paralyze" <t>')
-    send_command('bind #0 input //send safiyeh /ma "Cure" Galvatron')
+    send_command('bind #0 input //send safiyeh /ma "Cure" Cuetka')
 
     send_command('bind #q input //send safiyeh /ma "Fire V" <t>')
     send_command('bind #w input //send safiyeh /ma "Flurry" <t>')

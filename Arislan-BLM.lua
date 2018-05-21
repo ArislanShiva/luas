@@ -207,7 +207,7 @@ function init_gear_sets()
         head="Pixie Hairpin +1",
         body="Amalric Doublet",
         hands="Amalric Gages +1",
-        legs=gear.Merlinic_MB_legs,
+        legs="Merlinic Shalwar",
         feet="Merlinic Crackows",
         neck="Baetyl Pendant",
         ear1="Barkaro. Earring",
@@ -240,7 +240,7 @@ function init_gear_sets()
     sets.midcast.FastRecast = {
         head="Amalric Coif",
         hands="Merlinic Dastanas",
-        legs=gear.Merlinic_MB_legs,
+        legs="Merlinic Shalwar",
         feet="Regal Pumps +1",
         ear1="Etiolation Earring",
         ear2="Loquacious Earring",
@@ -353,7 +353,7 @@ function init_gear_sets()
         head="Merlinic Hood",
         body="Vanya Robe",
         hands="Ea Cuffs",
-        legs=gear.Merlinic_MAcc_legs,
+        legs="Jhakri Slops +2",
         feet="Skaoi Boots",
         neck="Erra Pendant",
         ear1="Barkaro. Earring",
@@ -379,7 +379,7 @@ function init_gear_sets()
         head="Merlinic Hood",
         body="Jhakri Robe +2",
         hands="Ea Cuffs",
-        legs=gear.Merlinic_MAcc_legs,
+        legs="Jhakri Slops +2",
         feet="Merlinic Crackows",
         neck="Erra Pendant",
         ear1="Barkaro. Earring",
@@ -427,7 +427,6 @@ function init_gear_sets()
         main=gear.Grioavolr_MB,
         sub="Enki Strap",
         head="Amalric Coif",
-        legs=gear.Merlinic_MAcc_legs,
         ring2="Shiva Ring +1",
         })
 
@@ -453,7 +452,7 @@ function init_gear_sets()
         head="Merlinic Hood",
         body="Merlinic Jubbah",
         hands="Amalric Gages +1",
-        legs=gear.Merlinic_MAcc_legs,
+        legs="Merlinic Shalwar",
         feet="Merlinic Crackows",
         neck="Baetyl Pendant",
         ear1="Barkaro. Earring",
@@ -484,7 +483,6 @@ function init_gear_sets()
     sets.midcast['Elemental Magic'].Spaekona = set_combine(sets.midcast['Elemental Magic'], {
         sub="Enki Strap",
         body="Spaekona's Coat +2",
-        legs=gear.Merlinic_MAcc_legs,
         neck="Erra Pendant",
         })
 
@@ -596,7 +594,7 @@ function init_gear_sets()
         head="Merlinic Hood",
         body="Merlinic Jubbah",
         hands="Amalric Gages +1",
-        legs=gear.Merlinic_MB_legs,
+        legs="Merlinic Shalwar",
         neck="Incanter's Torque",
         ear1="Barkaro. Earring",
         ear2="Regal Earring",

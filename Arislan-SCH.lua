@@ -101,7 +101,7 @@ function user_setup()
 
     -- Additional local binds
     include('Global-Binds.lua') -- OK to remove this line
-    include('Global-GEO-Binds.lua') -- OK to remove this line
+    include('Global-COR-Binds.lua') -- OK to remove this line
 
     send_command('bind ^` input /ja Immanence <me>')
     send_command('bind !` gs c toggle MagicBurst')
@@ -420,7 +420,7 @@ function init_gear_sets()
         head="Acad. Mortar. +2",
         body="Acad. Gown +2",
         hands="Kaykaus Cuffs",
-        legs=gear.Merlinic_MAcc_legs,
+        legs="Jhakri Slops +2",
         feet="Acad. Loafers +3",
         neck="Erra Pendant",
         ear1="Barkaro. Earring",
@@ -471,7 +471,7 @@ function init_gear_sets()
         head="Merlinic Hood",
         body="Merlinic Jubbah",
         hands="Amalric Gages +1",
-        legs=gear.Merlinic_MB_legs,
+        legs="Merlinic Shalwar",
         feet="Merlinic Crackows",
         neck="Baetyl Pendant",
         ear1="Barkaro. Earring",
@@ -486,7 +486,6 @@ function init_gear_sets()
         main=gear.Grioavolr_MB,
         sub="Enki Strap",
         body="Seidr Cotehardie",
-        legs=gear.Merlinic_MAcc_legs,
         feet="Jhakri Pigaches +2",
         neck="Erra Pendant",
         })
@@ -494,7 +493,6 @@ function init_gear_sets()
     sets.midcast['Elemental Magic'].Resistant = set_combine(sets.midcast['Elemental Magic'], {
         main=gear.Grioavolr_MB,
         sub="Enki Strap",
-        legs=gear.Merlinic_MAcc_legs,
         feet="Jhakri Pigaches +2",
         neck="Erra Pendant",
         waist="Yamabuki-no-Obi",
@@ -574,7 +572,7 @@ function init_gear_sets()
         head="Merlinic Hood",
         body="Merlinic Jubbah",
         hands="Amalric Gages +1",
-        legs=gear.Merlinic_MB_legs,
+        legs="Merlinic Shalwar",
         neck="Incanter's Torque",
         ear1="Barkaro. Earring",
         ear2="Regal Earring",
@@ -624,18 +622,10 @@ function init_gear_sets()
         -- Akademos 10
         body="Merlinic Jubbah", --10
         hands="Amalric Gages +1", --(6)
-        legs=gear.Merlinic_MB_legs, --6
+        legs="Merlinic Shalwar", --6
         feet="Merlinic Crackows", --11
         neck="Mizu. Kubikazari", --10
         ring1="Mujin Band", --(5)
-        }
-
-    sets.magic_burst.Resistant = {
-        body="Merlinic Jubbah", --10
-        hands="Amalric Gages +1", --(6)
-        legs=gear.Merlinic_MAcc_legs,
-        feet="Merlinic Crackows", --11
-        neck="Mizu. Kubikazari", --10
         }
 
 --    sets.buff['Ebullience'] = {head="Arbatel Bonnet +1"}
@@ -709,11 +699,7 @@ function job_post_midcast(spell, action, spellMap, eventArgs)
         end
     end
     if spell.skill == 'Elemental Magic' and state.MagicBurst.value then
-        if state.CastingMode.value == "Resistant" then
-            equip(sets.magic_burst.Resistant)
-        else
-            equip(sets.magic_burst)
-        end
+        equip(sets.magic_burst)
         if spell.english == "Impact" then
             equip(sets.midcast.Impact)
         end

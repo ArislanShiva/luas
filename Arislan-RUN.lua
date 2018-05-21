@@ -109,7 +109,7 @@ function user_setup()
 
     -- Additional local binds
     include('Global-Binds.lua') -- OK to remove this line
-    include('Global-GEO-Binds.lua') -- OK to remove this line
+    include('Global-COR-Binds.lua') -- OK to remove this line
 
     send_command('bind ^` input //gs c rune')
     send_command('bind !` input /ja "Vivacious Pulse" <me>')
@@ -552,8 +552,8 @@ function init_gear_sets()
         legs="Carmine Cuisses +1",
         feet="Turms Leggings +1",
         neck="Bathy Choker +1",
-        ear1="Genmei Earring",
-        ear2="Infused Earring",
+        ear1="Infused Earring",
+        ear2="Genmei Earring",
         ring1="Paguroidea Ring",
         ring2="Sheltered Ring",
         back=gear.RUN_HP_Cape,
@@ -569,8 +569,8 @@ function init_gear_sets()
         legs="Carmine Cuisses +1",
         feet="Erilaz Greaves +1", --5/0
         neck="Loricate Torque +1", --6/6
-        ear1="Genmei Earring", --2/0
-        ear2="Ethereal Earring",
+        ear1="Ethereal Earring",
+        ear2="Genmei Earring", --2/0
         ring1="Gelatinous Ring +1", --7/(-1)
         ring2="Defending Ring", --10/10
         back="Evasionist's Cape", --7/4
@@ -616,8 +616,8 @@ function init_gear_sets()
         legs="Eri. Leg Guards +1", --7/0
         feet="Turms Leggings +1",
         neck="Loricate Torque +1", --6/6
-        ear1="Genmei Earring", --2/0
-        ear2="Ethereal Earring",
+        ear1="Ethereal Earring",
+        ear2="Genmei Earring", --2/0
         ring1="Gelatinous Ring +1", --7/(-1)
         ring2="Defending Ring", --10/10
         back=gear.RUN_HP_Cape,
@@ -633,11 +633,11 @@ function init_gear_sets()
         legs="Eri. Leg Guards +1", --7/0
         feet="Erilaz Greaves +1",--5/0
         neck="Warder's Charm +1",
-        ear1="Genmei Earring", --2/0
-        ear2="Ethereal Earring",
+        ear1="Ethereal Earring",
+        ear2="Odnowa Earring +1", --0/2
         ring1="Gelatinous Ring +1", --7/(-1)
         ring2="Defending Ring", --10/10
-        back="Evasionist's Cape", --7/4
+        back=gear.RUN_FC_Cape, --10/0
         waist="Engraved Belt",
         }
 
@@ -648,13 +648,13 @@ function init_gear_sets()
         body="Ayanmo Corazza +2", --6/6
         hands="Erilaz Gauntlets +1",
         legs="Rune. Trousers +3", --5/0
-        feet="Erilaz Greaves +1", --5/0
+        feet="Turms Leggings +1",
         neck="Loricate Torque +1", --6/6
-        ear1="Genmei Earring", --2/0
-        ear2="Hearty Earring",
+        ear1="Hearty Earring",
+        ear2="Genmei Earring", --2/0
         ring1="Gelatinous Ring +1", --7/(-1)
         ring2="Defending Ring", --10/10
-        back=gear.RUN_FC_Cape,
+        back=gear.RUN_FC_Cape, --10/0
         waist="Engraved Belt",
         }
 
@@ -759,11 +759,10 @@ function init_gear_sets()
         neck="Loricate Torque +1", --6/6
         ring1="Moonbeam Ring",  --4/4
         ring2="Defending Ring", --10/10
-        back=gear.RUN_TP_Cape, --5/5
+        back=gear.RUN_TP_Cape, --10/0
         }
 
 	sets.HybridPlus = {
-        hands=gear.Herc_DT_hands, --7/5
         legs="Meg. Chausses +2", --6/0
         }
 

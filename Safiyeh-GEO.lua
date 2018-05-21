@@ -176,8 +176,8 @@ function init_gear_sets()
     -- Default set for any weaponskill that isn't any more specifically defined
     sets.precast.WS = {
         body="Jhakri Robe +2",
-        hands="Jhakri Cuffs +1",
-        feet="Jhakri Pigaches +1",
+        hands="Jhakri Cuffs +2",
+        feet="Jhakri Pigaches +2",
 		neck="Fotia Gorget",
         ear1="Moonshade Earring",
         ear2="Regal Earring",
@@ -529,8 +529,8 @@ function init_gear_sets()
         main="Idris",
         sub="Tamaxchi",
         body="Jhakri Robe +2",
-        hands="Jhakri Cuffs +1",
-        feet="Jhakri Pigaches +1",
+        hands="Jhakri Cuffs +2",
+        feet="Jhakri Pigaches +2",
         ear1="Cessance Earring",
         ear2="Regal Earring",
         ring1="Hetairoi Ring",

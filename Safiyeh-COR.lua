@@ -476,7 +476,7 @@ function init_gear_sets()
         }
 
     sets.midcast.CorsairShot.Resistant = set_combine(sets.midcast.CorsairShot, {
-        head="Mummu Bonnet +1",
+        head="Mummu Bonnet +2",
         body="Mummu Jacket +2",
         hands="Mummu Wrists +2",
         legs="Mummu Kecks +2",
@@ -523,7 +523,7 @@ function init_gear_sets()
         })
 
     sets.midcast.RA.Critical = set_combine(sets.midcast.RA, {
-        head="Mummu Bonnet +1",
+        head="Mummu Bonnet +2",
         body="Mummu Jacket +2",
         hands="Mummu Wrists +2",
         legs="Mummu Kecks +2",

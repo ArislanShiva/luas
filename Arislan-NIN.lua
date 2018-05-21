@@ -118,6 +118,7 @@ function user_setup()
     send_command('bind ^numpad4 input /ws "Blade: Ten" <t>')
     send_command('bind ^numpad6 input /ws "Blade: Hi" <t>')
     send_command('bind ^numpad1 input /ws "Blade: Yu" <t>')
+    send_command('bind ^numpad2 input /ws "Blade: Chi" <t>')
 
     -- Whether a warning has been given for low ninja tools
     state.warned = M(false)
@@ -147,6 +148,7 @@ function user_unload()
     send_command('unbind ^numpad4')
     send_command('unbind ^numpad6')
     send_command('unbind ^numpad1')
+    send_command('unbind ^numpad2')
 
     send_command('unbind #`')
     send_command('unbind #1')
@@ -194,11 +196,11 @@ function init_gear_sets()
         ring1="Asklepian Ring",
         waist="Gishdubar Sash",
         }
-        
+
     sets.precast.Waltz['Healing Waltz'] = {}
 
     -- Fast cast sets for spells
-    
+
     sets.precast.FC = {
         ammo="Sapience Orb", --2
         head=gear.Herc_MAB_head, --7
@@ -224,7 +226,7 @@ function init_gear_sets()
         body=gear.Taeon_RA_body, --10/0
         legs=gear.Adhemar_C_legs, --10/0
         }
-       
+
     -- Weaponskill sets
     -- Default set for any weaponskill that isn't any more specifically defined
     sets.precast.WS = {
@@ -312,7 +314,7 @@ function init_gear_sets()
         ammo="Impatiens", --10
         ring1="Evanescence Ring", --5
         }
-        
+
     -- Specific spells
     sets.midcast.Utsusemi = set_combine(sets.midcast.SpellInterrupt, {feet="Hattori Kyahan +1", back=gear.NIN_TP_Cape,})
 
@@ -384,10 +386,10 @@ function init_gear_sets()
     --------------------------------------
     -- Idle/resting/defense/etc sets
     --------------------------------------
-    
+
     -- Resting sets
 --    sets.resting = {}
-    
+
     -- Idle sets
     sets.idle = {
         ammo="Seki Shuriken",
@@ -427,15 +429,15 @@ function init_gear_sets()
         back=gear.NIN_TP_Cape,
         waist="Windbuffet Belt +1",
         })
-    
+
     sets.idle.Weak = sets.idle.DT
-    
+
     -- Defense sets
     sets.defense.PDT = sets.idle.DT
     sets.defense.MDT = sets.idle.DT
 
     sets.Kiting = {feet="Danzo sune-ate"}
-    
+
     sets.DayMovement = {feet="Danzo sune-ate"}
     sets.NightMovement = {feet="Hachiya Kyahan +3"}
 
@@ -452,15 +454,15 @@ function init_gear_sets()
     -- EG: sets.engaged.Dagger.Accuracy.Evasion
 
     -- * NIN Native DW Trait: 35% DW
-    
-    -- No Magic Haste (74% DW to cap)    
+
+    -- No Magic Haste (74% DW to cap)
     sets.engaged = {
         ammo="Seki Shuriken",
         head=gear.Adhemar_B_head,
         body="Mochi. Chainmail +1", --7
         hands="Floral Gauntlets", --5
         legs="Samnuha Tights",
-        feet="Hiza. Sune-Ate +1", --7
+        feet="Hiza. Sune-Ate +2", --8
         neck="Erudit. Necklace",
         ear1="Eabani Earring", --4
         ear2="Suppanomimi", --5
@@ -501,7 +503,7 @@ function init_gear_sets()
         body=gear.Adhemar_B_body, --6
         hands="Floral Gauntlets", --5
         legs="Samnuha Tights",
-        feet="Hiza. Sune-Ate +1", --7
+        feet="Hiza. Sune-Ate +2", --8
         neck="Erudit. Necklace",
         ear1="Eabani Earring", --4
         ear2="Suppanomimi", --5
@@ -509,7 +511,7 @@ function init_gear_sets()
         ring2="Epona's Ring",
         back=gear.NIN_TP_Cape,
         waist="Reiki Yotai", --7
-        } -- 34%
+      } -- 35%
 
     sets.engaged.LowAcc.LowHaste = set_combine(sets.engaged.LowHaste, {
         head="Dampening Tam",
@@ -670,7 +672,7 @@ function init_gear_sets()
         neck="Loricate Torque +1", --6/6
         ring2="Defending Ring", --10/10
         }
-    
+
     sets.engaged.DT = set_combine(sets.engaged, sets.engaged.Hybrid)
     sets.engaged.LowAcc.DT = set_combine(sets.engaged.LowAcc, sets.engaged.Hybrid)
     sets.engaged.MidAcc.DT = set_combine(sets.engaged.MidAcc, sets.engaged.Hybrid)
@@ -680,25 +682,25 @@ function init_gear_sets()
     sets.engaged.DT.LowHaste = set_combine(sets.engaged.LowHaste, sets.engaged.Hybrid)
     sets.engaged.LowAcc.DT.LowHaste = set_combine(sets.engaged.LowAcc.LowHaste, sets.engaged.Hybrid)
     sets.engaged.MidAcc.DT.LowHaste = set_combine(sets.engaged.MidAcc.LowHaste, sets.engaged.Hybrid)
-    sets.engaged.HighAcc.DT.LowHaste = set_combine(sets.engaged.HighAcc.LowHaste, sets.engaged.Hybrid)    
+    sets.engaged.HighAcc.DT.LowHaste = set_combine(sets.engaged.HighAcc.LowHaste, sets.engaged.Hybrid)
     sets.engaged.STP.DT.LowHaste = set_combine(sets.engaged.STP.LowHaste, sets.engaged.Hybrid)
 
     sets.engaged.DT.MidHaste = set_combine(sets.engaged.MidHaste, sets.engaged.Hybrid)
     sets.engaged.LowAcc.DT.MidHaste = set_combine(sets.engaged.LowAcc.MidHaste, sets.engaged.Hybrid)
     sets.engaged.MidAcc.DT.MidHaste = set_combine(sets.engaged.MidAcc.MidHaste, sets.engaged.Hybrid)
-    sets.engaged.HighAcc.DT.MidHaste = set_combine(sets.engaged.HighAcc.MidHaste, sets.engaged.Hybrid)    
+    sets.engaged.HighAcc.DT.MidHaste = set_combine(sets.engaged.HighAcc.MidHaste, sets.engaged.Hybrid)
     sets.engaged.STP.DT.MidHaste = set_combine(sets.engaged.STP.MidHaste, sets.engaged.Hybrid)
 
     sets.engaged.DT.HighHaste = set_combine(sets.engaged.HighHaste, sets.engaged.Hybrid)
     sets.engaged.LowAcc.DT.HighHaste = set_combine(sets.engaged.LowAcc.HighHaste, sets.engaged.Hybrid)
     sets.engaged.MidAcc.DT.HighHaste = set_combine(sets.engaged.MidAcc.HighHaste, sets.engaged.Hybrid)
-    sets.engaged.HighAcc.DT.HighHaste = set_combine(sets.engaged.HighAcc.HighHaste, sets.engaged.Hybrid)    
+    sets.engaged.HighAcc.DT.HighHaste = set_combine(sets.engaged.HighAcc.HighHaste, sets.engaged.Hybrid)
     sets.engaged.STP.DT.HighHaste = set_combine(sets.engaged.HighHaste.STP, sets.engaged.Hybrid)
 
     sets.engaged.DT.MaxHaste = set_combine(sets.engaged.MaxHaste, sets.engaged.Hybrid)
     sets.engaged.LowAcc.DT.MaxHaste = set_combine(sets.engaged.LowAcc.MaxHaste, sets.engaged.Hybrid)
     sets.engaged.MidAcc.DT.MaxHaste = set_combine(sets.engaged.MidAcc.MaxHaste, sets.engaged.Hybrid)
-    sets.engaged.HighAcc.DT.MaxHaste = set_combine(sets.engaged.HighAcc.MaxHaste, sets.engaged.Hybrid)    
+    sets.engaged.HighAcc.DT.MaxHaste = set_combine(sets.engaged.HighAcc.MaxHaste, sets.engaged.Hybrid)
     sets.engaged.STP.DT.MaxHaste = set_combine(sets.engaged.STP.MaxHaste, sets.engaged.Hybrid)
 
     --------------------------------------
@@ -803,7 +805,7 @@ function job_buff_change(buff, gain)
     end
 
 --    if buffactive['Reive Mark'] then
---        if gain then           
+--        if gain then
 --            equip(sets.Reive)
 --            disable('neck')
 --        else
@@ -812,7 +814,7 @@ function job_buff_change(buff, gain)
 --    end
 
     if buff == "doom" then
-        if gain then           
+        if gain then
             equip(sets.buff.Doom)
             send_command('@input /p Doomed.')
              disable('ring1','ring2','waist')
@@ -877,29 +879,29 @@ end
 function display_current_job_state(eventArgs)
 
     local msg = '[ Melee'
-    
+
     if state.CombatForm.has_value then
         msg = msg .. ' (' .. state.CombatForm.value .. ')'
     end
-    
+
     msg = msg .. ': '
-    
+
     msg = msg .. state.OffenseMode.value
     if state.HybridMode.value ~= 'Normal' then
         msg = msg .. '/' .. state.HybridMode.value
     end
     msg = msg .. ' ][ WS: ' .. state.WeaponskillMode.value
-    
+
     if state.DefenseMode.value ~= 'None' then
         msg = msg .. ' ][ Defense: ' .. state.DefenseMode.value .. state[state.DefenseMode.value .. 'DefenseMode'].value
     end
-    
+
     if state.Kiting.value then
         msg = msg .. ' ][ Kiting Mode: ON'
     end
-    
+
     msg = msg .. ' ]'
-    
+
     add_to_chat(060, msg)
 
     eventArgs.handled = true
@@ -910,7 +912,7 @@ end
 -------------------------------------------------------------------------------------------------------------------
 
 --Read incoming packet to differentiate between Haste I and II
-windower.register_event('action', 
+windower.register_event('action',
     function(act)
         --check if you are a target of spell
         local actionTargets = act.targets
@@ -938,7 +940,7 @@ windower.register_event('action',
                 end
             elseif act.category == 13 then
                 local param = act.param
-                if param == 595 and haste ~= 2 then 
+                if param == 595 and haste ~= 2 then
                     --add_to_chat(122, 'Haste Status: Haste I (Hastega)')
                     haste = 1
                 elseif param == 602 then
@@ -1017,7 +1019,7 @@ function do_ninja_tool_checks(spell, spellMap, eventArgs)
             return
         end
     end
-    
+
     local available_ninja_tools = player.inventory[ninja_tool_name] or player.wardrobe[ninja_tool_name]
 
     -- If no tools are available, end.
@@ -1026,7 +1028,7 @@ function do_ninja_tool_checks(spell, spellMap, eventArgs)
             return
         end
     end
-    
+
     -- Low ninja tools warning.
     if spell.skill == "Ninjutsu" and state.warned.value == false
         and available_ninja_tools.count > 1 and available_ninja_tools.count <= options.ninja_tool_warning_limit then
@@ -1036,7 +1038,7 @@ function do_ninja_tool_checks(spell, spellMap, eventArgs)
         for i = 1, #msg do
             border = border .. "*"
         end
-        
+
         add_to_chat(104, border)
         add_to_chat(104, msg)
         add_to_chat(104, border)

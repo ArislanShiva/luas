@@ -152,7 +152,7 @@ function user_setup()
 
     send_command('bind @c gs c toggle CP')
     send_command('bind @q gs c cycle QDMode')
-    send_command('bind @g gs c cycle Gun')
+    send_command('bind @e gs c cycle Gun')
     send_command('bind @w gs c toggle WeaponLock')
 
     send_command('bind ^numlock input /ja "Triple Shot" <me>')
@@ -195,7 +195,7 @@ function user_unload()
     send_command('unbind ^,')
     send_command('unbind @c')
     send_command('unbind @q')
-    send_command('unbind @g')
+    send_command('unbind @e')
     send_command('unbind @w')
     send_command('unbind ^numlock')
     send_command('unbind ^numpad/')
@@ -231,7 +231,7 @@ function init_gear_sets()
 
     sets.precast.JA['Snake Eye'] = {legs="Lanun Trews +1"}
     sets.precast.JA['Wild Card'] = {feet="Lanun Bottes +3"}
-    sets.precast.JA['Random Deal'] = {body="Lanun Frac +1"}
+    sets.precast.JA['Random Deal'] = {body="Lanun Frac +3"}
 
     sets.precast.CorsairRoll = {
         head="Lanun Tricorne +3",
@@ -352,7 +352,7 @@ function init_gear_sets()
     sets.precast.WS['Wildfire'] = {
         ammo=gear.MAbullet,
         head=gear.Herc_MAB_head,
-        body="Laksa. Frac +3",
+        body="Lanun Frac +3",
         hands="Carmine Fin. Ga. +1",
         legs=gear.Herc_MAB_legs,
         feet="Lanun Bottes +3",
@@ -491,7 +491,7 @@ function init_gear_sets()
     sets.midcast.CorsairShot = {
         ammo=gear.QDbullet,
         head=gear.Herc_MAB_head,
-        body="Samnuha Coat",
+        body="Lanun Frac +3",
         hands="Carmine Fin. Ga. +1",
         legs=gear.Herc_MAB_legs,
         feet="Lanun Bottes +3",
@@ -543,7 +543,7 @@ function init_gear_sets()
     sets.midcast.RA = {
         ammo=gear.RAbullet,
         head="Lanun Tricorne +3",
-        body="Mummu Jacket +2",
+        body="Oshosi Vest",
         hands=gear.Adhemar_C_hands,
         legs=gear.Adhemar_C_legs,
         feet="Meg. Jam. +2",
@@ -581,7 +581,6 @@ function init_gear_sets()
         })
 
     sets.midcast.RA.STP = set_combine(sets.midcast.RA, {
-        body="Oshosi Vest",
         feet="Carmine Greaves +1",
         ear1="Dedition Earring",
         ring1="Chirich Ring",
@@ -604,8 +603,8 @@ function init_gear_sets()
 
     sets.idle = {
         ammo=gear.MAbullet,
-        head="Meghanada Visor +2",
-        body="Meg. Cuirie +2",
+        head="Volte Cap",
+        body="Lanun Frac +3",
         hands=gear.Herc_DT_hands,
         legs="Carmine Cuisses +1",
         feet="Meg. Jam. +2",
@@ -620,7 +619,7 @@ function init_gear_sets()
 
     sets.idle.DT = set_combine(sets.idle, {
         head="Meghanada Visor +2", --5/0
-        body="Meg. Cuirie +2", --8/0
+        body="Lanun Frac +3", --6/0
         hands=gear.Herc_DT_hands, --7/5
         feet="Lanun Bottes +3", --6/0
         neck="Loricate Torque +1", --6/6
@@ -638,7 +637,7 @@ function init_gear_sets()
 
     sets.idle.Town = set_combine(sets.idle, {
         head="Lanun Tricorne +3",
-        body=gear.Adhemar_B_body,
+        body="Lanun Frac +3",
         hands="Lanun Gants +3",
         feet="Lanun Bottes +3",
         neck="Iskur Gorget",

@@ -324,7 +324,7 @@ function init_gear_sets()
         head="Merlinic Hood",
         body="Vanya Robe",
         hands="Azimuth Gloves +1",
-        legs=gear.Merlinic_MAcc_legs,
+        legs="Jhakri Slops +2",
         feet="Skaoi Boots",
         neck="Erra Pendant",
         ear1="Barkaro. Earring",
@@ -379,7 +379,7 @@ function init_gear_sets()
         head="Merlinic Hood",
         body="Merlinic Jubbah",
         hands="Amalric Gages +1",
-        legs=gear.Merlinic_MAcc_legs,
+        legs="Merlinic Shalwar",
         feet="Merlinic Crackows",
         neck="Baetyl Pendant",
         ear1="Barkaro. Earring",
@@ -409,7 +409,6 @@ function init_gear_sets()
     sets.midcast['Elemental Magic'].Seidr = set_combine(sets.midcast['Elemental Magic'], {
         sub="Enki Strap",
         body="Seidr Cotehardie",
-        legs=gear.Merlinic_MAcc_legs,
         feet="Jhakri Pigaches +2",
         neck="Sanctity Necklace",
         })
