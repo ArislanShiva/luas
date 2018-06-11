@@ -566,7 +566,7 @@ function init_gear_sets()
         ear2="Infused Earring",
         ring1="Paguroidea Ring",
         ring2="Sheltered Ring",
-        back="Moonbeam Cape",
+        back="Moonlight Cape",
         --waist="Flume Belt +1",
         }
 
@@ -577,7 +577,7 @@ function init_gear_sets()
         ear2="Etiolation Earring", --0/3
         ring1="Gelatinous Ring +1", --7/(-1)
         ring2="Defending Ring", --10/10
-        back="Moonbeam Cape", --5/5
+        back="Moonlight Cape", --6/6
         --waist="Flume Belt +1", --4/0
         })
 

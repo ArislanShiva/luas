@@ -41,7 +41,7 @@
 -------------------------------------------------------------------------------------------------------------------
 
 --  gs c cycle treasuremode (set on ctrl-= by default): Cycles through the available treasure hunter modes.
--- 
+--
 --  TH Modes:  None                 Will never equip TH gear
 --             Tag                  Will equip TH gear sufficient for initial contact with a mob (either melee,
 --
@@ -56,7 +56,7 @@
 -- Initialization function for this job file.
 function get_sets()
     mote_include_version = 2
-    
+
     -- Load and initialize the include file.
     include('Mote-Include.lua')
 end
@@ -66,7 +66,7 @@ function job_setup()
     state.Buff['Sneak Attack'] = buffactive['sneak attack'] or false
     state.Buff['Trick Attack'] = buffactive['trick attack'] or false
     state.Buff['Feint'] = buffactive['feint'] or false
-    
+
     include('Mote-TreasureHunter')
 
     -- For th_action_check():
@@ -113,7 +113,7 @@ function user_setup()
         send_command('bind ^numpad* input /ja "Sekkanoki" <me>')
         send_command('bind ^numpad- input /ja "Third Eye" <me>')
     end
-	
+
     send_command('bind ^numpad7 input /ws "Exenterator" <t>')
     send_command('bind ^numpad8 input /ws "Mandalic Stab" <t>')
     send_command('bind ^numpad4 input /ws "Evisceration" <t>')
@@ -170,11 +170,11 @@ function init_gear_sets()
         feet="Skulk. Poulaines +1",
         waist="Chaac Belt",
         }
-        
+
     sets.buff['Sneak Attack'] = {
-        ammo="Yetshila",
+        ammo="Yetshila +1",
         head="Pill. Bonnet +3",
-        body="Pillager's Vest +3", 
+        body="Pillager's Vest +3",
         hands=gear.Adhemar_B_hands,
         legs="Lustr. Subligar +1",
         feet="Lustra. Leggings +1",
@@ -186,9 +186,9 @@ function init_gear_sets()
         }
 
     sets.buff['Trick Attack'] = {
-        ammo="Yetshila",
+        ammo="Yetshila +1",
         head="Pill. Bonnet +3",
-        body="Pillager's Vest +3", 
+        body="Pillager's Vest +3",
         hands="Pillager's Armlets +1",
         legs="Pill. Culottes +3",
         feet="Meg. Jam. +2",
@@ -266,7 +266,7 @@ function init_gear_sets()
 
     sets.precast.WS = {
         ammo="Focal Orb",
-        head="Pill. Bonnet +3", 
+        head="Pill. Bonnet +3",
         body=gear.Herc_WS_body,
         hands="Meg. Gloves +2",
         legs="Lustr. Subligar +1",
@@ -304,7 +304,7 @@ function init_gear_sets()
         })
 
     sets.precast.WS['Evisceration'] = set_combine(sets.precast.WS, {
-        ammo="Yetshila",
+        ammo="Yetshila +1",
         head=gear.Adhemar_B_head,
         body="Pillager's Vest +3",
         hands="Mummu Wrists +2",
@@ -325,7 +325,7 @@ function init_gear_sets()
         })
 
     sets.precast.WS['Rudra\'s Storm'] = set_combine(sets.precast.WS, {
-        ammo="Expeditious Pinion",
+        ammo="Jukukik Feather",
         neck="Caro Necklace",
         ear1="Sherida Earring",
         waist="Grunfeld Rope",
@@ -370,7 +370,7 @@ function init_gear_sets()
         ammo="Impatiens", --10
         ring1="Evanescence Ring", --5
         }
-        
+
     sets.midcast.Utsusemi = sets.midcast.SpellInterrupt
 
 
@@ -392,7 +392,7 @@ function init_gear_sets()
         ear2="Infused Earring",
         ring1="Paguroidea Ring",
         ring2="Sheltered Ring",
-        back="Moonbeam Cape",
+        back="Moonlight Cape",
         waist="Flume Belt +1",
         }
 
@@ -404,7 +404,7 @@ function init_gear_sets()
         neck="Loricate Torque +1", --6/6
         ring1="Gelatinous Ring +1", --7/(-1)
         ring2="Defending Ring", --10/10
-        back="Moonbeam Cape", --5/5
+        back="Moonlight Cape", --6/6
         })
 
     sets.idle.Town = set_combine(sets.idle, {
@@ -448,7 +448,7 @@ function init_gear_sets()
 
     -- * THF Native DW Trait: 25% DW
     -- * THF Job Points DW Gift: 5% DW
-    
+
     -- No Magic Haste (74% DW to cap)
     sets.engaged = {
         ammo="Yamarang",
@@ -473,7 +473,7 @@ function init_gear_sets()
 
     sets.engaged.MidAcc = set_combine(sets.engaged.LowAcc, {
         head="Dampening Tam",
-        body="Pillager's Vest +3", 
+        body="Pillager's Vest +3",
         ring2="Ilabrat Ring",
         waist="Kentarch Belt +1",
         })
@@ -517,7 +517,7 @@ function init_gear_sets()
 
     sets.engaged.MidAcc.LowHaste = set_combine(sets.engaged.LowAcc.LowHaste, {
         head="Dampening Tam",
-        body="Pillager's Vest +3", 
+        body="Pillager's Vest +3",
         ring2="Ilabrat Ring",
         waist="Kentarch Belt +1",
         })
@@ -540,7 +540,7 @@ function init_gear_sets()
     sets.engaged.MidHaste = {
         ammo="Yamarang",
         head=gear.Adhemar_B_head,
-        body="Pillager's Vest +3", 
+        body="Pillager's Vest +3",
         hands=gear.Adhemar_B_hands,
         legs="Samnuha Tights",
         feet=gear.Herc_TA_feet,
@@ -584,7 +584,7 @@ function init_gear_sets()
     sets.engaged.HighHaste = {
         ammo="Yamarang",
         head=gear.Adhemar_B_head,
-        body="Pillager's Vest +3", 
+        body="Pillager's Vest +3",
         hands=gear.Adhemar_B_hands,
         legs="Samnuha Tights",
         feet=gear.Herc_TA_feet,
@@ -629,7 +629,7 @@ function init_gear_sets()
     sets.engaged.MaxHaste = {
         ammo="Yamarang",
         head=gear.Adhemar_B_head,
-        body="Pillager's Vest +3", 
+        body="Pillager's Vest +3",
         hands=gear.Adhemar_B_hands,
         legs="Samnuha Tights",
         feet=gear.Herc_TA_feet,
@@ -682,7 +682,7 @@ function init_gear_sets()
         ring1="Moonbeam Ring", --4/4
         ring2="Defending Ring", --10/10
         }
-    
+
     sets.engaged.DT = set_combine(sets.engaged, sets.engaged.Hybrid)
     sets.engaged.LowAcc.DT = set_combine(sets.engaged.LowAcc, sets.engaged.Hybrid)
     sets.engaged.MidAcc.DT = set_combine(sets.engaged.MidAcc, sets.engaged.Hybrid)
@@ -692,35 +692,35 @@ function init_gear_sets()
     sets.engaged.DT.LowHaste = set_combine(sets.engaged.LowHaste, sets.engaged.Hybrid)
     sets.engaged.LowAcc.DT.LowHaste = set_combine(sets.engaged.LowAcc.LowHaste, sets.engaged.Hybrid)
     sets.engaged.MidAcc.DT.LowHaste = set_combine(sets.engaged.MidAcc.LowHaste, sets.engaged.Hybrid)
-    sets.engaged.HighAcc.DT.LowHaste = set_combine(sets.engaged.HighAcc.LowHaste, sets.engaged.Hybrid)    
+    sets.engaged.HighAcc.DT.LowHaste = set_combine(sets.engaged.HighAcc.LowHaste, sets.engaged.Hybrid)
     sets.engaged.STP.DT.LowHaste = set_combine(sets.engaged.STP.LowHaste, sets.engaged.Hybrid)
 
     sets.engaged.DT.MidHaste = set_combine(sets.engaged.MidHaste, sets.engaged.Hybrid)
     sets.engaged.LowAcc.DT.MidHaste = set_combine(sets.engaged.LowAcc.MidHaste, sets.engaged.Hybrid)
     sets.engaged.MidAcc.DT.MidHaste = set_combine(sets.engaged.MidAcc.MidHaste, sets.engaged.Hybrid)
-    sets.engaged.HighAcc.DT.MidHaste = set_combine(sets.engaged.HighAcc.MidHaste, sets.engaged.Hybrid)    
+    sets.engaged.HighAcc.DT.MidHaste = set_combine(sets.engaged.HighAcc.MidHaste, sets.engaged.Hybrid)
     sets.engaged.STP.DT.MidHaste = set_combine(sets.engaged.STP.MidHaste, sets.engaged.Hybrid)
 
     sets.engaged.DT.HighHaste = set_combine(sets.engaged.HighHaste, sets.engaged.Hybrid)
     sets.engaged.LowAcc.DT.HighHaste = set_combine(sets.engaged.LowAcc.HighHaste, sets.engaged.Hybrid)
     sets.engaged.MidAcc.DT.HighHaste = set_combine(sets.engaged.MidAcc.HighHaste, sets.engaged.Hybrid)
-    sets.engaged.HighAcc.DT.HighHaste = set_combine(sets.engaged.HighAcc.HighHaste, sets.engaged.Hybrid)    
+    sets.engaged.HighAcc.DT.HighHaste = set_combine(sets.engaged.HighAcc.HighHaste, sets.engaged.Hybrid)
     sets.engaged.STP.DT.HighHaste = set_combine(sets.engaged.HighHaste.STP, sets.engaged.Hybrid)
 
     sets.engaged.DT.MaxHaste = set_combine(sets.engaged.MaxHaste, sets.engaged.Hybrid)
     sets.engaged.LowAcc.DT.MaxHaste = set_combine(sets.engaged.LowAcc.MaxHaste, sets.engaged.Hybrid)
     sets.engaged.MidAcc.DT.MaxHaste = set_combine(sets.engaged.MidAcc.MaxHaste, sets.engaged.Hybrid)
-    sets.engaged.HighAcc.DT.MaxHaste = set_combine(sets.engaged.HighAcc.MaxHaste, sets.engaged.Hybrid)    
+    sets.engaged.HighAcc.DT.MaxHaste = set_combine(sets.engaged.HighAcc.MaxHaste, sets.engaged.Hybrid)
     sets.engaged.STP.DT.MaxHaste = set_combine(sets.engaged.STP.MaxHaste, sets.engaged.Hybrid)
 
 
     ------------------------------------------------------------------------------------------------
     ---------------------------------------- Special Sets ------------------------------------------
     ------------------------------------------------------------------------------------------------
-    
+
     sets.buff.Doom = {ring1="Eshmun's Ring", ring2="Eshmun's Ring", waist="Gishdubar Sash"}
 
-    sets.Reive = {neck="Ygnas's Resolve +1"}
+    --sets.Reive = {neck="Ygnas's Resolve +1"}
     sets.CP = {back="Mecisto. Mantle"}
 
 end
@@ -805,7 +805,7 @@ function job_buff_change(buff,gain)
     end
 
 --    if buffactive['Reive Mark'] then
---        if gain then           
+--        if gain then
 --            equip(sets.Reive)
 --            disable('neck')
 --        else
@@ -814,7 +814,7 @@ function job_buff_change(buff,gain)
 --    end
 
     if buff == "doom" then
-        if gain then           
+        if gain then
             equip(sets.buff.Doom)
             send_command('@input /p Doomed.')
              disable('ring1','ring2','waist')
@@ -894,29 +894,29 @@ end
 -- Return true if display was handled, and you don't want the default info shown.
 function display_current_job_state(eventArgs)
     local msg = '[ Melee'
-    
+
     if state.CombatForm.has_value then
         msg = msg .. ' (' .. state.CombatForm.value .. ')'
     end
-    
+
     msg = msg .. ': '
-    
+
     msg = msg .. state.OffenseMode.value
     if state.HybridMode.value ~= 'Normal' then
         msg = msg .. '/' .. state.HybridMode.value
     end
     msg = msg .. ' ][ WS: ' .. state.WeaponskillMode.value
-    
+
     if state.DefenseMode.value ~= 'None' then
         msg = msg .. ' ][ Defense: ' .. state.DefenseMode.value .. state[state.DefenseMode.value .. 'DefenseMode'].value
     end
-    
+
     if state.Kiting.value then
         msg = msg .. ' ][ Kiting Mode: ON'
     end
-    
+
     msg = msg .. ' ][ TH: ' .. state.TreasureMode.value
-    
+
     msg = msg .. ' ]'
 
     add_to_chat(060, msg)
@@ -929,7 +929,7 @@ end
 -------------------------------------------------------------------------------------------------------------------
 
 --Read incoming packet to differentiate between Haste I and II
-windower.register_event('action', 
+windower.register_event('action',
     function(act)
         --check if you are a target of spell
         local actionTargets = act.targets
@@ -957,7 +957,7 @@ windower.register_event('action',
                 end
             elseif act.category == 13 then
                 local param = act.param
-                if param == 595 and haste ~= 2 then 
+                if param == 595 and haste ~= 2 then
                     --add_to_chat(122, 'Haste Status: Haste I (Hastega)')
                     haste = 1
                 elseif param == 602 then

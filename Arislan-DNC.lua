@@ -52,7 +52,7 @@
 -------------------------------------------------------------------------------------------------------------------
 --  Custom Commands (preface with /console to use these in macros)
 -------------------------------------------------------------------------------------------------------------------
-   
+
 --  gs c step                       Uses the currently configured step on the target, with either <t> or
 --                                  <stnpc> depending on setting.
 --  gs c step t                     Uses the currently configured step on the target, but forces use of <t>.
@@ -72,7 +72,7 @@
 -- Initialization function for this job file.
 function get_sets()
     mote_include_version = 2
-    
+
     -- Load and initialize the include file.
     include('Mote-Include.lua')
 end
@@ -107,7 +107,7 @@ end
 
 -- Setup vars that are user-dependent.  Can override this function in a sidecar file.
 function user_setup()
-    state.OffenseMode:options('Normal', 'LowAcc', 'MidAcc', 'HighAcc', 'STP')
+    state.OffenseMode:options('STP', 'Normal', 'LowAcc', 'MidAcc', 'HighAcc')
     state.HybridMode:options('Normal', 'DT')
     state.WeaponskillMode:options('Normal', 'Acc')
     state.IdleMode:options('Normal', 'DT')
@@ -208,7 +208,7 @@ function init_gear_sets()
     ------------------------------------------------------------------------------------------------
     ---------------------------------------- Precast Sets ------------------------------------------
     ------------------------------------------------------------------------------------------------
-    
+
     -- Enmity set
     sets.Enmity = {
         ammo="Sapience Orb", --2
@@ -217,7 +217,7 @@ function init_gear_sets()
         hands="Kurys Gloves", --9
         neck="Unmoving Collar +1", --10
         ear1="Cryptic Earring", --4
-        ear2="Friomisi Earring", --2
+        ear2="Trux Earring", --5
         ring1="Supershear Ring", --5
         ring2="Eihwaz Ring", --5
         waist="Kasiri Belt", --3
@@ -226,7 +226,7 @@ function init_gear_sets()
     sets.precast.JA['Provoke'] = sets.Enmity
     sets.precast.JA['No Foot Rise'] = {body="Horos Casaque +1"}
     sets.precast.JA['Trance'] = {head="Horos Tiara +1"}
-      
+
     sets.precast.Waltz = {
         ammo="Yamarang", --5
         head="Anwig Salade",
@@ -242,12 +242,12 @@ function init_gear_sets()
         back=gear.DNC_WTZ_Cape, --10
         waist="Aristo Belt",
         } -- Waltz Potency/CHR
-    
+
     sets.precast.WaltzSelf = set_combine(sets.precast.Waltz, {
         head="Mummu Bonnet +2", --8
         ring1="Asklepian Ring", --3
         }) -- Waltz effects received
-        
+
     sets.precast.Waltz['Healing Waltz'] = {}
     sets.precast.Samba = {head="Maxixi Tiara +3", back=gear.DNC_TP_Cape}
     sets.precast.Jig = {legs="Horos Tights +1", feet="Maxixi Toeshoes +3"}
@@ -287,7 +287,7 @@ function init_gear_sets()
         waist="Eschan Stone",
         back=gear.DNC_TP_Cape,
         } -- Magic Accuracy
-        
+
     sets.precast.Flourish1['Desperate Flourish'] = {
         ammo="Yamarang",
         head="Maxixi Tiara +3",
@@ -308,7 +308,7 @@ function init_gear_sets()
     sets.precast.Flourish3 = {}
     sets.precast.Flourish3['Striking Flourish'] = {body="Macu. Casaque +1"}
     sets.precast.Flourish3['Climactic Flourish'] = {head="Maculele Tiara +1",}
-    
+
     sets.precast.FC = {
         ammo="Sapience Orb",
         head=gear.Herc_MAB_head, --7
@@ -333,7 +333,7 @@ function init_gear_sets()
     ------------------------------------------------------------------------------------------------
     ------------------------------------- Weapon Skill Sets ----------------------------------------
     ------------------------------------------------------------------------------------------------
-    
+
     sets.precast.WS = {
         ammo="Focal Orb",
         head="Lilitu Headpiece",
@@ -349,7 +349,7 @@ function init_gear_sets()
         back=gear.DNC_WS1_Cape,
         waist="Fotia Belt",
         } -- default set
-        
+
     sets.precast.WS.Acc = set_combine(sets.precast.WS, {
         ammo="Falcon Eye",
         head="Dampening Tam",
@@ -359,7 +359,7 @@ function init_gear_sets()
         })
 
     sets.precast.WS.Critical = {body="Meg. Cuirie +2"}
-    
+
     sets.precast.WS['Exenterator'] = set_combine(sets.precast.WS, {
         ammo="Yamarang",
         head=gear.Adhemar_B_head,
@@ -370,7 +370,7 @@ function init_gear_sets()
         ear2="Telos Earring",
         back=gear.DNC_WS2_Cape,
         })
-        
+
     sets.precast.WS['Exenterator'].Acc = set_combine(sets.precast.WS['Exenterator'], {
         ammo="Falcon Eye",
         head="Dampening Tam",
@@ -388,7 +388,7 @@ function init_gear_sets()
         ring2="Epona's Ring",
         back=gear.DNC_WS2_Cape,
         })
-        
+
     sets.precast.WS['Pyrrhic Kleos'].Acc = set_combine(sets.precast.WS['Pyrrhic Kleos'], {
         ammo="Falcon Eye",
         head="Dampening Tam",
@@ -451,12 +451,12 @@ function init_gear_sets()
         back="Argocham. Mantle",
         waist="Eschan Stone",
         }
-    
+
     sets.precast.Skillchain = {
         hands="Macu. Bangles +1",
         }
-    
-    
+
+
     ------------------------------------------------------------------------------------------------
     ---------------------------------------- Midcast Sets ------------------------------------------
     ------------------------------------------------------------------------------------------------
@@ -489,7 +489,7 @@ function init_gear_sets()
         ear2="Infused Earring",
         ring1="Paguroidea Ring",
         ring2="Sheltered Ring",
-        back="Moonbeam Cape",
+        back="Moonlight Cape",
         waist="Flume Belt +1",
         }
 
@@ -502,7 +502,7 @@ function init_gear_sets()
         ear2="Etiolation Earring", --0/3
         ring1="Gelatinous Ring +1", --7/(-1)
         ring2="Defending Ring", --10/10
-        back="Moonbeam Cape", --5/5
+        back="Moonlight Cape", --6/6
         })
 
     sets.idle.Town = set_combine(sets.idle, {
@@ -519,9 +519,9 @@ function init_gear_sets()
         back=gear.DNC_TP_Cape,
         waist="Windbuffet Belt +1",
         })
-    
+
     sets.idle.Weak = sets.idle.DT
-    
+
 
     ------------------------------------------------------------------------------------------------
     ---------------------------------------- Defense Sets ------------------------------------------
@@ -546,7 +546,7 @@ function init_gear_sets()
 
     -- * DNC Native DW Trait: 30% DW
     -- * DNC Job Points DW Gift: 5% DW
-    
+
     -- No Magic Haste (74% DW to cap)
     sets.engaged = {
         ammo="Yamarang",
@@ -558,7 +558,7 @@ function init_gear_sets()
         neck="Charis Necklace", --5
         ear1="Eabani Earring", --4
         ear2="Suppanomimi", --5
-        ring1="Chirich Ring",
+        ring1="Hetairoi Ring",
         ring2="Epona's Ring",
         back=gear.DNC_TP_Cape,
         waist="Reiki Yotai", --7
@@ -599,7 +599,7 @@ function init_gear_sets()
         neck="Charis Necklace", --5
         ear1="Eabani Earring", --4
         ear2="Suppanomimi", --5
-        ring1="Chirich Ring",
+        ring1="Hetairoi Ring",
         ring2="Epona's Ring",
         back=gear.DNC_TP_Cape,
         waist="Reiki Yotai", --7
@@ -640,7 +640,7 @@ function init_gear_sets()
         neck="Anu Torque",
         ear1="Eabani Earring", --4
         ear2="Suppanomimi", --5
-        ring1="Chirich Ring",
+        ring1="Hetairoi Ring",
         ring2="Epona's Ring",
         back=gear.DNC_TP_Cape,
         waist="Reiki Yotai", --7
@@ -682,7 +682,7 @@ function init_gear_sets()
         neck="Anu Torque",
         ear1="Eabani Earring", --4
         ear2="Suppanomimi", --5
-        ring1="Chirich Ring",
+        ring1="Hetairoi Ring",
         ring2="Epona's Ring",
         back=gear.DNC_TP_Cape,
         waist="Windbuffet Belt +1",
@@ -721,11 +721,10 @@ function init_gear_sets()
         hands=gear.Adhemar_B_hands,
         legs="Samnuha Tights",
         feet=gear.Herc_TA_feet,
-        --neck="Anu Torque",
-		neck="Bathy Choker +1",
+        neck="Anu Torque",
         ear1="Sherida Earring",
         ear2="Brutal Earring",
-        ring1="Chirich Ring",
+        ring1="Hetairoi Ring",
         ring2="Epona's Ring",
         back=gear.DNC_TP_Cape,
         waist="Windbuffet Belt +1",
@@ -769,7 +768,7 @@ function init_gear_sets()
         ring1="Moonbeam Ring", --4/4
         ring2="Defending Ring", --10/10
         }
-    
+
     sets.engaged.DT = set_combine(sets.engaged, sets.engaged.Hybrid)
     sets.engaged.LowAcc.DT = set_combine(sets.engaged.LowAcc, sets.engaged.Hybrid)
     sets.engaged.MidAcc.DT = set_combine(sets.engaged.MidAcc, sets.engaged.Hybrid)
@@ -779,25 +778,25 @@ function init_gear_sets()
     sets.engaged.DT.LowHaste = set_combine(sets.engaged.LowHaste, sets.engaged.Hybrid)
     sets.engaged.LowAcc.DT.LowHaste = set_combine(sets.engaged.LowAcc.LowHaste, sets.engaged.Hybrid)
     sets.engaged.MidAcc.DT.LowHaste = set_combine(sets.engaged.MidAcc.LowHaste, sets.engaged.Hybrid)
-    sets.engaged.HighAcc.DT.LowHaste = set_combine(sets.engaged.HighAcc.LowHaste, sets.engaged.Hybrid)    
+    sets.engaged.HighAcc.DT.LowHaste = set_combine(sets.engaged.HighAcc.LowHaste, sets.engaged.Hybrid)
     sets.engaged.STP.DT.LowHaste = set_combine(sets.engaged.STP.LowHaste, sets.engaged.Hybrid)
 
     sets.engaged.DT.MidHaste = set_combine(sets.engaged.MidHaste, sets.engaged.Hybrid)
     sets.engaged.LowAcc.DT.MidHaste = set_combine(sets.engaged.LowAcc.MidHaste, sets.engaged.Hybrid)
     sets.engaged.MidAcc.DT.MidHaste = set_combine(sets.engaged.MidAcc.MidHaste, sets.engaged.Hybrid)
-    sets.engaged.HighAcc.DT.MidHaste = set_combine(sets.engaged.HighAcc.MidHaste, sets.engaged.Hybrid)    
+    sets.engaged.HighAcc.DT.MidHaste = set_combine(sets.engaged.HighAcc.MidHaste, sets.engaged.Hybrid)
     sets.engaged.STP.DT.MidHaste = set_combine(sets.engaged.STP.MidHaste, sets.engaged.Hybrid)
 
     sets.engaged.DT.HighHaste = set_combine(sets.engaged.HighHaste, sets.engaged.Hybrid)
     sets.engaged.LowAcc.DT.HighHaste = set_combine(sets.engaged.LowAcc.HighHaste, sets.engaged.Hybrid)
     sets.engaged.MidAcc.DT.HighHaste = set_combine(sets.engaged.MidAcc.HighHaste, sets.engaged.Hybrid)
-    sets.engaged.HighAcc.DT.HighHaste = set_combine(sets.engaged.HighAcc.HighHaste, sets.engaged.Hybrid)    
+    sets.engaged.HighAcc.DT.HighHaste = set_combine(sets.engaged.HighAcc.HighHaste, sets.engaged.Hybrid)
     sets.engaged.STP.DT.HighHaste = set_combine(sets.engaged.HighHaste.STP, sets.engaged.Hybrid)
 
     sets.engaged.DT.MaxHaste = set_combine(sets.engaged.MaxHaste, sets.engaged.Hybrid)
     sets.engaged.LowAcc.DT.MaxHaste = set_combine(sets.engaged.LowAcc.MaxHaste, sets.engaged.Hybrid)
     sets.engaged.MidAcc.DT.MaxHaste = set_combine(sets.engaged.MidAcc.MaxHaste, sets.engaged.Hybrid)
-    sets.engaged.HighAcc.DT.MaxHaste = set_combine(sets.engaged.HighAcc.MaxHaste, sets.engaged.Hybrid)    
+    sets.engaged.HighAcc.DT.MaxHaste = set_combine(sets.engaged.HighAcc.MaxHaste, sets.engaged.Hybrid)
     sets.engaged.STP.DT.MaxHaste = set_combine(sets.engaged.STP.MaxHaste, sets.engaged.Hybrid)
 
 
@@ -812,7 +811,7 @@ function init_gear_sets()
 
     sets.buff.Doom = {ring1="Eshmun's Ring", ring2="Eshmun's Ring", waist="Gishdubar Sash"}
     sets.CP = {back="Mecisto. Mantle"}
-    sets.Reive = {neck="Ygnas's Resolve +1"}
+    --sets.Reive = {neck="Ygnas's Resolve +1"}
 
 end
 
@@ -885,7 +884,7 @@ function job_buff_change(buff,gain)
     end
 
 --    if buffactive['Reive Mark'] then
---        if gain then           
+--        if gain then
 --            equip(sets.Reive)
 --            disable('neck')
 --        else
@@ -894,7 +893,7 @@ function job_buff_change(buff,gain)
 --    end
 
     if buff == "doom" then
-        if gain then           
+        if gain then
             equip(sets.buff.Doom)
             send_command('@input /p Doomed.')
              disable('ring1','ring2','waist')
@@ -944,7 +943,7 @@ function customize_idle_set(idleSet)
     else
         enable('back')
     end
-    
+
     return idleSet
 end
 
@@ -955,7 +954,7 @@ function customize_melee_set(meleeSet)
     if state.Buff['Climactic Flourish'] then
         meleeSet = set_combine(meleeSet, sets.buff['Climactic Flourish'])
     end
-    if state.ClosedPosition.value == true and state.OffenseMode.value == 'STP' then
+    if state.ClosedPosition.value == true then
         meleeSet = set_combine(meleeSet, sets.buff['Closed Position'])
     end
 
@@ -969,7 +968,7 @@ function job_auto_change_target(spell, action, spellMap, eventArgs)
             state.IgnoreTargetting:reset()
             eventArgs.handled = true
         end
-        
+
         eventArgs.SelectNPCTargets = state.SelectStepTarget.value
     end
 end
@@ -979,23 +978,23 @@ end
 -- Set eventArgs.handled to true if display was handled, and you don't want the default info shown.
 function display_current_job_state(eventArgs)
     local msg = '[ Melee'
-    
+
     if state.CombatForm.has_value then
         msg = msg .. ' (' .. state.CombatForm.value .. ')'
     end
-    
+
     msg = msg .. ': '
-    
+
     msg = msg .. state.OffenseMode.value
     if state.HybridMode.value ~= 'Normal' then
         msg = msg .. '/' .. state.HybridMode.value
     end
     msg = msg .. ' ][ WS: ' .. state.WeaponskillMode.value .. ' ]'
-    
+
     if state.DefenseMode.value ~= 'None' then
         msg = msg .. '[ Defense: ' .. state.DefenseMode.value .. state[state.DefenseMode.value .. 'DefenseMode'].value .. ' ]'
     end
-    
+
     if state.ClosedPosition.value then
         msg = msg .. '[ Closed Position: ON ]'
     end
@@ -1009,7 +1008,7 @@ function display_current_job_state(eventArgs)
     if state.UseAltStep.value == true then
         msg = msg .. '/'..state.AltStep.current
     end
-    
+
     msg = msg .. '* ]'
 
     add_to_chat(060, msg)
@@ -1035,8 +1034,8 @@ function job_self_command(cmdParams, eventArgs)
             state.CurrentStep:cycle()
         else
             doStep = state.MainStep.current
-        end        
-        
+        end
+
         send_command('@input /ja "'..doStep..'" <t>')
     end
 end
@@ -1046,7 +1045,7 @@ end
 -------------------------------------------------------------------------------------------------------------------
 
 --Read incoming packet to differentiate between Haste I and II
-windower.register_event('action', 
+windower.register_event('action',
     function(act)
         --check if you are a target of spell
         local actionTargets = act.targets
@@ -1074,7 +1073,7 @@ windower.register_event('action',
                 end
             elseif act.category == 13 then
                 local param = act.param
-                if param == 595 and haste ~= 2 then 
+                if param == 595 and haste ~= 2 then
                     --add_to_chat(122, 'Haste Status: Haste I (Hastega)')
                     haste = 1
                 elseif param == 602 then
@@ -1130,7 +1129,7 @@ function job_pretarget(spell, action, spellMap, eventArgs)
         local allRecasts = windower.ffxi.get_ability_recasts()
         local prestoCooldown = allRecasts[236]
         local under3FMs = not buffactive['Finishing Move 3'] and not buffactive['Finishing Move 4'] and not buffactive['Finishing Move 5']
-         
+
         if player.main_job_level >= 77 and prestoCooldown < 1 and under3FMs then
             cast_delay(1.1)
             send_command('input /ja "Presto" <me>')

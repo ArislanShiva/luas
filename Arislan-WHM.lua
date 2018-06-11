@@ -64,7 +64,7 @@
 -- Initialization function for this job file.
 function get_sets()
     mote_include_version = 2
-    
+
     -- Load and initialize the include file.
     include('Mote-Include.lua')
 end
@@ -88,8 +88,8 @@ function user_setup()
     state.OffenseMode:options('Normal', 'Acc')
     state.CastingMode:options('Normal', 'Resistant')
     state.IdleMode:options('Normal', 'DT', 'MEva')
-    
-    state.WeaponLock = M(false, 'Weapon Lock')    
+
+    state.WeaponLock = M(false, 'Weapon Lock')
     state.CP = M(false, "Capacity Points Mode")
 
     -- Additional local binds
@@ -184,7 +184,7 @@ function init_gear_sets()
         back=gear.WHM_FC_Cape, --10
         waist="Witful Belt", --3/(2)
         }
-        
+
     sets.precast.FC['Enhancing Magic'] = set_combine(sets.precast.FC, {
         back="Perimede Cape",
         waist="Siegel Sash",
@@ -213,7 +213,7 @@ function init_gear_sets()
 
     -- Precast sets to enhance JAs
     --sets.precast.JA.Benediction = {}
-    
+
     -- Weaponskill sets
 
     -- Default set for any weaponskill that isn't any more specifically defined
@@ -221,7 +221,6 @@ function init_gear_sets()
         ammo="Floestone",
         head="Aya. Zucchetto +2",
         body="Ayanmo Corazza +2",
-        hands="Chironic Gloves",
         legs="Aya. Cosciales +2",
         feet="Battlecast Gaiters",
         neck="Fotia Gorget",
@@ -258,7 +257,7 @@ function init_gear_sets()
         })
 
     -- Midcast Sets
-    
+
     sets.midcast.FC = {
         head="Piety Cap +1",
         body="Inyanga Jubbah +2",
@@ -271,7 +270,7 @@ function init_gear_sets()
         back=gear.WHM_FC_Cape,
         waist="Witful Belt",
         } -- Haste
-    
+
     -- Cure sets
 
     sets.midcast.CureSolace = {
@@ -348,7 +347,7 @@ function init_gear_sets()
         back=gear.WHM_FC_Cape,
         waist="Witful Belt",
         }
-        
+
     sets.midcast.Cursna = set_combine(sets.midcast.StatusRemoval, {
         main="Yagrush",
         sub="Chanter's Shield",
@@ -408,24 +407,24 @@ function init_gear_sets()
         hands="Ebers Mitts +1",
         legs="Th. Pant. +3",
         })
-    
-    sets.midcast.Refresh = set_combine(sets.midcast['Enhancing Magic'], {
+
+    sets.midcast.Refresh = set_combine(sets.midcast.EnhancingDuration, {
         waist="Gishdubar Sash",
         back="Grapevine Cape",
         })
 
-    sets.midcast.Stoneskin = set_combine(sets.midcast['Enhancing Magic'], {
+    sets.midcast.Stoneskin = set_combine(sets.midcast.EnhancingDuration, {
         neck="Nodens Gorget",
         waist="Siegel Sash",
         })
 
-    sets.midcast.Aquaveil = set_combine(sets.midcast['Enhancing Magic'], {
+    sets.midcast.Aquaveil = set_combine(sets.midcast.EnhancingDuration, {
         main="Vadose Rod",
         sub="Ammurapi Shield",
         waist="Emphatikos Rope",
         })
 
-    sets.midcast.Auspice = set_combine(sets.midcast['Enhancing Magic'], {
+    sets.midcast.Auspice = set_combine(sets.midcast.EnhancingDuration, {
         feet="Ebers Duckbills +1",
         })
 
@@ -541,15 +540,15 @@ function init_gear_sets()
     -- Initializes trusts at iLvl 119
     sets.midcast.Trust = sets.precast.FC
 
-    
+
     -- Sets to return to when not performing an action.
-    
+
     -- Resting sets
     sets.resting = {
         main="Chatoyant Staff",
         waist="Shinjutsu-no-Obi +1",
         }
-    
+
     -- Idle sets (default idle set not needed since the other three are defined, but leaving for testing purposes)
     sets.idle = {
         main="Bolelabunga",
@@ -565,19 +564,21 @@ function init_gear_sets()
         ear2="Infused Earring",
         ring1="Paguroidea Ring",
         ring2="Sheltered Ring",
-        back="Moonbeam Cape",
+        back="Moonlight Cape",
         waist="Austerity Belt +1",
         }
 
     sets.idle.DT = set_combine(sets.idle, {
-        main="Mafic Cudgel", --10/0
+        main="Bolelabunga",
         sub="Genmei Shield", --10/0
-        head="Aya. Zucchetto +2",  --3/3
+        ammo="Staunch Tathlum", --2/2
+        head="Gende. Caubeen +1",  --4/4
         hands="Gende. Gages +1", --4/3
         neck="Loricate Torque +1", --6/6
         ear1="Genmei Earring", --2/0
+        ring1="Gelatinous Ring +1", --7/(-1)
         ring2="Defending Ring", --10/10
-        back="Moonbeam Cape", --5/5
+        back="Moonlight Cape", --6/6
         waist="Slipor Sash", --0/3
         })
 
@@ -607,9 +608,9 @@ function init_gear_sets()
         ear2="Glorious Earring",
         back=gear.WHM_FC_Cape,
         })
-    
+
     sets.idle.Weak = sets.idle.DT
-    
+
     -- Defense sets
 
     sets.defense.PDT = sets.idle.DT
@@ -629,7 +630,7 @@ function init_gear_sets()
     -- sets if more refined versions aren't defined.
     -- If you create a set with both offense and defense modes, the offense mode should be first.
     -- EG: sets.engaged.Dagger.Accuracy.Evasion
-    
+
     -- Basic set for if no TP weapon is defined.
     sets.engaged = {
         main="Yagrush",
@@ -637,15 +638,12 @@ function init_gear_sets()
         ammo="Vanir Battery",
         head="Aya. Zucchetto +2",
         body="Ayanmo Corazza +2",
-        hands="Chironic Gloves",
         legs="Aya. Cosciales +2",
         feet="Battlecast Gaiters",
-        neck="Asperity Necklace",
         ear1="Eabani Earring",
         ear2="Brutal Earring",
         ring1="Ilabrat Ring",
         ring2="Hetairoi Ring",
-        waist="Shetal Stone",
         back=gear.WHM_TP_Cape,
         }
 
@@ -717,7 +715,7 @@ function job_aftercast(spell, action, spellMap, eventArgs)
             send_command('@timers c "Sleep ['..spell.target.name..']" 60 down spells/00253.png')
         elseif spell.english == "Repose" then
             send_command('@timers c "Repose ['..spell.target.name..']" 90 down spells/00098.png')
-        end 
+        end
     end
 end
 
@@ -727,7 +725,7 @@ end
 
 function job_buff_change(buff,gain)
     if buff == "doom" then
-        if gain then           
+        if gain then
             equip(sets.buff.Doom)
             --send_command('@input /p Doomed.')
              disable('ring1','ring2','waist')
@@ -781,7 +779,7 @@ function job_get_spell_map(spell, default_spell_map)
                     return "CureWeather"
                 else
                     return "CureNormal"
-                end                
+                end
             end
         elseif default_spell_map == 'Curaga' then
             if (world.weather_element == 'Light' or world.day_element == 'Light') then
@@ -810,20 +808,20 @@ function customize_idle_set(idleSet)
     else
         enable('back')
     end
-    
+
     return idleSet
 end
 
 -- Called by the 'update' self-command.
 function job_update(cmdParams, eventArgs)
 --[[if cmdParams[1] == 'user' and not areas.Cities:contains(world.area) then
-        local needsArts = 
+        local needsArts =
             player.sub_job:lower() == 'sch' and
             not buffactive['Light Arts'] and
             not buffactive['Addendum: White'] and
             not buffactive['Dark Arts'] and
             not buffactive['Addendum: Black']
-            
+
         if not buffactive['Afflatus Solace'] and not buffactive['Afflatus Misery'] then
             if needsArts then
                 send_command('@input /ja "Afflatus Solace" <me>;wait 1.2;input /ja "Light Arts" <me>')
@@ -909,7 +907,7 @@ function select_default_macro_book()
     set_macro_page(1, 4)
 end
 
-function update_offense_mode()  
+function update_offense_mode()
     if player.sub_job == 'NIN' or player.sub_job == 'DNC' then
         state.CombatForm:set('DW')
     else

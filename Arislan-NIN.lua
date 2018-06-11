@@ -177,7 +177,7 @@ function init_gear_sets()
         feet="Mochi. Kyahan +1", --6
         neck="Unmoving Collar +1", --10
         ear1="Cryptic Earring", --4
-        ear2="Friomisi Earring", --2
+        ear2="Trux Earring", --5
         ring1="Supershear Ring", --5
         ring2="Eihwaz Ring", --5
         waist="Kasiri Belt", --3
@@ -253,7 +253,7 @@ function init_gear_sets()
         })
 
     sets.precast.WS['Blade: Hi'] = set_combine(sets.precast.WS, {
-        ammo="Yetshila",
+        ammo="Yetshila +1",
         head=gear.Adhemar_B_head,
         hands="Mummu Wrists +2",
         feet="Mummu Gamash. +2",
@@ -273,6 +273,7 @@ function init_gear_sets()
         })
 
     sets.precast.WS['Blade: Shun'] = set_combine(sets.precast.WS, {
+        ammo="Jukukik Feather",
         head=gear.Adhemar_B_head,
         body=gear.Adhemar_B_body,
         legs="Jokushu Haidate",
@@ -403,7 +404,7 @@ function init_gear_sets()
         ear2="Infused Earring",
         ring1="Paguroidea Ring",
         ring2="Sheltered Ring",
-        back="Moonbeam Cape",
+        back="Moonlight Cape",
         waist="Flume Belt +1",
         }
 
@@ -414,7 +415,7 @@ function init_gear_sets()
         neck="Loricate Torque +1", --6/6
         ring1="Gelatinous Ring +1", --7/(-1)
         ring2="Defending Ring", --10/10
-        back="Moonbeam Cape", --5/5
+        back="Moonlight Cape", --6/6
         })
 
     sets.idle.Town = set_combine(sets.idle, {
@@ -720,7 +721,7 @@ function init_gear_sets()
 
     sets.CP = {back="Mecisto. Mantle"}
     sets.TH = {waist="Chaac Belt"}
-    sets.Reive = {neck="Ygnas's Resolve +1"}
+    --sets.Reive = {neck="Ygnas's Resolve +1"}
 
 end
 

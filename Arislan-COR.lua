@@ -168,8 +168,8 @@ function user_setup()
     send_command('bind ^numpad4 input /ws "Leaden Salute" <t>')
     send_command('bind ^numpad6 input /ws "Wildfire" <t>')
     send_command('bind ^numpad1 input /ws "Requiescat" <t>')
-    send_command('bind ^numpad2 input /ws "Burning Blade" <t>')
-    send_command('bind ^numpad3 input /ws "Flat Blade" <t>')
+    send_command('bind ^numpad2 input /ws "Hot Shot" <t>')
+    send_command('bind ^numpad3 input /ws "Numbing Shot" <t>')
 
     send_command('bind numpad0 input /ra <t>')
 
@@ -364,6 +364,8 @@ function init_gear_sets()
         back=gear.COR_WS1_Cape,
         waist="Eschan Stone",
         }
+
+    sets.precast.WS['Hot Shot'] = sets.precast.WS['Wildfire']
 
     sets.precast.WS['Leaden Salute'] = set_combine(sets.precast.WS['Wildfire'], {
         head="Pixie Hairpin +1",
@@ -594,6 +596,11 @@ function init_gear_sets()
         feet="Oshosi Leggings", --2
         } --27
 
+    sets.TripleShotCritical = {
+        head="Meghanada Visor +2",
+        waist="Kwahu Kachina Belt",
+        }
+
 
     ------------------------------------------------------------------------------------------------
     ----------------------------------------- Idle Sets --------------------------------------------
@@ -613,7 +620,7 @@ function init_gear_sets()
         ear2="Infused Earring",
         ring1="Paguroidea Ring",
         ring2="Sheltered Ring",
-        back="Moonbeam Cape",
+        back="Moonlight Cape",
         waist="Flume Belt +1",
         }
 
@@ -625,7 +632,7 @@ function init_gear_sets()
         neck="Loricate Torque +1", --6/6
         ear2="Etiolation Earring", --0/3
         ring2="Defending Ring", --10/10
-        back="Moonbeam Cape", --5/5
+        back="Moonlight Cape", --6/6
         waist="Flume Belt +1", --4/0
         })
 
@@ -974,7 +981,7 @@ function init_gear_sets()
 
     sets.Obi = {waist="Hachirin-no-Obi"}
     sets.CP = {back="Mecisto. Mantle"}
-    sets.Reive = {neck="Ygnas's Resolve +1"}
+    --sets.Reive = {neck="Ygnas's Resolve +1"}
 
 end
 
@@ -1059,8 +1066,15 @@ function job_post_midcast(spell, action, spellMap, eventArgs)
         elseif state.QDMode.value == 'STP' then
             equip(sets.midcast.CorsairShot.STP)
         end
-    elseif spell.action_type == 'Ranged Attack' and buffactive['Triple Shot'] then
-        equip(sets.TripleShot)
+    elseif spell.action_type == 'Ranged Attack' then
+        if buffactive['Triple Shot'] then
+            equip(sets.TripleShot)
+            if buffactive['Aftermath: Lv.3'] and player.equipment.main == "Armageddon" then
+                equip(sets.TripleShotCritical)
+            end
+        elseif buffactive['Aftermath: Lv.3'] and player.equipment.main == "Armageddon" then
+            equip(sets.midcast.RA.Critical)
+        end
     end
 end
 

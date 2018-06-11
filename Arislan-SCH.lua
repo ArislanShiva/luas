@@ -101,7 +101,7 @@ function user_setup()
 
     -- Additional local binds
     include('Global-Binds.lua') -- OK to remove this line
-    include('Global-COR-Binds.lua') -- OK to remove this line
+    include('Global-GEO-Binds.lua') -- OK to remove this line
 
     send_command('bind ^` input /ja Immanence <me>')
     send_command('bind !` gs c toggle MagicBurst')
@@ -110,7 +110,7 @@ function user_setup()
     send_command('bind ^[ gs c scholar power')
     send_command('bind ^] gs c scholar accuracy')
     send_command('bind ^; gs c scholar speed')
-    send_command('bind !w input /ma "Aspir II" <t>')
+    send_command('bind !w input /ma "Flurry" <stpc>')
     send_command('bind !o input /ma "Regen V" <stpc>')
     send_command('bind ![ gs c scholar aoe')
     send_command('bind !] gs c scholar duration')
@@ -177,6 +177,20 @@ function init_gear_sets()
     -- Precast sets to enhance JAs
     sets.precast.JA['Tabula Rasa'] = {legs="Peda. Pants +1"}
     sets.precast.JA['Enlightenment'] = {body="Peda. Gown +1"}
+    sets.precast.JA['Sublimation'] = {
+        head="Acad. Mortar. +3",
+        body="Acad. Gown +2",
+        hands="Telchine Gloves",
+        legs="Acad. Pants +3",
+        feet="Skaoi Boots",
+        neck="Bathy Choker +1",
+        ear1="Eabani Earring",
+        ear2="Etiolation Earring",
+        ring1="Eihwaz Ring",
+        ring2="Carb. Ring +1",
+        back="Moonlight Cape",
+        waist="Eschan Stone",
+        }
 
     -- Fast cast sets for spells
     sets.precast.FC = {
@@ -266,10 +280,10 @@ function init_gear_sets()
         head="Gende. Caubeen +1", --15/(-8)
         body="Kaykaus Bliaut", --5(+3)
         hands="Kaykaus Cuffs", --10/(-6)
-        legs="Kaykaus Tights", --10/(-5)
+        legs="Acad. Pants +3", --15
         feet="Kaykaus Boots", --10/(-10)
         neck="Incanter's Torque",
-        ear1="Mendi. Earring", --5
+        ear1="Beatific Earring",
         ear2="Regal Earring",
         ring1="Lebeche Ring", --3/(-5)
         ring2="Haoma's Ring",
@@ -296,7 +310,7 @@ function init_gear_sets()
     sets.midcast.StatusRemoval = {
         head="Vanya Hood",
         body="Vanya Robe",
-        legs="Acad. Pants +2",
+        legs="Acad. Pants +3",
         feet="Vanya Clogs",
         neck="Incanter's Torque",
         ear2="Healing Earring",
@@ -362,13 +376,12 @@ function init_gear_sets()
         back="Grapevine Cape",
         })
 
-    sets.midcast.Stoneskin = set_combine(sets.midcast['Enhancing Magic'], {
-        legs="Acad. Pants +2",
+    sets.midcast.Stoneskin = set_combine(sets.midcast.EnhancingDuration, {
         neck="Nodens Gorget",
         waist="Siegel Sash",
         })
 
-    sets.midcast.Aquaveil = set_combine(sets.midcast['Enhancing Magic'], {
+    sets.midcast.Aquaveil = set_combine(sets.midcast.EnhancingDuration, {
         main="Vadose Rod",
         sub="Ammurapi Shield",
         head="Amalric Coif",
@@ -392,10 +405,10 @@ function init_gear_sets()
         main=gear.Grioavolr_MND,
         sub="Enki Strap",
         ammo="Quartz Tathlum +1",
-        head="Acad. Mortar. +2",
+        head="Acad. Mortar. +3",
         body="Acad. Gown +2",
         hands="Kaykaus Cuffs",
-        legs="Chironic Hose",
+        legs="Acad. Pants +3",
         feet="Acad. Loafers +3",
         neck="Erra Pendant",
         ear1="Barkaro. Earring",
@@ -408,6 +421,7 @@ function init_gear_sets()
 
     sets.midcast.IntEnfeebles = set_combine(sets.midcast.MndEnfeebles, {
         ammo="Pemphredo Tathlum",
+        legs="Chironic Hose",
         back=gear.SCH_MAB_Cape,
         })
 
@@ -417,10 +431,10 @@ function init_gear_sets()
         main=gear.Grioavolr_MB,
         sub="Enki Strap",
         ammo="Pemphredo Tathlum",
-        head="Acad. Mortar. +2",
+        head="Acad. Mortar. +3",
         body="Acad. Gown +2",
         hands="Kaykaus Cuffs",
-        legs="Jhakri Slops +2",
+        legs="Acad. Pants +3",
         feet="Acad. Loafers +3",
         neck="Erra Pendant",
         ear1="Barkaro. Earring",
@@ -438,7 +452,7 @@ function init_gear_sets()
         head="Pixie Hairpin +1",
         body="Merlinic Jubbah", --10
         hands="Amalric Gages +1", --(5)
-        legs="Mallquis Trews +1", --5
+        legs="Mallquis Trews +2", --5
         feet="Merlinic Crackows", --11
         neck="Mizu. Kubikazari", --10
         ear1="Barkaro. Earring",
@@ -544,23 +558,20 @@ function init_gear_sets()
         ear2="Infused Earring",
         ring1="Paguroidea Ring",
         ring2="Sheltered Ring",
-        back="Moonbeam Cape",
+        back="Moonlight Cape",
         waist="Refoccilation Stone",
         }
 
     sets.idle.DT = set_combine(sets.idle, {
-        main="Mafic Cudgel", --10/0
+        main="Bolelabunga",
         sub="Genmei Shield", --10/0
         ammo="Staunch Tathlum", --2/2
         head="Gende. Caubeen +1", --4/4
-        body="Mallquis Saio +1", --6/6
-        hands="Gende. Gages +1", --4/3
-         neck="Loricate Torque +1", --6/6
-        ear1="Genmei Earring", --2/0
-        ear2="Etiolation Earring", --0/3
+        body="Mallquis Saio +2", --8/8
+        neck="Loricate Torque +1", --6/6
         ring1="Gelatinous Ring +1", --7/(-1)
         ring2="Defending Ring", --10/10
-        back="Moonbeam Cape", --5/5
+        back="Moonlight Cape", --6/6
         waist="Slipor Sash", --0/3
         })
 
@@ -569,10 +580,10 @@ function init_gear_sets()
     sets.idle.Town = set_combine(sets.idle, {
         main=gear.Akademos_MAB,
         sub="Enki Strap",
-        head="Merlinic Hood",
+        head="Acad. Mortar. +3",
         body="Merlinic Jubbah",
         hands="Amalric Gages +1",
-        legs="Merlinic Shalwar",
+        legs="Acad. Pants +3",
         neck="Incanter's Torque",
         ear1="Barkaro. Earring",
         ear2="Regal Earring",
@@ -639,14 +650,16 @@ function init_gear_sets()
     sets.buff['Klimaform'] = {feet="Arbatel Loafers +1"}
 
     sets.buff.FullSublimation = {
-        head="Acad. Mortar. +2",
-        ear1="Savant's Earring",
-        body="Peda. Gown +1",
-        }
+       main="Siriti", --1
+       sub="Genmei Shield", --10/0
+       head="Acad. Mortar. +3", --4
+       body="Peda. Gown +1", --3
+       ear1="Savant's Earring", --1
+       }
 
     sets.buff.Doom = {ring1="Eshmun's Ring", ring2="Eshmun's Ring", waist="Gishdubar Sash"}
 
-    sets.LightArts = {legs="Acad. Pants +2", feet="Acad. Loafers +3"}
+    sets.LightArts = {legs="Acad. Pants +3", feet="Acad. Loafers +3"}
     sets.DarkArts = {body="Acad. Gown +2", feet="Acad. Loafers +3"}
 
     sets.Obi = {waist="Hachirin-no-Obi"}
@@ -793,11 +806,7 @@ end
 
 function customize_idle_set(idleSet)
     if state.Buff['Sublimation: Activated'] then
-        if state.IdleMode.value == 'Normal' then
-            idleSet = set_combine(idleSet, sets.buff.FullSublimation)
-        elseif state.IdleMode.value == 'PDT' then
-            idleSet = set_combine(idleSet, sets.buff.PDTSublimation)
-        end
+        idleSet = set_combine(idleSet, sets.buff.FullSublimation)
     end
     if player.mpp < 51 then
         idleSet = set_combine(idleSet, sets.latent_refresh)

@@ -210,7 +210,6 @@ function init_gear_sets()
     --    Traits --30
         ammo="Sapience Orb", --2
         head="Atrophy Chapeau +3", --16
-        hands="Leyline Gloves", --8
         legs="Aya. Cosciales +2", --6
         feet="Carmine Greaves +1", --8
         neck="Orunmila's Torque", --5
@@ -218,7 +217,6 @@ function init_gear_sets()
         ear2="Enchntr. Earring +1", --2
         ring1="Kishar Ring", --4
         ring2="Weather. Ring +1", --5
-        back="Swith Cape +1", --4
         }
 
     sets.precast.FC['Enhancing Magic'] = set_combine(sets.precast.FC, {waist="Siegel Sash"})
@@ -273,7 +271,7 @@ function init_gear_sets()
         })
 
     sets.precast.WS['Chant du Cygne'] = set_combine(sets.precast.WS, {
-        ammo="Yetshila",
+        ammo="Yetshila +1",
         head=gear.Taeon_Crit_head,
         body=gear.Taeon_Crit_body,
         hands=gear.Taeon_Crit_hands,
@@ -465,7 +463,7 @@ function init_gear_sets()
         back="Grapevine Cape"
         }
 
-    sets.midcast.Stoneskin = set_combine(sets.midcast['Enhancing Magic'], {
+    sets.midcast.Stoneskin = set_combine(sets.midcast.EnhancingDuration, {
         neck="Nodens Gorget",
         waist="Siegel Sash",
         })
@@ -475,7 +473,7 @@ function init_gear_sets()
         feet=gear.Taeon_Phalanx_feet, --3
         })
 
-    sets.midcast.Aquaveil = set_combine(sets.midcast['Enhancing Magic'], {
+    sets.midcast.Aquaveil = set_combine(sets.midcast.EnhancingDuration, {
         head="Amalric Coif",
         waist="Emphatikos Rope",
         })
@@ -660,21 +658,22 @@ function init_gear_sets()
         ear2="Infused Earring",
         ring1="Paguroidea Ring",
         ring2="Sheltered Ring",
-        back="Moonbeam Cape",
+        back="Moonlight Cape",
         waist="Flume Belt +1",
         }
 
     sets.idle.DT = set_combine(sets.idle, {
-        main="Mafic Cudgel", --10/0
+        main="Bolelabunga",
         sub="Beatific Shield +1", --4/29
         ammo="Staunch Tathlum", --2/2
-        head="Aya. Zucchetto +2", --3/3
+        head="Gende. Caubeen +1", --4/4
         body="Ayanmo Corazza +2", --6/6
+        hands="Gende. Gages +1", --4/3
         neck="Loricate Torque +1", --6/6
         ear1="Genmei Earring", --2/0
         ring1="Gelatinous Ring +1", --7/(-1)
         ring2="Defending Ring", --10/10
-        back="Moonbeam Cape", --5/5
+        back="Moonlight Cape", --6/6
         waist="Slipor Sash", --0/3
         })
 

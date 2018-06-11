@@ -314,25 +314,25 @@ function init_gear_sets()
         feet="Telchine Pigaches",
         }
 
-    sets.midcast.Regen = set_combine(sets.midcast['Enhancing Magic'], {
+    sets.midcast.Regen = set_combine(sets.midcast.EnhancingDuration, {
         main="Bolelabunga",
         sub="Ammurapi Shield",
         body="Telchine Chas.",
         })
 
-    sets.midcast.Refresh = set_combine(sets.midcast['Enhancing Magic'], {
+    sets.midcast.Refresh = set_combine(sets.midcast.EnhancingDuration, {
         head="Amalric Coif",
         --feet="Inspirited Boots",
         waist="Gishdubar Sash",
         back="Grapevine Cape",
         })
 
-    sets.midcast.Stoneskin = set_combine(sets.midcast['Enhancing Magic'], {
+    sets.midcast.Stoneskin = set_combine(sets.midcast.EnhancingDuration, {
         neck="Nodens Gorget",
         waist="Siegel Sash",
         })
 
-    sets.midcast.Aquaveil = set_combine(sets.midcast['Enhancing Magic'], {
+    sets.midcast.Aquaveil = set_combine(sets.midcast.EnhancingDuration, {
         main="Vadose Rod",
         sub="Ammurapi Shield",
         head="Amalric Coif",
@@ -548,20 +548,20 @@ function init_gear_sets()
         ear2="Infused Earring",
         ring1="Paguroidea Ring",
         ring2="Sheltered Ring",
-        back="Moonbeam Cape",
+        back="Moonlight Cape",
         waist="Refoccilation Stone",
         }
 
     sets.idle.DT = set_combine(sets.idle, {
-        main="Mafic Cudgel", --10/0
+        main="Bolelabunga",
         sub="Genmei Shield", --10/0
         ammo="Staunch Tathlum", --2/2
-        body="Mallquis Saio +1", --6/6
+        body="Mallquis Saio +2", --8/8
         neck="Loricate Torque +1", --6/6
         ear1="Genmei Earring", --2/0
         ring1="Gelatinous Ring +1", --7/(-1)
         ring2="Defending Ring", --10/10
-        back="Moonbeam Cape", --5/5
+        back="Moonlight Cape", --6/6
         waist="Slipor Sash", --0/3
         })
 
@@ -616,7 +616,7 @@ function init_gear_sets()
 
     sets.magic_burst = {
         body="Merlinic Jubbah", --10
-        hands="Amalric Cuffs +1", --(6)
+        hands="Amalric Gages +1", --(6)
         feet="Merlinic Crackows", --11
         neck="Mizu. Kubikazari", --10
         ring1="Mujin Band", --(5)

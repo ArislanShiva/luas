@@ -109,7 +109,7 @@ function user_setup()
 
     -- Additional local binds
     include('Global-Binds.lua') -- OK to remove this line
-    include('Global-COR-Binds.lua') -- OK to remove this line
+    include('Global-GEO-Binds.lua') -- OK to remove this line
 
     send_command('bind ^` input //gs c rune')
     send_command('bind !` input /ja "Vivacious Pulse" <me>')
@@ -232,7 +232,7 @@ function init_gear_sets()
     sets.Enmity.HP = set_combine(sets.Enmity, {
         ear2="Odnowa Earring +1",
         ring1="Moonbeam Ring",
-        back="Moonbeam Cape",
+        back="Moonlight Cape",
         waist="Oneiros Belt",
         })
 
@@ -335,7 +335,7 @@ function init_gear_sets()
         ear2="Moonshade Earring",
         ring1="Regal Ring",
         ring2="Niqmaddu Ring",
-        back="Bleating Mantle",
+        back=gear.RUN_WS1_Cape,
         waist="Fotia Belt",
         }
 
@@ -587,6 +587,7 @@ function init_gear_sets()
         ear2="Telos Earring",
         ring1="Regal Ring",
         ring2="Defending Ring",
+        back="Moonlight Cape",
         })
 
     sets.idle.Weak = sets.idle.DT
@@ -671,7 +672,7 @@ function init_gear_sets()
         ear2="Odnowa Earring +1", --0/2
         ring1="Moonbeam Ring", --4/4
         ring2="Defending Ring", --10/10
-        back="Moonbeam Cape", --5/5
+        back="Moonlight Cape", --6/6
         waist="Flume Belt +1", --4/0
         }
 
@@ -704,7 +705,7 @@ function init_gear_sets()
         hands=gear.Adhemar_B_hands,
         legs="Samnuha Tights",
         feet=gear.Herc_TA_feet,
-        neck="Asperity Necklace",
+        neck="Anu Torque",
         ear1="Sherida Earring",
         ear2="Brutal Earring",
         ring1="Epona's Ring",
@@ -734,7 +735,6 @@ function init_gear_sets()
 
     sets.engaged.STP = set_combine(sets.engaged, {
         feet="Carmine Greaves +1",
-        neck="Anu Torque",
         ear2="Telos Earring",
         waist="Kentarch Belt +1",
         })
@@ -757,12 +757,12 @@ function init_gear_sets()
         head=gear.Adhemar_D_head, --3/0
         body="Ayanmo Corazza +2", --6/6
         neck="Loricate Torque +1", --6/6
-        ring1="Moonbeam Ring",  --4/4
         ring2="Defending Ring", --10/10
         back=gear.RUN_TP_Cape, --10/0
         }
 
 	sets.HybridPlus = {
+        ring1="Moonbeam Ring",  --4/4
         legs="Meg. Chausses +2", --6/0
         }
 
@@ -795,7 +795,7 @@ function init_gear_sets()
     sets.Embolden = set_combine(sets.midcast.EnhancingDuration, {back="Evasionist's Cape"})
     sets.Obi = {waist="Hachirin-no-Obi"}
     sets.CP = {back="Mecisto. Mantle"}
-    sets.Reive = {neck="Ygnas's Resolve +1"}
+    --sets.Reive = {neck="Ygnas's Resolve +1"}
 
 end
 

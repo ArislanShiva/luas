@@ -281,21 +281,21 @@ function init_gear_sets()
         feet="Telchine Pigaches",
         }
 
-    sets.midcast.Regen = set_combine(sets.midcast['Enhancing Magic'], {
+    sets.midcast.Regen = set_combine(sets.midcast.EnhancingDuration, {
         main="Bolelabunga",
         sub="Ammurapi Shield",
         })
 
-    sets.midcast.Refresh = set_combine(sets.midcast['Enhancing Magic'], {
+    sets.midcast.Refresh = set_combine(sets.midcast.EnhancingDuration, {
         head="Amalric Coif",
         })
 
-    sets.midcast.Stoneskin = set_combine(sets.midcast['Enhancing Magic'], {
+    sets.midcast.Stoneskin = set_combine(sets.midcast.EnhancingDuration, {
         neck="Nodens Gorget",
 		waist="Siegel Sash",
         })
 
-    sets.midcast.Aquaveil = set_combine(sets.midcast['Enhancing Magic'], {
+    sets.midcast.Aquaveil = set_combine(sets.midcast.EnhancingDuration, {
         main="Vadose Rod",
         sub="Ammurapi Shield",
         head="Amalric Coif",
@@ -440,7 +440,7 @@ function init_gear_sets()
         ear2="Etiolation Earring", --0/3
         ring1="Gelatinous Ring +1", --7/(-1)
         ring2="Defending Ring", --10/10
-        back="Moonbeam Cape", --5/5
+        back="Moonlight Cape", --6/6
         })
 
 --[[    sets.idle.Weak = set_combine(sets.idle, {
@@ -455,7 +455,7 @@ function init_gear_sets()
 		ear2="Odnowa Earring",
         ring1="Gelatinous Ring +1",
         ring2="Defending Ring",
-        back="Moonbeam Cape",
+        back="Moonlight Cape",
 		waist="Eschan Stone",
 		})
 ]]--
@@ -479,7 +479,7 @@ function init_gear_sets()
         ear2="Etiolation Earring", --0/3
         ring1="Gelatinous Ring +1", --7/(-1)
         ring2="Defending Ring",
-        back="Moonbeam Cape", --5/5
+        back="Moonlight Cape", --6/6
         })
 
     -- .Indi sets are for when an Indi-spell is active.
