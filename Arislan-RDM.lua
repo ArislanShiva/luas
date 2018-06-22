@@ -325,7 +325,7 @@ function init_gear_sets()
     sets.precast.WS['Sanguine Blade'] = {
         ammo="Pemphredo Tathlum",
         head="Pixie Hairpin +1",
-        body="Merlinic Jubbah",
+        body="Amalric Doublet +1",
         hands="Amalric Gages +1",
         legs="Merlinic Shalwar",
         feet="Merlinic Crackows",
@@ -357,7 +357,7 @@ function init_gear_sets()
         ammo="Esper Stone +1", --0/(-5)
         head="Gende. Caubeen +1", --15/(-8)
         body="Kaykaus Bliaut", --(+3)
-        hands="Kaykaus Cuffs", --10/(-6)
+        hands="Kaykaus Cuffs +1", --11/(-6)
         legs="Kaykaus Tights", --10/(-5)
         feet="Kaykaus Boots", --10/(-10)
         neck="Incanter's Torque",
@@ -372,7 +372,7 @@ function init_gear_sets()
     sets.midcast.CureWeather = set_combine(sets.midcast.Cure, {
         main="Chatoyant Staff",
         sub="Achaq Grip", --0/(-4)
-        hands="Kaykaus Cuffs", --10/(-6)
+        hands="Kaykaus Cuffs +1", --11/(-6)
         back="Twilight Cape",
         waist="Hachirin-no-Obi",
         })
@@ -470,6 +470,8 @@ function init_gear_sets()
 
     sets.midcast['Phalanx'] = set_combine(sets.midcast.EnhancingDuration, {
         body=gear.Taeon_Phalanx_body, --3
+        hands=gear.Taeon_Phalanx_hands, --3
+        legs=gear.Taeon_Phalanx_legs, --3
         feet=gear.Taeon_Phalanx_feet, --3
         })
 
@@ -495,7 +497,7 @@ function init_gear_sets()
         ammo="Regal Gem",
         head="Atrophy Chapeau +3",
         body="Lethargy Sayon +1",
-        hands="Kaykaus Cuffs",
+        hands="Kaykaus Cuffs +1",
         legs="Chironic Hose",
         feet="Skaoi Boots",
         neck="Imbodla Necklace",
@@ -555,7 +557,7 @@ function init_gear_sets()
         ammo="Pemphredo Tathlum",
         head="Atrophy Chapeau +3",
         body="Atrophy Tabard +3",
-        hands="Ea Cuffs",
+        hands="Kaykaus Cuffs +1",
         legs="Jhakri Slops +2",
         feet="Merlinic Crackows",
         neck="Erra Pendant",
@@ -583,7 +585,7 @@ function init_gear_sets()
         sub="Niobid Strap",
         ammo="Pemphredo Tathlum",
         head="Merlinic Hood",
-        body="Merlinic Jubbah",
+        body="Amalric Doublet +1",
         hands="Amalric Gages +1",
         legs="Merlinic Shalwar",
         feet="Merlinic Crackows",
@@ -608,7 +610,6 @@ function init_gear_sets()
         main=gear.Grioavolr_MB,
         sub="Enki Strap",
         head="Atrophy Chapeau +3",
-        body="Atrophy Tabard +3",
         feet="Jhakri Pigaches +2",
         neck="Erra Pendant",
         ear1="Hermetic Earring",
@@ -680,7 +681,7 @@ function init_gear_sets()
     sets.idle.Town = set_combine(sets.idle, {
         ammo="Regal Gem",
         head="Atrophy Chapeau +3",
-        body="Atrophy Tabard +3",
+        body="Amalric Doublet +1",
         hands="Amalric Gages +1",
         neck="Incanter's Torque",
         ear1="Sherida Earring",
@@ -1058,11 +1059,12 @@ end
 
 function job_buff_change(buff,gain)
     -- If we gain or lose any haste buffs, adjust which gear set we target.
-    if S{'haste', 'march', 'mighty guard', 'embrava', 'haste samba', 'geo-haste', 'indi-haste'}:contains(buff:lower()) then
+    if S{'haste', 'march', 'mighty guard', 'embrava', 'haste samba', 'geo-haste', 'indi-haste', 'erratic flutter'}:contains(buff:lower()) then
         determine_haste_group()
         if not gain then
             haste = nil
             --add_to_chat(122, "Haste Status: Cleared")
+            determine_haste_group()
         end
         if not midaction() then
             handle_equipping_gear(player.status)
@@ -1227,6 +1229,10 @@ windower.register_event('action',
                     haste = 1
                 elseif param == 511 then
                     --add_to_chat(122, 'Haste Status: Haste II (Haste II)')
+                    haste = 2
+                end
+                elseif param == 710 then
+                    --add_to_chat(122, 'Haste Status: Haste II (Erratic Flutter)')
                     haste = 2
                 end
             elseif act.category == 5 then

@@ -166,7 +166,7 @@ function init_gear_sets()
     sets.precast.FC.DeathMode = {
         ammo="Ghastly Tathlum +1",
         head="Amalric Coif", --10
-        body="Amalric Doublet",
+        body="Amalric Doublet +1",
         hands="Merlinic Dastanas", --6
         legs="Psycloth Lappas", --7
         feet="Regal Pumps +1", --7
@@ -205,7 +205,7 @@ function init_gear_sets()
     sets.precast.WS['Vidohunir'] = {
         ammo="Ghastly Tathlum +1",
         head="Pixie Hairpin +1",
-        body="Amalric Doublet",
+        body="Amalric Doublet +1",
         hands="Amalric Gages +1",
         legs="Merlinic Shalwar",
         feet="Merlinic Crackows",
@@ -221,7 +221,7 @@ function init_gear_sets()
     sets.precast.WS['Myrkr'] = {
         ammo="Ghastly Tathlum +1",
         head="Pixie Hairpin +1",
-        body="Weather. Robe +1",
+        body="Amalric Doublet +1",
         hands="Telchine Gloves",
         legs="Amalric Slops",
         feet="Medium's Sabots",
@@ -575,7 +575,7 @@ function init_gear_sets()
         sub="Enki Strap",
         ammo="Ghastly Tathlum +1",
         head="Pixie Hairpin +1",
-        body="Amalric Doublet",
+        body="Amalric Doublet +1",
         hands="Amalric Gages",
         legs="Amalric Slops",
         feet="Merlinic Crackows",
@@ -592,7 +592,7 @@ function init_gear_sets()
         main=gear.Grioavolr_MB,
         sub="Enki Strap",
         head="Merlinic Hood",
-        body="Merlinic Jubbah",
+        body="Amalric Doublet +1",
         hands="Amalric Gages +1",
         legs="Merlinic Shalwar",
         neck="Incanter's Torque",

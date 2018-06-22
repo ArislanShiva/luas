@@ -250,7 +250,7 @@ function init_gear_sets()
 
     sets.precast.Waltz['Healing Waltz'] = {}
     sets.precast.Samba = {head="Maxixi Tiara +3", back=gear.DNC_TP_Cape}
-    sets.precast.Jig = {legs="Horos Tights +1", feet="Maxixi Toeshoes +3"}
+    sets.precast.Jig = {legs="Horos Tights +3", feet="Maxixi Toeshoes +3"}
 
     sets.precast.Step = {
         ammo="Yamarang",
@@ -339,7 +339,7 @@ function init_gear_sets()
         head="Lilitu Headpiece",
         body=gear.Herc_WS_body,
         hands="Maxixi Bangles +3",
-        legs="Lustr. Subligar +1",
+        legs="Horos Tights +3",
         feet="Lustra. Leggings +1",
         neck="Fotia Gorget",
         ear1="Ishvara Earring",
@@ -440,8 +440,8 @@ function init_gear_sets()
         ammo="Pemphredo Tathlum",
         head=gear.Herc_MAB_head,
         body="Samnuha Coat",
-        hands="Leyline Gloves",
-        legs=gear.Herc_MAB_legs,
+        hands="Maxixi Bangles +3",
+        legs="Horos Tights +3",
         feet=gear.Herc_MAB_feet,
         neck="Baetyl Pendant",
         ear1="Novio Earring",
@@ -509,8 +509,8 @@ function init_gear_sets()
         ammo="Yamarang",
         head=gear.Adhemar_B_head,
         body=gear.Adhemar_B_body,
-        hands=gear.Adhemar_B_hands,
-        legs="Dashing Subligar",
+        hands="Maxixi Bangles +3",
+        legs="Horos Tights +3",
         neck="Combatant's Torque",
         ear1="Sherida Earring",
         ear2="Telos Earring",
@@ -804,7 +804,7 @@ function init_gear_sets()
     ---------------------------------------- Special Sets ------------------------------------------
     ------------------------------------------------------------------------------------------------
 
---    sets.buff['Saber Dance'] = {legs="Horos Tights +1"}
+--    sets.buff['Saber Dance'] = {legs="Horos Tights +3"}
 --    sets.buff['Fan Dance'] = {body="Horos Bangles +1"}
     sets.buff['Climactic Flourish'] = {head="Maculele Tiara +1"} --body="Meg. Cuirie +2"}
     sets.buff['Closed Position'] = {feet="Horos Toe Shoes +1"}
@@ -868,11 +868,12 @@ end
 -- gain == true if the buff was gained, false if it was lost.
 function job_buff_change(buff,gain)
     -- If we gain or lose any haste buffs, adjust gear.
-    if S{'haste', 'march', 'mighty guard', 'embrava', 'haste samba', 'geo-haste', 'indi-haste'}:contains(buff:lower()) then
+    if S{'haste', 'march', 'mighty guard', 'embrava', 'haste samba', 'geo-haste', 'indi-haste', 'erratic flutter'}:contains(buff:lower()) then
         determine_haste_group()
         if not gain then
             haste = nil
             --add_to_chat(122, "Haste Status: Cleared")
+            determine_haste_group()
         end
         if not midaction() then
             handle_equipping_gear(player.status)
@@ -1064,6 +1065,10 @@ windower.register_event('action',
                     haste = 1
                 elseif param == 511 then
                     --add_to_chat(122, 'Haste Status: Haste II (Haste II)')
+                    haste = 2
+                end
+                elseif param == 710 then
+                    --add_to_chat(122, 'Haste Status: Haste II (Erratic Flutter)')
                     haste = 2
                 end
             elseif act.category == 5 then

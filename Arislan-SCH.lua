@@ -212,7 +212,7 @@ function init_gear_sets()
         waist="Witful Belt", --3/(3)
         }
 
-    sets.precast.FC.Grimoire = {head="Peda. M.Board +1", feet="Acad. Loafers +3"}
+    sets.precast.FC.Grimoire = {head="Peda. M.Board +3", feet="Acad. Loafers +3"}
     sets.precast.FC['Enhancing Magic'] = set_combine(sets.precast.FC, {waist="Siegel Sash"})
     sets.precast.FC['Elemental Magic'] = set_combine(sets.precast.FC, {waist="Channeler's Stone"})
 
@@ -253,8 +253,8 @@ function init_gear_sets()
     sets.precast.WS['Myrkr'] = {
         ammo="Ghastly Tathlum +1",
         head="Pixie Hairpin +1",
-        body="Weather. Robe +1",
-        hands="Kaykaus Cuffs",
+        body="Amalric Doublet +1",
+        hands="Kaykaus Cuffs +1",
         legs="Amalric Slops",
         feet="Kaykaus Boots",
         neck="Orunmila's Torque",
@@ -279,7 +279,7 @@ function init_gear_sets()
         ammo="Esper Stone +1", --0/(-5)
         head="Gende. Caubeen +1", --15/(-8)
         body="Kaykaus Bliaut", --5(+3)
-        hands="Kaykaus Cuffs", --10/(-6)
+        hands="Kaykaus Cuffs +1", --11/(-6)
         legs="Acad. Pants +3", --15
         feet="Kaykaus Boots", --10/(-10)
         neck="Incanter's Torque",
@@ -294,7 +294,6 @@ function init_gear_sets()
     sets.midcast.CureWeather = set_combine(sets.midcast.Cure, {
         main="Chatoyant Staff", --10
         sub="Achaq Grip", --0/(-4)
-        hands="Kaykaus Cuffs", --10/(-6)
         back="Solemnity Cape", --7/0
         waist="Hachirin-no-Obi",
         })
@@ -407,7 +406,7 @@ function init_gear_sets()
         ammo="Quartz Tathlum +1",
         head="Acad. Mortar. +3",
         body="Acad. Gown +2",
-        hands="Kaykaus Cuffs",
+        hands="Kaykaus Cuffs +1",
         legs="Acad. Pants +3",
         feet="Acad. Loafers +3",
         neck="Erra Pendant",
@@ -433,7 +432,7 @@ function init_gear_sets()
         ammo="Pemphredo Tathlum",
         head="Acad. Mortar. +3",
         body="Acad. Gown +2",
-        hands="Kaykaus Cuffs",
+        hands="Kaykaus Cuffs +1",
         legs="Acad. Pants +3",
         feet="Acad. Loafers +3",
         neck="Erra Pendant",
@@ -446,7 +445,7 @@ function init_gear_sets()
         }
 
     sets.midcast.Kaustra = {
-        main=gear.Akademos_MAB, --10
+        main="Akademos", --10
         sub="Enki Strap",
         ammo="Ghastly Tathlum +1",
         head="Pixie Hairpin +1",
@@ -479,11 +478,11 @@ function init_gear_sets()
 
     -- Elemental Magic
     sets.midcast['Elemental Magic'] = {
-        main=gear.Akademos_MAB,
+        main="Akademos",
         sub="Niobid Strap",
         ammo="Pemphredo Tathlum",
-        head="Merlinic Hood",
-        body="Merlinic Jubbah",
+        head="Peda. M.Board +3",
+        body="Amalric Doublet +1",
         hands="Amalric Gages +1",
         legs="Merlinic Shalwar",
         feet="Merlinic Crackows",
@@ -513,7 +512,7 @@ function init_gear_sets()
         })
 
     sets.midcast.Impact = set_combine(sets.midcast['Elemental Magic'], {
-        main=gear.Akademos_MAB,
+        main="Akademos",
         sub="Niobid Strap",
         head=empty,
         body="Twilight Cloak",
@@ -521,7 +520,7 @@ function init_gear_sets()
         })
 
     sets.midcast.Helix = {
-        main=gear.Akademos_MAB,
+        main="Akademos",
         sub="Niobid Strap",
         ammo="Ghastly Tathlum +1",
         waist="Yamabuki-no-Obi",
@@ -545,7 +544,7 @@ function init_gear_sets()
     ------------------------------------------------------------------------------------------------
 
     sets.idle = {
-        main=gear.Akademos_MAB,
+        main="Akademos",
         sub="Enki Strap",
         ammo="Homiliary",
         head="Befouled Crown",
@@ -578,10 +577,10 @@ function init_gear_sets()
     sets.idle.Refresh = {main="Bolelabunga", sub="Genmei Shield"}
 
     sets.idle.Town = set_combine(sets.idle, {
-        main=gear.Akademos_MAB,
+        main="Akademos",
         sub="Enki Strap",
-        head="Acad. Mortar. +3",
-        body="Merlinic Jubbah",
+        head="Peda. M.Board +3",
+        body="Amalric Doublet +1",
         hands="Amalric Gages +1",
         legs="Acad. Pants +3",
         neck="Incanter's Torque",
@@ -631,18 +630,18 @@ function init_gear_sets()
 
     sets.magic_burst = {
         -- Akademos 10
-        body="Merlinic Jubbah", --10
+        head="Peda. M.Board +3", --(4)
         hands="Amalric Gages +1", --(6)
         legs="Merlinic Shalwar", --6
         feet="Merlinic Crackows", --11
         neck="Mizu. Kubikazari", --10
-        ring1="Mujin Band", --(5)
+        ring2="Mujin Band", --(5)
         }
 
 --    sets.buff['Ebullience'] = {head="Arbatel Bonnet +1"}
     sets.buff['Rapture'] = {head="Arbatel Bonnet +1"}
     sets.buff['Perpetuance'] = {hands="Arbatel Bracers +1"}
-    sets.buff['Immanence'] = {main=gear.Akademos_MAB, sub="Enki Strap", hands="Arbatel Bracers +1", "Lugh's Cape"}
+    sets.buff['Immanence'] = {hands="Arbatel Bracers +1", "Lugh's Cape"}
     sets.buff['Penury'] = {legs="Arbatel Pants +1"}
     sets.buff['Parsimony'] = {legs="Arbatel Pants +1"}
     sets.buff['Celerity'] = {feet="Peda. Loafers +1"}
@@ -686,6 +685,9 @@ function job_post_midcast(spell, action, spellMap, eventArgs)
     if spell.skill == 'Elemental Magic' or spell.english == "Kaustra" then
         if (spell.element == world.day_element or spell.element == world.weather_element) then
             equip(sets.Obi)
+            if buffactive['Klimaform'] then
+                equip(sets.buff['Klimaform'])
+            end
         end
         if spellMap == "Helix" then
             --equip(sets.midcast['Elemental Magic'])

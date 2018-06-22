@@ -337,6 +337,7 @@ function init_gear_sets()
 
     sets.midcast.IntEnfeebles = set_combine(sets.midcast.MndEnfeebles, {
         main=gear.Grioavolr_MB,
+        body="Amalric Doublet +1",
         back="Nantosuelta's Cape",
         }) -- INT/Magic accuracy
 
@@ -344,7 +345,7 @@ function init_gear_sets()
         main=gear.Grioavolr_MB,
         sub="Enki Strap",
         head="Merlinic Hood",
-        body="Jhakri Robe +2",
+        body="Amalric Doublet +1",
         hands="Ea Cuffs",
         legs="Azimuth Tights +1",
         feet="Merlinic Crackows",
@@ -377,7 +378,7 @@ function init_gear_sets()
         main=gear.Grioavolr_MB,
         sub="Niobid Strap",
         head="Merlinic Hood",
-        body="Merlinic Jubbah",
+        body="Amalric Doublet +1",
         hands="Amalric Gages +1",
         legs="Merlinic Shalwar",
         feet="Merlinic Crackows",
@@ -511,8 +512,8 @@ function init_gear_sets()
         main="Sucellus",
         sub="Ammurapi Shield",
         head="Azimuth Hood +1",
-        body="Azimuth Coat +1",
-        hands="Bagua Mitaines +1",
+        body="Amalric Doublet +1",
+        hands="Amalric Gages +1",
         legs="Azimuth Tights +1",
         neck="Incanter's Torque",
         ear1="Barkaro. Earring",

@@ -311,7 +311,7 @@ function init_gear_sets()
         neck="Fotia Gorget",
         ear1="Moonshade Earring",
         ear2="Ishvara Earring",
-        ring1="Garuda Ring +1",
+        ring1="Regal Ring",
         ring2="Dingir Ring",
         back=gear.COR_WS3_Cape,
         waist="Fotia Belt",
@@ -341,7 +341,7 @@ function init_gear_sets()
         neck="Baetyl Pendant",
         ear1="Novio Earring",
         ear2="Friomisi Earring",
-        ring1="Garuda Ring +1",
+        ring1="Ilabrat Ring",
         ring2="Dingir Ring",
         back=gear.COR_WS3_Cape,
         waist="Eschan Stone",
@@ -393,7 +393,7 @@ function init_gear_sets()
         legs="Samnuha Tights",
         feet="Herculean Boots",
         neck="Caro Necklace",
-        --ring1="Regal Ring",
+        ring1="Regal Ring",
         --ring2="Rufescent Ring",
         back=gear.COR_WS2_Cape,
         --waist="Prosilio Belt +1",
@@ -469,7 +469,7 @@ function init_gear_sets()
         neck="Baetyl Pendant",
         ear1="Novio Earring",
         ear2="Friomisi Earring",
-        ring1="Garuda Ring +1",
+        ring1="Regal Ring",
         ring2="Dingir Ring",
         back=gear.COR_WS3_Cape,
         waist="Eschan Stone",
@@ -505,7 +505,7 @@ function init_gear_sets()
         neck="Iskur Gorget",
         ear1="Enervating Earring",
         ear2="Neritic Earring",
-        ring1="Garuda Ring +1",
+        ring1="Ilabrat Ring",
         ring2="Dingir Ring",
         back=gear.COR_RA_Cape,
         --waist="Yemaya Belt",
@@ -590,8 +590,8 @@ function init_gear_sets()
     sets.idle.Town = set_combine(sets.idle, {
         hands="Carmine Fin. Ga. +1",
         neck="Iskur Gorget",
-        ring1="Garuda Ring +1",
-		ring2="Dingir Ring",
+        ring1="Regal Ring",
+		    ring2="Dingir Ring",
         back=gear.COR_WS3_Cape,
         waist="Eschan Stone",
         })
@@ -639,13 +639,13 @@ function init_gear_sets()
         legs="Meg. Chausses +2",
         --neck="Combatant's Torque",
         --ear2="Telos Earring",
-        --ring2="Ilabrat Ring",
+        ring2="Ilabrat Ring",
         })
 
     sets.engaged.HighAcc = set_combine(sets.engaged.MidAcc, {
         head="Carmine Mask +1",
         legs="Carmine Cuisses +1",
-        --ring1="Regal Ring",
+        ring1="Regal Ring",
         --ring2="Ramuh Ring +1",
         --waist="Olseni Belt",
         })
@@ -680,13 +680,13 @@ function init_gear_sets()
 
     sets.engaged.DW.MidAcc = set_combine(sets.engaged.DW.LowAcc, {
         --neck="Combatant's Torque",
-        --ring2="Ilabrat Ring",
+        ring2="Ilabrat Ring",
         })
 
     sets.engaged.DW.HighAcc = set_combine(sets.engaged.DW.MidAcc, {
         head="Carmine Mask +1",
         --ear2="Telos Earring",
-        --ring1="Regal Ring",
+        ring1="Regal Ring",
         --ring2="Ramuh Ring +1",
         --waist="Olseni Belt",
         })
@@ -719,12 +719,12 @@ function init_gear_sets()
     sets.engaged.DW.MidAcc.LowHaste = set_combine(sets.engaged.DW.LowAcc.LowHaste, {
         --neck="Combatant's Torque",
         --ear2="Telos Earring",
-        --ring2="Ilabrat Ring",
+        ring2="Ilabrat Ring",
         })
 
     sets.engaged.DW.HighAcc.LowHaste = set_combine(sets.engaged.DW.MidAcc.LowHaste, {
         head="Carmine Mask +1",
-        --ring1="Regal Ring",
+        ring1="Regal Ring",
         --ring2="Ramuh Ring +1",
         --waist="Olseni Belt",
         })
@@ -758,12 +758,12 @@ function init_gear_sets()
         legs="Meg. Chausses +2",
         --neck="Combatant's Torque",
         --ear2="Telos Earring",
-        --ring2="Ilabrat Ring",
+        ring2="Ilabrat Ring",
         })
 
     sets.engaged.DW.HighAcc.MidHaste = set_combine(sets.engaged.DW.MidAcc.MidHaste, {
         head="Carmine Mask +1",
-        --ring1="Regal Ring",
+        ring1="Regal Ring",
         --ring2="Ramuh Ring +1",
         --waist="Olseni Belt",
         })
@@ -797,12 +797,12 @@ function init_gear_sets()
         legs="Meg. Chausses +2",
         --neck="Combatant's Torque",
         --ear2="Telos Earring",
-        --ring2="Ilabrat Ring",
+        ring2="Ilabrat Ring",
         })
 
     sets.engaged.DW.HighAcc.HighHaste = set_combine(sets.engaged.DW.MidAcc.HighHaste, {
         head="Carmine Mask +1",
-        --ring1="Regal Ring",
+        ring1="Regal Ring",
         --ring2="Ramuh Ring +1",
         --waist="Olseni Belt",
         })
@@ -836,13 +836,13 @@ function init_gear_sets()
         legs="Meg. Chausses +2",
         --neck="Combatant's Torque",
         --ear2="Telos Earring",
-        --ring2="Ilabrat Ring",
+        ring2="Ilabrat Ring",
         })
 
     sets.engaged.DW.HighAcc.MaxHaste = set_combine(sets.engaged.DW.MidAcc.MaxHaste, {
         head="Carmine Mask +1",
         legs="Carmine Cuisses +1",
-        --ring1="Regal Ring",
+        ring1="Regal Ring",
         --ring2="Ramuh Ring +1",
         --waist="Olseni Belt",
         })
@@ -1010,12 +1010,13 @@ end
 
 function job_buff_change(buff,gain)
     -- If we gain or lose any haste buffs, adjust gear.
-    if S{'haste', 'march', 'mighty guard', 'embrava', 'haste samba', 'geo-haste', 'indi-haste'}:contains(buff:lower()) then
+    if S{'haste', 'march', 'mighty guard', 'embrava', 'haste samba', 'geo-haste', 'indi-haste', 'erratic flutter'}:contains(buff:lower()) then
         determine_haste_group()
         customize_melee_set()
         if not gain then
             haste = nil
             --add_to_chat(122, "Haste Status: Cleared")
+            determine_haste_group()
         end
         if not midaction() then
             handle_equipping_gear(player.status)
@@ -1191,6 +1192,30 @@ end
 -------------------------------------------------------------------------------------------------------------------
 
 --Read incoming packet to differentiate between Haste/Flurry I and II
+function job_self_command(cmdParams, eventArgs)
+    if cmdParams[1] == 'qd' then
+        if cmdParams[2] == 't' then
+            state.IgnoreTargetting:set()
+        end
+
+        local doqd = ''
+        if state.UseAltqd.value == true then
+            doqd = state[state.Currentqd.current..'qd'].current
+            state.Currentqd:cycle()
+        else
+            doqd = state.Mainqd.current
+        end
+
+        send_command('@input /ja "'..doqd..'" <t>')
+    end
+end
+
+
+-------------------------------------------------------------------------------------------------------------------
+-- Utility functions specific to this job.
+-------------------------------------------------------------------------------------------------------------------
+
+--Read incoming packet to differentiate between Haste/Flurry I and II
 windower.register_event('action',
     function(act)
         --check if you are a target of spell
@@ -1216,6 +1241,10 @@ windower.register_event('action',
                     haste = 1
                 elseif param == 511 then
                     --add_to_chat(122, 'Haste Status: Haste II (Haste II)')
+                    haste = 2
+                end
+                elseif param == 710 then
+                    --add_to_chat(122, 'Haste Status: Haste II (Erratic Flutter)')
                     haste = 2
                 end
             elseif act.category == 5 then

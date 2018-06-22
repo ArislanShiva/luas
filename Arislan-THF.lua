@@ -793,11 +793,12 @@ end
 -- gain == true if the buff was gained, false if it was lost.
 function job_buff_change(buff,gain)
     -- If we gain or lose any haste buffs, adjust gear.
-    if S{'haste', 'march', 'mighty guard', 'embrava', 'haste samba', 'geo-haste', 'indi-haste'}:contains(buff:lower()) then
+    if S{'haste', 'march', 'mighty guard', 'embrava', 'haste samba', 'geo-haste', 'indi-haste', 'erratic flutter'}:contains(buff:lower()) then
         determine_haste_group()
         if not gain then
             haste = nil
             --add_to_chat(122, "Haste Status: Cleared")
+            determine_haste_group()
         end
         if not midaction() then
             handle_equipping_gear(player.status)
@@ -948,6 +949,10 @@ windower.register_event('action',
                     haste = 1
                 elseif param == 511 then
                     --add_to_chat(122, 'Haste Status: Haste II (Haste II)')
+                    haste = 2
+                end
+                elseif param == 710 then
+                    --add_to_chat(122, 'Haste Status: Haste II (Erratic Flutter)')
                     haste = 2
                 end
             elseif act.category == 5 then

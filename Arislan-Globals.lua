@@ -7,9 +7,6 @@
 function define_global_sets()
 
     -- Augmented Weapons
-    gear.Akademos_MAB = {name="Akademos", augments={'MP+80','INT+20','"Mag.Atk.Bns."+20',}}
-    gear.Akademos_MAC = {name="Akademos", augments={'INT+15','"Mag.Atk.Bns."+15','Mag. Acc.+15',}}
-
     gear.Colada_ATT = {name="Colada", augments={'Crit.hit rate+3','DEX+14','Attack+20','DMG:+14',}}
     gear.Colada_ENH = {name="Colada", augments={'Enh. Mag. eff. dur. +4','INT+5','Mag. Acc.+9',}}
 
@@ -62,8 +59,10 @@ function define_global_sets()
     -- Taeon
     gear.Taeon_FC_body = {name="Taeon Tabard", augments={'"Fast Cast"+5','HP+38',}}
 
-    gear.Taeon_Phalanx_body = {name="Taeon Tabard", augments={'Spell interruption rate down -10%','Phalanx +3',}}
-    gear.Taeon_Phalanx_feet = {name="Taeon Boots", augments={'Spell interruption rate down -7%','Phalanx +3',}}
+    gear.Taeon_Phalanx_body = {name="Taeon Tabard", augments={'Evasion+23','Spell interruption rate down -10%','Phalanx +3',}}
+    gear.Taeon_Phalanx_hands = {name="Taeon Gloves", augments={'Phalanx +3',}}
+    gear.Taeon_Phalanx_legs = {name="Taeon Tights", augments={'Phalanx +3',}}
+    gear.Taeon_Phalanx_feet = {name="Taeon Boots", augments={'Mag. Evasion+15','Spell interruption rate down -7%','Phalanx +3',}}
 
     gear.Taeon_TA_head = {name="Taeon Chapeau", augments={'Accuracy+19 Attack+19','"Triple Atk."+2','DEX+9',}}
     gear.Taeon_TA_hands = {name="Taeon Gloves", augments={'Accuracy+20 Attack+20','"Triple Atk."+2','DEX+9',}}

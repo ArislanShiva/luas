@@ -95,7 +95,7 @@ function user_setup()
     state.HybridMode:options('Normal', 'DT', 'DTPlus')
     state.CastingMode:options('Normal', 'Resistant')
     state.IdleMode:options('Normal', 'DT')
-    state.PhysicalDefenseMode:options('PDT', 'Parry', 'HP')
+    state.PhysicalDefenseMode:options('PDT', 'HP')
     state.MagicalDefenseMode:options('MDT', 'Status')
 
     state.WeaponLock = M(false, 'Weapon Lock')
@@ -452,9 +452,10 @@ function init_gear_sets()
     sets.midcast.FastRecast = sets.precast.FC
 
     sets.midcast.SpellInterrupt = {
-        ammo="Impatiens", --10
+        ammo="Staunch Tathlum", --10
         hands="Regal Gauntlets", --10
         legs="Carmine Cuisses +1", --20
+        ear1="Halasz Earring",
         ring1="Evanescence Ring", --5
         waist="Rumination Sash", --10
         }
@@ -507,11 +508,18 @@ function init_gear_sets()
         })
 
     sets.midcast['Phalanx'] = set_combine(sets.midcast['Enhancing Magic'], {
-        main="Deacon Sword", --4
-        sub="Chanter's Shield",
+        --main="Deacon Sword", --4
+        --sub="Chanter's Shield",
+        ammo="Staunch Tathlum", --(10)
         head="Fu. Bandeau +1", --5
-        body=gear.Taeon_Phalanx_body, --3
-        feet=gear.Taeon_Phalanx_feet, --3
+        body=gear.Taeon_Phalanx_body, --3(10)
+        hands="Regal Gauntlets", --(10)
+        legs="Carmine Cuisses +1", --(20)
+        feet=gear.Taeon_Phalanx_feet, --3(7)
+        --neck="Moonlight Necklace", --(15)
+        ear1="Halasz Earring", --(5)
+        ring1="Evanescence Ring", --(5)
+        waist="Rumination Sash", --(10)
         })
 
     sets.midcast['Regen'] = set_combine(sets.midcast['Enhancing Magic'], {head="Rune. Bandeau +3"})
@@ -570,7 +578,7 @@ function init_gear_sets()
         feet="Erilaz Greaves +1", --5/0
         neck="Loricate Torque +1", --6/6
         ear1="Ethereal Earring",
-        ear2="Genmei Earring", --2/0
+        ear1="Odnowa Earring +1", --0/2
         ring1="Gelatinous Ring +1", --7/(-1)
         ring2="Defending Ring", --10/10
         back="Evasionist's Cape", --7/4
@@ -611,14 +619,14 @@ function init_gear_sets()
     sets.defense.PDT = {
         sub="Refined Grip +1", --3/3
         ammo="Staunch Tathlum", --2/2
-        head=gear.Herc_DT_head, --3/3
-        body="Erilaz Surcoat +1",
-        hands=gear.Herc_DT_hands, --7/5
+        head=gear.Adhemar_D_head, --4/0
+        body="Futhark Coat +1", --7/7
+        hands="Turms Mittens +1",
         legs="Eri. Leg Guards +1", --7/0
         feet="Turms Leggings +1",
         neck="Loricate Torque +1", --6/6
         ear1="Ethereal Earring",
-        ear2="Genmei Earring", --2/0
+        ear2="Odnowa Earring +1", --0/2
         ring1="Gelatinous Ring +1", --7/(-1)
         ring2="Defending Ring", --10/10
         back=gear.RUN_HP_Cape,
@@ -662,7 +670,7 @@ function init_gear_sets()
     sets.defense.HP = {
         sub="Refined Grip +1", --3/3
         ammo="Staunch Tathlum", --2/2
-        head=gear.Adhemar_D_head, --3/0
+        head=gear.Adhemar_D_head, --4/0
         body="Runeist's Coat +3",
         hands="Runeist's Mitons +3", --3/0
         legs="Eri. Leg Guards +1", --7/0
@@ -677,20 +685,10 @@ function init_gear_sets()
         }
 
     sets.defense.Parry = {
-        sub="Refined Grip +1", --3/3
-        ammo="Staunch Tathlum", --2/2
-        head=gear.Herc_DT_head, --3/3
-        body="Meg. Cuirie +2", --8/0
         hands="Turms Mittens +1",
-        legs="Eri. Leg Guards +1", --7/0
+        legs="Eri. Leg Guards +1",
         feet="Turms Leggings +1",
-        neck="Loricate Torque +1", --6/6
-        ear1="Odnowa Earring", --0/1
-        ear2="Odnowa Earring +1", --0/2
-        ring1="Gelatinous Ring +1", --7/(-1)
-        ring2="Defending Ring", --10/10
         back=gear.RUN_HP_Cape,
-        waist="Flume Belt +1", --4/0
         }
 
     ------------------------------------------------------------------------------------------------
@@ -754,7 +752,7 @@ function init_gear_sets()
     ------------------------------------------------------------------------------------------------
 
     sets.Hybrid = {
-        head=gear.Adhemar_D_head, --3/0
+        head=gear.Adhemar_D_head, --4/0
         body="Ayanmo Corazza +2", --6/6
         neck="Loricate Torque +1", --6/6
         ring2="Defending Ring", --10/10

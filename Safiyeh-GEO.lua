@@ -66,13 +66,13 @@ function user_setup()
     include('Global-Binds.lua')
 
     send_command('bind ^` input /ja "Full Circle" <me>')
-	send_command('bind ^b input /ja "Blaze of Glory" <me>')
-	send_command('bind ^a input /ja "Ecliptic Attrition" <me>')
-	send_command('bind ^d input /ja "Dematerialize" <me>')
-	send_command('bind ^c input /ja "Life Cycle" <me>')
+   	send_command('bind ^b input /ja "Blaze of Glory" <me>')
+  	send_command('bind ^a input /ja "Ecliptic Attrition" <me>')
+  	send_command('bind ^d input /ja "Dematerialize" <me>')
+  	send_command('bind ^c input /ja "Life Cycle" <me>')
     send_command('bind !` gs c toggle MagicBurst')
-	send_command('bind !w input /ma "Flurry" <stpc>')
-	send_command('bind !p input /ja "Entrust" <me>')
+  	send_command('bind !w input /ma "Flurry" <stpc>')
+  	send_command('bind !p input /ja "Entrust" <me>')
     send_command('bind ^, input /ma Sneak <stpc>')
     send_command('bind ^. input /ma Invisible <stpc>')
     send_command('bind @c gs c toggle CP')
@@ -175,15 +175,17 @@ function init_gear_sets()
     -- Weaponskill sets
     -- Default set for any weaponskill that isn't any more specifically defined
     sets.precast.WS = {
+        head="Jhakri Coronal +1",
         body="Jhakri Robe +2",
         hands="Jhakri Cuffs +2",
+        legs="Jhakri Slops +2",
         feet="Jhakri Pigaches +2",
-		neck="Fotia Gorget",
+		    neck="Fotia Gorget",
         ear1="Moonshade Earring",
-        ear2="Regal Earring",
+        ear2="Brutal Earring",
         ring1="Hetairoi Ring",
-        ring2="Apate Ring",
-		waist="Fotia Belt",
+        ring2="Petrov Ring",
+		    waist="Fotia Belt",
         }
 
     ------------------------------------------------------------------------
@@ -469,13 +471,13 @@ function init_gear_sets()
         hands="Geo. Mitaines +3", --13/0
         legs="Telchine Braconi", --0/2
         feet="Telchine Pigaches", --0/3
-        back=gear.GEO_Pet_Cape, --0/10
+        back=gear.GEO_Pet_Cape, --0/15
         waist="Isa Belt" --3/1
         })
 
     sets.idle.DT.Pet = set_combine(sets.idle.Pet, {
         neck="Loricate Torque +1", --6/6
-		ear1="Odnowa Earring +1", --2/0
+		    ear1="Odnowa Earring +1", --2/0
         ear2="Etiolation Earring", --0/3
         ring1="Gelatinous Ring +1", --7/(-1)
         ring2="Defending Ring",
@@ -528,12 +530,16 @@ function init_gear_sets()
     sets.engaged = {
         main="Idris",
         sub="Tamaxchi",
+        head="Jhakri Coronal +1",
         body="Jhakri Robe +2",
         hands="Jhakri Cuffs +2",
+        legs="Jhakri Slops +2",
         feet="Jhakri Pigaches +2",
         ear1="Cessance Earring",
-        ear2="Regal Earring",
+        ear2="Brutal Earring",
         ring1="Hetairoi Ring",
+        ring2="Petrov Ring",
+        waist="Grunfeld Rope",
         }
 
 
