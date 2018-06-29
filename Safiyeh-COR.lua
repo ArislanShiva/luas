@@ -1,4 +1,5 @@
 -- Original: Motenten / Modified: Arislan
+-- Haste/DW Detection Requires Gearinfo Addon
 
 -------------------------------------------------------------------------------------------------------------------
 --  Keybinds
@@ -104,9 +105,6 @@ function job_setup()
     define_roll_values()
 
     lockstyleset = 2
-
-    update_offense_mode()
-    determine_haste_group()
 end
 
 -------------------------------------------------------------------------------------------------------------------
@@ -174,15 +172,22 @@ function user_setup()
 
     select_default_macro_book()
     set_lockstyle()
+
+    Haste = 0
+    DW_needed = 0
+    DW = false
+    moving = false
+    update_combat_form()
+    determine_haste_group()
 end
 
 
 -- Called when this job file is unloaded (eg: job change)
 function user_unload()
     send_command('unbind ^`')
-	send_command('unbind ^c')
-	send_command('unbind ^s')
-	send_command('unbind ^f')
+    send_command('unbind ^c')
+    send_command('unbind ^s')
+    send_command('unbind ^f')
     send_command('unbind !`')
     send_command('unbind @`')
     send_command('unbind ^-')
@@ -376,7 +381,7 @@ function init_gear_sets()
         ear2="Brutal Earring",
         --ring1="Begrudging Ring",
         ring2="Mummu Ring",
-		    back="Bleating Mantle",
+        back="Bleating Mantle",
         waist="Fotia Belt",
         }
 
@@ -591,7 +596,7 @@ function init_gear_sets()
         hands="Carmine Fin. Ga. +1",
         neck="Iskur Gorget",
         ring1="Regal Ring",
-		    ring2="Dingir Ring",
+        ring2="Dingir Ring",
         back=gear.COR_WS3_Cape,
         waist="Eschan Stone",
         })
@@ -853,8 +858,6 @@ function init_gear_sets()
         })
 
 
-    sets.LessDualWield = {}--back=gear.COR_TP_Cape}
-
     ------------------------------------------------------------------------------------------------
     ---------------------------------------- Hybrid Sets -------------------------------------------
     ------------------------------------------------------------------------------------------------
@@ -1009,25 +1012,11 @@ function job_aftercast(spell, action, spellMap, eventArgs)
 end
 
 function job_buff_change(buff,gain)
-    -- If we gain or lose any haste buffs, adjust gear.
-    if S{'haste', 'march', 'mighty guard', 'embrava', 'haste samba', 'geo-haste', 'indi-haste', 'erratic flutter'}:contains(buff:lower()) then
-        determine_haste_group()
-        customize_melee_set()
-        if not gain then
-            haste = nil
-            --add_to_chat(122, "Haste Status: Cleared")
-            determine_haste_group()
-        end
-        if not midaction() then
-            handle_equipping_gear(player.status)
-        end
-    end
-
 -- If we gain or lose any flurry buffs, adjust gear.
     if S{'flurry'}:contains(buff:lower()) then
         if not gain then
             flurry = nil
-            add_to_chat(122, "Flurry status cleared.")
+            --add_to_chat(122, "Flurry status cleared.")
         end
         if not midaction() then
             handle_equipping_gear(player.status)
@@ -1072,8 +1061,20 @@ end
 -- Called by the 'update' self-command, for common needs.
 -- Set eventArgs.handled to true if we don't want automatic equipping of gear.
 function job_update(cmdParams, eventArgs)
-    update_offense_mode()
+    handle_equipping_gear(player.status)
+end
+
+function job_handle_equipping_gear(playerStatus, eventArgs)
+    update_combat_form()
     determine_haste_group()
+end
+
+function update_combat_form()
+    if DW == true then
+        state.CombatForm:set('DW')
+    elseif DW == false then
+        state.CombatForm:reset()
+    end
 end
 
 -- Modify the default idle set after it was constructed.
@@ -1236,80 +1237,57 @@ windower.register_event('action',
                 elseif param == 846 then
                     --add_to_chat(122, 'Flurry Status: Flurry II')
                     flurry = 2
-                elseif param == 57 and haste ~=2 then
-                    --add_to_chat(122, 'Haste Status: Haste I (Haste)')
-                    haste = 1
-                elseif param == 511 then
-                    --add_to_chat(122, 'Haste Status: Haste II (Haste II)')
-                    haste = 2
-                end
-                elseif param == 710 then
-                    --add_to_chat(122, 'Haste Status: Haste II (Erratic Flutter)')
-                    haste = 2
-                end
-            elseif act.category == 5 then
-                if act.param == 5389 then
-                    --add_to_chat(122, 'Haste Status: Haste II (Spy Drink)')
-                    haste = 2
-                end
-            elseif act.category == 13 then
-                local param = act.param
-                --595 haste 1 -602 hastega 2
-                if param == 595 and haste ~=2 then
-                    --add_to_chat(122, 'Haste Status: Haste I (Hastega)')
-                    haste = 1
-                elseif param == 602 then
-                    --add_to_chat(122, 'Haste Status: Haste II (Hastega2)')
-                    haste = 2
                 end
             end
         end
     end)
 
 function determine_haste_group()
-
-    -- Assuming the following values:
-
-    -- Haste - 15%
-    -- Haste II - 30%
-    -- Haste Samba - 5%
-    -- Honor March - 15%
-    -- Victory March - 25%
-    -- Advancing March - 15%
-    -- Embrava - 25%
-    -- Mighty Guard (buffactive[604]) - 15%
-    -- Geo-Haste (buffactive[580]) - 30%
-
     classes.CustomMeleeGroups:clear()
+    if DW == true then
+      if DW_needed <= 11 then
+        classes.CustomMeleeGroups:append('MaxHaste')
+      elseif DW_needed > 11 and DW_needed <= 27 then
+        classes.CustomMeleeGroups:append('HighHaste')
+      elseif DW_needed > 27 and DW_needed <= 35 then
+        classes.CustomMeleeGroups:append('MidHaste')
+      elseif DW_needed > 35 and DW_needed <= 42 then
+        classes.CustomMeleeGroups:append('LowHaste')
+      elseif DW_needed > 42 then
+        classes.CustomMeleeGroups:append('')
+      end
+    end
+end
 
-    if state.CombatForm.value == 'DW' then
+function job_self_command(cmdParams, eventArgs)
+    gearinfo(cmdParams, eventArgs)
+end
 
-        if (haste == 2 and (buffactive[580] or buffactive.march or buffactive.embrava or buffactive[604])) or
-            (haste == 1 and (buffactive[580] or buffactive.march == 2 or (buffactive.embrava and buffactive['haste samba']) or (buffactive.march and buffactive[604]))) or
-            (buffactive[580] and (buffactive.march or buffactive.embrava or buffactive[604])) or
-            (buffactive.march == 2 and (buffactive.embrava or buffactive[604])) or
-            (buffactive.march and (buffactive.embrava and buffactive['haste samba'])) then
-            --add_to_chat(122, 'Magic Haste Level: 43%')
-            classes.CustomMeleeGroups:append('MaxHaste')
-            state.DualWield:set()
-        elseif ((haste == 2 or buffactive[580] or buffactive.march == 2) and buffactive['haste samba']) or
-            (haste == 1 and buffactive['haste samba'] and (buffactive.march or buffactive[604])) or
-            (buffactive.march and buffactive['haste samba'] and buffactive[604]) then
-            --add_to_chat(122, 'Magic Haste Level: 35%')
-            classes.CustomMeleeGroups:append('HighHaste')
-            state.DualWield:set()
-        elseif (haste == 2 or buffactive[580] or buffactive.march == 2 or (buffactive.embrava and buffactive['haste samba']) or
-            (haste == 1 and (buffactive.march or buffactive[604])) or (buffactive.march and buffactive[604])) then
-            --add_to_chat(122, 'Magic Haste Level: 30%')
-            classes.CustomMeleeGroups:append('MidHaste')
-            state.DualWield:set()
-        elseif (haste == 1 or buffactive.march or buffactive[604] or buffactive.embrava) then
-            --add_to_chat(122, 'Magic Haste Level: 15%')
-            classes.CustomMeleeGroups:append('LowHaste')
-            state.DualWield:set()
-        else
-            state.DualWield:set(false)
+function gearinfo(cmdParams, eventArgs)
+    if cmdParams[1] == 'gearinfo' then
+      if type(tonumber(cmdParams[2])) == 'number' then
+          if tonumber(cmdParams[2]) ~= DW_needed then
+          DW_needed = tonumber(cmdParams[2])
+          DW = true
         end
+      elseif type(cmdParams[2]) == 'string' then
+        if cmdParams[2] == 'false' then
+        	  DW_needed = 0
+          DW = false
+      	  end
+      end
+      if type(tonumber(cmdParams[3])) == 'number' then
+        	if tonumber(cmdParams[3]) ~= Haste then
+          	Haste = tonumber(cmdParams[3])
+        end
+      end
+      if type(cmdParams[4]) == 'string' then
+        if cmdParams[4] == 'true' then
+          moving = true
+        elseif cmdParams[4] == 'false' then
+          moving = false
+        end
+      end
     end
 end
 
@@ -1427,14 +1405,6 @@ function do_bullet_checks(spell, spellMap, eventArgs)
         state.warned:set()
     elseif available_bullets.count > options.ammo_warning_limit and state.warned then
         state.warned:reset()
-    end
-end
-
-function update_offense_mode()
-    if player.sub_job == 'NIN' or player.sub_job == 'DNC' then
-        state.CombatForm:set('DW')
-    else
-        state.CombatForm:reset()
     end
 end
 

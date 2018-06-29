@@ -759,7 +759,7 @@ function init_gear_sets()
         back=gear.RUN_TP_Cape, --10/0
         }
 
-	sets.HybridPlus = {
+  sets.HybridPlus = {
         ring1="Moonbeam Ring",  --4/4
         legs="Meg. Chausses +2", --6/0
         }

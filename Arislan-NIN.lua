@@ -1,4 +1,5 @@
 -- Original: Motenten / Modified: Arislan
+-- Haste/DW Detection Requires Gearinfo Addon
 
 -------------------------------------------------------------------------------------------------------------------
 --  Keybinds
@@ -64,8 +65,6 @@ function job_setup()
     lugra_ws = S{'Blade: Kamu', 'Blade: Shun', 'Blade: Ten'}
 
     lockstyleset = 1
-
-    determine_haste_group()
 end
 
 -------------------------------------------------------------------------------------------------------------------
@@ -126,6 +125,13 @@ function user_setup()
     select_movement_feet()
     select_default_macro_book()
     set_lockstyle()
+
+    Haste = 0
+    DW_needed = 0
+    DW = false
+    moving = false
+    update_combat_form()
+    determine_haste_group()
 end
 
 function user_unload()
@@ -793,19 +799,6 @@ end
 -- buff == buff gained or lost
 -- gain == true if the buff was gained, false if it was lost.
 function job_buff_change(buff, gain)
-    -- If we gain or lose any haste buffs, adjust gear.
-    if S{'haste', 'march', 'mighty guard', 'embrava', 'haste samba', 'geo-haste', 'indi-haste', 'erratic flutter'}:contains(buff:lower()) then
-        determine_haste_group()
-        if not gain then
-            haste = nil
-            --add_to_chat(122, "Haste Status: Cleared")
-            determine_haste_group()
-        end
-        if not midaction() then
-            handle_equipping_gear(player.status)
-        end
-    end
-
 --    if buffactive['Reive Mark'] then
 --        if gain then
 --            equip(sets.Reive)
@@ -871,10 +864,24 @@ function customize_melee_set(meleeSet)
     return meleeSet
 end
 
--- Called by the default 'update' self-command.
+-- Called by the 'update' self-command, for common needs.
+-- Set eventArgs.handled to true if we don't want automatic equipping of gear.
 function job_update(cmdParams, eventArgs)
     select_movement_feet()
+    handle_equipping_gear(player.status)
+end
+
+function job_handle_equipping_gear(playerStatus, eventArgs)
+    update_combat_form()
     determine_haste_group()
+end
+
+function update_combat_form()
+    if DW == true then
+        state.CombatForm:set('DW')
+    elseif DW == false then
+        state.CombatForm:reset()
+    end
 end
 
 -- Function to display the current relevant user state when doing an update.
@@ -913,88 +920,54 @@ end
 -- Utility functions specific to this job.
 -------------------------------------------------------------------------------------------------------------------
 
---Read incoming packet to differentiate between Haste I and II
-windower.register_event('action',
-    function(act)
-        --check if you are a target of spell
-        local actionTargets = act.targets
-        playerId = windower.ffxi.get_player().id
-        isTarget = false
-        for _, target in ipairs(actionTargets) do
-            if playerId == target.id then
-                isTarget = true
-            end
-        end
-        if isTarget == true then
-            if act.category == 4 then
-                local param = act.param
-                if param == 57 then
-                    --add_to_chat(122, 'Haste Status: Haste I (Haste)')
-                    haste = 1
-                elseif param == 511 then
-                    --add_to_chat(122, 'Haste Status: Haste II (Haste II)')
-                    haste = 2
-                end
-                elseif param == 710 then
-                    --add_to_chat(122, 'Haste Status: Haste II (Erratic Flutter)')
-                    haste = 2
-                end
-            elseif act.category == 5 then
-                if act.param == 5389 then
-                    --add_to_chat(122, 'Haste Status: Haste II (Spy Drink)')
-                    haste = 2
-                end
-            elseif act.category == 13 then
-                local param = act.param
-                if param == 595 and haste ~= 2 then
-                    --add_to_chat(122, 'Haste Status: Haste I (Hastega)')
-                    haste = 1
-                elseif param == 602 then
-                    --add_to_chat(122, 'Haste Status: Haste II (Hastega2)')
-                    haste = 2
-                end
-            end
-        end
-    end)
-
 function determine_haste_group()
-
-    -- Assuming the following values:
-
-    -- Haste - 15%
-    -- Haste II - 30%
-    -- Haste Samba - 5%
-    -- Honor March - 15%
-    -- Victory March - 25%
-    -- Advancing March - 15%
-    -- Embrava - 25%
-    -- Mighty Guard (buffactive[604]) - 15%
-    -- Geo-Haste (buffactive[580]) - 30%
-
     classes.CustomMeleeGroups:clear()
-
-    if (haste == 2 and (buffactive[580] or buffactive.march or buffactive.embrava or buffactive[604])) or
-        (haste == 1 and (buffactive[580] or buffactive.march == 2 or (buffactive.embrava and buffactive['haste samba']) or (buffactive.march and buffactive[604]))) or
-        (buffactive[580] and (buffactive.march or buffactive.embrava or buffactive[604])) or
-        (buffactive.march == 2 and (buffactive.embrava or buffactive[604])) or
-        (buffactive.march and (buffactive.embrava and buffactive['haste samba'])) then
-        --add_to_chat(122, 'Magic Haste Level: 43%')
+    if DW == true then
+      if DW_needed <= 1 then
         classes.CustomMeleeGroups:append('MaxHaste')
-    elseif ((haste == 2 or buffactive[580] or buffactive.march == 2) and buffactive['haste samba']) or
-        (haste == 1 and buffactive['haste samba'] and (buffactive.march or buffactive[604])) or
-        (buffactive.march and buffactive['haste samba'] and buffactive[604]) then
-        --add_to_chat(122, 'Magic Haste Level: 35%')
+      elseif DW_needed > 1 and DW_needed <= 16 then
         classes.CustomMeleeGroups:append('HighHaste')
-    elseif (haste == 2 or buffactive[580] or buffactive.march == 2 or (buffactive.embrava and buffactive['haste samba']) or
-        (haste == 1 and (buffactive.march or buffactive[604])) or (buffactive.march and buffactive[604])) then
-        --add_to_chat(122, 'Magic Haste Level: 30%')
+      elseif DW_needed > 16 and DW_needed <= 21 then
         classes.CustomMeleeGroups:append('MidHaste')
-    elseif (haste == 1 or buffactive.march or buffactive[604] or buffactive.embrava) then
-        --add_to_chat(122, 'Magic Haste Level: 15%')
+      elseif DW_needed > 21 and DW_needed <= 34 then
         classes.CustomMeleeGroups:append('LowHaste')
+      elseif DW_needed > 34 then
+        classes.CustomMeleeGroups:append('')
+      end
     end
 end
 
+function job_self_command(cmdParams, eventArgs)
+    gearinfo(cmdParams, eventArgs)
+end
+
+function gearinfo(cmdParams, eventArgs)
+    if cmdParams[1] == 'gearinfo' then
+      if type(tonumber(cmdParams[2])) == 'number' then
+          if tonumber(cmdParams[2]) ~= DW_needed then
+          DW_needed = tonumber(cmdParams[2])
+          DW = true
+        end
+      elseif type(cmdParams[2]) == 'string' then
+        if cmdParams[2] == 'false' then
+        	  DW_needed = 0
+          DW = false
+      	  end
+      end
+      if type(tonumber(cmdParams[3])) == 'number' then
+        	if tonumber(cmdParams[3]) ~= Haste then
+          	Haste = tonumber(cmdParams[3])
+        end
+      end
+      if type(cmdParams[4]) == 'string' then
+        if cmdParams[4] == 'true' then
+          moving = true
+        elseif cmdParams[4] == 'false' then
+          moving = false
+        end
+      end
+    end
+end
 
 function select_movement_feet()
     if world.time >= (17*60) or world.time <= (7*60) then

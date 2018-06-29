@@ -154,7 +154,7 @@ function init_gear_sets()
         }
 
     sets.precast.FC['Enhancing Magic'] = set_combine(sets.precast.FC, {
-		waist="Siegel Sash",
+        waist="Siegel Sash",
         back="Perimede Cape",
         })
 
@@ -180,12 +180,12 @@ function init_gear_sets()
         hands="Jhakri Cuffs +2",
         legs="Jhakri Slops +2",
         feet="Jhakri Pigaches +2",
-		    neck="Fotia Gorget",
+        neck="Fotia Gorget",
         ear1="Moonshade Earring",
         ear2="Brutal Earring",
         ring1="Hetairoi Ring",
         ring2="Petrov Ring",
-		    waist="Fotia Belt",
+        waist="Fotia Belt",
         }
 
     ------------------------------------------------------------------------
@@ -242,7 +242,7 @@ function init_gear_sets()
         ear2="Mendi. Earring", --5
         ring1="Haoma's Ring",
         ring2="Haoma's Ring",
-        back=gear.GEO_Idle_Cape, --10
+        back=gear.GEO_Cure_Cape, --10
         waist="Bishop's Sash",
         }
 
@@ -270,6 +270,7 @@ function init_gear_sets()
         neck="Incanter's Torque",
         ring1="Stikini Ring",
         ring2="Stikini Ring",
+        back=gear.GEO_Cure_Cape,
         waist="Olympus Sash",
         }
 
@@ -294,7 +295,7 @@ function init_gear_sets()
 
     sets.midcast.Stoneskin = set_combine(sets.midcast.EnhancingDuration, {
         neck="Nodens Gorget",
-		waist="Siegel Sash",
+  waist="Siegel Sash",
         })
 
     sets.midcast.Aquaveil = set_combine(sets.midcast.EnhancingDuration, {
@@ -327,7 +328,7 @@ function init_gear_sets()
         ring2="Weather. Ring +1",
         back=gear.GEO_FC_Cape,
         waist="Luminary Sash",
-       } -- MND/Magic accuracy
+        } -- MND/Magic accuracy
 
     sets.midcast.IntEnfeebles = set_combine(sets.midcast.MndEnfeebles, {
         ear1="Barkarole Earring",
@@ -420,7 +421,7 @@ function init_gear_sets()
         legs="Assid. Pants +1",
         feet="Geo. Sandals +3",
         neck="Bathy Choker +1",
-		    ear1="Lugalbanda Earring",
+        ear1="Lugalbanda Earring",
         ear2="Infused Earring",
         ring1="Paguroidea Ring",
         ring2="Sheltered Ring",
@@ -438,7 +439,7 @@ function init_gear_sets()
         hands="Geo. Mitaines +3", --3/0
         feet="Azimuth Gaiters +1", --4/0
         neck="Loricate Torque +1", --6/6
-		    ear1="Odnowa Earring +1", --2/0
+        ear1="Odnowa Earring +1", --2/0
         ear2="Etiolation Earring", --0/3
         ring1="Gelatinous Ring +1", --7/(-1)
         ring2="Defending Ring", --10/10
@@ -446,20 +447,20 @@ function init_gear_sets()
         })
 
 --[[    sets.idle.Weak = set_combine(sets.idle, {
-		sub="Ammurapi Shield",
+  sub="Ammurapi Shield",
         head="Geo. Galero +3",
         body="Geomancy Tunic +3",
         hands="Geo. Mitaines +3",
         legs="Geomancy Pants +3",
         feet="Geo. Sandals +3",
-		neck="Nodens Gorget",
-		ear1="Odnowa Earring +1",
-		ear2="Odnowa Earring",
+  neck="Nodens Gorget",
+  ear1="Odnowa Earring +1",
+  ear2="Odnowa Earring",
         ring1="Gelatinous Ring +1",
         ring2="Defending Ring",
         back="Moonlight Cape",
-		waist="Eschan Stone",
-		})
+  waist="Eschan Stone",
+  })
 ]]--
     -- .Pet sets are for when Luopan is present.
     sets.idle.Pet = set_combine(sets.idle, {
@@ -477,7 +478,7 @@ function init_gear_sets()
 
     sets.idle.DT.Pet = set_combine(sets.idle.Pet, {
         neck="Loricate Torque +1", --6/6
-		    ear1="Odnowa Earring +1", --2/0
+        ear1="Odnowa Earring +1", --2/0
         ear2="Etiolation Earring", --0/3
         ring1="Gelatinous Ring +1", --7/(-1)
         ring2="Defending Ring",
