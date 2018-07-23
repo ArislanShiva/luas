@@ -58,12 +58,9 @@
     send_command('bind !numpad. input /ma "Esuna" <me>')
 
     -- Default Item HotKeys
-    send_command('bind @numpad7 input /item "Soldier\'s Drink" <me>')
     send_command('bind @numpad7 input /item "Remedy" <me>')
     send_command('bind @numpad8 input /item "Echo Drops" <me>')
     send_command('bind @numpad9 input /item "Eye Drops" <me>')
     send_command('bind @numpad4 input /item "Antidote" <me>')
     send_command('bind @numpad6 input /item "Remedy" <me>')
     send_command('bind @numpad1 input /item "Holy Water" <me>')
-    send_command('bind @numpad1 input /item "Catholican +1" <me>')
-    send_command('bind @numpad1 input /item "Catholican" <me>')

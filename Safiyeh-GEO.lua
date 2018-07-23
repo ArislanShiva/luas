@@ -137,7 +137,7 @@ function init_gear_sets()
     sets.precast.FC = {
     --  /RDM --15
         ranged="Dunna", --3
-        main="Sucellus",
+        main="Sucellus", --5
         sub="Chanter's Shield", --3
         head="Amalric Coif", --10
         body="Merlinic Jubbah", --6
@@ -154,8 +154,8 @@ function init_gear_sets()
         }
 
     sets.precast.FC['Enhancing Magic'] = set_combine(sets.precast.FC, {
-        waist="Siegel Sash",
         back="Perimede Cape",
+        waist="Siegel Sash",
         })
 
     sets.precast.FC['Elemental Magic'] = set_combine(sets.precast.FC, {
@@ -295,7 +295,7 @@ function init_gear_sets()
 
     sets.midcast.Stoneskin = set_combine(sets.midcast.EnhancingDuration, {
         neck="Nodens Gorget",
-  waist="Siegel Sash",
+        waist="Siegel Sash",
         })
 
     sets.midcast.Aquaveil = set_combine(sets.midcast.EnhancingDuration, {
@@ -304,10 +304,7 @@ function init_gear_sets()
         head="Amalric Coif",
         })
 
-    sets.midcast.Protect = set_combine(sets.midcast.EnhancingDuration, {
-        ring2="Sheltered Ring",
-        })
-
+    sets.midcast.Protect = set_combine(sets.midcast.EnhancingDuration, {ring2="Sheltered Ring"})
     sets.midcast.Protectra = sets.midcast.Protect
     sets.midcast.Shell = sets.midcast.Protect
     sets.midcast.Shellra = sets.midcast.Protect
@@ -446,22 +443,6 @@ function init_gear_sets()
         back="Moonlight Cape", --6/6
         })
 
---[[    sets.idle.Weak = set_combine(sets.idle, {
-  sub="Ammurapi Shield",
-        head="Geo. Galero +3",
-        body="Geomancy Tunic +3",
-        hands="Geo. Mitaines +3",
-        legs="Geomancy Pants +3",
-        feet="Geo. Sandals +3",
-  neck="Nodens Gorget",
-  ear1="Odnowa Earring +1",
-  ear2="Odnowa Earring",
-        ring1="Gelatinous Ring +1",
-        ring2="Defending Ring",
-        back="Moonlight Cape",
-  waist="Eschan Stone",
-  })
-]]--
     -- .Pet sets are for when Luopan is present.
     sets.idle.Pet = set_combine(sets.idle, {
         -- Pet: -DT (37.5% to cap) / Pet: Regen

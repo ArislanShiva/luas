@@ -88,7 +88,7 @@ function job_setup()
     state.AltStep = M{['description']='Alt Step', 'Quickstep', 'Feather Step', 'Stutter Step', 'Box Step'}
     state.UseAltStep = M(false, 'Use Alt Step')
     state.SelectStepTarget = M(false, 'Select Step Target')
-    state.IgnoreTargetting = M(false, 'Ignore Targetting')
+    state.IgnoreTargetting = M(true, 'Ignore Targetting')
 
     state.ClosedPosition = M(false, 'Closed Position')
 
@@ -150,7 +150,7 @@ function user_setup()
     send_command('bind ^numpad6 input /ws "Pyrrhic Kleos" <t>')
     send_command('bind ^numpad1 input /ws "Aeolian Edge" <t>')
 
-    send_command('bind numpad0 gs c step')
+    send_command('bind numpad0 gs c step t')
 
     select_default_macro_book()
     set_lockstyle()
@@ -288,7 +288,7 @@ function init_gear_sets()
         neck="Sanctity Necklace",
         ear1="Digni. Earring",
         ear2="Hermetic Earring",
-        ring1="Stikini Ring",
+        ring1="Stikini Ring +1",
         ring2="Weather. Ring +1",
         waist="Eschan Stone",
         back=gear.DNC_TP_Cape,
@@ -950,13 +950,13 @@ end
 
 -- Called by the 'update' self-command, for common needs.
 -- Set eventArgs.handled to true if we don't want automatic equipping of gear.
-function job_update(cmdParams, eventArgs)
-    handle_equipping_gear(player.status)
-end
-
 function job_handle_equipping_gear(playerStatus, eventArgs)
     update_combat_form()
     determine_haste_group()
+end
+
+function job_update(cmdParams, eventArgs)
+    handle_equipping_gear(player.status)
 end
 
 function update_combat_form()
@@ -1044,13 +1044,13 @@ function display_current_job_state(eventArgs)
         msg = msg .. '[ Kiting Mode: ON ]'
     end
 
-    msg = msg .. '[ *'..state.MainStep.current
+    msg = msg .. '[ '..state.MainStep.current
 
     if state.UseAltStep.value == true then
         msg = msg .. '/'..state.AltStep.current
     end
 
-    msg = msg .. '* ]'
+    msg = msg .. ' ]'
 
     add_to_chat(060, msg)
 
@@ -1062,7 +1062,27 @@ end
 -- User self-commands.
 -------------------------------------------------------------------------------------------------------------------
 
--- Called for custom player commands.
+-------------------------------------------------------------------------------------------------------------------
+-- Utility functions specific to this job.
+-------------------------------------------------------------------------------------------------------------------
+
+function determine_haste_group()
+    classes.CustomMeleeGroups:clear()
+    if DW == true then
+        if DW_needed <= 1 then
+            classes.CustomMeleeGroups:append('MaxHaste')
+        elseif DW_needed > 1 and DW_needed <= 9 then
+            classes.CustomMeleeGroups:append('HighHaste')
+        elseif DW_needed > 9 and DW_needed <= 21 then
+            classes.CustomMeleeGroups:append('MidHaste')
+        elseif DW_needed > 21 and DW_needed <= 39 then
+            classes.CustomMeleeGroups:append('LowHaste')
+        elseif DW_needed > 39 then
+            classes.CustomMeleeGroups:append('')
+        end
+    end
+end
+
 function job_self_command(cmdParams, eventArgs)
     if cmdParams[1] == 'step' then
         if cmdParams[2] == 't' then
@@ -1079,58 +1099,35 @@ function job_self_command(cmdParams, eventArgs)
 
         send_command('@input /ja "'..doStep..'" <t>')
     end
-end
 
--------------------------------------------------------------------------------------------------------------------
--- Utility functions specific to this job.
--------------------------------------------------------------------------------------------------------------------
-
-function determine_haste_group()
-    classes.CustomMeleeGroups:clear()
-    if DW == true then
-      if DW_needed <= 1 then
-        classes.CustomMeleeGroups:append('MaxHaste')
-      elseif DW_needed > 1 and DW_needed <= 9 then
-        classes.CustomMeleeGroups:append('HighHaste')
-      elseif DW_needed > 9 and DW_needed <= 21 then
-        classes.CustomMeleeGroups:append('MidHaste')
-      elseif DW_needed > 21 and DW_needed <= 39 then
-        classes.CustomMeleeGroups:append('LowHaste')
-      elseif DW_needed > 39 then
-        classes.CustomMeleeGroups:append('')
-      end
-    end
-end
-
-function job_self_command(cmdParams, eventArgs)
     gearinfo(cmdParams, eventArgs)
 end
 
 function gearinfo(cmdParams, eventArgs)
     if cmdParams[1] == 'gearinfo' then
-      if type(tonumber(cmdParams[2])) == 'number' then
-          if tonumber(cmdParams[2]) ~= DW_needed then
-          DW_needed = tonumber(cmdParams[2])
-          DW = true
+        if type(tonumber(cmdParams[2])) == 'number' then
+            if tonumber(cmdParams[2]) ~= DW_needed then
+            DW_needed = tonumber(cmdParams[2])
+            DW = true
+            end
+        elseif type(cmdParams[2]) == 'string' then
+            if cmdParams[2] == 'false' then
+        	      DW_needed = 0
+                DW = false
+      	    end
         end
-      elseif type(cmdParams[2]) == 'string' then
-        if cmdParams[2] == 'false' then
-        	  DW_needed = 0
-          DW = false
-      	  end
-      end
-      if type(tonumber(cmdParams[3])) == 'number' then
-        	if tonumber(cmdParams[3]) ~= Haste then
-          	Haste = tonumber(cmdParams[3])
+        if type(tonumber(cmdParams[3])) == 'number' then
+          	if tonumber(cmdParams[3]) ~= Haste then
+              	Haste = tonumber(cmdParams[3])
+            end
         end
-      end
-      if type(cmdParams[4]) == 'string' then
-        if cmdParams[4] == 'true' then
-          moving = true
-        elseif cmdParams[4] == 'false' then
-          moving = false
+        if type(cmdParams[4]) == 'string' then
+            if cmdParams[4] == 'true' then
+                moving = true
+            elseif cmdParams[4] == 'false' then
+                moving = false
+            end
         end
-      end
     end
 end
 

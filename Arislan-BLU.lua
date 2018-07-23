@@ -200,7 +200,7 @@ function user_setup()
 
     -- Additional local binds
     include('Global-Binds.lua') -- OK to remove this line
-    include('Global-GEO-Binds.lua') -- OK to remove this line
+    include('Global-WHM-Binds.lua') -- OK to remove this line
 
     send_command('bind ^` input /ma "Blank Gaze" <t>')
     send_command('bind !` gs c toggle MagicBurst')
@@ -493,7 +493,7 @@ function init_gear_sets()
 
     sets.precast.WS['Flash Nova'] = set_combine(sets.precast.WS['Sanguine Blade'], {
         head="Jhakri Coronal +2",
-        ring1="Levia. Ring +1",
+        ring1="Stikini Ring +1",
         ring2="Weather. Ring +1",
         })
 
@@ -517,8 +517,8 @@ function init_gear_sets()
         legs="Hashishin Tayt +1",
         feet="Luhlaza Charuqs +1",
         neck="Incanter's Torque",
-        ring1="Stikini Ring",
-        ring2="Stikini Ring",
+        ring1="Stikini Ring +1",
+        ring2="Stikini Ring +1",
         back="Cornflower Cape",
         }
 
@@ -572,8 +572,8 @@ function init_gear_sets()
 
     sets.midcast['Blue Magic'].PhysicalMnd = set_combine(sets.midcast['Blue Magic'].Physical, {
         ear2="Regal Earring",
-        ring1="Levia. Ring +1",
-        ring2="Levia. Ring +1",
+        ring1="Stikini Ring +1",
+        ring2="Stikini Ring +1",
         })
 
     sets.midcast['Blue Magic'].PhysicalChr = set_combine(sets.midcast['Blue Magic'].Physical, {ear1="Regal Earring", ear2="Enchntr. Earring +1"})
@@ -599,8 +599,8 @@ function init_gear_sets()
         hands="Jhakri Cuffs +2",
         neck="Erra Pendant",
         ear1="Digni. Earring",
-        ring1="Stikini Ring",
-        ring2="Stikini Ring",
+        ring1="Stikini Ring +1",
+        ring2="Stikini Ring +1",
         waist="Yamabuki-no-Obi",
         })
 
@@ -614,8 +614,8 @@ function init_gear_sets()
         })
 
     sets.midcast['Blue Magic'].MagicalMnd = set_combine(sets.midcast['Blue Magic'].Magical, {
-        ring1="Levia. Ring +1",
-        ring2="Levia. Ring +1",
+        ring1="Stikini Ring +1",
+        ring2="Stikini Ring +1",
         })
 
     sets.midcast['Blue Magic'].MagicalDex = set_combine(sets.midcast['Blue Magic'].Magical, {
@@ -636,8 +636,8 @@ function init_gear_sets()
         neck="Erra Pendant",
         ear1="Digni. Earring",
         ear2="Regal Earring",
-        ring1="Stikini Ring",
-        ring2="Weather. Ring +1",
+        ring1="Stikini Ring +1",
+        ring2="Stikini Ring +1",
         back=gear.BLU_MAB_Cape,
         waist="Luminary Sash",
         }
@@ -696,8 +696,8 @@ function init_gear_sets()
         ear1="Andoaa Earring",
         body="Telchine Chas.",
         hands="Telchine Gloves",
-        ring1="Stikini Ring",
-        ring2="Stikini Ring",
+        ring1="Stikini Ring +1",
+        ring2="Stikini Ring +1",
         ear1="Augment. Earring",
         ear2="Andoaa Earring",
         back="Fi Follet Cape +1",
@@ -753,8 +753,8 @@ function init_gear_sets()
         neck="Bathy Choker +1",
         ear1="Genmei Earring",
         ear2="Infused Earring",
-        ring1="Paguroidea Ring",
-        ring2="Sheltered Ring",
+        ring1="Stikini Ring +1",
+        ring2="Stikini Ring +1",
         back="Moonlight Cape",
         waist="Flume Belt +1",
         }
@@ -781,8 +781,6 @@ function init_gear_sets()
         neck="Combatant's Torque",
         ear1="Eabani Earring",
         ear2="Telos Earring",
-        ring1="Ramuh Ring +1",
-        ring2="Weather. Ring +1",
         back=gear.BLU_WS1_Cape,
         waist="Windbuffet Belt +1",
         })
@@ -1244,6 +1242,25 @@ end
 -- User code that supplements standard library decisions.
 -------------------------------------------------------------------------------------------------------------------
 
+-- Called by the 'update' self-command, for common needs.
+-- Set eventArgs.handled to true if we don't want automatic equipping of gear.
+function job_handle_equipping_gear(playerStatus, eventArgs)
+    update_combat_form()
+    determine_haste_group()
+end
+
+function job_update(cmdParams, eventArgs)
+    handle_equipping_gear(player.status)
+end
+
+function update_combat_form()
+    if DW == true then
+        state.CombatForm:set('DW')
+    elseif DW == false then
+        state.CombatForm:reset()
+    end
+end
+
 -- Custom spell mapping.
 -- Return custom spellMap value that can override the default spell mapping.
 -- Don't return anything to allow default spell mapping to be used.
@@ -1276,25 +1293,6 @@ function customize_idle_set(idleSet)
     --end
 
     return idleSet
-end
-
--- Called by the 'update' self-command, for common needs.
--- Set eventArgs.handled to true if we don't want automatic equipping of gear.
-function job_update(cmdParams, eventArgs)
-    handle_equipping_gear(player.status)
-end
-
-function job_handle_equipping_gear(playerStatus, eventArgs)
-    update_combat_form()
-    determine_haste_group()
-end
-
-function update_combat_form()
-    if DW == true then
-        state.CombatForm:set('DW')
-    elseif DW == false then
-        state.CombatForm:reset()
-    end
 end
 
 -- Function to display the current relevant user state when doing an update.
@@ -1339,17 +1337,17 @@ end
 function determine_haste_group()
     classes.CustomMeleeGroups:clear()
     if DW == true then
-      if DW_needed <= 11 then
-        classes.CustomMeleeGroups:append('MaxHaste')
-      elseif DW_needed > 11 and DW_needed <= 21 then
-        classes.CustomMeleeGroups:append('HighHaste')
-      elseif DW_needed > 21 and DW_needed <= 27 then
-        classes.CustomMeleeGroups:append('MidHaste')
-      elseif DW_needed > 27 and DW_needed <= 37 then
-        classes.CustomMeleeGroups:append('LowHaste')
-      elseif DW_needed > 37 then
-        classes.CustomMeleeGroups:append('')
-      end
+        if DW_needed <= 11 then
+            classes.CustomMeleeGroups:append('MaxHaste')
+        elseif DW_needed > 11 and DW_needed <= 21 then
+            classes.CustomMeleeGroups:append('HighHaste')
+        elseif DW_needed > 21 and DW_needed <= 27 then
+            classes.CustomMeleeGroups:append('MidHaste')
+        elseif DW_needed > 27 and DW_needed <= 37 then
+            classes.CustomMeleeGroups:append('LowHaste')
+        elseif DW_needed > 37 then
+            classes.CustomMeleeGroups:append('')
+        end
     end
 end
 
@@ -1359,29 +1357,29 @@ end
 
 function gearinfo(cmdParams, eventArgs)
     if cmdParams[1] == 'gearinfo' then
-      if type(tonumber(cmdParams[2])) == 'number' then
-          if tonumber(cmdParams[2]) ~= DW_needed then
-          DW_needed = tonumber(cmdParams[2])
-          DW = true
+        if type(tonumber(cmdParams[2])) == 'number' then
+            if tonumber(cmdParams[2]) ~= DW_needed then
+            DW_needed = tonumber(cmdParams[2])
+            DW = true
+            end
+        elseif type(cmdParams[2]) == 'string' then
+            if cmdParams[2] == 'false' then
+        	      DW_needed = 0
+                DW = false
+      	    end
         end
-      elseif type(cmdParams[2]) == 'string' then
-        if cmdParams[2] == 'false' then
-        	  DW_needed = 0
-          DW = false
-      	  end
-      end
-      if type(tonumber(cmdParams[3])) == 'number' then
-        	if tonumber(cmdParams[3]) ~= Haste then
-          	Haste = tonumber(cmdParams[3])
+        if type(tonumber(cmdParams[3])) == 'number' then
+          	if tonumber(cmdParams[3]) ~= Haste then
+              	Haste = tonumber(cmdParams[3])
+            end
         end
-      end
-      if type(cmdParams[4]) == 'string' then
-        if cmdParams[4] == 'true' then
-          moving = true
-        elseif cmdParams[4] == 'false' then
-          moving = false
+        if type(cmdParams[4]) == 'string' then
+            if cmdParams[4] == 'true' then
+                moving = true
+            elseif cmdParams[4] == 'false' then
+                moving = false
+            end
         end
-      end
     end
 end
 

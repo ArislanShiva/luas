@@ -343,8 +343,8 @@ function init_gear_sets()
 
     sets.midcast.ElementalNinjutsu.Resistant = set_combine(sets.midcast.Ninjutsu, {
         neck="Sanctity Necklace",
-        ring1="Stikini Ring",
-        ring2="Stikini Ring",
+        ring1="Stikini Ring +1",
+        ring2="Stikini Ring +1",
         ear1="Hermetic Earring",
         })
 
@@ -358,8 +358,8 @@ function init_gear_sets()
         neck="Sanctity Necklace",
         ear1="Hermetic Earring",
         ear2="Digni. Earring",
-        ring1="Stikini Ring",
-        ring2="Stikini Ring",
+        ring1="Stikini Ring +1",
+        ring2="Stikini Ring +1",
         back=gear.NIN_MAB_Cape,
         waist="Eschan Stone",
         }
@@ -369,8 +369,8 @@ function init_gear_sets()
         feet="Mochi. Kyahan +1",
         neck="Incanter's Torque",
         ear1="Stealth Earring",
-        ring1="Stikini Ring",
-        ring2="Stikini Ring",
+        ring1="Stikini Ring +1",
+        ring2="Stikini Ring +1",
         back="Astute Cape",
         waist="Cimmerian Sash",
         }
@@ -832,6 +832,26 @@ end
 -- User code that supplements standard library decisions.
 -------------------------------------------------------------------------------------------------------------------
 
+
+-- Called by the 'update' self-command, for common needs.
+-- Set eventArgs.handled to true if we don't want automatic equipping of gear.
+function job_handle_equipping_gear(playerStatus, eventArgs)
+    update_combat_form()
+    determine_haste_group()
+end
+
+function job_update(cmdParams, eventArgs)
+    handle_equipping_gear(player.status)
+end
+
+function update_combat_form()
+    if DW == true then
+        state.CombatForm:set('DW')
+    elseif DW == false then
+        state.CombatForm:reset()
+    end
+end
+
 -- Modify the default idle set after it was constructed.
 function customize_idle_set(idleSet)
     if state.Buff.Migawari then
@@ -864,25 +884,6 @@ function customize_melee_set(meleeSet)
     return meleeSet
 end
 
--- Called by the 'update' self-command, for common needs.
--- Set eventArgs.handled to true if we don't want automatic equipping of gear.
-function job_update(cmdParams, eventArgs)
-    select_movement_feet()
-    handle_equipping_gear(player.status)
-end
-
-function job_handle_equipping_gear(playerStatus, eventArgs)
-    update_combat_form()
-    determine_haste_group()
-end
-
-function update_combat_form()
-    if DW == true then
-        state.CombatForm:set('DW')
-    elseif DW == false then
-        state.CombatForm:reset()
-    end
-end
 
 -- Function to display the current relevant user state when doing an update.
 function display_current_job_state(eventArgs)
@@ -923,17 +924,17 @@ end
 function determine_haste_group()
     classes.CustomMeleeGroups:clear()
     if DW == true then
-      if DW_needed <= 1 then
-        classes.CustomMeleeGroups:append('MaxHaste')
-      elseif DW_needed > 1 and DW_needed <= 16 then
-        classes.CustomMeleeGroups:append('HighHaste')
-      elseif DW_needed > 16 and DW_needed <= 21 then
-        classes.CustomMeleeGroups:append('MidHaste')
-      elseif DW_needed > 21 and DW_needed <= 34 then
-        classes.CustomMeleeGroups:append('LowHaste')
-      elseif DW_needed > 34 then
-        classes.CustomMeleeGroups:append('')
-      end
+        if DW_needed <= 1 then
+            classes.CustomMeleeGroups:append('MaxHaste')
+        elseif DW_needed > 1 and DW_needed <= 16 then
+            classes.CustomMeleeGroups:append('HighHaste')
+        elseif DW_needed > 16 and DW_needed <= 21 then
+            classes.CustomMeleeGroups:append('MidHaste')
+        elseif DW_needed > 21 and DW_needed <= 34 then
+            classes.CustomMeleeGroups:append('LowHaste')
+        elseif DW_needed > 34 then
+            classes.CustomMeleeGroups:append('')
+        end
     end
 end
 
@@ -943,29 +944,29 @@ end
 
 function gearinfo(cmdParams, eventArgs)
     if cmdParams[1] == 'gearinfo' then
-      if type(tonumber(cmdParams[2])) == 'number' then
-          if tonumber(cmdParams[2]) ~= DW_needed then
-          DW_needed = tonumber(cmdParams[2])
-          DW = true
+        if type(tonumber(cmdParams[2])) == 'number' then
+            if tonumber(cmdParams[2]) ~= DW_needed then
+            DW_needed = tonumber(cmdParams[2])
+            DW = true
+            end
+        elseif type(cmdParams[2]) == 'string' then
+            if cmdParams[2] == 'false' then
+        	      DW_needed = 0
+                DW = false
+      	    end
         end
-      elseif type(cmdParams[2]) == 'string' then
-        if cmdParams[2] == 'false' then
-        	  DW_needed = 0
-          DW = false
-      	  end
-      end
-      if type(tonumber(cmdParams[3])) == 'number' then
-        	if tonumber(cmdParams[3]) ~= Haste then
-          	Haste = tonumber(cmdParams[3])
+        if type(tonumber(cmdParams[3])) == 'number' then
+          	if tonumber(cmdParams[3]) ~= Haste then
+              	Haste = tonumber(cmdParams[3])
+            end
         end
-      end
-      if type(cmdParams[4]) == 'string' then
-        if cmdParams[4] == 'true' then
-          moving = true
-        elseif cmdParams[4] == 'false' then
-          moving = false
+        if type(cmdParams[4]) == 'string' then
+            if cmdParams[4] == 'true' then
+                moving = true
+            elseif cmdParams[4] == 'false' then
+                moving = false
+            end
         end
-      end
     end
 end
 

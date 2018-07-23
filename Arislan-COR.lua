@@ -165,7 +165,7 @@ function user_setup()
     send_command('bind ^numpad8 input /ws "Last Stand" <t>')
     send_command('bind ^numpad4 input /ws "Leaden Salute" <t>')
     send_command('bind ^numpad6 input /ws "Wildfire" <t>')
-    send_command('bind ^numpad1 input /ws "Requiescat" <t>')
+    send_command('bind ^numpad1 input /ws "Aeolian Edge" <t>')
     send_command('bind ^numpad2 input /ws "Hot Shot" <t>')
     send_command('bind ^numpad3 input /ws "Numbing Shot" <t>')
 
@@ -645,6 +645,8 @@ function init_gear_sets()
         head=gear.Herc_Idle_head,
         --body="Mekosu. Harness",
         legs="Rawhide Trousers",
+        ring1="Stikini Ring +1",
+        ring2="Stikini Ring +1",
         })
 
     sets.idle.Town = set_combine(sets.idle, {
@@ -929,6 +931,13 @@ function init_gear_sets()
         ring1="Chirich Ring",
         })
 
+    sets.engaged.DW.MaxHastePlus = set_combine(sets.engaged.DW.MaxHaste, {back=gear.COR_DW_Cape})
+    sets.engaged.DW.LowAcc.MaxHastePlus = set_combine(sets.engaged.DW.LowAcc.MaxHaste, {back=gear.COR_DW_Cape})
+    sets.engaged.DW.MidAcc.MaxHastePlus = set_combine(sets.engaged.DW.MidAcc.MaxHaste, {back=gear.COR_DW_Cape})
+    sets.engaged.DW.HighAcc.MaxHastePlus = set_combine(sets.engaged.DW.HighAcc.MaxHaste, {back=gear.COR_DW_Cape})
+    sets.engaged.DW.STP.MaxHastePlus = set_combine(sets.engaged.DW.STP.MaxHaste, {back=gear.COR_DW_Cape})
+
+
     ------------------------------------------------------------------------------------------------
     ---------------------------------------- Hybrid Sets -------------------------------------------
     ------------------------------------------------------------------------------------------------
@@ -974,6 +983,12 @@ function init_gear_sets()
     sets.engaged.DW.MidAcc.DT.MaxHaste = set_combine(sets.engaged.DW.MidAcc.MaxHaste, sets.engaged.Hybrid)
     sets.engaged.DW.HighAcc.DT.MaxHaste = set_combine(sets.engaged.DW.HighAcc.MaxHaste, sets.engaged.Hybrid)
     sets.engaged.DW.STP.DT.MaxHaste = set_combine(sets.engaged.DW.STP.MaxHaste, sets.engaged.Hybrid)
+
+    sets.engaged.DW.DT.MaxHastePlus = set_combine(sets.engaged.DW.MaxHastePlus, sets.engaged.Hybrid)
+    sets.engaged.DW.LowAcc.DT.MaxHastePlus = set_combine(sets.engaged.DW.LowAcc.MaxHastePlus, sets.engaged.Hybrid)
+    sets.engaged.DW.MidAcc.DT.MaxHastePlus = set_combine(sets.engaged.DW.MidAcc.MaxHastePlus, sets.engaged.Hybrid)
+    sets.engaged.DW.HighAcc.DT.MaxHastePlus = set_combine(sets.engaged.DW.HighAcc.MaxHastePlus, sets.engaged.Hybrid)
+    sets.engaged.DW.STP.DT.MaxHastePlus = set_combine(sets.engaged.DW.STP.MaxHastePlus, sets.engaged.Hybrid)
 
 
     ------------------------------------------------------------------------------------------------
@@ -1140,13 +1155,13 @@ end
 
 -- Called by the 'update' self-command, for common needs.
 -- Set eventArgs.handled to true if we don't want automatic equipping of gear.
-function job_update(cmdParams, eventArgs)
-    handle_equipping_gear(player.status)
-end
-
 function job_handle_equipping_gear(playerStatus, eventArgs)
     update_combat_form()
     determine_haste_group()
+end
+
+function job_update(cmdParams, eventArgs)
+    handle_equipping_gear(player.status)
 end
 
 function update_combat_form()
@@ -1234,30 +1249,6 @@ function display_current_job_state(eventArgs)
 end
 
 -------------------------------------------------------------------------------------------------------------------
--- User self-commands.
--------------------------------------------------------------------------------------------------------------------
-
--- Called for custom player commands.
-function job_self_command(cmdParams, eventArgs)
-    if cmdParams[1] == 'qd' then
-        if cmdParams[2] == 't' then
-            state.IgnoreTargetting:set()
-        end
-
-        local doqd = ''
-        if state.UseAltqd.value == true then
-            doqd = state[state.Currentqd.current..'qd'].current
-            state.Currentqd:cycle()
-        else
-            doqd = state.Mainqd.current
-        end
-
-        send_command('@input /ja "'..doqd..'" <t>')
-    end
-end
-
-
--------------------------------------------------------------------------------------------------------------------
 -- Utility functions specific to this job.
 -------------------------------------------------------------------------------------------------------------------
 
@@ -1290,49 +1281,67 @@ windower.register_event('action',
 function determine_haste_group()
     classes.CustomMeleeGroups:clear()
     if DW == true then
-      if DW_needed <= 11 then
-        classes.CustomMeleeGroups:append('MaxHaste')
-      elseif DW_needed > 11 and DW_needed <= 27 then
-        classes.CustomMeleeGroups:append('HighHaste')
-      elseif DW_needed > 27 and DW_needed <= 35 then
-        classes.CustomMeleeGroups:append('MidHaste')
-      elseif DW_needed > 35 and DW_needed <= 42 then
-        classes.CustomMeleeGroups:append('LowHaste')
-      elseif DW_needed > 42 then
-        classes.CustomMeleeGroups:append('')
-      end
+        if DW_needed <= 11 then
+            classes.CustomMeleeGroups:append('MaxHaste')
+        elseif DW_needed > 11 and DW_needed <= 21 then
+            classes.CustomMeleeGroups:append('MaxHastePlus')
+        elseif DW_needed > 21 and DW_needed <= 27 then
+            classes.CustomMeleeGroups:append('HighHaste')
+        elseif DW_needed > 27 and DW_needed <= 31 then
+            classes.CustomMeleeGroups:append('MidHaste')
+        elseif DW_needed > 31 and DW_needed <= 42 then
+            classes.CustomMeleeGroups:append('LowHaste')
+        elseif DW_needed > 42 then
+            classes.CustomMeleeGroups:append('')
+        end
     end
 end
 
 function job_self_command(cmdParams, eventArgs)
+    if cmdParams[1] == 'qd' then
+        if cmdParams[2] == 't' then
+            state.IgnoreTargetting:set()
+        end
+
+        local doqd = ''
+        if state.UseAltqd.value == true then
+            doqd = state[state.Currentqd.current..'qd'].current
+            state.Currentqd:cycle()
+        else
+            doqd = state.Mainqd.current
+        end
+
+        send_command('@input /ja "'..doqd..'" <t>')
+    end
+
     gearinfo(cmdParams, eventArgs)
 end
 
 function gearinfo(cmdParams, eventArgs)
     if cmdParams[1] == 'gearinfo' then
-      if type(tonumber(cmdParams[2])) == 'number' then
-          if tonumber(cmdParams[2]) ~= DW_needed then
-          DW_needed = tonumber(cmdParams[2])
-          DW = true
+        if type(tonumber(cmdParams[2])) == 'number' then
+            if tonumber(cmdParams[2]) ~= DW_needed then
+            DW_needed = tonumber(cmdParams[2])
+            DW = true
+            end
+        elseif type(cmdParams[2]) == 'string' then
+            if cmdParams[2] == 'false' then
+        	      DW_needed = 0
+                DW = false
+      	    end
         end
-      elseif type(cmdParams[2]) == 'string' then
-        if cmdParams[2] == 'false' then
-        	  DW_needed = 0
-          DW = false
-      	  end
-      end
-      if type(tonumber(cmdParams[3])) == 'number' then
-        	if tonumber(cmdParams[3]) ~= Haste then
-          	Haste = tonumber(cmdParams[3])
+        if type(tonumber(cmdParams[3])) == 'number' then
+          	if tonumber(cmdParams[3]) ~= Haste then
+              	Haste = tonumber(cmdParams[3])
+            end
         end
-      end
-      if type(cmdParams[4]) == 'string' then
-        if cmdParams[4] == 'true' then
-          moving = true
-        elseif cmdParams[4] == 'false' then
-          moving = false
+        if type(cmdParams[4]) == 'string' then
+            if cmdParams[4] == 'true' then
+                moving = true
+            elseif cmdParams[4] == 'false' then
+                moving = false
+            end
         end
-      end
     end
 end
 

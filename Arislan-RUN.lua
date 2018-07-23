@@ -406,7 +406,7 @@ function init_gear_sets()
         ear1="Novio Earring",
         ear2="Friomisi Earring",
         ring1="Archon Ring",
-        ring2="Levia. Ring +1",
+        ring2="Stikini Ring +1",
         back="Argocham. Mantle",
         waist="Eschan Stone",
         }
@@ -486,8 +486,8 @@ function init_gear_sets()
         neck="Incanter's Torque",
         ear1="Augment. Earring",
         ear2="Andoaa Earring",
-        ring1="Stikini Ring",
-        ring2="Stikini Ring",
+        ring1="Stikini Ring +1",
+        ring2="Stikini Ring +1",
         back="Merciful Cape",
         waist="Olympus Sash",
         }
@@ -532,8 +532,8 @@ function init_gear_sets()
         ammo="Yamarang",
         legs="Rune. Trousers +3",
         neck="Incanter's Torque",
-        ring1="Stikini Ring",
-        ring2="Stikini Ring",
+        ring1="Stikini Ring +1",
+        ring2="Stikini Ring +1",
         waist="Bishop's Sash",
         }
 
@@ -556,14 +556,14 @@ function init_gear_sets()
         ammo="Homiliary",
         head=gear.Herc_Idle_head,
         body="Runeist's Coat +3",
-        hands="Regal Gauntlets",
+        hands="Turms Mittens +1",
         legs="Carmine Cuisses +1",
         feet="Turms Leggings +1",
         neck="Bathy Choker +1",
         ear1="Infused Earring",
         ear2="Genmei Earring",
-        ring1="Paguroidea Ring",
-        ring2="Sheltered Ring",
+        ring1="Stikini Ring +1",
+        ring2="Stikini Ring +1",
         back=gear.RUN_HP_Cape,
         waist="Flume Belt +1",
         }
@@ -593,8 +593,6 @@ function init_gear_sets()
         neck="Loricate Torque +1",
         ear1="Sherida Earring",
         ear2="Telos Earring",
-        ring1="Regal Ring",
-        ring2="Defending Ring",
         back="Moonlight Cape",
         })
 

@@ -116,17 +116,15 @@ function user_setup()
     include('Global-Binds.lua') -- OK to remove this line
     include('Global-GEO-Binds.lua') -- OK to remove this line
 
-    send_command('bind ^` input /ja Composure <me>')
+    send_command('bind ^` input /ja "Composure" <me>')
     send_command('bind !` gs c toggle MagicBurst')
 
     if player.sub_job == 'SCH' then
         send_command('bind ^- gs c scholar light')
         send_command('bind ^= gs c scholar dark')
-        send_command('bind !- gs c scholar addendum')
-        send_command('bind != gs c scholar addendum')
-        send_command('bind ^; gs c scholar speed')
+        send_command('bind !- input /ja "Addendum: White" <me>')
+        send_command('bind != input /ja "Addendum: Black" <me>')
         send_command('bind ![ gs c scholar aoe')
-        send_command('bind !; gs c scholar cost')
     end
 
     send_command('bind !q input /ma "Temper II" <me>')
@@ -166,9 +164,7 @@ function user_unload()
     send_command('unbind ^=')
     send_command('unbind !-')
     send_command('unbind !=')
-    send_command('unbind ^;')
     send_command('unbind ![')
-    send_command('unbind !;')
     send_command('unbind !q')
     send_command('unbind !w')
     send_command('bind !e input /ma "Haste" <stpc>')
@@ -237,7 +233,7 @@ function init_gear_sets()
     sets.precast.FC['Healing Magic'] = sets.precast.FC.Cure
     sets.precast.FC['Elemental Magic'] = set_combine(sets.precast.FC, {waist="Channeler's Stone"})
     sets.precast.FC.Impact = set_combine(sets.precast.FC, {head=empty, body="Twilight Cloak"})
-    sets.precast.Storm = set_combine(sets.precast.FC, {ring2="Levia. Ring +1", waist="Channeler's Stone"}) -- stop quick cast
+    sets.precast.Storm = set_combine(sets.precast.FC, {ring2="Stikini Ring +1", waist="Channeler's Stone"}) -- stop quick cast
 
     sets.precast.FC.Utsusemi = set_combine(sets.precast.FC, {
         ammo="Impatiens",
@@ -391,8 +387,8 @@ function init_gear_sets()
 
     sets.midcast.Curaga = set_combine(sets.midcast.Cure, {
         ammo="Regal Gem",
-        ring1="Levia. Ring +1",
-        ring2="Levia. Ring +1",
+        ring1="Stikini Ring +1",
+        ring2="Stikini Ring +1",
         waist="Luminary Sash",
         })
 
@@ -428,8 +424,8 @@ function init_gear_sets()
         neck="Incanter's Torque",
         ear1="Augment. Earring",
         ear2="Andoaa Earring",
-        ring1="Stikini Ring",
-        ring2="Stikini Ring",
+        ring1="Stikini Ring +1",
+        ring2="Stikini Ring +1",
         back="Ghostfyre Cape",
         waist="Olympus Sash",
         }
@@ -487,10 +483,7 @@ function init_gear_sets()
 
     sets.midcast.Storm = sets.midcast.EnhancingDuration
 
-    sets.midcast.Protect = set_combine(sets.midcast.EnhancingDuration, {
-        ring2="Sheltered Ring",
-        })
-
+    sets.midcast.Protect = set_combine(sets.midcast.EnhancingDuration, {ring2="Sheltered Ring"})
     sets.midcast.Protectra = sets.midcast.Protect
     sets.midcast.Shell = sets.midcast.Protect
     sets.midcast.Shellra = sets.midcast.Shell
@@ -518,6 +511,7 @@ function init_gear_sets()
         head="Atrophy Chapeau +3",
         body="Atrophy Tabard +3",
         neck="Sanctity Necklace",
+        ring1="Stikini Ring +1",
         ring2="Weather. Ring +1",
         })
 
@@ -538,7 +532,8 @@ function init_gear_sets()
         body="Atrophy Tabard +3",
         hands="Leth. Gantherots +1",
         neck="Incanter's Torque",
-        ring1="Stikini Ring",
+        ring1="Stikini Ring +1",
+        ring2="Stikini Ring +1",
         ear1="Enfeebling Earring",
         waist="Rumination Sash",
         }
@@ -568,8 +563,8 @@ function init_gear_sets()
         neck="Erra Pendant",
         ear1="Hermetic Earring",
         ear2="Regal Earring",
-        ring1="Stikini Ring",
-        ring2="Stikini Ring",
+        ring1="Stikini Ring +1",
+        ring2="Stikini Ring +1",
         back=gear.RDM_INT_Cape,
         waist="Luminary Sash",
         }
@@ -662,8 +657,8 @@ function init_gear_sets()
         neck="Bathy Choker +1",
         ear1="Genmei Earring",
         ear2="Infused Earring",
-        ring1="Paguroidea Ring",
-        ring2="Sheltered Ring",
+        ring1="Stikini Ring +1",
+        ring2="Stikini Ring +1",
         back="Moonlight Cape",
         waist="Flume Belt +1",
         }
@@ -691,8 +686,8 @@ function init_gear_sets()
         neck="Incanter's Torque",
         ear1="Sherida Earring",
         ear2="Regal Earring",
-        ring1="Levia. Ring +1",
-        ring2="Weather. Ring +1",
+        ring1="Stikini Ring +1",
+        ring2="Stikini Ring +1",
         back=gear.RDM_INT_Cape,
         waist="Luminary Sash",
         })
@@ -1090,13 +1085,13 @@ end
 
 -- Called by the 'update' self-command, for common needs.
 -- Set eventArgs.handled to true if we don't want automatic equipping of gear.
-function job_update(cmdParams, eventArgs)sa
-    handle_equipping_gear(player.status)
-end
-
 function job_handle_equipping_gear(playerStatus, eventArgs)
     update_combat_form()
     determine_haste_group()
+end
+
+function job_update(cmdParams, eventArgs)
+    handle_equipping_gear(player.status)
 end
 
 function update_combat_form()
@@ -1104,17 +1099,6 @@ function update_combat_form()
         state.CombatForm:set('DW')
     elseif DW == false then
         state.CombatForm:reset()
-    end
-end
-
--- Called for direct player commands.
-function job_self_command(cmdParams, eventArgs)
-    if cmdParams[1]:lower() == 'scholar' then
-        handle_strategems(cmdParams)
-        eventArgs.handled = true
-    elseif cmdParams[1]:lower() == 'nuke' then
-        handle_nuking(cmdParams)
-        eventArgs.handled = true
     end
 end
 
@@ -1215,49 +1199,57 @@ end
 function determine_haste_group()
     classes.CustomMeleeGroups:clear()
     if DW == true then
-      if DW_needed <= 11 then
-        classes.CustomMeleeGroups:append('MaxHaste')
-      elseif DW_needed > 11 and DW_needed <= 26 then
-        classes.CustomMeleeGroups:append('HighHaste')
-      elseif DW_needed > 26 and DW_needed <= 31 then
-        classes.CustomMeleeGroups:append('MidHaste')
-      elseif DW_needed > 31 and DW_needed <= 42 then
-        classes.CustomMeleeGroups:append('LowHaste')
-      elseif DW_needed > 42 then
-        classes.CustomMeleeGroups:append('')
-      end
+        if DW_needed <= 11 then
+            classes.CustomMeleeGroups:append('MaxHaste')
+        elseif DW_needed > 11 and DW_needed <= 26 then
+            classes.CustomMeleeGroups:append('HighHaste')
+        elseif DW_needed > 26 and DW_needed <= 31 then
+            classes.CustomMeleeGroups:append('MidHaste')
+        elseif DW_needed > 31 and DW_needed <= 42 then
+            classes.CustomMeleeGroups:append('LowHaste')
+        elseif DW_needed > 42 then
+            classes.CustomMeleeGroups:append('')
+        end
     end
 end
 
 function job_self_command(cmdParams, eventArgs)
+    if cmdParams[1]:lower() == 'scholar' then
+        handle_strategems(cmdParams)
+        eventArgs.handled = true
+    elseif cmdParams[1]:lower() == 'nuke' then
+        handle_nuking(cmdParams)
+        eventArgs.handled = true
+    end
+
     gearinfo(cmdParams, eventArgs)
 end
 
 function gearinfo(cmdParams, eventArgs)
     if cmdParams[1] == 'gearinfo' then
-      if type(tonumber(cmdParams[2])) == 'number' then
-          if tonumber(cmdParams[2]) ~= DW_needed then
-          DW_needed = tonumber(cmdParams[2])
-          DW = true
+        if type(tonumber(cmdParams[2])) == 'number' then
+            if tonumber(cmdParams[2]) ~= DW_needed then
+            DW_needed = tonumber(cmdParams[2])
+            DW = true
+            end
+        elseif type(cmdParams[2]) == 'string' then
+            if cmdParams[2] == 'false' then
+        	      DW_needed = 0
+                DW = false
+      	    end
         end
-      elseif type(cmdParams[2]) == 'string' then
-        if cmdParams[2] == 'false' then
-        	  DW_needed = 0
-          DW = false
-      	  end
-      end
-      if type(tonumber(cmdParams[3])) == 'number' then
-        	if tonumber(cmdParams[3]) ~= Haste then
-          	Haste = tonumber(cmdParams[3])
+        if type(tonumber(cmdParams[3])) == 'number' then
+          	if tonumber(cmdParams[3]) ~= Haste then
+              	Haste = tonumber(cmdParams[3])
+            end
         end
-      end
-      if type(cmdParams[4]) == 'string' then
-        if cmdParams[4] == 'true' then
-          moving = true
-        elseif cmdParams[4] == 'false' then
-          moving = false
+        if type(cmdParams[4]) == 'string' then
+            if cmdParams[4] == 'true' then
+                moving = true
+            elseif cmdParams[4] == 'false' then
+                moving = false
+            end
         end
-      end
     end
 end
 

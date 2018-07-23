@@ -146,9 +146,7 @@ function init_gear_sets()
         back="Perimede Cape",
         })
 
-    sets.precast.FC['Elemental Magic'] = set_combine(sets.precast.FC, {
-        waist="Channeler's Stone", --2
-        })
+    sets.precast.FC['Elemental Magic'] = set_combine(sets.precast.FC, {ear1="Barkaro. Earring", waist="Channeler's Stone"})
 
     sets.precast.FC.Cure = set_combine(sets.precast.FC, {
         main="Oranyan", --7
@@ -161,7 +159,7 @@ function init_gear_sets()
 
     sets.precast.FC.Curaga = sets.precast.FC.Cure
     sets.precast.FC.Impact = set_combine(sets.precast.FC, {head=empty, body="Twilight Cloak"})
-    sets.precast.Storm = set_combine(sets.precast.FC, {ring2="Levia. Ring +1", waist="Channeler's Stone"}) -- stop quick cast
+    sets.precast.Storm = set_combine(sets.precast.FC, {ring2="Stikini Ring +1", waist="Channeler's Stone"}) -- stop quick cast
 
     sets.precast.FC.DeathMode = {
         ammo="Ghastly Tathlum +1",
@@ -268,8 +266,8 @@ function init_gear_sets()
 
     sets.midcast.Curaga = set_combine(sets.midcast.Cure, {
         neck="Nuna Gorget +1",
-        ring1="Levia. Ring +1",
-        ring2="Levia. Ring +1",
+        ring1="Stikini Ring +1",
+        ring2="Stikini Ring +1",
         waist="Luminary Sash",
         })
 
@@ -298,8 +296,8 @@ function init_gear_sets()
         neck="Incanter's Torque",
         ear1="Augment. Earring",
         ear2="Andoaa Earring",
-        ring1="Stikini Ring",
-        ring2="Stikini Ring",
+        ring1="Stikini Ring +1",
+        ring2="Stikini Ring +1",
         back="Fi Follet Cape +1",
         waist="Olympus Sash",
         }
@@ -339,9 +337,7 @@ function init_gear_sets()
         waist="Emphatikos Rope",
         })
 
-    sets.midcast.Protect = set_combine(sets.midcast.EnhancingDuration, {
-        ring1="Sheltered Ring",
-        })
+    sets.midcast.Protect = set_combine(sets.midcast.EnhancingDuration, {ring1="Sheltered Ring"})
     sets.midcast.Protectra = sets.midcast.Protect
     sets.midcast.Shell = sets.midcast.Protect
     sets.midcast.Shellra = sets.midcast.Protect
@@ -358,8 +354,8 @@ function init_gear_sets()
         neck="Erra Pendant",
         ear1="Barkaro. Earring",
         ear2="Regal Earring",
-        ring1="Kishar Ring",
-        ring2="Stikini Ring",
+        ring1="Stikini Ring +1",
+        ring2="Stikini Ring +1",
         back=gear.BLM_FC_Cape,
         waist="Rumination Sash",
         } -- MND/Magic accuracy
@@ -384,8 +380,8 @@ function init_gear_sets()
         neck="Erra Pendant",
         ear1="Barkaro. Earring",
         ear2="Regal Earring",
-        ring1="Stikini Ring",
-        ring2="Stikini Ring",
+        ring1="Stikini Ring +1",
+        ring2="Stikini Ring +1",
         back=gear.BLM_MAB_Cape,
         waist="Luminary Sash",
         }
@@ -545,9 +541,9 @@ function init_gear_sets()
         feet="Herald's Gaiters",
         neck="Bathy Choker +1",
         ear1="Genmei Earring",
-        ear2="Infused Earring",
-        ring1="Paguroidea Ring",
-        ring2="Sheltered Ring",
+        ear2="Lugalbanda Earring",
+        ring1="Stikini Ring +1",
+        ring2="Stikini Ring +1",
         back="Moonlight Cape",
         waist="Refoccilation Stone",
         }
@@ -598,8 +594,7 @@ function init_gear_sets()
         neck="Incanter's Torque",
         ear1="Barkaro. Earring",
         ear2="Regal Earring",
-        ring1="Shiva Ring +1",
-        ring2="Weather. Ring +1",
+        ring2="Shiva Ring +1",
         back=gear.BLM_MAB_Cape,
         })
 

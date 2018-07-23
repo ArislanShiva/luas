@@ -295,7 +295,7 @@ function init_gear_sets()
         ear2="Telos Earring",
         })
 
-    sets.precast.WS.Critical = {ammo="Yetshila", body="Meg. Cuirie +2"}
+    sets.precast.WS.Critical = {ammo="Yetshila +1", body="Meg. Cuirie +2"}
 
     sets.precast.WS['Exenterator'] = set_combine(sets.precast.WS, {
         ammo="Seeth. Bomblet +1",
@@ -865,14 +865,14 @@ end
 
 -- Called by the 'update' self-command, for common needs.
 -- Set eventArgs.handled to true if we don't want automatic equipping of gear.
-function job_update(cmdParams, eventArgs)
-    handle_equipping_gear(player.status)
-    th_update(cmdParams, eventArgs)
-end
-
 function job_handle_equipping_gear(playerStatus, eventArgs)
     update_combat_form()
     determine_haste_group()
+end
+
+function job_update(cmdParams, eventArgs)
+    handle_equipping_gear(player.status)
+    th_update(cmdParams, eventArgs)
 end
 
 function update_combat_form()
@@ -957,17 +957,17 @@ end
 function determine_haste_group()
     classes.CustomMeleeGroups:clear()
     if DW == true then
-      if DW_needed <= 5 then
-        classes.CustomMeleeGroups:append('MaxHaste')
-      elseif DW_needed > 5 and DW_needed <= 22 then
-        classes.CustomMeleeGroups:append('HighHaste')
-      elseif DW_needed > 22 and DW_needed <= 26 then
-        classes.CustomMeleeGroups:append('MidHaste')
-      elseif DW_needed > 26 and DW_needed <= 37 then
-        classes.CustomMeleeGroups:append('LowHaste')
-      elseif DW_needed > 37 then
-        classes.CustomMeleeGroups:append('')
-      end
+        if DW_needed <= 5 then
+            classes.CustomMeleeGroups:append('MaxHaste')
+        elseif DW_needed > 5 and DW_needed <= 22 then
+            classes.CustomMeleeGroups:append('HighHaste')
+        elseif DW_needed > 22 and DW_needed <= 26 then
+            classes.CustomMeleeGroups:append('MidHaste')
+        elseif DW_needed > 26 and DW_needed <= 37 then
+            classes.CustomMeleeGroups:append('LowHaste')
+        elseif DW_needed > 37 then
+            classes.CustomMeleeGroups:append('')
+        end
     end
 end
 
@@ -977,29 +977,29 @@ end
 
 function gearinfo(cmdParams, eventArgs)
     if cmdParams[1] == 'gearinfo' then
-      if type(tonumber(cmdParams[2])) == 'number' then
-          if tonumber(cmdParams[2]) ~= DW_needed then
-          DW_needed = tonumber(cmdParams[2])
-          DW = true
+        if type(tonumber(cmdParams[2])) == 'number' then
+            if tonumber(cmdParams[2]) ~= DW_needed then
+            DW_needed = tonumber(cmdParams[2])
+            DW = true
+            end
+        elseif type(cmdParams[2]) == 'string' then
+            if cmdParams[2] == 'false' then
+        	      DW_needed = 0
+                DW = false
+      	    end
         end
-      elseif type(cmdParams[2]) == 'string' then
-        if cmdParams[2] == 'false' then
-        	  DW_needed = 0
-          DW = false
-      	  end
-      end
-      if type(tonumber(cmdParams[3])) == 'number' then
-        	if tonumber(cmdParams[3]) ~= Haste then
-          	Haste = tonumber(cmdParams[3])
+        if type(tonumber(cmdParams[3])) == 'number' then
+          	if tonumber(cmdParams[3]) ~= Haste then
+              	Haste = tonumber(cmdParams[3])
+            end
         end
-      end
-      if type(cmdParams[4]) == 'string' then
-        if cmdParams[4] == 'true' then
-          moving = true
-        elseif cmdParams[4] == 'false' then
-          moving = false
+        if type(cmdParams[4]) == 'string' then
+            if cmdParams[4] == 'true' then
+                moving = true
+            elseif cmdParams[4] == 'false' then
+                moving = false
+            end
         end
-      end
     end
 end
 

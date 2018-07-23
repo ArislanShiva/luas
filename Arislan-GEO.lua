@@ -212,8 +212,8 @@ function init_gear_sets()
         neck="Incanter's Torque",
         ear1="Gifted Earring",
         ear2="Calamitous Earring",
-        ring1="Stikini Ring",
-        ring2="Stikini Ring",
+        ring1="Stikini Ring +1",
+        ring2="Stikini Ring +1",
         back="Lifestream Cape",
         waist="Austerity Belt +1",
         }
@@ -241,8 +241,8 @@ function init_gear_sets()
 
     sets.midcast.Curaga = set_combine(sets.midcast.Cure, {
         neck="Nuna Gorget +1",
-        ring1="Levia. Ring +1",
-        ring2="Levia. Ring +1",
+        ring1="Stikini Ring +1",
+        ring2="Stikini Ring +1",
         })
 
     sets.midcast.Cursna = set_combine(sets.midcast.Cure, {
@@ -270,8 +270,8 @@ function init_gear_sets()
         neck="Incanter's Torque",
         ear1="Augment. Earring",
         ear2="Andoaa Earring",
-        ring1="Stikini Ring",
-        ring2="Stikini Ring",
+        ring1="Stikini Ring +1",
+        ring2="Stikini Ring +1",
         back="Fi Follet Cape +1",
         waist="Olympus Sash",
         }
@@ -310,9 +310,7 @@ function init_gear_sets()
         waist="Emphatikos Rope",
         })
 
-    sets.midcast.Protect = set_combine(sets.midcast.EnhancingDuration, {
-        ring1="Sheltered Ring",
-        })
+    sets.midcast.Protect = set_combine(sets.midcast.EnhancingDuration, {ring1="Sheltered Ring"})
     sets.midcast.Protectra = sets.midcast.Protect
     sets.midcast.Shell = sets.midcast.Protect
     sets.midcast.Shellra = sets.midcast.Protect
@@ -329,8 +327,8 @@ function init_gear_sets()
         neck="Erra Pendant",
         ear1="Barkaro. Earring",
         ear2="Regal Earring",
-        ring1="Kishar Ring",
-        ring2="Stikini Ring",
+        ring1="Stikini Ring +1",
+        ring2="Stikini Ring +1",
         back="Aurist's Cape +1",
         waist="Luminary Sash",
         } -- MND/Magic accuracy
@@ -352,8 +350,8 @@ function init_gear_sets()
         neck="Erra Pendant",
         ear1="Barkaro. Earring",
         ear2="Regal Earring",
-        ring1="Evanescence Ring",
-        ring2="Stikini Ring",
+        ring1="Stikini Ring +1",
+        ring2="Evanescence Ring",
         back="Perimede Cape",
         waist="Luminary Sash",
         }
@@ -449,9 +447,9 @@ function init_gear_sets()
         feet="Geo. Sandals +1",
         neck="Bathy Choker +1",
         ear1="Genmei Earring",
-        ear2="Infused Earring",
-        ring1="Paguroidea Ring",
-        ring2="Sheltered Ring",
+        ear2="Lugalbanda Earring",
+        ring1="Stikini Ring +1",
+        ring2="Stikini Ring +1",
         back="Moonlight Cape",
         waist="Austerity Belt +1",
         }

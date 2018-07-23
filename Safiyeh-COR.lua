@@ -229,10 +229,10 @@ function init_gear_sets()
         hands="Chasseur's Gants +1",
         legs="Desultor Tassets",
         feet="Meg. Jam. +2", --3/0
-        neck="Loricate Torque +1",
+        neck="Regal Necklace",
         --ear1="Genmei Earring", --2/0
         ear2="Etiolation Earring", --0/3
-        ring1="Barataria Ring",
+        ring1="Gelatinous Ring +1",
         ring2="Defending Ring", --10/10
         back=gear.COR_SNP_Cape,
         --waist="Flume Belt +1", --4/0
@@ -1060,13 +1060,13 @@ end
 
 -- Called by the 'update' self-command, for common needs.
 -- Set eventArgs.handled to true if we don't want automatic equipping of gear.
-function job_update(cmdParams, eventArgs)
-    handle_equipping_gear(player.status)
-end
-
 function job_handle_equipping_gear(playerStatus, eventArgs)
     update_combat_form()
     determine_haste_group()
+end
+
+function job_update(cmdParams, eventArgs)
+    handle_equipping_gear(player.status)
 end
 
 function update_combat_form()
@@ -1098,15 +1098,6 @@ function customize_idle_set(idleSet)
         enable('back')
     end
     return idleSet
-end
-
--- Modify the default melee set after it was constructed.
-function customize_melee_set(meleeSet)
-    if state.DualWield.value == true and player.sub_job == 'NIN' then
-        meleeSet = set_combine(meleeSet, sets.LessDualWield)
-    end
-
-    return meleeSet
 end
 
 -- Handle auto-targetting based on local setup.
