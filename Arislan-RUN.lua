@@ -452,7 +452,7 @@ function init_gear_sets()
     sets.midcast.FastRecast = sets.precast.FC
 
     sets.midcast.SpellInterrupt = {
-        ammo="Staunch Tathlum", --10
+        ammo="Staunch Tathlum +1", --10
         hands="Regal Gauntlets", --10
         legs="Carmine Cuisses +1", --20
         ear1="Halasz Earring",
@@ -462,7 +462,7 @@ function init_gear_sets()
 
     sets.midcast.Cure = {
         sub="Mensch Strap +1",
-        ammo="Staunch Tathlum",
+        ammo="Staunch Tathlum +1",
         head=gear.Herc_DT_head,
         body="Vrikodara Jupon", -- 13
         hands="Buremte Gloves", --(13)
@@ -510,7 +510,7 @@ function init_gear_sets()
     sets.midcast['Phalanx'] = set_combine(sets.midcast['Enhancing Magic'], {
         --main="Deacon Sword", --4
         --sub="Chanter's Shield",
-        ammo="Staunch Tathlum", --(10)
+        ammo="Staunch Tathlum +1", --(10)
         head="Fu. Bandeau +1", --5
         body=gear.Taeon_Phalanx_body, --3(10)
         hands="Regal Gauntlets", --(10)
@@ -570,14 +570,14 @@ function init_gear_sets()
 
     sets.idle.DT = {
         sub="Refined Grip +1", --3/3
-        ammo="Staunch Tathlum", --2/2
+        ammo="Staunch Tathlum +1", --3/3
         head=gear.Herc_DT_head, --3/3
         body="Runeist's Coat +3",
         hands="Turms Mittens +1",
         legs="Carmine Cuisses +1",
         feet="Erilaz Greaves +1", --5/0
         neck="Loricate Torque +1", --6/6
-        ear1="Ethereal Earring",
+        ear1="Genmei Earring", --2/0
         ear1="Odnowa Earring +1", --0/2
         ring1="Gelatinous Ring +1", --7/(-1)
         ring2="Defending Ring", --10/10
@@ -616,7 +616,7 @@ function init_gear_sets()
 
     sets.defense.PDT = {
         sub="Refined Grip +1", --3/3
-        ammo="Staunch Tathlum", --2/2
+        ammo="Staunch Tathlum +1", --3/3
         head=gear.Adhemar_D_head, --4/0
         body="Futhark Coat +1", --7/7
         hands="Turms Mittens +1",
@@ -633,7 +633,7 @@ function init_gear_sets()
 
     sets.defense.MDT = {
         sub="Irenic Strap +1", --0/5
-        ammo="Staunch Tathlum", --2/2
+        ammo="Staunch Tathlum +1", --3/3
         head=gear.Herc_DT_head, --3/3
         body="Runeist's Coat +3",
         hands=gear.Herc_DT_hands, --7/5
@@ -650,7 +650,7 @@ function init_gear_sets()
 
     sets.defense.Status = {
         sub="Mensch Strap +1", --5/0
-        ammo="Staunch Tathlum", --2/2
+        ammo="Staunch Tathlum +1", --3/3
         head=gear.Herc_DT_head, --3/3
         body="Ayanmo Corazza +2", --6/6
         hands="Erilaz Gauntlets +1",
@@ -667,7 +667,7 @@ function init_gear_sets()
 
     sets.defense.HP = {
         sub="Refined Grip +1", --3/3
-        ammo="Staunch Tathlum", --2/2
+        ammo="Staunch Tathlum +1", --3/3
         head=gear.Adhemar_D_head, --4/0
         body="Runeist's Coat +3",
         hands="Runeist's Mitons +3", --3/0

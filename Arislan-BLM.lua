@@ -128,7 +128,7 @@ function init_gear_sets()
         sub="Clerisy Strap +1", --3
         ammo="Sapience Orb", --2
         head="Amalric Coif", --10
-        body="Shango Robe", --8
+        body=gear.Merl_FC_body, --13
         hands="Merlinic Dastanas", --6
         legs="Psycloth Lappas", --7
         feet="Regal Pumps +1", --7
@@ -407,7 +407,7 @@ function init_gear_sets()
         sub="Enki Strap",
         ammo="Ghastly Tathlum +1",
         head="Pixie Hairpin +1",
-        body="Merlinic Jubbah", --10
+        body=gear.Merl_MB_body, --10
         hands="Amalric Gages", --(5)
         legs="Amalric Slops",
         feet="Merlinic Crackows", --11
@@ -446,7 +446,7 @@ function init_gear_sets()
         sub="Niobid Strap",
         ammo="Pemphredo Tathlum",
         head="Merlinic Hood",
-        body="Merlinic Jubbah",
+        body=gear.Merl_MB_body,
         hands="Amalric Gages +1",
         legs="Merlinic Shalwar",
         feet="Merlinic Crackows",
@@ -551,7 +551,7 @@ function init_gear_sets()
     sets.idle.DT = set_combine(sets.idle, {
         main="Bolelabunga",
         sub="Genmei Shield", --10/0
-        ammo="Staunch Tathlum", --2/2
+        ammo="Staunch Tathlum +1", --3/3
         body="Mallquis Saio +2", --8/8
         neck="Loricate Torque +1", --6/6
         ear1="Genmei Earring", --2/0
@@ -610,7 +610,7 @@ function init_gear_sets()
     sets.latent_dt = {ear2="Sorcerer's Earring"}
 
     sets.magic_burst = {
-        body="Merlinic Jubbah", --10
+        body=gear.Merl_MB_body, --10
         hands="Amalric Gages +1", --(6)
         feet="Merlinic Crackows", --11
         neck="Mizu. Kubikazari", --10

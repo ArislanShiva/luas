@@ -140,7 +140,7 @@ function init_gear_sets()
         main="Sucellus", --5
         sub="Chanter's Shield", --3
         head="Amalric Coif", --10
-        body="Merlinic Jubbah", --6
+        body=gear.Merl_MB_body, --6
         hands="Merlinic Dastanas", --7
         legs="Geomancy Pants +3", --15
         feet="Regal Pumps +1", --7
@@ -532,7 +532,7 @@ function init_gear_sets()
     sets.magic_burst = {
         head="Merlinic Hood", --5
         hands="Amalric Gages", --(5)
-        body="Merlinic Jubbah", --10
+        body=gear.Merl_MB_body, --10
         legs="Merlinic Shalwar", --11
         neck="Mizu. Kubikazari", --10
         ring2="Mujin Band", --(5)

@@ -89,6 +89,10 @@ function user_setup()
     state.CastingMode:options('Normal', 'Resistant')
     state.IdleMode:options('Normal', 'DT', 'MEva')
 
+    state.BarElement = M{['description']='BarElement', 'Barfira', 'Barblizzara', 'Baraera', 'Barstonra', 'Barthundra', 'Barwatera'}
+    state.BarStatus = M{['description']='BarStatus', 'Baramnesra', 'Barvira', 'Barparalyzra', 'Barsilencera', 'Barpetra', 'Barpoisonra', 'Barblindra', 'Barsleepra'}
+    state.BoostSpell = M{['description']='BoostSpell', 'Boost-STR', 'Boost-INT', 'Boost-AGI', 'Boost-VIT', 'Boost-DEX', 'Boost-MND', 'Boost-CHR'}
+
     state.WeaponLock = M(false, 'Weapon Lock')
     state.CP = M(false, "Capacity Points Mode")
 
@@ -105,6 +109,12 @@ function user_setup()
     send_command('bind ^; gs c scholar speed')
     send_command('bind ![ gs c scholar aoe')
     send_command('bind !; gs c scholar cost')
+    send_command('bind ^insert gs c cycleback BoostSpell')
+    send_command('bind ^delete gs c cycle BoostSpell')
+    send_command('bind ^home gs c cycleback BarElement')
+    send_command('bind ^end gs c cycle BarElement')
+    send_command('bind ^pageup gs c cycleback BarStatus')
+    send_command('bind ^pagedown gs c cycle BarStatus')
     send_command('bind ^[ input /ja "Divine Seal" <me>')
     send_command('bind ^] input /ja "Divine Caress" <me>')
     send_command('bind !o input /ma "Regen IV" <stpc>')
@@ -132,6 +142,12 @@ function user_unload()
     send_command('unbind ^;')
     send_command('unbind ![')
     send_command('unbind !;')
+    send_command('unbind ^insert')
+    send_command('unbind ^delete')
+    send_command('unbind ^home')
+    send_command('unbind ^end')
+    send_command('unbind ^pageup')
+    send_command('unbind ^pagedown')
     send_command('unbind ^[')
     send_command('unbind ^]')
     send_command('unbind !o')
@@ -201,6 +217,7 @@ function init_gear_sets()
     sets.precast.FC.Cure = set_combine(sets.precast.FC['Healing Magic'], {
         ammo="Impatiens",
         head="Piety Cap +1", --13
+        feet="Kaykaus Boots +1", --7
         ear1="Nourish. Earring +1", --4
         ear2="Mendi. Earring", --5
         ring1="Lebeche Ring", --(2)
@@ -222,7 +239,6 @@ function init_gear_sets()
         head="Aya. Zucchetto +2",
         body="Ayanmo Corazza +2",
         legs="Aya. Cosciales +2",
-        feet="Battlecast Gaiters",
         neck="Fotia Gorget",
         ear1="Moonshade Earring",
         ear2="Telos Earring",
@@ -278,11 +294,11 @@ function init_gear_sets()
         main="Queller Rod", --15(+2)/(-15)
         sub="Sors Shield", --3/(-5)
         ammo="Esper Stone +1", --0/(-5)
-        head="Gende. Caubeen +1", --15/(-8)
+        head="Kaykaus Mitra +1", --11(+2)/(-6)
         body="Ebers Bliaud +1",
         hands="Theophany Mitts +3", --(+4)/(-7)
         legs="Ebers Pant. +1",
-        feet="Kaykaus Boots", --10/(-10)
+        feet="Kaykaus Boots +1", --11(+2)/(-12)
         neck="Incanter's Torque",
         ear1="Nourish. Earring +1", --7
         ear2="Glorious Earring", -- (+2)/(-5)
@@ -303,14 +319,14 @@ function init_gear_sets()
         body="Theo. Briault +3", --0(+6)/(-6)
         })
 
-    sets.midcast.CureWeather = set_combine(sets.midcast.Cure, {
+    sets.midcast.CureWeather = set_combine(sets.midcast.CureNormal, {
         main="Chatoyant Staff", --10
         sub="Achaq Grip", --0/(-4)
         back="Mending Cape", --(-6)
         waist="Hachirin-no-Obi",
         })
 
-    sets.midcast.CuragaNormal = set_combine(sets.midcast.Cure, {
+    sets.midcast.CuragaNormal = set_combine(sets.midcast.CureNormal, {
         body="Theo. Briault +3", --0(+6)/(-6)
         neck="Nuna Gorget +1",
         ring1="Stikini Ring +1",
@@ -570,8 +586,8 @@ function init_gear_sets()
     sets.idle.DT = set_combine(sets.idle, {
         main="Bolelabunga",
         sub="Genmei Shield", --10/0
-        ammo="Staunch Tathlum", --2/2
-        head="Gende. Caubeen +1",  --4/4
+        ammo="Staunch Tathlum +1", --3/3
+        head="Aya. Zucchetto +2", --3/3
         hands="Gende. Gages +1", --4/3
         neck="Loricate Torque +1", --6/6
         ear1="Genmei Earring", --2/0
@@ -582,7 +598,7 @@ function init_gear_sets()
         })
 
     sets.idle.MEva = set_combine(sets.idle.DT, {
-        ammo="Staunch Tathlum",
+        ammo="Staunch Tathlum +1",
         head="Inyanga Tiara +2",
         body="Inyanga Jubbah +2",
         hands="Inyan. Dastanas +2",
@@ -597,7 +613,7 @@ function init_gear_sets()
     sets.idle.Town = set_combine(sets.idle, {
         main="Yagrush",
         sub="Ammurapi Shield",
-        head="Theophany Cap +3",
+        head="Kaykaus Mitra +1",
         hands="Kaykaus Cuffs +1",
         legs="Th. Pant. +3",
         neck="Debilis Medallion",
@@ -636,20 +652,12 @@ function init_gear_sets()
         head="Aya. Zucchetto +2",
         body="Ayanmo Corazza +2",
         legs="Aya. Cosciales +2",
-        feet="Battlecast Gaiters",
         ear1="Eabani Earring",
         ear2="Brutal Earring",
         ring1="Ilabrat Ring",
         ring2="Hetairoi Ring",
         back=gear.WHM_TP_Cape,
         }
-
-    sets.engaged.DW = set_combine(sets.engaged, {
-        main="Izcalli",
-        sub="Sindri",
-        ear1="Eabani Earring",
-        waist="Shetal Stone",
-        })
 
     -- Buff sets: Gear that needs to be worn to actively enhance a current player buff.
     sets.buff['Divine Caress'] = {hands="Ebers Mitts +1", back="Mending Cape"}
@@ -756,6 +764,12 @@ function job_self_command(cmdParams, eventArgs)
     elseif cmdParams[1]:lower() == 'nuke' then
         handle_nuking(cmdParams)
         eventArgs.handled = true
+    elseif cmdParams[1]:lower() == 'barelement' then
+        send_command('@input /ma '..state.BarElement.value..' <me>')
+    elseif cmdParams[1]:lower() == 'barstatus' then
+        send_command('@input /ma '..state.BarStatus.value..' <me>')
+    elseif cmdParams[1]:lower() == 'boostspell' then
+        send_command('@input /ma '..state.BoostSpell.value..' <me>')
     end
 end
 
@@ -808,28 +822,6 @@ function customize_idle_set(idleSet)
 
     return idleSet
 end
-
--- Called by the 'update' self-command.
-function job_update(cmdParams, eventArgs)
---[[if cmdParams[1] == 'user' and not areas.Cities:contains(world.area) then
-        local needsArts =
-            player.sub_job:lower() == 'sch' and
-            not buffactive['Light Arts'] and
-            not buffactive['Addendum: White'] and
-            not buffactive['Dark Arts'] and
-            not buffactive['Addendum: Black']
-
-        if not buffactive['Afflatus Solace'] and not buffactive['Afflatus Misery'] then
-            if needsArts then
-                send_command('@input /ja "Afflatus Solace" <me>;wait 1.2;input /ja "Light Arts" <me>')
-            else
-                send_command('@input /ja "Afflatus Solace" <me>')
-            end
-        end
-    end--]]
-    update_offense_mode()
-end
-
 
 -- Function to display the current relevant user state when doing an update.
 function display_current_job_state(eventArgs)
@@ -902,14 +894,6 @@ end
 function select_default_macro_book()
     -- Default macro set/book
     set_macro_page(1, 4)
-end
-
-function update_offense_mode()
-    if player.sub_job == 'NIN' or player.sub_job == 'DNC' then
-        state.CombatForm:set('DW')
-    else
-        state.CombatForm:reset()
-    end
 end
 
 function set_lockstyle()

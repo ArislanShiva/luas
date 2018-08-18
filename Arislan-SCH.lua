@@ -175,11 +175,11 @@ function init_gear_sets()
     ------------------------------------------------------------------------------------------------
 
     -- Precast sets to enhance JAs
-    sets.precast.JA['Tabula Rasa'] = {legs="Peda. Pants +1"}
-    sets.precast.JA['Enlightenment'] = {body="Peda. Gown +1"}
+    sets.precast.JA['Tabula Rasa'] = {legs="Peda. Pants +3"}
+    sets.precast.JA['Enlightenment'] = {body="Peda. Gown +3"}
     sets.precast.JA['Sublimation'] = {
         head="Acad. Mortar. +3",
-        body="Acad. Gown +2",
+        body="Acad. Gown +3",
         hands="Telchine Gloves",
         legs="Acad. Pants +3",
         feet="Skaoi Boots",
@@ -199,7 +199,7 @@ function init_gear_sets()
         sub="Clerisy Strap +1", --3
         ammo="Sapience Orb", --2
         head="Amalric Coif", --10
-        body="Shango Robe", --8
+        body=gear.Merl_FC_body, --13
         hands="Gende. Gages +1", --7
         legs="Psycloth Lappas", --7
         feet="Regal Pumps +1", --7
@@ -220,6 +220,7 @@ function init_gear_sets()
         main="Oranyan", --7
         sub="Clerisy Strap +1", --3
         ammo="Impatiens",
+        feet="Kaykaus Boots +1", --7
         ear1="Mendi. Earring", --5
         ring1="Lebeche Ring", --(2)
         back="Perimede Cape", --(4)
@@ -256,7 +257,7 @@ function init_gear_sets()
         body="Amalric Doublet +1",
         hands="Kaykaus Cuffs +1",
         legs="Amalric Slops",
-        feet="Kaykaus Boots",
+        feet="Kaykaus Boots +1",
         neck="Orunmila's Torque",
         ear1="Loquacious Earring",
         ear2="Etiolation Earring",
@@ -277,11 +278,11 @@ function init_gear_sets()
         main="Tamaxchi", --22/(-10)
         sub="Sors Shield", --3/(-5)
         ammo="Esper Stone +1", --0/(-5)
-        head="Gende. Caubeen +1", --15/(-8)
+        head="Kaykaus Mitra +1", --11(+2)/(-6)
         body="Kaykaus Bliaut", --5(+3)
-        hands="Kaykaus Cuffs +1", --11/(-6)
+        hands="Kaykaus Cuffs +1", --11(+2)/(-6)
         legs="Acad. Pants +3", --15
-        feet="Kaykaus Boots", --10/(-10)
+        feet="Kaykaus Boots +1", --11(+2)/(-12)
         neck="Incanter's Torque",
         ear1="Beatific Earring",
         ear2="Regal Earring",
@@ -334,7 +335,7 @@ function init_gear_sets()
         sub="Ammurapi Shield",
         ammo="Savant's Treatise",
         head="Telchine Cap",
-        body="Telchine Chasuble",
+        body="Peda. Gown +3",
         hands="Telchine Gloves",
         legs="Telchine Braconi",
         feet="Telchine Pigaches",
@@ -351,7 +352,7 @@ function init_gear_sets()
         main="Gada",
         sub="Ammurapi Shield",
         head="Telchine Cap",
-        body="Telchine Chas.",
+        body="Peda. Gown +3",
         hands="Telchine Gloves",
         legs="Telchine Braconi",
         feet="Telchine Pigaches",
@@ -402,7 +403,7 @@ function init_gear_sets()
         sub="Enki Strap",
         ammo="Quartz Tathlum +1",
         head="Acad. Mortar. +3",
-        body="Acad. Gown +2",
+        body="Acad. Gown +3",
         hands="Kaykaus Cuffs +1",
         legs="Acad. Pants +3",
         feet="Acad. Loafers +3",
@@ -428,9 +429,9 @@ function init_gear_sets()
         sub="Enki Strap",
         ammo="Pemphredo Tathlum",
         head="Acad. Mortar. +3",
-        body="Acad. Gown +2",
+        body="Acad. Gown +3",
         hands="Kaykaus Cuffs +1",
-        legs="Acad. Pants +3",
+        legs="Peda. Pants +3",
         feet="Acad. Loafers +3",
         neck="Erra Pendant",
         ear1="Barkaro. Earring",
@@ -446,7 +447,7 @@ function init_gear_sets()
         sub="Enki Strap",
         ammo="Ghastly Tathlum +1",
         head="Pixie Hairpin +1",
-        body="Merlinic Jubbah", --10
+        body=gear.Merl_MB_body, --10
         hands="Amalric Gages +1", --(5)
         legs="Mallquis Trews +2", --5
         feet="Merlinic Crackows", --11
@@ -496,6 +497,7 @@ function init_gear_sets()
         main=gear.Grioavolr_MB,
         sub="Enki Strap",
         body="Seidr Cotehardie",
+        legs="Peda. Pants +3",
         feet="Jhakri Pigaches +2",
         neck="Erra Pendant",
         })
@@ -503,6 +505,7 @@ function init_gear_sets()
     sets.midcast['Elemental Magic'].Resistant = set_combine(sets.midcast['Elemental Magic'], {
         main=gear.Grioavolr_MB,
         sub="Enki Strap",
+        legs="Peda. Pants +3",
         feet="Jhakri Pigaches +2",
         neck="Erra Pendant",
         waist="Yamabuki-no-Obi",
@@ -545,7 +548,7 @@ function init_gear_sets()
         sub="Enki Strap",
         ammo="Homiliary",
         head="Befouled Crown",
-        body="Jhakri Robe +2",
+        body="Acad. Gown +3",
         hands="Gende. Gages +1",
         legs="Assiduity Pants +1",
         feet="Herald's Gaiters",
@@ -561,8 +564,7 @@ function init_gear_sets()
     sets.idle.DT = set_combine(sets.idle, {
         main="Bolelabunga",
         sub="Genmei Shield", --10/0
-        ammo="Staunch Tathlum", --2/2
-        head="Gende. Caubeen +1", --4/4
+        ammo="Staunch Tathlum +1", --3/3
         body="Mallquis Saio +2", --8/8
         neck="Loricate Torque +1", --6/6
         ring1="Gelatinous Ring +1", --7/(-1)
@@ -579,7 +581,7 @@ function init_gear_sets()
         head="Peda. M.Board +3",
         body="Amalric Doublet +1",
         hands="Amalric Gages +1",
-        legs="Acad. Pants +3",
+        legs="Peda. Pants +3",
         neck="Incanter's Torque",
         ear1="Barkaro. Earring",
         ear2="Regal Earring",
@@ -633,7 +635,7 @@ function init_gear_sets()
         ring2="Mujin Band", --(5)
         }
 
---    sets.buff['Ebullience'] = {head="Arbatel Bonnet +1"}
+    --sets.buff['Ebullience'] = {head="Arbatel Bonnet +1"}
     sets.buff['Rapture'] = {head="Arbatel Bonnet +1"}
     sets.buff['Perpetuance'] = {hands="Arbatel Bracers +1"}
     sets.buff['Immanence'] = {hands="Arbatel Bracers +1", "Lugh's Cape"}
@@ -647,14 +649,14 @@ function init_gear_sets()
        main="Siriti", --1
        sub="Genmei Shield", --10/0
        head="Acad. Mortar. +3", --4
-       body="Peda. Gown +1", --3
+       body="Peda. Gown +3", --5
        ear1="Savant's Earring", --1
        }
 
     sets.buff.Doom = {ring1="Eshmun's Ring", ring2="Eshmun's Ring", waist="Gishdubar Sash"}
 
     sets.LightArts = {legs="Acad. Pants +3", feet="Acad. Loafers +3"}
-    sets.DarkArts = {body="Acad. Gown +2", feet="Acad. Loafers +3"}
+    sets.DarkArts = {body="Acad. Gown +3", feet="Acad. Loafers +3"}
 
     sets.Obi = {waist="Hachirin-no-Obi"}
     sets.Bookworm = {back="Bookworm's Cape"}

@@ -196,11 +196,10 @@ function user_setup()
     state.CP = M(false, "Capacity Points Mode")
 
     state.HasteMode = M(false, 'Block Haste Reset')
-    state.Greatsword = M{['description']='Current Weapon', 'Epeolatry', 'Lionheart', 'Aettir', "Hepatizon Axe +1"}
 
     -- Additional local binds
     include('Global-Binds.lua') -- OK to remove this line
-    include('Global-WHM-Binds.lua') -- OK to remove this line
+    include('Global-GEO-Binds.lua') -- OK to remove this line
 
     send_command('bind ^` input /ma "Blank Gaze" <t>')
     send_command('bind !` gs c toggle MagicBurst')
@@ -677,8 +676,8 @@ function init_gear_sets()
         ammo="Mavi Tathlum",
         head="Carmine Mask +1",
         hands="Hashi. Bazu. +1",
-        ear1="Etiolation Earring",
-        ear2="Loquacious Earring",
+        ear1="Loquacious Earring",
+        ear2="Enchntr. Earring +1",
         ring1="Kishar Ring",
         ring2="Weather. Ring +1",
         waist="Witful Belt",
@@ -744,7 +743,7 @@ function init_gear_sets()
     -- Idle sets (default idle set not needed since the other three are defined, but leaving for testing purposes)
 
     sets.idle = {
-        ammo="Staunch Tathlum",
+        ammo="Staunch Tathlum +1",
         head=gear.Herc_Idle_head,
         body="Jhakri Robe +2",
         hands=gear.Herc_DT_hands,
@@ -760,14 +759,14 @@ function init_gear_sets()
         }
 
     sets.idle.DT = set_combine(sets.idle, {
-        ammo="Staunch Tathlum", --2/2
+        ammo="Staunch Tathlum +1", --3/3
         head="Dampening Tam", --0/4
         body="Ayanmo Corazza +2", --6/6
         hands=gear.Herc_DT_hands, --7/5
-        --legs="Aya. Cosciales +2", --5/5
-        feet="Battlecast Gaiters", --3/0
+        feet="Hashi. Basmak +1",
         neck="Loricate Torque +1", --6/6
-        ear1="Etiolation Earring", --0/3
+		ear1="Genmei Earring", --2/0
+        ear2="Etiolation Earring", --0/3
         ring1="Gelatinous Ring +1", --7/(-1)
         ring2="Defending Ring", --10/10
         back="Moonlight Cape", --6/6
@@ -1073,7 +1072,7 @@ function init_gear_sets()
     ------------------------------------------------------------------------------------------------
 
     sets.engaged.Hybrid = {
-        ammo="Staunch Tathlum", --2/2
+        ammo="Staunch Tathlum +1", --3/3
         head=gear.Adhemar_D_head, --4/0
         body="Ayanmo Corazza +2", --6/6
         neck="Loricate Torque +1", --6/6

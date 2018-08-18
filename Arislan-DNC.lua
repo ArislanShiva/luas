@@ -484,7 +484,7 @@ function init_gear_sets()
     sets.resting = {}
 
     sets.idle = {
-        ammo="Staunch Tathlum",
+        ammo="Staunch Tathlum +1",
         head="Maxixi Tiara +3",
         body="Turms Harness",
         hands=gear.Herc_DT_hands,
@@ -500,7 +500,7 @@ function init_gear_sets()
         }
 
     sets.idle.DT = set_combine(sets.idle, {
-        ammo="Staunch Tathlum", --2/2
+        ammo="Staunch Tathlum +1", --3/3
         body="Meg. Cuirie +2", --8/0
         hands=gear.Herc_DT_hands, --7/5
         legs="Mummu Kecks +2", --5/5
@@ -989,12 +989,9 @@ function customize_idle_set(idleSet)
 end
 
 function customize_melee_set(meleeSet)
-    if buffactive['Saber Dance'] then
-        meleeSet = set_combine(meleeSet, sets.buff['Saber Dance'])
-    end
-    if state.Buff['Climactic Flourish'] then
-        meleeSet = set_combine(meleeSet, sets.buff['Climactic Flourish'])
-    end
+    --if state.Buff['Climactic Flourish'] then
+    --    meleeSet = set_combine(meleeSet, sets.buff['Climactic Flourish'])
+    --end
     if state.ClosedPosition.value == true then
         meleeSet = set_combine(meleeSet, sets.buff['Closed Position'])
     end

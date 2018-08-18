@@ -390,7 +390,7 @@ function init_gear_sets()
     sets.resting = {}
 
     sets.idle = {
-        ammo="Staunch Tathlum",
+        ammo="Staunch Tathlum +1",
         head="Pill. Bonnet +3",
         body="Turms Harness",
         hands=gear.Herc_DT_hands,
@@ -406,7 +406,7 @@ function init_gear_sets()
         }
 
     sets.idle.DT = set_combine(sets.idle, {
-        ammo="Staunch Tathlum", --2/2
+        ammo="Staunch Tathlum +1", --3/3
         body="Meg. Cuirie +2", --8/0
         hands=gear.Herc_DT_hands, --7/5
         legs="Mummu Kecks +2", --5/5

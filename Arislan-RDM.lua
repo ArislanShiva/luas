@@ -356,11 +356,11 @@ function init_gear_sets()
         main="Tamaxchi", --22/(-10)
         sub="Sors Shield", --3/(-5)
         ammo="Esper Stone +1", --0/(-5)
-        head="Gende. Caubeen +1", --15/(-8)
+        head="Kaykaus Mitra +1", --11(+2)/(-6)
         body="Kaykaus Bliaut", --(+3)
-        hands="Kaykaus Cuffs +1", --11/(-6)
+        hands="Kaykaus Cuffs +1", --11(+2)/(-6)
         legs="Kaykaus Tights", --10/(-5)
-        feet="Kaykaus Boots", --10/(-10)
+        feet="Kaykaus Boots +1", --11(+2)/(-12)
         neck="Incanter's Torque",
         ear1="Mendi. Earring", --5
         ear2="Roundel Earring", --5
@@ -373,7 +373,6 @@ function init_gear_sets()
     sets.midcast.CureWeather = set_combine(sets.midcast.Cure, {
         main="Chatoyant Staff",
         sub="Achaq Grip", --0/(-4)
-        hands="Kaykaus Cuffs +1", --11/(-6)
         back="Twilight Cape",
         waist="Hachirin-no-Obi",
         })
@@ -498,7 +497,7 @@ function init_gear_sets()
         hands="Kaykaus Cuffs +1",
         legs="Chironic Hose",
         feet="Skaoi Boots",
-        neck="Imbodla Necklace",
+        neck="Dls. Torque +1",
         ear1="Hermetic Earring",
         ear2="Regal Earring",
         ring1="Kishar Ring",
@@ -510,19 +509,19 @@ function init_gear_sets()
     sets.midcast.MndEnfeeblesAcc = set_combine(sets.midcast.MndEnfeebles, {
         head="Atrophy Chapeau +3",
         body="Atrophy Tabard +3",
-        neck="Sanctity Necklace",
+        feet="Jhakri Pigaches +2",
         ring1="Stikini Ring +1",
-        ring2="Weather. Ring +1",
         })
 
     sets.midcast.IntEnfeebles = set_combine(sets.midcast.MndEnfeebles, {
         main=gear.Grioavolr_MB,
+        feet="Jhakri Pigaches +2",
+        ring1="Stikini Ring +1",
         back=gear.RDM_INT_Cape,
         })
 
     sets.midcast.IntEnfeeblesAcc = set_combine(sets.midcast.IntEnfeebles, {
         body="Atrophy Tabard +3",
-        neck="Erra Pendant",
         ring2="Weather. Ring +1",
         })
 
@@ -666,8 +665,8 @@ function init_gear_sets()
     sets.idle.DT = set_combine(sets.idle, {
         main="Bolelabunga",
         sub="Beatific Shield +1", --4/29
-        ammo="Staunch Tathlum", --2/2
-        head="Gende. Caubeen +1", --4/4
+        ammo="Staunch Tathlum +1", --3/3
+        head="Aya. Zucchetto +2", --3/3
         body="Ayanmo Corazza +2", --6/6
         hands="Gende. Gages +1", --4/3
         neck="Loricate Torque +1", --6/6
@@ -683,7 +682,7 @@ function init_gear_sets()
         head="Atrophy Chapeau +3",
         body="Amalric Doublet +1",
         hands="Amalric Gages +1",
-        neck="Incanter's Torque",
+        neck="Dls. Torque +1",
         ear1="Sherida Earring",
         ear2="Regal Earring",
         ring1="Stikini Ring +1",
@@ -708,7 +707,7 @@ function init_gear_sets()
 
     sets.magic_burst = {
         main=gear.Grioavolr_MB, --5
-        body="Merlinic Jubbah", --10
+        body=gear.Merl_MB_body, --10
         hands="Ea Cuffs", --5(5)
         feet="Merlinic Crackows", --11
         neck="Mizu. Kubikazari", --10

@@ -89,6 +89,10 @@ function user_setup()
     state.CastingMode:options('Normal', 'Resistant')
     state.IdleMode:options('Normal', 'DT', 'MEva')
 
+    state.BarElement = M{['description']='BarElement', 'Barfira', 'Barblizzara', 'Baraera', 'Barstonra', 'Barthundra', 'Barwatera'}
+    state.BarStatus = M{['description']='BarStatus', 'Baramnesra', 'Barvira', 'Barparalyzra', 'Barsilencera', 'Barpetra', 'Barpoisonra', 'Barblindra', 'Barsleepra'}
+    state.BoostSpell = M{['description']='BoostSpell', 'Boost-STR', 'Boost-INT', 'Boost-AGI', 'Boost-VIT', 'Boost-DEX', 'Boost-MND', 'Boost-CHR'}
+
     state.WeaponLock = M(false, 'Weapon Lock')
     state.CP = M(false, "Capacity Points Mode")
 
@@ -101,6 +105,12 @@ function user_setup()
     send_command('bind ^; gs c scholar speed')
     send_command('bind ![ gs c scholar aoe')
     send_command('bind !; gs c scholar cost')
+    send_command('bind ^insert gs c cycleback BoostSpell')
+    send_command('bind ^delete gs c cycle BoostSpell')
+    send_command('bind ^home gs c cycleback BarElement')
+    send_command('bind ^end gs c cycle BarElement')
+    send_command('bind ^pageup gs c cycleback BarStatus')
+    send_command('bind ^pagedown gs c cycle BarStatus')
     send_command('bind ^[ input /ja "Divine Seal" <me>')
     send_command('bind ^] input /ja "Divine Caress" <me>')
     send_command('bind !o input /ma "Regen IV" <stpc>')
@@ -128,6 +138,12 @@ function user_unload()
     send_command('unbind ^;')
     send_command('unbind ![')
     send_command('unbind !;')
+    send_command('unbind ^insert')
+    send_command('unbind ^delete')
+    send_command('unbind ^home')
+    send_command('unbind ^end')
+    send_command('unbind ^pageup')
+    send_command('unbind ^pagedown')
     send_command('unbind ^[')
     send_command('unbind ^]')
     send_command('unbind !o')
@@ -211,21 +227,7 @@ function init_gear_sets()
     -- Weaponskill sets
 
     -- Default set for any weaponskill that isn't any more specifically defined
-    sets.precast.WS = {
-
-        }
-
-    sets.precast.WS['Black Halo'] = set_combine(sets.precast.WS, {
-
-        })
-
-    sets.precast.WS['Hexa Strike'] = set_combine(sets.precast.WS, {
-
-        })
-
-    sets.precast.WS['Flash Nova'] = set_combine(sets.precast.WS, {
-
-        })
+    sets.precast.WS = {}
 
     -- Midcast Sets
 
@@ -273,14 +275,14 @@ function init_gear_sets()
         --body="Theo. Briault +3", --0(+6)/(-6)
         })
 
-    sets.midcast.CureWeather = set_combine(sets.midcast.Cure, {
+    sets.midcast.CureWeather = set_combine(sets.midcast.CureNormal, {
         main="Chatoyant Staff", --10
         --sub="Achaq Grip", --0/(-4)
         --back="Mending Cape", --(-6)
         waist="Hachirin-no-Obi",
         })
 
-    sets.midcast.CuragaNormal = set_combine(sets.midcast.Cure, {
+    sets.midcast.CuragaNormal = set_combine(sets.midcast.CureNormal, {
         --body="Theo. Briault +3", --0(+6)/(-6)
         --neck="Nuna Gorget +1",
         ring1="Stikini Ring",
@@ -525,7 +527,7 @@ function init_gear_sets()
         legs="Assid. Pants +1",
         feet="Crier's Gaiters",
         neck="Bathy Choker +1",
-        ear1="Genmei Earring",
+        ear1="Nourish. Earring +1",
         ear2="Infused Earring",
         ring1="Paguroidea Ring",
         ring2="Sheltered Ring",
@@ -536,11 +538,11 @@ function init_gear_sets()
     sets.idle.DT = set_combine(sets.idle, {
         main="Bolelabunga",
         sub="Genmei Shield", --10/0
-        --ammo="Staunch Tathlum", --2/2
+        --ammo="Staunch Tathlum +1", --3/3
         --head="Gende. Caubeen +1",  --4/4
         --hands="Gende. Gages +1", --4/3
         neck="Loricate Torque +1", --6/6
-        ear1="Genmei Earring", --2/0
+        --ear1="Genmei Earring", --2/0
         ring1="Gelatinous Ring +1", --7/(-1)
         ring2="Defending Ring", --10/10
         --back="Moonlight Cape", --6/6
@@ -548,7 +550,7 @@ function init_gear_sets()
         })
 
     sets.idle.MEva = set_combine(sets.idle.DT, {
-        --ammo="Staunch Tathlum",
+        --ammo="Staunch Tathlum +1",
         head="Inyanga Tiara +2",
         body="Inyanga Jubbah +2",
         hands="Inyan. Dastanas +2",
@@ -699,6 +701,12 @@ function job_self_command(cmdParams, eventArgs)
     elseif cmdParams[1]:lower() == 'nuke' then
         handle_nuking(cmdParams)
         eventArgs.handled = true
+    elseif cmdParams[1]:lower() == 'barelement' then
+        send_command('@input /ma '..state.BarElement.value..' <me>')
+    elseif cmdParams[1]:lower() == 'barstatus' then
+        send_command('@input /ma '..state.BarStatus.value..' <me>')
+    elseif cmdParams[1]:lower() == 'boostspell' then
+        send_command('@input /ma '..state.BoostSpell.value..' <me>')
     end
 end
 
@@ -774,9 +782,22 @@ function job_update(cmdParams, eventArgs)
 end
 
 
--- Function to display the current relevant user state when doing an update.
+-- Set eventArgs.handled to true if we don't want the automatic display to be run.
 function display_current_job_state(eventArgs)
-    display_current_caster_state()
+    local msg = ''
+
+    msg = '[ Casting Mode: ' .. state.CastingMode.value .. ' ]'
+
+    if state.DefenseMode.value ~= 'None' then
+        msg = msg .. '[ Defense: ' .. state.DefenseMode.value .. state[state.DefenseMode.value .. 'DefenseMode'].value .. ' ]'
+    end
+
+    if state.Kiting.value then
+        msg = msg .. '[ Kiting Mode: ON ]'
+    end
+
+    add_to_chat(060, msg)
+
     eventArgs.handled = true
 end
 
@@ -844,7 +865,7 @@ end
 -- Select default macro book on initial load or subjob change.
 function select_default_macro_book()
     -- Default macro set/book
-    set_macro_page(1, 4)
+    set_macro_page(1, 3)
 end
 
 function update_offense_mode()

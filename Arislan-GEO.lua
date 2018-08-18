@@ -129,7 +129,7 @@ function init_gear_sets()
         sub="Clerisy Strap +1", --3
         range="Dunna", --3
         head="Amalric Coif", --10
-        body="Shango Robe", --8
+        body=gear.Merl_FC_body, --13
         hands="Merlinic Dastanas", --6
         legs="Geo. Pants +1", --11
         feet="Regal Pumps +1", --7
@@ -563,7 +563,7 @@ function init_gear_sets()
     --------------------------------------
 
     sets.magic_burst = {
-        body="Merlinic Jubbah", --10
+        body=gear.Merl_MB_body, --10
         hands="Amalric Gages +1", --(6)
         feet="Merlinic Crackows", --11
         neck="Mizu. Kubikazari", --10

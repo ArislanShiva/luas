@@ -415,7 +415,7 @@ function init_gear_sets()
         }
 
     sets.idle.DT = set_combine(sets.idle, {
-        ammo="Staunch Tathlum", --2/2
+        ammo="Staunch Tathlum +1", --3/3
         hands=gear.Herc_DT_hands, --7/5
         legs="Mummu Kecks +2", --5/5
         neck="Loricate Torque +1", --6/6
