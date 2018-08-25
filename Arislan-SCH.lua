@@ -321,8 +321,8 @@ function init_gear_sets()
         }
 
     sets.midcast.Cursna = set_combine(sets.midcast.StatusRemoval, {
-        main="Gada",
-        sub="Genmei Shield",
+        main=gear.Gada_ENF,
+        sub="Ammurapi Shield",
         hands="Hieros Mittens",
         feet="Vanya Clogs",
         --feet="Gende. Galosh. +1",
@@ -331,7 +331,7 @@ function init_gear_sets()
         })
 
     sets.midcast['Enhancing Magic'] = {
-        main="Gada",
+        main=gear.Gada_ENH,
         sub="Ammurapi Shield",
         ammo="Savant's Treatise",
         head="Telchine Cap",
@@ -349,7 +349,7 @@ function init_gear_sets()
         }
 
     sets.midcast.EnhancingDuration = {
-        main="Gada",
+        main=gear.Gada_ENH,
         sub="Ammurapi Shield",
         head="Telchine Cap",
         body="Peda. Gown +3",
@@ -399,16 +399,16 @@ function init_gear_sets()
 
     -- Custom spell classes
     sets.midcast.MndEnfeebles = {
-        main=gear.Grioavolr_MND,
-        sub="Enki Strap",
-        ammo="Quartz Tathlum +1",
+        main=gear.Gada_ENF,
+        sub="Ammurapi Shield",
+        ammo="Pemphredo Tathlum",
         head="Acad. Mortar. +3",
         body="Acad. Gown +3",
         hands="Kaykaus Cuffs +1",
         legs="Acad. Pants +3",
         feet="Acad. Loafers +3",
         neck="Erra Pendant",
-        ear1="Barkaro. Earring",
+        ear1="Digni. Earring",
         ear2="Regal Earring",
         ring1="Kishar Ring",
         ring2="Stikini Ring +1",
@@ -417,16 +417,18 @@ function init_gear_sets()
         }
 
     sets.midcast.IntEnfeebles = set_combine(sets.midcast.MndEnfeebles, {
-        ammo="Pemphredo Tathlum",
+        main=gear.Grioavolr_MND,
+        sub="Enki Strap",
         legs="Chironic Hose",
+        ear1="Barkaro. Earring",
         back=gear.SCH_MAB_Cape,
         })
 
     sets.midcast.ElementalEnfeeble = sets.midcast.IntEnfeebles
 
     sets.midcast['Dark Magic'] = {
-        main=gear.Grioavolr_MB,
-        sub="Enki Strap",
+        main="Rubicundity",
+        sub="Ammurapi Shield",
         ammo="Pemphredo Tathlum",
         head="Acad. Mortar. +3",
         body="Acad. Gown +3",

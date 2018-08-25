@@ -359,7 +359,7 @@ function init_gear_sets()
         head=gear.Herc_MAB_head,
         body="Lanun Frac +3",
         hands="Carmine Fin. Ga. +1",
-        legs=gear.Herc_MAB_legs,
+        legs=gear.Herc_MWS_legs,
         feet="Lanun Bottes +3",
         neck="Baetyl Pendant",
         ear1="Novio Earring",
@@ -588,9 +588,8 @@ function init_gear_sets()
         })
 
     sets.midcast.RA.STP = set_combine(sets.midcast.RA, {
-        feet="Carmine Greaves +1",
+        feet=gear.Adhemar_D_feet,
         ear1="Dedition Earring",
-        ring1="Chirich Ring",
         })
 
     sets.TripleShot = {

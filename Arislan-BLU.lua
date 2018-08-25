@@ -433,7 +433,7 @@ function init_gear_sets()
         })
 
     sets.precast.WS['Requiescat'] = {
-        ammo="Quartz Tathlum +1",
+        ammo="Hydrocera",
         head="Jhakri Coronal +2",
         body="Jhakri Robe +2",
         hands="Jhakri Cuffs +2",

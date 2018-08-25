@@ -340,7 +340,7 @@ function init_gear_sets()
 
     -- 110 total Enhancing Magic Skill; caps even without Light Arts
     sets.midcast['Enhancing Magic'] = {
-        main="Gada",
+        main=gear.Gada_ENH,
         sub="Ammurapi Shield",
         head="Befouled Crown",
         body="Telchine Chas.",
@@ -357,7 +357,7 @@ function init_gear_sets()
         }
 
     sets.midcast.EnhancingDuration = {
-        main="Gada",
+        main=gear.Gada_ENH,
         sub="Ammurapi Shield",
         head="Telchine Cap",
         body="Telchine Chas.",
@@ -470,8 +470,8 @@ function init_gear_sets()
 
     -- Custom spell classes
     sets.midcast.MndEnfeebles = {
-        main="Grioavolr",
-        sub="Enki Strap",
+        main=gear.Gada_ENF,
+        sub="Ammurapi Shield",
         ammo="Hydrocera",
         head="Befouled Crown",
         body="Inyanga Jubbah +2",

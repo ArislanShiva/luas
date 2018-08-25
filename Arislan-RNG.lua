@@ -326,8 +326,8 @@ function init_gear_sets()
         head="Orion Beret +3",
         body="Samnuha Coat",
         hands="Carmine Fin. Ga. +1",
-        legs=gear.Herc_MAB_legs,
-        feet=gear.Herc_WS_feet,
+        legs=gear.Herc_MWS_legs,
+        feet=gear.Herc_MWS_feet,
         neck="Baetyl Pendant",
         ear1="Moonshade Earring",
         ear2="Friomisi Earring",
@@ -427,7 +427,7 @@ function init_gear_sets()
         })
 
     sets.midcast.RA.STP = set_combine(sets.midcast.RA, {
-        feet="Carmine Greaves +1",
+        feet=gear.Adhemar_D_feet,
         ear1="Dedition Earring",
         ring1="Ilabrat Ring",
         })

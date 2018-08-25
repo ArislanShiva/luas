@@ -728,7 +728,7 @@ function init_gear_sets()
     sets.engaged.Hybrid = {
         head=gear.Adhemar_D_head, --4/0
         neck="Loricate Torque +1", --6/6
-        ring1="Moonbeam Ring", --4/4
+        ring1="Moonlight Ring", --5/5
         ring2="Defending Ring", --10/10
         }
 
@@ -857,7 +857,15 @@ function job_buff_change(buff,gain)
         end
     end
 
+    if not midaction() then
+        handle_equipping_gear(player.status)
+	end
 end
+
+function job_status_change(new_status, old_status)
+	handle_equipping_gear(player.status)
+end
+
 
 -------------------------------------------------------------------------------------------------------------------
 -- User code that supplements standard library decisions.
@@ -957,9 +965,9 @@ end
 function determine_haste_group()
     classes.CustomMeleeGroups:clear()
     if DW == true then
-        if DW_needed <= 5 then
+        if DW_needed <= 6 then
             classes.CustomMeleeGroups:append('MaxHaste')
-        elseif DW_needed > 5 and DW_needed <= 22 then
+        elseif DW_needed > 6 and DW_needed <= 22 then
             classes.CustomMeleeGroups:append('HighHaste')
         elseif DW_needed > 22 and DW_needed <= 26 then
             classes.CustomMeleeGroups:append('MidHaste')

@@ -359,7 +359,7 @@ function init_gear_sets()
         head="Kaykaus Mitra +1", --11(+2)/(-6)
         body="Kaykaus Bliaut", --(+3)
         hands="Kaykaus Cuffs +1", --11(+2)/(-6)
-        legs="Kaykaus Tights", --10/(-5)
+        legs="Atrophy Tights +2", --11
         feet="Kaykaus Boots +1", --11(+2)/(-12)
         neck="Incanter's Torque",
         ear1="Mendi. Earring", --5
@@ -496,7 +496,7 @@ function init_gear_sets()
         body="Lethargy Sayon +1",
         hands="Kaykaus Cuffs +1",
         legs="Chironic Hose",
-        feet="Skaoi Boots",
+        feet="Vitiation Boots +2",
         neck="Dls. Torque +1",
         ear1="Hermetic Earring",
         ear2="Regal Earring",
@@ -547,12 +547,12 @@ function init_gear_sets()
     sets.midcast.ElementalEnfeeble = sets.midcast.IntEnfeebles
 
     sets.midcast['Dia III'] = set_combine(sets.midcast.MndEnfeebles, sets.midcast.EffectEnfeebles, {head="Viti. Chapeau +1"})
-    sets.midcast['Paralyze II'] = set_combine(sets.midcast.MndEnfeebles, {head="Vitiation Boots +1"})
+    sets.midcast['Paralyze II'] = set_combine(sets.midcast.MndEnfeebles, {head="Vitiation Boots +2"})
     sets.midcast['Slow II'] = set_combine(sets.midcast.MndEnfeebles, {head="Viti. Chapeau +1"})
 
     sets.midcast['Dark Magic'] = {
-        main=gear.Grioavolr_MB,
-        sub="Enki Strap",
+        main="Rubicundity",
+        sub="Ammurapi Shield",
         ammo="Pemphredo Tathlum",
         head="Atrophy Chapeau +3",
         body="Atrophy Tabard +3",
@@ -682,6 +682,7 @@ function init_gear_sets()
         head="Atrophy Chapeau +3",
         body="Amalric Doublet +1",
         hands="Amalric Gages +1",
+        feet="Vitiation Boots +2",
         neck="Dls. Torque +1",
         ear1="Sherida Earring",
         ear2="Regal Earring",

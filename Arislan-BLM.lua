@@ -253,7 +253,6 @@ function init_gear_sets()
         ammo="Esper Stone +1", --0/(-5)
         body="Vanya Robe",
         hands="Telchine Gloves", --10
-        legs="Gyve Trousers", --10
         feet="Medium's Sabots", --12
         neck="Nodens Gorget", --5
         ear1="Mendi. Earring", --5
@@ -272,7 +271,7 @@ function init_gear_sets()
         })
 
     sets.midcast.Cursna = set_combine(sets.midcast.Cure, {
-        main="Gada",
+        main=gear.Gada_ENF,
         sub="Genmei Shield",
         head="Vanya Hood",
         body="Vanya Robe",
@@ -286,7 +285,7 @@ function init_gear_sets()
         })
 
     sets.midcast['Enhancing Magic'] = {
-        main="Gada",
+        main=gear.Gada_ENH,
         sub="Ammurapi Shield",
         head="Telchine Cap",
         body="Telchine Chas.",
@@ -303,7 +302,7 @@ function init_gear_sets()
         }
 
     sets.midcast.EnhancingDuration = {
-        main="Gada",
+        main=gear.Gada_ENH,
         sub="Ammurapi Shield",
         head="Telchine Cap",
         body="Telchine Chas.",
@@ -343,9 +342,9 @@ function init_gear_sets()
     sets.midcast.Shellra = sets.midcast.Protect
 
     sets.midcast.MndEnfeebles = {
-        main=gear.Grioavolr_MND,
-        sub="Enki Strap",
-        ammo="Quartz Tathlum +1",
+        main=gear.Gada_ENF,
+        sub="Ammurapi Shield",
+        ammo="Pemphredo Tathlum",
         head="Merlinic Hood",
         body="Vanya Robe",
         hands="Ea Cuffs",
@@ -362,15 +361,15 @@ function init_gear_sets()
 
     sets.midcast.IntEnfeebles = set_combine(sets.midcast.MndEnfeebles, {
         main=gear.Grioavolr_MB,
-        ammo="Pemphredo Tathlum",
+        sub="Enki Strap",
         back=gear.BLM_MAB_Cape,
         }) -- INT/Magic accuracy
 
     sets.midcast.ElementalEnfeeble = sets.midcast.IntEnfeebles
 
     sets.midcast['Dark Magic'] = {
-        main=gear.Grioavolr_MB,
-        sub="Enki Strap",
+        main="Rubicundity",
+        sub="Ammurapi Shield",
         ammo="Pemphredo Tathlum",
         head="Merlinic Hood",
         body="Jhakri Robe +2",

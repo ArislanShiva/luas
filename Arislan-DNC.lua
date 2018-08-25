@@ -264,7 +264,7 @@ function init_gear_sets()
         body="Maxixi Casaque +3",
         hands="Maxixi Bangles +3",
         legs="Mummu Kecks +2",
-        feet="Maxixi Toeshoes +3",
+        feet="Horos T. Shoes +3",
         neck="Combatant's Torque",
         ear1="Digni. Earring",
         ear2="Telos Earring",
@@ -810,7 +810,7 @@ function init_gear_sets()
     sets.engaged.Hybrid = {
         head=gear.Adhemar_D_head, --4/0
         neck="Loricate Torque +1", --6/6
-        ring1="Moonbeam Ring", --4/4
+        ring1="Moonlight Ring", --5/5
         ring2="Defending Ring", --10/10
         }
 
@@ -858,7 +858,7 @@ function init_gear_sets()
 --    sets.buff['Saber Dance'] = {legs="Horos Tights +3"}
 --    sets.buff['Fan Dance'] = {body="Horos Bangles +1"}
     sets.buff['Climactic Flourish'] = {head="Maculele Tiara +1"} --body="Meg. Cuirie +2"}
-    sets.buff['Closed Position'] = {feet="Horos Toe Shoes +1"}
+    sets.buff['Closed Position'] = {feet="Horos T. Shoes +3"}
 
     sets.buff.Doom = {ring1="Eshmun's Ring", ring2="Eshmun's Ring", waist="Gishdubar Sash"}
     sets.CP = {back="Mecisto. Mantle"}

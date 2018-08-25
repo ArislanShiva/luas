@@ -260,7 +260,7 @@ function init_gear_sets()
         })
 
     sets.midcast['Enhancing Magic'] = {
-        main="Gada",
+        main=gear.Gada_ENH,
         sub="Ammurapi Shield",
         head="Befouled Crown",
         body="Telchine Chas.",
@@ -275,7 +275,7 @@ function init_gear_sets()
         }
 
     sets.midcast.EnhancingDuration = {
-        main="Gada",
+        main=gear.Gada_ENH,
         sub="Ammurapi Shield",
         head="Telchine Cap",
         body="Telchine Chas.",
@@ -311,18 +311,18 @@ function init_gear_sets()
 
 
     sets.midcast.MndEnfeebles = {
-        main="Grioavolr",
-        sub="Enki Strap",
+        main=gear.Gada_ENF,
+        sub="Ammurapi Shield",
         head="Geo. Galero +3",
         body="Geomancy Tunic +3",
         hands="Geo. Mitaines +3",
         legs="Geomancy Pants +3",
         feet="Geo. Sandals +3",
         neck="Erra Pendant",
-        ear1="Barkarole Earring",
+        ear1="Digni. Earring",
         ear2="Regal Earring",
         ring1="Kishar Ring",
-        ring2="Weather. Ring +1",
+        ring2="Stikini Ring",
         back=gear.GEO_FC_Cape,
         waist="Luminary Sash",
         } -- MND/Magic accuracy
@@ -384,7 +384,7 @@ function init_gear_sets()
 
     sets.midcast['Elemental Magic'].Resistant = set_combine(sets.midcast['Elemental Magic'], {
         head="Geo. Galero +3",
-        neck="Erra Pendant",
+        neck="Sanctity Necklace",
         ear2="Digni. Earring",
         })
 

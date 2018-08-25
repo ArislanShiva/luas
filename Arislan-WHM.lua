@@ -257,20 +257,7 @@ function init_gear_sets()
         ring2="Begrudging Ring",
         })
 
-    sets.precast.WS['Flash Nova'] = set_combine(sets.precast.WS, {
-        ammo="Pemphredo Tathlum",
-        head="Telchine Cap",
-        body="Vedic Coat",
-        hands="Fanatic Gloves",
-        legs="Gyve Trousers",
-        neck="Baetyl Pendant",
-        ear1="Friomisi Earring",
-        ear2="Regal Earring",
-        ring1="Rufescent Ring",
-        ring2="Weather. Ring +1",
-        back="Toro Cape",
-        waist="Refoccilation Stone",
-        })
+    sets.precast.WS['Flash Nova'] = set_combine(sets.precast.WS, {})
 
     -- Midcast Sets
 
@@ -498,8 +485,8 @@ function init_gear_sets()
     sets.midcast.Holy = sets.midcast.Banish
 
     sets.midcast['Dark Magic'] = {
-        main=gear.Grioavolr_MB,
-        sub="Enki Strap",
+        main="Rubicundity",
+        sub="Ammurapi Shield",
         ammo="Pemphredo Tathlum",
         head="Befouled Crown",
         body="Shango Robe",
@@ -519,14 +506,14 @@ function init_gear_sets()
     sets.midcast.MndEnfeebles = {
         main=gear.Grioavolr_MND,
         sub="Enki Strap",
-        ammo="Quartz Tathlum +1",
+        ammo="Pemphredo Tathlum",
         head="Theophany Cap +3",
         body="Theo. Briault +3",
         hands="Kaykaus Cuffs +1",
         legs="Chironic Hose",
         feet="Theo. Duckbills +3",
         neck="Erra Pendant",
-        ear1="Hermetic Earring",
+        ear1="Digni. Earring",
         ear2="Regal Earring",
         ring1="Kishar Ring",
         ring2="Stikini Ring +1",
@@ -536,7 +523,6 @@ function init_gear_sets()
 
     sets.midcast.IntEnfeebles = set_combine(sets.midcast.MndEnfeebles, {
         main=gear.Grioavolr_MB,
-        ammo="Pemphredo Tathlum",
         back="Aurist's Cape +1",
         waist="Yamabuki-no-Obi",
         })
@@ -648,7 +634,6 @@ function init_gear_sets()
     sets.engaged = {
         main="Yagrush",
         sub="Tamaxchi",
-        ammo="Vanir Battery",
         head="Aya. Zucchetto +2",
         body="Ayanmo Corazza +2",
         legs="Aya. Cosciales +2",

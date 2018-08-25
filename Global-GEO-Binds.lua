@@ -16,7 +16,7 @@
     send_command('bind #` input //send safiyeh /ja "Full Circle" <me>')
 
     send_command('bind #1 input //send safiyeh /ma "Geo-Frailty" <t>')
-    send_command('bind #2 input //send safiyeh /ma "Indi-Focus" <t>')
+    send_command('bind #2 input //send safiyeh /ma "Indi-Fury" <t>')
     send_command('bind #3 input //send safiyeh /ma "Indi-Haste" <t>')
     send_command('bind #4 input //send safiyeh /ma "Indi-Refresh" <t>')
     send_command('bind #5 input //send safiyeh /ma "Geo-Malaise" <t>')

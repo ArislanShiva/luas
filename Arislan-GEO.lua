@@ -228,7 +228,6 @@ function init_gear_sets()
         sub="Sors Shield", --3/(-5)
         body="Vanya Robe",
         hands="Telchine Gloves", --10
-        legs="Gyve Trousers", --10
         feet="Medium's Sabots", --12
         neck="Incanter's Torque",
         ear1="Mendi. Earring", --5
@@ -246,8 +245,8 @@ function init_gear_sets()
         })
 
     sets.midcast.Cursna = set_combine(sets.midcast.Cure, {
-        main="Gada",
-        sub="Genmei Shield",
+        main=gear.Gada_ENF,
+        sub="Ammurapi Shield",
         head="Vanya Hood",
         body="Vanya Robe",
         hands="Hieros Mittens",
@@ -260,7 +259,7 @@ function init_gear_sets()
         })
 
     sets.midcast['Enhancing Magic'] = {
-        main="Gada",
+        main=gear.Gada_ENH,
         sub="Ammurapi Shield",
         head="Telchine Cap",
         body="Telchine Chas.",
@@ -277,7 +276,7 @@ function init_gear_sets()
         }
 
     sets.midcast.EnhancingDuration = {
-        main="Gada",
+        main=gear.Gada_ENH,
         sub="Ammurapi Shield",
         head="Telchine Cap",
         body="Telchine Chas.",
@@ -317,8 +316,8 @@ function init_gear_sets()
 
 
     sets.midcast.MndEnfeebles = {
-        main=gear.Grioavolr_MND,
-        sub="Enki Strap",
+        main=gear.Gada_ENF,
+        sub="Ammurapi Shield",
         head="Merlinic Hood",
         body="Vanya Robe",
         hands="Azimuth Gloves +1",
@@ -335,13 +334,14 @@ function init_gear_sets()
 
     sets.midcast.IntEnfeebles = set_combine(sets.midcast.MndEnfeebles, {
         main=gear.Grioavolr_MB,
+        sub="Enki Strap",
         body="Amalric Doublet +1",
         back="Nantosuelta's Cape",
         }) -- INT/Magic accuracy
 
     sets.midcast['Dark Magic'] = {
-        main=gear.Grioavolr_MB,
-        sub="Enki Strap",
+        main="Rubicundity",
+        sub="Ammurapi Shield",
         head="Merlinic Hood",
         body="Amalric Doublet +1",
         hands="Ea Cuffs",

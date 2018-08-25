@@ -78,7 +78,7 @@ function job_setup()
     blue_magic_maps.Cure = S{'Wild Carrot'}
     blue_magic_maps.Buffs = S{'Cocoon', 'Refueling'}
 
-    rayke_duration = 47
+    rayke_duration = 35
     gambit_duration = 96
 
     lockstyleset = 2
@@ -92,7 +92,7 @@ end
 function user_setup()
     state.OffenseMode:options('STP', 'Normal', 'LowAcc', 'MidAcc', 'HighAcc')
     state.WeaponskillMode:options('Normal', 'Acc')
-    state.HybridMode:options('Normal', 'DT', 'DTPlus')
+    state.HybridMode:options('Normal', 'DT')
     state.CastingMode:options('Normal', 'Resistant')
     state.IdleMode:options('Normal', 'DT')
     state.PhysicalDefenseMode:options('PDT', 'HP')
@@ -231,7 +231,7 @@ function init_gear_sets()
 
     sets.Enmity.HP = set_combine(sets.Enmity, {
         ear2="Odnowa Earring +1",
-        ring1="Moonbeam Ring",
+        ring1="Moonlight Ring",
         back="Moonlight Cape",
         waist="Oneiros Belt",
         })
@@ -299,7 +299,7 @@ function init_gear_sets()
         body="Runeist's Coat +3",
         ear1="Odnowa Earring",
         ear2="Odnowa Earring +1",
-        ring1="Moonbeam Ring",
+        ring1="Moonlight Ring",
         waist="Oneiros Belt",
         })
 
@@ -508,15 +508,14 @@ function init_gear_sets()
         })
 
     sets.midcast['Phalanx'] = set_combine(sets.midcast['Enhancing Magic'], {
-        --main="Deacon Sword", --4
-        --sub="Chanter's Shield",
-        ammo="Staunch Tathlum +1", --(10)
+        main="Deacon Sword", --4
+        sub="Chanter's Shield",
+        ammo="Staunch Tathlum +1", --(11)
         head="Fu. Bandeau +1", --5
         body=gear.Taeon_Phalanx_body, --3(10)
-        hands="Regal Gauntlets", --(10)
-        legs="Carmine Cuisses +1", --(20)
+        hands=gear.Taeon_Phalanx_hands, --3
+        legs=gear.Taeon_Phalanx_legs, --3
         feet=gear.Taeon_Phalanx_feet, --3(7)
-        --neck="Moonlight Necklace", --(15)
         ear1="Halasz Earring", --(5)
         ring1="Evanescence Ring", --(5)
         waist="Rumination Sash", --(10)
@@ -593,6 +592,7 @@ function init_gear_sets()
         neck="Loricate Torque +1",
         ear1="Sherida Earring",
         ear2="Telos Earring",
+        ring1="Moonlight Ring",
         back="Moonlight Cape",
         })
 
@@ -676,7 +676,7 @@ function init_gear_sets()
         neck="Loricate Torque +1", --6/6
         ear1="Odnowa Earring", --0/1
         ear2="Odnowa Earring +1", --0/2
-        ring1="Moonbeam Ring", --4/4
+        ring1="Moonlight Ring", --5/5
         ring2="Defending Ring", --10/10
         back="Moonlight Cape", --6/6
         waist="Flume Belt +1", --4/0
@@ -707,7 +707,7 @@ function init_gear_sets()
         ring1="Epona's Ring",
         ring2="Niqmaddu Ring",
         back=gear.RUN_TP_Cape,
-        waist="Ioskeha Belt",
+        waist="Windbuffet Belt +1",
         }
 
     sets.engaged.LowAcc = set_combine(sets.engaged, {
@@ -718,15 +718,16 @@ function init_gear_sets()
     sets.engaged.MidAcc = set_combine(sets.engaged.LowAcc, {
         ear2="Telos Earring",
         ring1="Regal Ring",
+        feet=gear.Herc_STP_feet,
         })
 
     sets.engaged.HighAcc = set_combine(sets.engaged.MidAcc, {
         head="Carmine Mask +1",
+        body="Runeist's Coat +3",
         hands="Runeist's Mitons +3",
         legs="Carmine Cuisses +1",
-        feet=gear.Herc_STP_feet,
         ear1="Cessance Earring",
-        waist="Kentarch Belt +1",
+        waist="Olseni Belt",
         })
 
     sets.engaged.STP = set_combine(sets.engaged, {
@@ -740,7 +741,8 @@ function init_gear_sets()
         body="Turms Harness",
         neck="Anu Torque",
         ear2="Telos Earring",
-        ring1="Ilabrat Ring",
+        ring1="Moonlight Ring",
+        ring2="Ilabrat Ring",
         waist="Kentarch Belt +1",
         }
 
@@ -753,13 +755,9 @@ function init_gear_sets()
         head=gear.Adhemar_D_head, --4/0
         body="Ayanmo Corazza +2", --6/6
         neck="Loricate Torque +1", --6/6
+        ring1="Moonlight Ring", --5/5
         ring2="Defending Ring", --10/10
         back=gear.RUN_TP_Cape, --10/0
-        }
-
-  sets.HybridPlus = {
-        ring1="Moonbeam Ring",  --4/4
-        legs="Meg. Chausses +2", --6/0
         }
 
     sets.engaged.DT = set_combine(sets.engaged, sets.Hybrid)
@@ -768,18 +766,15 @@ function init_gear_sets()
     sets.engaged.HighAcc.DT = set_combine(sets.engaged.HighAcc, sets.Hybrid)
     sets.engaged.STP.DT = set_combine(sets.engaged.STP, sets.Hybrid)
 
-    sets.engaged.DTPlus = set_combine(sets.engaged, sets.Hybrid, sets.HybridPlus)
-    sets.engaged.LowAcc.DTPlus = set_combine(sets.engaged.LowAcc, sets.Hybrid, sets.HybridPlus)
-    sets.engaged.MidAcc.DTPlus = set_combine(sets.engaged.MidAcc, sets.Hybrid, sets.HybridPlus)
-    sets.engaged.HighAcc.DTPlus = set_combine(sets.engaged.HighAcc, sets.Hybrid, sets.HybridPlus)
-    sets.engaged.STP.DTPlus = set_combine(sets.engaged.STP, sets.Hybrid, sets.HybridPlus)
-
     sets.engaged.Aftermath.DT = {
         head="Aya. Zucchetto +2",
         body="Turms Harness",
         feet="Carmine Greaves +1",
+        ear1="Dedition Earring",
         ear2="Telos Earring",
-        waist="Flume Belt +1",
+        ring1="Moonlight Ring",
+        ring2="Defending Ring",
+        waist="Kentarch Belt +1",
         }
 
     ------------------------------------------------------------------------------------------------
@@ -865,6 +860,9 @@ function job_post_midcast(spell, action, spellMap, eventArgs)
         if spellMap == 'Refresh' then
             equip(sets.midcast.Refresh)
         end
+    end
+    if spell.english == 'Phalanx' and buffactive['Embolden'] then
+        equip(sets.midcast.EnhancingDuration)
     end
     -- If DefenseMode is active, apply that gear over midcast
     -- choices.  Precast is allowed through for fast cast on
@@ -1002,7 +1000,7 @@ end
 function customize_melee_set(meleeSet)
      if buffactive['Aftermath: Lv.3'] and player.equipment.main == "Epeolatry"
         and state.DefenseMode.value == 'None' then
-        if state.HybridMode.value == "DT" or state.HybridMode.value == "DTPlus" then
+        if state.HybridMode.value == "DT" then
             meleeSet = set_combine(meleeSet, sets.engaged.Aftermath.DT)
         else
             meleeSet = set_combine(meleeSet, sets.engaged.Aftermath)
