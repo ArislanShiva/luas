@@ -106,6 +106,8 @@ function user_setup()
     state.CP = M(false, "Capacity Points Mode")
 
     state.Runes = M{['description']='Runes', 'Ignis', 'Gelus', 'Flabra', 'Tellus', 'Sulpor', 'Unda', 'Lux', 'Tenebrae'}
+    state.BarElement = M{['description']='BarElement', 'Barfire', 'Barblizzard', 'Baraero', 'Barstone', 'Barthunder', 'Barwater'}
+    state.BarStatus = M{['description']='BarStatus', 'Baramnesia', 'Barvirus', 'Barparalyze', 'Barsilence', 'Barpetrify', 'Barpoison', 'Barblind', 'Barsleep'}
 
     -- Additional local binds
     include('Global-Binds.lua') -- OK to remove this line
@@ -115,6 +117,12 @@ function user_setup()
     send_command('bind !` input /ja "Vivacious Pulse" <me>')
     send_command('bind ^- gs c cycleback Runes')
     send_command('bind ^= gs c cycle Runes')
+    send_command('bind ^insert gs c cycleback Runes')
+    send_command('bind ^delete gs c cycle Runes')
+    send_command('bind ^home gs c cycleback BarElement')
+    send_command('bind ^end gs c cycle BarElement')
+    send_command('bind ^pageup gs c cycleback BarStatus')
+    send_command('bind ^pagedown gs c cycle BarStatus')
     send_command('bind ^f11 gs c cycle MagicalDefenseMode')
     send_command('bind @c gs c toggle CP')
     send_command('bind @e gs c cycle Greatsword')
@@ -478,10 +486,8 @@ function init_gear_sets()
         }
 
     sets.midcast['Enhancing Magic'] = {
-        head="Erilaz Galea +1",
-        --head="Carmine Mask +1",
-        hands="Regal Gauntlets",
-        --legs="Carmine Cuisses +1",
+        head="Carmine Mask +1",
+        legs="Carmine Cuisses +1",
         legs="Futhark Trousers +1",
         neck="Incanter's Torque",
         ear1="Augment. Earring",
@@ -513,9 +519,9 @@ function init_gear_sets()
         ammo="Staunch Tathlum +1", --(11)
         head="Fu. Bandeau +1", --5
         body=gear.Taeon_Phalanx_body, --3(10)
-        hands=gear.Taeon_Phalanx_hands, --3
-        legs=gear.Taeon_Phalanx_legs, --3
-        feet=gear.Taeon_Phalanx_feet, --3(7)
+        hands=gear.Taeon_Phalanx_hands, --3(8)
+        legs=gear.Taeon_Phalanx_legs, --3(8)
+        feet=gear.Taeon_Phalanx_feet, --3(10)
         ear1="Halasz Earring", --(5)
         ring1="Evanescence Ring", --(5)
         waist="Rumination Sash", --(10)
@@ -585,7 +591,7 @@ function init_gear_sets()
         }
 
     sets.idle.Town = set_combine(sets.idle, {
-        ammo="Knobkierrie",
+        ammo="Staunch Tathlum +1",
         head=gear.Adhemar_D_head,
         hands="Turms Mittens +1",
         feet="Turms Leggings +1",
@@ -1073,7 +1079,35 @@ function display_current_job_state(eventArgs)
         msg = msg .. '[ Kiting Mode ]'
     end
 
-    msg = msg .. '[ *' .. state.Runes.current .. '* ]'
+    rune = state.Runes.current
+
+	if rune == "Ignis" then
+	    damage = "Fire"
+		resistance = "Ice"
+	elseif rune == "Gelus" then
+	    damage = "Ice"
+		resistance = "Wind"
+	elseif rune == "Flabra" then
+	    damage = "Wind"
+		resistance = "Stone"
+	elseif rune == "Tellus" then
+	    damage = "Stone"
+		resistance = "Lightning"
+	elseif rune == "Sulpor" then
+	    damage = "Lightning"
+		resistance = "Water"
+	elseif rune == "Unda" then
+	    damage = "Water"
+		resistance = "Fire"
+	elseif rune == "Lux" then
+	    damage = "Light"
+		resistance = "Dark"
+	elseif rune == "Tenebrae" then
+	    damage = "Dark"
+		resistance = "Light"
+	end
+
+    msg = msg .. '[ *' .. rune .. '* (' .. damage .. ' Damage/Resist ' .. resistance .. ') ]'
 
     add_to_chat(060, msg)
 
@@ -1096,6 +1130,7 @@ end
 -------------------------------------------------------------------------------------------------------------------
 -- User code that supplements self-commands.
 -------------------------------------------------------------------------------------------------------------------
+
 function job_self_command(cmdParams, eventArgs)
     if cmdParams[1]:lower() == 'rune' then
         send_command('@input /ja '..state.Runes.value..' <me>')
