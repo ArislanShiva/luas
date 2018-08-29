@@ -106,8 +106,6 @@ function user_setup()
     state.CP = M(false, "Capacity Points Mode")
 
     state.Runes = M{['description']='Runes', 'Ignis', 'Gelus', 'Flabra', 'Tellus', 'Sulpor', 'Unda', 'Lux', 'Tenebrae'}
-    state.BarElement = M{['description']='BarElement', 'Barfire', 'Barblizzard', 'Baraero', 'Barstone', 'Barthunder', 'Barwater'}
-    state.BarStatus = M{['description']='BarStatus', 'Baramnesia', 'Barvirus', 'Barparalyze', 'Barsilence', 'Barpetrify', 'Barpoison', 'Barblind', 'Barsleep'}
 
     -- Additional local binds
     include('Global-Binds.lua') -- OK to remove this line
@@ -117,12 +115,6 @@ function user_setup()
     send_command('bind !` input /ja "Vivacious Pulse" <me>')
     send_command('bind ^- gs c cycleback Runes')
     send_command('bind ^= gs c cycle Runes')
-    send_command('bind ^insert gs c cycleback Runes')
-    send_command('bind ^delete gs c cycle Runes')
-    send_command('bind ^home gs c cycleback BarElement')
-    send_command('bind ^end gs c cycle BarElement')
-    send_command('bind ^pageup gs c cycleback BarStatus')
-    send_command('bind ^pagedown gs c cycle BarStatus')
     send_command('bind ^f11 gs c cycle MagicalDefenseMode')
     send_command('bind @c gs c toggle CP')
     send_command('bind @e gs c cycle Greatsword')
@@ -1079,35 +1071,7 @@ function display_current_job_state(eventArgs)
         msg = msg .. '[ Kiting Mode ]'
     end
 
-    rune = state.Runes.current
-
-	if rune == "Ignis" then
-	    damage = "Fire"
-		resistance = "Ice"
-	elseif rune == "Gelus" then
-	    damage = "Ice"
-		resistance = "Wind"
-	elseif rune == "Flabra" then
-	    damage = "Wind"
-		resistance = "Stone"
-	elseif rune == "Tellus" then
-	    damage = "Stone"
-		resistance = "Lightning"
-	elseif rune == "Sulpor" then
-	    damage = "Lightning"
-		resistance = "Water"
-	elseif rune == "Unda" then
-	    damage = "Water"
-		resistance = "Fire"
-	elseif rune == "Lux" then
-	    damage = "Light"
-		resistance = "Dark"
-	elseif rune == "Tenebrae" then
-	    damage = "Dark"
-		resistance = "Light"
-	end
-
-    msg = msg .. '[ *' .. rune .. '* (' .. damage .. ' Damage/Resist ' .. resistance .. ') ]'
+    msg = msg .. '[ *' .. state.Runes.current .. '* ]'
 
     add_to_chat(060, msg)
 
