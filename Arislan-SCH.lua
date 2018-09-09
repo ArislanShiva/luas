@@ -619,7 +619,7 @@ function init_gear_sets()
         ear1="Cessance Earring",
         ear2="Telos Earring",
         ring1="Chirich Ring",
-        ring2="Hetairoi Ring",
+        ring2="Petrov Ring",
         back="Relucent Cape",
         }
 

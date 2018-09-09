@@ -119,7 +119,7 @@ function init_gear_sets()
         back=gear.BLM_Death_Cape,
         }
 
-    sets.precast.JA.Manafont = {body="Arch. Coat"}
+    sets.precast.JA.Manafont = {body="Arch. Coat +1"}
 
     -- Fast cast sets for spells
     sets.precast.FC = {
@@ -138,7 +138,7 @@ function init_gear_sets()
         ring1="Kishar Ring", --4
         ring2="Weather. Ring +1", --5
         back=gear.BLM_FC_Cape, --10
-        waist="Witful Belt", --3/(2)
+        waist="Witful Belt", --3/(3)
         }
 
     sets.precast.FC['Enhancing Magic'] = set_combine(sets.precast.FC, {
@@ -174,7 +174,7 @@ function init_gear_sets()
         ring1="Mephitas's Ring +1",
         ring2="Weather. Ring +1", --5
         back="Bane Cape", --4
-        waist="Witful Belt", --3/(2)
+        waist="Witful Belt", --3/(3)
         }
 
     sets.precast.FC.Impact.DeathMode = set_combine(sets.precast.FC.DeathMode, {head=empty, body="Twilight Cloak"})
@@ -638,7 +638,7 @@ function init_gear_sets()
         ear1="Cessance Earring",
         ear2="Telos Earring",
         ring1="Chirich Ring",
-        ring2="Hetairoi Ring",
+        ring2="Petrov Ring",
         back="Relucent Cape",
         }
 

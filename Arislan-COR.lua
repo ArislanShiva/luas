@@ -120,9 +120,10 @@ function user_setup()
     state.CastingMode:options('Normal', 'Resistant')
     state.IdleMode:options('Normal', 'DT', 'Refresh')
 
-    state.WeaponLock = M(false, 'Weapon Lock')
     state.Gun = M{['description']='Current Gun', 'Death Penalty', 'Fomalhaut', 'Ataktos'}--, 'Armageddon'
     state.CP = M(false, "Capacity Points Mode")
+    state.WeaponLock = M(false, 'Weapon Lock')
+    state.RingLock = M(false, 'Ring Lock')
 
     gear.RAbullet = "Chrono Bullet"
     gear.WSbullet = "Chrono Bullet"
@@ -152,6 +153,7 @@ function user_setup()
     send_command('bind @q gs c cycle QDMode')
     send_command('bind @e gs c cycle Gun')
     send_command('bind @w gs c toggle WeaponLock')
+    send_command('bind @r gs c toggle WeaponLock')
 
     send_command('bind ^numlock input /ja "Triple Shot" <me>')
 
@@ -202,6 +204,7 @@ function user_unload()
     send_command('unbind @q')
     send_command('unbind @e')
     send_command('unbind @w')
+    send_command('unbind @r')
     send_command('unbind ^numlock')
     send_command('unbind ^numpad/')
     send_command('unbind ^numpad*')
@@ -690,7 +693,7 @@ function init_gear_sets()
         neck="Iskur Gorget",
         ear1="Cessance Earring",
         ear2="Brutal Earring",
-        ring1="Hetairoi Ring",
+        ring1="Petrov Ring",
         ring2="Epona's Ring",
         back=gear.COR_TP_Cape,
         waist="Windbuffet Belt +1",
@@ -733,7 +736,7 @@ function init_gear_sets()
         neck="Iskur Gorget",
         ear1="Suppanomimi", --5
         ear2="Brutal Earring",
-        ring1="Hetairoi Ring",
+        ring1="Petrov Ring",
         ring2="Epona's Ring",
         back=gear.COR_DW_Cape, --10
         waist="Reiki Yotai", --7
@@ -774,7 +777,7 @@ function init_gear_sets()
         neck="Iskur Gorget",
         ear1="Suppanomimi", --5
         ear2="Eabani Earring", --4
-        ring1="Hetairoi Ring",
+        ring1="Petrov Ring",
         ring2="Epona's Ring",
         back=gear.COR_TP_Cape,
         waist="Reiki Yotai", --7
@@ -814,7 +817,7 @@ function init_gear_sets()
         neck="Iskur Gorget",
         ear1="Suppanomimi", --5
         ear2="Eabani Earring", --4
-        ring1="Hetairoi Ring",
+        ring1="Petrov Ring",
         ring2="Epona's Ring",
         back=gear.COR_TP_Cape,
         waist="Reiki Yotai", --7
@@ -856,7 +859,7 @@ function init_gear_sets()
         neck="Iskur Gorget",
         ear1="Suppanomimi", --5
         ear2="Eabani Earring", --4
-        ring1="Hetairoi Ring",
+        ring1="Petrov Ring",
         ring2="Epona's Ring",
         back=gear.COR_TP_Cape,
         waist="Reiki Yotai", --7
@@ -898,7 +901,7 @@ function init_gear_sets()
         neck="Iskur Gorget",
         ear1="Suppanomimi", --5
         ear2="Telos Earring",
-        ring1="Hetairoi Ring",
+        ring1="Petrov Ring",
         ring2="Epona's Ring",
         back=gear.COR_TP_Cape,
         waist="Windbuffet Belt +1",
@@ -1146,6 +1149,11 @@ function job_state_change(stateField, newValue, oldValue)
     else
         enable('ranged')
     end
+    if state.RingLock.value == true then
+        disable('ring1','ring2')
+    else
+        enable('ring1','ring2')
+    end
 end
 
 -------------------------------------------------------------------------------------------------------------------
@@ -1325,7 +1333,7 @@ function gearinfo(cmdParams, eventArgs)
             end
         elseif type(cmdParams[2]) == 'string' then
             if cmdParams[2] == 'false' then
-        	      DW_needed = 0
+        	    DW_needed = 0
                 DW = false
       	    end
         end
@@ -1340,6 +1348,9 @@ function gearinfo(cmdParams, eventArgs)
             elseif cmdParams[4] == 'false' then
                 moving = false
             end
+        end
+        if not midaction() then
+            job_update()
         end
     end
 end

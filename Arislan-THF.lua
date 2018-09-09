@@ -101,6 +101,7 @@ function user_setup()
     send_command('bind ^` gs c cycle treasuremode')
     send_command('bind !` input /ja "Flee" <me>')
     send_command('bind @c gs c toggle CP')
+    state.RingLock = M(false, 'Ring Lock')
 
     send_command('bind ^numlock input /ja "Assassin\'s Charge" <me>')
 
@@ -141,6 +142,7 @@ function user_unload()
     send_command('unbind !`')
     send_command('unbind ^,')
     send_command('unbind @c')
+    send_command('unbind @r')
     send_command('unbind ^numlock')
     send_command('unbind ^numpad/')
     send_command('unbind ^numpad*')
@@ -463,7 +465,7 @@ function init_gear_sets()
         neck="Anu Torque",
         ear1="Cessance Earring",
         ear2="Brutal Earring",
-        ring1="Hetairoi Ring",
+        ring1="Petrov Ring",
         ring2="Epona's Ring",
         back=gear.THF_TP_Cape,
         waist="Windbuffet Belt +1",
@@ -510,7 +512,7 @@ function init_gear_sets()
         neck="Erudit. Necklace",
         ear1="Eabani Earring", --4
         ear2="Suppanomimi", --5
-        ring1="Hetairoi Ring",
+        ring1="Petrov Ring",
         ring2="Epona's Ring",
         back=gear.THF_DW_Cape, --10
         waist="Reiki Yotai", --7
@@ -554,7 +556,7 @@ function init_gear_sets()
         neck="Erudit. Necklace",
         ear1="Cessance Earring",
         ear2="Suppanomimi", --5
-        ring1="Hetairoi Ring",
+        ring1="Petrov Ring",
         ring2="Epona's Ring",
         back=gear.THF_DW_Cape, --10
         waist="Reiki Yotai", --7
@@ -597,7 +599,7 @@ function init_gear_sets()
         neck="Erudit. Necklace",
         ear1="Eabani Earring", --4
         ear2="Suppanomimi", --5
-        ring1="Hetairoi Ring",
+        ring1="Petrov Ring",
         ring2="Epona's Ring",
         back=gear.THF_DW_Cape, --10
         waist="Reiki Yotai", --7
@@ -641,7 +643,7 @@ function init_gear_sets()
         neck="Erudit. Necklace",
         ear1="Sherida Earring",
         ear2="Suppanomimi", --5
-        ring1="Hetairoi Ring",
+        ring1="Petrov Ring",
         ring2="Epona's Ring",
         back=gear.THF_DW_Cape, --10
         waist="Reiki Yotai", --7
@@ -686,7 +688,7 @@ function init_gear_sets()
         neck="Erudit. Necklace",
         ear1="Sherida Earring",
         ear2="Suppanomimi", --5
-        ring1="Hetairoi Ring",
+        ring1="Petrov Ring",
         ring2="Epona's Ring",
         back=gear.THF_TP_Cape,
         waist="Windbuffet Belt +1",
@@ -862,8 +864,13 @@ function job_buff_change(buff,gain)
 	end
 end
 
-function job_status_change(new_status, old_status)
-	handle_equipping_gear(player.status)
+-- Handle notifications of general user state change.
+function job_state_change(stateField, newValue, oldValue)
+    if state.RingLock.value == true then
+        disable('ring1','ring2')
+    else
+        enable('ring1','ring2')
+    end
 end
 
 
@@ -992,7 +999,7 @@ function gearinfo(cmdParams, eventArgs)
             end
         elseif type(cmdParams[2]) == 'string' then
             if cmdParams[2] == 'false' then
-        	      DW_needed = 0
+        	    DW_needed = 0
                 DW = false
       	    end
         end
@@ -1007,6 +1014,9 @@ function gearinfo(cmdParams, eventArgs)
             elseif cmdParams[4] == 'false' then
                 moving = false
             end
+        end
+        if not midaction() then
+            job_update()
         end
     end
 end

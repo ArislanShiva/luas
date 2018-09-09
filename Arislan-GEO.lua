@@ -139,7 +139,7 @@ function init_gear_sets()
         ring1="Kishar Ring", --4
         ring2="Weather. Ring +1", --5
         back="Lifestream Cape", --7
-        waist="Witful Belt", --3/(2)
+        waist="Witful Belt", --3/(3)
         }
 
     sets.precast.FC['Enhancing Magic'] = set_combine(sets.precast.FC, {
@@ -552,7 +552,7 @@ function init_gear_sets()
         ear1="Cessance Earring",
         ear2="Telos Earring",
         ring1="Chirich Ring",
-        ring2="Hetairoi Ring",
+        ring2="Petrov Ring",
         back="Relucent Cape",
         waist="Windbuffet Belt +1",
         }

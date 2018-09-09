@@ -111,6 +111,7 @@ function user_setup()
     state.WeaponLock = M(false, 'Weapon Lock')
     state.MagicBurst = M(false, 'Magic Burst')
     state.CP = M(false, "Capacity Points Mode")
+    state.RingLock = M(false, 'Ring Lock')
 
     -- Additional local binds
     include('Global-Binds.lua') -- OK to remove this line
@@ -174,6 +175,7 @@ function user_unload()
     send_command('unbind !p')
     send_command('unbind @c')
     send_command('unbind @w')
+    send_command('unbind @r')
     send_command('unbind ^numpad7')
     send_command('unbind ^numpad9')
     send_command('unbind ^numpad4')
@@ -446,6 +448,11 @@ function init_gear_sets()
         hands="Viti. Gloves +1",
         }
 
+    sets.midcast.GainSpell = {
+        --hands="Viti. Gloves +3",
+        }
+
+
     sets.midcast.Regen = set_combine(sets.midcast.EnhancingDuration, {
         main="Bolelabunga",
         sub="Ammurapi Shield",
@@ -469,10 +476,10 @@ function init_gear_sets()
         })
 
     sets.midcast['Phalanx'] = set_combine(sets.midcast.EnhancingDuration, {
-        --body=gear.Taeon_Phalanx_body, --3
-        --hands=gear.Taeon_Phalanx_hands, --3
-        --legs=gear.Taeon_Phalanx_legs, --3
-        --feet=gear.Taeon_Phalanx_feet, --3
+        --body=gear.Taeon_Phalanx_body, --3(10)
+        --hands=gear.Taeon_Phalanx_hands, --3(8)
+        --legs=gear.Taeon_Phalanx_legs, --3(8)
+        --feet=gear.Taeon_Phalanx_feet, --3(10)
         })
 
     sets.midcast.Aquaveil = set_combine(sets.midcast.EnhancingDuration, {
@@ -743,7 +750,7 @@ function init_gear_sets()
         ear1="Sherida Earring",
         ear2="Telos Earring",
         ring1="Chirich Ring",
-        ring2="Hetairoi Ring",
+        ring2="Petrov Ring",
         back=gear.RDM_DW_Cape,
         waist="Windbuffet Belt +1",
         }
@@ -776,7 +783,7 @@ function init_gear_sets()
         ear1="Eabani Earring", --4
         ear2="Suppanomimi", --5
         ring1="Chirich Ring",
-        ring2="Hetairoi Ring",
+        ring2="Petrov Ring",
         back=gear.RDM_DW_Cape, --10
         waist="Reiki Yotai", --7
         } --41
@@ -803,7 +810,7 @@ function init_gear_sets()
         ear1="Eabani Earring", --4
         ear2="Suppanomimi", --5
         ring1="Chirich Ring",
-        ring2="Hetairoi Ring",
+        ring2="Petrov Ring",
         back=gear.RDM_DW_Cape, --10
         waist="Reiki Yotai", --7
         }) --41
@@ -830,7 +837,7 @@ function init_gear_sets()
         ear1="Sherida Earring",
         ear2="Suppanomimi", --5
         ring1="Chirich Ring",
-        ring2="Hetairoi Ring",
+        ring2="Petrov Ring",
         back=gear.RDM_DW_Cape, --10
         waist="Reiki Yotai", --7
         }) --41
@@ -861,7 +868,7 @@ function init_gear_sets()
         ear1="Sherida Earring",
         ear2="Telos Earring",
         ring1="Chirich Ring",
-        ring2="Hetairoi Ring",
+        ring2="Petrov Ring",
         back=gear.RDM_DW_Cape, --10
         waist="Reiki Yotai", --7
         }) --26
@@ -892,7 +899,7 @@ function init_gear_sets()
         ear1="Sherida Earring",
         ear2="Telos Earring",
         ring1="Chirich Ring",
-        ring2="Hetairoi Ring",
+        ring2="Petrov Ring",
         back=gear.RDM_DW_Cape, --10
         waist="Windbuffet Belt +1",
         }) --10
@@ -1020,6 +1027,8 @@ function job_post_midcast(spell, action, spellMap, eventArgs)
             end
         elseif skill_spells:contains(spell.english) then
             equip(sets.midcast.EnhancingSkill)
+        elseif spell.english:startswith('Gain') then
+            equip(sets.midcast.GainSpell)
         end
         if (spell.target.type == 'PLAYER' or spell.target.type == 'NPC') and buffactive.Composure then
             equip(sets.buff.ComposureOther)
@@ -1076,6 +1085,11 @@ function job_state_change(stateField, newValue, oldValue)
         disable('main','sub')
     else
         enable('main','sub')
+    end
+    if state.RingLock.value == true then
+        disable('ring1','ring2')
+    else
+        enable('ring1','ring2')
     end
 end
 
@@ -1234,7 +1248,7 @@ function gearinfo(cmdParams, eventArgs)
             end
         elseif type(cmdParams[2]) == 'string' then
             if cmdParams[2] == 'false' then
-        	      DW_needed = 0
+        	    DW_needed = 0
                 DW = false
       	    end
         end
@@ -1249,6 +1263,9 @@ function gearinfo(cmdParams, eventArgs)
             elseif cmdParams[4] == 'false' then
                 moving = false
             end
+        end
+        if not midaction() then
+            job_update()
         end
     end
 end

@@ -165,6 +165,7 @@ function init_gear_sets()
 
     sets.precast.FC.Cure = set_combine(sets.precast.FC, {
         ear1="Mendi. Earring", --5
+        ring1="Lebeche Ring", --(2)
         back="Perimede Cape", --(4)
         })
 
@@ -183,8 +184,8 @@ function init_gear_sets()
         neck="Fotia Gorget",
         ear1="Moonshade Earring",
         ear2="Brutal Earring",
-        ring1="Hetairoi Ring",
-        ring2="Petrov Ring",
+        ring1="Petrov Ring",
+        ring2="Hetairoi Ring",
         waist="Fotia Belt",
         }
 
@@ -236,13 +237,14 @@ function init_gear_sets()
         head="Vanya Hood", --10
         body="Vanya Robe", --7
         hands="Telchine Gloves", --17
+        legs="Chironic Hose", --8
         feet="Vanya Clogs", --5
         neck="Incanter's Torque",
         ear1="Beatific Earring",
         ear2="Mendi. Earring", --5
-        ring1="Haoma's Ring",
+        ring1="Lebeche Ring", --3/(-5)
         ring2="Haoma's Ring",
-        back=gear.GEO_Cure_Cape, --10
+        back=gear.GEO_Cure_Cape, --0/(-10)
         waist="Bishop's Sash",
         }
 
@@ -268,6 +270,7 @@ function init_gear_sets()
         legs="Telchine Braconi",
         feet="Telchine Pigaches",
         neck="Incanter's Torque",
+        ear2="Andoaa Earring",
         ring1="Stikini Ring",
         ring2="Stikini Ring",
         back=gear.GEO_Cure_Cape,
@@ -316,7 +319,7 @@ function init_gear_sets()
         head="Geo. Galero +3",
         body="Geomancy Tunic +3",
         hands="Geo. Mitaines +3",
-        legs="Geomancy Pants +3",
+        legs="Chironic Hose",
         feet="Geo. Sandals +3",
         neck="Erra Pendant",
         ear1="Digni. Earring",
@@ -519,8 +522,8 @@ function init_gear_sets()
         feet="Jhakri Pigaches +2",
         ear1="Cessance Earring",
         ear2="Brutal Earring",
-        ring1="Hetairoi Ring",
-        ring2="Petrov Ring",
+        ring1="Petrov Ring",
+        ring2="Hetairoi Ring",
         waist="Grunfeld Rope",
         }
 

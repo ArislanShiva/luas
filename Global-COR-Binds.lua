@@ -19,13 +19,14 @@
     send_command('bind #2 input //send safiyeh /ja "Samurai Roll" <me>')
     send_command('bind #3 input //send safiyeh /ja "Corsair\'s Roll" <me>')
     send_command('bind #4 input //send safiyeh /ja "Evoker\'s Roll" <me>')
-    send_command('bind #5 input //send safiyeh /ja "Wizard\'s Roll" <me>')
+    send_command('bind #5 input //send safiyeh /ja "Beast Roll" <me>')
     send_command('bind #6 input //send safiyeh /ja "Tactician\'s Roll" <me>')
 
     send_command('bind #7 input //send safiyeh /console gs c qd')
     send_command('bind #8 input //send safiyeh /ja "Light Shot" <t>')
     send_command('bind #0 input //send safiyeh /ja "Dark Shot" <t>')
 
+    send_command('bind #w input //send safiyeh /ma "Flurry" <t>')
     send_command('bind #e input //send safiyeh /ma "Haste" <t>')
     send_command('bind #r input //send safiyeh /ma "Refresh" <t>')
     send_command('bind #t input //send safiyeh /ma "Blink" <me>')

@@ -77,6 +77,7 @@ function user_setup()
     state.IdleMode:options('Normal', 'DT')
 
     state.CP = M(false, "Capacity Points Mode")
+    state.RingLock = M(false, 'Ring Lock')
 
     gear.RAbullet = "Chrono Bullet"
     gear.WSbullet = "Chrono Bullet"
@@ -100,6 +101,7 @@ function user_setup()
     end
 
     send_command('bind @c gs c toggle CP')
+    send_command('bind @r gs c toggle RingLock')
 
     send_command('bind ^numlock input /ja "Double Shot" <me>')
 
@@ -143,8 +145,8 @@ function user_unload()
     send_command('unbind @`')
     send_command('unbind ^,')
     send_command('unbind @f')
-    send_command('unbind @h')
     send_command('unbind @c')
+    send_command('unbind @r')
     send_command('unbind ^numlock')
     send_command('unbind ^numpad/')
     send_command('unbind ^numpad*')
@@ -416,11 +418,11 @@ function init_gear_sets()
         })
 
     sets.midcast.RA.Critical = set_combine(sets.midcast.RA, {
-        head="Mummu Bonnet +2",
+        head="Meghanada Visor +2",
         body="Mummu Jacket +2",
         hands="Kobo Kote",
         legs="Mummu Kecks +2",
-        feet="Mummu Gamash. +2",
+        feet="Oshosi Leggings",
         ring1="Begrudging Ring",
         ring2="Mummu Ring",
         waist="Kwahu Kachina Belt",
@@ -434,7 +436,7 @@ function init_gear_sets()
 
     sets.DoubleShot = {
         head="Oshosi Mask", --5
-        body="Oshosi Vest +1", --8
+        body="Arc. Jerkin +3",
         hands="Oshosi Gloves", -- 4
         legs="Oshosi Trousers", --6
         feet="Oshosi Leggings", --3
@@ -518,7 +520,7 @@ function init_gear_sets()
         neck="Iskur Gorget",
         ear1="Cessance Earring",
         ear2="Brutal Earring",
-        ring1="Hetairoi Ring",
+        ring1="Petrov Ring",
         ring2="Epona's Ring",
         back=gear.RNG_TP_Cape,
         waist="Windbuffet Belt +1",
@@ -561,7 +563,7 @@ function init_gear_sets()
         neck="Iskur Gorget",
         ear1="Suppanomimi", --5
         ear2="Eabani Earring", --4
-        ring1="Hetairoi Ring",
+        ring1="Petrov Ring",
         ring2="Epona's Ring",
         back=gear.RNG_DW_Cape, --10
         waist="Reiki Yotai", --7
@@ -601,7 +603,7 @@ function init_gear_sets()
         neck="Iskur Gorget",
         ear1="Suppanomimi", --5
         ear2="Eabani Earring", --4
-        ring1="Hetairoi Ring",
+        ring1="Petrov Ring",
         ring2="Epona's Ring",
         back=gear.RNG_TP_Cape,
         waist="Reiki Yotai", --7
@@ -641,7 +643,7 @@ function init_gear_sets()
         neck="Iskur Gorget",
         ear1="Suppanomimi", --5
         ear2="Eabani Earring", --4
-        ring1="Hetairoi Ring",
+        ring1="Petrov Ring",
         ring2="Epona's Ring",
         back=gear.RNG_TP_Cape,
         waist="Reiki Yotai", --7
@@ -683,7 +685,7 @@ function init_gear_sets()
         neck="Iskur Gorget",
         ear1="Suppanomimi", --5
         ear2="Eabani Earring", --4
-        ring1="Hetairoi Ring",
+        ring1="Petrov Ring",
         ring2="Epona's Ring",
         back=gear.RNG_TP_Cape,
         waist="Reiki Yotai", --7
@@ -725,7 +727,7 @@ function init_gear_sets()
         neck="Iskur Gorget",
         ear1="Suppanomimi", --5
         ear2="Telos Earring",
-        ring1="Hetairoi Ring",
+        ring1="Petrov Ring",
         ring2="Epona's Ring",
         back=gear.RNG_TP_Cape,
         waist="Windbuffet Belt +1",
@@ -956,9 +958,12 @@ function job_buff_change(buff,gain)
 
 end
 
-function job_status_change(new_status, old_status)
-    if new_status == 'Engaged' then
-        determine_haste_group()
+-- Handle notifications of general user state change.
+function job_state_change(stateField, newValue, oldValue)
+    if state.RingLock.value == true then
+        disable('ring1','ring2')
+    else
+        enable('ring1','ring2')
     end
 end
 
@@ -1088,7 +1093,7 @@ function gearinfo(cmdParams, eventArgs)
             end
         elseif type(cmdParams[2]) == 'string' then
             if cmdParams[2] == 'false' then
-        	      DW_needed = 0
+        	    DW_needed = 0
                 DW = false
       	    end
         end
@@ -1103,6 +1108,9 @@ function gearinfo(cmdParams, eventArgs)
             elseif cmdParams[4] == 'false' then
                 moving = false
             end
+        end
+        if not midaction() then
+            job_update()
         end
     end
 end

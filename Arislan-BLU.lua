@@ -194,8 +194,7 @@ function user_setup()
 
     state.MagicBurst = M(false, 'Magic Burst')
     state.CP = M(false, "Capacity Points Mode")
-
-    state.HasteMode = M(false, 'Block Haste Reset')
+    state.RingLock = M(false, 'Ring Lock')
 
     -- Additional local binds
     include('Global-Binds.lua') -- OK to remove this line
@@ -228,6 +227,7 @@ function user_setup()
     end
 
     send_command('bind @c gs c toggle CP')
+    send_command('bind @r gs c toggle RingLock')
 
     if player.sub_job == 'WAR' then
         send_command('bind ^numpad/ input /ja "Berserk" <me>')
@@ -273,7 +273,7 @@ function user_unload()
     send_command('unbind !p')
     send_command('unbind ^,')
     send_command('unbind @c')
-    send_command('unbind @h')
+    send_command('unbind @r')
     send_command('unbind ^numlock')
     send_command('unbind ^numpad/')
     send_command('unbind ^numpad*')
@@ -347,7 +347,7 @@ function init_gear_sets()
         ring1="Kishar Ring", --4
         ring2="Weather. Ring +1", --6(4)
         back="Swith Cape +1", --4
-        waist="Witful Belt", --3/(2)
+        waist="Witful Belt", --3/(3)
         }
 
     sets.precast.FC['Blue Magic'] = set_combine(sets.precast.FC, {body="Hashishin Mintan +1"})
@@ -717,10 +717,10 @@ function init_gear_sets()
     sets.midcast.Stoneskin = set_combine(sets.midcast.EnhancingDuration, {waist="Siegel Sash"})
 
     sets.midcast.Phalanx = set_combine(sets.midcast.EnhancingDuration, {
-        body=gear.Taeon_Phalanx_body, --3
-        hands=gear.Taeon_Phalanx_hands, --3
-        legs=gear.Taeon_Phalanx_legs, --3
-        feet=gear.Taeon_Phalanx_feet, --3
+        body=gear.Taeon_Phalanx_body, --3(10)
+        hands=gear.Taeon_Phalanx_hands, --3(8)
+        legs=gear.Taeon_Phalanx_legs, --3(8)
+        feet=gear.Taeon_Phalanx_feet, --3(10)
         })
 
     sets.midcast.Aquaveil = set_combine(sets.midcast.EnhancingDuration, {head="Amalric Coif", waist="Emphatikos Rope"})
@@ -816,7 +816,7 @@ function init_gear_sets()
         neck="Ainia Collar",
         ear1="Cessance Earring",
         ear2="Brutal Earring",
-        ring1="Hetairoi Ring",
+        ring1="Petrov Ring",
         ring2="Epona's Ring",
         back=gear.BLU_TP_Cape,
         waist="Windbuffet Belt +1",
@@ -867,7 +867,7 @@ function init_gear_sets()
         neck="Ainia Collar",
         ear1="Eabani Earring", --4
         ear2="Suppanomimi", --5
-        ring1="Hetairoi Ring",
+        ring1="Petrov Ring",
         ring2="Epona's Ring",
         back=gear.BLU_TP_Cape,
         waist="Reiki Yotai", --7
@@ -908,7 +908,7 @@ function init_gear_sets()
         neck="Ainia Collar",
         ear1="Eabani Earring", --4
         ear2="Suppanomimi", --5
-        ring1="Hetairoi Ring",
+        ring1="Petrov Ring",
         ring2="Epona's Ring",
         back=gear.BLU_TP_Cape,
         waist="Reiki Yotai", --7
@@ -949,7 +949,7 @@ function init_gear_sets()
         neck="Ainia Collar",
         ear1="Cessance Earring",
         ear2="Suppanomimi", --5
-        ring1="Hetairoi Ring",
+        ring1="Petrov Ring",
         ring2="Epona's Ring",
         back=gear.BLU_TP_Cape,
         waist="Reiki Yotai", --7
@@ -993,7 +993,7 @@ function init_gear_sets()
         neck="Ainia Collar",
         ear1="Eabani Earring", --4
         ear2="Suppanomimi", --5
-        ring1="Hetairoi Ring",
+        ring1="Petrov Ring",
         ring2="Epona's Ring",
         back=gear.BLU_TP_Cape,
         waist="Reiki Yotai", --7
@@ -1035,7 +1035,7 @@ function init_gear_sets()
         neck="Ainia Collar",
         ear1="Cessance Earring",
         ear2="Telos Earring",
-        ring1="Hetairoi Ring",
+        ring1="Petrov Ring",
         ring2="Epona's Ring",
         back=gear.BLU_TP_Cape,
         waist="Windbuffet Belt +1",
@@ -1237,6 +1237,15 @@ function job_buff_change(buff,gain)
 
 end
 
+-- Handle notifications of general user state change.
+function job_state_change(stateField, newValue, oldValue)
+    if state.RingLock.value == true then
+        disable('ring1','ring2')
+    else
+        enable('ring1','ring2')
+    end
+end
+
 -------------------------------------------------------------------------------------------------------------------
 -- User code that supplements standard library decisions.
 -------------------------------------------------------------------------------------------------------------------
@@ -1363,7 +1372,7 @@ function gearinfo(cmdParams, eventArgs)
             end
         elseif type(cmdParams[2]) == 'string' then
             if cmdParams[2] == 'false' then
-        	      DW_needed = 0
+        	    DW_needed = 0
                 DW = false
       	    end
         end
@@ -1378,6 +1387,9 @@ function gearinfo(cmdParams, eventArgs)
             elseif cmdParams[4] == 'false' then
                 moving = false
             end
+        end
+        if not midaction() then
+            job_update()
         end
     end
 end

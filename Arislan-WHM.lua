@@ -98,7 +98,7 @@ function user_setup()
 
     -- Additional local binds
     include('Global-Binds.lua') -- OK to remove this line
-    include('Global-GEO-Binds.lua') -- OK to remove this line
+    include('Global-COR-Binds.lua') -- OK to remove this line
 
     send_command('bind ^` input /ja "Afflatus Solace" <me>')
     send_command('bind !` input /ja "Afflatus Misery" <me>')
@@ -190,7 +190,7 @@ function init_gear_sets()
         ammo="Sapience Orb", --2
         body="Inyanga Jubbah +2", --14
         hands="Gende. Gages +1", --7
-        legs="Kaykaus Tights", --6
+        legs="Aya. Cosciales +2", --6
         feet="Regal Pumps +1", --7
         neck="Orunmila's Torque", --5
         ear1="Loquacious Earring", --2
@@ -198,25 +198,24 @@ function init_gear_sets()
         ring1="Kishar Ring", --4
         ring2="Weather. Ring +1", --5
         back=gear.WHM_FC_Cape, --10
-        waist="Witful Belt", --3/(2)
+        waist="Witful Belt", --3/(3)
         }
 
     sets.precast.FC['Enhancing Magic'] = set_combine(sets.precast.FC, {
-        back="Perimede Cape",
         waist="Siegel Sash",
         })
 
     sets.precast.FC['Healing Magic'] = set_combine(sets.precast.FC, {
-        head="Vanya Hood", --7
-        legs="Ebers Pant. +1",
+        legs="Ebers Pant. +1", --13
         back="Perimede Cape",
         })
 
     sets.precast.FC.StatusRemoval = sets.precast.FC['Healing Magic']
 
     sets.precast.FC.Cure = set_combine(sets.precast.FC['Healing Magic'], {
-        ammo="Impatiens",
+        ammo="Impatiens", --(2)
         head="Piety Cap +1", --13
+        legs="Ebers Pant. +1", --13
         feet="Kaykaus Boots +1", --7
         ear1="Nourish. Earring +1", --4
         ear2="Mendi. Earring", --5
@@ -245,7 +244,7 @@ function init_gear_sets()
         ring1="Rufescent Ring",
         ring2="Shukuyu Ring",
         waist="Fotia Belt",
-        back=gear.WHM_TP_Cape,
+        back="Relucent Cape",
         }
 
     sets.precast.WS['Black Halo'] = set_combine(sets.precast.WS, {
@@ -291,14 +290,13 @@ function init_gear_sets()
         ear2="Glorious Earring", -- (+2)/(-5)
         ring1="Lebeche Ring", --3/(-5)
         ring2="Haoma's Ring",
-        back=gear.WHM_FC_Cape,
+        back=gear.WHM_Cure_Cape,
         waist="Bishop's Sash",
         } -- 16% Cure Potency from JP
 
     sets.midcast.CureSolaceWeather = set_combine(sets.midcast.CureSolace, {
         main="Chatoyant Staff", --10
         sub="Achaq Grip", --0/(-4)
-        back="Mending Cape", --(-6)
         waist="Hachirin-no-Obi",
         })
 
@@ -465,7 +463,7 @@ function init_gear_sets()
         ear2="Regal Earring",
         ring1="Kishar Ring",
         ring2="Stikini Ring +1",
-        back=gear.WHM_FC_Cape,
+        back=gear.WHM_Cure_Cape,
         waist="Refoccilation Stone",
         }
 
@@ -498,7 +496,7 @@ function init_gear_sets()
         ear2="Regal Earring",
         ring1="Stikini Ring +1",
         ring2="Stikini Ring +1",
-        back=gear.WHM_FC_Cape,
+        back=gear.WHM_Cure_Cape,
         waist="Yamabuki-no-Obi",
         }
 
@@ -517,7 +515,7 @@ function init_gear_sets()
         ear2="Regal Earring",
         ring1="Kishar Ring",
         ring2="Stikini Ring +1",
-        back=gear.WHM_FC_Cape,
+        back=gear.WHM_Cure_Cape,
         waist="Luminary Sash",
         }
 
@@ -593,6 +591,7 @@ function init_gear_sets()
         ear1="Eabani Earring",
         ear2="Hearty Earring",
         ring1="Inyanga Ring",
+        back=gear.WHM_FC_Cape,
         })
 
 
@@ -605,7 +604,6 @@ function init_gear_sets()
         neck="Debilis Medallion",
         ear1="Nourish. Earring +1",
         ear2="Glorious Earring",
-        back=gear.WHM_FC_Cape,
         })
 
     sets.idle.Weak = sets.idle.DT
@@ -615,13 +613,8 @@ function init_gear_sets()
     sets.defense.PDT = sets.idle.DT
     sets.defense.MDT = sets.idle.DT
 
-    sets.Kiting = {
-        feet="Herald's Gaiters"
-        }
-
-    sets.latent_refresh = {
-        waist="Fucho-no-obi"
-        }
+    sets.Kiting = {feet="Herald's Gaiters"}
+    sets.latent_refresh = {waist="Fucho-no-obi"}
 
     -- Engaged sets
 
@@ -640,8 +633,8 @@ function init_gear_sets()
         ear1="Eabani Earring",
         ear2="Brutal Earring",
         ring1="Ilabrat Ring",
-        ring2="Hetairoi Ring",
-        back=gear.WHM_TP_Cape,
+        ring2="Petrov Ring",
+        back="Relucent Cape",
         }
 
     -- Buff sets: Gear that needs to be worn to actively enhance a current player buff.

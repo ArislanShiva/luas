@@ -98,7 +98,6 @@ function user_setup()
     state.PhysicalDefenseMode:options('PDT', 'HP')
     state.MagicalDefenseMode:options('MDT', 'Status')
 
-    state.WeaponLock = M(false, 'Weapon Lock')
     state.Greatsword = M{['description']='Current Weapon', 'Epeolatry', 'Lionheart', 'Aettir', "Hepatizon Axe +1"}
     state.Charm = M(false, 'Charm Resistance')
     state.Knockback = M(false, 'Knockback')
@@ -106,6 +105,8 @@ function user_setup()
     state.CP = M(false, "Capacity Points Mode")
 
     state.Runes = M{['description']='Runes', 'Ignis', 'Gelus', 'Flabra', 'Tellus', 'Sulpor', 'Unda', 'Lux', 'Tenebrae'}
+
+    state.WeaponLock = M(false, 'Weapon Lock')
 
     -- Additional local binds
     include('Global-Binds.lua') -- OK to remove this line
@@ -220,7 +221,7 @@ function init_gear_sets()
         hands="Kurys Gloves", --9
         legs="Eri. Leg Guards +1", --7
         feet="Erilaz Greaves +1",--6
-        neck="Unmoving Collar +1", --10
+        neck="Moonbeam Necklace", --10
         ear1="Cryptic Earring", --4
         ear2="Trux Earring", --5
         ring1="Supershear Ring", --5
@@ -452,13 +453,16 @@ function init_gear_sets()
     sets.midcast.FastRecast = sets.precast.FC
 
     sets.midcast.SpellInterrupt = {
-        ammo="Staunch Tathlum +1", --10
+        ammo="Staunch Tathlum +1", --11
+        body=gear.Taeon_Phalanx_body, --10
         hands="Regal Gauntlets", --10
         legs="Carmine Cuisses +1", --20
-        ear1="Halasz Earring",
+        feet=gear.Taeon_Phalanx_feet, --10
+        neck="Moonbeam Necklace", --10
+        ear1="Halasz Earring", --5
         ring1="Evanescence Ring", --5
         waist="Rumination Sash", --10
-        }
+        } -- +10% from merit points
 
     sets.midcast.Cure = {
         sub="Mensch Strap +1",
@@ -508,15 +512,17 @@ function init_gear_sets()
     sets.midcast['Phalanx'] = set_combine(sets.midcast['Enhancing Magic'], {
         main="Deacon Sword", --4
         sub="Chanter's Shield",
-        ammo="Staunch Tathlum +1", --(11)
+        ammo="Staunch Tathlum +1", --11
         head="Fu. Bandeau +1", --5
         body=gear.Taeon_Phalanx_body, --3(10)
         hands=gear.Taeon_Phalanx_hands, --3(8)
         legs=gear.Taeon_Phalanx_legs, --3(8)
         feet=gear.Taeon_Phalanx_feet, --3(10)
-        ear1="Halasz Earring", --(5)
-        ring1="Evanescence Ring", --(5)
-        waist="Rumination Sash", --(10)
+        })
+
+    sets.midcast['Aquaveil'] = set_combine(sets.midcast['Enhancing Magic'], sets.midcast.SpellInterrupt, {
+        main="Nibiru Faussar", --1
+        sub="Refined Grip +1",
         })
 
     sets.midcast['Regen'] = set_combine(sets.midcast['Enhancing Magic'], {head="Rune. Bandeau +3"})
@@ -996,7 +1002,7 @@ end
 
 -- Modify the default melee set after it was constructed.
 function customize_melee_set(meleeSet)
-     if buffactive['Aftermath: Lv.3'] and player.equipment.main == "Epeolatry"
+    if buffactive['Aftermath: Lv.3'] and player.equipment.main == "Epeolatry"
         and state.DefenseMode.value == 'None' then
         if state.HybridMode.value == "DT" then
             meleeSet = set_combine(meleeSet, sets.engaged.Aftermath.DT)

@@ -630,7 +630,7 @@ function init_gear_sets()
         neck="Iskur Gorget",
         ear1="Cessance Earring",
         ear2="Suppanomimi", --5
-        ring1="Hetairoi Ring",
+        ring1="Petrov Ring",
         ring2="Epona's Ring",
         back=gear.COR_DW_Cape, --10
         waist="Kentarch Belt +1",
@@ -673,7 +673,7 @@ function init_gear_sets()
         neck="Iskur Gorget",
         ear1="Cessance Earring",
         ear2="Suppanomimi", --5
-        ring1="Hetairoi Ring",
+        ring1="Petrov Ring",
         ring2="Epona's Ring",
         back=gear.COR_DW_Cape, --10
         waist="Kentarch Belt +1",
@@ -711,7 +711,7 @@ function init_gear_sets()
         neck="Iskur Gorget",
         ear1="Cessance Earring",
         ear2="Suppanomimi", --5
-        ring1="Hetairoi Ring",
+        ring1="Petrov Ring",
         ring2="Epona's Ring",
         back=gear.COR_DW_Cape, --10
         waist="Kentarch Belt +1",
@@ -749,7 +749,7 @@ function init_gear_sets()
         neck="Iskur Gorget",
         ear1="Cessance Earring",
         ear2="Suppanomimi", --5
-        ring1="Hetairoi Ring",
+        ring1="Petrov Ring",
         ring2="Epona's Ring",
         back=gear.COR_DW_Cape, --10
         waist="Kentarch Belt +1",
@@ -788,7 +788,7 @@ function init_gear_sets()
         neck="Iskur Gorget",
         ear1="Cessance Earring",
         ear2="Suppanomimi", --5
-        ring1="Hetairoi Ring",
+        ring1="Petrov Ring",
         ring2="Epona's Ring",
         back=gear.COR_DW_Cape, --10
         waist="Kentarch Belt +1",
@@ -827,7 +827,7 @@ function init_gear_sets()
         neck="Iskur Gorget",
         ear1="Cessance Earring",
         ear2="Suppanomimi", --5
-        ring1="Hetairoi Ring",
+        ring1="Petrov Ring",
         ring2="Epona's Ring",
         back=gear.COR_DW_Cape, --10
         waist="Kentarch Belt +1",

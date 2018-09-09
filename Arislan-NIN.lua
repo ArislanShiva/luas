@@ -82,6 +82,7 @@ function user_setup()
 
     state.MagicBurst = M(false, 'Magic Burst')
     state.CP = M(false, "Capacity Points Mode")
+    state.RingLock = M(false, 'Ring Lock')
     state.TH = M(false, "Treasure Hunter Mode")
 
     state.Night = M(false, "Dusk to Dawn")
@@ -101,6 +102,7 @@ function user_setup()
     send_command('bind @/ input /ma "Utsusemi: San" <me>')
 
     send_command('bind @c gs c toggle CP')
+    send_command('bind @r gs c toggle RingLock')
 
     send_command('bind ^numlock input /ja "Innin" <me>')
     send_command('bind !numlock input /ja "Yonin" <me>')
@@ -140,6 +142,7 @@ function user_unload()
     send_command('unbind ^=')
     send_command('unbind @/')
     send_command('unbind @c')
+    send_command('unbind @r')
     send_command('unbind @t')
     send_command('unbind ^numlock')
     send_command('unbind !numlock')
@@ -473,7 +476,7 @@ function init_gear_sets()
         neck="Erudit. Necklace",
         ear1="Eabani Earring", --4
         ear2="Suppanomimi", --5
-        ring1="Hetairoi Ring",
+        ring1="Petrov Ring",
         ring2="Epona's Ring",
         back=gear.NIN_TP_Cape,
         waist="Reiki Yotai", --7
@@ -514,7 +517,7 @@ function init_gear_sets()
         neck="Erudit. Necklace",
         ear1="Eabani Earring", --4
         ear2="Suppanomimi", --5
-        ring1="Hetairoi Ring",
+        ring1="Petrov Ring",
         ring2="Epona's Ring",
         back=gear.NIN_TP_Cape,
         waist="Reiki Yotai", --7
@@ -556,7 +559,7 @@ function init_gear_sets()
         neck="Erudit. Necklace",
         ear1="Eabani Earring", --4
         ear2="Suppanomimi", --5
-        ring1="Hetairoi Ring",
+        ring1="Petrov Ring",
         ring2="Epona's Ring",
         back=gear.NIN_TP_Cape,
         waist="Reiki Yotai", --7
@@ -598,7 +601,7 @@ function init_gear_sets()
         neck="Erudit. Necklace",
         ear1="Eabani Earring", --4
         ear2="Suppanomimi", --5
-        ring1="Hetairoi Ring",
+        ring1="Petrov Ring",
         ring2="Epona's Ring",
         back=gear.NIN_TP_Cape,
         waist="Windbuffet Belt +1",
@@ -640,7 +643,7 @@ function init_gear_sets()
         neck="Erudit. Necklace",
         ear1="Cessance Earring",
         ear2="Brutal Earring",
-        ring1="Hetairoi Ring",
+        ring1="Petrov Ring",
         ring2="Epona's Ring",
         back=gear.NIN_TP_Cape,
         waist="Windbuffet Belt +1",
@@ -821,12 +824,16 @@ function job_buff_change(buff, gain)
 
 end
 
---function job_status_change(new_status, old_status)
+function job_status_change(new_status, old_status)
     if new_status == 'Idle' then
         select_movement_feet()
     end
---end
-
+    if state.RingLock.value == true then
+        disable('ring1','ring2')
+    else
+        enable('ring1','ring2')
+    end
+end
 
 -------------------------------------------------------------------------------------------------------------------
 -- User code that supplements standard library decisions.
@@ -951,7 +958,7 @@ function gearinfo(cmdParams, eventArgs)
             end
         elseif type(cmdParams[2]) == 'string' then
             if cmdParams[2] == 'false' then
-        	      DW_needed = 0
+        	    DW_needed = 0
                 DW = false
       	    end
         end
@@ -966,6 +973,9 @@ function gearinfo(cmdParams, eventArgs)
             elseif cmdParams[4] == 'false' then
                 moving = false
             end
+        end
+        if not midaction() then
+            job_update()
         end
     end
 end
