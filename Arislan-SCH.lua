@@ -200,7 +200,7 @@ function init_gear_sets()
         ammo="Sapience Orb", --2
         head="Amalric Coif", --10
         body=gear.Merl_FC_body, --13
-        hands="Gende. Gages +1", --7
+        hands="Acad. Bracers +3", --9
         legs="Psycloth Lappas", --7
         feet="Regal Pumps +1", --7
         neck="Orunmila's Torque", --5
@@ -214,7 +214,7 @@ function init_gear_sets()
 
     sets.precast.FC.Grimoire = {head="Peda. M.Board +3", feet="Acad. Loafers +3"}
     sets.precast.FC['Enhancing Magic'] = set_combine(sets.precast.FC, {waist="Siegel Sash"})
-    sets.precast.FC['Elemental Magic'] = set_combine(sets.precast.FC, {ear1="Barkaro. Earring", waist="Channeler's Stone"})
+    sets.precast.FC['Elemental Magic'] = set_combine(sets.precast.FC, {ear1="Barkaro. Earring"})
 
     sets.precast.FC.Cure = set_combine(sets.precast.FC, {
         main="Oranyan", --7
@@ -228,7 +228,7 @@ function init_gear_sets()
 
     sets.precast.FC.Curaga = sets.precast.FC.Cure
     sets.precast.FC.Impact = set_combine(sets.precast.FC, {head=empty, body="Twilight Cloak"})
-    sets.precast.Storm = set_combine(sets.precast.FC, {ring2="Stikini Ring +1", waist="Channeler's Stone"}) -- stop quick cast
+    sets.precast.Storm = set_combine(sets.precast.FC, {ring2="Stikini Ring +1"})
 
 
     ------------------------------------------------------------------------------------------------
@@ -279,8 +279,8 @@ function init_gear_sets()
         sub="Sors Shield", --3/(-5)
         ammo="Esper Stone +1", --0/(-5)
         head="Kaykaus Mitra +1", --11(+2)/(-6)
-        body="Kaykaus Bliaut", --5(+3)
-        hands="Kaykaus Cuffs +1", --11(+2)/(-6)
+        body="Kaykaus Bliaut", --(+3)/(-6)
+        hands="Peda. Bracers +3", --(+3)/(-7)
         legs="Acad. Pants +3", --15
         feet="Kaykaus Boots +1", --11(+2)/(-12)
         neck="Incanter's Torque",
@@ -288,14 +288,13 @@ function init_gear_sets()
         ear2="Regal Earring",
         ring1="Lebeche Ring", --3/(-5)
         ring2="Haoma's Ring",
-        back="Oretan. Cape +1", --6
+        back=gear.SCH_Cure_Cape, --10
         waist="Bishop's Sash",
         }
 
     sets.midcast.CureWeather = set_combine(sets.midcast.Cure, {
         main="Chatoyant Staff", --10
         sub="Achaq Grip", --0/(-4)
-        back="Solemnity Cape", --7/0
         waist="Hachirin-no-Obi",
         })
 
@@ -303,20 +302,19 @@ function init_gear_sets()
         neck="Nuna Gorget +1",
         ring1="Stikini Ring +1",
         ring2="Stikini Ring +1",
-        back=gear.SCH_FC_Cape,
         waist="Luminary Sash",
         })
 
     sets.midcast.StatusRemoval = {
         head="Vanya Hood",
         body="Vanya Robe",
+        hands="Peda. Bracers +3",
         legs="Acad. Pants +3",
         feet="Vanya Clogs",
         neck="Incanter's Torque",
         ear2="Healing Earring",
         ring1="Haoma's Ring",
         ring2="Haoma's Ring",
-        back="Oretan. Cape +1",
         waist="Bishop's Sash",
         }
 
@@ -328,6 +326,7 @@ function init_gear_sets()
         --feet="Gende. Galosh. +1",
         neck="Debilis Medallion",
         ear1="Beatific Earring",
+        back="Oretan. Cape +1",
         })
 
     sets.midcast['Enhancing Magic'] = {
@@ -407,7 +406,7 @@ function init_gear_sets()
         hands="Kaykaus Cuffs +1",
         legs="Acad. Pants +3",
         feet="Acad. Loafers +3",
-        neck="Erra Pendant",
+        neck="Argute Stole +1",
         ear1="Digni. Earring",
         ear2="Regal Earring",
         ring1="Kishar Ring",
@@ -432,10 +431,10 @@ function init_gear_sets()
         ammo="Pemphredo Tathlum",
         head="Acad. Mortar. +3",
         body="Acad. Gown +3",
-        hands="Kaykaus Cuffs +1",
+        hands="Acad. Bracers +3",
         legs="Peda. Pants +3",
         feet="Acad. Loafers +3",
-        neck="Erra Pendant",
+        neck="Argute Stole +1",
         ear1="Barkaro. Earring",
         ear2="Regal Earring",
         ring1="Stikini Ring +1",
@@ -525,6 +524,7 @@ function init_gear_sets()
         main="Akademos",
         sub="Niobid Strap",
         ammo="Ghastly Tathlum +1",
+        neck="Argute Stole +1",
         waist="Yamabuki-no-Obi",
         }
 
@@ -567,7 +567,9 @@ function init_gear_sets()
         main="Bolelabunga",
         sub="Genmei Shield", --10/0
         ammo="Staunch Tathlum +1", --3/3
+        head="Volte Cap",
         body="Mallquis Saio +2", --8/8
+        feet="Volte Boots",
         neck="Loricate Torque +1", --6/6
         ring1="Gelatinous Ring +1", --7/(-1)
         ring2="Defending Ring", --10/10
@@ -584,7 +586,7 @@ function init_gear_sets()
         body="Amalric Doublet +1",
         hands="Amalric Gages +1",
         legs="Peda. Pants +3",
-        neck="Incanter's Torque",
+        neck="Argute Stole +1",
         ear1="Barkaro. Earring",
         ear2="Regal Earring",
         back=gear.SCH_MAB_Cape,

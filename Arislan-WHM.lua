@@ -98,7 +98,7 @@ function user_setup()
 
     -- Additional local binds
     include('Global-Binds.lua') -- OK to remove this line
-    include('Global-COR-Binds.lua') -- OK to remove this line
+    include('Global-GEO-Binds.lua') -- OK to remove this line
 
     send_command('bind ^` input /ja "Afflatus Solace" <me>')
     send_command('bind !` input /ja "Afflatus Misery" <me>')
@@ -276,7 +276,6 @@ function init_gear_sets()
     -- Cure sets
 
     sets.midcast.CureSolace = {
-        -- 10 from JP Gifts
         main="Queller Rod", --15(+2)/(-15)
         sub="Sors Shield", --3/(-5)
         ammo="Esper Stone +1", --0/(-5)
@@ -292,11 +291,13 @@ function init_gear_sets()
         ring2="Haoma's Ring",
         back=gear.WHM_Cure_Cape,
         waist="Bishop's Sash",
-        } -- 16% Cure Potency from JP
+        }
 
     sets.midcast.CureSolaceWeather = set_combine(sets.midcast.CureSolace, {
         main="Chatoyant Staff", --10
         sub="Achaq Grip", --0/(-4)
+        hands="Kaykaus Cuffs +1", --11/(-6)
+        back="Twilight Cape",
         waist="Hachirin-no-Obi",
         })
 
@@ -307,7 +308,8 @@ function init_gear_sets()
     sets.midcast.CureWeather = set_combine(sets.midcast.CureNormal, {
         main="Chatoyant Staff", --10
         sub="Achaq Grip", --0/(-4)
-        back="Mending Cape", --(-6)
+        hands="Kaykaus Cuffs +1", --11/(-6)
+        back="Twilight Cape",
         waist="Hachirin-no-Obi",
         })
 
@@ -323,6 +325,7 @@ function init_gear_sets()
         main="Chatoyant Staff", --10
         sub="Achaq Grip", --0/(-4)
         body="Theo. Briault +3", --0(+6)/(-6)
+        hands="Kaykaus Cuffs +1", --11/(-6)
         neck="Nuna Gorget +1",
         back="Twilight Cape",
         ring1="Stikini Ring +1",

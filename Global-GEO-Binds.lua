@@ -15,8 +15,8 @@
 
     send_command('bind #` input //send safiyeh /ja "Full Circle" <me>')
 
-    send_command('bind #1 input //send safiyeh /ma "Geo-Fury" <t>')
-    send_command('bind #2 input //send safiyeh /ma "Indi-Fend" <t>')
+    send_command('bind #1 input //send safiyeh /ma "Geo-Fade" <t>')
+    send_command('bind #2 input //send safiyeh /ma "Indi-Focus" <t>')
     send_command('bind #3 input //send safiyeh /ma "Indi-Haste" <t>')
     send_command('bind #4 input //send safiyeh /ma "Indi-Refresh" <t>')
     send_command('bind #5 input //send safiyeh /ma "Geo-Malaise" <t>')
@@ -25,9 +25,10 @@
     send_command('bind #7 input //send safiyeh /ma "Dia II" <t>')
     send_command('bind #8 input //send safiyeh /ma "Silence" <t>')
     send_command('bind #9 input //send safiyeh /ma "Paralyze" <t>')
-    send_command('bind #0 input //send safiyeh /ma "Cure" Arislan')
+    send_command('bind #0 input //send safiyeh /ma "Cure" Xelltrix')
+    --send_command('bind #0 input //send safiyeh /ma "Dispel" <t>')
 
-    send_command('bind #q input //send safiyeh /ma "Fire V" <t>')
+    send_command('bind #q input //send safiyeh /ma "Blizzard V" <t>')
     send_command('bind #w input //send safiyeh /ma "Aspir III" <t>')
     send_command('bind #e input //send safiyeh /ma "Haste" <t>')
     send_command('bind #r input //send safiyeh /ma "Refresh" <t>')
@@ -55,4 +56,5 @@
     send_command('bind #numpad5 input //send safiyeh /ma "Stona" <t>')
     send_command('bind #numpad6 input //send safiyeh /ma "Viruna" <t>')
     send_command('bind #numpad1 input //send safiyeh /ma "Cursna" <t>')
+    --send_command('bind #numpad2 input //send safiyeh /ma "Cursna" Gary')
     send_command('bind #numpad+ input //send safiyeh /ma "Erase" <t>')

@@ -172,8 +172,13 @@ function job_setup()
         'Crashing Thunder','Cruel Joke','Droning Whirlwind','Gates of Hades','Harden Shell','Mighty Guard',
         'Polar Roar','Pyric Bulwark','Tearing Gust','Thunderbolt','Tourbillion','Uproot'}
 
+    include('Mote-TreasureHunter')
 
-    state.CP = M(false, "Capacity Points Mode")
+    -- For th_action_check():
+    -- JA IDs for actions that always have TH: Provoke, Animated Flourish
+    info.default_ja_ids = S{35, 204}
+    -- Unblinkable JA IDs for actions that always have TH: Quick/Box/Stutter Step, Desperate/Violent Flourish
+    info.default_u_ja_ids = S{201, 202, 203, 205, 207}
 
     lockstyleset = 3
 end
@@ -194,13 +199,12 @@ function user_setup()
 
     state.MagicBurst = M(false, 'Magic Burst')
     state.CP = M(false, "Capacity Points Mode")
-    state.RingLock = M(false, 'Ring Lock')
 
     -- Additional local binds
     include('Global-Binds.lua') -- OK to remove this line
     include('Global-GEO-Binds.lua') -- OK to remove this line
 
-    send_command('bind ^` input /ma "Blank Gaze" <t>')
+    send_command('bind ^` gs c cycle treasuremode')
     send_command('bind !` gs c toggle MagicBurst')
     send_command('bind ^- input /ja "Chain Affinity" <me>')
     send_command('bind ^[ input /ja "Efflux" <me>')
@@ -227,7 +231,6 @@ function user_setup()
     end
 
     send_command('bind @c gs c toggle CP')
-    send_command('bind @r gs c toggle RingLock')
 
     if player.sub_job == 'WAR' then
         send_command('bind ^numpad/ input /ja "Berserk" <me>')
@@ -273,7 +276,6 @@ function user_unload()
     send_command('unbind !p')
     send_command('unbind ^,')
     send_command('unbind @c')
-    send_command('unbind @r')
     send_command('unbind ^numlock')
     send_command('unbind ^numpad/')
     send_command('unbind ^numpad*')
@@ -392,10 +394,13 @@ function init_gear_sets()
     sets.precast.WS['Chant du Cygne'] = set_combine(sets.precast.WS, {
         ammo="Jukukik Feather",
         head=gear.Adhemar_B_head,
-        body="Abnoba Kaftan",
+        body="Assim. Jubbah +3",
+        --body="Abnoba Kaftan",
         hands=gear.Adhemar_B_hands,
-        legs="Samnuha Tights",
-        feet="Thereoid Greaves",
+        --legs="Samnuha Tights",
+        legs=gear.Herc_WS_legs,
+        feet=gear.Herc_MWS_feet,
+        --feet="Thereoid Greaves",
         ear2="Brutal Earring",
         ring1="Begrudging Ring",
         ring2="Epona's Ring",
@@ -760,10 +765,10 @@ function init_gear_sets()
 
     sets.idle.DT = set_combine(sets.idle, {
         ammo="Staunch Tathlum +1", --3/3
-        head="Dampening Tam", --0/4
+        head="Volte Cap",
         body="Ayanmo Corazza +2", --6/6
         hands=gear.Herc_DT_hands, --7/5
-        feet="Hashi. Basmak +1",
+        feet="Volte Boots",
         neck="Loricate Torque +1", --6/6
 		ear1="Genmei Earring", --2/0
         ear2="Etiolation Earring", --0/3
@@ -1136,10 +1141,9 @@ function init_gear_sets()
     sets.buff.Doom = {ring1="Eshmun's Ring", ring2="Eshmun's Ring", waist="Gishdubar Sash"}
 
     sets.CP = {back="Mecisto. Mantle"}
-    --sets.Reive = {neck="Ygnas's Resolve +1"}
-    sets.TreasureHunter = {head=gear.Herc_TH_head, hands=gear.Herc_TH_hands}
-
+    sets.TreasureHunter = {head="Volte Cap", hands=gear.Herc_TH_hands, waist="Chaac Belt"}
     sets.midcast.Diaga = sets.TreasureHunter
+    --sets.Reive = {neck="Ygnas's Resolve +1"}
 
 end
 
@@ -1237,14 +1241,6 @@ function job_buff_change(buff,gain)
 
 end
 
--- Handle notifications of general user state change.
-function job_state_change(stateField, newValue, oldValue)
-    if state.RingLock.value == true then
-        disable('ring1','ring2')
-    else
-        enable('ring1','ring2')
-    end
-end
 
 -------------------------------------------------------------------------------------------------------------------
 -- User code that supplements standard library decisions.
@@ -1259,6 +1255,7 @@ end
 
 function job_update(cmdParams, eventArgs)
     handle_equipping_gear(player.status)
+    th_update(cmdParams, eventArgs)
 end
 
 function update_combat_form()
@@ -1303,6 +1300,15 @@ function customize_idle_set(idleSet)
     return idleSet
 end
 
+-- Modify the default melee set after it was constructed.
+function customize_melee_set(meleeSet)
+    if state.TreasureMode.value == 'Fulltime' then
+        meleeSet = set_combine(meleeSet, sets.TreasureHunter)
+    end
+
+    return meleeSet
+end
+
 -- Function to display the current relevant user state when doing an update.
 -- Return true if display was handled, and you don't want the default info shown.
 function display_current_job_state(eventArgs)
@@ -1329,8 +1335,12 @@ function display_current_job_state(eventArgs)
     end
 
     if state.Kiting.value then
-        msg = msg .. '[ Kiting Mode: ON ]'
+        msg = msg .. '[ Kiting Mode: ON'
     end
+
+    msg = msg .. ' ][ TH: ' .. state.TreasureMode.value
+
+    msg = msg .. ' ]'
 
     add_to_chat(060, msg)
 
@@ -1418,6 +1428,19 @@ function apply_ability_bonuses(spell, action, spellMap)
     if state.Buff['Burst Affinity'] then equip (sets.buff['Burst Affinity']) end
     if state.Buff['Efflux'] then equip (sets.buff['Efflux']) end
     if state.Buff['Diffusion'] then equip (sets.buff['Diffusion']) end
+end
+
+-- Check for various actions that we've specified in user code as being used with TH gear.
+-- This will only ever be called if TreasureMode is not 'None'.
+-- Category and Param are as specified in the action event packet.
+function th_action_check(category, param)
+    if category == 2 or -- any ranged attack
+        --category == 4 or -- any magic action
+        (category == 3 and param == 30) or -- Aeolian Edge
+        (category == 6 and info.default_ja_ids:contains(param)) or -- Provoke, Animated Flourish
+        (category == 14 and info.default_u_ja_ids:contains(param)) -- Quick/Box/Stutter Step, Desperate/Violent Flourish
+        then return true
+    end
 end
 
 -- Select default macro book on initial load or subjob change.

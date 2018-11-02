@@ -77,7 +77,6 @@ function user_setup()
     state.IdleMode:options('Normal', 'DT')
 
     state.CP = M(false, "Capacity Points Mode")
-    state.RingLock = M(false, 'Ring Lock')
 
     gear.RAbullet = "Chrono Bullet"
     gear.WSbullet = "Chrono Bullet"
@@ -101,7 +100,6 @@ function user_setup()
     end
 
     send_command('bind @c gs c toggle CP')
-    send_command('bind @r gs c toggle RingLock')
 
     send_command('bind ^numlock input /ja "Double Shot" <me>')
 
@@ -146,7 +144,6 @@ function user_unload()
     send_command('unbind ^,')
     send_command('unbind @f')
     send_command('unbind @c')
-    send_command('unbind @r')
     send_command('unbind ^numlock')
     send_command('unbind ^numpad/')
     send_command('unbind ^numpad*')
@@ -181,7 +178,7 @@ function init_gear_sets()
     ------------------------------------------------------------------------------------------------
 
     -- Precast sets to enhance JAs
-    sets.precast.JA['Eagle Eye Shot'] = {legs="Arc. Braccae +1"}
+    sets.precast.JA['Eagle Eye Shot'] = {legs="Arc. Braccae +3"}
     sets.precast.JA['Bounty Shot'] = {hands="Amini Glove. +1"}
     sets.precast.JA['Camouflage'] = {body="Orion Jerkin +3"}
     sets.precast.JA['Scavenge'] = {feet="Orion Socks +3"}
@@ -251,7 +248,7 @@ function init_gear_sets()
         head="Orion Beret +3",
         body=gear.Herc_RA_body,
         hands="Meg. Gloves +2",
-        legs=gear.Herc_RA_legs,
+        legs="Arc. Braccae +3",
         feet=gear.Herc_RA_feet,
         neck="Fotia Gorget",
         ear1="Ishvara Earring",
@@ -264,7 +261,6 @@ function init_gear_sets()
 
     sets.precast.WS.Acc = set_combine(sets.precast.WS, {
         ammo=gear.ACCbullet,
-        legs=gear.Adhemar_C_legs,
         feet="Orion Socks +3",
         neck="Combatant's Torque",
         ear2="Telos Earring",
@@ -283,7 +279,6 @@ function init_gear_sets()
         head="Mummu Bonnet +2",
         body="Abnoba Kaftan",
         hands="Mummu Wrists +2",
-        legs=gear.Herc_RA_legs,
         feet="Thereoid Greaves",
         ear1="Sherida Earring",
         ring1="Begrudging Ring",
@@ -308,7 +303,7 @@ function init_gear_sets()
     sets.precast.WS['Last Stand'].Acc = set_combine(sets.precast.WS['Last Stand'], {
         ammo=gear.ACCbullet,
         legs=gear.Adhemar_C_legs,
-    	  feet="Orion Socks +3",
+    	feet="Orion Socks +3",
         neck="Iskur Gorget",
         ear2="Telos Earring",
         ring2="Hajduk Ring +1",
@@ -388,7 +383,7 @@ function init_gear_sets()
 
     sets.midcast.RA = {
         ammo=gear.RAbullet,
-        head="Arcadian Beret +1",
+        head="Arcadian Beret +2",
         body="Oshosi Vest +1",
         hands=gear.Adhemar_C_hands,
         legs=gear.Adhemar_C_legs,
@@ -958,14 +953,6 @@ function job_buff_change(buff,gain)
 
 end
 
--- Handle notifications of general user state change.
-function job_state_change(stateField, newValue, oldValue)
-    if state.RingLock.value == true then
-        disable('ring1','ring2')
-    else
-        enable('ring1','ring2')
-    end
-end
 
 -------------------------------------------------------------------------------------------------------------------
 -- User code that supplements standard library decisions.

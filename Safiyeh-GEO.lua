@@ -176,7 +176,7 @@ function init_gear_sets()
     -- Weaponskill sets
     -- Default set for any weaponskill that isn't any more specifically defined
     sets.precast.WS = {
-        head="Jhakri Coronal +1",
+        head="Jhakri Coronal +2",
         body="Jhakri Robe +2",
         hands="Jhakri Cuffs +2",
         legs="Jhakri Slops +2",
@@ -188,6 +188,13 @@ function init_gear_sets()
         ring2="Hetairoi Ring",
         waist="Fotia Belt",
         }
+
+    sets.precast.WS['Hexastrike'] = set_combine(sets.precast.WS, {
+        neck="Caro Necklace",
+        waist="Grunfeld Rope",
+        })
+
+    sets.precast.WS['Exudation'] = sets.precast.WS['Hexastrike']
 
     ------------------------------------------------------------------------
     ----------------------------- Midcast Sets -----------------------------
@@ -232,12 +239,12 @@ function init_gear_sets()
         })
 
     sets.midcast.Cure = {
-        main="Tamaxchi", --22/(-10)
+        main=gear.Gada_ENF, --18/(-4)
         sub="Sors Shield", --3
         head="Vanya Hood", --10
-        body="Vanya Robe", --7
-        hands="Telchine Gloves", --17
-        legs="Chironic Hose", --8
+        body="Vanya Robe", --7/(-6)
+        hands="Vanya Cuffs",
+        legs="Vanya Slops",
         feet="Vanya Clogs", --5
         neck="Incanter's Torque",
         ear1="Beatific Earring",
@@ -249,13 +256,13 @@ function init_gear_sets()
         }
 
     sets.midcast.Curaga = set_combine(sets.midcast.Cure, {
-
+        neck="Nuna Gorget +1",
+        ring2="Stikini Ring",
+        waist="Luminary Sash",
         })
 
     sets.midcast.Cursna = set_combine(sets.midcast.Cure, {
-        feet="Vanya Clogs",
         neck="Malison Medallion",
-        ear1="Beatific Earring",
         ring1="Haoma's Ring",
         ring2="Haoma's Ring",
         back="Oretan. Cape +1",
@@ -514,8 +521,8 @@ function init_gear_sets()
     -- Normal melee group
     sets.engaged = {
         main="Idris",
-        sub="Tamaxchi",
-        head="Jhakri Coronal +1",
+        sub="Genmei Shield",
+        head="Jhakri Coronal +2",
         body="Jhakri Robe +2",
         hands="Jhakri Cuffs +2",
         legs="Jhakri Slops +2",
@@ -524,7 +531,7 @@ function init_gear_sets()
         ear2="Brutal Earring",
         ring1="Petrov Ring",
         ring2="Hetairoi Ring",
-        waist="Grunfeld Rope",
+        waist="Cetl Belt",
         }
 
 

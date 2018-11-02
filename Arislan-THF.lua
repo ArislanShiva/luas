@@ -101,7 +101,6 @@ function user_setup()
     send_command('bind ^` gs c cycle treasuremode')
     send_command('bind !` input /ja "Flee" <me>')
     send_command('bind @c gs c toggle CP')
-    state.RingLock = M(false, 'Ring Lock')
 
     send_command('bind ^numlock input /ja "Assassin\'s Charge" <me>')
 
@@ -177,9 +176,10 @@ function init_gear_sets()
     ------------------------------------------------------------------------------------------------
 
     sets.TreasureHunter = {
-        hands="Plunderer's Armlets +1",
-        feet="Skulk. Poulaines +1",
-        waist="Chaac Belt",
+        head=gear.Herc_TH_head, --2
+        hands="Plunderer's Armlets +1", --3
+        feet="Skulk. Poulaines +1", --3
+        waist="Chaac Belt", --1
         }
 
     sets.buff['Sneak Attack'] = {
@@ -238,8 +238,8 @@ function init_gear_sets()
     sets.precast.JA['Despoil'] = {ammo="Barathrum",    legs="Skulk. Culottes +1", feet="Skulk. Poulaines +1"}
     sets.precast.JA['Perfect Dodge'] = {hands="Plunderer's Armlets +1"}
     sets.precast.JA['Feint'] = {legs="Plunderer's Culottes +1"}
-    sets.precast.JA['Sneak Attack'] = sets.buff['Sneak Attack']
-    sets.precast.JA['Trick Attack'] = sets.buff['Trick Attack']
+    --sets.precast.JA['Sneak Attack'] = sets.buff['Sneak Attack']
+    --sets.precast.JA['Trick Attack'] = sets.buff['Trick Attack']
 
     sets.precast.Waltz = {
         ammo="Yamarang",
@@ -409,9 +409,11 @@ function init_gear_sets()
 
     sets.idle.DT = set_combine(sets.idle, {
         ammo="Staunch Tathlum +1", --3/3
+        head="Volte Cap",
         body="Meg. Cuirie +2", --8/0
         hands=gear.Herc_DT_hands, --7/5
         legs="Mummu Kecks +2", --5/5
+        feet="Volte Boots",
         neck="Loricate Torque +1", --6/6
         ring1="Gelatinous Ring +1", --7/(-1)
         ring2="Defending Ring", --10/10
@@ -862,15 +864,6 @@ function job_buff_change(buff,gain)
     if not midaction() then
         handle_equipping_gear(player.status)
 	end
-end
-
--- Handle notifications of general user state change.
-function job_state_change(stateField, newValue, oldValue)
-    if state.RingLock.value == true then
-        disable('ring1','ring2')
-    else
-        enable('ring1','ring2')
-    end
 end
 
 

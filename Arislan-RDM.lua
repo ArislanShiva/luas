@@ -233,9 +233,9 @@ function init_gear_sets()
 
     sets.precast.FC.Curaga = sets.precast.FC.Cure
     sets.precast.FC['Healing Magic'] = sets.precast.FC.Cure
-    sets.precast.FC['Elemental Magic'] = set_combine(sets.precast.FC, {waist="Channeler's Stone"})
+    sets.precast.FC['Elemental Magic'] = set_combine(sets.precast.FC, {})
     sets.precast.FC.Impact = set_combine(sets.precast.FC, {head=empty, body="Twilight Cloak"})
-    sets.precast.Storm = set_combine(sets.precast.FC, {ring2="Stikini Ring +1", waist="Channeler's Stone"}) -- stop quick cast
+    sets.precast.Storm = set_combine(sets.precast.FC, {ring2="Stikini Ring +1"})
 
     sets.precast.FC.Utsusemi = set_combine(sets.precast.FC, {
         ammo="Impatiens",
@@ -359,16 +359,16 @@ function init_gear_sets()
         sub="Sors Shield", --3/(-5)
         ammo="Esper Stone +1", --0/(-5)
         head="Kaykaus Mitra +1", --11(+2)/(-6)
-        body="Kaykaus Bliaut", --(+3)
+        body="Kaykaus Bliaut", --(+3)/(-6)
         hands="Kaykaus Cuffs +1", --11(+2)/(-6)
-        legs="Atrophy Tights +2", --11
+        legs="Atrophy Tights +3", --12
         feet="Kaykaus Boots +1", --11(+2)/(-12)
         neck="Incanter's Torque",
         ear1="Mendi. Earring", --5
         ear2="Roundel Earring", --5
         ring1="Lebeche Ring", --3/(-5)
         ring2="Haoma's Ring",
-        back=gear.RDM_MND_Cape, --10
+        back=gear.RDM_MND_Cape, --(-10)
         waist="Bishop's Sash",
         }
 
@@ -396,7 +396,7 @@ function init_gear_sets()
     sets.midcast.StatusRemoval = {
         head="Vanya Hood",
         body="Vanya Robe",
-        legs="Atrophy Tights +2",
+        legs="Atrophy Tights +3",
         feet="Vanya Clogs",
         neck="Incanter's Torque",
         ear2="Healing Earring",
@@ -420,7 +420,7 @@ function init_gear_sets()
         head="Befouled Crown",
         body="Viti. Tabard +1",
         hands="Atrophy Gloves +3",
-        legs="Atrophy Tights +2",
+        legs="Atrophy Tights +3",
         feet="Leth. Houseaux +1",
         neck="Incanter's Torque",
         ear1="Augment. Earring",
@@ -503,7 +503,7 @@ function init_gear_sets()
         body="Lethargy Sayon +1",
         hands="Kaykaus Cuffs +1",
         legs="Chironic Hose",
-        feet="Vitiation Boots +2",
+        feet="Vitiation Boots +3",
         neck="Dls. Torque +1",
         ear1="Hermetic Earring",
         ear2="Regal Earring",
@@ -516,13 +516,11 @@ function init_gear_sets()
     sets.midcast.MndEnfeeblesAcc = set_combine(sets.midcast.MndEnfeebles, {
         head="Atrophy Chapeau +3",
         body="Atrophy Tabard +3",
-        feet="Jhakri Pigaches +2",
         ring1="Stikini Ring +1",
         })
 
     sets.midcast.IntEnfeebles = set_combine(sets.midcast.MndEnfeebles, {
         main=gear.Grioavolr_MB,
-        feet="Jhakri Pigaches +2",
         ring1="Stikini Ring +1",
         back=gear.RDM_INT_Cape,
         })
@@ -537,6 +535,7 @@ function init_gear_sets()
         head="Viti. Chapeau +1",
         body="Atrophy Tabard +3",
         hands="Leth. Gantherots +1",
+        feet="Vitiation Boots +3",
         neck="Incanter's Torque",
         ring1="Stikini Ring +1",
         ring2="Stikini Ring +1",
@@ -547,14 +546,14 @@ function init_gear_sets()
     sets.midcast.EffectEnfeebles = {
         ammo="Regal Gem",
         body="Lethargy Sayon +1",
-        feet="Uk'uxkaj Boots",
+        feet="Vitiation Boots +3",
         back=gear.RDM_MND_Cape,
         }
 
     sets.midcast.ElementalEnfeeble = sets.midcast.IntEnfeebles
 
     sets.midcast['Dia III'] = set_combine(sets.midcast.MndEnfeebles, sets.midcast.EffectEnfeebles, {head="Viti. Chapeau +1"})
-    sets.midcast['Paralyze II'] = set_combine(sets.midcast.MndEnfeebles, {head="Vitiation Boots +2"})
+    sets.midcast['Paralyze II'] = set_combine(sets.midcast.MndEnfeebles, {head="Vitiation Boots +3"})
     sets.midcast['Slow II'] = set_combine(sets.midcast.MndEnfeebles, {head="Viti. Chapeau +1"})
 
     sets.midcast['Dark Magic'] = {
@@ -671,13 +670,13 @@ function init_gear_sets()
 
     sets.idle.DT = set_combine(sets.idle, {
         main="Bolelabunga",
-        sub="Beatific Shield +1", --4/29
+        sub="Genmei Shield", --10/0
         ammo="Staunch Tathlum +1", --3/3
-        head="Aya. Zucchetto +2", --3/3
+        head="Volte Cap",
         body="Ayanmo Corazza +2", --6/6
         hands="Gende. Gages +1", --4/3
+        feet="Volte Boots",
         neck="Loricate Torque +1", --6/6
-        ear1="Genmei Earring", --2/0
         ring1="Gelatinous Ring +1", --7/(-1)
         ring2="Defending Ring", --10/10
         back="Moonlight Cape", --6/6
@@ -689,7 +688,7 @@ function init_gear_sets()
         head="Atrophy Chapeau +3",
         body="Amalric Doublet +1",
         hands="Amalric Gages +1",
-        feet="Vitiation Boots +2",
+        feet="Vitiation Boots +3",
         neck="Dls. Torque +1",
         ear1="Sherida Earring",
         ear2="Regal Earring",
@@ -771,8 +770,8 @@ function init_gear_sets()
 
     -- No Magic Haste (74% DW to cap)
     sets.engaged.DW = {
-        main="Sequence",
-        sub=gear.Colada_ATT,
+        main="Almace",
+        sub="Ternion Dagger +1",
         ammo="Ginsen",
         head=gear.Taeon_TA_head,
         body="Ayanmo Corazza +2",

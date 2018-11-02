@@ -251,13 +251,12 @@ function init_gear_sets()
     -- Cure sets
 
     sets.midcast.CureSolace = {
-        -- 10 from JP Gifts
         main="Queller Rod", --15(+2)/(-15)
         sub="Sors Shield", --3/(-5)
-        --ammo="Esper Stone +1", --0/(-5)
+        ammo="Hydrocera",
         head="Gende. Caubeen +1", --18/(-8)
         body="Ebers Bliaud +1",
-        hands="Gende. Gages +1", --8
+        hands="Theophany Mitts +2", --(2)/(-6)
         legs="Ebers Pant. +1",
         feet="Vanya Clogs", --5
         neck="Incanter's Torque",
@@ -271,8 +270,9 @@ function init_gear_sets()
 
     sets.midcast.CureSolaceWeather = set_combine(sets.midcast.CureSolace, {
         main="Chatoyant Staff", --10
-        sub="Enki Strap",
+        sub="Achaq Grip", --0/(-4)
         hands="Telchine Gloves", --17
+        back="Twilight Cape",
         waist="Hachirin-no-Obi",
         })
 
@@ -282,14 +282,14 @@ function init_gear_sets()
 
     sets.midcast.CureWeather = set_combine(sets.midcast.CureNormal, {
         main="Chatoyant Staff", --10
-        --sub="Achaq Grip", --0/(-4)
-        back="Mending Cape", --1/(-6)
+        sub="Achaq Grip", --0/(-4)
+        back="Twilight Cape",
         waist="Hachirin-no-Obi",
         })
 
     sets.midcast.CuragaNormal = set_combine(sets.midcast.CureNormal, {
         --body="Theo. Briault +3", --0(+6)/(-6)
-        --neck="Nuna Gorget +1",
+        neck="Nuna Gorget +1",
         ring1="Stikini Ring",
         ring2="Stikini Ring",
         waist="Luminary Sash",
@@ -297,9 +297,9 @@ function init_gear_sets()
 
     sets.midcast.CuragaWeather = {
         main="Chatoyant Staff", --10
-        --sub="Achaq Grip", --0/(-4)
+        sub="Achaq Grip", --0/(-4)
         --body="Theo. Briault +3", --0(+6)/(-6)
-        --neck="Nuna Gorget +1",
+        neck="Nuna Gorget +1",
         back="Twilight Cape",
         ring1="Stikini Ring",
         ring2="Stikini Ring",
@@ -330,7 +330,7 @@ function init_gear_sets()
         sub="Chanter's Shield",
         body="Ebers Bliaud +1",
         hands="Fanatic Gloves", --15
-        legs="Theo. Pant. +1", --15
+        legs="Th. Pantaloons +2", --17
         feet="Vanya Clogs", --5
         neck="Malison Medallion", --10
         ear1="Beatific Earring",
@@ -351,7 +351,7 @@ function init_gear_sets()
         body="Telchine Chas.",
         hands="Telchine Gloves",
         legs="Telchine Braconi",
-        feet="Theo. Duckbills +1",
+        feet="Theo. Duckbills +2",
         neck="Incanter's Torque",
         --ear1="Augment. Earring",
         ear2="Andoaa Earring",
@@ -369,6 +369,7 @@ function init_gear_sets()
         hands="Telchine Gloves",
         legs="Telchine Braconi",
         feet="Telchine Pigaches",
+        --feet="Theo. Duckbills +2",
         }
 
     sets.midcast.Regen = set_combine(sets.midcast.EnhancingDuration, {
@@ -377,13 +378,13 @@ function init_gear_sets()
         head="Inyanga Tiara +2",
         body="Piety Briault +1",
         hands="Ebers Mitts +1",
-        legs="Theo. Pant. +1",
+        legs="Th. Pantaloons +2",
         })
 
     sets.midcast.RegenDuration = set_combine(sets.midcast.EnhancingDuration, {
         body="Telchine Chas.",
         hands="Ebers Mitts +1",
-        legs="Theo. Pant. +1",
+        legs="Th. Pantaloons +2",
         })
 
     sets.midcast.Refresh = set_combine(sets.midcast.EnhancingDuration, {
@@ -432,7 +433,7 @@ function init_gear_sets()
         head="Befouled Crown",
         body="Vanya Robe",
         hands="Inyan. Dastanas +2",
-        legs="Kaykaus Tights",
+        legs="Th. Pantaloons +2",
         neck="Incanter's Torque",
         ear1="Digni. Earring",
         ear2="Regal Earring",
@@ -445,6 +446,7 @@ function init_gear_sets()
     sets.midcast.Banish = set_combine(sets.midcast['Divine Magic'], {
         head="Inyanga Tiara +2",
         body="Witching Robe",
+        legs="Kaykaus Tights",
         neck="Baetyl Pendant",
         ear1="Friomisi Earring",
         ear2="Regal Earring",
@@ -481,7 +483,7 @@ function init_gear_sets()
         body="Inyanga Jubbah +2",
         hands="Inyan. Dastanas +2",
         legs="Chironic Hose",
-        feet="Inyan. Crackows +2",
+        feet="Theo. Duckbills +2",
         neck="Erra Pendant",
         ear1="Digni. Earring",
         ear2="Regal Earring",
@@ -568,6 +570,8 @@ function init_gear_sets()
 
 
     sets.idle.Town = set_combine(sets.idle, {
+        hands="Theophany Mitts +2",
+        legs="Th. Pantaloons +2",
         back=gear.WHM_Cure_Cape,
         })
 

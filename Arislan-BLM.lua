@@ -146,7 +146,7 @@ function init_gear_sets()
         back="Perimede Cape",
         })
 
-    sets.precast.FC['Elemental Magic'] = set_combine(sets.precast.FC, {ear1="Barkaro. Earring", waist="Channeler's Stone"})
+    sets.precast.FC['Elemental Magic'] = set_combine(sets.precast.FC, {ear1="Barkaro. Earring"})
 
     sets.precast.FC.Cure = set_combine(sets.precast.FC, {
         main="Oranyan", --7
@@ -159,7 +159,7 @@ function init_gear_sets()
 
     sets.precast.FC.Curaga = sets.precast.FC.Cure
     sets.precast.FC.Impact = set_combine(sets.precast.FC, {head=empty, body="Twilight Cloak"})
-    sets.precast.Storm = set_combine(sets.precast.FC, {ring2="Stikini Ring +1", waist="Channeler's Stone"}) -- stop quick cast
+    sets.precast.Storm = set_combine(sets.precast.FC, {ring2="Stikini Ring +1"})
 
     sets.precast.FC.DeathMode = {
         ammo="Ghastly Tathlum +1",
@@ -427,7 +427,7 @@ function init_gear_sets()
 
     sets.midcast.Death.Occult = set_combine(sets.midcast.Death, {
         sub="Bloodrain Strap",
-        head="Mallquis Chapeau +2",
+        head="Mall. Chapeau +2",
         legs="Perdition Slops",
         feet="Battlecast Gaiters",
         neck="Seraphic Ampulla",
@@ -483,7 +483,7 @@ function init_gear_sets()
 
     sets.midcast['Elemental Magic'].Occult = set_combine(sets.midcast['Elemental Magic'], {
         sub="Bloodrain Strap",
-        head="Mallquis Chapeau +2",
+        head="Mall. Chapeau +2",
         legs="Perdition Slops",
         feet="Battlecast Gaiters",
         neck="Seraphic Ampulla",
@@ -551,7 +551,9 @@ function init_gear_sets()
         main="Bolelabunga",
         sub="Genmei Shield", --10/0
         ammo="Staunch Tathlum +1", --3/3
+        head="Volte Cap",
         body="Mallquis Saio +2", --8/8
+        feet="Volte Boots",
         neck="Loricate Torque +1", --6/6
         ear1="Genmei Earring", --2/0
         ring1="Gelatinous Ring +1", --7/(-1)

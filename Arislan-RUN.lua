@@ -241,7 +241,7 @@ function init_gear_sets()
     sets.precast.JA['Valiance'] = sets.precast.JA['Vallation']
     sets.precast.JA['Pflug'] = set_combine(sets.Enmity, {feet="Runeist's Boots +3"})
     sets.precast.JA['Battuta'] = set_combine(sets.Enmity, {head="Fu. Bandeau +1"})
-    sets.precast.JA['Liement'] = set_combine(sets.Enmity, {body="Futhark Coat +1"})
+    sets.precast.JA['Liement'] = set_combine(sets.Enmity, {body="Futhark Coat +3"})
 
     sets.precast.JA['Lunge'] = {
         ammo="Seeth. Bomblet +1",
@@ -262,7 +262,7 @@ function init_gear_sets()
     sets.precast.JA['Swipe'] = sets.precast.JA['Lunge']
     sets.precast.JA['Gambit'] = {hands="Runeist's Mitons +3"}
     sets.precast.JA['Rayke'] = {feet="Futhark Boots +1"}
-    sets.precast.JA['Elemental Sforzo'] = set_combine(sets.Enmity, {body="Futhark Coat +1"})
+    sets.precast.JA['Elemental Sforzo'] = set_combine(sets.Enmity, {body="Futhark Coat +3"})
     sets.precast.JA['Swordplay'] = set_combine(sets.Enmity, {hands="Futhark Mitons +1"})
 
     sets.precast.JA['Vivacious Pulse'] = set_combine(sets.Enmity, {
@@ -348,19 +348,17 @@ function init_gear_sets()
         })
 
     sets.precast.WS['Resolution'] = set_combine(sets.precast.WS, {
-        ammo="Seeth. Bomblet +1",
-        head=gear.Adhemar_B_head,
-        body=gear.Adhemar_B_body,
-        hands=gear.Adhemar_B_hands,
-        legs="Samnuha Tights",
-        ring1="Regal Ring",
-        ring2="Niqmaddu Ring",
+        --ammo="Seeth. Bomblet +1",
+        --head=gear.Adhemar_B_head,
+        --body=gear.Adhemar_B_body,
+        --hands=gear.Adhemar_B_hands,
+        --legs="Samnuha Tights",
+        feet=gear.Herc_MWS_feet,
         back=gear.RUN_WS1_Cape,
         })
 
     sets.precast.WS['Resolution'].Acc = set_combine(sets.precast.WS['Resolution'], {
         head="Dampening Tam",
-        hands=gear.Adhemar_A_hands,
         legs="Meg. Chausses +2",
         feet=gear.Herc_STP_feet,
         ear2="Telos Earring",
@@ -568,7 +566,7 @@ function init_gear_sets()
         ring1="Stikini Ring +1",
         ring2="Stikini Ring +1",
         back=gear.RUN_HP_Cape,
-        waist="Flume Belt +1",
+        waist="Ioskeha Belt +1",
         }
 
     sets.idle.DT = {
@@ -591,6 +589,7 @@ function init_gear_sets()
     sets.idle.Town = set_combine(sets.idle, {
         ammo="Staunch Tathlum +1",
         head=gear.Adhemar_D_head,
+        body="Futhark Coat +3",
         hands="Turms Mittens +1",
         feet="Turms Leggings +1",
         neck="Loricate Torque +1",
@@ -622,7 +621,7 @@ function init_gear_sets()
         sub="Refined Grip +1", --3/3
         ammo="Staunch Tathlum +1", --3/3
         head=gear.Adhemar_D_head, --4/0
-        body="Futhark Coat +1", --7/7
+        body="Futhark Coat +3", --9/9
         hands="Turms Mittens +1",
         legs="Eri. Leg Guards +1", --7/0
         feet="Turms Leggings +1",
@@ -653,17 +652,17 @@ function init_gear_sets()
         }
 
     sets.defense.Status = {
-        sub="Mensch Strap +1", --5/0
+        sub="Irenic Strap +1", --0/5
         ammo="Staunch Tathlum +1", --3/3
-        head=gear.Herc_DT_head, --3/3
-        body="Ayanmo Corazza +2", --6/6
+        head="Rune. Bandeau +3",
+        body="Futhark Coat +3", --9/9
         hands="Erilaz Gauntlets +1",
         legs="Rune. Trousers +3", --5/0
         feet="Turms Leggings +1",
         neck="Loricate Torque +1", --6/6
         ear1="Hearty Earring",
         ear2="Genmei Earring", --2/0
-        ring1="Gelatinous Ring +1", --7/(-1)
+        ring1="Moonlight Ring", --5/5
         ring2="Defending Ring", --10/10
         back=gear.RUN_FC_Cape, --10/0
         waist="Engraved Belt",
@@ -711,7 +710,7 @@ function init_gear_sets()
         ring1="Epona's Ring",
         ring2="Niqmaddu Ring",
         back=gear.RUN_TP_Cape,
-        waist="Windbuffet Belt +1",
+        waist="Ioskeha Belt +1",
         }
 
     sets.engaged.LowAcc = set_combine(sets.engaged, {
@@ -884,10 +883,10 @@ end
 function job_aftercast(spell, action, spellMap, eventArgs)
     if spell.name == 'Rayke' and not spell.interrupted then
         send_command('@timers c "Rayke ['..spell.target.name..']" '..rayke_duration..' down spells/00136.png')
-        send_command('wait '..rayke_duration..';input /p Rayke: OFF <call21>;')
+        send_command('wait '..rayke_duration..';input /echo [Rayke just wore off!];')
     elseif spell.name == 'Gambit' and not spell.interrupted then
         send_command('@timers c "Gambit ['..spell.target.name..']" '..gambit_duration..' down spells/00136.png')
-        send_command('wait '..gambit_duration..';input /p Gambit: OFF <call21>;')
+        send_command('wait '..gambit_duration..';input /echo [Gambit just wore off!];')
     end
 end
 

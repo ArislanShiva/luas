@@ -147,10 +147,7 @@ function init_gear_sets()
         back="Perimede Cape",
         })
 
-    sets.precast.FC['Elemental Magic'] = set_combine(sets.precast.FC, {
-        hands="Bagua Mitaines +1",
-        waist="Channeler's Stone",
-        })
+    sets.precast.FC['Elemental Magic'] = set_combine(sets.precast.FC, {hands="Bagua Mitaines +1"})
 
     sets.precast.FC.Cure = set_combine(sets.precast.FC, {
         main="Oranyan", --7
@@ -462,8 +459,9 @@ function init_gear_sets()
     sets.idle.DT = set_combine(sets.idle, {
         main="Bolelabunga",
         sub="Genmei Shield", --10/0
+        head="Volte Cap",
         body="Mallquis Saio +2", --8/8
-        feet="Azimuth Gaiters +1", --4/0
+        feet="Volte Boots",
         neck="Loricate Torque +1", --6/6
         ear1="Genmei Earring", --2/0
         ring1="Gelatinous Ring +1", --7/(-1)

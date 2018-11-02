@@ -62,6 +62,14 @@ function job_setup()
     state.Buff.Innin = buffactive.Innin or false
     state.Buff.Futae = buffactive.Futae or false
 
+    include('Mote-TreasureHunter')
+
+    -- For th_action_check():
+    -- JA IDs for actions that always have TH: Provoke, Animated Flourish
+    info.default_ja_ids = S{35, 204}
+    -- Unblinkable JA IDs for actions that always have TH: Quick/Box/Stutter Step, Desperate/Violent Flourish
+    info.default_u_ja_ids = S{201, 202, 203, 205, 207}
+
     lugra_ws = S{'Blade: Kamu', 'Blade: Shun', 'Blade: Ten'}
 
     lockstyleset = 1
@@ -82,18 +90,15 @@ function user_setup()
 
     state.MagicBurst = M(false, 'Magic Burst')
     state.CP = M(false, "Capacity Points Mode")
-    state.RingLock = M(false, 'Ring Lock')
-    state.TH = M(false, "Treasure Hunter Mode")
 
     state.Night = M(false, "Dusk to Dawn")
     options.ninja_tool_warning_limit = 10
 
     -- Additional local binds
     include('Global-Binds.lua') -- OK to remove this line
-    include('Global-COR-Binds.lua') -- OK to remove this line
+    include('Global-GEO-Binds.lua') -- OK to remove this line
 
-
-    send_command('bind ^` gs c toggle TH')
+    send_command('bind ^` gs c cycle treasuremode')
     send_command('bind !` gs c toggle MagicBurst')
     send_command('bind ^- input /ja "Yonin" <me>')
     send_command('bind ^= input /ja "Innin" <me>')
@@ -102,7 +107,6 @@ function user_setup()
     send_command('bind @/ input /ma "Utsusemi: San" <me>')
 
     send_command('bind @c gs c toggle CP')
-    send_command('bind @r gs c toggle RingLock')
 
     send_command('bind ^numlock input /ja "Innin" <me>')
     send_command('bind !numlock input /ja "Yonin" <me>')
@@ -137,12 +141,12 @@ function user_setup()
 end
 
 function user_unload()
+    send_command('unbind ^`')
     send_command('unbind !`')
     send_command('unbind ^-')
     send_command('unbind ^=')
     send_command('unbind @/')
     send_command('unbind @c')
-    send_command('unbind @r')
     send_command('unbind @t')
     send_command('unbind ^numlock')
     send_command('unbind !numlock')
@@ -403,7 +407,7 @@ function init_gear_sets()
     -- Idle sets
     sets.idle = {
         ammo="Seki Shuriken",
-        head="Dampening Tam",
+        head="Volte Cap",
         body="Hiza. Haramaki +2",
         hands=gear.Herc_DT_hands,
         legs="Samnuha Tights",
@@ -421,6 +425,7 @@ function init_gear_sets()
         ammo="Staunch Tathlum +1", --3/3
         hands=gear.Herc_DT_hands, --7/5
         legs="Mummu Kecks +2", --5/5
+        feet="Volte Boots",
         neck="Loricate Torque +1", --6/6
         ring1="Gelatinous Ring +1", --7/(-1)
         ring2="Defending Ring", --10/10
@@ -718,7 +723,7 @@ function init_gear_sets()
     --------------------------------------
 
     sets.magic_burst = {
-        legs="Hachiya Kyahan +3",
+        feet="Hachiya Kyahan +3",
         ring1="Locus Ring",
         ring2="Mujin Band", --(5)
         }
@@ -729,7 +734,7 @@ function init_gear_sets()
 --    sets.buff.Innin = {}
 
     sets.CP = {back="Mecisto. Mantle"}
-    sets.TH = {waist="Chaac Belt"}
+    sets.TreasureHunter = {head="Volte Cap", hands=gear.Herc_TH_hands, waist="Chaac Belt"}
     --sets.Reive = {neck="Ygnas's Resolve +1"}
 
 end
@@ -828,11 +833,6 @@ function job_status_change(new_status, old_status)
     if new_status == 'Idle' then
         select_movement_feet()
     end
-    if state.RingLock.value == true then
-        disable('ring1','ring2')
-    else
-        enable('ring1','ring2')
-    end
 end
 
 -------------------------------------------------------------------------------------------------------------------
@@ -849,6 +849,7 @@ end
 
 function job_update(cmdParams, eventArgs)
     handle_equipping_gear(player.status)
+    th_update(cmdParams, eventArgs)
 end
 
 function update_combat_form()
@@ -870,12 +871,6 @@ function customize_idle_set(idleSet)
     else
         enable('back')
     end
-    if state.TH.current == 'on' then
-        equip(sets.TH)
-        disable('waist')
-    else
-        enable('waist')
-    end
 
     idleSet = set_combine(idleSet, select_movement_feet())
 
@@ -888,6 +883,10 @@ function customize_melee_set(meleeSet)
     if state.Buff.Migawari then
         meleeSet = set_combine(meleeSet, sets.buff.Migawari)
     end
+    if state.TreasureMode.value == 'Fulltime' then
+        meleeSet = set_combine(meleeSet, sets.TreasureHunter)
+    end
+
     return meleeSet
 end
 
@@ -916,6 +915,8 @@ function display_current_job_state(eventArgs)
     if state.Kiting.value then
         msg = msg .. ' ][ Kiting Mode: ON'
     end
+
+    msg = msg .. ' ][ TH: ' .. state.TreasureMode.value
 
     msg = msg .. ' ]'
 
@@ -1038,6 +1039,20 @@ function do_ninja_tool_checks(spell, spellMap, eventArgs)
         state.warned:reset()
     end
 end
+
+-- Check for various actions that we've specified in user code as being used with TH gear.
+-- This will only ever be called if TreasureMode is not 'None'.
+-- Category and Param are as specified in the action event packet.
+function th_action_check(category, param)
+    if category == 2 or -- any ranged attack
+        --category == 4 or -- any magic action
+        (category == 3 and param == 30) or -- Aeolian Edge
+        (category == 6 and info.default_ja_ids:contains(param)) or -- Provoke, Animated Flourish
+        (category == 14 and info.default_u_ja_ids:contains(param)) -- Quick/Box/Stutter Step, Desperate/Violent Flourish
+        then return true
+    end
+end
+
 
 
 -- Select default macro book on initial load or subjob change.

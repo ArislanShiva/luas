@@ -96,7 +96,6 @@ function job_setup()
 --  state.SkillchainPending = M(false, 'Skillchain Pending')
 
     state.CP = M(false, "Capacity Points Mode")
-    state.RingLock = M(false, 'Ring Lock')
 
     lockstyleset = 1
 end
@@ -128,7 +127,6 @@ function user_setup()
     send_command('bind ^numlock input /ja "Reverse Flourish" <me>')
 
     send_command('bind @c gs c toggle CP')
-    send_command('bind @r gs c toggle RingLock')
 
     if player.sub_job == 'WAR' then
         send_command('bind ^numpad/ input /ja "Berserk" <me>')
@@ -181,7 +179,6 @@ function user_unload()
     send_command('unbind ^,')
     send_command('unbind @f')
     send_command('unbind @c')
-    send_command('unbind @r')
     send_command('unbind ^numlock')
     send_command('unbind ^numpad/')
     send_command('unbind ^numpad*')
@@ -504,9 +501,11 @@ function init_gear_sets()
 
     sets.idle.DT = set_combine(sets.idle, {
         ammo="Staunch Tathlum +1", --3/3
+        head="Volte Cap",
         body="Meg. Cuirie +2", --8/0
         hands=gear.Herc_DT_hands, --7/5
         legs="Mummu Kecks +2", --5/5
+        feet="Volte Boots",
         neck="Loricate Torque +1", --6/6
         ear2="Etiolation Earring", --0/3
         ring1="Gelatinous Ring +1", --7/(-1)
@@ -945,15 +944,6 @@ function job_buff_change(buff,gain)
         end
     end
 
-end
-
--- Handle notifications of general user state change.
-function job_state_change(stateField, newValue, oldValue)
-    if state.RingLock.value == true then
-        disable('ring1','ring2')
-    else
-        enable('ring1','ring2')
-    end
 end
 
 -------------------------------------------------------------------------------------------------------------------

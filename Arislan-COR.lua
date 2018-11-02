@@ -123,7 +123,6 @@ function user_setup()
     state.Gun = M{['description']='Current Gun', 'Death Penalty', 'Fomalhaut', 'Ataktos'}--, 'Armageddon'
     state.CP = M(false, "Capacity Points Mode")
     state.WeaponLock = M(false, 'Weapon Lock')
-    state.RingLock = M(false, 'Ring Lock')
 
     gear.RAbullet = "Chrono Bullet"
     gear.WSbullet = "Chrono Bullet"
@@ -204,7 +203,6 @@ function user_unload()
     send_command('unbind @q')
     send_command('unbind @e')
     send_command('unbind @w')
-    send_command('unbind @r')
     send_command('unbind ^numlock')
     send_command('unbind ^numpad/')
     send_command('unbind ^numpad*')
@@ -362,7 +360,7 @@ function init_gear_sets()
         head=gear.Herc_MAB_head,
         body="Lanun Frac +3",
         hands="Carmine Fin. Ga. +1",
-        legs=gear.Herc_MWS_legs,
+        legs=gear.Herc_MAB_legs,
         feet="Lanun Bottes +3",
         neck="Baetyl Pendant",
         ear1="Novio Earring",
@@ -621,7 +619,7 @@ function init_gear_sets()
         body="Oshosi Vest +1",
         hands=gear.Herc_DT_hands,
         legs="Carmine Cuisses +1",
-        feet="Meg. Jam. +2",
+        head="Volte Boots",
         neck="Bathy Choker +1",
         ear1="Genmei Earring",
         ear2="Infused Earring",
@@ -1148,11 +1146,6 @@ function job_state_change(stateField, newValue, oldValue)
         disable('ranged')
     else
         enable('ranged')
-    end
-    if state.RingLock.value == true then
-        disable('ring1','ring2')
-    else
-        enable('ring1','ring2')
     end
 end
 
