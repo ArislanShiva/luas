@@ -13,6 +13,7 @@
 --              [ F12 ]             Update Current Gear / Report Current Status
 --              [ CTRL+F12 ]        Cycle Idle Modes
 --              [ ALT+F12 ]         Cancel Emergency -PDT/-MDT Mode
+--              [ WIN+A ]           AttackMode: Capped/Uncapped WS Modifier
 --              [ WIN+C ]           Toggle Capacity Points Mode
 --
 --
@@ -51,6 +52,7 @@ function user_setup()
     state.HybridMode:options('Normal', 'DT')
     state.IdleMode:options('Normal', 'DT')
 
+    state.AttackMode = M{['description']='Attack', 'Capped', 'Uncapped'}
     state.CP = M(false, "Capacity Points Mode")
 
     -- Additional local binds
@@ -59,6 +61,7 @@ function user_setup()
 
     send_command('bind ^` input /ja "Call Wyvern" <me>')
     send_command('bind !` input /ja "Spirit Link" <me>')
+    send_command('bind @a gs c cycle AttackMode')
     send_command('bind @c gs c toggle CP')
 
     if player.sub_job == 'WAR' then
@@ -97,6 +100,7 @@ end
 function user_unload()
     send_command('unbind ^`')
     send_command('unbind !`')
+    send_command('unbind @a')
     send_command('unbind @c')
     send_command('unbind ^numpad/')
     send_command('unbind ^numpad*')
@@ -135,7 +139,7 @@ function init_gear_sets()
     sets.precast.JA['Ancient Circle'] = {legs="Vishap Brais +3"}
 
     sets.precast.JA['Spirit Link'] = {
-        head="Vishap Armet +1",
+        head="Vishap Armet +2",
         hands="Pel. Vambraces +1",
         feet="Ptero. Greaves +1",
         ear1="Pratik Earring",
@@ -153,27 +157,23 @@ function init_gear_sets()
     sets.precast.JA['Jump'] = {
         ammo="Ginsen",
         head="Flam. Zucchetto +2",
-        body=gear.Valo_TP_body,
+        body="Vishap Mail +3",
         hands="Vis. Fng. Gaunt. +3",
-        legs=gear.Valo_TP_legs,
+        legs=gear.Valo_STP_legs,
         feet="Ostro Greaves",
         neck="Anu Torque",
         ear1="Sherida Earring",
         ear2="Telos Earring",
         ring1="Petrov Ring",
         ring2="Niqmaddu Ring",
-        back=gear.DRG_TP_Cape,
+        back=gear.DRG_JMP_Cape,
         waist="Ioskeha Belt +1",
         }
 
     sets.precast.JA['High Jump'] = sets.precast.JA['Jump']
-    sets.precast.JA['Soul Jump'] = sets.precast.JA['Jump']
     sets.precast.JA['Spirit Jump'] = sets.precast.JA['Jump']
-
-    sets.precast.JA['Super Jump'] = set_combine(sets.precast.JA['Jump'], {
-        hands=gear.Acro_STP_hands,
-        legs=gear.Valo_STP_legs,
-        })
+    sets.precast.JA['Soul Jump'] = set_combine(sets.precast.JA['Jump'], {hands=gear.Acro_STP_hands})
+    sets.precast.JA['Super Jump'] = set_combine(sets.precast.JA['Jump'], {hands=gear.Acro_STP_hands, legs=gear.Valo_STP_legs})
 
     sets.precast.JA['Angon'] = {ammo="Angon"}
 
@@ -207,38 +207,73 @@ function init_gear_sets()
         ear2="Moonshade Earring",
         ring1="Regal Ring",
         ring2="Niqmaddu Ring",
-        back=gear.DRG_WS1_Cape,
+        back=gear.DRG_WS2_Cape,
         waist="Fotia Belt",
         }
+
+	sets.precast.WS.Acc = set_combine(sets.precast.WS, {})
+
+	sets.precast.WS.Uncapped = set_combine(sets.precast.WS, {
+        head="Sulevia's Mask +2",
+        })
 
     sets.precast.WS['Camlann\'s Torment'] = set_combine(sets.precast.WS, {
         head="Sulevia's Mask +2",
 		ear2="Ishvara Earring",
         })
 
+    sets.precast.WS['Camlann\'s Torment'].Acc = set_combine(sets.precast.WS['Camlann\'s Torment'], {})
+
+	sets.precast.WS['Camlann\'s Torment'].Uncapped = set_combine(sets.precast.WS['Camlann\'s Torment'], {
+        head="Sulevia's Mask +2", 
+        legs="Sulev. Cuisses +2",
+        })
+
     sets.precast.WS['Drakesbane'] = set_combine(sets.precast.WS, {
-        --body="Flamma Korazin +2",
         hands="Flamma Manopolas +2",
         legs="Pelt. Cuissots +1",
         ring1="Begrudging Ring",
         waist="Ioskeha Belt +1",
         })
 
-    sets.precast.WS['Geirskogul'] = set_combine(sets.precast.WS, {
-        ear2="Ishvara Earring",
+    sets.precast.WS['Drakesbane'].Acc = set_combine(sets.precast.WS['Drakesbane'], {})
+
+	sets.precast.WS['Drakesbane'].Uncapped = set_combine(sets.precast.WS['Drakesbane'], {
+        head="Sulevia's Mask +2",
+        hands="Sulev. Gauntlets +2",
+        legs="Sulev. Cuisses +2",
         })
 
-	sets.precast.WS['Leg Sweep'] = set_combine(sets.precast.WS, {
-        ammo="Pemphredo Tathlum",
-        head="Flam. Zucchetto +2",
-		body="Flamma Korazin +2",
-		hands="Flam. Manopolas +2",
-        legs="Flamma Dirs +2",
-		feet="Flam. Gambieras +2",
-		ear1="Digni. Earring",
-		ring1="Stikini Ring +1",
-		ring2="Weather. Ring +1",
-	    back=gear.DRG_WS1_Cape,
+    sets.precast.WS['Geirskogul'] = set_combine(sets.precast.WS, {
+        head="Sulevia's Mask +2", 
+		ear2="Ishvara Earring",
+        back=gear.DRG_WS3_Cape,
+        })
+
+    sets.precast.WS['Geirskogul'].Acc = set_combine(sets.precast.WS['Geirskogul'], {})
+
+	sets.precast.WS['Geirskogul'].Uncapped = set_combine(sets.precast.WS['Geirskogul'], {
+        legs="Sulev. Cuisses +2",
+        })
+
+    sets.precast.WS['Sonic Thrust'] = sets.precast.WS['Camlann\'s Torment']
+    sets.precast.WS['Sonic Thrust'].Acc = sets.precast.WS['Camlann\'s Torment'].Acc
+    sets.precast.WS['Sonic Thrust'].Uncapped = sets.precast.WS['Camlann\'s Torment'].Uncapped
+
+    sets.precast.WS['Stardiver'] = set_combine(sets.precast.WS, {
+        head="Flam. Zucchetto +2", 
+        body=gear.Valo_TP_body,
+        legs="Sulev. Cuisses +2",
+        feet="Flam. Gambieras +2",
+        back=gear.DRG_WS1_Cape,
+        })
+
+    sets.precast.WS['Stardiver'].Acc = set_combine(sets.precast.WS['Stardiver'], {})
+
+	sets.precast.WS['Stardiver'].Uncapped = set_combine(sets.precast.WS['Stardiver'], {
+        head="Sulevia's Mask +2", 
+        body="Emicho Haubert +1",
+        legs="Sulev. Cuisses +2",
         })
 
     sets.precast.WS['Raiden Thrust'] = set_combine(sets.precast.WS, {
@@ -251,15 +286,19 @@ function init_gear_sets()
         back="Argocham. Mantle",
         })
 
-    sets.precast.WS['Sonic Thrust'] = sets.precast.WS['Camlann\'s Torment']
-
-    sets.precast.WS['Stardiver'] = set_combine(sets.precast.WS, {
-        --body=gear.Valo_TP_body,
-        --legs=gear.Valo_TP_legs,
-        --feet="Flam. Gambieras +2",
-        })
-
     sets.precast.WS['Thunder Thrust'] = sets.precast.WS['Raiden Thrust']
+	
+    sets.precast.WS['Leg Sweep'] = set_combine(sets.precast.WS, {
+        ammo="Pemphredo Tathlum",
+        head="Flam. Zucchetto +2",
+		body="Flamma Korazin +2",
+		hands="Flam. Manopolas +2",
+        legs="Flamma Dirs +2",
+		feet="Flam. Gambieras +2",
+		ear1="Digni. Earring",
+		ring1="Stikini Ring +1",
+		ring2="Weather. Ring +1",
+        })
 
     ------------------------------------------------------------------------------------------------
     ---------------------------------------- Midcast Sets ------------------------------------------
@@ -294,7 +333,6 @@ function init_gear_sets()
     sets.idle = {
         ammo="Staunch Tathlum +1", --3/3
         head="Volte Cap",
-        --head="Valorous Mask",
         body="Sulevia's Plate. +2", --9/9
         hands="Sulev. Gauntlets +2", --5/5
         legs="Carmine Cuisses +1",
@@ -320,15 +358,17 @@ function init_gear_sets()
         })
 
     sets.idle.Pet = set_combine(sets.idle, {
-        body="Vishap Mail +1",
+        body="Vishap Mail +3",
         hands="Ptero. Fin. G. +1",
         feet="Ptero. Greaves +1",
+        ear1="Enmerkar Earring",
         ear2="Anastasi Earring",
         waist="Isa Belt",
         })
 
     sets.idle.DT.Pet = set_combine(sets.idle.Pet, {
         head="Sulevia's Mask +2", --6/6
+        body="Emicho Haubert +1",
         neck="Loricate Torque +1", --6/6
         ring1="Moonlight Ring", --5/5
         ring2="Defending Ring", --10/10
@@ -338,7 +378,7 @@ function init_gear_sets()
     sets.idle.Town = set_combine(sets.idle, {
         ammo="Staunch Tathlum +1",
         head="Flam. Zucchetto +2",
-        body=gear.Valo_WSD_body,
+        body="Emicho Haubert +1",
         hands="Vis. Fng. Gaunt. +3",
         feet="Flam. Gambieras +2",
         neck="Anu Torque",
@@ -383,27 +423,30 @@ function init_gear_sets()
 
     sets.engaged.LowAcc = set_combine(sets.engaged, {
         ammo="Ginsen",
-        legs="Sulev. Cuisses +2",
+        body="Emicho Haubert +1",
         neck="Combatant's Torque",
         ear2="Telos Earring",
        })
 
     sets.engaged.MidAcc = set_combine(sets.engaged.LowAcc, {
+        legs="Sulev. Cuisses +2",
         neck="Shulmanu Collar",
         ring1="Moonlight Ring",
         })
 
     sets.engaged.HighAcc = set_combine(sets.engaged.MidAcc, {
         head="Carmine Mask +1",
+        body="Vishap Mail +3",
         hands="Flam. Manopolas +2",
         legs="Vishap Brais +3",
         })
 
     sets.engaged.STP = set_combine(sets.engaged, {
         ammo="Ginsen",
-        hand=gear.Acro_STP_hands,
+        hands=gear.Acro_STP_hands,
         legs=gear.Valo_STP_legs,
         ear2="Telos Earring",
+        back=gear.DRG_JMP_Cape,
         waist="Kentarch Belt +1",
         })
 
@@ -414,8 +457,10 @@ function init_gear_sets()
 
     sets.engaged.Hybrid = {
         ammo="Staunch Tathlum +1", --3/3
+        neck="Loricate Torque +1", --6/6
+        body="Vishap Mail +3",
         ring1="Moonlight Ring", --5/5
-        legs="Sulev. Cuisses +2", --7/7
+        ring2="Defending Ring", --10/10
         }
 
     sets.engaged.DT = set_combine(sets.engaged, sets.engaged.Hybrid)
@@ -554,6 +599,11 @@ end
 -- User code that supplements self-commands.
 -------------------------------------------------------------------------------------------------------------------
 
+function get_custom_wsmode(spell, action, spellMap)
+    if spell.type == 'WeaponSkill' and state.AttackMode.value == 'Uncapped' then
+        return "Uncapped"
+    end
+end
 
 -------------------------------------------------------------------------------------------------------------------
 -- Utility functions specific to this job.

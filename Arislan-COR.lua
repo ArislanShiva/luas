@@ -288,7 +288,6 @@ function init_gear_sets()
 
     sets.precast.FC.Utsusemi = set_combine(sets.precast.FC, {
         body="Passion Jacket",
-        neck="Magoraga Beads",
         ring1="Lebeche Ring",
         })
 
@@ -619,6 +618,7 @@ function init_gear_sets()
         body="Oshosi Vest +1",
         hands=gear.Herc_DT_hands,
         legs="Carmine Cuisses +1",
+        feet="Ahosi Leggings",
         head="Volte Boots",
         neck="Bathy Choker +1",
         ear1="Genmei Earring",
@@ -633,8 +633,9 @@ function init_gear_sets()
         head="Meghanada Visor +2", --5/0
         body="Lanun Frac +3", --6/0
         hands=gear.Herc_DT_hands, --7/5
-        feet="Lanun Bottes +3", --6/0
+        feet="Ahosi Leggings", --4/0
         neck="Loricate Torque +1", --6/6
+        ear1="Genmei Earring", --2/0
         ear2="Etiolation Earring", --0/3
         ring2="Defending Ring", --10/10
         back="Moonlight Cape", --6/6

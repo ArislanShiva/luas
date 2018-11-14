@@ -239,7 +239,6 @@ function init_gear_sets()
 
     sets.precast.FC.Utsusemi = set_combine(sets.precast.FC, {
         ammo="Impatiens",
-        neck="Magoraga Beads",
         ring1="Lebeche Ring",
         back="Perimede Cape",
         waist="Rumination Sash",

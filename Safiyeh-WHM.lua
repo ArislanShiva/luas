@@ -425,6 +425,7 @@ function init_gear_sets()
     sets.midcast.Protectra = sets.midcast.Protect
     sets.midcast.Shell = sets.midcast.Protect
     sets.midcast.Shellra = sets.midcast.Protect
+    sets.midcast.ShellraV = set_combine(sets.midcast.Protect, {legs="Piety Pantaln. +1"})
 
     sets.midcast['Divine Magic'] = {
         main="Grioavolr",
@@ -641,6 +642,9 @@ function job_post_midcast(spell, action, spellMap, eventArgs)
             if spellMap == 'Refresh' then
                 equip(sets.midcast.Refresh)
             end
+        end
+        if spell.name == 'Shellra V' then
+            equip(sets.midcast.ShellraV)
         end
         if spellMap == "Regen" and state.RegenMode.value == 'Duration' then
             equip(sets.midcast.RegenDuration)

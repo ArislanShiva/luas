@@ -274,8 +274,7 @@ function init_gear_sets()
 
     sets.precast.FC.Utsusemi = set_combine(sets.precast.FC, {
         body="Passion Jacket",
-        neck="Magoraga Beads",
-        --ring1="Lebeche Ring",
+        ring1="Lebeche Ring",
         })
 
     -- (10% Snapshot from JP Gifts)

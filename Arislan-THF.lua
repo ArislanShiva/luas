@@ -203,7 +203,6 @@ function init_gear_sets()
         hands="Pillager's Armlets +1",
         legs="Pill. Culottes +3",
         feet="Meg. Jam. +2",
-        neck="Magoraga Beads",
         ear2="Infused Earring",
         ring1="Regal Ring",
         ring2="Ilabrat Ring",
@@ -267,7 +266,6 @@ function init_gear_sets()
 
     sets.precast.FC.Utsusemi = set_combine(sets.precast.FC, {
         body="Passion Jacket",
-        neck="Magoraga Beads",
         ring1="Lebeche Ring",
         })
 
@@ -410,14 +408,15 @@ function init_gear_sets()
     sets.idle.DT = set_combine(sets.idle, {
         ammo="Staunch Tathlum +1", --3/3
         head="Volte Cap",
-        body="Meg. Cuirie +2", --8/0
         hands=gear.Herc_DT_hands, --7/5
         legs="Mummu Kecks +2", --5/5
-        feet="Volte Boots",
+        feet="Turms Leggings +1",
         neck="Loricate Torque +1", --6/6
+        ear1="Genmei Earring", --2/0
         ring1="Gelatinous Ring +1", --7/(-1)
         ring2="Defending Ring", --10/10
         back="Moonlight Cape", --6/6
+        waist="Flume Belt +1", --4/0
         })
 
     sets.idle.Town = set_combine(sets.idle, {

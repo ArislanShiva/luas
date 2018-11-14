@@ -237,11 +237,13 @@ function init_gear_sets()
         ammo="Floestone",
         head="Aya. Zucchetto +2",
         body="Ayanmo Corazza +2",
+        hands="Aya. Manopolas +2",
         legs="Aya. Cosciales +2",
+		feet="Battlecast Gaiters",
         neck="Fotia Gorget",
         ear1="Moonshade Earring",
-        ear2="Telos Earring",
-        ring1="Rufescent Ring",
+        ear2="Ishvara Earring",
+        ring1="Ayanmo Ring",
         ring2="Shukuyu Ring",
         waist="Fotia Belt",
         back="Relucent Cape",
@@ -452,6 +454,7 @@ function init_gear_sets()
     sets.midcast.Protectra = sets.midcast.Protect
     sets.midcast.Shell = sets.midcast.Protect
     sets.midcast.Shellra = sets.midcast.Protect
+    sets.midcast.ShellraV = set_combine(sets.midcast.Protect, {legs="Piety Pantaln. +1"})
 
     sets.midcast['Divine Magic'] = {
         main=gear.Grioavolr_MB,
@@ -632,12 +635,16 @@ function init_gear_sets()
         sub="Tamaxchi",
         head="Aya. Zucchetto +2",
         body="Ayanmo Corazza +2",
+        hands="Aya. Manopolas +2",
         legs="Aya. Cosciales +2",
-        ear1="Eabani Earring",
+        feet="Battlecast Gaiters",
+        neck="Asperity Necklace",
+        ear1="Suppanomimi",
         ear2="Brutal Earring",
         ring1="Ilabrat Ring",
         ring2="Petrov Ring",
         back="Relucent Cape",
+        waist="Shetal Stone",
         }
 
     -- Buff sets: Gear that needs to be worn to actively enhance a current player buff.
@@ -686,6 +693,9 @@ function job_post_midcast(spell, action, spellMap, eventArgs)
             if spellMap == 'Refresh' then
                 equip(sets.midcast.Refresh)
             end
+        end
+        if spell.name == 'Shellra V' then
+            equip(sets.midcast.ShellraV)
         end
         if spellMap == "Regen" and state.RegenMode.value == 'Duration' then
             equip(sets.midcast.RegenDuration)

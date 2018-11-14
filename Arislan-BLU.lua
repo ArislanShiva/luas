@@ -244,7 +244,7 @@ function user_setup()
     send_command('bind ^numpad5 input /ws "Expiacion" <t>')
     send_command('bind ^numpad1 input /ws "Sanguine Blade" <t>')
     send_command('bind ^numpad2 input /ws "Fast Blade" <t>')
-    send_command('bind ^numpad3 input /ws "Red Lotus Blade" <t>')
+    send_command('bind ^numpad3 input /ws "Flat Blade" <t>')
 
     select_default_macro_book()
     set_lockstyle()
@@ -316,6 +316,7 @@ function init_gear_sets()
         head="Halitus Helm", --8
         body="Emet Harness +1", --10
         hands="Kurys Gloves", --9
+        feet="Ahosi Leggings", --7
         neck="Unmoving Collar +1", --10
         ear1="Cryptic Earring", --4
         ear2="Trux Earring", --5
@@ -358,8 +359,6 @@ function init_gear_sets()
 
     sets.precast.FC.Utsusemi = set_combine(sets.precast.FC, {
         ammo="Impatiens",
-        body="Passion Jacket",
-        neck="Magoraga Beads",
         ring1="Lebeche Ring",
         waist="Rumination Sash",
         })
@@ -753,7 +752,7 @@ function init_gear_sets()
         body="Jhakri Robe +2",
         hands=gear.Herc_DT_hands,
         legs="Carmine Cuisses +1",
-        feet="Carmine Greaves +1",
+        feet="Ahosi Leggings",
         neck="Bathy Choker +1",
         ear1="Genmei Earring",
         ear2="Infused Earring",
@@ -768,7 +767,7 @@ function init_gear_sets()
         head="Volte Cap",
         body="Ayanmo Corazza +2", --6/6
         hands=gear.Herc_DT_hands, --7/5
-        feet="Volte Boots",
+        feet="Ahosi Leggings", --4/0
         neck="Loricate Torque +1", --6/6
 		ear1="Genmei Earring", --2/0
         ear2="Etiolation Earring", --0/3
@@ -782,6 +781,7 @@ function init_gear_sets()
         head=gear.Adhemar_B_head,
         body=gear.Adhemar_B_body,
         hands=gear.Adhemar_B_hands,
+        feet="Carmine Greaves +1",
         neck="Combatant's Torque",
         ear1="Eabani Earring",
         ear2="Telos Earring",

@@ -220,7 +220,7 @@ function init_gear_sets()
         body="Emet Harness +1", --10
         hands="Kurys Gloves", --9
         legs="Eri. Leg Guards +1", --7
-        feet="Erilaz Greaves +1",--6
+        feet="Ahosi Leggings",--7
         neck="Moonbeam Necklace", --10
         ear1="Cryptic Earring", --4
         ear2="Trux Earring", --5
@@ -314,7 +314,6 @@ function init_gear_sets()
     sets.precast.FC.Utsusemi = set_combine(sets.precast.FC, {
         ammo="Impatiens",
         body="Passion Jacket",
-        neck="Magoraga Beads",
         ring1="Lebeche Ring",
         waist="Rumination Sash",
         })
@@ -641,7 +640,7 @@ function init_gear_sets()
         body="Runeist's Coat +3",
         hands=gear.Herc_DT_hands, --7/5
         legs="Eri. Leg Guards +1", --7/0
-        feet="Erilaz Greaves +1",--5/0
+        feet="Ahosi Leggings", --4/0
         neck="Warder's Charm +1",
         ear1="Ethereal Earring",
         ear2="Odnowa Earring +1", --0/2
