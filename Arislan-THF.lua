@@ -191,6 +191,7 @@ function init_gear_sets()
         feet="Lustra. Leggings +1",
         neck="Caro Necklace",
         ear1="Sherida Earring",
+        ear2="Mache Earring +1",
         ring1="Regal Ring",
         ring2="Ramuh Ring +1",
         back=gear.THF_TP_Cape,
@@ -314,13 +315,13 @@ function init_gear_sets()
 
     sets.precast.WS['Evisceration'] = set_combine(sets.precast.WS, {
         ammo="Yetshila +1",
-        head=gear.Adhemar_B_head,
+        head="Lustratio Cap +1",
         body="Pillager's Vest +3",
         hands="Mummu Wrists +2",
         legs="Pill. Culottes +3",
         feet=gear.Herc_TA_feet,
         ear1="Sherida Earring",
-        ear2="Brutal Earring",
+        ear2="Mache Earring +1",
         ring1="Begrudging Ring",
         ring2="Mummu Ring",
         back=gear.THF_WS2_Cape,
@@ -329,7 +330,6 @@ function init_gear_sets()
     sets.precast.WS['Evisceration'].Acc = set_combine(sets.precast.WS['Evisceration'], {
         ammo="Falcon Eye",
         head="Skulker's Bonnet +1",
-        ear2="Telos Earring",
         ring1="Regal Ring",
         })
 
@@ -464,7 +464,7 @@ function init_gear_sets()
         legs="Samnuha Tights",
         feet=gear.Herc_TA_feet,
         neck="Anu Torque",
-        ear1="Cessance Earring",
+        ear1="Sherida Earring",
         ear2="Brutal Earring",
         ring1="Petrov Ring",
         ring2="Epona's Ring",
@@ -475,12 +475,14 @@ function init_gear_sets()
     sets.engaged.LowAcc = set_combine(sets.engaged, {
         head="Skulker's Bonnet +1",
         neck="Combatant's Torque",
+        ear2="Telos Earring",
         })
 
     sets.engaged.MidAcc = set_combine(sets.engaged.LowAcc, {
         ammo="Falcon Eye",
         head="Dampening Tam",
         body="Pillager's Vest +3",
+        ear1="Cessance Earring",
         ring2="Ilabrat Ring",
         waist="Kentarch Belt +1",
         })
@@ -488,7 +490,7 @@ function init_gear_sets()
     sets.engaged.HighAcc = set_combine(sets.engaged.MidAcc, {
         legs="Pill. Culottes +3",
         feet=gear.Herc_STP_feet,
-        ear2="Telos Earring",
+        ear2="Mache Earring +1",
         ring1="Regal Ring",
         ring2="Ramuh Ring +1",
         waist="Olseni Belt",
@@ -776,7 +778,12 @@ function init_gear_sets()
     ---------------------------------------- Special Sets ------------------------------------------
     ------------------------------------------------------------------------------------------------
 
-    sets.buff.Doom = {ring1="Eshmun's Ring", ring2="Eshmun's Ring", waist="Gishdubar Sash"}
+    sets.buff.Doom = {
+        neck="Nicander's Necklace", --20
+        ring1="Eshmun's Ring", --20
+        ring2="Eshmun's Ring", --20
+        waist="Gishdubar Sash", --10
+        }
 
     --sets.Reive = {neck="Ygnas's Resolve +1"}
     sets.CP = {back="Mecisto. Mantle"}

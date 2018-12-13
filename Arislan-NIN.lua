@@ -289,7 +289,7 @@ function init_gear_sets()
         head=gear.Adhemar_B_head,
         body=gear.Adhemar_B_body,
         legs="Jokushu Haidate",
-        ear2="Brutal Earring",
+        ear2="Mache Earring +1",
         ring2="Ilabrat Ring",
         back=gear.NIN_TP_Cape,
         })
@@ -730,7 +730,14 @@ function init_gear_sets()
         }
 
 --    sets.buff.Migawari = {body="Iga Ningi +2"}
-    sets.buff.Doom = {ring1="Eshmun's Ring", ring2="Eshmun's Ring", waist="Gishdubar Sash"}
+
+    sets.buff.Doom = {
+        neck="Nicander's Necklace", --20
+        ring1="Eshmun's Ring", --20
+        ring2="Eshmun's Ring", --20
+        waist="Gishdubar Sash", --10
+        }
+		
 --    sets.buff.Yonin = {}
 --    sets.buff.Innin = {}
 

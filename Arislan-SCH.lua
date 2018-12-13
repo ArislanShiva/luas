@@ -256,7 +256,7 @@ function init_gear_sets()
         head="Pixie Hairpin +1",
         body="Amalric Doublet +1",
         hands="Kaykaus Cuffs +1",
-        legs="Amalric Slops",
+        legs="Amalric Slops +1",
         feet="Kaykaus Boots +1",
         neck="Orunmila's Torque",
         ear1="Loquacious Earring",
@@ -452,7 +452,7 @@ function init_gear_sets()
         hands="Amalric Gages +1", --(5)
         legs="Mallquis Trews +2", --5
         feet="Merlinic Crackows", --11
-        neck="Mizu. Kubikazari", --10
+        neck="Argute Stole +1", --8
         ear1="Barkaro. Earring",
         ear2="Regal Earring",
         ring1="Shiva Ring +1",
@@ -483,8 +483,8 @@ function init_gear_sets()
         head="Peda. M.Board +3",
         body="Amalric Doublet +1",
         hands="Amalric Gages +1",
-        legs="Merlinic Shalwar",
-        feet="Merlinic Crackows",
+        legs="Amalric Slops +1",
+        feet="Amalric Nails +1",
         neck="Baetyl Pendant",
         ear1="Barkaro. Earring",
         ear2="Regal Earring",
@@ -499,7 +499,7 @@ function init_gear_sets()
         sub="Enki Strap",
         body="Seidr Cotehardie",
         legs="Peda. Pants +3",
-        feet="Jhakri Pigaches +2",
+        feet="Merlinic Crackows",
         neck="Erra Pendant",
         })
 
@@ -657,7 +657,12 @@ function init_gear_sets()
        ear1="Savant's Earring", --1
        }
 
-    sets.buff.Doom = {ring1="Eshmun's Ring", ring2="Eshmun's Ring", waist="Gishdubar Sash"}
+    sets.buff.Doom = {
+        neck="Nicander's Necklace", --20
+        ring1="Eshmun's Ring", --20
+        ring2="Eshmun's Ring", --20
+        waist="Gishdubar Sash", --10
+        }
 
     sets.LightArts = {legs="Acad. Pants +3", feet="Acad. Loafers +3"}
     sets.DarkArts = {body="Acad. Gown +3", feet="Acad. Loafers +3"}

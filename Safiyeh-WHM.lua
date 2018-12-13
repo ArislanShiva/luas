@@ -277,7 +277,7 @@ function init_gear_sets()
         })
 
     sets.midcast.CureNormal = set_combine(sets.midcast.CureSolace, {
-        --body="Theo. Briault +3", --0(+6)/(-6)
+        body="Theo. Briault +2", --0(+3)/(-5)
         })
 
     sets.midcast.CureWeather = set_combine(sets.midcast.CureNormal, {
@@ -288,7 +288,7 @@ function init_gear_sets()
         })
 
     sets.midcast.CuragaNormal = set_combine(sets.midcast.CureNormal, {
-        --body="Theo. Briault +3", --0(+6)/(-6)
+        body="Theo. Briault +2", --0(+3)/(-5)
         neck="Nuna Gorget +1",
         ring1="Stikini Ring",
         ring2="Stikini Ring",
@@ -298,7 +298,7 @@ function init_gear_sets()
     sets.midcast.CuragaWeather = {
         main="Chatoyant Staff", --10
         sub="Achaq Grip", --0/(-4)
-        --body="Theo. Briault +3", --0(+6)/(-6)
+        body="Theo. Briault +2", --0(+3)/(-5)
         neck="Nuna Gorget +1",
         back="Twilight Cape",
         ring1="Stikini Ring",
@@ -480,8 +480,8 @@ function init_gear_sets()
         main=gear.Gada_ENF,
         sub="Ammurapi Shield",
         ammo="Hydrocera",
-        head="Befouled Crown",
-        body="Inyanga Jubbah +2",
+        head="Theophany Cap +2",
+        body="Theo. Briault +2",
         hands="Inyan. Dastanas +2",
         legs="Chironic Hose",
         feet="Theo. Duckbills +2",

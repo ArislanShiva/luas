@@ -221,7 +221,7 @@ function init_gear_sets()
         head="Pixie Hairpin +1",
         body="Amalric Doublet +1",
         hands="Telchine Gloves",
-        legs="Amalric Slops",
+        legs="Amalric Slops +1",
         feet="Medium's Sabots",
         neck="Orunmila's Torque",
         ear1="Etiolation Earring",
@@ -408,7 +408,7 @@ function init_gear_sets()
         head="Pixie Hairpin +1",
         body=gear.Merl_MB_body, --10
         hands="Amalric Gages", --(5)
-        legs="Amalric Slops",
+        legs="Amalric Slops +1",
         feet="Merlinic Crackows", --11
         neck="Mizu. Kubikazari", --10
         ear1="Barkaro. Earring",
@@ -447,8 +447,8 @@ function init_gear_sets()
         head="Merlinic Hood",
         body=gear.Merl_MB_body,
         hands="Amalric Gages +1",
-        legs="Merlinic Shalwar",
-        feet="Merlinic Crackows",
+        legs="Amalric Slops +1",
+        feet="Amalric Nails +1",
         neck="Baetyl Pendant",
         ear1="Barkaro. Earring",
         ear2="Regal Earring",
@@ -462,8 +462,8 @@ function init_gear_sets()
         main=gear.Grioavolr_MB,
         sub="Enki Strap",
         ammo="Ghastly Tathlum +1",
-        legs="Amalric Slops",
-        feet="Jhakri Pigaches +2",
+        legs="Amalric Slops +1",
+        feet="Merlinic Crackows",
         neck="Erra Pendant",
         back=gear.BLM_Death_Cape,
         })
@@ -478,6 +478,8 @@ function init_gear_sets()
     sets.midcast['Elemental Magic'].Spaekona = set_combine(sets.midcast['Elemental Magic'], {
         sub="Enki Strap",
         body="Spaekona's Coat +2",
+        legs="Merlinic Shalwar",
+        feet="Merlinic Crackows",
         neck="Erra Pendant",
         })
 
@@ -574,7 +576,7 @@ function init_gear_sets()
         head="Pixie Hairpin +1",
         body="Amalric Doublet +1",
         hands="Amalric Gages",
-        legs="Amalric Slops",
+        legs="Amalric Slops +1",
         feet="Merlinic Crackows",
         neck="Sanctity Necklace",
         ear1="Barkaro. Earring",
@@ -591,7 +593,7 @@ function init_gear_sets()
         head="Merlinic Hood",
         body="Amalric Doublet +1",
         hands="Amalric Gages +1",
-        legs="Merlinic Shalwar",
+        legs="Amalric Slops +1",
         neck="Incanter's Torque",
         ear1="Barkaro. Earring",
         ear2="Regal Earring",
@@ -644,7 +646,12 @@ function init_gear_sets()
         back="Relucent Cape",
         }
 
-    sets.buff.Doom = {ring1="Eshmun's Ring", ring2="Eshmun's Ring", waist="Gishdubar Sash"}
+    sets.buff.Doom = {
+        neck="Nicander's Necklace", --20
+        ring1="Eshmun's Ring", --20
+        ring2="Eshmun's Ring", --20
+        waist="Gishdubar Sash", --10
+        }
 
     sets.DarkAffinity = {head="Pixie Hairpin +1",ring2="Archon Ring"}
     sets.Obi = {waist="Hachirin-no-Obi"}

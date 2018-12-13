@@ -19,8 +19,8 @@
     send_command('bind #2 input //send safiyeh /ma "Indi-Fury" <t>')
     send_command('bind #3 input //send safiyeh /ma "Indi-Haste" <t>')
     send_command('bind #4 input //send safiyeh /ma "Indi-Refresh" <t>')
-    send_command('bind #5 input //send safiyeh /ma "Geo-Vex" <t>')
-    send_command('bind #6 input //send safiyeh /ma "Indi-Attunement" <t>')
+    send_command('bind #5 input //send safiyeh /ma "Geo-Malaise" <t>')
+    send_command('bind #6 input //send safiyeh /ma "Indi-Acumen" <t>')
 
     send_command('bind #7 input //send safiyeh /ma "Dia II" <t>')
     send_command('bind #8 input //send safiyeh /ma "Silence" <t>')
@@ -58,3 +58,5 @@
     send_command('bind #numpad1 input //send safiyeh /ma "Cursna" <t>')
     send_command('bind #numpad2 input //send safiyeh /ma "Cursna" Gary')
     send_command('bind #numpad+ input //send safiyeh /ma "Erase" <t>')
+    send_command('bind #numpad0 input //send safiyeh /ma "Sacrifice" <t>')
+    send_command('bind #numpad. input //send safiyeh /ma "Esuna" <t>')

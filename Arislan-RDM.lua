@@ -257,8 +257,8 @@ function init_gear_sets()
         legs="Jhakri Slops +2",
         feet="Jhakri Pigaches +2",
         neck="Fotia Gorget",
-        ear1="Moonshade Earring",
-        ear2="Ishvara Earring",
+        ear1="Ishvara Earring",
+        ear2="Moonshade Earring",
         ring1="Rufescent Ring",
         ring2="Shukuyu Ring",
         back=gear.RDM_WS1_Cape,
@@ -267,7 +267,7 @@ function init_gear_sets()
 
     sets.precast.WS.Acc = set_combine(sets.precast.WS, {
         neck="Combatant's Torque",
-        ear2="Telos Earring",
+        ear2="Mache Earring +1",
         ring1="Ramuh Ring +1",
         waist="Grunfeld Rope",
         })
@@ -279,7 +279,7 @@ function init_gear_sets()
         hands=gear.Taeon_Crit_hands,
         legs=gear.Taeon_Crit_legs,
         feet="Thereoid Greaves",
-        ear2="Sherida Earring",
+        ear1="Sherida Earring",
         ring1="Begrudging Ring",
         ring2="Ilabrat Ring",
         back=gear.RDM_WS2_Cape,
@@ -290,7 +290,7 @@ function init_gear_sets()
         body=gear.Taeon_TA_body,
         hands=gear.Taeon_TA_hands,
         legs=gear.Taeon_TA_legs,
-        ear2="Telos Earring",
+        ear2="Mache Earring +1",
         ring1="Ramuh Ring +1",
         })
 
@@ -319,7 +319,7 @@ function init_gear_sets()
 
     sets.precast.WS['Requiescat'].Acc = set_combine(sets.precast.WS['Requiescat'], {
         neck="Combatant's Torque",
-        ear2="Telos Earring",
+        ear1="Mache Earring +1",
         ring1="Ramuh Ring +1",
         waist="Grunfeld Rope",
         })
@@ -329,8 +329,8 @@ function init_gear_sets()
         head="Pixie Hairpin +1",
         body="Amalric Doublet +1",
         hands="Amalric Gages +1",
-        legs="Merlinic Shalwar",
-        feet="Merlinic Crackows",
+        legs="Amalric Slops +1",
+        feet="Amalric Nails +1",
         neck="Baetyl Pendant",
         ear1="Moonshade Earring",
         ear2="Regal Earring",
@@ -475,10 +475,10 @@ function init_gear_sets()
         })
 
     sets.midcast['Phalanx'] = set_combine(sets.midcast.EnhancingDuration, {
-        --body=gear.Taeon_Phalanx_body, --3(10)
-        --hands=gear.Taeon_Phalanx_hands, --3(8)
-        --legs=gear.Taeon_Phalanx_legs, --3(8)
-        --feet=gear.Taeon_Phalanx_feet, --3(10)
+        body=gear.Taeon_Phalanx_body, --3(10)
+        hands=gear.Taeon_Phalanx_hands, --3(10)
+        legs=gear.Taeon_Phalanx_legs, --3(10)
+        feet=gear.Taeon_Phalanx_feet, --3(10)
         })
 
     sets.midcast.Aquaveil = set_combine(sets.midcast.EnhancingDuration, {
@@ -591,8 +591,8 @@ function init_gear_sets()
         head="Merlinic Hood",
         body="Amalric Doublet +1",
         hands="Amalric Gages +1",
-        legs="Merlinic Shalwar",
-        feet="Merlinic Crackows",
+        legs="Amalric Slops +1",
+        feet="Amalric Nails +1",
         neck="Baetyl Pendant",
         ear1="Friomisi Earring",
         ear2="Regal Earring",
@@ -606,15 +606,16 @@ function init_gear_sets()
         main=gear.Grioavolr_MB,
         sub="Enki Strap",
         body="Seidr Cotehardie",
-        feet="Jhakri Pigaches +2",
+        legs="Merlinic Shalwar",
+        feet="Merlinic Crackows",
         neck="Erra Pendant",
         })
 
     sets.midcast['Elemental Magic'].Resistant = set_combine(sets.midcast['Elemental Magic'], {
         main=gear.Grioavolr_MB,
         sub="Enki Strap",
-        head="Atrophy Chapeau +3",
-        feet="Jhakri Pigaches +2",
+        legs="Merlinic Shalwar",
+        feet="Merlinic Crackows",
         neck="Erra Pendant",
         ear1="Hermetic Earring",
         waist="Yamabuki-no-Obi",
@@ -763,6 +764,7 @@ function init_gear_sets()
         head="Carmine Mask +1",
         legs="Carmine Cuisses +1",
         ear1="Cessance Earring",
+        ear2="Mache Earring +1",
         ring1="Ramuh Ring +1",
         waist="Olseni Belt",
         })
@@ -793,6 +795,8 @@ function init_gear_sets()
 
     sets.engaged.DW.HighAcc = set_combine(sets.engaged.DW.MidAcc, {
         head="Carmine Mask +1",
+        ear1="Cessance Earring",
+        ear2="Mache Earring +1",
         ring1="Ramuh Ring +1",
         })
 
@@ -820,6 +824,8 @@ function init_gear_sets()
 
     sets.engaged.DW.HighAcc.LowHaste = set_combine(sets.engaged.DW.MidAcc.LowHaste, {
         head="Carmine Mask +1",
+        ear1="Cessance Earring",
+        ear2="Mache Earring +1",
         ring1="Ramuh Ring +1",
         })
 
@@ -850,6 +856,7 @@ function init_gear_sets()
     sets.engaged.DW.HighAcc.MidHaste = set_combine(sets.engaged.DW.MidAcc.MidHaste, {
         head="Carmine Mask +1",
         ear1="Cessance Earring",
+        ear2="Mache Earring +1",
         ring1="Ramuh Ring +1",
         waist="Olseni Belt",
         })
@@ -881,6 +888,7 @@ function init_gear_sets()
     sets.engaged.DW.HighAcc.HighHaste = set_combine(sets.engaged.DW.MidAcc.HighHaste, {
         head="Carmine Mask +1",
         ear1="Cessance Earring",
+        ear2="Mache Earring +1",
         ring1="Ramuh Ring +1",
         waist="Olseni Belt",
         })
@@ -912,6 +920,7 @@ function init_gear_sets()
         head="Carmine Mask +1",
         legs="Carmine Cuisses +1", --6
         ear1="Cessance Earring",
+        ear2="Mache Earring +1",
         ring1="Ramuh Ring +1",
         waist="Olseni Belt",
         })
@@ -955,7 +964,12 @@ function init_gear_sets()
     ---------------------------------------- Special Sets ------------------------------------------
     ------------------------------------------------------------------------------------------------
 
-    sets.buff.Doom = {ring1="Eshmun's Ring", ring2="Eshmun's Ring", waist="Gishdubar Sash"}
+    sets.buff.Doom = {
+        neck="Nicander's Necklace", --20
+        ring1="Eshmun's Ring", --20
+        ring2="Eshmun's Ring", --20
+        waist="Gishdubar Sash", --10
+        }
 
     sets.Obi = {waist="Hachirin-no-Obi"}
     sets.CP = {back="Mecisto. Mantle"}

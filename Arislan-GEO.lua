@@ -375,8 +375,8 @@ function init_gear_sets()
         head="Merlinic Hood",
         body="Amalric Doublet +1",
         hands="Amalric Gages +1",
-        legs="Merlinic Shalwar",
-        feet="Merlinic Crackows",
+        legs="Amalric Slops +1",
+        feet="Amalric Nails +1",
         neck="Baetyl Pendant",
         ear1="Barkaro. Earring",
         ear2="Regal Earring",
@@ -389,7 +389,8 @@ function init_gear_sets()
     sets.midcast['Elemental Magic'].Resistant = set_combine(sets.midcast['Elemental Magic'], {
         main=gear.Grioavolr_MB,
         sub="Enki Strap",
-        feet="Jhakri Pigaches +2",
+        legs="Merlinic Shalwar",
+        feet="Merlinic Crackows",
         neck="Erra Pendant",
         back="Aurist's Cape +1",
         waist="Yamabuki-no-Obi",
@@ -405,7 +406,8 @@ function init_gear_sets()
     sets.midcast['Elemental Magic'].Seidr = set_combine(sets.midcast['Elemental Magic'], {
         sub="Enki Strap",
         body="Seidr Cotehardie",
-        feet="Jhakri Pigaches +2",
+        legs="Merlinic Shalwar",
+        feet="Merlinic Crackows",
         neck="Sanctity Necklace",
         })
 
@@ -510,7 +512,7 @@ function init_gear_sets()
         head="Azimuth Hood +1",
         body="Amalric Doublet +1",
         hands="Amalric Gages +1",
-        legs="Azimuth Tights +1",
+        legs="Amalric Slops +1",
         neck="Incanter's Torque",
         ear1="Barkaro. Earring",
         ear2="Regal Earring",
@@ -569,7 +571,12 @@ function init_gear_sets()
         back="Seshaw Cape", --5
         }
 
-    sets.buff.Doom = {ring1="Eshmun's Ring", ring2="Eshmun's Ring", waist="Gishdubar Sash"}
+    sets.buff.Doom = {
+        neck="Nicander's Necklace", --20
+        ring1="Eshmun's Ring", --20
+        ring2="Eshmun's Ring", --20
+        waist="Gishdubar Sash", --10
+        }
 
     sets.Obi = {waist="Hachirin-no-Obi"}
     sets.CP = {back="Mecisto. Mantle"}
