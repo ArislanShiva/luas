@@ -38,8 +38,8 @@
 --  Spells:     [ WIN+, ]           Utsusemi: Ichi
 --              [ WIN+. ]           Utsusemi: Ni
 --
---  Weapons:    [ CTRL+G ]          Cycles between available ranged weapons
---              [ CTRL+W ]          Toggle Ranged Weapon Lock
+--  Weapons:    [ WIN+E/R ]         Cycles between available Weapon Sets
+--              [ WIN+W ]           Toggle Ranged Weapon Lock
 --
 --  WS:         [ CTRL+Numpad7 ]    Savage Blade
 --              [ CTRL+Numpad8 ]    Last Stand
