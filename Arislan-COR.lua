@@ -44,8 +44,10 @@
 --  WS:         [ CTRL+Numpad7 ]    Savage Blade
 --              [ CTRL+Numpad8 ]    Last Stand
 --              [ CTRL+Numpad4 ]    Leaden Salute
+--              [ CTRL+Numpad5 ]    Requiescat
 --              [ CTRL+Numpad6 ]    Wildfire
---              [ CTRL+Numpad1 ]    Requiescat
+--              [ CTRL+Numpad1 ]    Aeolian Edge
+--              [ CTRL+Numpad2 ]    Evisceration
 --
 --  RA:         [ Numpad0 ]         Ranged Attack
 --
@@ -167,6 +169,7 @@ function user_setup()
     send_command('bind ^numpad7 input /ws "Savage Blade" <t>')
     send_command('bind ^numpad8 input /ws "Last Stand" <t>')
     send_command('bind ^numpad4 input /ws "Leaden Salute" <t>')
+    send_command('bind ^numpad5 input /ws "Requiescat" <t>')
     send_command('bind ^numpad6 input /ws "Wildfire" <t>')
     send_command('bind ^numpad1 input /ws "Aeolian Edge" <t>')
     send_command('bind ^numpad2 input /ws "Evisceration" <t>')
@@ -211,6 +214,7 @@ function user_unload()
     send_command('unbind ^numpad-')
     send_command('unbind ^numpad8')
     send_command('unbind ^numpad4')
+    send_command('unbind ^numpad5')
     send_command('unbind ^numpad6')
     send_command('unbind ^numpad1')
     send_command('unbind ^numpad2')
