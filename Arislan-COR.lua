@@ -1336,12 +1336,6 @@ function job_self_command(cmdParams, eventArgs)
         send_command('@input /ja "'..doqd..'" <t>')
     end
 
-    --[[if cmdParams[2] == 'WeaponSet' then
-        local weaponset = state.WeaponSet.current
-        change_weapons(weaponset)
-    end]]--
-
-
     gearinfo(cmdParams, eventArgs)
 end
 
@@ -1492,22 +1486,6 @@ function do_bullet_checks(spell, spellMap, eventArgs)
         state.warned:reset()
     end
 end
-
---[[function change_weapons(weaponset)
-
-    local weaponset = weaponset
-    local weaponset_index = table.find(state.WeaponSet,weaponset)
-	local weaponset_length = table.getn(state.WeaponSet)
-
-    if weaponset_index + 1 > weaponset_length then
-        weaponset = state.WeaponSet[1]
-	else
-	    weaponset = state.WeaponSet[weaponset_index + 1]
-    end
-
-	send_command('gs equip sets.' ..weaponset)
-
-end]]--
 
 windower.register_event('zone change', 
     function()
