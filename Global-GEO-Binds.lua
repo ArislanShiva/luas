@@ -13,6 +13,11 @@
     send_command('bind #f11 input //send safiyeh //gs c cycle castingmode')
     send_command('bind #f12 input //send safiyeh //gs c cycle idlemode')
 
+    send_command('bind #insert input //send safiyeh //gs c cycleback Element')
+    send_command('bind #delete input //send safiyeh //gs c cycle Element')
+    send_command('bind #= input //send safiyeh //gs c toggle MagicBurst')
+    send_command('bind #backspace input //send safiyeh //gs c toggle Auto')
+
     send_command('bind #` input //send safiyeh /ja "Full Circle" <me>')
 
     send_command('bind #1 input //send safiyeh /ma "Geo-Frailty" <t>')
@@ -28,7 +33,7 @@
     send_command('bind #0 input //send safiyeh /ma "Cure" Arislan')
     --send_command('bind #0 input //send safiyeh /ma "Dispel" <t>')
 
-    send_command('bind #q input //send safiyeh /ma "Blizzard V" <t>')
+    send_command('bind #q input //send safiyeh //gs c nuke')
     send_command('bind #w input //send safiyeh /ma "Aspir III" <t>')
     send_command('bind #e input //send safiyeh /ma "Haste" <t>')
     send_command('bind #r input //send safiyeh /ma "Refresh" <t>')

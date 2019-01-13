@@ -115,6 +115,8 @@ function user_setup()
     include('Global-Binds.lua') -- OK to remove this line
     include('Global-GEO-Binds.lua') -- OK to remove this line
 
+    send_command('lua l gearinfo')
+
     send_command('bind ^- gs c cycleback mainstep')
     send_command('bind ^= gs c cycle mainstep')
     send_command('bind !- gs c cycleback altstep')
@@ -205,6 +207,9 @@ function user_unload()
     send_command('unbind #8')
     send_command('unbind #9')
     send_command('unbind #0')
+
+    send_command('lua u gearinfo')
+
 end
 
 
@@ -220,23 +225,24 @@ function init_gear_sets()
         ammo="Sapience Orb", --2
         head="Halitus Helm", --8
         body="Emet Harness +1", --10
-        hands="Kurys Gloves", --9
+        hands="Horos Bangles +3", --9
         feet="Ahosi Leggings", --7
         neck="Unmoving Collar +1", --10
         ear1="Cryptic Earring", --4
         ear2="Trux Earring", --5
         ring1="Supershear Ring", --5
         ring2="Eihwaz Ring", --5
+        back=gear.DNC_WTZ_Cape, --10
         waist="Kasiri Belt", --3
         }
 
     sets.precast.JA['Provoke'] = sets.Enmity
-    sets.precast.JA['No Foot Rise'] = {body="Horos Casaque +1"}
+    sets.precast.JA['No Foot Rise'] = {body="Horos Casaque +3"}
     sets.precast.JA['Trance'] = {head="Horos Tiara +1"}
 
     sets.precast.Waltz = {
         ammo="Yamarang", --5
-        head="Anwig Salade",
+        head="Horos Tiara +3", --15
         body="Maxixi Casaque +3", --19(8)
         hands="Maxixi Bangles +3",
         legs="Dashing Subligar", --10
@@ -246,13 +252,14 @@ function init_gear_sets()
         ear2="Enchntr. Earring +1",
         ring1="Carb. Ring +1",
         ring2="Carb. Ring +1",
-        back=gear.DNC_WTZ_Cape, --10
+        back=gear.DNC_WTZ_Cape,
         waist="Aristo Belt",
         } -- Waltz Potency/CHR
 
     sets.precast.WaltzSelf = set_combine(sets.precast.Waltz, {
-        head="Mummu Bonnet +2", --8
-        ring1="Asklepian Ring", --3
+        head="Mummu Bonnet +2", --(8)
+        ring1="Asklepian Ring", --(3)
+        ear1="Roundel Earring", --5
         }) -- Waltz effects received
 
     sets.precast.Waltz['Healing Waltz'] = {}
@@ -282,7 +289,7 @@ function init_gear_sets()
     sets.precast.Flourish1['Violent Flourish'] = {
         ammo="Hydrocera",
         head="Mummu Bonnet +2",
-        body="Horos Casaque +1",
+        body="Horos Casaque +3",
         hands="Mummu Wrists +2",
         legs="Mummu Kecks +2",
         feet="Mummu Gamash. +2",
@@ -369,7 +376,7 @@ function init_gear_sets()
     sets.precast.WS['Exenterator'] = set_combine(sets.precast.WS, {
         ammo="Yamarang",
         head=gear.Adhemar_B_head,
-        body=gear.Adhemar_B_body,
+        body="Meg. Cuirie +2",
         legs="Meg. Chausses +2",
         feet="Meg. Jam. +2",
         ear1="Sherida Earring",
@@ -380,13 +387,14 @@ function init_gear_sets()
     sets.precast.WS['Exenterator'].Acc = set_combine(sets.precast.WS['Exenterator'], {
         ammo="Falcon Eye",
         head="Dampening Tam",
+        body="Horos Casaque +3",
         ear2="Telos Earring",
         })
 
     sets.precast.WS['Pyrrhic Kleos'] = set_combine(sets.precast.WS, {
         ammo="Cheruski Needle",
         head="Lustratio Cap +1",
-        body=gear.Adhemar_B_body,
+        body="Horos Casaque +3",
         hands=gear.Adhemar_B_hands,
         legs="Samnuha Tights",
         feet=gear.Herc_TA_feet,
@@ -421,7 +429,7 @@ function init_gear_sets()
     sets.precast.WS['Evisceration'].Acc = set_combine(sets.precast.WS['Evisceration'], {
         ammo="Falcon Eye",
         head="Dampening Tam",
-        body=gear.Adhemar_B_body,
+        body="Horos Casaque +3",
         legs="Meg. Chausses +2",
         feet="Maxixi Toeshoes +3",
         ring1="Regal Ring",
@@ -484,10 +492,10 @@ function init_gear_sets()
 
     sets.idle = {
         ammo="Staunch Tathlum +1",
-        head="Maxixi Tiara +3",
+        head="Volte Cap",
         body="Turms Harness",
-        hands=gear.Herc_DT_hands,
-        legs="Meg. Chausses +2",
+        hands="Turms Mittens +1",
+        legs="Mummu Kecks +2",
         feet="Skd. Jambeaux +1",
         neck="Bathy Choker +1",
         ear1="Genmei Earring",
@@ -501,8 +509,9 @@ function init_gear_sets()
     sets.idle.DT = set_combine(sets.idle, {
         ammo="Staunch Tathlum +1", --3/3
         head="Volte Cap",
-        hands=gear.Herc_DT_hands, --7/5
-        legs="Mummu Kecks +2", --5/5
+        body="Horos Casaque +3", --6/0
+        hands="Turms Mittens +1",
+        legs="Meg. Chausses +2", --6/0
         feet="Turms Leggings +1",
         neck="Loricate Torque +1", --6/6
         ear1="Genmei Earring", --2/0
@@ -516,7 +525,7 @@ function init_gear_sets()
     sets.idle.Town = set_combine(sets.idle, {
         ammo="Yamarang",
         head=gear.Adhemar_B_head,
-        body=gear.Adhemar_B_body,
+        body="Horos Casaque +3",
         hands="Maxixi Bangles +3",
         legs="Horos Tights +3",
         neck="Combatant's Torque",
@@ -555,7 +564,7 @@ function init_gear_sets()
     sets.engaged = {
         ammo="Yamarang",
         head=gear.Adhemar_B_head,
-        body=gear.Adhemar_B_body,
+        body="Horos Casaque +3",
         hands=gear.Adhemar_B_hands,
         legs="Samnuha Tights",
         feet=gear.Herc_TA_feet,
@@ -582,6 +591,8 @@ function init_gear_sets()
         })
 
     sets.engaged.HighAcc = set_combine(sets.engaged.MidAcc, {
+        body="Maxixi Casaque +3",
+        legs="Horos Tights +3",
         feet=gear.Herc_STP_feet,
         ear2="Mache Earring +1",
         ring1="Ramuh Ring +1",
@@ -619,13 +630,13 @@ function init_gear_sets()
 
     sets.engaged.DW.MidAcc = set_combine(sets.engaged.DW.LowAcc, {
         head="Maxixi Tiara +3", --8
-        body="Maxixi Casaque +3",
         ring2="Ilabrat Ring",
         waist="Kentarch Belt +1",
         })
 
     sets.engaged.DW.HighAcc = set_combine(sets.engaged.DW.MidAcc, {
-        legs=gear.Herc_WS_legs,
+        body="Maxixi Casaque +3",
+        legs="Horos Tights +3",
         feet=gear.Herc_STP_feet,
         ear2="Mache Earring +1",
         ring1="Regal Ring",
@@ -661,13 +672,14 @@ function init_gear_sets()
 
     sets.engaged.DW.MidAcc.LowHaste = set_combine(sets.engaged.DW.LowAcc.LowHaste, {
         head="Maxixi Tiara +3", --8
-        body="Maxixi Casaque +3",
+        body="Horos Casaque +3",
         ring2="Ilabrat Ring",
         waist="Kentarch Belt +1",
         })
 
     sets.engaged.DW.HighAcc.LowHaste = set_combine(sets.engaged.DW.MidAcc.LowHaste, {
-        legs=gear.Herc_WS_legs,
+        body="Maxixi Casaque +3",
+        legs="Horos Tights +3",
         feet=gear.Herc_STP_feet,
         ear2="Mache Earring +1",
         ring1="Regal Ring",
@@ -703,14 +715,14 @@ function init_gear_sets()
 
     sets.engaged.DW.MidAcc.MidHaste = set_combine(sets.engaged.DW.LowAcc.MidHaste, {
         head="Maxixi Tiara +3", --8
-        body="Maxixi Casaque +3",
+        body="Horos Casaque +3",
         ring2="Ilabrat Ring",
         waist="Kentarch Belt +1",
         })
 
     sets.engaged.DW.HighAcc.MidHaste = set_combine(sets.engaged.DW.MidAcc.MidHaste, {
         body="Maxixi Casaque +3",
-        legs=gear.Herc_WS_legs,
+        legs="Horos Tights +3",
         feet=gear.Herc_STP_feet,
         ear2="Mache Earring +1",
         ring1="Regal Ring",
@@ -746,13 +758,14 @@ function init_gear_sets()
         })
 
     sets.engaged.DW.MidAcc.HighHaste = set_combine(sets.engaged.DW.LowAcc.HighHaste, {
-        body="Maxixi Casaque +3",
+        body="Horos Casaque +3",
         ring2="Ilabrat Ring",
         })
 
     sets.engaged.DW.HighAcc.HighHaste = set_combine(sets.engaged.DW.MidAcc.HighHaste, {
         head="Maxixi Tiara +3", --8
-        legs=gear.Herc_WS_legs,
+        body="Maxixi Casaque +3",
+        legs="Horos Tights +3",
         feet=gear.Herc_STP_feet,
         ear2="Mache Earring +1",
         ring1="Regal Ring",
@@ -769,7 +782,7 @@ function init_gear_sets()
     sets.engaged.DW.MaxHaste = {
         ammo="Yamarang",
         head=gear.Adhemar_B_head,
-        body=gear.Herc_TA_body,
+        body="Horos Casaque +3",
         hands=gear.Adhemar_B_hands,
         legs="Samnuha Tights",
         feet=gear.Herc_TA_feet,
@@ -790,14 +803,14 @@ function init_gear_sets()
         })
 
     sets.engaged.DW.MidAcc.MaxHaste = set_combine(sets.engaged.DW.LowAcc.MaxHaste, {
-        body="Maxixi Casaque +3",
         ear1="Cessance Earring",
         ring2="Ilabrat Ring",
         })
 
     sets.engaged.DW.HighAcc.MaxHaste = set_combine(sets.engaged.DW.MidAcc.MaxHaste, {
         head="Maxixi Tiara +3", --8
-        legs=gear.Herc_WS_legs,
+        body="Maxixi Casaque +3",
+        legs="Horos Tights +3",
         feet=gear.Herc_STP_feet,
         ear2="Mache Earring +1",
         ring1="Regal Ring",
@@ -817,6 +830,7 @@ function init_gear_sets()
 
     sets.engaged.Hybrid = {
         head=gear.Adhemar_D_head, --4/0
+        body="Horos Casaque +3", --6/0
         neck="Loricate Torque +1", --6/6
         ring1="Moonlight Ring", --5/5
         ring2="Defending Ring", --10/10
@@ -864,7 +878,7 @@ function init_gear_sets()
     ------------------------------------------------------------------------------------------------
 
     sets.buff['Saber Dance'] = {legs="Horos Tights +3"}
---    sets.buff['Fan Dance'] = {body="Horos Bangles +1"}
+    sets.buff['Fan Dance'] = {body="Horos Bangles +3"}
     sets.buff['Climactic Flourish'] = {head="Maculele Tiara +1"} --body="Meg. Cuirie +2"}
     sets.buff['Closed Position'] = {feet="Horos T. Shoes +3"}
 
@@ -901,7 +915,6 @@ function job_precast(spell, action, spellMap, eventArgs)
     end
 end
 
-
 function job_post_precast(spell, action, spellMap, eventArgs)
     if spell.type == "WeaponSkill" then
         if state.Buff['Sneak Attack'] == true then
@@ -911,7 +924,7 @@ function job_post_precast(spell, action, spellMap, eventArgs)
             equip(sets.buff['Climactic Flourish'])
         end
     end
-    if spell.type=='Waltz' and spell.target.type == 'SELF' then
+    if spell.type=='Waltz' and spell.english:startswith('Curing') and spell.target.type == 'SELF' then
         equip(sets.precast.WaltzSelf)
     end
 end
@@ -1159,6 +1172,12 @@ function job_pretarget(spell, action, spellMap, eventArgs)
         end
     end
 end
+
+windower.register_event('zone change', 
+    function()
+        send_command('gi ugs true')
+    end
+)
 
 -- Select default macro book on initial load or subjob change.
 function select_default_macro_book()

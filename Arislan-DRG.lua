@@ -90,8 +90,11 @@ function user_setup()
     send_command('bind ^numpad1 input /ws "Sonic Thrust" <t>')
     send_command('bind ^numpad2 input /ws "Leg Sweep" <t>')
 
-    send_command('bind ^numpad0 input /ja "Jump" <t>')
-    send_command('bind ^numpad. input /ja "High Jump" <t>')
+    send_command('bind numpad0 input /ja "Jump" <t>')
+    send_command('bind numpad. input /ja "High Jump" <t>')
+    send_command('bind ^numpad0 input /ja "Spirit Jump" <t>')
+    send_command('bind ^numpad. input /ja "Soul Jump" <t>')
+    send_command('bind ^numpadenter input /ja "Super Jump" <t>')
 
     select_default_macro_book()
     set_lockstyle()
@@ -111,8 +114,11 @@ function user_unload()
     send_command('unbind ^numpad5')
     send_command('unbind ^numpad1')
     send_command('unbind ^numpad2')
+    send_command('unbind numpad0')
+    send_command('unbind numpad.')
     send_command('unbind ^numpad0')
     send_command('unbind ^numpad.')
+    send_command('unbind ^numpadenter')
 
     send_command('unbind #`')
     send_command('unbind #1')
@@ -159,7 +165,7 @@ function init_gear_sets()
         head="Flam. Zucchetto +2",
         body="Vishap Mail +3",
         hands="Vis. Fng. Gaunt. +3",
-        legs=gear.Valo_STP_legs,
+        legs="Ptero. Brais +3",
         feet="Ostro Greaves",
         neck="Anu Torque",
         ear1="Sherida Earring",
@@ -172,8 +178,8 @@ function init_gear_sets()
 
     sets.precast.JA['High Jump'] = sets.precast.JA['Jump']
     sets.precast.JA['Spirit Jump'] = sets.precast.JA['Jump']
-    sets.precast.JA['Soul Jump'] = set_combine(sets.precast.JA['Jump'], {hands=gear.Acro_STP_hands})
-    sets.precast.JA['Super Jump'] = set_combine(sets.precast.JA['Jump'], {hands=gear.Acro_STP_hands, legs=gear.Valo_STP_legs})
+    sets.precast.JA['Soul Jump'] = set_combine(sets.precast.JA['Jump'], {hands="Emi. Gauntlets +1", legs=gear.Valo_STP_legs})
+    sets.precast.JA['Super Jump'] = {}
 
     sets.precast.JA['Angon'] = {ammo="Angon", hands="Ptero. Fin. G. +3"}
 
@@ -232,7 +238,6 @@ function init_gear_sets()
     sets.precast.WS['Drakesbane'] = set_combine(sets.precast.WS, {
         head="Flam. Zucchetto +2", 
         hands="Flamma Manopolas +2",
-        body="Emicho Haubert +1",
         legs="Pelt. Cuissots +1",
         ear2="Brutal Earring",
         ring1="Begrudging Ring",
@@ -275,12 +280,12 @@ function init_gear_sets()
         })
 
     sets.precast.WS['Stardiver'].Acc = set_combine(sets.precast.WS['Stardiver'], {
+        head="Ptero. Armet +3",
         feet="Vishap Greaves +3",
         })
 
 	sets.precast.WS['Stardiver'].Uncapped = set_combine(sets.precast.WS['Stardiver'], {
-        head="Sulevia's Mask +2", 
-        body="Emicho Haubert +1",
+        head="Ptero. Armet +3",
         legs="Sulev. Cuisses +2",
         })
 
@@ -308,12 +313,14 @@ function init_gear_sets()
 		ring2="Weather. Ring +1",
         })
 
+    sets.WSDayBonus = {head="Gavialis Helm"}
+
     ------------------------------------------------------------------------------------------------
     ---------------------------------------- Midcast Sets ------------------------------------------
     ------------------------------------------------------------------------------------------------
 
     sets.midcast.HealingBreath = {
-        head="Ptero. Armet +1",
+        head="Ptero. Armet +3",
         body=gear.Acro_Pet_body,
         hands=gear.Acro_Pet_hands,
         legs="Vishap Brais +3",
@@ -326,7 +333,7 @@ function init_gear_sets()
         }
 
     sets.midcast.ElementalBreath = {
-        head="Ptero. Armet +1",
+        head="Ptero. Armet +3",
         body=gear.Acro_Pet_body,
         hands=gear.Acro_Pet_hands,
         neck="Lancer's Torque",
@@ -377,6 +384,7 @@ function init_gear_sets()
     sets.idle.DT.Pet = set_combine(sets.idle.Pet, {
         head="Sulevia's Mask +2", --6/6
         body="Emicho Haubert +1",
+        legs="Ptero. Brais +3",
         neck="Loricate Torque +1", --6/6
         ring1="Moonlight Ring", --5/5
         ring2="Defending Ring", --10/10
@@ -385,7 +393,7 @@ function init_gear_sets()
 
     sets.idle.Town = set_combine(sets.idle, {
         ammo="Staunch Tathlum +1",
-        head="Vishap Armet +3",
+        head="Ptero. Armet +3",
         body="Emicho Haubert +1",
         hands="Ptero. Fin. G. +3",
         feet="Vishap Greaves +3",
@@ -444,14 +452,16 @@ function init_gear_sets()
 
     sets.engaged.HighAcc = set_combine(sets.engaged.MidAcc, {
         ammo="Amar Cluster",
-        body="Vishap Mail +3",
+        body="Emicho Haubert +1",
+        hands="Emi. Gauntlets +1",
+        legs=gear.Valo_STP_legs,
         ring1="Regal Ring",
-        hands="Flamma Manopolas +2",
         })
 
     sets.engaged.MaxAcc = set_combine(sets.engaged.HighAcc, {
+        body="Vishap Mail +3",
         head="Vishap Armet +3",
-        legs="Vishap Brais +3",
+        legs="Ptero. Brais +3",
         feet="Vishap Greaves +3",
         ear2="Mache Earring +1",
         ring1="Flamma Ring",
@@ -520,14 +530,28 @@ function job_precast(spell, action, spellMap, eventArgs)
     end
 
     -- Jump Overrides
-    if pet.isvalid and player.main_job_level >= 77 and spell.name == "Jump" then
-        eventArgs.cancel = true
-        send_command('@input /ja "Spirit Jump" <t>')
-    end
+    --if pet.isvalid and player.main_job_level >= 77 and spell.name == "Jump" then
+    --    eventArgs.cancel = true
+    --    send_command('@input /ja "Spirit Jump" <t>')
+    --end
 
-    if pet.isvalid and player.main_job_level >= 85 and spell.name == "High Jump" then
-        eventArgs.cancel = true
-        send_command('@input /ja "Soul Jump" <t>')
+    --if pet.isvalid and player.main_job_level >= 85 and spell.name == "High Jump" then
+    --    eventArgs.cancel = true
+    --    send_command('@input /ja "Soul Jump" <t>')
+    --end
+end
+
+function job_post_precast(spell, action, spellMap, eventArgs)
+    if spell.type == 'WeaponSkill' and state.WeaponskillMode.current == 'Normal' then
+        if spell.english == 'Sonic Thrust' then
+            if world.day_element == 'Earth' or world.day_element == 'Light' then
+                equip(sets.WSDayBonus)
+            end
+		elseif spell.english == 'Stardiver' then
+            if world.day_element == 'Earth' or world.day_element == 'Light' or world.day_element == 'Dark' then
+                equip(sets.WSDayBonus)
+           end
+        end
     end
 end
 

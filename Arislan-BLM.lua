@@ -43,6 +43,11 @@ end
 function job_setup()
 
     state.CP = M(false, "Capacity Points Mode")
+
+    degrade_array = {
+        ['Aspirs'] = {'Aspir','Aspir II','Aspir III'}
+        }
+
     lockstyleset = 10
 
 end
@@ -69,6 +74,7 @@ function user_setup()
 
     send_command('bind ^` input /ma Stun <t>')
     send_command('bind !` gs c toggle MagicBurst')
+    send_command('bind !w input /ma "Aspir III" <t>')
     send_command('bind !p input /ma "Shock Spikes" <me>')
     send_command('bind @d gs c toggle DeathMode')
     send_command('bind @c gs c toggle CP')
@@ -83,6 +89,7 @@ end
 function user_unload()
     send_command('unbind ^`')
     send_command('unbind !`')
+    send_command('unbind !w')
     send_command('unbind !p')
     send_command('unbind ^,')
     send_command('unbind !.')
@@ -123,15 +130,13 @@ function init_gear_sets()
 
     -- Fast cast sets for spells
     sets.precast.FC = {
-    --    /RDM --15 /SCH --10
-        main="Oranyan", --7
-        sub="Clerisy Strap +1", --3
+    --    /RDM --15
         ammo="Sapience Orb", --2
-        head="Amalric Coif", --10
+        head="Amalric Coif +1", --11
         body=gear.Merl_FC_body, --13
         hands="Merlinic Dastanas", --6
         legs="Psycloth Lappas", --7
-        feet="Regal Pumps +1", --7
+        feet="Volte Gaiters", --6
         neck="Orunmila's Torque", --5
         ear1="Loquacious Earring", --2
         ear2="Enchntr. Earring +1", --2
@@ -149,12 +154,8 @@ function init_gear_sets()
     sets.precast.FC['Elemental Magic'] = set_combine(sets.precast.FC, {ear1="Barkaro. Earring"})
 
     sets.precast.FC.Cure = set_combine(sets.precast.FC, {
-        main="Oranyan", --7
-        sub="Clerisy Strap +1", --3
-        ammo="Impatiens",
         ear1="Mendi. Earring", --5
         ring1="Lebeche Ring", --(2)
-        back="Perimede Cape", --(4)
         })
 
     sets.precast.FC.Curaga = sets.precast.FC.Cure
@@ -163,11 +164,11 @@ function init_gear_sets()
 
     sets.precast.FC.DeathMode = {
         ammo="Ghastly Tathlum +1",
-        head="Amalric Coif", --10
+        head="Amalric Coif +1", --11
         body="Amalric Doublet +1",
         hands="Merlinic Dastanas", --6
         legs="Psycloth Lappas", --7
-        feet="Regal Pumps +1", --7
+        feet="Volte Gaiters", --6
         neck="Orunmila's Torque", --5
         ear1="Etiolation Earring", --1
         ear2="Loquacious Earring", --2
@@ -236,10 +237,10 @@ function init_gear_sets()
     ---- Midcast Sets ----
 
     sets.midcast.FastRecast = {
-        head="Amalric Coif",
+        head="Amalric Coif +1",
         hands="Merlinic Dastanas",
         legs="Merlinic Shalwar",
-        feet="Regal Pumps +1",
+        feet="Volte Gaiters",
         ear1="Etiolation Earring",
         ear2="Loquacious Earring",
         ring1="Kishar Ring",
@@ -280,7 +281,7 @@ function init_gear_sets()
         neck="Debilis Medallion",
         ear1="Beatific Earring",
         ear2="Healing Earring",
-        ring1="Haoma's Ring",
+        ring1="Menelaus's Ring",
         ring2="Haoma's Ring",
         })
 
@@ -318,7 +319,7 @@ function init_gear_sets()
         })
 
     sets.midcast.Refresh = set_combine(sets.midcast.EnhancingDuration, {
-        head="Amalric Coif",
+        head="Amalric Coif +1",
         --feet="Inspirited Boots",
         waist="Gishdubar Sash",
         back="Grapevine Cape",
@@ -332,7 +333,7 @@ function init_gear_sets()
     sets.midcast.Aquaveil = set_combine(sets.midcast.EnhancingDuration, {
         main="Vadose Rod",
         sub="Ammurapi Shield",
-        head="Amalric Coif",
+        head="Amalric Coif +1",
         waist="Emphatikos Rope",
         })
 
@@ -397,7 +398,7 @@ function init_gear_sets()
     sets.midcast.Aspir = sets.midcast.Drain
 
     sets.midcast.Stun = set_combine(sets.midcast['Dark Magic'], {
-        feet="Regal Pumps +1",
+        feet="Volte Gaiters",
         waist="Channeler's Stone",
         })
 
@@ -421,7 +422,7 @@ function init_gear_sets()
     sets.midcast.Death.Resistant = set_combine(sets.midcast.Death, {
         main=gear.Grioavolr_MB,
         sub="Enki Strap",
-        head="Amalric Coif",
+        head="Amalric Coif +1",
         ring2="Shiva Ring +1",
         })
 
@@ -597,7 +598,6 @@ function init_gear_sets()
         neck="Incanter's Torque",
         ear1="Barkaro. Earring",
         ear2="Regal Earring",
-        ring2="Shiva Ring +1",
         back=gear.BLM_MAB_Cape,
         })
 
@@ -672,7 +672,9 @@ function job_precast(spell, action, spellMap, eventArgs)
             equip(sets.precast.FC.Impact.DeathMode)
         end
     end
-
+    if spellMap == 'Aspir' then
+        refine_various_spells(spell, action, spellMap, eventArgs)
+    end
     if buffactive['Mana Wall'] then
         equip(sets.precast.JA['Mana Wall'])
     end
@@ -770,7 +772,7 @@ function job_buff_change(buff, gain)
         if gain then
             equip(sets.buff.Doom)
             send_command('@input /p Doomed.')
-             disable('ring1','ring2','waist')
+            disable('ring1','ring2','waist')
         else
             enable('ring1','ring2','waist')
             handle_equipping_gear(player.status)
@@ -859,6 +861,27 @@ end
 function display_current_job_state(eventArgs)
     display_current_caster_state()
     eventArgs.handled = true
+end
+
+function refine_various_spells(spell, action, spellMap, eventArgs)
+    local aspirs = S{'Aspir','Aspir II','Aspir III'}
+
+    local newSpell = spell.english
+    local spell_recasts = windower.ffxi.get_spell_recasts()
+    local cancelling = 'All '..spell.english..' are on cooldown. Cancelling.'
+
+    local spell_index
+
+    if spell_recasts[spell.recast_id] > 0 then
+        if aspirs:contains(spell.name) then
+            spell_index = table.find(degrade_array['Aspirs'],spell.name)
+            if spell_index > 1 then
+                newSpell = degrade_array['Aspirs'][spell_index - 1]
+                send_command('@input /ma '..newSpell..' '..tostring(spell.target.raw))
+                eventArgs.cancel = true
+            end
+        end
+    end
 end
 
 

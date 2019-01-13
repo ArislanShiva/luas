@@ -104,7 +104,7 @@ function job_setup()
 
     define_roll_values()
 
-    lockstyleset = 2
+    lockstyleset = 1
 end
 
 -------------------------------------------------------------------------------------------------------------------
@@ -132,6 +132,8 @@ function user_setup()
 
     -- Additional local binds
     include('Global-Binds.lua')
+
+    send_command('lua l gearinfo')
 
     send_command('bind ^` input /ja "Double-up" <me>')
     send_command('bind ^c input /ja "Crooked Cards" <me>')
@@ -210,6 +212,9 @@ function user_unload()
     send_command('unbind ^numpad6')
     send_command('unbind ^numpad1')
     send_command('unbind numpad0')
+
+    send_command('lua u gearinfo')
+
 end
 
 -- Define sets and vars used by this job file.

@@ -98,6 +98,8 @@ function user_setup()
     include('Global-Binds.lua') -- OK to remove this line
     include('Global-GEO-Binds.lua') -- OK to remove this line
 
+    send_command('lua l gearinfo')
+
     send_command('bind ^` gs c cycle treasuremode')
     send_command('bind !` gs c toggle MagicBurst')
     send_command('bind ^- input /ja "Yonin" <me>')
@@ -174,6 +176,9 @@ function user_unload()
     send_command('unbind #8')
     send_command('unbind #9')
     send_command('unbind #0')
+
+    send_command('lua u gearinfo')
+
 end
 
 -- Define sets and vars used by this job file.
@@ -229,8 +234,8 @@ function init_gear_sets()
         }
 
     sets.precast.FC.Utsusemi = set_combine(sets.precast.FC, {
-        ammo="Impatiens",
         body="Mochi. Chainmail +1",
+        neck="Magoraga Beads",
         })
 
     sets.precast.RA = {
@@ -316,6 +321,7 @@ function init_gear_sets()
 
     sets.LugraLeft = {ear1="Lugra Earring"}
     sets.LugraRight = {ear2="Lugra Earring +1"}
+    sets.WSDayBonus = {head="Gavialis Helm"}
 
     --------------------------------------
     -- Midcast sets
@@ -770,11 +776,12 @@ end
 function job_post_precast(spell, action, spellMap, eventArgs)
     if spell.type == 'WeaponSkill' then
         if lugra_ws:contains(spell.english) and state.Night.value == true then
-            equip(sets.LugraRight)
+                equip(sets.LugraRight)
             if spell.english == 'Blade: Kamu' then
                 equip(sets.LugraLeft)
             end
-        elseif spell.english == 'Blade: Yu' and (world.weather_element == 'Water' or world.day_element == 'Water') then
+        end
+        if spell.english == 'Blade: Yu' and (world.weather_element == 'Water' or world.day_element == 'Water') then
             equip(sets.Obi)
         end
     end
@@ -1061,7 +1068,11 @@ function th_action_check(category, param)
     end
 end
 
-
+windower.register_event('zone change', 
+    function()
+        send_command('gi ugs true')
+    end
+)
 
 -- Select default macro book on initial load or subjob change.
 function select_default_macro_book()

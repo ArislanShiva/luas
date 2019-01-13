@@ -180,7 +180,7 @@ function job_setup()
     -- Unblinkable JA IDs for actions that always have TH: Quick/Box/Stutter Step, Desperate/Violent Flourish
     info.default_u_ja_ids = S{201, 202, 203, 205, 207}
 
-    lockstyleset = 3
+    lockstyleset = 1
 end
 
 -------------------------------------------------------------------------------------------------------------------
@@ -203,6 +203,8 @@ function user_setup()
     -- Additional local binds
     include('Global-Binds.lua') -- OK to remove this line
     include('Global-GEO-Binds.lua') -- OK to remove this line
+
+    send_command('lua l gearinfo')
 
     send_command('bind ^` gs c cycle treasuremode')
     send_command('bind !` gs c toggle MagicBurst')
@@ -297,6 +299,9 @@ function user_unload()
     send_command('unbind #8')
     send_command('unbind #9')
     send_command('unbind #0')
+
+    send_command('lua u gearinfo')
+
 end
 
 -- Define sets and vars used by this job file.
@@ -329,7 +334,7 @@ function init_gear_sets()
     sets.buff['Diffusion'] = {feet="Luhlaza Charuqs +1"}
     sets.buff['Efflux'] = {legs="Hashishin Tayt +1"}
 
-    sets.precast.JA['Azure Lore'] = {hands="Luhlaza Bazubands"}
+    sets.precast.JA['Azure Lore'] = {hands="Luh. Bazubands +1"}
     sets.precast.JA['Chain Affinity'] = {feet="Assim. Charuqs +1"}
     --sets.precast.JA['Convergence'] = {head="Luh. Keffiyeh +1"}
     --sets.precast.JA['Enchainment'] = {body="Luhlaza Jubbah +1"}
@@ -670,7 +675,7 @@ function init_gear_sets()
 
 
     sets.midcast['Blue Magic'].Buff = sets.midcast['Blue Magic']
-    sets.midcast['Blue Magic'].Refresh = set_combine(sets.midcast['Blue Magic'], {head="Amalric Coif", waist="Gishdubar Sash", back="Grapevine Cape"})
+    sets.midcast['Blue Magic'].Refresh = set_combine(sets.midcast['Blue Magic'], {head="Amalric Coif +1", waist="Gishdubar Sash", back="Grapevine Cape"})
     sets.midcast['Blue Magic'].SkillBasedBuff = sets.midcast['Blue Magic']
 
     sets.midcast['Blue Magic']['Occultation'] = set_combine(sets.midcast['Blue Magic'], {
@@ -685,7 +690,7 @@ function init_gear_sets()
         })
 
     sets.midcast['Blue Magic']['Carcharian Verve'] = set_combine(sets.midcast['Blue Magic'].Buff, {
-        head="Amalric Coif",
+        head="Amalric Coif +1",
         waist="Emphatikos Rope",
         })
 
@@ -713,7 +718,7 @@ function init_gear_sets()
         feet="Telchine Pigaches",
         }
 
-    sets.midcast.Refresh = set_combine(sets.midcast.EnhancingDuration, {head="Amalric Coif", waist="Gishdubar Sash", back="Grapevine Cape"})
+    sets.midcast.Refresh = set_combine(sets.midcast.EnhancingDuration, {head="Amalric Coif +1", waist="Gishdubar Sash", back="Grapevine Cape"})
     sets.midcast.Stoneskin = set_combine(sets.midcast.EnhancingDuration, {waist="Siegel Sash"})
 
     sets.midcast.Phalanx = set_combine(sets.midcast.EnhancingDuration, {
@@ -723,7 +728,7 @@ function init_gear_sets()
         feet=gear.Taeon_Phalanx_feet, --3(10)
         })
 
-    sets.midcast.Aquaveil = set_combine(sets.midcast.EnhancingDuration, {head="Amalric Coif", waist="Emphatikos Rope"})
+    sets.midcast.Aquaveil = set_combine(sets.midcast.EnhancingDuration, {head="Amalric Coif +1", waist="Emphatikos Rope"})
 
     sets.midcast.Protect = set_combine(sets.midcast.EnhancingDuration, {ring1="Sheltered Ring"})
     sets.midcast.Protectra = sets.midcast.Protect
@@ -1450,6 +1455,12 @@ function th_action_check(category, param)
         then return true
     end
 end
+
+windower.register_event('zone change', 
+    function()
+        send_command('gi ugs true')
+    end
+)
 
 -- Select default macro book on initial load or subjob change.
 function select_default_macro_book()

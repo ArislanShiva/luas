@@ -75,7 +75,7 @@ function job_setup()
     state.Buff['Afflatus Misery'] = buffactive['Afflatus Misery'] or false
     state.RegenMode = M{['description']='Regen Mode', 'Duration', 'Potency'}
 
-    lockstyleset = 3
+    lockstyleset = 1
 
 end
 

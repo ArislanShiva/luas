@@ -102,9 +102,9 @@ function define_global_sets()
 
     gear.Valo_STP_legs = {name="Valor. Hose", augments={'Accuracy+21 Attack+21','"Store TP"+8','Accuracy+15','Attack+11',}}
 
-    gear.Valo_WSD_head = {name="Valorous Mask", augments={'Accuracy+17 Attack+17','Weapon skill damage +2%','DEX+5','Accuracy+3','Attack+9',}}
+    gear.Valo_WSD_head = {name="Valorous Mask", augments={'Attack+16','Weapon skill damage +5%','CHR+2','Accuracy+13',}}
     gear.Valo_WSD_body = {name="Valorous Mail", augments={'Accuracy+22 Attack+22','Weapon skill damage +4%','STR+1','Accuracy+15','Attack+15',}}
-    gear.Valo_WSD_legs = {name="Valor. Hose", augments={'Accuracy+24 Attack+24','Weapon skill damage +3%','STR+9','Accuracy+5','Attack+8',}}
+    gear.Valo_WSD_legs = {name="Valor. Hose", augments={'Accuracy+25 Attack+25','Weapon skill damage +4%','STR+12','Attack+6',}}
 
     -- Ambuscade Capes
     gear.BLM_Death_Cape = {name="Taranus's Cape", augments={'MP+60','Mag. Acc+20 /Mag. Dmg.+20','INT+10','"Fast Cast"+10',}} --*

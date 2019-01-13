@@ -125,14 +125,12 @@ function init_gear_sets()
 
     sets.precast.FC = {
     --  /RDM --15
-        main="Oranyan", --7
-        sub="Clerisy Strap +1", --3
         range="Dunna", --3
-        head="Amalric Coif", --10
+        head="Amalric Coif +1", --11
         body=gear.Merl_FC_body, --13
         hands="Merlinic Dastanas", --6
         legs="Geo. Pants +1", --11
-        feet="Regal Pumps +1", --7
+        feet="Volte Gaiters", --6
         neck="Orunmila's Torque", --5
         ear1="Loquacious Earring", --2
         ear2="Enchntr. Earring +1", --2
@@ -150,11 +148,8 @@ function init_gear_sets()
     sets.precast.FC['Elemental Magic'] = set_combine(sets.precast.FC, {hands="Bagua Mitaines +1"})
 
     sets.precast.FC.Cure = set_combine(sets.precast.FC, {
-        main="Oranyan", --7
-        sub="Clerisy Strap +1", --3
         ear1="Mendi. Earring", --5
         ring1="Lebeche Ring", --(2)
-        back="Perimede Cape", --(4)
         })
 
     sets.precast.FC.Curaga = sets.precast.FC.Cure
@@ -187,10 +182,10 @@ function init_gear_sets()
     sets.midcast.FastRecast = {
         main="Oranyan",
         sub="Clerisy Strap +1",
-        head="Amalric Coif",
+        head="Amalric Coif +1",
         hands="Merlinic Dastanas",
         legs="Geo. Pants +1",
-        feet="Regal Pumps +1",
+        feet="Volte Gaiters",
         ear1="Loquacious Earring",
         ear2="Etiolation Earring",
         ring1="Kishar Ring",
@@ -251,7 +246,7 @@ function init_gear_sets()
         neck="Debilis Medallion",
         ear1="Beatific Earring",
         ear2="Healing Earring",
-        ring1="Haoma's Ring",
+        ring1="Menelaus's Ring",
         ring2="Haoma's Ring",
         })
 
@@ -289,7 +284,7 @@ function init_gear_sets()
         })
 
     sets.midcast.Refresh = set_combine(sets.midcast.EnhancingDuration, {
-        head="Amalric Coif",
+        head="Amalric Coif +1",
         waist="Gishdubar Sash",
         back="Grapevine Cape",
         })
@@ -302,7 +297,7 @@ function init_gear_sets()
     sets.midcast.Aquaveil = set_combine(sets.midcast.EnhancingDuration, {
         main="Vadose Rod",
         sub="Ammurapi Shield",
-        head="Amalric Coif",
+        head="Amalric Coif +1",
         waist="Emphatikos Rope",
         })
 
@@ -364,7 +359,7 @@ function init_gear_sets()
     sets.midcast.Aspir = sets.midcast.Drain
 
     sets.midcast.Stun = set_combine(sets.midcast['Dark Magic'], {
-        feet="Regal Pumps +1"
+        feet="Volte Gaiters",
         })
 
     -- Elemental Magic sets

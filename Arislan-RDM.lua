@@ -117,6 +117,10 @@ function user_setup()
     include('Global-Binds.lua') -- OK to remove this line
     include('Global-GEO-Binds.lua') -- OK to remove this line
 
+    if player.sub_job == 'NIN' then
+        send_command('lua l gearinfo')
+    end
+
     send_command('bind ^` input /ja "Composure" <me>')
     send_command('bind !` gs c toggle MagicBurst')
 
@@ -194,6 +198,11 @@ function user_unload()
     send_command('unbind #8')
     send_command('unbind #9')
     send_command('unbind #0')
+
+    if player.sub_job == 'NIN' then
+        send_command('lua u gearinfo')
+    end
+
 end
 
 -- Define sets and vars used by this job file.
@@ -225,10 +234,8 @@ function init_gear_sets()
     sets.precast.FC['Enhancing Magic'] = set_combine(sets.precast.FC, {waist="Siegel Sash"})
 
     sets.precast.FC.Cure = set_combine(sets.precast.FC, {
-        ammo="Impatiens",
         ear1="Mendi. Earring", --5
         ring1="Lebeche Ring", --(2)
-        back="Perimede Cape", --(4)
         })
 
     sets.precast.FC.Curaga = sets.precast.FC.Cure
@@ -399,7 +406,7 @@ function init_gear_sets()
         feet="Vanya Clogs",
         neck="Incanter's Torque",
         ear2="Healing Earring",
-        ring1="Haoma's Ring",
+        ring1="Menelaus's Ring",
         ring2="Haoma's Ring",
         back=gear.RDM_MND_Cape,
         waist="Bishop's Sash",
@@ -459,7 +466,7 @@ function init_gear_sets()
         })
 
     sets.midcast.Refresh = set_combine(sets.midcast.EnhancingDuration, {
-        head="Amalric Coif", -- +1
+        head="Amalric Coif +1", -- +1
         body="Atrophy Tabard +3", -- +3
         legs="Leth. Fuseau +1", -- +2
         })
@@ -482,7 +489,7 @@ function init_gear_sets()
         })
 
     sets.midcast.Aquaveil = set_combine(sets.midcast.EnhancingDuration, {
-        head="Amalric Coif",
+        head="Amalric Coif +1",
         waist="Emphatikos Rope",
         })
 

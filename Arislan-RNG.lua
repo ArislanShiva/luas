@@ -88,6 +88,8 @@ function user_setup()
     include('Global-Binds.lua') -- OK to remove this line
     include('Global-GEO-Binds.lua') -- OK to remove this line
 
+    send_command('lua l gearinfo')
+
     send_command('bind ^` input /ja "Velocity Shot" <me>')
     send_command ('bind @` input /ja "Scavenge" <me>')
 
@@ -167,6 +169,9 @@ function user_unload()
     send_command('unbind #8')
     send_command('unbind #9')
     send_command('unbind #0')
+
+    send_command('lua u gearinfo')
+
 end
 
 
@@ -1236,6 +1241,12 @@ function update_offense_mode()
         state.CombatForm:reset()
     end
 end
+
+windower.register_event('zone change', 
+    function()
+        send_command('gi ugs true')
+    end
+)
 
 -- Select default macro book on initial load or subjob change.
 function select_default_macro_book()

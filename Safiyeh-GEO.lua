@@ -47,6 +47,19 @@ function job_setup()
 
     state.CP = M(false, "Capacity Points Mode")
 
+    state.Auto = M(false, 'Auto Nuke')
+    state.Element = M{['description']='Element','Fire','Blizzard','Aero','Stone','Thunder','Water'}
+
+    degrade_array = {
+        ['Fire'] = {'Fire','Fire II','Fire III','Fire IV','Fire V'},
+        ['Ice'] = {'Blizzard','Blizzard II','Blizzard III','Blizzard IV','Blizzard V'},
+        ['Wind'] = {'Aero','Aero II','Aero III','Aero IV','Aero V'},
+        ['Earth'] = {'Stone','Stone II','Stone III','Stone IV','Stone V'},
+        ['Lightning'] = {'Thunder','Thunder II','Thunder III','Thunder IV','Thunder V'},
+        ['Water'] = {'Water', 'Water II','Water III', 'Water IV','Water V'},
+        ['Aspirs'] = {'Aspir','Aspir II','Aspir III'},
+        }
+
 end
 
 -------------------------------------------------------------------------------------------------------------------
@@ -71,7 +84,9 @@ function user_setup()
   	send_command('bind ^d input /ja "Dematerialize" <me>')
   	send_command('bind ^c input /ja "Life Cycle" <me>')
     send_command('bind !` gs c toggle MagicBurst')
-  	send_command('bind !w input /ma "Flurry" <stpc>')
+    send_command('bind ^insert gs c cycleback Element')
+    send_command('bind ^delete gs c cycle Element')
+  	send_command('bind !w input /ma "Aspir III" <t>')
   	send_command('bind !p input /ja "Entrust" <me>')
     send_command('bind ^, input /ma Sneak <stpc>')
     send_command('bind ^. input /ma Invisible <stpc>')
@@ -97,6 +112,8 @@ function user_unload()
     send_command('unbind ^d')
     send_command('unbind ^c')
     send_command('unbind !`')
+    send_command('unbind ^insert')
+    send_command('unbind ^delete')
     send_command('unbind !w')
     send_command('unbind !p')
     send_command('unbind ^,')
@@ -240,7 +257,7 @@ function init_gear_sets()
 
     sets.midcast.Cure = {
         main=gear.Gada_ENF, --18/(-4)
-        sub="Sors Shield", --3
+        sub="Sors Shield", --3/(-5)
         head="Vanya Hood", --10
         body="Vanya Robe", --7/(-6)
         hands="Vanya Cuffs",
@@ -563,6 +580,11 @@ function job_post_precast(spell, action, spellMap, eventArgs)
     if spell.name == 'Impact' then
         equip(sets.precast.FC.Impact)
     end
+    if state.Auto.value == true then
+        if (spellMap == 'Aspir' or (spell.skill == 'Elemental Magic' and spell.english ~= 'Impact' and spellMap ~= 'GeoNuke')) then
+            refine_various_spells(spell, action, spellMap, eventArgs)
+        end
+    end
 end
 
 function job_post_midcast(spell, action, spellMap, eventArgs)
@@ -699,9 +721,37 @@ function display_current_job_state(eventArgs)
 end
 
 function job_self_command(cmdParams, eventArgs)
-    if cmdParams[1]:lower() == 'nuke' then
-        handle_nuking(cmdParams)
-        eventArgs.handled = true
+    if cmdParams[1] == 'nuke' and not midaction() then
+        local nuke = ''
+        nuke = state.Element.current
+        send_command('@input /ma "'..nuke..' V" <t>')
+    end
+end
+
+function refine_various_spells(spell, action, spellMap, eventArgs)
+
+    local newSpell = spell.english
+    local spell_recasts = windower.ffxi.get_spell_recasts()
+    local cancelling = 'All '..spell.english..' are on cooldown. Cancelling.'
+
+    local spell_index
+
+    if spell_recasts[spell.recast_id] > 0 then
+        if spell.skill == 'Elemental Magic' then
+            spell_index = table.find(degrade_array[spell.element],spell.name)
+            if spell_index > 1 then
+                newSpell = degrade_array[spell.element][spell_index - 1]
+                send_command('@input /ma '..newSpell..' '..tostring(spell.target.raw))
+                eventArgs.cancel = true
+			end
+        elseif spellMap == 'Aspir' then
+            spell_index = table.find(degrade_array['Aspirs'],spell.name)
+            if spell_index > 1 then
+                newSpell = degrade_array['Aspirs'][spell_index - 1]
+                send_command('@input /ma '..newSpell..' '..tostring(spell.target.raw))
+                eventArgs.cancel = true
+            end
+        end
     end
 end
 

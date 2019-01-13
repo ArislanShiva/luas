@@ -81,6 +81,10 @@ function job_setup()
 
     update_active_strategems()
 
+    degrade_array = {
+        ['Aspirs'] = {'Aspir','Aspir II'}
+        }
+
     lockstyleset = 10
 
 end
@@ -110,7 +114,7 @@ function user_setup()
     send_command('bind ^[ gs c scholar power')
     send_command('bind ^] gs c scholar accuracy')
     send_command('bind ^; gs c scholar speed')
-    send_command('bind !w input /ma "Flurry" <stpc>')
+    send_command('bind !w input /ma "Aspir II" <t>')
     send_command('bind !o input /ma "Regen V" <stpc>')
     send_command('bind ![ gs c scholar aoe')
     send_command('bind !] gs c scholar duration')
@@ -195,14 +199,12 @@ function init_gear_sets()
     -- Fast cast sets for spells
     sets.precast.FC = {
     --    /RDM --15
-        main="Oranyan", --7
-        sub="Clerisy Strap +1", --3
         ammo="Sapience Orb", --2
-        head="Amalric Coif", --10
+        head="Amalric Coif +1", --11
         body=gear.Merl_FC_body, --13
         hands="Acad. Bracers +3", --9
         legs="Psycloth Lappas", --7
-        feet="Regal Pumps +1", --7
+        feet="Volte Gaiters", --6
         neck="Orunmila's Torque", --5
         ear1="Loquacious Earring", --2
         ear2="Enchntr. Earring +1", --2
@@ -217,13 +219,9 @@ function init_gear_sets()
     sets.precast.FC['Elemental Magic'] = set_combine(sets.precast.FC, {ear1="Barkaro. Earring"})
 
     sets.precast.FC.Cure = set_combine(sets.precast.FC, {
-        main="Oranyan", --7
-        sub="Clerisy Strap +1", --3
-        ammo="Impatiens",
         feet="Kaykaus Boots +1", --7
         ear1="Mendi. Earring", --5
         ring1="Lebeche Ring", --(2)
-        back="Perimede Cape", --(4)
         })
 
     sets.precast.FC.Curaga = sets.precast.FC.Cure
@@ -313,7 +311,7 @@ function init_gear_sets()
         feet="Vanya Clogs",
         neck="Incanter's Torque",
         ear2="Healing Earring",
-        ring1="Haoma's Ring",
+        ring1="Menelaus's Ring",
         ring2="Haoma's Ring",
         waist="Bishop's Sash",
         }
@@ -362,15 +360,18 @@ function init_gear_sets()
         sub="Ammurapi Shield",
         head="Arbatel Bonnet +1",
         body="Telchine Chas.",
-        back="Bookworm's Cape"
+        back="Bookworm's Cape",
         })
 
-    sets.midcast.RegenDuration = set_combine(sets.midcast.EnhancingDuration, {back=gear.SCH_FC_Cape})
+    sets.midcast.RegenDuration = set_combine(sets.midcast.EnhancingDuration, {
+        body="Telchine Chasuble",
+        back=gear.SCH_FC_Cape,
+        })
 
     sets.midcast.Haste = sets.midcast.EnhancingDuration
 
     sets.midcast.Refresh = set_combine(sets.midcast.EnhancingDuration, {
-        head="Amalric Coif",
+        head="Amalric Coif +1",
         waist="Gishdubar Sash",
         back="Grapevine Cape",
         })
@@ -383,7 +384,7 @@ function init_gear_sets()
     sets.midcast.Aquaveil = set_combine(sets.midcast.EnhancingDuration, {
         main="Vadose Rod",
         sub="Ammurapi Shield",
-        head="Amalric Coif",
+        head="Amalric Coif +1",
         waist="Emphatikos Rope",
         })
 
@@ -676,6 +677,12 @@ end
 -------------------------------------------------------------------------------------------------------------------
 -- Job-specific hooks for standard casting events.
 -------------------------------------------------------------------------------------------------------------------
+
+function job_precast(spell, action, spellMap, eventArgs)
+    if spellMap == 'Aspir' then
+        refine_various_spells(spell, action, spellMap, eventArgs)
+    end
+end
 
 function job_post_precast(spell, action, spellMap, eventArgs)
     if (spell.type == "WhiteMagic" and (buffactive["Light Arts"] or buffactive["Addendum: White"])) or
@@ -998,6 +1005,27 @@ function get_current_strategem_count()
     local currentCharges = math.floor(maxStrategems - maxStrategems * stratsRecast / fullRechargeTime)
 
     return currentCharges
+end
+
+function refine_various_spells(spell, action, spellMap, eventArgs)
+    local aspirs = S{'Aspir','Aspir II'}
+
+    local newSpell = spell.english
+    local spell_recasts = windower.ffxi.get_spell_recasts()
+    local cancelling = 'All '..spell.english..' are on cooldown. Cancelling.'
+
+    local spell_index
+
+    if spell_recasts[spell.recast_id] > 0 then
+        if aspirs:contains(spell.name) then
+            spell_index = table.find(degrade_array['Aspirs'],spell.name)
+            if spell_index > 1 then
+                newSpell = degrade_array['Aspirs'][spell_index - 1]
+                send_command('@input /ma '..newSpell..' '..tostring(spell.target.raw))
+                eventArgs.cancel = true
+            end
+        end
+    end
 end
 
 

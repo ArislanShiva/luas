@@ -191,7 +191,7 @@ function init_gear_sets()
         body="Inyanga Jubbah +2", --14
         hands="Gende. Gages +1", --7
         legs="Aya. Cosciales +2", --6
-        feet="Regal Pumps +1", --7
+        feet="Volte Gaiters", --6
         neck="Orunmila's Torque", --5
         ear1="Loquacious Earring", --2
         ear2="Enchntr. Earring +1", --2
@@ -267,7 +267,7 @@ function init_gear_sets()
         body="Inyanga Jubbah +2",
         hands="Fanatic Gloves",
         legs="Ebers Pant. +1",
-        feet="Regal Pumps +1",
+        feet="Volte Gaiters",
         ear1="Loquacious Earring",
         ear2="Etiolation Earring",
         ring1="Kishar Ring",
@@ -348,7 +348,7 @@ function init_gear_sets()
         neck="Orunmila's Torque",
         ear1="Loquacious Earring",
         ear2="Etiolation Earring",
-        ring1="Haoma's Ring",
+        ring1="Menelaus's Ring",
         ring2="Haoma's Ring",
         back=gear.WHM_FC_Cape,
         waist="Witful Belt",
@@ -365,7 +365,7 @@ function init_gear_sets()
         neck="Debilis Medallion", --15
         ear1="Beatific Earring",
         ear2="Healing Earring",
-        ring1="Haoma's Ring", --15
+        ring1="Menelaus's Ring", --20
         ring2="Haoma's Ring", --15
         back=gear.WHM_FC_Cape, --25
         waist="Bishop's Sash",

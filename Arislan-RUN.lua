@@ -70,6 +70,7 @@ end
 
 -- Setup vars that are user-independent.
 function job_setup()
+
     -- /BLU Spell Maps
     blue_magic_maps = {}
 
@@ -236,6 +237,8 @@ function init_gear_sets()
         ring1="Moonlight Ring",
         })
 
+    sets.precast.JA = sets.Enmity
+
     sets.precast.JA['Vallation'] = set_combine(sets.Enmity, {body="Runeist's Coat +3", legs="Futhark Trousers +3", back="Ogma's Cape"})
     sets.precast.JA['Valiance'] = sets.precast.JA['Vallation']
     sets.precast.JA['Pflug'] = set_combine(sets.Enmity, {feet="Runeist's Boots +3"})
@@ -259,10 +262,12 @@ function init_gear_sets()
         }
 
     sets.precast.JA['Swipe'] = sets.precast.JA['Lunge']
-    sets.precast.JA['Gambit'] = {hands="Runeist's Mitons +3"}
-    sets.precast.JA['Rayke'] = {feet="Futhark Boots +1"}
+    sets.precast.JA['Gambit'] = set_combine(sets.Enmity, {hands="Runeist's Mitons +3"})
+    sets.precast.JA['Rayke'] = set_combine(sets.Enmity, {feet="Futhark Boots +1"})
     sets.precast.JA['Elemental Sforzo'] = set_combine(sets.Enmity, {body="Futhark Coat +3"})
+    sets.precast.JA['Odyllic Subterfuge'] = sets.Enmity
     sets.precast.JA['Swordplay'] = set_combine(sets.Enmity, {hands="Futhark Mitons +1"})
+    sets.precast.JA['One For All'] = sets.Enmity
 
     sets.precast.JA['Vivacious Pulse'] = set_combine(sets.Enmity, {
         head="Erilaz Galea +1",
@@ -274,8 +279,21 @@ function init_gear_sets()
         back="Merciful Cape",
         })
 
-    sets.precast.JA['One For All'] = set_combine(sets.Enmity, {})
     sets.precast.JA['Provoke'] = sets.Enmity
+    sets.precast.JA['Warcry'] = sets.Enmity
+    sets.precast.JA['Berserk'] = sets.Enmity
+    sets.precast.JA['Defender'] = sets.Enmity
+    sets.precast.JA['Aggressor'] = sets.Enmity
+
+	sets.precast.JA['Last Resort'] = sets.Enmity
+    sets.precast.JA['Weapon Bash'] = sets.Enmity
+    sets.precast.JA['Souleater'] = sets.Enmity
+
+	sets.precast.JA['Hasso'] = sets.Enmity
+	sets.precast.JA['Meditate'] = sets.Enmity
+	sets.precast.JA['Seigan'] = sets.Enmity
+	sets.precast.JA['Sekkanoki'] = sets.Enmity
+
 
     -- Fast cast sets for spells
     sets.precast.FC = {
@@ -743,7 +761,7 @@ function init_gear_sets()
 
     sets.engaged.STP = set_combine(sets.engaged, {
         feet="Carmine Greaves +1",
-        ear2="Telos Earring",
+        ear2="Dedition Earring",
         waist="Kentarch Belt +1",
         })
 
@@ -751,7 +769,8 @@ function init_gear_sets()
         head="Aya. Zucchetto +2",
         body="Turms Harness",
         neck="Anu Torque",
-        ear2="Telos Earring",
+        ear1="Sherida Earring",
+        ear2="Dedition Earring",
         ring1="Moonlight Ring",
         ring2="Ilabrat Ring",
         waist="Kentarch Belt +1",
@@ -777,16 +796,32 @@ function init_gear_sets()
     sets.engaged.HighAcc.DT = set_combine(sets.engaged.HighAcc, sets.Hybrid)
     sets.engaged.STP.DT = set_combine(sets.engaged.STP, sets.Hybrid)
 
-    sets.engaged.Aftermath.DT = {
+--[[sets.engaged.Aftermath.DT = {
         head="Aya. Zucchetto +2",
         body="Turms Harness",
         feet="Carmine Greaves +1",
-        ear1="Dedition Earring",
+        ear1="Sherida Earring",
         ear2="Telos Earring",
         ring1="Moonlight Ring",
         ring2="Defending Ring",
         waist="Kentarch Belt +1",
         }
+]]
+
+    sets.engaged.Aftermath.DT = {
+        head="Aya. Zucchetto +2",
+        body="Ayanmo Corazza +2",
+        hands=gear.Adhemar_B_hands,
+        legs="Meg. Chausses +2",
+        feet=gear.Herc_STP_feet,
+        neck="Loricate Torque +1",
+        ear1="Sherida Earring",
+        ear2="Dedition Earring",
+        ring1="Moonlight Ring",
+        ring2="Defending Ring",
+        back=gear.RUN_TP_Cape,
+        waist="Ioskeha Belt +1",
+        }	
 
     ------------------------------------------------------------------------------------------------
     ---------------------------------------- Special Sets ------------------------------------------

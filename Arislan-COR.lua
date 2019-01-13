@@ -120,7 +120,7 @@ function user_setup()
     state.CastingMode:options('Normal', 'Resistant')
     state.IdleMode:options('Normal', 'DT', 'Refresh')
 
-    state.Gun = M{['description']='Current Gun', 'Death Penalty', 'Fomalhaut', 'Ataktos'}--, 'Armageddon'
+    state.WeaponSet = M{['description']='Weapon Set', 'DeathPenalty', 'Fomalhaut', 'Ataktos'}
     state.CP = M(false, "Capacity Points Mode")
     state.WeaponLock = M(false, 'Weapon Lock')
 
@@ -133,6 +133,8 @@ function user_setup()
     -- Additional local binds
     include('Global-Binds.lua') -- OK to remove this line
     include('Global-GEO-Binds.lua') -- OK to remove this line
+
+    send_command('lua l gearinfo')
 
     send_command('bind ^` input /ja "Double-up" <me>')
     send_command('bind ^c input /ja "Crooked Cards" <me>')
@@ -150,9 +152,9 @@ function user_setup()
 
     send_command('bind @c gs c toggle CP')
     send_command('bind @q gs c cycle QDMode')
-    send_command('bind @e gs c cycle Gun')
+    send_command('bind @e gs c cycleback WeaponSet')
+    send_command('bind @r gs c cycle WeaponSet')
     send_command('bind @w gs c toggle WeaponLock')
-    send_command('bind @r gs c toggle WeaponLock')
 
     send_command('bind ^numlock input /ja "Triple Shot" <me>')
 
@@ -167,8 +169,7 @@ function user_setup()
     send_command('bind ^numpad4 input /ws "Leaden Salute" <t>')
     send_command('bind ^numpad6 input /ws "Wildfire" <t>')
     send_command('bind ^numpad1 input /ws "Aeolian Edge" <t>')
-    send_command('bind ^numpad2 input /ws "Hot Shot" <t>')
-    send_command('bind ^numpad3 input /ws "Numbing Shot" <t>')
+    send_command('bind ^numpad2 input /ws "Evisceration" <t>')
 
     send_command('bind numpad0 input /ra <t>')
 
@@ -201,8 +202,9 @@ function user_unload()
     send_command('unbind ^,')
     send_command('unbind @c')
     send_command('unbind @q')
-    send_command('unbind @e')
     send_command('unbind @w')
+    send_command('unbind @e')
+    send_command('unbind @r')
     send_command('unbind ^numlock')
     send_command('unbind ^numpad/')
     send_command('unbind ^numpad*')
@@ -212,7 +214,6 @@ function user_unload()
     send_command('unbind ^numpad6')
     send_command('unbind ^numpad1')
     send_command('unbind ^numpad2')
-    send_command('unbind ^numpad3')
     send_command('unbind numpad0')
 
     send_command('unbind #`')
@@ -226,6 +227,9 @@ function user_unload()
     send_command('unbind #8')
     send_command('unbind #9')
     send_command('unbind #0')
+
+    send_command('lua u gearinfo')
+
 end
 
 -- Define sets and vars used by this job file.
@@ -1011,6 +1015,10 @@ function init_gear_sets()
     sets.CP = {back="Mecisto. Mantle"}
     --sets.Reive = {neck="Ygnas's Resolve +1"}
 
+    sets.DeathPenalty = {ranged="Death Penalty"}
+    sets.Fomalhaut = {ranged="Fomalhaut"}
+    sets.Ataktos = {ranged="Ataktos"}
+
 end
 
 
@@ -1021,6 +1029,8 @@ end
 -- Set eventArgs.handled to true if we don't want any automatic gear equipping to be done.
 -- Set eventArgs.useMidcastGear to true if we want midcast gear equipped on precast.
 function job_precast(spell, action, spellMap, eventArgs)
+    equip(sets[state.WeaponSet.current])
+
     -- Check that proper ammo is available if we're using ranged attacks or similar.
     if spell.action_type == 'Ranged Attack' or spell.type == 'WeaponSkill' or spell.type == 'CorsairShot' then
         do_bullet_checks(spell, spellMap, eventArgs)
@@ -1070,11 +1080,11 @@ function job_post_precast(spell, action, spellMap, eventArgs)
     -- Equip obi if weather/day matches for WS.
     elseif spell.type == 'WeaponSkill' then
         if spell.english == 'Leaden Salute' then
-            if world.weather_element == 'Dark' or world.day_element == 'Dark' then
-                equip(sets.Obi)
-            end
             if player.tp > 2900 then
                 equip(sets.precast.WS['Leaden Salute'].FullTP)
+            end
+            if world.weather_element == 'Dark' or world.day_element == 'Dark' then
+                equip(sets.Obi)
             end
         elseif spell.english == 'Wildfire' and (world.weather_element == 'Fire' or world.day_element == 'Fire') then
             equip(sets.Obi)
@@ -1108,7 +1118,9 @@ end
 
 -- Set eventArgs.handled to true if we don't want any automatic gear equipping to be done.
 function job_aftercast(spell, action, spellMap, eventArgs)
-    if spell.type == 'CorsairRoll' and not spell.interrupted then
+    equip(sets[state.WeaponSet.current])
+
+    if (spell.type == 'CorsairRoll' or spell.english == "Double-Up") and not spell.interrupted then
         display_roll_info(spell)
     end
     if spell.english == "Light Shot" then
@@ -1157,6 +1169,9 @@ function job_state_change(stateField, newValue, oldValue)
     else
         enable('ranged')
     end
+
+    equip(sets[state.WeaponSet.current])
+
 end
 
 -------------------------------------------------------------------------------------------------------------------
@@ -1171,6 +1186,7 @@ function job_handle_equipping_gear(playerStatus, eventArgs)
 end
 
 function job_update(cmdParams, eventArgs)
+    equip(sets[state.WeaponSet.current])
     handle_equipping_gear(player.status)
 end
 
@@ -1184,16 +1200,6 @@ end
 
 -- Modify the default idle set after it was constructed.
 function customize_idle_set(idleSet)
-    if state.Gun.current == 'Death Penalty' then
-        equip({ranged="Death Penalty"})
-    elseif state.Gun.current == 'Fomalhaut' then
-        equip({ranged="Fomalhaut"})
-    elseif state.Gun.current == 'Ataktos' then
-        equip({ranged="Ataktos"})
---    elseif state.Gun.current == 'Armageddon' then
---        equip({ranged="Armageddon"})
-    end
-
     if state.CP.current == 'on' then
         equip(sets.CP)
         disable('back')
@@ -1225,7 +1231,9 @@ function display_current_job_state(eventArgs)
         msg = msg .. '/' .. state.HybridMode.value
     end
 
-    msg = msg .. '/' ..state.RangedMode.current .. ' ]'
+    msg = msg .. '/' ..state.RangedMode.current
+
+    msg = msg .. ' (' ..state.WeaponSet.current .. ') ]'
 
     if state.WeaponskillMode.value ~= 'Normal' then
         msg = msg .. '[ WS: '..state.WeaponskillMode.current .. ' ]'
@@ -1323,6 +1331,12 @@ function job_self_command(cmdParams, eventArgs)
 
         send_command('@input /ja "'..doqd..'" <t>')
     end
+
+    --[[if cmdParams[2] == 'WeaponSet' then
+        local weaponset = state.WeaponSet.current
+        change_weapons(weaponset)
+    end]]--
+
 
     gearinfo(cmdParams, eventArgs)
 end
@@ -1474,6 +1488,28 @@ function do_bullet_checks(spell, spellMap, eventArgs)
         state.warned:reset()
     end
 end
+
+--[[function change_weapons(weaponset)
+
+    local weaponset = weaponset
+    local weaponset_index = table.find(state.WeaponSet,weaponset)
+	local weaponset_length = table.getn(state.WeaponSet)
+
+    if weaponset_index + 1 > weaponset_length then
+        weaponset = state.WeaponSet[1]
+	else
+	    weaponset = state.WeaponSet[weaponset_index + 1]
+    end
+
+	send_command('gs equip sets.' ..weaponset)
+
+end]]--
+
+windower.register_event('zone change', 
+    function()
+        send_command('gi ugs true')
+    end
+)
 
 -- Select default macro book on initial load or subjob change.
 function select_default_macro_book()
