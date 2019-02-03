@@ -99,15 +99,15 @@ function user_setup()
     state.PhysicalDefenseMode:options('PDT', 'HP')
     state.MagicalDefenseMode:options('MDT', 'Status')
 
-    state.Greatsword = M{['description']='Current Weapon', 'Epeolatry', 'Lionheart', 'Aettir', "Hepatizon Axe +1"}
     state.Charm = M(false, 'Charm Resistance')
     state.Knockback = M(false, 'Knockback')
     state.Death = M(false, "Death Resistance")
+
+    state.WeaponSet = M{['description']='Weapon Set', 'Epeolatry', 'Lionheart', 'Aettir', 'GreatAxe'}
     state.CP = M(false, "Capacity Points Mode")
+    state.WeaponLock = M(false, 'Weapon Lock')
 
     state.Runes = M{['description']='Runes', 'Ignis', 'Gelus', 'Flabra', 'Tellus', 'Sulpor', 'Unda', 'Lux', 'Tenebrae'}
-
-    state.WeaponLock = M(false, 'Weapon Lock')
 
     -- Additional local binds
     include('Global-Binds.lua') -- OK to remove this line
@@ -119,7 +119,9 @@ function user_setup()
     send_command('bind ^delete gs c cycle Runes')
     send_command('bind ^f11 gs c cycle MagicalDefenseMode')
     send_command('bind @c gs c toggle CP')
-    send_command('bind @e gs c cycle Greatsword')
+    send_command('bind @e gs c cycleback WeaponSet')
+    send_command('bind @r gs c cycle WeaponSet')
+    send_command('bind @w gs c toggle WeaponLock')
     send_command('bind @h gs c toggle Charm')
     send_command('bind @k gs c toggle Knockback')
     send_command('bind @d gs c toggle Death')
@@ -176,11 +178,12 @@ function user_unload()
     send_command('unbind ^delete')
     send_command('unbind @c')
     send_command('unbind @h')
-    send_command('unbind @e')
     send_command('unbind @k')
     send_command('unbind @d')
     send_command('unbind !q')
-    send_command('unbind !w')
+    send_command('unbind @w')
+    send_command('unbind @e')
+    send_command('unbind @r')
     send_command('unbind !o')
     send_command('unbind !p')
     send_command('unbind ^,')
@@ -253,7 +256,7 @@ function init_gear_sets()
         legs=gear.Herc_MAB_legs,
         feet=gear.Herc_MAB_feet,
         neck="Baetyl Pendant",
-        ear1="Novio Earring",
+        ear1="Crematio Earring",
         ear2="Friomisi Earring",
         ring1="Fenrir Ring +1",
         ring2="Fenrir Ring +1",
@@ -419,7 +422,7 @@ function init_gear_sets()
         legs=gear.Herc_MAB_legs,
         feet=gear.Herc_MAB_feet,
         neck="Baetyl Pendant",
-        ear1="Novio Earring",
+        ear1="Crematio Earring",
         ear2="Friomisi Earring",
         ring1="Archon Ring",
         ring2="Stikini Ring +1",
@@ -762,6 +765,8 @@ function init_gear_sets()
     sets.engaged.STP = set_combine(sets.engaged, {
         feet="Carmine Greaves +1",
         ear2="Dedition Earring",
+        ring1="Chirich Ring +1",
+        ring2="Chirich Ring +1",
         waist="Kentarch Belt +1",
         })
 
@@ -771,8 +776,8 @@ function init_gear_sets()
         neck="Anu Torque",
         ear1="Sherida Earring",
         ear2="Dedition Earring",
-        ring1="Moonlight Ring",
-        ring2="Ilabrat Ring",
+        ring1="Chirich Ring +1",
+        ring2="Chirich Ring +1",
         waist="Kentarch Belt +1",
         }
 
@@ -839,6 +844,11 @@ function init_gear_sets()
     sets.CP = {back="Mecisto. Mantle"}
     --sets.Reive = {neck="Ygnas's Resolve +1"}
 
+    sets.Epeolatry = {main="Epeolatry"}
+    sets.Lionheart = {main="Lionheart"}
+    sets.Aettir = {main="Aettir"}
+    sets.GreatAxe = {main="Hepatizon Axe +1"}
+
 end
 
 -------------------------------------------------------------------------------------------------------------------
@@ -846,6 +856,8 @@ end
 -------------------------------------------------------------------------------------------------------------------
 
 function job_precast(spell, action, spellMap, eventArgs)
+    equip(sets[state.WeaponSet.current])
+
     if state.PhysicalDefenseMode.value == 'HP' then
         eventArgs.handled = true
         if spell.action_type == 'Magic' then
@@ -929,6 +941,8 @@ function job_post_midcast(spell, action, spellMap, eventArgs)
 end
 
 function job_aftercast(spell, action, spellMap, eventArgs)
+    equip(sets[state.WeaponSet.current])
+
     if spell.name == 'Rayke' and not spell.interrupted then
         send_command('@timers c "Rayke ['..spell.target.name..']" '..rayke_duration..' down spells/00136.png')
         send_command('wait '..rayke_duration..';input /echo [Rayke just wore off!];')
@@ -1006,11 +1020,18 @@ function job_state_change(stateField, newValue, oldValue)
     else
         enable('main','sub')
     end
+
+    equip(sets[state.WeaponSet.current])
+
 end
 
 -------------------------------------------------------------------------------------------------------------------
 -- User code that supplements standard library decisions.
 -------------------------------------------------------------------------------------------------------------------
+
+function job_update(cmdParams, eventArgs)
+    equip(sets[state.WeaponSet.current])
+end
 
 -- Modify the default idle set after it was constructed.
 function customize_idle_set(idleSet)
@@ -1025,16 +1046,6 @@ function customize_idle_set(idleSet)
     end
     if state.Death.value == true then
         idleSet = set_combine(idleSet, sets.defense.Death)
-    end
-
-    if state.Greatsword.current == 'Epeolatry' then
-        equip({main="Epeolatry"})
-    elseif state.Greatsword.current == 'Lionheart' then
-        equip({main="Lionheart"})
-    elseif state.Greatsword.current == 'Aettir' then
-        equip({main="Aettir"})
-    elseif state.Greatsword.current == 'Hepatizon Axe +1' then
-        equip({main="Hepatizon Axe +1"})
     end
 
     --if state.CP.current == 'on' then

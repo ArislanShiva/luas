@@ -111,7 +111,6 @@ function user_setup()
     state.WeaponLock = M(false, 'Weapon Lock')
     state.MagicBurst = M(false, 'Magic Burst')
     state.CP = M(false, "Capacity Points Mode")
-    state.RingLock = M(false, 'Ring Lock')
 
     -- Additional local binds
     include('Global-Binds.lua') -- OK to remove this line
@@ -140,8 +139,8 @@ function user_setup()
     send_command('bind !o input /ma "Regen II" <stpc>')
     send_command('bind !p input /ma "Shock Spikes" <me>')
 
-    send_command('bind @c gs c toggle CP')
     send_command('bind @w gs c toggle WeaponLock')
+    send_command('bind @c gs c toggle CP')
 
     send_command('bind ^numpad7 input /ws "Savage Blade" <t>')
     send_command('bind ^numpad9 input /ws "Chant du Cygne" <t>')
@@ -177,8 +176,8 @@ function user_unload()
     send_command('bind !y input /ma "Phalanx" <me>')
     send_command('unbind !o')
     send_command('unbind !p')
-    send_command('unbind @c')
     send_command('unbind @w')
+    send_command('unbind @c')
     send_command('unbind @r')
     send_command('unbind ^numpad7')
     send_command('unbind ^numpad9')
@@ -213,43 +212,49 @@ function init_gear_sets()
     ------------------------------------------------------------------------------------------------
 
     -- Precast sets to enhance JAs
-    sets.precast.JA['Chainspell'] = {body="Viti. Tabard +1"}
+    sets.precast.JA['Chainspell'] = {body="Viti. Tabard +3"}
 
     -- Fast cast sets for spells
 
     -- Fast cast sets for spells
     sets.precast.FC = {
     --    Traits --30
-        ammo="Sapience Orb", --2
         head="Atrophy Chapeau +3", --16
+        body="Viti. Tabard +3", --15
         legs="Aya. Cosciales +2", --6
         feet="Carmine Greaves +1", --8
-        neck="Orunmila's Torque", --5
-        ear1="Loquacious Earring", --2
-        ear2="Enchntr. Earring +1", --2
-        ring1="Kishar Ring", --4
         ring2="Weather. Ring +1", --5
         }
 
     sets.precast.FC['Enhancing Magic'] = set_combine(sets.precast.FC, {waist="Siegel Sash"})
 
     sets.precast.FC.Cure = set_combine(sets.precast.FC, {
-        ear1="Mendi. Earring", --5
+        ammo="Impatiens", --(2)
         ring1="Lebeche Ring", --(2)
+        ring2="Weather. Ring +1", --5/(4)
+        back="Perimede Cape", --(4)
+        waist="Witful Belt", --3/(3)
         })
 
     sets.precast.FC.Curaga = sets.precast.FC.Cure
     sets.precast.FC['Healing Magic'] = sets.precast.FC.Cure
     sets.precast.FC['Elemental Magic'] = set_combine(sets.precast.FC, {})
-    sets.precast.FC.Impact = set_combine(sets.precast.FC, {head=empty, body="Twilight Cloak"})
-    sets.precast.Storm = set_combine(sets.precast.FC, {ring2="Stikini Ring +1"})
 
-    sets.precast.FC.Utsusemi = set_combine(sets.precast.FC, {
-        ammo="Impatiens",
-        ring1="Lebeche Ring",
-        back="Perimede Cape",
-        waist="Rumination Sash",
-        })
+    sets.precast.FC.Impact = set_combine(sets.precast.FC, {
+        ammo="Sapience Orb", --2
+        head=empty,
+        body="Twilight Cloak",
+        hands="Merlinic Dastanas", --6
+        neck="Orunmila's Torque", --5
+        ear1="Loquacious Earring", --2
+        ear2="Enchntr. Earring +1", --2
+        ring1="Kishar Ring", --4
+        back="Swith Cape +1", --4
+        waist="Witful Belt", --3/(3)
+		})
+
+    sets.precast.Storm = set_combine(sets.precast.FC, {ring2="Stikini Ring +1"})
+    sets.precast.FC.Utsusemi = sets.precast.FC.Cure
 
 
     ------------------------------------------------------------------------------------------------
@@ -258,7 +263,7 @@ function init_gear_sets()
 
     sets.precast.WS = {
         ammo="Floestone",
-        head="Jhakri Coronal +2",
+        head="Viti. Chapeau +3",
         body="Jhakri Robe +2",
         hands="Atrophy Gloves +3",
         legs="Jhakri Slops +2",
@@ -365,7 +370,7 @@ function init_gear_sets()
         sub="Sors Shield", --3/(-5)
         ammo="Esper Stone +1", --0/(-5)
         head="Kaykaus Mitra +1", --11(+2)/(-6)
-        body="Kaykaus Bliaut", --(+3)/(-6)
+        body="Kaykaus Bliaut +1", --(+4)/(-6)
         hands="Kaykaus Cuffs +1", --11(+2)/(-6)
         legs="Atrophy Tights +3", --12
         feet="Kaykaus Boots +1", --11(+2)/(-12)
@@ -414,6 +419,7 @@ function init_gear_sets()
 
     sets.midcast.Cursna = set_combine(sets.midcast.StatusRemoval, {
         hands="Hieros Mittens",
+        body="Viti. Tabard +3",
         neck="Debilis Medallion",
         ear1="Beatific Earring",
         back="Oretan. Cape +1",
@@ -424,7 +430,7 @@ function init_gear_sets()
         sub="Ammurapi Shield",
         ammo="Regal Gem",
         head="Befouled Crown",
-        body="Viti. Tabard +1",
+        body="Viti. Tabard +3",
         hands="Atrophy Gloves +3",
         legs="Atrophy Tights +3",
         feet="Leth. Houseaux +1",
@@ -441,10 +447,11 @@ function init_gear_sets()
         main=gear.Colada_ENH,
         sub="Ammurapi Shield",
         head="Telchine Cap",
-        body="Telchine Chas.",
+        body="Viti. Tabard +3",
         hands="Atrophy Gloves +3",
         legs="Telchine Braconi",
         feet="Leth. Houseaux +1",
+        neck="Dls. Torque +1",
         back="Ghostfyre Cape",
         }
 
@@ -505,7 +512,7 @@ function init_gear_sets()
         main=gear.Grioavolr_MND,
         sub="Enki Strap",
         ammo="Regal Gem",
-        head="Atrophy Chapeau +3",
+        head="Viti. Chapeau +3",
         body="Lethargy Sayon +1",
         hands="Kaykaus Cuffs +1",
         legs="Chironic Hose",
@@ -538,7 +545,7 @@ function init_gear_sets()
 
     sets.midcast.SkillEnfeebles = {
         sub="Mephitis Grip",
-        head="Viti. Chapeau +1",
+        head="Viti. Chapeau +3",
         body="Atrophy Tabard +3",
         hands="Leth. Gantherots +1",
         feet="Vitiation Boots +3",
@@ -558,9 +565,9 @@ function init_gear_sets()
 
     sets.midcast.ElementalEnfeeble = sets.midcast.IntEnfeebles
 
-    sets.midcast['Dia III'] = set_combine(sets.midcast.MndEnfeebles, sets.midcast.EffectEnfeebles, {head="Viti. Chapeau +1"})
+    sets.midcast['Dia III'] = set_combine(sets.midcast.MndEnfeebles, sets.midcast.EffectEnfeebles, {head="Viti. Chapeau +3"})
     sets.midcast['Paralyze II'] = set_combine(sets.midcast.MndEnfeebles, {head="Vitiation Boots +3"})
-    sets.midcast['Slow II'] = set_combine(sets.midcast.MndEnfeebles, {head="Viti. Chapeau +1"})
+    sets.midcast['Slow II'] = set_combine(sets.midcast.MndEnfeebles, {head="Viti. Chapeau +3"})
 
     sets.midcast['Dark Magic'] = {
         main="Rubicundity",
@@ -661,7 +668,7 @@ function init_gear_sets()
         main="Bolelabunga",
         sub="Beatific Shield +1",
         ammo="Homiliary",
-        head="Viti. Chapeau +1",
+        head="Viti. Chapeau +3",
         body="Jhakri Robe +2",
         hands="Atrophy Gloves +3",
         legs="Carmine Cuisses +1",
@@ -681,7 +688,7 @@ function init_gear_sets()
         ammo="Staunch Tathlum +1", --3/3
         head="Volte Cap",
         body="Ayanmo Corazza +2", --6/6
-        hands="Gende. Gages +1", --4/3
+        hands="Gende. Gages +1", --4/4
         feet="Volte Boots",
         neck="Loricate Torque +1", --6/6
         ring1="Gelatinous Ring +1", --7/(-1)
@@ -692,15 +699,13 @@ function init_gear_sets()
 
     sets.idle.Town = set_combine(sets.idle, {
         ammo="Regal Gem",
-        head="Atrophy Chapeau +3",
-        body="Amalric Doublet +1",
+        head="Viti. Chapeau +3",
+        body="Viti. Tabard +3",
         hands="Amalric Gages +1",
         feet="Vitiation Boots +3",
         neck="Dls. Torque +1",
         ear1="Sherida Earring",
         ear2="Regal Earring",
-        ring1="Stikini Ring +1",
-        ring2="Stikini Ring +1",
         back=gear.RDM_INT_Cape,
         waist="Luminary Sash",
         })
@@ -755,16 +760,16 @@ function init_gear_sets()
         neck="Anu Torque",
         ear1="Sherida Earring",
         ear2="Telos Earring",
-        ring1="Chirich Ring",
-        ring2="Petrov Ring",
+        ring1="Hetairoi Ring",
+        ring2="Chirich Ring +1",
         back=gear.RDM_DW_Cape,
         waist="Windbuffet Belt +1",
         }
 
     sets.engaged.MidAcc = set_combine(sets.engaged, {
         neck="Combatant's Torque",
+        ring1="Chirich Ring +1",
         waist="Kentarch Belt +1",
-        ring2="Ilabrat Ring",
         })
 
     sets.engaged.HighAcc = set_combine(sets.engaged, {
@@ -789,15 +794,15 @@ function init_gear_sets()
         neck="Anu Torque",
         ear1="Eabani Earring", --4
         ear2="Suppanomimi", --5
-        ring1="Chirich Ring",
-        ring2="Petrov Ring",
+        ring1="Hetairoi Ring",
+        ring2="Chirich Ring +1",
         back=gear.RDM_DW_Cape, --10
         waist="Reiki Yotai", --7
         } --41
 
     sets.engaged.DW.MidAcc = set_combine(sets.engaged.DW, {
         neck="Combatant's Torque",
-        ring2="Ilabrat Ring",
+        ring1="Chirich Ring +1",
         })
 
     sets.engaged.DW.HighAcc = set_combine(sets.engaged.DW.MidAcc, {
@@ -818,15 +823,14 @@ function init_gear_sets()
         neck="Anu Torque",
         ear1="Eabani Earring", --4
         ear2="Suppanomimi", --5
-        ring1="Chirich Ring",
-        ring2="Petrov Ring",
+        ring1="Hetairoi Ring",
+        ring2="Chirich Ring +1",
         back=gear.RDM_DW_Cape, --10
         waist="Reiki Yotai", --7
         }) --41
 
     sets.engaged.DW.MidAcc.LowHaste = set_combine(sets.engaged.DW.LowHaste, {
         neck="Combatant's Torque",
-        ring2="Ilabrat Ring",
         })
 
     sets.engaged.DW.HighAcc.LowHaste = set_combine(sets.engaged.DW.MidAcc.LowHaste, {
@@ -847,8 +851,8 @@ function init_gear_sets()
         neck="Anu Torque",
         ear1="Sherida Earring",
         ear2="Suppanomimi", --5
-        ring1="Chirich Ring",
-        ring2="Petrov Ring",
+        ring1="Hetairoi Ring",
+        ring2="Chirich Ring +1",
         back=gear.RDM_DW_Cape, --10
         waist="Reiki Yotai", --7
         }) --41
@@ -856,8 +860,8 @@ function init_gear_sets()
     sets.engaged.DW.MidAcc.MidHaste = set_combine(sets.engaged.DW.MidHaste, {
         legs="Carmine Cuisses +1", --6
         neck="Combatant's Torque",
+        ring1="Chirich Ring +1",
         ear2="Telos Earring",
-        ring2="Ilabrat Ring",
         })
 
     sets.engaged.DW.HighAcc.MidHaste = set_combine(sets.engaged.DW.MidAcc.MidHaste, {
@@ -879,8 +883,8 @@ function init_gear_sets()
         neck="Anu Torque",
         ear1="Sherida Earring",
         ear2="Telos Earring",
-        ring1="Chirich Ring",
-        ring2="Petrov Ring",
+        ring1="Hetairoi Ring",
+        ring2="Chirich Ring +1",
         back=gear.RDM_DW_Cape, --10
         waist="Reiki Yotai", --7
         }) --26
@@ -888,7 +892,7 @@ function init_gear_sets()
     sets.engaged.DW.MidAcc.HighHaste = set_combine(sets.engaged.DW.HighHaste, {
         legs="Carmine Cuisses +1", --6
         neck="Combatant's Torque",
-        ring2="Ilabrat Ring",
+        ring1="Chirich Ring +1",
         waist="Kentarch Belt +1",
         })
 
@@ -911,15 +915,15 @@ function init_gear_sets()
         neck="Anu Torque",
         ear1="Sherida Earring",
         ear2="Telos Earring",
-        ring1="Chirich Ring",
-        ring2="Petrov Ring",
+        ring1="Hetairoi Ring",
+        ring2="Chirich Ring +1",
         back=gear.RDM_DW_Cape, --10
         waist="Windbuffet Belt +1",
         }) --10
 
     sets.engaged.DW.MidAcc.MaxHaste = set_combine(sets.engaged.DW.MaxHaste, {
         neck="Combatant's Torque",
-        ring2="Ilabrat Ring",
+        ring1="Chirich Ring +1",
         waist="Kentarch Belt +1",
         })
 
@@ -1104,11 +1108,6 @@ function job_state_change(stateField, newValue, oldValue)
         disable('main','sub')
     else
         enable('main','sub')
-    end
-    if state.RingLock.value == true then
-        disable('ring1','ring2')
-    else
-        enable('ring1','ring2')
     end
 end
 
@@ -1346,6 +1345,12 @@ function handle_strategems(cmdParams)
         add_to_chat(123,'No arts has been activated yet.')
     end
 end
+
+windower.register_event('zone change', 
+    function()
+        send_command('gi ugs true')
+    end
+)
 
 -- Select default macro book on initial load or subjob change.
 function select_default_macro_book()

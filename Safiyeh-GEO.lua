@@ -47,7 +47,7 @@ function job_setup()
 
     state.CP = M(false, "Capacity Points Mode")
 
-    state.Auto = M(false, 'Auto Nuke')
+    state.Auto = M(true, 'Auto Nuke')
     state.Element = M{['description']='Element','Fire','Blizzard','Aero','Stone','Thunder','Water'}
 
     degrade_array = {
@@ -251,7 +251,7 @@ function init_gear_sets()
 
     sets.midcast.Geomancy.Indi = set_combine(sets.midcast.Geomancy, {
         hands="Geo. Mitaines +3",
-        legs="Bagua Pants +1",
+        legs="Bagua Pants +2",
         feet="Azimuth Gaiters +1",
         })
 
@@ -379,7 +379,7 @@ function init_gear_sets()
         }
 
     sets.midcast.Drain = set_combine(sets.midcast['Dark Magic'], {
-        head="Bagua Galero +1",
+        head="Bagua Galero +2",
         ring1="Evanescence Ring",
         ring2="Archon Ring",
         waist="Fucho-no-Obi",
@@ -467,7 +467,6 @@ function init_gear_sets()
         ear2="Etiolation Earring", --0/3
         ring1="Gelatinous Ring +1", --7/(-1)
         ring2="Defending Ring", --10/10
-        back="Moonlight Cape", --6/6
         })
 
     -- .Pet sets are for when Luopan is present.
@@ -475,23 +474,20 @@ function init_gear_sets()
         -- Pet: -DT (37.5% to cap) / Pet: Regen
         main="Idris",
         sub="Genmei Shield",
-        head="Telchine Cap", --0/3
+        head="Bagua Galero +2",
         body="Telchine Chas.", --0/3
         hands="Geo. Mitaines +3", --13/0
-        legs="Telchine Braconi", --0/2
+        legs="Telchine Braconi", --0/3
         feet="Telchine Pigaches", --0/3
+        neck="Loricate Torque +1", --6/6
+        ear2="Etiolation Earring", --0/3
+        ring1="Gelatinous Ring +1", --7/(-1)
+        ring2="Defending Ring", --10/10
         back=gear.GEO_Pet_Cape, --0/15
         waist="Isa Belt" --3/1
         })
 
-    sets.idle.DT.Pet = set_combine(sets.idle.Pet, {
-        neck="Loricate Torque +1", --6/6
-        ear1="Odnowa Earring +1", --2/0
-        ear2="Etiolation Earring", --0/3
-        ring1="Gelatinous Ring +1", --7/(-1)
-        ring2="Defending Ring",
-        back="Moonlight Cape", --6/6
-        })
+    sets.idle.DT.Pet = sets.idle.Pet
 
     -- .Indi sets are for when an Indi-spell is active.
     --sets.idle.Indi = set_combine(sets.idle, {})
@@ -518,13 +514,9 @@ function init_gear_sets()
     sets.defense.PDT = sets.idle.DT
     sets.defense.MDT = sets.idle.DT
 
-    sets.Kiting = {
-        feet="Geo. Sandals +3",
-        }
+    sets.Kiting = {feet="Geo. Sandals +3"}
 
-    sets.latent_refresh = {
-        waist="Fucho-no-Obi",
-        }
+    sets.latent_refresh = {waist="Fucho-no-Obi"}
 
     --------------------------------------
     -- Engaged sets
@@ -565,8 +557,7 @@ function init_gear_sets()
         ring2="Mujin Band", --(5)
         }
 
-    sets.buff.Doom = {ring1="Saida Ring", ring2="Saida Ring", waist="Gishdubar Sash"}
-
+    sets.buff.Doom = {ring1="Saida Ring", ring2="Saida Ring"}
     sets.Obi = {waist="Hachirin-no-Obi"}
     sets.CP = {back="Mecisto. Mantle"}
 
@@ -576,14 +567,19 @@ end
 -- Job-specific hooks for standard casting events.
 -------------------------------------------------------------------------------------------------------------------
 
+function job_precast(spell, action, spellMap, eventArgs)
+    if spellMap == 'Aspir' then
+        refine_various_spells(spell, action, spellMap, eventArgs)
+    elseif state.Auto.value == true then
+        if spell.skill == 'Elemental Magic' and spell.english ~= 'Impact' and spellMap ~= 'GeoNuke' then
+            refine_various_spells(spell, action, spellMap, eventArgs)
+        end
+    end
+end
+
 function job_post_precast(spell, action, spellMap, eventArgs)
     if spell.name == 'Impact' then
         equip(sets.precast.FC.Impact)
-    end
-    if state.Auto.value == true then
-        if (spellMap == 'Aspir' or (spell.skill == 'Elemental Magic' and spell.english ~= 'Impact' and spellMap ~= 'GeoNuke')) then
-            refine_various_spells(spell, action, spellMap, eventArgs)
-        end
     end
 end
 
@@ -722,9 +718,7 @@ end
 
 function job_self_command(cmdParams, eventArgs)
     if cmdParams[1] == 'nuke' and not midaction() then
-        local nuke = ''
-        nuke = state.Element.current
-        send_command('@input /ma "'..nuke..' V" <t>')
+        send_command('@input /ma "' .. state.Element.current .. ' V" <t>')
     end
 end
 
@@ -737,7 +731,7 @@ function refine_various_spells(spell, action, spellMap, eventArgs)
     local spell_index
 
     if spell_recasts[spell.recast_id] > 0 then
-        if spell.skill == 'Elemental Magic' then
+        if spell.skill == 'Elemental Magic' and spellMap ~= 'GeoElem' then
             spell_index = table.find(degrade_array[spell.element],spell.name)
             if spell_index > 1 then
                 newSpell = degrade_array[spell.element][spell_index - 1]

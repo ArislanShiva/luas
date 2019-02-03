@@ -61,6 +61,7 @@ function user_setup()
 
     send_command('bind ^` input /ja "Call Wyvern" <me>')
     send_command('bind !` input /ja "Spirit Link" <me>')
+    send_command('bind @` input /ja "Dismiss" <me>')
     send_command('bind @a gs c cycle AttackMode')
     send_command('bind @c gs c toggle CP')
 
@@ -103,6 +104,7 @@ end
 function user_unload()
     send_command('unbind ^`')
     send_command('unbind !`')
+    send_command('unbind @`')
     send_command('unbind @a')
     send_command('unbind @c')
     send_command('unbind ^numpad/')
@@ -170,7 +172,7 @@ function init_gear_sets()
         neck="Anu Torque",
         ear1="Sherida Earring",
         ear2="Telos Earring",
-        ring1="Petrov Ring",
+        ring1="Chirich Ring +1",
         ring2="Niqmaddu Ring",
         back=gear.DRG_JMP_Cape,
         waist="Ioskeha Belt +1",
@@ -355,8 +357,8 @@ function init_gear_sets()
         neck="Bathy Choker +1",
         ear1="Genmei Earring",
         ear2="Infused Earring",
-        ring1="Paguroidea Ring",
-        ring2="Sheltered Ring",
+        ring1="Chirich Ring +1",
+        ring2="Chirich Ring +1",
         back="Moonlight Cape", --6/6
         waist="Flume Belt +1", --4/0
         }
@@ -400,8 +402,6 @@ function init_gear_sets()
         neck="Anu Torque",
         ear1="Sherida Earring",
         ear2="Telos Earring",
-        ring1="Moonlight Ring",
-        ring2="Niqmaddu Ring",
         back=gear.DRG_TP_Cape,
         waist="Ioskeha Belt +1",
         })
@@ -431,7 +431,7 @@ function init_gear_sets()
         neck="Anu Torque",
         ear1="Sherida Earring",
         ear2="Brutal Earring",
-        ring1="Petrov Ring",
+        ring1="Chirich Ring +1",
         ring2="Niqmaddu Ring",
         back=gear.DRG_TP_Cape,
         waist="Ioskeha Belt +1",

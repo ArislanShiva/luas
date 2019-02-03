@@ -546,8 +546,8 @@ function init_gear_sets()
         neck="Combatant's Torque",
         ear1="Cessance Earring",
         ear2="Telos Earring",
-        ring1="Chirich Ring",
-        ring2="Petrov Ring",
+        ring1="Hetairoi Ring",
+        ring2="Chirich Ring +1",
         back="Relucent Cape",
         waist="Windbuffet Belt +1",
         }

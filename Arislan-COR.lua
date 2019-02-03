@@ -122,7 +122,7 @@ function user_setup()
     state.CastingMode:options('Normal', 'Resistant')
     state.IdleMode:options('Normal', 'DT', 'Refresh')
 
-    state.WeaponSet = M{['description']='Weapon Set', 'DeathPenalty', 'Fomalhaut', 'Ataktos'}
+    state.WeaponSet = M{['description']='Weapon Set', 'LeadenMelee', 'LeadenAccMelee', 'LeadenRanged', 'LastStandMelee', 'LastStandRanged', 'SavageMelee'}
     state.CP = M(false, "Capacity Points Mode")
     state.WeaponLock = M(false, 'Weapon Lock')
 
@@ -370,7 +370,7 @@ function init_gear_sets()
         legs=gear.Herc_MAB_legs,
         feet="Lanun Bottes +3",
         neck="Baetyl Pendant",
-        ear1="Novio Earring",
+        ear1="Crematio Earring",
         ear2="Friomisi Earring",
         ring1="Ilabrat Ring",
         ring2="Dingir Ring",
@@ -510,7 +510,7 @@ function init_gear_sets()
         legs=gear.Herc_MAB_legs,
         feet="Lanun Bottes +3",
         neck="Baetyl Pendant",
-        ear1="Novio Earring",
+        ear1="Crematio Earring",
         ear2="Friomisi Earring",
         ring1="Fenrir Ring +1",
         ring2="Dingir Ring",
@@ -528,8 +528,8 @@ function init_gear_sets()
         neck="Iskur Gorget",
         ear1="Dedition Earring",
         ear2="Telos Earring",
-        ring1="Ilabrat Ring",
-        ring2="Chirich Ring",
+        ring1="Chirich Ring +1",
+        ring2="Chirich Ring +1",
         back=gear.COR_RA_Cape,
         waist="Kentarch Belt +1",
         }
@@ -597,6 +597,8 @@ function init_gear_sets()
     sets.midcast.RA.STP = set_combine(sets.midcast.RA, {
         feet=gear.Adhemar_D_feet,
         ear1="Dedition Earring",
+        ring1="Chirich Ring +1",
+        ring2="Chirich Ring +1",
         })
 
     sets.TripleShot = {
@@ -630,8 +632,8 @@ function init_gear_sets()
         neck="Bathy Choker +1",
         ear1="Genmei Earring",
         ear2="Infused Earring",
-        ring1="Paguroidea Ring",
-        ring2="Sheltered Ring",
+        ring1="Chirich Ring +1",
+        ring2="Chirich Ring +1",
         back="Moonlight Cape",
         waist="Flume Belt +1",
         }
@@ -664,8 +666,6 @@ function init_gear_sets()
         neck="Iskur Gorget",
         ear1="Suppanomimi",
         ear2="Telos Earring",
-        ring1="Regal Ring",
-        ring2="Dingir Ring",
         back=gear.COR_WS1_Cape,
         waist="Windbuffet Belt +1",
         })
@@ -699,7 +699,7 @@ function init_gear_sets()
         neck="Iskur Gorget",
         ear1="Cessance Earring",
         ear2="Brutal Earring",
-        ring1="Petrov Ring",
+        ring1="Hetairoi Ring",
         ring2="Epona's Ring",
         back=gear.COR_TP_Cape,
         waist="Windbuffet Belt +1",
@@ -707,6 +707,7 @@ function init_gear_sets()
 
     sets.engaged.LowAcc = set_combine(sets.engaged, {
         head="Dampening Tam",
+        ring1="Chirich Ring +1",
         neck="Combatant's Torque",
         })
 
@@ -727,7 +728,8 @@ function init_gear_sets()
 
     sets.engaged.STP = set_combine(sets.engaged, {
         feet="Carmine Greaves +1",
-        ring1="Chirich Ring",
+        ring1="Chirich Ring +1",
+        ring2="Chirich Ring +1",
         })
 
     -- * DNC Subjob DW Trait: +15%
@@ -743,7 +745,7 @@ function init_gear_sets()
         neck="Iskur Gorget",
         ear1="Suppanomimi", --5
         ear2="Brutal Earring",
-        ring1="Petrov Ring",
+        ring1="Hetairoi Ring",
         ring2="Epona's Ring",
         back=gear.COR_DW_Cape, --10
         waist="Reiki Yotai", --7
@@ -751,6 +753,7 @@ function init_gear_sets()
 
     sets.engaged.DW.LowAcc = set_combine(sets.engaged.DW, {
         head="Dampening Tam",
+        ring1="Chirich Ring +1",
         neck="Combatant's Torque",
         })
 
@@ -771,7 +774,8 @@ function init_gear_sets()
         })
 
     sets.engaged.DW.STP = set_combine(sets.engaged.DW, {
-        ring1="Chirich Ring",
+        ring1="Chirich Ring +1",
+        ring2="Chirich Ring +1",
         })
 
     -- 15% Magic Haste (67% DW to cap)
@@ -784,7 +788,7 @@ function init_gear_sets()
         neck="Iskur Gorget",
         ear1="Suppanomimi", --5
         ear2="Eabani Earring", --4
-        ring1="Petrov Ring",
+        ring1="Hetairoi Ring",
         ring2="Epona's Ring",
         back=gear.COR_TP_Cape,
         waist="Reiki Yotai", --7
@@ -792,6 +796,7 @@ function init_gear_sets()
 
     sets.engaged.DW.LowAcc.LowHaste = set_combine(sets.engaged.DW.LowHaste, {
         head="Dampening Tam",
+        ring1="Chirich Ring +1",
         neck="Combatant's Torque",
         })
 
@@ -812,7 +817,8 @@ function init_gear_sets()
         })
 
     sets.engaged.DW.STP.LowHaste = set_combine(sets.engaged.DW.LowHaste, {
-        ring1="Chirich Ring",
+        ring1="Chirich Ring +1",
+        ring2="Chirich Ring +1",
         })
 
     -- 30% Magic Haste (56% DW to cap)
@@ -825,7 +831,7 @@ function init_gear_sets()
         neck="Iskur Gorget",
         ear1="Suppanomimi", --5
         ear2="Eabani Earring", --4
-        ring1="Petrov Ring",
+        ring1="Hetairoi Ring",
         ring2="Epona's Ring",
         back=gear.COR_TP_Cape,
         waist="Reiki Yotai", --7
@@ -833,6 +839,7 @@ function init_gear_sets()
 
     sets.engaged.DW.LowAcc.MidHaste = set_combine(sets.engaged.DW.MidHaste, {
         head="Dampening Tam",
+        ring1="Chirich Ring +1",
         neck="Combatant's Torque",
         })
 
@@ -855,7 +862,8 @@ function init_gear_sets()
         })
 
     sets.engaged.DW.STP.MidHaste = set_combine(sets.engaged.DW.MidHaste, {
-        ring1="Chirich Ring",
+        ring1="Chirich Ring +1",
+        ring2="Chirich Ring +1",
         })
 
     -- 35% Magic Haste (51% DW to cap)
@@ -868,7 +876,7 @@ function init_gear_sets()
         neck="Iskur Gorget",
         ear1="Suppanomimi", --5
         ear2="Eabani Earring", --4
-        ring1="Petrov Ring",
+        ring1="Hetairoi Ring",
         ring2="Epona's Ring",
         back=gear.COR_TP_Cape,
         waist="Reiki Yotai", --7
@@ -876,6 +884,7 @@ function init_gear_sets()
 
     sets.engaged.DW.LowAcc.HighHaste = set_combine(sets.engaged.DW.HighHaste, {
         head="Dampening Tam",
+        ring1="Chirich Ring +1",
         neck="Combatant's Torque",
         })
 
@@ -898,7 +907,8 @@ function init_gear_sets()
         })
 
     sets.engaged.DW.STP.HighHaste = set_combine(sets.engaged.DW.HighHaste, {
-        ring1="Chirich Ring",
+        ring1="Chirich Ring +1",
+        ring2="Chirich Ring +1",
         })
 
     -- 45% Magic Haste (36% DW to cap)
@@ -911,7 +921,7 @@ function init_gear_sets()
         neck="Iskur Gorget",
         ear1="Suppanomimi", --5
         ear2="Telos Earring",
-        ring1="Petrov Ring",
+        ring1="Hetairoi Ring",
         ring2="Epona's Ring",
         back=gear.COR_TP_Cape,
         waist="Windbuffet Belt +1",
@@ -919,6 +929,7 @@ function init_gear_sets()
 
     sets.engaged.DW.LowAcc.MaxHaste = set_combine(sets.engaged.DW.MaxHaste, {
         head="Dampening Tam",
+        ring1="Chirich Ring +1",
         waist="Kentarch Belt +1",
         })
 
@@ -941,7 +952,8 @@ function init_gear_sets()
 
     sets.engaged.DW.STP.MaxHaste = set_combine(sets.engaged.DW.MaxHaste, {
         feet="Carmine Greaves +1",
-        ring1="Chirich Ring",
+        ring1="Chirich Ring +1",
+        ring2="Chirich Ring +1",
         })
 
     sets.engaged.DW.MaxHastePlus = set_combine(sets.engaged.DW.MaxHaste, {back=gear.COR_DW_Cape})
@@ -1019,9 +1031,12 @@ function init_gear_sets()
     sets.CP = {back="Mecisto. Mantle"}
     --sets.Reive = {neck="Ygnas's Resolve +1"}
 
-    sets.DeathPenalty = {ranged="Death Penalty"}
-    sets.Fomalhaut = {ranged="Fomalhaut"}
-    sets.Ataktos = {ranged="Ataktos"}
+    sets.LeadenMelee = {main="Rostam", sub="Blurred Knife +1", ranged="Death Penalty"}
+    sets.LeadenAccMelee = {main="Rostam", sub="Eletta Knife", ranged="Death Penalty"}
+    sets.LeadenRanged = {main="Rostam", sub="Hep. Rapier +1", ranged="Death Penalty"}
+    sets.LastStandMelee = {main="Fettering Blade", sub="Blurred Knife +1", ranged="Fomalhaut"}
+    sets.LastStandRanged = {main="Rostam", sub="Nusku Shield", ranged="Fomalhaut"}
+    sets.SavageMelee = {main="Hep. Sapara +1", sub="Blurred Knife +1", ranged="Ataktos"}
 
 end
 
@@ -1038,6 +1053,13 @@ function job_precast(spell, action, spellMap, eventArgs)
     -- Check that proper ammo is available if we're using ranged attacks or similar.
     if spell.action_type == 'Ranged Attack' or spell.type == 'WeaponSkill' or spell.type == 'CorsairShot' then
         do_bullet_checks(spell, spellMap, eventArgs)
+    end
+
+    -- In Dynamis zone, ensure WS set is equipped.
+    if spell.type == 'WeaponSkill' and world.area:startswith('Dynamis') then
+        equip(sets[spell.english])
+        send_command('gi ugs false')
+        cast_delay(0.3)
     end
 
     -- Gear
@@ -1097,6 +1119,9 @@ function job_post_precast(spell, action, spellMap, eventArgs)
 end
 
 function job_post_midcast(spell, action, spellMap, eventArgs)
+    if spell.type == 'WeaponSkill' and world.area:startswith('Dynamis') then
+        eventArgs.handled = true
+    end
     -- Equip obi if weather/day matches for Quick Draw.
     if spell.type == 'CorsairShot' then
         if (spell.element == world.day_element or spell.element == world.weather_element) and
@@ -1123,6 +1148,11 @@ end
 -- Set eventArgs.handled to true if we don't want any automatic gear equipping to be done.
 function job_aftercast(spell, action, spellMap, eventArgs)
     equip(sets[state.WeaponSet.current])
+
+    if spell.type == 'WeaponSkill' and world.area:startswith('Dynamis') then
+        eventArgs.handled = true
+        send_command('wait 3;gi ugs true')
+    end
 
     if (spell.type == 'CorsairRoll' or spell.english == "Double-Up") and not spell.interrupted then
         display_roll_info(spell)

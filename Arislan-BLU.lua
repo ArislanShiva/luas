@@ -822,7 +822,7 @@ function init_gear_sets()
         neck="Ainia Collar",
         ear1="Cessance Earring",
         ear2="Brutal Earring",
-        ring1="Petrov Ring",
+        ring1="Hetairoi Ring",
         ring2="Epona's Ring",
         back=gear.BLU_TP_Cape,
         waist="Windbuffet Belt +1",
@@ -831,6 +831,7 @@ function init_gear_sets()
     sets.engaged.LowAcc = set_combine(sets.engaged, {
         head="Dampening Tam",
         neck="Combatant's Torque",
+        ring1="Chirich Ring +1",
         })
 
     sets.engaged.MidAcc = set_combine(sets.engaged.LowAcc, {
@@ -852,7 +853,8 @@ function init_gear_sets()
 
     sets.engaged.STP = set_combine(sets.engaged, {
         feet="Carmine Greaves +1",
-        ring1="Chirich Ring",
+        ring1="Chirich Ring +1",
+        ring2="Chirich Ring +1",
         })
 
     -- Base Dual-Wield Values:
@@ -874,7 +876,7 @@ function init_gear_sets()
         neck="Ainia Collar",
         ear1="Eabani Earring", --4
         ear2="Suppanomimi", --5
-        ring1="Petrov Ring",
+        ring1="Hetairoi Ring",
         ring2="Epona's Ring",
         back=gear.BLU_TP_Cape,
         waist="Reiki Yotai", --7
@@ -883,6 +885,7 @@ function init_gear_sets()
     sets.engaged.DW.LowAcc = set_combine(sets.engaged.DW, {
         head="Dampening Tam",
         neck="Combatant's Torque",
+        ring1="Chirich Ring +1",
         })
 
     sets.engaged.DW.MidAcc = set_combine(sets.engaged.DW.LowAcc, {
@@ -902,7 +905,8 @@ function init_gear_sets()
         })
 
     sets.engaged.DW.STP = set_combine(sets.engaged.DW, {
-        ring1="Chirich Ring",
+        ring1="Chirich Ring +1",
+        ring2="Chirich Ring +1",
         })
 
     -- 15% Magic Haste (67% DW to cap)
@@ -916,7 +920,7 @@ function init_gear_sets()
         neck="Ainia Collar",
         ear1="Eabani Earring", --4
         ear2="Suppanomimi", --5
-        ring1="Petrov Ring",
+        ring1="Hetairoi Ring",
         ring2="Epona's Ring",
         back=gear.BLU_TP_Cape,
         waist="Reiki Yotai", --7
@@ -925,6 +929,7 @@ function init_gear_sets()
     sets.engaged.DW.LowAcc.LowHaste = set_combine(sets.engaged.DW.LowHaste, {
         head="Dampening Tam",
         neck="Combatant's Torque",
+        ring1="Chirich Ring +1",
         })
 
     sets.engaged.DW.MidAcc.LowHaste = set_combine(sets.engaged.DW.LowAcc.LowHaste, {
@@ -944,7 +949,8 @@ function init_gear_sets()
         })
 
     sets.engaged.DW.STP.LowHaste = set_combine(sets.engaged.DW.LowHaste, {
-        ring1="Chirich Ring",
+        ring1="Chirich Ring +1",
+        ring2="Chirich Ring +1",
         })
 
     -- 30% Magic Haste (56% DW to cap)
@@ -958,7 +964,7 @@ function init_gear_sets()
         neck="Ainia Collar",
         ear1="Cessance Earring",
         ear2="Suppanomimi", --5
-        ring1="Petrov Ring",
+        ring1="Hetairoi Ring",
         ring2="Epona's Ring",
         back=gear.BLU_TP_Cape,
         waist="Reiki Yotai", --7
@@ -967,6 +973,7 @@ function init_gear_sets()
     sets.engaged.DW.LowAcc.MidHaste = set_combine(sets.engaged.DW.MidHaste, {
         head="Dampening Tam",
         neck="Combatant's Torque",
+        ring1="Chirich Ring +1",
         })
 
     sets.engaged.DW.MidAcc.MidHaste = set_combine(sets.engaged.DW.LowAcc.MidHaste, {
@@ -989,7 +996,8 @@ function init_gear_sets()
 
     sets.engaged.DW.STP.MidHaste = set_combine(sets.engaged.DW.MidHaste, {
         ear1="Dedition Earring",
-        ring1="Chirich Ring",
+        ring1="Chirich Ring +1",
+        ring2="Chirich Ring +1",
         })
 
     -- 35% Magic Haste (51% DW to cap)
@@ -1003,7 +1011,7 @@ function init_gear_sets()
         neck="Ainia Collar",
         ear1="Eabani Earring", --4
         ear2="Suppanomimi", --5
-        ring1="Petrov Ring",
+        ring1="Hetairoi Ring",
         ring2="Epona's Ring",
         back=gear.BLU_TP_Cape,
         waist="Reiki Yotai", --7
@@ -1012,6 +1020,7 @@ function init_gear_sets()
     sets.engaged.DW.LowAcc.HighHaste = set_combine(sets.engaged.DW.HighHaste, {
         head="Dampening Tam",
         neck="Combatant's Torque",
+        ring1="Chirich Ring +1",
         waist="Kentarch Belt +1",
         })
 
@@ -1032,7 +1041,8 @@ function init_gear_sets()
         })
 
     sets.engaged.DW.STP.HighHaste = set_combine(sets.engaged.DW.HighHaste, {
-        ring1="Chirich Ring",
+        ring1="Chirich Ring +1",
+        ring2="Chirich Ring +1",
         })
 
     -- 45% Magic Haste (36% DW to cap)
@@ -1046,7 +1056,7 @@ function init_gear_sets()
         neck="Ainia Collar",
         ear1="Cessance Earring",
         ear2="Telos Earring",
-        ring1="Petrov Ring",
+        ring1="Hetairoi Ring",
         ring2="Epona's Ring",
         back=gear.BLU_TP_Cape,
         waist="Windbuffet Belt +1",
@@ -1055,6 +1065,7 @@ function init_gear_sets()
     sets.engaged.DW.LowAcc.MaxHaste = set_combine(sets.engaged.DW.MaxHaste, {
         head="Dampening Tam",
         neck="Combatant's Torque",
+        ring1="Chirich Ring +1",
         })
 
     sets.engaged.DW.MidAcc.MaxHaste = set_combine(sets.engaged.DW.LowAcc.MaxHaste, {
@@ -1075,7 +1086,8 @@ function init_gear_sets()
     sets.engaged.DW.STP.MaxHaste = set_combine(sets.engaged.DW.MaxHaste, {
         ear1="Dedition Earring",
         ear2="Telos Earring",
-        ring1="Chirich Ring",
+        ring1="Chirich Ring +1",
+        ring2="Chirich Ring +1",
         waist="Kentarch Belt +1",
         })
 

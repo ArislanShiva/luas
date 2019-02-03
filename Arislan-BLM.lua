@@ -434,7 +434,7 @@ function init_gear_sets()
         neck="Seraphic Ampulla",
         ear1="Dedition Earring",
         ear2="Telos Earring",
-        ring1="Chirich Ring",
+        ring1="Chirich Ring +1 +1",
         ring2="Apate Ring",
         waist="Oneiros Rope",
         })
@@ -492,8 +492,8 @@ function init_gear_sets()
         neck="Seraphic Ampulla",
         ear1="Dedition Earring",
         ear2="Telos Earring",
-        ring1="Chirich Ring",
-        ring2="Apate Ring",
+        ring1="Chirich Ring +1",
+        ring2="Chirich Ring +1",
         waist="Oneiros Rope",
         })
 
@@ -517,7 +517,7 @@ function init_gear_sets()
         neck="Seraphic Ampulla",
         ear1="Dedition Earring",
         ear2="Telos Earring",
-        ring1="Chirich Ring",
+        ring1="Chirich Ring +1 +1",
         ring2="Apate Ring",
         waist="Oneiros Rope",
         })
@@ -641,8 +641,8 @@ function init_gear_sets()
         neck="Combatant's Torque",
         ear1="Cessance Earring",
         ear2="Telos Earring",
-        ring1="Chirich Ring",
-        ring2="Petrov Ring",
+        ring1="Hetairoi Ring",
+        ring2="Chirich Ring +1",
         back="Relucent Cape",
         }
 

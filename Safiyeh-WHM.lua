@@ -349,7 +349,7 @@ function init_gear_sets()
         sub="Ammurapi Shield",
         head="Befouled Crown",
         body="Telchine Chas.",
-        hands="Telchine Gloves",
+        hands="Dynasty Mitts",
         legs="Telchine Braconi",
         feet="Theo. Duckbills +2",
         neck="Incanter's Torque",

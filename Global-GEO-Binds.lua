@@ -15,8 +15,8 @@
 
     send_command('bind #insert input //send safiyeh //gs c cycleback Element')
     send_command('bind #delete input //send safiyeh //gs c cycle Element')
-    send_command('bind #= input //send safiyeh //gs c toggle MagicBurst')
-    send_command('bind #backspace input //send safiyeh //gs c toggle Auto')
+    send_command('bind #[ input //send safiyeh //gs c toggle MagicBurst')
+    send_command('bind #] input //send safiyeh //gs c toggle Auto')
 
     send_command('bind #` input //send safiyeh /ja "Full Circle" <me>')
 
@@ -53,6 +53,7 @@
     send_command('bind #s input //send safiyeh /ja "Lasting Emanation" <me>')
 
     send_command('bind #- input //send safiyeh /follow <t>')
+    send_command('bind #= input //send safiyeh //setkey numpad7 down;wait 0.2;input //send safiyeh //setkey numpad7 up')
 
     send_command('bind #numpad7 input //send safiyeh /ma "Paralyna" <t>')
     send_command('bind #numpad8 input //send safiyeh /ma "Silena" <t>')

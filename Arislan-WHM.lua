@@ -578,7 +578,7 @@ function init_gear_sets()
         sub="Genmei Shield", --10/0
         ammo="Staunch Tathlum +1", --3/3
         head="Aya. Zucchetto +2", --3/3
-        hands="Gende. Gages +1", --4/3
+        hands="Gende. Gages +1", --4/4
         neck="Loricate Torque +1", --6/6
         ear1="Genmei Earring", --2/0
         ring1="Gelatinous Ring +1", --7/(-1)
@@ -605,6 +605,7 @@ function init_gear_sets()
         main="Yagrush",
         sub="Ammurapi Shield",
         head="Kaykaus Mitra +1",
+        body="Kaykaus Bliaut +1",
         hands="Kaykaus Cuffs +1",
         legs="Th. Pant. +3",
         neck="Debilis Medallion",
@@ -641,8 +642,8 @@ function init_gear_sets()
         neck="Asperity Necklace",
         ear1="Suppanomimi",
         ear2="Brutal Earring",
-        ring1="Ilabrat Ring",
-        ring2="Petrov Ring",
+        ring1="Hetairoi Ring",
+        ring2="Chirich Ring +1",
         back="Relucent Cape",
         waist="Shetal Stone",
         }

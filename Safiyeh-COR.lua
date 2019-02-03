@@ -38,14 +38,16 @@
 --  Spells:     [ WIN+, ]           Utsusemi: Ichi
 --              [ WIN+. ]           Utsusemi: Ni
 --
---  Weapons:    [ CTRL+G ]          Cycles between available ranged weapons
---              [ CTRL+W ]          Toggle Ranged Weapon Lock
+--  Weapons:    [ WIN+E/R ]         Cycles between available Weapon Sets
+--              [ WIN+W ]           Toggle Ranged Weapon Lock
 --
 --  WS:         [ CTRL+Numpad7 ]    Savage Blade
 --              [ CTRL+Numpad8 ]    Last Stand
 --              [ CTRL+Numpad4 ]    Leaden Salute
+--              [ CTRL+Numpad5 ]    Requiescat
 --              [ CTRL+Numpad6 ]    Wildfire
---              [ CTRL+Numpad1 ]    Requiescat
+--              [ CTRL+Numpad1 ]    Aeolian Edge
+--              [ CTRL+Numpad2 ]    Evisceration
 --
 --  RA:         [ Numpad0 ]         Ranged Attack
 --
@@ -120,9 +122,9 @@ function user_setup()
     state.CastingMode:options('Normal', 'Resistant')
     state.IdleMode:options('Normal', 'DT', 'Refresh')
 
-    state.WeaponLock = M(false, 'Weapon Lock')
-    state.Gun = M{['description']='Current Gun', 'Compensator', 'Holliday'}
+    state.WeaponSet = M{['description']='Weapon Set', 'Compensator', 'Holliday'}
     state.CP = M(false, "Capacity Points Mode")
+    state.WeaponLock = M(false, 'Weapon Lock')
 
     gear.RAbullet = "Eminent Bullet"
     gear.WSbullet = "Eminent Bullet"
@@ -131,7 +133,7 @@ function user_setup()
     options.ammo_warning_limit = 10
 
     -- Additional local binds
-    include('Global-Binds.lua')
+    include('Global-Binds.lua') -- OK to remove this line
 
     send_command('lua l gearinfo')
 
@@ -151,7 +153,8 @@ function user_setup()
 
     send_command('bind @c gs c toggle CP')
     send_command('bind @q gs c cycle QDMode')
-    send_command('bind @g gs c cycle Gun')
+    send_command('bind @e gs c cycleback WeaponSet')
+    send_command('bind @r gs c cycle WeaponSet')
     send_command('bind @w gs c toggle WeaponLock')
 
     send_command('bind ^numlock input /ja "Triple Shot" <me>')
@@ -165,12 +168,12 @@ function user_setup()
     send_command('bind ^numpad7 input /ws "Savage Blade" <t>')
     send_command('bind ^numpad8 input /ws "Last Stand" <t>')
     send_command('bind ^numpad4 input /ws "Leaden Salute" <t>')
+    send_command('bind ^numpad5 input /ws "Requiescat" <t>')
     send_command('bind ^numpad6 input /ws "Wildfire" <t>')
-    send_command('bind ^numpad1 input /ws "Swift Blade" <t>')
+    send_command('bind ^numpad1 input /ws "Aeolian Edge" <t>')
+    send_command('bind ^numpad2 input /ws "Evisceration" <t>')
 
     send_command('bind numpad0 input /ra <t>')
-
-    send_command('bind #- input /follow <t>')
 
     select_default_macro_book()
     set_lockstyle()
@@ -201,17 +204,32 @@ function user_unload()
     send_command('unbind ^,')
     send_command('unbind @c')
     send_command('unbind @q')
-    send_command('unbind @g')
     send_command('unbind @w')
+    send_command('unbind @e')
+    send_command('unbind @r')
     send_command('unbind ^numlock')
     send_command('unbind ^numpad/')
     send_command('unbind ^numpad*')
     send_command('unbind ^numpad-')
     send_command('unbind ^numpad8')
     send_command('unbind ^numpad4')
+    send_command('unbind ^numpad5')
     send_command('unbind ^numpad6')
     send_command('unbind ^numpad1')
+    send_command('unbind ^numpad2')
     send_command('unbind numpad0')
+
+    send_command('unbind #`')
+    send_command('unbind #1')
+    send_command('unbind #2')
+    send_command('unbind #3')
+    send_command('unbind #4')
+    send_command('unbind #5')
+    send_command('unbind #6')
+    send_command('unbind #7')
+    send_command('unbind #8')
+    send_command('unbind #9')
+    send_command('unbind #0')
 
     send_command('lua u gearinfo')
 
@@ -252,8 +270,6 @@ function init_gear_sets()
 
     sets.precast.LuzafRing = set_combine(sets.precast.CorsairRoll, {ring1="Luzaf's Ring"})
     sets.precast.FoldDoubleBust = {hands="Lanun Gants +1"}
-
-    sets.precast.CorsairShot = {}
 
     sets.precast.Waltz = {
         body="Passion Jacket",
@@ -355,6 +371,8 @@ function init_gear_sets()
         back=gear.COR_WS3_Cape,
         waist="Eschan Stone",
         }
+
+    sets.precast.WS['Hot Shot'] = sets.precast.WS['Wildfire']
 
     sets.precast.WS['Leaden Salute'] = {
         ammo=gear.MAbullet,
@@ -556,7 +574,10 @@ function init_gear_sets()
         --feet="Oshosi Leggings", --2
         }
 
-
+    sets.TripleShotCritical = {
+        head="Meghanada Visor +2",
+        --waist="Kwahu Kachina Belt",
+        }
 
     ------------------------------------------------------------------------------------------------
     ----------------------------------------- Idle Sets --------------------------------------------
@@ -861,6 +882,12 @@ function init_gear_sets()
         ring1="Petrov Ring",
         })
 
+    sets.engaged.DW.MaxHastePlus = set_combine(sets.engaged.DW.MaxHaste, {back=gear.COR_DW_Cape})
+    sets.engaged.DW.LowAcc.MaxHastePlus = set_combine(sets.engaged.DW.LowAcc.MaxHaste, {back=gear.COR_DW_Cape})
+    sets.engaged.DW.MidAcc.MaxHastePlus = set_combine(sets.engaged.DW.MidAcc.MaxHaste, {back=gear.COR_DW_Cape})
+    sets.engaged.DW.HighAcc.MaxHastePlus = set_combine(sets.engaged.DW.HighAcc.MaxHaste, {back=gear.COR_DW_Cape})
+    sets.engaged.DW.STP.MaxHastePlus = set_combine(sets.engaged.DW.STP.MaxHaste, {back=gear.COR_DW_Cape})
+
 
     ------------------------------------------------------------------------------------------------
     ---------------------------------------- Hybrid Sets -------------------------------------------
@@ -907,6 +934,11 @@ function init_gear_sets()
     sets.engaged.DW.HighAcc.DT.MaxHaste = set_combine(sets.engaged.DW.HighAcc.MaxHaste, sets.engaged.Hybrid)
     sets.engaged.DW.STP.DT.MaxHaste = set_combine(sets.engaged.DW.STP.MaxHaste, sets.engaged.Hybrid)
 
+    sets.engaged.DW.DT.MaxHastePlus = set_combine(sets.engaged.DW.MaxHastePlus, sets.engaged.Hybrid)
+    sets.engaged.DW.LowAcc.DT.MaxHastePlus = set_combine(sets.engaged.DW.LowAcc.MaxHastePlus, sets.engaged.Hybrid)
+    sets.engaged.DW.MidAcc.DT.MaxHastePlus = set_combine(sets.engaged.DW.MidAcc.MaxHastePlus, sets.engaged.Hybrid)
+    sets.engaged.DW.HighAcc.DT.MaxHastePlus = set_combine(sets.engaged.DW.HighAcc.MaxHastePlus, sets.engaged.Hybrid)
+    sets.engaged.DW.STP.DT.MaxHastePlus = set_combine(sets.engaged.DW.STP.MaxHastePlus, sets.engaged.Hybrid)
 
     ------------------------------------------------------------------------------------------------
     ---------------------------------------- Special Sets ------------------------------------------
@@ -916,6 +948,10 @@ function init_gear_sets()
 
     sets.Obi = {waist="Hachirin-no-Obi"}
     sets.CP = {back="Mecisto. Mantle"}
+    --sets.Reive = {neck="Ygnas's Resolve +1"}
+
+    sets.Compensator = {ranged="Compensator"}
+    sets.Holliday = {ranged="Holliday"}
 
 end
 
@@ -927,6 +963,8 @@ end
 -- Set eventArgs.handled to true if we don't want any automatic gear equipping to be done.
 -- Set eventArgs.useMidcastGear to true if we want midcast gear equipped on precast.
 function job_precast(spell, action, spellMap, eventArgs)
+    equip(sets[state.WeaponSet.current])
+
     -- Check that proper ammo is available if we're using ranged attacks or similar.
     if spell.action_type == 'Ranged Attack' or spell.type == 'WeaponSkill' or spell.type == 'CorsairShot' then
         do_bullet_checks(spell, spellMap, eventArgs)
@@ -976,11 +1014,11 @@ function job_post_precast(spell, action, spellMap, eventArgs)
     -- Equip obi if weather/day matches for WS.
     elseif spell.type == 'WeaponSkill' then
         if spell.english == 'Leaden Salute' then
-            if world.weather_element == 'Dark' or world.day_element == 'Dark' then
-                equip(sets.Obi)
-            end
             if player.tp > 2900 then
                 equip(sets.precast.WS['Leaden Salute'].FullTP)
+            end
+            if world.weather_element == 'Dark' or world.day_element == 'Dark' then
+                equip(sets.Obi)
             end
         elseif spell.english == 'Wildfire' and (world.weather_element == 'Fire' or world.day_element == 'Fire') then
             equip(sets.Obi)
@@ -989,10 +1027,13 @@ function job_post_precast(spell, action, spellMap, eventArgs)
 end
 
 function job_post_midcast(spell, action, spellMap, eventArgs)
+    if spell.type == 'WeaponSkill' and world.area:startswith('Dynamis') then
+        eventArgs.handled = true
+    end
     -- Equip obi if weather/day matches for Quick Draw.
     if spell.type == 'CorsairShot' then
         if (spell.element == world.day_element or spell.element == world.weather_element) and
-        (spell.english ~= "Light Shot" and spell.english ~= "Dark Shot") then
+        (spell.english ~= 'Light Shot' and spell.english ~= 'Dark Shot') then
             equip(sets.Obi)
         end
         if state.QDMode.value == 'Magic Enhance' then
@@ -1000,14 +1041,28 @@ function job_post_midcast(spell, action, spellMap, eventArgs)
         elseif state.QDMode.value == 'STP' then
             equip(sets.midcast.CorsairShot.STP)
         end
-    elseif spell.action_type == 'Ranged Attack' and buffactive['Triple Shot'] then
-        equip(sets.TripleShot)
+    elseif spell.action_type == 'Ranged Attack' then
+        if buffactive['Triple Shot'] then
+            equip(sets.TripleShot)
+            if buffactive['Aftermath: Lv.3'] and player.equipment.main == "Armageddon" then
+                equip(sets.TripleShotCritical)
+            end
+        elseif buffactive['Aftermath: Lv.3'] and player.equipment.main == "Armageddon" then
+            equip(sets.midcast.RA.Critical)
+        end
     end
 end
 
 -- Set eventArgs.handled to true if we don't want any automatic gear equipping to be done.
 function job_aftercast(spell, action, spellMap, eventArgs)
-    if spell.type == 'CorsairRoll' and not spell.interrupted then
+    equip(sets[state.WeaponSet.current])
+
+    if spell.type == 'WeaponSkill' and world.area:startswith('Dynamis') then
+        eventArgs.handled = true
+        send_command('wait 3;gi ugs true')
+    end
+
+    if (spell.type == 'CorsairRoll' or spell.english == "Double-Up") and not spell.interrupted then
         display_roll_info(spell)
     end
     if spell.english == "Light Shot" then
@@ -1056,6 +1111,9 @@ function job_state_change(stateField, newValue, oldValue)
     else
         enable('ranged')
     end
+
+    equip(sets[state.WeaponSet.current])
+
 end
 
 -------------------------------------------------------------------------------------------------------------------
@@ -1070,6 +1128,7 @@ function job_handle_equipping_gear(playerStatus, eventArgs)
 end
 
 function job_update(cmdParams, eventArgs)
+    equip(sets[state.WeaponSet.current])
     handle_equipping_gear(player.status)
 end
 
@@ -1083,18 +1142,6 @@ end
 
 -- Modify the default idle set after it was constructed.
 function customize_idle_set(idleSet)
-    if state.Gun.current == 'Compensator' then
-        equip({ranged="Compensator"})
-    elseif state.Gun.current == 'Holliday' then
-        equip({ranged="Holliday"})
---    elseif state.Gun.current == 'Fomalhaut' then
---        equip({ranged="Fomalhaut"})
---    elseif state.Gun.current == 'Ataktos' then
---        equip({ranged="Ataktos"})
---    elseif state.Gun.current == 'Armageddon' then
---        equip({ranged="Armageddon"})
-    end
-
     if state.CP.current == 'on' then
         equip(sets.CP)
         disable('back')
@@ -1126,7 +1173,9 @@ function display_current_job_state(eventArgs)
         msg = msg .. '/' .. state.HybridMode.value
     end
 
-    msg = msg .. '/' ..state.RangedMode.current .. ' ]'
+    msg = msg .. '/' ..state.RangedMode.current
+
+    msg = msg .. ' (' ..state.WeaponSet.current .. ') ]'
 
     if state.WeaponskillMode.value ~= 'Normal' then
         msg = msg .. '[ WS: '..state.WeaponskillMode.current .. ' ]'
@@ -1158,54 +1207,6 @@ function display_current_job_state(eventArgs)
 
     eventArgs.handled = true
 end
-
--------------------------------------------------------------------------------------------------------------------
--- User self-commands.
--------------------------------------------------------------------------------------------------------------------
-
--- Called for custom player commands.
-function job_self_command(cmdParams, eventArgs)
-    if cmdParams[1] == 'qd' then
-        if cmdParams[2] == 't' then
-            state.IgnoreTargetting:set()
-        end
-
-        local doqd = ''
-        if state.UseAltqd.value == true then
-            doqd = state[state.Currentqd.current..'qd'].current
-            state.Currentqd:cycle()
-        else
-            doqd = state.Mainqd.current
-        end
-
-        send_command('@input /ja "'..doqd..'" <t>')
-    end
-end
-
-
--------------------------------------------------------------------------------------------------------------------
--- Utility functions specific to this job.
--------------------------------------------------------------------------------------------------------------------
-
---Read incoming packet to differentiate between Haste/Flurry I and II
-function job_self_command(cmdParams, eventArgs)
-    if cmdParams[1] == 'qd' then
-        if cmdParams[2] == 't' then
-            state.IgnoreTargetting:set()
-        end
-
-        local doqd = ''
-        if state.UseAltqd.value == true then
-            doqd = state[state.Currentqd.current..'qd'].current
-            state.Currentqd:cycle()
-        else
-            doqd = state.Mainqd.current
-        end
-
-        send_command('@input /ja "'..doqd..'" <t>')
-    end
-end
-
 
 -------------------------------------------------------------------------------------------------------------------
 -- Utility functions specific to this job.
@@ -1285,7 +1286,7 @@ function gearinfo(cmdParams, eventArgs)
             end
         elseif type(cmdParams[2]) == 'string' then
             if cmdParams[2] == 'false' then
-        	      DW_needed = 0
+        	    DW_needed = 0
                 DW = false
       	    end
         end
@@ -1300,6 +1301,9 @@ function gearinfo(cmdParams, eventArgs)
             elseif cmdParams[4] == 'false' then
                 moving = false
             end
+        end
+        if not midaction() then
+            job_update()
         end
     end
 end
@@ -1381,7 +1385,7 @@ function do_bullet_checks(spell, spellMap, eventArgs)
 
     -- If no ammo is available, give appropriate warning and end.
     if not available_bullets then
-        if spell.type == 'CorsairShotShot' and player.equipment.ammo ~= 'empty' then
+        if spell.type == 'CorsairShot' and player.equipment.ammo ~= 'empty' then
             add_to_chat(104, 'No Quick Draw ammo left.  Using what\'s currently equipped ('..player.equipment.ammo..').')
             return
         elseif spell.type == 'WeaponSkill' and player.equipment.ammo == gear.RAbullet then

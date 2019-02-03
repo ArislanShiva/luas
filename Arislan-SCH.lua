@@ -97,7 +97,7 @@ end
 function user_setup()
     state.OffenseMode:options('Normal', 'Acc')
     state.CastingMode:options('Normal', 'Seidr', 'Resistant')
-    state.IdleMode:options('Normal', 'DT')
+    state.IdleMode:options('Normal', 'DT', 'Vagary')
 
     state.WeaponLock = M(false, 'Weapon Lock')
     state.MagicBurst = M(false, 'Magic Burst')
@@ -249,6 +249,21 @@ function init_gear_sets()
         waist="Fotia Belt",
         }
 
+    sets.precast.WS['Omniscience'] = set_combine(sets.precast.WS, {
+        ammo="Pemphredo Tathlum",
+        head="Pixie Hairpin +1",
+        body="Peda. Gown +3",
+        legs="Peda. Pants +3",
+        feet="Merlinic Crackows",
+        ear1="Barkaro. Earring",
+        ear2="Regal Earring",
+        ring1="Stikini Ring +1",
+        ring2="Archon Ring",
+        back=gear.SCH_MAB_Cape,
+        waist="Yamabuki-no-Obi",
+        })
+
+
     sets.precast.WS['Myrkr'] = {
         ammo="Ghastly Tathlum +1",
         head="Pixie Hairpin +1",
@@ -277,7 +292,7 @@ function init_gear_sets()
         sub="Sors Shield", --3/(-5)
         ammo="Esper Stone +1", --0/(-5)
         head="Kaykaus Mitra +1", --11(+2)/(-6)
-        body="Kaykaus Bliaut", --(+3)/(-6)
+        body="Kaykaus Bliaut +1", --(+4)/(-6)
         hands="Peda. Bracers +3", --(+3)/(-7)
         legs="Acad. Pants +3", --15
         feet="Kaykaus Boots +1", --11(+2)/(-12)
@@ -447,7 +462,7 @@ function init_gear_sets()
     sets.midcast.Kaustra = {
         main="Akademos", --10
         sub="Enki Strap",
-        ammo="Ghastly Tathlum +1",
+        ammo="Pemphredo Tathlum",
         head="Pixie Hairpin +1",
         body=gear.Merl_MB_body, --10
         hands="Amalric Gages +1", --(5)
@@ -578,6 +593,8 @@ function init_gear_sets()
         waist="Slipor Sash", --0/3
         })
 
+    sets.idle.Vagary = sets.midcast['Elemental Magic']
+
     sets.idle.Refresh = {main="Bolelabunga", sub="Genmei Shield"}
 
     sets.idle.Town = set_combine(sets.idle, {
@@ -621,8 +638,8 @@ function init_gear_sets()
         neck="Combatant's Torque",
         ear1="Cessance Earring",
         ear2="Telos Earring",
-        ring1="Chirich Ring",
-        ring2="Petrov Ring",
+        ring1="Hetairoi Ring",
+        ring2="Chirich Ring +1",
         back="Relucent Cape",
         }
 
@@ -1008,8 +1025,6 @@ function get_current_strategem_count()
 end
 
 function refine_various_spells(spell, action, spellMap, eventArgs)
-    local aspirs = S{'Aspir','Aspir II'}
-
     local newSpell = spell.english
     local spell_recasts = windower.ffxi.get_spell_recasts()
     local cancelling = 'All '..spell.english..' are on cooldown. Cancelling.'
@@ -1017,7 +1032,7 @@ function refine_various_spells(spell, action, spellMap, eventArgs)
     local spell_index
 
     if spell_recasts[spell.recast_id] > 0 then
-        if aspirs:contains(spell.name) then
+        if spellMap == 'Aspir' then
             spell_index = table.find(degrade_array['Aspirs'],spell.name)
             if spell_index > 1 then
                 newSpell = degrade_array['Aspirs'][spell_index - 1]

@@ -363,7 +363,7 @@ function init_gear_sets()
         legs=gear.Herc_MAB_legs,
         feet=gear.Herc_MAB_feet,
         neck="Baetyl Pendant",
-        ear1="Novio Earring",
+        ear1="Crematio Earring",
         ear2="Friomisi Earring",
         ring1="Shiva Ring +1",
         ring2="Shiva Ring +1",
@@ -404,8 +404,8 @@ function init_gear_sets()
         neck="Bathy Choker +1",
         ear1="Genmei Earring",
         ear2="Infused Earring",
-        ring1="Paguroidea Ring",
-        ring2="Sheltered Ring",
+        ring1="Chirich Ring +1",
+        ring2="Chirich Ring +1",
         back="Moonlight Cape",
         waist="Flume Belt +1",
         }
@@ -433,8 +433,6 @@ function init_gear_sets()
         neck="Combatant's Torque",
         ear1="Sherida Earring",
         ear2="Telos Earring",
-        ring1="Regal Ring",
-        ring2="Ilabrat Ring",
         back=gear.THF_TP_Cape,
         waist="Windbuffet Belt +1",
         })
@@ -471,7 +469,7 @@ function init_gear_sets()
         neck="Anu Torque",
         ear1="Sherida Earring",
         ear2="Brutal Earring",
-        ring1="Petrov Ring",
+        ring1="Hetairoi Ring",
         ring2="Epona's Ring",
         back=gear.THF_TP_Cape,
         waist="Windbuffet Belt +1",
@@ -480,6 +478,7 @@ function init_gear_sets()
     sets.engaged.LowAcc = set_combine(sets.engaged, {
         head="Skulker's Bonnet +1",
         neck="Combatant's Torque",
+        ring1="Chirich Ring +1",
         ear2="Telos Earring",
         })
 
@@ -503,7 +502,8 @@ function init_gear_sets()
 
     sets.engaged.STP = set_combine(sets.engaged, {
         neck="Anu Torque",
-        ring1="Chirich Ring",
+        ring1="Chirich Ring +1",
+        ring2="Chirich Ring +1",
         })
 
     -- * DNC Native DW Trait: 30% DW
@@ -520,7 +520,7 @@ function init_gear_sets()
         neck="Erudit. Necklace",
         ear1="Eabani Earring", --4
         ear2="Suppanomimi", --5
-        ring1="Petrov Ring",
+        ring1="Hetairoi Ring",
         ring2="Epona's Ring",
         back=gear.THF_DW_Cape, --10
         waist="Reiki Yotai", --7
@@ -529,6 +529,7 @@ function init_gear_sets()
     sets.engaged.DW.LowAcc = set_combine(sets.engaged.DW, {
         head="Skulker's Bonnet +1",
         neck="Combatant's Torque",
+        ring1="Chirich Ring +1",
         })
 
     sets.engaged.DW.MidAcc = set_combine(sets.engaged.DW.LowAcc, {
@@ -550,7 +551,8 @@ function init_gear_sets()
 
     sets.engaged.DW.STP = set_combine(sets.engaged.DW, {
         neck="Anu Torque",
-        ring1="Chirich Ring",
+        ring1="Chirich Ring +1",
+        ring2="Chirich Ring +1",
         })
 
     -- 15% Magic Haste (67% DW to cap)
@@ -564,7 +566,7 @@ function init_gear_sets()
         neck="Erudit. Necklace",
         ear1="Cessance Earring",
         ear2="Suppanomimi", --5
-        ring1="Petrov Ring",
+        ring1="Hetairoi Ring",
         ring2="Epona's Ring",
         back=gear.THF_DW_Cape, --10
         waist="Reiki Yotai", --7
@@ -573,6 +575,7 @@ function init_gear_sets()
     sets.engaged.DW.LowAcc.LowHaste = set_combine(sets.engaged.DW.LowHaste, {
         head="Skulker's Bonnet +1",
         neck="Combatant's Torque",
+        ring1="Chirich Ring +1",
         })
 
     sets.engaged.DW.MidAcc.LowHaste = set_combine(sets.engaged.DW.LowAcc.LowHaste, {
@@ -593,7 +596,8 @@ function init_gear_sets()
 
     sets.engaged.DW.STP.LowHaste = set_combine(sets.engaged.DW.LowHaste, {
         neck="Anu Torque",
-        ring1="Chirich Ring",
+        ring1="Chirich Ring +1",
+        ring2="Chirich Ring +1",
         })
 
     -- 30% Magic Haste (56% DW to cap)
@@ -607,7 +611,7 @@ function init_gear_sets()
         neck="Erudit. Necklace",
         ear1="Eabani Earring", --4
         ear2="Suppanomimi", --5
-        ring1="Petrov Ring",
+        ring1="Hetairoi Ring",
         ring2="Epona's Ring",
         back=gear.THF_DW_Cape, --10
         waist="Reiki Yotai", --7
@@ -616,6 +620,7 @@ function init_gear_sets()
     sets.engaged.DW.LowAcc.MidHaste = set_combine(sets.engaged.DW.MidHaste, {
         head="Skulker's Bonnet +1",
         neck="Combatant's Torque",
+        ring1="Chirich Ring +1",
         })
 
     sets.engaged.DW.MidAcc.MidHaste = set_combine(sets.engaged.DW.LowAcc.MidHaste, {
@@ -637,7 +642,8 @@ function init_gear_sets()
     sets.engaged.DW.STP.MidHaste = set_combine(sets.engaged.DW.MidHaste, {
         neck="Anu Torque",
         ear1="Sherida Earring",
-        ring1="Chirich Ring",
+        ring1="Chirich Ring +1",
+        ring2="Chirich Ring +1",
         })
 
     -- 35% Magic Haste (51% DW to cap)
@@ -651,7 +657,7 @@ function init_gear_sets()
         neck="Erudit. Necklace",
         ear1="Sherida Earring",
         ear2="Suppanomimi", --5
-        ring1="Petrov Ring",
+        ring1="Hetairoi Ring",
         ring2="Epona's Ring",
         back=gear.THF_DW_Cape, --10
         waist="Reiki Yotai", --7
@@ -660,6 +666,7 @@ function init_gear_sets()
     sets.engaged.DW.LowAcc.HighHaste = set_combine(sets.engaged.DW.HighHaste, {
         head="Skulker's Bonnet +1",
         neck="Combatant's Torque",
+        ring1="Chirich Ring +1",
         })
 
     sets.engaged.DW.MidAcc.HighHaste = set_combine(sets.engaged.DW.LowAcc.HighHaste, {
@@ -682,7 +689,8 @@ function init_gear_sets()
         neck="Anu Torque",
         ear1="Sherida Earring",
         ear2="Telos Earring",
-        ring1="Chirich Ring",
+        ring1="Chirich Ring +1",
+        ring2="Chirich Ring +1",
         })
 
     -- 45% Magic Haste (36% DW to cap)
@@ -696,7 +704,7 @@ function init_gear_sets()
         neck="Erudit. Necklace",
         ear1="Sherida Earring",
         ear2="Suppanomimi", --5
-        ring1="Petrov Ring",
+        ring1="Hetairoi Ring",
         ring2="Epona's Ring",
         back=gear.THF_TP_Cape,
         waist="Windbuffet Belt +1",
@@ -705,6 +713,7 @@ function init_gear_sets()
     sets.engaged.DW.LowAcc.MaxHaste = set_combine(sets.engaged.DW.MaxHaste, {
         head="Skulker's Bonnet +1",
         neck="Combatant's Torque",
+        ring1="Chirich Ring +1",
         waist="Kentarch Belt +1",
         })
 
@@ -727,7 +736,8 @@ function init_gear_sets()
         neck="Anu Torque",
         ear1="Sherida Earring",
         ear2="Telos Earring",
-        ring1="Chirich Ring",
+        ring1="Chirich Ring +1",
+        ring2="Chirich Ring +1",
         waist="Kentarch Belt +1",
         })
 
