@@ -47,9 +47,9 @@
 --              Addendum Commands:
 --              Shorthand versions for each strategem type that uses the version appropriate for
 --              the current Arts.
---                                          Light Arts					Dark Arts
+--                                          Light Arts                    Dark Arts
 --                                          ----------                  ---------
---		        gs c scholar light          Light Arts/Addendum
+--                gs c scholar light          Light Arts/Addendum
 --              gs c scholar dark                                       Dark Arts/Addendum
 --              gs c scholar cost           Penury                      Parsimony
 --              gs c scholar speed          Celerity                    Alacrity
@@ -263,7 +263,7 @@ function init_gear_sets()
         ear1="Nourish. Earring +1", --7
         ear2="Glorious Earring", -- (+2)/(-5)
         ring1="Lebeche Ring", --3/(-5)
-        ring2="Haoma's Ring",
+        ring2={name="Haoma's Ring", bag="wardrobe2"},
         back=gear.WHM_Cure_Cape, --0/(-10)
         waist="Bishop's Sash",
         }
@@ -290,8 +290,8 @@ function init_gear_sets()
     sets.midcast.CuragaNormal = set_combine(sets.midcast.CureNormal, {
         body="Theo. Briault +2", --0(+3)/(-5)
         neck="Nuna Gorget +1",
-        ring1="Stikini Ring",
-        ring2="Stikini Ring",
+        ring1={name="Stikini Ring", bag="wardrobe1"},
+        ring2={name="Stikini Ring", bag="wardrobe2"},
         waist="Luminary Sash",
         })
 
@@ -301,8 +301,8 @@ function init_gear_sets()
         body="Theo. Briault +2", --0(+3)/(-5)
         neck="Nuna Gorget +1",
         back="Twilight Cape",
-        ring1="Stikini Ring",
-        ring2="Stikini Ring",
+        ring1={name="Stikini Ring", bag="wardrobe1"},
+        ring2={name="Stikini Ring", bag="wardrobe2"},
         waist="Hachirin-no-Obi",
         }
 
@@ -319,8 +319,8 @@ function init_gear_sets()
         neck="Baetyl Pendant",
         ear1="Loquacious Earring",
         ear2="Etiolation Earring",
-        ring1="Haoma's Ring",
-        ring2="Haoma's Ring",
+        ring1={name="Haoma's Ring", bag="wardrobe1"},
+        ring2={name="Haoma's Ring", bag="wardrobe2"},
         back=gear.WHM_FC_Cape,
         waist="Witful Belt",
         }
@@ -335,13 +335,13 @@ function init_gear_sets()
         neck="Malison Medallion", --10
         ear1="Beatific Earring",
         --ear2="Healing Earring",
-        ring1="Haoma's Ring", --15
-        ring2="Haoma's Ring", --15
+        ring1={name="Haoma's Ring", bag="wardrobe1"},
+        ring2={name="Haoma's Ring", bag="wardrobe2"},
         back=gear.WHM_FC_Cape, --25
         waist="Bishop's Sash",
         })
 
-    sets.midcast.Erase = set_combine(sets.midcast.StatusRemoval, {})
+    sets.midcast.Erase = set_combine(sets.midcast.StatusRemoval, {neck="Cleric's Torque"})
 
     -- 110 total Enhancing Magic Skill; caps even without Light Arts
     sets.midcast['Enhancing Magic'] = {
@@ -355,8 +355,8 @@ function init_gear_sets()
         neck="Incanter's Torque",
         --ear1="Augment. Earring",
         ear2="Andoaa Earring",
-        ring1="Stikini Ring",
-        ring2="Stikini Ring",
+        ring1={name="Stikini Ring", bag="wardrobe1"},
+        ring2={name="Stikini Ring", bag="wardrobe2"},
         back="Mending Cape",
         waist="Olympus Sash",
         }
@@ -438,8 +438,8 @@ function init_gear_sets()
         neck="Incanter's Torque",
         ear1="Digni. Earring",
         ear2="Regal Earring",
-        ring1="Stikini Ring",
-        ring2="Stikini Ring",
+        ring1={name="Stikini Ring", bag="wardrobe1"},
+        ring2={name="Stikini Ring", bag="wardrobe2"},
         back=gear.WHM_Cure_Cape,
         waist="Refoccilation Stone",
         }
@@ -469,8 +469,8 @@ function init_gear_sets()
         neck="Erra Pendant",
         ear1="Digni. Earring",
         ear2="Regal Earring",
-        ring1="Stikini Ring",
-        ring2="Stikini Ring",
+        ring1={name="Stikini Ring", bag="wardrobe1"},
+        ring2={name="Stikini Ring", bag="wardrobe2"},
         back=gear.WHM_FC_Cape,
         waist="Yamabuki-no-Obi",
         }
@@ -488,8 +488,8 @@ function init_gear_sets()
         neck="Erra Pendant",
         ear1="Digni. Earring",
         ear2="Regal Earring",
-        ring1="Stikini Ring",
-        ring2="Stikini Ring",
+        ring1={name="Stikini Ring", bag="wardrobe1"},
+        ring2={name="Stikini Ring", bag="wardrobe2"},
         back=gear.WHM_Cure_Cape,
         waist="Luminary Sash",
         }
@@ -600,7 +600,7 @@ function init_gear_sets()
     sets.buff['Divine Caress'] = {hands="Ebers Mitts +1", back="Mending Cape"}
     sets.buff['Devotion'] = {head="Piety Cap +1"}
 
-    sets.buff.Doom = {ring1="Saida Ring", ring2="Saida Ring", waist="Gishdubar Sash"}
+    sets.buff.Doom = {ring1={name="Saida Ring", bag="wardrobe1"}, ring2={name="Saida Ring", bag="wardrobe2"},}
 
     sets.Obi = {waist="Hachirin-no-Obi"}
     sets.CP = {back="Mecisto. Mantle"}
@@ -784,21 +784,30 @@ function job_update(cmdParams, eventArgs)
 end
 
 
--- Set eventArgs.handled to true if we don't want the automatic display to be run.
+-- Function to display the current relevant user state when doing an update.
+-- Return true if display was handled, and you don't want the default info shown.
 function display_current_job_state(eventArgs)
-    local msg = ''
+    local c_msg = state.CastingMode.value
 
-    msg = '[ Casting Mode: ' .. state.CastingMode.value .. ' ]'
+    local r_msg = state.RegenMode.value
 
+    local d_msg = 'None'
     if state.DefenseMode.value ~= 'None' then
-        msg = msg .. '[ Defense: ' .. state.DefenseMode.value .. state[state.DefenseMode.value .. 'DefenseMode'].value .. ' ]'
+        d_msg = state.DefenseMode.value .. state[state.DefenseMode.value .. 'DefenseMode'].value
     end
 
+    local i_msg = state.IdleMode.value
+
+    local msg = ''
     if state.Kiting.value then
-        msg = msg .. '[ Kiting Mode: ON ]'
+        msg = msg .. ' Kiting: On |'
     end
 
-    add_to_chat(060, msg)
+    add_to_chat(060, '| Magic: ' ..string.char(31,001)..c_msg.. string.char(31,002)..  ' |'
+        ..string.char(31,060).. ' Regen: ' ..string.char(31,001)..r_msg.. string.char(31,002)..  ' |'
+        ..string.char(31,004).. ' Defense: ' ..string.char(31,001)..d_msg.. string.char(31,002)..  ' |'
+        ..string.char(31,008).. ' Idle: ' ..string.char(31,001)..i_msg.. string.char(31,002)..  ' |'
+        ..string.char(31,002)..msg)
 
     eventArgs.handled = true
 end

@@ -204,8 +204,8 @@ function init_gear_sets()
         neck="Incanter's Torque",
         ear1="Gifted Earring",
         ear2="Calamitous Earring",
-        ring1="Stikini Ring +1",
-        ring2="Stikini Ring +1",
+        ring1={name="Stikini Ring +1", bag="wardrobe3"},
+        ring2={name="Stikini Ring +1", bag="wardrobe4"},
         back="Lifestream Cape",
         waist="Austerity Belt +1",
         }
@@ -232,8 +232,8 @@ function init_gear_sets()
 
     sets.midcast.Curaga = set_combine(sets.midcast.Cure, {
         neck="Nuna Gorget +1",
-        ring1="Stikini Ring +1",
-        ring2="Stikini Ring +1",
+        ring1={name="Stikini Ring +1", bag="wardrobe3"},
+        ring2={name="Stikini Ring +1", bag="wardrobe4"},
         })
 
     sets.midcast.Cursna = set_combine(sets.midcast.Cure, {
@@ -261,8 +261,8 @@ function init_gear_sets()
         neck="Incanter's Torque",
         ear1="Augment. Earring",
         ear2="Andoaa Earring",
-        ring1="Stikini Ring +1",
-        ring2="Stikini Ring +1",
+        ring1={name="Stikini Ring +1", bag="wardrobe3"},
+        ring2={name="Stikini Ring +1", bag="wardrobe4"},
         back="Fi Follet Cape +1",
         waist="Olympus Sash",
         }
@@ -318,8 +318,8 @@ function init_gear_sets()
         neck="Erra Pendant",
         ear1="Barkaro. Earring",
         ear2="Regal Earring",
-        ring1="Stikini Ring +1",
-        ring2="Stikini Ring +1",
+        ring1={name="Stikini Ring +1", bag="wardrobe3"},
+        ring2={name="Stikini Ring +1", bag="wardrobe4"},
         back="Aurist's Cape +1",
         waist="Luminary Sash",
         } -- MND/Magic accuracy
@@ -336,13 +336,13 @@ function init_gear_sets()
         sub="Ammurapi Shield",
         head="Merlinic Hood",
         body="Amalric Doublet +1",
-        hands="Ea Cuffs",
+        hands="Jhakri Cuffs +2",
         legs="Azimuth Tights +1",
         feet="Merlinic Crackows",
         neck="Erra Pendant",
         ear1="Barkaro. Earring",
         ear2="Regal Earring",
-        ring1="Stikini Ring +1",
+        ring1={name="Stikini Ring +1", bag="wardrobe3"},
         ring2="Evanescence Ring",
         back="Perimede Cape",
         waist="Luminary Sash",
@@ -375,8 +375,8 @@ function init_gear_sets()
         neck="Baetyl Pendant",
         ear1="Barkaro. Earring",
         ear2="Regal Earring",
-        ring1="Shiva Ring +1",
-        ring2="Shiva Ring +1",
+        ring1={name="Shiva Ring +1", bag="wardrobe3"},
+        ring2={name="Shiva Ring +1", bag="wardrobe4"},
         back="Toro Cape",
         waist="Refoccilation Stone",
         }
@@ -394,8 +394,8 @@ function init_gear_sets()
     sets.midcast.GeoElem = set_combine(sets.midcast['Elemental Magic'], {
         main="Solstice",
         sub="Ammurapi Shield",
-        ring1="Fenrir Ring +1",
-        ring2="Fenrir Ring +1",
+        ring1={name="Fenrir Ring +1", bag="wardrobe3"},
+        ring2={name="Fenrir Ring +1", bag="wardrobe4"},
         })
 
     sets.midcast['Elemental Magic'].Seidr = set_combine(sets.midcast['Elemental Magic'], {
@@ -411,8 +411,8 @@ function init_gear_sets()
         sub="Ammurapi Shield",
         body="Seidr Cotehardie",
         neck="Erra Pendant",
-        ring1="Fenrir Ring +1",
-        ring2="Fenrir Ring +1",
+        ring1={name="Fenrir Ring +1", bag="wardrobe3"},
+        ring2={name="Fenrir Ring +1", bag="wardrobe4"},
         })
 
     sets.midcast.Impact = set_combine(sets.midcast['Elemental Magic'], {
@@ -442,8 +442,8 @@ function init_gear_sets()
         neck="Bathy Choker +1",
         ear1="Genmei Earring",
         ear2="Lugalbanda Earring",
-        ring1="Stikini Ring +1",
-        ring2="Stikini Ring +1",
+        ring1={name="Stikini Ring +1", bag="wardrobe3"},
+        ring2={name="Stikini Ring +1", bag="wardrobe4"},
         back="Moonlight Cape",
         waist="Austerity Belt +1",
         }
@@ -511,7 +511,7 @@ function init_gear_sets()
         neck="Incanter's Torque",
         ear1="Barkaro. Earring",
         ear2="Regal Earring",
-        ring1="Fenrir Ring +1",
+        ring1={name="Fenrir Ring +1", bag="wardrobe3"},
         ring2="Weather. Ring +1",
         })
 
@@ -547,7 +547,7 @@ function init_gear_sets()
         ear1="Cessance Earring",
         ear2="Telos Earring",
         ring1="Hetairoi Ring",
-        ring2="Chirich Ring +1",
+        ring2={name="Chirich Ring +1", bag="wardrobe4"},
         back="Relucent Cape",
         waist="Windbuffet Belt +1",
         }
@@ -560,6 +560,7 @@ function init_gear_sets()
     sets.magic_burst = {
         body=gear.Merl_MB_body, --10
         hands="Amalric Gages +1", --(6)
+        legs="Merlinic Shalwar", --2
         feet="Merlinic Crackows", --11
         neck="Mizu. Kubikazari", --10
         ring1="Mujin Band", --(5)
@@ -568,8 +569,8 @@ function init_gear_sets()
 
     sets.buff.Doom = {
         neck="Nicander's Necklace", --20
-        ring1="Eshmun's Ring", --20
-        ring2="Eshmun's Ring", --20
+        ring1={name="Eshmun's Ring", bag="wardrobe3"}, --20
+        ring2={name="Eshmun's Ring", bag="wardrobe4"}, --20
         waist="Gishdubar Sash", --10
         }
 
@@ -717,7 +718,28 @@ end
 
 -- Function to display the current relevant user state when doing an update.
 function display_current_job_state(eventArgs)
-    display_current_caster_state()
+    local c_msg = state.CastingMode.value
+
+    local d_msg = 'None'
+    if state.DefenseMode.value ~= 'None' then
+        d_msg = state.DefenseMode.value .. state[state.DefenseMode.value .. 'DefenseMode'].value
+    end
+
+    local i_msg = state.IdleMode.value
+
+    local msg = ''
+    if state.MagicBurst.value then
+        msg = ' Burst: On |'
+    end
+    if state.Kiting.value then
+        msg = msg .. ' Kiting: On |'
+    end
+
+    add_to_chat(060, '| Magic: ' ..string.char(31,001)..c_msg.. string.char(31,002)..  ' |'
+        ..string.char(31,004).. ' Defense: ' ..string.char(31,001)..d_msg.. string.char(31,002)..  ' |'
+        ..string.char(31,008).. ' Idle: ' ..string.char(31,001)..i_msg.. string.char(31,002)..  ' |'
+        ..string.char(31,002)..msg)
+
     eventArgs.handled = true
 end
 

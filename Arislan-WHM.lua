@@ -47,9 +47,9 @@
 --              Addendum Commands:
 --              Shorthand versions for each strategem type that uses the version appropriate for
 --              the current Arts.
---                                          Light Arts					Dark Arts
+--                                          Light Arts                    Dark Arts
 --                                          ----------                  ---------
---		        gs c scholar light          Light Arts/Addendum
+--                gs c scholar light          Light Arts/Addendum
 --              gs c scholar dark                                       Dark Arts/Addendum
 --              gs c scholar cost           Penury                      Parsimony
 --              gs c scholar speed          Celerity                    Alacrity
@@ -239,7 +239,7 @@ function init_gear_sets()
         body="Ayanmo Corazza +2",
         hands="Aya. Manopolas +2",
         legs="Aya. Cosciales +2",
-		feet="Battlecast Gaiters",
+        feet="Battlecast Gaiters",
         neck="Fotia Gorget",
         ear1="Moonshade Earring",
         ear2="Ishvara Earring",
@@ -318,8 +318,8 @@ function init_gear_sets()
     sets.midcast.CuragaNormal = set_combine(sets.midcast.CureNormal, {
         body="Theo. Briault +3", --0(+6)/(-6)
         neck="Nuna Gorget +1",
-        ring1="Stikini Ring +1",
-        ring2="Stikini Ring +1",
+        ring1={name="Stikini Ring +1", bag="wardrobe3"},
+        ring2={name="Stikini Ring +1", bag="wardrobe4"},
         waist="Luminary Sash",
         })
 
@@ -330,8 +330,8 @@ function init_gear_sets()
         hands="Kaykaus Cuffs +1", --11/(-6)
         neck="Nuna Gorget +1",
         back="Twilight Cape",
-        ring1="Stikini Ring +1",
-        ring2="Stikini Ring +1",
+        ring1={name="Stikini Ring +1", bag="wardrobe3"},
+        ring2={name="Stikini Ring +1", bag="wardrobe4"},
         waist="Hachirin-no-Obi",
         }
 
@@ -385,8 +385,8 @@ function init_gear_sets()
         neck="Incanter's Torque",
         ear1="Augment. Earring",
         ear2="Andoaa Earring",
-        ring1="Stikini Ring +1",
-        ring2="Stikini Ring +1",
+        ring1={name="Stikini Ring +1", bag="wardrobe3"},
+        ring2={name="Stikini Ring +1", bag="wardrobe4"},
         back="Fi Follet Cape +1",
         waist="Olympus Sash",
         }
@@ -442,7 +442,7 @@ function init_gear_sets()
         head="Ebers Cap +1",
         body="Ebers Bliaud +1",
         hands="Ebers Mitts +1",
-        legs="Piety Pantaln. +1",
+        legs="Piety Pantaln. +3",
         feet="Ebers Duckbills +1",
         })
 
@@ -454,7 +454,7 @@ function init_gear_sets()
     sets.midcast.Protectra = sets.midcast.Protect
     sets.midcast.Shell = sets.midcast.Protect
     sets.midcast.Shellra = sets.midcast.Protect
-    sets.midcast.ShellraV = set_combine(sets.midcast.Protect, {legs="Piety Pantaln. +1"})
+    sets.midcast.ShellraV = set_combine(sets.midcast.Protect, {legs="Piety Pantaln. +3"})
 
     sets.midcast['Divine Magic'] = {
         main=gear.Grioavolr_MB,
@@ -468,7 +468,7 @@ function init_gear_sets()
         ear1="Hermetic Earring",
         ear2="Regal Earring",
         ring1="Kishar Ring",
-        ring2="Stikini Ring +1",
+        ring2={name="Stikini Ring +1", bag="wardrobe4"},
         back=gear.WHM_Cure_Cape,
         waist="Refoccilation Stone",
         }
@@ -500,8 +500,8 @@ function init_gear_sets()
         neck="Erra Pendant",
         ear1="Hermetic Earring",
         ear2="Regal Earring",
-        ring1="Stikini Ring +1",
-        ring2="Stikini Ring +1",
+        ring1={name="Stikini Ring +1", bag="wardrobe3"},
+        ring2={name="Stikini Ring +1", bag="wardrobe4"},
         back=gear.WHM_Cure_Cape,
         waist="Yamabuki-no-Obi",
         }
@@ -509,7 +509,7 @@ function init_gear_sets()
     -- Custom spell classes
     sets.midcast.MndEnfeebles = {
         main=gear.Grioavolr_MND,
-        sub="Enki Strap",
+        sub="Eletta Grip",
         ammo="Pemphredo Tathlum",
         head="Theophany Cap +3",
         body="Theo. Briault +3",
@@ -520,13 +520,14 @@ function init_gear_sets()
         ear1="Digni. Earring",
         ear2="Regal Earring",
         ring1="Kishar Ring",
-        ring2="Stikini Ring +1",
+        ring2={name="Stikini Ring +1", bag="wardrobe4"},
         back=gear.WHM_Cure_Cape,
         waist="Luminary Sash",
         }
 
     sets.midcast.IntEnfeebles = set_combine(sets.midcast.MndEnfeebles, {
         main=gear.Grioavolr_MB,
+        sub="Eletta Grip",
         back="Aurist's Cape +1",
         waist="Yamabuki-no-Obi",
         })
@@ -567,8 +568,8 @@ function init_gear_sets()
         neck="Bathy Choker +1",
         ear1="Genmei Earring",
         ear2="Infused Earring",
-        ring1="Stikini Ring +1",
-        ring2="Stikini Ring +1",
+        ring1={name="Stikini Ring +1", bag="wardrobe3"},
+        ring2={name="Stikini Ring +1", bag="wardrobe4"},
         back="Moonlight Cape",
         waist="Austerity Belt +1",
         }
@@ -607,7 +608,7 @@ function init_gear_sets()
         head="Kaykaus Mitra +1",
         body="Kaykaus Bliaut +1",
         hands="Kaykaus Cuffs +1",
-        legs="Th. Pant. +3",
+        legs="Piety Pantaln. +3",
         neck="Debilis Medallion",
         ear1="Nourish. Earring +1",
         ear2="Glorious Earring",
@@ -643,7 +644,7 @@ function init_gear_sets()
         ear1="Suppanomimi",
         ear2="Brutal Earring",
         ring1="Hetairoi Ring",
-        ring2="Chirich Ring +1",
+        ring2={name="Chirich Ring +1", bag="wardrobe4"},
         back="Relucent Cape",
         waist="Shetal Stone",
         }
@@ -654,8 +655,8 @@ function init_gear_sets()
 
     sets.buff.Doom = {
         neck="Nicander's Necklace", --20
-        ring1="Eshmun's Ring", --20
-        ring2="Eshmun's Ring", --20
+        ring1={name="Eshmun's Ring", bag="wardrobe3"}, --20
+        ring2={name="Eshmun's Ring", bag="wardrobe4"}, --20
         waist="Gishdubar Sash", --10
         }
 
@@ -821,8 +822,30 @@ function customize_idle_set(idleSet)
 end
 
 -- Function to display the current relevant user state when doing an update.
+-- Return true if display was handled, and you don't want the default info shown.
 function display_current_job_state(eventArgs)
-    display_current_caster_state()
+    local c_msg = state.CastingMode.value
+
+    local r_msg = state.RegenMode.value
+
+    local d_msg = 'None'
+    if state.DefenseMode.value ~= 'None' then
+        d_msg = state.DefenseMode.value .. state[state.DefenseMode.value .. 'DefenseMode'].value
+    end
+
+    local i_msg = state.IdleMode.value
+
+    local msg = ''
+    if state.Kiting.value then
+        msg = msg .. ' Kiting: On |'
+    end
+
+    add_to_chat(060, '| Magic: ' ..string.char(31,001)..c_msg.. string.char(31,002)..  ' |'
+        ..string.char(31,060).. ' Regen: ' ..string.char(31,001)..r_msg.. string.char(31,002)..  ' |'
+        ..string.char(31,004).. ' Defense: ' ..string.char(31,001)..d_msg.. string.char(31,002)..  ' |'
+        ..string.char(31,008).. ' Idle: ' ..string.char(31,001)..i_msg.. string.char(31,002)..  ' |'
+        ..string.char(31,002)..msg)
+
     eventArgs.handled = true
 end
 

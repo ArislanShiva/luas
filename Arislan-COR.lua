@@ -95,7 +95,7 @@ function job_setup()
     state.IgnoreTargetting = M(false, 'Ignore Targetting')
 
     state.DualWield = M(false, 'Dual Wield III')
-    state.QDMode = M{['description']='Quick Draw Mode', 'STP', 'Magic Enhance', 'Magic Attack'}
+    state.QDMode = M{['description']='Quick Draw Mode', 'STP', 'Enhance', 'Potency'}
 
     state.Currentqd = M{['description']='Current Quick Draw', 'Main', 'Alt'}
 
@@ -136,7 +136,9 @@ function user_setup()
     include('Global-Binds.lua') -- OK to remove this line
     include('Global-GEO-Binds.lua') -- OK to remove this line
 
-    send_command('lua l gearinfo')
+    if player.sub_job == 'NIN' or player.sub_job == 'DNC' then
+        send_command('lua l gearinfo')
+    end
 
     send_command('bind ^` input /ja "Double-up" <me>')
     send_command('bind ^c input /ja "Crooked Cards" <me>')
@@ -232,7 +234,9 @@ function user_unload()
     send_command('unbind #9')
     send_command('unbind #0')
 
-    send_command('lua u gearinfo')
+    if player.sub_job == 'NIN' or player.sub_job == 'DNC' then
+        send_command('lua u gearinfo')
+    end
 
 end
 
@@ -460,7 +464,7 @@ function init_gear_sets()
 
     sets.precast.WS['Aeolian Edge'] = set_combine(sets.precast.WS['Wildfire'], {
         ear1="Moonshade Earring",
-        ring1="Shiva Ring +1",
+        ring1={name="Shiva Ring +1", bag="wardrobe3"},
         })
 
     ------------------------------------------------------------------------------------------------
@@ -512,7 +516,7 @@ function init_gear_sets()
         neck="Baetyl Pendant",
         ear1="Crematio Earring",
         ear2="Friomisi Earring",
-        ring1="Fenrir Ring +1",
+        ring1={name="Fenrir Ring +1", bag="wardrobe3"},
         ring2="Dingir Ring",
         back="Gunslinger's Cape",
         waist="Eschan Stone",
@@ -528,8 +532,8 @@ function init_gear_sets()
         neck="Iskur Gorget",
         ear1="Dedition Earring",
         ear2="Telos Earring",
-        ring1="Chirich Ring +1",
-        ring2="Chirich Ring +1",
+        ring1={name="Chirich Ring +1", bag="wardrobe3"},
+        ring2={name="Chirich Ring +1", bag="wardrobe4"},
         back=gear.COR_RA_Cape,
         waist="Kentarch Belt +1",
         }
@@ -597,8 +601,8 @@ function init_gear_sets()
     sets.midcast.RA.STP = set_combine(sets.midcast.RA, {
         feet=gear.Adhemar_D_feet,
         ear1="Dedition Earring",
-        ring1="Chirich Ring +1",
-        ring2="Chirich Ring +1",
+        ring1={name="Chirich Ring +1", bag="wardrobe3"},
+        ring2={name="Chirich Ring +1", bag="wardrobe4"},
         })
 
     sets.TripleShot = {
@@ -632,8 +636,8 @@ function init_gear_sets()
         neck="Bathy Choker +1",
         ear1="Genmei Earring",
         ear2="Infused Earring",
-        ring1="Chirich Ring +1",
-        ring2="Chirich Ring +1",
+        ring1={name="Chirich Ring +1", bag="wardrobe3"},
+        ring2={name="Chirich Ring +1", bag="wardrobe4"},
         back="Moonlight Cape",
         waist="Flume Belt +1",
         }
@@ -655,8 +659,8 @@ function init_gear_sets()
         head=gear.Herc_Idle_head,
         --body="Mekosu. Harness",
         legs="Rawhide Trousers",
-        ring1="Stikini Ring +1",
-        ring2="Stikini Ring +1",
+        ring1={name="Stikini Ring +1", bag="wardrobe3"},
+        ring2={name="Stikini Ring +1", bag="wardrobe4"},
         })
 
     sets.idle.Town = set_combine(sets.idle, {
@@ -707,7 +711,7 @@ function init_gear_sets()
 
     sets.engaged.LowAcc = set_combine(sets.engaged, {
         head="Dampening Tam",
-        ring1="Chirich Ring +1",
+        ring1={name="Chirich Ring +1", bag="wardrobe3"},
         neck="Combatant's Torque",
         })
 
@@ -728,8 +732,8 @@ function init_gear_sets()
 
     sets.engaged.STP = set_combine(sets.engaged, {
         feet="Carmine Greaves +1",
-        ring1="Chirich Ring +1",
-        ring2="Chirich Ring +1",
+        ring1={name="Chirich Ring +1", bag="wardrobe3"},
+        ring2={name="Chirich Ring +1", bag="wardrobe4"},
         })
 
     -- * DNC Subjob DW Trait: +15%
@@ -753,7 +757,7 @@ function init_gear_sets()
 
     sets.engaged.DW.LowAcc = set_combine(sets.engaged.DW, {
         head="Dampening Tam",
-        ring1="Chirich Ring +1",
+        ring1={name="Chirich Ring +1", bag="wardrobe3"},
         neck="Combatant's Torque",
         })
 
@@ -774,8 +778,8 @@ function init_gear_sets()
         })
 
     sets.engaged.DW.STP = set_combine(sets.engaged.DW, {
-        ring1="Chirich Ring +1",
-        ring2="Chirich Ring +1",
+        ring1={name="Chirich Ring +1", bag="wardrobe3"},
+        ring2={name="Chirich Ring +1", bag="wardrobe4"},
         })
 
     -- 15% Magic Haste (67% DW to cap)
@@ -796,7 +800,7 @@ function init_gear_sets()
 
     sets.engaged.DW.LowAcc.LowHaste = set_combine(sets.engaged.DW.LowHaste, {
         head="Dampening Tam",
-        ring1="Chirich Ring +1",
+        ring1={name="Chirich Ring +1", bag="wardrobe3"},
         neck="Combatant's Torque",
         })
 
@@ -817,8 +821,8 @@ function init_gear_sets()
         })
 
     sets.engaged.DW.STP.LowHaste = set_combine(sets.engaged.DW.LowHaste, {
-        ring1="Chirich Ring +1",
-        ring2="Chirich Ring +1",
+        ring1={name="Chirich Ring +1", bag="wardrobe3"},
+        ring2={name="Chirich Ring +1", bag="wardrobe4"},
         })
 
     -- 30% Magic Haste (56% DW to cap)
@@ -839,7 +843,7 @@ function init_gear_sets()
 
     sets.engaged.DW.LowAcc.MidHaste = set_combine(sets.engaged.DW.MidHaste, {
         head="Dampening Tam",
-        ring1="Chirich Ring +1",
+        ring1={name="Chirich Ring +1", bag="wardrobe3"},
         neck="Combatant's Torque",
         })
 
@@ -862,8 +866,8 @@ function init_gear_sets()
         })
 
     sets.engaged.DW.STP.MidHaste = set_combine(sets.engaged.DW.MidHaste, {
-        ring1="Chirich Ring +1",
-        ring2="Chirich Ring +1",
+        ring1={name="Chirich Ring +1", bag="wardrobe3"},
+        ring2={name="Chirich Ring +1", bag="wardrobe4"},
         })
 
     -- 35% Magic Haste (51% DW to cap)
@@ -884,7 +888,7 @@ function init_gear_sets()
 
     sets.engaged.DW.LowAcc.HighHaste = set_combine(sets.engaged.DW.HighHaste, {
         head="Dampening Tam",
-        ring1="Chirich Ring +1",
+        ring1={name="Chirich Ring +1", bag="wardrobe3"},
         neck="Combatant's Torque",
         })
 
@@ -907,8 +911,8 @@ function init_gear_sets()
         })
 
     sets.engaged.DW.STP.HighHaste = set_combine(sets.engaged.DW.HighHaste, {
-        ring1="Chirich Ring +1",
-        ring2="Chirich Ring +1",
+        ring1={name="Chirich Ring +1", bag="wardrobe3"},
+        ring2={name="Chirich Ring +1", bag="wardrobe4"},
         })
 
     -- 45% Magic Haste (36% DW to cap)
@@ -929,7 +933,7 @@ function init_gear_sets()
 
     sets.engaged.DW.LowAcc.MaxHaste = set_combine(sets.engaged.DW.MaxHaste, {
         head="Dampening Tam",
-        ring1="Chirich Ring +1",
+        ring1={name="Chirich Ring +1", bag="wardrobe3"},
         waist="Kentarch Belt +1",
         })
 
@@ -952,8 +956,8 @@ function init_gear_sets()
 
     sets.engaged.DW.STP.MaxHaste = set_combine(sets.engaged.DW.MaxHaste, {
         feet="Carmine Greaves +1",
-        ring1="Chirich Ring +1",
-        ring2="Chirich Ring +1",
+        ring1={name="Chirich Ring +1", bag="wardrobe3"},
+        ring2={name="Chirich Ring +1", bag="wardrobe4"},
         })
 
     sets.engaged.DW.MaxHastePlus = set_combine(sets.engaged.DW.MaxHaste, {back=gear.COR_DW_Cape})
@@ -1022,8 +1026,8 @@ function init_gear_sets()
 
     sets.buff.Doom = {
         neck="Nicander's Necklace", --20
-        ring1="Eshmun's Ring", --20
-        ring2="Eshmun's Ring", --20
+        ring1={name="Eshmun's Ring", bag="wardrobe3"}, --20
+        ring2={name="Eshmun's Ring", bag="wardrobe4"}, --20
         waist="Gishdubar Sash", --10
         }
 
@@ -1032,11 +1036,11 @@ function init_gear_sets()
     --sets.Reive = {neck="Ygnas's Resolve +1"}
 
     sets.LeadenMelee = {main="Rostam", sub="Blurred Knife +1", ranged="Death Penalty"}
-    sets.LeadenAccMelee = {main="Rostam", sub="Eletta Knife", ranged="Death Penalty"}
-    sets.LeadenRanged = {main="Rostam", sub="Hep. Rapier +1", ranged="Death Penalty"}
-    sets.LastStandMelee = {main="Fettering Blade", sub="Blurred Knife +1", ranged="Fomalhaut"}
+    sets.LeadenAccMelee = {main="Rostam", sub="Kaja Knife", ranged="Death Penalty"}
+    sets.LeadenRanged = {main="Rostam", sub="Kaja Knife", ranged="Death Penalty"}
+    sets.LastStandMelee = {main="Rostam", sub="Blurred Knife +1", ranged="Fomalhaut"}
     sets.LastStandRanged = {main="Rostam", sub="Nusku Shield", ranged="Fomalhaut"}
-    sets.SavageMelee = {main="Hep. Sapara +1", sub="Blurred Knife +1", ranged="Ataktos"}
+    sets.SavageMelee = {main="Kaja Sword", sub="Blurred Knife +1", ranged="Ataktos"}
 
 end
 
@@ -1053,13 +1057,6 @@ function job_precast(spell, action, spellMap, eventArgs)
     -- Check that proper ammo is available if we're using ranged attacks or similar.
     if spell.action_type == 'Ranged Attack' or spell.type == 'WeaponSkill' or spell.type == 'CorsairShot' then
         do_bullet_checks(spell, spellMap, eventArgs)
-    end
-
-    -- In Dynamis zone, ensure WS set is equipped.
-    if spell.type == 'WeaponSkill' and world.area:startswith('Dynamis') then
-        equip(sets[spell.english])
-        send_command('gi ugs false')
-        cast_delay(0.3)
     end
 
     -- Gear
@@ -1119,16 +1116,12 @@ function job_post_precast(spell, action, spellMap, eventArgs)
 end
 
 function job_post_midcast(spell, action, spellMap, eventArgs)
-    if spell.type == 'WeaponSkill' and world.area:startswith('Dynamis') then
-        eventArgs.handled = true
-    end
-    -- Equip obi if weather/day matches for Quick Draw.
     if spell.type == 'CorsairShot' then
         if (spell.element == world.day_element or spell.element == world.weather_element) and
         (spell.english ~= 'Light Shot' and spell.english ~= 'Dark Shot') then
             equip(sets.Obi)
         end
-        if state.QDMode.value == 'Magic Enhance' then
+        if state.QDMode.value == 'Enhance' then
             equip(sets.midcast.CorsairShot.Enhance)
         elseif state.QDMode.value == 'STP' then
             equip(sets.midcast.CorsairShot.STP)
@@ -1148,11 +1141,6 @@ end
 -- Set eventArgs.handled to true if we don't want any automatic gear equipping to be done.
 function job_aftercast(spell, action, spellMap, eventArgs)
     equip(sets[state.WeaponSet.current])
-
-    if spell.type == 'WeaponSkill' and world.area:startswith('Dynamis') then
-        eventArgs.handled = true
-        send_command('wait 3;gi ugs true')
-    end
 
     if (spell.type == 'CorsairRoll' or spell.english == "Double-Up") and not spell.interrupted then
         display_roll_info(spell)
@@ -1257,45 +1245,43 @@ end
 
 -- Set eventArgs.handled to true if we don't want the automatic display to be run.
 function display_current_job_state(eventArgs)
-    local msg = ''
+    local cf_msg = ''
+    if state.CombatForm.has_value then
+        cf_msg = ' (' ..state.CombatForm.value.. ')'
+    end
 
-    msg = msg .. '[ Offense/Ranged: '..state.OffenseMode.current
-
+    local m_msg = state.OffenseMode.value
     if state.HybridMode.value ~= 'Normal' then
-        msg = msg .. '/' .. state.HybridMode.value
+        m_msg = m_msg .. '/' ..state.HybridMode.value
     end
 
-    msg = msg .. '/' ..state.RangedMode.current
+    local ws_msg = state.WeaponskillMode.value
 
-    msg = msg .. ' (' ..state.WeaponSet.current .. ') ]'
-
-    if state.WeaponskillMode.value ~= 'Normal' then
-        msg = msg .. '[ WS: '..state.WeaponskillMode.current .. ' ]'
-    end
-
-    if state.DefenseMode.value ~= 'None' then
-        msg = msg .. '[ Defense: ' .. state.DefenseMode.value .. state[state.DefenseMode.value .. 'DefenseMode'].value .. ' ]'
-    end
-
-    if state.Kiting.value then
-        msg = msg .. '[ Kiting Mode: ON ]'
-    end
-
-    msg = msg .. '[ *'..state.Mainqd.current
-
+    local qd_msg = '(' ..string.sub(state.QDMode.value,1,1).. ')'
+    
+    local e_msg = state.Mainqd.current
     if state.UseAltqd.value == true then
-        msg = msg .. '/'..state.Altqd.current
+        e_msg = e_msg .. '/'..state.Altqd.current
     end
 
-    msg = msg .. ' ('
-
-    if state.QDMode.value then
-        msg = msg .. state.QDMode.current .. ') '
+    local d_msg = 'None'
+    if state.DefenseMode.value ~= 'None' then
+        d_msg = state.DefenseMode.value .. state[state.DefenseMode.value .. 'DefenseMode'].value
     end
 
-    msg = msg .. ']'
+    local i_msg = state.IdleMode.value
 
-    add_to_chat(060, msg)
+    local msg = ''
+    if state.Kiting.value then
+        msg = msg .. ' Kiting: On |'
+    end
+
+    add_to_chat(002, '| ' ..string.char(31,210).. 'Melee' ..cf_msg.. ': ' ..string.char(31,001)..m_msg.. string.char(31,002)..  ' |'
+        ..string.char(31,207).. ' WS: ' ..string.char(31,001)..ws_msg.. string.char(31,002)..  ' |'
+        ..string.char(31,060).. ' QD' ..qd_msg.. ': '  ..string.char(31,001)..e_msg.. string.char(31,002)..  ' |'
+        ..string.char(31,004).. ' Defense: ' ..string.char(31,001)..d_msg.. string.char(31,002)..  ' |'
+        ..string.char(31,008).. ' Idle: ' ..string.char(31,001)..i_msg.. string.char(31,002)..  ' |'
+        ..string.char(31,002)..msg)
 
     eventArgs.handled = true
 end
@@ -1378,13 +1364,13 @@ function gearinfo(cmdParams, eventArgs)
             end
         elseif type(cmdParams[2]) == 'string' then
             if cmdParams[2] == 'false' then
-        	    DW_needed = 0
+                DW_needed = 0
                 DW = false
-      	    end
+              end
         end
         if type(tonumber(cmdParams[3])) == 'number' then
-          	if tonumber(cmdParams[3]) ~= Haste then
-              	Haste = tonumber(cmdParams[3])
+              if tonumber(cmdParams[3]) ~= Haste then
+                  Haste = tonumber(cmdParams[3])
             end
         end
         if type(cmdParams[4]) == 'string' then
@@ -1438,10 +1424,14 @@ end
 
 function display_roll_info(spell)
     rollinfo = rolls[spell.english]
-    local rollsize = (state.LuzafRing.value and 'Large') or 'Small'
+    local rollsize = (state.LuzafRing.value and string.char(129,157)) or ''
 
     if rollinfo then
-        add_to_chat(104, '[ Lucky: '..tostring(rollinfo.lucky)..' / Unlucky: '..tostring(rollinfo.unlucky)..' ] '..spell.english..': '..rollinfo.bonus..' ('..rollsize..') ')
+        add_to_chat(001, string.char(129,115).. '  ' ..string.char(31,210)..spell.english..string.char(31,001)..
+            ' : '..rollinfo.bonus.. ' ' ..string.char(129,116).. ' ' ..string.char(129,195)..
+            '  Lucky: ' ..string.char(31,204).. tostring(rollinfo.lucky)..string.char(31,001).. ' /' ..
+            ' Unlucky: ' ..string.char(31,167).. tostring(rollinfo.unlucky)..string.char(31,002)..
+            '  ' ..rollsize)
     end
 end
 
@@ -1519,7 +1509,9 @@ end
 
 windower.register_event('zone change', 
     function()
-        send_command('gi ugs true')
+        if player.sub_job == 'NIN' or player.sub_job == 'DNC' then
+            send_command('gi ugs true')
+        end
     end
 )
 

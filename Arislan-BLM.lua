@@ -160,7 +160,7 @@ function init_gear_sets()
 
     sets.precast.FC.Curaga = sets.precast.FC.Cure
     sets.precast.FC.Impact = set_combine(sets.precast.FC, {head=empty, body="Twilight Cloak"})
-    sets.precast.Storm = set_combine(sets.precast.FC, {ring2="Stikini Ring +1"})
+    sets.precast.Storm = set_combine(sets.precast.FC, {ring2={name="Stikini Ring +1", bag="wardrobe4"},})
 
     sets.precast.FC.DeathMode = {
         ammo="Ghastly Tathlum +1",
@@ -211,7 +211,7 @@ function init_gear_sets()
         neck="Baetyl Pendant",
         ear1="Barkaro. Earring",
         ear2="Moonshade Earring",
-        ring1="Shiva Ring +1",
+        ring1={name="Shiva Ring +1", bag="wardrobe3"},
         ring2="Archon Ring",
         back=gear.BLM_MAB_Cape,
         waist="Yamabuki-no-Obi",
@@ -266,8 +266,8 @@ function init_gear_sets()
 
     sets.midcast.Curaga = set_combine(sets.midcast.Cure, {
         neck="Nuna Gorget +1",
-        ring1="Stikini Ring +1",
-        ring2="Stikini Ring +1",
+        ring1={name="Stikini Ring +1", bag="wardrobe3"},
+        ring2={name="Stikini Ring +1", bag="wardrobe4"},
         waist="Luminary Sash",
         })
 
@@ -296,8 +296,8 @@ function init_gear_sets()
         neck="Incanter's Torque",
         ear1="Augment. Earring",
         ear2="Andoaa Earring",
-        ring1="Stikini Ring +1",
-        ring2="Stikini Ring +1",
+        ring1={name="Stikini Ring +1", bag="wardrobe3"},
+        ring2={name="Stikini Ring +1", bag="wardrobe4"},
         back="Fi Follet Cape +1",
         waist="Olympus Sash",
         }
@@ -348,21 +348,21 @@ function init_gear_sets()
         ammo="Pemphredo Tathlum",
         head="Merlinic Hood",
         body="Vanya Robe",
-        hands="Ea Cuffs",
+        hands="Jhakri Cuffs +2",
         legs="Jhakri Slops +2",
         feet="Skaoi Boots",
         neck="Erra Pendant",
         ear1="Barkaro. Earring",
         ear2="Regal Earring",
-        ring1="Stikini Ring +1",
-        ring2="Stikini Ring +1",
+        ring1={name="Stikini Ring +1", bag="wardrobe3"},
+        ring2={name="Stikini Ring +1", bag="wardrobe4"},
         back=gear.BLM_FC_Cape,
         waist="Rumination Sash",
         } -- MND/Magic accuracy
 
     sets.midcast.IntEnfeebles = set_combine(sets.midcast.MndEnfeebles, {
         main=gear.Grioavolr_MB,
-        sub="Enki Strap",
+        sub="Eletta Grip",
         back=gear.BLM_MAB_Cape,
         }) -- INT/Magic accuracy
 
@@ -374,14 +374,14 @@ function init_gear_sets()
         ammo="Pemphredo Tathlum",
         head="Merlinic Hood",
         body="Jhakri Robe +2",
-        hands="Ea Cuffs",
+        hands="Jhakri Cuffs +2",
         legs="Jhakri Slops +2",
         feet="Merlinic Crackows",
         neck="Erra Pendant",
         ear1="Barkaro. Earring",
         ear2="Regal Earring",
-        ring1="Stikini Ring +1",
-        ring2="Stikini Ring +1",
+        ring1={name="Stikini Ring +1", bag="wardrobe3"},
+        ring2={name="Stikini Ring +1", bag="wardrobe4"},
         back=gear.BLM_MAB_Cape,
         waist="Luminary Sash",
         }
@@ -423,7 +423,7 @@ function init_gear_sets()
         main=gear.Grioavolr_MB,
         sub="Enki Strap",
         head="Amalric Coif +1",
-        ring2="Shiva Ring +1",
+        ring2={name="Shiva Ring +1", bag="wardrobe4"},
         })
 
     sets.midcast.Death.Occult = set_combine(sets.midcast.Death, {
@@ -453,8 +453,8 @@ function init_gear_sets()
         neck="Baetyl Pendant",
         ear1="Barkaro. Earring",
         ear2="Regal Earring",
-        ring1="Shiva Ring +1",
-        ring2="Shiva Ring +1",
+        ring1={name="Shiva Ring +1", bag="wardrobe3"},
+        ring2={name="Shiva Ring +1", bag="wardrobe4"},
         back=gear.BLM_MAB_Cape,
         waist="Refoccilation Stone",
         }
@@ -472,6 +472,7 @@ function init_gear_sets()
     sets.midcast['Elemental Magic'].Resistant = set_combine(sets.midcast['Elemental Magic'], {
         main=gear.Grioavolr_MB,
         sub="Enki Strap",
+        legs="Merlinic Shalwar",
         neck="Sanctity Necklace",
         waist="Yamabuki-no-Obi",
         })
@@ -492,8 +493,8 @@ function init_gear_sets()
         neck="Seraphic Ampulla",
         ear1="Dedition Earring",
         ear2="Telos Earring",
-        ring1="Chirich Ring +1",
-        ring2="Chirich Ring +1",
+        ring1={name="Chirich Ring +1", bag="wardrobe3"},
+        ring2={name="Chirich Ring +1", bag="wardrobe4"},
         waist="Oneiros Rope",
         })
 
@@ -544,8 +545,8 @@ function init_gear_sets()
         neck="Bathy Choker +1",
         ear1="Genmei Earring",
         ear2="Lugalbanda Earring",
-        ring1="Stikini Ring +1",
-        ring2="Stikini Ring +1",
+        ring1={name="Stikini Ring +1", bag="wardrobe3"},
+        ring2={name="Stikini Ring +1", bag="wardrobe4"},
         back="Moonlight Cape",
         waist="Refoccilation Stone",
         }
@@ -615,6 +616,7 @@ function init_gear_sets()
     sets.magic_burst = {
         body=gear.Merl_MB_body, --10
         hands="Amalric Gages +1", --(6)
+        legs="Merlinic Shalwar", --2
         feet="Merlinic Crackows", --11
         neck="Mizu. Kubikazari", --10
         ring1="Mujin Band", --(5)
@@ -642,14 +644,14 @@ function init_gear_sets()
         ear1="Cessance Earring",
         ear2="Telos Earring",
         ring1="Hetairoi Ring",
-        ring2="Chirich Ring +1",
+        ring2={name="Chirich Ring +1", bag="wardrobe4"},
         back="Relucent Cape",
         }
 
     sets.buff.Doom = {
         neck="Nicander's Necklace", --20
-        ring1="Eshmun's Ring", --20
-        ring2="Eshmun's Ring", --20
+        ring1={name="Eshmun's Ring", bag="wardrobe3"}, --20
+        ring2={name="Eshmun's Ring", bag="wardrobe4"}, --20
         waist="Gishdubar Sash", --10
         }
 
@@ -858,8 +860,34 @@ end
 
 
 -- Function to display the current relevant user state when doing an update.
+-- Return true if display was handled, and you don't want the default info shown.
 function display_current_job_state(eventArgs)
-    display_current_caster_state()
+
+    local c_msg = state.CastingMode.value
+
+    local d_msg = 'None'
+    if state.DefenseMode.value ~= 'None' then
+        d_msg = state.DefenseMode.value .. state[state.DefenseMode.value .. 'DefenseMode'].value
+    end
+
+    local i_msg = state.IdleMode.value
+
+    local msg = ''
+    if state.MagicBurst.value then
+        msg = ' Burst: On |'
+    end
+    if state.DeathMode.value then
+        msg = msg .. ' Death: On |'
+    end
+    if state.Kiting.value then
+        msg = msg .. ' Kiting: On |'
+    end
+
+    add_to_chat(060, '| Magic: ' ..string.char(31,001)..c_msg.. string.char(31,002)..  ' |'
+        ..string.char(31,004).. ' Defense: ' ..string.char(31,001)..d_msg.. string.char(31,002)..  ' |'
+        ..string.char(31,008).. ' Idle: ' ..string.char(31,001)..i_msg.. string.char(31,002)..  ' |'
+        ..string.char(31,002)..msg)
+
     eventArgs.handled = true
 end
 

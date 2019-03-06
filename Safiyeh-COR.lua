@@ -480,7 +480,7 @@ function init_gear_sets()
         --ear1="Roundel Earring",
         ear2="Mendi. Earring",
         --ring1="Lebeche Ring",
-        ring2="Haoma's Ring",
+        ring2={name="Haoma's Ring", bag="wardrobe2"},
         waist="Bishop's Sash",
         }
 
@@ -511,7 +511,7 @@ function init_gear_sets()
         neck="Sanctity Necklace",
         ear1="Gwati Earring",
         ear2="Digni. Earring",
-        ring1="Stikini Ring",
+        ring1={name="Stikini Ring", bag="wardrobe1"},
         ring2="Weather. Ring +1",
         --waist="Kwahu Kachina Belt",
         })
@@ -944,7 +944,7 @@ function init_gear_sets()
     ---------------------------------------- Special Sets ------------------------------------------
     ------------------------------------------------------------------------------------------------
 
-    sets.buff.Doom = {ring1="Saida Ring", ring2="Saida Ring"}--, waist="Gishdubar Sash"}
+    sets.buff.Doom = {ring1={name="Saida Ring", bag="wardrobe1"}, ring2={name="Saida Ring", bag="wardrobe2"},}
 
     sets.Obi = {waist="Hachirin-no-Obi"}
     sets.CP = {back="Mecisto. Mantle"}
@@ -1165,45 +1165,43 @@ end
 
 -- Set eventArgs.handled to true if we don't want the automatic display to be run.
 function display_current_job_state(eventArgs)
-    local msg = ''
+    local cf_msg = ''
+    if state.CombatForm.has_value then
+        cf_msg = ' (' ..state.CombatForm.value.. ')'
+    end
 
-    msg = msg .. '[ Offense/Ranged: '..state.OffenseMode.current
-
+    local m_msg = state.OffenseMode.value
     if state.HybridMode.value ~= 'Normal' then
-        msg = msg .. '/' .. state.HybridMode.value
+        m_msg = m_msg .. '/' ..state.HybridMode.value
     end
 
-    msg = msg .. '/' ..state.RangedMode.current
+    local ws_msg = state.WeaponskillMode.value
 
-    msg = msg .. ' (' ..state.WeaponSet.current .. ') ]'
+    local qd_msg = '(' ..string.sub(state.QDMode.value,1,1).. ')'
 
-    if state.WeaponskillMode.value ~= 'Normal' then
-        msg = msg .. '[ WS: '..state.WeaponskillMode.current .. ' ]'
-    end
-
-    if state.DefenseMode.value ~= 'None' then
-        msg = msg .. '[ Defense: ' .. state.DefenseMode.value .. state[state.DefenseMode.value .. 'DefenseMode'].value .. ' ]'
-    end
-
-    if state.Kiting.value then
-        msg = msg .. '[ Kiting Mode: ON ]'
-    end
-
-    msg = msg .. '[ *'..state.Mainqd.current
-
+    local e_msg = state.Mainqd.current
     if state.UseAltqd.value == true then
-        msg = msg .. '/'..state.Altqd.current
+        e_msg = e_msg .. '/'..state.Altqd.current
     end
 
-    msg = msg .. ' ('
-
-    if state.QDMode.value then
-        msg = msg .. state.QDMode.current .. ') '
+    local d_msg = 'None'
+    if state.DefenseMode.value ~= 'None' then
+        d_msg = state.DefenseMode.value .. state[state.DefenseMode.value .. 'DefenseMode'].value
     end
 
-    msg = msg .. ']'
+    local i_msg = state.IdleMode.value
 
-    add_to_chat(060, msg)
+    local msg = ''
+    if state.Kiting.value then
+        msg = msg .. ' Kiting: On |'
+    end
+
+    add_to_chat(002, '| ' ..string.char(31,210).. 'Melee' ..cf_msg.. ': ' ..string.char(31,001)..m_msg.. string.char(31,002)..  ' |'
+        ..string.char(31,207).. ' WS: ' ..string.char(31,001)..ws_msg.. string.char(31,002)..  ' |'
+        ..string.char(31,060).. ' QD' ..qd_msg.. ': '  ..string.char(31,001)..e_msg.. string.char(31,002)..  ' |'
+        ..string.char(31,004).. ' Defense: ' ..string.char(31,001)..d_msg.. string.char(31,002)..  ' |'
+        ..string.char(31,008).. ' Idle: ' ..string.char(31,001)..i_msg.. string.char(31,002)..  ' |'
+        ..string.char(31,002)..msg)
 
     eventArgs.handled = true
 end
@@ -1286,13 +1284,13 @@ function gearinfo(cmdParams, eventArgs)
             end
         elseif type(cmdParams[2]) == 'string' then
             if cmdParams[2] == 'false' then
-        	    DW_needed = 0
+                DW_needed = 0
                 DW = false
-      	    end
+              end
         end
         if type(tonumber(cmdParams[3])) == 'number' then
-          	if tonumber(cmdParams[3]) ~= Haste then
-              	Haste = tonumber(cmdParams[3])
+              if tonumber(cmdParams[3]) ~= Haste then
+                  Haste = tonumber(cmdParams[3])
             end
         end
         if type(cmdParams[4]) == 'string' then
@@ -1346,10 +1344,14 @@ end
 
 function display_roll_info(spell)
     rollinfo = rolls[spell.english]
-    local rollsize = (state.LuzafRing.value and 'Large') or 'Small'
+    local rollsize = (state.LuzafRing.value and string.char(129,157)) or ''
 
     if rollinfo then
-        add_to_chat(104, '[ Lucky: '..tostring(rollinfo.lucky)..' / Unlucky: '..tostring(rollinfo.unlucky)..' ] '..spell.english..': '..rollinfo.bonus..' ('..rollsize..') ')
+        add_to_chat(001, string.char(129,115).. '  ' ..string.char(31,210)..spell.english..string.char(31,001)..
+            ' : '..rollinfo.bonus.. ' ' ..string.char(129,116).. ' ' ..string.char(129,195)..
+            '  Lucky: ' ..string.char(31,204).. tostring(rollinfo.lucky)..string.char(31,001).. ' /' ..
+            ' Unlucky: ' ..string.char(31,167).. tostring(rollinfo.unlucky)..string.char(31,002)..
+            '  ' ..rollsize)
     end
 end
 

@@ -66,6 +66,7 @@ function get_sets()
 
     -- Load and initialize the include file.
     include('Mote-Include.lua')
+    res = require 'resources'
 end
 
 -- Setup vars that are user-independent.
@@ -258,8 +259,8 @@ function init_gear_sets()
         neck="Baetyl Pendant",
         ear1="Crematio Earring",
         ear2="Friomisi Earring",
-        ring1="Fenrir Ring +1",
-        ring2="Fenrir Ring +1",
+        ring1={name="Fenrir Ring +1", bag="wardrobe3"},
+        ring2={name="Fenrir Ring +1", bag="wardrobe4"},
         back="Argocham. Mantle",
         waist="Eschan Stone",
         }
@@ -270,7 +271,7 @@ function init_gear_sets()
     sets.precast.JA['Elemental Sforzo'] = set_combine(sets.Enmity, {body="Futhark Coat +3"})
     sets.precast.JA['Odyllic Subterfuge'] = sets.Enmity
     sets.precast.JA['Swordplay'] = set_combine(sets.Enmity, {hands="Futhark Mitons +1"})
-    sets.precast.JA['One For All'] = sets.Enmity
+    sets.precast.JA['One for All'] = sets.Enmity
 
     sets.precast.JA['Vivacious Pulse'] = set_combine(sets.Enmity, {
         head="Erilaz Galea +1",
@@ -288,14 +289,14 @@ function init_gear_sets()
     sets.precast.JA['Defender'] = sets.Enmity
     sets.precast.JA['Aggressor'] = sets.Enmity
 
-	sets.precast.JA['Last Resort'] = sets.Enmity
+    sets.precast.JA['Last Resort'] = sets.Enmity
     sets.precast.JA['Weapon Bash'] = sets.Enmity
     sets.precast.JA['Souleater'] = sets.Enmity
 
-	sets.precast.JA['Hasso'] = sets.Enmity
-	sets.precast.JA['Meditate'] = sets.Enmity
-	sets.precast.JA['Seigan'] = sets.Enmity
-	sets.precast.JA['Sekkanoki'] = sets.Enmity
+    sets.precast.JA['Hasso'] = sets.Enmity
+    sets.precast.JA['Meditate'] = sets.Enmity
+    sets.precast.JA['Seigan'] = sets.Enmity
+    sets.precast.JA['Sekkanoki'] = sets.Enmity
 
 
     -- Fast cast sets for spells
@@ -425,7 +426,7 @@ function init_gear_sets()
         ear1="Crematio Earring",
         ear2="Friomisi Earring",
         ring1="Archon Ring",
-        ring2="Stikini Ring +1",
+        ring2={name="Stikini Ring +1", bag="wardrobe4"},
         back="Argocham. Mantle",
         waist="Eschan Stone",
         }
@@ -438,7 +439,7 @@ function init_gear_sets()
 
     sets.precast.WS['Flash Nova'] = set_combine(sets.precast.WS['Sanguine Blade'], {
         head=gear.Herc_MAB_head,
-        ring1="Shiva Ring +1",
+        ring1={name="Shiva Ring +1", bag="wardrobe3"},
         ring2="Weather. Ring +1",
         })
 
@@ -510,8 +511,8 @@ function init_gear_sets()
         neck="Incanter's Torque",
         ear1="Augment. Earring",
         ear2="Andoaa Earring",
-        ring1="Stikini Ring +1",
-        ring2="Stikini Ring +1",
+        ring1={name="Stikini Ring +1", bag="wardrobe3"},
+        ring2={name="Stikini Ring +1", bag="wardrobe4"},
         back="Merciful Cape",
         waist="Olympus Sash",
         }
@@ -540,8 +541,8 @@ function init_gear_sets()
         hands=gear.Taeon_Phalanx_hands, --3(10)
         legs=gear.Taeon_Phalanx_legs, --3(10)
         feet=gear.Taeon_Phalanx_feet, --3(10)
-		ear1="Odnowa Earring",
-		ear2="Odnowa Earring +1",
+        ear1="Odnowa Earring",
+        ear2="Odnowa Earring +1",
         ring1="Moonlight Ring",
         back=gear.RUN_FC_Cape, --(10)
         })
@@ -561,8 +562,8 @@ function init_gear_sets()
         ammo="Yamarang",
         legs="Rune. Trousers +3",
         neck="Incanter's Torque",
-        ring1="Stikini Ring +1",
-        ring2="Stikini Ring +1",
+        ring1={name="Stikini Ring +1", bag="wardrobe3"},
+        ring2={name="Stikini Ring +1", bag="wardrobe4"},
         waist="Bishop's Sash",
         }
 
@@ -591,8 +592,8 @@ function init_gear_sets()
         neck="Bathy Choker +1",
         ear1="Infused Earring",
         ear2="Genmei Earring",
-        ring1="Stikini Ring +1",
-        ring2="Stikini Ring +1",
+        ring1={name="Stikini Ring +1", bag="wardrobe3"},
+        ring2={name="Stikini Ring +1", bag="wardrobe4"},
         back=gear.RUN_HPP_Cape,
         waist="Ioskeha Belt +1",
         }
@@ -765,8 +766,8 @@ function init_gear_sets()
     sets.engaged.STP = set_combine(sets.engaged, {
         feet="Carmine Greaves +1",
         ear2="Dedition Earring",
-        ring1="Chirich Ring +1",
-        ring2="Chirich Ring +1",
+        ring1={name="Chirich Ring +1", bag="wardrobe3"},
+        ring2={name="Chirich Ring +1", bag="wardrobe4"},
         waist="Kentarch Belt +1",
         })
 
@@ -776,8 +777,8 @@ function init_gear_sets()
         neck="Anu Torque",
         ear1="Sherida Earring",
         ear2="Dedition Earring",
-        ring1="Chirich Ring +1",
-        ring2="Chirich Ring +1",
+        ring1={name="Chirich Ring +1", bag="wardrobe3"},
+        ring2={name="Chirich Ring +1", bag="wardrobe4"},
         waist="Kentarch Belt +1",
         }
 
@@ -826,7 +827,7 @@ function init_gear_sets()
         ring2="Defending Ring",
         back=gear.RUN_TP_Cape,
         waist="Ioskeha Belt +1",
-        }	
+        }    
 
     ------------------------------------------------------------------------------------------------
     ---------------------------------------- Special Sets ------------------------------------------
@@ -834,8 +835,8 @@ function init_gear_sets()
 
     sets.buff.Doom = {
         neck="Nicander's Necklace", --20
-        ring1="Eshmun's Ring", --20
-        ring2="Eshmun's Ring", --20
+        ring1={name="Eshmun's Ring", bag="wardrobe3"}, --20
+        ring2={name="Eshmun's Ring", bag="wardrobe4"}, --20
         waist="Gishdubar Sash", --10
         }
 
@@ -857,6 +858,12 @@ end
 
 function job_precast(spell, action, spellMap, eventArgs)
     equip(sets[state.WeaponSet.current])
+
+    if buffactive['terror'] or buffactive['petrification'] or buffactive['stun'] or buffactive['sleep'] then
+        add_to_chat(167, 'Stopped due to status.')
+        eventArgs.cancel = true
+        return
+    end
 
     if state.PhysicalDefenseMode.value == 'HP' then
         eventArgs.handled = true
@@ -980,6 +987,12 @@ function job_buff_change(buff,gain)
 --        end
 --    end
 
+    if buff == "terror" then
+        if gain then
+            equip(sets.defense.PDT)
+        end
+    end
+
     if buff == "doom" then
         if gain then
             equip(sets.buff.Doom)
@@ -1101,43 +1114,57 @@ end
 -- Function to display the current relevant user state when doing an update.
 -- Set eventArgs.handled to true if display was handled, and you don't want the default info shown.
 function display_current_job_state(eventArgs)
-    local msg = '[ Melee'
+    local r_msg = state.Runes.current
+    local r_color = ''
+    if state.Runes.current == 'Ignis' then r_color = 167
+    elseif state.Runes.current == 'Gelus' then r_color = 210
+    elseif state.Runes.current == 'Flabra' then r_color = 204
+    elseif state.Runes.current == 'Tellus' then r_color = 050
+    elseif state.Runes.current == 'Sulpor' then r_color = 215
+    elseif state.Runes.current == 'Unda' then r_color = 207
+    elseif state.Runes.current == 'Lux' then r_color = 001
+    elseif state.Runes.current == 'Tenebrae' then r_color = 160 end
 
+    local cf_msg = ''
     if state.CombatForm.has_value then
-        msg = msg .. ' (' .. state.CombatForm.value .. ')'
+        cf_msg = ' (' ..state.CombatForm.value.. ')'
     end
 
-    msg = msg .. ': '
-
-    msg = msg .. state.OffenseMode.value
+    local m_msg = state.OffenseMode.value
     if state.HybridMode.value ~= 'Normal' then
-        msg = msg .. '/' .. state.HybridMode.value
+        m_msg = m_msg .. '/' ..state.HybridMode.value
     end
-    msg = msg .. ' ][ WS: ' .. state.WeaponskillMode.value .. ' ]'
 
+    local ws_msg = state.WeaponskillMode.value
+
+    local d_msg = 'None'
     if state.DefenseMode.value ~= 'None' then
-        msg = msg .. '[ Defense: ' .. state.DefenseMode.value .. state[state.DefenseMode.value .. 'DefenseMode'].value .. ' ]'
+        d_msg = state.DefenseMode.value .. state[state.DefenseMode.value .. 'DefenseMode'].value
     end
 
+    local i_msg = state.IdleMode.value
+
+    local msg = ''
     if state.Charm.value == true then
-        msg = msg .. '[ Charm ]'
+        msg = msg .. ' Charm Resist |'
     end
-
     if state.Knockback.value == true then
-        msg = msg .. '[ Knockback ]'
+        msg = msg .. ' Knockback Resist |'
     end
-
     if state.Death.value == true then
-        msg = msg .. '[ Death ]'
+        msg = msg .. ' Death Resist |'
     end
-
     if state.Kiting.value then
-        msg = msg .. '[ Kiting Mode ]'
+        msg = msg .. ' Kiting: On |'
     end
 
-    msg = msg .. '[ *' .. state.Runes.current .. '* ]'
-
-    add_to_chat(060, msg)
+    add_to_chat(r_color, string.char(129,121).. '  ' ..string.upper(r_msg).. '  ' ..string.char(129,122)
+        ..string.char(31,210).. ' Melee' ..cf_msg.. ': ' ..string.char(31,001)..m_msg.. string.char(31,002).. ' |'
+        ..string.char(31,207).. ' WS: ' ..string.char(31,001)..ws_msg.. string.char(31,002).. ' |'
+        ..string.char(31,060)
+        ..string.char(31,004).. ' Defense: ' ..string.char(31,001)..d_msg.. string.char(31,002).. ' |'
+        ..string.char(31,008).. ' Idle: ' ..string.char(31,001)..i_msg.. string.char(31,002).. ' |'
+        ..string.char(31,002)..msg)
 
     eventArgs.handled = true
 end

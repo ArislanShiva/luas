@@ -29,13 +29,14 @@ function get_sets()
 
     -- Load and initialize the include file.
     include('Mote-Include.lua')
+    res = require 'resources'
 end
 
 -- Setup vars that are user-independent.
 function job_setup()
 
     wyv_breath_spells = S{'Dia', 'Poison', 'Blaze Spikes', 'Protect', 'Sprout Smack', 'Head Butt', 'Cocoon',
-	    'Barfira', 'Barblizzara', 'Baraera', 'Barstonra', 'Barthundra', 'Barwatera'}
+        'Barfira', 'Barblizzara', 'Baraera', 'Barstonra', 'Barthundra', 'Barwatera'}
     wyv_elem_breath = S{'Flame Breath', 'Frost Breath', 'Sand Breath', 'Hydro Breath', 'Gust Breath', 'Lightning Breath'}
 
     lockstyleset = 4
@@ -67,7 +68,7 @@ function user_setup()
 
     if player.sub_job == 'WAR' then
         send_command('bind !w input /ja "Defender" <me>')
-	elseif player.sub_job == 'SAM' then
+    elseif player.sub_job == 'SAM' then
         send_command('bind !w input /ja "Hasso" <me>')
     end
 
@@ -142,20 +143,20 @@ function init_gear_sets()
     ---------------------------------------- Precast Sets ------------------------------------------
     ------------------------------------------------------------------------------------------------
 
-    sets.precast.JA['Spirit Surge'] = {body="Ptero. Mail +1"}
-    sets.precast.JA['Call Wyvern'] = {body="Ptero. Mail +1"}
+    sets.precast.JA['Spirit Surge'] = {body="Ptero. Mail +3"}
+    sets.precast.JA['Call Wyvern'] = {body="Ptero. Mail +3"}
     sets.precast.JA['Ancient Circle'] = {legs="Vishap Brais +3"}
 
     sets.precast.JA['Spirit Link'] = {
         head="Vishap Armet +3",
         hands="Pel. Vambraces +1",
-        feet="Ptero. Greaves +1",
+        feet="Ptero. Greaves +3",
         ear1="Pratik Earring",
         }
 
     sets.precast.JA['Steady Wing'] = {
         legs="Vishap Brais +3",
-		feet="Ptero. Greaves +1",
+        feet="Ptero. Greaves +3",
         neck="Chanoix's Gorget",
         ear1="Lancer's Earring",
         ear2="Anastasi Earring",
@@ -166,13 +167,13 @@ function init_gear_sets()
         ammo="Ginsen",
         head="Flam. Zucchetto +2",
         body="Vishap Mail +3",
-        hands="Vis. Fng. Gaunt. +3",
+        hands="Ptero. Mail +3",
         legs="Ptero. Brais +3",
         feet="Ostro Greaves",
         neck="Anu Torque",
         ear1="Sherida Earring",
         ear2="Telos Earring",
-        ring1="Chirich Ring +1",
+        ring1={name="Chirich Ring +1", bag="wardrobe3"},
         ring2="Niqmaddu Ring",
         back=gear.DRG_JMP_Cape,
         waist="Ioskeha Belt +1",
@@ -180,7 +181,7 @@ function init_gear_sets()
 
     sets.precast.JA['High Jump'] = sets.precast.JA['Jump']
     sets.precast.JA['Spirit Jump'] = sets.precast.JA['Jump']
-    sets.precast.JA['Soul Jump'] = set_combine(sets.precast.JA['Jump'], {hands="Emi. Gauntlets +1", legs=gear.Valo_STP_legs})
+    sets.precast.JA['Soul Jump'] = set_combine(sets.precast.JA['Jump'], {body="Vishap Mail +3", hands="Emi. Gauntlets +1", legs=gear.Valo_STP_legs})
     sets.precast.JA['Super Jump'] = {}
 
     sets.precast.JA['Angon'] = {ammo="Angon", hands="Ptero. Fin. G. +3"}
@@ -219,21 +220,21 @@ function init_gear_sets()
         waist="Fotia Belt",
         }
 
-	sets.precast.WS.Acc = set_combine(sets.precast.WS, {})
+    sets.precast.WS.Acc = set_combine(sets.precast.WS, {})
 
-	sets.precast.WS.Uncapped = set_combine(sets.precast.WS, {
+    sets.precast.WS.Uncapped = set_combine(sets.precast.WS, {
         head="Sulevia's Mask +2",
         legs=gear.Valo_WSD_legs,
         })
 
     sets.precast.WS['Camlann\'s Torment'] = set_combine(sets.precast.WS, {
         head="Lustratio Cap +1",
-		ear2="Ishvara Earring",
+        ear2="Ishvara Earring",
         })
 
     sets.precast.WS['Camlann\'s Torment'].Acc = set_combine(sets.precast.WS['Camlann\'s Torment'], {})
 
-	sets.precast.WS['Camlann\'s Torment'].Uncapped = set_combine(sets.precast.WS['Camlann\'s Torment'], {
+    sets.precast.WS['Camlann\'s Torment'].Uncapped = set_combine(sets.precast.WS['Camlann\'s Torment'], {
         legs=gear.Valo_WSD_legs,
         })
 
@@ -249,7 +250,7 @@ function init_gear_sets()
 
     sets.precast.WS['Drakesbane'].Acc = set_combine(sets.precast.WS['Drakesbane'], {})
 
-	sets.precast.WS['Drakesbane'].Uncapped = set_combine(sets.precast.WS['Drakesbane'], {
+    sets.precast.WS['Drakesbane'].Uncapped = set_combine(sets.precast.WS['Drakesbane'], {
         head="Sulevia's Mask +2",
         legs=gear.Valo_WSD_legs,
         })
@@ -263,7 +264,7 @@ function init_gear_sets()
 
     sets.precast.WS['Geirskogul'].Acc = set_combine(sets.precast.WS['Geirskogul'], {})
 
-	sets.precast.WS['Geirskogul'].Uncapped = set_combine(sets.precast.WS['Geirskogul'], {
+    sets.precast.WS['Geirskogul'].Uncapped = set_combine(sets.precast.WS['Geirskogul'], {
         head="Sulevia's Mask +2", 
         legs=gear.Valo_WSD_legs,
         })
@@ -283,10 +284,10 @@ function init_gear_sets()
 
     sets.precast.WS['Stardiver'].Acc = set_combine(sets.precast.WS['Stardiver'], {
         head="Ptero. Armet +3",
-        feet="Vishap Greaves +3",
+        feet="Ptero. Greaves +3",
         })
 
-	sets.precast.WS['Stardiver'].Uncapped = set_combine(sets.precast.WS['Stardiver'], {
+    sets.precast.WS['Stardiver'].Uncapped = set_combine(sets.precast.WS['Stardiver'], {
         head="Ptero. Armet +3",
         legs="Sulev. Cuisses +2",
         })
@@ -296,23 +297,23 @@ function init_gear_sets()
         hands="Carmine Fin. Ga. +1",
         ear1="Hermetic Earring",
         ear2="Friomisi Earring",
-        ring1="Shiva Ring +1",
-        ring2="Shiva Ring +1",
+        ring1={name="Shiva Ring +1", bag="wardrobe3"},
+        ring2={name="Shiva Ring +1", bag="wardrobe4"},
         back="Argocham. Mantle",
         })
 
     sets.precast.WS['Thunder Thrust'] = sets.precast.WS['Raiden Thrust']
-	
+    
     sets.precast.WS['Leg Sweep'] = set_combine(sets.precast.WS, {
         ammo="Pemphredo Tathlum",
         head="Flam. Zucchetto +2",
-		body="Flamma Korazin +2",
-		hands="Flam. Manopolas +2",
+        body="Flamma Korazin +2",
+        hands="Flam. Manopolas +2",
         legs="Flamma Dirs +2",
-		feet="Flam. Gambieras +2",
-		ear1="Digni. Earring",
-		ring1="Stikini Ring +1",
-		ring2="Weather. Ring +1",
+        feet="Flam. Gambieras +2",
+        ear1="Digni. Earring",
+        ring1={name="Stikini Ring +1", bag="wardrobe3"},
+        ring2="Weather. Ring +1",
         })
 
     sets.WSDayBonus = {head="Gavialis Helm"}
@@ -326,11 +327,11 @@ function init_gear_sets()
         body=gear.Acro_Pet_body,
         hands=gear.Acro_Pet_hands,
         legs="Vishap Brais +3",
-        feet="Ptero. Greaves +1",
+        feet="Ptero. Greaves +3",
         neck="Lancer's Torque",
-		ear1="Lancer's Earring",
-		ear2="Anastasi Earring",
-		back="Updraft Mantle",
+        ear1="Lancer's Earring",
+        ear2="Anastasi Earring",
+        back="Updraft Mantle",
         waist="Glassblower's Belt",
         }
 
@@ -339,7 +340,7 @@ function init_gear_sets()
         body=gear.Acro_Pet_body,
         hands=gear.Acro_Pet_hands,
         neck="Lancer's Torque",
-		back="Updraft Mantle",
+        back="Updraft Mantle",
         waist="Glassblower's Belt",
         }
 
@@ -357,8 +358,8 @@ function init_gear_sets()
         neck="Bathy Choker +1",
         ear1="Genmei Earring",
         ear2="Infused Earring",
-        ring1="Chirich Ring +1",
-        ring2="Chirich Ring +1",
+        ring1={name="Chirich Ring +1", bag="wardrobe3"},
+        ring2={name="Chirich Ring +1", bag="wardrobe4"},
         back="Moonlight Cape", --6/6
         waist="Flume Belt +1", --4/0
         }
@@ -377,7 +378,7 @@ function init_gear_sets()
     sets.idle.Pet = set_combine(sets.idle, {
         body="Vishap Mail +3",
         hands="Ptero. Fin. G. +3",
-        feet="Ptero. Greaves +1",
+        feet="Ptero. Greaves +3",
         ear1="Enmerkar Earring",
         ear2="Anastasi Earring",
         waist="Isa Belt",
@@ -398,7 +399,7 @@ function init_gear_sets()
         head="Ptero. Armet +3",
         body="Emicho Haubert +1",
         hands="Ptero. Fin. G. +3",
-        feet="Vishap Greaves +3",
+        feet="Ptero. Greaves +3",
         neck="Anu Torque",
         ear1="Sherida Earring",
         ear2="Telos Earring",
@@ -431,7 +432,7 @@ function init_gear_sets()
         neck="Anu Torque",
         ear1="Sherida Earring",
         ear2="Brutal Earring",
-        ring1="Chirich Ring +1",
+        ring1={name="Chirich Ring +1", bag="wardrobe3"},
         ring2="Niqmaddu Ring",
         back=gear.DRG_TP_Cape,
         waist="Ioskeha Belt +1",
@@ -447,7 +448,7 @@ function init_gear_sets()
         ammo="Ginsen",
         neck="Shulmanu Collar",
         ring1="Flamma Ring",
-		ear2="Telos Earring",
+        ear2="Telos Earring",
         })
 
     sets.engaged.HighAcc = set_combine(sets.engaged.MidAcc, {
@@ -500,8 +501,8 @@ function init_gear_sets()
 
     sets.buff.Doom = {
         neck="Nicander's Necklace", --20
-        ring1="Eshmun's Ring", --20
-        ring2="Eshmun's Ring", --20
+        ring1={name="Eshmun's Ring", bag="wardrobe3"}, --20
+        ring2={name="Eshmun's Ring", bag="wardrobe4"}, --20
         waist="Gishdubar Sash", --10
         }
 
@@ -514,21 +515,14 @@ end
 -- Job-specific hooks for standard casting events.
 -------------------------------------------------------------------------------------------------------------------
 
-function job_aftercast(spell, action, spellMap, eventArgs)
-    if spell.name == 'Hasso' and not spell.interrupted then
-        send_command('wait 285;input /echo Hasso wearing off soon!;')
-    end
-end
-
 function job_precast(spell, action, spellMap, eventArgs)
     -- Wyvern Commands
-    if spell.name == 'Dismiss' and pet.hpp < 100 then		
-		eventArgs.cancel = true
-		add_to_chat(50, 'Cancelling Dismiss! ' ..pet.name.. ' is below full HP! [ ' ..pet.hpp.. '% ]')
+    if spell.name == 'Dismiss' and pet.hpp < 100 then        
+        eventArgs.cancel = true
+        add_to_chat(50, 'Cancelling Dismiss! ' ..pet.name.. ' is below full HP! [ ' ..pet.hpp.. '% ]')
     elseif wyv_breath_spells:contains(spell.english) or (spell.skill == 'Ninjutsu' and player.hpp < 33) then
         equip(sets.precast.HealingBreath)
     end
-
     -- Jump Overrides
     --if pet.isvalid and player.main_job_level >= 77 and spell.name == "Jump" then
     --    eventArgs.cancel = true
@@ -547,7 +541,7 @@ function job_post_precast(spell, action, spellMap, eventArgs)
             if world.day_element == 'Earth' or world.day_element == 'Light' then
                 equip(sets.WSDayBonus)
             end
-		elseif spell.english == 'Stardiver' then
+        elseif spell.english == 'Stardiver' then
             if world.day_element == 'Earth' or world.day_element == 'Light' or world.day_element == 'Dark' then
                 equip(sets.WSDayBonus)
            end
@@ -588,6 +582,10 @@ function job_buff_change(buff,gain)
             handle_equipping_gear(player.status)
         end
     end
+    
+    if buff == 'Hasso' and not gain then
+        add_to_chat(167, 'Hasso just expired!')    
+    end
 
 end
 
@@ -611,29 +609,37 @@ end
 -- Function to display the current relevant user state when doing an update.
 -- Set eventArgs.handled to true if display was handled, and you don't want the default info shown.
 function display_current_job_state(eventArgs)
-    local msg = '[ Melee'
-
+    local cf_msg = ''
     if state.CombatForm.has_value then
-        msg = msg .. ' (' .. state.CombatForm.value .. ')'
+        cf_msg = ' (' ..state.CombatForm.value.. ')'
     end
 
-    msg = msg .. ': '
-
-    msg = msg .. state.OffenseMode.value
+    local m_msg = state.OffenseMode.value
     if state.HybridMode.value ~= 'Normal' then
-        msg = msg .. '/' .. state.HybridMode.value
+        m_msg = m_msg .. '/' ..state.HybridMode.value
     end
-    msg = msg .. ' ][ WS: ' .. state.WeaponskillMode.value .. ' ]'
 
+    local am_msg = '(' ..string.sub(state.AttackMode.value,1,1).. ')'
+
+    local ws_msg = state.WeaponskillMode.value
+
+    local d_msg = 'None'
     if state.DefenseMode.value ~= 'None' then
-        msg = msg .. '[ Defense: ' .. state.DefenseMode.value .. state[state.DefenseMode.value .. 'DefenseMode'].value .. ' ]'
+        d_msg = state.DefenseMode.value .. state[state.DefenseMode.value .. 'DefenseMode'].value
     end
 
+    local i_msg = state.IdleMode.value
+
+    local msg = ''
     if state.Kiting.value then
-        msg = msg .. '[ Kiting Mode ]'
+        msg = msg .. ' Kiting: On |'
     end
 
-    add_to_chat(060, msg)
+    add_to_chat(002, '| ' ..string.char(31,210).. 'Melee' ..cf_msg.. ': ' ..string.char(31,001)..m_msg.. string.char(31,002)..  ' |'
+        ..string.char(31,207).. ' WS' ..am_msg.. ': ' ..string.char(31,001)..ws_msg.. string.char(31,002)..  ' |'
+        ..string.char(31,004).. ' Defense: ' ..string.char(31,001)..d_msg.. string.char(31,002)..  ' |'
+        ..string.char(31,008).. ' Idle: ' ..string.char(31,001)..i_msg.. string.char(31,002)..  ' |'
+        ..string.char(31,002)..msg)
 
     eventArgs.handled = true
 end

@@ -15,12 +15,12 @@
 
     send_command('bind #` input //send safiyeh /ja "Afflatus Solace" <me>')
 
-    send_command('bind #1 input //send safiyeh /ma "Cure II" <t>')
-    send_command('bind #2 input //send safiyeh /ma "Cure III" <t>')
-    send_command('bind #3 input //send safiyeh /ma "Cure IV" <t>')
+    send_command('bind #1 input //send safiyeh /ma "Cure III" <t>')
+    send_command('bind #2 input //send safiyeh /ma "Cure IV" <t>')
+    send_command('bind #3 input //send safiyeh /ma "Cure V" <t>')
     send_command('bind #4 input //send safiyeh /ma "Curaga II" <t>')
     send_command('bind #5 input //send safiyeh /ma "Curaga III" <t>')
-    send_command('bind #6 input //send safiyeh /ma "Repose" <t>')
+    send_command('bind #6 input //send safiyeh /ma "Aurorastorm" <me>')
 
     send_command('bind #7 input //send safiyeh /ma "Dia II" <t>')
     send_command('bind #8 input //send safiyeh /ma "Silence" <t>')

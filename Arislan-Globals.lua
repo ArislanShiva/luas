@@ -12,10 +12,13 @@ function define_global_sets()
     gear.Gada_ENF = {name="Gada", augments={'"Conserve MP"+2','MND+14','Mag. Acc.+20','"Mag.Atk.Bns."+2','DMG:+7',}}
     gear.Gada_ENH = {name="Gada", augments={'Enh. Mag. eff. dur. +6','MND+9','Mag. Acc.+9','"Mag.Atk.Bns."+1','DMG:+4',}}
 
+    gear.Kali_Idle = {name="Kali", augments={'MP+60','Mag. Acc.+20','"Refresh"+1',}}
+    gear.Kali_Song = {name="Kali", augments={'DMG:+15','CHR+15','Mag. Acc.+15',}}
+
     gear.Lathi_MAB = {name="Lathi", augments={'MP+80','INT+20','"Mag.Atk.Bns."+20',}}
     gear.Lathi_ENF = {name="Lathi", augments={'Mag. Acc.+20','Enfb.mag. skill +15','Dark magic skill +15',}}
 
-    gear.Linos_TP = {name="Linos", augments={'Accuracy+11 Attack+11','"Dbl.Atk."+3','Quadruple Attack +2',}}
+    gear.Linos_TP = {name="Linos", augments={'Accuracy+11 Attack+11','"Dbl.Atk."+3','Quadruple Attack +3',}}
     gear.Linos_WS = {name="Linos", augments={'Attack+13','Weapon skill damage +3%','STR+4 DEX+4',}}
 
     gear.Grioavolr_MND = {name="Grioavolr", augments={'Enfb.mag. skill +10','MND+18','Mag. Acc.+20','"Mag.Atk.Bns."+11',}}
@@ -105,7 +108,7 @@ function define_global_sets()
 
     gear.Valo_STP_legs = {name="Valor. Hose", augments={'Accuracy+21 Attack+21','"Store TP"+8','Accuracy+15','Attack+11',}}
 
-    gear.Valo_WSD_head = {name="Valorous Mask", augments={'Accuracy+3 Attack+3','Weapon skill damage +5%','DEX+4','Attack+10',}}
+    gear.Valo_WSD_head = {name="Valorous Mask", augments={'Accuracy+18 Attack+18','Weapon skill damage +4%','STR+7','Attack+3',}}
     gear.Valo_WSD_body = {name="Valorous Mail", augments={'Accuracy+22 Attack+22','Weapon skill damage +4%','STR+1','Accuracy+15','Attack+15',}}
     gear.Valo_WSD_legs = {name="Valor. Hose", augments={'Accuracy+25 Attack+25','Weapon skill damage +4%','STR+12','Attack+6',}}
 
@@ -181,3 +184,22 @@ function define_global_sets()
     gear.WHM_FC_Cape = {name="Alaunus's Cape", augments={'INT+20','Eva.+20 /Mag. Eva.+20','INT+10','"Fast Cast"+10','Mag. Evasion+15',}} --**
 
 end
+
+
+
+laggy_zones = S{'Al Zahbi', 'Aht Urhgan Whitegate', 'Eastern Adoulin', 'Mhaura', 'Nashmau', 'Western Adoulin'}
+
+windower.register_event('zone change', 
+    function()
+        -- Caps FPS to 30 via Config addon in certain problem zones
+        if laggy_zones:contains(world.zone) then
+            send_command('config FrameRateDivisor 2')
+        else
+            send_command('config FrameRateDivisor 1')
+        end
+        -- Auto load Omen add-on
+        if world.zone == 'Reisenjima Henge' then
+            send_command('lua l omen')
+        end
+    end
+)

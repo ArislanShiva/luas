@@ -82,6 +82,7 @@ function job_setup()
 
     state.CP = M(false, "Capacity Points Mode")
     state.Buff.Saboteur = buffactive.Saboteur or false
+    state.Buff.Stymie = buffactive.Stymie or false
 
     enfeebling_magic_acc = S{'Bind', 'Break', 'Dispel', 'Distract', 'Distract II', 'Frazzle',
         'Frazzle II',  'Gravity', 'Gravity II', 'Silence', 'Sleep', 'Sleep II', 'Sleepga'}
@@ -108,15 +109,21 @@ function user_setup()
     state.CastingMode:options('Normal', 'Seidr', 'Resistant')
     state.IdleMode:options('Normal', 'DT')
 
+    state.EnSpell = M{['description']='EnSpell', 'Enfire', 'Enblizzard', 'Enaero', 'Enstone', 'Enthunder', 'Enwater'}
+    state.BarElement = M{['description']='BarElement', 'Barfire', 'Barblizzard', 'Baraero', 'Barstone', 'Barthunder', 'Barwater'}
+    state.BarStatus = M{['description']='BarStatus', 'Baramnesia', 'Barvirus', 'Barparalyze', 'Barsilence', 'Barpetrify', 'Barpoison', 'Barblind', 'Barsleep'}
+    state.GainSpell = M{['description']='GainSpell', 'Gain-STR', 'Gain-INT', 'Gain-AGI', 'Gain-VIT', 'Gain-DEX', 'Gain-MND', 'Gain-CHR'}
+
     state.WeaponLock = M(false, 'Weapon Lock')
     state.MagicBurst = M(false, 'Magic Burst')
+    state.NM = M(false, 'NM')
     state.CP = M(false, "Capacity Points Mode")
 
     -- Additional local binds
     include('Global-Binds.lua') -- OK to remove this line
-    include('Global-GEO-Binds.lua') -- OK to remove this line
+    include('Global-WHM-Binds.lua') -- OK to remove this line
 
-    if player.sub_job == 'NIN' then
+    if player.sub_job == 'NIN' or player.sub_job == 'DNC' then
         send_command('lua l gearinfo')
     end
 
@@ -126,9 +133,11 @@ function user_setup()
     if player.sub_job == 'SCH' then
         send_command('bind ^- gs c scholar light')
         send_command('bind ^= gs c scholar dark')
-        send_command('bind !- input /ja "Addendum: White" <me>')
-        send_command('bind != input /ja "Addendum: Black" <me>')
+        send_command('bind !- gs c scholar addendum')
+        send_command('bind != gs c scholar addendum')
+        send_command('bind ^; gs c scholar speed')
         send_command('bind ![ gs c scholar aoe')
+        send_command('bind !; gs c scholar cost')
     end
 
     send_command('bind !q input /ma "Temper II" <me>')
@@ -138,6 +147,15 @@ function user_setup()
     send_command('bind !y input /ma "Phalanx II" <stpc>')
     send_command('bind !o input /ma "Regen II" <stpc>')
     send_command('bind !p input /ma "Shock Spikes" <me>')
+
+    send_command('bind !insert gs c cycleback EnSpell')
+    send_command('bind !delete gs c cycle EnSpell')
+    send_command('bind ^insert gs c cycleback GainSpell')
+    send_command('bind ^delete gs c cycle GainSpell')
+    send_command('bind ^home gs c cycleback BarElement')
+    send_command('bind ^end gs c cycle BarElement')
+    send_command('bind ^pageup gs c cycleback BarStatus')
+    send_command('bind ^pagedown gs c cycle BarStatus')
 
     send_command('bind @w gs c toggle WeaponLock')
     send_command('bind @c gs c toggle CP')
@@ -168,7 +186,9 @@ function user_unload()
     send_command('unbind ^=')
     send_command('unbind !-')
     send_command('unbind !=')
+    send_command('unbind ^;')
     send_command('unbind ![')
+    send_command('unbind !;')
     send_command('unbind !q')
     send_command('unbind !w')
     send_command('bind !e input /ma "Haste" <stpc>')
@@ -179,6 +199,14 @@ function user_unload()
     send_command('unbind @w')
     send_command('unbind @c')
     send_command('unbind @r')
+    send_command('unbind !insert')
+    send_command('unbind !delete')
+    send_command('unbind ^insert')
+    send_command('unbind ^delete')
+    send_command('unbind ^home')
+    send_command('unbind ^end')
+    send_command('unbind ^pageup')
+    send_command('unbind ^pagedown')
     send_command('unbind ^numpad7')
     send_command('unbind ^numpad9')
     send_command('unbind ^numpad4')
@@ -198,7 +226,7 @@ function user_unload()
     send_command('unbind #9')
     send_command('unbind #0')
 
-    if player.sub_job == 'NIN' then
+    if player.sub_job == 'NIN' or player.sub_job == 'DNC' then
         send_command('lua u gearinfo')
     end
 
@@ -251,9 +279,9 @@ function init_gear_sets()
         ring1="Kishar Ring", --4
         back="Swith Cape +1", --4
         waist="Witful Belt", --3/(3)
-		})
+        })
 
-    sets.precast.Storm = set_combine(sets.precast.FC, {ring2="Stikini Ring +1"})
+    sets.precast.Storm = set_combine(sets.precast.FC, {name="Stikini Ring +1", bag="wardrobe4"})
     sets.precast.FC.Utsusemi = sets.precast.FC.Cure
 
 
@@ -346,7 +374,7 @@ function init_gear_sets()
         neck="Baetyl Pendant",
         ear1="Moonshade Earring",
         ear2="Regal Earring",
-        ring1="Shiva Ring +1",
+        ring1={name="Shiva Ring +1", bag="wardrobe3"},
         ring2="Archon Ring",
         back=gear.RDM_INT_Cape,
         waist="Refoccilation Stone",
@@ -399,8 +427,8 @@ function init_gear_sets()
 
     sets.midcast.Curaga = set_combine(sets.midcast.Cure, {
         ammo="Regal Gem",
-        ring1="Stikini Ring +1",
-        ring2="Stikini Ring +1",
+        ring1={name="Stikini Ring +1", bag="wardrobe3"},
+        ring2={name="Stikini Ring +1", bag="wardrobe4"},
         waist="Luminary Sash",
         })
 
@@ -437,8 +465,8 @@ function init_gear_sets()
         neck="Incanter's Torque",
         ear1="Augment. Earring",
         ear2="Andoaa Earring",
-        ring1="Stikini Ring +1",
-        ring2="Stikini Ring +1",
+        ring1={name="Stikini Ring +1", bag="wardrobe3"},
+        ring2={name="Stikini Ring +1", bag="wardrobe4"},
         back="Ghostfyre Cape",
         waist="Olympus Sash",
         }
@@ -458,13 +486,12 @@ function init_gear_sets()
     sets.midcast.EnhancingSkill = {
         main="Pukulatmuj +1",
         sub="Pukulatmuj",
-        hands="Viti. Gloves +1",
+        hands="Viti. Gloves +2",
         }
 
     sets.midcast.GainSpell = {
-        --hands="Viti. Gloves +3",
+        hands="Viti. Gloves +2",
         }
-
 
     sets.midcast.Regen = set_combine(sets.midcast.EnhancingDuration, {
         main="Bolelabunga",
@@ -527,41 +554,48 @@ function init_gear_sets()
         }
 
     sets.midcast.MndEnfeeblesAcc = set_combine(sets.midcast.MndEnfeebles, {
+        main=gear.Grioavolr_MND,
+        sub="Enki Strap",
+        range="Kaja Bow",
+        ammo=empty,
         head="Atrophy Chapeau +3",
         body="Atrophy Tabard +3",
-        ring1="Stikini Ring +1",
+        ring1={name="Stikini Ring +1", bag="wardrobe3"},
         })
 
     sets.midcast.IntEnfeebles = set_combine(sets.midcast.MndEnfeebles, {
         main=gear.Grioavolr_MB,
-        ring1="Stikini Ring +1",
         back=gear.RDM_INT_Cape,
         })
 
     sets.midcast.IntEnfeeblesAcc = set_combine(sets.midcast.IntEnfeebles, {
+        main=gear.Grioavolr_MND,
+        sub="Enki Strap",
+        range="Kaja Bow",
+        ammo=empty,
         body="Atrophy Tabard +3",
         ring2="Weather. Ring +1",
         })
 
-    sets.midcast.SkillEnfeebles = {
+    sets.midcast.SkillEnfeebles = set_combine(sets.midcast.MndEnfeebles, {
         sub="Mephitis Grip",
         head="Viti. Chapeau +3",
         body="Atrophy Tabard +3",
         hands="Leth. Gantherots +1",
         feet="Vitiation Boots +3",
         neck="Incanter's Torque",
-        ring1="Stikini Ring +1",
-        ring2="Stikini Ring +1",
+        ring1={name="Stikini Ring +1", bag="wardrobe3"},
+        ring2={name="Stikini Ring +1", bag="wardrobe4"},
         ear1="Enfeebling Earring",
         waist="Rumination Sash",
-        }
+        })
 
-    sets.midcast.EffectEnfeebles = {
+    sets.midcast.EffectEnfeebles = set_combine(sets.midcast.MndEnfeebles, {
         ammo="Regal Gem",
         body="Lethargy Sayon +1",
         feet="Vitiation Boots +3",
         back=gear.RDM_MND_Cape,
-        }
+        })
 
     sets.midcast.ElementalEnfeeble = sets.midcast.IntEnfeebles
 
@@ -581,8 +615,8 @@ function init_gear_sets()
         neck="Erra Pendant",
         ear1="Hermetic Earring",
         ear2="Regal Earring",
-        ring1="Stikini Ring +1",
-        ring2="Stikini Ring +1",
+        ring1={name="Stikini Ring +1", bag="wardrobe3"},
+        ring2={name="Stikini Ring +1", bag="wardrobe4"},
         back=gear.RDM_INT_Cape,
         waist="Luminary Sash",
         }
@@ -610,8 +644,8 @@ function init_gear_sets()
         neck="Baetyl Pendant",
         ear1="Friomisi Earring",
         ear2="Regal Earring",
-        ring1="Shiva Ring +1",
-        ring2="Shiva Ring +1",
+        ring1={name="Shiva Ring +1", bag="wardrobe3"},
+        ring2={name="Shiva Ring +1", bag="wardrobe4"},
         back=gear.RDM_INT_Cape,
         waist="Refoccilation Stone",
         }
@@ -672,12 +706,12 @@ function init_gear_sets()
         body="Jhakri Robe +2",
         hands="Atrophy Gloves +3",
         legs="Carmine Cuisses +1",
-        feet="Carmine Greaves +1",
+        feet="Vitiation Boots +3",
         neck="Bathy Choker +1",
         ear1="Genmei Earring",
         ear2="Infused Earring",
-        ring1="Stikini Ring +1",
-        ring2="Stikini Ring +1",
+        ring1={name="Stikini Ring +1", bag="wardrobe3"},
+        ring2={name="Stikini Ring +1", bag="wardrobe4"},
         back="Moonlight Cape",
         waist="Flume Belt +1",
         }
@@ -702,7 +736,6 @@ function init_gear_sets()
         head="Viti. Chapeau +3",
         body="Viti. Tabard +3",
         hands="Amalric Gages +1",
-        feet="Vitiation Boots +3",
         neck="Dls. Torque +1",
         ear1="Sherida Earring",
         ear2="Regal Earring",
@@ -727,7 +760,8 @@ function init_gear_sets()
     sets.magic_burst = {
         main=gear.Grioavolr_MB, --5
         body=gear.Merl_MB_body, --10
-        hands="Ea Cuffs", --5(5)
+        hands="Amalric Gages +1", --(6)
+        legs="Merlinic Shalwar", --2
         feet="Merlinic Crackows", --11
         neck="Mizu. Kubikazari", --10
         ring1="Mujin Band", --(5)
@@ -761,14 +795,14 @@ function init_gear_sets()
         ear1="Sherida Earring",
         ear2="Telos Earring",
         ring1="Hetairoi Ring",
-        ring2="Chirich Ring +1",
+        ring2={name="Chirich Ring +1", bag="wardrobe4"},
         back=gear.RDM_DW_Cape,
         waist="Windbuffet Belt +1",
         }
 
     sets.engaged.MidAcc = set_combine(sets.engaged, {
         neck="Combatant's Torque",
-        ring1="Chirich Ring +1",
+        ring1={name="Chirich Ring +1", bag="wardrobe3"},
         waist="Kentarch Belt +1",
         })
 
@@ -795,14 +829,14 @@ function init_gear_sets()
         ear1="Eabani Earring", --4
         ear2="Suppanomimi", --5
         ring1="Hetairoi Ring",
-        ring2="Chirich Ring +1",
+        ring2={name="Chirich Ring +1", bag="wardrobe4"},
         back=gear.RDM_DW_Cape, --10
         waist="Reiki Yotai", --7
         } --41
 
     sets.engaged.DW.MidAcc = set_combine(sets.engaged.DW, {
         neck="Combatant's Torque",
-        ring1="Chirich Ring +1",
+        ring1={name="Chirich Ring +1", bag="wardrobe3"},
         })
 
     sets.engaged.DW.HighAcc = set_combine(sets.engaged.DW.MidAcc, {
@@ -824,7 +858,7 @@ function init_gear_sets()
         ear1="Eabani Earring", --4
         ear2="Suppanomimi", --5
         ring1="Hetairoi Ring",
-        ring2="Chirich Ring +1",
+        ring2={name="Chirich Ring +1", bag="wardrobe4"},
         back=gear.RDM_DW_Cape, --10
         waist="Reiki Yotai", --7
         }) --41
@@ -852,7 +886,7 @@ function init_gear_sets()
         ear1="Sherida Earring",
         ear2="Suppanomimi", --5
         ring1="Hetairoi Ring",
-        ring2="Chirich Ring +1",
+        ring2={name="Chirich Ring +1", bag="wardrobe4"},
         back=gear.RDM_DW_Cape, --10
         waist="Reiki Yotai", --7
         }) --41
@@ -860,7 +894,7 @@ function init_gear_sets()
     sets.engaged.DW.MidAcc.MidHaste = set_combine(sets.engaged.DW.MidHaste, {
         legs="Carmine Cuisses +1", --6
         neck="Combatant's Torque",
-        ring1="Chirich Ring +1",
+        ring1={name="Chirich Ring +1", bag="wardrobe3"},
         ear2="Telos Earring",
         })
 
@@ -884,7 +918,7 @@ function init_gear_sets()
         ear1="Sherida Earring",
         ear2="Telos Earring",
         ring1="Hetairoi Ring",
-        ring2="Chirich Ring +1",
+        ring2={name="Chirich Ring +1", bag="wardrobe4"},
         back=gear.RDM_DW_Cape, --10
         waist="Reiki Yotai", --7
         }) --26
@@ -892,7 +926,7 @@ function init_gear_sets()
     sets.engaged.DW.MidAcc.HighHaste = set_combine(sets.engaged.DW.HighHaste, {
         legs="Carmine Cuisses +1", --6
         neck="Combatant's Torque",
-        ring1="Chirich Ring +1",
+        ring1={name="Chirich Ring +1", bag="wardrobe3"},
         waist="Kentarch Belt +1",
         })
 
@@ -916,14 +950,14 @@ function init_gear_sets()
         ear1="Sherida Earring",
         ear2="Telos Earring",
         ring1="Hetairoi Ring",
-        ring2="Chirich Ring +1",
+        ring2={name="Chirich Ring +1", bag="wardrobe4"},
         back=gear.RDM_DW_Cape, --10
         waist="Windbuffet Belt +1",
         }) --10
 
     sets.engaged.DW.MidAcc.MaxHaste = set_combine(sets.engaged.DW.MaxHaste, {
         neck="Combatant's Torque",
-        ring1="Chirich Ring +1",
+        ring1={name="Chirich Ring +1", bag="wardrobe3"},
         waist="Kentarch Belt +1",
         })
 
@@ -977,8 +1011,8 @@ function init_gear_sets()
 
     sets.buff.Doom = {
         neck="Nicander's Necklace", --20
-        ring1="Eshmun's Ring", --20
-        ring2="Eshmun's Ring", --20
+        ring1={name="Eshmun's Ring", bag="wardrobe3"}, --20
+        ring2={name="Eshmun's Ring", bag="wardrobe4"}, --20
         waist="Gishdubar Sash", --10
         }
 
@@ -1014,27 +1048,10 @@ function job_post_precast(spell, action, spellMap, eventArgs)
     end
 end
 
-function job_midcast(spell, action, spellMap, eventArgs)
-    if spell.skill == 'Enfeebling Magic' then
-        if enfeebling_magic_skill:contains(spell.english) or enfeebling_magic_effect:contains(spell.english) then
-            if spell.type == "WhiteMagic" then
-                equip(sets.midcast.MndEnfeeblesAcc)
-            else
-                equip(sets.midcast.IntEnfeeblesAcc)
-            end
-        end
-    end
-end
-
 -- Run after the default midcast() is done.
 -- eventArgs is the same one used in job_midcast, in case information needs to be persisted.
 function job_post_midcast(spell, action, spellMap, eventArgs)
-    if spell.skill == 'Enfeebling Magic' then
-        if enfeebling_magic_skill:contains(spell.english) then
-            equip(sets.midcast.SkillEnfeebles)
-        elseif enfeebling_magic_effect:contains(spell.english) then
-            equip(sets.midcast.EffectEnfeebles)
-        end
+    if spell.skill == 'Sleep II' then
         if state.Buff.Saboteur then
             equip(sets.buff.Saboteur)
         end
@@ -1051,7 +1068,6 @@ function job_post_midcast(spell, action, spellMap, eventArgs)
         elseif skill_spells:contains(spell.english) then
             equip(sets.midcast.EnhancingSkill)
         elseif spell.english:startswith('Gain') then
-            equip(sets.midcast.GainSpell)
         end
         if (spell.target.type == 'PLAYER' or spell.target.type == 'NPC') and buffactive.Composure then
             equip(sets.buff.ComposureOther)
@@ -1074,14 +1090,8 @@ function job_post_midcast(spell, action, spellMap, eventArgs)
 end
 
 function job_aftercast(spell, action, spellMap, eventArgs)
-    if not spell.interrupted then
-        if spell.english == "Sleep II" then
-            send_command('@timers c "Sleep II ['..spell.target.name..']" 90 down spells/00259.png')
-        elseif spell.english == "Sleep" or spell.english == "Sleepga" then -- Sleep & Sleepga Countdown --
-            send_command('@timers c "Sleep ['..spell.target.name..']" 60 down spells/00253.png')
-        elseif spell.english == "Break" then
-            send_command('@timers c "Break ['..spell.target.name..']" 30 down spells/00255.png')
-        end
+    if spell.english:contains('Sleep') and not spell.interrupted then
+        set_sleep_timer(spell)
     end
 end
 
@@ -1143,25 +1153,21 @@ function job_get_spell_map(spell, default_spell_map)
             end
         end
         if spell.skill == 'Enfeebling Magic' then
-            if spell.type == "WhiteMagic" then
-                if  enfeebling_magic_effect:contains(spell.english) then
-                    return "EffectEnfeebles"
-                elseif not enfeebling_magic_skill:contains(spell.english) then
-                    if enfeebling_magic_acc:contains(spell.english) and not buffactive.Stymie then
-                        return "MndEnfeeblesAcc"
-                    else
-                        return "MndEnfeebles"
-                    end
+            if enfeebling_magic_skill:contains(spell.english) then
+                return "SkillEnfeebles"
+            elseif enfeebling_magic_effect:contains(spell.english) then
+                return "EffectEnfeebles"
+            elseif spell.type == "WhiteMagic" then
+                if enfeebling_magic_acc:contains(spell.english) and not buffactive.Stymie then
+                    return "MndEnfeeblesAcc"
+                else
+                    return "MndEnfeebles"
                 end
             elseif spell.type == "BlackMagic" then
-                if  enfeebling_magic_effect:contains(spell.english) then
-                    return "EffectEnfeebles"
-                elseif not enfeebling_magic_skill:contains(spell.english) then
-                    if enfeebling_magic_acc:contains(spell.english) and not buffactive.Stymie then
-                        return "IntEnfeeblesAcc"
-                    else
-                        return "IntEnfeebles"
-                    end
+                if enfeebling_magic_acc:contains(spell.english) and not buffactive.Stymie then
+                    return "IntEnfeeblesAcc"
+                else
+                    return "IntEnfeebles"
                 end
             else
                 return "MndEnfeebles"
@@ -1193,33 +1199,41 @@ end
 -- Function to display the current relevant user state when doing an update.
 -- Return true if display was handled, and you don't want the default info shown.
 function display_current_job_state(eventArgs)
-    local msg = '[ Melee'
-
+    local cf_msg = ''
     if state.CombatForm.has_value then
-        msg = msg .. ' (' .. state.CombatForm.value .. ')'
+        cf_msg = ' (' ..state.CombatForm.value.. ')'
     end
 
-    msg = msg .. ': '
-
-    msg = msg .. state.OffenseMode.value
+    local m_msg = state.OffenseMode.value
     if state.HybridMode.value ~= 'Normal' then
-        msg = msg .. '/' .. state.HybridMode.value
+        m_msg = m_msg .. '/' ..state.HybridMode.value
     end
-    msg = msg .. ' ][ WS: ' .. state.WeaponskillMode.value .. ' ]'
 
+    local ws_msg = state.WeaponskillMode.value
+
+    local c_msg = state.CastingMode.value
+
+    local d_msg = 'None'
     if state.DefenseMode.value ~= 'None' then
-        msg = msg .. '[ Defense: ' .. state.DefenseMode.value .. state[state.DefenseMode.value .. 'DefenseMode'].value .. ' ]'
+        d_msg = state.DefenseMode.value .. state[state.DefenseMode.value .. 'DefenseMode'].value
     end
 
-    if state.IdleMode.value ~= 'None' then
-        msg = msg .. '[ Idle: ' .. state.IdleMode.value .. ' ]'
-    end
+    local i_msg = state.IdleMode.value
 
+    local msg = ''
+    if state.MagicBurst.value then
+        msg = ' Burst: On |'
+    end
     if state.Kiting.value then
-        msg = msg .. '[ Kiting Mode: ON ]'
+        msg = msg .. ' Kiting: On |'
     end
 
-    add_to_chat(060, msg)
+    add_to_chat(002, '| ' ..string.char(31,210).. 'Melee' ..cf_msg.. ': ' ..string.char(31,001)..m_msg.. string.char(31,002)..  ' |'
+        ..string.char(31,207).. ' WS: ' ..string.char(31,001)..ws_msg.. string.char(31,002)..  ' |'
+        ..string.char(31,060).. ' Magic: ' ..string.char(31,001)..c_msg.. string.char(31,002)..  ' |'
+        ..string.char(31,004).. ' Defense: ' ..string.char(31,001)..d_msg.. string.char(31,002)..  ' |'
+        ..string.char(31,008).. ' Idle: ' ..string.char(31,001)..i_msg.. string.char(31,002)..  ' |'
+        ..string.char(31,002)..msg)
 
     eventArgs.handled = true
 end
@@ -1252,6 +1266,14 @@ function job_self_command(cmdParams, eventArgs)
     elseif cmdParams[1]:lower() == 'nuke' then
         handle_nuking(cmdParams)
         eventArgs.handled = true
+    elseif cmdParams[1]:lower() == 'enspell' then
+        send_command('@input /ma '..state.EnSpell.value..' <me>')
+    elseif cmdParams[1]:lower() == 'barelement' then
+        send_command('@input /ma '..state.BarElement.value..' <me>')
+    elseif cmdParams[1]:lower() == 'barstatus' then
+        send_command('@input /ma '..state.BarStatus.value..' <me>')
+    elseif cmdParams[1]:lower() == 'gainspell' then
+        send_command('@input /ma '..state.GainSpell.value..' <me>')
     end
 
     gearinfo(cmdParams, eventArgs)
@@ -1266,13 +1288,13 @@ function gearinfo(cmdParams, eventArgs)
             end
         elseif type(cmdParams[2]) == 'string' then
             if cmdParams[2] == 'false' then
-        	    DW_needed = 0
+                DW_needed = 0
                 DW = false
-      	    end
+              end
         end
         if type(tonumber(cmdParams[3])) == 'number' then
-          	if tonumber(cmdParams[3]) ~= Haste then
-              	Haste = tonumber(cmdParams[3])
+              if tonumber(cmdParams[3]) ~= Haste then
+                  Haste = tonumber(cmdParams[3])
             end
         end
         if type(cmdParams[4]) == 'string' then
@@ -1348,9 +1370,53 @@ end
 
 windower.register_event('zone change', 
     function()
-        send_command('gi ugs true')
+        if player.sub_job == 'NIN' or player.sub_job == 'DNC' then
+            send_command('gi ugs true')
+        end
     end
 )
+
+function set_sleep_timer(spell)
+    local self = windower.ffxi.get_player()
+
+    if spell.en == "Sleep II" then 
+        base = 90
+    elseif spell.en == "Sleep" or spell.en == "Sleepga" then 
+        base = 60
+    end
+
+    if state.Buff.Saboteur then
+        if state.NM.value then
+			base = base * 1.25
+		else
+			base = base * 2
+		end
+    end
+
+    -- Job Points Buff
+    base = base + self.job_points.rdm.enfeebling_magic_duration
+
+	if state.Buff.Stymie then
+		base = base + self.job_points.rdm.stymie_effect
+	end
+
+	add_to_chat(004, 'Base Duration: ' ..base)
+
+    --User enfeebling duration enhancing gear total
+    gear_mult = 1.10
+    --User enfeebling duration enhancing augment total
+	aug_mult = 1.17
+
+    totalDuration = math.floor(base * gear_mult * aug_mult)
+        
+    -- Create the custom timer
+    if spell.english == "Sleep II" then
+        send_command('@timers c "Sleep II ['..spell.target.name..']" ' ..totalDuration.. ' down spells/00259.png')
+    elseif spell.english == "Sleep" or spell.english == "Sleepga" then
+        send_command('@timers c "Sleep ['..spell.target.name..']" ' ..totalDuration.. ' down spells/00253.png')
+    end
+
+end
 
 -- Select default macro book on initial load or subjob change.
 function select_default_macro_book()

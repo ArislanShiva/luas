@@ -1,4 +1,4 @@
-    -- Dual Box Key Binds (Requires Send and Shortcuts)
+        -- Dual Box Key Binds (Requires Send and Shortcuts)
     send_command('bind #f1 input //send safiyeh /ta <p0>')
     send_command('bind #f2 input //send safiyeh /ta <p1>')
     send_command('bind #f3 input //send safiyeh /ta <p2>')

@@ -79,15 +79,15 @@ function user_setup()
     include('Global-Binds.lua')
 
     send_command('bind ^` input /ja "Full Circle" <me>')
-   	send_command('bind ^b input /ja "Blaze of Glory" <me>')
-  	send_command('bind ^a input /ja "Ecliptic Attrition" <me>')
-  	send_command('bind ^d input /ja "Dematerialize" <me>')
-  	send_command('bind ^c input /ja "Life Cycle" <me>')
+    send_command('bind ^b input /ja "Blaze of Glory" <me>')
+    send_command('bind ^a input /ja "Ecliptic Attrition" <me>')
+    send_command('bind ^d input /ja "Dematerialize" <me>')
+    send_command('bind ^c input /ja "Life Cycle" <me>')
     send_command('bind !` gs c toggle MagicBurst')
     send_command('bind ^insert gs c cycleback Element')
     send_command('bind ^delete gs c cycle Element')
-  	send_command('bind !w input /ma "Aspir III" <t>')
-  	send_command('bind !p input /ja "Entrust" <me>')
+    send_command('bind !w input /ma "Aspir III" <t>')
+    send_command('bind !p input /ja "Entrust" <me>')
     send_command('bind ^, input /ma Sneak <stpc>')
     send_command('bind ^. input /ma Invisible <stpc>')
     send_command('bind @c gs c toggle CP')
@@ -243,8 +243,8 @@ function init_gear_sets()
         ear1="Calamitous Earring",
         ear2="Gifted Earring",
         neck="Incanter's Torque",
-        ring1="Stikini Ring",
-        ring2="Stikini Ring",
+        ring1={name="Stikini Ring", bag="wardrobe1"},
+        ring2={name="Stikini Ring", bag="wardrobe2"},
         back="Lifestream Cape",
         waist="Austerity Belt +1",
         }
@@ -267,21 +267,21 @@ function init_gear_sets()
         ear1="Beatific Earring",
         ear2="Mendi. Earring", --5
         ring1="Lebeche Ring", --3/(-5)
-        ring2="Haoma's Ring",
+        ring2={name="Haoma's Ring", bag="wardrobe2"},
         back=gear.GEO_Cure_Cape, --0/(-10)
         waist="Bishop's Sash",
         }
 
     sets.midcast.Curaga = set_combine(sets.midcast.Cure, {
         neck="Nuna Gorget +1",
-        ring2="Stikini Ring",
+        ring2={name="Stikini Ring", bag="wardrobe2"},
         waist="Luminary Sash",
         })
 
     sets.midcast.Cursna = set_combine(sets.midcast.Cure, {
         neck="Malison Medallion",
-        ring1="Haoma's Ring",
-        ring2="Haoma's Ring",
+        ring1={name="Haoma's Ring", bag="wardrobe1"},
+        ring2={name="Haoma's Ring", bag="wardrobe2"},
         back="Oretan. Cape +1",
         })
 
@@ -295,8 +295,8 @@ function init_gear_sets()
         feet="Telchine Pigaches",
         neck="Incanter's Torque",
         ear2="Andoaa Earring",
-        ring1="Stikini Ring",
-        ring2="Stikini Ring",
+        ring1={name="Stikini Ring", bag="wardrobe1"},
+        ring2={name="Stikini Ring", bag="wardrobe2"},
         back=gear.GEO_Cure_Cape,
         waist="Olympus Sash",
         }
@@ -349,14 +349,14 @@ function init_gear_sets()
         ear1="Digni. Earring",
         ear2="Regal Earring",
         ring1="Kishar Ring",
-        ring2="Stikini Ring",
+        ring2={name="Stikini Ring", bag="wardrobe2"},
         back=gear.GEO_FC_Cape,
         waist="Luminary Sash",
         } -- MND/Magic accuracy
 
     sets.midcast.IntEnfeebles = set_combine(sets.midcast.MndEnfeebles, {
         ear1="Barkarole Earring",
-        ring1="Shiva Ring",
+        ring1={name="Shiva Ring", bag="wardrobe1"},
         ring2="Weather. Ring +1",
         back=gear.GEO_MAB_Cape,
         }) -- INT/Magic accuracy
@@ -372,7 +372,7 @@ function init_gear_sets()
         neck="Erra Pendant",
         ear1="Barkarole Earring",
         ear2="Digni. Earring",
-        ring1="Stikini Ring",
+        ring1={name="Stikini Ring", bag="wardrobe1"},
         ring2="Weather. Ring +1",
         back=gear.GEO_MAB_Cape,
         waist="Luminary Sash",
@@ -403,8 +403,8 @@ function init_gear_sets()
         neck="Baetyl Pendant",
         ear1="Barkarole Earring",
         ear2="Regal Earring",
-        ring1="Shiva Ring",
-        ring2="Shiva Ring",
+        ring1={name="Shiva Ring", bag="wardrobe1"},
+        ring2={name="Shiva Ring", bag="wardrobe2"},
         back=gear.GEO_MAB_Cape,
         waist="Refoccilation Stone",
         }
@@ -557,7 +557,7 @@ function init_gear_sets()
         ring2="Mujin Band", --(5)
         }
 
-    sets.buff.Doom = {ring1="Saida Ring", ring2="Saida Ring"}
+    sets.buff.Doom = {ring1={name="Saida Ring", bag="wardrobe1"}, ring2={name="Saida Ring", bag="wardrobe2"},}
     sets.Obi = {waist="Hachirin-no-Obi"}
     sets.CP = {back="Mecisto. Mantle"}
 
@@ -712,7 +712,31 @@ end
 
 -- Function to display the current relevant user state when doing an update.
 function display_current_job_state(eventArgs)
-    display_current_caster_state()
+    local c_msg = state.CastingMode.value
+
+    local d_msg = 'None'
+    if state.DefenseMode.value ~= 'None' then
+        d_msg = state.DefenseMode.value .. state[state.DefenseMode.value .. 'DefenseMode'].value
+    end
+
+    local i_msg = state.IdleMode.value
+
+    local msg = ''
+    if state.MagicBurst.value then
+        msg = ' Burst: On |'
+    end
+    if state.Auto.value then
+        msg = ' Auto: On |'
+    end
+    if state.Kiting.value then
+        msg = msg .. ' Kiting: On |'
+    end
+
+    add_to_chat(060, '| Magic: ' ..string.char(31,001)..c_msg.. string.char(31,002)..  ' |'
+        ..string.char(31,004).. ' Defense: ' ..string.char(31,001)..d_msg.. string.char(31,002)..  ' |'
+        ..string.char(31,008).. ' Idle: ' ..string.char(31,001)..i_msg.. string.char(31,002)..  ' |'
+        ..string.char(31,002)..msg)
+
     eventArgs.handled = true
 end
 
@@ -737,7 +761,7 @@ function refine_various_spells(spell, action, spellMap, eventArgs)
                 newSpell = degrade_array[spell.element][spell_index - 1]
                 send_command('@input /ma '..newSpell..' '..tostring(spell.target.raw))
                 eventArgs.cancel = true
-			end
+            end
         elseif spellMap == 'Aspir' then
             spell_index = table.find(degrade_array['Aspirs'],spell.name)
             if spell_index > 1 then
