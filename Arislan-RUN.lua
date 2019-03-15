@@ -270,7 +270,7 @@ function init_gear_sets()
     sets.precast.JA['Rayke'] = set_combine(sets.Enmity, {feet="Futhark Boots +1"})
     sets.precast.JA['Elemental Sforzo'] = set_combine(sets.Enmity, {body="Futhark Coat +3"})
     sets.precast.JA['Odyllic Subterfuge'] = sets.Enmity
-    sets.precast.JA['Swordplay'] = set_combine(sets.Enmity, {hands="Futhark Mitons +1"})
+    sets.precast.JA['Swordplay'] = set_combine(sets.Enmity, {hands="Futhark Mitons +3"})
     sets.precast.JA['One for All'] = sets.Enmity
 
     sets.precast.JA['Vivacious Pulse'] = set_combine(sets.Enmity, {

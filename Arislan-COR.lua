@@ -95,7 +95,7 @@ function job_setup()
     state.IgnoreTargetting = M(false, 'Ignore Targetting')
 
     state.DualWield = M(false, 'Dual Wield III')
-    state.QDMode = M{['description']='Quick Draw Mode', 'STP', 'Enhance', 'Potency'}
+    state.QDMode = M{['description']='Quick Draw Mode', 'STP', 'Enhance', 'Potency', 'TH'}
 
     state.Currentqd = M{['description']='Current Quick Draw', 'Main', 'Alt'}
 
@@ -556,6 +556,7 @@ function init_gear_sets()
     sets.midcast.CorsairShot['Light Shot'] = sets.midcast.CorsairShot.Resistant
     sets.midcast.CorsairShot['Dark Shot'] = sets.midcast.CorsairShot.Resistant
     sets.midcast.CorsairShot.Enhance = {body="Mirke Wardecors", feet="Chass. Bottes +1"}
+    sets.midcast.CorsairShot.TH = sets.TreasureHunter
 
     -- Ranged gear
     sets.midcast.RA = {
@@ -593,7 +594,7 @@ function init_gear_sets()
         hands="Mummu Wrists +2",
         legs="Mummu Kecks +2",
         feet="Oshosi Leggings",
-        ring1="Begrudging Ring",
+        --ring1="Begrudging Ring",
         ring2="Mummu Ring",
         waist="Kwahu Kachina Belt",
         })
@@ -1035,12 +1036,14 @@ function init_gear_sets()
     sets.CP = {back="Mecisto. Mantle"}
     --sets.Reive = {neck="Ygnas's Resolve +1"}
 
+    sets.TreasureHunter = {head="Volte Cap", feet="Volte Boots", waist="Chaac Belt"}
+
     sets.LeadenMelee = {main="Rostam", sub="Blurred Knife +1", ranged="Death Penalty"}
-    sets.LeadenAccMelee = {main="Rostam", sub="Kaja Knife", ranged="Death Penalty"}
-    sets.LeadenRanged = {main="Rostam", sub="Kaja Knife", ranged="Death Penalty"}
+    sets.LeadenAccMelee = {main="Rostam", sub="Tauret", ranged="Death Penalty"}
+    sets.LeadenRanged = {main="Naegling", sub="Tauret", ranged="Death Penalty"}
     sets.LastStandMelee = {main="Rostam", sub="Blurred Knife +1", ranged="Fomalhaut"}
     sets.LastStandRanged = {main="Rostam", sub="Nusku Shield", ranged="Fomalhaut"}
-    sets.SavageMelee = {main="Kaja Sword", sub="Blurred Knife +1", ranged="Ataktos"}
+    sets.SavageMelee = {main="Naegling", sub="Blurred Knife +1", ranged="Ataktos"}
 
 end
 
@@ -1123,6 +1126,8 @@ function job_post_midcast(spell, action, spellMap, eventArgs)
         end
         if state.QDMode.value == 'Enhance' then
             equip(sets.midcast.CorsairShot.Enhance)
+        elseif state.QDMode.value == 'TH' then
+            equip(sets.midcast.CorsairShot.TH)
         elseif state.QDMode.value == 'STP' then
             equip(sets.midcast.CorsairShot.STP)
         end

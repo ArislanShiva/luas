@@ -89,6 +89,7 @@ function user_setup()
     send_command('bind ^numpad8 input /ws "Drakesbane" <t>')
     send_command('bind ^numpad4 input /ws "Stardiver" <t>')
     send_command('bind ^numpad5 input /ws "Geirskogul" <t>')
+    send_command('bind ^numpad6 input /ws "Impulse Drive" <t>')
     send_command('bind ^numpad1 input /ws "Sonic Thrust" <t>')
     send_command('bind ^numpad2 input /ws "Leg Sweep" <t>')
 
@@ -115,6 +116,7 @@ function user_unload()
     send_command('unbind ^numpad8')
     send_command('unbind ^numpad4')
     send_command('unbind ^numpad5')
+    send_command('unbind ^numpad6')
     send_command('unbind ^numpad1')
     send_command('unbind ^numpad2')
     send_command('unbind numpad0')
@@ -167,7 +169,7 @@ function init_gear_sets()
         ammo="Ginsen",
         head="Flam. Zucchetto +2",
         body="Vishap Mail +3",
-        hands="Ptero. Mail +3",
+        hands="Vis. Fng. Gaunt. +3",
         legs="Ptero. Brais +3",
         feet="Ostro Greaves",
         neck="Anu Torque",
@@ -228,7 +230,6 @@ function init_gear_sets()
         })
 
     sets.precast.WS['Camlann\'s Torment'] = set_combine(sets.precast.WS, {
-        head="Lustratio Cap +1",
         ear2="Ishvara Earring",
         })
 
@@ -243,12 +244,14 @@ function init_gear_sets()
         hands="Flamma Manopolas +2",
         legs="Pelt. Cuissots +1",
         ear2="Brutal Earring",
-        ring1="Begrudging Ring",
-        back=gear.DRG_WS1_Cape,
+        --ring1="Begrudging Ring",
+        back=gear.DRG_WS4_Cape,
         waist="Ioskeha Belt +1",
         })
 
-    sets.precast.WS['Drakesbane'].Acc = set_combine(sets.precast.WS['Drakesbane'], {})
+    sets.precast.WS['Drakesbane'].Acc = set_combine(sets.precast.WS['Drakesbane'], {
+        waist="Kentarch Belt +1",
+        })
 
     sets.precast.WS['Drakesbane'].Uncapped = set_combine(sets.precast.WS['Drakesbane'], {
         head="Sulevia's Mask +2",
@@ -267,6 +270,31 @@ function init_gear_sets()
     sets.precast.WS['Geirskogul'].Uncapped = set_combine(sets.precast.WS['Geirskogul'], {
         head="Sulevia's Mask +2", 
         legs=gear.Valo_WSD_legs,
+        })
+
+    sets.precast.WS['Impulse Drive'] = set_combine(sets.precast.WS['Camlann\'s Torment'], {
+        head="Flam. Zucchetto +2", 
+        hands="Flamma Manopolas +2",
+        legs="Pelt. Cuissots +1",
+        ear2="Moonshade Earring",
+        --ring1="Begrudging Ring",
+        back=gear.DRG_WS4_Cape,
+        waist="Ioskeha Belt +1",
+        })
+
+    sets.precast.WS['Impulse Drive'].Acc = set_combine(sets.precast.WS['Impulse Drive'], {
+        legs="Vishap Brais +3",
+        waist="Kentarch Belt +1",
+        })
+
+    sets.precast.WS['Impulse Drive'].HighTP = set_combine(sets.precast.WS['Impulse Drive'], {
+        head=gear.Valo_WSD_head, 
+        hands="Ptero. Fin. G. +3",
+        legs="Vishap Brais +3",
+        back=gear.DRG_WS2_Cape,
+        ear2="Ishvara Earring",
+		ring1="Regal Ring",
+		waist="Prosilio Belt +1",
         })
 
     sets.precast.WS['Sonic Thrust'] = sets.precast.WS['Camlann\'s Torment']
@@ -536,15 +564,13 @@ function job_precast(spell, action, spellMap, eventArgs)
 end
 
 function job_post_precast(spell, action, spellMap, eventArgs)
-    if spell.type == 'WeaponSkill' and state.WeaponskillMode.current == 'Normal' then
-        if spell.english == 'Sonic Thrust' then
-            if world.day_element == 'Earth' or world.day_element == 'Light' then
-                equip(sets.WSDayBonus)
-            end
-        elseif spell.english == 'Stardiver' then
+    if spell.type == 'WeaponSkill' then
+        if spell.english == 'Stardiver' and state.WeaponskillMode.current == 'Normal' then
             if world.day_element == 'Earth' or world.day_element == 'Light' or world.day_element == 'Dark' then
                 equip(sets.WSDayBonus)
            end
+		elseif spell.english == 'Impulse Drive' and player.tp > 2000 then
+           equip(sets.precast.WS['Impulse Drive'].HighTP)
         end
     end
 end

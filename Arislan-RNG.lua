@@ -254,7 +254,7 @@ function init_gear_sets()
 
     sets.precast.RA.Flurry2 = set_combine(sets.precast.RA.Flurry1, {
         head="Orion Beret +3", --0/18
-        feet="Pursuer's Gaiters", --0/10
+        feet="Arcadian Socks +3", --0/10
         waist="Impulse Belt", --3/0
         }) --30/49
 
@@ -300,13 +300,14 @@ function init_gear_sets()
         hands="Mummu Wrists +2",
         feet="Thereoid Greaves",
         ear1="Sherida Earring",
-        ring1="Begrudging Ring",
+        --ring1="Begrudging Ring",
         ring2="Mummu Ring",
         })
 
     sets.precast.WS['Jishnu\'s Radiance'].Acc = set_combine(sets.precast.WS['Jishnu\'s Radiance'], {
         body="Sayadio's Kaftan",
         legs="Mummu Kecks +2",
+        feet="Arcadian Socks +3",
         neck="Iskur Gorget",
         ear1="Enervating Earring",
         ear2="Telos Earring",
@@ -365,7 +366,7 @@ function init_gear_sets()
         feet=gear.Herc_STP_feet,
         neck="Fotia Gorget",
         ear2="Mache Earring +1",
-        ring1="Begrudging Ring",
+        --ring1="Begrudging Ring",
         ring2="Mummu Ring",
         back=gear.RNG_TP_Cape,
         waist="Fotia Belt",
@@ -437,7 +438,7 @@ function init_gear_sets()
         hands="Kobo Kote",
         legs="Mummu Kecks +2",
         feet="Oshosi Leggings",
-        ring1="Begrudging Ring",
+        --ring1="Begrudging Ring",
         ring2="Mummu Ring",
         waist="Kwahu Kachina Belt",
         })
@@ -496,6 +497,7 @@ function init_gear_sets()
     sets.idle.Town = set_combine(sets.idle, {
         ammo=gear.ACCbullet,
         hands=gear.Adhemar_C_hands,
+        feet="Arcadian Socks +3",
         neck="Iskur Gorget",
         ear1="Enervating Earring",
         ear2="Telos Earring",

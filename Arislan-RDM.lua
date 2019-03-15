@@ -121,7 +121,7 @@ function user_setup()
 
     -- Additional local binds
     include('Global-Binds.lua') -- OK to remove this line
-    include('Global-WHM-Binds.lua') -- OK to remove this line
+    include('Global-GEO-Binds.lua') -- OK to remove this line
 
     if player.sub_job == 'NIN' or player.sub_job == 'DNC' then
         send_command('lua l gearinfo')
@@ -229,7 +229,6 @@ function user_unload()
     if player.sub_job == 'NIN' or player.sub_job == 'DNC' then
         send_command('lua u gearinfo')
     end
-
 end
 
 -- Define sets and vars used by this job file.
@@ -320,7 +319,7 @@ function init_gear_sets()
         legs=gear.Taeon_Crit_legs,
         feet="Thereoid Greaves",
         ear1="Sherida Earring",
-        ring1="Begrudging Ring",
+        --ring1="Begrudging Ring",
         ring2="Ilabrat Ring",
         back=gear.RDM_WS2_Cape,
         })
@@ -774,8 +773,6 @@ function init_gear_sets()
     ------------------------------------------------------------------------------------------------
     ---------------------------------------- Engaged Sets ------------------------------------------
     ------------------------------------------------------------------------------------------------
-
-    -- Engaged sets
 
     -- Variations for TP weapon and (optional) offense/defense modes.  Code will fall back on previous
     -- sets if more refined versions aren't defined.
@@ -1259,26 +1256,6 @@ function determine_haste_group()
     end
 end
 
-function job_self_command(cmdParams, eventArgs)
-    if cmdParams[1]:lower() == 'scholar' then
-        handle_strategems(cmdParams)
-        eventArgs.handled = true
-    elseif cmdParams[1]:lower() == 'nuke' then
-        handle_nuking(cmdParams)
-        eventArgs.handled = true
-    elseif cmdParams[1]:lower() == 'enspell' then
-        send_command('@input /ma '..state.EnSpell.value..' <me>')
-    elseif cmdParams[1]:lower() == 'barelement' then
-        send_command('@input /ma '..state.BarElement.value..' <me>')
-    elseif cmdParams[1]:lower() == 'barstatus' then
-        send_command('@input /ma '..state.BarStatus.value..' <me>')
-    elseif cmdParams[1]:lower() == 'gainspell' then
-        send_command('@input /ma '..state.GainSpell.value..' <me>')
-    end
-
-    gearinfo(cmdParams, eventArgs)
-end
-
 function gearinfo(cmdParams, eventArgs)
     if cmdParams[1] == 'gearinfo' then
         if type(tonumber(cmdParams[2])) == 'number' then
@@ -1308,6 +1285,26 @@ function gearinfo(cmdParams, eventArgs)
             job_update()
         end
     end
+end
+
+function job_self_command(cmdParams, eventArgs)
+    if cmdParams[1]:lower() == 'scholar' then
+        handle_strategems(cmdParams)
+        eventArgs.handled = true
+    elseif cmdParams[1]:lower() == 'nuke' then
+        handle_nuking(cmdParams)
+        eventArgs.handled = true
+    elseif cmdParams[1]:lower() == 'enspell' then
+        send_command('@input /ma '..state.EnSpell.value..' <me>')
+    elseif cmdParams[1]:lower() == 'barelement' then
+        send_command('@input /ma '..state.BarElement.value..' <me>')
+    elseif cmdParams[1]:lower() == 'barstatus' then
+        send_command('@input /ma '..state.BarStatus.value..' <me>')
+    elseif cmdParams[1]:lower() == 'gainspell' then
+        send_command('@input /ma '..state.GainSpell.value..' <me>')
+    end
+
+    gearinfo(cmdParams, eventArgs)
 end
 
 -- General handling of strategems in an Arts-agnostic way.
@@ -1368,14 +1365,6 @@ function handle_strategems(cmdParams)
     end
 end
 
-windower.register_event('zone change', 
-    function()
-        if player.sub_job == 'NIN' or player.sub_job == 'DNC' then
-            send_command('gi ugs true')
-        end
-    end
-)
-
 function set_sleep_timer(spell)
     local self = windower.ffxi.get_player()
 
@@ -1387,25 +1376,23 @@ function set_sleep_timer(spell)
 
     if state.Buff.Saboteur then
         if state.NM.value then
-			base = base * 1.25
-		else
-			base = base * 2
-		end
+            base = base * 1.25
+        else
+            base = base * 2
+        end
     end
 
     -- Job Points Buff
     base = base + self.job_points.rdm.enfeebling_magic_duration
 
-	if state.Buff.Stymie then
-		base = base + self.job_points.rdm.stymie_effect
-	end
-
-	add_to_chat(004, 'Base Duration: ' ..base)
+    if state.Buff.Stymie then
+        base = base + self.job_points.rdm.stymie_effect
+    end
 
     --User enfeebling duration enhancing gear total
     gear_mult = 1.10
     --User enfeebling duration enhancing augment total
-	aug_mult = 1.17
+    aug_mult = 1.18
 
     totalDuration = math.floor(base * gear_mult * aug_mult)
         
@@ -1417,6 +1404,14 @@ function set_sleep_timer(spell)
     end
 
 end
+
+windower.register_event('zone change', 
+    function()
+        if player.sub_job == 'NIN' or player.sub_job == 'DNC' then
+            send_command('gi ugs true')
+        end
+    end
+)
 
 -- Select default macro book on initial load or subjob change.
 function select_default_macro_book()

@@ -403,7 +403,7 @@ function init_gear_sets()
         legs="Samnuha Tights",
         feet="Thereoid Greaves",
         ear2="Brutal Earring",
-        ring1="Begrudging Ring",
+        --ring1="Begrudging Ring",
         ring2="Epona's Ring",
         back=gear.BLU_WS1_Cape,
         })
@@ -637,6 +637,7 @@ function init_gear_sets()
         ammo="Pemphredo Tathlum",
         head="Assim. Keffiyeh +2",
         body="Amalric Doublet +1",
+        --hands=gear.Herc_TH_hands,
         hands="Jhakri Cuffs +2",
         legs="Assim. Shalwar +3",
         feet="Jhakri Pigaches +2",

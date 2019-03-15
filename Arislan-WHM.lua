@@ -275,6 +275,18 @@ function init_gear_sets()
         waist="Witful Belt",
         } -- Haste
 
+    sets.midcast.ConserveMP = {
+        main="Sucellus",
+        --sub="Thuellaic Ecu +1",
+        head="Vanya Hood",
+        body="Vedic Coat",
+        --hands="Shrieker's Cuffs",
+        --legs="Vanya Slops",
+        feet="Kaykaus Boots +1",
+        ear2="Mendi. Earring",
+        back="Solemnity Cape",
+        waist="Austerity Belt +1",
+        }
     -- Cure sets
 
     sets.midcast.CureSolace = {
@@ -450,7 +462,11 @@ function init_gear_sets()
         feet="Ebers Duckbills +1"
         })
 
-    sets.midcast.Protect = set_combine(sets.midcast.EnhancingDuration, {ring1="Sheltered Ring"})
+    sets.midcast.Protect = set_combine(sets.midcast.ConserveMP, sets.midcast.EnhancingDuration, {
+        feet="Piety Duckbills +1",
+        ring1="Sheltered Ring",
+        })
+
     sets.midcast.Protectra = sets.midcast.Protect
     sets.midcast.Shell = sets.midcast.Protect
     sets.midcast.Shellra = sets.midcast.Protect
@@ -462,7 +478,7 @@ function init_gear_sets()
         ammo="Pemphredo Tathlum",
         head="Befouled Crown",
         body="Vanya Robe",
-        hands="Kaykaus Cuffs +1",
+        hands="Piety Mitts +3",
         legs="Th. Pant. +3",
         neck="Incanter's Torque",
         ear1="Hermetic Earring",
@@ -508,8 +524,8 @@ function init_gear_sets()
 
     -- Custom spell classes
     sets.midcast.MndEnfeebles = {
-        main=gear.Grioavolr_MND,
-        sub="Eletta Grip",
+        main=gear.Gada_Enf,
+        sub="Ammurapi Shield",
         ammo="Pemphredo Tathlum",
         head="Theophany Cap +3",
         body="Theo. Briault +3",
@@ -527,7 +543,7 @@ function init_gear_sets()
 
     sets.midcast.IntEnfeebles = set_combine(sets.midcast.MndEnfeebles, {
         main=gear.Grioavolr_MB,
-        sub="Eletta Grip",
+        sub="Enki Strap",
         back="Aurist's Cape +1",
         waist="Yamabuki-no-Obi",
         })

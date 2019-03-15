@@ -121,6 +121,8 @@ function user_setup()
     send_command('bind ^numpad4 input /ws "Evisceration" <t>')
     send_command('bind ^numpad5 input /ws "Rudra\'s Storm" <t>')
     send_command('bind ^numpad1 input /ws "Aeolian Edge" <t>')
+    send_command('bind ^numpad2 input /ws "Wasp Sting" <t>')
+    send_command('bind ^numpad3 input /ws "Gust Slash" <t>')
 
     send_command('bind ^numpad0 input /ja "Sneak Attack" <me>')
     send_command('bind ^numpad. input /ja "Trick Attack" <me>')
@@ -153,6 +155,8 @@ function user_unload()
     send_command('unbind ^numpad4')
     send_command('unbind ^numpad5')
     send_command('unbind ^numpad1')
+    send_command('unbind ^numpad2')
+    send_command('unbind ^numpad3')
     send_command('unbind ^numpad0')
     send_command('unbind ^numpad.')
 
@@ -327,7 +331,7 @@ function init_gear_sets()
         feet=gear.Herc_TA_feet,
         ear1="Sherida Earring",
         ear2="Mache Earring +1",
-        ring1="Begrudging Ring",
+        --ring1="Begrudging Ring",
         ring2="Mummu Ring",
         back=gear.THF_WS2_Cape,
         })

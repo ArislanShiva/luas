@@ -1,3 +1,38 @@
+-- Original: Motenten / Modified: Arislan
+
+-------------------------------------------------------------------------------------------------------------------
+--  Keybinds
+-------------------------------------------------------------------------------------------------------------------
+
+--  Modes:      [ F9 ]              Cycle Offense Mode
+--              [ CTRL+F9 ]         Cycle Hybrid Modes
+--              [ WIN+F9 ]          Cycle Weapon Skill Modes
+--              [ F10 ]             Emergency -PDT Mode
+--              [ ALT+F10 ]         Toggle Kiting Mode
+--              [ F11 ]             Emergency -MDT Mode
+--              [ CTRL+F11 ]        Cycle Casting Modes
+--              [ F12 ]             Update Current Gear / Report Current Status
+--              [ CTRL+F12 ]        Cycle Idle Modes
+--              [ ALT+F12 ]         Cancel Emergency -PDT/-MDT Mode
+--              [ WIN+C ]           Toggle Capacity Points Mode
+--
+--  Abilities:  [ CTRL+` ]          Cycle SongMode
+--
+--  Songs:      [ ALT+` ]           Chocobo Mazurka
+--              [ WIN+, ]           Utsusemi: Ichi
+--              [ WIN+. ]           Utsusemi: Ni
+--
+--  Weapons:    [ CTRL+W ]          Toggles Weapon Lock
+--
+--  WS:         [ CTRL+Numpad7 ]    Mordant Rime
+--              [ CTRL+Numpad4 ]    Evisceration
+--              [ CTRL+Numpad5 ]    Rudra's Storm
+--              [ CTRL+Numpad1 ]    Aeolian Edge
+--
+--
+--              (Global-Binds.lua contains additional non-job-related keybinds)
+
+
 -------------------------------------------------------------------------------------------------------------------
 -- Setup functions for this job.  Generally should not be modified.
 -------------------------------------------------------------------------------------------------------------------
@@ -112,7 +147,6 @@ function user_setup()
     select_default_macro_book()
     set_lockstyle()
     update_combat_form()
-
 end
 
 
@@ -218,7 +252,7 @@ function init_gear_sets()
     sets.precast.WS['Evisceration'] = set_combine(sets.precast.WS, {
         range=gear.Linos_TP,
         ear1="Brutal Earring",
-        ring1="Begrudging Ring",
+        --ring1="Begrudging Ring",
         back=gear.BRD_TP_Cape,
         })
         
@@ -442,12 +476,13 @@ function init_gear_sets()
     ---------------------------------------- Engaged Sets ------------------------------------------
     ------------------------------------------------------------------------------------------------
 
+    -- Engaged sets
+
     -- Variations for TP weapon and (optional) offense/defense modes.  Code will fall back on previous
     -- sets if more refined versions aren't defined.
     -- If you create a set with both offense and defense modes, the offense mode should be first.
     -- EG: sets.engaged.Dagger.Accuracy.Evasion
     
-    -- Basic set for if no TP weapon is defined.
     sets.engaged = {
         main="Twashtar",
         sub="Genmei Shield",
@@ -457,7 +492,7 @@ function init_gear_sets()
         hands="Aya. Manopolas +2",
         legs="Aya. Cosciales +2",
         feet="Chironic Slippers",
-        neck="Ainia Collar",
+        neck="Bard's Charm +1",
         ear1="Cessance Earring",
         ear2="Telos Earring",
         ring1={name="Chirich Ring +1", bag="wardrobe3"},
@@ -466,7 +501,13 @@ function init_gear_sets()
         waist="Windbuffet Belt +1",
         }
 
-    -- Set if dual-wielding
+	sets.engaged.Acc = set_combine(sets.engaged, {
+        ear2="Mache Earring +1",
+		ring2="Ramuh Ring +1",
+        waist="Kentarch Belt +1",
+        })
+
+    -- 45% Magic Haste (36% DW to cap)
     sets.engaged.DW = {
         main="Aeneas",
         sub="Blurred Knife +1",
@@ -476,6 +517,7 @@ function init_gear_sets()
         hands="Aya. Manopolas +2",
         legs="Aya. Cosciales +2",
         feet="Chironic Slippers",
+        --neck="Bard's Charm +1",
         neck="Ainia Collar",
         ear1="Eabani Earring", --4
         ear2="Telos Earring",
@@ -485,6 +527,10 @@ function init_gear_sets()
         waist="Reiki Yotai", --7
         }
 
+    sets.engaged.DW.Acc = set_combine(sets.engaged.DW, {
+        ear2="Mache Earring +1",
+		ring2="Ramuh Ring +1",
+        })
 
     ------------------------------------------------------------------------------------------------
     ---------------------------------------- Special Sets ------------------------------------------
@@ -607,6 +653,16 @@ end
 -- User code that supplements standard library decisions.
 -------------------------------------------------------------------------------------------------------------------
 
+-- Called by the 'update' self-command, for common needs.
+-- Set eventArgs.handled to true if we don't want automatic equipping of gear.
+function job_handle_equipping_gear(playerStatus, eventArgs)
+    update_combat_form()
+end
+
+function job_update(cmdParams, eventArgs)
+    handle_equipping_gear(player.status)
+end
+
 -- Called for direct player commands.
 function job_self_command(cmdParams, eventArgs)
     if cmdParams[1]:lower() == 'etude' then
@@ -616,16 +672,6 @@ function job_self_command(cmdParams, eventArgs)
     elseif cmdParams[1]:lower() == 'threnody' then
         send_command('@input /ma '..state.Threnody.value..' <stnpc>')
     end
-end
-
--- Called by the 'update' self-command, for common needs.
--- Set eventArgs.handled to true if we don't want automatic equipping of gear.
-function job_handle_equipping_gear(playerStatus, eventArgs)
-    update_combat_form()
-end
-
-function job_update(cmdParams, eventArgs)
-    handle_equipping_gear(player.status)
 end
 
 -- Modify the default idle set after it was constructed.
@@ -770,7 +816,6 @@ function update_combat_form()
         --end
     end
 end
-
 -- Select default macro book on initial load or subjob change.
 function select_default_macro_book()
     set_macro_page(1, 14)
