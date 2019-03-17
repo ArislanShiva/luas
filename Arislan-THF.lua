@@ -400,9 +400,9 @@ function init_gear_sets()
 
     sets.idle = {
         ammo="Staunch Tathlum +1",
-        head="Pill. Bonnet +3",
+        head="Turms Cap +1",
         body="Turms Harness",
-        hands=gear.Herc_DT_hands,
+        hands="Turms Mittens +1",
         legs="Mummu Kecks +2",
         feet="Jute Boots +1",
         neck="Bathy Choker +1",
@@ -416,21 +416,22 @@ function init_gear_sets()
 
     sets.idle.DT = set_combine(sets.idle, {
         ammo="Staunch Tathlum +1", --3/3
-        head="Volte Cap",
-        hands=gear.Herc_DT_hands, --7/5
+        head="Turms Cap +1",
+        hands="Turms Mittens +1",
         legs="Mummu Kecks +2", --5/5
         feet="Turms Leggings +1",
         neck="Loricate Torque +1", --6/6
         ear1="Genmei Earring", --2/0
+		ear2="Etiolation Earring", --0/3
         ring1="Gelatinous Ring +1", --7/(-1)
         ring2="Defending Ring", --10/10
-        back="Moonlight Cape", --6/6
+        back=gear.THF_TP_Cape, --10/0
         waist="Flume Belt +1", --4/0
         })
 
     sets.idle.Town = set_combine(sets.idle, {
         ammo="Yamarang",
-        head=gear.Adhemar_B_head,
+        head="Pill. Bonnet +3",
         body=gear.Adhemar_B_body,
         hands=gear.Adhemar_B_hands,
         legs="Lustr. Subligar +1",

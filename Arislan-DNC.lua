@@ -492,7 +492,7 @@ function init_gear_sets()
 
     sets.idle = {
         ammo="Staunch Tathlum +1",
-        head="Volte Cap",
+        head="Turms Cap +1",
         body="Turms Harness",
         hands="Turms Mittens +1",
         legs="Mummu Kecks +2",
@@ -508,7 +508,7 @@ function init_gear_sets()
 
     sets.idle.DT = set_combine(sets.idle, {
         ammo="Staunch Tathlum +1", --3/3
-        head="Volte Cap",
+        head="Turms Cap +1",
         body="Horos Casaque +3", --6/0
         hands="Turms Mittens +1",
         legs="Meg. Chausses +2", --6/0

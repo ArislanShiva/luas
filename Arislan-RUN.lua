@@ -98,7 +98,7 @@ function user_setup()
     state.CastingMode:options('Normal', 'Resistant')
     state.IdleMode:options('Normal', 'DT')
     state.PhysicalDefenseMode:options('PDT', 'HP')
-    state.MagicalDefenseMode:options('MDT', 'Status')
+    state.MagicalDefenseMode:options('MDT')
 
     state.Charm = M(false, 'Charm Resistance')
     state.Knockback = M(false, 'Knockback')
@@ -487,7 +487,7 @@ function init_gear_sets()
     sets.midcast.Cure = {
         sub="Mensch Strap +1",
         ammo="Staunch Tathlum +1",
-        head=gear.Herc_DT_head,
+        head="Fu. Bandeau +3",
         body="Vrikodara Jupon", -- 13
         hands="Buremte Gloves", --(13)
         legs="Aya. Cosciales +2",
@@ -584,41 +584,40 @@ function init_gear_sets()
     sets.idle = {
         sub="Mensch Strap +1",
         ammo="Homiliary",
-        head="Fu. Bandeau +3",
+        head="Turms Cap +1",
         body="Runeist's Coat +3",
-        hands="Turms Mittens +1",
+        hands="Regal Gauntlets",
         legs="Carmine Cuisses +1",
         feet="Turms Leggings +1",
         neck="Bathy Choker +1",
         ear1="Infused Earring",
-        ear2="Genmei Earring",
+        ear2="Odnowa Earring +1",
         ring1={name="Stikini Ring +1", bag="wardrobe3"},
         ring2={name="Stikini Ring +1", bag="wardrobe4"},
-        back=gear.RUN_HPP_Cape,
+        back=gear.RUN_HPD_Cape,
         waist="Ioskeha Belt +1",
         }
 
     sets.idle.DT = {
-        sub="Refined Grip +1", --3/3
+        sub="Mensch Strap +1", --5/0
         ammo="Staunch Tathlum +1", --3/3
         head="Fu. Bandeau +3", --6/0
         body="Runeist's Coat +3",
         hands="Turms Mittens +1",
         legs="Carmine Cuisses +1",
-        feet="Ahosi Leggings", --4/0
+        feet="Turms Leggings +1",
         neck="Loricate Torque +1", --6/6
         ear1="Eabani Earring",
         ear2="Odnowa Earring +1", --0/2
-        ring1="Gelatinous Ring +1", --7/(-1)
+        ring1="Moonlight Ring", --5/5
         ring2="Defending Ring", --10/10
-        back="Evasionist's Cape", --7/4
+        back=gear.RUN_HPD_Cape, --10/0
         waist="Flume Belt +1", --4/0
         }
 
     sets.idle.Town = set_combine(sets.idle, {
         ammo="Staunch Tathlum +1",
-        head="Fu. Bandeau +3",
-        body="Futhark Coat +3",
+        head="Turms Cap +1",
         hands="Turms Mittens +1",
         feet="Turms Leggings +1",
         neck="Loricate Torque +1",
@@ -647,9 +646,9 @@ function init_gear_sets()
     sets.defense.Death = {body="Samnuha Coat", ring1="Warden's Ring", ring2="Eihwaz Ring"}
 
     sets.defense.PDT = {
-        sub="Refined Grip +1", --3/3
+        sub="Mensch Strap +1", --5/0
         ammo="Staunch Tathlum +1", --3/3
-        head="Fu. Bandeau +3", --6/0
+        head="Turms Cap +1",
         body="Futhark Coat +3", --9/9
         hands="Turms Mittens +1",
         legs="Eri. Leg Guards +1", --7/0
@@ -657,44 +656,27 @@ function init_gear_sets()
         neck="Loricate Torque +1", --6/6
         ear1="Eabani Earring",
         ear2="Odnowa Earring +1", --0/2
-        ring1="Gelatinous Ring +1", --7/(-1)
+        ring1="Moonlight Ring", --5/5
         ring2="Defending Ring", --10/10
         back=gear.RUN_HPP_Cape,
         waist="Flume Belt +1", --4/0
         }
 
     sets.defense.MDT = {
-        sub="Irenic Strap +1", --0/5
+        sub="Refined Grip +1", --3/3
         ammo="Staunch Tathlum +1", --3/3
-        head="Fu. Bandeau +3", --6/0
+        head="Turms Cap +1",
         body="Runeist's Coat +3",
-        hands=gear.Herc_DT_hands, --7/5
+        hands="Turms Mittens +1",
         legs="Eri. Leg Guards +1", --7/0
         feet="Turms Leggings +1",
-        neck="Warder's Charm +1",
+        neck="Loricate Torque +1", --6/6
         ear1="Etiolation Earring", --0/3
         ear2="Odnowa Earring +1", --0/2
         ring1="Gelatinous Ring +1", --7/(-1)
         ring2="Defending Ring", --10/10
         back=gear.RUN_HPD_Cape, --10/0
-        waist="Engraved Belt",
-        }
-
-    sets.defense.Status = {
-        sub="Irenic Strap +1", --0/5
-        ammo="Staunch Tathlum +1", --3/3
-        head="Rune. Bandeau +3",
-        body="Futhark Coat +3", --9/9
-        hands="Erilaz Gauntlets +1",
-        legs="Rune. Trousers +3", --5/0
-        feet="Turms Leggings +1",
-        neck="Loricate Torque +1", --6/6
-        ear1="Hearty Earring",
-        ear2="Genmei Earring", --2/0
-        ring1="Moonlight Ring", --5/5
-        ring2="Defending Ring", --10/10
-        back=gear.RUN_HPD_Cape, --10/0
-        waist="Engraved Belt",
+        waist="Flume Belt +1", --4/0
         }
 
     sets.defense.HP = {

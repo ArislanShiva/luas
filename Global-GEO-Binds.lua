@@ -25,13 +25,13 @@
     send_command('bind #3 input //send safiyeh /ma "Indi-Haste" <t>')
     send_command('bind #4 input //send safiyeh /ma "Indi-Refresh" <t>')
     send_command('bind #5 input //send safiyeh /ma "Geo-Malaise" <t>')
-    send_command('bind #6 input //send safiyeh /ma "Indi-Torpor" <t>')
+    send_command('bind #6 input //send safiyeh /ma "Indi-Acumen" <t>')
 
     send_command('bind #7 input //send safiyeh /ma "Silence" <t>')
     send_command('bind #8 input //send safiyeh /ma "Silence" <t>')
     send_command('bind #9 input //send safiyeh /ma "Paralyze" <t>')
-    --send_command('bind #0 input //send safiyeh /ma "Cure" Arislan')
-    send_command('bind #0 input //send safiyeh /ma "Dispel" <t>')
+    send_command('bind #0 input //send safiyeh /ma "Cure" Arislan')
+    --send_command('bind #0 input //send safiyeh /ma "Dispel" <t>')
 
     send_command('bind #q input //send safiyeh //gs c nuke')
     send_command('bind #w input //send safiyeh /ma "Aspir III" <t>')
