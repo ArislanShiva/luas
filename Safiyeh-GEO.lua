@@ -167,7 +167,7 @@ function init_gear_sets()
         ring1="Kishar Ring", --4
         ring2="Weather. Ring +1", --6(4)
         back=gear.GEO_FC_Cape, --10
-        waist="Witful Belt", --3
+        waist="Witful Belt", --3(3)
         }
 
     sets.precast.FC['Enhancing Magic'] = set_combine(sets.precast.FC, {
@@ -242,7 +242,7 @@ function init_gear_sets()
         feet="Merlinic Crackows",
         ear1="Calamitous Earring",
         ear2="Gifted Earring",
-        neck="Incanter's Torque",
+        neck="Bagua Charm",
         ring1={name="Stikini Ring", bag="wardrobe1"},
         ring2={name="Stikini Ring", bag="wardrobe2"},
         back="Lifestream Cape",
@@ -345,7 +345,7 @@ function init_gear_sets()
         hands="Geo. Mitaines +3",
         legs="Chironic Hose",
         feet="Geo. Sandals +3",
-        neck="Erra Pendant",
+        neck="Bagua Charm",
         ear1="Digni. Earring",
         ear2="Regal Earring",
         ring1="Kishar Ring",
@@ -417,7 +417,7 @@ function init_gear_sets()
 
     sets.midcast.GeoElem = set_combine(sets.midcast['Elemental Magic'], {})
 
-    sets.midcast['Elemental Magic'].Seidr = set_combine(sets.midcast['Elemental Magic'], {
+    sets.midcast['Elemental Magic'].Seidr = set_combine(sets.midcast['Elemental Magic'].Resistant, {
         body="Seidr Cotehardie",
         })
 
@@ -472,22 +472,27 @@ function init_gear_sets()
     -- .Pet sets are for when Luopan is present.
     sets.idle.Pet = set_combine(sets.idle, {
         -- Pet: -DT (37.5% to cap) / Pet: Regen
-        main="Idris",
-        sub="Genmei Shield",
+        main="Idris", --0/0/25/0
+        sub="Genmei Shield", --10/0/0/0
         head="Bagua Galero +2",
-        body="Telchine Chas.", --0/3
-        hands="Geo. Mitaines +3", --13/0
-        legs="Telchine Braconi", --0/3
-        feet="Telchine Pigaches", --0/3
-        neck="Loricate Torque +1", --6/6
-        ear2="Etiolation Earring", --0/3
-        ring1="Gelatinous Ring +1", --7/(-1)
-        ring2="Defending Ring", --10/10
-        back=gear.GEO_Pet_Cape, --0/15
-        waist="Isa Belt" --3/1
+        body="Telchine Chas.", --0/0/0/3
+        hands="Geo. Mitaines +3", --3/0/13/0
+        legs="Telchine Braconi", --0/0/0/3
+        feet="Telchine Pigaches", --0/0/0/3
+        neck="Bagua Charm",
+        ear1="Odnowa Earring +1", --0/2/0/0
+        ear2="Etiolation Earring", --0/3/0/0
+        ring1="Gelatinous Ring +1", --7/(-1)/0/0
+        ring2="Defending Ring", --10/10/0/0
+        back=gear.GEO_Pet_Cape, --0/0/0/15
+        waist="Isa Belt" --0/0/3/1
         })
 
-    sets.idle.DT.Pet = sets.idle.Pet
+    sets.idle.DT.Pet = set_combine(sets.idle.Pet, {
+        body="Mallquis Saio +2", --8/8
+        })
+
+    sets.PetHP = {head="Bagua Galero +2"}
 
     -- .Indi sets are for when an Indi-spell is active.
     --sets.idle.Indi = set_combine(sets.idle, {})
@@ -502,7 +507,6 @@ function init_gear_sets()
         body="Geomancy Tunic +3",
         hands="Geo. Mitaines +3",
         legs="Geomancy Pants +3",
-        neck="Incanter's Torque",
         ear2="Regal Earring",
         ring1="Kishar Ring",
         ring2="Weather. Ring +1",
@@ -612,8 +616,6 @@ function job_aftercast(spell, action, spellMap, eventArgs)
             --send_command('@timers d "'..indi_timer..'"')
             --indi_timer = spell.english
             --send_command('@timers c "'..indi_timer..'" '..indi_duration..' down spells/00136.png')
-        elseif spell.skill == 'Elemental Magic' then
- --           state.MagicBurst:reset()
         end
         if spell.english == "Sleep II" then
             send_command('@timers c "Sleep II ['..spell.target.name..']" 90 down spells/00259.png')
@@ -697,6 +699,13 @@ function customize_idle_set(idleSet)
         disable('back')
     else
         enable('back')
+    end
+    
+    if pet.isvalid then
+        equip(sets.PetHP)
+        disable('head')
+    else
+        enable('head')
     end
 
     return idleSet

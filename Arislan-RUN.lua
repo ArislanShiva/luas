@@ -16,6 +16,7 @@
 --              [ WIN+H ]           Toggle Charm Defense Mods
 --              [ WIN+D ]           Toggle Death Defense Mods
 --              [ WIN+K ]           Toggle Knockback Defense Mods
+--              [ WIN+A ]           AttackMode: Capped/Uncapped WS Modifier
 --              [ WIN+C ]           Toggle Capacity Points Mode
 --
 --  Abilities:  [ CTRL+` ]          Use current Rune
@@ -105,6 +106,7 @@ function user_setup()
     state.Death = M(false, "Death Resistance")
 
     state.WeaponSet = M{['description']='Weapon Set', 'Epeolatry', 'Lionheart', 'Aettir', 'GreatAxe'}
+    state.AttackMode = M{['description']='Attack', 'Uncapped', 'Capped'}
     state.CP = M(false, "Capacity Points Mode")
     state.WeaponLock = M(false, 'Weapon Lock')
 
@@ -119,6 +121,7 @@ function user_setup()
     send_command('bind ^insert gs c cycleback Runes')
     send_command('bind ^delete gs c cycle Runes')
     send_command('bind ^f11 gs c cycle MagicalDefenseMode')
+    send_command('bind @a gs c cycle AttackMode')
     send_command('bind @c gs c toggle CP')
     send_command('bind @e gs c cycleback WeaponSet')
     send_command('bind @r gs c cycle WeaponSet')
@@ -177,6 +180,7 @@ function user_unload()
     send_command('unbind ^f11')
     send_command('unbind ^insert')
     send_command('unbind ^delete')
+    send_command('unbind @a')
     send_command('unbind @c')
     send_command('unbind @h')
     send_command('unbind @k')
@@ -349,30 +353,43 @@ function init_gear_sets()
         ear2="Telos Earring",
         })
 
-    sets.precast.WS['Resolution'] = set_combine(sets.precast.WS, {
+    sets.precast.WS.Uncapped = set_combine(sets.precast.WS, {
         ammo="Seeth. Bomblet +1",
-        head=gear.Adhemar_B_head,
-        body=gear.Adhemar_B_body,
+        })  
+
+    sets.precast.WS['Resolution'] = set_combine(sets.precast.WS, {
+        head="Lustratio Cap +1",
+        body="Lustr. Harness +1",
         hands=gear.Adhemar_B_hands,
         legs="Samnuha Tights",
-        feet=gear.Herc_TA_feet,
+        feet="Lustra. Leggings +1",
+        ring1="Epona's Ring",
         back=gear.RUN_WS1_Cape,
         })
 
     sets.precast.WS['Resolution'].Acc = set_combine(sets.precast.WS['Resolution'], {
-        head="Dampening Tam",
+        head=gear.Adhemar_B_head,
         legs="Meg. Chausses +2",
         feet=gear.Herc_STP_feet,
         ear2="Telos Earring",
         })
 
+    sets.precast.WS['Resolution'].Uncapped = set_combine(sets.precast.WS['Resolution'], {
+        ammo="Seeth. Bomblet +1",
+        head=gear.Adhemar_B_head,
+        body=gear.Adhemar_B_body,
+        legs="Meg. Chausses +2",
+        feet=gear.Herc_TA_feet,
+        ring1="Regal Ring",
+        })
+
     sets.precast.WS['Dimidiation'] = set_combine(sets.precast.WS, {
+        body=gear.Adhemar_B_body,
         legs="Lustr. Subligar +1",
         feet="Lustra. Leggings +1",
-        neck="Caro Necklace",
         ear1="Mache Earring +1",
+        ring1="Epona's Ring",
         back=gear.RUN_WS2_Cape,
-        waist="Grunfeld Rope",
         })
 
     sets.precast.WS['Dimidiation'].Acc = set_combine(sets.precast.WS['Dimidiation'], {
@@ -383,52 +400,15 @@ function init_gear_sets()
         ear2="Telos Earring",
         })
 
+    sets.precast.WS['Dimidiation'].Uncapped = set_combine(sets.precast.WS['Dimidiation'], {
+        neck="Caro Necklace",
+        ring1="Ilabrat Ring",
+        waist="Grunfeld Rope",
+        })
+
     sets.precast.WS['Herculean Slash'] = sets.precast.JA['Lunge']
 
-    sets.precast.WS['Savage Blade'] = set_combine(sets.precast.WS, {
-        body=gear.Herc_WS_body,
-        legs="Meg. Chausses +2",
-        feet="Meg. Jam. +2",
-        neck="Caro Necklace",
-        ear1="Ishvara Earring",
-        ring1="Regal Ring",
-        ring2="Niqmaddu Ring",
-        waist="Prosilio Belt +1",
-        back=gear.RUN_WS1_Cape,
-        })
-
-    sets.precast.WS['Sanguine Blade'] = {
-        ammo="Seeth. Bomblet +1",
-        head="Pixie Hairpin +1",
-        body="Samnuha Coat",
-        hands="Carmine Fin. Ga. +1",
-        legs=gear.Herc_MAB_legs,
-        feet=gear.Herc_MAB_feet,
-        neck="Baetyl Pendant",
-        ear1="Crematio Earring",
-        ear2="Friomisi Earring",
-        ring1="Archon Ring",
-        ring2={name="Stikini Ring +1", bag="wardrobe4"},
-        back="Argocham. Mantle",
-        waist="Eschan Stone",
-        }
-
-    sets.precast.WS['True Strike'] = sets.precast.WS['Resolution']
-
-    sets.precast.WS['True Strike'] = sets.precast.WS['Savage Blade']
-    sets.precast.WS['Judgment'] = sets.precast.WS['Savage Blade']
-    sets.precast.WS['Black Halo'] = sets.precast.WS['Savage Blade']
-
-    sets.precast.WS['Flash Nova'] = set_combine(sets.precast.WS['Sanguine Blade'], {
-        head=gear.Herc_MAB_head,
-        ring1={name="Shiva Ring +1", bag="wardrobe3"},
-        ring2="Weather. Ring +1",
-        })
-
-    sets.precast.WS['Upheaval'] = sets.precast.WS['Resolution']
-    sets.precast.WS['Fell Cleave'] = sets.precast.WS['Savage Blade']
-
-    sets.precast.WS['Full Break'] = {
+    sets.precast.WS['Shockwave'] = {
         ammo="Pemphredo Tathlum",
         head="Aya. Zucchetto +2",
         body="Ayanmo Corazza +2",
@@ -444,8 +424,16 @@ function init_gear_sets()
         waist="Eschan Stone",
         }
 
-    sets.precast.WS['Shockwave'] = sets.precast.WS['Full Break']
+    sets.precast.WS['Fell Cleave'] = set_combine(sets.precast.WS, {
+        feet="Lustra. Leggings +1",
+        ear2="Ishvara Earring",
+        ring1="Regal Ring",
+        ring2="Niqmaddu Ring",
+        back=gear.RUN_WS1_Cape,
+        })
 
+    sets.precast.WS['Upheaval'] = sets.precast.WS['Resolution']
+    sets.precast.WS['Full Break'] = sets.precast.WS['Shockwave']
 
     ------------------------------------------------------------------------------------------------
     ---------------------------------------- Midcast Sets ------------------------------------------
@@ -526,7 +514,7 @@ function init_gear_sets()
         })
 
     sets.midcast['Regen'] = set_combine(sets.midcast['Enhancing Magic'], {head="Rune. Bandeau +3"})
-    sets.midcast.Refresh = set_combine(sets.midcast.EnhancingDuration, {waist="Gishdubar Sash"})
+    sets.midcast.Refresh = set_combine(sets.midcast.EnhancingDuration, {head="Erilaz Galea +1", waist="Gishdubar Sash"})
     sets.midcast.Stoneskin = set_combine(sets.midcast['Enhancing Magic'], {waist="Siegel Sash"})
     sets.midcast.Protect = set_combine(sets.midcast['Enhancing Magic'], {ring2="Sheltered Ring"})
     sets.midcast.Shell = sets.midcast.Protect
@@ -579,7 +567,7 @@ function init_gear_sets()
         hands="Turms Mittens +1",
         legs="Carmine Cuisses +1",
         feet="Turms Leggings +1",
-        neck="Loricate Torque +1", --6/6
+        neck="Futhark Torque +1", --6/6
         ear1="Eabani Earring",
         ear2="Odnowa Earring +1", --0/2
         ring1="Moonlight Ring", --5/5
@@ -590,6 +578,7 @@ function init_gear_sets()
 
     sets.idle.Town = set_combine(sets.idle, {
         ammo="Staunch Tathlum +1",
+        neck="Futhark Torque +1",
         ear1="Eabani Earring",
         })
 
@@ -619,7 +608,7 @@ function init_gear_sets()
         hands="Turms Mittens +1",
         legs="Eri. Leg Guards +1", --7/0
         feet="Turms Leggings +1",
-        neck="Loricate Torque +1", --6/6
+        neck="Futhark Torque +1", --6/6
         ear1="Eabani Earring",
         ear2="Odnowa Earring +1", --0/2
         ring1="Moonlight Ring", --5/5
@@ -636,7 +625,7 @@ function init_gear_sets()
         hands="Turms Mittens +1",
         legs="Eri. Leg Guards +1", --7/0
         feet="Turms Leggings +1",
-        neck="Loricate Torque +1", --6/6
+        neck="Futhark Torque +1", --6/6
         ear1="Etiolation Earring", --0/3
         ear2="Odnowa Earring +1", --0/2
         ring1="Gelatinous Ring +1", --7/(-1)
@@ -653,7 +642,7 @@ function init_gear_sets()
         hands="Regal Gauntlets",
         legs="Eri. Leg Guards +1", --7/0
         feet="Turms Leggings +1",
-        neck="Loricate Torque +1", --6/6
+        neck="Futhark Torque +1", --6/6
         ear1="Odnowa Earring", --0/1
         ear2="Odnowa Earring +1", --0/2
         ring1="Moonlight Ring", --5/5
@@ -738,7 +727,7 @@ function init_gear_sets()
     sets.Hybrid = {
         head=gear.Adhemar_D_head, --4/0
         body="Ayanmo Corazza +2", --6/6
-        neck="Loricate Torque +1", --6/6
+        neck="Futhark Torque +1", --6/6
         ring1="Moonlight Ring", --5/5
         ring2="Defending Ring", --10/10
         back=gear.RUN_TP_Cape, --10/0
@@ -768,7 +757,7 @@ function init_gear_sets()
         hands=gear.Adhemar_B_hands,
         legs="Meg. Chausses +2",
         feet=gear.Herc_STP_feet,
-        neck="Loricate Torque +1",
+        neck="Futhark Torque +1",
         ear1="Sherida Earring",
         ear2="Dedition Earring",
         ring1="Moonlight Ring",
@@ -860,7 +849,7 @@ function job_precast(spell, action, spellMap, eventArgs)
 end
 
 function job_midcast(spell, action, spellMap, eventArgs)
-    if state.DefenseMode.value ~= 'None' then
+    if state.DefenseMode.value ~= 'None' and spell.english ~= "Phalanx" then
         eventArgs.handled = true
         if spell.action_type == 'Magic' then
             if spell.English == 'Flash' or spell.English == 'Foil' or spell.English == 'Stun'
@@ -1082,6 +1071,8 @@ function display_current_job_state(eventArgs)
         m_msg = m_msg .. '/' ..state.HybridMode.value
     end
 
+    local am_msg = '(' ..string.sub(state.AttackMode.value,1,1).. ')'
+
     local ws_msg = state.WeaponskillMode.value
 
     local d_msg = 'None'
@@ -1107,7 +1098,7 @@ function display_current_job_state(eventArgs)
 
     add_to_chat(r_color, string.char(129,121).. '  ' ..string.upper(r_msg).. '  ' ..string.char(129,122)
         ..string.char(31,210).. ' Melee' ..cf_msg.. ': ' ..string.char(31,001)..m_msg.. string.char(31,002).. ' |'
-        ..string.char(31,207).. ' WS: ' ..string.char(31,001)..ws_msg.. string.char(31,002).. ' |'
+        ..string.char(31,207).. ' WS' ..am_msg.. ': ' ..string.char(31,001)..ws_msg.. string.char(31,002)..  ' |'
         ..string.char(31,060)
         ..string.char(31,004).. ' Defense: ' ..string.char(31,001)..d_msg.. string.char(31,002).. ' |'
         ..string.char(31,008).. ' Idle: ' ..string.char(31,001)..i_msg.. string.char(31,002).. ' |'
@@ -1136,6 +1127,12 @@ end
 function job_self_command(cmdParams, eventArgs)
     if cmdParams[1]:lower() == 'rune' then
         send_command('@input /ja '..state.Runes.value..' <me>')
+    end
+end
+
+function get_custom_wsmode(spell, action, spellMap)
+    if spell.type == 'WeaponSkill' and state.AttackMode.value == 'Uncapped' then
+        return "Uncapped"
     end
 end
 

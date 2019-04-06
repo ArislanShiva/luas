@@ -242,10 +242,7 @@ function init_gear_sets()
     sets.precast.JA['Chainspell'] = {body="Viti. Tabard +3"}
 
     -- Fast cast sets for spells
-
-    -- Fast cast sets for spells
     sets.precast.FC = {
-    --    Traits --30
         head="Atrophy Chapeau +3", --16
         body="Viti. Tabard +3", --15
         legs="Aya. Cosciales +2", --6
@@ -293,7 +290,7 @@ function init_gear_sets()
         head="Viti. Chapeau +3",
         body="Jhakri Robe +2",
         hands="Atrophy Gloves +3",
-        legs="Jhakri Slops +2",
+        legs="Viti. Tights +3",
         feet="Jhakri Pigaches +2",
         neck="Fotia Gorget",
         ear1="Ishvara Earring",
@@ -328,7 +325,7 @@ function init_gear_sets()
         head=gear.Taeon_TA_head,
         body=gear.Taeon_TA_body,
         hands=gear.Taeon_TA_hands,
-        legs=gear.Taeon_TA_legs,
+        legs="Viti. Tights +3",
         ear2="Mache Earring +1",
         ring1="Ramuh Ring +1",
         })
@@ -488,10 +485,6 @@ function init_gear_sets()
         hands="Viti. Gloves +2",
         }
 
-    sets.midcast.GainSpell = {
-        hands="Viti. Gloves +2",
-        }
-
     sets.midcast.Regen = set_combine(sets.midcast.EnhancingDuration, {
         main="Bolelabunga",
         sub="Ammurapi Shield",
@@ -527,11 +520,14 @@ function init_gear_sets()
         })
 
     sets.midcast.Storm = sets.midcast.EnhancingDuration
+    sets.midcast.GainSpell = {hands="Viti. Gloves +2"}
+    sets.midcast.SpikesSpell = {legs="Viti. Tights +3"}
 
     sets.midcast.Protect = set_combine(sets.midcast.EnhancingDuration, {ring2="Sheltered Ring"})
     sets.midcast.Protectra = sets.midcast.Protect
     sets.midcast.Shell = sets.midcast.Protect
     sets.midcast.Shellra = sets.midcast.Shell
+
 
      -- Custom spell classes
     sets.midcast.MndEnfeebles = {
@@ -598,6 +594,7 @@ function init_gear_sets()
 
     sets.midcast.ElementalEnfeeble = sets.midcast.IntEnfeebles
 
+    sets.midcast['Blind II'] = set_combine(sets.midcast.IntEnfeebles, sets.midcast.EffectEnfeebles, {legs="Viti. Tights +3"})
     sets.midcast['Dia III'] = set_combine(sets.midcast.MndEnfeebles, sets.midcast.EffectEnfeebles, {head="Viti. Chapeau +3"})
     sets.midcast['Paralyze II'] = set_combine(sets.midcast.MndEnfeebles, {head="Vitiation Boots +3"})
     sets.midcast['Slow II'] = set_combine(sets.midcast.MndEnfeebles, {head="Viti. Chapeau +3"})
@@ -630,6 +627,7 @@ function init_gear_sets()
 
     sets.midcast.Aspir = sets.midcast.Drain
     sets.midcast.Stun = set_combine(sets.midcast['Dark Magic'], {waist="Luminary Sash"})
+    sets.midcast['Bio III'] = set_combine(sets.midcast['Dark Magic'], {legs="Viti. Tights +3"})
 
     sets.midcast['Elemental Magic'] = {
         main=gear.Grioavolr_MB,
@@ -722,6 +720,7 @@ function init_gear_sets()
         head="Volte Cap",
         body="Ayanmo Corazza +2", --6/6
         hands="Gende. Gages +1", --4/4
+        legs="Viti. Tights +3", --5/0
         feet="Volte Boots",
         neck="Loricate Torque +1", --6/6
         ring1="Gelatinous Ring +1", --7/(-1)
@@ -1065,6 +1064,9 @@ function job_post_midcast(spell, action, spellMap, eventArgs)
         elseif skill_spells:contains(spell.english) then
             equip(sets.midcast.EnhancingSkill)
         elseif spell.english:startswith('Gain') then
+            equip(sets.midcast.GainSpell)
+        elseif spell.english:contains('Spikes') then
+            equip(sets.midcast.SpikesSpell)
         end
         if (spell.target.type == 'PLAYER' or spell.target.type == 'NPC') and buffactive.Composure then
             equip(sets.buff.ComposureOther)

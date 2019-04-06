@@ -204,7 +204,7 @@ function init_gear_sets()
         body=gear.Merl_FC_body, --13
         hands="Acad. Bracers +3", --9
         legs="Psycloth Lappas", --7
-        feet="Volte Gaiters", --6
+        feet="Peda. Loafers +3", --8
         neck="Orunmila's Torque", --5
         ear1="Loquacious Earring", --2
         ear2="Enchntr. Earring +1", --2
@@ -405,7 +405,7 @@ function init_gear_sets()
 
     sets.midcast.Storm = sets.midcast.EnhancingDuration
 
-    sets.midcast.Stormsurge = set_combine(sets.midcast.Storm, {feet="Peda. Loafers +1"})
+    sets.midcast.Stormsurge = set_combine(sets.midcast.Storm, {feet="Peda. Loafers +3"})
 
     sets.midcast.Protect = set_combine(sets.midcast.EnhancingDuration, {ring2="Sheltered Ring"})
     sets.midcast.Protectra = sets.midcast.Protect
@@ -587,7 +587,7 @@ function init_gear_sets()
         ammo="Staunch Tathlum +1", --3/3
         head="Volte Cap",
         body="Mallquis Saio +2", --8/8
-        feet="Volte Boots",
+        feet="Peda. Loafers +3",
         neck="Loricate Torque +1", --6/6
         ring1="Gelatinous Ring +1", --7/(-1)
         ring2="Defending Ring", --10/10
@@ -666,8 +666,8 @@ function init_gear_sets()
     sets.buff['Immanence'] = {hands="Arbatel Bracers +1", "Lugh's Cape"}
     sets.buff['Penury'] = {legs="Arbatel Pants +1"}
     sets.buff['Parsimony'] = {legs="Arbatel Pants +1"}
-    sets.buff['Celerity'] = {feet="Peda. Loafers +1"}
-    sets.buff['Alacrity'] = {feet="Peda. Loafers +1"}
+    sets.buff['Celerity'] = {feet="Peda. Loafers +3"}
+    sets.buff['Alacrity'] = {feet="Peda. Loafers +3"}
     sets.buff['Klimaform'] = {feet="Arbatel Loafers +1"}
 
     sets.buff.FullSublimation = {

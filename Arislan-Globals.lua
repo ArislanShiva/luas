@@ -18,8 +18,8 @@ function define_global_sets()
     gear.Lathi_MAB = {name="Lathi", augments={'MP+80','INT+20','"Mag.Atk.Bns."+20',}}
     gear.Lathi_ENF = {name="Lathi", augments={'Mag. Acc.+20','Enfb.mag. skill +15','Dark magic skill +15',}}
 
-    gear.Linos_TP = {name="Linos", augments={'Accuracy+11 Attack+11','"Dbl.Atk."+3','Quadruple Attack +3',}}
-    gear.Linos_WS = {name="Linos", augments={'Attack+13','Weapon skill damage +3%','STR+4 DEX+4',}}
+    gear.Linos_TP = {name="Linos", augments={'Accuracy+12 Attack+12','"Dbl.Atk."+3','Quadruple Attack +3',}}
+    gear.Linos_WS = {name="Linos", augments={'Accuracy+11 Attack+11','Weapon skill damage +3%','STR+4 DEX+4',}}
 
     gear.Grioavolr_MND = {name="Grioavolr", augments={'Enfb.mag. skill +10','MND+18','Mag. Acc.+20','"Mag.Atk.Bns."+11',}}
     gear.Grioavolr_MP = {name="Grioavolr", augments={'"Fast Cast"+5','MP+97','Mag. Acc.+28','"Mag.Atk.Bns."+29',}}
@@ -102,11 +102,12 @@ function define_global_sets()
     gear.Taeon_RA_body = {name="Taeon Tabard", augments={'Rng.Acc.+20 Rng.Atk.+20','"Snapshot"+5','"Snapshot"+5',}}
 
     -- Valorous
+    gear.Valo_Crit_feet = {name="Valorous Greaves", augments={'Accuracy+28','Crit. hit damage +4%','STR+5',}}
+
+    gear.Valo_STP_legs = {name="Valor. Hose", augments={'Accuracy+21 Attack+21','"Store TP"+8','Accuracy+15','Attack+11',}}
 
     gear.Valo_TP_body = {name="Valorous Mail", augments={'Attack+27','"Dbl.Atk."+5','DEX+9','Accuracy+15',}}
     gear.Valo_TP_legs = {name="Valor. Hose", augments={'Accuracy+20','"Dbl.Atk."+5','Attack+13',}}
-
-    gear.Valo_STP_legs = {name="Valor. Hose", augments={'Accuracy+21 Attack+21','"Store TP"+8','Accuracy+15','Attack+11',}}
 
     gear.Valo_WSD_head = {name="Valorous Mask", augments={'Accuracy+18 Attack+18','Weapon skill damage +4%','STR+7','Attack+3',}}
     gear.Valo_WSD_body = {name="Valorous Mail", augments={'Accuracy+22 Attack+22','Weapon skill damage +4%','STR+1','Accuracy+15','Attack+15',}}

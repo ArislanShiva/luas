@@ -436,7 +436,8 @@ function init_gear_sets()
         hands="Inyan. Dastanas +2", --0/4
         legs="Inyanga Shalwar +2", --0/6
         feet="Inyan. Crackows +2", --0/3
-        neck="Loricate Torque +1", --6/6
+		neck="Bard's Charm +1",
+        --neck="Loricate Torque +1", --6/6
         ear1="Genmei Earring", --2/0
         ear2="Etiolation Earring", --0/3
         ring1="Gelatinous Ring +1", --7/{-1}

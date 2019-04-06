@@ -390,7 +390,7 @@ function init_gear_sets()
         ring1="Archon Ring",
         })
 
-    sets.precast.WS['Leaden Salute'].FullTP = {ear1="Novio Earring", waist="Svelt. Gouriz +1"}
+    sets.precast.WS['Leaden Salute'].FullTP = {ear1="Crematio Earring", waist="Svelt. Gouriz +1"}
 
     sets.precast.WS['Evisceration'] = {
         head=gear.Adhemar_B_head,

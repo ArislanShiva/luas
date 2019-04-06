@@ -333,19 +333,19 @@ function init_gear_sets()
     sets.precast.JA['Provoke'] = sets.Enmity
 
     sets.buff['Burst Affinity'] = {legs="Assim. Shalwar +3", feet="Hashi. Basmak +1"}
-    sets.buff['Diffusion'] = {feet="Luhlaza Charuqs +1"}
+    sets.buff['Diffusion'] = {feet="Luhlaza Charuqs +3"}
     sets.buff['Efflux'] = {legs="Hashishin Tayt +1"}
 
     sets.precast.JA['Azure Lore'] = {hands="Luh. Bazubands +1"}
     sets.precast.JA['Chain Affinity'] = {feet="Assim. Charuqs +1"}
     sets.precast.JA['Convergence'] = {head="Luh. Keffiyeh +3"}
-    --sets.precast.JA['Enchainment'] = {body="Luhlaza Jubbah +1"}
+    sets.precast.JA['Enchainment'] = {body="Luhlaza Jubbah +3"}
 
     sets.precast.FC = {
         -- Colada 4
         ammo="Sapience Orb", --2
         head="Carmine Mask +1", --14
-        body=gear.Taeon_FC_body, --8
+        body="Luhlaza Jubbah +3", --9
         hands="Leyline Gloves", --8
         legs="Aya. Cosciales +2", --6
         feet="Carmine Greaves +1", --8
@@ -378,7 +378,7 @@ function init_gear_sets()
         head="Lilitu Headpiece",
         body="Assim. Jubbah +3",
         hands="Jhakri Cuffs +2",
-        legs=gear.Herc_WS_legs,
+        legs="Luhlaza Shalwar +3",
         feet=gear.Herc_TA_feet,
         neck="Fotia Gorget",
         ear1="Moonshade Earring",
@@ -440,11 +440,11 @@ function init_gear_sets()
 
     sets.precast.WS['Requiescat'] = {
         ammo="Hydrocera",
-        head="Jhakri Coronal +2",
-        body="Jhakri Robe +2",
+        head="Luh. Keffiyeh +3",
+        body="Luhlaza Jubbah +3",
         hands="Jhakri Cuffs +2",
-        legs=gear.Herc_WS_legs,
-        feet="Jhakri Pigaches +2",
+        legs="Luhlaza Shalwar +3",
+        feet="Luhlaza Charuqs +3",
         neck="Fotia Gorget",
         ear1="Moonshade Earring",
         ear2="Brutal Earring",
@@ -457,7 +457,6 @@ function init_gear_sets()
     sets.precast.WS['Requiescat'].Acc = set_combine(sets.precast.WS['Requiescat'], {
         ammo="Falcon Eye",
         head="Dampening Tam",
-        legs="Carmine Cuisses +1",
         feet=gear.Herc_STP_feet,
         ear1="Cessance Earring",
         ear2="Telos Earring",
@@ -476,7 +475,7 @@ function init_gear_sets()
         head="Pixie Hairpin +1",
         body="Amalric Doublet +1",
         hands="Amalric Gages +1",
-        legs="Amalric Slops +1",
+        legs="Luhlaza Shalwar +3",
         feet="Amalric Nails +1",
         neck="Fotia Gorget",
         ear1="Moonshade Earring",
@@ -520,7 +519,7 @@ function init_gear_sets()
         body="Assim. Jubbah +3",
         hands="Rawhide Gloves",
         legs="Hashishin Tayt +1",
-        feet="Luhlaza Charuqs +1",
+        feet="Luhlaza Charuqs +3",
         neck="Incanter's Torque",
         ring1={name="Stikini Ring +1", bag="wardrobe3"},
         ring2={name="Stikini Ring +1", bag="wardrobe4"},
@@ -529,11 +528,11 @@ function init_gear_sets()
 
     sets.midcast['Blue Magic'].Physical = {
         ammo="Floestone",
-        head="Jhakri Coronal +2",
-        body="Jhakri Robe +2",
+        head="Luh. Keffiyeh +3",
+        body="Luhlaza Jubbah +3",
         hands="Jhakri Cuffs +2",
-        legs="Jhakri Slops +2",
-        feet="Jhakri Pigaches +2",
+        legs="Luhlaza Shalwar +3",
+        feet="Luhlaza Charuqs +3",
         neck="Caro Necklace",
         ring1="Shukuyu Ring",
         ring2="Ilabrat Ring",
@@ -603,6 +602,7 @@ function init_gear_sets()
     sets.midcast['Blue Magic'].Magical.Resistant = set_combine(sets.midcast['Blue Magic'].Magical, {
         head="Assim. Keffiyeh +2",
         hands="Jhakri Cuffs +2",
+        legs="Luhlaza Shalwar +3",
         neck="Erra Pendant",
         ear1="Digni. Earring",
         ring1={name="Stikini Ring +1", bag="wardrobe3"},
@@ -637,10 +637,9 @@ function init_gear_sets()
         ammo="Pemphredo Tathlum",
         head="Assim. Keffiyeh +2",
         body="Amalric Doublet +1",
-        --hands=gear.Herc_TH_hands,
-        hands="Jhakri Cuffs +2",
+        hands="Aya. Manopolas +2",
         legs="Assim. Shalwar +3",
-        feet="Jhakri Pigaches +2",
+        feet="Aya. Gambieras +2",
         neck="Erra Pendant",
         ear1="Digni. Earring",
         ear2="Regal Earring",
@@ -652,7 +651,17 @@ function init_gear_sets()
 
     sets.midcast['Blue Magic'].Breath = set_combine(sets.midcast['Blue Magic'].Magical, {head="Luh. Keffiyeh +3"})
 
-    sets.midcast['Blue Magic'].Stun = sets.midcast['Blue Magic'].MagicAccuracy
+    sets.midcast['Blue Magic'].Stun = set_combine(sets.midcast['Blue Magic'].MagicAccuracy, {
+        head="Aya. Zucchetto +2",
+        body="Ayanmo Corazza +2",
+        hands="Aya. Manopolas +2",
+        legs="Aya. Cosciales +2",
+        feet="Aya. Gambieras +2",
+        neck="Sanctity Necklace",
+        ear2="Mache Earring +1",
+        back=gear.BLU_TP_Cape,
+        waist="Eschan Stone",
+        })
 
     sets.midcast['Blue Magic'].Healing = {
         ammo="Pemphredo Tathlum",
@@ -1223,7 +1232,7 @@ function job_post_midcast(spell, action, spellMap, eventArgs)
     end
 end
 
-function job_post_midcast(spell, action, spellMap, eventArgs)
+function job_aftercast(spell, action, spellMap, eventArgs)
     if not spell.interrupted then
         if spell.english == "Dream Flower" then
             send_command('@timers c "Dream Flower ['..spell.target.name..']" 90 down spells/00098.png')

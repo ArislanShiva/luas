@@ -128,6 +128,14 @@ function user_setup()
     send_command('bind ^numpad1 input /ws "Flash Nova" <t>')
     send_command('bind ^numpad0 input /ws "Mystic Boon" <t>')
 
+    send_command('bind 1 input /ma "Barfira" <me>')
+    send_command('bind 2 input /ma "Barblizzara" <me>')
+    send_command('bind 3 input /ma "Baraera" <me>')
+    send_command('bind 4 input /ma "Barstonra" <me>')
+    send_command('bind 5 input /ma "Barthundra" <me>')
+    send_command('bind 6 input /ma "Barwatera" <me>')
+
+
     select_default_macro_book()
     set_lockstyle()
 end
@@ -171,6 +179,14 @@ function user_unload()
     send_command('unbind #8')
     send_command('unbind #9')
     send_command('unbind #0')
+
+    send_command('unbind 1')
+    send_command('unbind 2')
+    send_command('unbind 3')
+    send_command('unbind 4')
+    send_command('unbind 5')
+    send_command('unbind 6')
+
 end
 
 -- Define sets and vars used by this job file.
@@ -236,9 +252,9 @@ function init_gear_sets()
     sets.precast.WS = {
         ammo="Floestone",
         head="Aya. Zucchetto +2",
-        body="Ayanmo Corazza +2",
-        hands="Aya. Manopolas +2",
-        legs="Aya. Cosciales +2",
+        body="Piety Briault +3",
+        hands="Piety Mitts +3",
+        legs="Piety Pantaln. +3",
         feet="Battlecast Gaiters",
         neck="Fotia Gorget",
         ear1="Moonshade Earring",
@@ -417,7 +433,7 @@ function init_gear_sets()
         main="Bolelabunga",
         sub="Ammurapi Shield",
         head="Inyanga Tiara +2",
-        body="Piety Briault +1",
+        body="Piety Briault +3",
         hands="Ebers Mitts +1",
         legs="Th. Pant. +3",
         })
@@ -469,8 +485,8 @@ function init_gear_sets()
 
     sets.midcast.Protectra = sets.midcast.Protect
     sets.midcast.Shell = sets.midcast.Protect
-    sets.midcast.Shellra = sets.midcast.Protect
-    sets.midcast.ShellraV = set_combine(sets.midcast.Protect, {legs="Piety Pantaln. +3"})
+    sets.midcast.Shellra = set_combine(sets.midcast.ConserveMP, sets.midcast.EnhancingDuration, {ring1="Sheltered Ring"})
+    sets.midcast.ShellraV = set_combine(sets.midcast.Shellra, {legs="Piety Pantaln. +3"})
 
     sets.midcast['Divine Magic'] = {
         main=gear.Grioavolr_MB,
@@ -509,7 +525,7 @@ function init_gear_sets()
         sub="Ammurapi Shield",
         ammo="Pemphredo Tathlum",
         head="Befouled Crown",
-        body="Shango Robe",
+        body="Theo. Briault +3",
         hands="Theophany Mitts +3",
         legs="Chironic Hose",
         feet="Medium's Sabots",
@@ -577,7 +593,7 @@ function init_gear_sets()
         sub="Genmei Shield",
         ammo="Homiliary",
         head="Befouled Crown",
-        body="Theo. Briault +3",
+        body="Piety Briault +3",
         hands="Inyan. Dastanas +2",
         legs="Assid. Pants +1",
         feet="Herald's Gaiters",

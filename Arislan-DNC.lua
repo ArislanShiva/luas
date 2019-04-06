@@ -113,7 +113,7 @@ function user_setup()
 
     -- Additional local binds
     include('Global-Binds.lua') -- OK to remove this line
-    include('Global-WHM-Binds.lua') -- OK to remove this line
+    include('Global-GEO-Binds.lua') -- OK to remove this line
 
     send_command('lua l gearinfo')
 
@@ -498,7 +498,7 @@ function init_gear_sets()
         legs="Mummu Kecks +2",
         feet="Skd. Jambeaux +1",
         neck="Bathy Choker +1",
-        ear1="Genmei Earring",
+        ear1="Eabani Earring",
         ear2="Infused Earring",
         ring1={name="Chirich Ring +1", bag="wardrobe3"},
         ring2={name="Chirich Ring +1", bag="wardrobe4"},
@@ -511,14 +511,14 @@ function init_gear_sets()
         head="Turms Cap +1",
         body="Horos Casaque +3", --6/0
         hands="Turms Mittens +1",
-        legs="Meg. Chausses +2", --6/0
+        legs="Mummu Kecks +2", --5/5
         feet="Turms Leggings +1",
         neck="Loricate Torque +1", --6/6
-        ear1="Genmei Earring", --2/0
+        ear1="Eabani Earring",
         ear2="Etiolation Earring", --0/3
         ring1="Gelatinous Ring +1", --7/(-1)
         ring2="Defending Ring", --10/10
-        back="Moonlight Cape", --6/6
+        back=gear.DNC_TP_Cape, --10/0
         waist="Flume Belt +1", --4/0
         })
 
