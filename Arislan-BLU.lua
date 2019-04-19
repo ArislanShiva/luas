@@ -246,7 +246,8 @@ function user_setup()
     send_command('bind ^numpad4 input /ws "Requiescat" <t>')
     send_command('bind ^numpad5 input /ws "Expiacion" <t>')
     send_command('bind ^numpad1 input /ws "Sanguine Blade" <t>')
-    send_command('bind ^numpad2 input /ws "Flat Blade" <t>')
+    send_command('bind ^numpad2 input /ws "Black Halo" <t>')
+    send_command('bind numpad0 input /ws "Savage Blade" <t>')
 
     select_default_macro_book()
     set_lockstyle()
@@ -288,6 +289,7 @@ function user_unload()
     send_command('unbind ^numpad5')
     send_command('unbind ^numpad1')
     send_command('unbind ^numpad2')
+    send_command('unbind numpad0')
 
     send_command('unbind #`')
     send_command('unbind #1')
@@ -379,11 +381,11 @@ function init_gear_sets()
         body="Assim. Jubbah +3",
         hands="Jhakri Cuffs +2",
         legs="Luhlaza Shalwar +3",
-        feet=gear.Herc_TA_feet,
+        feet=gear.Herc_WS_feet,
         neck="Fotia Gorget",
         ear1="Moonshade Earring",
         ear2="Ishvara Earring",
-        ring1="Shukuyu Ring",
+        ring1="Epaminondas's Ring",
         ring2="Ilabrat Ring",
         back=gear.BLU_WS2_Cape,
         waist="Fotia Belt",
@@ -402,8 +404,9 @@ function init_gear_sets()
         hands=gear.Adhemar_B_hands,
         legs="Samnuha Tights",
         feet="Thereoid Greaves",
+        neck="Mirage Stole +2",
         ear2="Brutal Earring",
-        --ring1="Begrudging Ring",
+        ring1="Begrudging Ring",
         ring2="Epona's Ring",
         back=gear.BLU_WS1_Cape,
         })
@@ -423,9 +426,7 @@ function init_gear_sets()
     sets.precast.WS['Savage Blade'] = set_combine(sets.precast.WS, {
         ammo="Floestone",
         body="Assim. Jubbah +3",
-        hands=gear.Adhemar_B_hands,
-        neck="Caro Necklace",
-        ring1="Shukuyu Ring",
+        neck="Mirage Stole +2",
         ring2="Rufescent Ring",
         waist="Prosilio Belt +1",
         })
@@ -433,7 +434,6 @@ function init_gear_sets()
     sets.precast.WS['Savage Blade'].Acc = set_combine(sets.precast.WS['Savage Blade'], {
         ammo="Falcon Eye",
         feet=gear.Herc_STP_feet,
-        neck="Combatant's Torque",
         ear2="Telos Earring",
         waist="Grunfeld Rope",
         })
@@ -480,7 +480,7 @@ function init_gear_sets()
         neck="Fotia Gorget",
         ear1="Moonshade Earring",
         ear2="Regal Earring",
-        ring1="Rufescent Ring",
+        ring1="Epaminondas's Ring",
         ring2="Archon Ring",
         back=gear.BLU_MAB_Cape,
         waist="Fotia Belt",
@@ -490,14 +490,24 @@ function init_gear_sets()
     sets.precast.WS['True Strike'].Acc = sets.precast.WS['Savage Blade'].Acc
     sets.precast.WS['Judgment'] = sets.precast.WS['True Strike']
     sets.precast.WS['Judgment'].Acc = sets.precast.WS['True Strike'].Acc
-    sets.precast.WS['Black Halo'] = sets.precast.WS['True Strike']
-    sets.precast.WS['Black Halo'].Acc = sets.precast.WS['True Strike'].Acc
+
+    sets.precast.WS['Black Halo'] = set_combine(sets.precast.WS['Savage Blade'], {
+        head="Luh. Keffiyeh +3",   
+        ear2="Regal Earring",
+        waist="Luminary Sash",
+        })
+
+    sets.precast.WS['Black Halo'].Acc = set_combine(sets.precast.WS['Black Halo'], {
+        ammo="Falcon Eye",
+        feet=gear.Herc_STP_feet,
+        ear2="Telos Earring",
+        })
+
     sets.precast.WS['Realmrazer'] = sets.precast.WS['Requiescat']
     sets.precast.WS['Realmrazer'].Acc = sets.precast.WS['Requiescat'].Acc
 
     sets.precast.WS['Flash Nova'] = set_combine(sets.precast.WS['Sanguine Blade'], {
         head="Jhakri Coronal +2",
-        ring1={name="Stikini Ring +1", bag="wardrobe3"},
         ring2="Weather. Ring +1",
         })
 
@@ -520,7 +530,7 @@ function init_gear_sets()
         hands="Rawhide Gloves",
         legs="Hashishin Tayt +1",
         feet="Luhlaza Charuqs +3",
-        neck="Incanter's Torque",
+        neck="Mirage Stole +2",
         ring1={name="Stikini Ring +1", bag="wardrobe3"},
         ring2={name="Stikini Ring +1", bag="wardrobe4"},
         back="Cornflower Cape",
@@ -545,7 +555,7 @@ function init_gear_sets()
         head="Carmine Mask +1",
         legs="Carmine Cuisses +1",
         feet=gear.Herc_STP_feet,
-        neck="Sanctity Necklace",
+        neck="Mirage Stole +2",
         ear2="Telos Earring",
         back="Cornflower Cape",
         waist="Grunfeld Rope",
@@ -603,7 +613,7 @@ function init_gear_sets()
         head="Assim. Keffiyeh +2",
         hands="Jhakri Cuffs +2",
         legs="Luhlaza Shalwar +3",
-        neck="Erra Pendant",
+        neck="Mirage Stole +2",
         ear1="Digni. Earring",
         ring1={name="Stikini Ring +1", bag="wardrobe3"},
         ring2={name="Stikini Ring +1", bag="wardrobe4"},
@@ -640,7 +650,7 @@ function init_gear_sets()
         hands="Aya. Manopolas +2",
         legs="Assim. Shalwar +3",
         feet="Aya. Gambieras +2",
-        neck="Erra Pendant",
+        neck="Mirage Stole +2",
         ear1="Digni. Earring",
         ear2="Regal Earring",
         ring1={name="Stikini Ring +1", bag="wardrobe3"},
@@ -657,7 +667,7 @@ function init_gear_sets()
         hands="Aya. Manopolas +2",
         legs="Aya. Cosciales +2",
         feet="Aya. Gambieras +2",
-        neck="Sanctity Necklace",
+        neck="Mirage Stole +2",
         ear2="Mache Earring +1",
         back=gear.BLU_TP_Cape,
         waist="Eschan Stone",
@@ -694,6 +704,7 @@ function init_gear_sets()
         ammo="Mavi Tathlum",
         head="Carmine Mask +1",
         hands="Hashi. Bazu. +1",
+        neck="Mirage Stole +2",
         ear1="Loquacious Earring",
         ear2="Enchntr. Earring +1",
         ring1="Kishar Ring",
@@ -795,7 +806,7 @@ function init_gear_sets()
         body="Assim. Jubbah +3",
         hands=gear.Adhemar_B_hands,
         feet="Amalric Nails +1",
-        neck="Combatant's Torque",
+        neck="Mirage Stole +2",
         ear1="Eabani Earring",
         ear2="Telos Earring",
         back=gear.BLU_WS1_Cape,
@@ -858,6 +869,7 @@ function init_gear_sets()
         head="Carmine Mask +1",
         legs="Carmine Cuisses +1",
         feet=gear.Herc_STP_feet,
+        neck="Mirage Stole +2",
         ear2="Mache Earring +1",
         ring1="Ramuh Ring +1",
         waist="Olseni Belt",
@@ -910,6 +922,7 @@ function init_gear_sets()
     sets.engaged.DW.HighAcc = set_combine(sets.engaged.DW.MidAcc, {
         head="Carmine Mask +1",
         feet=gear.Herc_STP_feet,
+        neck="Mirage Stole +2",
         ear1="Cessance Earring",
         ear2="Mache Earring +1",
         ring1="Ramuh Ring +1",
@@ -954,6 +967,7 @@ function init_gear_sets()
     sets.engaged.DW.HighAcc.LowHaste = set_combine(sets.engaged.DW.MidAcc.LowHaste, {
         head="Carmine Mask +1",
         feet=gear.Herc_STP_feet,
+        neck="Mirage Stole +2",
         ear1="Cessance Earring",
         ear2="Mache Earring +1",
         ring1="Ramuh Ring +1",
@@ -1000,6 +1014,7 @@ function init_gear_sets()
         head="Carmine Mask +1",
         legs="Carmine Cuisses +1",
         feet=gear.Herc_STP_feet,
+        neck="Mirage Stole +2",
         ear1="Cessance Earring",
         ear2="Mache Earring +1",
         ring1="Ramuh Ring +1",
@@ -1046,6 +1061,7 @@ function init_gear_sets()
         head="Carmine Mask +1",
         legs="Carmine Cuisses +1",
         feet=gear.Herc_STP_feet,
+        neck="Mirage Stole +2",
         ear1="Cessance Earring",
         ear2="Mache Earring +1",
         ring1="Ramuh Ring +1",
@@ -1090,6 +1106,7 @@ function init_gear_sets()
         head="Carmine Mask +1",
         legs="Carmine Cuisses +1",
         feet=gear.Herc_STP_feet,
+        neck="Mirage Stole +2",
         ear2="Mache Earring +1",
         ring1="Ramuh Ring +1",
         waist="Olseni Belt",

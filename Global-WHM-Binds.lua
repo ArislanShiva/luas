@@ -52,3 +52,4 @@
     send_command('bind #numpad6 input //send safiyeh /ma "Viruna" <t>')
     send_command('bind #numpad1 input //send safiyeh /ma "Cursna" <t>')
     send_command('bind #numpad+ input //send safiyeh /ma "Erase" <t>')
+    send_command('bind #numpad. input //send safiyeh /ma "Esuna" <me>')

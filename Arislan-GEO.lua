@@ -168,7 +168,7 @@ function init_gear_sets()
         ear1="Moonshade Earring",
         ear2="Telos Earring",
         ring1="Rufescent Ring",
-        ring2="Shukuyu Ring",
+        ring2="Epaminondas's Ring",
         back="Relucent Cape",
         waist="Fotia Belt",
         }
@@ -180,8 +180,6 @@ function init_gear_sets()
 
     -- Base fast recast for spells
     sets.midcast.FastRecast = {
-        main="Oranyan",
-        sub="Clerisy Strap +1",
         head="Amalric Coif +1",
         hands="Merlinic Dastanas",
         legs="Geo. Pants +1",
@@ -366,7 +364,7 @@ function init_gear_sets()
 
     sets.midcast['Elemental Magic'] = {
         main=gear.Grioavolr_MB,
-        sub="Niobid Strap",
+        sub="Enki Strap",
         head="Merlinic Hood",
         body="Amalric Doublet +1",
         hands="Amalric Gages +1",
@@ -383,7 +381,7 @@ function init_gear_sets()
 
     sets.midcast['Elemental Magic'].Resistant = set_combine(sets.midcast['Elemental Magic'], {
         main=gear.Grioavolr_MB,
-        sub="Enki Strap",
+        sub="Eletta Grip",
         legs="Merlinic Shalwar",
         feet="Merlinic Crackows",
         neck="Erra Pendant",
@@ -399,7 +397,8 @@ function init_gear_sets()
         })
 
     sets.midcast['Elemental Magic'].Seidr = set_combine(sets.midcast['Elemental Magic'], {
-        sub="Enki Strap",
+        main=gear.Grioavolr_MB,
+        sub="Eletta Grip",
         body="Seidr Cotehardie",
         legs="Merlinic Shalwar",
         feet="Merlinic Crackows",
@@ -416,8 +415,6 @@ function init_gear_sets()
         })
 
     sets.midcast.Impact = set_combine(sets.midcast['Elemental Magic'], {
-        main=gear.Grioavolr_MB,
-        sub="Niobid Strap",
         head=empty,
         body="Twilight Cloak",
         ring2="Archon Ring",

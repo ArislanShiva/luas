@@ -243,8 +243,8 @@ function init_gear_sets()
         neck="Fotia Gorget",
         ear1="Moonshade Earring",
         ear2="Telos Earring",
-        ring1="Rufescent Ring",
-        ring2="Shukuyu Ring",
+        ring1="Epaminondas's Ring",
+        ring2="Rufescent Ring",
         back="Relucent Cape",
         waist="Fotia Belt",
         }
@@ -257,7 +257,6 @@ function init_gear_sets()
         feet="Merlinic Crackows",
         ear1="Barkaro. Earring",
         ear2="Regal Earring",
-        ring1={name="Stikini Ring +1", bag="wardrobe3"},
         ring2="Archon Ring",
         back=gear.SCH_MAB_Cape,
         waist="Yamabuki-no-Obi",
@@ -494,7 +493,7 @@ function init_gear_sets()
     -- Elemental Magic
     sets.midcast['Elemental Magic'] = {
         main="Akademos",
-        sub="Niobid Strap",
+        sub="Enki Strap",
         ammo="Pemphredo Tathlum",
         head="Peda. M.Board +3",
         body="Amalric Doublet +1",
@@ -512,7 +511,7 @@ function init_gear_sets()
 
     sets.midcast['Elemental Magic'].Seidr = set_combine(sets.midcast['Elemental Magic'], {
         main=gear.Grioavolr_MB,
-        sub="Enki Strap",
+        sub="Eletta Grip",
         head="Merlinic Hood",
         body="Seidr Cotehardie",
         legs="Peda. Pants +3",
@@ -522,7 +521,7 @@ function init_gear_sets()
 
     sets.midcast['Elemental Magic'].Resistant = set_combine(sets.midcast['Elemental Magic'], {
         main=gear.Grioavolr_MB,
-        sub="Enki Strap",
+        sub="Eletta Grip",
         head="Merlinic Hood",
         legs="Peda. Pants +3",
         feet="Jhakri Pigaches +2",
@@ -532,7 +531,7 @@ function init_gear_sets()
 
     sets.midcast.Impact = set_combine(sets.midcast['Elemental Magic'], {
         main="Akademos",
-        sub="Niobid Strap",
+        sub="Enki Strap",
         head=empty,
         body="Twilight Cloak",
         ring1="Archon Ring",
@@ -540,7 +539,7 @@ function init_gear_sets()
 
     sets.midcast.Helix = {
         main="Akademos",
-        sub="Niobid Strap",
+        sub="Enki Strap",
         ammo="Ghastly Tathlum +1",
         neck="Argute Stole +1",
         waist="Yamabuki-no-Obi",

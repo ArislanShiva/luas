@@ -294,7 +294,7 @@ function init_gear_sets()
         ear1="Ishvara Earring",
         ear2="Moonshade Earring",
         ring1="Regal Ring",
-        ring2="Ilabrat Ring",
+        ring2="Epaminondas's Ring",
         back=gear.THF_WS1_Cape,
         waist="Fotia Belt",
         } -- default set
@@ -315,6 +315,7 @@ function init_gear_sets()
         feet="Meg. Jam. +2",
         ear1="Sherida Earring",
         ear2="Telos Earring",
+        ring2="Ilabrat Ring",
         })
 
     sets.precast.WS['Exenterator'].Acc = set_combine(sets.precast.WS['Exenterator'], {
@@ -331,7 +332,7 @@ function init_gear_sets()
         feet=gear.Herc_TA_feet,
         ear1="Sherida Earring",
         ear2="Mache Earring +1",
-        --ring1="Begrudging Ring",
+        ring1="Begrudging Ring",
         ring2="Mummu Ring",
         back=gear.THF_WS2_Cape,
         })
@@ -370,13 +371,10 @@ function init_gear_sets()
         ear1="Crematio Earring",
         ear2="Friomisi Earring",
         ring1={name="Shiva Ring +1", bag="wardrobe3"},
-        ring2={name="Shiva Ring +1", bag="wardrobe4"},
+        ring2="Epaminondas's Ring",
         back="Argocham. Mantle",
         waist="Eschan Stone",
         })
-
-    sets.precast.WS['Aeolian Edge'].TH = set_combine(sets.precast.WS['Aeolian Edge'], sets.TreasureHunter)
-
 
     ------------------------------------------------------------------------------------------------
     ---------------------------------------- Midcast Sets ------------------------------------------
@@ -401,12 +399,12 @@ function init_gear_sets()
     sets.idle = {
         ammo="Staunch Tathlum +1",
         head="Turms Cap +1",
-        body="Turms Harness",
+        body="Ashera Harness",
         hands="Turms Mittens +1",
         legs="Mummu Kecks +2",
         feet="Jute Boots +1",
         neck="Bathy Choker +1",
-        ear1="Genmei Earring",
+        ear1="Eabani Earring",
         ear2="Infused Earring",
         ring1={name="Chirich Ring +1", bag="wardrobe3"},
         ring2={name="Chirich Ring +1", bag="wardrobe4"},
@@ -417,13 +415,12 @@ function init_gear_sets()
     sets.idle.DT = set_combine(sets.idle, {
         ammo="Staunch Tathlum +1", --3/3
         head="Turms Cap +1",
+        body="Ashera Harness", --7/7
         hands="Turms Mittens +1",
         legs="Mummu Kecks +2", --5/5
         feet="Turms Leggings +1",
         neck="Loricate Torque +1", --6/6
-        ear1="Genmei Earring", --2/0
-		ear2="Etiolation Earring", --0/3
-        ring1="Gelatinous Ring +1", --7/(-1)
+        ring1="Moonlight Ring", --5/5
         ring2="Defending Ring", --10/10
         back=gear.THF_TP_Cape, --10/0
         waist="Flume Belt +1", --4/0
@@ -432,7 +429,7 @@ function init_gear_sets()
     sets.idle.Town = set_combine(sets.idle, {
         ammo="Yamarang",
         head="Pill. Bonnet +3",
-        body=gear.Adhemar_B_body,
+        body="Ashera Harness",
         hands=gear.Adhemar_B_hands,
         legs="Lustr. Subligar +1",
         neck="Combatant's Torque",
@@ -693,7 +690,6 @@ function init_gear_sets()
     sets.engaged.DW.STP.HighHaste = set_combine(sets.engaged.DW.HighHaste, {
         neck="Anu Torque",
         ear1="Sherida Earring",
-        ear2="Telos Earring",
         ring1={name="Chirich Ring +1", bag="wardrobe3"},
         ring2={name="Chirich Ring +1", bag="wardrobe4"},
         })
@@ -740,7 +736,6 @@ function init_gear_sets()
     sets.engaged.DW.STP.MaxHaste = set_combine(sets.engaged.DW.MaxHaste, {
         neck="Anu Torque",
         ear1="Sherida Earring",
-        ear2="Telos Earring",
         ring1={name="Chirich Ring +1", bag="wardrobe3"},
         ring2={name="Chirich Ring +1", bag="wardrobe4"},
         waist="Kentarch Belt +1",
@@ -752,6 +747,7 @@ function init_gear_sets()
 
     sets.engaged.Hybrid = {
         head=gear.Adhemar_D_head, --4/0
+        body="Ashera Harness", --7/7
         neck="Loricate Torque +1", --6/6
         ring1="Moonlight Ring", --5/5
         ring2="Defending Ring", --10/10
@@ -827,9 +823,7 @@ function job_post_precast(spell, action, spellMap, eventArgs)
             send_command('cancel 66; cancel 444; cancel Copy Image; cancel Copy Image (2)')
         end
     end
-    if spell.english == 'Aeolian Edge' and state.TreasureMode.value ~= 'None' then
-        equip(sets.TreasureHunter)
-    elseif spell.english=='Sneak Attack' or spell.english=='Trick Attack' then
+    if spell.english=='Sneak Attack' or spell.english=='Trick Attack' then
         if state.TreasureMode.value == 'SATA' or state.TreasureMode.value == 'Fulltime' then
             equip(sets.TreasureHunter)
         end

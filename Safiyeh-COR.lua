@@ -401,7 +401,7 @@ function init_gear_sets()
         neck="Fotia Gorget",
         ear1="Moonshade Earring",
         ear2="Brutal Earring",
-        ----ring1="Begrudging Ring",
+        --ring1="Begrudging Ring",
         ring2="Mummu Ring",
         back="Bleating Mantle",
         waist="Fotia Belt",

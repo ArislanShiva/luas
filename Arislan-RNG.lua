@@ -263,7 +263,6 @@ function init_gear_sets()
     ------------------------------------------------------------------------------------------------
 
     sets.precast.WS = {
-        ammo=gear.RAbullet,
         head="Orion Beret +3",
         body=gear.Herc_RA_body,
         hands="Meg. Gloves +2",
@@ -273,7 +272,7 @@ function init_gear_sets()
         ear1="Ishvara Earring",
         ear2="Moonshade Earring",
         ring1="Regal Ring",
-        ring2="Dingir Ring",
+        ring2="Epaminondas's Ring",
         back=gear.RNG_WS2_Cape,
         waist="Fotia Belt",
         }
@@ -300,12 +299,11 @@ function init_gear_sets()
         hands="Mummu Wrists +2",
         feet="Thereoid Greaves",
         ear1="Sherida Earring",
-        --ring1="Begrudging Ring",
+        ring1="Begrudging Ring",
         ring2="Mummu Ring",
         })
 
     sets.precast.WS['Jishnu\'s Radiance'].Acc = set_combine(sets.precast.WS['Jishnu\'s Radiance'], {
-        body="Sayadio's Kaftan",
         legs="Mummu Kecks +2",
         feet="Arcadian Socks +3",
         neck="Iskur Gorget",
@@ -336,8 +334,8 @@ function init_gear_sets()
         })
 
     sets.precast.WS["Coronach"].Acc = set_combine(sets.precast.WS['Coronach'], {
-      ear2="Telos Earring",
-      })
+        ear2="Telos Earring",
+        })
 
     sets.precast.WS["Trueflight"] = {
         ammo=gear.MAbullet,
@@ -350,7 +348,7 @@ function init_gear_sets()
         ear1="Moonshade Earring",
         ear2="Friomisi Earring",
         ring1="Weather. Ring +1",
-        ring2="Dingir Ring",
+        ring2="Epaminondas's Ring",
         back=gear.RNG_WS1_Cape,
         waist="Eschan Stone",
         }
@@ -366,7 +364,7 @@ function init_gear_sets()
         feet=gear.Herc_STP_feet,
         neck="Fotia Gorget",
         ear2="Mache Earring +1",
-        --ring1="Begrudging Ring",
+        ring1="Begrudging Ring",
         ring2="Mummu Ring",
         back=gear.RNG_TP_Cape,
         waist="Fotia Belt",
@@ -438,7 +436,7 @@ function init_gear_sets()
         hands="Kobo Kote",
         legs="Mummu Kecks +2",
         feet="Oshosi Leggings",
-        --ring1="Begrudging Ring",
+        ring1="Begrudging Ring",
         ring2="Mummu Ring",
         waist="Kwahu Kachina Belt",
         })

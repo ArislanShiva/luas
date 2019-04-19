@@ -231,6 +231,7 @@ function init_gear_sets()
 
     sets.precast.WS['Camlann\'s Torment'] = set_combine(sets.precast.WS, {
         ear2="Ishvara Earring",
+        ring2="Epaminondas's Ring",
         })
 
     sets.precast.WS['Camlann\'s Torment'].Acc = set_combine(sets.precast.WS['Camlann\'s Torment'], {})
@@ -245,7 +246,7 @@ function init_gear_sets()
         legs="Pelt. Cuissots +1",
         feet=gear.Valo_Crit_feet,
         ear2="Brutal Earring",
-        --ring1="Begrudging Ring",
+        ring1="Begrudging Ring",
         back=gear.DRG_WS4_Cape,
         waist="Ioskeha Belt +1",
         })
@@ -263,6 +264,7 @@ function init_gear_sets()
         head="Lustratio Cap +1",
         legs="Lustr. Subligar +1",
         ear2="Mache Earring +1",
+        ring2="Epaminondas's Ring",
         back=gear.DRG_WS3_Cape,
         })
 
@@ -278,7 +280,8 @@ function init_gear_sets()
         hands="Flamma Manopolas +2",
         legs="Pelt. Cuissots +1",
         ear2="Moonshade Earring",
-        --ring1="Begrudging Ring",
+        ring1="Begrudging Ring",
+        ring2="Epaminondas's Ring",
         back=gear.DRG_WS4_Cape,
         waist="Ioskeha Belt +1",
         })
@@ -328,7 +331,6 @@ function init_gear_sets()
         ear1="Hermetic Earring",
         ear2="Friomisi Earring",
         ring1={name="Shiva Ring +1", bag="wardrobe3"},
-        ring2={name="Shiva Ring +1", bag="wardrobe4"},
         back="Argocham. Mantle",
         })
 

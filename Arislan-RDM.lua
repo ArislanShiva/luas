@@ -288,7 +288,7 @@ function init_gear_sets()
     sets.precast.WS = {
         ammo="Floestone",
         head="Viti. Chapeau +3",
-        body="Jhakri Robe +2",
+        body="Viti. Tabard +3",
         hands="Atrophy Gloves +3",
         legs="Viti. Tights +3",
         feet="Jhakri Pigaches +2",
@@ -296,12 +296,13 @@ function init_gear_sets()
         ear1="Ishvara Earring",
         ear2="Moonshade Earring",
         ring1="Rufescent Ring",
-        ring2="Shukuyu Ring",
+        ring2="Epaminondas's Ring",
         back=gear.RDM_WS1_Cape,
         waist="Fotia Belt",
         }
 
     sets.precast.WS.Acc = set_combine(sets.precast.WS, {
+        body="Jhakri Robe +2",
         neck="Combatant's Torque",
         ear2="Mache Earring +1",
         ring1="Ramuh Ring +1",
@@ -310,22 +311,17 @@ function init_gear_sets()
 
     sets.precast.WS['Chant du Cygne'] = set_combine(sets.precast.WS, {
         ammo="Yetshila +1",
-        head=gear.Taeon_Crit_head,
-        body=gear.Taeon_Crit_body,
-        hands=gear.Taeon_Crit_hands,
-        legs=gear.Taeon_Crit_legs,
+        head="Aya. Zucchetto +2",
+        body="Ayanmo Corazza +2",
+        hands="Aya. Manopolas +2",
         feet="Thereoid Greaves",
         ear1="Sherida Earring",
-        --ring1="Begrudging Ring",
+        ring1="Begrudging Ring",
         ring2="Ilabrat Ring",
         back=gear.RDM_WS2_Cape,
         })
 
     sets.precast.WS['Chant du Cygne'].Acc = set_combine(sets.precast.WS['Chant du Cygne'], {
-        head=gear.Taeon_TA_head,
-        body=gear.Taeon_TA_body,
-        hands=gear.Taeon_TA_hands,
-        legs="Viti. Tights +3",
         ear2="Mache Earring +1",
         ring1="Ramuh Ring +1",
         })
@@ -351,6 +347,7 @@ function init_gear_sets()
     sets.precast.WS['Requiescat'] = set_combine(sets.precast.WS, {
         ammo="Regal Gem",
         ear2="Sherida Earring",
+        ring2="Shukuyu Ring",
         })
 
     sets.precast.WS['Requiescat'].Acc = set_combine(sets.precast.WS['Requiescat'], {
@@ -370,8 +367,8 @@ function init_gear_sets()
         neck="Baetyl Pendant",
         ear1="Moonshade Earring",
         ear2="Regal Earring",
-        ring1={name="Shiva Ring +1", bag="wardrobe3"},
-        ring2="Archon Ring",
+        ring1="Archon Ring",
+        ring2="Epaminondas's Ring",
         back=gear.RDM_INT_Cape,
         waist="Refoccilation Stone",
         }
@@ -585,17 +582,19 @@ function init_gear_sets()
         waist="Rumination Sash",
         })
 
-    sets.midcast.EffectEnfeebles = set_combine(sets.midcast.MndEnfeebles, {
+    sets.midcast.EffectEnfeebles = {
         ammo="Regal Gem",
         body="Lethargy Sayon +1",
         feet="Vitiation Boots +3",
         back=gear.RDM_MND_Cape,
-        })
+        }
 
     sets.midcast.ElementalEnfeeble = sets.midcast.IntEnfeebles
 
     sets.midcast['Blind II'] = set_combine(sets.midcast.IntEnfeebles, sets.midcast.EffectEnfeebles, {legs="Viti. Tights +3"})
     sets.midcast['Dia III'] = set_combine(sets.midcast.MndEnfeebles, sets.midcast.EffectEnfeebles, {head="Viti. Chapeau +3"})
+    sets.midcast['Dia II'] = set_combine(sets.midcast.MndEnfeebles, sets.midcast.EffectEnfeebles)
+    sets.midcast['Dia I'] = set_combine(sets.midcast.MndEnfeebles, sets.midcast.EffectEnfeebles)
     sets.midcast['Paralyze II'] = set_combine(sets.midcast.MndEnfeebles, {head="Vitiation Boots +3"})
     sets.midcast['Slow II'] = set_combine(sets.midcast.MndEnfeebles, {head="Viti. Chapeau +3"})
 
@@ -621,7 +620,7 @@ function init_gear_sets()
         head="Pixie Hairpin +1",
         feet="Merlinic Crackows",
         ear1="Hirudinea Earring",
-        ring2="Archon Ring",
+        ring1="Archon Ring",
         waist="Fucho-no-obi",
         })
 
@@ -631,7 +630,7 @@ function init_gear_sets()
 
     sets.midcast['Elemental Magic'] = {
         main=gear.Grioavolr_MB,
-        sub="Niobid Strap",
+        sub="Enki Strap",
         ammo="Pemphredo Tathlum",
         head="Merlinic Hood",
         body="Amalric Doublet +1",
@@ -648,8 +647,6 @@ function init_gear_sets()
         }
 
     sets.midcast['Elemental Magic'].Seidr = set_combine(sets.midcast['Elemental Magic'], {
-        main=gear.Grioavolr_MB,
-        sub="Enki Strap",
         body="Seidr Cotehardie",
         legs="Merlinic Shalwar",
         feet="Merlinic Crackows",
@@ -667,8 +664,6 @@ function init_gear_sets()
         })
 
     sets.midcast.Impact = set_combine(sets.midcast['Elemental Magic'], {
-        main=gear.Grioavolr_MB,
-        sub="Niobid Strap",
         head=empty,
         body="Twilight Cloak",
         ring1="Archon Ring",
@@ -726,7 +721,7 @@ function init_gear_sets()
         ring1="Gelatinous Ring +1", --7/(-1)
         ring2="Defending Ring", --10/10
         back="Moonlight Cape", --6/6
-        waist="Slipor Sash", --0/3
+        waist="Carrier's Sash",
         })
 
     sets.idle.Town = set_combine(sets.idle, {

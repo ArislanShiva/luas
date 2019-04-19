@@ -44,6 +44,10 @@ end
 function job_setup()
     indi_timer = ''
     indi_duration = 180
+    newLuopan = 0
+
+    state.Buff.Entrust = buffactive.Entrust or false
+    state.Buff['Blaze of Glory'] = buffactive['Blaze of Glory'] or false
 
     state.CP = M(false, "Capacity Points Mode")
 
@@ -146,7 +150,7 @@ function init_gear_sets()
     -- Precast sets to enhance JAs
     sets.precast.JA.Bolster = {body="Bagua Tunic +1"}
     sets.precast.JA['Full Circle'] = {head="Azimuth Hood +1"}
-    sets.precast.JA['Life Cycle'] = {body="Geomancy Tunic +3", back=gear.GEO_Idle_Cape,}
+    sets.precast.JA['Life Cycle'] = {head="Bagua Galero +3", body="Geomancy Tunic +3", back=gear.GEO_Idle_Cape,}
 
 
     -- Fast cast sets for spells
@@ -235,7 +239,7 @@ function init_gear_sets()
    sets.midcast.Geomancy = {
         main="Idris",
         sub="Chanter's Shield",
-        head="Vanya Hood",
+        head="Bagua Galero +3",
         body="Azimuth Coat +1",
         hands="Shrieker's Cuffs",
         legs="Azimuth Tights +1",
@@ -250,6 +254,7 @@ function init_gear_sets()
         }
 
     sets.midcast.Geomancy.Indi = set_combine(sets.midcast.Geomancy, {
+        head="Vanya Hood",
         hands="Geo. Mitaines +3",
         legs="Bagua Pants +2",
         feet="Azimuth Gaiters +1",
@@ -343,8 +348,8 @@ function init_gear_sets()
         head="Geo. Galero +3",
         body="Geomancy Tunic +3",
         hands="Geo. Mitaines +3",
-        legs="Chironic Hose",
-        feet="Geo. Sandals +3",
+        legs="Geomancy Pants +3",
+        feet="Bagua Sandals +3",
         neck="Bagua Charm",
         ear1="Digni. Earring",
         ear2="Regal Earring",
@@ -379,7 +384,7 @@ function init_gear_sets()
         }
 
     sets.midcast.Drain = set_combine(sets.midcast['Dark Magic'], {
-        head="Bagua Galero +2",
+        head="Bagua Galero +3",
         ring1="Evanescence Ring",
         ring2="Archon Ring",
         waist="Fucho-no-Obi",
@@ -395,7 +400,7 @@ function init_gear_sets()
     sets.midcast['Elemental Magic'] = {
         main="Idris",
         sub="Ammurapi Shield",
-        head="Merlinic Hood",
+        head="Bagua Galero +3",
         body="Jhakri Robe +2",
         hands="Amalric Gages",
         legs="Merlinic Shalwar",
@@ -410,7 +415,7 @@ function init_gear_sets()
         }
 
     sets.midcast['Elemental Magic'].Resistant = set_combine(sets.midcast['Elemental Magic'], {
-        head="Geo. Galero +3",
+        feet="Bagua Sandals +3",
         neck="Sanctity Necklace",
         ear2="Digni. Earring",
         })
@@ -474,11 +479,11 @@ function init_gear_sets()
         -- Pet: -DT (37.5% to cap) / Pet: Regen
         main="Idris", --0/0/25/0
         sub="Genmei Shield", --10/0/0/0
-        head="Bagua Galero +2",
+        head="Telchine Cap", --0/0/0/3
         body="Telchine Chas.", --0/0/0/3
         hands="Geo. Mitaines +3", --3/0/13/0
         legs="Telchine Braconi", --0/0/0/3
-        feet="Telchine Pigaches", --0/0/0/3
+        feet="Bagua Sandals +3", --0/0/0/5
         neck="Bagua Charm",
         ear1="Odnowa Earring +1", --0/2/0/0
         ear2="Etiolation Earring", --0/3/0/0
@@ -492,7 +497,7 @@ function init_gear_sets()
         body="Mallquis Saio +2", --8/8
         })
 
-    sets.PetHP = {head="Bagua Galero +2"}
+    sets.PetHP = {head="Bagua Galero +3"}
 
     -- .Indi sets are for when an Indi-spell is active.
     --sets.idle.Indi = set_combine(sets.idle, {})
@@ -503,7 +508,7 @@ function init_gear_sets()
     sets.idle.Town = set_combine(sets.idle, {
         main="Idris",
         sub="Ammurapi Shield",
-        head="Geo. Galero +3",
+        head="Bagua Galero +3",
         body="Geomancy Tunic +3",
         hands="Geo. Mitaines +3",
         legs="Geomancy Pants +3",
@@ -571,6 +576,15 @@ end
 -- Job-specific hooks for standard casting events.
 -------------------------------------------------------------------------------------------------------------------
 
+function job_pretarget(spell, spellMap, eventArgs)
+    if spell.type == 'Geomancy' then
+        if spell.name:startswith('Indi') and state.Buff.Entrust and spell.target.type == 'SELF' then
+            add_to_chat(002, 'Entrust active - Select a party member!')
+            cancel_spell()
+        end
+    end
+end
+
 function job_precast(spell, action, spellMap, eventArgs)
     if spellMap == 'Aspir' then
         refine_various_spells(spell, action, spellMap, eventArgs)
@@ -598,33 +612,28 @@ function job_post_midcast(spell, action, spellMap, eventArgs)
         if (spell.element == world.day_element or spell.element == world.weather_element) then
             equip(sets.Obi)
         end
-    end
-    if spell.skill == 'Enhancing Magic' and classes.NoSkillSpells:contains(spell.english) then
+    elseif spell.skill == 'Enhancing Magic' and classes.NoSkillSpells:contains(spell.english) then
         equip(sets.midcast.EnhancingDuration)
         if spellMap == 'Refresh' then
             equip(sets.midcast.Refresh)
+        end
+    elseif spell.skill == 'Geomancy' then
+        if state.Buff.Entrust and spell.english:startswith('Indi-') then
+            --equip({main="Solstice"})
         end
     end
 end
 
 function job_aftercast(spell, action, spellMap, eventArgs)
     if not spell.interrupted then
-        if spell.english:startswith('Indi') then
-            if not classes.CustomIdleGroups:contains('Indi') then
-                classes.CustomIdleGroups:append('Indi')
-            end
-            --send_command('@timers d "'..indi_timer..'"')
-            --indi_timer = spell.english
-            --send_command('@timers c "'..indi_timer..'" '..indi_duration..' down spells/00136.png')
-        end
         if spell.english == "Sleep II" then
             send_command('@timers c "Sleep II ['..spell.target.name..']" 90 down spells/00259.png')
         elseif spell.english == "Sleep" or spell.english == "Sleepga" then -- Sleep & Sleepga Countdown --
             send_command('@timers c "Sleep ['..spell.target.name..']" 60 down spells/00253.png')
-        end
-    elseif not player.indi then
-        classes.CustomIdleGroups:clear()
-    end
+        elseif spell.english:startswith('Geo-') or spell.english == "Life Cycle" then
+            newLuopan = 1
+		end
+	end
 end
 
 
@@ -636,14 +645,6 @@ end
 -- buff == buff gained or lost
 -- gain == true if the buff was gained, false if it was lost.
 function job_buff_change(buff, gain)
-    if player.indi and not classes.CustomIdleGroups:contains('Indi')then
-        classes.CustomIdleGroups:append('Indi')
-        handle_equipping_gear(player.status)
-    elseif classes.CustomIdleGroups:contains('Indi') and not player.indi then
-        classes.CustomIdleGroups:clear()
-        handle_equipping_gear(player.status)
-    end
-
     if buff == "doom" then
         if gain then
             equip(sets.buff.Doom)
@@ -700,13 +701,17 @@ function customize_idle_set(idleSet)
     else
         enable('back')
     end
-    
     if pet.isvalid then
-        equip(sets.PetHP)
-        disable('head')
-    else
-        enable('head')
-    end
+		if pet.hpp > 73 then
+            if newLuopan == 1 then
+				equip(sets.PetHP)
+				disable('head')
+			end
+		elseif pet.hpp <= 73 then
+			enable('head')
+            newLuopan = 0
+		end
+	end
 
     return idleSet
 end
@@ -714,9 +719,6 @@ end
 -- Called by the 'update' self-command.
 function job_update(cmdParams, eventArgs)
     classes.CustomIdleGroups:clear()
-    if player.indi then
-        classes.CustomIdleGroups:append('Indi')
-    end
 end
 
 -- Function to display the current relevant user state when doing an update.

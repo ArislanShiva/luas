@@ -235,14 +235,14 @@ function init_gear_sets()
     sets.precast.WS = {
         range=gear.Linos_WS,
         head="Lustratio Cap +1",
-        body="Ayanmo Corazza +2",
+        body="Ashera Harness",
         hands="Aya. Manopolas +2",
         legs="Lustr. Subligar +1",
         feet="Lustra. Leggings +1",
         neck="Fotia Gorget",
         ear1="Ishvara Earring",
         ear2="Moonshade Earring",
-        ring1="Shukuyu Ring",
+        ring1="Epaminondas's Ring",
         ring2="Ilabrat Ring",
         back=gear.BRD_WS_Cape,
         waist="Fotia Belt",
@@ -252,7 +252,7 @@ function init_gear_sets()
     sets.precast.WS['Evisceration'] = set_combine(sets.precast.WS, {
         range=gear.Linos_TP,
         ear1="Brutal Earring",
-        --ring1="Begrudging Ring",
+        ring1="Begrudging Ring",
         back=gear.BRD_TP_Cape,
         })
         
@@ -260,14 +260,12 @@ function init_gear_sets()
 
     sets.precast.WS['Mordant Rime'] = set_combine(sets.precast.WS, {
         ear2="Regal Earring",
-        ring1={name="Carb. Ring +1", bag="wardrobe3"},
         ring2={name="Carb. Ring +1", bag="wardrobe4"},
         waist="Grunfeld Rope",
         })
 
     sets.precast.WS['Rudra\'s Storm'] = set_combine(sets.precast.WS, {
         neck="Caro Necklace",
-        ring1="Ramuh Ring +1",
         waist="Grunfeld Rope",
         })
     
@@ -411,7 +409,7 @@ function init_gear_sets()
     ------------------------------------------------------------------------------------------------
 
     sets.idle = {
-        main=gear.Kali_Idle,
+        main="Sangoma",
         sub="Genmei Shield",
         range="Gjallarhorn",
         head="Inyanga Tiara +2",
@@ -432,13 +430,12 @@ function init_gear_sets()
         sub="Genmei Shield", --10/0
         range="Gjallarhorn",
         head="Inyanga Tiara +2", --0/5
-        body="Inyanga Jubbah +2", --0/8
+        body="Ashera Harness", --7/7
         hands="Inyan. Dastanas +2", --0/4
         legs="Inyanga Shalwar +2", --0/6
         feet="Inyan. Crackows +2", --0/3
 		neck="Bard's Charm +1",
         --neck="Loricate Torque +1", --6/6
-        ear1="Genmei Earring", --2/0
         ear2="Etiolation Earring", --0/3
         ring1="Gelatinous Ring +1", --7/{-1}
         ring2="Defending Ring",  --10/10

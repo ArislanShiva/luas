@@ -257,7 +257,7 @@ function init_gear_sets()
         ear1="Moonshade Earring",
         ear2="Ishvara Earring",
         ring1="Regal Ring",
-        ring2="Shukuyu Ring",
+        ring2="Epaminondas's Ring",
         back=gear.NIN_WS1_Cape,
         waist="Fotia Belt",
         } -- default set
@@ -280,7 +280,6 @@ function init_gear_sets()
 
     sets.precast.WS['Blade: Ten'] = set_combine(sets.precast.WS, {
         neck="Caro Necklace",
-        ring2="Ilabrat Ring",
         waist="Grunfeld Rope",
         back=gear.NIN_WS1_Cape,
         })
@@ -313,8 +312,7 @@ function init_gear_sets()
         neck="Baetyl Pendant",
         ear1="Moonshade Earring",
         ear2="Friomisi Earring",
-        ring1={name="Shiva Ring +1", bag="wardrobe3"},
-        ring2="Dingir Ring",
+        ring1="Dingir Ring",
         back=gear.NIN_MAB_Cape,
         waist="Eschan Stone",
         })
@@ -396,8 +394,8 @@ function init_gear_sets()
         neck="Iskur Gorget",
         ear1="Enervating Earring",
         ear2="Telos Earring",
-        ring1="Regal Ring",
-        ring2="Dingir Ring",
+        ring1="Dingir Ring",
+        ring2="Hajduk Ring +1",
         back=gear.NIN_TP_Cape,
         waist="Yemaya Belt",
         }
@@ -413,7 +411,7 @@ function init_gear_sets()
     sets.idle = {
         ammo="Seki Shuriken",
         head="Volte Cap",
-        body="Hiza. Haramaki +2",
+        body="Ashera Harness",
         hands=gear.Herc_DT_hands,
         legs="Samnuha Tights",
         feet="Ahosi Leggings",
@@ -428,12 +426,11 @@ function init_gear_sets()
 
     sets.idle.DT = set_combine(sets.idle, {
         ammo="Staunch Tathlum +1", --3/3
+        body="Ashera Harness", --7/7
         hands=gear.Herc_DT_hands, --7/5
         legs="Mummu Kecks +2", --5/5
-        feet="Ahosi Leggings", --4/0
         neck="Loricate Torque +1", --6/6
         ear1="Genmei Earring", --2/0
-        ring1="Gelatinous Ring +1", --7/(-1)
         ring2="Defending Ring", --10/10
         back="Moonlight Cape", --6/6
         waist="Flume Belt +1", --4/0
@@ -441,7 +438,7 @@ function init_gear_sets()
 
     sets.idle.Town = set_combine(sets.idle, {
         head=gear.Adhemar_B_head,
-        body=gear.Adhemar_B_body,
+        body="Ashera Harness",
         hands=gear.Adhemar_B_hands,
         neck="Combatant's Torque",
         ear1="Cessance Earring",
@@ -689,6 +686,7 @@ function init_gear_sets()
         })
 
     sets.engaged.STP.MaxHaste = set_combine(sets.engaged.MaxHaste, {
+        body="Ashera Harness",
         neck="Iskur Gorget",
         ear1="Dedition Earring",
         ear2="Telos Earring",
@@ -699,6 +697,7 @@ function init_gear_sets()
 
     sets.engaged.Hybrid = {
         head=gear.Adhemar_D_head, --4/0
+        body="Ashera Harness", --7/7
         neck="Loricate Torque +1", --6/6
         ring2="Defending Ring", --10/10
         }

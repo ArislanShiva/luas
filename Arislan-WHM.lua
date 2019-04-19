@@ -128,12 +128,12 @@ function user_setup()
     send_command('bind ^numpad1 input /ws "Flash Nova" <t>')
     send_command('bind ^numpad0 input /ws "Mystic Boon" <t>')
 
-    send_command('bind 1 input /ma "Barfira" <me>')
+    --[[send_command('bind 1 input /ma "Barfira" <me>')
     send_command('bind 2 input /ma "Barblizzara" <me>')
     send_command('bind 3 input /ma "Baraera" <me>')
     send_command('bind 4 input /ma "Barstonra" <me>')
     send_command('bind 5 input /ma "Barthundra" <me>')
-    send_command('bind 6 input /ma "Barwatera" <me>')
+    send_command('bind 6 input /ma "Barwatera" <me>')]]--
 
 
     select_default_macro_book()
@@ -507,13 +507,13 @@ function init_gear_sets()
 
     sets.midcast.Banish = set_combine(sets.midcast['Divine Magic'], {
         main=gear.Grioavolr_MB,
-        sub="Niobid Strap",
+        sub="Enki Strap",
         head="Inyanga Tiara +2",
         body="Vedic Coat",
         legs="Th. Pant. +3",
         neck="Sanctity Necklace",
         ear1="Friomisi Earring",
-        ear2="Regal Earring",
+        ear2="Etiolation Earring",
         ring2="Weather. Ring +1",
         waist="Refoccilation Stone",
         })
@@ -566,7 +566,7 @@ function init_gear_sets()
 
     sets.midcast.Impact = {
         main=gear.Grioavolr_MB,
-        sub="Niobid Strap",
+        sub="Enki Strap",
         head=empty,
         body="Twilight Cloak",
         hands="Inyan. Dastanas +2",
@@ -627,12 +627,13 @@ function init_gear_sets()
         hands="Inyan. Dastanas +2",
         legs="Inyanga Shalwar +2",
         feet="Inyan. Crackows +2",
+        neck="Warder's Charm +1",
         ear1="Eabani Earring",
-        ear2="Hearty Earring",
+        ear2="Regal Earring",
         ring1="Inyanga Ring",
         back=gear.WHM_FC_Cape,
+        waist="Carrier's Sash",
         })
-
 
     sets.idle.Town = set_combine(sets.idle, {
         main="Yagrush",

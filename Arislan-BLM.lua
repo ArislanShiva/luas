@@ -193,7 +193,7 @@ function init_gear_sets()
         neck="Fotia Gorget",
         ear1="Moonshade Earring",
         ear2="Telos Earring",
-        ring1="Rufescent Ring",
+        ring1="Epaminondas's Ring",
         ring2="Shukuyu Ring",
         back="Relucent Cape",
         waist="Fotia Belt",
@@ -211,7 +211,7 @@ function init_gear_sets()
         neck="Baetyl Pendant",
         ear1="Barkaro. Earring",
         ear2="Moonshade Earring",
-        ring1={name="Shiva Ring +1", bag="wardrobe3"},
+        ring1="Epaminondas's Ring",
         ring2="Archon Ring",
         back=gear.BLM_MAB_Cape,
         waist="Yamabuki-no-Obi",
@@ -443,7 +443,7 @@ function init_gear_sets()
 
     sets.midcast['Elemental Magic'] = {
         main=gear.Lathi_MAB,
-        sub="Niobid Strap",
+        sub="Enki Strap",
         ammo="Pemphredo Tathlum",
         head="Merlinic Hood",
         body=gear.Merl_MB_body,
@@ -461,7 +461,7 @@ function init_gear_sets()
 
     sets.midcast['Elemental Magic'].DeathMode = set_combine(sets.midcast['Elemental Magic'], {
         main=gear.Grioavolr_MB,
-        sub="Enki Strap",
+        sub="Eletta Grip",
         ammo="Ghastly Tathlum +1",
         legs="Amalric Slops +1",
         feet="Merlinic Crackows",
@@ -499,7 +499,6 @@ function init_gear_sets()
         })
 
     sets.midcast.Impact = set_combine(sets.midcast['Elemental Magic'], {
-        sub="Niobid Strap",
         head=empty,
         body="Twilight Cloak",
         ring2="Archon Ring",

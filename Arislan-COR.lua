@@ -340,8 +340,8 @@ function init_gear_sets()
         neck="Fotia Gorget",
         ear1="Moonshade Earring",
         ear2="Ishvara Earring",
-        ring1="Regal Ring",
-        ring2="Dingir Ring",
+        ring1="Dingir Ring",
+        ring2="Epaminondas's Ring",
         back=gear.COR_WS3_Cape,
         waist="Fotia Belt",
         }
@@ -376,8 +376,8 @@ function init_gear_sets()
         neck="Baetyl Pendant",
         ear1="Crematio Earring",
         ear2="Friomisi Earring",
-        ring1="Ilabrat Ring",
-        ring2="Dingir Ring",
+        ring1="Dingir Ring",
+        ring2="Epaminondas's Ring",
         back=gear.COR_WS1_Cape,
         waist="Eschan Stone",
         }
@@ -417,7 +417,7 @@ function init_gear_sets()
         hands="Meg. Gloves +2",
         legs=gear.Herc_WS_legs,
         ring1="Regal Ring",
-        ring2="Shukuyu Ring",
+        ring2="Epaminondas's Ring",
         back=gear.COR_WS2_Cape,
         waist="Prosilio Belt +1",
         })
@@ -425,7 +425,6 @@ function init_gear_sets()
     sets.precast.WS['Savage Blade'].Acc = set_combine(sets.precast.WS['Savage Blade'], {
         body="Meg. Cuirie +2",
         ear2="Telos Earring",
-        ring2="Rufescent Ring",
         waist="Grunfeld Rope",
         })
 
@@ -464,7 +463,6 @@ function init_gear_sets()
 
     sets.precast.WS['Aeolian Edge'] = set_combine(sets.precast.WS['Wildfire'], {
         ear1="Moonshade Earring",
-        ring1={name="Shiva Ring +1", bag="wardrobe3"},
         })
 
     ------------------------------------------------------------------------------------------------
@@ -489,23 +487,6 @@ function init_gear_sets()
 
     sets.midcast.Utsusemi = sets.midcast.SpellInterrupt
 
-    -- Occult Acumen Set
-    sets.midcast['Dark Magic'] = {
-        ammo=gear.QDbullet,
-        head=gear.Herc_MAB_head,
-        body="Mummu Jacket +2",
-        hands=gear.Adhemar_B_hands,
-        legs="Chas. Culottes +1",
-        feet="Carmine Greaves +1",
-        neck="Iskur Gorget",
-        ear1="Dedition Earring",
-        ear2="Telos Earring",
-        ring1="Archon Ring",
-        ring2="Dingir Ring",
-        back=gear.COR_RA_Cape,
-        waist="Oneiros Rope",
-        }
-
     sets.midcast.CorsairShot = {
         ammo=gear.QDbullet,
         head=gear.Herc_MAB_head,
@@ -516,8 +497,8 @@ function init_gear_sets()
         neck="Baetyl Pendant",
         ear1="Crematio Earring",
         ear2="Friomisi Earring",
-        ring1={name="Fenrir Ring +1", bag="wardrobe3"},
-        ring2="Dingir Ring",
+        ring1="Dingir Ring",
+        ring2={name="Fenrir Ring +1", bag="wardrobe3"},
         back="Gunslinger's Cape",
         waist="Eschan Stone",
         }
@@ -556,7 +537,6 @@ function init_gear_sets()
     sets.midcast.CorsairShot['Light Shot'] = sets.midcast.CorsairShot.Resistant
     sets.midcast.CorsairShot['Dark Shot'] = sets.midcast.CorsairShot.Resistant
     sets.midcast.CorsairShot.Enhance = {body="Mirke Wardecors", feet="Chass. Bottes +1"}
-    sets.midcast.CorsairShot.TH = sets.TreasureHunter
 
     -- Ranged gear
     sets.midcast.RA = {
@@ -569,8 +549,8 @@ function init_gear_sets()
         neck="Iskur Gorget",
         ear1="Enervating Earring",
         ear2="Telos Earring",
-        ring1="Ilabrat Ring",
-        ring2="Dingir Ring",
+        ring1="Dingir Ring",
+        ring2="Ilabrat Ring",
         back=gear.COR_RA_Cape,
         waist="Yemaya Belt",
         }
@@ -578,13 +558,13 @@ function init_gear_sets()
     sets.midcast.RA.Acc = set_combine(sets.midcast.RA, {
         head="Meghanada Visor +2",
         hands="Lanun Gants +3",
-        ring1="Regal Ring",
+        ring2="Hajduk Ring +1",
         })
 
     sets.midcast.RA.HighAcc = set_combine(sets.midcast.RA.Acc, {
         body="Laksa. Frac +3",
         legs="Laksa. Trews +3",
-        ring2="Hajduk Ring +1",
+        ring1="Regal Ring",
         waist="Kwahu Kachina Belt",
         })
 
@@ -594,7 +574,7 @@ function init_gear_sets()
         hands="Mummu Wrists +2",
         legs="Mummu Kecks +2",
         feet="Oshosi Leggings",
-        --ring1="Begrudging Ring",
+        ring1="Begrudging Ring",
         ring2="Mummu Ring",
         waist="Kwahu Kachina Belt",
         })
@@ -681,7 +661,21 @@ function init_gear_sets()
     ------------------------------------------------------------------------------------------------
 
     sets.defense.PDT = sets.idle.DT
-    sets.defense.MDT = sets.idle.DT
+
+    sets.defense.MDT = {
+		head="Volte Cap",
+        body="Oshosi Vest +1",
+        hands="Oshosi Gloves",
+        legs="Oshosi Trousers",
+        feet="Oshosi Leggings",
+        neck="Loricate Torque +1", --6/6
+        ear1="Eabani Earring",
+        ear2="Etiolation Earring", --0/3
+        ring1="Gelatinous Ring +1", --7/(-1)
+        ring2="Defending Ring", --10/10
+        back=gear.COR_SNP_Cape,
+        waist="Flume Belt +1", --4/0
+	    }
 
     sets.Kiting = {legs="Carmine Cuisses +1"}
 
@@ -1036,7 +1030,7 @@ function init_gear_sets()
     sets.CP = {back="Mecisto. Mantle"}
     --sets.Reive = {neck="Ygnas's Resolve +1"}
 
-    sets.TreasureHunter = {head="Volte Cap", feet="Volte Boots", waist="Chaac Belt"}
+    sets.TreasureHunter = {head="Volte Cap", hands=gear.Herc_TH_hands, feet="Volte Boots", waist="Chaac Belt"}
 
     sets.LeadenMelee = {main="Rostam", sub="Blurred Knife +1", ranged="Death Penalty"}
     sets.LeadenAccMelee = {main="Rostam", sub="Tauret", ranged="Death Penalty"}
@@ -1127,7 +1121,8 @@ function job_post_midcast(spell, action, spellMap, eventArgs)
         if state.QDMode.value == 'Enhance' then
             equip(sets.midcast.CorsairShot.Enhance)
         elseif state.QDMode.value == 'TH' then
-            equip(sets.midcast.CorsairShot.TH)
+            equip(sets.midcast.CorsairShot)
+            equip(sets.TreasureHunter)
         elseif state.QDMode.value == 'STP' then
             equip(sets.midcast.CorsairShot.STP)
         end

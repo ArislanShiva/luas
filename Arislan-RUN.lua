@@ -101,9 +101,7 @@ function user_setup()
     state.PhysicalDefenseMode:options('PDT', 'HP')
     state.MagicalDefenseMode:options('MDT')
 
-    state.Charm = M(false, 'Charm Resistance')
     state.Knockback = M(false, 'Knockback')
-    state.Death = M(false, "Death Resistance")
 
     state.WeaponSet = M{['description']='Weapon Set', 'Epeolatry', 'Lionheart', 'Aettir', 'GreatAxe'}
     state.AttackMode = M{['description']='Attack', 'Uncapped', 'Capped'}
@@ -114,7 +112,7 @@ function user_setup()
 
     -- Additional local binds
     include('Global-Binds.lua') -- OK to remove this line
-    include('Global-GEO-Binds.lua') -- OK to remove this line
+    include('Global-WHM-Binds.lua') -- OK to remove this line
 
     send_command('bind ^` input //gs c rune')
     send_command('bind !` input /ja "Vivacious Pulse" <me>')
@@ -126,9 +124,7 @@ function user_setup()
     send_command('bind @e gs c cycleback WeaponSet')
     send_command('bind @r gs c cycle WeaponSet')
     send_command('bind @w gs c toggle WeaponLock')
-    send_command('bind @h gs c toggle Charm')
     send_command('bind @k gs c toggle Knockback')
-    send_command('bind @d gs c toggle Death')
     send_command('bind !q input /ma "Temper" <me>')
 
     if player.sub_job == 'BLU' then
@@ -142,7 +138,7 @@ function user_setup()
     end
 
     send_command('bind !o input /ma "Regen IV" <stpc>')
-    send_command('bind !p input /ma "Shock Spikes" <me>')
+    send_command('bind !p input /ma "Ice Spikes" <me>')
 
     send_command('bind @w gs c toggle WeaponLock')
     send_command('bind @c gs c toggle CP')
@@ -182,8 +178,6 @@ function user_unload()
     send_command('unbind ^delete')
     send_command('unbind @a')
     send_command('unbind @c')
-    send_command('unbind @h')
-    send_command('unbind @k')
     send_command('unbind @d')
     send_command('unbind !q')
     send_command('unbind @w')
@@ -388,7 +382,7 @@ function init_gear_sets()
         legs="Lustr. Subligar +1",
         feet="Lustra. Leggings +1",
         ear1="Mache Earring +1",
-        ring1="Epona's Ring",
+        ring2="Epaminondas's Ring",
         back=gear.RUN_WS2_Cape,
         })
 
@@ -402,7 +396,6 @@ function init_gear_sets()
 
     sets.precast.WS['Dimidiation'].Uncapped = set_combine(sets.precast.WS['Dimidiation'], {
         neck="Caro Necklace",
-        ring1="Ilabrat Ring",
         waist="Grunfeld Rope",
         })
 
@@ -427,8 +420,6 @@ function init_gear_sets()
     sets.precast.WS['Fell Cleave'] = set_combine(sets.precast.WS, {
         feet="Lustra. Leggings +1",
         ear2="Ishvara Earring",
-        ring1="Regal Ring",
-        ring2="Niqmaddu Ring",
         back=gear.RUN_WS1_Cape,
         })
 
@@ -578,6 +569,7 @@ function init_gear_sets()
 
     sets.idle.Town = set_combine(sets.idle, {
         ammo="Staunch Tathlum +1",
+        body="Ashera Harness",
         neck="Futhark Torque +1",
         ear1="Eabani Earring",
         })
@@ -590,21 +582,13 @@ function init_gear_sets()
     ---------------------------------------- Defense Sets ------------------------------------------
     ------------------------------------------------------------------------------------------------
 
-    sets.defense.Charm = {
-        neck="Unmoving Collar +1",
-        ear2="Arete del Luna +1",
-        ring1="Wuji Ring",
-        back="Solemnity Cape",
-        }
-
     sets.defense.Knockback = {back="Repulse Mantle"}
-    sets.defense.Death = {body="Samnuha Coat", ring1="Warden's Ring", ring2="Eihwaz Ring"}
 
     sets.defense.PDT = {
-        sub="Mensch Strap +1", --5/0
+        sub="Refined Grip +1", --3/3
         ammo="Staunch Tathlum +1", --3/3
         head="Turms Cap +1",
-        body="Futhark Coat +3", --9/9
+        body="Ashera Harness", --7/7
         hands="Turms Mittens +1",
         legs="Eri. Leg Guards +1", --7/0
         feet="Turms Leggings +1",
@@ -613,8 +597,8 @@ function init_gear_sets()
         ear2="Odnowa Earring +1", --0/2
         ring1="Moonlight Ring", --5/5
         ring2="Defending Ring", --10/10
-        back=gear.RUN_HPP_Cape,
-        waist="Flume Belt +1", --4/0
+        back=gear.RUN_HPD_Cape, --10/0
+        waist="Engraved Belt",
         }
 
     sets.defense.MDT = {
@@ -701,6 +685,8 @@ function init_gear_sets()
         })
 
     sets.engaged.STP = set_combine(sets.engaged, {
+        head="Aya. Zucchetto +2",
+        body="Ashera Harness",
         feet="Carmine Greaves +1",
         ear2="Dedition Earring",
         ring1={name="Chirich Ring +1", bag="wardrobe3"},
@@ -710,7 +696,7 @@ function init_gear_sets()
 
     sets.engaged.Aftermath = {
         head="Aya. Zucchetto +2",
-        body="Turms Harness",
+        body="Ashera Harness",
         neck="Anu Torque",
         ear1="Sherida Earring",
         ear2="Dedition Earring",
@@ -726,7 +712,7 @@ function init_gear_sets()
 
     sets.Hybrid = {
         head=gear.Adhemar_D_head, --4/0
-        body="Ayanmo Corazza +2", --6/6
+        body="Ashera Harness", --7/7
         neck="Futhark Torque +1", --6/6
         ring1="Moonlight Ring", --5/5
         ring2="Defending Ring", --10/10
@@ -741,7 +727,6 @@ function init_gear_sets()
 
 --[[sets.engaged.Aftermath.DT = {
         head="Aya. Zucchetto +2",
-        body="Turms Harness",
         feet="Carmine Greaves +1",
         ear1="Sherida Earring",
         ear2="Telos Earring",
@@ -753,7 +738,7 @@ function init_gear_sets()
 
     sets.engaged.Aftermath.DT = {
         head="Aya. Zucchetto +2",
-        body="Ayanmo Corazza +2",
+        body="Ashera Harness",
         hands=gear.Adhemar_B_hands,
         legs="Meg. Chausses +2",
         feet=gear.Herc_STP_feet,
@@ -801,7 +786,7 @@ function job_precast(spell, action, spellMap, eventArgs)
         eventArgs.cancel = true
         return
     end
-    if state.DefenseMode.value ~= 'None' then
+    if state.DefenseMode.value == 'HP' then
         currentSpell = spell.english
         eventArgs.handled = true
         if spell.action_type == 'Magic' then
@@ -849,7 +834,7 @@ function job_precast(spell, action, spellMap, eventArgs)
 end
 
 function job_midcast(spell, action, spellMap, eventArgs)
-    if state.DefenseMode.value ~= 'None' and spell.english ~= "Phalanx" then
+    if state.DefenseMode.value == 'HP' and spell.english ~= "Phalanx" then
         eventArgs.handled = true
         if spell.action_type == 'Magic' then
             if spell.English == 'Flash' or spell.English == 'Foil' or spell.English == 'Stun'
@@ -987,14 +972,8 @@ function customize_idle_set(idleSet)
     if player.mpp < 51 then
         idleSet = set_combine(idleSet, sets.latent_refresh)
     end
-    if state.Charm.value == true then
-        idleSet = set_combine(idleSet, sets.defense.Charm)
-    end
     if state.Knockback.value == true then
         idleSet = set_combine(idleSet, sets.defense.Knockback)
-    end
-    if state.Death.value == true then
-        idleSet = set_combine(idleSet, sets.defense.Death)
     end
 
     --if state.CP.current == 'on' then
@@ -1017,14 +996,8 @@ function customize_melee_set(meleeSet)
             meleeSet = set_combine(meleeSet, sets.engaged.Aftermath)
         end
     end
-    if state.Charm.value == true then
-        meleeSet = set_combine(meleeSet, sets.defense.Charm)
-    end
     if state.Knockback.value == true then
         meleeSet = set_combine(meleeSet, sets.defense.Knockback)
-    end
-    if state.Death.value == true then
-        meleeSet = set_combine(meleeSet, sets.defense.Death)
     end
 
     return meleeSet
@@ -1034,14 +1007,8 @@ function customize_defense_set(defenseSet)
     if buffactive['Battuta'] then
         defenseSet = set_combine(defenseSet, sets.defense.Parry)
     end
-    if state.Charm.value == true then
-        defenseSet = set_combine(defenseSet, sets.defense.Charm)
-    end
     if state.Knockback.value == true then
         defenseSet = set_combine(defenseSet, sets.defense.Knockback)
-    end
-    if state.Death.value == true then
-        defenseSet = set_combine(defenseSet, sets.defense.Death)
     end
 
     return defenseSet
@@ -1083,14 +1050,8 @@ function display_current_job_state(eventArgs)
     local i_msg = state.IdleMode.value
 
     local msg = ''
-    if state.Charm.value == true then
-        msg = msg .. ' Charm Resist |'
-    end
     if state.Knockback.value == true then
         msg = msg .. ' Knockback Resist |'
-    end
-    if state.Death.value == true then
-        msg = msg .. ' Death Resist |'
     end
     if state.Kiting.value then
         msg = msg .. ' Kiting: On |'

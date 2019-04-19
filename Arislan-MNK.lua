@@ -147,7 +147,7 @@ function init_gear_sets()
         ear1="Moonshade Earring",
         ear2="Ishvara Earring",
         ring1="Regal Ring",
-        ring2="Shukuyu Ring",
+        ring2="Epaminondas's Ring",
         back="Relucent Cape",
         waist="Fotia Belt",
         } -- default set
