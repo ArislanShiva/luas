@@ -153,7 +153,7 @@ function job_setup()
 
     -- Healing spells
     blue_magic_maps.Healing = S{'Healing Breeze','Magic Fruit','Plenilune Embrace','Pollen','Restoral',
-        'White Wind','Wild Carrot'}
+        'Wild Carrot'}
 
     -- Buffs that depend on blue magic skill
     blue_magic_maps.SkillBasedBuff = S{'Barrier Tusk','Diamondhide','Magic Barrier','Metallic Body',
@@ -247,7 +247,6 @@ function user_setup()
     send_command('bind ^numpad5 input /ws "Expiacion" <t>')
     send_command('bind ^numpad1 input /ws "Sanguine Blade" <t>')
     send_command('bind ^numpad2 input /ws "Black Halo" <t>')
-    send_command('bind numpad0 input /ws "Savage Blade" <t>')
 
     select_default_macro_book()
     set_lockstyle()
@@ -289,7 +288,6 @@ function user_unload()
     send_command('unbind ^numpad5')
     send_command('unbind ^numpad1')
     send_command('unbind ^numpad2')
-    send_command('unbind numpad0')
 
     send_command('unbind #`')
     send_command('unbind #1')
@@ -362,7 +360,7 @@ function init_gear_sets()
 
     sets.precast.FC['Blue Magic'] = set_combine(sets.precast.FC, {body="Hashishin Mintan +1"})
     sets.precast.FC['Enhancing Magic'] = set_combine(sets.precast.FC, {waist="Siegel Sash"})
-    sets.precast.FC.Cure = set_combine(sets.precast.FC, {ammo="Impatiens", ear2="Mendi. Earring"})
+    sets.precast.FC.Cure = set_combine(sets.precast.FC, {ammo="Impatiens", ear1="Mendi. Earring"})
 
     sets.precast.FC.Utsusemi = set_combine(sets.precast.FC, {
         ammo="Impatiens",
@@ -674,17 +672,19 @@ function init_gear_sets()
         })
 
     sets.midcast['Blue Magic'].Healing = {
-        ammo="Pemphredo Tathlum",
+        ammo="Staunch Tathlum +1",
         head="Carmine Mask +1",
         body="Vrikodara Jupon", -- 13
-        hands="Telchine Gloves", -- 10
+        hands="Telchine Gloves", -- 17
+        legs="Assim. Shalwar +3",
         feet="Medium's Sabots", -- 12
-        neck="Incanter's Torque",
-        ear2="Mendi. Earring", -- 5
+        neck="Nuna Gorget +1",
+        ear1="Mendi. Earring", -- 5
+        ear2="Regal Earring",
         ring1="Lebeche Ring", -- 3
-        ring2="Haoma's Ring",
-        back="Solemnity Cape", -- 7
-        waist="Bishop's Sash",
+        ring2={name="Stikini Ring +1", bag="wardrobe4"},
+        back="Aurist's Cape +1",
+        waist="Luminary Sash",
         }
 
     sets.midcast['Blue Magic'].HealingSelf = set_combine(sets.midcast['Blue Magic'].Healing, {
@@ -692,25 +692,31 @@ function init_gear_sets()
         legs="Gyve Trousers", -- 10
         neck="Phalaina Locket", -- 4(4)
         ring2="Asklepian Ring", -- (3)
+        back="Solemnity Cape", --7
         waist="Gishdubar Sash", -- (10)
         })
 
+    sets.midcast['Blue Magic']['White Wind'] = set_combine(sets.midcast['Blue Magic'].Healing, {
+        ammo="Falcon Eye",
+        head=gear.Adhemar_D_head,
+        neck="Sanctity Necklace",
+		ear2="Etiolation Earring",
+        ring2="Eihwaz Ring",
+        back="Moonlight Cape",
+		waist="Kasiri Belt",
+        })
 
     sets.midcast['Blue Magic'].Buff = sets.midcast['Blue Magic']
     sets.midcast['Blue Magic'].Refresh = set_combine(sets.midcast['Blue Magic'], {head="Amalric Coif +1", waist="Gishdubar Sash", back="Grapevine Cape"})
     sets.midcast['Blue Magic'].SkillBasedBuff = sets.midcast['Blue Magic']
 
     sets.midcast['Blue Magic']['Occultation'] = set_combine(sets.midcast['Blue Magic'], {
-        ammo="Mavi Tathlum",
-        head="Carmine Mask +1",
         hands="Hashi. Bazu. +1",
-        neck="Mirage Stole +2",
         ear1="Loquacious Earring",
         ear2="Enchntr. Earring +1",
-        ring1="Kishar Ring",
-        ring2="Weather. Ring +1",
+		ring2="Weather. Ring +1",
         waist="Witful Belt",
-        })
+        }) -- 1 shadow per 50 skill
 
     sets.midcast['Blue Magic']['Carcharian Verve'] = set_combine(sets.midcast['Blue Magic'].Buff, {
         head="Amalric Coif +1",
