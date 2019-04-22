@@ -148,7 +148,7 @@ function init_gear_sets()
     ------------------------------------------------------------------------------------------------
 
     -- Precast sets to enhance JAs
-    sets.precast.JA.Bolster = {body="Bagua Tunic +1"}
+    sets.precast.JA.Bolster = {body="Bagua Tunic +3"}
     sets.precast.JA['Full Circle'] = {head="Azimuth Hood +1"}
     sets.precast.JA['Life Cycle'] = {head="Bagua Galero +3", body="Geomancy Tunic +3", back=gear.GEO_Idle_Cape,}
 
@@ -401,7 +401,7 @@ function init_gear_sets()
         main="Idris",
         sub="Ammurapi Shield",
         head="Bagua Galero +3",
-        body="Jhakri Robe +2",
+        body="Bagua Tunic +3",
         hands="Amalric Gages",
         legs="Merlinic Shalwar",
         feet="Merlinic Crackows",
