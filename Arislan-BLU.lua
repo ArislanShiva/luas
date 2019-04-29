@@ -148,8 +148,8 @@ function job_setup()
         'Magnetite Cloud','Poison Breath','Self-Destruct','Thunder Breath','Vapor Spray','Wind Breath'}
 
     -- Stun spells
-    blue_magic_maps.Stun = S{'Blitzstrahl','Frypan','Head Butt','Sudden Lunge','Tail slap','Temporal Shift',
-        'Thunderbolt','Whirl of Rage'}
+    blue_magic_maps.StunPhysical = S{'Frypan','Head Butt','Sudden Lunge','Tail slap','Whirl of Rage'}
+    blue_magic_maps.StunMagical = S{'Blitzstrahl','Temporal Shift','Thunderbolt'}
 
     -- Healing spells
     blue_magic_maps.Healing = S{'Healing Breeze','Magic Fruit','Plenilune Embrace','Pollen','Restoral',
@@ -571,7 +571,6 @@ function init_gear_sets()
     sets.midcast['Blue Magic'].PhysicalVit = sets.midcast['Blue Magic'].Physical
 
     sets.midcast['Blue Magic'].PhysicalAgi = set_combine(sets.midcast['Blue Magic'].Physical, {
-        body="Sayadio's Kaftan",
         hands=gear.Adhemar_B_hands,
         ring2="Ilabrat Ring",
         })
@@ -659,7 +658,7 @@ function init_gear_sets()
 
     sets.midcast['Blue Magic'].Breath = set_combine(sets.midcast['Blue Magic'].Magical, {head="Luh. Keffiyeh +3"})
 
-    sets.midcast['Blue Magic'].Stun = set_combine(sets.midcast['Blue Magic'].MagicAccuracy, {
+    sets.midcast['Blue Magic'].StunPhysical = set_combine(sets.midcast['Blue Magic'].MagicAccuracy, {
         head="Aya. Zucchetto +2",
         body="Ayanmo Corazza +2",
         hands="Aya. Manopolas +2",
@@ -670,6 +669,8 @@ function init_gear_sets()
         back=gear.BLU_TP_Cape,
         waist="Eschan Stone",
         })
+
+    sets.midcast['Blue Magic'].StunMagical = sets.midcast['Blue Magic'].MagicAccuracy
 
     sets.midcast['Blue Magic'].Healing = {
         ammo="Staunch Tathlum +1",
