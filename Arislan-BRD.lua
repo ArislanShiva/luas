@@ -217,6 +217,10 @@ function init_gear_sets()
 
     sets.precast.FC.SongPlaceholder = set_combine(sets.precast.FC.BardSong, {range=info.ExtraSongInstrument})
     
+    sets.precast.FC.HonorMarch = set_combine(sets.precast.FC.BardSong, {
+        range="Marsyas",
+        })
+    
     -- Precast sets to enhance JAs
     
     sets.precast.JA.Nightingale = {feet="Bihu Slippers +1"}
@@ -281,7 +285,7 @@ function init_gear_sets()
     sets.midcast.Ballad = {legs="Fili Rhingrave +1"}
     sets.midcast.Carol = {hands="Mousai Gages"}
     sets.midcast.Etude = {head="Mousai Turban"}
-    --sets.midcast.HonorMarch = {range="Marsyas", hands="Fili Manchettes +1"}
+    sets.midcast.HonorMarch = {range="Marsyas", hands="Fili Manchettes +1"}
     sets.midcast.Lullaby = {range="Daurdabla", body="Fili Hongreline +1", hands="Brioso Cuffs +2"}
     sets.midcast.Madrigal = {head="Fili Calot +1"}
     --sets.midcast.Mambo = {feet="Mousai Crackows"}
@@ -428,13 +432,12 @@ function init_gear_sets()
 
     sets.idle.DT = {
         sub="Genmei Shield", --10/0
-        range="Gjallarhorn",
         head="Inyanga Tiara +2", --0/5
         body="Ashera Harness", --7/7
         hands="Inyan. Dastanas +2", --0/4
         legs="Inyanga Shalwar +2", --0/6
         feet="Inyan. Crackows +2", --0/3
-		neck="Bard's Charm +1",
+        neck="Bard's Charm +1",
         --neck="Loricate Torque +1", --6/6
         ear2="Etiolation Earring", --0/3
         ring1="Gelatinous Ring +1", --7/{-1}
@@ -499,9 +502,9 @@ function init_gear_sets()
         waist="Windbuffet Belt +1",
         }
 
-	sets.engaged.Acc = set_combine(sets.engaged, {
+    sets.engaged.Acc = set_combine(sets.engaged, {
         ear2="Mache Earring +1",
-		ring2="Ramuh Ring +1",
+        ring2="Ramuh Ring +1",
         waist="Kentarch Belt +1",
         })
 
@@ -527,7 +530,7 @@ function init_gear_sets()
 
     sets.engaged.DW.Acc = set_combine(sets.engaged.DW, {
         ear2="Mache Earring +1",
-		ring2="Ramuh Ring +1",
+        ring2="Ramuh Ring +1",
         })
 
     ------------------------------------------------------------------------------------------------
@@ -557,8 +560,8 @@ end
 -- Set eventArgs.handled to true if we don't want any automatic gear equipping to be done.
 -- Set eventArgs.useMidcastGear to true if we want midcast gear equipped on precast.
 function job_precast(spell, action, spellMap, eventArgs)
-    --[[if spell.type == 'BardSong' then
-        -- Auto-Pianissimo
+    if spell.type == 'BardSong' then
+        --[[ Auto-Pianissimo
         if ((spell.target.type == 'PLAYER' and not spell.target.charmed) or (spell.target.type == 'NPC' and spell.target.in_party)) and
             not state.Buff['Pianissimo'] then
             
@@ -568,8 +571,11 @@ function job_precast(spell, action, spellMap, eventArgs)
                 eventArgs.cancel = true
                 return
             end
+        end]]
+        if spell.name == 'Honor March' then
+            equip({range="Marsyas"})
         end
-    end]]
+    end
     if spellMap == 'Utsusemi' then
         if buffactive['Copy Image (3)'] or buffactive['Copy Image (4+)'] then
             cancel_spell()
@@ -591,6 +597,9 @@ function job_midcast(spell, action, spellMap, eventArgs)
             if generalClass and sets.midcast[generalClass] then
                 equip(sets.midcast[generalClass])
             end
+            if spell.name == 'Honor March' then
+                equip(sets.midcast.HonorMarch)
+            end
         end
     end
 end
@@ -609,6 +618,9 @@ function job_post_midcast(spell, action, spellMap, eventArgs)
 end
 
 function job_aftercast(spell, action, spellMap, eventArgs)
+    if spell.english == 'Honor March' then
+        equip(sets.precast.FC.HonorMarch)
+    end
     if spell.english:contains('Lullaby') and not spell.interrupted then
         set_lullaby_timer(spell)
     end
