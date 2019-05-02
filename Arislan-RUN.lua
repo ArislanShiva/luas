@@ -245,7 +245,7 @@ function init_gear_sets()
         ear2={name="Odnowa Earring +1", priority=5},
         ring1={name="Moonlight Ring", priority=6},
         ring2={name="Eihwaz Ring", priority=2}, --5
-        back={name=gear.RUN_HPD_Cape, priority=3}, --10
+        back={name="Ogma's cape", augments={'HP+60','Eva.+20 /Mag. Eva.+20','HP+20','Enmity+10','Phys. dmg. taken-10%',}, priority=3}, 
         waist={name="Kasiri Belt", priority=1}, --3
         }
 
