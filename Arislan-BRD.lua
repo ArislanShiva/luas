@@ -137,7 +137,7 @@ function user_setup()
     send_command('bind @w gs c toggle WeaponLock')
     send_command('bind @c gs c toggle CP')
 
-    send_command('bind ^numpad7 input /ws "Mordant Rime" <t>')
+    send_command('bind numpad0 input /ws "Mordant Rime" <t>')
     send_command('bind ^numpad4 input /ws "Evisceration" <t>')
     send_command('bind ^numpad5 input /ws "Rudra\'s Storm" <t>')
     send_command('bind ^numpad1 input /ws "Aeolian Edge" <t>')
@@ -166,7 +166,7 @@ function user_unload()
     send_command('unbind @l')
     send_command('unbind @w')
     send_command('unbind @c')
-    send_command('unbind ^numpad7')
+    send_command('unbind numpad0')
     send_command('unbind ^numpad4')
     send_command('unbind ^numpad5')
     send_command('unbind ^numpad1')
@@ -184,7 +184,7 @@ function init_gear_sets()
 
     -- Fast cast sets for spells
     sets.precast.FC = {
-        main=gear.Kali_Song, --7
+        main="Kali", --7
         sub="Genmei Shield",
         head="Nahtirah Hat", --10
         body="Inyanga Jubbah +2", --14
@@ -216,10 +216,6 @@ function init_gear_sets()
         })
 
     sets.precast.FC.SongPlaceholder = set_combine(sets.precast.FC.BardSong, {range=info.ExtraSongInstrument})
-    
-    sets.precast.FC.HonorMarch = set_combine(sets.precast.FC.BardSong, {
-        range="Marsyas",
-        })
     
     -- Precast sets to enhance JAs
     
@@ -263,13 +259,14 @@ function init_gear_sets()
     sets.precast.WS['Exenterator'] = set_combine(sets.precast.WS, {})
 
     sets.precast.WS['Mordant Rime'] = set_combine(sets.precast.WS, {
+        neck="Bard's Charm +1",
         ear2="Regal Earring",
         ring2={name="Carb. Ring +1", bag="wardrobe4"},
         waist="Grunfeld Rope",
         })
 
     sets.precast.WS['Rudra\'s Storm'] = set_combine(sets.precast.WS, {
-        neck="Caro Necklace",
+        neck="Bard's Charm +1",
         waist="Grunfeld Rope",
         })
     
@@ -299,7 +296,7 @@ function init_gear_sets()
 
     -- For song buffs (duration and AF3 set bonus)
     sets.midcast.SongEnhancing = {
-        main=gear.Kali_Song,
+        main="Carnwenhan",
         sub="Genmei Shield",
         range="Gjallarhorn",
         head="Fili Calot +1",
@@ -318,7 +315,7 @@ function init_gear_sets()
 
     -- For song defbuffs (duration primary, accuracy secondary)
     sets.midcast.SongEnfeeble = {
-        main=gear.Kali_Song,
+        main="Carnwenhan",
         sub="Ammurapi Shield",
         range="Gjallarhorn",
         head="Brioso Roundlet +2",
@@ -381,7 +378,7 @@ function init_gear_sets()
         })
     
     sets.midcast['Enhancing Magic'] = {
-        main=gear.Kali_Song,
+        main="Kali",
         sub="Ammurapi Shield",
         head="Telchine Cap",
         body="Telchine Chas.",
@@ -421,7 +418,8 @@ function init_gear_sets()
         hands="Gende. Gages +1",
         legs="Assid. Pants +1",
         feet="Fili Cothurnes +1",
-        neck="Bathy Choker +1",
+        neck="Bard's Charm +1",
+        --neck="Bathy Choker +1",
         ear1="Genmei Earring",
         ear2="Infused Earring",
         ring1={name="Stikini Ring +1", bag="wardrobe3"},
@@ -447,7 +445,7 @@ function init_gear_sets()
         }
 
     sets.idle.Town = set_combine(sets.idle, {
-        main="Twashtar",
+        main="Carnwenhan",
         sub="Genmei Shield",
         range="Gjallarhorn",
         head="Brioso Roundlet +2",
@@ -485,7 +483,7 @@ function init_gear_sets()
     -- EG: sets.engaged.Dagger.Accuracy.Evasion
     
     sets.engaged = {
-        main="Twashtar",
+        main="Carnwenhan",
         sub="Genmei Shield",
         range=gear.Linos_TP,
         head="Aya. Zucchetto +2",
@@ -510,16 +508,15 @@ function init_gear_sets()
 
     -- 45% Magic Haste (36% DW to cap)
     sets.engaged.DW = {
-        main="Aeneas",
-        sub="Blurred Knife +1",
+        main="Carnwenhan",
+        sub="Twashtar",
         range=gear.Linos_TP,
         head="Aya. Zucchetto +2",
         body="Ayanmo Corazza +2",
         hands="Aya. Manopolas +2",
         legs="Aya. Cosciales +2",
         feet="Chironic Slippers",
-        --neck="Bard's Charm +1",
-        neck="Ainia Collar",
+        neck="Bard's Charm +1",
         ear1="Eabani Earring", --4
         ear2="Telos Earring",
         ring1={name="Chirich Ring +1", bag="wardrobe3"},
@@ -537,7 +534,7 @@ function init_gear_sets()
     ---------------------------------------- Special Sets ------------------------------------------
     ------------------------------------------------------------------------------------------------
 
-    sets.SongDWDuration = {main=gear.Kali_Song, sub=gear.Kali_Idle}
+    sets.SongDWDuration = {main="Carnwenhan", sub="Kali"}
 
     sets.buff.Doom = {
         neck="Nicander's Necklace", --20
@@ -575,6 +572,9 @@ function job_precast(spell, action, spellMap, eventArgs)
         if spell.name == 'Honor March' then
             equip({range="Marsyas"})
         end
+        if buffactive.Troubadour and string.find(spell.name,'Lullaby') then
+            equip({range="Marsyas"})
+        end
     end
     if spellMap == 'Utsusemi' then
         if buffactive['Copy Image (3)'] or buffactive['Copy Image (4+)'] then
@@ -590,27 +590,23 @@ end
 
 -- Set eventArgs.handled to true if we don't want any automatic gear equipping to be done.
 function job_midcast(spell, action, spellMap, eventArgs)
-    if spell.action_type == 'Magic' then
-        if spell.type == 'BardSong' then
-            -- layer general gear on first, then let default handler add song-specific gear.
-            local generalClass = get_song_class(spell)
-            if generalClass and sets.midcast[generalClass] then
-                equip(sets.midcast[generalClass])
-            end
-            if spell.name == 'Honor March' then
-                equip(sets.midcast.HonorMarch)
-            end
+    if spell.type == 'BardSong' then
+        -- layer general gear on first, then let default handler add song-specific gear.
+        local generalClass = get_song_class(spell)
+        if generalClass and sets.midcast[generalClass] then
+            equip(sets.midcast[generalClass])
+        end
+        if spell.name == 'Honor March' then
+            equip({range="Marsyas"})
+        end
+        if buffactive.Troubadour and string.find(spell.name,'Lullaby') then
+            equip({range="Marsyas"})
         end
     end
 end
 
 function job_post_midcast(spell, action, spellMap, eventArgs)
     if spell.type == 'BardSong' then
-        --if state.SongMode.value == 'FullLength' then
-        --    equip(sets.midcast.Daurdabla)
-        --end
-
-        --state.SongMode:reset()
         if state.CombatForm.current == 'DW' then
             equip(sets.SongDWDuration)
         end
@@ -618,11 +614,8 @@ function job_post_midcast(spell, action, spellMap, eventArgs)
 end
 
 function job_aftercast(spell, action, spellMap, eventArgs)
-    if spell.english == 'Honor March' then
-        equip(sets.precast.FC.HonorMarch)
-    end
     if spell.english:contains('Lullaby') and not spell.interrupted then
-        set_lullaby_timer(spell)
+        get_lullaby_duration(spell)
     end
 end
 
@@ -757,7 +750,7 @@ function get_song_class(spell)
     end
 end
 
-function set_lullaby_timer(spell)
+function get_lullaby_duration(spell)
     local self = windower.ffxi.get_player()
 
     local troubadour = false
@@ -772,8 +765,30 @@ function set_lullaby_timer(spell)
         if v == 231 then marcato = true end
     end
 
-    --User Lullaby duration enhancing gear total
-    mult = 2.17
+    local mult = 1
+    
+    if player.equipment.range == 'Daurdabla' then mult = mult + 0.3 end -- change to 0.25 with 90 Daur
+    if player.equipment.range == "Gjallarhorn" then mult = mult + 0.4 end -- change to 0.3 with 95 Gjall
+    if player.equipment.range == "Marsyas" then mult = mult + 0.5 end
+
+    if player.equipment.main == "Carnwenhan" then mult = mult + 0.5 end -- 0.1 for 75, 0.4 for 95, 0.5 for 99/119
+    if player.equipment.main == "Legato Dagger" then mult = mult + 0.05 end
+    if player.equipment.main == "Kali" then mult = mult + 0.05 end
+    if player.equipment.sub == "Kali" then mult = mult + 0.05 end
+    if player.equipment.sub == "Legato Dagger" then mult = mult + 0.05 end
+    if player.equipment.neck == "Aoidos' Matinee" then mult = mult + 0.1 end
+    if player.equipment.neck == "Mnbw. Whistle +1" then mult = mult + 0.2 end
+    if player.equipment.neck == "Mnbw. Whistle +1 +1" then mult = mult + 0.3 end
+    if player.equipment.body == "Fili Hongreline +1" then mult = mult + 0.12 end
+    if player.equipment.legs == "Inyanga Shalwar +1" then mult = mult + 0.15 end
+    if player.equipment.legs == "Inyanga Shalwar +2" then mult = mult + 0.17 end
+    if player.equipment.feet == "Brioso Slippers" then mult = mult + 0.1 end
+    if player.equipment.feet == "Brioso Slippers +1" then mult = mult + 0.11 end
+    if player.equipment.feet == "Brioso Slippers +2" then mult = mult + 0.13 end
+    if player.equipment.feet == "Brioso Slippers +3" then mult = mult + 0.15 end
+    if player.equipment.hands == 'Brioso Cuffs +1' then mult = mult + 0.1 end
+    if player.equipment.hands == 'Brioso Cuffs +2' then mult = mult + 0.1 end
+    if player.equipment.hands == 'Brioso Cuffs +3' then mult = mult + 0.2 end
 
     if troubadour then
         mult = mult * 2
