@@ -90,9 +90,9 @@ function user_setup()
     state.HybridMode:options('Normal', 'DT')
     state.WeaponskillMode:options('Normal', 'Acc')
     state.CastingMode:options('Normal', 'Resistant')
-    state.IdleMode:options('Normal', 'DT')
+    state.IdleMode:options('Normal', 'DT', 'MEva')
 
-    state.LullabyMode = M{['description']='Lullaby', 'Potency', 'Duration', 'Range'}
+    state.LullabyMode = M{['description']='Lullaby Instrument', 'Horn', 'Harp'}
 
     state.Carol = M{['description']='Carol', 
         'Fire Carol', 'Fire Carol II', 'Ice Carol', 'Ice Carol II', 'Wind Carol', 'Wind Carol II',
@@ -133,11 +133,11 @@ function user_setup()
     send_command('bind ^pageup gs c cycleback Threnody')
     send_command('bind ^pagedown gs c cycle Threnody')
 
-    send_command('bind @l gs c cycle LullabyMode')
+    send_command('bind @` gs c cycle LullabyMode')
     send_command('bind @w gs c toggle WeaponLock')
     send_command('bind @c gs c toggle CP')
 
-    send_command('bind numpad0 input /ws "Mordant Rime" <t>')
+    send_command('bind ^numpad7 input /ws "Mordant Rime" <t>')
     send_command('bind ^numpad4 input /ws "Evisceration" <t>')
     send_command('bind ^numpad5 input /ws "Rudra\'s Storm" <t>')
     send_command('bind ^numpad1 input /ws "Aeolian Edge" <t>')
@@ -163,10 +163,10 @@ function user_unload()
     send_command('unbind ^end')
     send_command('unbind ^pageup')
     send_command('unbind ^pagedown')
-    send_command('unbind @l')
+    send_command('unbind @`')
     send_command('unbind @w')
     send_command('unbind @c')
-    send_command('unbind numpad0')
+    send_command('unbind ^numpad7')
     send_command('unbind ^numpad4')
     send_command('unbind ^numpad5')
     send_command('unbind ^numpad1')
@@ -221,7 +221,7 @@ function init_gear_sets()
     
     sets.precast.JA.Nightingale = {feet="Bihu Slippers +1"}
     sets.precast.JA.Troubadour = {body="Bihu Jstcorps +1"}
-    sets.precast.JA['Soul Voice'] = {legs="Bihu Cannions +1"}
+    sets.precast.JA['Soul Voice'] = {legs="Bihu Cannions +3"}
 
     -- Waltz set (chr and vit)
     sets.precast.Waltz = {}
@@ -237,7 +237,7 @@ function init_gear_sets()
         head="Lustratio Cap +1",
         body="Ashera Harness",
         hands="Aya. Manopolas +2",
-        legs="Lustr. Subligar +1",
+        legs="Bihu Cannions +3",
         feet="Lustra. Leggings +1",
         neck="Fotia Gorget",
         ear1="Ishvara Earring",
@@ -266,6 +266,7 @@ function init_gear_sets()
         })
 
     sets.precast.WS['Rudra\'s Storm'] = set_combine(sets.precast.WS, {
+        legs="Lustr. Subligar +1",
         neck="Bard's Charm +1",
         waist="Grunfeld Rope",
         })
@@ -283,7 +284,7 @@ function init_gear_sets()
     sets.midcast.Carol = {hands="Mousai Gages"}
     sets.midcast.Etude = {head="Mousai Turban"}
     sets.midcast.HonorMarch = {range="Marsyas", hands="Fili Manchettes +1"}
-    sets.midcast.Lullaby = {range="Daurdabla", body="Fili Hongreline +1", hands="Brioso Cuffs +2"}
+    sets.midcast.Lullaby = {body="Fili Hongreline +1", hands="Brioso Cuffs +2"}
     sets.midcast.Madrigal = {head="Fili Calot +1"}
     --sets.midcast.Mambo = {feet="Mousai Crackows"}
     sets.midcast.March = {hands="Fili Manchettes +1"}
@@ -378,7 +379,7 @@ function init_gear_sets()
         })
     
     sets.midcast['Enhancing Magic'] = {
-        main="Kali",
+        main="Carnwenhan",
         sub="Ammurapi Shield",
         head="Telchine Cap",
         body="Telchine Chas.",
@@ -428,30 +429,45 @@ function init_gear_sets()
         waist="Flume Belt +1",
         }
 
-    sets.idle.DT = {
+	sets.idle.DT = {
         sub="Genmei Shield", --10/0
         head="Inyanga Tiara +2", --0/5
-        body="Ashera Harness", --7/7
+		body="Ashera Harness", --7/7
+        hands="Inyan. Dastanas +2", --0/4
+        legs="Bihu Cannions +3", --6/0
+        feet="Inyan. Crackows +2", --0/3
+		neck="Loricate Torque +1", --6/6
+        ear1="Genmei Earring", --2/0
+        ear2="Etiolation Earring", --0/3
+        ring1="Moonlight Ring", --5/5
+        ring2="Defending Ring",  --10/10
+        back="Moonlight Cape", --6/6
+        waist="Flume Belt +1", --4/0
+		}
+
+    sets.idle.MEva = {
+        sub="Genmei Shield", --10/0
+        head="Inyanga Tiara +2", --0/5
+        body="Inyanga Jubbah +2", --0/8
         hands="Inyan. Dastanas +2", --0/4
         legs="Inyanga Shalwar +2", --0/6
         feet="Inyan. Crackows +2", --0/3
-        neck="Bard's Charm +1",
-        --neck="Loricate Torque +1", --6/6
+        neck="Warder's Charm +1",
         ear2="Etiolation Earring", --0/3
-        ring1="Gelatinous Ring +1", --7/{-1}
+        ring1="Moonlight Ring", --5/5
         ring2="Defending Ring",  --10/10
-        waist="Flume Belt +1", --4/0
         back="Moonlight Cape", --6/6
+        waist="Carrier's Sash",
         }
 
     sets.idle.Town = set_combine(sets.idle, {
         main="Carnwenhan",
         sub="Genmei Shield",
         range="Gjallarhorn",
-        head="Brioso Roundlet +2",
-        body="Brioso Justau. +2",
-        hands="Brioso Cuffs +2",
-        legs="Brioso Cannions +2",
+        head="Fili Calot +1",
+        body="Ashera Harness",
+        hands="Fili Manchettes +1",
+        legs="Bihu Cannions +3",
         neck="Mnbw. Whistle +1",
         ear1="Enchntr. Earring +1",
         ear2="Regal Earring",
@@ -572,8 +588,14 @@ function job_precast(spell, action, spellMap, eventArgs)
         if spell.name == 'Honor March' then
             equip({range="Marsyas"})
         end
-        if buffactive.Troubadour and string.find(spell.name,'Lullaby') then
-            equip({range="Marsyas"})
+        if string.find(spell.name,'Lullaby') then
+            if buffactive.Troubadour then
+                equip({range="Marsyas"})
+		    elseif state.LullabyMode.value == 'Horn' then
+                equip({range="Gjallarhorn"})
+            else
+                equip({range="Daurdabla"})
+            end
         end
     end
     if spellMap == 'Utsusemi' then
@@ -599,9 +621,15 @@ function job_midcast(spell, action, spellMap, eventArgs)
         if spell.name == 'Honor March' then
             equip({range="Marsyas"})
         end
-        if buffactive.Troubadour and string.find(spell.name,'Lullaby') then
-            equip({range="Marsyas"})
-        end
+        if string.find(spell.name,'Lullaby') then
+            if buffactive.Troubadour then
+                equip({range="Marsyas"})
+		    elseif state.LullabyMode.value == 'Horn' then
+                equip({range="Gjallarhorn"})
+            else
+                equip({range="Daurdabla"})
+            end
+		end
     end
 end
 
