@@ -64,6 +64,8 @@ function job_setup()
     -- Whether a warning has been given for low ammo
     state.warned = M(false)
 
+    elemental_ws = S{'Aeolian Edge', 'Trueflight', 'Wildfire'}
+
     lockstyleset = 1
 end
 
@@ -353,7 +355,6 @@ function init_gear_sets()
         waist="Eschan Stone",
         }
 
-    sets.precast.WS["Trueflight"].FullTP = {ear1="Crematio Earring", waist="Svelt. Gouriz +1"}
     sets.precast.WS["Wildfire"] = set_combine(sets.precast.WS["Trueflight"], {ring1="Regal Ring"})
 
     sets.precast.WS['Evisceration'] = {
@@ -864,6 +865,7 @@ function init_gear_sets()
         waist="Gishdubar Sash", --10
         }
 
+    sets.FullTP = {ear1="Crematio Earring"}
     sets.Obi = {waist="Hachirin-no-Obi"}
     --sets.Reive = {neck="Ygnas's Resolve +1"}
     sets.CP = {back="Mecisto. Mantle"}
@@ -908,22 +910,33 @@ function job_post_precast(spell, action, spellMap, eventArgs)
                 equip(sets.precast.RA.Flurry2)
             elseif flurry == 1 then
                 equip(sets.precast.RA.Flurry1)
-                end
-  end
+            end
         end
     -- Equip obi if weather/day matches for WS.
-    if spell.type == 'WeaponSkill' then
-        if spell.english == 'Trueflight' then
-            if world.weather_element == 'Light' or world.day_element == 'Light' then
-                equip(sets.Obi)
-            end
-            if player.tp > 2900 then
-                equip(sets.precast.WS["Trueflight"].FullTP)
-            end
-        elseif spell.english == 'Wildfire' and (world.weather_element == 'Fire' or world.day_element == 'Fire') then
-            equip(sets.Obi)
+    elseif spell.type == 'WeaponSkill' then
+        -- Replace TP-bonus gear if not needed.
+        if spell.english == 'Trueflight' or spell.english == 'Aeolian Edge' and player.tp > 2900 then
+            equip(sets.FullTP)
+        end
+        if elemental_ws:contains(spell.name) then
+            -- Matching double weather (w/o day conflict).
+            if spell.element == world.weather_element and (get_weather_intensity() == 2 and spell.element ~= elements.weak_to[world.day_element]) then
+                equip({waist="Hachirin-no-Obi"})
+            -- Target distance under 1.7 yalms.
+            elseif spell.target.distance < (1.7 + spell.target.model_size) then
+                equip({waist="Orpheus's Sash"})
+            -- Matching day and weather.
+            elseif spell.element == world.day_element and spell.element == world.weather_element then
+                equip({waist="Hachirin-no-Obi"})
+            -- Target distance under 8 yalms.
+            elseif spell.target.distance < (8 + spell.target.model_size) then
+                equip({waist="Orpheus's Sash"})
+            -- Match day or weather.
+            elseif spell.element == world.day_element or spell.element == world.weather_element then
+                equip({waist="Hachirin-no-Obi"})
             end
         end
+    end
 end
 
 
@@ -1115,7 +1128,7 @@ windower.register_event('action',
                 elseif param == 846 then
                     --add_to_chat(122, 'Flurry Status: Flurry II')
                     flurry = 2
-                end
+              end
             end
         end
     end)
@@ -1154,11 +1167,11 @@ function gearinfo(cmdParams, eventArgs)
             if cmdParams[2] == 'false' then
                 DW_needed = 0
                 DW = false
-              end
+            end
         end
         if type(tonumber(cmdParams[3])) == 'number' then
-              if tonumber(cmdParams[3]) ~= Haste then
-                  Haste = tonumber(cmdParams[3])
+            if tonumber(cmdParams[3]) ~= Haste then
+                Haste = tonumber(cmdParams[3])
             end
         end
         if type(cmdParams[4]) == 'string' then
@@ -1198,7 +1211,7 @@ function check_ammo(spell, action, spellMap, eventArgs)
                 else
                     add_to_chat(122,"Default ammo unavailable.  Removing Unlimited Shot ammo.")
                     equip({ammo=empty})
-                end
+              end
             else
                 add_to_chat(122,"Unable to determine default ammo for current weapon.  Removing Unlimited Shot ammo.")
                 equip({ammo=empty})
@@ -1210,7 +1223,7 @@ function check_ammo(spell, action, spellMap, eventArgs)
                     equip({ammo=DefaultAmmo[player.equipment.range]})
                 else
                     add_to_chat(122,"Default ammo unavailable.  Leaving empty.")
-                end
+              end
             else
                 add_to_chat(122,"Unable to determine default ammo for current weapon.  Leaving empty.")
             end
@@ -1233,7 +1246,7 @@ function do_bullet_checks(spell, spellMap, eventArgs)
                     bullet_name = gear.ACCbullet
                 else
                     bullet_name = gear.WSbullet
-                end
+              end
             else
                 -- magical weaponskills
                 bullet_name = gear.MAbullet

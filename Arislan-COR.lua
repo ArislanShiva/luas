@@ -104,6 +104,8 @@ function job_setup()
     -- Whether a warning has been given for low ammo
     state.warned = M(false)
 
+    elemental_ws = S{'Aeolian Edge', 'Leaden Salute', 'Wildfire'}
+
     define_roll_values()
 
     lockstyleset = 1
@@ -147,12 +149,12 @@ function user_setup()
     send_command('bind !` input /ja "Bolter\'s Roll" <me>')
     send_command ('bind @` gs c toggle LuzafRing')
 
-    send_command('bind ^- gs c cycleback mainqd')
-    send_command('bind ^= gs c cycle mainqd')
-    send_command('bind !- gs c cycle altqd')
-    send_command('bind != gs c cycleback altqd')
-    send_command('bind ^[ gs c toggle selectqdtarget')
-    send_command('bind ^] gs c toggle usealtqd')
+    send_command('bind ^insert gs c cycleback mainqd')
+    send_command('bind ^delete gs c cycle mainqd')
+    send_command('bind ^home gs c cycle altqd')
+    send_command('bind ^end gs c cycleback altqd')
+    send_command('bind ^pageup gs c toggle selectqdtarget')
+    send_command('bind ^pagedown gs c toggle usealtqd')
 
     send_command('bind @c gs c toggle CP')
     send_command('bind @q gs c cycle QDMode')
@@ -198,12 +200,12 @@ function user_unload()
     send_command('unbind ^f')
     send_command('unbind !`')
     send_command('unbind @`')
-    send_command('unbind ^-')
-    send_command('unbind ^=')
-    send_command('unbind !-')
-    send_command('unbind !=')
-    send_command('unbind ^[')
-    send_command('unbind ^]')
+    send_command('unbind ^insert')
+    send_command('unbind ^delete')
+    send_command('unbind ^home')
+    send_command('unbind ^end')
+    send_command('unbind ^pageup')
+    send_command('unbind ^pagedown')
     send_command('unbind ^,')
     send_command('unbind @c')
     send_command('unbind @q')
@@ -373,7 +375,8 @@ function init_gear_sets()
         hands="Carmine Fin. Ga. +1",
         legs=gear.Herc_MAB_legs,
         feet="Lanun Bottes +3",
-        neck="Baetyl Pendant",
+--        neck="Baetyl Pendant",
+        neck="Comm. Charm +1",
         ear1="Crematio Earring",
         ear2="Friomisi Earring",
         ring1="Dingir Ring",
@@ -389,8 +392,6 @@ function init_gear_sets()
         ear1="Moonshade Earring",
         ring1="Archon Ring",
         })
-
-    sets.precast.WS['Leaden Salute'].FullTP = {ear1="Crematio Earring", waist="Svelt. Gouriz +1"}
 
     sets.precast.WS['Evisceration'] = {
         head=gear.Adhemar_B_head,
@@ -525,7 +526,7 @@ function init_gear_sets()
         hands="Laksa. Gants +3",
         legs="Mummu Kecks +2",
         feet="Laksa. Boots +3",
-        neck="Sanctity Necklace",
+        neck="Comm. Charm +1",
         ear1="Hermetic Earring",
         ear2="Digni. Earring",
         ring1="Regal Ring",
@@ -614,7 +615,7 @@ function init_gear_sets()
         legs="Carmine Cuisses +1",
         feet="Ahosi Leggings",
         head="Volte Boots",
-        neck="Bathy Choker +1",
+        neck="Comm. Charm +1",
         ear1="Genmei Earring",
         ear2="Infused Earring",
         ring1={name="Chirich Ring +1", bag="wardrobe3"},
@@ -628,7 +629,7 @@ function init_gear_sets()
         body="Lanun Frac +3", --6/0
         hands=gear.Herc_DT_hands, --7/5
         feet="Ahosi Leggings", --4/0
-        neck="Loricate Torque +1", --6/6
+        --neck="Loricate Torque +1", --6/6
         ear1="Genmei Earring", --2/0
         ear2="Etiolation Earring", --0/3
         ring2="Defending Ring", --10/10
@@ -648,7 +649,7 @@ function init_gear_sets()
         head="Lanun Tricorne +3",
         hands="Lanun Gants +3",
         feet="Lanun Bottes +3",
-        neck="Iskur Gorget",
+        neck="Comm. Charm +1",
         ear1="Suppanomimi",
         ear2="Telos Earring",
         back=gear.COR_WS1_Cape,
@@ -741,7 +742,8 @@ function init_gear_sets()
         hands="Floral Gauntlets", --5
         legs="Carmine Cuisses +1", --6
         feet=gear.Taeon_DW_feet, --9
-        neck="Iskur Gorget",
+        neck="Comm. Charm +1",
+        --neck="Iskur Gorget",
         ear1="Suppanomimi", --5
         ear2="Brutal Earring",
         ring1="Hetairoi Ring",
@@ -784,7 +786,8 @@ function init_gear_sets()
         hands="Floral Gauntlets", --5
         legs="Carmine Cuisses +1", --6
         feet=gear.Taeon_DW_feet, --9
-        neck="Iskur Gorget",
+        neck="Comm. Charm +1",
+--        neck="Iskur Gorget",
         ear1="Suppanomimi", --5
         ear2="Eabani Earring", --4
         ring1="Hetairoi Ring",
@@ -827,7 +830,8 @@ function init_gear_sets()
         hands=gear.Adhemar_B_hands,
         legs="Samnuha Tights",
         feet=gear.Taeon_DW_feet, --9
-        neck="Iskur Gorget",
+--        neck="Iskur Gorget",
+        neck="Comm. Charm +1",
         ear1="Suppanomimi", --5
         ear2="Eabani Earring", --4
         ring1="Hetairoi Ring",
@@ -872,7 +876,8 @@ function init_gear_sets()
         hands=gear.Adhemar_B_hands,
         legs="Samnuha Tights",
         feet=gear.Herc_TA_feet,
-        neck="Iskur Gorget",
+        neck="Comm. Charm +1",
+--        neck="Iskur Gorget",
         ear1="Suppanomimi", --5
         ear2="Eabani Earring", --4
         ring1="Hetairoi Ring",
@@ -917,7 +922,8 @@ function init_gear_sets()
         hands=gear.Adhemar_B_hands,
         legs="Samnuha Tights",
         feet=gear.Herc_TA_feet,
-        neck="Iskur Gorget",
+        neck="Comm. Charm +1",
+--        neck="Iskur Gorget",
         ear1="Suppanomimi", --5
         ear2="Telos Earring",
         ring1="Hetairoi Ring",
@@ -968,7 +974,7 @@ function init_gear_sets()
 
     sets.engaged.Hybrid = {
         head=gear.Adhemar_D_head, --4/0
-        neck="Loricate Torque +1", --6/6
+        --neck="Loricate Torque +1", --6/6
         ring2="Defending Ring", --10/10
         }
 
@@ -1026,6 +1032,7 @@ function init_gear_sets()
         waist="Gishdubar Sash", --10
         }
 
+	sets.FullTP = {ear1="Crematio Earring"}
     sets.Obi = {waist="Hachirin-no-Obi"}
     sets.CP = {back="Mecisto. Mantle"}
     --sets.Reive = {neck="Ygnas's Resolve +1"}
@@ -1050,7 +1057,6 @@ end
 -- Set eventArgs.useMidcastGear to true if we want midcast gear equipped on precast.
 function job_precast(spell, action, spellMap, eventArgs)
     equip(sets[state.WeaponSet.current])
-
     -- Check that proper ammo is available if we're using ranged attacks or similar.
     if spell.action_type == 'Ranged Attack' or spell.type == 'WeaponSkill' or spell.type == 'CorsairShot' then
         do_bullet_checks(spell, spellMap, eventArgs)
@@ -1097,27 +1103,52 @@ function job_post_precast(spell, action, spellMap, eventArgs)
         elseif flurry == 1 then
             equip(sets.precast.RA.Flurry1)
         end
-    -- Equip obi if weather/day matches for WS.
     elseif spell.type == 'WeaponSkill' then
-        if spell.english == 'Leaden Salute' then
-            if player.tp > 2900 then
-                equip(sets.precast.WS['Leaden Salute'].FullTP)
+        -- Replace TP-bonus gear if not needed.
+        if spell.english == 'Leaden Salute' or spell.english == 'Aeolian Edge' and player.tp > 2900 then
+            equip(sets.FullTP)
+        end
+        if elemental_ws:contains(spell.name) then
+            -- Matching double weather (w/o day conflict).
+            if spell.element == world.weather_element and (get_weather_intensity() == 2 and spell.element ~= elements.weak_to[world.day_element]) then
+                equip({waist="Hachirin-no-Obi"})
+            -- Target distance under 1.7 yalms.
+            elseif spell.target.distance < (1.7 + spell.target.model_size) then
+                equip({waist="Orpheus's Sash"})
+            -- Matching day and weather.
+            elseif spell.element == world.day_element and spell.element == world.weather_element then
+                equip({waist="Hachirin-no-Obi"})
+            -- Target distance under 8 yalms.
+            elseif spell.target.distance < (8 + spell.target.model_size) then
+                equip({waist="Orpheus's Sash"})
+            -- Match day or weather.
+            elseif spell.element == world.day_element or spell.element == world.weather_element then
+                equip({waist="Hachirin-no-Obi"})
             end
-            if world.weather_element == 'Dark' or world.day_element == 'Dark' then
-                equip(sets.Obi)
-            end
-        elseif spell.english == 'Wildfire' and (world.weather_element == 'Fire' or world.day_element == 'Fire') then
-            equip(sets.Obi)
         end
     end
 end
 
 function job_post_midcast(spell, action, spellMap, eventArgs)
     if spell.type == 'CorsairShot' then
-        if (spell.element == world.day_element or spell.element == world.weather_element) and
-        (spell.english ~= 'Light Shot' and spell.english ~= 'Dark Shot') then
-            equip(sets.Obi)
-        end
+		if (spell.english ~= 'Light Shot' and spell.english ~= 'Dark Shot') then
+			-- Matching double weather (w/o day conflict).
+			if spell.element == world.weather_element and (get_weather_intensity() == 2 and spell.element ~= elements.weak_to[world.day_element]) then
+				equip({waist="Hachirin-no-Obi"})
+			-- Target distance under 1.7 yalms.
+			elseif spell.target.distance < (1.7 + spell.target.model_size) then
+				equip({waist="Orpheus's Sash"})
+			-- Matching day and weather.
+			elseif spell.element == world.day_element and spell.element == world.weather_element then
+				equip({waist="Hachirin-no-Obi"})
+			-- Target distance under 8 yalms.
+			elseif spell.target.distance < (8 + spell.target.model_size) then
+				equip({waist="Orpheus's Sash"})
+			-- Match day or weather.
+			elseif spell.element == world.day_element or spell.element == world.weather_element then
+				equip({waist="Hachirin-no-Obi"})
+			end
+		end
         if state.QDMode.value == 'Enhance' then
             equip(sets.midcast.CorsairShot.Enhance)
         elseif state.QDMode.value == 'TH' then
@@ -1141,7 +1172,6 @@ end
 -- Set eventArgs.handled to true if we don't want any automatic gear equipping to be done.
 function job_aftercast(spell, action, spellMap, eventArgs)
     equip(sets[state.WeaponSet.current])
-
     if (spell.type == 'CorsairRoll' or spell.english == "Double-Up") and not spell.interrupted then
         display_roll_info(spell)
     end
@@ -1193,7 +1223,6 @@ function job_state_change(stateField, newValue, oldValue)
     end
 
     equip(sets[state.WeaponSet.current])
-
 end
 
 -------------------------------------------------------------------------------------------------------------------
@@ -1208,8 +1237,7 @@ function job_handle_equipping_gear(playerStatus, eventArgs)
 end
 
 function job_update(cmdParams, eventArgs)
-    equip(sets[state.WeaponSet.current])
-    handle_equipping_gear(player.status)
+    equip(sets[state.WeaponSet.current])    handle_equipping_gear(player.status)
 end
 
 function update_combat_form()
@@ -1311,7 +1339,7 @@ windower.register_event('action',
                 elseif param == 846 then
                     --add_to_chat(122, 'Flurry Status: Flurry II')
                     flurry = 2
-                end
+              end
             end
         end
     end)
@@ -1366,11 +1394,11 @@ function gearinfo(cmdParams, eventArgs)
             if cmdParams[2] == 'false' then
                 DW_needed = 0
                 DW = false
-              end
+            end
         end
         if type(tonumber(cmdParams[3])) == 'number' then
-              if tonumber(cmdParams[3]) ~= Haste then
-                  Haste = tonumber(cmdParams[3])
+            if tonumber(cmdParams[3]) ~= Haste then
+                Haste = tonumber(cmdParams[3])
             end
         end
         if type(cmdParams[4]) == 'string' then
