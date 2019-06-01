@@ -75,8 +75,6 @@ function job_setup()
     state.Buff['Pianissimo'] = buffactive['pianissimo'] or false
     state.Buff['Pianissimo'] = buffactive['pianissimo'] or false
 
-    include('Mote-TreasureHunter')
-
     lockstyleset = 1
 end
 
@@ -115,6 +113,10 @@ function user_setup()
     -- Additional local binds
     include('Global-Binds.lua') -- OK to remove this line
     include('Global-GEO-Binds.lua') -- OK to remove this line
+
+    if player.sub_job == 'NIN' or player.sub_job == 'DNC' then
+        send_command('lua l gearinfo')
+    end
    
     -- Adjust this if using the Terpander (new +song instrument)
     info.ExtraSongInstrument = 'Daurdabla'
@@ -146,7 +148,13 @@ function user_setup()
 
     select_default_macro_book()
     set_lockstyle()
+
+    Haste = 0
+    DW_needed = 0
+    DW = false
+    moving = false
     update_combat_form()
+    determine_haste_group()
 end
 
 
@@ -172,6 +180,10 @@ function user_unload()
     send_command('unbind ^numpad1')
     send_command('unbind ^numpad2')
     send_command('unbind ^numpad3')
+
+    if player.sub_job == 'NIN' or player.sub_job == 'DNC' then
+        send_command('lua u gearinfo')
+    end
 end
 
 
@@ -209,7 +221,7 @@ function init_gear_sets()
 
     sets.precast.FC.BardSong = set_combine(sets.precast.FC, {
         head="Fili Calot +1", --0/14
-        feet="Bihu Slippers +1", --8
+        feet="Bihu Slippers +3", --9
         neck="Loricate Torque +1",
         ear1="Genmei Earring",
         ring2="Defending Ring",
@@ -219,8 +231,8 @@ function init_gear_sets()
     
     -- Precast sets to enhance JAs
     
-    sets.precast.JA.Nightingale = {feet="Bihu Slippers +1"}
-    sets.precast.JA.Troubadour = {body="Bihu Jstcorps +1"}
+    sets.precast.JA.Nightingale = {feet="Bihu Slippers +3"}
+    sets.precast.JA.Troubadour = {body="Bihu Jstcorps. +3"}
     sets.precast.JA['Soul Voice'] = {legs="Bihu Cannions +3"}
 
     -- Waltz set (chr and vit)
@@ -234,11 +246,11 @@ function init_gear_sets()
     -- Default set for any weaponskill that isn't any more specifically defined
     sets.precast.WS = {
         range=gear.Linos_WS,
-        head="Lustratio Cap +1",
-        body="Ashera Harness",
-        hands="Aya. Manopolas +2",
+        head="Bihu Roundlet +3",
+        body="Bihu Jstcorps. +3",
+        hands="Bihu Cuffs +3",
         legs="Bihu Cannions +3",
-        feet="Lustra. Leggings +1",
+        feet="Bihu Slippers +3",
         neck="Fotia Gorget",
         ear1="Ishvara Earring",
         ear2="Moonshade Earring",
@@ -251,6 +263,9 @@ function init_gear_sets()
     -- Specific weaponskill sets.  Uses the base set if an appropriate WSMod version isn't found.
     sets.precast.WS['Evisceration'] = set_combine(sets.precast.WS, {
         range=gear.Linos_TP,
+        head="Lustratio Cap +1",
+        legs="Lustr. Subligar +1",
+        feet="Lustra. Leggings +1",
         ear1="Brutal Earring",
         ring1="Begrudging Ring",
         back=gear.BRD_TP_Cape,
@@ -261,12 +276,13 @@ function init_gear_sets()
     sets.precast.WS['Mordant Rime'] = set_combine(sets.precast.WS, {
         neck="Bard's Charm +1",
         ear2="Regal Earring",
-        ring2={name="Carb. Ring +1", bag="wardrobe4"},
         waist="Grunfeld Rope",
         })
 
     sets.precast.WS['Rudra\'s Storm'] = set_combine(sets.precast.WS, {
+        head="Lustratio Cap +1",
         legs="Lustr. Subligar +1",
+        feet="Lustra. Leggings +1",
         neck="Bard's Charm +1",
         waist="Grunfeld Rope",
         })
@@ -284,7 +300,7 @@ function init_gear_sets()
     sets.midcast.Carol = {hands="Mousai Gages"}
     sets.midcast.Etude = {head="Mousai Turban"}
     sets.midcast.HonorMarch = {range="Marsyas", hands="Fili Manchettes +1"}
-    sets.midcast.Lullaby = {body="Fili Hongreline +1", hands="Brioso Cuffs +2"}
+    sets.midcast.Lullaby = {body="Fili Hongreline +1", hands="Brioso Cuffs +3"}
     sets.midcast.Madrigal = {head="Fili Calot +1"}
     --sets.midcast.Mambo = {feet="Mousai Crackows"}
     sets.midcast.March = {hands="Fili Manchettes +1"}
@@ -292,7 +308,9 @@ function init_gear_sets()
     sets.midcast.Minuet = {body="Fili Hongreline +1"}
     sets.midcast.Paeon = {head="Brioso Roundlet +2"}
     sets.midcast.Threnody = {body="Mousai Manteel"}
-    --sets.midcast['Magic Finale'] = {legs="Fili Rhingrave +1"}
+    sets.midcast['Adventurer\'s Dirge'] = {hands="Bihu Cuffs +3"}
+    sets.midcast['Foe Sirvente'] = {head="Bihu Roundlet +3"}
+    sets.midcast['Magic Finale'] = {legs="Fili Rhingrave +1"}
     sets.midcast["Sentinel's Scherzo"] = {feet="Fili Cothurnes +1"}
 
     -- For song buffs (duration and AF3 set bonus)
@@ -321,7 +339,7 @@ function init_gear_sets()
         range="Gjallarhorn",
         head="Brioso Roundlet +2",
         body="Brioso Justau. +2",
-        hands="Brioso Cuffs +2",
+        hands="Brioso Cuffs +3",
         legs="Inyanga Shalwar +2",
         feet="Brioso Slippers +3",
         neck="Mnbw. Whistle +1",
@@ -381,11 +399,11 @@ function init_gear_sets()
     sets.midcast['Enhancing Magic'] = {
         main="Carnwenhan",
         sub="Ammurapi Shield",
-        head="Telchine Cap",
-        body="Telchine Chas.",
-        hands="Telchine Gloves",
-        legs="Telchine Braconi",
-        feet="Telchine Pigaches",
+        head=gear.Telchine_ENH_head,
+        body=gear.Telchine_ENH_body,
+        hands=gear.Telchine_ENH_hands,
+        legs=gear.Telchine_ENH_legs,
+        feet=gear.Telchine_ENH_feet,
         neck="Incanter's Torque",
         ear1="Augment. Earring",
         ear2="Andoaa Earring",
@@ -419,8 +437,7 @@ function init_gear_sets()
         hands="Gende. Gages +1",
         legs="Assid. Pants +1",
         feet="Fili Cothurnes +1",
-        neck="Bard's Charm +1",
-        --neck="Bathy Choker +1",
+        neck="Bathy Choker +1",
         ear1="Genmei Earring",
         ear2="Infused Earring",
         ring1={name="Stikini Ring +1", bag="wardrobe3"},
@@ -429,24 +446,21 @@ function init_gear_sets()
         waist="Flume Belt +1",
         }
 
-	sets.idle.DT = {
-        sub="Genmei Shield", --10/0
-        head="Inyanga Tiara +2", --0/5
-		body="Ashera Harness", --7/7
+    sets.idle.DT = {
+        head="Bihu Roundlet +3", --6/0
+        body="Bihu Jstcorps. +3", --7/0
         hands="Inyan. Dastanas +2", --0/4
         legs="Bihu Cannions +3", --6/0
         feet="Inyan. Crackows +2", --0/3
-		neck="Loricate Torque +1", --6/6
-        ear1="Genmei Earring", --2/0
+        neck="Loricate Torque +1", --6/6
         ear2="Etiolation Earring", --0/3
         ring1="Moonlight Ring", --5/5
         ring2="Defending Ring",  --10/10
         back="Moonlight Cape", --6/6
         waist="Flume Belt +1", --4/0
-		}
+        }
 
     sets.idle.MEva = {
-        sub="Genmei Shield", --10/0
         head="Inyanga Tiara +2", --0/5
         body="Inyanga Jubbah +2", --0/8
         hands="Inyan. Dastanas +2", --0/4
@@ -464,14 +478,15 @@ function init_gear_sets()
         main="Carnwenhan",
         sub="Genmei Shield",
         range="Gjallarhorn",
-        head="Fili Calot +1",
-        body="Ashera Harness",
-        hands="Fili Manchettes +1",
+        head="Bihu Roundlet +3",
+        body="Bihu Jstcorps. +3",
+        hands="Brioso Cuffs +3",
         legs="Bihu Cannions +3",
         neck="Mnbw. Whistle +1",
         ear1="Enchntr. Earring +1",
         ear2="Regal Earring",
         back=gear.BRD_Song_Cape,
+        waist="Luminary Sash",
         })
     
     sets.idle.Weak = sets.idle.DT
@@ -500,11 +515,11 @@ function init_gear_sets()
     
     sets.engaged = {
         main="Carnwenhan",
-        sub="Genmei Shield",
+        sub="Taming Sari",
         range=gear.Linos_TP,
         head="Aya. Zucchetto +2",
         body="Ayanmo Corazza +2",
-        hands="Aya. Manopolas +2",
+        hands="Chironic Gloves",
         legs="Aya. Cosciales +2",
         feet="Chironic Slippers",
         neck="Bard's Charm +1",
@@ -522,29 +537,116 @@ function init_gear_sets()
         waist="Kentarch Belt +1",
         })
 
-    -- 45% Magic Haste (36% DW to cap)
+    -- * DNC Subjob DW Trait: +15%
+    -- * NIN Subjob DW Trait: +25%
+
+    -- No Magic Haste (74% DW to cap)
     sets.engaged.DW = {
         main="Carnwenhan",
-        sub="Twashtar",
+        sub="Taming Sari",
         range=gear.Linos_TP,
-        head="Aya. Zucchetto +2",
+        head="Chironic Hat",
         body="Ayanmo Corazza +2",
-        hands="Aya. Manopolas +2",
+        hands="Chironic Gloves",
+        legs="Aya. Cosciales +2",
+        feet="Chironic Slippers",
+        neck="Bard's Charm +1",
+        ear1="Eabani Earring", --4
+        ear2="Suppanomimi", --5
+        ring1={name="Chirich Ring +1", bag="wardrobe3"},
+        ring2={name="Chirich Ring +1", bag="wardrobe4"},
+        back=gear.BRD_DW_Cape, --10
+        waist="Reiki Yotai", --7
+        } -- 26%
+
+    sets.engaged.DW.Acc = set_combine(sets.engaged.DW, {
+        head="Aya. Zucchetto +2",
+        hands="Bihu Cuffs +3",
+        feet="Bihu Slippers +3",
+        })
+
+    -- 15% Magic Haste (67% DW to cap)
+    sets.engaged.DW.LowHaste = sets.engaged.DW
+    sets.engaged.DW.Acc.LowHaste = sets.engaged.DW.Acc
+
+    -- 30% Magic Haste (56% DW to cap)
+    sets.engaged.DW.MidHaste = sets.engaged.DW
+    sets.engaged.DW.Acc.MidHaste = sets.engaged.DW.Acc
+
+    -- 35% Magic Haste (51% DW to cap)
+    sets.engaged.DW.HighHaste = sets.engaged.DW
+    sets.engaged.DW.Acc.HighHaste = sets.engaged.DW.Acc
+
+    -- 45% Magic Haste (36% DW to cap)
+	sets.engaged.DW.MaxHaste = {
+        main="Carnwenhan",
+        sub="Taming Sari",
+        range=gear.Linos_TP,
+        head="Chironic Hat",
+        body="Ayanmo Corazza +2",
+        hands="Chironic Gloves",
         legs="Aya. Cosciales +2",
         feet="Chironic Slippers",
         neck="Bard's Charm +1",
         ear1="Eabani Earring", --4
         ear2="Telos Earring",
         ring1={name="Chirich Ring +1", bag="wardrobe3"},
-        ring2="Ilabrat Ring",
+        ring2={name="Chirich Ring +1", bag="wardrobe4"},
         back=gear.BRD_TP_Cape,
         waist="Reiki Yotai", --7
         }
 
-    sets.engaged.DW.Acc = set_combine(sets.engaged.DW, {
+    sets.engaged.DW.MaxHaste.Acc = set_combine(sets.engaged.DW, {
+        head="Aya. Zucchetto +2",
+        hands="Bihu Cuffs +3",
+        feet="Bihu Slippers +3",
         ear2="Mache Earring +1",
-        ring2="Ramuh Ring +1",
         })
+
+    sets.engaged.DW.MaxHastePlus = set_combine(sets.engaged.DW.MaxHaste, {ear1="Cessance Earring", back=gear.BRD_DW_Cape})
+    sets.engaged.DW.Acc.MaxHastePlus = set_combine(sets.engaged.DW.Acc.MaxHaste, {ear1="Cessance Earring", back=gear.BRD_DW_Cape})
+
+    sets.engaged.Aftermath = {
+        head="Aya. Zucchetto +2",
+        body="Ashera Harness",
+        hands=gear.Telchine_STP_hands,
+        feet="Battlecast Gaiters",
+        ring1={name="Chirich Ring +1", bag="wardrobe3"},
+        ring2={name="Chirich Ring +1", bag="wardrobe4"},
+        back=gear.BRD_STP_Cape,
+        }
+
+    ------------------------------------------------------------------------------------------------
+    ---------------------------------------- Hybrid Sets -------------------------------------------
+    ------------------------------------------------------------------------------------------------
+
+    sets.engaged.Hybrid = {
+        neck="Loricate Torque +1", --6/6
+        ring1="Moonlight Ring", --5/5
+        ring2="Defending Ring", --10/10
+        }
+
+    sets.engaged.DT = set_combine(sets.engaged, sets.engaged.Hybrid)
+    sets.engaged.Acc.DT = set_combine(sets.engaged.Acc, sets.engaged.Hybrid)
+
+    sets.engaged.DW.DT = set_combine(sets.engaged.DW, sets.engaged.Hybrid)
+    sets.engaged.DW.Acc.DT = set_combine(sets.engaged.DW.Acc, sets.engaged.Hybrid)
+
+    sets.engaged.DW.DT.LowHaste = set_combine(sets.engaged.DW.LowHaste, sets.engaged.Hybrid)
+    sets.engaged.DW.Acc.DT.LowHaste = set_combine(sets.engaged.DW.Acc.LowHaste, sets.engaged.Hybrid)
+
+    sets.engaged.DW.DT.MidHaste = set_combine(sets.engaged.DW.MidHaste, sets.engaged.Hybrid)
+    sets.engaged.DW.Acc.DT.MidHaste = set_combine(sets.engaged.DW.Acc.MidHaste, sets.engaged.Hybrid)
+
+    sets.engaged.DW.DT.HighHaste = set_combine(sets.engaged.DW.HighHaste, sets.engaged.Hybrid)
+    sets.engaged.DW.Acc.DT.HighHaste = set_combine(sets.engaged.DW.Acc.HighHaste, sets.engaged.Hybrid)
+
+    sets.engaged.DW.DT.MaxHaste = set_combine(sets.engaged.DW.MaxHaste, sets.engaged.Hybrid)
+    sets.engaged.DW.Acc.DT.MaxHaste = set_combine(sets.engaged.DW.Acc.MaxHaste, sets.engaged.Hybrid)
+
+    sets.engaged.DW.DT.MaxHastePlus = set_combine(sets.engaged.DW.MaxHastePlus, sets.engaged.Hybrid)
+    sets.engaged.DW.Acc.DT.MaxHastePlus = set_combine(sets.engaged.DW.Acc.MaxHastePlus, sets.engaged.Hybrid)
+
 
     ------------------------------------------------------------------------------------------------
     ---------------------------------------- Special Sets ------------------------------------------
@@ -591,7 +693,7 @@ function job_precast(spell, action, spellMap, eventArgs)
         if string.find(spell.name,'Lullaby') then
             if buffactive.Troubadour then
                 equip({range="Marsyas"})
-		    elseif state.LullabyMode.value == 'Horn' then
+            elseif state.LullabyMode.value == 'Horn' then
                 equip({range="Gjallarhorn"})
             else
                 equip({range="Daurdabla"})
@@ -624,12 +726,12 @@ function job_midcast(spell, action, spellMap, eventArgs)
         if string.find(spell.name,'Lullaby') then
             if buffactive.Troubadour then
                 equip({range="Marsyas"})
-		    elseif state.LullabyMode.value == 'Horn' then
+            elseif state.LullabyMode.value == 'Horn' then
                 equip({range="Gjallarhorn"})
             else
                 equip({range="Daurdabla"})
             end
-		end
+        end
     end
 end
 
@@ -688,10 +790,19 @@ end
 -- Set eventArgs.handled to true if we don't want automatic equipping of gear.
 function job_handle_equipping_gear(playerStatus, eventArgs)
     update_combat_form()
+    determine_haste_group()
 end
 
 function job_update(cmdParams, eventArgs)
     handle_equipping_gear(player.status)
+end
+
+function update_combat_form()
+    if DW == true then
+        state.CombatForm:set('DW')
+    elseif DW == false then
+        state.CombatForm:reset()
+    end
 end
 
 -- Called for direct player commands.
@@ -703,6 +814,17 @@ function job_self_command(cmdParams, eventArgs)
     elseif cmdParams[1]:lower() == 'threnody' then
         send_command('@input /ma '..state.Threnody.value..' <stnpc>')
     end
+
+    gearinfo(cmdParams, eventArgs)
+end
+
+-- Modify the default melee set after it was constructed.
+function customize_melee_set(meleeSet)
+    if buffactive['Aftermath: Lv.3'] and player.equipment.main == "Carnwenhan" then
+        meleeSet = set_combine(meleeSet, sets.engaged.Aftermath)
+    end
+
+    return meleeSet
 end
 
 -- Modify the default idle set after it was constructed.
@@ -815,7 +937,7 @@ function get_lullaby_duration(spell)
     if player.equipment.feet == "Brioso Slippers +2" then mult = mult + 0.13 end
     if player.equipment.feet == "Brioso Slippers +3" then mult = mult + 0.15 end
     if player.equipment.hands == 'Brioso Cuffs +1' then mult = mult + 0.1 end
-    if player.equipment.hands == 'Brioso Cuffs +2' then mult = mult + 0.1 end
+    if player.equipment.hands == 'Brioso Cuffs +3' then mult = mult + 0.1 end
     if player.equipment.hands == 'Brioso Cuffs +3' then mult = mult + 0.2 end
 
     if troubadour then
@@ -859,16 +981,64 @@ function get_lullaby_duration(spell)
     end
 end
 
-function update_combat_form()
+function determine_haste_group()
     classes.CustomMeleeGroups:clear()
-    if S{'NIN','DNC'}:contains(player.sub_job) then
-        --if not (player.equipment.sub:contains('Shield') or player.equipment.sub == 'empty') then
-            state.CombatForm:set('DW')
-        else
-            state.CombatForm:reset()
-        --end
+    if DW == true then
+        if DW_needed <= 12 then
+            classes.CustomMeleeGroups:append('MaxHaste')
+        elseif DW_needed > 12 and DW_needed <= 21 then
+            classes.CustomMeleeGroups:append('MaxHastePlus')
+        elseif DW_needed > 21 and DW_needed <= 27 then
+            classes.CustomMeleeGroups:append('HighHaste')
+        elseif DW_needed > 27 and DW_needed <= 31 then
+            classes.CustomMeleeGroups:append('MidHaste')
+        elseif DW_needed > 31 and DW_needed <= 42 then
+            classes.CustomMeleeGroups:append('LowHaste')
+        elseif DW_needed > 42 then
+            classes.CustomMeleeGroups:append('')
+        end
     end
 end
+
+function gearinfo(cmdParams, eventArgs)
+    if cmdParams[1] == 'gearinfo' then
+        if type(tonumber(cmdParams[2])) == 'number' then
+            if tonumber(cmdParams[2]) ~= DW_needed then
+            DW_needed = tonumber(cmdParams[2])
+            DW = true
+            end
+        elseif type(cmdParams[2]) == 'string' then
+            if cmdParams[2] == 'false' then
+                DW_needed = 0
+                DW = false
+            end
+        end
+        if type(tonumber(cmdParams[3])) == 'number' then
+            if tonumber(cmdParams[3]) ~= Haste then
+                Haste = tonumber(cmdParams[3])
+            end
+        end
+        if type(cmdParams[4]) == 'string' then
+            if cmdParams[4] == 'true' then
+                moving = true
+            elseif cmdParams[4] == 'false' then
+                moving = false
+            end
+        end
+        if not midaction() then
+            job_update()
+        end
+    end
+end
+
+windower.register_event('zone change', 
+    function()
+        if player.sub_job == 'NIN' or player.sub_job == 'DNC' then
+            send_command('gi ugs true')
+        end
+    end
+)
+
 -- Select default macro book on initial load or subjob change.
 function select_default_macro_book()
     set_macro_page(1, 14)
