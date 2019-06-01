@@ -42,9 +42,13 @@ end
 
 -- Setup vars that are user-independent.  state.Buff vars initialized here will automatically be tracked.
 function job_setup()
+	geo_timer = ''
     indi_timer = ''
-    indi_duration = 180
-    newLuopan = 0
+    indi_duration = 308
+	entrust_timer = ''
+	entrust_duration = 344
+	entrust = 0
+	newLuopan = 0
 
     state.Buff.Entrust = buffactive.Entrust or false
     state.Buff['Blaze of Glory'] = buffactive['Blaze of Glory'] or false
@@ -180,7 +184,7 @@ function init_gear_sets()
         })
 
     sets.precast.FC['Elemental Magic'] = set_combine(sets.precast.FC, {
-        hands="Bagua Mitaines +1",
+        hands="Bagua Mitaines +3",
         ear1="Barkarole Earring",
         })
 
@@ -242,7 +246,7 @@ function init_gear_sets()
         head="Bagua Galero +3",
         body="Azimuth Coat +1",
         hands="Shrieker's Cuffs",
-        legs="Azimuth Tights +1",
+        legs="Vanya Slops",
         feet="Merlinic Crackows",
         ear1="Calamitous Earring",
         ear2="Gifted Earring",
@@ -255,8 +259,7 @@ function init_gear_sets()
 
     sets.midcast.Geomancy.Indi = set_combine(sets.midcast.Geomancy, {
         head="Vanya Hood",
-        hands="Geo. Mitaines +3",
-        legs="Bagua Pants +2",
+        legs="Bagua Pants +3",
         feet="Azimuth Gaiters +1",
         })
 
@@ -343,7 +346,7 @@ function init_gear_sets()
 
 
     sets.midcast.MndEnfeebles = {
-        main=gear.Gada_ENF,
+        main="Maxentius",
         sub="Ammurapi Shield",
         head="Geo. Galero +3",
         body="Geomancy Tunic +3",
@@ -402,7 +405,7 @@ function init_gear_sets()
         sub="Ammurapi Shield",
         head="Bagua Galero +3",
         body="Bagua Tunic +3",
-        hands="Amalric Gages",
+        hands="Bagua Mitaines +3",
         legs="Merlinic Shalwar",
         feet="Merlinic Crackows",
         neck="Baetyl Pendant",
@@ -446,7 +449,7 @@ function init_gear_sets()
         sub="Genmei Shield",
         head="Befouled Crown",
         body="Jhakri Robe +2",
-        hands="Bagua Mitaines +1",
+        hands="Bagua Mitaines +3",
         legs="Assid. Pants +1",
         feet="Geo. Sandals +3",
         neck="Bathy Choker +1",
@@ -510,8 +513,7 @@ function init_gear_sets()
         sub="Ammurapi Shield",
         head="Bagua Galero +3",
         body="Geomancy Tunic +3",
-        hands="Geo. Mitaines +3",
-        legs="Geomancy Pants +3",
+        legs="Bagua Pants +3",
         ear2="Regal Earring",
         ring1="Kishar Ring",
         ring2="Weather. Ring +1",
@@ -586,7 +588,7 @@ function job_pretarget(spell, spellMap, eventArgs)
 end
 
 function job_precast(spell, action, spellMap, eventArgs)
-    if spellMap == 'Aspir' then
+    if spell.name:startswith('Aspir') then
         refine_various_spells(spell, action, spellMap, eventArgs)
     elseif state.Auto.value == true then
         if spell.skill == 'Elemental Magic' and spell.english ~= 'Impact' and spellMap ~= 'GeoNuke' then
@@ -619,21 +621,35 @@ function job_post_midcast(spell, action, spellMap, eventArgs)
         end
     elseif spell.skill == 'Geomancy' then
         if state.Buff.Entrust and spell.english:startswith('Indi-') then
-            --equip({main="Solstice"})
+            equip({main=gear.Gada_GEO})
+			entrust = 1
         end
     end
 end
 
 function job_aftercast(spell, action, spellMap, eventArgs)
     if not spell.interrupted then
-        if spell.english == "Sleep II" then
+		if spell.english:startswith('Geo') then
+            geo_timer = spell.english
+			send_command('@timers c "'..geo_timer..'" 600 down spells/00136.png')
+		elseif spell.english:startswith('Indi') then
+			if entrust == 1 then
+				entrust_timer = spell.english
+				send_command('@timers c "'..entrust_timer..' ['..spell.target.name..']" '..entrust_duration..' down spells/00136.png')
+				entrust = 0
+			else
+				send_command('@timers d "'..indi_timer..'"')
+				indi_timer = spell.english
+				send_command('@timers c "'..indi_timer..'" '..indi_duration..' down spells/00136.png')
+			end
+        elseif spell.english == "Sleep II" then
             send_command('@timers c "Sleep II ['..spell.target.name..']" 90 down spells/00259.png')
         elseif spell.english == "Sleep" or spell.english == "Sleepga" then -- Sleep & Sleepga Countdown --
             send_command('@timers c "Sleep ['..spell.target.name..']" 60 down spells/00253.png')
         elseif spell.english:startswith('Geo-') or spell.english == "Life Cycle" then
             newLuopan = 1
-		end
-	end
+        end
+    end
 end
 
 
@@ -665,6 +681,15 @@ function job_state_change(stateField, newValue, oldValue)
     else
         enable('main','sub')
     end
+end
+
+-- Called when a player gains or loses a pet.
+-- pet == pet structure
+-- gain == true if the pet was gained, false if it was lost.
+function job_pet_change(petparam, gain)
+    if gain == false then
+        send_command('@timers d "'..geo_timer..'"')
+	end
 end
 
 -------------------------------------------------------------------------------------------------------------------
@@ -702,16 +727,16 @@ function customize_idle_set(idleSet)
         enable('back')
     end
     if pet.isvalid then
-		if pet.hpp > 73 then
+        if pet.hpp > 73 then
             if newLuopan == 1 then
-				equip(sets.PetHP)
-				disable('head')
-			end
-		elseif pet.hpp <= 73 then
-			enable('head')
+                equip(sets.PetHP)
+                disable('head')
+            end
+        elseif pet.hpp <= 73 then
+            enable('head')
             newLuopan = 0
-		end
-	end
+        end
+    end
 
     return idleSet
 end
@@ -773,7 +798,7 @@ function refine_various_spells(spell, action, spellMap, eventArgs)
                 send_command('@input /ma '..newSpell..' '..tostring(spell.target.raw))
                 eventArgs.cancel = true
             end
-        elseif spellMap == 'Aspir' then
+        elseif spell.name:startswith('Aspir') then
             spell_index = table.find(degrade_array['Aspirs'],spell.name)
             if spell_index > 1 then
                 newSpell = degrade_array['Aspirs'][spell_index - 1]
