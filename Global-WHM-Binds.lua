@@ -25,7 +25,7 @@
     send_command('bind #7 input //send safiyeh /ma "Dia II" <t>')
     send_command('bind #8 input //send safiyeh /ma "Silence" <t>')
     send_command('bind #9 input //send safiyeh /ma "Paralyze" <t>')
-    send_command('bind #0 input //send safiyeh /ma "Dispel" <t>')
+    send_command('bind #0 input //send safiyeh /ma "Addle" <t>')
 
     send_command('bind #q input //send safiyeh /ma "Light Arts" <me>')
     send_command('bind #e input //send safiyeh /ma "Haste" <t>')
@@ -34,7 +34,7 @@
     send_command('bind #y input //send safiyeh /ma "Phalanx" <me>')
     send_command('bind #u input //send safiyeh /ma "Stoneskin" <me>')
     send_command('bind #i input //send safiyeh /ma "Aquaveil" <me>')
-    send_command('bind #o input //send safiyeh /ma "Cure IV" <t>')
+    send_command('bind #o input //send safiyeh /ma "Regen IV" <t>')
     send_command('bind #p input //send safiyeh /ja "Sublimation" <me>')
 
     send_command('bind #, input //send safiyeh /ma "Sneak" <t>')

@@ -467,10 +467,10 @@ function init_gear_sets()
     sets.midcast.EnhancingDuration = {
         main=gear.Colada_ENH,
         sub="Ammurapi Shield",
-        head="Telchine Cap",
+        head=gear.Telchine_ENH_head,
         body="Viti. Tabard +3",
         hands="Atrophy Gloves +3",
-        legs="Telchine Braconi",
+        legs=gear.Telchine_ENH_legs,
         feet="Leth. Houseaux +1",
         neck="Dls. Torque +1",
         back="Ghostfyre Cape",
@@ -479,13 +479,17 @@ function init_gear_sets()
     sets.midcast.EnhancingSkill = {
         main="Pukulatmuj +1",
         sub="Pukulatmuj",
-        hands="Viti. Gloves +2",
+        hands="Viti. Gloves +3",
         }
 
     sets.midcast.Regen = set_combine(sets.midcast.EnhancingDuration, {
         main="Bolelabunga",
         sub="Ammurapi Shield",
-        body="Telchine Chas.",
+        head=gear.Telchine_ENH_head,
+        body=gear.Telchine_ENH_body,
+        hands=gear.Telchine_ENH_hands,
+        legs=gear.Telchine_ENH_legs,
+        feet=gear.Telchine_ENH_feet,
         })
 
     sets.midcast.Refresh = set_combine(sets.midcast.EnhancingDuration, {
@@ -512,12 +516,18 @@ function init_gear_sets()
         })
 
     sets.midcast.Aquaveil = set_combine(sets.midcast.EnhancingDuration, {
+        main="Vadose Rod",
+        sub="Ammurapi Shield",
+        ammo="Staunch Tathlum +1",
         head="Amalric Coif +1",
+        ear1="Halasz Earring",
+        ring1="Freke Ring",
+        ring2="Evanescence Ring",
         waist="Emphatikos Rope",
         })
 
     sets.midcast.Storm = sets.midcast.EnhancingDuration
-    sets.midcast.GainSpell = {hands="Viti. Gloves +2"}
+    sets.midcast.GainSpell = {hands="Viti. Gloves +3"}
     sets.midcast.SpikesSpell = {legs="Viti. Tights +3"}
 
     sets.midcast.Protect = set_combine(sets.midcast.EnhancingDuration, {ring2="Sheltered Ring"})
@@ -546,9 +556,9 @@ function init_gear_sets()
         }
 
     sets.midcast.MndEnfeeblesAcc = set_combine(sets.midcast.MndEnfeebles, {
-        main=gear.Grioavolr_MND,
-        sub="Enki Strap",
-        range="Kaja Bow",
+        main="Maxentius",
+        sub="Ammurapi Shield",
+        range="Ullr",
         ammo=empty,
         head="Atrophy Chapeau +3",
         body="Atrophy Tabard +3",
@@ -561,9 +571,9 @@ function init_gear_sets()
         })
 
     sets.midcast.IntEnfeeblesAcc = set_combine(sets.midcast.IntEnfeebles, {
-        main=gear.Grioavolr_MND,
-        sub="Enki Strap",
-        range="Kaja Bow",
+        main="Maxentius",
+        sub="Ammurapi Shield",
+        range="Ullr",
         ammo=empty,
         body="Atrophy Tabard +3",
         ring2="Weather. Ring +1",
@@ -640,8 +650,8 @@ function init_gear_sets()
         neck="Baetyl Pendant",
         ear1="Friomisi Earring",
         ear2="Regal Earring",
-        ring1={name="Shiva Ring +1", bag="wardrobe3"},
-        ring2={name="Shiva Ring +1", bag="wardrobe4"},
+        ring1="Freke Ring",
+        ring2="Shiva Ring +1",
         back=gear.RDM_INT_Cape,
         waist="Refoccilation Stone",
         }
@@ -700,7 +710,7 @@ function init_gear_sets()
         legs="Carmine Cuisses +1",
         feet="Vitiation Boots +3",
         neck="Bathy Choker +1",
-        ear1="Genmei Earring",
+        ear1="Sanare Earring",
         ear2="Infused Earring",
         ring1={name="Stikini Ring +1", bag="wardrobe3"},
         ring2={name="Stikini Ring +1", bag="wardrobe4"},
@@ -718,6 +728,7 @@ function init_gear_sets()
         legs="Viti. Tights +3", --5/0
         feet="Volte Boots",
         neck="Loricate Torque +1", --6/6
+        ear1="Sanare Earring",
         ring1="Gelatinous Ring +1", --7/(-1)
         ring2="Defending Ring", --10/10
         back="Moonlight Cape", --6/6
@@ -757,7 +768,7 @@ function init_gear_sets()
         legs="Merlinic Shalwar", --2
         feet="Merlinic Crackows", --11
         neck="Mizu. Kubikazari", --10
-        ring1="Mujin Band", --(5)
+        ring2="Mujin Band", --(5)
         }
 
     sets.Kiting = {legs="Carmine Cuisses +1"}
@@ -808,8 +819,8 @@ function init_gear_sets()
 
     -- No Magic Haste (74% DW to cap)
     sets.engaged.DW = {
-        main="Almace",
-        sub="Ternion Dagger +1",
+        main="Naegling",
+        sub="Thibron",
         ammo="Ginsen",
         head=gear.Taeon_TA_head,
         body="Ayanmo Corazza +2",
@@ -1054,7 +1065,7 @@ function job_post_midcast(spell, action, spellMap, eventArgs)
                 equip(sets.midcast.Refresh)
                 if spell.target.type == 'SELF' then
                     equip (sets.midcast.RefreshSelf)
-                end
+              end
             end
         elseif skill_spells:contains(spell.english) then
             equip(sets.midcast.EnhancingSkill)
@@ -1109,9 +1120,9 @@ end
 -- Handle notifications of general user state change.
 function job_state_change(stateField, newValue, oldValue)
     if state.WeaponLock.value == true then
-        disable('main','sub')
+        disable('main','sub','range')
     else
-        enable('main','sub')
+        enable('main','sub','range')
     end
 end
 
@@ -1156,13 +1167,13 @@ function job_get_spell_map(spell, default_spell_map)
                     return "MndEnfeeblesAcc"
                 else
                     return "MndEnfeebles"
-                end
+              end
             elseif spell.type == "BlackMagic" then
                 if enfeebling_magic_acc:contains(spell.english) and not buffactive.Stymie then
                     return "IntEnfeeblesAcc"
                 else
                     return "IntEnfeebles"
-                end
+              end
             else
                 return "MndEnfeebles"
             end
@@ -1264,11 +1275,11 @@ function gearinfo(cmdParams, eventArgs)
             if cmdParams[2] == 'false' then
                 DW_needed = 0
                 DW = false
-              end
+            end
         end
         if type(tonumber(cmdParams[3])) == 'number' then
-              if tonumber(cmdParams[3]) ~= Haste then
-                  Haste = tonumber(cmdParams[3])
+            if tonumber(cmdParams[3]) ~= Haste then
+                Haste = tonumber(cmdParams[3])
             end
         end
         if type(cmdParams[4]) == 'string' then

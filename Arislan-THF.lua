@@ -186,7 +186,7 @@ function init_gear_sets()
 
     sets.TreasureHunter = {
         head=gear.Herc_TH_head, --2
-        hands="Plunderer's Armlets +1", --3
+        hands="Plun. Armlets +3", --4
         feet="Skulk. Poulaines +1", --3
         waist="Chaac Belt", --1
         }
@@ -233,7 +233,7 @@ function init_gear_sets()
     -- Precast sets to enhance JAs
     sets.precast.JA['Collaborator'] = {head="Skulker's Bonnet +1"}
     sets.precast.JA['Accomplice'] = {head="Skulker's Bonnet +1"}
-    sets.precast.JA['Flee'] = {feet="Pill. Poulaines +2"}
+    sets.precast.JA['Flee'] = {feet="Pill. Poulaines +3"}
     sets.precast.JA['Hide'] = {body="Pillager's Vest +3"}
     sets.precast.JA['Conspirator'] = {body="Skulker's Vest +1"}
 
@@ -241,11 +241,11 @@ function init_gear_sets()
         ammo="Barathrum", --3
         --head="Asn. Bonnet +2",
         hands="Pillager's Armlets +1",
-        feet="Pill. Poulaines +2",
+        feet="Pill. Poulaines +3",
         }
 
-    sets.precast.JA['Despoil'] = {ammo="Barathrum",    legs="Skulk. Culottes +1", feet="Skulk. Poulaines +1"}
-    sets.precast.JA['Perfect Dodge'] = {hands="Plunderer's Armlets +1"}
+    sets.precast.JA['Despoil'] = {ammo="Barathrum", legs="Skulk. Culottes +1", feet="Skulk. Poulaines +1"}
+    sets.precast.JA['Perfect Dodge'] = {hands="Plun. Armlets +3"}
     sets.precast.JA['Feint'] = {legs="Plunderer's Culottes +1"}
     --sets.precast.JA['Sneak Attack'] = sets.buff['Sneak Attack']
     --sets.precast.JA['Trick Attack'] = sets.buff['Trick Attack']
@@ -308,7 +308,6 @@ function init_gear_sets()
     sets.precast.WS.Critical = {ammo="Yetshila +1", body="Meg. Cuirie +2"}
 
     sets.precast.WS['Exenterator'] = set_combine(sets.precast.WS, {
-        ammo="Seeth. Bomblet +1",
         head=gear.Adhemar_B_head,
         body=gear.Adhemar_B_body,
         legs="Meg. Chausses +2",
@@ -319,7 +318,6 @@ function init_gear_sets()
         })
 
     sets.precast.WS['Exenterator'].Acc = set_combine(sets.precast.WS['Exenterator'], {
-        ammo="Falcon Eye",
         head="Dampening Tam",
         })
 
@@ -351,7 +349,6 @@ function init_gear_sets()
         })
 
     sets.precast.WS['Rudra\'s Storm'].Acc = set_combine(sets.precast.WS['Rudra\'s Storm'], {
-        ammo="Falcon Eye",
         legs=gear.Herc_WS_legs,
         feet=gear.Herc_STP_feet,
         ear2="Telos Earring",
@@ -370,10 +367,10 @@ function init_gear_sets()
         neck="Baetyl Pendant",
         ear1="Crematio Earring",
         ear2="Friomisi Earring",
-        ring1={name="Shiva Ring +1", bag="wardrobe3"},
+        ring1="Shiva Ring +1",
         ring2="Epaminondas's Ring",
         back="Argocham. Mantle",
-        waist="Eschan Stone",
+        waist="Orpheus's Sash",
         })
 
     ------------------------------------------------------------------------------------------------
@@ -402,9 +399,9 @@ function init_gear_sets()
         body="Ashera Harness",
         hands="Turms Mittens +1",
         legs="Mummu Kecks +2",
-        feet="Jute Boots +1",
+        feet="Pill. Poulaines +3",
         neck="Bathy Choker +1",
-        ear1="Eabani Earring",
+        ear1="Sanare Earring",
         ear2="Infused Earring",
         ring1={name="Chirich Ring +1", bag="wardrobe3"},
         ring2={name="Chirich Ring +1", bag="wardrobe4"},
@@ -420,6 +417,7 @@ function init_gear_sets()
         legs="Mummu Kecks +2", --5/5
         feet="Turms Leggings +1",
         neck="Loricate Torque +1", --6/6
+        ear1="Sanare Earring",
         ring1="Moonlight Ring", --5/5
         ring2="Defending Ring", --10/10
         back=gear.THF_TP_Cape, --10/0
@@ -427,10 +425,10 @@ function init_gear_sets()
         })
 
     sets.idle.Town = set_combine(sets.idle, {
-        ammo="Yamarang",
+        ammo="Yetshila +1",
         head="Pill. Bonnet +3",
         body="Ashera Harness",
-        hands=gear.Adhemar_B_hands,
+        hands="Plun. Armlets +3",
         legs="Lustr. Subligar +1",
         neck="Combatant's Torque",
         ear1="Sherida Earring",
@@ -449,7 +447,7 @@ function init_gear_sets()
     sets.defense.PDT = sets.idle.DT
     sets.defense.MDT = sets.idle.DT
 
-    sets.Kiting = {feet="Jute Boots +1"}
+    sets.Kiting = {feet="Pill. Poulaines +3"}
 
 
     ------------------------------------------------------------------------------------------------
@@ -833,6 +831,14 @@ function job_post_precast(spell, action, spellMap, eventArgs)
             equip(sets.precast.WS.Critical)
         end
     end
+	if spell.type == 'WeaponSkill' then
+        if spell.english == 'Aeolian Edge' then
+            -- Matching double weather (w/o day conflict).
+            if spell.element == world.weather_element and (get_weather_intensity() == 2 and spell.element ~= elements.weak_to[world.day_element]) then
+                equip({waist="Hachirin-no-Obi"})
+			end
+        end
+    end
 end
 
 -- Set eventArgs.handled to true if we don't want any automatic gear equipping to be done.
@@ -1019,11 +1025,11 @@ function gearinfo(cmdParams, eventArgs)
             if cmdParams[2] == 'false' then
                 DW_needed = 0
                 DW = false
-              end
+            end
         end
         if type(tonumber(cmdParams[3])) == 'number' then
-              if tonumber(cmdParams[3]) ~= Haste then
-                  Haste = tonumber(cmdParams[3])
+            if tonumber(cmdParams[3]) ~= Haste then
+                Haste = tonumber(cmdParams[3])
             end
         end
         if type(cmdParams[4]) == 'string' then

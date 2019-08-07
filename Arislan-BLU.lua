@@ -172,6 +172,8 @@ function job_setup()
         'Crashing Thunder','Cruel Joke','Droning Whirlwind','Gates of Hades','Harden Shell','Mighty Guard',
         'Polar Roar','Pyric Bulwark','Tearing Gust','Thunderbolt','Tourbillion','Uproot'}
 
+    elemental_ws = S{'Flash Nova', 'Sanguine Blade'}
+
     include('Mote-TreasureHunter')
 
     -- For th_action_check():
@@ -475,13 +477,13 @@ function init_gear_sets()
         hands="Amalric Gages +1",
         legs="Luhlaza Shalwar +3",
         feet="Amalric Nails +1",
-        neck="Fotia Gorget",
+        neck="Baetyl Pendant",
         ear1="Moonshade Earring",
         ear2="Regal Earring",
         ring1="Epaminondas's Ring",
         ring2="Archon Ring",
         back=gear.BLU_MAB_Cape,
-        waist="Fotia Belt",
+        waist="Eschan Stone",
         }
 
     sets.precast.WS['True Strike'] = sets.precast.WS['Savage Blade']
@@ -603,7 +605,7 @@ function init_gear_sets()
         ring1={name="Shiva Ring +1", bag="wardrobe3"},
         ring2={name="Shiva Ring +1", bag="wardrobe4"},
         back=gear.BLU_MAB_Cape,
-        waist="Eschan Stone",
+        waist="Orpheus's Sash",
         }
 
     sets.midcast['Blue Magic'].Magical.Resistant = set_combine(sets.midcast['Blue Magic'].Magical, {
@@ -614,7 +616,6 @@ function init_gear_sets()
         ear1="Digni. Earring",
         ring1={name="Stikini Ring +1", bag="wardrobe3"},
         ring2={name="Stikini Ring +1", bag="wardrobe4"},
-        waist="Yamabuki-no-Obi",
         })
 
     sets.midcast['Blue Magic'].MagicalDark = set_combine(sets.midcast['Blue Magic'].Magical, {
@@ -676,7 +677,7 @@ function init_gear_sets()
         ammo="Staunch Tathlum +1",
         head="Carmine Mask +1",
         body="Vrikodara Jupon", -- 13
-        hands="Telchine Gloves", -- 17
+        hands=gear.Telchine_ENH_hands, -- 10
         legs="Assim. Shalwar +3",
         feet="Medium's Sabots", -- 12
         neck="Nuna Gorget +1",
@@ -701,10 +702,10 @@ function init_gear_sets()
         ammo="Falcon Eye",
         head=gear.Adhemar_D_head,
         neck="Sanctity Necklace",
-		ear2="Etiolation Earring",
+        ear2="Etiolation Earring",
         ring2="Eihwaz Ring",
         back="Moonlight Cape",
-		waist="Kasiri Belt",
+        waist="Kasiri Belt",
         })
 
     sets.midcast['Blue Magic'].Buff = sets.midcast['Blue Magic']
@@ -715,7 +716,7 @@ function init_gear_sets()
         hands="Hashi. Bazu. +1",
         ear1="Loquacious Earring",
         ear2="Enchntr. Earring +1",
-		ring2="Weather. Ring +1",
+        ring2="Weather. Ring +1",
         waist="Witful Belt",
         }) -- 1 shadow per 50 skill
 
@@ -727,10 +728,10 @@ function init_gear_sets()
     sets.midcast['Enhancing Magic'] = {
         ammo="Pemphredo Tathlum",
         head="Carmine Mask +1",
-        body="Telchine Chas.",
-        hands="Telchine Gloves",
+        body=gear.Telchine_ENH_body,
+        hands=gear.Telchine_ENH_hands,
         legs="Carmine Cuisses +1",
-        feet="Telchine Pigaches",
+        feet=gear.Telchine_ENH_feet,
         neck="Incanter's Torque",
         ear1="Augment. Earring",
         ear2="Andoaa Earring",
@@ -741,11 +742,11 @@ function init_gear_sets()
         }
 
     sets.midcast.EnhancingDuration = {
-        head="Telchine Cap",
-        body="Telchine Chas.",
-        hands="Telchine Gloves",
-        legs="Telchine Braconi",
-        feet="Telchine Pigaches",
+        head=gear.Telchine_ENH_head,
+        body=gear.Telchine_ENH_body,
+        hands=gear.Telchine_ENH_hands,
+        legs=gear.Telchine_ENH_legs,
+        feet=gear.Telchine_ENH_feet,
         }
 
     sets.midcast.Refresh = set_combine(sets.midcast.EnhancingDuration, {head="Amalric Coif +1", waist="Gishdubar Sash", back="Grapevine Cape"})
@@ -784,8 +785,9 @@ function init_gear_sets()
         hands=gear.Herc_DT_hands,
         legs="Carmine Cuisses +1",
         feet="Ahosi Leggings",
-        neck="Bathy Choker +1",
-        ear1="Genmei Earring",
+        neck="Mirage Stole +2",
+--        neck="Bathy Choker +1",
+        ear1="Sanare Earring",
         ear2="Infused Earring",
         ring1={name="Stikini Ring +1", bag="wardrobe3"},
         ring2={name="Stikini Ring +1", bag="wardrobe4"},
@@ -799,7 +801,8 @@ function init_gear_sets()
         body="Ayanmo Corazza +2", --6/6
         hands=gear.Herc_DT_hands, --7/5
         feet="Ahosi Leggings", --4/0
-        neck="Loricate Torque +1", --6/6
+        neck="Mirage Stole +2",
+--        neck="Loricate Torque +1", --6/6
         ear1="Genmei Earring", --2/0
         ear2="Etiolation Earring", --0/3
         ring1="Gelatinous Ring +1", --7/(-1)
@@ -812,7 +815,7 @@ function init_gear_sets()
         head="Luh. Keffiyeh +3",
         body="Assim. Jubbah +3",
         hands=gear.Adhemar_B_hands,
-        feet="Amalric Nails +1",
+        feet="Luhlaza Charuqs +3",
         neck="Mirage Stole +2",
         ear1="Eabani Earring",
         ear2="Telos Earring",
@@ -1233,6 +1236,29 @@ function job_precast(spell, action, spellMap, eventArgs)
     end
 end
 
+function job_post_precast(spell, action, spellMap, eventArgs)
+    if spell.type == 'WeaponSkill' then
+        if elemental_ws:contains(spell.name) then
+            -- Matching double weather (w/o day conflict).
+            if spell.element == world.weather_element and (get_weather_intensity() == 2 and spell.element ~= elements.weak_to[world.day_element]) then
+                equip({waist="Hachirin-no-Obi"})
+            -- Target distance under 1.7 yalms.
+            elseif spell.target.distance < (1.7 + spell.target.model_size) then
+                equip({waist="Orpheus's Sash"})
+            -- Matching day and weather.
+            elseif spell.element == world.day_element and spell.element == world.weather_element then
+                equip({waist="Hachirin-no-Obi"})
+            -- Target distance under 8 yalms.
+            elseif spell.target.distance < (8 + spell.target.model_size) then
+                equip({waist="Orpheus's Sash"})
+            -- Match day or weather.
+            elseif spell.element == world.day_element or spell.element == world.weather_element then
+                equip({waist="Hachirin-no-Obi"})
+            end
+        end
+    end
+end
+
 -- Run after the default midcast() is done.
 -- eventArgs is the same one used in job_midcast, in case information needs to be persisted.
 function job_post_midcast(spell, action, spellMap, eventArgs)
@@ -1241,6 +1267,11 @@ function job_post_midcast(spell, action, spellMap, eventArgs)
         for buff,active in pairs(state.Buff) do
             if active and sets.buff[buff] then
                 equip(sets.buff[buff])
+            end
+        end
+        if spellMap == 'Magical' then
+            if spell.element == world.weather_element and (get_weather_intensity() == 2 and spell.element ~= elements.weak_to[world.day_element]) then
+                equip({waist="Hachirin-no-Obi"})
             end
         end
         if spellMap == 'Healing' and spell.target.type == 'SELF' then
@@ -1453,11 +1484,11 @@ function gearinfo(cmdParams, eventArgs)
             if cmdParams[2] == 'false' then
                 DW_needed = 0
                 DW = false
-              end
+            end
         end
         if type(tonumber(cmdParams[3])) == 'number' then
-              if tonumber(cmdParams[3]) ~= Haste then
-                  Haste = tonumber(cmdParams[3])
+            if tonumber(cmdParams[3]) ~= Haste then
+                Haste = tonumber(cmdParams[3])
             end
         end
         if type(cmdParams[4]) == 'string' then

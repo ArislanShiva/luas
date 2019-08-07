@@ -93,11 +93,11 @@ function user_setup()
     send_command('bind ^numpad1 input /ws "Sonic Thrust" <t>')
     send_command('bind ^numpad2 input /ws "Leg Sweep" <t>')
 
-    send_command('bind numpad0 input /ja "Jump" <t>')
-    send_command('bind numpad. input /ja "High Jump" <t>')
-    send_command('bind ^numpad0 input /ja "Spirit Jump" <t>')
-    send_command('bind ^numpad. input /ja "Soul Jump" <t>')
-    send_command('bind ^numpadenter input /ja "Super Jump" <t>')
+    send_command('bind ^numpad0 input /ja "Jump" <t>')
+    send_command('bind ^numpad. input /ja "High Jump" <t>')
+    send_command('bind ^numpad+ input /ja "Spirit Jump" <t>')
+    send_command('bind ^numpadenter input /ja "Soul Jump" <t>')
+    send_command('bind ^numlock input /ja "Super Jump" <t>')
 
     select_default_macro_book()
     set_lockstyle()
@@ -119,11 +119,11 @@ function user_unload()
     send_command('unbind ^numpad6')
     send_command('unbind ^numpad1')
     send_command('unbind ^numpad2')
-    send_command('unbind numpad0')
-    send_command('unbind numpad.')
     send_command('unbind ^numpad0')
     send_command('unbind ^numpad.')
+    send_command('unbind ^numpad+')
     send_command('unbind ^numpadenter')
+    send_command('unbind ^numlock')
 
     send_command('unbind #`')
     send_command('unbind #1')
@@ -225,11 +225,12 @@ function init_gear_sets()
     sets.precast.WS.Acc = set_combine(sets.precast.WS, {})
 
     sets.precast.WS.Uncapped = set_combine(sets.precast.WS, {
-        head="Sulevia's Mask +2",
+        head="Hjarrandi Helm",
         legs=gear.Valo_WSD_legs,
         })
 
     sets.precast.WS['Camlann\'s Torment'] = set_combine(sets.precast.WS, {
+        neck="Dgn. Collar +1",
         ear2="Ishvara Earring",
         ring2="Epaminondas's Ring",
         })
@@ -237,6 +238,7 @@ function init_gear_sets()
     sets.precast.WS['Camlann\'s Torment'].Acc = set_combine(sets.precast.WS['Camlann\'s Torment'], {})
 
     sets.precast.WS['Camlann\'s Torment'].Uncapped = set_combine(sets.precast.WS['Camlann\'s Torment'], {
+        neck="Fotia Gorget",
         legs=gear.Valo_WSD_legs,
         })
 
@@ -245,6 +247,7 @@ function init_gear_sets()
         hands="Flamma Manopolas +2",
         legs="Pelt. Cuissots +1",
         feet=gear.Valo_Crit_feet,
+        neck="Dgn. Collar +1",
         ear2="Brutal Earring",
         ring1="Begrudging Ring",
         back=gear.DRG_WS4_Cape,
@@ -256,7 +259,7 @@ function init_gear_sets()
         })
 
     sets.precast.WS['Drakesbane'].Uncapped = set_combine(sets.precast.WS['Drakesbane'], {
-        head="Sulevia's Mask +2",
+        head="Hjarrandi Helm",
         legs=gear.Valo_WSD_legs,
         })
 
@@ -271,7 +274,7 @@ function init_gear_sets()
     sets.precast.WS['Geirskogul'].Acc = set_combine(sets.precast.WS['Geirskogul'], {})
 
     sets.precast.WS['Geirskogul'].Uncapped = set_combine(sets.precast.WS['Geirskogul'], {
-        head="Sulevia's Mask +2", 
+        head="Hjarrandi Helm", 
         legs=gear.Valo_WSD_legs,
         })
 
@@ -279,6 +282,7 @@ function init_gear_sets()
         head="Flam. Zucchetto +2", 
         hands="Flamma Manopolas +2",
         legs="Pelt. Cuissots +1",
+        neck="Dgn. Collar +1",
         ear2="Moonshade Earring",
         ring1="Begrudging Ring",
         ring2="Epaminondas's Ring",
@@ -310,6 +314,7 @@ function init_gear_sets()
         head="Flam. Zucchetto +2", 
         body=gear.Valo_TP_body,
         hands="Sulev. Gauntlets +2",
+        neck="Fotia Gorget",
         legs="Sulev. Cuisses +2",
         feet="Flam. Gambieras +2",
         back=gear.DRG_WS1_Cape,
@@ -330,7 +335,7 @@ function init_gear_sets()
         hands="Carmine Fin. Ga. +1",
         ear1="Hermetic Earring",
         ear2="Friomisi Earring",
-        ring1={name="Shiva Ring +1", bag="wardrobe3"},
+        ring1="Shiva Ring +1",
         back="Argocham. Mantle",
         })
 
@@ -360,7 +365,7 @@ function init_gear_sets()
         hands=gear.Acro_Pet_hands,
         legs="Vishap Brais +3",
         feet="Ptero. Greaves +3",
-        neck="Lancer's Torque",
+        neck="Dgn. Collar +1",
         ear1="Lancer's Earring",
         ear2="Anastasi Earring",
         back="Updraft Mantle",
@@ -382,13 +387,13 @@ function init_gear_sets()
 
     sets.idle = {
         ammo="Staunch Tathlum +1", --3/3
-        head="Volte Cap",
-        body="Sulevia's Plate. +2", --9/9
+        head="Hjarrandi Helm", --10/10
+        body="Tartarus Platemail", --10/10
         hands="Sulev. Gauntlets +2", --5/5
         legs="Carmine Cuisses +1",
-        feet="Volte Boots",
+        feet="Ptero. Greaves +3",
         neck="Bathy Choker +1",
-        ear1="Genmei Earring",
+        ear1="Sanare Earring",
         ear2="Infused Earring",
         ring1={name="Chirich Ring +1", bag="wardrobe3"},
         ring2={name="Chirich Ring +1", bag="wardrobe4"},
@@ -398,29 +403,33 @@ function init_gear_sets()
 
     sets.idle.DT = set_combine(sets.idle, {
         ammo="Staunch Tathlum +1", --3/3
-        body="Sulevia's Plate. +2", --9/9
-        head="Sulevia's Mask +2", --6/6
-        hands="Sulev. Gauntlets +2", --5/5
+        body="Tartarus Platemail", --10/10
+        head="Hjarrandi Helm", --10/10
+        hands="Flam. Manopolas +2",
+        feet="Ptero. Greaves +3",
         neck="Loricate Torque +1", --6/6
-        ear1="Eabani Earring",
+        ear1="Sanare Earring",
+        ear2="Anastasi Earring",
         ring1="Moonlight Ring", --5/5
         ring2="Defending Ring", --10/10
+        waist="Carrier's Sash",
         })
 
     sets.idle.Pet = set_combine(sets.idle, {
         body="Vishap Mail +3",
         hands="Ptero. Fin. G. +3",
         feet="Ptero. Greaves +3",
+        neck="Dgn. Collar +1",
         ear1="Enmerkar Earring",
         ear2="Anastasi Earring",
         waist="Isa Belt",
         })
 
     sets.idle.DT.Pet = set_combine(sets.idle.Pet, {
-        head="Sulevia's Mask +2", --6/6
+        head="Hjarrandi Helm", --10/10
         body="Emicho Haubert +1",
         legs="Ptero. Brais +3",
-        neck="Loricate Torque +1", --6/6
+        neck="Dgn. Collar +1",
         ring1="Moonlight Ring", --5/5
         ring2="Defending Ring", --10/10
         back="Moonlight Cape", --6/6
@@ -429,10 +438,9 @@ function init_gear_sets()
     sets.idle.Town = set_combine(sets.idle, {
         ammo="Staunch Tathlum +1",
         head="Ptero. Armet +3",
-        body="Emicho Haubert +1",
         hands="Ptero. Fin. G. +3",
         feet="Ptero. Greaves +3",
-        neck="Anu Torque",
+        neck="Dgn. Collar +1",
         ear1="Sherida Earring",
         ear2="Telos Earring",
         back=gear.DRG_TP_Cape,

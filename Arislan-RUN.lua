@@ -112,7 +112,7 @@ function user_setup()
 
     -- Additional local binds
     include('Global-Binds.lua') -- OK to remove this line
-    include('Global-WHM-Binds.lua') -- OK to remove this line
+    include('Global-GEO-Binds.lua') -- OK to remove this line
 
     send_command('bind ^` input //gs c rune')
     send_command('bind !` input /ja "Vivacious Pulse" <me>')
@@ -269,6 +269,7 @@ function init_gear_sets()
         ring2={name="Fenrir Ring +1", bag="wardrobe4"},
         back="Argocham. Mantle",
         waist="Eschan Stone",
+        --head="Volte Cap", hands=gear.Herc_TH_hands, feet="Volte Boots", waist="Chaac Belt"
         }
 
     sets.precast.JA['Swipe'] = sets.precast.JA['Lunge']
@@ -559,7 +560,7 @@ function init_gear_sets()
         legs="Carmine Cuisses +1",
         feet="Turms Leggings +1",
         neck="Futhark Torque +1", --6/6
-        ear1="Eabani Earring",
+        ear1="Sanare Earring",
         ear2="Odnowa Earring +1", --0/2
         ring1="Moonlight Ring", --5/5
         ring2="Defending Ring", --10/10
@@ -571,7 +572,7 @@ function init_gear_sets()
         ammo="Staunch Tathlum +1",
         body="Ashera Harness",
         neck="Futhark Torque +1",
-        ear1="Eabani Earring",
+        ear1="Sanare Earring",
         })
 
     sets.idle.Weak = sets.idle.DT
@@ -593,7 +594,7 @@ function init_gear_sets()
         legs="Eri. Leg Guards +1", --7/0
         feet="Turms Leggings +1",
         neck="Futhark Torque +1", --6/6
-        ear1="Eabani Earring",
+        ear1="Sanare Earring",
         ear2="Odnowa Earring +1", --0/2
         ring1="Moonlight Ring", --5/5
         ring2="Defending Ring", --10/10

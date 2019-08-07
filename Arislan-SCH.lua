@@ -184,7 +184,7 @@ function init_gear_sets()
     sets.precast.JA['Sublimation'] = {
         head="Acad. Mortar. +3",
         body="Acad. Gown +3",
-        hands="Telchine Gloves",
+        hands=gear.Telchine_ENH_hands,
         legs="Acad. Pants +3",
         feet="Skaoi Boots",
         neck="Bathy Choker +1",
@@ -238,7 +238,7 @@ function init_gear_sets()
         head="Jhakri Coronal +2",
         body="Jhakri Robe +2",
         hands="Jhakri Cuffs +2",
-        legs="Telchine Braconi",
+        legs=gear.Telchine_ENH_legs,
         feet="Jhakri Pigaches +2",
         neck="Fotia Gorget",
         ear1="Moonshade Earring",
@@ -306,7 +306,7 @@ function init_gear_sets()
 
     sets.midcast.CureWeather = set_combine(sets.midcast.Cure, {
         main="Chatoyant Staff", --10
-        sub="Achaq Grip", --0/(-4)
+        sub="Khonsu", --0/(-5)
         waist="Hachirin-no-Obi",
         })
 
@@ -345,11 +345,11 @@ function init_gear_sets()
         main=gear.Gada_ENH,
         sub="Ammurapi Shield",
         ammo="Savant's Treatise",
-        head="Telchine Cap",
+        head=gear.Telchine_ENH_head,
         body="Peda. Gown +3",
-        hands="Telchine Gloves",
-        legs="Telchine Braconi",
-        feet="Telchine Pigaches",
+        hands=gear.Telchine_ENH_hands,
+        legs=gear.Telchine_ENH_legs,
+        feet=gear.Telchine_ENH_feet,
         neck="Incanter's Torque",
         ear1="Augment. Earring",
         ear2="Andoaa Earring",
@@ -362,23 +362,30 @@ function init_gear_sets()
     sets.midcast.EnhancingDuration = {
         main=gear.Gada_ENH,
         sub="Ammurapi Shield",
-        head="Telchine Cap",
+        head=gear.Telchine_ENH_head,
         body="Peda. Gown +3",
-        hands="Telchine Gloves",
-        legs="Telchine Braconi",
-        feet="Telchine Pigaches",
+        hands=gear.Telchine_ENH_hands,
+        legs=gear.Telchine_ENH_legs,
+        feet=gear.Telchine_ENH_feet,
         }
 
     sets.midcast.Regen = set_combine(sets.midcast.EnhancingDuration, {
         main="Bolelabunga",
         sub="Ammurapi Shield",
         head="Arbatel Bonnet +1",
-        body="Telchine Chas.",
+        body=gear.Telchine_ENH_body,
+        hands=gear.Telchine_ENH_hands,
+        legs=gear.Telchine_ENH_legs,
+        feet=gear.Telchine_ENH_feet,
         back="Bookworm's Cape",
         })
 
     sets.midcast.RegenDuration = set_combine(sets.midcast.EnhancingDuration, {
-        body="Telchine Chasuble",
+        head=gear.Telchine_ENH_head,
+        body=gear.Telchine_ENH_body,
+        hands=gear.Telchine_ENH_hands,
+        legs=gear.Telchine_ENH_legs,
+        feet=gear.Telchine_ENH_feet,
         back=gear.SCH_FC_Cape,
         })
 
@@ -398,7 +405,11 @@ function init_gear_sets()
     sets.midcast.Aquaveil = set_combine(sets.midcast.EnhancingDuration, {
         main="Vadose Rod",
         sub="Ammurapi Shield",
+        ammo="Staunch Tathlum +1",
         head="Amalric Coif +1",
+        ear1="Halasz Earring",
+        ring1="Freke Ring",
+        ring2="Evanescence Ring",
         waist="Emphatikos Rope",
         })
 
@@ -413,7 +424,7 @@ function init_gear_sets()
 
     -- Custom spell classes
     sets.midcast.MndEnfeebles = {
-        main=gear.Gada_ENF,
+        main="Maxentius",
         sub="Ammurapi Shield",
         ammo="Pemphredo Tathlum",
         head="Acad. Mortar. +3",
@@ -431,8 +442,8 @@ function init_gear_sets()
         }
 
     sets.midcast.IntEnfeebles = set_combine(sets.midcast.MndEnfeebles, {
-        main=gear.Grioavolr_MND,
-        sub="Eletta Grip",
+        main="Maxentius",
+        sub="Ammurapi Shield",
         legs="Chironic Hose",
         ear1="Barkaro. Earring",
         back=gear.SCH_MAB_Cape,
@@ -470,7 +481,7 @@ function init_gear_sets()
         neck="Argute Stole +1", --8
         ear1="Barkaro. Earring",
         ear2="Regal Earring",
-        ring1={name="Shiva Ring +1", bag="wardrobe3"},
+        ring1="Freke Ring",
         ring2="Archon Ring",
         back=gear.SCH_MAB_Cape,
         waist="Yamabuki-no-Obi",
@@ -503,15 +514,15 @@ function init_gear_sets()
         neck="Baetyl Pendant",
         ear1="Barkaro. Earring",
         ear2="Regal Earring",
-        ring1={name="Shiva Ring +1", bag="wardrobe3"},
-        ring2={name="Shiva Ring +1", bag="wardrobe4"},
+        ring1="Freke Ring",
+        ring2="Shiva Ring +1",
         back=gear.SCH_MAB_Cape,
         waist="Refoccilation Stone",
         }
 
     sets.midcast['Elemental Magic'].Seidr = set_combine(sets.midcast['Elemental Magic'], {
         main=gear.Grioavolr_MB,
-        sub="Eletta Grip",
+        sub="Khonsu",
         head="Merlinic Hood",
         body="Seidr Cotehardie",
         legs="Peda. Pants +3",
@@ -521,7 +532,7 @@ function init_gear_sets()
 
     sets.midcast['Elemental Magic'].Resistant = set_combine(sets.midcast['Elemental Magic'], {
         main=gear.Grioavolr_MB,
-        sub="Eletta Grip",
+        sub="Khonsu",
         head="Merlinic Hood",
         legs="Peda. Pants +3",
         feet="Jhakri Pigaches +2",
@@ -531,7 +542,7 @@ function init_gear_sets()
 
     sets.midcast.Impact = set_combine(sets.midcast['Elemental Magic'], {
         main="Akademos",
-        sub="Enki Strap",
+        sub="Khonsu",
         head=empty,
         body="Twilight Cloak",
         ring1="Archon Ring",
@@ -572,7 +583,7 @@ function init_gear_sets()
         legs="Assiduity Pants +1",
         feet="Herald's Gaiters",
         neck="Bathy Choker +1",
-        ear1="Genmei Earring",
+        ear1="Sanare Earring",
         ear2="Lugalbanda Earring",
         ring1={name="Stikini Ring +1", bag="wardrobe3"},
         ring2={name="Stikini Ring +1", bag="wardrobe4"},
@@ -588,6 +599,7 @@ function init_gear_sets()
         body="Mallquis Saio +2", --8/8
         feet="Peda. Loafers +3",
         neck="Loricate Torque +1", --6/6
+        ear1="Sanare Earring",
         ring1="Gelatinous Ring +1", --7/(-1)
         ring2="Defending Ring", --10/10
         back="Moonlight Cape", --6/6
@@ -698,7 +710,7 @@ end
 -------------------------------------------------------------------------------------------------------------------
 
 function job_precast(spell, action, spellMap, eventArgs)
-    if spellMap == 'Aspir' then
+    if spell.name:startswith('Aspir') then
         refine_various_spells(spell, action, spellMap, eventArgs)
     end
 end
@@ -717,7 +729,7 @@ function job_post_midcast(spell, action, spellMap, eventArgs)
     if spell.skill == 'Elemental Magic' or spell.english == "Kaustra" then
         if (spell.element == world.day_element or spell.element == world.weather_element) then
             equip(sets.Obi)
-            if buffactive['Klimaform'] then
+            if buffactive['Klimaform'] and spell.element == world.weather_element then
                 equip(sets.buff['Klimaform'])
             end
         end
@@ -948,7 +960,7 @@ function apply_grimoire_bonuses(spell, action, spellMap)
         if state.Buff.Immanence then
             equip(sets.buff['Immanence'])
         end
-        if state.Buff.Klimaform and (spell.element == world.weather_element or spell.element == world.day_element) then
+        if state.Buff.Klimaform and spell.element == world.weather_element then
             equip(sets.buff['Klimaform'])
         end
     end
@@ -1062,7 +1074,7 @@ function refine_various_spells(spell, action, spellMap, eventArgs)
     local spell_index
 
     if spell_recasts[spell.recast_id] > 0 then
-        if spellMap == 'Aspir' then
+        if spell.name:startswith('Aspir') then
             spell_index = table.find(degrade_array['Aspirs'],spell.name)
             if spell_index > 1 then
                 newSpell = degrade_array['Aspirs'][spell_index - 1]

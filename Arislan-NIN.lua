@@ -203,7 +203,7 @@ function init_gear_sets()
 
     sets.precast.JA['Provoke'] = sets.Enmity
 --  sets.precast.JA['Mijin Gakure'] = {legs="Mochi. Hakama +1"}
-    sets.precast.JA['Futae'] = {legs="Hattori Tekko +1"}
+    sets.precast.JA['Futae'] = {hands="Hattori Tekko +1"}
     sets.precast.JA['Sange'] = {body="Mochi. Chainmail +1"}
 
     sets.precast.Waltz = {
@@ -247,7 +247,7 @@ function init_gear_sets()
     -- Weaponskill sets
     -- Default set for any weaponskill that isn't any more specifically defined
     sets.precast.WS = {
-        ammo="Seeth. Bomblet +1",
+        range="Seeth. Bomblet +1",
         head="Hachiya Hatsu. +3",
         body=gear.Herc_WS_body,
         hands=gear.Adhemar_B_hands,
@@ -303,7 +303,7 @@ function init_gear_sets()
         })
 
     sets.precast.WS['Blade: Yu'] = set_combine(sets.precast.WS, {
-        ammo="Seeth. Bomblet +1",
+        ammo="Pemphredo Tathlum",
         head="Hachiya Hatsu. +3",
         body="Samnuha Coat",
         hands="Leyline Gloves",
@@ -359,7 +359,7 @@ function init_gear_sets()
         })
 
     sets.midcast.EnfeeblingNinjutsu = {
-        ammo="Yamarang",
+        ammo="Pemphredo Tathlum",
         head="Hachiya Hatsu. +3",
         body="Mummu Jacket +2",
         hands="Mummu Wrists +2",
@@ -416,7 +416,7 @@ function init_gear_sets()
         legs="Samnuha Tights",
         feet="Ahosi Leggings",
         neck="Bathy Choker +1",
-        ear1="Genmei Earring",
+        ear1="Sanare Earring",
         ear2="Infused Earring",
         ring1={name="Chirich Ring +1", bag="wardrobe3"},
         ring2={name="Chirich Ring +1", bag="wardrobe4"},
@@ -806,6 +806,12 @@ function job_post_midcast(spell, action, spellMap, eventArgs)
         end
         if state.Buff.Futae then
             equip(sets.precast.JA['Futae'])
+            add_to_chat(120, 'Futae GO!')
+        end
+    end
+    if spell.type == 'WeaponSkill' then
+        if state.Buff.Futae then
+            add_to_chat(120, 'Futae GO!')
         end
     end
     if state.Buff.Doom then
@@ -994,11 +1000,11 @@ function gearinfo(cmdParams, eventArgs)
             if cmdParams[2] == 'false' then
                 DW_needed = 0
                 DW = false
-              end
+            end
         end
         if type(tonumber(cmdParams[3])) == 'number' then
-              if tonumber(cmdParams[3]) ~= Haste then
-                  Haste = tonumber(cmdParams[3])
+            if tonumber(cmdParams[3]) ~= Haste then
+                Haste = tonumber(cmdParams[3])
             end
         end
         if type(cmdParams[4]) == 'string' then

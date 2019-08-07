@@ -73,7 +73,6 @@ function job_setup()
     state.SongMode = M{['description']='Song Mode', 'None', 'Placeholder'}
 
     state.Buff['Pianissimo'] = buffactive['pianissimo'] or false
-    state.Buff['Pianissimo'] = buffactive['pianissimo'] or false
 
     lockstyleset = 1
 end
@@ -220,7 +219,8 @@ function init_gear_sets()
         })
 
     sets.precast.FC.BardSong = set_combine(sets.precast.FC, {
-        head="Fili Calot +1", --0/14
+        head="Fili Calot +1", --14
+        body="Brioso Justau. +3", --15
         feet="Bihu Slippers +3", --9
         neck="Loricate Torque +1",
         ear1="Genmei Earring",
@@ -306,7 +306,7 @@ function init_gear_sets()
     sets.midcast.March = {hands="Fili Manchettes +1"}
     sets.midcast.Minne = {legs="Mousai Seraweels"}
     sets.midcast.Minuet = {body="Fili Hongreline +1"}
-    sets.midcast.Paeon = {head="Brioso Roundlet +2"}
+    sets.midcast.Paeon = {head="Brioso Roundlet +3"}
     sets.midcast.Threnody = {body="Mousai Manteel"}
     sets.midcast['Adventurer\'s Dirge'] = {hands="Bihu Cuffs +3"}
     sets.midcast['Foe Sirvente'] = {head="Bihu Roundlet +3"}
@@ -337,10 +337,10 @@ function init_gear_sets()
         main="Carnwenhan",
         sub="Ammurapi Shield",
         range="Gjallarhorn",
-        head="Brioso Roundlet +2",
-        body="Brioso Justau. +2",
+        head="Brioso Roundlet +3",
+        body="Brioso Justau. +3",
         hands="Brioso Cuffs +3",
-        legs="Inyanga Shalwar +2",
+        legs="Brioso Cannions +3",
         feet="Brioso Slippers +3",
         neck="Mnbw. Whistle +1",
         ear1="Digni. Earring",
@@ -352,7 +352,7 @@ function init_gear_sets()
         }
 
     -- For song defbuffs (accuracy primary, duration secondary)
-    sets.midcast.SongEnfeebleAcc = set_combine(sets.midcast.SongEnfeeble, {legs="Brioso Cannions +2"})
+    sets.midcast.SongEnfeebleAcc = set_combine(sets.midcast.SongEnfeeble, {legs="Brioso Cannions +3"})
 
     -- Placeholder song; minimize duration to make it easy to overwrite.
     sets.midcast.SongPlaceholder = set_combine(sets.midcast.SongEnhancing, {range=info.ExtraSongInstrument})
@@ -423,6 +423,23 @@ function init_gear_sets()
     sets.midcast.Shell = sets.midcast.Protect
     sets.midcast.Shellra = sets.midcast.Shell
 
+    sets.midcast['Enfeebling Magic'] = {
+        main="Carnwenhan",
+        sub="Ammurapi Shield",
+        head="Brioso Roundlet +3",
+        body="Brioso Justau. +3",
+        hands="Brioso Cuffs +3",
+        legs="Brioso Cannions +3",
+        feet="Brioso Slippers +3",
+        neck="Mnbw. Whistle +1",
+        ear1="Digni. Earring",
+        ear2="Regal Earring",
+        ring1="Kishar Ring",
+        ring2={name="Stikini Ring +1", bag="wardrobe4"},
+        waist="Luminary Sash",
+        back=gear.BRD_Song_Cape,
+        }
+
     
     ------------------------------------------------------------------------------------------------
     ----------------------------------------- Idle Sets --------------------------------------------
@@ -450,14 +467,15 @@ function init_gear_sets()
         head="Bihu Roundlet +3", --6/0
         body="Bihu Jstcorps. +3", --7/0
         hands="Inyan. Dastanas +2", --0/4
-        legs="Bihu Cannions +3", --6/0
+        legs="Brioso Cannions +3", --8/8
         feet="Inyan. Crackows +2", --0/3
         neck="Loricate Torque +1", --6/6
+        ear1="Genmei Earring", --2/0
         ear2="Etiolation Earring", --0/3
         ring1="Moonlight Ring", --5/5
         ring2="Defending Ring",  --10/10
         back="Moonlight Cape", --6/6
-        waist="Flume Belt +1", --4/0
+        waist="Carrier's Sash",
         }
 
     sets.idle.MEva = {
@@ -467,6 +485,7 @@ function init_gear_sets()
         legs="Inyanga Shalwar +2", --0/6
         feet="Inyan. Crackows +2", --0/3
         neck="Warder's Charm +1",
+        ear1="Sanare Earring",
         ear2="Etiolation Earring", --0/3
         ring1="Moonlight Ring", --5/5
         ring2="Defending Ring",  --10/10
@@ -478,10 +497,10 @@ function init_gear_sets()
         main="Carnwenhan",
         sub="Genmei Shield",
         range="Gjallarhorn",
-        head="Bihu Roundlet +3",
+        head="Brioso Roundlet +3",
         body="Bihu Jstcorps. +3",
         hands="Brioso Cuffs +3",
-        legs="Bihu Cannions +3",
+        legs="Brioso Cannions +3",
         neck="Mnbw. Whistle +1",
         ear1="Enchntr. Earring +1",
         ear2="Regal Earring",
@@ -927,8 +946,8 @@ function get_lullaby_duration(spell)
     if player.equipment.sub == "Kali" then mult = mult + 0.05 end
     if player.equipment.sub == "Legato Dagger" then mult = mult + 0.05 end
     if player.equipment.neck == "Aoidos' Matinee" then mult = mult + 0.1 end
-    if player.equipment.neck == "Mnbw. Whistle +1" then mult = mult + 0.2 end
-    if player.equipment.neck == "Mnbw. Whistle +1 +1" then mult = mult + 0.3 end
+    if player.equipment.neck == "Mnbw. Whistle" then mult = mult + 0.2 end
+    if player.equipment.neck == "Mnbw. Whistle +1" then mult = mult + 0.3 end
     if player.equipment.body == "Fili Hongreline +1" then mult = mult + 0.12 end
     if player.equipment.legs == "Inyanga Shalwar +1" then mult = mult + 0.15 end
     if player.equipment.legs == "Inyanga Shalwar +2" then mult = mult + 0.17 end
@@ -939,6 +958,11 @@ function get_lullaby_duration(spell)
     if player.equipment.hands == 'Brioso Cuffs +1' then mult = mult + 0.1 end
     if player.equipment.hands == 'Brioso Cuffs +3' then mult = mult + 0.1 end
     if player.equipment.hands == 'Brioso Cuffs +3' then mult = mult + 0.2 end
+
+    --JP Duration Gift
+    if self.job_points.brd.jp_spent >= 1200 then
+        mult = mult + 0.05
+    end
 
     if troubadour then
         mult = mult * 2

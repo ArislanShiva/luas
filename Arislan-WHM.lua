@@ -230,7 +230,7 @@ function init_gear_sets()
 
     sets.precast.FC.Cure = set_combine(sets.precast.FC['Healing Magic'], {
         ammo="Impatiens", --(2)
-        head="Piety Cap +1", --13
+        head="Piety Cap +3", --15
         legs="Ebers Pant. +1", --13
         feet="Kaykaus Boots +1", --7
         ear1="Nourish. Earring +1", --4
@@ -251,7 +251,7 @@ function init_gear_sets()
     -- Default set for any weaponskill that isn't any more specifically defined
     sets.precast.WS = {
         ammo="Floestone",
-        head="Aya. Zucchetto +2",
+        head="Piety Cap +3",
         body="Piety Briault +3",
         hands="Piety Mitts +3",
         legs="Piety Pantaln. +3",
@@ -278,18 +278,7 @@ function init_gear_sets()
 
     -- Midcast Sets
 
-    sets.midcast.FC = {
-        head="Piety Cap +1",
-        body="Inyanga Jubbah +2",
-        hands="Fanatic Gloves",
-        legs="Ebers Pant. +1",
-        feet="Volte Gaiters",
-        ear1="Loquacious Earring",
-        ear2="Etiolation Earring",
-        ring1="Kishar Ring",
-        back=gear.WHM_FC_Cape,
-        waist="Witful Belt",
-        } -- Haste
+    sets.midcast.FC = sets.precast.FC
 
     sets.midcast.ConserveMP = {
         main="Sucellus",
@@ -405,10 +394,10 @@ function init_gear_sets()
     sets.midcast['Enhancing Magic'] = {
         main="Gada",
         sub="Ammurapi Shield",
-        head="Telchine Cap",
-        body="Telchine Chas.",
+        head=gear.Telchine_ENH_head,
+        body=gear.Telchine_ENH_body,
         hands="Dynasty Mitts",
-        legs="Telchine Braconi",
+        legs=gear.Telchine_ENH_legs,
         feet="Theo. Duckbills +3",
         neck="Incanter's Torque",
         ear1="Augment. Earring",
@@ -422,10 +411,10 @@ function init_gear_sets()
     sets.midcast.EnhancingDuration = {
         main="Gada",
         sub="Ammurapi Shield",
-        head="Telchine Cap",
-        body="Telchine Chas.",
-        hands="Telchine Gloves",
-        legs="Telchine Braconi",
+        head=gear.Telchine_ENH_head,
+        body=gear.Telchine_ENH_body,
+        hands=gear.Telchine_ENH_hands,
+        legs=gear.Telchine_ENH_legs,
         feet="Theo. Duckbills +3",
         }
 
@@ -434,14 +423,16 @@ function init_gear_sets()
         sub="Ammurapi Shield",
         head="Inyanga Tiara +2",
         body="Piety Briault +3",
-        hands="Ebers Mitts +1",
-        legs="Th. Pant. +3",
+        hands=gear.Telchine_ENH_hands,
+        legs=gear.Telchine_ENH_legs,
+        feet=gear.Telchine_ENH_feet,
         })
 
     sets.midcast.RegenDuration = set_combine(sets.midcast.EnhancingDuration, {
-        body="Telchine Chas.",
+        body=gear.Telchine_ENH_body,
         hands="Ebers Mitts +1",
         legs="Th. Pant. +3",
+        feet="Theo. Duckbills +3",
         })
 
     sets.midcast.Refresh = set_combine(sets.midcast.EnhancingDuration, {
@@ -457,6 +448,10 @@ function init_gear_sets()
     sets.midcast.Aquaveil = set_combine(sets.midcast.EnhancingDuration, {
         main="Vadose Rod",
         sub="Ammurapi Shield",
+        ammo="Staunch Tathlum +1",
+        ear1="Halasz Earring",
+        ring1="Freke Ring",
+        ring2="Evanescence Ring",
         waist="Emphatikos Rope",
         })
 
@@ -485,12 +480,11 @@ function init_gear_sets()
 
     sets.midcast.Protectra = sets.midcast.Protect
     sets.midcast.Shell = sets.midcast.Protect
-    sets.midcast.Shellra = set_combine(sets.midcast.ConserveMP, sets.midcast.EnhancingDuration, {ring1="Sheltered Ring"})
-    sets.midcast.ShellraV = set_combine(sets.midcast.Shellra, {legs="Piety Pantaln. +3"})
+    sets.midcast.Shellra = sets.midcast.Protect
 
     sets.midcast['Divine Magic'] = {
-        main=gear.Grioavolr_MB,
-        sub="Enki Strap",
+        main="Maxentius",
+        sub="Ammurapi Shield",
         ammo="Pemphredo Tathlum",
         head="Befouled Crown",
         body="Vanya Robe",
@@ -506,14 +500,15 @@ function init_gear_sets()
         }
 
     sets.midcast.Banish = set_combine(sets.midcast['Divine Magic'], {
-        main=gear.Grioavolr_MB,
-        sub="Enki Strap",
+        main="Maxentius",
+        sub="Ammurapi Shield",
         head="Inyanga Tiara +2",
         body="Vedic Coat",
         legs="Th. Pant. +3",
         neck="Sanctity Necklace",
         ear1="Friomisi Earring",
         ear2="Etiolation Earring",
+        ring1="Freke Ring",
         ring2="Weather. Ring +1",
         waist="Refoccilation Stone",
         })
@@ -540,7 +535,7 @@ function init_gear_sets()
 
     -- Custom spell classes
     sets.midcast.MndEnfeebles = {
-        main=gear.Gada_Enf,
+        main="Maxentius",
         sub="Ammurapi Shield",
         ammo="Pemphredo Tathlum",
         head="Theophany Cap +3",
@@ -558,20 +553,21 @@ function init_gear_sets()
         }
 
     sets.midcast.IntEnfeebles = set_combine(sets.midcast.MndEnfeebles, {
-        main=gear.Grioavolr_MB,
-        sub="Enki Strap",
+        main="Maxentius",
+        sub="Ammurapi Shield",
         back="Aurist's Cape +1",
         waist="Yamabuki-no-Obi",
         })
 
     sets.midcast.Impact = {
-        main=gear.Grioavolr_MB,
-        sub="Enki Strap",
+        main="Maxentius",
+        sub="Ammurapi Shield",
         head=empty,
         body="Twilight Cloak",
         hands="Inyan. Dastanas +2",
         legs="Th. Pant. +3",
         feet="Theo. Duckbills +3",
+        ring1="Freke Ring",
         ring2="Archon Ring",
         }
 
@@ -598,7 +594,7 @@ function init_gear_sets()
         legs="Assid. Pants +1",
         feet="Herald's Gaiters",
         neck="Bathy Choker +1",
-        ear1="Genmei Earring",
+        ear1="Sanare Earring",
         ear2="Infused Earring",
         ring1={name="Stikini Ring +1", bag="wardrobe3"},
         ring2={name="Stikini Ring +1", bag="wardrobe4"},
@@ -628,7 +624,7 @@ function init_gear_sets()
         legs="Inyanga Shalwar +2",
         feet="Inyan. Crackows +2",
         neck="Warder's Charm +1",
-        ear1="Eabani Earring",
+        ear1="Sanare Earring",
         ear2="Regal Earring",
         ring1="Inyanga Ring",
         back=gear.WHM_FC_Cape,
@@ -684,7 +680,7 @@ function init_gear_sets()
 
     -- Buff sets: Gear that needs to be worn to actively enhance a current player buff.
     sets.buff['Divine Caress'] = {hands="Ebers Mitts +1", back="Mending Cape"}
-    sets.buff['Devotion'] = {head="Piety Cap +1"}
+    sets.buff['Devotion'] = {head="Piety Cap +3"}
 
     sets.buff.Doom = {
         neck="Nicander's Necklace", --20
@@ -733,9 +729,6 @@ function job_post_midcast(spell, action, spellMap, eventArgs)
             if spellMap == 'Refresh' then
                 equip(sets.midcast.Refresh)
             end
-        end
-        if spell.name == 'Shellra V' then
-            equip(sets.midcast.ShellraV)
         end
         if spellMap == "Regen" and state.RegenMode.value == 'Duration' then
             equip(sets.midcast.RegenDuration)
@@ -815,13 +808,13 @@ function job_get_spell_map(spell, default_spell_map)
                     return "CureSolaceWeather"
                 else
                     return "CureSolace"
-                end
+              end
             else
                 if (world.weather_element == 'Light' or world.day_element == 'Light') then
                     return "CureWeather"
                 else
                     return "CureNormal"
-                end
+              end
             end
         elseif default_spell_map == 'Curaga' then
             if (world.weather_element == 'Light' or world.day_element == 'Light') then

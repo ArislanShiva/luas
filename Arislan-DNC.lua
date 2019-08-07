@@ -458,7 +458,7 @@ function init_gear_sets()
         neck="Baetyl Pendant",
         ear1="Crematio Earring",
         ear2="Friomisi Earring",
-        ring1={name="Shiva Ring +1", bag="wardrobe3"},
+        ring1="Shiva Ring +1",
         ring2="Epaminondas's Ring",
         back="Argocham. Mantle",
         waist="Eschan Stone",
@@ -497,7 +497,7 @@ function init_gear_sets()
         legs="Mummu Kecks +2",
         feet="Skd. Jambeaux +1",
         neck="Bathy Choker +1",
-        ear1="Eabani Earring",
+        ear1="Sanare Earring",
         ear2="Infused Earring",
         ring1={name="Chirich Ring +1", bag="wardrobe3"},
         ring2={name="Chirich Ring +1", bag="wardrobe4"},
@@ -513,6 +513,7 @@ function init_gear_sets()
         legs="Mummu Kecks +2", --5/5
         feet="Turms Leggings +1",
         neck="Loricate Torque +1", --6/6
+        ear1="Sanare Earring",
         ring1="Gelatinous Ring +1", --7/(-1)
         ring2="Defending Ring", --10/10
         back=gear.DNC_TP_Cape, --10/0
@@ -1139,11 +1140,11 @@ function gearinfo(cmdParams, eventArgs)
             if cmdParams[2] == 'false' then
                 DW_needed = 0
                 DW = false
-              end
+            end
         end
         if type(tonumber(cmdParams[3])) == 'number' then
-              if tonumber(cmdParams[3]) ~= Haste then
-                  Haste = tonumber(cmdParams[3])
+            if tonumber(cmdParams[3]) ~= Haste then
+                Haste = tonumber(cmdParams[3])
             end
         end
         if type(cmdParams[4]) == 'string' then

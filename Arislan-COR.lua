@@ -94,7 +94,6 @@ function job_setup()
     state.SelectqdTarget = M(false, 'Select Quick Draw Target')
     state.IgnoreTargetting = M(false, 'Ignore Targetting')
 
-    state.DualWield = M(false, 'Dual Wield III')
     state.QDMode = M{['description']='Quick Draw Mode', 'STP', 'Enhance', 'Potency', 'TH'}
 
     state.Currentqd = M{['description']='Current Quick Draw', 'Main', 'Alt'}
@@ -105,6 +104,14 @@ function job_setup()
     state.warned = M(false)
 
     elemental_ws = S{'Aeolian Edge', 'Leaden Salute', 'Wildfire'}
+
+    include('Mote-TreasureHunter')
+
+    -- For th_action_check():
+    -- JA IDs for actions that always have TH: Provoke, Animated Flourish
+    info.default_ja_ids = S{35, 204}
+    -- Unblinkable JA IDs for actions that always have TH: Quick/Box/Stutter Step, Desperate/Violent Flourish
+    info.default_u_ja_ids = S{201, 202, 203, 205, 207}
 
     define_roll_values()
 
@@ -124,7 +131,7 @@ function user_setup()
     state.CastingMode:options('Normal', 'Resistant')
     state.IdleMode:options('Normal', 'DT', 'Refresh')
 
-    state.WeaponSet = M{['description']='Weapon Set', 'LeadenMelee', 'LeadenAccMelee', 'LeadenRanged', 'LastStandMelee', 'LastStandRanged', 'SavageMelee'}
+    state.WeaponSet = M{['description']='Weapon Set', 'LeadenMelee', 'LeadenRanged', 'LastStandMelee', 'LastStandRanged', 'SavageMelee'}
     state.CP = M(false, "Capacity Points Mode")
     state.WeaponLock = M(false, 'Weapon Lock')
 
@@ -142,6 +149,7 @@ function user_setup()
         send_command('lua l gearinfo')
     end
 
+    send_command('bind @t gs c cycle treasuremode')
     send_command('bind ^` input /ja "Double-up" <me>')
     send_command('bind ^c input /ja "Crooked Cards" <me>')
     send_command('bind ^s input /ja "Snake Eye" <me>')
@@ -199,6 +207,7 @@ function user_unload()
     send_command('unbind ^s')
     send_command('unbind ^f')
     send_command('unbind !`')
+    send_command('unbind @t')
     send_command('unbind @`')
     send_command('unbind ^insert')
     send_command('unbind ^delete')
@@ -249,7 +258,7 @@ function init_gear_sets()
     ---------------------------------------- Precast Sets ------------------------------------------
     ------------------------------------------------------------------------------------------------
 
-    sets.precast.JA['Snake Eye'] = {legs="Lanun Trews +1"}
+    sets.precast.JA['Snake Eye'] = {legs="Lanun Trews +3"}
     sets.precast.JA['Wild Card'] = {feet="Lanun Bottes +3"}
     sets.precast.JA['Random Deal'] = {body="Lanun Frac +3"}
 
@@ -315,7 +324,7 @@ function init_gear_sets()
         feet="Meg. Jam. +2", --10/0
         back=gear.COR_SNP_Cape, --10/0
         waist="Yemaya Belt", --0/5
-      } --61/26
+        } --61/26
 
     sets.precast.RA.Flurry1 = set_combine(sets.precast.RA, {
         body="Laksa. Frac +3", --0/20
@@ -375,7 +384,6 @@ function init_gear_sets()
         hands="Carmine Fin. Ga. +1",
         legs=gear.Herc_MAB_legs,
         feet="Lanun Bottes +3",
---        neck="Baetyl Pendant",
         neck="Comm. Charm +1",
         ear1="Crematio Earring",
         ear2="Friomisi Earring",
@@ -574,7 +582,7 @@ function init_gear_sets()
         body="Meg. Cuirie +2",
         hands="Mummu Wrists +2",
         legs="Mummu Kecks +2",
-        feet="Oshosi Leggings",
+        feet="Osh. Leggings +1",
         ring1="Begrudging Ring",
         ring2="Mummu Ring",
         waist="Kwahu Kachina Belt",
@@ -588,11 +596,11 @@ function init_gear_sets()
         })
 
     sets.TripleShot = {
-        head="Oshosi Mask", --4
+        head="Oshosi Mask +1", --5
         body="Chasseur's Frac +1", --12
         hands="Lanun Gants +3",
-        legs="Oshosi Trousers", --5
-        feet="Oshosi Leggings", --2
+        legs="Osh. Trousers +1", --6
+        feet="Osh. Leggings +1", --3
         } --27
 
     sets.TripleShotCritical = {
@@ -611,11 +619,10 @@ function init_gear_sets()
         ammo=gear.MAbullet,
         head="Volte Cap",
         body="Oshosi Vest +1",
-        hands=gear.Herc_DT_hands,
+        hands="Oshosi Gloves +1",
         legs="Carmine Cuisses +1",
-        feet="Ahosi Leggings",
-        head="Volte Boots",
-        neck="Comm. Charm +1",
+        feet="Osh. Leggings +1",
+        neck="Bathy Choker +1",
         ear1="Genmei Earring",
         ear2="Infused Earring",
         ring1={name="Chirich Ring +1", bag="wardrobe3"},
@@ -628,7 +635,7 @@ function init_gear_sets()
         head="Meghanada Visor +2", --5/0
         body="Lanun Frac +3", --6/0
         hands=gear.Herc_DT_hands, --7/5
-        feet="Ahosi Leggings", --4/0
+        feet="Osh. Leggings +1", --3
         --neck="Loricate Torque +1", --6/6
         ear1="Genmei Earring", --2/0
         ear2="Etiolation Earring", --0/3
@@ -646,8 +653,7 @@ function init_gear_sets()
         })
 
     sets.idle.Town = set_combine(sets.idle, {
-        head="Lanun Tricorne +3",
-        hands="Lanun Gants +3",
+        head="Oshosi Mask +1",
         feet="Lanun Bottes +3",
         neck="Comm. Charm +1",
         ear1="Suppanomimi",
@@ -666,16 +672,16 @@ function init_gear_sets()
     sets.defense.MDT = {
 		head="Volte Cap",
         body="Oshosi Vest +1",
-        hands="Oshosi Gloves",
-        legs="Oshosi Trousers",
-        feet="Oshosi Leggings",
-        neck="Loricate Torque +1", --6/6
-        ear1="Eabani Earring",
+        hands="Oshosi Gloves +1",
+        legs="Osh. Trousers +1",
+        feet="Osh. Leggings +1",
+        neck="Warder's Charm +1",
+        ear1="Sanare Earring",
         ear2="Etiolation Earring", --0/3
         ring1="Gelatinous Ring +1", --7/(-1)
         ring2="Defending Ring", --10/10
         back=gear.COR_SNP_Cape,
-        waist="Flume Belt +1", --4/0
+        waist="Carrier's Sash",
 	    }
 
     sets.Kiting = {legs="Carmine Cuisses +1"}
@@ -742,8 +748,7 @@ function init_gear_sets()
         hands="Floral Gauntlets", --5
         legs="Carmine Cuisses +1", --6
         feet=gear.Taeon_DW_feet, --9
-        neck="Comm. Charm +1",
-        --neck="Iskur Gorget",
+        neck="Iskur Gorget",
         ear1="Suppanomimi", --5
         ear2="Brutal Earring",
         ring1="Hetairoi Ring",
@@ -786,8 +791,7 @@ function init_gear_sets()
         hands="Floral Gauntlets", --5
         legs="Carmine Cuisses +1", --6
         feet=gear.Taeon_DW_feet, --9
-        neck="Comm. Charm +1",
---        neck="Iskur Gorget",
+        neck="Iskur Gorget",
         ear1="Suppanomimi", --5
         ear2="Eabani Earring", --4
         ring1="Hetairoi Ring",
@@ -830,8 +834,7 @@ function init_gear_sets()
         hands=gear.Adhemar_B_hands,
         legs="Samnuha Tights",
         feet=gear.Taeon_DW_feet, --9
---        neck="Iskur Gorget",
-        neck="Comm. Charm +1",
+        neck="Iskur Gorget",
         ear1="Suppanomimi", --5
         ear2="Eabani Earring", --4
         ring1="Hetairoi Ring",
@@ -876,8 +879,7 @@ function init_gear_sets()
         hands=gear.Adhemar_B_hands,
         legs="Samnuha Tights",
         feet=gear.Herc_TA_feet,
-        neck="Comm. Charm +1",
---        neck="Iskur Gorget",
+        neck="Iskur Gorget",
         ear1="Suppanomimi", --5
         ear2="Eabani Earring", --4
         ring1="Hetairoi Ring",
@@ -922,8 +924,7 @@ function init_gear_sets()
         hands=gear.Adhemar_B_hands,
         legs="Samnuha Tights",
         feet=gear.Herc_TA_feet,
-        neck="Comm. Charm +1",
---        neck="Iskur Gorget",
+        neck="Iskur Gorget",
         ear1="Suppanomimi", --5
         ear2="Telos Earring",
         ring1="Hetairoi Ring",
@@ -974,7 +975,7 @@ function init_gear_sets()
 
     sets.engaged.Hybrid = {
         head=gear.Adhemar_D_head, --4/0
-        --neck="Loricate Torque +1", --6/6
+        neck="Loricate Torque +1", --6/6
         ring2="Defending Ring", --10/10
         }
 
@@ -1037,14 +1038,13 @@ function init_gear_sets()
     sets.CP = {back="Mecisto. Mantle"}
     --sets.Reive = {neck="Ygnas's Resolve +1"}
 
-    sets.TreasureHunter = {head="Volte Cap", hands=gear.Herc_TH_hands, feet="Volte Boots", waist="Chaac Belt"}
+    sets.TreasureHunter = {head="Volte Cap", hands=gear.Herc_TH_hands, waist="Chaac Belt"}
 
-    sets.LeadenMelee = {main="Rostam", sub="Blurred Knife +1", ranged="Death Penalty"}
-    sets.LeadenAccMelee = {main="Rostam", sub="Tauret", ranged="Death Penalty"}
-    sets.LeadenRanged = {main="Naegling", sub="Tauret", ranged="Death Penalty"}
-    sets.LastStandMelee = {main="Rostam", sub="Blurred Knife +1", ranged="Fomalhaut"}
-    sets.LastStandRanged = {main="Rostam", sub="Nusku Shield", ranged="Fomalhaut"}
-    sets.SavageMelee = {main="Naegling", sub="Blurred Knife +1", ranged="Ataktos"}
+    sets.LeadenMelee = {main="Rostam", sub="Lanun Knife", ranged="Death Penalty"}
+    sets.LeadenRanged = {main="Lanun Knife", sub="Tauret", ranged="Death Penalty"}
+    sets.LastStandMelee = {main="Lanun Knife", sub="Blurred Knife +1", ranged="Fomalhaut"}
+    sets.LastStandRanged = {main="Lanun Knife", sub="Nusku Shield", ranged="Fomalhaut"}
+    sets.SavageMelee = {main="Naegling", sub="Lanun Knife", ranged="Ataktos"}
 
 end
 
@@ -1237,7 +1237,8 @@ function job_handle_equipping_gear(playerStatus, eventArgs)
 end
 
 function job_update(cmdParams, eventArgs)
-    equip(sets[state.WeaponSet.current])    handle_equipping_gear(player.status)
+    equip(sets[state.WeaponSet.current])
+    handle_equipping_gear(player.status)
 end
 
 function update_combat_form()
@@ -1542,6 +1543,19 @@ windower.register_event('zone change',
         end
     end
 )
+
+-- Check for various actions that we've specified in user code as being used with TH gear.
+-- This will only ever be called if TreasureMode is not 'None'.
+-- Category and Param are as specified in the action event packet.
+function th_action_check(category, param)
+    if category == 2 or -- any ranged attack
+        --category == 4 or -- any magic action
+        (category == 3 and param == 30) or -- Aeolian Edge
+        (category == 6 and info.default_ja_ids:contains(param)) or -- Provoke, Animated Flourish
+        (category == 14 and info.default_u_ja_ids:contains(param)) -- Quick/Box/Stutter Step, Desperate/Violent Flourish
+        then return true
+    end
+end
 
 -- Select default macro book on initial load or subjob change.
 function select_default_macro_book()

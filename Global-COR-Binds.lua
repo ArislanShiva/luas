@@ -17,7 +17,7 @@
 
     send_command('bind #1 input //send safiyeh /ja "Chaos Roll" <me>')
     send_command('bind #2 input //send safiyeh /ja "Samurai Roll" <me>')
-    send_command('bind #3 input //send safiyeh /ja "Corsair\'s Roll" <me>')
+    send_command('bind #3 input //send safiyeh /ja "Fighter\'s Roll" <me>')
     send_command('bind #4 input //send safiyeh /ja "Evoker\'s Roll" <me>')
     send_command('bind #5 input //send safiyeh /ja "Beast Roll" <me>')
     send_command('bind #6 input //send safiyeh /ja "Tactician\'s Roll" <me>')
@@ -42,6 +42,7 @@
     send_command('bind #x input //send safiyeh /ja "Fold" <me>')
 
     send_command('bind #- input //send safiyeh /follow <t>')
+    send_command('bind #= input //send safiyeh //setkey numpad7 down;wait 0.2;input //send safiyeh //setkey numpad7 up')
 
     send_command('bind #numpad7 input //send safiyeh /ma "Paralyna" <t>')
     send_command('bind #numpad8 input //send safiyeh /ma "Silena" <t>')
