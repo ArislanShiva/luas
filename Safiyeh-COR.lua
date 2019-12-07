@@ -122,20 +122,22 @@ function user_setup()
     state.CastingMode:options('Normal', 'Resistant')
     state.IdleMode:options('Normal', 'DT', 'Refresh')
 
-    state.WeaponSet = M{['description']='Weapon Set', 'Compensator', 'Holliday'}
+    state.WeaponSet = M{['description']='Weapon Set', 'Fomalhaut'}
     state.CP = M(false, "Capacity Points Mode")
     state.WeaponLock = M(false, 'Weapon Lock')
 
-    gear.RAbullet = "Eminent Bullet"
-    gear.WSbullet = "Eminent Bullet"
-    gear.MAbullet = "Eminent Bullet"
-    gear.QDbullet = "Eminent Bullet"
+    gear.RAbullet = "Chrono Bullet"
+    gear.WSbullet = "Chrono Bullet"
+    gear.MAbullet = "Chrono Bullet"
+    gear.QDbullet = "Chrono Bullet"
     options.ammo_warning_limit = 10
 
     -- Additional local binds
     include('Global-Binds.lua') -- OK to remove this line
 
-    send_command('lua l gearinfo')
+    if player.sub_job == 'NIN' or player.sub_job == 'DNC' then
+        send_command('lua l gearinfo')
+    end
 
     send_command('bind ^` input /ja "Double-up" <me>')
     send_command('bind ^c input /ja "Crooked Cards" <me>')
@@ -231,8 +233,9 @@ function user_unload()
     send_command('unbind #9')
     send_command('unbind #0')
 
-    send_command('lua u gearinfo')
-
+    if player.sub_job == 'NIN' or player.sub_job == 'DNC' then
+        send_command('lua u gearinfo')
+    end
 end
 
 -- Define sets and vars used by this job file.
@@ -253,7 +256,7 @@ function init_gear_sets()
         legs="Desultor Tassets",
         feet="Meg. Jam. +2", --3/0
         neck="Regal Necklace",
-        --ear1="Genmei Earring", --2/0
+        ear1="Genmei Earring", --2/0
         ear2="Etiolation Earring", --0/3
         ring1="Gelatinous Ring +1",
         ring2="Defending Ring", --10/10
@@ -345,7 +348,7 @@ function init_gear_sets()
     sets.precast.WS.Acc = set_combine(sets.precast.WS, {
         neck="Iskur Gorget",
         --ring2="Hajduk Ring +1",
-        --waist="Kwahu Kachina Belt",
+        --waist="K. Kachina Belt +1",
         })
 
     sets.precast.WS['Last Stand'] = sets.precast.WS
@@ -353,7 +356,7 @@ function init_gear_sets()
     sets.precast.WS['Last Stand'].Acc = set_combine(sets.precast.WS['Last Stand'], {
         ammo=gear.WSbullet,
         --ring2="Hajduk Ring +1",
-        --waist="Kwahu Kachina Belt",
+        --waist="K. Kachina Belt +1",
         })
 
     sets.precast.WS['Wildfire'] = {
@@ -513,7 +516,7 @@ function init_gear_sets()
         ear2="Digni. Earring",
         ring1={name="Stikini Ring", bag="wardrobe1"},
         ring2="Weather. Ring +1",
-        --waist="Kwahu Kachina Belt",
+        --waist="K. Kachina Belt +1",
         })
 
     sets.midcast.CorsairShot['Light Shot'] = sets.midcast.CorsairShot.Resistant
@@ -535,7 +538,7 @@ function init_gear_sets()
         ring1="Ilabrat Ring",
         ring2="Dingir Ring",
         back=gear.COR_RA_Cape,
-        --waist="Yemaya Belt",
+        waist="Yemaya Belt",
         }
 
     sets.midcast.RA.Acc = set_combine(sets.midcast.RA, {
@@ -546,7 +549,7 @@ function init_gear_sets()
     sets.midcast.RA.HighAcc = set_combine(sets.midcast.RA.Acc, {
         --legs="Laksa. Trews +3",
         --ring2="Hajduk Ring +1",
-        --waist="Kwahu Kachina Belt",
+        --waist="K. Kachina Belt +1",
         })
 
     sets.midcast.RA.Critical = set_combine(sets.midcast.RA, {
@@ -556,7 +559,7 @@ function init_gear_sets()
         legs="Mummu Kecks +2",
         feet="Mummu Gamash. +2",
         ring2="Mummu Ring",
-        --waist="Kwahu Kachina Belt",
+        --waist="K. Kachina Belt +1",
         })
 
     sets.midcast.RA.STP = set_combine(sets.midcast.RA, {
@@ -576,7 +579,7 @@ function init_gear_sets()
 
     sets.TripleShotCritical = {
         head="Meghanada Visor +2",
-        --waist="Kwahu Kachina Belt",
+        --waist="K. Kachina Belt +1",
         }
 
     ------------------------------------------------------------------------------------------------
@@ -950,8 +953,7 @@ function init_gear_sets()
     sets.CP = {back="Mecisto. Mantle"}
     --sets.Reive = {neck="Ygnas's Resolve +1"}
 
-    sets.Compensator = {ranged="Compensator"}
-    sets.Holliday = {ranged="Holliday"}
+    sets.Fomalhaut = {ranged="Fomalhaut"}
 
 end
 
@@ -1231,7 +1233,7 @@ windower.register_event('action',
                 elseif param == 846 then
                     --add_to_chat(122, 'Flurry Status: Flurry II')
                     flurry = 2
-                end
+              end
             end
         end
     end)
@@ -1286,11 +1288,11 @@ function gearinfo(cmdParams, eventArgs)
             if cmdParams[2] == 'false' then
                 DW_needed = 0
                 DW = false
-              end
+            end
         end
         if type(tonumber(cmdParams[3])) == 'number' then
-              if tonumber(cmdParams[3]) ~= Haste then
-                  Haste = tonumber(cmdParams[3])
+            if tonumber(cmdParams[3]) ~= Haste then
+                Haste = tonumber(cmdParams[3])
             end
         end
         if type(cmdParams[4]) == 'string' then

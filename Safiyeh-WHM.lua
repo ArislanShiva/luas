@@ -253,7 +253,7 @@ function init_gear_sets()
     sets.midcast.CureSolace = {
         main="Queller Rod", --15(+2)/(-15)
         sub="Sors Shield", --3/(-5)
-        ammo="Hydrocera",
+        ammo="Esper Stone +1", --0/(-5)
         head="Gende. Caubeen +1", --18/(-8)
         body="Ebers Bliaud +1",
         hands="Theophany Mitts +2", --(2)/(-6)
@@ -421,15 +421,18 @@ function init_gear_sets()
         feet="Ebers Duckbills +1"
         })
 
-    sets.midcast.Protect = set_combine(sets.midcast.EnhancingDuration, {ring1="Sheltered Ring"})
+    sets.midcast.Protect = set_combine(sets.midcast.ConserveMP, sets.midcast.EnhancingDuration, {
+        feet="Piety Duckbills +1",
+        ring1="Sheltered Ring",
+        })
+
     sets.midcast.Protectra = sets.midcast.Protect
     sets.midcast.Shell = sets.midcast.Protect
     sets.midcast.Shellra = sets.midcast.Protect
-    sets.midcast.ShellraV = set_combine(sets.midcast.Protect, {legs="Piety Pantaln. +1"})
 
     sets.midcast['Divine Magic'] = {
-        main="Grioavolr",
-        sub="Enki Strap",
+        main="Maxentius",
+        sub="Ammurapi Shield",
         ammo="Pemphredo Tathlum",
         head="Befouled Crown",
         body="Vanya Robe",
@@ -477,7 +480,7 @@ function init_gear_sets()
 
     -- Custom spell classes
     sets.midcast.MndEnfeebles = {
-        main=gear.Gada_ENF,
+        main="Maxentius",
         sub="Ammurapi Shield",
         ammo="Hydrocera",
         head="Theophany Cap +2",
@@ -496,7 +499,6 @@ function init_gear_sets()
 
     sets.midcast.IntEnfeebles = set_combine(sets.midcast.MndEnfeebles, {
         ammo="Pemphredo Tathlum",
-        --back="Aurist's Cape +1",
         waist="Yamabuki-no-Obi",
         })
 
@@ -549,7 +551,7 @@ function init_gear_sets()
         hands="Gende. Gages +1", --3/3
         legs="Aya. Cosciales +2", --6
         neck="Loricate Torque +1", --6/6
-        --ear1="Genmei Earring", --2/0
+        ear1="Genmei Earring", --2/0
         ring1="Gelatinous Ring +1", --7/(-1)
         ring2="Defending Ring", --10/10
         --back="Moonlight Cape", --6/6
@@ -643,9 +645,6 @@ function job_post_midcast(spell, action, spellMap, eventArgs)
                 equip(sets.midcast.Refresh)
             end
         end
-        if spell.name == 'Shellra V' then
-            equip(sets.midcast.ShellraV)
-        end
         if spellMap == "Regen" and state.RegenMode.value == 'Duration' then
             equip(sets.midcast.RegenDuration)
         end
@@ -724,13 +723,13 @@ function job_get_spell_map(spell, default_spell_map)
                     return "CureSolaceWeather"
                 else
                     return "CureSolace"
-                end
+              end
             else
                 if (world.weather_element == 'Light' or world.day_element == 'Light') then
                     return "CureWeather"
                 else
                     return "CureNormal"
-                end
+              end
             end
         elseif default_spell_map == 'Curaga' then
             if (world.weather_element == 'Light' or world.day_element == 'Light') then
