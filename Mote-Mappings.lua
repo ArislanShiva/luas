@@ -190,6 +190,12 @@ spell_maps = {
     ['Doton: Ni'] = 'ElementalNinjutsu',['Huton: Ni'] = 'ElementalNinjutsu',['Hyoton: Ni'] = 'ElementalNinjutsu',
     ['Katon: San'] = 'ElementalNinjutsu',['Suiton: San'] = 'ElementalNinjutsu',['Raiton: San'] = 'ElementalNinjutsu',
     ['Doton: San'] = 'ElementalNinjutsu',['Huton: San'] = 'ElementalNinjutsu',['Hyoton: San'] = 'ElementalNinjutsu',
+	['Kurayami: Ichi'] = 'EnfeeblingNinjutsu',['Kurayami: Ni'] = 'EnfeeblingNinjutsu',['Hojo: Ichi'] = 'EnfeeblingNinjutsu',
+	['Hojo: Ni'] = 'EnfeeblingNinjutsu',['Dokumori: Ichi'] = 'EnfeeblingNinjutsu',['Jubaku: Ichi'] = 'EnfeeblingNinjutsu',
+	['Aisha: Ichi'] = 'EnfeeblingNinjutsu',['Yurin: Ichi'] = 'EnfeeblingNinjutsu',
+	['Tonko: Ichi'] = 'EnhancingNinjutsu',['Tonko: Ni'] = 'EnhancingNinjutsu', ['Monomi: Ichi'] = 'EnhancingNinjutsu',
+	['Myoshu: Ichi'] = 'EnhancingNinjutsu',['Migawari: Ichi'] = 'EnhancingNinjutsu',['Gekka: Ichi'] = 'EnhancingNinjutsu',
+	['Yain: Ichi'] = 'EnhancingNinjutsu',['Kakka: Ichi'] = 'EnhancingNinjutsu',
     ['Banish']='Banish',['Banish II']='Banish',['Banish III']='Banish',['Banishga']='Banish',['Banishga II']='Banish',
     ['Holy']='Holy',['Holy II']='Holy',['Drain']='Drain',['Drain II']='Drain',['Drain III']='Drain',['Aspir']='Aspir',['Aspir II']='Aspir',['Aspir III']='Aspir',
     ['Absorb-Str']='Absorb',['Absorb-Dex']='Absorb',['Absorb-Vit']='Absorb',['Absorb-Agi']='Absorb',['Absorb-Int']='Absorb',['Absorb-Mnd']='Absorb',['Absorb-Chr']='Absorb',
@@ -248,7 +254,8 @@ areas.Cities = S{
     "Eastern Adoulin",
     "Western Adoulin",
     "Kazham",
-    "Rabao"
+    "Rabao",
+    "Chocobo Circuit",
 }
 -- Adoulin areas, where Ionis will grant special stat bonuses.
 areas.Adoulin = S{
