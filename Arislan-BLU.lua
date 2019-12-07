@@ -645,9 +645,9 @@ function init_gear_sets()
         ammo="Pemphredo Tathlum",
         head="Assim. Keffiyeh +2",
         body="Amalric Doublet +1",
-        hands="Aya. Manopolas +2",
+        hands="Malignance Gloves",
         legs="Assim. Shalwar +3",
-        feet="Aya. Gambieras +2",
+        feet="Malignance Boots",
         neck="Mirage Stole +2",
         ear1="Digni. Earring",
         ear2="Regal Earring",
@@ -655,16 +655,17 @@ function init_gear_sets()
         ring2={name="Stikini Ring +1", bag="wardrobe4"},
         back=gear.BLU_MAB_Cape,
         waist="Luminary Sash",
+		head="Volte Cap", hands=gear.Herc_TH_hands, waist="Chaac Belt",
         }
 
     sets.midcast['Blue Magic'].Breath = set_combine(sets.midcast['Blue Magic'].Magical, {head="Luh. Keffiyeh +3"})
 
     sets.midcast['Blue Magic'].StunPhysical = set_combine(sets.midcast['Blue Magic'].MagicAccuracy, {
-        head="Aya. Zucchetto +2",
-        body="Ayanmo Corazza +2",
-        hands="Aya. Manopolas +2",
-        legs="Aya. Cosciales +2",
-        feet="Aya. Gambieras +2",
+        head="Malignance Chapeau",
+        body="Malignance Tabard",
+        hands="Malignance Gloves",
+        legs="Malignance Tights",
+        feet="Malignance Boots",
         neck="Mirage Stole +2",
         ear2="Mache Earring +1",
         back=gear.BLU_TP_Cape,
@@ -685,7 +686,7 @@ function init_gear_sets()
         ear2="Regal Earring",
         ring1="Lebeche Ring", -- 3
         ring2={name="Stikini Ring +1", bag="wardrobe4"},
-        back="Aurist's Cape +1",
+        back="Oretan. Cape +1", --6
         waist="Luminary Sash",
         }
 
@@ -780,35 +781,30 @@ function init_gear_sets()
 
     sets.idle = {
         ammo="Staunch Tathlum +1",
-        head=gear.Herc_Idle_head,
+        head="Malignance Chapeau",
         body="Jhakri Robe +2",
-        hands=gear.Herc_DT_hands,
+        hands="Malignance Gloves",
         legs="Carmine Cuisses +1",
-        feet="Ahosi Leggings",
-        neck="Mirage Stole +2",
---        neck="Bathy Choker +1",
-        ear1="Sanare Earring",
-        ear2="Infused Earring",
+        feet="Malignance Boots",
+        neck="Bathy Choker +1",
+        ear1="Eabani Earring",
+        ear2="Sanare Earring",
         ring1={name="Stikini Ring +1", bag="wardrobe3"},
         ring2={name="Stikini Ring +1", bag="wardrobe4"},
         back="Moonlight Cape",
-        waist="Flume Belt +1",
+        waist="Carrier's Sash",
         }
 
     sets.idle.DT = set_combine(sets.idle, {
         ammo="Staunch Tathlum +1", --3/3
-        head="Volte Cap",
-        body="Ayanmo Corazza +2", --6/6
-        hands=gear.Herc_DT_hands, --7/5
-        feet="Ahosi Leggings", --4/0
-        neck="Mirage Stole +2",
---        neck="Loricate Torque +1", --6/6
-        ear1="Genmei Earring", --2/0
-        ear2="Etiolation Earring", --0/3
-        ring1="Gelatinous Ring +1", --7/(-1)
+        head="Malignance Chapeau", --6/6
+        body="Malignance Tabard", --9/9
+        hands="Malignance Gloves", --5/5
+        legs="Malignance Tights", --7/7
+        feet="Malignance Boots", --4/4
+        neck="Warder's Charm +1",
         ring2="Defending Ring", --10/10
         back="Moonlight Cape", --6/6
-        waist="Flume Belt +1", --4/0
         })
 
     sets.idle.Town = set_combine(sets.idle, {
@@ -1135,10 +1131,11 @@ function init_gear_sets()
     ------------------------------------------------------------------------------------------------
 
     sets.engaged.Hybrid = {
-        ammo="Staunch Tathlum +1", --3/3
-        head=gear.Adhemar_D_head, --4/0
-        body="Ayanmo Corazza +2", --6/6
-        neck="Loricate Torque +1", --6/6
+        head="Malignance Chapeau", --6/6
+        body="Malignance Tabard", --9/9
+        hands="Malignance Gloves", --5/5
+        legs="Malignance Tights", --7/7
+        feet="Malignance Boots", --4/4
         ring2="Defending Ring", --10/10
         }
 

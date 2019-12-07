@@ -264,10 +264,10 @@ function init_gear_sets()
 
     sets.precast.CorsairRoll = {
         head="Lanun Tricorne +3",
-        body="Meg. Cuirie +2", --8/0
+        body="Malignance Tabard", --9/9
         hands="Chasseur's Gants +1",
         legs="Desultor Tassets",
-        feet="Lanun Bottes +3", --6/0
+        feet="Malignance Boots", --4/0
         neck="Regal Necklace",
         ear1="Genmei Earring", --2/0
         ear2="Etiolation Earring", --0/3
@@ -358,23 +358,21 @@ function init_gear_sets()
         }
 
     sets.precast.WS.Acc = set_combine(sets.precast.WS, {
-        legs=gear.Adhemar_C_legs,
         feet=gear.Herc_RA_feet,
         ear2="Telos Earring",
         neck="Iskur Gorget",
         ring2="Hajduk Ring +1",
-        waist="Kwahu Kachina Belt",
+        waist="K. Kachina Belt +1",
         })
 
     sets.precast.WS['Last Stand'] = sets.precast.WS
 
     sets.precast.WS['Last Stand'].Acc = set_combine(sets.precast.WS['Last Stand'], {
-        legs=gear.Adhemar_C_legs,
         feet=gear.Herc_RA_feet,
         neck="Iskur Gorget",
         ear2="Telos Earring",
         ring2="Hajduk Ring +1",
-        waist="Kwahu Kachina Belt",
+        waist="K. Kachina Belt +1",
         })
 
     sets.precast.WS['Wildfire'] = {
@@ -514,11 +512,11 @@ function init_gear_sets()
 
     sets.midcast.CorsairShot.STP = {
         ammo=gear.QDbullet,
-        head=gear.Herc_MAB_head,
-        body="Mummu Jacket +2",
-        hands="Schutzen Mittens",
-        legs="Chas. Culottes +1",
-        feet="Carmine Greaves +1",
+        head="Malignance Chapeau",
+        body="Malignance Tabard",
+        hands="Malignance Gloves",
+        legs="Malignance Tights",
+        feet="Malignance Boots",
         neck="Iskur Gorget",
         ear1="Dedition Earring",
         ear2="Telos Earring",
@@ -530,9 +528,9 @@ function init_gear_sets()
 
     sets.midcast.CorsairShot.Resistant = set_combine(sets.midcast.CorsairShot, {
         head="Laksa. Tricorne +3",
-        body="Mummu Jacket +2",
+        body="Malignance Tabard",
         hands="Laksa. Gants +3",
-        legs="Mummu Kecks +2",
+        legs="Malignance Tights",
         feet="Laksa. Boots +3",
         neck="Comm. Charm +1",
         ear1="Hermetic Earring",
@@ -540,7 +538,7 @@ function init_gear_sets()
         ring1="Regal Ring",
         ring2="Weather. Ring +1",
         back=gear.COR_WS1_Cape,
-        waist="Kwahu Kachina Belt",
+        waist="K. Kachina Belt +1",
         })
 
     sets.midcast.CorsairShot['Light Shot'] = sets.midcast.CorsairShot.Resistant
@@ -550,11 +548,11 @@ function init_gear_sets()
     -- Ranged gear
     sets.midcast.RA = {
         ammo=gear.RAbullet,
-        head="Lanun Tricorne +3",
-        body="Oshosi Vest +1",
-        hands=gear.Adhemar_C_hands,
-        legs=gear.Adhemar_C_legs,
-        feet="Meg. Jam. +2",
+        head="Malignance Chapeau",
+        body="Malignance Tabard",
+        hands="Malignance Gloves",
+        legs="Malignance Tights",
+        feet="Malignance Boots",
         neck="Iskur Gorget",
         ear1="Enervating Earring",
         ear2="Telos Earring",
@@ -566,15 +564,13 @@ function init_gear_sets()
 
     sets.midcast.RA.Acc = set_combine(sets.midcast.RA, {
         head="Meghanada Visor +2",
-        hands="Lanun Gants +3",
         ring2="Hajduk Ring +1",
         })
 
     sets.midcast.RA.HighAcc = set_combine(sets.midcast.RA.Acc, {
-        body="Laksa. Frac +3",
         legs="Laksa. Trews +3",
         ring1="Regal Ring",
-        waist="Kwahu Kachina Belt",
+        waist="K. Kachina Belt +1",
         })
 
     sets.midcast.RA.Critical = set_combine(sets.midcast.RA, {
@@ -585,7 +581,7 @@ function init_gear_sets()
         feet="Osh. Leggings +1",
         ring1="Begrudging Ring",
         ring2="Mummu Ring",
-        waist="Kwahu Kachina Belt",
+        waist="K. Kachina Belt +1",
         })
 
     sets.midcast.RA.STP = set_combine(sets.midcast.RA, {
@@ -605,7 +601,7 @@ function init_gear_sets()
 
     sets.TripleShotCritical = {
         head="Meghanada Visor +2",
-        waist="Kwahu Kachina Belt",
+        waist="K. Kachina Belt +1",
         }
 
 
@@ -617,31 +613,29 @@ function init_gear_sets()
 
     sets.idle = {
         ammo=gear.MAbullet,
-        head="Volte Cap",
-        body="Oshosi Vest +1",
-        hands="Oshosi Gloves +1",
+        head="Malignance Chapeau",
+        body="Malignance Tabard",
+        hands="Malignance Gloves",
         legs="Carmine Cuisses +1",
-        feet="Osh. Leggings +1",
+        feet="Malignance Boots",
         neck="Bathy Choker +1",
-        ear1="Genmei Earring",
-        ear2="Infused Earring",
+        ear1="Sanare Earring",
+        ear2="Eabani Earring",
         ring1={name="Chirich Ring +1", bag="wardrobe3"},
         ring2={name="Chirich Ring +1", bag="wardrobe4"},
-        back="Moonlight Cape",
-        waist="Flume Belt +1",
+        back=gear.COR_SNP_Cape,
+        waist="Carrier's Sash",
         }
 
     sets.idle.DT = set_combine(sets.idle, {
-        head="Meghanada Visor +2", --5/0
-        body="Lanun Frac +3", --6/0
-        hands=gear.Herc_DT_hands, --7/5
-        feet="Osh. Leggings +1", --3
-        --neck="Loricate Torque +1", --6/6
-        ear1="Genmei Earring", --2/0
-        ear2="Etiolation Earring", --0/3
+        head="Malignance Chapeau", --6/6
+        body="Malignance Tabard", --9/9
+        hands="Malignance Gloves", --5/5
+        legs="Malignance Tights", --7/7
+        feet="Malignance Boots", --4/4
+        neck="Warder's Charm +1",
         ring2="Defending Ring", --10/10
         back="Moonlight Cape", --6/6
-        waist="Flume Belt +1", --4/0
         })
 
     sets.idle.Refresh = set_combine(sets.idle, {
@@ -654,12 +648,13 @@ function init_gear_sets()
 
     sets.idle.Town = set_combine(sets.idle, {
         head="Oshosi Mask +1",
+        body="Oshosi Vest +1",
+        hands="Oshosi Gloves +1",
         feet="Lanun Bottes +3",
         neck="Comm. Charm +1",
         ear1="Suppanomimi",
         ear2="Telos Earring",
-        back=gear.COR_WS1_Cape,
-        waist="Windbuffet Belt +1",
+        waist="K. Kachina Belt +1",
         })
 
 
@@ -670,14 +665,14 @@ function init_gear_sets()
     sets.defense.PDT = sets.idle.DT
 
     sets.defense.MDT = {
-		head="Volte Cap",
-        body="Oshosi Vest +1",
-        hands="Oshosi Gloves +1",
-        legs="Osh. Trousers +1",
-        feet="Osh. Leggings +1",
+        head="Malignance Chapeau", --6/6
+        body="Malignance Tabard", --9/9
+        hands="Malignance Gloves", --5/5
+        legs="Malignance Tights", --7/7
+        feet="Malignance Boots", --4/4
         neck="Warder's Charm +1",
         ear1="Sanare Earring",
-        ear2="Etiolation Earring", --0/3
+        ear2="Eabani Earring",
         ring1="Gelatinous Ring +1", --7/(-1)
         ring2="Defending Ring", --10/10
         back=gear.COR_SNP_Cape,
@@ -1040,11 +1035,11 @@ function init_gear_sets()
 
     sets.TreasureHunter = {head="Volte Cap", hands=gear.Herc_TH_hands, waist="Chaac Belt"}
 
-    sets.LeadenMelee = {main="Rostam", sub="Lanun Knife", ranged="Death Penalty"}
+	sets.LeadenMelee = {main="Rostam", sub="Tauret", ranged="Death Penalty"}
     sets.LeadenRanged = {main="Lanun Knife", sub="Tauret", ranged="Death Penalty"}
-    sets.LastStandMelee = {main="Lanun Knife", sub="Blurred Knife +1", ranged="Fomalhaut"}
+    sets.LastStandMelee = {main="Rostam", sub="Blurred Knife +1", ranged="Fomalhaut"}
     sets.LastStandRanged = {main="Lanun Knife", sub="Nusku Shield", ranged="Fomalhaut"}
-    sets.SavageMelee = {main="Naegling", sub="Lanun Knife", ranged="Ataktos"}
+    sets.SavageMelee = {main="Naegling", sub="Blurred Knife +1", ranged="Fomalhaut"}
 
 end
 

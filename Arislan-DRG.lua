@@ -377,6 +377,9 @@ function init_gear_sets()
         body=gear.Acro_Pet_body,
         hands=gear.Acro_Pet_hands,
         neck="Lancer's Torque",
+        ear1="Enmerkar Earring",
+        ear2="Dragoon's Earring",
+        ring1="C. Palug Ring",
         back="Updraft Mantle",
         waist="Glassblower's Belt",
         }
@@ -393,8 +396,8 @@ function init_gear_sets()
         legs="Carmine Cuisses +1",
         feet="Ptero. Greaves +3",
         neck="Bathy Choker +1",
-        ear1="Sanare Earring",
-        ear2="Infused Earring",
+        ear1="Eabani Earring",
+        ear2="Sanare Earring",
         ring1={name="Chirich Ring +1", bag="wardrobe3"},
         ring2={name="Chirich Ring +1", bag="wardrobe4"},
         back="Moonlight Cape", --6/6
@@ -410,7 +413,7 @@ function init_gear_sets()
         neck="Loricate Torque +1", --6/6
         ear1="Sanare Earring",
         ear2="Anastasi Earring",
-        ring1="Moonlight Ring", --5/5
+        ring1="-light Ring", --5/5
         ring2="Defending Ring", --10/10
         waist="Carrier's Sash",
         })

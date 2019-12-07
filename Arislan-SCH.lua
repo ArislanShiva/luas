@@ -206,7 +206,7 @@ function init_gear_sets()
         legs="Psycloth Lappas", --7
         feet="Peda. Loafers +3", --8
         neck="Orunmila's Torque", --5
-        ear1="Loquacious Earring", --2
+        ear1="Malignance Earring", --4
         ear2="Enchntr. Earring +1", --2
         ring1="Kishar Ring", --4
         ring2="Weather. Ring +1", --5/(3)
@@ -226,6 +226,7 @@ function init_gear_sets()
 
     sets.precast.FC.Curaga = sets.precast.FC.Cure
     sets.precast.FC.Impact = set_combine(sets.precast.FC, {head=empty, body="Twilight Cloak"})
+    sets.precast.FC.Dispelga = set_combine(sets.precast.FC, {main="Daybreak", sub="Ammurapi Shield"})
     sets.precast.Storm = set_combine(sets.precast.FC, {ring2={name="Stikini Ring +1", bag="wardrobe4"},})
 
 
@@ -255,7 +256,7 @@ function init_gear_sets()
         body="Peda. Gown +3",
         legs="Peda. Pants +3",
         feet="Merlinic Crackows",
-        ear1="Barkaro. Earring",
+        ear1="Malignance Earring",
         ear2="Regal Earring",
         ring2="Archon Ring",
         back=gear.SCH_MAB_Cape,
@@ -433,7 +434,7 @@ function init_gear_sets()
         legs="Acad. Pants +3",
         feet="Acad. Loafers +3",
         neck="Argute Stole +1",
-        ear1="Digni. Earring",
+        ear1="Malignance Earring",
         ear2="Regal Earring",
         ring1="Kishar Ring",
         ring2={name="Stikini Ring +1", bag="wardrobe4"},
@@ -445,11 +446,11 @@ function init_gear_sets()
         main="Maxentius",
         sub="Ammurapi Shield",
         legs="Chironic Hose",
-        ear1="Barkaro. Earring",
         back=gear.SCH_MAB_Cape,
         })
 
-    sets.midcast.ElementalEnfeeble = sets.midcast.IntEnfeebles
+    sets.midcast.ElementalEnfeeble = sets.midcast.Enfeebles
+    sets.midcast.Dispelga = set_combine(sets.midcast.IntEnfeebles, {main="Daybreak", sub="Ammurapi Shield"})
 
     sets.midcast['Dark Magic'] = {
         main="Rubicundity",
@@ -461,7 +462,7 @@ function init_gear_sets()
         legs="Peda. Pants +3",
         feet="Acad. Loafers +3",
         neck="Argute Stole +1",
-        ear1="Barkaro. Earring",
+        ear1="Malignance Earring",
         ear2="Regal Earring",
         ring1={name="Stikini Ring +1", bag="wardrobe3"},
         ring2={name="Stikini Ring +1", bag="wardrobe4"},
@@ -479,7 +480,7 @@ function init_gear_sets()
         legs="Mallquis Trews +2", --5
         feet="Merlinic Crackows", --11
         neck="Argute Stole +1", --8
-        ear1="Barkaro. Earring",
+        ear1="Malignance Earring",
         ear2="Regal Earring",
         ring1="Freke Ring",
         ring2="Archon Ring",
@@ -512,7 +513,7 @@ function init_gear_sets()
         legs="Amalric Slops +1",
         feet="Amalric Nails +1",
         neck="Baetyl Pendant",
-        ear1="Barkaro. Earring",
+        ear1="Malignance Earring",
         ear2="Regal Earring",
         ring1="Freke Ring",
         ring2="Shiva Ring +1",
@@ -618,7 +619,7 @@ function init_gear_sets()
         hands="Amalric Gages +1",
         legs="Peda. Pants +3",
         neck="Argute Stole +1",
-        ear1="Barkaro. Earring",
+        ear1="Malignance Earring",
         ear2="Regal Earring",
         back=gear.SCH_MAB_Cape,
         })
@@ -654,6 +655,7 @@ function init_gear_sets()
         ring1="Hetairoi Ring",
         ring2={name="Chirich Ring +1", bag="wardrobe4"},
         back="Relucent Cape",
+        head="Volte Cap", feet="Volte Boots", waist="Chaac Belt" --TH
         }
 
     ------------------------------------------------------------------------------------------------

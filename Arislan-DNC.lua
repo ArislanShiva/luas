@@ -113,7 +113,7 @@ function user_setup()
 
     -- Additional local binds
     include('Global-Binds.lua') -- OK to remove this line
-    include('Global-GEO-Binds.lua') -- OK to remove this line
+    include('Global-WHM-Binds.lua') -- OK to remove this line
 
     send_command('lua l gearinfo')
 
@@ -266,7 +266,7 @@ function init_gear_sets()
     sets.precast.Jig = {legs="Horos Tights +3", feet="Maxixi Toeshoes +3"}
 
     sets.precast.Step = {
-        ammo="Yamarang",
+        ammo="C. Palug Stone",
         head="Maxixi Tiara +3",
         body="Maxixi Casaque +3",
         hands="Maxixi Bangles +3",
@@ -363,7 +363,7 @@ function init_gear_sets()
         } -- default set
 
     sets.precast.WS.Acc = set_combine(sets.precast.WS, {
-        ammo="Falcon Eye",
+        ammo="C. Palug Stone",
         head="Dampening Tam",
         legs="Meg. Chausses +2",
         feet="Meg. Jam. +2",
@@ -384,7 +384,7 @@ function init_gear_sets()
         })
 
     sets.precast.WS['Exenterator'].Acc = set_combine(sets.precast.WS['Exenterator'], {
-        ammo="Falcon Eye",
+        ammo="C. Palug Stone",
         head="Dampening Tam",
         body="Horos Casaque +3",
         ear2="Telos Earring",
@@ -399,12 +399,13 @@ function init_gear_sets()
         feet=gear.Herc_TA_feet,
         ear1="Sherida Earring",
         ear2="Mache Earring +1",
+        ring1="Gere Ring",
         ring2="Epona's Ring",
         back=gear.DNC_WS2_Cape,
         })
 
     sets.precast.WS['Pyrrhic Kleos'].Acc = set_combine(sets.precast.WS['Pyrrhic Kleos'], {
-        ammo="Falcon Eye",
+        ammo="C. Palug Stone",
         head="Dampening Tam",
         hands=gear.Adhemar_B_hands,
         legs=gear.Herc_WS_legs,
@@ -421,12 +422,13 @@ function init_gear_sets()
         feet=gear.Herc_STP_feet,
         ear1="Sherida Earring",
         ear2="Mache Earring +1",
+        ring1="Begrudging Ring",
         ring2="Mummu Ring",
         back=gear.DNC_WS3_Cape,
         })
 
     sets.precast.WS['Evisceration'].Acc = set_combine(sets.precast.WS['Evisceration'], {
-        ammo="Falcon Eye",
+        ammo="C. Palug Stone",
         head="Dampening Tam",
         body="Horos Casaque +3",
         legs="Meg. Chausses +2",
@@ -442,7 +444,7 @@ function init_gear_sets()
         })
 
     sets.precast.WS['Rudra\'s Storm'].Acc = set_combine(sets.precast.WS['Rudra\'s Storm'], {
-        ammo="Falcon Eye",
+        ammo="C. Palug Stone",
         legs=gear.Herc_WS_legs,
         feet=gear.Herc_STP_feet,
         ear2="Telos Earring",
@@ -492,32 +494,31 @@ function init_gear_sets()
     sets.idle = {
         ammo="Staunch Tathlum +1",
         head="Turms Cap +1",
-        body="Ashera Harness",
+        body="Malignance Tabard",
         hands="Turms Mittens +1",
-        legs="Mummu Kecks +2",
+        legs="Malignance Tights",
         feet="Skd. Jambeaux +1",
         neck="Bathy Choker +1",
-        ear1="Sanare Earring",
-        ear2="Infused Earring",
+        ear1="Eabani Earring",
+        ear2="Sanare Earring",
         ring1={name="Chirich Ring +1", bag="wardrobe3"},
         ring2={name="Chirich Ring +1", bag="wardrobe4"},
         back="Moonlight Cape",
-        waist="Flume Belt +1",
+        waist="Engraved Belt",
         }
 
     sets.idle.DT = set_combine(sets.idle, {
         ammo="Staunch Tathlum +1", --3/3
-        head="Turms Cap +1",
-        body="Ashera Harness", --7/7
-        hands="Turms Mittens +1",
-        legs="Mummu Kecks +2", --5/5
-        feet="Turms Leggings +1",
-        neck="Loricate Torque +1", --6/6
+        head="Malignance Chapeau", --6/6
+        body="Malignance Tabard", --9/9
+        hands="Malignance Gloves", --5/5
+        legs="Malignance Tights", --7/7
+        feet="Malignance Boots", --4/4
+        neck="Warder's Charm +1",
         ear1="Sanare Earring",
-        ring1="Gelatinous Ring +1", --7/(-1)
+        ring1="Moonlight Ring", --5/5
         ring2="Defending Ring", --10/10
-        back=gear.DNC_TP_Cape, --10/0
-        waist="Flume Belt +1", --4/0
+        back="Moonlight Cape", --6/6
         })
 
     sets.idle.Town = set_combine(sets.idle, {
@@ -565,7 +566,7 @@ function init_gear_sets()
         neck="Etoile Gorget +1",
         ear1="Cessance Earring",
         ear2="Brutal Earring",
-        ring1="Hetairoi Ring",
+        ring1="Gere Ring",
         ring2="Epona's Ring",
         back=gear.DNC_TP_Cape,
         waist="Windbuffet Belt +1",
@@ -576,7 +577,7 @@ function init_gear_sets()
         })
 
     sets.engaged.MidAcc = set_combine(sets.engaged.LowAcc, {
-        ammo="Falcon Eye",
+        ammo="C. Palug Stone",
         ear2="Telos Earring",
         ring1={name="Chirich Ring +1", bag="wardrobe3"},
         ring2="Ilabrat Ring",
@@ -613,7 +614,7 @@ function init_gear_sets()
         neck="Charis Necklace", --5
         ear1="Eabani Earring", --4
         ear2="Suppanomimi", --5
-        ring1="Hetairoi Ring",
+        ring1="Gere Ring",
         ring2="Epona's Ring",
         back=gear.DNC_TP_Cape,
         waist="Reiki Yotai", --7
@@ -656,7 +657,7 @@ function init_gear_sets()
         neck="Charis Necklace", --5
         ear1="Eabani Earring", --4
         ear2="Suppanomimi", --5
-        ring1="Hetairoi Ring",
+        ring1="Gere Ring",
         ring2="Epona's Ring",
         back=gear.DNC_TP_Cape,
         waist="Reiki Yotai", --7
@@ -700,7 +701,7 @@ function init_gear_sets()
         neck="Etoile Gorget +1",
         ear1="Eabani Earring", --4
         ear2="Suppanomimi", --5
-        ring1="Hetairoi Ring",
+        ring1="Gere Ring",
         ring2="Epona's Ring",
         back=gear.DNC_TP_Cape,
         waist="Reiki Yotai", --7
@@ -744,7 +745,7 @@ function init_gear_sets()
         neck="Etoile Gorget +1",
         ear1="Eabani Earring", --4
         ear2="Brutal Earring",
-        ring1="Hetairoi Ring",
+        ring1="Gere Ring",
         ring2="Epona's Ring",
         back=gear.DNC_TP_Cape,
         waist="Windbuffet Belt +1",
@@ -789,7 +790,7 @@ function init_gear_sets()
         neck="Etoile Gorget +1",
         ear1="Sherida Earring",
         ear2="Brutal Earring",
-        ring1="Hetairoi Ring",
+        ring1="Gere Ring",
         ring2="Epona's Ring",
         back=gear.DNC_TP_Cape,
         waist="Windbuffet Belt +1",

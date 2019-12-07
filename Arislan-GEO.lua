@@ -154,6 +154,7 @@ function init_gear_sets()
 
     sets.precast.FC.Curaga = sets.precast.FC.Cure
     sets.precast.FC.Impact = set_combine(sets.precast.FC, {head=empty, body="Twilight Cloak"})
+    sets.precast.FC.Dispelga = set_combine(sets.precast.FC, {main="Daybreak", sub="Ammurapi Shield"})
 
 
     -- Weaponskill sets
@@ -326,7 +327,7 @@ function init_gear_sets()
         ear2="Regal Earring",
         ring1={name="Stikini Ring +1", bag="wardrobe3"},
         ring2={name="Stikini Ring +1", bag="wardrobe4"},
-        back="Aurist's Cape +1",
+        --back="Aurist's Cape +1",
         waist="Luminary Sash",
         } -- MND/Magic accuracy
 
@@ -336,6 +337,8 @@ function init_gear_sets()
         body="Amalric Doublet +1",
         back="Nantosuelta's Cape",
         }) -- INT/Magic accuracy
+
+    sets.midcast.Dispelga = set_combine(sets.midcast.IntEnfeebles, {main="Daybreak", sub="Ammurapi Shield"})
 
     sets.midcast['Dark Magic'] = {
         main="Rubicundity",
@@ -393,7 +396,7 @@ function init_gear_sets()
         legs="Merlinic Shalwar",
         feet="Merlinic Crackows",
         neck="Erra Pendant",
-        back="Aurist's Cape +1",
+        --back="Aurist's Cape +1",
         waist="Yamabuki-no-Obi",
         })
 
@@ -563,11 +566,11 @@ function init_gear_sets()
     --------------------------------------
 
     sets.magic_burst = {
-        body=gear.Merl_MB_body, --10
+        head="Ea Hat +1", --7/(7)
+        body="Ea Houppe. +1", --9/(9)
         hands="Amalric Gages +1", --(6)
-        legs="Merlinic Shalwar", --2
+        legs="Ea Slops +1", --8/(8)
         feet="Merlinic Crackows", --11
-        neck="Mizu. Kubikazari", --10
         ring2="Mujin Band", --(5)
         back="Seshaw Cape", --5
         }

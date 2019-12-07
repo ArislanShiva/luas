@@ -40,8 +40,7 @@ function define_global_sets()
     gear.Adhemar_B_hands = {name="Adhemar Wrist. +1", augments={'STR+12','DEX+12','Attack+20',}}
     gear.Adhemar_C_hands = {name="Adhemar Wrist. +1", augments={'AGI+12','Rng.Acc.+20','Rng.Atk.+20',}}
 
-    gear.Adhemar_C_legs = {name="Adhemar Kecks +1", augments={'AGI+12','Rng.Acc.+20','Rng.Atk.+20',}}
-    gear.Adhemar_D_legs = {name="Adhemar Kecks", augments={'AGI+10','"Rapid Shot"+10','Enmity-5',}}
+    gear.Adhemar_D_legs = {name="Adhemar Kecks +1", augments={'AGI+12','"Rapid Shot"+13','Enmity-6',}}
 
     gear.Adhemar_D_feet = {name="Adhe. Gamashes +1", augments={'HP+65','"Store TP"+7','"Snapshot"+10',}}
 
@@ -77,7 +76,7 @@ function define_global_sets()
 
     -- Merlinic
     gear.Merl_FC_body = {name="Merlinic Jubbah", augments={'"Mag.Atk.Bns."+13','"Fast Cast"+7',}}
-    gear.Merl_MB_body = {name="Merlinic Jubbah", augments={'Mag. Acc.+21 "Mag.Atk.Bns."+21','Magic burst dmg.+10%','CHR+4','"Mag.Atk.Bns."+11',}}
+    gear.Merl_MB_body = {name="Merlinic Jubbah", augments={'Mag. Acc.+25 "Mag.Atk.Bns."+25','Magic burst dmg.+10%','VIT+5','"Mag.Atk.Bns."+12',}}
 
     -- Taeon
     gear.Taeon_DW_feet = {name="Taeon Boots", augments={'Accuracy+20 Attack+20','"Dual Wield"+5','STR+7 DEX+7',}}
@@ -199,16 +198,16 @@ end
 
 
 
-laggy_zones = S{'Al Zahbi', 'Aht Urhgan Whitegate', 'Eastern Adoulin', 'Mhaura', 'Nashmau', 'Western Adoulin'}
+laggy_zones = S{'Al Zahbi', 'Aht Urhgan Whitegate', 'Eastern Adoulin', 'Mhaura', 'Nashmau', 'Selbina', 'Western Adoulin'}
 
 windower.register_event('zone change', 
     function()
       -- Caps FPS to 30 via Config addon in certain problem zones
-        if laggy_zones:contains(world.zone) then
+        --[[if laggy_zones:contains(world.zone) then
             send_command('config FrameRateDivisor 2')
         else
             send_command('config FrameRateDivisor 1')
-        end
+        end]]--
 
         -- Auto load Omen add-on
         if world.zone == 'Reisenjima Henge' then

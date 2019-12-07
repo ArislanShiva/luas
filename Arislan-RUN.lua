@@ -112,7 +112,7 @@ function user_setup()
 
     -- Additional local binds
     include('Global-Binds.lua') -- OK to remove this line
-    include('Global-GEO-Binds.lua') -- OK to remove this line
+    include('Global-WHM-Binds.lua') -- OK to remove this line
 
     send_command('bind ^` input //gs c rune')
     send_command('bind !` input /ja "Vivacious Pulse" <me>')
@@ -505,7 +505,7 @@ function init_gear_sets()
         sub="Refined Grip +1",
         })
 
-    sets.midcast['Regen'] = set_combine(sets.midcast['Enhancing Magic'], {head="Rune. Bandeau +3"})
+    sets.midcast['Regen'] = set_combine(sets.midcast['Enhancing Magic'], {head="Rune. Bandeau +3", neck="Sacro Gorget"})
     sets.midcast.Refresh = set_combine(sets.midcast.EnhancingDuration, {head="Erilaz Galea +1", waist="Gishdubar Sash"})
     sets.midcast.Stoneskin = set_combine(sets.midcast['Enhancing Magic'], {waist="Siegel Sash"})
     sets.midcast.Protect = set_combine(sets.midcast['Enhancing Magic'], {ring2="Sheltered Ring"})
@@ -543,7 +543,7 @@ function init_gear_sets()
         legs="Carmine Cuisses +1",
         feet="Turms Leggings +1",
         neck="Bathy Choker +1",
-        ear1="Infused Earring",
+        ear1="Sanare Earring",
         ear2="Odnowa Earring +1",
         ring1={name="Stikini Ring +1", bag="wardrobe3"},
         ring2={name="Stikini Ring +1", bag="wardrobe4"},
@@ -677,6 +677,7 @@ function init_gear_sets()
         })
 
     sets.engaged.HighAcc = set_combine(sets.engaged.MidAcc, {
+        ammo="C. Palug Stone",
         head="Carmine Mask +1",
         body="Runeist's Coat +3",
         hands="Runeist's Mitons +3",

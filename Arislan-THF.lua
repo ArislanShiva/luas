@@ -210,10 +210,9 @@ function init_gear_sets()
         ammo="Yetshila +1",
         head="Pill. Bonnet +3",
         body="Pillager's Vest +3",
-        hands="Pillager's Armlets +1",
-        legs="Pill. Culottes +3",
+        hands="Malignance Gloves",
+        legs="Malignance Tights",
         feet="Meg. Jam. +2",
-        ear2="Infused Earring",
         ring1="Regal Ring",
         ring2="Ilabrat Ring",
         back=gear.THF_TP_Cape,
@@ -231,11 +230,11 @@ function init_gear_sets()
     ------------------------------------------------------------------------------------------------
 
     -- Precast sets to enhance JAs
-    sets.precast.JA['Collaborator'] = {head="Skulker's Bonnet +1"}
+    sets.precast.JA['Collaborator'] = set_combine(sets.TreasureHunter, {head="Skulker's Bonnet +1"})
     sets.precast.JA['Accomplice'] = {head="Skulker's Bonnet +1"}
     sets.precast.JA['Flee'] = {feet="Pill. Poulaines +3"}
     sets.precast.JA['Hide'] = {body="Pillager's Vest +3"}
-    sets.precast.JA['Conspirator'] = {body="Skulker's Vest +1"}
+    sets.precast.JA['Conspirator'] = set_combine(sets.TreasureHunter, {body="Skulker's Vest +1"})
 
     sets.precast.JA['Steal'] = {
         ammo="Barathrum", --3
@@ -246,7 +245,7 @@ function init_gear_sets()
 
     sets.precast.JA['Despoil'] = {ammo="Barathrum", legs="Skulk. Culottes +1", feet="Skulk. Poulaines +1"}
     sets.precast.JA['Perfect Dodge'] = {hands="Plun. Armlets +3"}
-    sets.precast.JA['Feint'] = {legs="Plunderer's Culottes +1"}
+    sets.precast.JA['Feint'] = {legs="Plun. Culottes +3"}
     --sets.precast.JA['Sneak Attack'] = sets.buff['Sneak Attack']
     --sets.precast.JA['Trick Attack'] = sets.buff['Trick Attack']
 
@@ -288,7 +287,7 @@ function init_gear_sets()
         head="Pill. Bonnet +3",
         body=gear.Herc_WS_body,
         hands="Meg. Gloves +2",
-        legs="Lustr. Subligar +1",
+        legs="Plun. Culottes +3",
         feet="Lustra. Leggings +1",
         neck="Fotia Gorget",
         ear1="Ishvara Earring",
@@ -300,7 +299,7 @@ function init_gear_sets()
         } -- default set
 
     sets.precast.WS.Acc = set_combine(sets.precast.WS, {
-        ammo="Falcon Eye",
+        ammo="C. Palug Stone",
         legs="Meg. Chausses +2",
         ear2="Telos Earring",
         })
@@ -336,20 +335,19 @@ function init_gear_sets()
         })
 
     sets.precast.WS['Evisceration'].Acc = set_combine(sets.precast.WS['Evisceration'], {
-        ammo="Falcon Eye",
+        ammo="C. Palug Stone",
         head="Skulker's Bonnet +1",
         ring1="Regal Ring",
         })
 
     sets.precast.WS['Rudra\'s Storm'] = set_combine(sets.precast.WS, {
-        ammo="Jukukik Feather",
+        ammo="C. Palug Stone",
         neck="Caro Necklace",
         ear1="Sherida Earring",
         waist="Grunfeld Rope",
         })
 
     sets.precast.WS['Rudra\'s Storm'].Acc = set_combine(sets.precast.WS['Rudra\'s Storm'], {
-        legs=gear.Herc_WS_legs,
         feet=gear.Herc_STP_feet,
         ear2="Telos Earring",
         })
@@ -396,40 +394,38 @@ function init_gear_sets()
     sets.idle = {
         ammo="Staunch Tathlum +1",
         head="Turms Cap +1",
-        body="Ashera Harness",
+        body="Malignance Tabard",
         hands="Turms Mittens +1",
-        legs="Mummu Kecks +2",
+        legs="Malignance Tights",
         feet="Pill. Poulaines +3",
         neck="Bathy Choker +1",
-        ear1="Sanare Earring",
-        ear2="Infused Earring",
+        ear1="Eabani Earring",
+        ear2="Sanare Earring",
         ring1={name="Chirich Ring +1", bag="wardrobe3"},
         ring2={name="Chirich Ring +1", bag="wardrobe4"},
         back="Moonlight Cape",
-        waist="Flume Belt +1",
+        waist="Engraved Belt",
         }
 
     sets.idle.DT = set_combine(sets.idle, {
         ammo="Staunch Tathlum +1", --3/3
-        head="Turms Cap +1",
-        body="Ashera Harness", --7/7
-        hands="Turms Mittens +1",
-        legs="Mummu Kecks +2", --5/5
-        feet="Turms Leggings +1",
-        neck="Loricate Torque +1", --6/6
+        head="Malignance Chapeau", --6/6
+        body="Malignance Tabard", --9/9
+        hands="Malignance Gloves", --5/5
+        legs="Malignance Tights", --7/7
+        feet="Malignance Boots", --4/4
+        neck="Warder's Charm +1",
         ear1="Sanare Earring",
         ring1="Moonlight Ring", --5/5
         ring2="Defending Ring", --10/10
-        back=gear.THF_TP_Cape, --10/0
-        waist="Flume Belt +1", --4/0
+        back="Moonlight Cape", --6/6
         })
 
     sets.idle.Town = set_combine(sets.idle, {
         ammo="Yetshila +1",
         head="Pill. Bonnet +3",
-        body="Ashera Harness",
         hands="Plun. Armlets +3",
-        legs="Lustr. Subligar +1",
+        legs="Plun. Culottes +3",
         neck="Combatant's Torque",
         ear1="Sherida Earring",
         ear2="Telos Earring",
@@ -469,7 +465,7 @@ function init_gear_sets()
         neck="Anu Torque",
         ear1="Sherida Earring",
         ear2="Brutal Earring",
-        ring1="Hetairoi Ring",
+        ring1="Gere Ring",
         ring2="Epona's Ring",
         back=gear.THF_TP_Cape,
         waist="Windbuffet Belt +1",
@@ -483,7 +479,7 @@ function init_gear_sets()
         })
 
     sets.engaged.MidAcc = set_combine(sets.engaged.LowAcc, {
-        ammo="Falcon Eye",
+        ammo="C. Palug Stone",
         head="Dampening Tam",
         body="Pillager's Vest +3",
         ear1="Cessance Earring",
@@ -520,7 +516,7 @@ function init_gear_sets()
         neck="Erudit. Necklace",
         ear1="Eabani Earring", --4
         ear2="Suppanomimi", --5
-        ring1="Hetairoi Ring",
+        ring1="Gere Ring",
         ring2="Epona's Ring",
         back=gear.THF_DW_Cape, --10
         waist="Reiki Yotai", --7
@@ -566,7 +562,7 @@ function init_gear_sets()
         neck="Erudit. Necklace",
         ear1="Cessance Earring",
         ear2="Suppanomimi", --5
-        ring1="Hetairoi Ring",
+        ring1="Gere Ring",
         ring2="Epona's Ring",
         back=gear.THF_DW_Cape, --10
         waist="Reiki Yotai", --7
@@ -611,7 +607,7 @@ function init_gear_sets()
         neck="Erudit. Necklace",
         ear1="Eabani Earring", --4
         ear2="Suppanomimi", --5
-        ring1="Hetairoi Ring",
+        ring1="Gere Ring",
         ring2="Epona's Ring",
         back=gear.THF_DW_Cape, --10
         waist="Reiki Yotai", --7
@@ -657,7 +653,7 @@ function init_gear_sets()
         neck="Erudit. Necklace",
         ear1="Sherida Earring",
         ear2="Suppanomimi", --5
-        ring1="Hetairoi Ring",
+        ring1="Gere Ring",
         ring2="Epona's Ring",
         back=gear.THF_DW_Cape, --10
         waist="Reiki Yotai", --7
@@ -703,7 +699,7 @@ function init_gear_sets()
         neck="Erudit. Necklace",
         ear1="Sherida Earring",
         ear2="Suppanomimi", --5
-        ring1="Hetairoi Ring",
+        ring1="Gere Ring",
         ring2="Epona's Ring",
         back=gear.THF_TP_Cape,
         waist="Windbuffet Belt +1",
@@ -744,10 +740,11 @@ function init_gear_sets()
     ------------------------------------------------------------------------------------------------
 
     sets.engaged.Hybrid = {
-        head=gear.Adhemar_D_head, --4/0
-        body="Ashera Harness", --7/7
-        neck="Loricate Torque +1", --6/6
-        ring1="Moonlight Ring", --5/5
+        head="Malignance Chapeau", --6/6
+        body="Malignance Tabard", --9/9
+        hands="Malignance Gloves", --5/5
+        legs="Malignance Tights", --7/7
+        feet="Malignance Boots", --4/4
         ring2="Defending Ring", --10/10
         }
 
@@ -902,6 +899,11 @@ end
 function job_handle_equipping_gear(playerStatus, eventArgs)
     update_combat_form()
     determine_haste_group()
+
+    -- Check for SATA when equipping gear.  If either is active, equip
+    -- that gear specifically, and block equipping default gear.
+    check_buff('Sneak Attack', eventArgs)
+    check_buff('Trick Attack', eventArgs)
 end
 
 function job_update(cmdParams, eventArgs)

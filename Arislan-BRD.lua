@@ -228,6 +228,8 @@ function init_gear_sets()
         })
 
     sets.precast.FC.SongPlaceholder = set_combine(sets.precast.FC.BardSong, {range=info.ExtraSongInstrument})
+
+    sets.precast.FC.Dispelga = set_combine(sets.precast.FC, {main="Daybreak", sub="Ammurapi Shield"})
     
     -- Precast sets to enhance JAs
     
@@ -274,13 +276,14 @@ function init_gear_sets()
     sets.precast.WS['Exenterator'] = set_combine(sets.precast.WS, {})
 
     sets.precast.WS['Mordant Rime'] = set_combine(sets.precast.WS, {
+        head="Chironic Hat",
         neck="Bard's Charm +1",
         ear2="Regal Earring",
         waist="Grunfeld Rope",
         })
 
     sets.precast.WS['Rudra\'s Storm'] = set_combine(sets.precast.WS, {
-        head="Lustratio Cap +1",
+        head="Chironic Hat",
         legs="Lustr. Subligar +1",
         feet="Lustra. Leggings +1",
         neck="Bard's Charm +1",
@@ -370,7 +373,6 @@ function init_gear_sets()
         ear2="Mendi. Earring", --5
         ring1="Lebeche Ring", --3/(-5)
         ring2="Haoma's Ring",
-        back="Aurist's Cape +1",
         waist="Bishop's Sash",
         }
         
@@ -440,6 +442,7 @@ function init_gear_sets()
         back=gear.BRD_Song_Cape,
         }
 
+    sets.midcast.Dispelga = set_combine(sets.midcast['Enfeebling Magic'], {main="Daybreak", sub="Ammurapi Shield"})
     
     ------------------------------------------------------------------------------------------------
     ----------------------------------------- Idle Sets --------------------------------------------
@@ -455,8 +458,8 @@ function init_gear_sets()
         legs="Assid. Pants +1",
         feet="Fili Cothurnes +1",
         neck="Bathy Choker +1",
-        ear1="Genmei Earring",
-        ear2="Infused Earring",
+        ear1="Eabani Earring",
+        ear2="Sanare Earring",
         ring1={name="Stikini Ring +1", bag="wardrobe3"},
         ring2={name="Stikini Ring +1", bag="wardrobe4"},
         back="Moonlight Cape",
@@ -564,7 +567,7 @@ function init_gear_sets()
         main="Carnwenhan",
         sub="Taming Sari",
         range=gear.Linos_TP,
-        head="Chironic Hat",
+        head="Aya. Zucchetto +2",
         body="Ayanmo Corazza +2",
         hands="Chironic Gloves",
         legs="Aya. Cosciales +2",
@@ -579,7 +582,6 @@ function init_gear_sets()
         } -- 26%
 
     sets.engaged.DW.Acc = set_combine(sets.engaged.DW, {
-        head="Aya. Zucchetto +2",
         hands="Bihu Cuffs +3",
         feet="Bihu Slippers +3",
         })
@@ -601,7 +603,7 @@ function init_gear_sets()
         main="Carnwenhan",
         sub="Taming Sari",
         range=gear.Linos_TP,
-        head="Chironic Hat",
+        head="Aya. Zucchetto +2",
         body="Ayanmo Corazza +2",
         hands="Chironic Gloves",
         legs="Aya. Cosciales +2",
@@ -616,7 +618,6 @@ function init_gear_sets()
         }
 
     sets.engaged.DW.MaxHaste.Acc = set_combine(sets.engaged.DW, {
-        head="Aya. Zucchetto +2",
         hands="Bihu Cuffs +3",
         feet="Bihu Slippers +3",
         ear2="Mache Earring +1",

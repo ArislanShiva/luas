@@ -241,7 +241,7 @@ function init_gear_sets()
     sets.precast.RA = {
         head=gear.Taeon_RA_head, --10/0
         body=gear.Taeon_RA_body, --10/0
-        legs=gear.Adhemar_C_legs, --10/0
+        legs=gear.Adhemar_D_legs, --10/13
         }
 
     -- Weaponskill sets
@@ -274,6 +274,7 @@ function init_gear_sets()
         head=gear.Adhemar_B_head,
         hands="Mummu Wrists +2",
         feet="Mummu Gamash. +2",
+        ring1="Begrudging Ring",
         ring2="Mummu Ring",
         back=gear.NIN_WS1_Cape,
         })
@@ -289,11 +290,12 @@ function init_gear_sets()
         })
 
     sets.precast.WS['Blade: Shun'] = set_combine(sets.precast.WS, {
-        ammo="Jukukik Feather",
+        ammo="C. Palug Stone",
         head=gear.Adhemar_B_head,
         body=gear.Adhemar_B_body,
         legs="Jokushu Haidate",
         ear2="Mache Earring +1",
+        ring1="Gere Ring",
         ring2="Ilabrat Ring",
         back=gear.NIN_TP_Cape,
         })
@@ -389,7 +391,7 @@ function init_gear_sets()
         head="Mummu Bonnet +2",
         body="Mummu Jacket +2",
         hands=gear.Adhemar_C_hands,
-        legs=gear.Adhemar_C_legs,
+        legs="Malignance Tights",
         feet="Mummu Gamash. +2",
         neck="Iskur Gorget",
         ear1="Enervating Earring",
@@ -416,8 +418,8 @@ function init_gear_sets()
         legs="Samnuha Tights",
         feet="Ahosi Leggings",
         neck="Bathy Choker +1",
-        ear1="Sanare Earring",
-        ear2="Infused Earring",
+        ear1="Eabani Earring",
+        ear2="Sanare Earring",
         ring1={name="Chirich Ring +1", bag="wardrobe3"},
         ring2={name="Chirich Ring +1", bag="wardrobe4"},
         back="Moonlight Cape",
@@ -483,7 +485,7 @@ function init_gear_sets()
         neck="Erudit. Necklace",
         ear1="Eabani Earring", --4
         ear2="Suppanomimi", --5
-        ring1="Hetairoi Ring",
+        ring1="Gere Ring",
         ring2="Epona's Ring",
         back=gear.NIN_TP_Cape,
         waist="Reiki Yotai", --7
@@ -526,7 +528,7 @@ function init_gear_sets()
         neck="Erudit. Necklace",
         ear1="Eabani Earring", --4
         ear2="Suppanomimi", --5
-        ring1="Hetairoi Ring",
+        ring1="Gere Ring",
         ring2="Epona's Ring",
         back=gear.NIN_TP_Cape,
         waist="Reiki Yotai", --7
@@ -570,7 +572,7 @@ function init_gear_sets()
         neck="Erudit. Necklace",
         ear1="Eabani Earring", --4
         ear2="Suppanomimi", --5
-        ring1="Hetairoi Ring",
+        ring1="Gere Ring",
         ring2="Epona's Ring",
         back=gear.NIN_TP_Cape,
         waist="Reiki Yotai", --7
@@ -614,7 +616,7 @@ function init_gear_sets()
         neck="Erudit. Necklace",
         ear1="Eabani Earring", --4
         ear2="Suppanomimi", --5
-        ring1="Hetairoi Ring",
+        ring1="Gere Ring",
         ring2="Epona's Ring",
         back=gear.NIN_TP_Cape,
         waist="Windbuffet Belt +1",
@@ -658,7 +660,7 @@ function init_gear_sets()
         neck="Erudit. Necklace",
         ear1="Cessance Earring",
         ear2="Brutal Earring",
-        ring1="Hetairoi Ring",
+        ring1="Gere Ring",
         ring2="Epona's Ring",
         back=gear.NIN_TP_Cape,
         waist="Windbuffet Belt +1",

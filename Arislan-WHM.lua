@@ -242,6 +242,7 @@ function init_gear_sets()
     sets.precast.FC.Curaga = sets.precast.FC.Cure
     sets.precast.FC.CureSolace = sets.precast.FC.Cure
     sets.precast.FC.Impact = set_combine(sets.precast.FC, {head=empty, body="Twilight Cloak"})
+    sets.precast.FC.Dispelga = set_combine(sets.precast.FC, {main="Daybreak", sub="Ammurapi Shield"})
 
     -- Precast sets to enhance JAs
     --sets.precast.JA.Benediction = {}
@@ -553,11 +554,12 @@ function init_gear_sets()
         }
 
     sets.midcast.IntEnfeebles = set_combine(sets.midcast.MndEnfeebles, {
-        main="Maxentius",
+        main="Yagrush",
         sub="Ammurapi Shield",
-        back="Aurist's Cape +1",
         waist="Yamabuki-no-Obi",
         })
+
+    sets.midcast.Dispelga = set_combine(sets.midcast.IntEnfeebles, {main="Daybreak", sub="Ammurapi Shield"})
 
     sets.midcast.Impact = {
         main="Maxentius",
@@ -594,8 +596,8 @@ function init_gear_sets()
         legs="Assid. Pants +1",
         feet="Herald's Gaiters",
         neck="Bathy Choker +1",
-        ear1="Sanare Earring",
-        ear2="Infused Earring",
+        ear1="Eabani Earring",
+        ear2="Sanare Earring",
         ring1={name="Stikini Ring +1", bag="wardrobe3"},
         ring2={name="Stikini Ring +1", bag="wardrobe4"},
         back="Moonlight Cape",
