@@ -26,7 +26,6 @@
 --              [ WIN+. ]           Utsusemi: Ni
 --
 --  Weapons:    [ WIN+E/R ]         Cycles between available Weapon Sets
---              [ WIN+W ]           Toggle Ranged Weapon Lock
 --
 --  WS:         [ CTRL+Numpad7 ]    Trueflight
 --              [ CTRL+Numpad8 ]    Last Stand
@@ -79,15 +78,44 @@ function user_setup()
     state.WeaponskillMode:options('Normal', 'Acc')
     state.IdleMode:options('Normal', 'DT')
 
-    state.WeaponSet = M{['description']='Weapon Set', 'Annihilator', 'Fomalhaut'}
+    state.WeaponSet = M{['description']='Weapon Set', 'Annihilator', 'Fomalhaut', 'Gastraphetes'}
     state.CP = M(false, "Capacity Points Mode")
-    state.WeaponLock = M(false, 'Weapon Lock')
 
-    gear.RAbullet = "Chrono Bullet"
-    gear.WSbullet = "Chrono Bullet"
-    gear.ACCbullet = "Eradicating Bullet"
-    gear.MAbullet = "Chrono Bullet"
-    options.ammo_warning_limit = 10
+    DefaultAmmo = {['Yoichinoyumi'] = "Chrono Arrow",
+                   ['Gandiva'] = "Chrono Arrow",
+                   ['Fail-Not'] = "Chrono Arrow",
+                   ['Annihilator'] = "Chrono Bullet",
+                   ['Armageddon'] = "Chrono Bullet",
+                   ['Gastraphetes'] = "Quelling Bolt",
+                   ['Fomalhaut'] = "Chrono Bullet",
+                   }
+
+    AccAmmo = {    ['Yoichinoyumi'] = "Yoichi's Arrow",
+                   ['Gandiva'] = "Yoichi's Arrow",
+                   ['Fail-Not'] = "Yoichi's Arrow",
+                   ['Annihilator'] = "Devastating Bullet",
+                   ['Armageddon'] = "Devastating Bullet",
+                   ['Gastraphetes'] = "Quelling Bolt",
+                   ['Fomalhaut'] = "Devastating Bullet",
+                   }
+
+    WSAmmo = {     ['Yoichinoyumi'] = "Chrono Arrow",
+                   ['Gandiva'] = "Chrono Arrow",
+                   ['Fail-Not'] = "Chrono Arrow",
+                   ['Annihilator'] = "Chrono Bullet",
+                   ['Armageddon'] = "Chrono Bullet",
+                   ['Gastraphetes'] = "Quelling Bolt",
+                   ['Fomalhaut'] = "Chrono Bullet",
+                   }
+
+    MagicAmmo = {  ['Yoichinoyumi'] = "Chrono Arrow",
+                   ['Gandiva'] = "Chrono Arrow",
+                   ['Fail-Not'] = "Chrono Arrow",
+                   ['Annihilator'] = "Chrono Bullet",
+                   ['Armageddon'] = "Chrono Bullet",
+                   ['Gastraphetes'] = "Quelling Bolt",
+                   ['Fomalhaut'] = "Chrono Bullet",
+                   }
 
     -- Additional local binds
     include('Global-Binds.lua') -- OK to remove this line
@@ -111,7 +139,6 @@ function user_setup()
     send_command('bind @c gs c toggle CP')
     send_command('bind @e gs c cycleback WeaponSet')
     send_command('bind @r gs c cycle WeaponSet')
-    send_command('bind @w gs c toggle WeaponLock')
 
     send_command('bind ^numlock input /ja "Double Shot" <me>')
 
@@ -156,7 +183,6 @@ function user_unload()
     send_command('unbind ^,')
     send_command('unbind @f')
     send_command('unbind @c')
-    send_command('unbind @w')
     send_command('unbind @e')
     send_command('unbind @r')
     send_command('unbind ^numlock')
@@ -238,7 +264,6 @@ function init_gear_sets()
 
     -- (10% Snapshot, 5% Rapid from Merits)
     sets.precast.RA = {
-        ammo=gear.RAbullet,
         head=gear.Taeon_RA_head, --10/0
         body="Oshosi Vest +1", --14/0
         hands="Carmine Fin. Ga. +1", --8/11
@@ -260,6 +285,11 @@ function init_gear_sets()
         waist="Yemaya Belt", --0/5
         }) --30/54
 
+    sets.precast.RA.Gastra = {head="Mummu Bonnet +2"}
+    sets.precast.RA.Gastra.Flurry1 = set_combine(sets.precast.RA.Gastra, {})
+    sets.precast.RA.Gastra.Flurry2 = set_combine(sets.precast.RA.Gastra.Flurry1, {})
+
+
     ------------------------------------------------------------------------------------------------
     ------------------------------------- Weapon Skill Sets ----------------------------------------
     ------------------------------------------------------------------------------------------------
@@ -280,7 +310,6 @@ function init_gear_sets()
         }
 
     sets.precast.WS.Acc = set_combine(sets.precast.WS, {
-        ammo=gear.ACCbullet,
         feet="Orion Socks +3",
         neck="Combatant's Torque",
         ear2="Telos Earring",
@@ -339,7 +368,6 @@ function init_gear_sets()
         })
 
     sets.precast.WS["Trueflight"] = {
-        ammo=gear.MAbullet,
         head="Orion Beret +3",
         body="Samnuha Coat",
         hands="Carmine Fin. Ga. +1",
@@ -400,7 +428,6 @@ function init_gear_sets()
     -- Ranged sets
 
     sets.midcast.RA = {
-        ammo=gear.RAbullet,
         head="Arcadian Beret +3",
         body="Malignance Tabard",
         hands="Malignance Gloves",
@@ -416,7 +443,6 @@ function init_gear_sets()
         }
 
     sets.midcast.RA.Acc = set_combine(sets.midcast.RA, {
-        ammo=gear.ACCbullet,
         hands="Meg. Gloves +2",
         feet="Orion Socks +3",
         ring2="Hajduk Ring +1",
@@ -448,6 +474,12 @@ function init_gear_sets()
         ring2={name="Chirich Ring +1", bag="wardrobe4"},
         })
 
+    sets.midcast.RA.Gastra = {}
+    sets.midcast.RA.Gastra.Acc = set_combine(sets.midcast.RA.Gastra, {})
+    sets.midcast.RA.Gastra.HighAcc = set_combine(sets.midcast.RA.Gastra.Acc, {})
+    sets.midcast.RA.Gastra.Cricial = set_combine(sets.midcast.RA.Gastra.RA, {})
+    sets.midcast.RA.Gastra.STP = set_combine(sets.midcast.RA.Gastra.RA, {})
+
     sets.DoubleShot = {
         head="Arcadian Beret +3",
         body="Arc. Jerkin +3",
@@ -465,7 +497,6 @@ function init_gear_sets()
 
     -- Idle sets
     sets.idle = {
-        ammo=gear.RAbullet,
         head="Malignance Chapeau",
         body="Malignance Tabard",
         hands="Malignance Gloves",
@@ -488,12 +519,12 @@ function init_gear_sets()
         legs="Malignance Tights", --7/7
         feet="Malignance Boots", --4/4
         neck="Warder's Charm +1",
+        ring1="Vengeful Ring",
         ring2="Defending Ring", --10/10
         back="Moonlight Cape", --6/6
         })
 
     sets.idle.Town = set_combine(sets.idle, {
-        ammo=gear.ACCbullet,
         head="Oshosi Mask +1",
         body="Oshosi Vest +1",
         hands="Oshosi Gloves +1",
@@ -879,6 +910,7 @@ function init_gear_sets()
 
     sets.Annihilator = {ranged="Annihilator"}
     sets.Fomalhaut = {ranged="Fomalhaut"}
+    sets.Gastraphetes = {ranged="Em. Crossbow"}
 
 end
 
@@ -891,9 +923,12 @@ end
 function job_precast(spell, action, spellMap, eventArgs)
     equip(sets[state.WeaponSet.current])
 
+    if spell.action_type == 'Ranged Attack' then
+        state.CombatWeapon:set(player.equipment.range)
+    end
     -- Check that proper ammo is available if we're using ranged attacks or similar.
-    if spell.action_type == 'Ranged Attack' or spell.type == 'WeaponSkill' or spell.type == 'CorsairShot' then
-        do_bullet_checks(spell, spellMap, eventArgs)
+    if spell.action_type == 'Ranged Attack' or (spell.type == 'WeaponSkill' and (spell.skill == 'Marksmanship' or spell.skill == 'Archery')) then
+        check_ammo(spell, action, spellMap, eventArgs)
     end
     if spellMap == 'Utsusemi' then
         if buffactive['Copy Image (3)'] or buffactive['Copy Image (4+)'] then
@@ -912,19 +947,26 @@ function job_post_precast(spell, action, spellMap, eventArgs)
 --        if state.Buff['Velocity Shot'] then
 --            equip( sets.buff['Velocity Shot'])
 --        end
-        if spell.action_type == 'Ranged Attack' then
+        if spell.action_type == 'Ranged Attack' and state.WeaponSet.current == "Gastraphetes" then
+            if flurry == 2 then
+                equip(sets.precast.RA.Gastra.Flurry2)
+            elseif flurry == 1 then
+                equip(sets.precast.RA.Gastra.Flurry1)
+            else
+                equip(sets.precast.RA.Gastra)
+            end        
+        elseif spell.action_type == 'Ranged Attack' then
             if flurry == 2 then
                 equip(sets.precast.RA.Flurry2)
             elseif flurry == 1 then
                 equip(sets.precast.RA.Flurry1)
             end
         end
-    -- Equip obi if weather/day matches for WS.
-    elseif spell.type == 'WeaponSkill' then
         -- Replace TP-bonus gear if not needed.
         if spell.english == 'Trueflight' or spell.english == 'Aeolian Edge' and player.tp > 2900 then
             equip(sets.FullTP)
         end
+        -- Equip obi if weather/day matches for WS.
         if elemental_ws:contains(spell.name) then
             -- Matching double weather (w/o day conflict).
             if spell.element == world.weather_element and (get_weather_intensity() == 2 and spell.element ~= elements.weak_to[world.day_element]) then
@@ -946,10 +988,22 @@ function job_post_precast(spell, action, spellMap, eventArgs)
     end
 end
 
-
 -- Set eventArgs.handled to true if we don't want any automatic gear equipping to be done.
 function job_post_midcast(spell, action, spellMap, eventArgs)
     if spell.action_type == 'Ranged Attack' then
+        if spell.action_type == 'Ranged Attack' and state.WeaponSet.current == "Gastraphetes" then
+            if state.RangedMode.value == 'STP' then
+                equip(sets.midcast.RA.Gastra.STP)
+            elseif state.RangedMode.value == 'Acc' then
+                equip(sets.midcast.RA.Gastra.Acc)
+            elseif state.RangedMode.value == 'HighAcc' then
+                equip(sets.midcast.RA.Gastra.HighAcc)
+            elseif state.RangedMode.value == 'Critical' then
+                equip(sets.midcast.RA.Gastra.Critical)
+            else
+                equip(sets.midcast.RA.Gastra)
+            end                
+        end
         if buffactive['Double Shot'] then
             equip(sets.DoubleShot)
         end
@@ -1089,7 +1143,7 @@ function display_current_job_state(eventArgs)
 
     local msg = ''
     if state.Kiting.value then
-        msg = msg .. ' Kiting: On |'
+        msg = msg .. ' Kiting: On |' 
     end
 
     add_to_chat(002, '| ' ..string.char(31,210).. 'Melee' ..cf_msg.. ': ' ..string.char(31,001)..m_msg.. string.char(31,002)..  ' |'
@@ -1187,117 +1241,49 @@ end
 
 -- Check for proper ammo when shooting or weaponskilling
 function check_ammo(spell, action, spellMap, eventArgs)
-    -- Filter ammo checks depending on Unlimited Shot
-    if state.Buff['Unlimited Shot'] then
-        if player.equipment.ammo ~= U_Shot_Ammo[player.equipment.range] then
-            if player.inventory[U_Shot_Ammo[player.equipment.range]] or player.wardrobe[U_Shot_Ammo[player.equipment.range]] then
-                add_to_chat(122,"Unlimited Shot active. Using custom ammo.")
-                equip({ammo=U_Shot_Ammo[player.equipment.range]})
-            elseif player.inventory[DefaultAmmo[player.equipment.range]] or player.wardrobe[DefaultAmmo[player.equipment.range]] then
-                add_to_chat(122,"Unlimited Shot active but no custom ammo available. Using default ammo.")
+    if spell.action_type == 'Ranged Attack' then
+        if player.equipment.ammo == 'empty' or player.equipment.ammo ~= DefaultAmmo[player.equipment.range] then
+            if DefaultAmmo[player.equipment.range] then
+                if player.inventory[DefaultAmmo[player.equipment.range]] then
+                    --add_to_chat(3,"Using Default Ammo")
+                    equip({ammo=DefaultAmmo[player.equipment.range]})
+                else
+                    add_to_chat(3,"Default ammo unavailable.  Leaving empty.")
+                end
+            else
+                add_to_chat(3,"Unable to determine default ammo for current weapon.  Leaving empty.")
+            end
+        end
+    elseif spell.type == 'WeaponSkill' then
+        if spell.element == 'None' then
+        --physical weaponskills
+            if state.WeaponskillMode.value == 'Acc' then
+                if player.inventory[AccAmmo[player.equipment.range]] then
+                    equip({ammo=AccAmmo[player.equipment.range]})
+                else
+                    add_to_chat(3,"Acc ammo unavailable.  Using default ammo.")
+                    equip({ammo=DefaultAmmo[player.equipment.range]})
+                end
+            else
+                if player.inventory[WSAmmo[player.equipment.range]] then
+                    equip({ammo=WSAmmo[player.equipment.range]})
+                else
+                    add_to_chat(3,"WS ammo unavailable.  Using default ammo.")
+                    equip({ammo=DefaultAmmo[player.equipment.range]})
+                end
+            end
+        else
+            -- magical weaponskills
+            if player.inventory[MagicAmmo[player.equipment.range]] then
+                equip({ammo=MagicAmmo[player.equipment.range]})
+            else
+                add_to_chat(3,"Magic ammo unavailable.  Using default ammo.")
                 equip({ammo=DefaultAmmo[player.equipment.range]})
-            else
-                add_to_chat(122,"Unlimited Shot active but unable to find any custom or default ammo.")
-            end
-        end
-    else
-        if player.equipment.ammo == U_Shot_Ammo[player.equipment.range] and player.equipment.ammo ~= DefaultAmmo[player.equipment.range] then
-            if DefaultAmmo[player.equipment.range] then
-                if player.inventory[DefaultAmmo[player.equipment.range]] then
-                    add_to_chat(122,"Unlimited Shot not active. Using Default Ammo")
-                    equip({ammo=DefaultAmmo[player.equipment.range]})
-                else
-                    add_to_chat(122,"Default ammo unavailable.  Removing Unlimited Shot ammo.")
-                    equip({ammo=empty})
-              end
-            else
-                add_to_chat(122,"Unable to determine default ammo for current weapon.  Removing Unlimited Shot ammo.")
-                equip({ammo=empty})
-            end
-        elseif player.equipment.ammo == 'empty' then
-            if DefaultAmmo[player.equipment.range] then
-                if player.inventory[DefaultAmmo[player.equipment.range]] then
-                    add_to_chat(122,"Using Default Ammo")
-                    equip({ammo=DefaultAmmo[player.equipment.range]})
-                else
-                    add_to_chat(122,"Default ammo unavailable.  Leaving empty.")
-              end
-            else
-                add_to_chat(122,"Unable to determine default ammo for current weapon.  Leaving empty.")
-            end
-        elseif player.inventory[player.equipment.ammo].count < 10 then
-            add_to_chat(122,"Ammo '"..player.inventory[player.equipment.ammo].shortname.."' running low ("..player.inventory[player.equipment.ammo].count..")")
-        end
-    end
-end
-
--- Determine whether we have sufficient ammo for the action being attempted.
-function do_bullet_checks(spell, spellMap, eventArgs)
-    local bullet_name
-    local bullet_min_count = 1
-
-    if spell.type == 'WeaponSkill' then
-        if spell.skill == "Marksmanship" then
-            if spell.element == 'None' then
-                -- physical weaponskills
-                if state.WeaponskillMode.value == 'Acc' then
-                    bullet_name = gear.ACCbullet
-                else
-                    bullet_name = gear.WSbullet
-              end
-            else
-                -- magical weaponskills
-                bullet_name = gear.MAbullet
-            end
-        else
-            -- Ignore non-ranged weaponskills
-            return
-        end
-    elseif spell.action_type == 'Ranged Attack' then
-        if state.RangedMode.value == 'Acc' or state.RangedMode == 'HighAcc' then
-            bullet_name = gear.ACCbullet
-        else
-            bullet_name = gear.RAbullet
-        end
-        if buffactive['Double Shot'] then
-            bullet_min_count = 2
-        end
-    end
-
-    local available_bullets = player.inventory[bullet_name] or player.wardrobe[bullet_name]
-
-    -- If no ammo is available, give appropriate warning and end.
-    if not available_bullets then
-        if spell.type == 'WeaponSkill' then
-            if (state.WeaponskillMode.value == 'Acc' and player.equipment.ammo == gear.ACCbullet) or
-            (state.WeaponskillMode.value ~= 'Acc' and players.equipment.ammo == gear.RAbullet) then
-                add_to_chat(104, 'No weaponskill ammo left.  Using what\'s currently equipped (standard ranged bullets: '..player.equipment.ammo..').')
-                return
-            else
-                add_to_chat(104, 'No ammo ('..tostring(bullet_name)..') available for that action.')
-                eventArgs.cancel = true
-                return
             end
         end
     end
-
-    -- Low ammo warning.
-    if state.warned.value == false
-        and available_bullets.count > 1 and available_bullets.count <= options.ammo_warning_limit then
-        local msg = '*****  LOW AMMO WARNING: '..bullet_name..' *****'
-        --local border = string.repeat("*", #msg)
-        local border = ""
-        for i = 1, #msg do
-            border = border .. "*"
-        end
-
-        add_to_chat(104, border)
-        add_to_chat(104, msg)
-        add_to_chat(104, border)
-
-        state.warned:set()
-    elseif available_bullets.count > options.ammo_warning_limit and state.warned then
-        state.warned:reset()
+    if player.equipment.ammo ~= 'empty' and player.inventory[player.equipment.ammo].count < 15 then
+        add_to_chat(39,"*** Ammo '"..player.inventory[player.equipment.ammo].shortname.."' running low! *** ("..player.inventory[player.equipment.ammo].count..")")
     end
 end
 
