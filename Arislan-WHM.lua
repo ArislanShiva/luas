@@ -49,7 +49,7 @@
 --              the current Arts.
 --                                          Light Arts                    Dark Arts
 --                                          ----------                  ---------
---                gs c scholar light          Light Arts/Addendum
+--              gs c scholar light          Light Arts/Addendum
 --              gs c scholar dark                                       Dark Arts/Addendum
 --              gs c scholar cost           Penury                      Parsimony
 --              gs c scholar speed          Celerity                    Alacrity
@@ -73,6 +73,8 @@ end
 function job_setup()
     state.Buff['Afflatus Solace'] = buffactive['Afflatus Solace'] or false
     state.Buff['Afflatus Misery'] = buffactive['Afflatus Misery'] or false
+    state.Buff['Sublimation: Activated'] = buffactive['Sublimation: Activated'] or false
+
     state.RegenMode = M{['description']='Regen Mode', 'Duration', 'Potency'}
 
     lockstyleset = 1
@@ -127,14 +129,6 @@ function user_setup()
     send_command('bind ^numpad5 input /ws "Realmrazer" <t>')
     send_command('bind ^numpad1 input /ws "Flash Nova" <t>')
     send_command('bind ^numpad0 input /ws "Mystic Boon" <t>')
-
-    --[[send_command('bind 1 input /ma "Barfira" <me>')
-    send_command('bind 2 input /ma "Barblizzara" <me>')
-    send_command('bind 3 input /ma "Baraera" <me>')
-    send_command('bind 4 input /ma "Barstonra" <me>')
-    send_command('bind 5 input /ma "Barthundra" <me>')
-    send_command('bind 6 input /ma "Barwatera" <me>')]]--
-
 
     select_default_macro_book()
     set_lockstyle()
@@ -200,7 +194,7 @@ function init_gear_sets()
     -- Fast cast sets for spells
 
     sets.precast.FC = {
-    --    /SCH --3
+    --  /SCH --3
         main="Sucellus", --5
         sub="Chanter's Shield", --8
         ammo="Sapience Orb", --2
@@ -214,7 +208,7 @@ function init_gear_sets()
         ring1="Kishar Ring", --4
         ring2="Weather. Ring +1", --5
         back=gear.WHM_FC_Cape, --10
-        waist="Witful Belt", --3/(3)
+        waist="Embla Sash", --5
         }
 
     sets.precast.FC['Enhancing Magic'] = set_combine(sets.precast.FC, {
@@ -224,6 +218,7 @@ function init_gear_sets()
     sets.precast.FC['Healing Magic'] = set_combine(sets.precast.FC, {
         legs="Ebers Pant. +1", --13
         back="Perimede Cape",
+        waist="Witful Belt", --3(3)
         })
 
     sets.precast.FC.StatusRemoval = sets.precast.FC['Healing Magic']
@@ -417,6 +412,7 @@ function init_gear_sets()
         hands=gear.Telchine_ENH_hands,
         legs=gear.Telchine_ENH_legs,
         feet="Theo. Duckbills +3",
+        waist="Embla Sash",
         }
 
     sets.midcast.Regen = set_combine(sets.midcast.EnhancingDuration, {
@@ -683,6 +679,7 @@ function init_gear_sets()
     -- Buff sets: Gear that needs to be worn to actively enhance a current player buff.
     sets.buff['Divine Caress'] = {hands="Ebers Mitts +1", back="Mending Cape"}
     sets.buff['Devotion'] = {head="Piety Cap +3"}
+    sets.buff.Sublimation = {waist="Embla Sash"}
 
     sets.buff.Doom = {
         neck="Nicander's Necklace", --20
@@ -755,6 +752,10 @@ end
 -------------------------------------------------------------------------------------------------------------------
 
 function job_buff_change(buff,gain)
+    if buff == "Sublimation: Activated" then
+        handle_equipping_gear(player.status)
+    end
+
     if buff == "doom" then
         if gain then
             equip(sets.buff.Doom)
@@ -836,6 +837,9 @@ end
 
 
 function customize_idle_set(idleSet)
+    if state.Buff['Sublimation: Activated'] then
+        idleSet = set_combine(idleSet, sets.buff.Sublimation)
+    end
     if player.mpp < 51 then
         idleSet = set_combine(idleSet, sets.latent_refresh)
     end
@@ -848,6 +852,12 @@ function customize_idle_set(idleSet)
 
     return idleSet
 end
+
+-- Called by the 'update' self-command.
+function job_update(cmdParams, eventArgs)
+    update_sublimation()
+end
+
 
 -- Function to display the current relevant user state when doing an update.
 -- Return true if display was handled, and you don't want the default info shown.
@@ -880,6 +890,10 @@ end
 -------------------------------------------------------------------------------------------------------------------
 -- Utility functions specific to this job.
 -------------------------------------------------------------------------------------------------------------------
+
+function update_sublimation()
+    state.Buff['Sublimation: Activated'] = buffactive['Sublimation: Activated'] or false
+end
 
 -- General handling of strategems in an Arts-agnostic way.
 -- Format: gs c scholar <strategem>

@@ -244,9 +244,9 @@ function init_gear_sets()
 
     sets.precast.WS['Drakesbane'] = set_combine(sets.precast.WS, {
         head="Flam. Zucchetto +2", 
+        body="Hjarrandi Breast.",
         hands="Flamma Manopolas +2",
         legs="Pelt. Cuissots +1",
-        feet=gear.Valo_Crit_feet,
         neck="Dgn. Collar +1",
         ear2="Brutal Earring",
         ring1="Begrudging Ring",
@@ -279,7 +279,8 @@ function init_gear_sets()
         })
 
     sets.precast.WS['Impulse Drive'] = set_combine(sets.precast.WS['Camlann\'s Torment'], {
-        head="Flam. Zucchetto +2", 
+        head="Flam. Zucchetto +2",
+        body="Hjarrandi Breast.",
         hands="Flamma Manopolas +2",
         legs="Pelt. Cuissots +1",
         neck="Dgn. Collar +1",
@@ -297,9 +298,9 @@ function init_gear_sets()
 
     sets.precast.WS['Impulse Drive'].HighTP = set_combine(sets.precast.WS['Impulse Drive'], {
         head=gear.Valo_WSD_head, 
+        body=gear.Valo_WSD_body,
         hands="Ptero. Fin. G. +3",
         legs="Vishap Brais +3",
-        feet=gear.Valo_Crit_feet,
         back=gear.DRG_WS2_Cape,
         ear2="Ishvara Earring",
 		ring1="Regal Ring",
@@ -391,7 +392,7 @@ function init_gear_sets()
     sets.idle = {
         ammo="Staunch Tathlum +1", --3/3
         head="Hjarrandi Helm", --10/10
-        body="Tartarus Platemail", --10/10
+        body="Hjarrandi Breast.", --12/12
         hands="Sulev. Gauntlets +2", --5/5
         legs="Carmine Cuisses +1",
         feet="Ptero. Greaves +3",
@@ -406,14 +407,14 @@ function init_gear_sets()
 
     sets.idle.DT = set_combine(sets.idle, {
         ammo="Staunch Tathlum +1", --3/3
-        body="Tartarus Platemail", --10/10
+        body="Hjarrandi Breast.", --12/12
         head="Hjarrandi Helm", --10/10
         hands="Flam. Manopolas +2",
         feet="Ptero. Greaves +3",
         neck="Loricate Torque +1", --6/6
         ear1="Sanare Earring",
         ear2="Anastasi Earring",
-        ring1="-light Ring", --5/5
+        ring1="Moonlight Ring", --5/5
         ring2="Defending Ring", --10/10
         waist="Carrier's Sash",
         })

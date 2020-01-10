@@ -412,7 +412,7 @@ function init_gear_sets()
         ring1={name="Stikini Ring +1", bag="wardrobe3"},
         ring2={name="Stikini Ring +1", bag="wardrobe4"},
         back="Fi Follet Cape +1",
-        waist="Olympus Sash",
+        waist="Embla Sash",
         }
 
     sets.midcast.Regen = set_combine(sets.midcast['Enhancing Magic'], {head="Inyanga Tiara +2"})

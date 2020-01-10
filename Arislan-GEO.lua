@@ -137,7 +137,7 @@ function init_gear_sets()
         ring1="Kishar Ring", --4
         ring2="Weather. Ring +1", --5
         back="Lifestream Cape", --7
-        waist="Witful Belt", --3/(3)
+        waist="Embla Sash", --5
         }
 
     sets.precast.FC['Enhancing Magic'] = set_combine(sets.precast.FC, {
@@ -150,6 +150,7 @@ function init_gear_sets()
     sets.precast.FC.Cure = set_combine(sets.precast.FC, {
         ear1="Mendi. Earring", --5
         ring1="Lebeche Ring", --(2)
+        waist="Witful Belt", --3/(3)
         })
 
     sets.precast.FC.Curaga = sets.precast.FC.Cure
@@ -274,6 +275,7 @@ function init_gear_sets()
         hands=gear.Telchine_ENH_hands,
         legs=gear.Telchine_ENH_legs,
         feet=gear.Telchine_ENH_feet,
+        waist="Embla Sash",
         }
 
     sets.midcast.Regen = set_combine(sets.midcast.EnhancingDuration, {

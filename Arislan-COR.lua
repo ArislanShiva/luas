@@ -634,6 +634,7 @@ function init_gear_sets()
         legs="Malignance Tights", --7/7
         feet="Malignance Boots", --4/4
         neck="Warder's Charm +1",
+        ring1="Vengeful Ring",
         ring2="Defending Ring", --10/10
         back="Moonlight Cape", --6/6
         })
@@ -673,7 +674,7 @@ function init_gear_sets()
         neck="Warder's Charm +1",
         ear1="Sanare Earring",
         ear2="Eabani Earring",
-        ring1="Gelatinous Ring +1", --7/(-1)
+        ring1="Vengeful Ring",
         ring2="Defending Ring", --10/10
         back=gear.COR_SNP_Cape,
         waist="Carrier's Sash",

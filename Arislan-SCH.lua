@@ -182,6 +182,8 @@ function init_gear_sets()
     sets.precast.JA['Tabula Rasa'] = {legs="Peda. Pants +3"}
     sets.precast.JA['Enlightenment'] = {body="Peda. Gown +3"}
     sets.precast.JA['Sublimation'] = {
+        main="Musa",
+        sub="Enki Strap",
         head="Acad. Mortar. +3",
         body="Acad. Gown +3",
         hands=gear.Telchine_ENH_hands,
@@ -211,7 +213,7 @@ function init_gear_sets()
         ring1="Kishar Ring", --4
         ring2="Weather. Ring +1", --5/(3)
         back=gear.SCH_FC_Cape, --10
-        waist="Witful Belt", --3/(3)
+        waist="Embla Sash", --5
         }
 
     sets.precast.FC.Grimoire = {head="Peda. M.Board +3", feet="Acad. Loafers +3"}
@@ -222,6 +224,7 @@ function init_gear_sets()
         feet="Kaykaus Boots +1", --7
         ear1="Mendi. Earring", --5
         ring1="Lebeche Ring", --(2)
+        waist="Witful Belt", --3/(3)
         })
 
     sets.precast.FC.Curaga = sets.precast.FC.Cure
@@ -288,8 +291,8 @@ function init_gear_sets()
     sets.midcast.FastRecast = sets.precast.FC
 
     sets.midcast.Cure = {
-        main="Tamaxchi", --22/(-10)
-        sub="Sors Shield", --3/(-5)
+        main="Musa", --22
+        sub="Khonsu", --(-5)
         ammo="Esper Stone +1", --0/(-5)
         head="Kaykaus Mitra +1", --11(+2)/(-6)
         body="Kaykaus Bliaut +1", --(+4)/(-6)
@@ -319,6 +322,8 @@ function init_gear_sets()
         })
 
     sets.midcast.StatusRemoval = {
+        main="Musa",
+        sub="Khonsu",
         head="Vanya Hood",
         body="Vanya Robe",
         hands="Peda. Bracers +3",
@@ -361,18 +366,19 @@ function init_gear_sets()
         }
 
     sets.midcast.EnhancingDuration = {
-        main=gear.Gada_ENH,
-        sub="Ammurapi Shield",
+        main="Musa",
+        sub="Khonsu",
         head=gear.Telchine_ENH_head,
         body="Peda. Gown +3",
         hands=gear.Telchine_ENH_hands,
         legs=gear.Telchine_ENH_legs,
         feet=gear.Telchine_ENH_feet,
+        waist="Embla Sash",
         }
 
     sets.midcast.Regen = set_combine(sets.midcast.EnhancingDuration, {
-        main="Bolelabunga",
-        sub="Ammurapi Shield",
+        main="Musa",
+        sub="Khonsu",
         head="Arbatel Bonnet +1",
         body=gear.Telchine_ENH_body,
         hands=gear.Telchine_ENH_hands,
@@ -383,10 +389,6 @@ function init_gear_sets()
 
     sets.midcast.RegenDuration = set_combine(sets.midcast.EnhancingDuration, {
         head=gear.Telchine_ENH_head,
-        body=gear.Telchine_ENH_body,
-        hands=gear.Telchine_ENH_hands,
-        legs=gear.Telchine_ENH_legs,
-        feet=gear.Telchine_ENH_feet,
         back=gear.SCH_FC_Cape,
         })
 
@@ -612,8 +614,8 @@ function init_gear_sets()
     sets.idle.Refresh = {main="Bolelabunga", sub="Genmei Shield"}
 
     sets.idle.Town = set_combine(sets.idle, {
-        main="Akademos",
-        sub="Enki Strap",
+        main="Musa",
+        sub="Khonsu",
         head="Peda. M.Board +3",
         body="Amalric Doublet +1",
         hands="Amalric Gages +1",
@@ -689,6 +691,7 @@ function init_gear_sets()
        head="Acad. Mortar. +3", --4
        body="Peda. Gown +3", --5
        ear1="Savant's Earring", --1
+       waist="Embla Sash", --5
        }
 
     sets.buff.Doom = {

@@ -482,6 +482,7 @@ function init_gear_sets()
         feet="Leth. Houseaux +1",
         neck="Dls. Torque +1",
         back="Ghostfyre Cape",
+        waist="Embla Sash",
         }
 
     sets.midcast.EnhancingSkill = {
@@ -715,12 +716,12 @@ function init_gear_sets()
         ammo="Homiliary",
         head="Viti. Chapeau +3",
         body="Jhakri Robe +2",
-        hands="Atrophy Gloves +3",
+        hands="Malignance Gloves",
         legs="Carmine Cuisses +1",
-        feet="Vitiation Boots +3",
+        feet="Malignance Boots",
         neck="Bathy Choker +1",
         ear1="Eabani Earring",
-        ear2="Infused Earring",
+        ear2="Sanare Earring",
         ring1={name="Stikini Ring +1", bag="wardrobe3"},
         ring2={name="Stikini Ring +1", bag="wardrobe4"},
         back="Moonlight Cape",
