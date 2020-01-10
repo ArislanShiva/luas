@@ -608,10 +608,10 @@ function init_gear_sets()
         head="Turms Cap +1",
         body="Runeist's Coat +3",
         hands="Turms Mittens +1",
-        legs="Turms Subligar +1",
+        legs="Eri. Leg Guards +1", --7/0
         feet="Turms Leggings +1",
         neck="Futhark Torque +1", --6/6
-        ear1="Odnowa Earring",
+        ear1="Genmei Earring", --2/0
         ear2="Odnowa Earring +1", --0/2
         ring1="Gelatinous Ring +1", --7/(-1)
         ring2="Defending Ring", --10/10
