@@ -496,7 +496,7 @@ function init_gear_sets()
         head="Turms Cap +1",
         body="Malignance Tabard",
         hands="Turms Mittens +1",
-        legs="Malignance Tights",
+        legs="Turms Subligar +1",
         feet="Skd. Jambeaux +1",
         neck="Bathy Choker +1",
         ear1="Eabani Earring",
@@ -515,8 +515,8 @@ function init_gear_sets()
         legs="Malignance Tights", --7/7
         feet="Malignance Boots", --4/4
         neck="Warder's Charm +1",
-        ear1="Sanare Earring",
-        ring1="Moonlight Ring", --5/5
+        ear2="Sanare Earring",
+        ring1="Vengeful Ring",
         ring2="Defending Ring", --10/10
         back="Moonlight Cape", --6/6
         })

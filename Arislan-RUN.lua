@@ -112,7 +112,7 @@ function user_setup()
 
     -- Additional local binds
     include('Global-Binds.lua') -- OK to remove this line
-    include('Global-WHM-Binds.lua') -- OK to remove this line
+    include('Global-GEO-Binds.lua') -- OK to remove this line
 
     send_command('bind ^` input //gs c rune')
     send_command('bind !` input /ja "Vivacious Pulse" <me>')
@@ -238,7 +238,7 @@ function init_gear_sets()
         head="Halitus Helm", --8
         body="Emet Harness +1", --10
         hands="Kurys Gloves", --9
-        legs="Eri. Leg Guards +1", --7
+        legs="Eri. Leg Guards +1", --11
         feet="Ahosi Leggings",--7
         neck="Moonbeam Necklace", --10
         ear1={name="Odnowa Earring", priority=4},
@@ -540,7 +540,7 @@ function init_gear_sets()
         head="Turms Cap +1",
         body="Runeist's Coat +3",
         hands="Regal Gauntlets",
-        legs="Carmine Cuisses +1",
+        legs="Turms Subligar +1",
         feet="Turms Leggings +1",
         neck="Bathy Choker +1",
         ear1="Sanare Earring",
@@ -557,7 +557,7 @@ function init_gear_sets()
         head="Fu. Bandeau +3", --6/0
         body="Runeist's Coat +3",
         hands="Turms Mittens +1",
-        legs="Carmine Cuisses +1",
+        legs="Turms Subligar +1",
         feet="Turms Leggings +1",
         neck="Futhark Torque +1", --6/6
         ear1="Sanare Earring",
@@ -603,20 +603,20 @@ function init_gear_sets()
         }
 
     sets.defense.MDT = {
-        sub="Refined Grip +1", --3/3
+        sub="Mensch Strap +1", --5/0
         ammo="Staunch Tathlum +1", --3/3
         head="Turms Cap +1",
         body="Runeist's Coat +3",
         hands="Turms Mittens +1",
-        legs="Eri. Leg Guards +1", --7/0
+        legs="Turms Subligar +1",
         feet="Turms Leggings +1",
         neck="Futhark Torque +1", --6/6
-        ear1="Etiolation Earring", --0/3
+        ear1="Odnowa Earring",
         ear2="Odnowa Earring +1", --0/2
         ring1="Gelatinous Ring +1", --7/(-1)
         ring2="Defending Ring", --10/10
         back=gear.RUN_HPD_Cape, --10/0
-        waist="Flume Belt +1", --4/0
+        waist="Engraved Belt",
         }
 
     sets.defense.HP = {
@@ -727,7 +727,8 @@ function init_gear_sets()
     sets.engaged.HighAcc.DT = set_combine(sets.engaged.HighAcc, sets.Hybrid)
     sets.engaged.STP.DT = set_combine(sets.engaged.STP, sets.Hybrid)
 
---[[sets.engaged.Aftermath.DT = {
+--[[
+    sets.engaged.Aftermath.DT = {
         head="Aya. Zucchetto +2",
         feet="Carmine Greaves +1",
         ear1="Sherida Earring",

@@ -78,7 +78,7 @@ function user_setup()
     state.WeaponskillMode:options('Normal', 'Acc')
     state.IdleMode:options('Normal', 'DT')
 
-    state.WeaponSet = M{['description']='Weapon Set', 'Annihilator', 'Fomalhaut', 'Gastraphetes'}
+    state.WeaponSet = M{['description']='Weapon Set', 'Annihilator', 'Fomalhaut'}
     state.CP = M(false, "Capacity Points Mode")
 
     DefaultAmmo = {['Yoichinoyumi'] = "Chrono Arrow",
@@ -473,12 +473,6 @@ function init_gear_sets()
         ring1={name="Chirich Ring +1", bag="wardrobe3"},
         ring2={name="Chirich Ring +1", bag="wardrobe4"},
         })
-
-    sets.midcast.RA.Gastra = {}
-    sets.midcast.RA.Gastra.Acc = set_combine(sets.midcast.RA.Gastra, {})
-    sets.midcast.RA.Gastra.HighAcc = set_combine(sets.midcast.RA.Gastra.Acc, {})
-    sets.midcast.RA.Gastra.Cricial = set_combine(sets.midcast.RA.Gastra.RA, {})
-    sets.midcast.RA.Gastra.STP = set_combine(sets.midcast.RA.Gastra.RA, {})
 
     sets.DoubleShot = {
         head="Arcadian Beret +3",
@@ -991,19 +985,6 @@ end
 -- Set eventArgs.handled to true if we don't want any automatic gear equipping to be done.
 function job_post_midcast(spell, action, spellMap, eventArgs)
     if spell.action_type == 'Ranged Attack' then
-        if spell.action_type == 'Ranged Attack' and state.WeaponSet.current == "Gastraphetes" then
-            if state.RangedMode.value == 'STP' then
-                equip(sets.midcast.RA.Gastra.STP)
-            elseif state.RangedMode.value == 'Acc' then
-                equip(sets.midcast.RA.Gastra.Acc)
-            elseif state.RangedMode.value == 'HighAcc' then
-                equip(sets.midcast.RA.Gastra.HighAcc)
-            elseif state.RangedMode.value == 'Critical' then
-                equip(sets.midcast.RA.Gastra.Critical)
-            else
-                equip(sets.midcast.RA.Gastra)
-            end                
-        end
         if buffactive['Double Shot'] then
             equip(sets.DoubleShot)
         end

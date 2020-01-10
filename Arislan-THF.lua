@@ -396,7 +396,7 @@ function init_gear_sets()
         head="Turms Cap +1",
         body="Malignance Tabard",
         hands="Turms Mittens +1",
-        legs="Malignance Tights",
+        legs="Turms Subligar +1",
         feet="Pill. Poulaines +3",
         neck="Bathy Choker +1",
         ear1="Eabani Earring",
@@ -416,16 +416,14 @@ function init_gear_sets()
         feet="Malignance Boots", --4/4
         neck="Warder's Charm +1",
         ear1="Sanare Earring",
-        ring1="Moonlight Ring", --5/5
+        ring1="Vengeful Ring",
         ring2="Defending Ring", --10/10
         back="Moonlight Cape", --6/6
         })
 
     sets.idle.Town = set_combine(sets.idle, {
         ammo="Yetshila +1",
-        head="Pill. Bonnet +3",
-        hands="Plun. Armlets +3",
-        legs="Plun. Culottes +3",
+        body="Pillager's Vest +3",
         neck="Combatant's Torque",
         ear1="Sherida Earring",
         ear2="Telos Earring",
