@@ -277,7 +277,7 @@ function init_gear_sets()
         waist="Flume Belt +1", --4/0
         }
 
-    sets.precast.CorsairRoll.Gun = set_combine(sets.precast.CorsairRoll.Engaged, {range="Compensator"})
+    sets.precast.CorsairRoll.Duration = {main={name="Rostam", bag="Wardrobe 2"}, range="Compensator"}
     sets.precast.CorsairRoll["Caster's Roll"] = set_combine(sets.precast.CorsairRoll, {legs="Chas. Culottes +1"})
     sets.precast.CorsairRoll["Courser's Roll"] = set_combine(sets.precast.CorsairRoll, {feet="Chass. Bottes +1"})
     sets.precast.CorsairRoll["Blitzer's Roll"] = set_combine(sets.precast.CorsairRoll, {head="Chass. Tricorne +1"})
@@ -634,7 +634,7 @@ function init_gear_sets()
         legs="Malignance Tights", --7/7
         feet="Malignance Boots", --4/4
         neck="Warder's Charm +1",
-        ring1="Vengeful Ring",
+        ring1="Purity Ring", --0/4
         ring2="Defending Ring", --10/10
         back="Moonlight Cape", --6/6
         })
@@ -674,7 +674,7 @@ function init_gear_sets()
         neck="Warder's Charm +1",
         ear1="Sanare Earring",
         ear2="Eabani Earring",
-        ring1="Vengeful Ring",
+        ring1="Purity Ring", --0/4
         ring2="Defending Ring", --10/10
         back=gear.COR_SNP_Cape,
         waist="Carrier's Sash",
@@ -1036,11 +1036,11 @@ function init_gear_sets()
 
     sets.TreasureHunter = {head="Volte Cap", hands=gear.Herc_TH_hands, waist="Chaac Belt"}
 
-	sets.LeadenMelee = {main="Rostam", sub="Tauret", ranged="Death Penalty"}
+	sets.LeadenMelee = {main={name="Rostam", bag="Wardrobe 4"}, sub="Tauret", ranged="Death Penalty"}
     sets.LeadenRanged = {main="Lanun Knife", sub="Tauret", ranged="Death Penalty"}
-    sets.LastStandMelee = {main="Rostam", sub="Blurred Knife +1", ranged="Fomalhaut"}
+    sets.LastStandMelee = {main="Naegling", sub="Blurred Knife +1", ranged="Fomalhaut"}
     sets.LastStandRanged = {main="Lanun Knife", sub="Nusku Shield", ranged="Fomalhaut"}
-    sets.SavageMelee = {main="Naegling", sub="Blurred Knife +1", ranged="Fomalhaut"}
+    sets.SavageMelee = {main="Naegling", sub="Blurred Knife +1", ranged="Ataktos"}
 
 end
 
@@ -1061,7 +1061,7 @@ function job_precast(spell, action, spellMap, eventArgs)
     -- Gear
     if (spell.type == 'CorsairRoll' or spell.english == "Double-Up") then
         if player.status ~= 'Engaged' then
-            equip(sets.precast.CorsairRoll.Gun)
+            equip(sets.precast.CorsairRoll.Duration)
         end
         if state.LuzafRing.value then
             equip(sets.precast.LuzafRing)

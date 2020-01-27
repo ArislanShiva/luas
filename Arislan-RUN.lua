@@ -84,7 +84,7 @@ function job_setup()
     rayke_duration = 35
     gambit_duration = 96
 
-    lockstyleset = 2
+    lockstyleset = 4
 
 end
 
@@ -160,7 +160,7 @@ function user_setup()
     send_command('bind ^numpad7 input /ws "Resolution" <t>')
     send_command('bind ^numpad8 input /ws "Upheaval" <t>')
     send_command('bind ^numpad9 input /ws "Dimidiation" <t>')
-    send_command('bind ^numpad5 input /ws "Ground Strike" <t>')
+    send_command('bind ^numpad5 input /ws "Ground Strike" <t>;input /p Ground Strike')
     send_command('bind ^numpad6 input /ws "Full Break" <t>')
     send_command('bind ^numpad1 input /ws "Herculean Slash" <t>')
     send_command('bind ^numpad2 input /ws "Shockwave" <t>')
@@ -240,13 +240,13 @@ function init_gear_sets()
         hands="Kurys Gloves", --9
         legs="Eri. Leg Guards +1", --11
         feet="Ahosi Leggings",--7
-        neck="Moonbeam Necklace", --10
-        ear1={name="Odnowa Earring", priority=4},
-        ear2={name="Odnowa Earring +1", priority=5},
-        ring1={name="Moonlight Ring", priority=6},
-        ring2={name="Eihwaz Ring", priority=2}, --5
-        back={name="Ogma's cape", augments={'HP+60','Eva.+20 /Mag. Eva.+20','HP+20','Enmity+10','Phys. dmg. taken-10%',}, priority=3}, 
-        waist={name="Kasiri Belt", priority=1}, --3
+        neck="Futhark Torque +1", --7
+        ear1={name="Odnowa Earring", priority=3},
+        ear2={name="Odnowa Earring +1", priority=2},
+        ring1={name="Moonlight Ring", priority=1},
+        ring2="Eihwaz Ring", --5
+        back=gear.RUN_HPD_Cape, --10
+        waist="Kasiri Belt", --3
         }
 
     sets.precast.JA['Vallation'] = {body="Runeist's Coat +3", legs="Futhark Trousers +3", back=gear.RUN_HPD_Cape,}
@@ -269,7 +269,6 @@ function init_gear_sets()
         ring2={name="Fenrir Ring +1", bag="wardrobe4"},
         back="Argocham. Mantle",
         waist="Eschan Stone",
-        --head="Volte Cap", hands=gear.Herc_TH_hands, feet="Volte Boots", waist="Chaac Belt"
         }
 
     sets.precast.JA['Swipe'] = sets.precast.JA['Lunge']
@@ -299,11 +298,11 @@ function init_gear_sets()
 
     sets.precast.FC.HP = set_combine(sets.precast.FC, {
         ammo="Aqreqaq Bomblet",
-        head="Rune. Bandeau +3",
-        body="Runeist's Coat +3",
-        ear1="Odnowa Earring",
-        ear2="Odnowa Earring +1",
-        ring1="Moonlight Ring",
+        head={name="Rune. Bandeau +3", priority=5},
+        body={name="Runeist's Coat +3", priority=1},
+        ear1={name="Odnowa Earring", priority=4},
+        ear2={name="Odnowa Earring +1", priority=3},
+        ring1={name="Moonlight Ring", priority=2},
         waist="Oneiros Belt",
         })
 
@@ -471,7 +470,7 @@ function init_gear_sets()
         hands="Runeist's Mitons +3",
         legs="Carmine Cuisses +1",
         neck="Incanter's Torque",
-        ear1="Augment. Earring",
+        ear1="Mimir Earring",
         ear2="Andoaa Earring",
         ring1={name="Stikini Ring +1", bag="wardrobe3"},
         ring2={name="Stikini Ring +1", bag="wardrobe4"},
@@ -623,16 +622,16 @@ function init_gear_sets()
         sub="Mensch Strap +1", --5/0
         ammo="Staunch Tathlum +1", --3/3
         head=gear.Adhemar_D_head, --4/0
-        body="Runeist's Coat +3",
-        hands="Regal Gauntlets",
+        body={name="Runeist's Coat +3", priority=2},
+        hands={name="Regal Gauntlets", priority=3},
         legs="Eri. Leg Guards +1", --7/0
         feet="Turms Leggings +1",
         neck="Futhark Torque +1", --6/6
-        ear1="Odnowa Earring", --0/1
-        ear2="Odnowa Earring +1", --0/2
-        ring1="Moonlight Ring", --5/5
+        ear1={name="Odnowa Earring", priority=6}, --0/1
+        ear2={name="Odnowa Earring +1", priority=5}, --0/2
+        ring1={name="Moonlight Ring", priority=4}, --5/5
         ring2="Defending Ring", --10/10
-        back="Moonlight Cape", --6/6
+        back={name="Moonlight Cape", priority=1}, --6/6
         waist="Flume Belt +1", --4/0
         }
 
@@ -789,14 +788,16 @@ function job_precast(spell, action, spellMap, eventArgs)
         eventArgs.cancel = true
         return
     end
-    if state.DefenseMode.value == 'HP' then
+    if state.DefenseMode.value == 'Physical' and state.PhysicalDefenseMode.current == 'HP' then
         currentSpell = spell.english
         eventArgs.handled = true
         if spell.action_type == 'Magic' then
             equip(sets.precast.FC.HP)
+            add_to_chat(1, 'Precast Swap Magic')
         elseif spell.action_type == 'Ability' then
             equip(sets.Enmity.HP)
 			equip(sets.precast.JA[currentSpell])
+            add_to_chat(1, 'Precast Swap Ability')
         end
 	else
         if spell.action_type == 'Ability' then
@@ -837,12 +838,13 @@ function job_precast(spell, action, spellMap, eventArgs)
 end
 
 function job_midcast(spell, action, spellMap, eventArgs)
-    if state.DefenseMode.value == 'HP' and spell.english ~= "Phalanx" then
+    if state.DefenseMode.value == 'Physical' and state.PhysicalDefenseMode.current == 'HP' and spell.english ~= "Phalanx" then
         eventArgs.handled = true
         if spell.action_type == 'Magic' then
-            if spell.English == 'Flash' or spell.English == 'Foil' or spell.English == 'Stun'
+            if spell.english == 'Flash' or spell.english == 'Foil' or spell.english == 'Stun'
                 or blue_magic_maps.Enmity:contains(spell.english) then
                 equip(sets.Enmity.HP)
+				add_to_chat(1, 'Midcast Magic Swap')
             elseif spell.skill == 'Enhancing Magic' then
                 equip(sets.midcast.EnhancingDuration)
             end

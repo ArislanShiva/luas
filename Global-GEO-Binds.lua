@@ -34,7 +34,7 @@
     --send_command('bind #8 input //send safiyeh /ma "Distract" <t>')
     send_command('bind #9 input //send safiyeh /ma "Paralyze" <t>')
     --send_command('bind #9 input //send safiyeh /ma "Sleep II" <t>')
-    --send_command('bind #0 input //send safiyeh /ma "Stun" <t>')
+    send_command('bind #0 input //send safiyeh /ma "Stun" <t>')
     --send_command('bind #0 input //send safiyeh /ma "Dispel" <t>')
     send_command('bind #0 input //send safiyeh /ma "Cure" Arislan')
 

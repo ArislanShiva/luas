@@ -416,7 +416,7 @@ function init_gear_sets()
         feet="Malignance Boots", --4/4
         neck="Warder's Charm +1",
         ear1="Sanare Earring",
-        ring1="Vengeful Ring",
+        ring1="Purity Ring", --0/4
         ring2="Defending Ring", --10/10
         back="Moonlight Cape", --6/6
         })

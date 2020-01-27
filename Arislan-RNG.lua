@@ -513,7 +513,7 @@ function init_gear_sets()
         legs="Malignance Tights", --7/7
         feet="Malignance Boots", --4/4
         neck="Warder's Charm +1",
-        ring1="Vengeful Ring",
+        ring1="Purity Ring", --0/4
         ring2="Defending Ring", --10/10
         back="Moonlight Cape", --6/6
         })
@@ -1057,11 +1057,11 @@ function job_buff_change(buff,gain)
 end
 
 function job_state_change(stateField, newValue, oldValue)
-    if state.WeaponLock.value == true then
-        disable('ranged')
-    else
-        enable('ranged')
-    end
+    --if state.WeaponLock.value == true then
+    --    disable('ranged')
+    --else
+    --    enable('ranged')
+   -- end
 
     equip(sets[state.WeaponSet.current])
 

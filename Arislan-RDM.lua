@@ -313,7 +313,7 @@ function init_gear_sets()
         ammo="Yetshila +1",
         head="Aya. Zucchetto +2",
         body="Ayanmo Corazza +2",
-        hands="Aya. Manopolas +2",
+        hands="Malignance Gloves",
         feet="Thereoid Greaves",
         ear1="Sherida Earring",
         ring1="Begrudging Ring",
@@ -322,6 +322,7 @@ function init_gear_sets()
         })
 
     sets.precast.WS['Chant du Cygne'].Acc = set_combine(sets.precast.WS['Chant du Cygne'], {
+        head="Malignance Chapeau",
         ear2="Mache Earring +1",
         ring1="Ramuh Ring +1",
         })
@@ -330,14 +331,12 @@ function init_gear_sets()
     sets.precast.WS['Vorpal Blade'].Acc = sets.precast.WS['Chant du Cygne'].Acc
 
     sets.precast.WS['Savage Blade'] = set_combine(sets.precast.WS, {
-        neck="Caro Necklace",
-        ear2="Sherida Earring",
+        neck="Dls. Torque +1",
         waist="Prosilio Belt +1",
         })
 
     sets.precast.WS['Savage Blade'].Acc = set_combine(sets.precast.WS['Savage Blade'], {
         neck="Combatant's Torque",
-        ear2="Telos Earring",
         waist="Grunfeld Rope",
         })
 
@@ -361,22 +360,34 @@ function init_gear_sets()
         ammo="Pemphredo Tathlum",
         head="Pixie Hairpin +1",
         body="Amalric Doublet +1",
-        hands="Amalric Gages +1",
+        hands="Jhakri Cuffs +2",
         legs="Amalric Slops +1",
         feet="Amalric Nails +1",
         neck="Baetyl Pendant",
-        ear1="Moonshade Earring",
+        ear1="Malignance Earring",
         ear2="Regal Earring",
         ring1="Archon Ring",
         ring2="Epaminondas's Ring",
         back=gear.RDM_INT_Cape,
-        waist="Refoccilation Stone",
+        waist="Orpheus Sash",
         }
 
     sets.precast.WS['Seraph Blade'] = set_combine(sets.precast.WS['Sanguine Blade'], {
         head="Merlinic Hood",
+        ear2="Moonshade Earring",
         ring1="Weather. Ring +1",
-        ring2="Epaminondas's Ring",
+        })
+
+    sets.precast.WS['Black Halo'] = set_combine(sets.precast.WS['Savage Blade'], {
+        ear2="Sherida Earring",
+        ring1="Rufescent Ring",
+        waist="Prosilio Belt +1",
+        })
+
+    sets.precast.WS['Black Halo'].Acc = set_combine(sets.precast.WS['Black Halo'], {
+        neck="Combatant's Torque",
+        ear2="Telos Earring",
+        waist="Grunfeld Rope",
         })
 
 
@@ -395,8 +406,8 @@ function init_gear_sets()
         }
 
     sets.midcast.Cure = {
-        main="Tamaxchi", --22/(-10)
-        sub="Sors Shield", --3/(-5)
+        main="Daybreak",
+        sub="Ammurapi Shield",
         ammo="Esper Stone +1", --0/(-5)
         head="Kaykaus Mitra +1", --11(+2)/(-6)
         body="Kaykaus Bliaut +1", --(+4)/(-6)
@@ -404,7 +415,7 @@ function init_gear_sets()
         legs="Atrophy Tights +3", --12
         feet="Kaykaus Boots +1", --11(+2)/(-12)
         neck="Incanter's Torque",
-        ear1="Mendi. Earring", --5
+        ear1="Malignance Earring",
         ear2="Roundel Earring", --5
         ring1="Lebeche Ring", --3/(-5)
         ring2="Haoma's Ring",
@@ -414,13 +425,12 @@ function init_gear_sets()
 
     sets.midcast.CureWeather = set_combine(sets.midcast.Cure, {
         main="Chatoyant Staff",
-        sub="Achaq Grip", --0/(-4)
+        sub="Enki Strap",
         back="Twilight Cape",
         waist="Hachirin-no-Obi",
         })
 
     sets.midcast.CureSelf = set_combine(sets.midcast.Cure, {
-        hands="Buremte Gloves", -- (13)
         neck="Phalaina Locket", -- 4(4)
         ring2="Asklepian Ring", -- (3)
         waist="Gishdubar Sash", -- (10)
@@ -464,7 +474,7 @@ function init_gear_sets()
         legs="Atrophy Tights +3",
         feet="Leth. Houseaux +1",
         neck="Incanter's Torque",
-        ear1="Augment. Earring",
+        ear1="Mimir Earring",
         ear2="Andoaa Earring",
         ring1={name="Stikini Ring +1", bag="wardrobe3"},
         ring2={name="Stikini Ring +1", bag="wardrobe4"},
@@ -547,8 +557,8 @@ function init_gear_sets()
 
      -- Custom spell classes
     sets.midcast.MndEnfeebles = {
-        main=gear.Grioavolr_MND,
-        sub="Enki Strap",
+        main="Daybreak",
+        sub="Ammurapi Shield",
         ammo="Regal Gem",
         head="Viti. Chapeau +3",
         body="Lethargy Sayon +1",
@@ -557,25 +567,27 @@ function init_gear_sets()
         feet="Vitiation Boots +3",
         neck="Dls. Torque +1",
         ear1="Malignance Earring",
-        ear2="Regal Earring",
+        ear2="Snotra Earring",
         ring1="Kishar Ring",
-        ring2="Globidonta Ring",
+        ring2={name="Stikini Ring +1", bag="wardrobe4"},
         back=gear.RDM_MND_Cape,
         waist="Luminary Sash",
         }
 
     sets.midcast.MndEnfeeblesAcc = set_combine(sets.midcast.MndEnfeebles, {
-        main="Maxentius",
+        main="Daybreak",
         sub="Ammurapi Shield",
         range="Ullr",
         ammo=empty,
         head="Atrophy Chapeau +3",
         body="Atrophy Tabard +3",
+        ear2="Regal Earring",
         ring1={name="Stikini Ring +1", bag="wardrobe3"},
         })
 
     sets.midcast.IntEnfeebles = set_combine(sets.midcast.MndEnfeebles, {
-        main=gear.Grioavolr_MB,
+        main="Maxentius",
+        sub="Ammurapi Shield",
         back=gear.RDM_INT_Cape,
         })
 
@@ -585,10 +597,13 @@ function init_gear_sets()
         range="Ullr",
         ammo=empty,
         body="Atrophy Tabard +3",
+        ear2="Regal Earring",
+        ring1={name="Stikini Ring +1", bag="wardrobe3"},
         ring2="Weather. Ring +1",
         })
 
     sets.midcast.SkillEnfeebles = set_combine(sets.midcast.MndEnfeebles, {
+        main=gear.Grioavolr_MND,
         sub="Mephitis Grip",
         head="Viti. Chapeau +3",
         body="Atrophy Tabard +3",
@@ -632,7 +647,7 @@ function init_gear_sets()
         ear1="Malignance Earring",
         ear2="Regal Earring",
         ring1={name="Stikini Ring +1", bag="wardrobe3"},
-        ring2={name="Stikini Ring +1", bag="wardrobe4"},
+        ring2="Evanescence Ring",
         back=gear.RDM_INT_Cape,
         waist="Luminary Sash",
         }
@@ -642,6 +657,7 @@ function init_gear_sets()
         feet="Merlinic Crackows",
         ear1="Hirudinea Earring",
         ring1="Archon Ring",
+        ring2="Evanescence Ring",
         waist="Fucho-no-obi",
         })
 
@@ -650,8 +666,8 @@ function init_gear_sets()
     sets.midcast['Bio III'] = set_combine(sets.midcast['Dark Magic'], {legs="Viti. Tights +3"})
 
     sets.midcast['Elemental Magic'] = {
-        main=gear.Grioavolr_MB,
-        sub="Enki Strap",
+        main="Daybreak",
+        sub="Ammurapi Shield",
         ammo="Pemphredo Tathlum",
         head="Merlinic Hood",
         body="Amalric Doublet +1",
@@ -675,8 +691,8 @@ function init_gear_sets()
         })
 
     sets.midcast['Elemental Magic'].Resistant = set_combine(sets.midcast['Elemental Magic'], {
-        main=gear.Grioavolr_MB,
-        sub="Enki Strap",
+        range="Ullr",
+        ammo=empty,
         legs="Merlinic Shalwar",
         feet="Merlinic Crackows",
         neck="Erra Pendant",
@@ -697,8 +713,6 @@ function init_gear_sets()
     -- Job-specific buff sets
     sets.buff.ComposureOther = {
         head="Leth. Chappel +1",
-        body="Lethargy Sayon +1",
-        --hands="Leth. Gantherots +1",
         legs="Leth. Fuseau +1",
         feet="Leth. Houseaux +1",
         }
@@ -751,7 +765,7 @@ function init_gear_sets()
         hands="Amalric Gages +1",
         neck="Dls. Torque +1",
         ear1="Malignance Earring",
-        ear2="Regal Earring",
+        ear2="Snotra Earring",
         back=gear.RDM_INT_Cape,
         waist="Luminary Sash",
         })
