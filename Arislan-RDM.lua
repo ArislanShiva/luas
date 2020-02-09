@@ -253,6 +253,7 @@ function init_gear_sets()
 
     sets.precast.FC.Cure = set_combine(sets.precast.FC, {
         ammo="Impatiens", --(2)
+        legs="Kaykaus Tights +1", --7
         ring1="Lebeche Ring", --(2)
         ring2="Weather. Ring +1", --5/(4)
         back="Perimede Cape", --(4)
@@ -406,18 +407,18 @@ function init_gear_sets()
         }
 
     sets.midcast.Cure = {
-        main="Daybreak",
-        sub="Ammurapi Shield",
+        main="Daybreak", --30
+        sub="Sors Shield", --3/(-5)
         ammo="Esper Stone +1", --0/(-5)
         head="Kaykaus Mitra +1", --11(+2)/(-6)
         body="Kaykaus Bliaut +1", --(+4)/(-6)
         hands="Kaykaus Cuffs +1", --11(+2)/(-6)
-        legs="Atrophy Tights +3", --12
+        legs="Kaykaus Tights +1", --11(+2)/(-6)
         feet="Kaykaus Boots +1", --11(+2)/(-12)
         neck="Incanter's Torque",
-        ear1="Malignance Earring",
-        ear2="Roundel Earring", --5
-        ring1="Lebeche Ring", --3/(-5)
+        ear1="Beatific Earring",
+        ear2="Meili Earring",
+        ring1="Sirona's Ring",
         ring2="Haoma's Ring",
         back=gear.RDM_MND_Cape, --(-10)
         waist="Bishop's Sash",
@@ -449,7 +450,7 @@ function init_gear_sets()
         legs="Atrophy Tights +3",
         feet="Vanya Clogs",
         neck="Incanter's Torque",
-        ear2="Healing Earring",
+        ear2="Meili Earring",
         ring1="Menelaus's Ring",
         ring2="Haoma's Ring",
         back=gear.RDM_MND_Cape,
@@ -535,8 +536,6 @@ function init_gear_sets()
         })
 
     sets.midcast.Aquaveil = set_combine(sets.midcast.EnhancingDuration, {
-        main="Vadose Rod",
-        sub="Ammurapi Shield",
         ammo="Staunch Tathlum +1",
         head="Amalric Coif +1",
         ear1="Halasz Earring",

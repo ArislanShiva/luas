@@ -73,6 +73,8 @@ end
 function job_setup()
     state.Buff['Afflatus Solace'] = buffactive['Afflatus Solace'] or false
     state.Buff['Afflatus Misery'] = buffactive['Afflatus Misery'] or false
+    state.Buff['Sublimation: Activated'] = buffactive['Sublimation: Activated'] or false
+
     state.RegenMode = M{['description']='Regen Mode', 'Duration', 'Potency'}
 
     lockstyleset = 1
@@ -197,7 +199,7 @@ function init_gear_sets()
         ring1="Kishar Ring", --4
         ring2="Weather. Ring +1", --6(4)
         back=gear.WHM_FC_Cape, --10
-        waist="Witful Belt", --3/(3)
+        waist="Embla Sash",
         }
 
     sets.precast.FC['Enhancing Magic'] = set_combine(sets.precast.FC, {
@@ -208,6 +210,7 @@ function init_gear_sets()
     sets.precast.FC['Healing Magic'] = set_combine(sets.precast.FC, {
         legs="Ebers Pant. +1", --13
         back="Perimede Cape",
+        waist="Witful Belt", --3/(3)
         })
 
     sets.precast.FC.StatusRemoval = sets.precast.FC['Healing Magic']
@@ -334,7 +337,7 @@ function init_gear_sets()
         feet="Vanya Clogs", --5
         neck="Malison Medallion", --10
         ear1="Beatific Earring",
-        --ear2="Healing Earring",
+        ear2="Healing Earring",
         ring1={name="Haoma's Ring", bag="wardrobe1"},
         ring2={name="Haoma's Ring", bag="wardrobe2"},
         back=gear.WHM_FC_Cape, --25
@@ -353,7 +356,7 @@ function init_gear_sets()
         legs="Telchine Braconi",
         feet="Theo. Duckbills +2",
         neck="Incanter's Torque",
-        --ear1="Augment. Earring",
+        --ear1="Mimir Earring",
         ear2="Andoaa Earring",
         ring1={name="Stikini Ring", bag="wardrobe1"},
         ring2={name="Stikini Ring", bag="wardrobe2"},
@@ -370,6 +373,7 @@ function init_gear_sets()
         legs="Telchine Braconi",
         feet="Telchine Pigaches",
         --feet="Theo. Duckbills +2",
+        waist="Embla Sash",
         }
 
     sets.midcast.Regen = set_combine(sets.midcast.EnhancingDuration, {
@@ -559,6 +563,8 @@ function init_gear_sets()
         })
 
     sets.idle.MEva = set_combine(sets.idle.DT, {
+        main="Daybreak",
+        sub="Genmei Shield",
         --ammo="Staunch Tathlum +1",
         head="Inyanga Tiara +2",
         body="Inyanga Jubbah +2",
@@ -601,6 +607,7 @@ function init_gear_sets()
     -- Buff sets: Gear that needs to be worn to actively enhance a current player buff.
     sets.buff['Divine Caress'] = {hands="Ebers Mitts +1", back="Mending Cape"}
     sets.buff['Devotion'] = {head="Piety Cap +1"}
+    sets.buff.Sublimation = {waist="Embla Sash"}
 
     sets.buff.Doom = {ring1={name="Saida Ring", bag="wardrobe1"}, ring2={name="Saida Ring", bag="wardrobe2"},}
 
@@ -668,6 +675,9 @@ end
 -------------------------------------------------------------------------------------------------------------------
 
 function job_buff_change(buff,gain)
+    if buff == "Sublimation: Activated" then
+        handle_equipping_gear(player.status)
+    end
     if buff == "doom" then
         if gain then
             equip(sets.buff.Doom)
@@ -749,6 +759,9 @@ end
 
 
 function customize_idle_set(idleSet)
+    if state.Buff['Sublimation: Activated'] then
+        idleSet = set_combine(idleSet, sets.buff.Sublimation)
+    end
     if player.mpp < 51 then
         idleSet = set_combine(idleSet, sets.latent_refresh)
     end
@@ -760,6 +773,11 @@ function customize_idle_set(idleSet)
     end
 
     return idleSet
+end
+
+-- Called by the 'update' self-command.
+function job_update(cmdParams, eventArgs)
+    update_sublimation()
 end
 
 -- Called by the 'update' self-command.
@@ -814,6 +832,10 @@ end
 -------------------------------------------------------------------------------------------------------------------
 -- Utility functions specific to this job.
 -------------------------------------------------------------------------------------------------------------------
+
+function update_sublimation()
+    state.Buff['Sublimation: Activated'] = buffactive['Sublimation: Activated'] or false
+end
 
 -- General handling of strategems in an Arts-agnostic way.
 -- Format: gs c scholar <strategem>

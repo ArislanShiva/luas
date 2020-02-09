@@ -28,6 +28,7 @@
     send_command('bind #0 input //send safiyeh /ma "Dispel" <t>')
 
     send_command('bind #q input //send safiyeh /ma "Light Arts" <me>')
+    send_command('bind #w input //send safiyeh /ma "Aspir" <t>')
     send_command('bind #e input //send safiyeh /ma "Haste" <t>')
     send_command('bind #r input //send safiyeh /ma "Refresh" <t>')
     send_command('bind #t input //send safiyeh /ma "Blink" <me>')

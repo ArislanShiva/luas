@@ -104,7 +104,7 @@ function user_setup()
 
     state.Etude = M{['description']='Etude', 'Sinewy Etude', 'Herculean Etude', 'Learned Etude', 'Sage Etude',
         'Quick Etude', 'Swift Etude', 'Vivacious Etude', 'Vital Etude', 'Dextrous Etude', 'Uncanny Etude',
-        'Spirited Etude', 'Logical Etude', 'Echanting Etude', 'Bewitching Etude'}
+        'Spirited Etude', 'Logical Etude', 'Enchanting Etude', 'Bewitching Etude'}
 
     state.WeaponLock = M(false, 'Weapon Lock')
     state.CP = M(false, "Capacity Points Mode")
@@ -214,6 +214,7 @@ function init_gear_sets()
     sets.precast.FC['Enhancing Magic'] = set_combine(sets.precast.FC, {waist="Siegel Sash"})
 
     sets.precast.FC.Cure = set_combine(sets.precast.FC, {
+        legs="Kaykaus Tights +1", --7
         feet="Kaykaus Boots +1", --0/7
         ear2="Mendi. Earring", --0/5
         })
@@ -362,17 +363,19 @@ function init_gear_sets()
 
     -- Other general spells and classes.
     sets.midcast.Cure = {
-        main="Chatoyant Staff", --10
-        sub="Achaq Grip",
+        main="Daybreak", --30
+        sub="Ammurapi Shield",
         head="Kaykaus Mitra +1", --11
         body="Kaykaus Bliaut +1", --(+4)/(-6)
         hands="Kaykaus Cuffs +1", --11(+2)/(-6)
-        legs="Chironic Hose", --8
+        legs="Kaykaus Tights +1", --11/(+2)/(-6)
         feet="Kaykaus Boots +1", --11(+2)/(-12)
         neck="Incanter's Torque",
-        ear2="Mendi. Earring", --5
-        ring1="Lebeche Ring", --3/(-5)
+        ear1="Beatific Earring",
+        ear2="Meili Earring",
+        ring1="Sirona's Ring",
         ring2="Haoma's Ring",
+        back="Solemnity Cape", --7
         waist="Bishop's Sash",
         }
         
@@ -384,7 +387,7 @@ function init_gear_sets()
         legs="Aya. Cosciales +2",
         feet="Vanya Clogs",
         neck="Incanter's Torque",
-        ear2="Healing Earring",
+        ear2="Meili Earring",
         ring1="Menelaus's Ring",
         ring2="Haoma's Ring",
         back=gear.BRD_Song_Cape,
@@ -407,7 +410,7 @@ function init_gear_sets()
         legs=gear.Telchine_ENH_legs,
         feet=gear.Telchine_ENH_feet,
         neck="Incanter's Torque",
-        ear1="Augment. Earring",
+        ear1="Mimir Earring",
         ear2="Andoaa Earring",
         ring1={name="Stikini Ring +1", bag="wardrobe3"},
         ring2={name="Stikini Ring +1", bag="wardrobe4"},

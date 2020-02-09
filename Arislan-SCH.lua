@@ -205,7 +205,7 @@ function init_gear_sets()
         head="Amalric Coif +1", --11
         body=gear.Merl_FC_body, --13
         hands="Acad. Bracers +3", --9
-        legs="Psycloth Lappas", --7
+        legs="Kaykaus Tights +1", --7
         feet="Peda. Loafers +3", --8
         neck="Orunmila's Torque", --5
         ear1="Malignance Earring", --4
@@ -218,7 +218,7 @@ function init_gear_sets()
 
     sets.precast.FC.Grimoire = {head="Peda. M.Board +3", feet="Acad. Loafers +3"}
     sets.precast.FC['Enhancing Magic'] = set_combine(sets.precast.FC, {waist="Siegel Sash"})
-    sets.precast.FC['Elemental Magic'] = set_combine(sets.precast.FC, {ear1="Barkaro. Earring"})
+    sets.precast.FC['Elemental Magic'] = set_combine(sets.precast.FC, {})
 
     sets.precast.FC.Cure = set_combine(sets.precast.FC, {
         feet="Kaykaus Boots +1", --7
@@ -291,19 +291,19 @@ function init_gear_sets()
     sets.midcast.FastRecast = sets.precast.FC
 
     sets.midcast.Cure = {
-        main="Musa", --22
-        sub="Khonsu", --(-5)
+        main="Daybreak", --30
+        sub="Sors Shield", --3/(-5)
         ammo="Esper Stone +1", --0/(-5)
         head="Kaykaus Mitra +1", --11(+2)/(-6)
         body="Kaykaus Bliaut +1", --(+4)/(-6)
         hands="Peda. Bracers +3", --(+3)/(-7)
-        legs="Acad. Pants +3", --15
+        legs="Kaykaus Tights +1", --11(+2)/(-6)
         feet="Kaykaus Boots +1", --11(+2)/(-12)
         neck="Incanter's Torque",
         ear1="Beatific Earring",
-        ear2="Regal Earring",
+        ear2="Meili Earring",
         ring1="Lebeche Ring", --3/(-5)
-        ring2="Haoma's Ring",
+        ring2="Sirona's Ring",
         back=gear.SCH_Cure_Cape, --10
         waist="Bishop's Sash",
         }
@@ -330,14 +330,14 @@ function init_gear_sets()
         legs="Acad. Pants +3",
         feet="Vanya Clogs",
         neck="Incanter's Torque",
-        ear2="Healing Earring",
+        ear2="Meili Earring",
         ring1="Menelaus's Ring",
         ring2="Haoma's Ring",
         waist="Bishop's Sash",
         }
 
     sets.midcast.Cursna = set_combine(sets.midcast.StatusRemoval, {
-        main=gear.Gada_ENF,
+        main=gear.Gada_ENH,
         sub="Ammurapi Shield",
         hands="Hieros Mittens",
         feet="Vanya Clogs",
@@ -357,7 +357,7 @@ function init_gear_sets()
         legs=gear.Telchine_ENH_legs,
         feet=gear.Telchine_ENH_feet,
         neck="Incanter's Torque",
-        ear1="Augment. Earring",
+        ear1="Mimir Earring",
         ear2="Andoaa Earring",
         ring1={name="Stikini Ring +1", bag="wardrobe3"},
         ring2={name="Stikini Ring +1", bag="wardrobe4"},
@@ -565,6 +565,8 @@ function init_gear_sets()
         })
 
     sets.midcast.LightHelix = set_combine(sets.midcast.Helix, {
+        main="Daybreak",
+        sub="Ammurapi Shield",
         ring2="Weather. Ring +1"
         })
 
@@ -731,15 +733,9 @@ end
 
 -- Run after the general midcast() is done.
 function job_post_midcast(spell, action, spellMap, eventArgs)
-    if spell.skill == 'Elemental Magic' or spell.english == "Kaustra" then
-        if (spell.element == world.day_element or spell.element == world.weather_element) then
-            equip(sets.Obi)
-            if buffactive['Klimaform'] and spell.element == world.weather_element then
-                equip(sets.buff['Klimaform'])
-            end
-        end
+    if spell.skill == 'Elemental Magic' then
         if spellMap == "Helix" then
-            --equip(sets.midcast['Elemental Magic'])
+            equip(sets.midcast['Elemental Magic'])
             if spell.english:startswith('Lumino') then
                 equip(sets.midcast.LightHelix)
             elseif spell.english:startswith('Nocto') then
@@ -750,6 +746,9 @@ function job_post_midcast(spell, action, spellMap, eventArgs)
             if state.HelixMode.value == 'Duration' then
                 equip(sets.Bookworm)
             end
+        end
+        if buffactive['Klimaform'] and spell.element == world.weather_element then
+            equip(sets.buff['Klimaform'])
         end
     end
     if spell.action_type == 'Magic' then
@@ -766,6 +765,23 @@ function job_post_midcast(spell, action, spellMap, eventArgs)
         equip(sets.magic_burst)
         if spell.english == "Impact" then
             equip(sets.midcast.Impact)
+        end
+    end
+    if spell.skill == 'Elemental Magic' or spell.english == "Kaustra" then
+        if spell.element == world.weather_element and (get_weather_intensity() == 2 and spell.element ~= elements.weak_to[world.day_element]) then
+            equip(sets.Obi)
+        -- Target distance under 1.7 yalms.
+        elseif spell.target.distance < (1.7 + spell.target.model_size) then
+            equip({waist="Orpheus's Sash"})
+        -- Matching day and weather.
+        elseif spell.element == world.day_element and spell.element == world.weather_element then
+            equip(sets.Obi)
+        -- Target distance under 8 yalms.
+        elseif spell.target.distance < (8 + spell.target.model_size) then
+            equip({waist="Orpheus's Sash"})
+        -- Match day or weather.
+        elseif spell.element == world.day_element or spell.element == world.weather_element then
+            equip(sets.Obi)
         end
     end
     if spell.skill == 'Enhancing Magic' then

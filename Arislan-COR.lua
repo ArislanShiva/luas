@@ -143,7 +143,7 @@ function user_setup()
 
     -- Additional local binds
     include('Global-Binds.lua') -- OK to remove this line
-    include('Global-GEO-Binds.lua') -- OK to remove this line
+    include('Global-WHM-Binds.lua') -- OK to remove this line
 
     if player.sub_job == 'NIN' or player.sub_job == 'DNC' then
         send_command('lua l gearinfo')
@@ -277,7 +277,7 @@ function init_gear_sets()
         waist="Flume Belt +1", --4/0
         }
 
-    sets.precast.CorsairRoll.Duration = {main={name="Rostam", bag="Wardrobe 2"}, range="Compensator"}
+    sets.precast.CorsairRoll.Duration = {main={name="Rostam", bag="Wardrobe 1"}, range="Compensator"}
     sets.precast.CorsairRoll["Caster's Roll"] = set_combine(sets.precast.CorsairRoll, {legs="Chas. Culottes +1"})
     sets.precast.CorsairRoll["Courser's Roll"] = set_combine(sets.precast.CorsairRoll, {feet="Chass. Bottes +1"})
     sets.precast.CorsairRoll["Blitzer's Roll"] = set_combine(sets.precast.CorsairRoll, {head="Chass. Tricorne +1"})
@@ -406,7 +406,8 @@ function init_gear_sets()
         legs="Samnuha Tights",
         feet="Mummu Gamash. +2",
         neck="Fotia Gorget",
-        ear2="Mache Earring +1",
+        ear1="Mache Earring +1",
+        ear2="Odr Earring",
         ring1="Regal Ring",
         ring2="Mummu Ring",
         back=gear.COR_TP_Cape,
@@ -723,7 +724,8 @@ function init_gear_sets()
     sets.engaged.HighAcc = set_combine(sets.engaged.MidAcc, {
         head="Carmine Mask +1",
         feet=gear.Herc_STP_feet,
-        ear2="Mache Earring +1",
+        ear1="Mache Earring +1",
+        ear2="Odr Earring",
         ring2="Ramuh Ring +1",
         waist="Olseni Belt",
         })
@@ -770,7 +772,8 @@ function init_gear_sets()
     sets.engaged.DW.HighAcc = set_combine(sets.engaged.DW.MidAcc, {
         head="Carmine Mask +1",
         feet=gear.Herc_STP_feet,
-        ear2="Mache Earring +1",
+        ear1="Mache Earring +1",
+        ear2="Odr Earring",
         ring2="Ramuh Ring +1",
         waist="Olseni Belt",
         })
@@ -812,8 +815,8 @@ function init_gear_sets()
     sets.engaged.DW.HighAcc.LowHaste = set_combine(sets.engaged.DW.MidAcc.LowHaste, {
         head="Carmine Mask +1",
         feet=gear.Herc_STP_feet,
-        ear1="Cessance Earring",
-        ear2="Mache Earring +1",
+        ear1="Mache Earring +1",
+        ear2="Odr Earring",
         ring2="Ramuh Ring +1",
         waist="Olseni Belt",
         })
@@ -857,8 +860,8 @@ function init_gear_sets()
         head="Carmine Mask +1",
         legs="Carmine Cuisses +1",
         feet=gear.Herc_STP_feet,
-        ear1="Cessance Earring",
-        ear2="Mache Earring +1",
+        ear1="Mache Earring +1",
+        ear2="Odr Earring",
         ring2="Ramuh Ring +1",
         waist="Olseni Belt",
         })
@@ -902,8 +905,8 @@ function init_gear_sets()
         head="Carmine Mask +1",
         legs="Carmine Cuisses +1",
         feet=gear.Herc_STP_feet,
-        ear1="Cessance Earring",
-        ear2="Mache Earring +1",
+        ear1="Mache Earring +1",
+        ear2="Odr Earring",
         ring2="Ramuh Ring +1",
         waist="Olseni Belt",
         })
@@ -947,7 +950,8 @@ function init_gear_sets()
         head="Carmine Mask +1",
         legs="Carmine Cuisses +1",
         feet=gear.Herc_STP_feet,
-        ear2="Mache Earring +1",
+        ear1="Mache Earring +1",
+        ear2="Odr Earring",
         ring2="Ramuh Ring +1",
         waist="Olseni Belt",
         })
@@ -1036,7 +1040,7 @@ function init_gear_sets()
 
     sets.TreasureHunter = {head="Volte Cap", hands=gear.Herc_TH_hands, waist="Chaac Belt"}
 
-	sets.LeadenMelee = {main={name="Rostam", bag="Wardrobe 4"}, sub="Tauret", ranged="Death Penalty"}
+	sets.LeadenMelee = {main={name="Rostam", bag="Wardrobe 4"}, sub={name="Rostam", bag="Wardrobe 1"}, ranged="Death Penalty"}
     sets.LeadenRanged = {main="Lanun Knife", sub="Tauret", ranged="Death Penalty"}
     sets.LastStandMelee = {main="Naegling", sub="Blurred Knife +1", ranged="Fomalhaut"}
     sets.LastStandRanged = {main="Lanun Knife", sub="Nusku Shield", ranged="Fomalhaut"}

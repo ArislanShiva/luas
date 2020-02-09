@@ -381,7 +381,7 @@ function init_gear_sets()
         body=gear.Adhemar_B_body,
         legs="Lustr. Subligar +1",
         feet="Lustra. Leggings +1",
-        ear1="Mache Earring +1",
+        ear1="Odr Earring",
         ring2="Epaminondas's Ring",
         back=gear.RUN_WS2_Cape,
         })
@@ -391,7 +391,7 @@ function init_gear_sets()
         body=gear.Adhemar_B_body,
         legs="Samnuha Tights",
         feet=gear.Herc_STP_feet,
-        ear2="Telos Earring",
+        ear2="Mache Earring +1",
         })
 
     sets.precast.WS['Dimidiation'].Uncapped = set_combine(sets.precast.WS['Dimidiation'], {
@@ -486,7 +486,7 @@ function init_gear_sets()
 
     sets.midcast['Phalanx'] = set_combine(sets.midcast.SpellInterrupt, {
         main="Deacon Sword", --4
-        sub="Chanter's Shield",
+        sub="Pukulatmuj +1",
         ammo="Staunch Tathlum +1", --(11)
         head="Fu. Bandeau +3", --7
         body=gear.Taeon_Phalanx_body, --3(10)
@@ -681,7 +681,8 @@ function init_gear_sets()
         body="Runeist's Coat +3",
         hands="Runeist's Mitons +3",
         legs="Carmine Cuisses +1",
-        ear1="Mache Earring +1",
+        ear1="Odr Earring",
+        ear2="Mache Earring +1",
         waist="Olseni Belt",
         })
 

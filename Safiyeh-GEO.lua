@@ -183,10 +183,7 @@ function init_gear_sets()
         waist="Siegel Sash",
         })
 
-    sets.precast.FC['Elemental Magic'] = set_combine(sets.precast.FC, {
-        hands="Bagua Mitaines +3",
-        ear1="Barkarole Earring",
-        })
+    sets.precast.FC['Elemental Magic'] = set_combine(sets.precast.FC, {hands="Bagua Mitaines +3"})
 
     sets.precast.FC.Cure = set_combine(sets.precast.FC, {
         ear1="Mendi. Earring", --5
@@ -266,7 +263,7 @@ function init_gear_sets()
         })
 
     sets.midcast.Cure = {
-        main=gear.Gada_ENF, --18/(-4)
+        main="Daybreak", --30
         sub="Sors Shield", --3/(-5)
         head="Vanya Hood", --10
         body="Vanya Robe", --7/(-6)
@@ -275,7 +272,7 @@ function init_gear_sets()
         feet="Vanya Clogs", --5
         neck="Incanter's Torque",
         ear1="Beatific Earring",
-        ear2="Mendi. Earring", --5
+        ear2="Meili Earring",
         ring1="Lebeche Ring", --3/(-5)
         ring2={name="Haoma's Ring", bag="wardrobe2"},
         back=gear.GEO_Cure_Cape, --0/(-10)
@@ -520,7 +517,6 @@ function init_gear_sets()
         legs="Bagua Pants +3",
         ear1="Malignance Earring",
         ear2="Regal Earring",
-        ring1="Kishar Ring",
         ring2="Weather. Ring +1",
         back=gear.GEO_Pet_Cape,
         })

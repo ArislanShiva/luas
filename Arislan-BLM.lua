@@ -151,7 +151,7 @@ function init_gear_sets()
         back="Perimede Cape",
         })
 
-    sets.precast.FC['Elemental Magic'] = set_combine(sets.precast.FC, {ear1="Barkaro. Earring"})
+    sets.precast.FC['Elemental Magic'] = set_combine(sets.precast.FC, {})
 
     sets.precast.FC.Cure = set_combine(sets.precast.FC, {
         ear1="Mendi. Earring", --5
@@ -251,7 +251,7 @@ function init_gear_sets()
         } -- Haste
 
     sets.midcast.Cure = {
-        main="Tamaxchi", --22/(-10)
+        main="Daybreak", --30
         sub="Sors Shield", --3/(-5)
         ammo="Esper Stone +1", --0/(-5)
         body="Vanya Robe",
@@ -274,7 +274,7 @@ function init_gear_sets()
         })
 
     sets.midcast.Cursna = set_combine(sets.midcast.Cure, {
-        main=gear.Gada_ENF,
+        main=gear.Gada_ENH,
         sub="Genmei Shield",
         head="Vanya Hood",
         body="Vanya Robe",
@@ -282,7 +282,7 @@ function init_gear_sets()
         feet="Vanya Clogs",
         neck="Debilis Medallion",
         ear1="Beatific Earring",
-        ear2="Healing Earring",
+        ear2="Meili Earring",
         ring1="Menelaus's Ring",
         ring2="Haoma's Ring",
         })
@@ -296,7 +296,7 @@ function init_gear_sets()
         legs=gear.Telchine_ENH_legs,
         feet=gear.Telchine_ENH_feet,
         neck="Incanter's Torque",
-        ear1="Augment. Earring",
+        ear1="Mimir Earring",
         ear2="Andoaa Earring",
         ring1={name="Stikini Ring +1", bag="wardrobe3"},
         ring2={name="Stikini Ring +1", bag="wardrobe4"},
