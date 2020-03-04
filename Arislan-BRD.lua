@@ -89,7 +89,7 @@ function user_setup()
     state.CastingMode:options('Normal', 'Resistant')
     state.IdleMode:options('Normal', 'DT', 'MEva')
 
-    state.LullabyMode = M{['description']='Lullaby Instrument', 'Horn', 'Harp'}
+    state.LullabyMode = M{['description']='Lullaby Instrument', 'Harp', 'Horn'}
 
     state.Carol = M{['description']='Carol', 
         'Fire Carol', 'Fire Carol II', 'Ice Carol', 'Ice Carol II', 'Wind Carol', 'Wind Carol II',
@@ -301,8 +301,8 @@ function init_gear_sets()
         
     -- Gear to enhance certain classes of songs.
     sets.midcast.Ballad = {legs="Fili Rhingrave +1"}
-    sets.midcast.Carol = {hands="Mousai Gages"}
-    sets.midcast.Etude = {head="Mousai Turban"}
+    sets.midcast.Carol = {hands="Mousai Gages +1"}
+    sets.midcast.Etude = {head="Mousai Turban +1"}
     sets.midcast.HonorMarch = {range="Marsyas", hands="Fili Manchettes +1"}
     sets.midcast.Lullaby = {body="Fili Hongreline +1", hands="Brioso Cuffs +3"}
     sets.midcast.Madrigal = {head="Fili Calot +1"}
@@ -311,7 +311,7 @@ function init_gear_sets()
     sets.midcast.Minne = {legs="Mousai Seraweels"}
     sets.midcast.Minuet = {body="Fili Hongreline +1"}
     sets.midcast.Paeon = {head="Brioso Roundlet +3"}
-    sets.midcast.Threnody = {body="Mousai Manteel"}
+    sets.midcast.Threnody = {body="Mousai Manteel +1"}
     sets.midcast['Adventurer\'s Dirge'] = {hands="Bihu Cuffs +3"}
     sets.midcast['Foe Sirvente'] = {head="Bihu Roundlet +3"}
     sets.midcast['Magic Finale'] = {legs="Fili Rhingrave +1"}
@@ -716,10 +716,10 @@ function job_precast(spell, action, spellMap, eventArgs)
         if string.find(spell.name,'Lullaby') then
             if buffactive.Troubadour then
                 equip({range="Marsyas"})
-            elseif state.LullabyMode.value == 'Horn' then
-                equip({range="Gjallarhorn"})
+            elseif state.LullabyMode.value == 'Harp' and spell.english:contains('Horde') then
+                equip({range="Blurred Harp +1"})
             else
-                equip({range="Daurdabla"})
+                equip({range="Gjallarhorn"})
             end
         end
     end
@@ -749,10 +749,10 @@ function job_midcast(spell, action, spellMap, eventArgs)
         if string.find(spell.name,'Lullaby') then
             if buffactive.Troubadour then
                 equip({range="Marsyas"})
-            elseif state.LullabyMode.value == 'Horn' then
-                equip({range="Gjallarhorn"})
+            elseif state.LullabyMode.value == 'Harp' and spell.english:contains('Horde') then
+                equip({range="Blurred Harp +1"})
             else
-                equip({range="Daurdabla"})
+                equip({range="Gjallarhorn"})
             end
         end
     end
