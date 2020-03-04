@@ -415,7 +415,7 @@ function init_gear_sets()
         ammo="Falcon Eye",
         head="Dampening Tam",
         body=gear.Adhemar_B_body,
-        hands=gear.Adhemar_B_hands,
+        hands=gear.Adhemar_A_hands,
         feet=gear.Herc_STP_feet,
         ear2="Mache Earring +1",
         })
@@ -483,7 +483,7 @@ function init_gear_sets()
         ring1="Epaminondas's Ring",
         ring2="Archon Ring",
         back=gear.BLU_MAB_Cape,
-        waist="Eschan Stone",
+        waist="Sacro Cord",
         }
 
     sets.precast.WS['True Strike'] = sets.precast.WS['Savage Blade']
@@ -553,6 +553,7 @@ function init_gear_sets()
     sets.midcast['Blue Magic'].PhysicalAcc = set_combine(sets.midcast['Blue Magic'].Physical, {
         ammo="Falcon Eye",
         head="Carmine Mask +1",
+        hands=gear.Adhemar_A_hands,
         legs="Carmine Cuisses +1",
         feet=gear.Herc_STP_feet,
         neck="Mirage Stole +2",
@@ -860,6 +861,7 @@ function init_gear_sets()
 
     sets.engaged.LowAcc = set_combine(sets.engaged, {
         head="Dampening Tam",
+        hands=gear.Adhemar_A_hands,
         neck="Combatant's Torque",
         ring1={name="Chirich Ring +1", bag="wardrobe3"},
         })
@@ -915,6 +917,7 @@ function init_gear_sets()
 
     sets.engaged.DW.LowAcc = set_combine(sets.engaged.DW, {
         head="Dampening Tam",
+        hands=gear.Adhemar_A_hands,
         neck="Combatant's Torque",
         ring1={name="Chirich Ring +1", bag="wardrobe3"},
         })
@@ -960,6 +963,7 @@ function init_gear_sets()
 
     sets.engaged.DW.LowAcc.LowHaste = set_combine(sets.engaged.DW.LowHaste, {
         head="Dampening Tam",
+        hands=gear.Adhemar_A_hands,
         neck="Combatant's Torque",
         ring1={name="Chirich Ring +1", bag="wardrobe3"},
         })
@@ -1005,6 +1009,7 @@ function init_gear_sets()
 
     sets.engaged.DW.LowAcc.MidHaste = set_combine(sets.engaged.DW.MidHaste, {
         head="Dampening Tam",
+        hands=gear.Adhemar_A_hands,
         neck="Combatant's Torque",
         ring1={name="Chirich Ring +1", bag="wardrobe3"},
         })
@@ -1053,6 +1058,7 @@ function init_gear_sets()
 
     sets.engaged.DW.LowAcc.HighHaste = set_combine(sets.engaged.DW.HighHaste, {
         head="Dampening Tam",
+        hands=gear.Adhemar_A_hands,
         neck="Combatant's Torque",
         ring1={name="Chirich Ring +1", bag="wardrobe3"},
         waist="Kentarch Belt +1",
@@ -1099,6 +1105,7 @@ function init_gear_sets()
 
     sets.engaged.DW.LowAcc.MaxHaste = set_combine(sets.engaged.DW.MaxHaste, {
         head="Dampening Tam",
+        hands=gear.Adhemar_A_hands,
         neck="Combatant's Torque",
         ring1={name="Chirich Ring +1", bag="wardrobe3"},
         })

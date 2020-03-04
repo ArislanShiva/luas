@@ -263,7 +263,7 @@ function init_gear_sets()
         ear2="Regal Earring",
         ring2="Archon Ring",
         back=gear.SCH_MAB_Cape,
-        waist="Yamabuki-no-Obi",
+        waist="Sacro Cord",
         })
 
 
@@ -487,7 +487,7 @@ function init_gear_sets()
         ring1="Freke Ring",
         ring2="Archon Ring",
         back=gear.SCH_MAB_Cape,
-        waist="Yamabuki-no-Obi",
+        waist="Sacro Cord",
         }
 
     sets.midcast.Drain = set_combine(sets.midcast['Dark Magic'], {
@@ -540,7 +540,7 @@ function init_gear_sets()
         legs="Peda. Pants +3",
         feet="Jhakri Pigaches +2",
         neck="Erra Pendant",
-        waist="Yamabuki-no-Obi",
+        waist="Sacro Cord",
         })
 
     sets.midcast.Impact = set_combine(sets.midcast['Elemental Magic'], {
@@ -556,7 +556,7 @@ function init_gear_sets()
         sub="Enki Strap",
         ammo="Ghastly Tathlum +1",
         neck="Argute Stole +1",
-        waist="Yamabuki-no-Obi",
+        waist="Sacro Cord",
         }
 
     sets.midcast.DarkHelix = set_combine(sets.midcast.Helix, {

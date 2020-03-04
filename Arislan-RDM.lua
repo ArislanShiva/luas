@@ -588,6 +588,7 @@ function init_gear_sets()
         main="Maxentius",
         sub="Ammurapi Shield",
         back=gear.RDM_INT_Cape,
+        waist="Sacro Cord",
         })
 
     sets.midcast.IntEnfeeblesAcc = set_combine(sets.midcast.IntEnfeebles, {
@@ -695,7 +696,7 @@ function init_gear_sets()
         legs="Merlinic Shalwar",
         feet="Merlinic Crackows",
         neck="Erra Pendant",
-        waist="Yamabuki-no-Obi",
+        waist="Sacro Cord",
         })
 
     sets.midcast.Impact = set_combine(sets.midcast['Elemental Magic'], {

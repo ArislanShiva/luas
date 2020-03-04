@@ -216,7 +216,7 @@ function init_gear_sets()
         ring1="Epaminondas's Ring",
         ring2="Archon Ring",
         back=gear.BLM_MAB_Cape,
-        waist="Yamabuki-no-Obi",
+        waist="Sacro Cord",
         } -- INT
 
     sets.precast.WS['Myrkr'] = {
@@ -428,7 +428,7 @@ function init_gear_sets()
         ear2="Regal Earring",
         ring1="Mephitas's Ring +1",
         back=gear.BLM_Death_Cape, --5
-        waist="Yamabuki-no-Obi",
+        waist="Sacro Cord",
         }
 
     sets.midcast.Death.Resistant = set_combine(sets.midcast.Death, {
@@ -484,7 +484,7 @@ function init_gear_sets()
         sub="Khonsu",
         legs="Merlinic Shalwar",
         neck="Sanctity Necklace",
-        waist="Yamabuki-no-Obi",
+        waist="Sacro Cord",
         })
 
     sets.midcast['Elemental Magic'].Spaekona = set_combine(sets.midcast['Elemental Magic'], {

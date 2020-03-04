@@ -266,6 +266,7 @@ function init_gear_sets()
         } -- default set
 
     sets.precast.WS.Acc = set_combine(sets.precast.WS, {
+        hands=gear.Adhemar_A_hands,
         legs=gear.Herc_WS_legs,
         feet=gear.Herc_STP_feet,
         ear2="Telos Earring",
@@ -320,7 +321,7 @@ function init_gear_sets()
         head="Hachiya Hatsu. +3",
         body="Samnuha Coat",
         hands="Leyline Gloves",
-        legs=gear.Herc_MAB_legs,
+        legs=gear.Herc_MWS_legs,
         feet=gear.Herc_MAB_feet,
         neck="Baetyl Pendant",
         ear1="Crematio Earring",
@@ -398,11 +399,11 @@ function init_gear_sets()
         }
 
     sets.midcast.RA = {
-        head="Mummu Bonnet +2",
-        body="Mummu Jacket +2",
-        hands=gear.Adhemar_C_hands,
+        head="Malignance Chapeau",
+        body="Malignance Tabard",
+        hands="Malignance Gloves",
         legs="Malignance Tights",
-        feet="Mummu Gamash. +2",
+        feet="Malignance Boots",
         neck="Iskur Gorget",
         ear1="Enervating Earring",
         ear2="Telos Earring",
@@ -505,7 +506,7 @@ function init_gear_sets()
         } -- 39%
 
     sets.engaged.LowAcc = set_combine(sets.engaged, {
-
+        hands=gear.Adhemar_A_hands,
         })
 
     sets.engaged.MidAcc = set_combine(sets.engaged.LowAcc, {
@@ -542,7 +543,7 @@ function init_gear_sets()
         } -- 31%
 
     sets.engaged.LowAcc.LowHaste = set_combine(sets.engaged.LowHaste, {
-
+        hands=gear.Adhemar_A_hands,
         })
 
     sets.engaged.MidAcc.LowHaste = set_combine(sets.engaged.LowAcc.LowHaste, {
@@ -582,7 +583,7 @@ function init_gear_sets()
         } -- 22%
 
     sets.engaged.LowAcc.MidHaste = set_combine(sets.engaged.MidHaste, {
-
+        hands=gear.Adhemar_A_hands,
         })
 
     sets.engaged.MidAcc.MidHaste = set_combine(sets.engaged.LowAcc.MidHaste, {
@@ -623,6 +624,7 @@ function init_gear_sets()
 
     sets.engaged.LowAcc.HighHaste = set_combine(sets.engaged.HighHaste, {
         head="Dampening Tam",
+        hands=gear.Adhemar_A_hands,
         })
 
     sets.engaged.MidAcc.HighHaste = set_combine(sets.engaged.LowAcc.HighHaste, {
@@ -664,6 +666,7 @@ function init_gear_sets()
 
     sets.engaged.LowAcc.MaxHaste = set_combine(sets.engaged.MaxHaste, {
         head="Dampening Tam",
+        hands=gear.Adhemar_A_hands,
         waist="Kentarch Belt +1",
         })
 

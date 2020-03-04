@@ -547,7 +547,7 @@ function init_gear_sets()
     sets.midcast.IntEnfeebles = set_combine(sets.midcast.MndEnfeebles, {
         main="Yagrush",
         sub="Ammurapi Shield",
-        waist="Yamabuki-no-Obi",
+        waist="Sacro Cord",
         })
 
     sets.midcast.Dispelga = set_combine(sets.midcast.IntEnfeebles, {main="Daybreak", sub="Ammurapi Shield"})

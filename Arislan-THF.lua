@@ -191,33 +191,8 @@ function init_gear_sets()
         waist="Chaac Belt", --1
         }
 
-    sets.buff['Sneak Attack'] = {
-        ammo="Yetshila +1",
-        head="Pill. Bonnet +3",
-        body="Pillager's Vest +3",
-        hands=gear.Adhemar_B_hands,
-        legs="Lustr. Subligar +1",
-        feet="Lustra. Leggings +1",
-        neck="Caro Necklace",
-        ear1="Sherida Earring",
-        ear2="Mache Earring +1",
-        ring1="Regal Ring",
-        ring2="Ramuh Ring +1",
-        back=gear.THF_TP_Cape,
-        }
-
-    sets.buff['Trick Attack'] = {
-        ammo="Yetshila +1",
-        head="Pill. Bonnet +3",
-        body="Pillager's Vest +3",
-        hands="Malignance Gloves",
-        legs="Malignance Tights",
-        feet="Meg. Jam. +2",
-        ring1="Regal Ring",
-        ring2="Ilabrat Ring",
-        back=gear.THF_TP_Cape,
-        waist="Svelt. Gouriz +1",
-        }
+    sets.buff['Sneak Attack'] = {}
+    sets.buff['Trick Attack'] = {}
 
     -- Actions we want to use to tag TH.
     sets.precast.Step = sets.TreasureHunter
@@ -360,7 +335,7 @@ function init_gear_sets()
         head=gear.Herc_MAB_head,
         body="Samnuha Coat",
         hands="Leyline Gloves",
-        legs=gear.Herc_MAB_legs,
+        legs=gear.Herc_MWS_legs,
         feet=gear.Herc_MAB_feet,
         neck="Baetyl Pendant",
         ear1="Crematio Earring",
@@ -457,7 +432,7 @@ function init_gear_sets()
         ammo="Yamarang",
         head=gear.Adhemar_B_head,
         body=gear.Adhemar_B_body,
-        hands=gear.Adhemar_B_hands,
+        hands=gear.Adhemar_A_hands,
         legs="Samnuha Tights",
         feet=gear.Herc_TA_feet,
         neck="Anu Torque",
@@ -508,7 +483,7 @@ function init_gear_sets()
         ammo="Yamarang",
         head=gear.Adhemar_B_head,
         body=gear.Adhemar_B_body, -- 6
-        hands=gear.Adhemar_B_hands,
+        hands=gear.Adhemar_A_hands,
         legs="Samnuha Tights",
         feet=gear.Taeon_DW_feet, --9
         neck="Erudit. Necklace",
@@ -554,7 +529,7 @@ function init_gear_sets()
         ammo="Yamarang",
         head=gear.Adhemar_B_head,
         body=gear.Adhemar_B_body, -- 6
-        hands=gear.Adhemar_B_hands,
+        hands=gear.Adhemar_A_hands,
         legs="Samnuha Tights",
         feet=gear.Taeon_DW_feet, --9
         neck="Erudit. Necklace",
@@ -599,7 +574,7 @@ function init_gear_sets()
         ammo="Yamarang",
         head=gear.Adhemar_B_head,
         body="Pillager's Vest +3",
-        hands=gear.Adhemar_B_hands,
+        hands=gear.Adhemar_A_hands,
         legs="Samnuha Tights",
         feet=gear.Herc_TA_feet,
         neck="Erudit. Necklace",
@@ -645,7 +620,7 @@ function init_gear_sets()
         ammo="Yamarang",
         head=gear.Adhemar_B_head,
         body="Pillager's Vest +3",
-        hands=gear.Adhemar_B_hands,
+        hands=gear.Adhemar_A_hands,
         legs="Samnuha Tights",
         feet=gear.Herc_TA_feet,
         neck="Erudit. Necklace",
@@ -691,7 +666,7 @@ function init_gear_sets()
         ammo="Yamarang",
         head=gear.Adhemar_B_head,
         body="Pillager's Vest +3",
-        hands=gear.Adhemar_B_hands,
+        hands=gear.Adhemar_A_hands,
         legs="Samnuha Tights",
         feet=gear.Herc_TA_feet,
         neck="Erudit. Necklace",

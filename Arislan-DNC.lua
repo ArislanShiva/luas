@@ -407,7 +407,7 @@ function init_gear_sets()
     sets.precast.WS['Pyrrhic Kleos'].Acc = set_combine(sets.precast.WS['Pyrrhic Kleos'], {
         ammo="C. Palug Stone",
         head="Dampening Tam",
-        hands=gear.Adhemar_B_hands,
+        hands=gear.Adhemar_A_hands,
         legs=gear.Herc_WS_legs,
         feet=gear.Herc_STP_feet,
         ring2="Ramuh Ring +1",
@@ -574,6 +574,7 @@ function init_gear_sets()
 
     sets.engaged.LowAcc = set_combine(sets.engaged, {
         head="Dampening Tam",
+        hands=gear.Adhemar_A_hands,
         })
 
     sets.engaged.MidAcc = set_combine(sets.engaged.LowAcc, {
@@ -622,6 +623,7 @@ function init_gear_sets()
 
     sets.engaged.DW.LowAcc = set_combine(sets.engaged.DW, {
         head="Dampening Tam",
+        hands=gear.Adhemar_A_hands,
         })
 
     sets.engaged.DW.MidAcc = set_combine(sets.engaged.DW.LowAcc, {
@@ -665,6 +667,7 @@ function init_gear_sets()
 
     sets.engaged.DW.LowAcc.LowHaste = set_combine(sets.engaged.DW.LowHaste, {
         head="Dampening Tam",
+        hands=gear.Adhemar_A_hands,
         })
 
     sets.engaged.DW.MidAcc.LowHaste = set_combine(sets.engaged.DW.LowAcc.LowHaste, {
@@ -709,6 +712,7 @@ function init_gear_sets()
 
     sets.engaged.DW.LowAcc.MidHaste = set_combine(sets.engaged.DW.MidHaste, {
         head="Dampening Tam",
+        hands=gear.Adhemar_A_hands,
         })
 
     sets.engaged.DW.MidAcc.MidHaste = set_combine(sets.engaged.DW.LowAcc.MidHaste, {
@@ -753,6 +757,7 @@ function init_gear_sets()
 
     sets.engaged.DW.LowAcc.HighHaste = set_combine(sets.engaged.DW.HighHaste, {
         head="Dampening Tam",
+        hands=gear.Adhemar_A_hands,
         waist="Kentarch Belt +1",
         })
 
@@ -798,6 +803,7 @@ function init_gear_sets()
 
     sets.engaged.DW.LowAcc.MaxHaste = set_combine(sets.engaged.DW.MaxHaste, {
         head="Dampening Tam",
+        hands=gear.Adhemar_A_hands,
         ear2="Telos Earring",
         waist="Kentarch Belt +1",
         })

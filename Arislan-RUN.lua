@@ -241,7 +241,7 @@ function init_gear_sets()
         legs="Eri. Leg Guards +1", --11
         feet="Ahosi Leggings",--7
         neck="Futhark Torque +1", --7
-        ear1={name="Odnowa Earring", priority=3},
+        ear1={name="Tuisto Earring", priority=3},
         ear2={name="Odnowa Earring +1", priority=2},
         ring1={name="Moonlight Ring", priority=1},
         ring2="Eihwaz Ring", --5
@@ -288,7 +288,7 @@ function init_gear_sets()
         legs="Aya. Cosciales +2", --6
         feet="Carmine Greaves +1", --8
         neck="Orunmila's Torque", --5
-        ear1="Odnowa Earring",
+        ear1="Tuisto Earring",
         ear2="Odnowa Earring +1",
         ring1="Moonlight Ring",
         ring2="Weather. Ring +1", --6(4)
@@ -300,7 +300,7 @@ function init_gear_sets()
         ammo="Aqreqaq Bomblet",
         head={name="Rune. Bandeau +3", priority=5},
         body={name="Runeist's Coat +3", priority=1},
-        ear1={name="Odnowa Earring", priority=4},
+        ear1={name="Tuisto Earring", priority=4},
         ear2={name="Odnowa Earring +1", priority=3},
         ring1={name="Moonlight Ring", priority=2},
         waist="Oneiros Belt",
@@ -363,6 +363,7 @@ function init_gear_sets()
 
     sets.precast.WS['Resolution'].Acc = set_combine(sets.precast.WS['Resolution'], {
         head=gear.Adhemar_B_head,
+        hands=gear.Adhemar_A_hands,
         legs="Meg. Chausses +2",
         feet=gear.Herc_STP_feet,
         ear2="Telos Earring",
@@ -493,7 +494,7 @@ function init_gear_sets()
         hands=gear.Taeon_Phalanx_hands, --3(10)
         legs=gear.Taeon_Phalanx_legs, --3(10)
         feet=gear.Taeon_Phalanx_feet, --3(10)
-        ear1="Odnowa Earring",
+        ear1="Tuisto Earring",
         ear2="Odnowa Earring +1",
         ring1="Moonlight Ring",
         back=gear.RUN_FC_Cape, --(10)
@@ -627,7 +628,7 @@ function init_gear_sets()
         legs="Eri. Leg Guards +1", --7/0
         feet="Turms Leggings +1",
         neck="Futhark Torque +1", --6/6
-        ear1={name="Odnowa Earring", priority=6}, --0/1
+        ear1={name="Tuisto Earring", priority=6}, --0/1
         ear2={name="Odnowa Earring +1", priority=5}, --0/2
         ring1={name="Moonlight Ring", priority=4}, --5/5
         ring2="Defending Ring", --10/10
@@ -665,6 +666,7 @@ function init_gear_sets()
 
     sets.engaged.LowAcc = set_combine(sets.engaged, {
         head="Dampening Tam",
+        hands=gear.Adhemar_A_hands,
         neck="Combatant's Torque",
         })
 
@@ -742,7 +744,7 @@ function init_gear_sets()
     sets.engaged.Aftermath.DT = {
         head="Aya. Zucchetto +2",
         body="Ashera Harness",
-        hands=gear.Adhemar_B_hands,
+        hands=gear.Adhemar_A_hands,
         legs="Meg. Chausses +2",
         feet=gear.Herc_STP_feet,
         neck="Futhark Torque +1",

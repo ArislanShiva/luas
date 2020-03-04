@@ -192,7 +192,7 @@ function init_gear_sets()
     sets.precast.FC = {
         ammo="Sapience Orb", --2
         head="Carmine Mask +1", --14
-        body=gear.Taeon_FC_body, --8
+        body="Sacro Breastplate", --10
         hands="Leyline Gloves", --8
         legs="Aya. Cosciales +2", --6
         feet="Carmine Greaves +1", --8
@@ -333,6 +333,7 @@ function init_gear_sets()
 
     sets.precast.WS['Raiden Thrust'] = set_combine(sets.precast.WS, {
         ammo="Pemphredo Tathlum",
+        body="Sacro Breastplate",
         hands="Carmine Fin. Ga. +1",
         ear1="Hermetic Earring",
         ear2="Friomisi Earring",
@@ -392,7 +393,7 @@ function init_gear_sets()
     sets.idle = {
         ammo="Staunch Tathlum +1", --3/3
         head="Hjarrandi Helm", --10/10
-        body="Hjarrandi Breast.", --12/12
+        body="Sacro Breastplate",
         hands="Sulev. Gauntlets +2", --5/5
         legs="Carmine Cuisses +1",
         feet="Ptero. Greaves +3",
