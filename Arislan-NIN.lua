@@ -368,7 +368,7 @@ function init_gear_sets()
         neck="Sanctity Necklace",
         ring1={name="Stikini Ring +1", bag="wardrobe3"},
         ring2={name="Stikini Ring +1", bag="wardrobe4"},
-        ear1="Hermetic Earring",
+        ear1="Enchntr. Earring +1",
         })
 
     sets.midcast.EnfeeblingNinjutsu = {
@@ -379,7 +379,7 @@ function init_gear_sets()
         legs="Mummu Kecks +2",
         feet="Hachiya Kyahan +3",
         neck="Sanctity Necklace",
-        ear1="Hermetic Earring",
+        ear1="Enchntr. Earring +1",
         ear2="Digni. Earring",
         ring1={name="Stikini Ring +1", bag="wardrobe3"},
         ring2={name="Stikini Ring +1", bag="wardrobe4"},

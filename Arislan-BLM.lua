@@ -364,7 +364,7 @@ function init_gear_sets()
         feet="Skaoi Boots",
         neck="Erra Pendant",
         ear1="Malignance Earring",
-        ear2="Regal Earring",
+        ear2="Vor Earring",
         ring1={name="Stikini Ring +1", bag="wardrobe3"},
         ring2={name="Stikini Ring +1", bag="wardrobe4"},
         back=gear.BLM_FC_Cape,

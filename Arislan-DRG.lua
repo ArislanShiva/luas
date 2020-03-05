@@ -335,7 +335,7 @@ function init_gear_sets()
         ammo="Pemphredo Tathlum",
         body="Sacro Breastplate",
         hands="Carmine Fin. Ga. +1",
-        ear1="Hermetic Earring",
+        ear1="Crematio Earring",
         ear2="Friomisi Earring",
         ring1="Shiva Ring +1",
         back="Argocham. Mantle",

@@ -438,7 +438,7 @@ function init_gear_sets()
         feet="Brioso Slippers +3",
         neck="Mnbw. Whistle +1",
         ear1="Digni. Earring",
-        ear2="Regal Earring",
+        ear2="Vor Earring",
         ring1="Kishar Ring",
         ring2={name="Stikini Ring +1", bag="wardrobe4"},
         waist="Luminary Sash",

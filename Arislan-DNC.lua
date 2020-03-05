@@ -294,7 +294,7 @@ function init_gear_sets()
         feet="Mummu Gamash. +2",
         neck="Etoile Gorget +1",
         ear1="Digni. Earring",
-        ear2="Hermetic Earring",
+        ear2="Enchntr. Earring +1",
         ring1={name="Stikini Ring +1", bag="wardrobe3"},
         ring2="Weather. Ring +1",
         waist="Eschan Stone",

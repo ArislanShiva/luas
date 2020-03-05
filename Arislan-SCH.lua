@@ -437,7 +437,7 @@ function init_gear_sets()
         feet="Acad. Loafers +3",
         neck="Argute Stole +1",
         ear1="Malignance Earring",
-        ear2="Regal Earring",
+        ear2="Vor Earring",
         ring1="Kishar Ring",
         ring2={name="Stikini Ring +1", bag="wardrobe4"},
         back=gear.SCH_FC_Cape,

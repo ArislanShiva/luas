@@ -613,6 +613,7 @@ function init_gear_sets()
         ring1={name="Stikini Ring +1", bag="wardrobe3"},
         ring2={name="Stikini Ring +1", bag="wardrobe4"},
         ear1="Enfeebling Earring",
+        ear2="Vor Earring",
         waist="Rumination Sash",
         })
 

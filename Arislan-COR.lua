@@ -143,7 +143,7 @@ function user_setup()
 
     -- Additional local binds
     include('Global-Binds.lua') -- OK to remove this line
-    include('Global-WHM-Binds.lua') -- OK to remove this line
+    include('Global-GEO-Binds.lua') -- OK to remove this line
 
     if player.sub_job == 'NIN' or player.sub_job == 'DNC' then
         send_command('lua l gearinfo')
@@ -534,7 +534,7 @@ function init_gear_sets()
         legs="Malignance Tights",
         feet="Laksa. Boots +3",
         neck="Comm. Charm +1",
-        ear1="Hermetic Earring",
+        ear1="Enchntr. Earring +1",
         ear2="Digni. Earring",
         ring1="Regal Ring",
         ring2="Weather. Ring +1",
@@ -1046,7 +1046,7 @@ function init_gear_sets()
 
     sets.TreasureHunter = {head="Volte Cap", hands=gear.Herc_TH_hands, waist="Chaac Belt"}
 
-	sets.LeadenMelee = {main={name="Rostam", bag="Wardrobe 4"}, sub={name="Rostam", bag="Wardrobe 1"}, ranged="Death Penalty"}
+	sets.LeadenMelee = {main={name="Rostam", bag="Wardrobe 4"}, sub="Tauret"}
     sets.LeadenRanged = {main="Lanun Knife", sub="Tauret", ranged="Death Penalty"}
     sets.LastStandMelee = {main="Naegling", sub="Blurred Knife +1", ranged="Fomalhaut"}
     sets.LastStandRanged = {main="Lanun Knife", sub="Nusku Shield", ranged="Fomalhaut"}

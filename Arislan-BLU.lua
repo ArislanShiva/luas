@@ -656,7 +656,6 @@ function init_gear_sets()
         ring2={name="Stikini Ring +1", bag="wardrobe4"},
         back=gear.BLU_MAB_Cape,
         waist="Luminary Sash",
-		head="Volte Cap", hands=gear.Herc_TH_hands, waist="Chaac Belt",
         }
 
     sets.midcast['Blue Magic'].Breath = set_combine(sets.midcast['Blue Magic'].Magical, {head="Luh. Keffiyeh +3"})
@@ -767,6 +766,10 @@ function init_gear_sets()
     sets.midcast.Protectra = sets.midcast.Protect
     sets.midcast.Shell = sets.midcast.Protect
     sets.midcast.Shellra = sets.midcast.Protect
+
+    sets.midcast['Enfeebling Magic'] = set_combine(sets.midcast['Blue Magic'].MagicAccuracy, {
+        ear2="Vor Earring",
+        })
 
     sets.midcast.Utsusemi = sets.midcast.SpellInterrupt
 
