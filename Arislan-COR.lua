@@ -368,7 +368,6 @@ function init_gear_sets()
     sets.precast.WS['Last Stand'] = sets.precast.WS
 
     sets.precast.WS['Last Stand'].Acc = set_combine(sets.precast.WS['Last Stand'], {
-        feet=gear.Herc_RA_feet,
         neck="Iskur Gorget",
         ear2="Telos Earring",
         ring2="Hajduk Ring +1",
@@ -382,7 +381,7 @@ function init_gear_sets()
         hands="Carmine Fin. Ga. +1",
         legs=gear.Herc_MWS_legs,
         feet="Lanun Bottes +3",
-        neck="Comm. Charm +1",
+        neck="Comm. Charm +2",
         ear1="Crematio Earring",
         ear2="Friomisi Earring",
         ring1="Dingir Ring",
@@ -533,7 +532,7 @@ function init_gear_sets()
         hands="Laksa. Gants +3",
         legs="Malignance Tights",
         feet="Laksa. Boots +3",
-        neck="Comm. Charm +1",
+        neck="Comm. Charm +2",
         ear1="Enchntr. Earring +1",
         ear2="Digni. Earring",
         ring1="Regal Ring",
@@ -1046,7 +1045,7 @@ function init_gear_sets()
 
     sets.TreasureHunter = {head="Volte Cap", hands=gear.Herc_TH_hands, waist="Chaac Belt"}
 
-	sets.LeadenMelee = {main={name="Rostam", bag="Wardrobe 4"}, sub="Tauret"}
+	sets.LeadenMelee = {main={name="Rostam", bag="Wardrobe 4"}, sub="Tauret", ranged="Death Penalty"}
     sets.LeadenRanged = {main="Lanun Knife", sub="Tauret", ranged="Death Penalty"}
     sets.LastStandMelee = {main="Naegling", sub="Blurred Knife +1", ranged="Fomalhaut"}
     sets.LastStandRanged = {main="Lanun Knife", sub="Nusku Shield", ranged="Fomalhaut"}
@@ -1099,11 +1098,7 @@ function job_precast(spell, action, spellMap, eventArgs)
 end
 
 function job_post_precast(spell, action, spellMap, eventArgs)
-    if (spell.type == 'CorsairRoll' or spell.english == "Double-Up") then
-        if player.status ~= 'Engaged' then
-            equip(sets.precast.CorsairRoll.Gun)
-        end
-    elseif spell.action_type == 'Ranged Attack' then
+    if spell.action_type == 'Ranged Attack' then
         if flurry == 2 then
             equip(sets.precast.RA.Flurry2)
         elseif flurry == 1 then

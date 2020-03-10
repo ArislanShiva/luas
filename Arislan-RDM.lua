@@ -370,7 +370,7 @@ function init_gear_sets()
         ring1="Archon Ring",
         ring2="Epaminondas's Ring",
         back=gear.RDM_INT_Cape,
-        waist="Orpheus Sash",
+        waist="Orpheus's Sash",
         }
 
     sets.precast.WS['Seraph Blade'] = set_combine(sets.precast.WS['Sanguine Blade'], {

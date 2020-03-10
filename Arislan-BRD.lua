@@ -311,7 +311,7 @@ function init_gear_sets()
     sets.midcast.Minne = {legs="Mousai Seraweels"}
     sets.midcast.Minuet = {body="Fili Hongreline +1"}
     sets.midcast.Paeon = {head="Brioso Roundlet +3"}
-    sets.midcast.Threnody = {body="Mousai Manteel +1"}
+    sets.midcast.Threnody = {body="Mou. Manteel +1"}
     sets.midcast['Adventurer\'s Dirge'] = {hands="Bihu Cuffs +3"}
     sets.midcast['Foe Sirvente'] = {head="Bihu Roundlet +3"}
     sets.midcast['Magic Finale'] = {legs="Fili Rhingrave +1"}
@@ -456,9 +456,9 @@ function init_gear_sets()
         sub="Genmei Shield",
         range="Gjallarhorn",
         head="Inyanga Tiara +2",
-        body="Kaykaus Bliaut +1",
-        hands="Gende. Gages +1",
-        legs="Assid. Pants +1",
+        body="Mou. Manteel +1",
+        hands="Mousai Gages +1",
+        legs="Inyanga Shalwar +2",
         feet="Fili Cothurnes +1",
         neck="Bathy Choker +1",
         ear1="Eabani Earring",
@@ -503,9 +503,7 @@ function init_gear_sets()
         main="Carnwenhan",
         sub="Genmei Shield",
         range="Gjallarhorn",
-        head="Brioso Roundlet +3",
-        body="Bihu Jstcorps. +3",
-        hands="Brioso Cuffs +3",
+        head="Mousai Turban +1",
         legs="Brioso Cannions +3",
         neck="Mnbw. Whistle +1",
         ear1="Enchntr. Earring +1",
