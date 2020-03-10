@@ -30,7 +30,7 @@
     send_command('bind #7 input //send safiyeh /ma "Dia II" <t>')
 	send_command('bind #8 input //send safiyeh /ma "Silence" <t>')
     send_command('bind #9 input //send safiyeh /ma "Paralyze" <t>')
-    send_command('bind #0 input //send safiyeh /ma "Cure" Arislan')
+    send_command('bind #0 input //send safiyeh /ma "Cure" Gary')
     --send_command('bind #0 input //send safiyeh /ma "Dispel" <t>')
     --send_command('bind #7 input //send safiyeh /ma "Sleep II" <t>')
     --send_command('bind #8 input //send safiyeh /ma "Sleepga" <t>')

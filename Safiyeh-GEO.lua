@@ -250,8 +250,8 @@ function init_gear_sets()
         ear1="Calamitous Earring",
         ear2="Gifted Earring",
         neck="Bagua Charm",
-        ring1={name="Stikini Ring", bag="wardrobe1"},
-        ring2={name="Stikini Ring", bag="wardrobe2"},
+        ring1={name="Stikini Ring", bag="wardrobe2"},
+        ring2={name="Stikini Ring", bag="wardrobe3"},
         back="Lifestream Cape",
         waist="Austerity Belt +1",
         }
@@ -281,14 +281,14 @@ function init_gear_sets()
 
     sets.midcast.Curaga = set_combine(sets.midcast.Cure, {
         neck="Nuna Gorget +1",
-        ring2={name="Stikini Ring", bag="wardrobe2"},
+        ring2={name="Stikini Ring", bag="wardrobe3"},
         waist="Luminary Sash",
         })
 
     sets.midcast.Cursna = set_combine(sets.midcast.Cure, {
         neck="Malison Medallion",
-        ring1={name="Haoma's Ring", bag="wardrobe1"},
-        ring2={name="Haoma's Ring", bag="wardrobe2"},
+        ring1={name="Haoma's Ring", bag="wardrobe2"},
+        ring2={name="Haoma's Ring", bag="wardrobe3"},
         back="Oretan. Cape +1",
         })
 
@@ -302,8 +302,8 @@ function init_gear_sets()
         feet="Telchine Pigaches",
         neck="Incanter's Torque",
         ear2="Andoaa Earring",
-        ring1={name="Stikini Ring", bag="wardrobe1"},
-        ring2={name="Stikini Ring", bag="wardrobe2"},
+        ring1={name="Stikini Ring", bag="wardrobe2"},
+        ring2={name="Stikini Ring", bag="wardrobe3"},
         back=gear.GEO_Cure_Cape,
         waist="Olympus Sash",
         }
@@ -357,13 +357,13 @@ function init_gear_sets()
         ear1="Malignance Earring",
         ear2="Regal Earring",
         ring1="Kishar Ring",
-        ring2={name="Stikini Ring", bag="wardrobe2"},
+        ring2={name="Stikini Ring", bag="wardrobe3"},
         back=gear.GEO_FC_Cape,
         waist="Luminary Sash",
         } -- MND/Magic accuracy
 
     sets.midcast.IntEnfeebles = set_combine(sets.midcast.MndEnfeebles, {
-        ring1={name="Shiva Ring", bag="wardrobe1"},
+        ring1={name="Shiva Ring", bag="wardrobe2"},
         ring2="Weather. Ring +1",
         back=gear.GEO_MAB_Cape,
         }) -- INT/Magic accuracy
@@ -381,7 +381,7 @@ function init_gear_sets()
         neck="Erra Pendant",
         ear1="Malignance Earring",
         ear2="Digni. Earring",
-        ring1={name="Stikini Ring", bag="wardrobe1"},
+        ring1={name="Stikini Ring", bag="wardrobe2"},
         ring2="Weather. Ring +1",
         back=gear.GEO_MAB_Cape,
         waist="Luminary Sash",
@@ -402,7 +402,7 @@ function init_gear_sets()
     -- Elemental Magic sets
 
     sets.midcast['Elemental Magic'] = {
-        main="Idris",
+        main="Daybreak",
         sub="Ammurapi Shield",
         head="Bagua Galero +3",
         body="Bagua Tunic +3",
@@ -412,8 +412,8 @@ function init_gear_sets()
         neck="Saevus Pendant +1",
         ear1="Malignance Earring",
         ear2="Regal Earring",
-        ring1={name="Shiva Ring", bag="wardrobe1"},
-        ring2={name="Shiva Ring", bag="wardrobe2"},
+        ring1={name="Shiva Ring", bag="wardrobe2"},
+        ring2={name="Shiva Ring", bag="wardrobe3"},
         back=gear.GEO_MAB_Cape,
         waist="Refoccilation Stone",
         }
@@ -580,7 +580,7 @@ function init_gear_sets()
         ring2="Mujin Band", --(5)
         }
 
-    sets.buff.Doom = {ring1={name="Saida Ring", bag="wardrobe1"}, ring2={name="Saida Ring", bag="wardrobe2"},}
+    sets.buff.Doom = {ring1={name="Saida Ring", bag="wardrobe2"}, ring2={name="Saida Ring", bag="wardrobe3"},}
     sets.Obi = {waist="Hachirin-no-Obi"}
     sets.CP = {back="Mecisto. Mantle"}
 
