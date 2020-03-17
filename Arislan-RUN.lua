@@ -379,6 +379,7 @@ function init_gear_sets()
         })
 
     sets.precast.WS['Dimidiation'] = set_combine(sets.precast.WS, {
+        ammo="Voluspa Tathlum",
         body=gear.Adhemar_B_body,
         legs="Lustr. Subligar +1",
         feet="Lustra. Leggings +1",
@@ -388,7 +389,6 @@ function init_gear_sets()
         })
 
     sets.precast.WS['Dimidiation'].Acc = set_combine(sets.precast.WS['Dimidiation'], {
-        ammo="Seeth. Bomblet +1",
         body=gear.Adhemar_B_body,
         legs="Samnuha Tights",
         feet=gear.Herc_STP_feet,

@@ -376,7 +376,7 @@ function init_gear_sets()
     ------------------------------------------------------------------------------------------------
 
     sets.precast.WS = {
-        ammo="Focal Orb",
+        ammo="Voluspa Tathlum",
         head="Lilitu Headpiece",
         body="Assim. Jubbah +3",
         hands="Jhakri Cuffs +2",
@@ -398,7 +398,6 @@ function init_gear_sets()
         })
 
     sets.precast.WS['Chant du Cygne'] = set_combine(sets.precast.WS, {
-        ammo="Jukukik Feather",
         head=gear.Adhemar_B_head,
         body="Abnoba Kaftan",
         hands=gear.Adhemar_B_hands,
@@ -412,7 +411,6 @@ function init_gear_sets()
         })
 
     sets.precast.WS['Chant du Cygne'].Acc = set_combine(sets.precast.WS['Chant du Cygne'], {
-        ammo="Falcon Eye",
         head="Dampening Tam",
         body=gear.Adhemar_B_body,
         hands=gear.Adhemar_A_hands,
@@ -424,7 +422,6 @@ function init_gear_sets()
     sets.precast.WS['Vorpal Blade'].Acc = sets.precast.WS['Chant du Cygne'].Acc
 
     sets.precast.WS['Savage Blade'] = set_combine(sets.precast.WS, {
-        ammo="Floestone",
         body="Assim. Jubbah +3",
         neck="Mirage Stole +2",
         ring2="Rufescent Ring",
@@ -432,7 +429,6 @@ function init_gear_sets()
         })
 
     sets.precast.WS['Savage Blade'].Acc = set_combine(sets.precast.WS['Savage Blade'], {
-        ammo="Falcon Eye",
         feet=gear.Herc_STP_feet,
         ear2="Telos Earring",
         waist="Grunfeld Rope",
@@ -455,7 +451,7 @@ function init_gear_sets()
         }
 
     sets.precast.WS['Requiescat'].Acc = set_combine(sets.precast.WS['Requiescat'], {
-        ammo="Falcon Eye",
+        ammo="Voluspa Tathlum",
         head="Dampening Tam",
         feet=gear.Herc_STP_feet,
         ear1="Cessance Earring",
@@ -498,7 +494,6 @@ function init_gear_sets()
         })
 
     sets.precast.WS['Black Halo'].Acc = set_combine(sets.precast.WS['Black Halo'], {
-        ammo="Falcon Eye",
         feet=gear.Herc_STP_feet,
         ear2="Telos Earring",
         })
@@ -551,7 +546,7 @@ function init_gear_sets()
         }
 
     sets.midcast['Blue Magic'].PhysicalAcc = set_combine(sets.midcast['Blue Magic'].Physical, {
-        ammo="Falcon Eye",
+        ammo="Voluspa Tathlum",
         head="Carmine Mask +1",
         hands=gear.Adhemar_A_hands,
         legs="Carmine Cuisses +1",
@@ -565,7 +560,7 @@ function init_gear_sets()
     sets.midcast['Blue Magic'].PhysicalStr = sets.midcast['Blue Magic'].Physical
 
     sets.midcast['Blue Magic'].PhysicalDex = set_combine(sets.midcast['Blue Magic'].Physical, {
-        ammo="Falcon Eye",
+        ammo="Voluspa Tathlum",
         ear2="Mache Earring +1",
         ring2="Ilabrat Ring",
         back=gear.BLU_WS1_Cape,
@@ -700,7 +695,6 @@ function init_gear_sets()
         })
 
     sets.midcast['Blue Magic']['White Wind'] = set_combine(sets.midcast['Blue Magic'].Healing, {
-        ammo="Falcon Eye",
         head=gear.Adhemar_D_head,
         neck="Sanctity Necklace",
         ear2="Etiolation Earring",
@@ -870,7 +864,7 @@ function init_gear_sets()
         })
 
     sets.engaged.MidAcc = set_combine(sets.engaged.LowAcc, {
-        ammo="Falcon Eye",
+        ammo="Voluspa Tathlum",
         ear2="Telos Earring",
         ring1="Regal Ring",
         ring2="Ilabrat Ring",
@@ -926,7 +920,7 @@ function init_gear_sets()
         })
 
     sets.engaged.DW.MidAcc = set_combine(sets.engaged.DW.LowAcc, {
-        ammo="Falcon Eye",
+        ammo="Voluspa Tathlum",
         ear2="Telos Earring",
         ring2="Ilabrat Ring",
         waist="Kentarch Belt +1",
@@ -972,7 +966,7 @@ function init_gear_sets()
         })
 
     sets.engaged.DW.MidAcc.LowHaste = set_combine(sets.engaged.DW.LowAcc.LowHaste, {
-        ammo="Falcon Eye",
+        ammo="Voluspa Tathlum",
         ear2="Telos Earring",
         ring2="Ilabrat Ring",
         waist="Kentarch Belt +1",
@@ -1018,7 +1012,7 @@ function init_gear_sets()
         })
 
     sets.engaged.DW.MidAcc.MidHaste = set_combine(sets.engaged.DW.LowAcc.MidHaste, {
-        ammo="Falcon Eye",
+        ammo="Voluspa Tathlum",
         feet=gear.Herc_TA_feet,
         ear2="Telos Earring",
         ring2="Ilabrat Ring",
@@ -1068,7 +1062,7 @@ function init_gear_sets()
         })
 
     sets.engaged.DW.MidAcc.HighHaste = set_combine(sets.engaged.DW.LowAcc.HighHaste, {
-        ammo="Falcon Eye",
+        ammo="Voluspa Tathlum",
         ear2="Telos Earring",
         ring2="Ilabrat Ring",
         })
@@ -1114,7 +1108,7 @@ function init_gear_sets()
         })
 
     sets.engaged.DW.MidAcc.MaxHaste = set_combine(sets.engaged.DW.LowAcc.MaxHaste, {
-        ammo="Falcon Eye",
+        ammo="Voluspa Tathlum",
         ring2="Ilabrat Ring",
         waist="Kentarch Belt +1",
         })

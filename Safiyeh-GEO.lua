@@ -455,7 +455,7 @@ function init_gear_sets()
         feet="Geo. Sandals +3",
         neck="Bathy Choker +1",
         ear1="Lugalbanda Earring",
-        ear2="Infused Earring",
+        ear2="Etiolation Earring",
         ring1="Paguroidea Ring",
         ring2="Sheltered Ring",
         back=gear.GEO_Idle_Cape,
@@ -472,7 +472,7 @@ function init_gear_sets()
         hands="Geo. Mitaines +3", --3/0
         feet="Azimuth Gaiters +1", --4/0
         neck="Loricate Torque +1", --6/6
-        ear1="Odnowa Earring +1", --2/0
+        ear1="Genmei Earring", --2/0
         ear2="Etiolation Earring", --0/3
         ring1="Gelatinous Ring +1", --7/(-1)
         ring2="Defending Ring", --10/10
@@ -489,7 +489,7 @@ function init_gear_sets()
         legs="Telchine Braconi", --0/0/0/3
         feet="Bagua Sandals +3", --0/0/0/5
         neck="Bagua Charm",
-        ear1="Odnowa Earring +1", --0/2/0/0
+        ear1="Genmei Earring", --2/2/0/0
         ear2="Etiolation Earring", --0/3/0/0
         ring1="Gelatinous Ring +1", --7/(-1)/0/0
         ring2="Defending Ring", --10/10/0/0

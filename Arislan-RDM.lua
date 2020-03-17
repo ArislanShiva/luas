@@ -287,7 +287,7 @@ function init_gear_sets()
     ------------------------------------------------------------------------------------------------
 
     sets.precast.WS = {
-        ammo="Floestone",
+        ammo="Voluspa Tathlum",
         head="Viti. Chapeau +3",
         body="Viti. Tabard +3",
         hands="Atrophy Gloves +3",
@@ -345,7 +345,6 @@ function init_gear_sets()
     sets.precast.WS['Death Blossom'].Acc = sets.precast.WS['Savage Blade'].Acc
 
     sets.precast.WS['Requiescat'] = set_combine(sets.precast.WS, {
-        ammo="Regal Gem",
         ear2="Sherida Earring",
         ring2="Shukuyu Ring",
         })

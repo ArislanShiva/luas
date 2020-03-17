@@ -468,7 +468,7 @@ function init_gear_sets()
     ------------------------------------------------------------------------------------------------
 
     sets.engaged = {
-        ammo="Focal Orb",
+        ammo="Floestone",
         head="Flam. Zucchetto +2",
         body=gear.Valo_TP_body,
         hands="Sulev. Gauntlets +2",

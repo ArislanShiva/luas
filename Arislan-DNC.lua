@@ -347,7 +347,7 @@ function init_gear_sets()
     ------------------------------------------------------------------------------------------------
 
     sets.precast.WS = {
-        ammo="Focal Orb",
+        ammo="Voluspa Tathlum",
         head="Lilitu Headpiece",
         body=gear.Herc_WS_body,
         hands="Maxixi Bangles +3",
