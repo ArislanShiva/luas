@@ -128,14 +128,14 @@ function user_setup()
     state.HybridMode:options('Normal', 'DT')
     state.RangedMode:options('STP', 'Normal', 'Acc', 'HighAcc', 'Critical')
     state.WeaponskillMode:options('Normal', 'Acc')
-    state.CastingMode:options('Normal', 'Resistant')
     state.IdleMode:options('Normal', 'DT', 'Refresh')
 
-    state.WeaponSet = M{['description']='Weapon Set', 'LeadenMelee', 'LeadenRanged', 'LastStandMelee', 'LastStandRanged', 'SavageMelee'}
+    state.WeaponSet = M{['description']='Weapon Set', 'DeathPenalty_M', 'DeathPenalty_R', 'Armageddon_M', 'Armageddon_R', 'Fomalhaut_M', 'Fomalhaut_R', 'Ataktos'}
     state.CP = M(false, "Capacity Points Mode")
     state.WeaponLock = M(false, 'Weapon Lock')
 
     gear.RAbullet = "Chrono Bullet"
+    gear.RAccbullet = "Devastating Bullet"
     gear.WSbullet = "Chrono Bullet"
     gear.MAbullet = "Living Bullet"
     gear.QDbullet = "Living Bullet"
@@ -277,7 +277,7 @@ function init_gear_sets()
         waist="Flume Belt +1", --4/0
         }
 
-    sets.precast.CorsairRoll.Duration = {main={name="Rostam", bag="Wardrobe 1"}, range="Compensator"}
+    sets.precast.CorsairRoll.Duration = {main={name="Rostam", bag="wardrobe"}, range="Compensator"}
     sets.precast.CorsairRoll["Caster's Roll"] = set_combine(sets.precast.CorsairRoll, {legs="Chas. Culottes +1"})
     sets.precast.CorsairRoll["Courser's Roll"] = set_combine(sets.precast.CorsairRoll, {feet="Chass. Bottes +1"})
     sets.precast.CorsairRoll["Blitzer's Roll"] = set_combine(sets.precast.CorsairRoll, {head="Chass. Tricorne +1"})
@@ -358,6 +358,7 @@ function init_gear_sets()
         }
 
     sets.precast.WS.Acc = set_combine(sets.precast.WS, {
+        ammo=gear.RAccbullet,
         feet=gear.Herc_RA_feet,
         ear2="Telos Earring",
         neck="Iskur Gorget",
@@ -368,6 +369,7 @@ function init_gear_sets()
     sets.precast.WS['Last Stand'] = sets.precast.WS
 
     sets.precast.WS['Last Stand'].Acc = set_combine(sets.precast.WS['Last Stand'], {
+        ammo=gear.RAccbullet,
         neck="Iskur Gorget",
         ear2="Telos Earring",
         ring2="Hajduk Ring +1",
@@ -526,7 +528,8 @@ function init_gear_sets()
         waist="Kentarch Belt +1",
         }
 
-    sets.midcast.CorsairShot.Resistant = set_combine(sets.midcast.CorsairShot, {
+    sets.midcast.CorsairShot['Light Shot'] = {
+        ammo=gear.RAccbullet,
         head="Laksa. Tricorne +3",
         body="Malignance Tabard",
         hands="Laksa. Gants +3",
@@ -539,10 +542,9 @@ function init_gear_sets()
         ring2="Weather. Ring +1",
         back=gear.COR_WS1_Cape,
         waist="K. Kachina Belt +1",
-        })
+        }
 
-    sets.midcast.CorsairShot['Light Shot'] = sets.midcast.CorsairShot.Resistant
-    sets.midcast.CorsairShot['Dark Shot'] = sets.midcast.CorsairShot.Resistant
+    sets.midcast.CorsairShot['Dark Shot'] = sets.midcast.CorsairShot['Light Shot']
     sets.midcast.CorsairShot.Enhance = {body="Mirke Wardecors", feet="Chass. Bottes +1"}
 
     -- Ranged gear
@@ -563,6 +565,7 @@ function init_gear_sets()
         }
 
     sets.midcast.RA.Acc = set_combine(sets.midcast.RA, {
+        ammo=gear.RAccbullet,
         head="Meghanada Visor +2",
         ring2="Hajduk Ring +1",
         })
@@ -648,9 +651,9 @@ function init_gear_sets()
         })
 
     sets.idle.Town = set_combine(sets.idle, {
-        head="Oshosi Mask +1",
+        head="Lanun Tricorne +3",
         body="Oshosi Vest +1",
-        hands="Oshosi Gloves +1",
+        hands="Lanun Gants +3",
         feet="Lanun Bottes +3",
         neck="Comm. Charm +2",
         ear1="Suppanomimi",
@@ -1045,11 +1048,13 @@ function init_gear_sets()
 
     sets.TreasureHunter = {head="Volte Cap", hands=gear.Herc_TH_hands, waist="Chaac Belt"}
 
-	sets.LeadenMelee = {main={name="Rostam", bag="Wardrobe 4"}, sub="Tauret", ranged="Death Penalty"}
-    sets.LeadenRanged = {main="Lanun Knife", sub="Tauret", ranged="Death Penalty"}
-    sets.LastStandMelee = {main="Naegling", sub="Blurred Knife +1", ranged="Fomalhaut"}
-    sets.LastStandRanged = {main="Lanun Knife", sub="Nusku Shield", ranged="Fomalhaut"}
-    sets.SavageMelee = {main="Naegling", sub="Blurred Knife +1", ranged="Ataktos"}
+	sets.DeathPenalty_M = {main={name="Rostam", bag="Wardrobe 4"}, sub="Tauret", ranged="Death Penalty"}
+    sets.DeathPenalty_R = {main="Lanun Knife", sub="Tauret", ranged="Death Penalty"}
+	sets.Armageddon_M = {main={name="Rostam", bag="Wardrobe 4"}, sub="Tauret", ranged="Armageddon"}
+    sets.Armageddon_R = {main="Lanun Knife", sub="Tauret", ranged="Armageddon"}
+    sets.Fomalhaut_M = {main="Naegling", sub="Blurred Knife +1", ranged="Fomalhaut"}
+    sets.Fomalhaut_R = {main="Lanun Knife", sub="Nusku Shield", ranged="Fomalhaut"}
+    sets.Ataktos = {main="Naegling", sub="Blurred Knife +1", ranged="Ataktos"}
 
 end
 
@@ -1075,8 +1080,6 @@ function job_precast(spell, action, spellMap, eventArgs)
         if state.LuzafRing.value then
             equip(sets.precast.LuzafRing)
         end
-    elseif spell.type == 'CorsairShot' and state.CastingMode.value == 'Resistant' then
-        classes.CustomClass = 'Acc'
     end
 
     if spell.english == 'Fold' and buffactive['Bust'] == 2 then
@@ -1149,15 +1152,15 @@ function job_post_midcast(spell, action, spellMap, eventArgs)
 			elseif spell.element == world.day_element or spell.element == world.weather_element then
 				equip({waist="Hachirin-no-Obi"})
 			end
+            if state.QDMode.value == 'Enhance' then
+                equip(sets.midcast.CorsairShot.Enhance)
+            elseif state.QDMode.value == 'TH' then
+                equip(sets.midcast.CorsairShot)
+                equip(sets.TreasureHunter)
+            elseif state.QDMode.value == 'STP' then
+                equip(sets.midcast.CorsairShot.STP)
+            end
 		end
-        if state.QDMode.value == 'Enhance' then
-            equip(sets.midcast.CorsairShot.Enhance)
-        elseif state.QDMode.value == 'TH' then
-            equip(sets.midcast.CorsairShot)
-            equip(sets.TreasureHunter)
-        elseif state.QDMode.value == 'STP' then
-            equip(sets.midcast.CorsairShot.STP)
-        end
     elseif spell.action_type == 'Ranged Attack' then
         if buffactive['Triple Shot'] then
             equip(sets.TripleShot)
