@@ -78,7 +78,7 @@ function user_setup()
     state.WeaponskillMode:options('Normal', 'Acc')
     state.IdleMode:options('Normal', 'DT')
 
-    state.WeaponSet = M{['description']='Weapon Set', 'Annihilator', 'Fomalhaut'}
+    state.WeaponSet = M{['description']='Weapon Set', 'Annihilator', 'Fomalhaut', 'Armageddon'}
     state.CP = M(false, "Capacity Points Mode")
 
     DefaultAmmo = {['Yoichinoyumi'] = "Chrono Arrow",
@@ -111,10 +111,10 @@ function user_setup()
     MagicAmmo = {  ['Yoichinoyumi'] = "Chrono Arrow",
                    ['Gandiva'] = "Chrono Arrow",
                    ['Fail-Not'] = "Chrono Arrow",
-                   ['Annihilator'] = "Chrono Bullet",
-                   ['Armageddon'] = "Chrono Bullet",
+                   ['Annihilator'] = "Devastating Bullet",
+                   ['Armageddon'] = "Devastating Bullet",
                    ['Gastraphetes'] = "Quelling Bolt",
-                   ['Fomalhaut'] = "Chrono Bullet",
+                   ['Fomalhaut'] = "Devastating Bullet",
                    }
 
     -- Additional local binds
@@ -285,9 +285,9 @@ function init_gear_sets()
         waist="Yemaya Belt", --0/5
         }) --30/54
 
-    sets.precast.RA.Gastra = {head="Mummu Bonnet +2"}
-    sets.precast.RA.Gastra.Flurry1 = set_combine(sets.precast.RA.Gastra, {})
-    sets.precast.RA.Gastra.Flurry2 = set_combine(sets.precast.RA.Gastra.Flurry1, {})
+    --sets.precast.RA.Gastra = {head="Mummu Bonnet +2"}
+    --sets.precast.RA.Gastra.Flurry1 = set_combine(sets.precast.RA.Gastra, {})
+    --sets.precast.RA.Gastra.Flurry2 = set_combine(sets.precast.RA.Gastra.Flurry1, {})
 
 
     ------------------------------------------------------------------------------------------------
@@ -481,6 +481,11 @@ function init_gear_sets()
         legs="Osh. Trousers +1", --7
         feet="Osh. Leggings +1", --4
         } --25
+
+    sets.DoubleShot.Critical = {
+        head="Meghanada Visor +2",
+        waist="K. Kachina Belt +1",
+        }
 
 
     ------------------------------------------------------------------------------------------------
@@ -904,7 +909,8 @@ function init_gear_sets()
 
     sets.Annihilator = {ranged="Annihilator"}
     sets.Fomalhaut = {ranged="Fomalhaut"}
-    sets.Gastraphetes = {ranged="Em. Crossbow"}
+    sets.Armageddon = {ranged="Armageddon"}
+    --sets.Gastraphetes = {ranged="Gastraphetes"}
 
 end
 
@@ -987,6 +993,11 @@ function job_post_midcast(spell, action, spellMap, eventArgs)
     if spell.action_type == 'Ranged Attack' then
         if buffactive['Double Shot'] then
             equip(sets.DoubleShot)
+            if buffactive['Aftermath: Lv.3'] and player.equipment.ranged == "Armageddon" then
+                equip(sets.DoubleShotCritical)
+            end
+        elseif buffactive['Aftermath: Lv.3'] and player.equipment.ranged == "Armageddon" then
+            equip(sets.midcast.RA.Critical)
         end
         if state.Buff.Barrage then
             equip(sets.buff.Barrage)
