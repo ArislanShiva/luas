@@ -425,7 +425,7 @@ function init_gear_sets()
         body="Assim. Jubbah +3",
         neck="Mirage Stole +2",
         ring2="Rufescent Ring",
-        waist="Prosilio Belt +1",
+        waist="Sailfi Belt +1",
         })
 
     sets.precast.WS['Savage Blade'].Acc = set_combine(sets.precast.WS['Savage Blade'], {
@@ -488,9 +488,9 @@ function init_gear_sets()
     sets.precast.WS['Judgment'].Acc = sets.precast.WS['True Strike'].Acc
 
     sets.precast.WS['Black Halo'] = set_combine(sets.precast.WS['Savage Blade'], {
-        head="Luh. Keffiyeh +3",   
+        head="Luh. Keffiyeh +3",
         ear2="Regal Earring",
-        waist="Luminary Sash",
+        waist="Sailfi Belt +1",
         })
 
     sets.precast.WS['Black Halo'].Acc = set_combine(sets.precast.WS['Black Halo'], {
@@ -526,6 +526,7 @@ function init_gear_sets()
         legs="Hashishin Tayt +1",
         feet="Luhlaza Charuqs +3",
         neck="Mirage Stole +2",
+        ear1="Njordr Earring",
         ring1={name="Stikini Ring +1", bag="wardrobe3"},
         ring2={name="Stikini Ring +1", bag="wardrobe4"},
         back="Cornflower Cape",
@@ -542,7 +543,7 @@ function init_gear_sets()
         ring1="Shukuyu Ring",
         ring2="Ilabrat Ring",
         back=gear.BLU_WS2_Cape,
-        waist="Prosilio Belt +1",
+        waist="Sailfi Belt +1",
         }
 
     sets.midcast['Blue Magic'].PhysicalAcc = set_combine(sets.midcast['Blue Magic'].Physical, {
@@ -564,6 +565,7 @@ function init_gear_sets()
         ear2="Mache Earring +1",
         ring2="Ilabrat Ring",
         back=gear.BLU_WS1_Cape,
+        waist="Grunfeld Rope",
         })
 
     sets.midcast['Blue Magic'].PhysicalVit = sets.midcast['Blue Magic'].Physical
@@ -709,7 +711,7 @@ function init_gear_sets()
 
     sets.midcast['Blue Magic']['Occultation'] = set_combine(sets.midcast['Blue Magic'], {
         hands="Hashi. Bazu. +1",
-        ear1="Loquacious Earring",
+        ear1="Njordr Earring",
         ear2="Enchntr. Earring +1",
         ring2="Weather. Ring +1",
         waist="Witful Belt",
@@ -779,7 +781,7 @@ function init_gear_sets()
 
     sets.idle = {
         ammo="Staunch Tathlum +1",
-        head="Malignance Chapeau",
+        head=gear.Herc_Idle_head,
         body="Jhakri Robe +2",
         hands="Malignance Gloves",
         legs="Carmine Cuisses +1",
@@ -1545,7 +1547,7 @@ function th_action_check(category, param)
     end
 end
 
-windower.register_event('zone change', 
+windower.register_event('zone change',
     function()
         send_command('gi ugs true')
     end

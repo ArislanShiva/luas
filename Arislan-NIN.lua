@@ -287,8 +287,8 @@ function init_gear_sets()
 
     sets.precast.WS['Blade: Ten'] = set_combine(sets.precast.WS, {
         neck="Ninja Nodowa +1",
-        waist="Grunfeld Rope",
         back=gear.NIN_WS1_Cape,
+        waist="Sailfi Belt +1",
         })
 
     sets.precast.WS['Blade: Ten'].Acc = set_combine(sets.precast.WS['Blade: Ten'], {
@@ -1097,7 +1097,7 @@ function th_action_check(category, param)
     end
 end
 
-windower.register_event('zone change', 
+windower.register_event('zone change',
     function()
         send_command('gi ugs true')
     end

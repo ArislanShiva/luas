@@ -360,6 +360,7 @@ function init_gear_sets()
     sets.precast.WS.Acc = set_combine(sets.precast.WS, {
         ammo=gear.RAccbullet,
         feet=gear.Herc_RA_feet,
+        ear1="Beyla Earring",
         ear2="Telos Earring",
         neck="Iskur Gorget",
         ring2="Hajduk Ring +1",
@@ -371,6 +372,7 @@ function init_gear_sets()
     sets.precast.WS['Last Stand'].Acc = set_combine(sets.precast.WS['Last Stand'], {
         ammo=gear.RAccbullet,
         neck="Iskur Gorget",
+        ear1="Beyla Earring",
         ear2="Telos Earring",
         ring2="Hajduk Ring +1",
         waist="K. Kachina Belt +1",
@@ -425,16 +427,16 @@ function init_gear_sets()
         head="Lilitu Headpiece",
         hands="Meg. Gloves +2",
         legs=gear.Herc_WS_legs,
+        neck="Comm. Charm +2",
         ring1="Regal Ring",
         ring2="Epaminondas's Ring",
         back=gear.COR_WS2_Cape,
-        waist="Prosilio Belt +1",
+        waist="Sailfi Belt +1",
         })
 
     sets.precast.WS['Savage Blade'].Acc = set_combine(sets.precast.WS['Savage Blade'], {
         body="Meg. Cuirie +2",
         ear2="Telos Earring",
-        waist="Grunfeld Rope",
         })
 
     sets.precast.WS['Swift Blade'] = set_combine(sets.precast.WS, {
@@ -567,6 +569,7 @@ function init_gear_sets()
     sets.midcast.RA.Acc = set_combine(sets.midcast.RA, {
         ammo=gear.RAccbullet,
         head="Meghanada Visor +2",
+        ear1="Beyla Earring",
         ring2="Hajduk Ring +1",
         })
 
@@ -656,7 +659,7 @@ function init_gear_sets()
         hands="Lanun Gants +3",
         feet="Lanun Bottes +3",
         neck="Comm. Charm +2",
-        ear1="Suppanomimi",
+        ear1="Beyla Earring",
         ear2="Telos Earring",
         waist="K. Kachina Belt +1",
         })
@@ -1048,10 +1051,10 @@ function init_gear_sets()
 
     sets.TreasureHunter = {head="Volte Cap", hands=gear.Herc_TH_hands, waist="Chaac Belt"}
 
-	sets.DeathPenalty_M = {main={name="Rostam", bag="Wardrobe 4"}, sub="Tauret", ranged="Death Penalty"}
+	  sets.DeathPenalty_M = {main={name="Rostam", bag="Wardrobe 4"}, sub="Tauret", ranged="Death Penalty"}
     sets.DeathPenalty_R = {main="Lanun Knife", sub="Tauret", ranged="Death Penalty"}
-	sets.Armageddon_M = {main={name="Rostam", bag="Wardrobe 4"}, sub="Tauret", ranged="Armageddon"}
-    sets.Armageddon_R = {main="Lanun Knife", sub="Tauret", ranged="Armageddon"}
+	  sets.Armageddon_M = {main={name="Rostam", bag="Wardrobe 4"}, sub="Tauret", ranged="Armageddon"}
+    sets.Armageddon_R = {main="Fettering Blade", sub="Nusku Shield", ranged="Armageddon"}
     sets.Fomalhaut_M = {main="Naegling", sub="Blurred Knife +1", ranged="Fomalhaut"}
     sets.Fomalhaut_R = {main="Lanun Knife", sub="Nusku Shield", ranged="Fomalhaut"}
     sets.Ataktos = {main="Naegling", sub="Blurred Knife +1", ranged="Ataktos"}
@@ -1291,7 +1294,7 @@ function display_current_job_state(eventArgs)
     local ws_msg = state.WeaponskillMode.value
 
     local qd_msg = '(' ..string.sub(state.QDMode.value,1,1).. ')'
-    
+
     local e_msg = state.Mainqd.current
     if state.UseAltqd.value == true then
         e_msg = e_msg .. '/'..state.Altqd.current
@@ -1540,7 +1543,7 @@ function do_bullet_checks(spell, spellMap, eventArgs)
     end
 end
 
-windower.register_event('zone change', 
+windower.register_event('zone change',
     function()
         if player.sub_job == 'NIN' or player.sub_job == 'DNC' then
             send_command('gi ugs true')

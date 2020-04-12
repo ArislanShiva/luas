@@ -77,6 +77,7 @@ function job_setup()
     -- Unblinkable JA IDs for actions that always have TH: Quick/Box/Stutter Step, Desperate/Violent Flourish
     info.default_u_ja_ids = S{201, 202, 203, 205, 207}
 
+    state.AttackMode = M{['description']='Attack', 'Capped', 'Uncapped'}
     state.CP = M(false, "Capacity Points Mode")
 
     lockstyleset = 1
@@ -102,6 +103,7 @@ function user_setup()
 
     send_command('bind ^` gs c cycle treasuremode')
     send_command('bind !` input /ja "Flee" <me>')
+    send_command('bind @a gs c cycle AttackMode')
     send_command('bind @c gs c toggle CP')
 
     send_command('bind ^numlock input /ja "Assassin\'s Charge" <me>')
@@ -144,6 +146,7 @@ function user_unload()
     send_command('unbind ^`')
     send_command('unbind !`')
     send_command('unbind ^,')
+    send_command('unbind @a')
     send_command('unbind @c')
     send_command('unbind @r')
     send_command('unbind ^numlock')
@@ -279,6 +282,10 @@ function init_gear_sets()
         ear2="Telos Earring",
         })
 
+    sets.precast.WS.Uncapped = set_combine(sets.precast.WS, {
+        head="Lilitu Headpiece",
+        })
+
     sets.precast.WS.Critical = {ammo="Yetshila +1", body="Meg. Cuirie +2"}
 
     sets.precast.WS['Exenterator'] = set_combine(sets.precast.WS, {
@@ -295,9 +302,13 @@ function init_gear_sets()
         head="Dampening Tam",
         })
 
+    sets.precast.WS['Exenterator'].Uncapped = set_combine(sets.precast.WS['Exenterator'], {
+
+        })
+
     sets.precast.WS['Evisceration'] = set_combine(sets.precast.WS, {
         ammo="Yetshila +1",
-        head="Lustratio Cap +1",
+        head=gear.Adhemar_B_head,
         body="Pillager's Vest +3",
         hands="Mummu Wrists +2",
         legs="Pill. Culottes +3",
@@ -311,7 +322,12 @@ function init_gear_sets()
 
     sets.precast.WS['Evisceration'].Acc = set_combine(sets.precast.WS['Evisceration'], {
         ammo="C. Palug Stone",
-        head="Skulker's Bonnet +1",
+        ring1="Regal Ring",
+        })
+
+    sets.precast.WS['Evisceration'].Uncapped = set_combine(sets.precast.WS['Evisceration'], {
+        ammo="Voluspa Tathlum",
+        hands=gear.Adhemar_B_hands,
         ring1="Regal Ring",
         })
 
@@ -327,8 +343,14 @@ function init_gear_sets()
         ear2="Telos Earring",
         })
 
+    sets.precast.WS['Rudra\'s Storm'].Uncapped = set_combine(sets.precast.WS['Rudra\'s Storm'], {
+        ammo="Voluspa Tathlum",
+        head="Lilitu Headpiece",
+        })
+
     sets.precast.WS['Mandalic Stab'] = sets.precast.WS["Rudra's Storm"]
     sets.precast.WS['Mandalic Stab'].Acc = sets.precast.WS["Rudra's Storm"].Acc
+    sets.precast.WS['Mandalic Stab'].Uncapped = sets.precast.WS["Rudra's Storm"].Uncapped
 
     sets.precast.WS['Aeolian Edge'] = set_combine(sets.precast.WS, {
         ammo="Seeth. Bomblet +1",
@@ -892,15 +914,18 @@ function update_combat_form()
     end
 end
 
-function get_custom_wsmode(spell, spellMap, defaut_wsmode)
+function get_custom_wsmode(spell, action, spellMap)
     local wsmode
 
-    if state.Buff['Sneak Attack'] then
-        wsmode = 'SA'
+    if spell.type == 'WeaponSkill' and state.AttackMode.value == 'Uncapped' then
+        wsmode = 'Uncapped'
     end
-    if state.Buff['Trick Attack'] then
-        wsmode = (wsmode or '') .. 'TA'
-    end
+    --if state.Buff['Sneak Attack'] then
+    --    wsmode = 'SA'
+    --end
+    --if state.Buff['Trick Attack'] then
+    --    wsmode = (wsmode or '') .. 'TA'
+    --end
 
     return wsmode
 end
@@ -1060,7 +1085,7 @@ function th_action_check(category, param)
     end
 end
 
-windower.register_event('zone change', 
+windower.register_event('zone change',
     function()
         send_command('gi ugs true')
     end

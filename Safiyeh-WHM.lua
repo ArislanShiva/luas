@@ -199,21 +199,12 @@ function init_gear_sets()
         ring1="Kishar Ring", --4
         ring2="Weather. Ring +1", --6(4)
         back=gear.WHM_FC_Cape, --10
-        waist="Embla Sash",
+        waist="Embla Sash", --5
         }
 
     sets.precast.FC['Enhancing Magic'] = set_combine(sets.precast.FC, {
-        back="Perimede Cape",
         waist="Siegel Sash",
         })
-
-    sets.precast.FC['Healing Magic'] = set_combine(sets.precast.FC, {
-        legs="Ebers Pant. +1", --13
-        back="Perimede Cape",
-        waist="Witful Belt", --3/(3)
-        })
-
-    sets.precast.FC.StatusRemoval = sets.precast.FC['Healing Magic']
 
     sets.precast.FC.Cure = set_combine(sets.precast.FC['Healing Magic'], {
         --ammo="Impatiens",
@@ -223,11 +214,13 @@ function init_gear_sets()
         ear2="Mendi. Earring", --5
         ring1="Lebeche Ring", --(2)
         back="Perimede Cape", --(4)
+        waist="Witful Belt", --3(3)
         })
 
     sets.precast.FC.Curaga = sets.precast.FC.Cure
     sets.precast.FC.CureSolace = sets.precast.FC.Cure
     sets.precast.FC.Impact = set_combine(sets.precast.FC, {head=empty, body="Twilight Cloak"})
+    sets.precast.FC.Dispelga = set_combine(sets.precast.FC, {main="Daybreak", sub="Ammurapi Shield"})
 
     -- Precast sets to enhance JAs
     --sets.precast.JA.Benediction = {}
@@ -235,21 +228,26 @@ function init_gear_sets()
     -- Weaponskill sets
 
     -- Default set for any weaponskill that isn't any more specifically defined
-    sets.precast.WS = {}
+    sets.precast.WS = {
+        body="Piety Briault +3",
+        }
 
     -- Midcast Sets
 
-    sets.midcast.FC = {
-        body="Inyanga Jubbah +2",
-        hands="Fanatic Gloves",
-        legs="Ebers Pant. +1",
-        feet="Regal Pumps +1",
-        ear1="Loquacious Earring",
-        ear2="Etiolation Earring",
-        ring1="Kishar Ring",
-        back=gear.WHM_FC_Cape,
-        waist="Witful Belt",
-        } -- Haste
+    sets.midcast.FC = sets.precast.FC
+
+    sets.midcast.ConserveMP = {
+        main="Sucellus",
+        --sub="Thuellaic Ecu +1",
+        head="Vanya Hood",
+        --body="Vedic Coat",
+        --hands="Shrieker's Cuffs",
+        --legs="Vanya Slops",
+        --feet="Kaykaus Boots +1",
+        ear2="Mendi. Earring",
+        --back="Solemnity Cape",
+        waist="Austerity Belt +1",
+        }
 
     -- Cure sets
 
@@ -259,12 +257,12 @@ function init_gear_sets()
         ammo="Esper Stone +1", --0/(-5)
         head="Gende. Caubeen +1", --18/(-8)
         body="Ebers Bliaud +1",
-        hands="Theophany Mitts +2", --(2)/(-6)
+        hands="Theophany Mitts +3", --(+4)/(-7)
         legs="Ebers Pant. +1",
-        feet="Vanya Clogs", --5
+        feet="Piety Duckbills +1", --10/(-5)
         neck="Incanter's Torque",
-        ear1="Nourish. Earring +1", --7
-        ear2="Glorious Earring", -- (+2)/(-5)
+        ear1="Glorious Earring", -- (+2)/(-5)
+        ear2="Meili Earring",
         ring1="Lebeche Ring", --3/(-5)
         ring2={name="Haoma's Ring", bag="wardrobe2"},
         back=gear.WHM_Cure_Cape, --0/(-10)
@@ -293,8 +291,8 @@ function init_gear_sets()
     sets.midcast.CuragaNormal = set_combine(sets.midcast.CureNormal, {
         body="Theo. Briault +2", --0(+3)/(-5)
         neck="Nuna Gorget +1",
-        ring1={name="Stikini Ring", bag="wardrobe1"},
-        ring2={name="Stikini Ring", bag="wardrobe2"},
+        ring1={name="Stikini Ring", bag="wardrobe2"},
+        ring2={name="Stikini Ring", bag="wardrobe3"},
         waist="Luminary Sash",
         })
 
@@ -304,32 +302,32 @@ function init_gear_sets()
         body="Theo. Briault +2", --0(+3)/(-5)
         neck="Nuna Gorget +1",
         back="Twilight Cape",
-        ring1={name="Stikini Ring", bag="wardrobe1"},
-        ring2={name="Stikini Ring", bag="wardrobe2"},
+        ring1={name="Stikini Ring", bag="wardrobe2"},
+        ring2={name="Stikini Ring", bag="wardrobe3"},
         waist="Hachirin-no-Obi",
         }
 
     --sets.midcast.CureMelee = sets.midcast.CureSolace
 
     sets.midcast.StatusRemoval = {
-        main="Sucellus",
+        main="Yagrush",
         sub="Chanter's Shield",
         head="Vanya Hood",
         body="Inyanga Jubbah +2",
         hands="Fanatic Gloves",
         legs="Aya. Cosciales +2",
-        --feet="Medium's Sabots",
+        feet="Regal Pumps +1",
         neck="Baetyl Pendant",
         ear1="Loquacious Earring",
         ear2="Etiolation Earring",
-        ring1={name="Haoma's Ring", bag="wardrobe1"},
-        ring2={name="Haoma's Ring", bag="wardrobe2"},
+        ring1={name="Haoma's Ring", bag="wardrobe2"},
+        ring2={name="Haoma's Ring", bag="wardrobe3"},
         back=gear.WHM_FC_Cape,
         waist="Witful Belt",
         }
 
     sets.midcast.Cursna = set_combine(sets.midcast.StatusRemoval, {
-        main="Sucellus",
+        main="Yagrush",
         sub="Chanter's Shield",
         body="Ebers Bliaud +1",
         hands="Fanatic Gloves", --15
@@ -337,9 +335,9 @@ function init_gear_sets()
         feet="Vanya Clogs", --5
         neck="Malison Medallion", --10
         ear1="Beatific Earring",
-        ear2="Healing Earring",
-        ring1={name="Haoma's Ring", bag="wardrobe1"},
-        ring2={name="Haoma's Ring", bag="wardrobe2"},
+        ear2="Meili Earring",
+        ring1={name="Haoma's Ring", bag="wardrobe2"},
+        ring2={name="Haoma's Ring", bag="wardrobe3"},
         back=gear.WHM_FC_Cape, --25
         waist="Bishop's Sash",
         })
@@ -350,7 +348,7 @@ function init_gear_sets()
     sets.midcast['Enhancing Magic'] = {
         main=gear.Gada_ENH,
         sub="Ammurapi Shield",
-        head="Befouled Crown",
+        head="Telchine Cap",
         body="Telchine Chas.",
         hands="Dynasty Mitts",
         legs="Telchine Braconi",
@@ -358,8 +356,8 @@ function init_gear_sets()
         neck="Incanter's Torque",
         --ear1="Mimir Earring",
         ear2="Andoaa Earring",
-        ring1={name="Stikini Ring", bag="wardrobe1"},
-        ring2={name="Stikini Ring", bag="wardrobe2"},
+        ring1={name="Stikini Ring", bag="wardrobe2"},
+        ring2={name="Stikini Ring", bag="wardrobe3"},
         back="Mending Cape",
         waist="Olympus Sash",
         }
@@ -380,7 +378,7 @@ function init_gear_sets()
         main="Bolelabunga",
         sub="Ammurapi Shield",
         head="Inyanga Tiara +2",
-        body="Piety Briault +1",
+        body="Piety Briault +3",
         hands="Ebers Mitts +1",
         legs="Th. Pantaloons +2",
         })
@@ -426,7 +424,6 @@ function init_gear_sets()
         })
 
     sets.midcast.Protect = set_combine(sets.midcast.ConserveMP, sets.midcast.EnhancingDuration, {
-        feet="Piety Duckbills +1",
         ring1="Sheltered Ring",
         })
 
@@ -445,15 +442,15 @@ function init_gear_sets()
         neck="Incanter's Torque",
         ear1="Digni. Earring",
         ear2="Regal Earring",
-        ring1={name="Stikini Ring", bag="wardrobe1"},
-        ring2={name="Stikini Ring", bag="wardrobe2"},
+        ring1={name="Stikini Ring", bag="wardrobe2"},
+        ring2={name="Stikini Ring", bag="wardrobe3"},
         back=gear.WHM_Cure_Cape,
         waist="Refoccilation Stone",
         }
 
     sets.midcast.Banish = set_combine(sets.midcast['Divine Magic'], {
         head="Inyanga Tiara +2",
-        body="Witching Robe",
+        --body="Witching Robe",
         legs="Kaykaus Tights",
         neck="Baetyl Pendant",
         ear1="Friomisi Earring",
@@ -470,14 +467,14 @@ function init_gear_sets()
         ammo="Pemphredo Tathlum",
         head="Befouled Crown",
         body="Inyanga Jubbah +2",
-        hands="Inyan. Dastanas +2",
+        hands="Theophany Mitts +3",
         legs="Chironic Hose",
         feet="Inyan. Crackows +2",
         neck="Erra Pendant",
         ear1="Digni. Earring",
         ear2="Regal Earring",
-        ring1={name="Stikini Ring", bag="wardrobe1"},
-        ring2={name="Stikini Ring", bag="wardrobe2"},
+        ring1={name="Stikini Ring", bag="wardrobe2"},
+        ring2={name="Stikini Ring", bag="wardrobe3"},
         back=gear.WHM_FC_Cape,
         waist="Yamabuki-no-Obi",
         }
@@ -495,7 +492,7 @@ function init_gear_sets()
         neck="Erra Pendant",
         ear1="Digni. Earring",
         ear2="Regal Earring",
-        ring1={name="Stikini Ring", bag="wardrobe1"},
+        ring1="Kishar Ring",
         ring2={name="Stikini Ring", bag="wardrobe2"},
         back=gear.WHM_Cure_Cape,
         waist="Luminary Sash",
@@ -535,13 +532,13 @@ function init_gear_sets()
         sub="Genmei Shield",
         ammo="Homiliary",
         head="Befouled Crown",
-        body="Witching Robe",
+        body="Piety Briault +3",
         hands="Inyan. Dastanas +2",
         legs="Assid. Pants +1",
         feet="Crier's Gaiters",
         neck="Bathy Choker +1",
-        ear1="Nourish. Earring +1",
-        ear2="Infused Earring",
+        ear1="Genmei Earring",
+        ear2="Etiolation Earring",
         ring1="Paguroidea Ring",
         ring2="Sheltered Ring",
         back=gear.WHM_FC_Cape,
@@ -579,8 +576,10 @@ function init_gear_sets()
 
 
     sets.idle.Town = set_combine(sets.idle, {
-        hands="Theophany Mitts +2",
-        legs="Th. Pantaloons +2",
+        main="Yagrush",
+        sub="Ammurapi Shield",
+        hands="Theophany Mitts +3",
+        ear1="Glorious Earring",
         back=gear.WHM_Cure_Cape,
         })
 
@@ -609,7 +608,7 @@ function init_gear_sets()
     sets.buff['Devotion'] = {head="Piety Cap +1"}
     sets.buff.Sublimation = {waist="Embla Sash"}
 
-    sets.buff.Doom = {ring1={name="Saida Ring", bag="wardrobe1"}, ring2={name="Saida Ring", bag="wardrobe2"},}
+    sets.buff.Doom = {ring1={name="Saida Ring", bag="wardrobe2"}, ring2={name="Saida Ring", bag="wardrobe3"},}
 
     sets.Obi = {waist="Hachirin-no-Obi"}
     sets.CP = {back="Mecisto. Mantle"}
@@ -782,22 +781,7 @@ end
 
 -- Called by the 'update' self-command.
 function job_update(cmdParams, eventArgs)
---[[if cmdParams[1] == 'user' and not areas.Cities:contains(world.area) then
-        local needsArts =
-            player.sub_job:lower() == 'sch' and
-            not buffactive['Light Arts'] and
-            not buffactive['Addendum: White'] and
-            not buffactive['Dark Arts'] and
-            not buffactive['Addendum: Black']
-
-        if not buffactive['Afflatus Solace'] and not buffactive['Afflatus Misery'] then
-            if needsArts then
-                send_command('@input /ja "Afflatus Solace" <me>;wait 1.2;input /ja "Light Arts" <me>')
-            else
-                send_command('@input /ja "Afflatus Solace" <me>')
-            end
-        end
-    end--]]
+    update_sublimation()
 end
 
 

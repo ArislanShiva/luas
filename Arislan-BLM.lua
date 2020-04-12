@@ -58,7 +58,7 @@ end
 
 -- Setup vars that are user-dependent.  Can override this function in a sidecar file.
 function user_setup()
-    state.CastingMode:options('Normal', 'Resistant', 'Spaekona', 'Occult')
+    state.CastingMode:options('Normal', 'Resistant', 'Spaekona')
     state.IdleMode:options('Normal', 'DT')
 
     state.WeaponLock = M(false, 'Weapon Lock')
@@ -359,7 +359,7 @@ function init_gear_sets()
         ammo="Pemphredo Tathlum",
         head="Merlinic Hood",
         body="Vanya Robe",
-        hands="Jhakri Cuffs +2",
+        hands="Raetic Bangles +1",
         legs="Jhakri Slops +2",
         feet="Skaoi Boots",
         neck="Erra Pendant",
@@ -386,7 +386,7 @@ function init_gear_sets()
         ammo="Pemphredo Tathlum",
         head="Merlinic Hood",
         body="Jhakri Robe +2",
-        hands="Jhakri Cuffs +2",
+        hands="Raetic Bangles +1",
         legs="Jhakri Slops +2",
         feet="Merlinic Crackows",
         neck="Erra Pendant",
@@ -411,7 +411,6 @@ function init_gear_sets()
 
     sets.midcast.Stun = set_combine(sets.midcast['Dark Magic'], {
         feet="Volte Gaiters",
-        waist="Channeler's Stone",
         })
 
     sets.midcast.Death = {
@@ -436,19 +435,6 @@ function init_gear_sets()
         sub="Enki Strap",
         head="Amalric Coif +1",
         ring2="Shiva Ring +1",
-        })
-
-    sets.midcast.Death.Occult = set_combine(sets.midcast.Death, {
-        sub="Bloodrain Strap",
-        head="Mall. Chapeau +2",
-        legs="Perdition Slops",
-        feet="Battlecast Gaiters",
-        neck="Seraphic Ampulla",
-        ear1="Dedition Earring",
-        ear2="Telos Earring",
-        ring1="Chirich Ring +1",
-        ring2="Apate Ring",
-        waist="Oneiros Rope",
         })
 
     -- Elemental Magic sets
@@ -495,19 +481,6 @@ function init_gear_sets()
         neck="Erra Pendant",
         })
 
-    sets.midcast['Elemental Magic'].Occult = set_combine(sets.midcast['Elemental Magic'], {
-        --sub="Bloodrain Strap",
-        head="Mall. Chapeau +2",
-        legs="Perdition Slops",
-        feet="Battlecast Gaiters",
-        neck="Seraphic Ampulla",
-        ear1="Dedition Earring",
-        ear2="Telos Earring",
-        ring1={name="Chirich Ring +1", bag="wardrobe3"},
-        ring2={name="Chirich Ring +1", bag="wardrobe4"},
-        waist="Oneiros Rope",
-        })
-
     sets.midcast.Impact = set_combine(sets.midcast['Elemental Magic'], {
         head=empty,
         body="Twilight Cloak",
@@ -518,18 +491,6 @@ function init_gear_sets()
         sub="Khonsu",
         head=empty,
         body="Twilight Cloak",
-        })
-
-    sets.midcast.Impact.Occult = set_combine(sets.midcast.Impact, {
-        sub="Bloodrain Strap",
-        legs="Perdition Slops",
-        feet="Battlecast Gaiters",
-        neck="Seraphic Ampulla",
-        ear1="Dedition Earring",
-        ear2="Telos Earring",
-        ring1="Chirich Ring +1",
-        ring2="Apate Ring",
-        waist="Oneiros Rope",
         })
 
     -- Initializes trusts at iLvl 119
@@ -548,7 +509,7 @@ function init_gear_sets()
         ammo="Pemphredo Tathlum",
         head="Befouled Crown",
         body="Jhakri Robe +2",
-        hands="Amalric Gages +1",
+        hands="Raetic Bangles +1",
         legs="Assid. Pants +1",
         feet="Herald's Gaiters",
         neck="Bathy Choker +1",
@@ -561,14 +522,17 @@ function init_gear_sets()
         }
 
     sets.idle.DT = set_combine(sets.idle, {
-        main="Bolelabunga",
+        main="Daybreak",
         sub="Genmei Shield", --10/0
         ammo="Staunch Tathlum +1", --3/3
         head="Volte Cap",
         body="Mallquis Saio +2", --8/8
-        feet="Volte Boots",
+        hands="Raetic Bangles +1",
+        feet=gear.Telchine_ENH_legs,
+        feet="Volte Gaiters",
         neck="Loricate Torque +1", --6/6
-        ear1="Genmei Earring", --2/0
+        ear1="Sanare Earring",
+        ear2="Lugalbanda Earring",
         ring1="Gelatinous Ring +1", --7/(-1)
         ring2="Defending Ring", --10/10
         back="Moonlight Cape", --6/6
@@ -603,7 +567,6 @@ function init_gear_sets()
         sub="Khonsu",
         head="Ea Hat +1",
         body="Ea Houppe. +1",
-        hands="Amalric Gages +1",
         legs="Ea Slops +1",
         neck="Incanter's Torque",
         ear1="Malignance Earring",
@@ -648,11 +611,13 @@ function init_gear_sets()
     -- Normal melee group
 
     sets.engaged = {
-        head="Jhakri Coronal +2",
+        main="Maxentius",
+        sub="Ammurapi Shield",
+        head="Volte Cap",
         body="Jhakri Robe +2",
-        hands="Jhakri Cuffs +2",
-        legs="Jhakri Slops +2",
-        feet="Jhakri Pigaches +2",
+        hands="Raetic Bangles +1",
+        legs=gear.Telchine_ENH_legs,
+        feet="Battlecast Gaiters",
         neck="Combatant's Torque",
         ear1="Cessance Earring",
         ear2="Telos Earring",

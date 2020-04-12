@@ -113,7 +113,7 @@ function user_setup()
 
     -- Additional local binds
     include('Global-Binds.lua') -- OK to remove this line
-    include('Global-WHM-Binds.lua') -- OK to remove this line
+    include('Global-GEO-Binds.lua') -- OK to remove this line
 
     send_command('lua l gearinfo')
 
@@ -1182,7 +1182,7 @@ function job_pretarget(spell, action, spellMap, eventArgs)
     end
 end
 
-windower.register_event('zone change', 
+windower.register_event('zone change',
     function()
         send_command('gi ugs true')
     end

@@ -240,10 +240,11 @@ function init_gear_sets()
     sets.precast.WS['Camlann\'s Torment'].Uncapped = set_combine(sets.precast.WS['Camlann\'s Torment'], {
         neck="Fotia Gorget",
         legs=gear.Valo_WSD_legs,
+        waist="Sailfi Belt +1",
         })
 
     sets.precast.WS['Drakesbane'] = set_combine(sets.precast.WS, {
-        head="Flam. Zucchetto +2", 
+        head="Flam. Zucchetto +2",
         body="Hjarrandi Breast.",
         hands="Flamma Manopolas +2",
         legs="Pelt. Cuissots +1",
@@ -251,11 +252,11 @@ function init_gear_sets()
         ear2="Brutal Earring",
         ring1="Begrudging Ring",
         back=gear.DRG_WS4_Cape,
-        waist="Ioskeha Belt +1",
+        waist="Sailfi Belt +1",
         })
 
     sets.precast.WS['Drakesbane'].Acc = set_combine(sets.precast.WS['Drakesbane'], {
-        waist="Kentarch Belt +1",
+        waist="Ioskeha Belt +1",
         })
 
     sets.precast.WS['Drakesbane'].Uncapped = set_combine(sets.precast.WS['Drakesbane'], {
@@ -274,7 +275,7 @@ function init_gear_sets()
     sets.precast.WS['Geirskogul'].Acc = set_combine(sets.precast.WS['Geirskogul'], {})
 
     sets.precast.WS['Geirskogul'].Uncapped = set_combine(sets.precast.WS['Geirskogul'], {
-        head="Hjarrandi Helm", 
+        head="Hjarrandi Helm",
         legs=gear.Valo_WSD_legs,
         })
 
@@ -288,23 +289,22 @@ function init_gear_sets()
         ring1="Begrudging Ring",
         ring2="Epaminondas's Ring",
         back=gear.DRG_WS4_Cape,
-        waist="Ioskeha Belt +1",
+        waist="Sailfi Belt +1",
         })
 
     sets.precast.WS['Impulse Drive'].Acc = set_combine(sets.precast.WS['Impulse Drive'], {
         legs="Vishap Brais +3",
-        waist="Kentarch Belt +1",
+        waist="Ioskeha Belt +1",
         })
 
     sets.precast.WS['Impulse Drive'].HighTP = set_combine(sets.precast.WS['Impulse Drive'], {
-        head=gear.Valo_WSD_head, 
+        head=gear.Valo_WSD_head,
         body=gear.Valo_WSD_body,
         hands="Ptero. Fin. G. +3",
         legs="Vishap Brais +3",
         back=gear.DRG_WS2_Cape,
         ear2="Ishvara Earring",
-		ring1="Regal Ring",
-		waist="Prosilio Belt +1",
+		    ring1="Regal Ring",
         })
 
     sets.precast.WS['Sonic Thrust'] = sets.precast.WS['Camlann\'s Torment']
@@ -312,7 +312,7 @@ function init_gear_sets()
     sets.precast.WS['Sonic Thrust'].Uncapped = sets.precast.WS['Camlann\'s Torment'].Uncapped
 
     sets.precast.WS['Stardiver'] = set_combine(sets.precast.WS, {
-        head="Flam. Zucchetto +2", 
+        head="Flam. Zucchetto +2",
         body=gear.Valo_TP_body,
         hands="Sulev. Gauntlets +2",
         neck="Fotia Gorget",
@@ -342,7 +342,7 @@ function init_gear_sets()
         })
 
     sets.precast.WS['Thunder Thrust'] = sets.precast.WS['Raiden Thrust']
-    
+
     sets.precast.WS['Leg Sweep'] = set_combine(sets.precast.WS, {
         ammo="Pemphredo Tathlum",
         head="Flam. Zucchetto +2",
@@ -480,13 +480,14 @@ function init_gear_sets()
         ring1={name="Chirich Ring +1", bag="wardrobe3"},
         ring2="Niqmaddu Ring",
         back=gear.DRG_TP_Cape,
-        waist="Ioskeha Belt +1",
+        waist="Sailfi Belt +1",
         }
 
     sets.engaged.LowAcc = set_combine(sets.engaged, {
         ammo="Amar Cluster",
         neck="Combatant's Torque",
         ear2="Cessance Earring",
+        waist="Ioskeha Belt +1",
         })
 
     sets.engaged.MidAcc = set_combine(sets.engaged.LowAcc, {
@@ -562,7 +563,7 @@ end
 
 function job_precast(spell, action, spellMap, eventArgs)
     -- Wyvern Commands
-    if spell.name == 'Dismiss' and pet.hpp < 100 then        
+    if spell.name == 'Dismiss' and pet.hpp < 100 then
         eventArgs.cancel = true
         add_to_chat(50, 'Cancelling Dismiss! ' ..pet.name.. ' is below full HP! [ ' ..pet.hpp.. '% ]')
     elseif wyv_breath_spells:contains(spell.english) or (spell.skill == 'Ninjutsu' and player.hpp < 33) then
@@ -625,9 +626,9 @@ function job_buff_change(buff,gain)
             handle_equipping_gear(player.status)
         end
     end
-    
+
     if buff == 'Hasso' and not gain then
-        add_to_chat(167, 'Hasso just expired!')    
+        add_to_chat(167, 'Hasso just expired!')
     end
 
 end
@@ -693,9 +694,13 @@ end
 -------------------------------------------------------------------------------------------------------------------
 
 function get_custom_wsmode(spell, action, spellMap)
+    local wsmode
+
     if spell.type == 'WeaponSkill' and state.AttackMode.value == 'Uncapped' then
-        return "Uncapped"
+        wsmode = 'Uncapped'
     end
+
+    return wsmode
 end
 
 -------------------------------------------------------------------------------------------------------------------

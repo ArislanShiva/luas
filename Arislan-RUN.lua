@@ -349,7 +349,7 @@ function init_gear_sets()
 
     sets.precast.WS.Uncapped = set_combine(sets.precast.WS, {
         ammo="Seeth. Bomblet +1",
-        })  
+        })
 
     sets.precast.WS['Resolution'] = set_combine(sets.precast.WS, {
         head="Lustratio Cap +1",
@@ -398,6 +398,7 @@ function init_gear_sets()
     sets.precast.WS['Dimidiation'].Uncapped = set_combine(sets.precast.WS['Dimidiation'], {
         neck="Caro Necklace",
         waist="Grunfeld Rope",
+        waist="Sailfi Belt +1",
         })
 
     sets.precast.WS['Herculean Slash'] = sets.precast.JA['Lunge']
@@ -422,6 +423,7 @@ function init_gear_sets()
         feet="Lustra. Leggings +1",
         ear2="Ishvara Earring",
         back=gear.RUN_WS1_Cape,
+        waist="Sailfi Belt +1",
         })
 
     sets.precast.WS['Upheaval'] = sets.precast.WS['Resolution']
@@ -537,7 +539,7 @@ function init_gear_sets()
     sets.idle = {
         sub="Mensch Strap +1",
         ammo="Homiliary",
-        head="Turms Cap +1",
+        head=gear.Herc_Idle_head,
         body="Runeist's Coat +3",
         hands="Regal Gauntlets",
         legs="Turms Subligar +1",
@@ -570,6 +572,7 @@ function init_gear_sets()
 
     sets.idle.Town = set_combine(sets.idle, {
         ammo="Staunch Tathlum +1",
+        head="Turms Cap +1",
         body="Ashera Harness",
         neck="Futhark Torque +1",
         ear1="Sanare Earring",
@@ -661,13 +664,14 @@ function init_gear_sets()
         ring1="Epona's Ring",
         ring2="Niqmaddu Ring",
         back=gear.RUN_TP_Cape,
-        waist="Ioskeha Belt +1",
+        waist="Sailfi Belt +1",
         }
 
     sets.engaged.LowAcc = set_combine(sets.engaged, {
         head="Dampening Tam",
         hands=gear.Adhemar_A_hands,
         neck="Combatant's Torque",
+        waist="Ioskeha Belt +1",
         })
 
     sets.engaged.MidAcc = set_combine(sets.engaged.LowAcc, {
@@ -753,8 +757,8 @@ function init_gear_sets()
         ring1="Moonlight Ring",
         ring2="Defending Ring",
         back=gear.RUN_TP_Cape,
-        waist="Ioskeha Belt +1",
-        }    
+        waist="Sailfi Belt +1",
+        }
 
     ------------------------------------------------------------------------------------------------
     ---------------------------------------- Special Sets ------------------------------------------

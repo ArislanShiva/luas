@@ -244,7 +244,7 @@ function init_gear_sets()
         body="Piety Briault +3",
         hands="Piety Mitts +3",
         legs="Piety Pantaln. +3",
-        feet="Battlecast Gaiters",
+        feet="Piety Duckbills +2",
         neck="Fotia Gorget",
         ear1="Moonshade Earring",
         ear2="Ishvara Earring",
@@ -256,7 +256,6 @@ function init_gear_sets()
 
     sets.precast.WS['Black Halo'] = set_combine(sets.precast.WS, {
         neck="Caro Necklace",
-        waist="Prosilio Belt +1",
         })
 
     sets.precast.WS['Hexa Strike'] = set_combine(sets.precast.WS, {
@@ -281,6 +280,7 @@ function init_gear_sets()
         back="Solemnity Cape",
         waist="Austerity Belt +1",
         }
+
     -- Cure sets
 
     sets.midcast.CureSolace = {
@@ -557,7 +557,7 @@ function init_gear_sets()
         sub="Ammurapi Shield",
         head=empty,
         body="Twilight Cloak",
-        hands="Inyan. Dastanas +2",
+        hands="Raetic Bangles +1",
         legs="Th. Pant. +3",
         feet="Theo. Duckbills +3",
         ring1="Freke Ring",
@@ -583,7 +583,7 @@ function init_gear_sets()
         ammo="Homiliary",
         head="Befouled Crown",
         body="Piety Briault +3",
-        hands="Inyan. Dastanas +2",
+        hands="Raetic Bangles +1",
         legs="Assid. Pants +1",
         feet="Herald's Gaiters",
         neck="Bathy Choker +1",
@@ -611,17 +611,18 @@ function init_gear_sets()
 
     sets.idle.MEva = set_combine(sets.idle.DT, {
         main="Daybreak",
-        sub="Genmei Shield",
+        sub="Ammurapi Shield",
         ammo="Staunch Tathlum +1",
         head="Inyanga Tiara +2",
         body="Inyanga Jubbah +2",
-        hands="Inyan. Dastanas +2",
+        hands="Raetic Bangles +1",
         legs="Inyanga Shalwar +2",
         feet="Inyan. Crackows +2",
         neck="Warder's Charm +1",
-        ear1="Sanare Earring",
-        ear2="Regal Earring",
-        ring1="Inyanga Ring",
+        ear1="Eabani Earring",
+        ear2="Sanare Earring",
+        ring1="Purity Ring",
+        ring2="Inyanga Ring",
         back=gear.WHM_FC_Cape,
         waist="Carrier's Sash",
         })
@@ -631,14 +632,11 @@ function init_gear_sets()
         sub="Ammurapi Shield",
         head="Kaykaus Mitra +1",
         body="Kaykaus Bliaut +1",
-        hands="Kaykaus Cuffs +1",
         legs="Kaykaus Tights +1",
         neck="Debilis Medallion",
         ear1="Glorious Earring",
         ear2="Regal Earring",
         })
-
-    sets.idle.Weak = sets.idle.DT
 
     -- Defense sets
 
@@ -660,16 +658,16 @@ function init_gear_sets()
         main="Yagrush",
         head="Aya. Zucchetto +2",
         body="Ayanmo Corazza +2",
-        hands="Aya. Manopolas +2",
-        legs="Aya. Cosciales +2",
+        hands="Raetic Bangles +1",
+        legs="Piety Pantaln. +3",
         feet="Battlecast Gaiters",
-        neck="Asperity Necklace",
-        ear1="Suppanomimi",
-        ear2="Brutal Earring",
+        neck="Combatant's Torque",
+        ear1="Cessance Earring",
+        ear2="Telos Earring",
         ring1="Hetairoi Ring",
         ring2={name="Chirich Ring +1", bag="wardrobe4"},
         back="Relucent Cape",
-        waist="Shetal Stone",
+        waist="Windbuffet Belt +1",
         }
 
     -- Buff sets: Gear that needs to be worn to actively enhance a current player buff.

@@ -332,8 +332,8 @@ function init_gear_sets()
     sets.precast.WS['Vorpal Blade'].Acc = sets.precast.WS['Chant du Cygne'].Acc
 
     sets.precast.WS['Savage Blade'] = set_combine(sets.precast.WS, {
-        neck="Dls. Torque +1",
-        waist="Prosilio Belt +1",
+        neck="Dls. Torque +2",
+        waist="Sailfi Belt +1",
         })
 
     sets.precast.WS['Savage Blade'].Acc = set_combine(sets.precast.WS['Savage Blade'], {
@@ -353,7 +353,6 @@ function init_gear_sets()
         neck="Combatant's Torque",
         ear1="Mache Earring +1",
         ring1="Ramuh Ring +1",
-        waist="Grunfeld Rope",
         })
 
     sets.precast.WS['Sanguine Blade'] = {
@@ -378,10 +377,15 @@ function init_gear_sets()
         ring1="Weather. Ring +1",
         })
 
+    sets.precast.WS['Aeolian Edge'] = set_combine(sets.precast.WS['Seraph Dlade'], {
+        head="Merlinic Hood",
+        ear2="Moonshade Earring",
+        ring1="Shiva Ring +1",
+        })
+
     sets.precast.WS['Black Halo'] = set_combine(sets.precast.WS['Savage Blade'], {
         ear2="Sherida Earring",
         ring1="Rufescent Ring",
-        waist="Prosilio Belt +1",
         })
 
     sets.precast.WS['Black Halo'].Acc = set_combine(sets.precast.WS['Black Halo'], {
@@ -490,7 +494,7 @@ function init_gear_sets()
         hands="Atrophy Gloves +3",
         legs=gear.Telchine_ENH_legs,
         feet="Leth. Houseaux +1",
-        neck="Dls. Torque +1",
+        neck="Dls. Torque +2",
         back="Ghostfyre Cape",
         waist="Embla Sash",
         }
@@ -563,7 +567,7 @@ function init_gear_sets()
         hands="Kaykaus Cuffs +1",
         legs="Chironic Hose",
         feet="Vitiation Boots +3",
-        neck="Dls. Torque +1",
+        neck="Dls. Torque +2",
         ear1="Malignance Earring",
         ear2="Snotra Earring",
         ring1="Kishar Ring",
@@ -573,13 +577,12 @@ function init_gear_sets()
         }
 
     sets.midcast.MndEnfeeblesAcc = set_combine(sets.midcast.MndEnfeebles, {
-        main="Daybreak",
+        main="Crocea Mors",
         sub="Ammurapi Shield",
         range="Ullr",
         ammo=empty,
         head="Atrophy Chapeau +3",
         body="Atrophy Tabard +3",
-        ear2="Regal Earring",
         ring1={name="Stikini Ring +1", bag="wardrobe3"},
         })
 
@@ -591,14 +594,12 @@ function init_gear_sets()
         })
 
     sets.midcast.IntEnfeeblesAcc = set_combine(sets.midcast.IntEnfeebles, {
-        main="Maxentius",
+        main="Crocea Mors",
         sub="Ammurapi Shield",
         range="Ullr",
         ammo=empty,
         body="Atrophy Tabard +3",
-        ear2="Regal Earring",
-        ring1={name="Stikini Ring +1", bag="wardrobe3"},
-        ring2="Weather. Ring +1",
+        ring2={name="Stikini Ring +1", bag="wardrobe3"},
         })
 
     sets.midcast.SkillEnfeebles = set_combine(sets.midcast.MndEnfeebles, {
@@ -611,8 +612,8 @@ function init_gear_sets()
         neck="Incanter's Torque",
         ring1={name="Stikini Ring +1", bag="wardrobe3"},
         ring2={name="Stikini Ring +1", bag="wardrobe4"},
-        ear1="Enfeebling Earring",
-        ear2="Vor Earring",
+        ear1="Vor Earring",
+        ear2="Snotra Earring",
         waist="Rumination Sash",
         })
 
@@ -730,7 +731,7 @@ function init_gear_sets()
         ammo="Homiliary",
         head="Viti. Chapeau +3",
         body="Jhakri Robe +2",
-        hands="Malignance Gloves",
+        hands="Raetic Bangles +1",
         legs="Carmine Cuisses +1",
         feet="Malignance Boots",
         neck="Bathy Choker +1",
@@ -762,8 +763,8 @@ function init_gear_sets()
         ammo="Regal Gem",
         head="Viti. Chapeau +3",
         body="Viti. Tabard +3",
-        hands="Amalric Gages +1",
-        neck="Dls. Torque +1",
+        feet="Vitiation Boots +3",
+        neck="Dls. Torque +2",
         ear1="Malignance Earring",
         ear2="Snotra Earring",
         back=gear.RDM_INT_Cape,
@@ -1396,9 +1397,9 @@ end
 function set_sleep_timer(spell)
     local self = windower.ffxi.get_player()
 
-    if spell.en == "Sleep II" then 
+    if spell.en == "Sleep II" then
         base = 90
-    elseif spell.en == "Sleep" or spell.en == "Sleepga" then 
+    elseif spell.en == "Sleep" or spell.en == "Sleepga" then
         base = 60
     end
 
@@ -1418,12 +1419,12 @@ function set_sleep_timer(spell)
     end
 
     --User enfeebling duration enhancing gear total
-    gear_mult = 1.10
+    gear_mult = 1.20
     --User enfeebling duration enhancing augment total
-    aug_mult = 1.18
+    aug_mult = 1.25
 
     totalDuration = math.floor(base * gear_mult * aug_mult)
-        
+
     -- Create the custom timer
     if spell.english == "Sleep II" then
         send_command('@timers c "Sleep II ['..spell.target.name..']" ' ..totalDuration.. ' down spells/00259.png')
@@ -1433,7 +1434,7 @@ function set_sleep_timer(spell)
 
 end
 
-windower.register_event('zone change', 
+windower.register_event('zone change',
     function()
         if player.sub_job == 'NIN' or player.sub_job == 'DNC' then
             send_command('gi ugs true')

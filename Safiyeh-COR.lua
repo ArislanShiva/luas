@@ -426,7 +426,7 @@ function init_gear_sets()
         ring1="Regal Ring",
         --ring2="Rufescent Ring",
         back=gear.COR_WS2_Cape,
-        --waist="Prosilio Belt +1",
+        --waist="Sailfi Belt +1",
         })
 
     sets.precast.WS['Savage Blade'].Acc = set_combine(sets.precast.WS['Savage Blade'], {

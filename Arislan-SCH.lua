@@ -479,7 +479,7 @@ function init_gear_sets()
         head="Pixie Hairpin +1",
         body=gear.Merl_MB_body, --10
         hands="Amalric Gages +1", --(5)
-        legs="Mallquis Trews +2", --5
+        legs="Mallquis Trews +2", --6
         feet="Merlinic Crackows", --11
         neck="Argute Stole +1", --8
         ear1="Malignance Earring",
@@ -584,7 +584,7 @@ function init_gear_sets()
         ammo="Homiliary",
         head="Befouled Crown",
         body="Acad. Gown +3",
-        hands="Gende. Gages +1",
+        hands="Raetic Bangles +1",
         legs="Assiduity Pants +1",
         feet="Herald's Gaiters",
         neck="Bathy Choker +1",
@@ -597,12 +597,14 @@ function init_gear_sets()
         }
 
     sets.idle.DT = set_combine(sets.idle, {
-        main="Bolelabunga",
+        main="Daybreak",
         sub="Genmei Shield", --10/0
         ammo="Staunch Tathlum +1", --3/3
         head="Volte Cap",
         body="Mallquis Saio +2", --8/8
-        feet="Peda. Loafers +3",
+        hands="Raetic Bangles +1",
+        legs="Peda. Pants +3",
+        feet="Volte Gaiters",
         neck="Loricate Torque +1", --6/6
         ear1="Sanare Earring",
         ring1="Gelatinous Ring +1", --7/(-1)
@@ -613,22 +615,17 @@ function init_gear_sets()
 
     sets.idle.Vagary = sets.midcast['Elemental Magic']
 
-    sets.idle.Refresh = {main="Bolelabunga", sub="Genmei Shield"}
-
     sets.idle.Town = set_combine(sets.idle, {
         main="Musa",
         sub="Khonsu",
         head="Peda. M.Board +3",
         body="Amalric Doublet +1",
-        hands="Amalric Gages +1",
         legs="Peda. Pants +3",
         neck="Argute Stole +1",
         ear1="Malignance Earring",
         ear2="Regal Earring",
         back=gear.SCH_MAB_Cape,
         })
-
-    sets.idle.Weak = sets.idle.DT
 
     sets.resting = set_combine(sets.idle, {
         main="Chatoyant Staff",
@@ -649,17 +646,19 @@ function init_gear_sets()
     ------------------------------------------------------------------------------------------------
 
     sets.engaged = {
-        head="Jhakri Coronal +2",
+        head="Peda. M.Board +3",
         body="Jhakri Robe +2",
-        hands="Jhakri Cuffs +2",
-        feet="Jhakri Pigaches +2",
+        hands="Raetic Bangles +1",
+        legs="Peda. Pants +3",
+        feet="Peda. Loafers +3",
         neck="Combatant's Torque",
         ear1="Cessance Earring",
         ear2="Telos Earring",
         ring1="Hetairoi Ring",
         ring2={name="Chirich Ring +1", bag="wardrobe4"},
         back="Relucent Cape",
-        head="Volte Cap", feet="Volte Boots", waist="Chaac Belt" --TH
+        waist="Windbuffet Belt +1",
+        --head="Volte Cap", feet="Volte Boots", waist="Chaac Belt" --TH
         }
 
     ------------------------------------------------------------------------------------------------
@@ -901,7 +900,7 @@ function display_current_job_state(eventArgs)
     local c_msg = state.CastingMode.value
 
     local h_msg = state.HelixMode.value
-    
+
     local r_msg = state.RegenMode.value
 
     local d_msg = 'None'

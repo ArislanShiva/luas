@@ -312,6 +312,7 @@ function init_gear_sets()
     sets.precast.WS.Acc = set_combine(sets.precast.WS, {
         feet="Orion Socks +3",
         neck="Combatant's Torque",
+        ear1="Beyla Earring",
         ear2="Telos Earring",
         waist="K. Kachina Belt +1",
         })
@@ -320,6 +321,7 @@ function init_gear_sets()
 
     sets.precast.WS['Apex Arrow'].Acc = set_combine(sets.precast.WS['Apex Arrow'], {
         feet="Orion Socks +3",
+        ear1="Beyla Earring",
         ear2="Telos Earring",
         waist="K. Kachina Belt +1",
         })
@@ -338,7 +340,7 @@ function init_gear_sets()
         legs="Mummu Kecks +2",
         feet="Arcadian Socks +3",
         neck="Iskur Gorget",
-        ear1="Enervating Earring",
+        ear1="Beyla Earring",
         ear2="Telos Earring",
         ring1="Regal Ring",
         ring2="Hajduk Ring +1",
@@ -352,6 +354,7 @@ function init_gear_sets()
     sets.precast.WS['Last Stand'].Acc = set_combine(sets.precast.WS['Last Stand'], {
         ammo=gear.ACCbullet,
         feet="Orion Socks +3",
+        ear1="Beyla Earring",
         ear2="Telos Earring",
         ring2="Hajduk Ring +1",
         waist="K. Kachina Belt +1",
@@ -364,6 +367,7 @@ function init_gear_sets()
         })
 
     sets.precast.WS["Coronach"].Acc = set_combine(sets.precast.WS['Coronach'], {
+        ear1="Beyla Earring",
         ear2="Telos Earring",
         })
 
@@ -445,6 +449,7 @@ function init_gear_sets()
     sets.midcast.RA.Acc = set_combine(sets.midcast.RA, {
         hands="Meg. Gloves +2",
         feet="Orion Socks +3",
+        ear1="Beyla Earring",
         ring2="Hajduk Ring +1",
         })
 
@@ -528,7 +533,7 @@ function init_gear_sets()
         body="Oshosi Vest +1",
         hands="Oshosi Gloves +1",
         neck="Scout's Gorget +1",
-        ear1="Enervating Earring",
+        ear1="Beyla Earring",
         ear2="Telos Earring",
         back=gear.RNG_RA_Cape,
         waist="K. Kachina Belt +1",
@@ -954,7 +959,7 @@ function job_post_precast(spell, action, spellMap, eventArgs)
                 equip(sets.precast.RA.Gastra.Flurry1)
             else
                 equip(sets.precast.RA.Gastra)
-            end        
+            end
         elseif spell.action_type == 'Ranged Attack' then
             if flurry == 2 then
                 equip(sets.precast.RA.Flurry2)
@@ -1135,7 +1140,7 @@ function display_current_job_state(eventArgs)
 
     local msg = ''
     if state.Kiting.value then
-        msg = msg .. ' Kiting: On |' 
+        msg = msg .. ' Kiting: On |'
     end
 
     add_to_chat(002, '| ' ..string.char(31,210).. 'Melee' ..cf_msg.. ': ' ..string.char(31,001)..m_msg.. string.char(31,002)..  ' |'
@@ -1287,7 +1292,7 @@ function update_offense_mode()
     end
 end
 
-windower.register_event('zone change', 
+windower.register_event('zone change',
     function()
         if player.sub_job == 'NIN' or player.sub_job == 'DNC' then
             send_command('gi ugs true')

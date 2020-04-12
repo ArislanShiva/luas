@@ -39,21 +39,21 @@
 
 --[[
     Custom commands:
-    
+
     SongMode may take one of three values: None, Placeholder, FullLength
-    
+
     You can set these via the standard 'set' and 'cycle' self-commands.  EG:
     gs c cycle SongMode
     gs c set SongMode Placeholder
-    
+
     The Placeholder state will equip the bonus song instrument and ensure non-duration gear is equipped.
     The FullLength state will simply equip the bonus song instrument on top of standard gear.
-    
-    
+
+
     Simple macro to cast a placeholder Daurdabla song:
     /console gs c set SongMode Placeholder
     /ma "Shining Fantasia" <me>
-    
+
     To use a Terpander rather than Daurdabla, set the info.ExtraSongInstrument variable to
     'Terpander', and info.ExtraSongs to 1.
 --]]
@@ -61,7 +61,7 @@
 -- Initialization function for this job file.
 function get_sets()
     mote_include_version = 2
-    
+
     -- Load and initialize the include file.
     include('Mote-Include.lua')
     res = require 'resources'
@@ -91,7 +91,7 @@ function user_setup()
 
     state.LullabyMode = M{['description']='Lullaby Instrument', 'Harp', 'Horn'}
 
-    state.Carol = M{['description']='Carol', 
+    state.Carol = M{['description']='Carol',
         'Fire Carol', 'Fire Carol II', 'Ice Carol', 'Ice Carol II', 'Wind Carol', 'Wind Carol II',
         'Earth Carol', 'Earth Carol II', 'Lightning Carol', 'Lightning Carol II', 'Water Carol', 'Water Carol II',
         'Light Carol', 'Light Carol II', 'Dark Carol', 'Dark Carol II',
@@ -116,12 +116,12 @@ function user_setup()
     if player.sub_job == 'NIN' or player.sub_job == 'DNC' then
         send_command('lua l gearinfo')
     end
-   
+
     -- Adjust this if using the Terpander (new +song instrument)
     info.ExtraSongInstrument = 'Daurdabla'
     -- How many extra songs we can keep from Daurdabla/Terpander
     info.ExtraSongs = 2
-    
+
     send_command('bind ^` gs c cycle SongMode')
     send_command('bind !` input /ma "Chocobo Mazurka" <me>')
     send_command('bind !p input /ja "Pianissimo" <me>')
@@ -138,8 +138,8 @@ function user_setup()
     send_command('bind @w gs c toggle WeaponLock')
     send_command('bind @c gs c toggle CP')
 
-    send_command('bind ^numpad7 input /ws "Mordant Rime" <t>')
-    send_command('bind ^numpad4 input /ws "Evisceration" <t>')
+    send_command('bind ^numpad7 input /ws "Savage Blade" <t>')
+    --send_command('bind ^numpad7 input /ws "Mordant Rime" <t>')
     send_command('bind ^numpad5 input /ws "Rudra\'s Storm" <t>')
     send_command('bind ^numpad1 input /ws "Aeolian Edge" <t>')
     send_command('bind ^numpad2 input /ws "Wasp Sting" <t>')
@@ -231,17 +231,17 @@ function init_gear_sets()
     sets.precast.FC.SongPlaceholder = set_combine(sets.precast.FC.BardSong, {range=info.ExtraSongInstrument})
 
     sets.precast.FC.Dispelga = set_combine(sets.precast.FC, {main="Daybreak", sub="Ammurapi Shield"})
-    
+
     -- Precast sets to enhance JAs
-    
+
     sets.precast.JA.Nightingale = {feet="Bihu Slippers +3"}
     sets.precast.JA.Troubadour = {body="Bihu Jstcorps. +3"}
     sets.precast.JA['Soul Voice'] = {legs="Bihu Cannions +3"}
 
     -- Waltz set (chr and vit)
     sets.precast.Waltz = {}
-    
-       
+
+
     ------------------------------------------------------------------------------------------------
     ------------------------------------- Weapon Skill Sets ----------------------------------------
     ------------------------------------------------------------------------------------------------
@@ -262,7 +262,7 @@ function init_gear_sets()
         back=gear.BRD_WS_Cape,
         waist="Fotia Belt",
         }
-    
+
     -- Specific weaponskill sets.  Uses the base set if an appropriate WSMod version isn't found.
     sets.precast.WS['Evisceration'] = set_combine(sets.precast.WS, {
         range=gear.Linos_TP,
@@ -273,7 +273,7 @@ function init_gear_sets()
         ring1="Begrudging Ring",
         back=gear.BRD_TP_Cape,
         })
-        
+
     sets.precast.WS['Exenterator'] = set_combine(sets.precast.WS, {})
 
     sets.precast.WS['Mordant Rime'] = set_combine(sets.precast.WS, {
@@ -284,21 +284,27 @@ function init_gear_sets()
         })
 
     sets.precast.WS['Rudra\'s Storm'] = set_combine(sets.precast.WS, {
-        head="Chironic Hat",
+        head="Lustratio Cap +1",
         legs="Lustr. Subligar +1",
         feet="Lustra. Leggings +1",
         neck="Bard's Charm +1",
         waist="Grunfeld Rope",
         })
-    
-    
+
+    sets.precast.WS['Savage Blade'] = set_combine(sets.precast.WS, {
+        neck="Caro Necklace",
+        ring1="Shukuyu Ring",
+        waist="Sailfi Belt +1",
+        })
+
+
     ------------------------------------------------------------------------------------------------
     ---------------------------------------- Midcast Sets ------------------------------------------
     ------------------------------------------------------------------------------------------------
 
     -- General set for recast times.
     sets.midcast.FastRecast = sets.precast.FC
-        
+
     -- Gear to enhance certain classes of songs.
     sets.midcast.Ballad = {legs="Fili Rhingrave +1"}
     sets.midcast.Carol = {hands="Mousai Gages +1"}
@@ -378,9 +384,9 @@ function init_gear_sets()
         back="Solemnity Cape", --7
         waist="Bishop's Sash",
         }
-        
+
     sets.midcast.Curaga = sets.midcast.Cure
-        
+
     sets.midcast.StatusRemoval = {
         head="Vanya Hood",
         body="Vanya Robe",
@@ -393,14 +399,14 @@ function init_gear_sets()
         back=gear.BRD_Song_Cape,
         waist="Bishop's Sash",
         }
-        
+
     sets.midcast.Cursna = set_combine(sets.midcast.StatusRemoval, {
         hands="Hieros Mittens",
         neck="Debilis Medallion",
         ear1="Beatific Earring",
         back="Oretan. Cape +1",
         })
-    
+
     sets.midcast['Enhancing Magic'] = {
         main="Carnwenhan",
         sub="Ammurapi Shield",
@@ -446,7 +452,7 @@ function init_gear_sets()
         }
 
     sets.midcast.Dispelga = set_combine(sets.midcast['Enfeebling Magic'], {main="Daybreak", sub="Ammurapi Shield"})
-    
+
     ------------------------------------------------------------------------------------------------
     ----------------------------------------- Idle Sets --------------------------------------------
     ------------------------------------------------------------------------------------------------
@@ -457,7 +463,7 @@ function init_gear_sets()
         range="Gjallarhorn",
         head="Inyanga Tiara +2",
         body="Mou. Manteel +1",
-        hands="Mousai Gages +1",
+        hands="Raetic Bangles +1",
         legs="Inyanga Shalwar +2",
         feet="Fili Cothurnes +1",
         neck="Bathy Choker +1",
@@ -472,7 +478,7 @@ function init_gear_sets()
     sets.idle.DT = {
         head="Bihu Roundlet +3", --6/0
         body="Bihu Jstcorps. +3", --7/0
-        hands="Inyan. Dastanas +2", --0/4
+        hands="Raetic Bangles +1",
         legs="Brioso Cannions +3", --8/8
         feet="Inyan. Crackows +2", --0/3
         neck="Loricate Torque +1", --6/6
@@ -485,16 +491,18 @@ function init_gear_sets()
         }
 
     sets.idle.MEva = {
+        main="Daybreak",
+        sub="Ammurapi Shield",
         head="Inyanga Tiara +2", --0/5
         body="Inyanga Jubbah +2", --0/8
-        hands="Inyan. Dastanas +2", --0/4
+        hands="Raetic Bangles +1",
         legs="Inyanga Shalwar +2", --0/6
         feet="Inyan. Crackows +2", --0/3
         neck="Warder's Charm +1",
-        ear1="Sanare Earring",
-        ear2="Etiolation Earring", --0/3
-        ring1="Moonlight Ring", --5/5
-        ring2="Defending Ring",  --10/10
+        ear1="Eabani Earring",
+        ear2="Sanare Earring",
+        ring1="Purity Ring",
+        ring2="Inyanga Ring",
         back="Moonlight Cape", --6/6
         waist="Carrier's Sash",
         }
@@ -511,10 +519,10 @@ function init_gear_sets()
         back=gear.BRD_Song_Cape,
         waist="Luminary Sash",
         })
-    
+
     sets.idle.Weak = sets.idle.DT
-    
-    
+
+
     ------------------------------------------------------------------------------------------------
     ---------------------------------------- Defense Sets ------------------------------------------
     ------------------------------------------------------------------------------------------------
@@ -535,7 +543,7 @@ function init_gear_sets()
     -- sets if more refined versions aren't defined.
     -- If you create a set with both offense and defense modes, the offense mode should be first.
     -- EG: sets.engaged.Dagger.Accuracy.Evasion
-    
+
     sets.engaged = {
         main="Carnwenhan",
         sub="Taming Sari",
@@ -555,6 +563,7 @@ function init_gear_sets()
         }
 
     sets.engaged.Acc = set_combine(sets.engaged, {
+        hands="Raetic Bangles +1",
         ear2="Mache Earring +1",
         ring2="Ramuh Ring +1",
         waist="Kentarch Belt +1",
@@ -583,7 +592,7 @@ function init_gear_sets()
         } -- 26%
 
     sets.engaged.DW.Acc = set_combine(sets.engaged.DW, {
-        hands="Bihu Cuffs +3",
+        hands="Raetic Bangles +1",
         feet="Bihu Slippers +3",
         })
 
@@ -619,7 +628,7 @@ function init_gear_sets()
         }
 
     sets.engaged.DW.MaxHaste.Acc = set_combine(sets.engaged.DW, {
-        hands="Bihu Cuffs +3",
+        hands="Raetic Bangles +1",
         feet="Bihu Slippers +3",
         ear2="Mache Earring +1",
         })
@@ -700,7 +709,7 @@ function job_precast(spell, action, spellMap, eventArgs)
         --[[ Auto-Pianissimo
         if ((spell.target.type == 'PLAYER' and not spell.target.charmed) or (spell.target.type == 'NPC' and spell.target.in_party)) and
             not state.Buff['Pianissimo'] then
-            
+
             local spell_recasts = windower.ffxi.get_spell_recasts()
             if spell_recasts[spell.recast_id] < 2 then
                 send_command('@input /ja "Pianissimo" <me>; wait 1.5; input /ma "'..spell.name..'" '..spell.target.name)
@@ -928,7 +937,7 @@ function get_lullaby_duration(spell)
     local clarioncall = false
     local soulvoice = false
     local marcato = false
- 
+
     for i,v in pairs(self.buffs) do
         if v == 348 then troubadour = true end
         if v == 499 then clarioncall = true end
@@ -937,7 +946,7 @@ function get_lullaby_duration(spell)
     end
 
     local mult = 1
-    
+
     if player.equipment.range == 'Daurdabla' then mult = mult + 0.3 end -- change to 0.25 with 90 Daur
     if player.equipment.range == "Gjallarhorn" then mult = mult + 0.4 end -- change to 0.3 with 95 Gjall
     if player.equipment.range == "Marsyas" then mult = mult + 0.5 end
@@ -970,31 +979,31 @@ function get_lullaby_duration(spell)
         mult = mult * 2
     end
 
-    if spell.en == "Foe Lullaby II" or spell.en == "Horde Lullaby II" then 
+    if spell.en == "Foe Lullaby II" or spell.en == "Horde Lullaby II" then
         base = 60
-    elseif spell.en == "Foe Lullaby" or spell.en == "Horde Lullaby" then 
+    elseif spell.en == "Foe Lullaby" or spell.en == "Horde Lullaby" then
         base = 30
     end
 
     totalDuration = math.floor(mult * base)
-        
+
     -- Job Points Buff
     totalDuration = totalDuration + self.job_points.brd.lullaby_duration
-    if troubadour then 
+    if troubadour then
         totalDuration = totalDuration + self.job_points.brd.lullaby_duration
         -- adding it a second time if Troubadour up
     end
 
     if clarioncall then
-        if troubadour then 
+        if troubadour then
             totalDuration = totalDuration + (self.job_points.brd.clarion_call_effect * 2 * 2)
             -- Clarion Call gives 2 seconds per Job Point upgrade.  * 2 again for Troubadour
         else
             totalDuration = totalDuration + (self.job_points.brd.clarion_call_effect * 2)
-            -- Clarion Call gives 2 seconds per Job Point upgrade. 
+            -- Clarion Call gives 2 seconds per Job Point upgrade.
         end
     end
-    
+
     if marcato and not soulvoice then
         totalDuration = totalDuration + self.job_points.brd.marcato_effect
     end
@@ -1057,7 +1066,7 @@ function gearinfo(cmdParams, eventArgs)
     end
 end
 
-windower.register_event('zone change', 
+windower.register_event('zone change',
     function()
         if player.sub_job == 'NIN' or player.sub_job == 'DNC' then
             send_command('gi ugs true')
