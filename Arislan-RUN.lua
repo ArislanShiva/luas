@@ -84,7 +84,7 @@ function job_setup()
     rayke_duration = 35
     gambit_duration = 96
 
-    lockstyleset = 4
+    lockstyleset = 2
 
 end
 
@@ -97,7 +97,7 @@ function user_setup()
     state.WeaponskillMode:options('Normal', 'Acc')
     state.HybridMode:options('Normal', 'DT')
     state.CastingMode:options('Normal', 'Resistant')
-    state.IdleMode:options('Normal', 'DT')
+    state.IdleMode:options('Normal', 'DT', 'Refresh')
     state.PhysicalDefenseMode:options('PDT', 'HP')
     state.MagicalDefenseMode:options('MDT')
 
@@ -224,7 +224,7 @@ function init_gear_sets()
         hands="Kurys Gloves", --9
         legs="Eri. Leg Guards +1", --7
         feet="Ahosi Leggings",--7
-        neck="Moonbeam Necklace", --10
+        neck={name="Unmoving Collar +1", priority=1}, --10
         ear1="Cryptic Earring", --4
         ear2="Trux Earring", --5
         ring1="Supershear Ring", --5
@@ -240,10 +240,10 @@ function init_gear_sets()
         hands="Kurys Gloves", --9
         legs="Eri. Leg Guards +1", --11
         feet="Ahosi Leggings",--7
-        neck="Futhark Torque +1", --7
-        ear1={name="Tuisto Earring", priority=3},
-        ear2={name="Odnowa Earring +1", priority=2},
-        ring1={name="Moonlight Ring", priority=1},
+        neck={name="Unmoving Collar +1", priority=1}, --10
+        ear1={name="Tuisto Earring", priority=4},
+        ear2={name="Odnowa Earring +1", priority=3},
+        ring1={name="Moonlight Ring", priority=2},
         ring2="Eihwaz Ring", --5
         back=gear.RUN_HPD_Cape, --10
         waist="Kasiri Belt", --3
@@ -298,11 +298,12 @@ function init_gear_sets()
 
     sets.precast.FC.HP = set_combine(sets.precast.FC, {
         ammo="Aqreqaq Bomblet",
-        head={name="Rune. Bandeau +3", priority=5},
-        body={name="Runeist's Coat +3", priority=1},
-        ear1={name="Tuisto Earring", priority=4},
-        ear2={name="Odnowa Earring +1", priority=3},
-        ring1={name="Moonlight Ring", priority=2},
+        head={name="Rune. Bandeau +3", priority=6},
+        body={name="Runeist's Coat +3", priority=2},
+        neck={name="Unmoving Collar +1", priority=1}, --10
+        ear1={name="Tuisto Earring", priority=5},
+        ear2={name="Odnowa Earring +1", priority=4},
+        ring1={name="Moonlight Ring", priority=3},
         waist="Oneiros Belt",
         })
 
@@ -539,16 +540,16 @@ function init_gear_sets()
     sets.idle = {
         sub="Mensch Strap +1",
         ammo="Homiliary",
-        head=gear.Herc_Idle_head,
-        body="Runeist's Coat +3",
+        head="Turms Cap +1",
+        body="Futhark Coat +3",
         hands="Regal Gauntlets",
         legs="Turms Subligar +1",
         feet="Turms Leggings +1",
         neck="Bathy Choker +1",
         ear1="Sanare Earring",
         ear2="Odnowa Earring +1",
-        ring1={name="Stikini Ring +1", bag="wardrobe3"},
-        ring2={name="Stikini Ring +1", bag="wardrobe4"},
+        ring1={name="Chirich Ring +1", bag="wardrobe3"},
+        ring2={name="Chirich Ring +1", bag="wardrobe4"},
         back=gear.RUN_HPD_Cape,
         waist="Ioskeha Belt +1",
         }
@@ -570,11 +571,21 @@ function init_gear_sets()
         waist="Flume Belt +1", --4/0
         }
 
+    sets.idle.Refresh = set_combine(sets.idle, {
+        ammo="Homiliary",
+        head=gear.Herc_Idle_head,
+        body="Runeist's Coat +3",
+        hands="Regal Gauntlets",
+        legs="Rawhide Trousers",
+        ring1={name="Stikini Ring +1", bag="wardrobe3"},
+        ring2={name="Stikini Ring +1", bag="wardrobe4"},
+        })
+
     sets.idle.Town = set_combine(sets.idle, {
         ammo="Staunch Tathlum +1",
         head="Turms Cap +1",
         body="Ashera Harness",
-        neck="Futhark Torque +1",
+        neck="Unmoving Collar +1",
         ear1="Sanare Earring",
         })
 
@@ -800,16 +811,14 @@ function job_precast(spell, action, spellMap, eventArgs)
         eventArgs.handled = true
         if spell.action_type == 'Magic' then
             equip(sets.precast.FC.HP)
-            add_to_chat(1, 'Precast Swap Magic')
         elseif spell.action_type == 'Ability' then
             equip(sets.Enmity.HP)
-			equip(sets.precast.JA[currentSpell])
-            add_to_chat(1, 'Precast Swap Ability')
+            equip(sets.precast.JA[currentSpell])
         end
-	else
+    else
         if spell.action_type == 'Ability' then
             equip(sets.Enmity)
-			equip(sets.precast.JA[spell])
+            equip(sets.precast.JA[spell])
         end
     end
     if spell.english == 'Lunge' then
@@ -851,7 +860,6 @@ function job_midcast(spell, action, spellMap, eventArgs)
             if spell.english == 'Flash' or spell.english == 'Foil' or spell.english == 'Stun'
                 or blue_magic_maps.Enmity:contains(spell.english) then
                 equip(sets.Enmity.HP)
-				add_to_chat(1, 'Midcast Magic Swap')
             elseif spell.skill == 'Enhancing Magic' then
                 equip(sets.midcast.EnhancingDuration)
             end
@@ -873,7 +881,7 @@ function job_post_midcast(spell, action, spellMap, eventArgs)
             if spellMap == 'Refresh' then
                 equip(sets.midcast.Refresh)
             end
-		end
+        end
         if spell.english == 'Phalanx' and buffactive['Embolden'] then
             equip(sets.midcast.EnhancingDuration)
         end

@@ -8,7 +8,7 @@ function define_global_sets()
 
     gear.Gada_ENF = {name="Gada", augments={'Enmity-4','MND+7','Mag. Acc.+22','"Mag.Atk.Bns."+20',}}
     gear.Gada_ENH = {name="Gada", augments={'Enh. Mag. eff. dur. +6','Mag. Acc.+11',}}
-	gear.Gada_GEO = {name="Gada", augments={'Indi. eff. dur. +11','DMG:+4',}}
+    gear.Gada_GEO = {name="Gada", augments={'Indi. eff. dur. +11','DMG:+4',}}
 
     gear.Adhemar_C_legs = {name="Adhemar Kecks", augments={'AGI+10','Rng.Acc.+15','Rng.Atk.+15',}}
     gear.Adhemar_D_legs = {name="Adhemar Kecks", augments={'AGI+10','"Rapid Shot"+10','Enmity-5',}}

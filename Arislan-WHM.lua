@@ -518,10 +518,10 @@ function init_gear_sets()
         feet="Theo. Duckbills +3",
         neck="Erra Pendant",
         ear1="Malignance Earring",
-        ear2="Regal Earring",
+        ear2="Mani Earring",
         ring1="Evanescence Ring",
         ring2="Archon Ring",
-        back=gear.WHM_MND_Cape,
+        back="Perimede Cape",
         waist="Fucho-no-Obi",
         }
 

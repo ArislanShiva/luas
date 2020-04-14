@@ -304,7 +304,7 @@ function init_gear_sets()
         legs="Vishap Brais +3",
         back=gear.DRG_WS2_Cape,
         ear2="Ishvara Earring",
-		    ring1="Regal Ring",
+            ring1="Regal Ring",
         })
 
     sets.precast.WS['Sonic Thrust'] = sets.precast.WS['Camlann\'s Torment']
@@ -587,7 +587,7 @@ function job_post_precast(spell, action, spellMap, eventArgs)
             if world.day_element == 'Earth' or world.day_element == 'Light' or world.day_element == 'Dark' then
                 equip(sets.WSDayBonus)
            end
-		elseif spell.english == 'Impulse Drive' and player.tp > 2000 then
+        elseif spell.english == 'Impulse Drive' and player.tp > 2000 then
            equip(sets.precast.WS['Impulse Drive'].HighTP)
         end
     end

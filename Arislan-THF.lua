@@ -823,12 +823,12 @@ function job_post_precast(spell, action, spellMap, eventArgs)
             equip(sets.precast.WS.Critical)
         end
     end
-	if spell.type == 'WeaponSkill' then
+    if spell.type == 'WeaponSkill' then
         if spell.english == 'Aeolian Edge' then
             -- Matching double weather (w/o day conflict).
             if spell.element == world.weather_element and (get_weather_intensity() == 2 and spell.element ~= elements.weak_to[world.day_element]) then
                 equip({waist="Hachirin-no-Obi"})
-			end
+            end
         end
     end
 end

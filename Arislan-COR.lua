@@ -278,6 +278,7 @@ function init_gear_sets()
         }
 
     sets.precast.CorsairRoll.Duration = {main={name="Rostam", bag="wardrobe"}, range="Compensator"}
+    sets.precast.CorsairRoll.LowerDelay = {back="Gunslinger's Cape"}
     sets.precast.CorsairRoll["Caster's Roll"] = set_combine(sets.precast.CorsairRoll, {legs="Chas. Culottes +1"})
     sets.precast.CorsairRoll["Courser's Roll"] = set_combine(sets.precast.CorsairRoll, {feet="Chass. Bottes +1"})
     sets.precast.CorsairRoll["Blitzer's Roll"] = set_combine(sets.precast.CorsairRoll, {head="Chass. Tricorne +1"})
@@ -510,7 +511,7 @@ function init_gear_sets()
         ear2="Friomisi Earring",
         ring1="Dingir Ring",
         ring2={name="Fenrir Ring +1", bag="wardrobe3"},
-        back="Gunslinger's Cape",
+        back=gear.COR_WS1_Cape,
         waist="Eschan Stone",
         }
 
@@ -684,7 +685,7 @@ function init_gear_sets()
         ring2="Defending Ring", --10/10
         back=gear.COR_SNP_Cape,
         waist="Carrier's Sash",
-	    }
+        }
 
     sets.Kiting = {legs="Carmine Cuisses +1"}
 
@@ -1044,16 +1045,16 @@ function init_gear_sets()
         waist="Gishdubar Sash", --10
         }
 
-	sets.FullTP = {ear1="Crematio Earring"}
+    sets.FullTP = {ear1="Crematio Earring"}
     sets.Obi = {waist="Hachirin-no-Obi"}
     sets.CP = {back="Mecisto. Mantle"}
     --sets.Reive = {neck="Ygnas's Resolve +1"}
 
     sets.TreasureHunter = {head="Volte Cap", hands=gear.Herc_TH_hands, waist="Chaac Belt"}
 
-	  sets.DeathPenalty_M = {main={name="Rostam", bag="Wardrobe 4"}, sub="Tauret", ranged="Death Penalty"}
+      sets.DeathPenalty_M = {main={name="Rostam", bag="wardrobe3"}, sub="Tauret", ranged="Death Penalty"}
     sets.DeathPenalty_R = {main="Lanun Knife", sub="Tauret", ranged="Death Penalty"}
-	  sets.Armageddon_M = {main={name="Rostam", bag="Wardrobe 4"}, sub="Tauret", ranged="Armageddon"}
+      sets.Armageddon_M = {main={name="Rostam", bag="wardrobe3"}, sub="Tauret", ranged="Armageddon"}
     sets.Armageddon_R = {main="Fettering Blade", sub="Nusku Shield", ranged="Armageddon"}
     sets.Fomalhaut_M = {main="Naegling", sub="Blurred Knife +1", ranged="Fomalhaut"}
     sets.Fomalhaut_R = {main="Lanun Knife", sub="Nusku Shield", ranged="Fomalhaut"}
@@ -1138,23 +1139,23 @@ end
 
 function job_post_midcast(spell, action, spellMap, eventArgs)
     if spell.type == 'CorsairShot' then
-		if (spell.english ~= 'Light Shot' and spell.english ~= 'Dark Shot') then
-			-- Matching double weather (w/o day conflict).
-			if spell.element == world.weather_element and (get_weather_intensity() == 2 and spell.element ~= elements.weak_to[world.day_element]) then
-				equip({waist="Hachirin-no-Obi"})
-			-- Target distance under 1.7 yalms.
-			elseif spell.target.distance < (1.7 + spell.target.model_size) then
-				equip({waist="Orpheus's Sash"})
-			-- Matching day and weather.
-			elseif spell.element == world.day_element and spell.element == world.weather_element then
-				equip({waist="Hachirin-no-Obi"})
-			-- Target distance under 8 yalms.
-			elseif spell.target.distance < (8 + spell.target.model_size) then
-				equip({waist="Orpheus's Sash"})
-			-- Match day or weather.
-			elseif spell.element == world.day_element or spell.element == world.weather_element then
-				equip({waist="Hachirin-no-Obi"})
-			end
+        if (spell.english ~= 'Light Shot' and spell.english ~= 'Dark Shot') then
+            -- Matching double weather (w/o day conflict).
+            if spell.element == world.weather_element and (get_weather_intensity() == 2 and spell.element ~= elements.weak_to[world.day_element]) then
+                equip({waist="Hachirin-no-Obi"})
+            -- Target distance under 1.7 yalms.
+            elseif spell.target.distance < (1.7 + spell.target.model_size) then
+                equip({waist="Orpheus's Sash"})
+            -- Matching day and weather.
+            elseif spell.element == world.day_element and spell.element == world.weather_element then
+                equip({waist="Hachirin-no-Obi"})
+            -- Target distance under 8 yalms.
+            elseif spell.target.distance < (8 + spell.target.model_size) then
+                equip({waist="Orpheus's Sash"})
+            -- Match day or weather.
+            elseif spell.element == world.day_element or spell.element == world.weather_element then
+                equip({waist="Hachirin-no-Obi"})
+            end
             if state.QDMode.value == 'Enhance' then
                 equip(sets.midcast.CorsairShot.Enhance)
             elseif state.QDMode.value == 'TH' then
@@ -1163,7 +1164,7 @@ function job_post_midcast(spell, action, spellMap, eventArgs)
             elseif state.QDMode.value == 'STP' then
                 equip(sets.midcast.CorsairShot.STP)
             end
-		end
+        end
     elseif spell.action_type == 'Ranged Attack' then
         if buffactive['Triple Shot'] then
             equip(sets.TripleShot)

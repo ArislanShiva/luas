@@ -646,7 +646,7 @@ function init_gear_sets()
         feet="Merlinic Crackows",
         neck="Erra Pendant",
         ear1="Malignance Earring",
-        ear2="Regal Earring",
+        ear2="Mani Earring",
         ring1={name="Stikini Ring +1", bag="wardrobe3"},
         ring2="Evanescence Ring",
         back=gear.RDM_INT_Cape,
@@ -659,6 +659,7 @@ function init_gear_sets()
         ear1="Hirudinea Earring",
         ring1="Archon Ring",
         ring2="Evanescence Ring",
+        back="Perimede Cape",
         waist="Fucho-no-obi",
         })
 

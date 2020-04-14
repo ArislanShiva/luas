@@ -412,7 +412,6 @@ function init_gear_sets()
         head="Amalric Coif +1",
         ear1="Halasz Earring",
         ring1="Freke Ring",
-        ring2="Evanescence Ring",
         waist="Emphatikos Rope",
         })
 
@@ -465,7 +464,7 @@ function init_gear_sets()
         feet="Acad. Loafers +3",
         neck="Argute Stole +1",
         ear1="Malignance Earring",
-        ear2="Regal Earring",
+        ear2="Mani Earring",
         ring1={name="Stikini Ring +1", bag="wardrobe3"},
         ring2={name="Stikini Ring +1", bag="wardrobe4"},
         back="Perimede Cape",
@@ -493,6 +492,7 @@ function init_gear_sets()
     sets.midcast.Drain = set_combine(sets.midcast['Dark Magic'], {
         head="Pixie Hairpin +1",
         ear1="Hirudinea Earring",
+        ring1="Evanescence Ring",
         ring2="Archon Ring",
         waist="Fucho-no-obi",
         })
@@ -548,7 +548,7 @@ function init_gear_sets()
         sub="Khonsu",
         head=empty,
         body="Twilight Cloak",
-        ring1="Archon Ring",
+        ring2="Archon Ring",
         })
 
     sets.midcast.Helix = {

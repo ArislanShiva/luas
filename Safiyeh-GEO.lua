@@ -42,13 +42,13 @@ end
 
 -- Setup vars that are user-independent.  state.Buff vars initialized here will automatically be tracked.
 function job_setup()
-	  geo_timer = ''
+      geo_timer = ''
     indi_timer = ''
     indi_duration = 308
-	  entrust_timer = ''
-	  entrust_duration = 344
-	  entrust = 0
-	  newLuopan = 0
+      entrust_timer = ''
+      entrust_duration = 344
+      entrust = 0
+      newLuopan = 0
 
     state.Buff.Entrust = buffactive.Entrust or false
     state.Buff['Blaze of Glory'] = buffactive['Blaze of Glory'] or false
@@ -302,10 +302,11 @@ function init_gear_sets()
         legs="Telchine Braconi",
         feet="Telchine Pigaches",
         neck="Incanter's Torque",
+        ear1="Mimir Earring",
         ear2="Andoaa Earring",
         ring1={name="Stikini Ring", bag="wardrobe2"},
         ring2={name="Stikini Ring", bag="wardrobe3"},
-        back=gear.GEO_Cure_Cape,
+        back="Perimede Cape",
         waist="Olympus Sash",
         }
 
@@ -347,7 +348,7 @@ function init_gear_sets()
 
 
     sets.midcast.MndEnfeebles = {
-        main="Maxentius",
+        main="Idris",
         sub="Ammurapi Shield",
         head="Geo. Galero +3",
         body="Geomancy Tunic +3",
@@ -356,7 +357,7 @@ function init_gear_sets()
         feet="Bagua Sandals +3",
         neck="Bagua Charm +2",
         ear1="Malignance Earring",
-        ear2="Regal Earring",
+        ear2="Vor Earring",
         ring1="Kishar Ring",
         ring2={name="Stikini Ring", bag="wardrobe3"},
         back=gear.GEO_FC_Cape,
@@ -392,6 +393,7 @@ function init_gear_sets()
         head="Bagua Galero +3",
         ring1="Evanescence Ring",
         ring2="Archon Ring",
+        ear2="Mani Earring",
         waist="Fucho-no-Obi",
         })
 
@@ -489,7 +491,7 @@ function init_gear_sets()
         hands="Geo. Mitaines +3", --3/0/13/0
         legs="Telchine Braconi", --0/0/0/3
         feet="Bagua Sandals +3", --0/0/0/5
-        neck="Bagua Charm",
+        neck="Bagua Charm +2",
         ear1="Genmei Earring", --2/2/0/0
         ear2="Etiolation Earring", --0/3/0/0
         ring1="Gelatinous Ring +1", --7/(-1)/0/0
@@ -636,26 +638,26 @@ function job_post_midcast(spell, action, spellMap, eventArgs)
     elseif spell.skill == 'Geomancy' then
         if state.Buff.Entrust and spell.english:startswith('Indi-') then
             equip({main=gear.Gada_GEO})
-		        entrust = 1
+                entrust = 1
         end
     end
 end
 
 function job_aftercast(spell, action, spellMap, eventArgs)
     if not spell.interrupted then
-	      if spell.english:startswith('Geo') then
+          if spell.english:startswith('Geo') then
             geo_timer = spell.english
-			      send_command('@timers c "'..geo_timer..'" 600 down spells/00136.png')
-		    elseif spell.english:startswith('Indi') then
-			      if entrust == 1 then
-			  	      entrust_timer = spell.english
-				        send_command('@timers c "'..entrust_timer..' ['..spell.target.name..']" '..entrust_duration..' down spells/00136.png')
-				        entrust = 0
-			      else
-				       send_command('@timers d "'..indi_timer..'"')
-				       indi_timer = spell.english
-				       send_command('@timers c "'..indi_timer..'" '..indi_duration..' down spells/00136.png')
-			      end
+                  send_command('@timers c "'..geo_timer..'" 600 down spells/00136.png')
+            elseif spell.english:startswith('Indi') then
+                  if entrust == 1 then
+                        entrust_timer = spell.english
+                        send_command('@timers c "'..entrust_timer..' ['..spell.target.name..']" '..entrust_duration..' down spells/00136.png')
+                        entrust = 0
+                  else
+                       send_command('@timers d "'..indi_timer..'"')
+                       indi_timer = spell.english
+                       send_command('@timers c "'..indi_timer..'" '..indi_duration..' down spells/00136.png')
+                  end
         elseif spell.english == "Sleep II" then
             send_command('@timers c "Sleep II ['..spell.target.name..']" 90 down spells/00259.png')
         elseif spell.english == "Sleep" or spell.english == "Sleepga" then -- Sleep & Sleepga Countdown --
@@ -703,7 +705,7 @@ end
 function job_pet_change(petparam, gain)
     if gain == false then
         send_command('@timers d "'..geo_timer..'"')
-	end
+    end
 end
 
 -------------------------------------------------------------------------------------------------------------------

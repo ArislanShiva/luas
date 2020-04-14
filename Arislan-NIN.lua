@@ -736,10 +736,10 @@ function init_gear_sets()
     -- Custom buff sets
     --------------------------------------
 
-	sets.buff.Migawari = {}
-	sets.buff.Yonin = {}
-	sets.buff.Innin = {}
-	sets.buff.Sange = {ammo="Hachiya Shuriken"}
+    sets.buff.Migawari = {}
+    sets.buff.Yonin = {}
+    sets.buff.Innin = {}
+    sets.buff.Sange = {ammo="Hachiya Shuriken"}
 
     sets.magic_burst = {
         feet="Hachiya Kyahan +3",
@@ -916,9 +916,9 @@ function customize_melee_set(meleeSet)
     if state.TreasureMode.value == 'Fulltime' then
         meleeSet = set_combine(meleeSet, sets.TreasureHunter)
     end
-	if state.Buff.Sange then
-		meleeSet = set_combine(meleeSet, sets.buff.Sange)
-	end
+    if state.Buff.Sange then
+        meleeSet = set_combine(meleeSet, sets.buff.Sange)
+    end
 
     return meleeSet
 end

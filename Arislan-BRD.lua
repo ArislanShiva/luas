@@ -113,6 +113,7 @@ function user_setup()
     include('Global-Binds.lua') -- OK to remove this line
     include('Global-GEO-Binds.lua') -- OK to remove this line
 
+    send_command('lua u gearinfo')
     if player.sub_job == 'NIN' or player.sub_job == 'DNC' then
         send_command('lua l gearinfo')
     end
@@ -179,10 +180,6 @@ function user_unload()
     send_command('unbind ^numpad1')
     send_command('unbind ^numpad2')
     send_command('unbind ^numpad3')
-
-    if player.sub_job == 'NIN' or player.sub_job == 'DNC' then
-        send_command('lua u gearinfo')
-    end
 end
 
 
@@ -609,7 +606,7 @@ function init_gear_sets()
     sets.engaged.DW.Acc.HighHaste = sets.engaged.DW.Acc
 
     -- 45% Magic Haste (36% DW to cap)
-	sets.engaged.DW.MaxHaste = {
+    sets.engaged.DW.MaxHaste = {
         main="Carnwenhan",
         sub="Taming Sari",
         range=gear.Linos_TP,
