@@ -88,7 +88,7 @@ function job_setup()
     enfeebling_magic_acc = S{'Bind', 'Break', 'Dispel', 'Distract', 'Distract II', 'Frazzle',
         'Frazzle II',  'Gravity', 'Gravity II', 'Silence'}
     enfeebling_magic_skill = S{'Distract III', 'Frazzle III', 'Poison II'}
-    enfeebling_magic_effect = S{'Dia', 'Dia II', 'Dia III', 'Diaga'}
+    enfeebling_magic_effect = S{'Dia', 'Dia II', 'Dia III', 'Blind', 'Blind II'}
     enfeebling_magic_sleep = S{'Sleep', 'Sleep II', 'Sleepga'}
 
     skill_spells = S{
@@ -119,7 +119,8 @@ function user_setup()
 
     state.WeaponLock = M(false, 'Weapon Lock')
     state.MagicBurst = M(false, 'Magic Burst')
-    state.NM = M(false, 'NM')
+    state.SleepMode = M{['description']='Sleep Mode', 'Normal', 'MaxDuration'}
+    state.NM = M(false, 'NM?')
     state.CP = M(false, "Capacity Points Mode")
 
     -- Additional local binds
@@ -160,6 +161,8 @@ function user_setup()
     send_command('bind ^pageup gs c cycleback BarStatus')
     send_command('bind ^pagedown gs c cycle BarStatus')
 
+    send_command('bind @s gs c cycle SleepMode')
+    send_command('bind @d gs c toggle NM')
     send_command('bind @w gs c toggle WeaponLock')
     send_command('bind @c gs c toggle CP')
 
@@ -198,6 +201,8 @@ function user_unload()
     send_command('bind !y input /ma "Phalanx" <me>')
     send_command('unbind !o')
     send_command('unbind !p')
+    send_command('unbind @s')
+    send_command('unbind @d')
     send_command('unbind @w')
     send_command('unbind @c')
     send_command('unbind @r')
@@ -560,6 +565,15 @@ function init_gear_sets()
 
 
      -- Custom spell classes
+
+    sets.midcast.EnfeeblesEffect = {
+        range=empty,
+        ammo="Regal Gem",
+        body="Lethargy Sayon +1",
+        feet="Vitiation Boots +3",
+        back=gear.RDM_MND_Cape,
+        }
+
     sets.midcast.MndEnfeebles = {
         main="Daybreak",
         sub="Ammurapi Shield",
@@ -588,6 +602,19 @@ function init_gear_sets()
         ring1={name="Stikini Ring +1", bag="wardrobe3"},
         })
 
+    sets.midcast.MndEnfeeblesEffect = set_combine(sets.midcast.MndEnfeebles, sets.EffectEnfeebles, {
+        main="Daybreak",
+        sub="Ammurapi Shield",
+        head="Leth. Chappel +1",
+        body="Lethargy Sayon +1",
+        hands="Leth. Gantherots +1",
+        legs="Leth. Fuseau +1",
+        feet="Leth. Houseaux +1",
+        neck="Dls. Torque +2",
+        ear2="Snotra Earring",
+        ring1="Kishar Ring",
+        })
+
     sets.midcast.IntEnfeebles = set_combine(sets.midcast.MndEnfeebles, {
         main="Maxentius",
         sub="Ammurapi Shield",
@@ -600,6 +627,13 @@ function init_gear_sets()
         sub="Ammurapi Shield",
         range="Ullr",
         ammo=empty,
+        body="Atrophy Tabard +3",
+        ring1={name="Stikini Ring +1", bag="wardrobe3"},
+        })
+
+    sets.midcast.IntEnfeeblesEffect = set_combine(sets.midcast.IntEnfeebles, sets.EffectEnfeebles, {
+        main="Crocea Mors",
+        sub="Ammurapi Shield",
         body="Atrophy Tabard +3",
         ring1={name="Stikini Ring +1", bag="wardrobe3"},
         })
@@ -619,13 +653,6 @@ function init_gear_sets()
         waist="Rumination Sash",
         })
 
-    sets.midcast.EffectEnfeebles = {
-        ammo="Regal Gem",
-        body="Lethargy Sayon +1",
-        feet="Vitiation Boots +3",
-        back=gear.RDM_MND_Cape,
-        }
-
     sets.midcast.Sleep = set_combine(sets.midcast.IntEnfeeblesAcc, {
         head="Viti. Chapeau +3",
         neck="Dls. Torque +2",
@@ -643,13 +670,6 @@ function init_gear_sets()
 
     sets.midcast.ElementalEnfeeble = sets.midcast.IntEnfeebles
     sets.midcast.Dispelga = set_combine(sets.midcast.IntEnfeeblesAcc, {main="Daybreak", sub="Ammurapi Shield"})
-
-    sets.midcast['Blind II'] = set_combine(sets.midcast.IntEnfeebles, sets.midcast.EffectEnfeebles, {legs="Viti. Tights +3"})
-    sets.midcast['Dia III'] = set_combine(sets.midcast.MndEnfeebles, sets.midcast.EffectEnfeebles, {head="Viti. Chapeau +3"})
-    sets.midcast['Dia II'] = set_combine(sets.midcast.MndEnfeebles, sets.midcast.EffectEnfeebles)
-    sets.midcast['Dia I'] = set_combine(sets.midcast.MndEnfeebles, sets.midcast.EffectEnfeebles)
-    sets.midcast['Paralyze II'] = set_combine(sets.midcast.MndEnfeebles, {head="Vitiation Boots +3"})
-    sets.midcast['Slow II'] = set_combine(sets.midcast.MndEnfeebles, {head="Viti. Chapeau +3"})
 
     sets.midcast['Dark Magic'] = {
         main="Rubicundity",
@@ -1193,24 +1213,26 @@ function job_get_spell_map(spell, default_spell_map)
         if spell.skill == 'Enfeebling Magic' then
             if enfeebling_magic_skill:contains(spell.english) then
                 return "SkillEnfeebles"
-            elseif enfeebling_magic_effect:contains(spell.english) then
-                return "EffectEnfeebles"
             elseif spell.type == "WhiteMagic" then
                 if enfeebling_magic_acc:contains(spell.english) and not buffactive.Stymie then
                     return "MndEnfeeblesAcc"
+                elseif enfeebling_magic_effect:contains(spell.english) then
+                    return "MndEnfeeblesEffect"
                 else
                     return "MndEnfeebles"
               end
             elseif spell.type == "BlackMagic" then
                 if enfeebling_magic_acc:contains(spell.english) and not buffactive.Stymie then
                     return "IntEnfeeblesAcc"
-                elseif enfeebling_magic_sleep:contains(spell.english) and buffactive.Stymie and buffactive.Composure then
+                elseif enfeebling_magic_effect:contains(spell.english) then
+                    return "IntEnfeeblesEffect"
+                elseif enfeebling_magic_sleep:contains(spell.english) and ((buffactive.Stymie and buffactive.Composure) or state.SleepMode.value == 'MaxDuration') then
                     return "SleepMaxDuration"
                 elseif enfeebling_magic_sleep:contains(spell.english) then
                     return "Sleep"
                 else
                     return "IntEnfeebles"
-              end
+                end
             else
                 return "MndEnfeebles"
             end
@@ -1431,7 +1453,9 @@ function set_sleep_timer(spell)
     base = base + self.merits.enfeebling_magic_duration*6
 
     -- Relic Head Duration Bonus
-    base = base + self.merits.enfeebling_magic_duration*3
+    if not ((buffactive.Stymie and buffactive.Composure) or state.SleepMode.value == 'MaxDuration') then
+        base = base + self.merits.enfeebling_magic_duration*3
+    end
 
     -- Job Points Duration Bonus
     base = base + self.job_points.rdm.enfeebling_magic_duration
@@ -1442,10 +1466,12 @@ function set_sleep_timer(spell)
     aug_mult = 1.25
     --Estoquer/Lethargy Composure set bonus
     --2pc = 1.1 / 3pc = 1.2 / 4pc = 1.35 / 5pc = 1.5
-    empy_mult = 1
+    empy_mult = 1 --from sets.midcast.Sleep
 
-    if state.Buff.Stymie and state.Buff.Composure then
-        base = base + self.job_points.rdm.stymie_effect
+    if ((buffactive.Stymie and buffactive.Composure) or state.SleepMode.value == 'MaxDuration') then
+        if buffactive.Stymie then
+            base = base + self.job_points.rdm.stymie_effect
+        end
         empy_mult = 1.5 --from sets.midcast.SleepMaxDuration
     end
 
