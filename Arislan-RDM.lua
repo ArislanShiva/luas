@@ -88,7 +88,7 @@ function job_setup()
     enfeebling_magic_acc = S{'Bind', 'Break', 'Dispel', 'Distract', 'Distract II', 'Frazzle',
         'Frazzle II',  'Gravity', 'Gravity II', 'Silence'}
     enfeebling_magic_skill = S{'Distract III', 'Frazzle III', 'Poison II'}
-    enfeebling_magic_effect = S{'Dia', 'Dia II', 'Dia III', 'Blind', 'Blind II'}
+    enfeebling_magic_effect = S{'Dia', 'Dia II', 'Dia III', 'Diaga', 'Blind', 'Blind II'}
     enfeebling_magic_sleep = S{'Sleep', 'Sleep II', 'Sleepga'}
 
     skill_spells = S{
@@ -566,14 +566,6 @@ function init_gear_sets()
 
      -- Custom spell classes
 
-    sets.midcast.EnfeeblesEffect = {
-        range=empty,
-        ammo="Regal Gem",
-        body="Lethargy Sayon +1",
-        feet="Vitiation Boots +3",
-        back=gear.RDM_MND_Cape,
-        }
-
     sets.midcast.MndEnfeebles = {
         main="Daybreak",
         sub="Ammurapi Shield",
@@ -602,17 +594,12 @@ function init_gear_sets()
         ring1={name="Stikini Ring +1", bag="wardrobe3"},
         })
 
-    sets.midcast.MndEnfeeblesEffect = set_combine(sets.midcast.MndEnfeebles, sets.EffectEnfeebles, {
-        main="Daybreak",
-        sub="Ammurapi Shield",
-        head="Leth. Chappel +1",
+    sets.midcast.MndEnfeeblesEffect = set_combine(sets.midcast.MndEnfeebles, {
+        ammo="Regal Gem",
         body="Lethargy Sayon +1",
-        hands="Leth. Gantherots +1",
-        legs="Leth. Fuseau +1",
-        feet="Leth. Houseaux +1",
+        feet="Vitiation Boots +3",
         neck="Dls. Torque +2",
-        ear2="Snotra Earring",
-        ring1="Kishar Ring",
+        back=gear.RDM_MND_Cape,
         })
 
     sets.midcast.IntEnfeebles = set_combine(sets.midcast.MndEnfeebles, {
@@ -631,11 +618,12 @@ function init_gear_sets()
         ring1={name="Stikini Ring +1", bag="wardrobe3"},
         })
 
-    sets.midcast.IntEnfeeblesEffect = set_combine(sets.midcast.IntEnfeebles, sets.EffectEnfeebles, {
-        main="Crocea Mors",
-        sub="Ammurapi Shield",
-        body="Atrophy Tabard +3",
-        ring1={name="Stikini Ring +1", bag="wardrobe3"},
+    sets.midcast.IntEnfeeblesEffect = set_combine(sets.midcast.IntEnfeebles, {
+        ammo="Regal Gem",
+        body="Lethargy Sayon +1",
+        feet="Vitiation Boots +3",
+        neck="Dls. Torque +2",
+        back=gear.RDM_INT_Cape,
         })
 
     sets.midcast.SkillEnfeebles = set_combine(sets.midcast.MndEnfeebles, {
