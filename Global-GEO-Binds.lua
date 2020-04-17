@@ -28,13 +28,15 @@
     send_command('bind #6 input //send safiyeh /ma "Indi-Acumen" <t>')
 
     send_command('bind #7 input //send safiyeh /ma "Dia II" <t>')
-      send_command('bind #8 input //send safiyeh /ma "Silence" <t>')
+    send_command('bind #8 input //send safiyeh /ma "Silence" <t>')
     send_command('bind #9 input //send safiyeh /ma "Paralyze" <t>')
     send_command('bind #0 input //send safiyeh /ma "Cure" Arislan')
     --send_command('bind #0 input //send safiyeh /ma "Dispel" <t>')
     --send_command('bind #7 input //send safiyeh /ma "Dispelga" <t>')
     --send_command('bind #8 input //send safiyeh /ma "Sleepga" <t>')
     --send_command('bind #0 input //send safiyeh /ma "Stun" <t>')
+    --send_command('bind #7 input //send safiyeh /ma "Blizzard" <t>')
+    --send_command('bind #8 input //send safiyeh /ma "Water" <t>')
 
     send_command('bind #q input //send safiyeh //gs c nuke')
     send_command('bind #w input //send safiyeh /ma "Aspir III" <t>')
