@@ -107,6 +107,8 @@ function user_setup()
     include('Global-Binds.lua') -- OK to remove this line
     include('Global-GEO-Binds.lua') -- OK to remove this line
 
+    send_command('lua l gearinfo')
+
     send_command('bind ^` input /ja Immanence <me>')
     send_command('bind !` gs c toggle MagicBurst')
     send_command('bind ^- gs c scholar light')
@@ -131,6 +133,9 @@ function user_setup()
 
     select_default_macro_book()
     set_lockstyle()
+
+    state.Auto_Kite = M(false, 'Auto_Kite')
+    moving = false
 end
 
 -- Called when this job file is unloaded (eg: job change)
@@ -586,7 +591,7 @@ function init_gear_sets()
         body="Acad. Gown +3",
         hands="Raetic Bangles +1",
         legs="Assiduity Pants +1",
-        feet="Herald's Gaiters",
+        feet="Volte Gaiters",
         neck="Bathy Choker +1",
         ear1="Sanare Earring",
         ear2="Lugalbanda Earring",
@@ -621,6 +626,7 @@ function init_gear_sets()
         head="Peda. M.Board +3",
         body="Amalric Doublet +1",
         legs="Peda. Pants +3",
+        feet="Peda. Loafers +3",
         neck="Argute Stole +1",
         ear1="Malignance Earring",
         ear2="Regal Earring",
@@ -853,6 +859,17 @@ end
 -- User code that supplements standard library decisions.
 -------------------------------------------------------------------------------------------------------------------
 
+function job_handle_equipping_gear(playerStatus, eventArgs)
+    check_moving()
+end
+
+-- Called by the 'update' self-command.
+function job_update(cmdParams, eventArgs)
+    handle_equipping_gear(player.status)
+    update_active_strategems()
+    update_sublimation()
+end
+
 -- Custom spell mapping.
 function job_get_spell_map(spell, default_spell_map)
     if spell.action_type == 'Magic' then
@@ -883,14 +900,11 @@ function customize_idle_set(idleSet)
     else
         enable('back')
     end
+    if state.Auto_Kite.value == true then
+       idleSet = set_combine(idleSet, sets.Kiting)
+    end
 
     return idleSet
-end
-
--- Called by the 'update' self-command.
-function job_update(cmdParams, eventArgs)
-    update_active_strategems()
-    update_sublimation()
 end
 
 -- Function to display the current relevant user state when doing an update.
@@ -934,6 +948,7 @@ end
 
 -- Called for direct player commands.
 function job_self_command(cmdParams, eventArgs)
+    gearinfo(cmdParams, eventArgs)
     if cmdParams[1]:lower() == 'scholar' then
         handle_strategems(cmdParams)
         eventArgs.handled = true
@@ -946,6 +961,21 @@ end
 -------------------------------------------------------------------------------------------------------------------
 -- Utility functions specific to this job.
 -------------------------------------------------------------------------------------------------------------------
+
+function gearinfo(cmdParams, eventArgs)
+    if cmdParams[1] == 'gearinfo' then
+        if type(cmdParams[4]) == 'string' then
+            if cmdParams[4] == 'true' then
+                moving = true
+            elseif cmdParams[4] == 'false' then
+                moving = false
+            end
+        end
+        if not midaction() then
+            job_update()
+        end
+    end
+end
 
 -- Reset the state vars tracking strategems.
 function update_active_strategems()
@@ -1105,6 +1135,15 @@ function refine_various_spells(spell, action, spellMap, eventArgs)
     end
 end
 
+function check_moving()
+    if state.DefenseMode.value == 'None'  and state.Kiting.value == false then
+        if state.Auto_Kite.value == false and moving then
+            state.Auto_Kite:set(true)
+        elseif state.Auto_Kite.value == true and moving == false then
+            state.Auto_Kite:set(false)
+        end
+    end
+end
 
 -- Select default macro book on initial load or subjob change.
 function select_default_macro_book()

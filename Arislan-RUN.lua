@@ -114,6 +114,8 @@ function user_setup()
     include('Global-Binds.lua') -- OK to remove this line
     include('Global-GEO-Binds.lua') -- OK to remove this line
 
+    send_command('lua l gearinfo')
+
     send_command('bind ^` input //gs c rune')
     send_command('bind !` input /ja "Vivacious Pulse" <me>')
     send_command('bind ^insert gs c cycleback Runes')
@@ -168,6 +170,9 @@ function user_setup()
 
     select_default_macro_book()
     set_lockstyle()
+
+    state.Auto_Kite = M(false, 'Auto_Kite')
+    moving = false
 end
 
 function user_unload()
@@ -589,7 +594,6 @@ function init_gear_sets()
         ear1="Sanare Earring",
         })
 
-    sets.idle.Weak = sets.idle.DT
     sets.Kiting = {legs="Carmine Cuisses +1"}
 
 
@@ -983,8 +987,13 @@ end
 -- User code that supplements standard library decisions.
 -------------------------------------------------------------------------------------------------------------------
 
+function job_handle_equipping_gear(playerStatus, eventArgs)
+    check_moving()
+end
+
 function job_update(cmdParams, eventArgs)
     equip(sets[state.WeaponSet.current])
+    handle_equipping_gear(player.status)
 end
 
 -- Modify the default idle set after it was constructed.
@@ -995,13 +1004,15 @@ function customize_idle_set(idleSet)
     if state.Knockback.value == true then
         idleSet = set_combine(idleSet, sets.defense.Knockback)
     end
-
     --if state.CP.current == 'on' then
     --    equip(sets.CP)
     --    disable('back')
     --else
     --    enable('back')
     --end
+    if state.Auto_Kite.value == true then
+       idleSet = set_combine(idleSet, sets.Kiting)
+    end
 
     return idleSet
 end
@@ -1120,6 +1131,35 @@ end
 -------------------------------------------------------------------------------------------------------------------
 -- Utility functions specific to this job.
 -------------------------------------------------------------------------------------------------------------------
+
+function job_self_command(cmdParams, eventArgs)
+    gearinfo(cmdParams, eventArgs)
+end
+
+function gearinfo(cmdParams, eventArgs)
+    if cmdParams[1] == 'gearinfo' then
+        if type(cmdParams[4]) == 'string' then
+            if cmdParams[4] == 'true' then
+                moving = true
+            elseif cmdParams[4] == 'false' then
+                moving = false
+            end
+        end
+        if not midaction() then
+            job_update()
+        end
+    end
+end
+
+function check_moving()
+    if state.DefenseMode.value == 'None'  and state.Kiting.value == false then
+        if state.Auto_Kite.value == false and moving then
+            state.Auto_Kite:set(true)
+        elseif state.Auto_Kite.value == true and moving == false then
+            state.Auto_Kite:set(false)
+        end
+    end
+end
 
 -- Select default macro book on initial load or subjob change.
 function select_default_macro_book()

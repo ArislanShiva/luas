@@ -93,8 +93,8 @@ function user_setup()
     AccAmmo = {    ['Yoichinoyumi'] = "Yoichi's Arrow",
                    ['Gandiva'] = "Yoichi's Arrow",
                    ['Fail-Not'] = "Yoichi's Arrow",
-                   ['Annihilator'] = "Devastating Bullet",
-                   ['Armageddon'] = "Devastating Bullet",
+                   ['Annihilator'] = "Eradicating Bullet",
+                   ['Armageddon'] = "Eradicating Bullet",
                    ['Gastraphetes'] = "Quelling Bolt",
                    ['Fomalhaut'] = "Devastating Bullet",
                    }
@@ -121,9 +121,7 @@ function user_setup()
     include('Global-Binds.lua') -- OK to remove this line
     include('Global-GEO-Binds.lua') -- OK to remove this line
 
-    if player.sub_job == 'NIN' or player.sub_job == 'DNC' then
-        send_command('lua l gearinfo')
-    end
+    send_command('lua l gearinfo')
 
     send_command('bind ^` input /ja "Velocity Shot" <me>')
     send_command ('bind @` input /ja "Scavenge" <me>')
@@ -164,6 +162,7 @@ function user_setup()
     select_default_macro_book()
     set_lockstyle()
 
+    state.Auto_Kite = M(false, 'Auto_Kite')
     Haste = 0
     DW_needed = 0
     DW = false
@@ -208,11 +207,6 @@ function user_unload()
     send_command('unbind #8')
     send_command('unbind #9')
     send_command('unbind #0')
-
-    if player.sub_job == 'NIN' or player.sub_job == 'DNC' then
-        send_command('lua u gearinfo')
-    end
-
 end
 
 
@@ -299,7 +293,7 @@ function init_gear_sets()
         body=gear.Herc_RA_body,
         hands="Meg. Gloves +2",
         legs="Arc. Braccae +3",
-        feet=gear.Herc_RA_feet,
+        feet=gear.Herc_MWS_feet,
         neck="Fotia Gorget",
         ear1="Ishvara Earring",
         ear2="Moonshade Earring",
@@ -310,7 +304,7 @@ function init_gear_sets()
         }
 
     sets.precast.WS.Acc = set_combine(sets.precast.WS, {
-        feet="Orion Socks +3",
+        feet="Arcadian Socks +3",
         neck="Combatant's Torque",
         ear1="Beyla Earring",
         ear2="Telos Earring",
@@ -504,7 +498,7 @@ function init_gear_sets()
         head="Malignance Chapeau",
         body="Malignance Tabard",
         hands="Malignance Gloves",
-        legs="Carmine Cuisses +1",
+        legs="Malignance Tights",
         feet="Malignance Boots",
         neck="Scout's Gorget +1",
         neck="Bathy Choker +1",
@@ -529,9 +523,11 @@ function init_gear_sets()
         })
 
     sets.idle.Town = set_combine(sets.idle, {
-        head="Oshosi Mask +1",
+        head="Orion Beret +3",
         body="Oshosi Vest +1",
         hands="Oshosi Gloves +1",
+        legs="Arc. Braccae +3",
+        feet="Osh. Leggings +1",
         neck="Scout's Gorget +1",
         ear1="Beyla Earring",
         ear2="Telos Earring",
@@ -547,7 +543,7 @@ function init_gear_sets()
     sets.defense.PDT = sets.idle.DT
     sets.defense.MDT = sets.idle.DT
 
-    sets.Kiting = {legs="Carmine Cuisses +1"}
+    sets.Kiting = {feet="Orion Socks +3"}
 
 
     ------------------------------------------------------------------------------------------------
@@ -1092,6 +1088,7 @@ end
 function job_handle_equipping_gear(playerStatus, eventArgs)
     update_combat_form()
     determine_haste_group()
+    check_moving()
 end
 
 function job_update(cmdParams, eventArgs)
@@ -1113,6 +1110,9 @@ function customize_idle_set(idleSet)
         disable('back')
     else
         enable('back')
+    end
+    if state.Auto_Kite.value == true then
+       idleSet = set_combine(idleSet, sets.Kiting)
     end
 
     return idleSet
@@ -1299,6 +1299,16 @@ windower.register_event('zone change',
         end
     end
 )
+
+function check_moving()
+    if state.DefenseMode.value == 'None'  and state.Kiting.value == false then
+        if state.Auto_Kite.value == false and moving then
+            state.Auto_Kite:set(true)
+        elseif state.Auto_Kite.value == true and moving == false then
+            state.Auto_Kite:set(false)
+        end
+    end
+end
 
 -- Select default macro book on initial load or subjob change.
 function select_default_macro_book()

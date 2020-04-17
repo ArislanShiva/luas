@@ -145,9 +145,7 @@ function user_setup()
     include('Global-Binds.lua') -- OK to remove this line
     include('Global-GEO-Binds.lua') -- OK to remove this line
 
-    if player.sub_job == 'NIN' or player.sub_job == 'DNC' then
-        send_command('lua l gearinfo')
-    end
+    send_command('lua l gearinfo')
 
     send_command('bind @t gs c cycle treasuremode')
     send_command('bind ^` input /ja "Double-up" <me>')
@@ -191,6 +189,7 @@ function user_setup()
     select_default_macro_book()
     set_lockstyle()
 
+    state.Auto_Kite = M(false, 'Auto_Kite')
     Haste = 0
     DW_needed = 0
     DW = false
@@ -244,11 +243,6 @@ function user_unload()
     send_command('unbind #8')
     send_command('unbind #9')
     send_command('unbind #0')
-
-    if player.sub_job == 'NIN' or player.sub_job == 'DNC' then
-        send_command('lua u gearinfo')
-    end
-
 end
 
 -- Define sets and vars used by this job file.
@@ -623,7 +617,7 @@ function init_gear_sets()
         head="Malignance Chapeau",
         body="Malignance Tabard",
         hands="Malignance Gloves",
-        legs="Carmine Cuisses +1",
+        legs="Malignance Tights",
         feet="Malignance Boots",
         neck="Bathy Choker +1",
         ear1="Sanare Earring",
@@ -658,6 +652,7 @@ function init_gear_sets()
         head="Lanun Tricorne +3",
         body="Oshosi Vest +1",
         hands="Lanun Gants +3",
+        legs="Osh. Trousers +1",
         feet="Lanun Bottes +3",
         neck="Comm. Charm +2",
         ear1="Beyla Earring",
@@ -1052,9 +1047,9 @@ function init_gear_sets()
 
     sets.TreasureHunter = {head="Volte Cap", hands=gear.Herc_TH_hands, waist="Chaac Belt"}
 
-      sets.DeathPenalty_M = {main={name="Rostam", bag="wardrobe3"}, sub="Tauret", ranged="Death Penalty"}
+    sets.DeathPenalty_M = {main={name="Rostam", bag="wardrobe3"}, sub="Tauret", ranged="Death Penalty"}
     sets.DeathPenalty_R = {main="Lanun Knife", sub="Tauret", ranged="Death Penalty"}
-      sets.Armageddon_M = {main={name="Rostam", bag="wardrobe3"}, sub="Tauret", ranged="Armageddon"}
+    sets.Armageddon_M = {main={name="Rostam", bag="wardrobe3"}, sub="Tauret", ranged="Armageddon"}
     sets.Armageddon_R = {main="Fettering Blade", sub="Nusku Shield", ranged="Armageddon"}
     sets.Fomalhaut_M = {main="Naegling", sub="Blurred Knife +1", ranged="Fomalhaut"}
     sets.Fomalhaut_R = {main="Lanun Knife", sub="Nusku Shield", ranged="Fomalhaut"}
@@ -1242,6 +1237,7 @@ end
 function job_handle_equipping_gear(playerStatus, eventArgs)
     update_combat_form()
     determine_haste_group()
+    check_moving()
 end
 
 function job_update(cmdParams, eventArgs)
@@ -1265,6 +1261,10 @@ function customize_idle_set(idleSet)
     else
         enable('back')
     end
+    if state.Auto_Kite.value == true then
+       idleSet = set_combine(idleSet, sets.Kiting)
+    end
+
     return idleSet
 end
 
@@ -1562,6 +1562,16 @@ function th_action_check(category, param)
         (category == 6 and info.default_ja_ids:contains(param)) or -- Provoke, Animated Flourish
         (category == 14 and info.default_u_ja_ids:contains(param)) -- Quick/Box/Stutter Step, Desperate/Violent Flourish
         then return true
+    end
+end
+
+function check_moving()
+    if state.DefenseMode.value == 'None'  and state.Kiting.value == false then
+        if state.Auto_Kite.value == false and moving then
+            state.Auto_Kite:set(true)
+        elseif state.Auto_Kite.value == true and moving == false then
+            state.Auto_Kite:set(false)
+        end
     end
 end
 

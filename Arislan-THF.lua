@@ -132,6 +132,7 @@ function user_setup()
     select_default_macro_book()
     set_lockstyle()
 
+    state.Auto_Kite = M(false, 'Auto_Kite')
     Haste = 0
     DW_needed = 0
     DW = false
@@ -174,9 +175,6 @@ function user_unload()
     send_command('unbind #8')
     send_command('unbind #9')
     send_command('unbind #0')
-
-    send_command('lua u gearinfo')
-
 end
 
 
@@ -394,7 +392,7 @@ function init_gear_sets()
         body="Malignance Tabard",
         hands="Turms Mittens +1",
         legs="Turms Subligar +1",
-        feet="Pill. Poulaines +3",
+        feet="Turms Leggings +1",
         neck="Bathy Choker +1",
         ear1="Eabani Earring",
         ear2="Sanare Earring",
@@ -427,9 +425,6 @@ function init_gear_sets()
         back=gear.THF_TP_Cape,
         waist="Windbuffet Belt +1",
         })
-
-    sets.idle.Weak = sets.idle.DT
-
 
     ------------------------------------------------------------------------------------------------
     ---------------------------------------- Defense Sets ------------------------------------------
@@ -894,6 +889,7 @@ end
 function job_handle_equipping_gear(playerStatus, eventArgs)
     update_combat_form()
     determine_haste_group()
+    check_moving()
 
     -- Check for SATA when equipping gear.  If either is active, equip
     -- that gear specifically, and block equipping default gear.
@@ -936,6 +932,9 @@ function customize_idle_set(idleSet)
         disable('back')
     else
         enable('back')
+    end
+    if state.Auto_Kite.value == true then
+       idleSet = set_combine(idleSet, sets.Kiting)
     end
 
     return idleSet
@@ -1090,6 +1089,16 @@ windower.register_event('zone change',
         send_command('gi ugs true')
     end
 )
+
+function check_moving()
+    if state.DefenseMode.value == 'None'  and state.Kiting.value == false then
+        if state.Auto_Kite.value == false and moving then
+            state.Auto_Kite:set(true)
+        elseif state.Auto_Kite.value == true and moving == false then
+            state.Auto_Kite:set(false)
+        end
+    end
+end
 
 -- Select default macro book on initial load or subjob change.
 function select_default_macro_book()

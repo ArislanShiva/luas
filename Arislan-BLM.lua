@@ -72,6 +72,8 @@ function user_setup()
     include('Global-Binds.lua') -- OK to remove this line
     include('Global-GEO-Binds.lua') -- OK to remove this line
 
+    send_command('lua l gearinfo')
+
     send_command('bind ^` input /ma Stun <t>')
     send_command('bind !` gs c toggle MagicBurst')
     send_command('bind !w input /ma "Aspir III" <t>')
@@ -83,6 +85,9 @@ function user_setup()
 
     select_default_macro_book()
     set_lockstyle()
+
+    state.Auto_Kite = M(false, 'Auto_Kite')
+    moving = false
 end
 
 -- Called when this job file is unloaded (eg: job change)
@@ -511,7 +516,7 @@ function init_gear_sets()
         body="Jhakri Robe +2",
         hands="Raetic Bangles +1",
         legs="Assid. Pants +1",
-        feet="Herald's Gaiters",
+        feet="Volte Gaiters",
         neck="Bathy Choker +1",
         ear1="Sanare Earring",
         ear2="Lugalbanda Earring",
@@ -528,7 +533,6 @@ function init_gear_sets()
         head="Volte Cap",
         body="Mallquis Saio +2", --8/8
         hands="Raetic Bangles +1",
-        feet=gear.Telchine_ENH_legs,
         feet="Volte Gaiters",
         neck="Loricate Torque +1", --6/6
         ear1="Sanare Earring",
@@ -568,13 +572,12 @@ function init_gear_sets()
         head="Ea Hat +1",
         body="Ea Houppe. +1",
         legs="Ea Slops +1",
+        feet="Volte Gaiters",
         neck="Incanter's Torque",
         ear1="Malignance Earring",
         ear2="Regal Earring",
         back=gear.BLM_MAB_Cape,
         })
-
-    sets.idle.Weak = sets.idle.DT
 
     -- Defense sets
 
@@ -782,6 +785,14 @@ end
 -- User code that supplements standard library decisions.
 -------------------------------------------------------------------------------------------------------------------
 
+function job_handle_equipping_gear(playerStatus, eventArgs)
+    check_moving()
+end
+
+function job_update(cmdParams, eventArgs)
+    handle_equipping_gear(player.status)
+end
+
 -- Custom spell mapping.
 function job_get_spell_map(spell, default_spell_map)
     if spell.action_type == 'Magic' then
@@ -814,6 +825,9 @@ function customize_idle_set(idleSet)
     end
     if buffactive['Mana Wall'] then
         idleSet = set_combine(idleSet, sets.precast.JA['Mana Wall'])
+    end
+    if state.Auto_Kite.value == true then
+       idleSet = set_combine(idleSet, sets.Kiting)
     end
 
     return idleSet
@@ -894,6 +908,61 @@ end
 -------------------------------------------------------------------------------------------------------------------
 -- Utility functions specific to this job.
 -------------------------------------------------------------------------------------------------------------------
+
+function job_self_command(cmdParams, eventArgs)
+    gearinfo(cmdParams, eventArgs)
+end
+
+function gearinfo(cmdParams, eventArgs)
+    if cmdParams[1] == 'gearinfo' then
+        if type(cmdParams[4]) == 'string' then
+            if cmdParams[4] == 'true' then
+                moving = true
+            elseif cmdParams[4] == 'false' then
+                moving = false
+            end
+        end
+        if not midaction() then
+            job_update()
+        end
+    end
+end
+
+function update_active_abilities()
+    state.Buff['Burst Affinity'] = buffactive['Burst Affinity'] or false
+    state.Buff['Efflux'] = buffactive['Efflux'] or false
+    state.Buff['Diffusion'] = buffactive['Diffusion'] or false
+end
+
+-- State buff checks that will equip buff gear and mark the event as handled.
+function apply_ability_bonuses(spell, action, spellMap)
+    if state.Buff['Burst Affinity'] and (spellMap == 'Magical' or spellMap == 'MagicalLight' or spellMap == 'MagicalDark' or spellMap == 'Breath') then
+        if state.MagicBurst.value then
+            equip(sets.magic_burst)
+        end
+        equip(sets.buff['Burst Affinity'])
+    end
+    if state.Buff.Efflux and spellMap == 'Physical' then
+        equip(sets.buff['Efflux'])
+    end
+    if state.Buff.Diffusion and (spellMap == 'Buffs' or spellMap == 'BlueSkill') then
+        equip(sets.buff['Diffusion'])
+    end
+
+    if state.Buff['Burst Affinity'] then equip (sets.buff['Burst Affinity']) end
+    if state.Buff['Efflux'] then equip (sets.buff['Efflux']) end
+    if state.Buff['Diffusion'] then equip (sets.buff['Diffusion']) end
+end
+
+function check_moving()
+    if state.DefenseMode.value == 'None'  and state.Kiting.value == false then
+        if state.Auto_Kite.value == false and moving then
+            state.Auto_Kite:set(true)
+        elseif state.Auto_Kite.value == true and moving == false then
+            state.Auto_Kite:set(false)
+        end
+    end
+end
 
 -- Select default macro book on initial load or subjob change.
 function select_default_macro_book()

@@ -113,10 +113,7 @@ function user_setup()
     include('Global-Binds.lua') -- OK to remove this line
     include('Global-GEO-Binds.lua') -- OK to remove this line
 
-    send_command('lua u gearinfo')
-    if player.sub_job == 'NIN' or player.sub_job == 'DNC' then
-        send_command('lua l gearinfo')
-    end
+    send_command('lua l gearinfo')
 
     -- Adjust this if using the Terpander (new +song instrument)
     info.ExtraSongInstrument = 'Daurdabla'
@@ -149,6 +146,7 @@ function user_setup()
     select_default_macro_book()
     set_lockstyle()
 
+    state.Auto_Kite = M(false, 'Auto_Kite')
     Haste = 0
     DW_needed = 0
     DW = false
@@ -462,7 +460,7 @@ function init_gear_sets()
         body="Mou. Manteel +1",
         hands="Raetic Bangles +1",
         legs="Inyanga Shalwar +2",
-        feet="Fili Cothurnes +1",
+        feet="Inyan. Crackows +2",
         neck="Bathy Choker +1",
         ear1="Eabani Earring",
         ear2="Sanare Earring",
@@ -510,15 +508,13 @@ function init_gear_sets()
         range="Gjallarhorn",
         head="Mousai Turban +1",
         legs="Brioso Cannions +3",
+        feet="Brioso Slippers +3",
         neck="Mnbw. Whistle +1",
         ear1="Enchntr. Earring +1",
         ear2="Regal Earring",
         back=gear.BRD_Song_Cape,
         waist="Luminary Sash",
         })
-
-    sets.idle.Weak = sets.idle.DT
-
 
     ------------------------------------------------------------------------------------------------
     ---------------------------------------- Defense Sets ------------------------------------------
@@ -818,6 +814,7 @@ end
 function job_handle_equipping_gear(playerStatus, eventArgs)
     update_combat_form()
     determine_haste_group()
+    check_moving()
 end
 
 function job_update(cmdParams, eventArgs)
@@ -864,6 +861,9 @@ function customize_idle_set(idleSet)
     end
     if player.mpp < 51 then
         idleSet = set_combine(idleSet, sets.latent_refresh)
+    end
+    if state.Auto_Kite.value == true then
+       idleSet = set_combine(idleSet, sets.Kiting)
     end
 
     return idleSet
@@ -1070,6 +1070,16 @@ windower.register_event('zone change',
         end
     end
 )
+
+function check_moving()
+    if state.DefenseMode.value == 'None'  and state.Kiting.value == false then
+        if state.Auto_Kite.value == false and moving then
+            state.Auto_Kite:set(true)
+        elseif state.Auto_Kite.value == true and moving == false then
+            state.Auto_Kite:set(false)
+        end
+    end
+end
 
 -- Select default macro book on initial load or subjob change.
 function select_default_macro_book()

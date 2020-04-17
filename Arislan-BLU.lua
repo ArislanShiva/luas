@@ -253,6 +253,7 @@ function user_setup()
     select_default_macro_book()
     set_lockstyle()
 
+    state.Auto_Kite = M(false, 'Auto_Kite')
     Haste = 0
     DW_needed = 0
     DW = false
@@ -303,9 +304,7 @@ function user_unload()
     send_command('unbind #9')
     send_command('unbind #0')
 
-    send_command('lua u gearinfo')
     send_command('lua u azureSets')
-
 end
 
 -- Define sets and vars used by this job file.
@@ -784,7 +783,7 @@ function init_gear_sets()
         head=gear.Herc_Idle_head,
         body="Jhakri Robe +2",
         hands="Malignance Gloves",
-        legs="Carmine Cuisses +1",
+        legs="Malignance Tights",
         feet="Malignance Boots",
         neck="Bathy Choker +1",
         ear1="Eabani Earring",
@@ -812,6 +811,7 @@ function init_gear_sets()
         head="Luh. Keffiyeh +3",
         body="Assim. Jubbah +3",
         hands=gear.Adhemar_B_hands,
+        legs="Luhlaza Shalwar +3",
         feet="Luhlaza Charuqs +3",
         neck="Mirage Stole +2",
         ear1="Eabani Earring",
@@ -1348,6 +1348,7 @@ end
 function job_handle_equipping_gear(playerStatus, eventArgs)
     update_combat_form()
     determine_haste_group()
+    check_moving()
 end
 
 function job_update(cmdParams, eventArgs)
@@ -1393,6 +1394,9 @@ function customize_idle_set(idleSet)
     --else
     --    enable('hands')
     --end
+    if state.Auto_Kite.value == true then
+       idleSet = set_combine(idleSet, sets.Kiting)
+    end
 
     return idleSet
 end
@@ -1552,6 +1556,16 @@ windower.register_event('zone change',
         send_command('gi ugs true')
     end
 )
+
+function check_moving()
+    if state.DefenseMode.value == 'None'  and state.Kiting.value == false then
+        if state.Auto_Kite.value == false and moving then
+            state.Auto_Kite:set(true)
+        elseif state.Auto_Kite.value == true and moving == false then
+            state.Auto_Kite:set(false)
+        end
+    end
+end
 
 -- Select default macro book on initial load or subjob change.
 function select_default_macro_book()

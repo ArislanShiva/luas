@@ -102,6 +102,8 @@ function user_setup()
     include('Global-Binds.lua') -- OK to remove this line
     include('Global-GEO-Binds.lua') -- OK to remove this line
 
+    send_command('lua l gearinfo')
+
     send_command('bind ^` input /ja "Afflatus Solace" <me>')
     send_command('bind !` input /ja "Afflatus Misery" <me>')
     send_command('bind ^- gs c scholar light')
@@ -132,6 +134,9 @@ function user_setup()
 
     select_default_macro_book()
     set_lockstyle()
+
+    state.Auto_Kite = M(false, 'Auto_Kite')
+    moving = false
 end
 
 function user_unload()
@@ -180,7 +185,6 @@ function user_unload()
     send_command('unbind 4')
     send_command('unbind 5')
     send_command('unbind 6')
-
 end
 
 -- Define sets and vars used by this job file.
@@ -585,7 +589,7 @@ function init_gear_sets()
         body="Piety Briault +3",
         hands="Raetic Bangles +1",
         legs="Assid. Pants +1",
-        feet="Herald's Gaiters",
+        feet="Inyan. Crackows +2",
         neck="Bathy Choker +1",
         ear1="Eabani Earring",
         ear2="Sanare Earring",
@@ -633,6 +637,7 @@ function init_gear_sets()
         head="Kaykaus Mitra +1",
         body="Kaykaus Bliaut +1",
         legs="Kaykaus Tights +1",
+        feet="Kaykaus Boots +1",
         neck="Debilis Medallion",
         ear1="Glorious Earring",
         ear2="Regal Earring",
@@ -777,6 +782,15 @@ end
 -- User code that supplements standard library decisions.
 -------------------------------------------------------------------------------------------------------------------
 
+function job_handle_equipping_gear(playerStatus, eventArgs)
+    check_moving()
+end
+
+function job_update(cmdParams, eventArgs)
+    handle_equipping_gear(player.status)
+    update_sublimation()
+end
+
 -- Called for direct player commands.
 function job_self_command(cmdParams, eventArgs)
     if cmdParams[1]:lower() == 'scholar' then
@@ -829,7 +843,6 @@ function job_get_spell_map(spell, default_spell_map)
     end
 end
 
-
 function customize_idle_set(idleSet)
     if state.Buff['Sublimation: Activated'] then
         idleSet = set_combine(idleSet, sets.buff.Sublimation)
@@ -843,15 +856,12 @@ function customize_idle_set(idleSet)
     else
         enable('back')
     end
+    if state.Auto_Kite.value == true then
+       idleSet = set_combine(idleSet, sets.Kiting)
+    end
 
     return idleSet
 end
-
--- Called by the 'update' self-command.
-function job_update(cmdParams, eventArgs)
-    update_sublimation()
-end
-
 
 -- Function to display the current relevant user state when doing an update.
 -- Return true if display was handled, and you don't want the default info shown.
@@ -884,6 +894,25 @@ end
 -------------------------------------------------------------------------------------------------------------------
 -- Utility functions specific to this job.
 -------------------------------------------------------------------------------------------------------------------
+
+function job_self_command(cmdParams, eventArgs)
+    gearinfo(cmdParams, eventArgs)
+end
+
+function gearinfo(cmdParams, eventArgs)
+    if cmdParams[1] == 'gearinfo' then
+        if type(cmdParams[4]) == 'string' then
+            if cmdParams[4] == 'true' then
+                moving = true
+            elseif cmdParams[4] == 'false' then
+                moving = false
+            end
+        end
+        if not midaction() then
+            job_update()
+        end
+    end
+end
 
 function update_sublimation()
     state.Buff['Sublimation: Activated'] = buffactive['Sublimation: Activated'] or false
@@ -943,6 +972,16 @@ function handle_strategems(cmdParams)
         end
     else
         add_to_chat(123,'No arts has been activated yet.')
+    end
+end
+
+function check_moving()
+    if state.DefenseMode.value == 'None'  and state.Kiting.value == false then
+        if state.Auto_Kite.value == false and moving then
+            state.Auto_Kite:set(true)
+        elseif state.Auto_Kite.value == true and moving == false then
+            state.Auto_Kite:set(false)
+        end
     end
 end
 
