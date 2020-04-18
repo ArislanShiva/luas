@@ -185,6 +185,8 @@ function user_unload()
     send_command('unbind 4')
     send_command('unbind 5')
     send_command('unbind 6')
+
+    send_command('lua u gearinfo')
 end
 
 -- Define sets and vars used by this job file.

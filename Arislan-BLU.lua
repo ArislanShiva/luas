@@ -305,6 +305,7 @@ function user_unload()
     send_command('unbind #0')
 
     send_command('lua u azureSets')
+    send_command('lua u gearinfo')
 end
 
 -- Define sets and vars used by this job file.

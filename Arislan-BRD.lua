@@ -178,6 +178,8 @@ function user_unload()
     send_command('unbind ^numpad1')
     send_command('unbind ^numpad2')
     send_command('unbind ^numpad3')
+
+    send_command('lua u gearinfo')
 end
 
 
