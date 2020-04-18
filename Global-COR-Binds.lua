@@ -19,7 +19,7 @@
     send_command('bind #2 input //send safiyeh /ja "Samurai Roll" <me>')
     send_command('bind #3 input //send safiyeh /ja "Fighter\'s Roll" <me>')
     send_command('bind #4 input //send safiyeh /ja "Evoker\'s Roll" <me>')
-    send_command('bind #5 input //send safiyeh /ja "Beast Roll" <me>')
+    send_command('bind #5 input //send safiyeh /ja "Gallant\'s Roll" <me>')
     send_command('bind #6 input //send safiyeh /ja "Tactician\'s Roll" <me>')
 
     send_command('bind #7 input //send safiyeh /console gs c qd')

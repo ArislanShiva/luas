@@ -111,7 +111,6 @@ function user_setup()
     state.CastingMode:options('Normal', 'Seidr', 'Resistant')
     state.IdleMode:options('Normal', 'DT')
 
-
     state.EnSpell = M{['description']='EnSpell', 'Enfire', 'Enblizzard', 'Enaero', 'Enstone', 'Enthunder', 'Enwater'}
     state.BarElement = M{['description']='BarElement', 'Barfire', 'Barblizzard', 'Baraero', 'Barstone', 'Barthunder', 'Barwater'}
     state.BarStatus = M{['description']='BarStatus', 'Baramnesia', 'Barvirus', 'Barparalyze', 'Barsilence', 'Barpetrify', 'Barpoison', 'Barblind', 'Barsleep'}
@@ -120,6 +119,7 @@ function user_setup()
     state.WeaponLock = M(false, 'Weapon Lock')
     state.MagicBurst = M(false, 'Magic Burst')
     state.SleepMode = M{['description']='Sleep Mode', 'Normal', 'MaxDuration'}
+    state.EnspellMode = M(false, 'Enspell Melee Mode')
     state.NM = M(false, 'NM?')
     state.CP = M(false, "Capacity Points Mode")
 
@@ -160,6 +160,7 @@ function user_setup()
     send_command('bind ^pagedown gs c cycle BarStatus')
 
     send_command('bind @s gs c cycle SleepMode')
+    send_command('bind @e gs c cycle EnspellMode')
     send_command('bind @d gs c toggle NM')
     send_command('bind @w gs c toggle WeaponLock')
     send_command('bind @c gs c toggle CP')
@@ -201,6 +202,7 @@ function user_unload()
     send_command('unbind !o')
     send_command('unbind !p')
     send_command('unbind @s')
+    send_command('unbind @e')
     send_command('unbind @d')
     send_command('unbind @w')
     send_command('unbind @c')
@@ -1046,6 +1048,9 @@ function init_gear_sets()
     sets.engaged.DW.MidAcc.DT.MaxHaste = set_combine(sets.engaged.DW.MidAcc.MaxHaste, sets.engaged.Hybrid)
     sets.engaged.DW.HighAcc.DT.MaxHaste = set_combine(sets.engaged.DW.HighAcc.MaxHaste, sets.engaged.Hybrid)
 
+    sets.engaged.Enspell = {hands="Aya. Manopolas +2", waist="Orpheus's Sash"}
+    sets.engaged.Enspell.Fencer = {ring1="Fencer's Ring"}
+
 
     ------------------------------------------------------------------------------------------------
     ---------------------------------------- Special Sets ------------------------------------------
@@ -1238,6 +1243,17 @@ function customize_idle_set(idleSet)
     end
 
     return idleSet
+end
+
+function customize_melee_set(meleeSet)
+    if state.EnspellMode.value == true then
+        meleeSet = set_combine(meleeSet, sets.engaged.Enspell)
+    end
+    if state.EnspellMode.value == true and player.hpp <= 75 and player.tp < 1000 then
+        meleeSet = set_combine(meleeSet, sets.engaged.Enspell.Fencer)
+    end
+
+    return meleeSet
 end
 
 -- Set eventArgs.handled to true if we don't want the automatic display to be run.
