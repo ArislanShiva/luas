@@ -81,6 +81,9 @@ function job_setup()
     blue_magic_maps.Cure = S{'Wild Carrot'}
     blue_magic_maps.Buffs = S{'Cocoon', 'Refueling'}
 
+    no_swap_gear = S{"Warp Ring", "Dim. Ring (Dem)", "Dim. Ring (Holla)", "Dim. Ring (Mea)",
+              "Trizek Ring", "Echad Ring", "Facility Ring", "Capacity Ring"}
+
     rayke_duration = 35
     gambit_duration = 96
 
@@ -103,7 +106,7 @@ function user_setup()
 
     state.Knockback = M(false, 'Knockback')
 
-    state.WeaponSet = M{['description']='Weapon Set', 'Epeolatry', 'Lionheart', 'Aettir', 'GreatAxe'}
+    state.WeaponSet = M{['description']='Weapon Set', 'Epeolatry', 'Lionheart', 'Aettir', 'Lycurgos'}
     state.AttackMode = M{['description']='Attack', 'Uncapped', 'Capped'}
     state.CP = M(false, "Capacity Points Mode")
     state.WeaponLock = M(false, 'Weapon Lock')
@@ -231,7 +234,7 @@ function init_gear_sets()
         hands="Kurys Gloves", --9
         legs="Eri. Leg Guards +1", --7
         feet="Ahosi Leggings",--7
-        neck={name="Unmoving Collar +1", priority=1}, --10
+        neck="Moonlight Necklace", --15
         ear1="Cryptic Earring", --4
         ear2="Trux Earring", --5
         ring1="Supershear Ring", --5
@@ -324,7 +327,7 @@ function init_gear_sets()
         ammo="Impatiens",
         body="Passion Jacket",
         ring1="Lebeche Ring",
-        waist="Rumination Sash",
+        waist="Audumbla Sash",
         })
 
 
@@ -406,7 +409,6 @@ function init_gear_sets()
     sets.precast.WS['Dimidiation'].Uncapped = set_combine(sets.precast.WS['Dimidiation'], {
         neck="Caro Necklace",
         waist="Grunfeld Rope",
-        waist="Sailfi Belt +1",
         })
 
     sets.precast.WS['Herculean Slash'] = sets.precast.JA['Lunge']
@@ -421,10 +423,10 @@ function init_gear_sets()
         neck="Erra Pendant",
         ear1="Digni. Earring",
         ear2="Moonshade Earring",
-        ring1="Ayanmo Ring",
+        ring1="Metamor. Ring +1",
         ring2="Weather. Ring +1",
         back=gear.RUN_WS1_Cape,
-        waist="Eschan Stone",
+        waist="Acuity Belt +1",
         }
 
     sets.precast.WS['Fell Cleave'] = set_combine(sets.precast.WS, {
@@ -434,7 +436,11 @@ function init_gear_sets()
         waist="Sailfi Belt +1",
         })
 
+    sets.precast.WS['Steel Cyclone'] = sets.precast.WS['Fell Cleave']
     sets.precast.WS['Upheaval'] = sets.precast.WS['Resolution']
+    sets.precast.WS['Shield Break'] = sets.precast.WS['Shockwave']
+    sets.precast.WS['Armor Break'] = sets.precast.WS['Shockwave']
+    sets.precast.WS['Weapon Break'] = sets.precast.WS['Shockwave']
     sets.precast.WS['Full Break'] = sets.precast.WS['Shockwave']
 
     ------------------------------------------------------------------------------------------------
@@ -446,14 +452,14 @@ function init_gear_sets()
     sets.midcast.SpellInterrupt = {
         ammo="Staunch Tathlum +1", --11
         body=gear.Taeon_Phalanx_body, --10
-        hands="Regal Gauntlets", --10
-        legs="Carmine Cuisses +1", --20
+        hands=gear.Taeon_Phalanx_hands, --10
+        legs=gear.Taeon_Phalanx_legs, --10
         feet=gear.Taeon_Phalanx_feet, --10
-        neck="Moonbeam Necklace", --10
+        neck="Moonlight Necklace", --15
         ear1="Halasz Earring", --5
-        ring2="Evanescence Ring", --5
+        ring1="Evanescence Ring", --5
         back=gear.RUN_FC_Cape, --10
-        waist="Rumination Sash", --10
+        waist="Audumbla Sash", --10
         } -- +10% from merit points
 
     sets.midcast.Cure = {
@@ -475,7 +481,6 @@ function init_gear_sets()
 
     sets.midcast['Enhancing Magic'] = {
         main="Pukulatmuj +1",
-        sub="Pukulatmuj",
         head="Carmine Mask +1",
         body="Manasa Chasuble",
         hands="Runeist's Mitons +3",
@@ -497,17 +502,11 @@ function init_gear_sets()
 
     sets.midcast['Phalanx'] = set_combine(sets.midcast.SpellInterrupt, {
         main="Deacon Sword", --4
-        sub="Pukulatmuj +1",
-        ammo="Staunch Tathlum +1", --(11)
         head="Fu. Bandeau +3", --7
         body=gear.Taeon_Phalanx_body, --3(10)
         hands=gear.Taeon_Phalanx_hands, --3(10)
         legs=gear.Taeon_Phalanx_legs, --3(10)
         feet=gear.Taeon_Phalanx_feet, --3(10)
-        ear1="Tuisto Earring",
-        ear2="Odnowa Earring +1",
-        ring1="Moonlight Ring",
-        back=gear.RUN_FC_Cape, --(10)
         })
 
     sets.midcast['Aquaveil'] = set_combine(sets.midcast['Enhancing Magic'], sets.midcast.SpellInterrupt, {
@@ -592,7 +591,7 @@ function init_gear_sets()
         ammo="Staunch Tathlum +1",
         head="Turms Cap +1",
         body="Ashera Harness",
-        neck="Unmoving Collar +1",
+        neck="Moonlight Necklace",
         ear1="Sanare Earring",
         })
 
@@ -796,7 +795,7 @@ function init_gear_sets()
     sets.Epeolatry = {main="Epeolatry"}
     sets.Lionheart = {main="Lionheart"}
     sets.Aettir = {main="Aettir"}
-    sets.GreatAxe = {main="Hepatizon Axe +1"}
+    sets.Lycurgos = {main="Lycurgos"}
 
 end
 
@@ -990,6 +989,7 @@ end
 -------------------------------------------------------------------------------------------------------------------
 
 function job_handle_equipping_gear(playerStatus, eventArgs)
+    check_gear()
     check_moving()
 end
 
@@ -1162,6 +1162,32 @@ function check_moving()
         end
     end
 end
+
+function check_gear()
+    if no_swap_gear:contains(player.equipment.left_ring) then
+        disable("ring1")
+    else
+        enable("ring1")
+    end
+    if no_swap_gear:contains(player.equipment.right_ring) then
+        disable("ring2")
+    else
+        enable("ring2")
+    end
+end
+
+windower.register_event('zone change',
+    function()
+        if no_swap_gear:contains(player.equipment.left_ring) then
+            enable("ring1")
+            equip(sets.idle)
+        end
+        if no_swap_gear:contains(player.equipment.right_ring) then
+            enable("ring2")
+            equip(sets.idle)
+        end
+    end
+)
 
 -- Select default macro book on initial load or subjob change.
 function select_default_macro_book()

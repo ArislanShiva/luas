@@ -62,6 +62,10 @@ function job_setup()
     state.warned = M(false)
 
     elemental_ws = S{'Aeolian Edge', 'Trueflight', 'Wildfire'}
+    no_swap_gear = S{"Warp Ring", "Dim. Ring (Dem)", "Dim. Ring (Holla)", "Dim. Ring (Mea)",
+              "Trizek Ring", "Echad Ring", "Facility Ring", "Capacity Ring",
+              "Era. Bul. Pouch", "Dev. Bul. Pouch", "Chr. Bul. Pouch", "Quelling B. Quiver",
+              "Yoichi's Quiver", "Artemis's Quiver", "Chrono Quiver"}
 
     lockstyleset = 1
 end
@@ -232,7 +236,6 @@ function init_gear_sets()
 
     sets.precast.Waltz = {
         body="Passion Jacket",
-        neck="Phalaina Locket",
         ring1="Asklepian Ring",
         waist="Gishdubar Sash",
         }
@@ -593,7 +596,7 @@ function init_gear_sets()
         feet=gear.Herc_STP_feet,
         ear1="Cessance Earring",
         ear2="Mache Earring +1",
-        ring2="Ramuh Ring +1",
+        ring2={name="Chirich Ring +1", bag="wardrobe4"},
         waist="Olseni Belt",
         })
 
@@ -640,7 +643,7 @@ function init_gear_sets()
         ear1="Cessance Earring",
         ear2="Mache Earring +1",
         ring1="Regal Ring",
-        ring2="Ramuh Ring +1",
+        ring2={name="Chirich Ring +1", bag="wardrobe4"},
         waist="Olseni Belt",
         })
 
@@ -684,7 +687,7 @@ function init_gear_sets()
         ear1="Cessance Earring",
         ear2="Mache Earring +1",
         ring1="Regal Ring",
-        ring2="Ramuh Ring +1",
+        ring2={name="Chirich Ring +1", bag="wardrobe4"},
         waist="Olseni Belt",
         })
 
@@ -730,7 +733,7 @@ function init_gear_sets()
         ear1="Cessance Earring",
         ear2="Mache Earring +1",
         ring1="Regal Ring",
-        ring2="Ramuh Ring +1",
+        ring2={name="Chirich Ring +1", bag="wardrobe4"},
         waist="Olseni Belt",
         })
 
@@ -776,7 +779,7 @@ function init_gear_sets()
         ear1="Cessance Earring",
         ear2="Mache Earring +1",
         ring1="Regal Ring",
-        ring2="Ramuh Ring +1",
+        ring2={name="Chirich Ring +1", bag="wardrobe4"},
         waist="Olseni Belt",
         })
 
@@ -821,7 +824,7 @@ function init_gear_sets()
         ear1="Cessance Earring",
         ear2="Mache Earring +1",
         ring1="Regal Ring",
-        ring2="Ramuh Ring +1",
+        ring2={name="Chirich Ring +1", bag="wardrobe4"},
         waist="Olseni Belt",
         })
 
@@ -1088,6 +1091,7 @@ end
 -- Called by the 'update' self-command, for common needs.
 -- Set eventArgs.handled to true if we don't want automatic equipping of gear.
 function job_handle_equipping_gear(playerStatus, eventArgs)
+    check_gear()
     update_combat_form()
     determine_haste_group()
     check_moving()
@@ -1294,14 +1298,6 @@ function update_offense_mode()
     end
 end
 
-windower.register_event('zone change',
-    function()
-        if player.sub_job == 'NIN' or player.sub_job == 'DNC' then
-            send_command('gi ugs true')
-        end
-    end
-)
-
 function check_moving()
     if state.DefenseMode.value == 'None'  and state.Kiting.value == false then
         if state.Auto_Kite.value == false and moving then
@@ -1311,6 +1307,41 @@ function check_moving()
         end
     end
 end
+
+function check_gear()
+    if no_swap_gear:contains(player.equipment.left_ring) then
+        disable("ring1")
+    else
+        enable("ring1")
+    end
+    if no_swap_gear:contains(player.equipment.right_ring) then
+        disable("ring2")
+    else
+        enable("ring2")
+    end
+    if no_swap_gear:contains(player.equipment.waist) then
+        disable("waist")
+    else
+        enable("waist")
+    end
+end
+
+windower.register_event('zone change',
+    function()
+        if no_swap_gear:contains(player.equipment.left_ring) then
+            enable("ring1")
+            equip(sets.idle)
+        end
+        if no_swap_gear:contains(player.equipment.right_ring) then
+            enable("ring2")
+            equip(sets.idle)
+        end
+        if no_swap_gear:contains(player.equipment.waist) then
+            enable("waist")
+            equip(sets.idle)
+        end
+    end
+)
 
 -- Select default macro book on initial load or subjob change.
 function select_default_macro_book()

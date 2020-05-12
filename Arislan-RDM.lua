@@ -85,6 +85,9 @@ function job_setup()
     state.Buff.Saboteur = buffactive.Saboteur or false
     state.Buff.Stymie = buffactive.Stymie or false
 
+    no_swap_gear = S{"Warp Ring", "Dim. Ring (Dem)", "Dim. Ring (Holla)", "Dim. Ring (Mea)",
+              "Trizek Ring", "Echad Ring", "Facility Ring", "Capacity Ring"}
+
     enfeebling_magic_acc = S{'Bind', 'Break', 'Dispel', 'Distract', 'Distract II', 'Frazzle',
         'Frazzle II',  'Gravity', 'Gravity II', 'Silence'}
     enfeebling_magic_skill = S{'Distract III', 'Frazzle III', 'Poison II'}
@@ -279,7 +282,6 @@ function init_gear_sets()
         ear1="Loquacious Earring", --2
         ear2="Enchntr. Earring +1", --2
         ring1="Kishar Ring", --4
-        back="Swith Cape +1", --4
         waist="Witful Belt", --3/(3)
         })
 
@@ -312,7 +314,6 @@ function init_gear_sets()
         body="Jhakri Robe +2",
         neck="Combatant's Torque",
         ear2="Mache Earring +1",
-        ring1="Ramuh Ring +1",
         waist="Grunfeld Rope",
         })
 
@@ -331,7 +332,6 @@ function init_gear_sets()
     sets.precast.WS['Chant du Cygne'].Acc = set_combine(sets.precast.WS['Chant du Cygne'], {
         head="Malignance Chapeau",
         ear2="Mache Earring +1",
-        ring1="Ramuh Ring +1",
         })
 
     sets.precast.WS['Vorpal Blade'] = sets.precast.WS['Chant du Cygne']
@@ -358,7 +358,6 @@ function init_gear_sets()
     sets.precast.WS['Requiescat'].Acc = set_combine(sets.precast.WS['Requiescat'], {
         neck="Combatant's Torque",
         ear1="Mache Earring +1",
-        ring1="Ramuh Ring +1",
         })
 
     sets.precast.WS['Sanguine Blade'] = {
@@ -387,6 +386,7 @@ function init_gear_sets()
         head="Merlinic Hood",
         ear2="Moonshade Earring",
         ring1="Shiva Ring +1",
+        waist="Orpheus's Sash",
         })
 
     sets.precast.WS['Black Halo'] = set_combine(sets.precast.WS['Savage Blade'], {
@@ -578,7 +578,7 @@ function init_gear_sets()
         ear1="Malignance Earring",
         ear2="Snotra Earring",
         ring1="Kishar Ring",
-        ring2={name="Stikini Ring +1", bag="wardrobe4"},
+        ring2="Metamor. Ring +1",
         back=gear.RDM_MND_Cape,
         waist="Luminary Sash",
         }
@@ -591,6 +591,7 @@ function init_gear_sets()
         head="Atrophy Chapeau +3",
         body="Atrophy Tabard +3",
         ring1={name="Stikini Ring +1", bag="wardrobe3"},
+        waist="Acuity Belt +1",
         })
 
     sets.midcast.MndEnfeeblesEffect = set_combine(sets.midcast.MndEnfeebles, {
@@ -605,7 +606,7 @@ function init_gear_sets()
         main="Maxentius",
         sub="Ammurapi Shield",
         back=gear.RDM_INT_Cape,
-        waist="Sacro Cord",
+        waist="Acuity Belt +1",
         })
 
     sets.midcast.IntEnfeeblesAcc = set_combine(sets.midcast.IntEnfeebles, {
@@ -615,6 +616,7 @@ function init_gear_sets()
         ammo=empty,
         body="Atrophy Tabard +3",
         ring1={name="Stikini Ring +1", bag="wardrobe3"},
+        waist="Acuity Belt +1",
         })
 
     sets.midcast.IntEnfeeblesEffect = set_combine(sets.midcast.IntEnfeebles, {
@@ -673,7 +675,7 @@ function init_gear_sets()
         ring1={name="Stikini Ring +1", bag="wardrobe3"},
         ring2="Evanescence Ring",
         back=gear.RDM_INT_Cape,
-        waist="Luminary Sash",
+        waist="Acuity Belt +1",
         }
 
     sets.midcast.Drain = set_combine(sets.midcast['Dark Magic'], {
@@ -703,7 +705,7 @@ function init_gear_sets()
         ear1="Malignance Earring",
         ear2="Regal Earring",
         ring1="Freke Ring",
-        ring2="Shiva Ring +1",
+        ring2="Metamor. Ring +1",
         back=gear.RDM_INT_Cape,
         waist="Refoccilation Stone",
         }
@@ -713,6 +715,7 @@ function init_gear_sets()
         legs="Merlinic Shalwar",
         feet="Merlinic Crackows",
         neck="Erra Pendant",
+        waist="Acuity Belt +1",
         })
 
     sets.midcast['Elemental Magic'].Resistant = set_combine(sets.midcast['Elemental Magic'], {
@@ -793,7 +796,7 @@ function init_gear_sets()
         ear1="Malignance Earring",
         ear2="Snotra Earring",
         back=gear.RDM_INT_Cape,
-        waist="Luminary Sash",
+        waist="Acuity Belt +1",
         })
 
     sets.resting = set_combine(sets.idle, {
@@ -859,12 +862,14 @@ function init_gear_sets()
         legs="Carmine Cuisses +1",
         ear1="Cessance Earring",
         ear2="Mache Earring +1",
-        ring1="Ramuh Ring +1",
+        ring1={name="Chirich Ring +1", bag="wardrobe3"},
         waist="Olseni Belt",
         })
 
     -- No Magic Haste (74% DW to cap)
     sets.engaged.DW = {
+        main="Trainee Knife",
+        sub="Qutrub Knife",
         ammo="Ginsen",
         head="Malignance Chapeau",
         body="Malignance Tabard",
@@ -889,7 +894,6 @@ function init_gear_sets()
         head="Carmine Mask +1",
         ear1="Cessance Earring",
         ear2="Mache Earring +1",
-        ring1="Ramuh Ring +1",
         })
 
     -- 15% Magic Haste (67% DW to cap)
@@ -911,13 +915,13 @@ function init_gear_sets()
 
     sets.engaged.DW.MidAcc.LowHaste = set_combine(sets.engaged.DW.LowHaste, {
         neck="Combatant's Torque",
+        ring1={name="Chirich Ring +1", bag="wardrobe3"},
         })
 
     sets.engaged.DW.HighAcc.LowHaste = set_combine(sets.engaged.DW.MidAcc.LowHaste, {
         head="Carmine Mask +1",
         ear1="Cessance Earring",
         ear2="Mache Earring +1",
-        ring1="Ramuh Ring +1",
         })
 
     -- 30% Magic Haste (56% DW to cap)
@@ -935,7 +939,7 @@ function init_gear_sets()
         ring2={name="Chirich Ring +1", bag="wardrobe4"},
         back=gear.RDM_DW_Cape, --10
         waist="Reiki Yotai", --7
-        }) --32
+        }) --31
 
     sets.engaged.DW.MidAcc.MidHaste = set_combine(sets.engaged.DW.MidHaste, {
         legs="Carmine Cuisses +1", --6
@@ -948,8 +952,6 @@ function init_gear_sets()
         head="Carmine Mask +1",
         ear1="Cessance Earring",
         ear2="Mache Earring +1",
-        ring1="Ramuh Ring +1",
-        waist="Olseni Belt",
         })
 
     -- 35% Magic Haste (51% DW to cap)
@@ -959,7 +961,7 @@ function init_gear_sets()
         body="Malignance Tabard",
         hands="Malignance Gloves",
         legs="Malignance Tights",
-        feet="Carmine Greaves +1",
+        feet=gear.Taeon_DW_feet, --9
         neck="Anu Torque",
         ear1="Sherida Earring",
         ear2="Telos Earring",
@@ -967,21 +969,18 @@ function init_gear_sets()
         ring2={name="Chirich Ring +1", bag="wardrobe4"},
         back=gear.RDM_DW_Cape, --10
         waist="Reiki Yotai", --7
-        }) --17
+      }) --26
 
     sets.engaged.DW.MidAcc.HighHaste = set_combine(sets.engaged.DW.HighHaste, {
         legs="Carmine Cuisses +1", --6
         neck="Combatant's Torque",
         ring1={name="Chirich Ring +1", bag="wardrobe3"},
-        waist="Kentarch Belt +1",
         })
 
     sets.engaged.DW.HighAcc.HighHaste = set_combine(sets.engaged.DW.MidAcc.HighHaste, {
         head="Carmine Mask +1",
         ear1="Cessance Earring",
         ear2="Mache Earring +1",
-        ring1="Ramuh Ring +1",
-        waist="Olseni Belt",
         })
 
     -- 45% Magic Haste (36% DW to cap)
@@ -991,7 +990,7 @@ function init_gear_sets()
         body="Malignance Tabard",
         hands="Malignance Gloves",
         legs="Malignance Tights",
-        feet="Carmine Greaves +1",
+        feet="Malignance Boots",
         neck="Anu Torque",
         ear1="Sherida Earring",
         ear2="Telos Earring",
@@ -1012,7 +1011,6 @@ function init_gear_sets()
         legs="Carmine Cuisses +1", --6
         ear1="Cessance Earring",
         ear2="Mache Earring +1",
-        ring1="Ramuh Ring +1",
         waist="Olseni Belt",
         })
 
@@ -1050,7 +1048,12 @@ function init_gear_sets()
     sets.engaged.DW.MidAcc.DT.MaxHaste = set_combine(sets.engaged.DW.MidAcc.MaxHaste, sets.engaged.Hybrid)
     sets.engaged.DW.HighAcc.DT.MaxHaste = set_combine(sets.engaged.DW.HighAcc.MaxHaste, sets.engaged.Hybrid)
 
-    sets.engaged.Enspell = {hands="Aya. Manopolas +2", waist="Orpheus's Sash"}
+    sets.engaged.Enspell = {
+        hands="Aya. Manopolas +2",
+        neck="Dls. Torque +2",
+        waist="Orpheus's Sash",
+        }
+
     sets.engaged.Enspell.Fencer = {ring1="Fencer's Ring"}
 
 
@@ -1175,6 +1178,7 @@ end
 -- Called by the 'update' self-command, for common needs.
 -- Set eventArgs.handled to true if we don't want automatic equipping of gear.
 function job_handle_equipping_gear(playerStatus, eventArgs)
+    check_gear()
     update_combat_form()
     determine_haste_group()
     check_moving()
@@ -1491,14 +1495,6 @@ function set_sleep_timer(spell)
 
 end
 
-windower.register_event('zone change',
-    function()
-        if player.sub_job == 'NIN' or player.sub_job == 'DNC' then
-            send_command('gi ugs true')
-        end
-    end
-)
-
 function check_moving()
     if state.DefenseMode.value == 'None'  and state.Kiting.value == false then
         if state.Auto_Kite.value == false and moving then
@@ -1508,6 +1504,32 @@ function check_moving()
         end
     end
 end
+
+function check_gear()
+    if no_swap_gear:contains(player.equipment.left_ring) then
+        disable("ring1")
+    else
+        enable("ring1")
+    end
+    if no_swap_gear:contains(player.equipment.right_ring) then
+        disable("ring2")
+    else
+        enable("ring2")
+    end
+end
+
+windower.register_event('zone change',
+    function()
+        if no_swap_gear:contains(player.equipment.left_ring) then
+            enable("ring1")
+            equip(sets.idle)
+        end
+        if no_swap_gear:contains(player.equipment.right_ring) then
+            enable("ring2")
+            equip(sets.idle)
+        end
+    end
+)
 
 -- Select default macro book on initial load or subjob change.
 function select_default_macro_book()

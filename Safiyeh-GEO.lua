@@ -42,13 +42,13 @@ end
 
 -- Setup vars that are user-independent.  state.Buff vars initialized here will automatically be tracked.
 function job_setup()
-      geo_timer = ''
+    geo_timer = ''
     indi_timer = ''
     indi_duration = 308
-      entrust_timer = ''
-      entrust_duration = 344
-      entrust = 0
-      newLuopan = 0
+    entrust_timer = ''
+    entrust_duration = 344
+    entrust = 0
+    newLuopan = 0
 
     state.Buff.Entrust = buffactive.Entrust or false
     state.Buff['Blaze of Glory'] = buffactive['Blaze of Glory'] or false
@@ -57,6 +57,9 @@ function job_setup()
 
     state.Auto = M(true, 'Auto Nuke')
     state.Element = M{['description']='Element','Fire','Blizzard','Aero','Stone','Thunder','Water'}
+
+    no_swap_gear = S{"Warp Ring", "Dim. Ring (Dem)", "Dim. Ring (Holla)", "Dim. Ring (Mea)",
+              "Trizek Ring", "Echad Ring", "Facility Ring", "Capacity Ring"}
 
     degrade_array = {
         ['Fire'] = {'Fire','Fire II','Fire III','Fire IV','Fire V'},
@@ -86,6 +89,8 @@ function user_setup()
     -- Additional local binds
     include('Global-Binds.lua')
 
+    send_command('lua l gearinfo')
+
     send_command('bind ^` input /ja "Full Circle" <me>')
     send_command('bind ^b input /ja "Blaze of Glory" <me>')
     send_command('bind ^a input /ja "Ecliptic Attrition" <me>')
@@ -111,6 +116,9 @@ function user_setup()
 
     select_default_macro_book()
     set_lockstyle()
+
+    state.Auto_Kite = M(false, 'Auto_Kite')
+    moving = false
 end
 
 function user_unload()
@@ -141,6 +149,8 @@ function user_unload()
     send_command('unbind !numpad6')
     send_command('unbind !numpad1')
     send_command('unbind !numpad+')
+
+    send_command('lua u gearinfo')
 end
 
 
@@ -250,8 +260,8 @@ function init_gear_sets()
         ear1="Calamitous Earring",
         ear2="Gifted Earring",
         neck="Reti Pendant",
-        ring1={name="Stikini Ring", bag="wardrobe2"},
-        ring2={name="Stikini Ring", bag="wardrobe3"},
+        ring1={name="Stikini Ring", bag="wardrobe3"},
+        ring2={name="Stikini Ring", bag="wardrobe4"},
         back="Lifestream Cape",
         waist="Austerity Belt +1",
         }
@@ -275,21 +285,21 @@ function init_gear_sets()
         ear1="Beatific Earring",
         ear2="Meili Earring",
         ring1="Lebeche Ring", --3/(-5)
-        ring2={name="Haoma's Ring", bag="wardrobe2"},
+        ring2={name="Haoma's Ring", bag="wardrobe3"},
         back=gear.GEO_Cure_Cape, --0/(-10)
         waist="Bishop's Sash",
         }
 
     sets.midcast.Curaga = set_combine(sets.midcast.Cure, {
         neck="Nuna Gorget +1",
-        ring2={name="Stikini Ring", bag="wardrobe3"},
+        ring2="Metamor. Ring +1",
         waist="Luminary Sash",
         })
 
     sets.midcast.Cursna = set_combine(sets.midcast.Cure, {
         neck="Malison Medallion",
-        ring1={name="Haoma's Ring", bag="wardrobe2"},
-        ring2={name="Haoma's Ring", bag="wardrobe3"},
+        ring1={name="Haoma's Ring", bag="wardrobe3"},
+        ring2={name="Haoma's Ring", bag="wardrobe4"},
         back="Oretan. Cape +1",
         })
 
@@ -304,8 +314,8 @@ function init_gear_sets()
         neck="Incanter's Torque",
         ear1="Mimir Earring",
         ear2="Andoaa Earring",
-        ring1={name="Stikini Ring", bag="wardrobe2"},
-        ring2={name="Stikini Ring", bag="wardrobe3"},
+        ring1={name="Stikini Ring", bag="wardrobe3"},
+        ring2={name="Stikini Ring", bag="wardrobe4"},
         back="Perimede Cape",
         waist="Olympus Sash",
         }
@@ -359,13 +369,13 @@ function init_gear_sets()
         ear1="Malignance Earring",
         ear2="Vor Earring",
         ring1="Kishar Ring",
-        ring2={name="Stikini Ring", bag="wardrobe3"},
+        ring2={name="Stikini Ring", bag="wardrobe4"},
         back=gear.GEO_FC_Cape,
         waist="Luminary Sash",
         } -- MND/Magic accuracy
 
     sets.midcast.IntEnfeebles = set_combine(sets.midcast.MndEnfeebles, {
-        ring1={name="Shiva Ring", bag="wardrobe2"},
+        ring1="Freke Ring",
         ring2="Weather. Ring +1",
         back=gear.GEO_MAB_Cape,
         }) -- INT/Magic accuracy
@@ -383,8 +393,8 @@ function init_gear_sets()
         neck="Erra Pendant",
         ear1="Malignance Earring",
         ear2="Digni. Earring",
-        ring1={name="Stikini Ring", bag="wardrobe2"},
-        ring2="Weather. Ring +1",
+        ring1={name="Stikini Ring", bag="wardrobe3"},
+        ring2="Metamor. Ring +1",
         back=gear.GEO_MAB_Cape,
         waist="Luminary Sash",
         }
@@ -415,8 +425,8 @@ function init_gear_sets()
         neck="Saevus Pendant +1",
         ear1="Malignance Earring",
         ear2="Regal Earring",
-        ring1={name="Shiva Ring", bag="wardrobe2"},
-        ring2={name="Shiva Ring", bag="wardrobe3"},
+        ring1="Freke Ring",
+        ring2="Metamor. Ring +1",
         back=gear.GEO_MAB_Cape,
         waist="Refoccilation Stone",
         }
@@ -452,17 +462,17 @@ function init_gear_sets()
         main="Bolelabunga",
         sub="Genmei Shield",
         head="Befouled Crown",
-        body="Jhakri Robe +2",
+        body="Geomancy Tunic +3",
         hands="Bagua Mitaines +3",
         legs="Assid. Pants +1",
-        feet="Geo. Sandals +3",
+        feet="Ea Pigaches +1",
         neck="Bathy Choker +1",
         ear1="Lugalbanda Earring",
         ear2="Etiolation Earring",
         ring1="Paguroidea Ring",
         ring2="Sheltered Ring",
         back=gear.GEO_Idle_Cape,
-        waist="Austerity Belt +1",
+        waist="Slipor Sash",
         }
 
     sets.resting = set_combine(sets.idle, {
@@ -471,14 +481,18 @@ function init_gear_sets()
 
     sets.idle.DT = set_combine(sets.idle, {
         sub="Genmei Shield", --10/0
+        head="Ea Hat +1",
         body="Mallquis Saio +2", --8/8
         hands="Geo. Mitaines +3", --3/0
-        feet="Azimuth Gaiters +1", --4/0
+        legs="Ea Slops +1",
+        feet="Ea Pigaches +1",
         neck="Loricate Torque +1", --6/6
         ear1="Genmei Earring", --2/0
         ear2="Etiolation Earring", --0/3
         ring1="Gelatinous Ring +1", --7/(-1)
         ring2="Defending Ring", --10/10
+        back=gear.GEO_Idle_Cape, --5/5
+        waist="Slipor Sash", --0/3
         })
 
     -- .Pet sets are for when Luopan is present.
@@ -492,7 +506,7 @@ function init_gear_sets()
         legs="Telchine Braconi", --0/0/0/3
         feet="Bagua Sandals +3", --0/0/0/5
         neck="Bagua Charm +2",
-        ear1="Genmei Earring", --2/2/0/0
+        ear1="Lugalbanda Earring",
         ear2="Etiolation Earring", --0/3/0/0
         ring1="Gelatinous Ring +1", --7/(-1)/0/0
         ring2="Defending Ring", --10/10/0/0
@@ -502,6 +516,7 @@ function init_gear_sets()
 
     sets.idle.DT.Pet = set_combine(sets.idle.Pet, {
         body="Mallquis Saio +2", --8/8
+        back=gear.GEO_Idle_Cape, --5/5
         })
 
     sets.PetHP = {head="Bagua Galero +3"}
@@ -518,9 +533,11 @@ function init_gear_sets()
         head="Bagua Galero +3",
         body="Geomancy Tunic +3",
         legs="Bagua Pants +3",
+        feet="Bagua Sandals +3",
         neck="Bagua Charm +2",
         ear1="Malignance Earring",
         ear2="Regal Earring",
+        ring1="Freke Ring",
         ring2="Weather. Ring +1",
         back=gear.GEO_Pet_Cape,
         })
@@ -584,7 +601,7 @@ function init_gear_sets()
         ring2="Mujin Band", --(5)
         }
 
-    sets.buff.Doom = {ring1={name="Saida Ring", bag="wardrobe2"}, ring2={name="Saida Ring", bag="wardrobe3"},}
+    sets.buff.Doom = {ring1={name="Saida Ring", bag="wardrobe3"}, ring2={name="Saida Ring", bag="wardrobe4"},}
     sets.Obi = {waist="Hachirin-no-Obi"}
     sets.CP = {back="Mecisto. Mantle"}
 
@@ -645,20 +662,21 @@ end
 
 function job_aftercast(spell, action, spellMap, eventArgs)
     if not spell.interrupted then
-          if spell.english:startswith('Geo') then
+        --[[if spell.english:startswith('Geo') then
             geo_timer = spell.english
-                  send_command('@timers c "'..geo_timer..'" 600 down spells/00136.png')
-            elseif spell.english:startswith('Indi') then
-                  if entrust == 1 then
-                        entrust_timer = spell.english
-                        send_command('@timers c "'..entrust_timer..' ['..spell.target.name..']" '..entrust_duration..' down spells/00136.png')
-                        entrust = 0
-                  else
-                       send_command('@timers d "'..indi_timer..'"')
-                       indi_timer = spell.english
-                       send_command('@timers c "'..indi_timer..'" '..indi_duration..' down spells/00136.png')
-                  end
-        elseif spell.english == "Sleep II" then
+            send_command('@timers c "'..geo_timer..'" 600 down spells/00136.png')
+        elseif spell.english:startswith('Indi') then
+            if entrust == 1 then
+                entrust_timer = spell.english
+                send_command('@timers c "'..entrust_timer..' ['..spell.target.name..']" '..entrust_duration..' down spells/00136.png')
+                entrust = 0
+            else
+                send_command('@timers d "'..indi_timer..'"')
+                indi_timer = spell.english
+                send_command('@timers c "'..indi_timer..'" '..indi_duration..' down spells/00136.png')
+            end
+        end ]]
+        if spell.english == "Sleep II" then
             send_command('@timers c "Sleep II ['..spell.target.name..']" 90 down spells/00259.png')
         elseif spell.english == "Sleep" or spell.english == "Sleepga" then -- Sleep & Sleepga Countdown --
             send_command('@timers c "Sleep ['..spell.target.name..']" 60 down spells/00253.png')
@@ -712,6 +730,16 @@ end
 -- User code that supplements standard library decisions.
 -------------------------------------------------------------------------------------------------------------------
 
+function job_handle_equipping_gear(playerStatus, eventArgs)
+    check_gear()
+    check_moving()
+end
+
+function job_update(cmdParams, eventArgs)
+    handle_equipping_gear(player.status)
+    classes.CustomIdleGroups:clear()
+end
+
 function job_get_spell_map(spell, default_spell_map)
     if spell.action_type == 'Magic' then
         if spell.skill == 'Enfeebling Magic' then
@@ -753,13 +781,11 @@ function customize_idle_set(idleSet)
             newLuopan = 0
         end
     end
+    if state.Auto_Kite.value == true then
+       idleSet = set_combine(idleSet, sets.Kiting)
+    end
 
     return idleSet
-end
-
--- Called by the 'update' self-command.
-function job_update(cmdParams, eventArgs)
-    classes.CustomIdleGroups:clear()
 end
 
 -- Function to display the current relevant user state when doing an update.
@@ -792,12 +818,6 @@ function display_current_job_state(eventArgs)
     eventArgs.handled = true
 end
 
-function job_self_command(cmdParams, eventArgs)
-    if cmdParams[1] == 'nuke' and not midaction() then
-        send_command('@input /ma "' .. state.Element.current .. ' V" <t>')
-    end
-end
-
 function refine_various_spells(spell, action, spellMap, eventArgs)
 
     local newSpell = spell.english
@@ -825,9 +845,69 @@ function refine_various_spells(spell, action, spellMap, eventArgs)
     end
 end
 
+
+
 -------------------------------------------------------------------------------------------------------------------
 -- Utility functions specific to this job.
 -------------------------------------------------------------------------------------------------------------------
+
+function job_self_command(cmdParams, eventArgs)
+    if cmdParams[1] == 'nuke' and not midaction() then
+        send_command('@input /ma "' .. state.Element.current .. ' V" <t>')
+    end
+    gearinfo(cmdParams, eventArgs)
+end
+
+function gearinfo(cmdParams, eventArgs)
+    if cmdParams[1] == 'gearinfo' then
+        if type(cmdParams[4]) == 'string' then
+            if cmdParams[4] == 'true' then
+                moving = true
+            elseif cmdParams[4] == 'false' then
+                moving = false
+            end
+        end
+        if not midaction() then
+            job_update()
+        end
+    end
+end
+
+function check_moving()
+    if state.DefenseMode.value == 'None'  and state.Kiting.value == false then
+        if state.Auto_Kite.value == false and moving then
+            state.Auto_Kite:set(true)
+        elseif state.Auto_Kite.value == true and moving == false then
+            state.Auto_Kite:set(false)
+        end
+    end
+end
+
+function check_gear()
+    if no_swap_gear:contains(player.equipment.left_ring) then
+        disable("ring1")
+    else
+        enable("ring1")
+    end
+    if no_swap_gear:contains(player.equipment.right_ring) then
+        disable("ring2")
+    else
+        enable("ring2")
+    end
+end
+
+windower.register_event('zone change',
+    function()
+        if no_swap_gear:contains(player.equipment.left_ring) then
+            enable("ring1")
+            equip(sets.idle)
+        end
+        if no_swap_gear:contains(player.equipment.right_ring) then
+            enable("ring2")
+            equip(sets.idle)
+        end
+    end
+)
 
 -- Select default macro book on initial load or subjob change.
 function select_default_macro_book()

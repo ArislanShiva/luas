@@ -172,6 +172,8 @@ function job_setup()
         'Crashing Thunder','Cruel Joke','Droning Whirlwind','Gates of Hades','Harden Shell','Mighty Guard',
         'Polar Roar','Pyric Bulwark','Tearing Gust','Thunderbolt','Tourbillion','Uproot'}
 
+    no_swap_gear = S{"Warp Ring", "Dim. Ring (Dem)", "Dim. Ring (Holla)", "Dim. Ring (Mea)",
+              "Trizek Ring", "Echad Ring", "Facility Ring", "Capacity Ring"}
     elemental_ws = S{'Flash Nova', 'Sanguine Blade'}
 
     include('Mote-TreasureHunter')
@@ -577,9 +579,10 @@ function init_gear_sets()
 
     sets.midcast['Blue Magic'].PhysicalInt = set_combine(sets.midcast['Blue Magic'].Physical, {
         ear2="Regal Earring",
-        ring1={name="Shiva Ring +1", bag="wardrobe3"},
-        ring2={name="Shiva Ring +1", bag="wardrobe4"},
+        ring1="Shiva Ring +1",
+        ring2="Metamor. Ring +1",
         back=gear.BLU_MAB_Cape,
+        waist="Acuity Belt +1",
         })
 
     sets.midcast['Blue Magic'].PhysicalMnd = set_combine(sets.midcast['Blue Magic'].Physical, {
@@ -600,8 +603,8 @@ function init_gear_sets()
         neck="Baetyl Pendant",
         ear1="Friomisi Earring",
         ear2="Regal Earring",
-        ring1={name="Shiva Ring +1", bag="wardrobe3"},
-        ring2={name="Shiva Ring +1", bag="wardrobe4"},
+        ring1="Shiva Ring +1",
+        ring2="Metamor. Ring +1",
         back=gear.BLU_MAB_Cape,
         waist="Orpheus's Sash",
         }
@@ -614,6 +617,7 @@ function init_gear_sets()
         ear1="Digni. Earring",
         ring1={name="Stikini Ring +1", bag="wardrobe3"},
         ring2={name="Stikini Ring +1", bag="wardrobe4"},
+        waist="Acuity Belt +1",
         })
 
     sets.midcast['Blue Magic'].MagicalDark = set_combine(sets.midcast['Blue Magic'].Magical, {
@@ -632,7 +636,6 @@ function init_gear_sets()
 
     sets.midcast['Blue Magic'].MagicalDex = set_combine(sets.midcast['Blue Magic'].Magical, {
         ear2="Mache Earring +1",
-        ring1="Ramuh Ring +1",
         ring2="Ilabrat Ring",
         })
 
@@ -652,7 +655,7 @@ function init_gear_sets()
         ring1={name="Stikini Ring +1", bag="wardrobe3"},
         ring2={name="Stikini Ring +1", bag="wardrobe4"},
         back=gear.BLU_MAB_Cape,
-        waist="Luminary Sash",
+        waist="Acuity Belt +1",
         }
 
     sets.midcast['Blue Magic'].Breath = set_combine(sets.midcast['Blue Magic'].Magical, {head="Luh. Keffiyeh +3"})
@@ -880,7 +883,7 @@ function init_gear_sets()
         feet=gear.Herc_STP_feet,
         neck="Mirage Stole +2",
         ear2="Mache Earring +1",
-        ring1="Ramuh Ring +1",
+        ring1={name="Chirich Ring +1", bag="wardrobe3"},
         waist="Olseni Belt",
         })
 
@@ -935,7 +938,7 @@ function init_gear_sets()
         neck="Mirage Stole +2",
         ear1="Cessance Earring",
         ear2="Mache Earring +1",
-        ring1="Ramuh Ring +1",
+        ring1={name="Chirich Ring +1", bag="wardrobe3"},
         waist="Olseni Belt",
         })
 
@@ -981,7 +984,7 @@ function init_gear_sets()
         neck="Mirage Stole +2",
         ear1="Cessance Earring",
         ear2="Mache Earring +1",
-        ring1="Ramuh Ring +1",
+        ring1={name="Chirich Ring +1", bag="wardrobe3"},
         waist="Olseni Belt",
         })
 
@@ -1029,7 +1032,7 @@ function init_gear_sets()
         neck="Mirage Stole +2",
         ear1="Cessance Earring",
         ear2="Mache Earring +1",
-        ring1="Ramuh Ring +1",
+        ring1={name="Chirich Ring +1", bag="wardrobe3"},
         waist="Olseni Belt",
         })
 
@@ -1077,7 +1080,7 @@ function init_gear_sets()
         neck="Mirage Stole +2",
         ear1="Cessance Earring",
         ear2="Mache Earring +1",
-        ring1="Ramuh Ring +1",
+        ring1={name="Chirich Ring +1", bag="wardrobe3"},
         waist="Olseni Belt",
         })
 
@@ -1122,7 +1125,7 @@ function init_gear_sets()
         feet=gear.Herc_STP_feet,
         neck="Mirage Stole +2",
         ear2="Mache Earring +1",
-        ring1="Ramuh Ring +1",
+        ring1={name="Chirich Ring +1", bag="wardrobe3"},
         waist="Olseni Belt",
         })
 
@@ -1347,6 +1350,7 @@ end
 -- Called by the 'update' self-command, for common needs.
 -- Set eventArgs.handled to true if we don't want automatic equipping of gear.
 function job_handle_equipping_gear(playerStatus, eventArgs)
+    check_gear()
     update_combat_form()
     determine_haste_group()
     check_moving()
@@ -1552,12 +1556,6 @@ function th_action_check(category, param)
     end
 end
 
-windower.register_event('zone change',
-    function()
-        send_command('gi ugs true')
-    end
-)
-
 function check_moving()
     if state.DefenseMode.value == 'None'  and state.Kiting.value == false then
         if state.Auto_Kite.value == false and moving then
@@ -1567,6 +1565,32 @@ function check_moving()
         end
     end
 end
+
+function check_gear()
+    if no_swap_gear:contains(player.equipment.left_ring) then
+        disable("ring1")
+    else
+        enable("ring1")
+    end
+    if no_swap_gear:contains(player.equipment.right_ring) then
+        disable("ring2")
+    else
+        enable("ring2")
+    end
+end
+
+windower.register_event('zone change',
+    function()
+        if no_swap_gear:contains(player.equipment.left_ring) then
+            enable("ring1")
+            equip(sets.idle)
+        end
+        if no_swap_gear:contains(player.equipment.right_ring) then
+            enable("ring2")
+            equip(sets.idle)
+        end
+    end
+)
 
 -- Select default macro book on initial load or subjob change.
 function select_default_macro_book()

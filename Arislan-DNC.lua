@@ -97,6 +97,9 @@ function job_setup()
 
     state.CP = M(false, "Capacity Points Mode")
 
+    no_swap_gear = S{"Warp Ring", "Dim. Ring (Dem)", "Dim. Ring (Holla)", "Dim. Ring (Mea)",
+              "Trizek Ring", "Echad Ring", "Facility Ring", "Capacity Ring"}
+
     lockstyleset = 1
 end
 
@@ -249,8 +252,8 @@ function init_gear_sets()
         neck="Etoile Gorget +1", --7
         --ear1="Handler's Earring +1",
         ear2="Enchntr. Earring +1",
-        ring1={name="Carb. Ring +1", bag="wardrobe3"},
-        ring2={name="Carb. Ring +1", bag="wardrobe4"},
+        ring1="Carb. Ring +1",
+        ring2="Metamor. Ring +1",
         back=gear.DNC_WTZ_Cape,
         waist="Aristo Belt",
         } -- Waltz Potency/CHR
@@ -276,7 +279,7 @@ function init_gear_sets()
         ear1="Mache Earring +1",
         ear2="Telos Earring",
         ring1="Regal Ring",
-        ring2="Ramuh Ring +1",
+        ring2={name="Chirich Ring +1", bag="wardrobe4"},
         waist="Olseni Belt",
         back=gear.DNC_TP_Cape
         }
@@ -295,7 +298,7 @@ function init_gear_sets()
         neck="Etoile Gorget +1",
         ear1="Digni. Earring",
         ear2="Enchntr. Earring +1",
-        ring1={name="Stikini Ring +1", bag="wardrobe3"},
+        ring1="Metamor. Ring +1",
         ring2="Weather. Ring +1",
         waist="Eschan Stone",
         back=gear.DNC_TP_Cape,
@@ -312,7 +315,7 @@ function init_gear_sets()
         ear1="Cessance Earring",
         ear2="Telos Earring",
         ring1="Regal Ring",
-        ring2="Ramuh Ring +1",
+        ring2={name="Chirich Ring +1", bag="wardrobe4"},
         back=gear.DNC_TP_Cape,
         } -- Accuracy
 
@@ -410,7 +413,6 @@ function init_gear_sets()
         hands=gear.Adhemar_A_hands,
         legs=gear.Herc_WS_legs,
         feet=gear.Herc_STP_feet,
-        ring2="Ramuh Ring +1",
         })
 
     sets.precast.WS['Evisceration'] = set_combine(sets.precast.WS, {
@@ -440,7 +442,7 @@ function init_gear_sets()
         ammo="Charis Feather",
         neck="Etoile Gorget +1",
         ear1="Sherida Earring",
-        waist="Grunfeld Rope",
+        waist="Artful Belt +1",
         })
 
     sets.precast.WS['Rudra\'s Storm'].Acc = set_combine(sets.precast.WS['Rudra\'s Storm'], {
@@ -448,6 +450,7 @@ function init_gear_sets()
         legs=gear.Herc_WS_legs,
         feet=gear.Herc_STP_feet,
         ear2="Telos Earring",
+        waist="Grunfeld Rope",
         })
 
     sets.precast.WS['Aeolian Edge'] = {
@@ -460,10 +463,10 @@ function init_gear_sets()
         neck="Baetyl Pendant",
         ear1="Crematio Earring",
         ear2="Friomisi Earring",
-        ring1="Shiva Ring +1",
+        ring1="Metamor. Ring +1",
         ring2="Epaminondas's Ring",
         back="Argocham. Mantle",
-        waist="Eschan Stone",
+        waist="Orpheus's Sash",
         }
 
     sets.precast.Skillchain = {
@@ -592,7 +595,7 @@ function init_gear_sets()
         feet=gear.Herc_STP_feet,
         ear2="Mache Earring +1",
         ring1="Regal Ring",
-        ring2="Ramuh Ring +1",
+        ring2={name="Chirich Ring +1", bag="wardrobe4"},
         waist="Olseni Belt",
         })
 
@@ -640,7 +643,7 @@ function init_gear_sets()
         feet=gear.Herc_STP_feet,
         ear2="Mache Earring +1",
         ring1="Regal Ring",
-        ring2="Ramuh Ring +1",
+        ring2={name="Chirich Ring +1", bag="wardrobe4"},
         waist="Olseni Belt",
         })
 
@@ -685,7 +688,7 @@ function init_gear_sets()
         feet=gear.Herc_STP_feet,
         ear2="Mache Earring +1",
         ring1="Regal Ring",
-        ring2="Ramuh Ring +1",
+        ring2={name="Chirich Ring +1", bag="wardrobe4"},
         waist="Olseni Belt",
         })
 
@@ -730,7 +733,7 @@ function init_gear_sets()
         feet=gear.Herc_STP_feet,
         ear2="Mache Earring +1",
         ring1="Regal Ring",
-        ring2="Ramuh Ring +1",
+        ring2={name="Chirich Ring +1", bag="wardrobe4"},
         waist="Olseni Belt",
         })
 
@@ -775,7 +778,7 @@ function init_gear_sets()
         feet=gear.Herc_STP_feet,
         ear2="Mache Earring +1",
         ring1="Regal Ring",
-        ring2="Ramuh Ring +1",
+        ring2={name="Chirich Ring +1", bag="wardrobe4"},
         waist="Olseni Belt",
         })
 
@@ -822,7 +825,7 @@ function init_gear_sets()
         feet=gear.Herc_STP_feet,
         ear2="Mache Earring +1",
         ring1="Regal Ring",
-        ring2="Ramuh Ring +1",
+        ring2={name="Chirich Ring +1", bag="wardrobe4"},
         waist="Olseni Belt",
         })
 
@@ -988,6 +991,7 @@ end
 -- Called by the 'update' self-command, for common needs.
 -- Set eventArgs.handled to true if we don't want automatic equipping of gear.
 function job_handle_equipping_gear(playerStatus, eventArgs)
+    check_gear()
     update_combat_form()
     determine_haste_group()
     check_moving()
@@ -1187,12 +1191,6 @@ function job_pretarget(spell, action, spellMap, eventArgs)
     end
 end
 
-windower.register_event('zone change',
-    function()
-        send_command('gi ugs true')
-    end
-)
-
 function check_moving()
     if state.DefenseMode.value == 'None'  and state.Kiting.value == false then
         if state.Auto_Kite.value == false and moving then
@@ -1202,6 +1200,32 @@ function check_moving()
         end
     end
 end
+
+function check_gear()
+    if no_swap_gear:contains(player.equipment.left_ring) then
+        disable("ring1")
+    else
+        enable("ring1")
+    end
+    if no_swap_gear:contains(player.equipment.right_ring) then
+        disable("ring2")
+    else
+        enable("ring2")
+    end
+end
+
+windower.register_event('zone change',
+    function()
+        if no_swap_gear:contains(player.equipment.left_ring) then
+            enable("ring1")
+            equip(sets.idle)
+        end
+        if no_swap_gear:contains(player.equipment.right_ring) then
+            enable("ring2")
+            equip(sets.idle)
+        end
+    end
+)
 
 -- Select default macro book on initial load or subjob change.
 function select_default_macro_book()

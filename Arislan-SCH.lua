@@ -196,11 +196,11 @@ function init_gear_sets()
         hands=gear.Telchine_ENH_hands,
         legs="Acad. Pants +3",
         feet="Skaoi Boots",
-        neck="Bathy Choker +1",
+        neck="Unmoving Collar +1",
         ear1="Eabani Earring",
         ear2="Etiolation Earring",
-        ring1="Eihwaz Ring",
-        ring2={name="Carb. Ring +1", bag="wardrobe4"},
+        ring1="Gelatinous Ring +1",
+        ring2="Eihwaz Ring",
         back="Moonlight Cape",
         waist="Eschan Stone",
         }
@@ -324,7 +324,7 @@ function init_gear_sets()
     sets.midcast.Curaga = set_combine(sets.midcast.Cure, {
         neck="Nuna Gorget +1",
         ring1={name="Stikini Ring +1", bag="wardrobe3"},
-        ring2={name="Stikini Ring +1", bag="wardrobe4"},
+        ring2="Metamor. Ring +1",
         waist="Luminary Sash",
         })
 
@@ -445,7 +445,7 @@ function init_gear_sets()
         ear1="Malignance Earring",
         ear2="Vor Earring",
         ring1="Kishar Ring",
-        ring2={name="Stikini Ring +1", bag="wardrobe4"},
+        ring2="Metamor. Ring +1",
         back=gear.SCH_FC_Cape,
         waist="Luminary Sash",
         }
@@ -455,6 +455,7 @@ function init_gear_sets()
         sub="Ammurapi Shield",
         legs="Chironic Hose",
         back=gear.SCH_MAB_Cape,
+        waist="Acuity Belt +1",
         })
 
     sets.midcast.ElementalEnfeeble = sets.midcast.Enfeebles
@@ -475,7 +476,7 @@ function init_gear_sets()
         ring1={name="Stikini Ring +1", bag="wardrobe3"},
         ring2={name="Stikini Ring +1", bag="wardrobe4"},
         back="Perimede Cape",
-        waist="Luminary Sash",
+        waist="Acuity Belt +1",
         }
 
     sets.midcast.Kaustra = {
@@ -493,7 +494,7 @@ function init_gear_sets()
         ring1="Freke Ring",
         ring2="Archon Ring",
         back=gear.SCH_MAB_Cape,
-        waist="Sacro Cord",
+        waist="Acuity Belt +1",
         }
 
     sets.midcast.Drain = set_combine(sets.midcast['Dark Magic'], {
@@ -508,7 +509,6 @@ function init_gear_sets()
 
     sets.midcast.Stun = set_combine(sets.midcast['Dark Magic'], {
         back=gear.SCH_MAB_Cape,
-        waist="Luminary Sash"
         })
 
     -- Elemental Magic
@@ -525,7 +525,7 @@ function init_gear_sets()
         ear1="Malignance Earring",
         ear2="Regal Earring",
         ring1="Freke Ring",
-        ring2="Shiva Ring +1",
+        ring2="Metamor. Ring +1",
         back=gear.SCH_MAB_Cape,
         waist="Refoccilation Stone",
         }
@@ -538,6 +538,7 @@ function init_gear_sets()
         legs="Peda. Pants +3",
         feet="Merlinic Crackows",
         neck="Erra Pendant",
+        waist="Acuity Belt +1",
         })
 
     sets.midcast['Elemental Magic'].Resistant = set_combine(sets.midcast['Elemental Magic'], {
@@ -600,7 +601,7 @@ function init_gear_sets()
         ring1={name="Stikini Ring +1", bag="wardrobe3"},
         ring2={name="Stikini Ring +1", bag="wardrobe4"},
         back="Moonlight Cape",
-        waist="Refoccilation Stone",
+        waist="Carrier's Sash",
         }
 
     sets.idle.DT = set_combine(sets.idle, {
@@ -617,7 +618,7 @@ function init_gear_sets()
         ring1="Gelatinous Ring +1", --7/(-1)
         ring2="Defending Ring", --10/10
         back="Moonlight Cape", --6/6
-        waist="Slipor Sash", --0/3
+        waist="Carrier's Sash",
         })
 
     sets.idle.Vagary = sets.midcast['Elemental Magic']
@@ -633,6 +634,7 @@ function init_gear_sets()
         ear1="Malignance Earring",
         ear2="Regal Earring",
         back=gear.SCH_MAB_Cape,
+        waist="Acuity Belt +1",
         })
 
     sets.resting = set_combine(sets.idle, {
@@ -666,7 +668,7 @@ function init_gear_sets()
         ring2={name="Chirich Ring +1", bag="wardrobe4"},
         back="Relucent Cape",
         waist="Windbuffet Belt +1",
-        --head="Volte Cap", feet="Volte Boots", waist="Chaac Belt" --TH
+        head="Volte Cap", feet="Volte Boots", waist="Chaac Belt" --TH
         }
 
     ------------------------------------------------------------------------------------------------
@@ -862,6 +864,7 @@ end
 -------------------------------------------------------------------------------------------------------------------
 
 function job_handle_equipping_gear(playerStatus, eventArgs)
+    check_rings()
     check_moving()
 end
 
@@ -1144,6 +1147,23 @@ function check_moving()
         elseif state.Auto_Kite.value == true and moving == false then
             state.Auto_Kite:set(false)
         end
+    end
+end
+
+function check_rings()
+    rings = S{"Warp Ring", "Dim. Ring (Dem)", "Dim. Ring (Holla)", "Dim. Ring (Mea)",
+              "Trizek Ring", "Echad Ring", "Facility Ring", "Capacity Ring"}
+
+    if rings:contains(player.equipment.left_ring) then
+        disable("left_ring")
+    else
+        enable("left_ring")
+    end
+
+    if rings:contains(player.equipment.right_ring) then
+        disable("right_ring")
+    else
+        enable("right_ring")
     end
 end
 

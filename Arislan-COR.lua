@@ -103,6 +103,9 @@ function job_setup()
     -- Whether a warning has been given for low ammo
     state.warned = M(false)
 
+    no_swap_gear = S{"Warp Ring", "Dim. Ring (Dem)", "Dim. Ring (Holla)", "Dim. Ring (Mea)",
+              "Trizek Ring", "Echad Ring", "Facility Ring", "Capacity Ring",
+              "Dev. Bul. Pouch", "Chr. Bul. Pouch", "Liv. Bul. Pouch"}
     elemental_ws = S{'Aeolian Edge', 'Leaden Salute', 'Wildfire'}
 
     include('Mote-TreasureHunter')
@@ -286,7 +289,6 @@ function init_gear_sets()
 
     sets.precast.Waltz = {
         body="Passion Jacket",
-        neck="Phalaina Locket",
         ring1="Asklepian Ring",
         waist="Gishdubar Sash",
         }
@@ -730,11 +732,12 @@ function init_gear_sets()
         feet=gear.Herc_STP_feet,
         ear1="Mache Earring +1",
         ear2="Odr Earring",
-        ring2="Ramuh Ring +1",
+        ring2={name="Chirich Ring +1", bag="wardrobe4"},
         waist="Olseni Belt",
         })
 
     sets.engaged.STP = set_combine(sets.engaged, {
+        head=gear.Herc_STP_head,
         feet="Carmine Greaves +1",
         ring1={name="Chirich Ring +1", bag="wardrobe3"},
         ring2={name="Chirich Ring +1", bag="wardrobe4"},
@@ -779,11 +782,12 @@ function init_gear_sets()
         feet=gear.Herc_STP_feet,
         ear1="Mache Earring +1",
         ear2="Odr Earring",
-        ring2="Ramuh Ring +1",
+        ring2={name="Chirich Ring +1", bag="wardrobe4"},
         waist="Olseni Belt",
         })
 
     sets.engaged.DW.STP = set_combine(sets.engaged.DW, {
+        head=gear.Herc_STP_head,
         ring1={name="Chirich Ring +1", bag="wardrobe3"},
         ring2={name="Chirich Ring +1", bag="wardrobe4"},
         })
@@ -823,11 +827,12 @@ function init_gear_sets()
         feet=gear.Herc_STP_feet,
         ear1="Mache Earring +1",
         ear2="Odr Earring",
-        ring2="Ramuh Ring +1",
+        ring2={name="Chirich Ring +1", bag="wardrobe4"},
         waist="Olseni Belt",
         })
 
     sets.engaged.DW.STP.LowHaste = set_combine(sets.engaged.DW.LowHaste, {
+        head=gear.Herc_STP_head,
         ring1={name="Chirich Ring +1", bag="wardrobe3"},
         ring2={name="Chirich Ring +1", bag="wardrobe4"},
         })
@@ -869,11 +874,12 @@ function init_gear_sets()
         feet=gear.Herc_STP_feet,
         ear1="Mache Earring +1",
         ear2="Odr Earring",
-        ring2="Ramuh Ring +1",
+        ring2={name="Chirich Ring +1", bag="wardrobe4"},
         waist="Olseni Belt",
         })
 
     sets.engaged.DW.STP.MidHaste = set_combine(sets.engaged.DW.MidHaste, {
+        head=gear.Herc_STP_head,
         ring1={name="Chirich Ring +1", bag="wardrobe3"},
         ring2={name="Chirich Ring +1", bag="wardrobe4"},
         })
@@ -915,11 +921,12 @@ function init_gear_sets()
         feet=gear.Herc_STP_feet,
         ear1="Mache Earring +1",
         ear2="Odr Earring",
-        ring2="Ramuh Ring +1",
+        ring2={name="Chirich Ring +1", bag="wardrobe4"},
         waist="Olseni Belt",
         })
 
     sets.engaged.DW.STP.HighHaste = set_combine(sets.engaged.DW.HighHaste, {
+        head=gear.Herc_STP_head,
         ring1={name="Chirich Ring +1", bag="wardrobe3"},
         ring2={name="Chirich Ring +1", bag="wardrobe4"},
         })
@@ -961,11 +968,12 @@ function init_gear_sets()
         feet=gear.Herc_STP_feet,
         ear1="Mache Earring +1",
         ear2="Odr Earring",
-        ring2="Ramuh Ring +1",
+        ring2={name="Chirich Ring +1", bag="wardrobe4"},
         waist="Olseni Belt",
         })
 
     sets.engaged.DW.STP.MaxHaste = set_combine(sets.engaged.DW.MaxHaste, {
+        head=gear.Herc_STP_head,
         feet="Carmine Greaves +1",
         ring1={name="Chirich Ring +1", bag="wardrobe3"},
         ring2={name="Chirich Ring +1", bag="wardrobe4"},
@@ -983,9 +991,11 @@ function init_gear_sets()
     ------------------------------------------------------------------------------------------------
 
     sets.engaged.Hybrid = {
-        head=gear.Adhemar_D_head, --4/0
-        neck="Loricate Torque +1", --6/6
-        ring2="Defending Ring", --10/10
+        head="Malignance Chapeau", --6/6
+        body="Malignance Tabard", --9/9
+        hands="Malignance Gloves", --5/5
+        legs="Malignance Tights", --7/7
+        feet="Malignance Boots", --4/4
         }
 
     sets.engaged.DT = set_combine(sets.engaged, sets.engaged.Hybrid)
@@ -1237,6 +1247,7 @@ end
 -- Called by the 'update' self-command, for common needs.
 -- Set eventArgs.handled to true if we don't want automatic equipping of gear.
 function job_handle_equipping_gear(playerStatus, eventArgs)
+    check_gear()
     update_combat_form()
     determine_haste_group()
     check_moving()
@@ -1546,14 +1557,6 @@ function do_bullet_checks(spell, spellMap, eventArgs)
     end
 end
 
-windower.register_event('zone change',
-    function()
-        if player.sub_job == 'NIN' or player.sub_job == 'DNC' then
-            send_command('gi ugs true')
-        end
-    end
-)
-
 -- Check for various actions that we've specified in user code as being used with TH gear.
 -- This will only ever be called if TreasureMode is not 'None'.
 -- Category and Param are as specified in the action event packet.
@@ -1576,6 +1579,41 @@ function check_moving()
         end
     end
 end
+
+function check_gear()
+    if no_swap_gear:contains(player.equipment.left_ring) then
+        disable("ring1")
+    else
+        enable("ring1")
+    end
+    if no_swap_gear:contains(player.equipment.right_ring) then
+        disable("ring2")
+    else
+        enable("ring2")
+    end
+    if no_swap_gear:contains(player.equipment.waist) then
+        disable("waist")
+    else
+        enable("waist")
+    end
+end
+
+windower.register_event('zone change',
+    function()
+        if no_swap_gear:contains(player.equipment.left_ring) then
+            enable("ring1")
+            equip(sets.idle)
+        end
+        if no_swap_gear:contains(player.equipment.right_ring) then
+            enable("ring2")
+            equip(sets.idle)
+        end
+        if no_swap_gear:contains(player.equipment.waist) then
+            enable("waist")
+            equip(sets.idle)
+        end
+    end
+)
 
 -- Select default macro book on initial load or subjob change.
 function select_default_macro_book()

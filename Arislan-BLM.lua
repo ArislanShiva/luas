@@ -44,6 +44,9 @@ function job_setup()
 
     state.CP = M(false, "Capacity Points Mode")
 
+    no_swap_gear = S{"Warp Ring", "Dim. Ring (Dem)", "Dim. Ring (Holla)", "Dim. Ring (Mea)",
+              "Trizek Ring", "Echad Ring", "Facility Ring", "Capacity Ring"}
+
     degrade_array = {
         ['Aspirs'] = {'Aspir','Aspir II','Aspir III'}
         }
@@ -223,7 +226,7 @@ function init_gear_sets()
         ring1="Epaminondas's Ring",
         ring2="Archon Ring",
         back=gear.BLM_MAB_Cape,
-        waist="Sacro Cord",
+        waist="Acuity Belt +1",
         } -- INT
 
     sets.precast.WS['Myrkr'] = {
@@ -276,7 +279,7 @@ function init_gear_sets()
     sets.midcast.Curaga = set_combine(sets.midcast.Cure, {
         neck="Nuna Gorget +1",
         ring1={name="Stikini Ring +1", bag="wardrobe3"},
-        ring2={name="Stikini Ring +1", bag="wardrobe4"},
+        ring2="Metamor. Ring +1",
         waist="Luminary Sash",
         })
 
@@ -375,13 +378,14 @@ function init_gear_sets()
         ring1={name="Stikini Ring +1", bag="wardrobe3"},
         ring2={name="Stikini Ring +1", bag="wardrobe4"},
         back=gear.BLM_FC_Cape,
-        waist="Rumination Sash",
+        waist="Luminary Sash",
         } -- MND/Magic accuracy
 
     sets.midcast.IntEnfeebles = set_combine(sets.midcast.MndEnfeebles, {
         main="Maxentius",
         sub="Ammurapi Shield",
         back=gear.BLM_MAB_Cape,
+        waist="Acuity Belt +1",
         }) -- INT/Magic accuracy
 
     sets.midcast.ElementalEnfeeble = sets.midcast.IntEnfeebles
@@ -402,7 +406,7 @@ function init_gear_sets()
         ring1={name="Stikini Ring +1", bag="wardrobe3"},
         ring2={name="Stikini Ring +1", bag="wardrobe4"},
         back=gear.BLM_MAB_Cape,
-        waist="Luminary Sash",
+        waist="Acuity Belt +1",
         }
 
     sets.midcast.Drain = set_combine(sets.midcast['Dark Magic'], {
@@ -433,6 +437,7 @@ function init_gear_sets()
         ear1="Malignance Earring",
         ear2="Regal Earring",
         ring1="Mephitas's Ring +1",
+        ring2="Metamor. Ring +1",
         back=gear.BLM_Death_Cape, --5
         waist="Sacro Cord",
         }
@@ -441,7 +446,7 @@ function init_gear_sets()
         main=gear.Grioavolr_MB,
         sub="Enki Strap",
         head="Amalric Coif +1",
-        ring2="Shiva Ring +1",
+        waist="Acuity Belt +1",
         })
 
     -- Elemental Magic sets
@@ -459,7 +464,7 @@ function init_gear_sets()
         ear1="Malignance Earring",
         ear2="Regal Earring",
         ring1="Freke Ring",
-        ring2="Shiva Ring +1",
+        ring2="Metamor. Ring +1",
         back=gear.BLM_MAB_Cape,
         waist="Refoccilation Stone",
         }
@@ -525,7 +530,7 @@ function init_gear_sets()
         ring1={name="Stikini Ring +1", bag="wardrobe3"},
         ring2={name="Stikini Ring +1", bag="wardrobe4"},
         back="Moonlight Cape",
-        waist="Refoccilation Stone",
+        waist="Carrier's Sash",
         }
 
     sets.idle.DT = set_combine(sets.idle, {
@@ -542,7 +547,7 @@ function init_gear_sets()
         ring1="Gelatinous Ring +1", --7/(-1)
         ring2="Defending Ring", --10/10
         back="Moonlight Cape", --6/6
-        waist="Slipor Sash", --0/3
+        waist="Carrier's Sash",
         })
 
     sets.idle.ManaWall = {
@@ -578,7 +583,10 @@ function init_gear_sets()
         neck="Incanter's Torque",
         ear1="Malignance Earring",
         ear2="Regal Earring",
+        ring1="Freke Ring",
+        ring2="Metamor. Ring +1",
         back=gear.BLM_MAB_Cape,
+        waist="Acuity Belt +1",
         })
 
     -- Defense sets
@@ -788,6 +796,7 @@ end
 -------------------------------------------------------------------------------------------------------------------
 
 function job_handle_equipping_gear(playerStatus, eventArgs)
+    check_gear()
     check_moving()
 end
 
@@ -930,32 +939,6 @@ function gearinfo(cmdParams, eventArgs)
     end
 end
 
-function update_active_abilities()
-    state.Buff['Burst Affinity'] = buffactive['Burst Affinity'] or false
-    state.Buff['Efflux'] = buffactive['Efflux'] or false
-    state.Buff['Diffusion'] = buffactive['Diffusion'] or false
-end
-
--- State buff checks that will equip buff gear and mark the event as handled.
-function apply_ability_bonuses(spell, action, spellMap)
-    if state.Buff['Burst Affinity'] and (spellMap == 'Magical' or spellMap == 'MagicalLight' or spellMap == 'MagicalDark' or spellMap == 'Breath') then
-        if state.MagicBurst.value then
-            equip(sets.magic_burst)
-        end
-        equip(sets.buff['Burst Affinity'])
-    end
-    if state.Buff.Efflux and spellMap == 'Physical' then
-        equip(sets.buff['Efflux'])
-    end
-    if state.Buff.Diffusion and (spellMap == 'Buffs' or spellMap == 'BlueSkill') then
-        equip(sets.buff['Diffusion'])
-    end
-
-    if state.Buff['Burst Affinity'] then equip (sets.buff['Burst Affinity']) end
-    if state.Buff['Efflux'] then equip (sets.buff['Efflux']) end
-    if state.Buff['Diffusion'] then equip (sets.buff['Diffusion']) end
-end
-
 function check_moving()
     if state.DefenseMode.value == 'None'  and state.Kiting.value == false then
         if state.Auto_Kite.value == false and moving then
@@ -965,6 +948,32 @@ function check_moving()
         end
     end
 end
+
+function check_gear()
+    if no_swap_gear:contains(player.equipment.left_ring) then
+        disable("ring1")
+    else
+        enable("ring1")
+    end
+    if no_swap_gear:contains(player.equipment.right_ring) then
+        disable("ring2")
+    else
+        enable("ring2")
+    end
+end
+
+windower.register_event('zone change',
+    function()
+        if no_swap_gear:contains(player.equipment.left_ring) then
+            enable("ring1")
+            equip(sets.idle)
+        end
+        if no_swap_gear:contains(player.equipment.right_ring) then
+            enable("ring2")
+            equip(sets.idle)
+        end
+    end
+)
 
 -- Select default macro book on initial load or subjob change.
 function select_default_macro_book()

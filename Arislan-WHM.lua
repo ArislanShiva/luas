@@ -77,6 +77,9 @@ function job_setup()
 
     state.RegenMode = M{['description']='Regen Mode', 'Duration', 'Potency'}
 
+    no_swap_gear = S{"Warp Ring", "Dim. Ring (Dem)", "Dim. Ring (Holla)", "Dim. Ring (Mea)",
+              "Trizek Ring", "Echad Ring", "Facility Ring", "Capacity Ring"}
+
     lockstyleset = 1
 
 end
@@ -278,7 +281,7 @@ function init_gear_sets()
         main="Sucellus",
         --sub="Thuellaic Ecu +1",
         head="Vanya Hood",
-        body="Vedic Coat",
+        --body="Vedic Coat",
         --hands="Shrieker's Cuffs",
         --legs="Vanya Slops",
         feet="Kaykaus Boots +1",
@@ -333,7 +336,7 @@ function init_gear_sets()
         body="Theo. Briault +3", --0(+6)/(-6)
         neck="Nuna Gorget +1",
         ring1={name="Stikini Ring +1", bag="wardrobe3"},
-        ring2={name="Stikini Ring +1", bag="wardrobe4"},
+        ring2="Metamor. Ring +1",
         waist="Luminary Sash",
         })
 
@@ -345,7 +348,7 @@ function init_gear_sets()
         neck="Nuna Gorget +1",
         back="Twilight Cape",
         ring1={name="Stikini Ring +1", bag="wardrobe3"},
-        ring2={name="Stikini Ring +1", bag="wardrobe4"},
+        ring2="Metamor. Ring +1",
         waist="Hachirin-no-Obi",
         }
 
@@ -494,14 +497,14 @@ function init_gear_sets()
         ring1={name="Stikini Ring +1", bag="wardrobe3"},
         ring2={name="Stikini Ring +1", bag="wardrobe4"},
         back=gear.WHM_MND_Cape,
-        waist="Luminary Sash",
+        waist="Acuity Belt +1",
         }
 
     sets.midcast.Banish = set_combine(sets.midcast['Divine Magic'], {
         main="Daybreak",
         sub="Ammurapi Shield",
         head="Theophany Cap +3",
-        body="Vedic Coat",
+        --body="Vedic Coat",
         hands="Fanatic Gloves",
         legs="Kaykaus Tights +1",
         neck="Sanctity Necklace",
@@ -553,7 +556,7 @@ function init_gear_sets()
     sets.midcast.IntEnfeebles = set_combine(sets.midcast.MndEnfeebles, {
         main="Yagrush",
         sub="Ammurapi Shield",
-        waist="Sacro Cord",
+        waist="Acuity Belt +1",
         })
 
     sets.midcast.Dispelga = set_combine(sets.midcast.IntEnfeebles, {main="Daybreak", sub="Ammurapi Shield"})
@@ -572,7 +575,6 @@ function init_gear_sets()
 
     -- Initializes trusts at iLvl 119
     sets.midcast.Trust = sets.precast.FC
-
 
     -- Sets to return to when not performing an action.
 
@@ -598,7 +600,7 @@ function init_gear_sets()
         ring1={name="Stikini Ring +1", bag="wardrobe3"},
         ring2={name="Stikini Ring +1", bag="wardrobe4"},
         back="Moonlight Cape",
-        waist="Austerity Belt +1",
+        waist="Carrier's Sash",
         }
 
     sets.idle.DT = set_combine(sets.idle, {
@@ -612,7 +614,7 @@ function init_gear_sets()
         ring1="Gelatinous Ring +1", --7/(-1)
         ring2="Defending Ring", --10/10
         back="Moonlight Cape", --6/6
-        waist="Slipor Sash", --0/3
+        waist="Carrier's Sash",
         })
 
     sets.idle.MEva = set_combine(sets.idle.DT, {
@@ -785,6 +787,7 @@ end
 -------------------------------------------------------------------------------------------------------------------
 
 function job_handle_equipping_gear(playerStatus, eventArgs)
+    check_gear()
     check_moving()
 end
 
@@ -986,6 +989,32 @@ function check_moving()
         end
     end
 end
+
+function check_gear()
+    if no_swap_gear:contains(player.equipment.left_ring) then
+        disable("ring1")
+    else
+        enable("ring1")
+    end
+    if no_swap_gear:contains(player.equipment.right_ring) then
+        disable("ring2")
+    else
+        enable("ring2")
+    end
+end
+
+windower.register_event('zone change',
+    function()
+        if no_swap_gear:contains(player.equipment.left_ring) then
+            enable("ring1")
+            equip(sets.idle)
+        end
+        if no_swap_gear:contains(player.equipment.right_ring) then
+            enable("ring2")
+            equip(sets.idle)
+        end
+    end
+)
 
 -- Select default macro book on initial load or subjob change.
 function select_default_macro_book()

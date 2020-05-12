@@ -251,10 +251,10 @@ function init_gear_sets()
 
     sets.precast.CorsairRoll = {
         head="Lanun Tricorne +1",
-        body="Meg. Cuirie +2", --8/0
+        body="Malignance Tabard", --9/9
         hands="Chasseur's Gants +1",
         legs="Desultor Tassets",
-        feet="Meg. Jam. +2", --3/0
+        feet="Malignance Boots", --4/4
         neck="Regal Necklace",
         ear1="Genmei Earring", --2/0
         ear2="Etiolation Earring", --0/3
@@ -483,7 +483,7 @@ function init_gear_sets()
         --ear1="Roundel Earring",
         ear2="Mendi. Earring",
         --ring1="Lebeche Ring",
-        ring2={name="Haoma's Ring", bag="wardrobe2"},
+        ring2={name="Haoma's Ring", bag="wardrobe3"},
         waist="Bishop's Sash",
         }
 
@@ -506,15 +506,15 @@ function init_gear_sets()
         }
 
     sets.midcast.CorsairShot.Resistant = set_combine(sets.midcast.CorsairShot, {
-        head="Mummu Bonnet +2",
-        body="Mummu Jacket +2",
-        hands="Mummu Wrists +2",
+        head="Malignance Chapeau",
+        body="Malignance Tabard",
+        hands="Malignance Gloves",
         legs="Mummu Kecks +2",
-        feet="Mummu Gamash. +2",
+        feet="Malignance Boots",
         neck="Sanctity Necklace",
         ear1="Gwati Earring",
         ear2="Digni. Earring",
-        ring1={name="Stikini Ring", bag="wardrobe1"},
+        ring1={name="Stikini Ring", bag="wardrobe3"},
         ring2="Weather. Ring +1",
         --waist="K. Kachina Belt +1",
         })
@@ -527,11 +527,11 @@ function init_gear_sets()
     -- Ranged gear
     sets.midcast.RA = {
         ammo=gear.RAbullet,
-        head="Meghanada Visor +2",
-        body="Mummu Jacket +2",
-        hands="Meg. Gloves +2",
+        head="Malignance Chapeau",
+        body="Malignance Tabard",
+        hands="Malignance Gloves",
         legs=gear.Adhemar_C_legs,
-        feet="Meg. Jam. +2",
+        feet="Malignance Boots",
         neck="Iskur Gorget",
         ear1="Enervating Earring",
         ear2="Neritic Earring",
@@ -543,7 +543,6 @@ function init_gear_sets()
 
     sets.midcast.RA.Acc = set_combine(sets.midcast.RA, {
         --body="Laksa. Frac +3",
-        hands="Meg. Gloves +2",
         })
 
     sets.midcast.RA.HighAcc = set_combine(sets.midcast.RA.Acc, {
@@ -564,7 +563,6 @@ function init_gear_sets()
 
     sets.midcast.RA.STP = set_combine(sets.midcast.RA, {
         --body="Oshosi Vest",
-        feet="Carmine Greaves +1",
         --ear1="Dedition Earring",
         --ring2="Ilabrat Ring",
         })
@@ -590,11 +588,11 @@ function init_gear_sets()
 
     sets.idle = {
         ammo=gear.MAbullet,
-        head="Meghanada Visor +2",
-        body="Meg. Cuirie +2",
-        hands="Chasseur's Gants +1",
+        head="Malignance Chapeau",
+        body="Malignance Tabard",
+        hands="Malignance Gloves",
         legs="Carmine Cuisses +1",
-        feet="Meg. Jam. +2",
+        feet="Malignance Boots",
         neck="Bathy Choker +1",
         ear2="Infused Earring",
         ring1="Paguroidea Ring",
@@ -604,8 +602,10 @@ function init_gear_sets()
         }
 
     sets.idle.DT = set_combine(sets.idle, {
-        body="Lanun Frac +1", --4/0
-        feet="Lanun Bottes +1", --4/0
+        head="Malignance Chapeau", --6/6
+        body="Malignance Tabard",
+        hands="Malignance Gloves", --5/5
+        feet="Malignance Boots", --4/4
         neck="Loricate Torque +1", --6/6
         ear2="Etiolation Earring", --0/3
         ring1="Gelatinous Ring +1", --7/(-1)
@@ -621,7 +621,6 @@ function init_gear_sets()
         })
 
     sets.idle.Town = set_combine(sets.idle, {
-        hands="Carmine Fin. Ga. +1",
         neck="Iskur Gorget",
         ring1="Regal Ring",
         ring2="Dingir Ring",
@@ -947,7 +946,7 @@ function init_gear_sets()
     ---------------------------------------- Special Sets ------------------------------------------
     ------------------------------------------------------------------------------------------------
 
-    sets.buff.Doom = {ring1={name="Saida Ring", bag="wardrobe1"}, ring2={name="Saida Ring", bag="wardrobe2"},}
+    sets.buff.Doom = {ring1={name="Saida Ring", bag="wardrobe3"}, ring2={name="Saida Ring", bag="wardrobe4"},}
 
     sets.Obi = {waist="Hachirin-no-Obi"}
     sets.CP = {back="Mecisto. Mantle"}
@@ -1058,11 +1057,6 @@ end
 -- Set eventArgs.handled to true if we don't want any automatic gear equipping to be done.
 function job_aftercast(spell, action, spellMap, eventArgs)
     equip(sets[state.WeaponSet.current])
-
-    if spell.type == 'WeaponSkill' and world.area:startswith('Dynamis') then
-        eventArgs.handled = true
-        send_command('wait 3;gi ugs true')
-    end
 
     if (spell.type == 'CorsairRoll' or spell.english == "Double-Up") and not spell.interrupted then
         display_roll_info(spell)

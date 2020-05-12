@@ -264,7 +264,7 @@ function init_gear_sets()
         ear1="Glorious Earring", -- (+2)/(-5)
         ear2="Meili Earring",
         ring1="Lebeche Ring", --3/(-5)
-        ring2={name="Haoma's Ring", bag="wardrobe2"},
+        ring2={name="Haoma's Ring", bag="wardrobe3"},
         back=gear.WHM_Cure_Cape, --0/(-10)
         waist="Bishop's Sash",
         }
@@ -291,8 +291,8 @@ function init_gear_sets()
     sets.midcast.CuragaNormal = set_combine(sets.midcast.CureNormal, {
         body="Theo. Briault +2", --0(+3)/(-5)
         neck="Nuna Gorget +1",
-        ring1={name="Stikini Ring", bag="wardrobe2"},
-        ring2={name="Stikini Ring", bag="wardrobe3"},
+        ring1={name="Stikini Ring", bag="wardrobe3"},
+        ring2="Metamor. Ring +1",
         waist="Luminary Sash",
         })
 
@@ -302,8 +302,8 @@ function init_gear_sets()
         body="Theo. Briault +2", --0(+3)/(-5)
         neck="Nuna Gorget +1",
         back="Twilight Cape",
-        ring1={name="Stikini Ring", bag="wardrobe2"},
-        ring2={name="Stikini Ring", bag="wardrobe3"},
+        ring1={name="Stikini Ring", bag="wardrobe3"},
+        ring2="Metamor. Ring +1",
         waist="Hachirin-no-Obi",
         }
 
@@ -320,8 +320,8 @@ function init_gear_sets()
         neck="Baetyl Pendant",
         ear1="Loquacious Earring",
         ear2="Etiolation Earring",
-        ring1={name="Haoma's Ring", bag="wardrobe2"},
-        ring2={name="Haoma's Ring", bag="wardrobe3"},
+        ring1={name="Haoma's Ring", bag="wardrobe3"},
+        ring2={name="Haoma's Ring", bag="wardrobe4"},
         back=gear.WHM_FC_Cape,
         waist="Witful Belt",
         }
@@ -336,8 +336,8 @@ function init_gear_sets()
         neck="Malison Medallion", --10
         ear1="Beatific Earring",
         ear2="Meili Earring",
-        ring1={name="Haoma's Ring", bag="wardrobe2"},
-        ring2={name="Haoma's Ring", bag="wardrobe3"},
+        ring1={name="Haoma's Ring", bag="wardrobe3"},
+        ring2={name="Haoma's Ring", bag="wardrobe4"},
         back=gear.WHM_FC_Cape, --25
         waist="Bishop's Sash",
         })
@@ -356,8 +356,8 @@ function init_gear_sets()
         neck="Incanter's Torque",
         ear1="Mimir Earring",
         ear2="Andoaa Earring",
-        ring1={name="Stikini Ring", bag="wardrobe2"},
-        ring2={name="Stikini Ring", bag="wardrobe3"},
+        ring1={name="Stikini Ring", bag="wardrobe3"},
+        ring2={name="Stikini Ring", bag="wardrobe4"},
         back="Mending Cape",
         waist="Olympus Sash",
         }
@@ -442,8 +442,8 @@ function init_gear_sets()
         neck="Incanter's Torque",
         ear1="Digni. Earring",
         ear2="Regal Earring",
-        ring1={name="Stikini Ring", bag="wardrobe2"},
-        ring2={name="Stikini Ring", bag="wardrobe3"},
+        ring1={name="Stikini Ring", bag="wardrobe3"},
+        ring2="Metamor. Ring +1",
         back=gear.WHM_Cure_Cape,
         waist="Refoccilation Stone",
         }
@@ -473,8 +473,8 @@ function init_gear_sets()
         neck="Erra Pendant",
         ear1="Digni. Earring",
         ear2="Mani Earring",
-        ring1={name="Stikini Ring", bag="wardrobe2"},
-        ring2={name="Stikini Ring", bag="wardrobe3"},
+        ring1={name="Stikini Ring", bag="wardrobe3"},
+        ring2={name="Stikini Ring", bag="wardrobe4"},
         back="Perimede Cape",
         waist="Yamabuki-no-Obi",
         }
@@ -493,7 +493,7 @@ function init_gear_sets()
         ear1="Digni. Earring",
         ear2="Vor Earring",
         ring1="Kishar Ring",
-        ring2={name="Stikini Ring", bag="wardrobe2"},
+        ring2={name="Stikini Ring", bag="wardrobe3"},
         back=gear.WHM_Cure_Cape,
         waist="Luminary Sash",
         }
@@ -608,7 +608,7 @@ function init_gear_sets()
     sets.buff['Devotion'] = {head="Piety Cap +1"}
     sets.buff.Sublimation = {waist="Embla Sash"}
 
-    sets.buff.Doom = {ring1={name="Saida Ring", bag="wardrobe2"}, ring2={name="Saida Ring", bag="wardrobe3"},}
+    sets.buff.Doom = {ring1={name="Saida Ring", bag="wardrobe3"}, ring2={name="Saida Ring", bag="wardrobe4"},}
 
     sets.Obi = {waist="Hachirin-no-Obi"}
     sets.CP = {back="Mecisto. Mantle"}

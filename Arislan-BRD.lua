@@ -74,6 +74,9 @@ function job_setup()
 
     state.Buff['Pianissimo'] = buffactive['pianissimo'] or false
 
+    no_swap_gear = S{"Warp Ring", "Dim. Ring (Dem)", "Dim. Ring (Holla)", "Dim. Ring (Mea)",
+              "Trizek Ring", "Echad Ring", "Facility Ring", "Capacity Ring"}
+
     lockstyleset = 1
 end
 
@@ -111,7 +114,7 @@ function user_setup()
 
     -- Additional local binds
     include('Global-Binds.lua') -- OK to remove this line
-    include('Global-GEO-Binds.lua') -- OK to remove this line
+    include('Global-WHM-Binds.lua') -- OK to remove this line
 
     send_command('lua l gearinfo')
 
@@ -136,8 +139,8 @@ function user_setup()
     send_command('bind @w gs c toggle WeaponLock')
     send_command('bind @c gs c toggle CP')
 
-    send_command('bind ^numpad7 input /ws "Savage Blade" <t>')
-    --send_command('bind ^numpad7 input /ws "Mordant Rime" <t>')
+    --send_command('bind ^numpad7 input /ws "Savage Blade" <t>')
+    send_command('bind ^numpad7 input /ws "Mordant Rime" <t>')
     send_command('bind ^numpad5 input /ws "Rudra\'s Storm" <t>')
     send_command('bind ^numpad1 input /ws "Aeolian Edge" <t>')
     send_command('bind ^numpad2 input /ws "Wasp Sting" <t>')
@@ -264,6 +267,7 @@ function init_gear_sets()
     sets.precast.WS['Evisceration'] = set_combine(sets.precast.WS, {
         range=gear.Linos_TP,
         head="Lustratio Cap +1",
+        body="Ayanmo Corazza +2",
         legs="Lustr. Subligar +1",
         feet="Lustra. Leggings +1",
         ear1="Brutal Earring",
@@ -271,12 +275,16 @@ function init_gear_sets()
         back=gear.BRD_TP_Cape,
         })
 
-    sets.precast.WS['Exenterator'] = set_combine(sets.precast.WS, {})
+    sets.precast.WS['Exenterator'] = set_combine(sets.precast.WS, {
+        body="Ayanmo Corazza +2",
+        ear1="Brutal Earring",
+        })
 
     sets.precast.WS['Mordant Rime'] = set_combine(sets.precast.WS, {
         head="Chironic Hat",
         neck="Bard's Charm +1",
         ear2="Regal Earring",
+        ring2="Metamor. Ring +1",
         waist="Grunfeld Rope",
         })
 
@@ -289,6 +297,8 @@ function init_gear_sets()
         })
 
     sets.precast.WS['Savage Blade'] = set_combine(sets.precast.WS, {
+        head="Lustratio Cap +1",
+        feet="Lustra. Leggings +1",
         neck="Caro Necklace",
         ring1="Shukuyu Ring",
         waist="Sailfi Belt +1",
@@ -315,10 +325,11 @@ function init_gear_sets()
     sets.midcast.Minuet = {body="Fili Hongreline +1"}
     sets.midcast.Paeon = {head="Brioso Roundlet +3"}
     sets.midcast.Threnody = {body="Mou. Manteel +1"}
-    sets.midcast['Adventurer\'s Dirge'] = {hands="Bihu Cuffs +3"}
+    sets.midcast['Adventurer\'s Dirge'] = {range="Marsyas", hands="Bihu Cuffs +3"}
     sets.midcast['Foe Sirvente'] = {head="Bihu Roundlet +3"}
     sets.midcast['Magic Finale'] = {legs="Fili Rhingrave +1"}
     sets.midcast["Sentinel's Scherzo"] = {feet="Fili Cothurnes +1"}
+    sets.midcast["Chocobo Mazurka"] = {range="Marsyas"}
 
     -- For song buffs (duration and AF3 set bonus)
     sets.midcast.SongEnhancing = {
@@ -353,13 +364,20 @@ function init_gear_sets()
         ear1="Digni. Earring",
         ear2="Regal Earring",
         ring1={name="Stikini Ring +1", bag="wardrobe3"},
-        ring2={name="Stikini Ring +1", bag="wardrobe4"},
-        waist="Luminary Sash",
+        ring2="Metamor. Ring +1",
+        waist="Acuity Belt +1",
         back=gear.BRD_Song_Cape,
         }
 
     -- For song defbuffs (accuracy primary, duration secondary)
     sets.midcast.SongEnfeebleAcc = set_combine(sets.midcast.SongEnfeeble, {legs="Brioso Cannions +3"})
+
+    -- For Horde Lullaby maxiumum AOE range.
+    sets.midcast.SongStringSkill = {
+        ear1="Gersemi Earring",
+        ear2="Musical Earring",
+        ring2={name="Stikini Ring +1", bag="wardrobe4"},
+        }
 
     -- Placeholder song; minimize duration to make it easy to overwrite.
     sets.midcast.SongPlaceholder = set_combine(sets.midcast.SongEnhancing, {range=info.ExtraSongInstrument})
@@ -382,7 +400,12 @@ function init_gear_sets()
         waist="Bishop's Sash",
         }
 
-    sets.midcast.Curaga = sets.midcast.Cure
+    sets.midcast.Curaga = set_combine(sets.midcast.Cure, {
+        neck="Nuna Gorget +1",
+        ring1={name="Stikini Ring +1", bag="wardrobe3"},
+        ring2="Metamor. Ring +1",
+        waist="Luminary Sash",
+        })
 
     sets.midcast.StatusRemoval = {
         head="Vanya Hood",
@@ -443,8 +466,8 @@ function init_gear_sets()
         ear1="Digni. Earring",
         ear2="Vor Earring",
         ring1="Kishar Ring",
-        ring2={name="Stikini Ring +1", bag="wardrobe4"},
-        waist="Luminary Sash",
+        ring2="Metamor. Ring +1",
+        waist="Acuity Belt +1",
         back=gear.BRD_Song_Cape,
         }
 
@@ -515,7 +538,7 @@ function init_gear_sets()
         ear1="Enchntr. Earring +1",
         ear2="Regal Earring",
         back=gear.BRD_Song_Cape,
-        waist="Luminary Sash",
+        waist="Acuity Belt +1",
         })
 
     ------------------------------------------------------------------------------------------------
@@ -552,7 +575,7 @@ function init_gear_sets()
         ear1="Cessance Earring",
         ear2="Telos Earring",
         ring1={name="Chirich Ring +1", bag="wardrobe3"},
-        ring2="Ilabrat Ring",
+        ring2={name="Chirich Ring +1", bag="wardrobe4"},
         back=gear.BRD_TP_Cape,
         waist="Windbuffet Belt +1",
         }
@@ -560,7 +583,6 @@ function init_gear_sets()
     sets.engaged.Acc = set_combine(sets.engaged, {
         hands="Raetic Bangles +1",
         ear2="Mache Earring +1",
-        ring2="Ramuh Ring +1",
         waist="Kentarch Belt +1",
         })
 
@@ -719,7 +741,7 @@ function job_precast(spell, action, spellMap, eventArgs)
             if buffactive.Troubadour then
                 equip({range="Marsyas"})
             elseif state.LullabyMode.value == 'Harp' and spell.english:contains('Horde') then
-                equip({range="Blurred Harp +1"})
+                equip({range="Daurdabla"})
             else
                 equip({range="Gjallarhorn"})
             end
@@ -752,7 +774,8 @@ function job_midcast(spell, action, spellMap, eventArgs)
             if buffactive.Troubadour then
                 equip({range="Marsyas"})
             elseif state.LullabyMode.value == 'Harp' and spell.english:contains('Horde') then
-                equip({range="Blurred Harp +1"})
+                equip({range="Daurdabla"})
+                equip(sets.midcast.SongStringSkill)
             else
                 equip({range="Gjallarhorn"})
             end
@@ -814,6 +837,7 @@ end
 -- Called by the 'update' self-command, for common needs.
 -- Set eventArgs.handled to true if we don't want automatic equipping of gear.
 function job_handle_equipping_gear(playerStatus, eventArgs)
+    check_gear()
     update_combat_form()
     determine_haste_group()
     check_moving()
@@ -1065,14 +1089,6 @@ function gearinfo(cmdParams, eventArgs)
     end
 end
 
-windower.register_event('zone change',
-    function()
-        if player.sub_job == 'NIN' or player.sub_job == 'DNC' then
-            send_command('gi ugs true')
-        end
-    end
-)
-
 function check_moving()
     if state.DefenseMode.value == 'None'  and state.Kiting.value == false then
         if state.Auto_Kite.value == false and moving then
@@ -1082,6 +1098,32 @@ function check_moving()
         end
     end
 end
+
+function check_gear()
+    if no_swap_gear:contains(player.equipment.left_ring) then
+        disable("ring1")
+    else
+        enable("ring1")
+    end
+    if no_swap_gear:contains(player.equipment.right_ring) then
+        disable("ring2")
+    else
+        enable("ring2")
+    end
+end
+
+windower.register_event('zone change',
+    function()
+        if no_swap_gear:contains(player.equipment.left_ring) then
+            enable("ring1")
+            equip(sets.idle)
+        end
+        if no_swap_gear:contains(player.equipment.right_ring) then
+            enable("ring2")
+            equip(sets.idle)
+        end
+    end
+)
 
 -- Select default macro book on initial load or subjob change.
 function select_default_macro_book()

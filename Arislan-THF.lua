@@ -69,6 +69,9 @@ function job_setup()
     state.Buff['Trick Attack'] = buffactive['trick attack'] or false
     state.Buff['Feint'] = buffactive['feint'] or false
 
+    no_swap_gear = S{"Warp Ring", "Dim. Ring (Dem)", "Dim. Ring (Holla)", "Dim. Ring (Mea)",
+              "Trizek Ring", "Echad Ring", "Facility Ring", "Capacity Ring"}
+
     include('Mote-TreasureHunter')
 
     -- For th_action_check():
@@ -231,7 +234,6 @@ function init_gear_sets()
         ammo="Yamarang",
         body="Passion Jacket",
         legs="Dashing Subligar",
-        neck="Phalaina Locket",
         ring1="Asklepian Ring",
         waist="Gishdubar Sash",
         }
@@ -335,12 +337,13 @@ function init_gear_sets()
         ammo="C. Palug Stone",
         neck="Caro Necklace",
         ear1="Sherida Earring",
-        waist="Grunfeld Rope",
+        waist="Artful Belt +1",
         })
 
     sets.precast.WS['Rudra\'s Storm'].Acc = set_combine(sets.precast.WS['Rudra\'s Storm'], {
         feet=gear.Herc_STP_feet,
         ear2="Telos Earring",
+        waist="Grunfeld Rope",
         })
 
     sets.precast.WS['Rudra\'s Storm'].Uncapped = set_combine(sets.precast.WS['Rudra\'s Storm'], {
@@ -362,7 +365,7 @@ function init_gear_sets()
         neck="Baetyl Pendant",
         ear1="Crematio Earring",
         ear2="Friomisi Earring",
-        ring1="Shiva Ring +1",
+        ring1="Metamor. Ring +1",
         ring2="Epaminondas's Ring",
         back="Argocham. Mantle",
         waist="Orpheus's Sash",
@@ -484,7 +487,7 @@ function init_gear_sets()
         feet=gear.Herc_STP_feet,
         ear2="Mache Earring +1",
         ring1="Regal Ring",
-        ring2="Ramuh Ring +1",
+        ring2={name="Chirich Ring +1", bag="wardrobe4"},
         waist="Olseni Belt",
         })
 
@@ -533,7 +536,7 @@ function init_gear_sets()
         ear1="Cessance Earring",
         ear2="Telos Earring",
         ring1="Regal Ring",
-        ring2="Ramuh Ring +1",
+        ring2={name="Chirich Ring +1", bag="wardrobe4"},
         waist="Olseni Belt",
         })
 
@@ -578,7 +581,7 @@ function init_gear_sets()
         feet=gear.Herc_STP_feet,
         ear2="Telos Earring",
         ring1="Regal Ring",
-        ring2="Ramuh Ring +1",
+        ring2={name="Chirich Ring +1", bag="wardrobe4"},
         waist="Olseni Belt",
         })
 
@@ -623,7 +626,7 @@ function init_gear_sets()
         feet=gear.Herc_STP_feet,
         ear2="Telos Earring",
         ring1="Regal Ring",
-        ring2="Ramuh Ring +1",
+        ring2={name="Chirich Ring +1", bag="wardrobe4"},
         waist="Olseni Belt",
         })
 
@@ -669,7 +672,7 @@ function init_gear_sets()
         feet=gear.Herc_STP_feet,
         ear2="Telos Earring",
         ring1="Regal Ring",
-        ring2="Ramuh Ring +1",
+        ring2={name="Chirich Ring +1", bag="wardrobe4"},
         waist="Olseni Belt",
         })
 
@@ -715,7 +718,7 @@ function init_gear_sets()
         feet=gear.Herc_STP_feet,
         ear2="Telos Earring",
         ring1="Regal Ring",
-        ring2="Ramuh Ring +1",
+        ring2={name="Chirich Ring +1", bag="wardrobe4"},
         waist="Olseni Belt",
         })
 
@@ -889,6 +892,7 @@ end
 -- Called by the 'update' self-command, for common needs.
 -- Set eventArgs.handled to true if we don't want automatic equipping of gear.
 function job_handle_equipping_gear(playerStatus, eventArgs)
+    check_gear()
     update_combat_form()
     determine_haste_group()
     check_moving()
@@ -1086,12 +1090,6 @@ function th_action_check(category, param)
     end
 end
 
-windower.register_event('zone change',
-    function()
-        send_command('gi ugs true')
-    end
-)
-
 function check_moving()
     if state.DefenseMode.value == 'None'  and state.Kiting.value == false then
         if state.Auto_Kite.value == false and moving then
@@ -1101,6 +1099,32 @@ function check_moving()
         end
     end
 end
+
+function check_gear()
+    if no_swap_gear:contains(player.equipment.left_ring) then
+        disable("ring1")
+    else
+        enable("ring1")
+    end
+    if no_swap_gear:contains(player.equipment.right_ring) then
+        disable("ring2")
+    else
+        enable("ring2")
+    end
+end
+
+windower.register_event('zone change',
+    function()
+        if no_swap_gear:contains(player.equipment.left_ring) then
+            enable("ring1")
+            equip(sets.idle)
+        end
+        if no_swap_gear:contains(player.equipment.right_ring) then
+            enable("ring2")
+            equip(sets.idle)
+        end
+    end
+)
 
 -- Select default macro book on initial load or subjob change.
 function select_default_macro_book()
