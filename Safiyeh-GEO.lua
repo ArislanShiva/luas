@@ -176,7 +176,7 @@ function init_gear_sets()
         sub="Chanter's Shield", --3
         head="Amalric Coif", --10
         body=gear.Merl_MB_body, --6
-        hands="Merlinic Dastanas", --7
+        hands=gear.Merl_FC_hands, --7
         legs="Geomancy Pants +3", --15
         feet="Regal Pumps +1", --7
         neck="Baetyl Pendant", --4
@@ -239,7 +239,7 @@ function init_gear_sets()
         main="Sucellus",
         sub="Chanter's Shield",
         head="Amalric Coif",
-        hands="Merlinic Dastanas",
+        hands=gear.Merl_FC_hands,
         legs="Geomancy Pants +3",
         ear1="Malignance Earring",
         ear2="Etiolation Earring",
@@ -256,12 +256,12 @@ function init_gear_sets()
         body="Azimuth Coat +1",
         hands="Shrieker's Cuffs",
         legs="Vanya Slops",
-        feet="Merlinic Crackows",
+        feet=gear.Merl_MAB_feet,
         ear1="Calamitous Earring",
         ear2="Gifted Earring",
         neck="Reti Pendant",
-        ring1={name="Stikini Ring", bag="wardrobe3"},
-        ring2={name="Stikini Ring", bag="wardrobe4"},
+        ring1={name="Stikini Ring +1", bag="wardrobe3"},
+        ring2={name="Stikini Ring +1", bag="wardrobe4"},
         back="Lifestream Cape",
         waist="Austerity Belt +1",
         }
@@ -314,8 +314,8 @@ function init_gear_sets()
         neck="Incanter's Torque",
         ear1="Mimir Earring",
         ear2="Andoaa Earring",
-        ring1={name="Stikini Ring", bag="wardrobe3"},
-        ring2={name="Stikini Ring", bag="wardrobe4"},
+        ring1={name="Stikini Ring +1", bag="wardrobe3"},
+        ring2={name="Stikini Ring +1", bag="wardrobe4"},
         back="Perimede Cape",
         waist="Olympus Sash",
         }
@@ -369,7 +369,7 @@ function init_gear_sets()
         ear1="Malignance Earring",
         ear2="Vor Earring",
         ring1="Kishar Ring",
-        ring2={name="Stikini Ring", bag="wardrobe4"},
+        ring2={name="Stikini Ring +1", bag="wardrobe4"},
         back=gear.GEO_FC_Cape,
         waist="Luminary Sash",
         } -- MND/Magic accuracy
@@ -378,6 +378,7 @@ function init_gear_sets()
         ring1="Freke Ring",
         ring2="Weather. Ring +1",
         back=gear.GEO_MAB_Cape,
+        waist="Acuity Belt +1",
         }) -- INT/Magic accuracy
 
     sets.midcast.Dispelga = set_combine(sets.midcast.IntEnfeebles, {main="Daybreak", sub="Ammurapi Shield"})
@@ -389,14 +390,14 @@ function init_gear_sets()
         body="Geomancy Tunic +3",
         hands="Geo. Mitaines +3",
         legs="Geomancy Pants +3",
-        feet="Merlinic Crackows",
+        feet=gear.Merl_MAB_feet,
         neck="Erra Pendant",
         ear1="Malignance Earring",
         ear2="Digni. Earring",
-        ring1={name="Stikini Ring", bag="wardrobe3"},
+        ring1={name="Stikini Ring +1", bag="wardrobe3"},
         ring2="Metamor. Ring +1",
         back=gear.GEO_MAB_Cape,
-        waist="Luminary Sash",
+        waist="Acuity Belt +1",
         }
 
     sets.midcast.Drain = set_combine(sets.midcast['Dark Magic'], {
@@ -419,9 +420,9 @@ function init_gear_sets()
         sub="Ammurapi Shield",
         head="Bagua Galero +3",
         body="Bagua Tunic +3",
-        hands="Bagua Mitaines +3",
-        legs="Merlinic Shalwar",
-        feet="Merlinic Crackows",
+        hands="Amalric Gages +1",
+        legs=gear.Merl_MAB_legs,
+        feet=gear.Merl_MAB_feet,
         neck="Saevus Pendant +1",
         ear1="Malignance Earring",
         ear2="Regal Earring",
@@ -432,9 +433,11 @@ function init_gear_sets()
         }
 
     sets.midcast['Elemental Magic'].Resistant = set_combine(sets.midcast['Elemental Magic'], {
+        hands="Bagua Mitaines +3",
         feet="Bagua Sandals +3",
         neck="Sanctity Necklace",
         ear2="Digni. Earring",
+        waist="Acuity Belt +1",
         })
 
     sets.midcast.GeoElem = set_combine(sets.midcast['Elemental Magic'], {})
@@ -465,12 +468,12 @@ function init_gear_sets()
         body="Geomancy Tunic +3",
         hands="Bagua Mitaines +3",
         legs="Assid. Pants +1",
-        feet="Ea Pigaches +1",
+        feet=gear.Merl_Idle_feet,
         neck="Bathy Choker +1",
         ear1="Lugalbanda Earring",
         ear2="Etiolation Earring",
-        ring1="Paguroidea Ring",
-        ring2="Sheltered Ring",
+        ring1={name="Stikini Ring +1", bag="wardrobe3"},
+        ring2={name="Stikini Ring +1", bag="wardrobe4"},
         back=gear.GEO_Idle_Cape,
         waist="Slipor Sash",
         }
@@ -537,9 +540,8 @@ function init_gear_sets()
         neck="Bagua Charm +2",
         ear1="Malignance Earring",
         ear2="Regal Earring",
-        ring1="Freke Ring",
-        ring2="Weather. Ring +1",
         back=gear.GEO_Pet_Cape,
+        waist="Acuity Belt +1",
         })
 
     -- Defense sets
@@ -580,16 +582,6 @@ function init_gear_sets()
     --------------------------------------
     -- Custom buff sets
     --------------------------------------
-
-    --[[sets.magic_burst = {
-        head="Merlinic Hood", --5
-        body=gear.Merl_MB_body, --10
-        hands="Amalric Gages", --(5)
-        legs="Merlinic Shalwar", --11
-        neck="Mizu. Kubikazari", --10
-        ring2="Mujin Band", --(5)
-        }
-    ]]--
 
     sets.magic_burst = {
         head="Ea Hat +1", --7/(7)

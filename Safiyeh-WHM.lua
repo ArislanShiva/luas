@@ -291,7 +291,7 @@ function init_gear_sets()
     sets.midcast.CuragaNormal = set_combine(sets.midcast.CureNormal, {
         body="Theo. Briault +2", --0(+3)/(-5)
         neck="Nuna Gorget +1",
-        ring1={name="Stikini Ring", bag="wardrobe3"},
+        ring1={name="Stikini Ring +1", bag="wardrobe3"},
         ring2="Metamor. Ring +1",
         waist="Luminary Sash",
         })
@@ -302,7 +302,7 @@ function init_gear_sets()
         body="Theo. Briault +2", --0(+3)/(-5)
         neck="Nuna Gorget +1",
         back="Twilight Cape",
-        ring1={name="Stikini Ring", bag="wardrobe3"},
+        ring1={name="Stikini Ring +1", bag="wardrobe3"},
         ring2="Metamor. Ring +1",
         waist="Hachirin-no-Obi",
         }
@@ -356,8 +356,8 @@ function init_gear_sets()
         neck="Incanter's Torque",
         ear1="Mimir Earring",
         ear2="Andoaa Earring",
-        ring1={name="Stikini Ring", bag="wardrobe3"},
-        ring2={name="Stikini Ring", bag="wardrobe4"},
+        ring1={name="Stikini Ring +1", bag="wardrobe3"},
+        ring2={name="Stikini Ring +1", bag="wardrobe4"},
         back="Mending Cape",
         waist="Olympus Sash",
         }
@@ -442,7 +442,7 @@ function init_gear_sets()
         neck="Incanter's Torque",
         ear1="Digni. Earring",
         ear2="Regal Earring",
-        ring1={name="Stikini Ring", bag="wardrobe3"},
+        ring1={name="Stikini Ring +1", bag="wardrobe3"},
         ring2="Metamor. Ring +1",
         back=gear.WHM_Cure_Cape,
         waist="Refoccilation Stone",
@@ -473,10 +473,10 @@ function init_gear_sets()
         neck="Erra Pendant",
         ear1="Digni. Earring",
         ear2="Mani Earring",
-        ring1={name="Stikini Ring", bag="wardrobe3"},
-        ring2={name="Stikini Ring", bag="wardrobe4"},
+        ring1={name="Stikini Ring +1", bag="wardrobe3"},
+        ring2={name="Stikini Ring +1", bag="wardrobe4"},
         back="Perimede Cape",
-        waist="Yamabuki-no-Obi",
+        waist="Acuity Belt +1",
         }
 
     -- Custom spell classes
@@ -493,14 +493,14 @@ function init_gear_sets()
         ear1="Digni. Earring",
         ear2="Vor Earring",
         ring1="Kishar Ring",
-        ring2={name="Stikini Ring", bag="wardrobe3"},
+        ring2={name="Stikini Ring +1", bag="wardrobe4"},
         back=gear.WHM_Cure_Cape,
         waist="Luminary Sash",
         }
 
     sets.midcast.IntEnfeebles = set_combine(sets.midcast.MndEnfeebles, {
         ammo="Pemphredo Tathlum",
-        waist="Yamabuki-no-Obi",
+        waist="Acuity Belt +1",
         })
 
     sets.midcast.Impact = {
@@ -539,10 +539,10 @@ function init_gear_sets()
         neck="Bathy Choker +1",
         ear1="Genmei Earring",
         ear2="Etiolation Earring",
-        ring1="Paguroidea Ring",
+        ring1={name="Stikini Ring +1", bag="wardrobe3"},
         ring2="Sheltered Ring",
         back=gear.WHM_FC_Cape,
-        waist="Austerity Belt +1",
+        waist="Slipor Sash",
         }
 
     sets.idle.DT = set_combine(sets.idle, {
@@ -556,7 +556,7 @@ function init_gear_sets()
         ring1="Gelatinous Ring +1", --7/(-1)
         ring2="Defending Ring", --10/10
         --back="Moonlight Cape", --6/6
-        --waist="Slipor Sash", --0/3
+        waist="Slipor Sash", --0/3
         })
 
     sets.idle.MEva = set_combine(sets.idle.DT, {
@@ -581,6 +581,7 @@ function init_gear_sets()
         hands="Theophany Mitts +3",
         ear1="Glorious Earring",
         back=gear.WHM_Cure_Cape,
+        waist="Acuity Belt +1",
         })
 
     sets.idle.Weak = sets.idle.DT

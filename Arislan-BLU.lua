@@ -378,7 +378,7 @@ function init_gear_sets()
     ------------------------------------------------------------------------------------------------
 
     sets.precast.WS = {
-        ammo="Voluspa Tathlum",
+        ammo="Aurgelmir Orb +1",
         head="Lilitu Headpiece",
         body="Assim. Jubbah +3",
         hands="Jhakri Cuffs +2",
@@ -394,6 +394,7 @@ function init_gear_sets()
         }
 
     sets.precast.WS.Acc = set_combine(sets.precast.WS, {
+        ammo="Voluspa Tathlum",
         head="Dampening Tam",
         hands=gear.Herc_WS_hands,
         ear2="Telos Earring",
@@ -413,6 +414,7 @@ function init_gear_sets()
         })
 
     sets.precast.WS['Chant du Cygne'].Acc = set_combine(sets.precast.WS['Chant du Cygne'], {
+        ammo="Voluspa Tathlum",
         head="Dampening Tam",
         body=gear.Adhemar_B_body,
         hands=gear.Adhemar_A_hands,
@@ -431,13 +433,13 @@ function init_gear_sets()
         })
 
     sets.precast.WS['Savage Blade'].Acc = set_combine(sets.precast.WS['Savage Blade'], {
+        ammo="Voluspa Tathlum",
         feet=gear.Herc_STP_feet,
         ear2="Telos Earring",
         waist="Grunfeld Rope",
         })
 
     sets.precast.WS['Requiescat'] = {
-        ammo="Hydrocera",
         head="Luh. Keffiyeh +3",
         body="Luhlaza Jubbah +3",
         hands="Jhakri Cuffs +2",
@@ -535,7 +537,7 @@ function init_gear_sets()
         }
 
     sets.midcast['Blue Magic'].Physical = {
-        ammo="Floestone",
+        ammo="Aurgelmir Orb +1",
         head="Luh. Keffiyeh +3",
         body="Luhlaza Jubbah +3",
         hands="Jhakri Cuffs +2",
@@ -563,7 +565,6 @@ function init_gear_sets()
     sets.midcast['Blue Magic'].PhysicalStr = sets.midcast['Blue Magic'].Physical
 
     sets.midcast['Blue Magic'].PhysicalDex = set_combine(sets.midcast['Blue Magic'].Physical, {
-        ammo="Voluspa Tathlum",
         ear2="Mache Earring +1",
         ring2="Ilabrat Ring",
         back=gear.BLU_WS1_Cape,
@@ -635,12 +636,20 @@ function init_gear_sets()
         })
 
     sets.midcast['Blue Magic'].MagicalDex = set_combine(sets.midcast['Blue Magic'].Magical, {
+        ammo="Aurgelmir Orb +1",
         ear2="Mache Earring +1",
         ring2="Ilabrat Ring",
         })
 
-    sets.midcast['Blue Magic'].MagicalVit = set_combine(sets.midcast['Blue Magic'].Magical, {})
-    sets.midcast['Blue Magic'].MagicalChr = set_combine(sets.midcast['Blue Magic'].Magical, {ear1="Regal Earring", ear2="Enchntr. Earring +1"})
+    sets.midcast['Blue Magic'].MagicalVit = set_combine(sets.midcast['Blue Magic'].Magical, {
+        ammo="Aurgelmir Orb +1",
+        })
+
+    sets.midcast['Blue Magic'].MagicalChr = set_combine(sets.midcast['Blue Magic'].Magical, {
+        ammo="Voluspa Tathlum",
+        ear1="Regal Earring",
+        ear2="Enchntr. Earring +1"
+        })
 
     sets.midcast['Blue Magic'].MagicAccuracy = {
         ammo="Pemphredo Tathlum",
@@ -661,6 +670,7 @@ function init_gear_sets()
     sets.midcast['Blue Magic'].Breath = set_combine(sets.midcast['Blue Magic'].Magical, {head="Luh. Keffiyeh +3"})
 
     sets.midcast['Blue Magic'].StunPhysical = set_combine(sets.midcast['Blue Magic'].MagicAccuracy, {
+        ammo="Voluspa Tathlum",
         head="Malignance Chapeau",
         body="Malignance Tabard",
         hands="Malignance Gloves",
@@ -812,6 +822,7 @@ function init_gear_sets()
         })
 
     sets.idle.Town = set_combine(sets.idle, {
+        ammo="Aurgelmir Orb +1",
         head="Luh. Keffiyeh +3",
         body="Assim. Jubbah +3",
         hands=gear.Adhemar_B_hands,
@@ -847,7 +858,7 @@ function init_gear_sets()
     -- EG: sets.engaged.Dagger.Accuracy.Evasion
 
     sets.engaged = {
-        ammo="Ginsen",
+        ammo="Aurgelmir Orb +1",
         head=gear.Adhemar_B_head,
         body=gear.Adhemar_B_body,
         hands=gear.Adhemar_B_hands,
@@ -888,6 +899,7 @@ function init_gear_sets()
         })
 
     sets.engaged.STP = set_combine(sets.engaged, {
+        head=gear.Herc_STP_head,
         feet="Carmine Greaves +1",
         ring1={name="Chirich Ring +1", bag="wardrobe3"},
         ring2={name="Chirich Ring +1", bag="wardrobe4"},
@@ -903,7 +915,7 @@ function init_gear_sets()
 
     -- No Magic Haste (74% DW to cap)
     sets.engaged.DW = {
-        ammo="Ginsen",
+        ammo="Aurgelmir Orb +1",
         head=gear.Adhemar_B_head,
         body=gear.Adhemar_B_body, --6
         hands=gear.Adhemar_B_hands,
@@ -943,13 +955,14 @@ function init_gear_sets()
         })
 
     sets.engaged.DW.STP = set_combine(sets.engaged.DW, {
+        head=gear.Herc_STP_head,
         ring1={name="Chirich Ring +1", bag="wardrobe3"},
         ring2={name="Chirich Ring +1", bag="wardrobe4"},
         })
 
     -- 15% Magic Haste (67% DW to cap)
     sets.engaged.DW.LowHaste = set_combine(sets.engaged.DW, {
-        ammo="Ginsen",
+        ammo="Aurgelmir Orb +1",
         head=gear.Adhemar_B_head,
         body=gear.Adhemar_B_body, --6
         hands=gear.Adhemar_B_hands,
@@ -989,13 +1002,14 @@ function init_gear_sets()
         })
 
     sets.engaged.DW.STP.LowHaste = set_combine(sets.engaged.DW.LowHaste, {
+        head=gear.Herc_STP_head,
         ring1={name="Chirich Ring +1", bag="wardrobe3"},
         ring2={name="Chirich Ring +1", bag="wardrobe4"},
         })
 
     -- 30% Magic Haste (56% DW to cap)
     sets.engaged.DW.MidHaste = {
-        ammo="Ginsen",
+        ammo="Aurgelmir Orb +1",
         head=gear.Adhemar_B_head,
         body=gear.Adhemar_B_body, --6
         hands=gear.Adhemar_B_hands,
@@ -1037,6 +1051,7 @@ function init_gear_sets()
         })
 
     sets.engaged.DW.STP.MidHaste = set_combine(sets.engaged.DW.MidHaste, {
+        head=gear.Herc_STP_head,
         ear1="Dedition Earring",
         ring1={name="Chirich Ring +1", bag="wardrobe3"},
         ring2={name="Chirich Ring +1", bag="wardrobe4"},
@@ -1044,7 +1059,7 @@ function init_gear_sets()
 
     -- 35% Magic Haste (51% DW to cap)
     sets.engaged.DW.HighHaste = {
-        ammo="Ginsen",
+        ammo="Aurgelmir Orb +1",
         head=gear.Adhemar_B_head,
         body=gear.Adhemar_B_body, --6
         hands=gear.Adhemar_B_hands,
@@ -1085,13 +1100,14 @@ function init_gear_sets()
         })
 
     sets.engaged.DW.STP.HighHaste = set_combine(sets.engaged.DW.HighHaste, {
+        head=gear.Herc_STP_head,
         ring1={name="Chirich Ring +1", bag="wardrobe3"},
         ring2={name="Chirich Ring +1", bag="wardrobe4"},
         })
 
     -- 45% Magic Haste (36% DW to cap)
     sets.engaged.DW.MaxHaste = {
-        ammo="Ginsen",
+        ammo="Aurgelmir Orb +1",
         head=gear.Adhemar_B_head,
         body=gear.Adhemar_B_body, --6
         hands=gear.Adhemar_B_hands,
@@ -1130,6 +1146,7 @@ function init_gear_sets()
         })
 
     sets.engaged.DW.STP.MaxHaste = set_combine(sets.engaged.DW.MaxHaste, {
+        head=gear.Herc_STP_head,
         ear1="Dedition Earring",
         ear2="Telos Earring",
         ring1={name="Chirich Ring +1", bag="wardrobe3"},

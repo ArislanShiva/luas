@@ -141,7 +141,7 @@ function user_setup()
     gear.RAccbullet = "Devastating Bullet"
     gear.WSbullet = "Chrono Bullet"
     gear.MAbullet = "Living Bullet"
-    gear.QDbullet = "Living Bullet"
+    gear.QDbullet = "Hauksbok Bullet"
     options.ammo_warning_limit = 10
 
     -- Additional local binds
@@ -472,6 +472,7 @@ function init_gear_sets()
         })
 
     sets.precast.WS['Aeolian Edge'] = set_combine(sets.precast.WS['Wildfire'], {
+        ammo=gear.QDbullet,
         ear1="Moonshade Earring",
         })
 
@@ -653,6 +654,7 @@ function init_gear_sets()
         })
 
     sets.idle.Town = set_combine(sets.idle, {
+        ammo=gear.QDbullet,
         head="Lanun Tricorne +3",
         body="Oshosi Vest +1",
         hands="Lanun Gants +3",

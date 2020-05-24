@@ -295,7 +295,7 @@ function init_gear_sets()
     ------------------------------------------------------------------------------------------------
 
     sets.precast.WS = {
-        ammo="Voluspa Tathlum",
+        ammo="Aurgelmir Orb +1",
         head="Viti. Chapeau +3",
         body="Viti. Tabard +3",
         hands="Atrophy Gloves +3",
@@ -311,6 +311,7 @@ function init_gear_sets()
         }
 
     sets.precast.WS.Acc = set_combine(sets.precast.WS, {
+        ammo="Voluspa Tathlum",
         body="Jhakri Robe +2",
         neck="Combatant's Torque",
         ear2="Mache Earring +1",
@@ -330,6 +331,7 @@ function init_gear_sets()
         })
 
     sets.precast.WS['Chant du Cygne'].Acc = set_combine(sets.precast.WS['Chant du Cygne'], {
+        ammo="Voluspa Tathlum",
         head="Malignance Chapeau",
         ear2="Mache Earring +1",
         })
@@ -343,6 +345,7 @@ function init_gear_sets()
         })
 
     sets.precast.WS['Savage Blade'].Acc = set_combine(sets.precast.WS['Savage Blade'], {
+        ammo="Voluspa Tathlum",
         neck="Combatant's Torque",
         waist="Grunfeld Rope",
         })
@@ -356,6 +359,7 @@ function init_gear_sets()
         })
 
     sets.precast.WS['Requiescat'].Acc = set_combine(sets.precast.WS['Requiescat'], {
+        ammo="Voluspa Tathlum",
         neck="Combatant's Torque",
         ear1="Mache Earring +1",
         })
@@ -395,6 +399,7 @@ function init_gear_sets()
         })
 
     sets.precast.WS['Black Halo'].Acc = set_combine(sets.precast.WS['Black Halo'], {
+        ammo="Voluspa Tathlum",
         neck="Combatant's Torque",
         ear2="Telos Earring",
         waist="Grunfeld Rope",
@@ -835,7 +840,7 @@ function init_gear_sets()
     -- EG: sets.engaged.Dagger.Accuracy.Evasion
 
     sets.engaged = {
-        ammo="Ginsen",
+        ammo="Aurgelmir Orb +1",
         head="Malignance Chapeau",
         body="Malignance Tabard",
         hands="Malignance Gloves",
@@ -858,6 +863,7 @@ function init_gear_sets()
         })
 
     sets.engaged.HighAcc = set_combine(sets.engaged, {
+        ammo="Voluspa Tathlum",
         head="Carmine Mask +1",
         legs="Carmine Cuisses +1",
         ear1="Cessance Earring",
@@ -870,7 +876,7 @@ function init_gear_sets()
     sets.engaged.DW = {
         main="Trainee Knife",
         sub="Qutrub Knife",
-        ammo="Ginsen",
+        ammo="Aurgelmir Orb +1",
         head="Malignance Chapeau",
         body="Malignance Tabard",
         hands="Malignance Gloves",
@@ -891,6 +897,7 @@ function init_gear_sets()
         })
 
     sets.engaged.DW.HighAcc = set_combine(sets.engaged.DW.MidAcc, {
+        ammo="Voluspa Tathlum",
         head="Carmine Mask +1",
         ear1="Cessance Earring",
         ear2="Mache Earring +1",
@@ -898,7 +905,7 @@ function init_gear_sets()
 
     -- 15% Magic Haste (67% DW to cap)
     sets.engaged.DW.LowHaste = set_combine(sets.engaged.DW, {
-        ammo="Ginsen",
+        ammo="Aurgelmir Orb +1",
         head="Malignance Chapeau",
         body="Malignance Tabard",
         hands="Malignance Gloves",
@@ -919,6 +926,7 @@ function init_gear_sets()
         })
 
     sets.engaged.DW.HighAcc.LowHaste = set_combine(sets.engaged.DW.MidAcc.LowHaste, {
+        ammo="Voluspa Tathlum",
         head="Carmine Mask +1",
         ear1="Cessance Earring",
         ear2="Mache Earring +1",
@@ -926,7 +934,7 @@ function init_gear_sets()
 
     -- 30% Magic Haste (56% DW to cap)
     sets.engaged.DW.MidHaste = set_combine(sets.engaged.DW, {
-        ammo="Ginsen",
+        ammo="Aurgelmir Orb +1",
         head="Malignance Chapeau",
         body="Malignance Tabard",
         hands="Malignance Gloves",
@@ -949,6 +957,7 @@ function init_gear_sets()
         })
 
     sets.engaged.DW.HighAcc.MidHaste = set_combine(sets.engaged.DW.MidAcc.MidHaste, {
+        ammo="Voluspa Tathlum",
         head="Carmine Mask +1",
         ear1="Cessance Earring",
         ear2="Mache Earring +1",
@@ -956,7 +965,7 @@ function init_gear_sets()
 
     -- 35% Magic Haste (51% DW to cap)
     sets.engaged.DW.HighHaste = set_combine(sets.engaged.DW, {
-        ammo="Ginsen",
+        ammo="Aurgelmir Orb +1",
         head="Malignance Chapeau",
         body="Malignance Tabard",
         hands="Malignance Gloves",
@@ -978,6 +987,7 @@ function init_gear_sets()
         })
 
     sets.engaged.DW.HighAcc.HighHaste = set_combine(sets.engaged.DW.MidAcc.HighHaste, {
+        ammo="Voluspa Tathlum",
         head="Carmine Mask +1",
         ear1="Cessance Earring",
         ear2="Mache Earring +1",
@@ -985,7 +995,7 @@ function init_gear_sets()
 
     -- 45% Magic Haste (36% DW to cap)
     sets.engaged.DW.MaxHaste = set_combine(sets.engaged.DW, {
-        ammo="Ginsen",
+        ammo="Aurgelmir Orb +1",
         head="Malignance Chapeau",
         body="Malignance Tabard",
         hands="Malignance Gloves",
@@ -1007,6 +1017,7 @@ function init_gear_sets()
         })
 
     sets.engaged.DW.HighAcc.MaxHaste = set_combine(sets.engaged.DW.MidAcc.MaxHaste, {
+        ammo="Voluspa Tathlum",
         head="Carmine Mask +1",
         legs="Carmine Cuisses +1", --6
         ear1="Cessance Earring",

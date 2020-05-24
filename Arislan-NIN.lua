@@ -255,7 +255,7 @@ function init_gear_sets()
     -- Weaponskill sets
     -- Default set for any weaponskill that isn't any more specifically defined
     sets.precast.WS = {
-        range="Seeth. Bomblet +1",
+        ammo="Aurgelmir Orb +1",
         head="Hachiya Hatsu. +3",
         body=gear.Herc_WS_body,
         hands=gear.Adhemar_B_hands,
@@ -271,6 +271,7 @@ function init_gear_sets()
         } -- default set
 
     sets.precast.WS.Acc = set_combine(sets.precast.WS, {
+        ammo="Voluspa Tathlum",
         hands=gear.Adhemar_A_hands,
         legs=gear.Herc_WS_legs,
         feet=gear.Herc_STP_feet,
@@ -301,6 +302,7 @@ function init_gear_sets()
         })
 
     sets.precast.WS['Blade: Ten'].Acc = set_combine(sets.precast.WS['Blade: Ten'], {
+        ammo="Voluspa Tathlum",
         ear2="Telos Earring",
         })
 
@@ -321,6 +323,7 @@ function init_gear_sets()
         })
 
     sets.precast.WS['Blade: Shun'].Acc = set_combine(sets.precast.WS['Blade: Shun'], {
+        ammo="Voluspa Tathlum",
         legs="Ken. Hakama +1",
         })
 
@@ -484,6 +487,7 @@ function init_gear_sets()
         })
 
     sets.idle.Town = set_combine(sets.idle, {
+        ammo="Aurgelmir Orb +1",
         head="Ken. Jinpachi +1",
         body="Ken. Samue +1",
         hands="Ken. Tekko +1",

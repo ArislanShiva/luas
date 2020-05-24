@@ -13,6 +13,14 @@ function define_global_sets()
     gear.Adhemar_C_legs = {name="Adhemar Kecks", augments={'AGI+10','Rng.Acc.+15','Rng.Atk.+15',}}
     gear.Adhemar_D_legs = {name="Adhemar Kecks", augments={'AGI+10','"Rapid Shot"+10','Enmity-5',}}
 
+    gear.Merl_FC_hands = {name="Merlinic Dastanas", augments={'"Fast Cast"+7','CHR+3','Mag. Acc.+12','"Mag.Atk.Bns."+1',}}
+
+    gear.Merl_Idle_feet = {name="Merlinic Crackows", augments={'Attack+24','"Store TP"+1','"Refresh"+1','Mag. Acc.+15 "Mag.Atk.Bns."+15',}}
+
+    gear.Merl_MAB_head = {name="Merlinic Hood", augments={'Mag. Acc.+23 "Mag.Atk.Bns."+23','Magic burst dmg.+5%','CHR+6','Mag. Acc.+4','"Mag.Atk.Bns."+10',}}
+    gear.Merl_MAB_legs = {name="Merlinic Shalwar", augments={'Mag. Acc.+24 "Mag.Atk.Bns."+24','Magic burst dmg.+11%','Mag. Acc.+14','"Mag.Atk.Bns."+14',}}
+    gear.Merl_MAB_feet = {name="Merlinic Crackows", augments={'Mag. Acc.+24 "Mag.Atk.Bns."+24','INT+15','"Mag.Atk.Bns."+13',}}
+
     gear.COR_DW_Cape = {name="Camulus's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','Accuracy+10','"Dual Wield"+10',}} --*
     gear.COR_RA_Cape = {name="Camulus's Mantle", augments={'AGI+20','Rng.Acc.+20 Rng.Atk.+20','AGI+10','"Store TP"+10',}} --*
     gear.COR_SNP_Cape = {name="Camulus's Mantle", augments={'INT+20','Eva.+20 /Mag. Eva.+20','Mag. Evasion+10','"Snapshot"+10',}} --*

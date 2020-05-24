@@ -514,7 +514,7 @@ function init_gear_sets()
         neck="Sanctity Necklace",
         ear1="Gwati Earring",
         ear2="Digni. Earring",
-        ring1={name="Stikini Ring", bag="wardrobe3"},
+        ring1={name="Stikini Ring +1", bag="wardrobe3"},
         ring2="Weather. Ring +1",
         --waist="K. Kachina Belt +1",
         })
@@ -595,8 +595,8 @@ function init_gear_sets()
         feet="Malignance Boots",
         neck="Bathy Choker +1",
         ear2="Infused Earring",
-        ring1="Paguroidea Ring",
-        ring2="Sheltered Ring",
+        ring1={name="Stikini Ring +1", bag="wardrobe3"},
+        ring2={name="Stikini Ring +1", bag="wardrobe4"},
         back="Moonlight Cape",
         --waist="Flume Belt +1",
         }

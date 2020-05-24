@@ -601,6 +601,7 @@ function init_gear_sets()
         })
 
     sets.engaged.STP = set_combine(sets.engaged, {
+        head=gear.Herc_STP_head,
         feet="Carmine Greaves +1",
         ring1={name="Chirich Ring +1", bag="wardrobe3"},
         ring2={name="Chirich Ring +1", bag="wardrobe4"},
@@ -648,6 +649,7 @@ function init_gear_sets()
         })
 
     sets.engaged.DW.STP = set_combine(sets.engaged.DW, {
+        head=gear.Herc_STP_head,
         ring1={name="Chirich Ring +1", bag="wardrobe3"},
         ring2={name="Chirich Ring +1", bag="wardrobe4"},
         })
@@ -692,6 +694,7 @@ function init_gear_sets()
         })
 
     sets.engaged.DW.STP.LowHaste = set_combine(sets.engaged.DW.LowHaste, {
+        head=gear.Herc_STP_head,
         ring1={name="Chirich Ring +1", bag="wardrobe3"},
         ring2={name="Chirich Ring +1", bag="wardrobe4"},
         })
@@ -738,6 +741,7 @@ function init_gear_sets()
         })
 
     sets.engaged.DW.STP.MidHaste = set_combine(sets.engaged.DW.MidHaste, {
+        head=gear.Herc_STP_head,
         ring1={name="Chirich Ring +1", bag="wardrobe3"},
         ring2={name="Chirich Ring +1", bag="wardrobe4"},
         })
@@ -784,6 +788,7 @@ function init_gear_sets()
         })
 
     sets.engaged.DW.STP.HighHaste = set_combine(sets.engaged.DW.HighHaste, {
+        head=gear.Herc_STP_head,
         ring1={name="Chirich Ring +1", bag="wardrobe3"},
         ring2={name="Chirich Ring +1", bag="wardrobe4"},
         })
@@ -829,6 +834,7 @@ function init_gear_sets()
         })
 
     sets.engaged.DW.STP.MaxHaste = set_combine(sets.engaged.DW.MaxHaste, {
+        head=gear.Herc_STP_head,
         ring1={name="Chirich Ring +1", bag="wardrobe3"},
         ring2={name="Chirich Ring +1", bag="wardrobe4"},
         })

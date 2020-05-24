@@ -175,7 +175,7 @@ function init_gear_sets()
         }
 
     sets.precast.JA['Jump'] = {
-        ammo="Ginsen",
+        ammo="Aurgelmir Orb +1",
         head="Flam. Zucchetto +2",
         body="Vishap Mail +3",
         hands="Vis. Fng. Gaunt. +3",
@@ -450,7 +450,7 @@ function init_gear_sets()
         })
 
     sets.idle.Town = set_combine(sets.idle, {
-        ammo="Staunch Tathlum +1",
+        ammo="Aurgelmir Orb +1",
         head="Ptero. Armet +3",
         hands="Ptero. Fin. G. +3",
         feet="Ptero. Greaves +3",
@@ -477,7 +477,7 @@ function init_gear_sets()
     ------------------------------------------------------------------------------------------------
 
     sets.engaged = {
-        ammo="Floestone",
+        ammo="Aurgelmir Orb +1",
         head="Flam. Zucchetto +2",
         body=gear.Valo_TP_body,
         hands="Sulev. Gauntlets +2",
@@ -493,14 +493,13 @@ function init_gear_sets()
         }
 
     sets.engaged.LowAcc = set_combine(sets.engaged, {
-        ammo="Amar Cluster",
         neck="Combatant's Torque",
         ear2="Cessance Earring",
         waist="Ioskeha Belt +1",
         })
 
     sets.engaged.MidAcc = set_combine(sets.engaged.LowAcc, {
-        ammo="Ginsen",
+        ammo="Voluspa Tathlum",
         neck="Shulmanu Collar",
         ring1="Flamma Ring",
         ear2="Telos Earring",
@@ -524,7 +523,6 @@ function init_gear_sets()
         })
 
     sets.engaged.STP = set_combine(sets.engaged, {
-        ammo="Ginsen",
         hands=gear.Acro_STP_hands,
         legs=gear.Valo_STP_legs,
         ear2="Telos Earring",
@@ -537,7 +535,6 @@ function init_gear_sets()
     ------------------------------------------------------------------------------------------------
 
     sets.engaged.Hybrid = {
-        ammo="Staunch Tathlum +1", --3/3
         neck="Loricate Torque +1", --6/6
         body="Vishap Mail +3",
         ring1="Moonlight Ring", --5/5
