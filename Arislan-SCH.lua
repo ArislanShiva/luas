@@ -81,6 +81,8 @@ function job_setup()
 
     update_active_strategems()
 
+    no_swap_gear = S{"Warp Ring", "Dim. Ring (Dem)", "Dim. Ring (Holla)", "Dim. Ring (Mea)",
+              "Trizek Ring", "Echad Ring", "Facility Ring", "Capacity Ring"}
     degrade_array = {
         ['Aspirs'] = {'Aspir','Aspir II'}
         }
@@ -1166,6 +1168,23 @@ function check_rings()
         enable("right_ring")
     end
 end
+
+windower.register_event('zone change',
+    function()
+        if no_swap_gear:contains(player.equipment.left_ring) then
+            enable("ring1")
+            equip(sets.idle)
+        end
+        if no_swap_gear:contains(player.equipment.right_ring) then
+            enable("ring2")
+            equip(sets.idle)
+        end
+        if no_swap_gear:contains(player.equipment.waist) then
+            enable("waist")
+            equip(sets.idle)
+        end
+    end
+)
 
 -- Select default macro book on initial load or subjob change.
 function select_default_macro_book()

@@ -796,23 +796,6 @@ function job_update(cmdParams, eventArgs)
     update_sublimation()
 end
 
--- Called for direct player commands.
-function job_self_command(cmdParams, eventArgs)
-    if cmdParams[1]:lower() == 'scholar' then
-        handle_strategems(cmdParams)
-        eventArgs.handled = true
-    elseif cmdParams[1]:lower() == 'nuke' then
-        handle_nuking(cmdParams)
-        eventArgs.handled = true
-    elseif cmdParams[1]:lower() == 'barelement' then
-        send_command('@input /ma '..state.BarElement.value..' <me>')
-    elseif cmdParams[1]:lower() == 'barstatus' then
-        send_command('@input /ma '..state.BarStatus.value..' <me>')
-    elseif cmdParams[1]:lower() == 'boostspell' then
-        send_command('@input /ma '..state.BoostSpell.value..' <me>')
-    end
-end
-
 -- Custom spell mapping.
 function job_get_spell_map(spell, default_spell_map)
     if spell.action_type == 'Magic' then
@@ -902,6 +885,19 @@ end
 
 function job_self_command(cmdParams, eventArgs)
     gearinfo(cmdParams, eventArgs)
+    if cmdParams[1]:lower() == 'scholar' then
+        handle_strategems(cmdParams)
+        eventArgs.handled = true
+    elseif cmdParams[1]:lower() == 'nuke' then
+        handle_nuking(cmdParams)
+        eventArgs.handled = true
+    elseif cmdParams[1]:lower() == 'barelement' then
+        send_command('@input /ma '..state.BarElement.value..' <me>')
+    elseif cmdParams[1]:lower() == 'barstatus' then
+        send_command('@input /ma '..state.BarStatus.value..' <me>')
+    elseif cmdParams[1]:lower() == 'boostspell' then
+        send_command('@input /ma '..state.BoostSpell.value..' <me>')
+    end
 end
 
 function gearinfo(cmdParams, eventArgs)

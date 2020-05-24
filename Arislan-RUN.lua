@@ -266,7 +266,7 @@ function init_gear_sets()
     sets.precast.JA['Liement'] = {body="Futhark Coat +3"}
 
     sets.precast.JA['Lunge'] = {
-        ammo="Seeth. Bomblet +1",
+        ammo="Aurgelmir Orb +1",
         head=gear.Herc_MAB_head,
         body="Samnuha Coat",
         hands="Carmine Fin. Ga. +1",
@@ -286,7 +286,18 @@ function init_gear_sets()
     sets.precast.JA['Rayke'] = {feet="Futhark Boots +1"}
     sets.precast.JA['Elemental Sforzo'] = {body="Futhark Coat +3"}
     sets.precast.JA['Swordplay'] = {hands="Futhark Mitons +3"}
-    sets.precast.JA['Vivacious Pulse'] = {head="Erilaz Galea +1"}
+
+    sets.precast.JA['Vivacious Pulse'] = {
+        head="Erilaz Galea +1",
+        legs="Rune. Trousers +3",
+        neck="Incanter's Torque",
+        ear1="Beatific Earring",
+        --ear2="Saxnot Earring",
+        ring1={name="Stikini Ring +1", bag="wardrobe3"},
+        ring2={name="Stikini Ring +1", bag="wardrobe4"},
+        --back="Altruistic Cape",
+        waist="Bishop's Sash",
+        }
 
 
     -- Fast cast sets for spells
@@ -352,27 +363,30 @@ function init_gear_sets()
         }
 
     sets.precast.WS.Acc = set_combine(sets.precast.WS, {
-        ammo="Seeth. Bomblet +1",
+        ammo="Voluspa Tathlum",
         body=gear.Adhemar_B_body,
         legs="Meg. Chausses +2",
         ear2="Telos Earring",
         })
 
     sets.precast.WS.Uncapped = set_combine(sets.precast.WS, {
-        ammo="Seeth. Bomblet +1",
+        ammo="Aurgelmir Orb +1",
         })
 
     sets.precast.WS['Resolution'] = set_combine(sets.precast.WS, {
+        ammo="Aurgelmir Orb +1",
         head="Lustratio Cap +1",
         body="Lustr. Harness +1",
         hands=gear.Adhemar_B_hands,
         legs="Samnuha Tights",
         feet="Lustra. Leggings +1",
+        --neck="Futhark Torque +2",
         ring1="Epona's Ring",
         back=gear.RUN_WS1_Cape,
         })
 
     sets.precast.WS['Resolution'].Acc = set_combine(sets.precast.WS['Resolution'], {
+        ammo="Voluspa Tathlum",
         head=gear.Adhemar_B_head,
         hands=gear.Adhemar_A_hands,
         legs="Meg. Chausses +2",
@@ -381,7 +395,6 @@ function init_gear_sets()
         })
 
     sets.precast.WS['Resolution'].Uncapped = set_combine(sets.precast.WS['Resolution'], {
-        ammo="Seeth. Bomblet +1",
         head=gear.Adhemar_B_head,
         body=gear.Adhemar_B_body,
         legs="Meg. Chausses +2",
@@ -390,7 +403,7 @@ function init_gear_sets()
         })
 
     sets.precast.WS['Dimidiation'] = set_combine(sets.precast.WS, {
-        ammo="Voluspa Tathlum",
+        ammo="Aurgelmir Orb +1",
         body=gear.Adhemar_B_body,
         legs="Lustr. Subligar +1",
         feet="Lustra. Leggings +1",
@@ -400,6 +413,7 @@ function init_gear_sets()
         })
 
     sets.precast.WS['Dimidiation'].Acc = set_combine(sets.precast.WS['Dimidiation'], {
+        ammo="Voluspa Tathlum",
         body=gear.Adhemar_B_body,
         legs="Samnuha Tights",
         feet=gear.Herc_STP_feet,
@@ -568,7 +582,7 @@ function init_gear_sets()
         hands="Turms Mittens +1",
         legs="Turms Subligar +1",
         feet="Turms Leggings +1",
-        neck="Futhark Torque +1", --6/6
+        neck="Futhark Torque +2", --7/7
         ear1="Sanare Earring",
         ear2="Odnowa Earring +1", --0/2
         ring1="Moonlight Ring", --5/5
@@ -588,10 +602,10 @@ function init_gear_sets()
         })
 
     sets.idle.Town = set_combine(sets.idle, {
-        ammo="Staunch Tathlum +1",
+        ammo="Aurgelmir Orb +1",
         head="Turms Cap +1",
         body="Ashera Harness",
-        neck="Moonlight Necklace",
+        neck="Futhark Torque +2",
         ear1="Sanare Earring",
         })
 
@@ -608,28 +622,28 @@ function init_gear_sets()
         sub="Refined Grip +1", --3/3
         ammo="Staunch Tathlum +1", --3/3
         head="Turms Cap +1",
-        body="Ashera Harness", --7/7
+        body="Runeist's Coat +3",
         hands="Turms Mittens +1",
         legs="Eri. Leg Guards +1", --7/0
         feet="Turms Leggings +1",
-        neck="Futhark Torque +1", --6/6
-        ear1="Sanare Earring",
+        neck="Futhark Torque +2", --7/7
+        ear1="Genmei Earring", --2/0
         ear2="Odnowa Earring +1", --0/2
-        ring1="Moonlight Ring", --5/5
+        ring1="Gelatinous Ring +1", --7/(-1)
         ring2="Defending Ring", --10/10
         back=gear.RUN_HPD_Cape, --10/0
         waist="Engraved Belt",
         }
 
     sets.defense.MDT = {
-        sub="Mensch Strap +1", --5/0
+        sub="Refined Grip +1", --3/3
         ammo="Staunch Tathlum +1", --3/3
         head="Turms Cap +1",
         body="Runeist's Coat +3",
         hands="Turms Mittens +1",
         legs="Eri. Leg Guards +1", --7/0
         feet="Turms Leggings +1",
-        neck="Futhark Torque +1", --6/6
+        neck="Futhark Torque +2", --7/7
         ear1="Genmei Earring", --2/0
         ear2="Odnowa Earring +1", --0/2
         ring1="Gelatinous Ring +1", --7/(-1)
@@ -646,7 +660,7 @@ function init_gear_sets()
         hands={name="Regal Gauntlets", priority=3},
         legs="Eri. Leg Guards +1", --7/0
         feet="Turms Leggings +1",
-        neck="Futhark Torque +1", --6/6
+        neck="Futhark Torque +2", --7/7
         ear1={name="Tuisto Earring", priority=6}, --0/1
         ear2={name="Odnowa Earring +1", priority=5}, --0/2
         ring1={name="Moonlight Ring", priority=4}, --5/5
@@ -668,7 +682,7 @@ function init_gear_sets()
 
     sets.engaged = {
         sub="Utu Grip",
-        ammo="Yamarang",
+        ammo="Aurgelmir Orb +1",
         head=gear.Adhemar_B_head,
         body=gear.Adhemar_B_body,
         hands=gear.Adhemar_B_hands,
@@ -691,6 +705,7 @@ function init_gear_sets()
         })
 
     sets.engaged.MidAcc = set_combine(sets.engaged.LowAcc, {
+        ammo="Yamarang",
         ear1="Cessance Earring",
         ear2="Telos Earring",
         ring1="Regal Ring",
@@ -737,7 +752,7 @@ function init_gear_sets()
     sets.Hybrid = {
         head=gear.Adhemar_D_head, --4/0
         body="Ashera Harness", --7/7
-        neck="Futhark Torque +1", --6/6
+        neck="Futhark Torque +2", --7/7
         ring1="Moonlight Ring", --5/5
         ring2="Defending Ring", --10/10
         back=gear.RUN_TP_Cape, --10/0
@@ -767,7 +782,7 @@ function init_gear_sets()
         hands=gear.Adhemar_A_hands,
         legs="Meg. Chausses +2",
         feet=gear.Herc_STP_feet,
-        neck="Futhark Torque +1",
+        neck="Futhark Torque +2",
         ear1="Sherida Earring",
         ear2="Dedition Earring",
         ring1="Moonlight Ring",
@@ -1118,12 +1133,6 @@ end
 -- User code that supplements self-commands.
 -------------------------------------------------------------------------------------------------------------------
 
-function job_self_command(cmdParams, eventArgs)
-    if cmdParams[1]:lower() == 'rune' then
-        send_command('@input /ja '..state.Runes.value..' <me>')
-    end
-end
-
 function get_custom_wsmode(spell, action, spellMap)
     if spell.type == 'WeaponSkill' and state.AttackMode.value == 'Uncapped' then
         return "Uncapped"
@@ -1136,6 +1145,9 @@ end
 
 function job_self_command(cmdParams, eventArgs)
     gearinfo(cmdParams, eventArgs)
+    if cmdParams[1]:lower() == 'rune' then
+        send_command('@input /ja '..state.Runes.value..' <me>')
+    end
 end
 
 function gearinfo(cmdParams, eventArgs)
