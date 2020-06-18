@@ -77,7 +77,7 @@ function job_setup()
     state.Buff['Sublimation: Activated'] = buffactive['Sublimation: Activated'] or false
     state.HelixMode = M{['description']='Helix Mode', 'Potency', 'Duration'}
     state.RegenMode = M{['description']='Regen Mode', 'Duration', 'Potency'}
-    state.CP = M(false, "Capacity Points Mode")
+    -- state.CP = M(false, "Capacity Points Mode")
 
     update_active_strategems()
 
@@ -123,7 +123,7 @@ function user_setup()
     send_command('bind ![ gs c scholar aoe')
     send_command('bind !] gs c scholar duration')
     send_command('bind !; gs c scholar cost')
-    send_command('bind @c gs c toggle CP')
+    -- send_command('bind @c gs c toggle CP')
     send_command('bind @h gs c cycle HelixMode')
     send_command('bind @r gs c cycle RegenMode')
     send_command('bind @s gs c toggle StormSurge')
@@ -156,7 +156,7 @@ function user_unload()
     send_command('unbind !;')
     send_command('unbind ^,')
     send_command('unbind !.')
-    send_command('unbind @c')
+    -- send_command('unbind @c')
     send_command('unbind @h')
     send_command('unbind @g')
     send_command('unbind @s')
@@ -233,11 +233,10 @@ function init_gear_sets()
         feet="Kaykaus Boots +1", --7
         ear1="Mendi. Earring", --5
         ring1="Lebeche Ring", --(2)
-        waist="Witful Belt", --3/(3)
         })
 
     sets.precast.FC.Curaga = sets.precast.FC.Cure
-    sets.precast.FC.Impact = set_combine(sets.precast.FC, {head=empty, body="Twilight Cloak"})
+    sets.precast.FC.Impact = set_combine(sets.precast.FC, {head=empty, body="Twilight Cloak", waist="Shinjutsu-no-Obi +1"})
     sets.precast.FC.Dispelga = set_combine(sets.precast.FC, {main="Daybreak", sub="Ammurapi Shield"})
     sets.precast.Storm = set_combine(sets.precast.FC, {ring2={name="Stikini Ring +1", bag="wardrobe4"},})
 
@@ -286,8 +285,8 @@ function init_gear_sets()
         neck="Orunmila's Torque",
         ear1="Loquacious Earring",
         ear2="Etiolation Earring",
-        ring1="Mephitas's Ring +1",
-        ring2="Mephitas's Ring",
+        ring1={name="Fenrir Ring +1", bag="wardrobe3"},
+        ring2="Metamor. Ring +1",
         back="Fi Follet Cape +1",
         waist="Shinjutsu-no-Obi +1",
         } -- Max MP
@@ -312,7 +311,7 @@ function init_gear_sets()
         ear1="Beatific Earring",
         ear2="Meili Earring",
         ring1="Lebeche Ring", --3/(-5)
-        ring2="Sirona's Ring",
+        ring2="Menelaus's Ring",
         back=gear.SCH_Cure_Cape, --10
         waist="Bishop's Sash",
         }
@@ -340,8 +339,8 @@ function init_gear_sets()
         feet="Vanya Clogs",
         neck="Incanter's Torque",
         ear2="Meili Earring",
-        ring1="Menelaus's Ring",
-        ring2="Haoma's Ring",
+        ring1="Haoma's Ring",
+        ring2="Menelaus's Ring",
         waist="Bishop's Sash",
         }
 
@@ -353,6 +352,7 @@ function init_gear_sets()
         --feet="Gende. Galosh. +1",
         neck="Debilis Medallion",
         ear1="Beatific Earring",
+        ring2="Menelaus's Ring",
         back="Oretan. Cape +1",
         })
 
@@ -419,6 +419,7 @@ function init_gear_sets()
         sub="Ammurapi Shield",
         ammo="Staunch Tathlum +1",
         head="Amalric Coif +1",
+        hands="Regal Cuffs",
         ear1="Halasz Earring",
         ring1="Freke Ring",
         waist="Emphatikos Rope",
@@ -440,7 +441,7 @@ function init_gear_sets()
         ammo="Pemphredo Tathlum",
         head="Acad. Mortar. +3",
         body="Acad. Gown +3",
-        hands="Kaykaus Cuffs +1",
+        hands="Regal Cuffs",
         legs="Acad. Pants +3",
         feet="Acad. Loafers +3",
         neck="Argute Stole +1",
@@ -461,7 +462,7 @@ function init_gear_sets()
         })
 
     sets.midcast.ElementalEnfeeble = sets.midcast.Enfeebles
-    sets.midcast.Dispelga = set_combine(sets.midcast.IntEnfeebles, {main="Daybreak", sub="Ammurapi Shield"})
+    sets.midcast.Dispelga = set_combine(sets.midcast.IntEnfeebles, {main="Daybreak", sub="Ammurapi Shield", waist="Shinjutsu-no-Obi +1"})
 
     sets.midcast['Dark Magic'] = {
         main="Rubicundity",
@@ -533,8 +534,6 @@ function init_gear_sets()
         }
 
     sets.midcast['Elemental Magic'].Seidr = set_combine(sets.midcast['Elemental Magic'], {
-        main=gear.Grioavolr_MB,
-        sub="Khonsu",
         head="Merlinic Hood",
         body="Seidr Cotehardie",
         legs="Peda. Pants +3",
@@ -544,11 +543,8 @@ function init_gear_sets()
         })
 
     sets.midcast['Elemental Magic'].Resistant = set_combine(sets.midcast['Elemental Magic'], {
-        main=gear.Grioavolr_MB,
-        sub="Khonsu",
         head="Merlinic Hood",
         legs="Peda. Pants +3",
-        feet="Jhakri Pigaches +2",
         neck="Erra Pendant",
         waist="Sacro Cord",
         })
@@ -559,6 +555,7 @@ function init_gear_sets()
         head=empty,
         body="Twilight Cloak",
         ring2="Archon Ring",
+        waist="Shinjutsu-no-Obi +1",
         })
 
     sets.midcast.Helix = {
@@ -612,7 +609,7 @@ function init_gear_sets()
         ammo="Staunch Tathlum +1", --3/3
         head="Volte Cap",
         body="Mallquis Saio +2", --8/8
-        hands="Raetic Bangles +1",
+        hands="Gende. Gages +1", --4/4
         legs="Peda. Pants +3",
         feet="Volte Gaiters",
         neck="Loricate Torque +1", --6/6
@@ -630,6 +627,7 @@ function init_gear_sets()
         sub="Khonsu",
         head="Peda. M.Board +3",
         body="Amalric Doublet +1",
+        hands="Regal Cuffs",
         legs="Peda. Pants +3",
         feet="Peda. Loafers +3",
         neck="Argute Stole +1",
@@ -719,7 +717,7 @@ function init_gear_sets()
 
     sets.Obi = {waist="Hachirin-no-Obi"}
     sets.Bookworm = {back="Bookworm's Cape"}
-    sets.CP = {back="Mecisto. Mantle"}
+    -- sets.CP = {back="Mecisto. Mantle"}
 
 end
 
@@ -901,12 +899,12 @@ function customize_idle_set(idleSet)
     if player.mpp < 51 then
         idleSet = set_combine(idleSet, sets.latent_refresh)
     end
-    if state.CP.current == 'on' then
-        equip(sets.CP)
-        disable('back')
-    else
-        enable('back')
-    end
+    -- if state.CP.current == 'on' then
+    --     equip(sets.CP)
+    --     disable('back')
+    -- else
+    --     enable('back')
+    -- end
     if state.Auto_Kite.value == true then
        idleSet = set_combine(idleSet, sets.Kiting)
     end

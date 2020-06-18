@@ -99,7 +99,7 @@ function user_setup()
     state.BoostSpell = M{['description']='BoostSpell', 'Boost-STR', 'Boost-INT', 'Boost-AGI', 'Boost-VIT', 'Boost-DEX', 'Boost-MND', 'Boost-CHR'}
 
     state.WeaponLock = M(false, 'Weapon Lock')
-    state.CP = M(false, "Capacity Points Mode")
+    -- state.CP = M(false, "Capacity Points Mode")
 
     -- Additional local binds
     include('Global-Binds.lua') -- OK to remove this line
@@ -125,7 +125,7 @@ function user_setup()
     send_command('bind ^[ input /ja "Divine Seal" <me>')
     send_command('bind ^] input /ja "Divine Caress" <me>')
     send_command('bind !o input /ma "Regen IV" <stpc>')
-    send_command('bind @c gs c toggle CP')
+    -- send_command('bind @c gs c toggle CP')
     send_command('bind @r gs c cycle RegenMode')
     send_command('bind @w gs c toggle WeaponLock')
 
@@ -161,7 +161,7 @@ function user_unload()
     send_command('unbind ^[')
     send_command('unbind ^]')
     send_command('unbind !o')
-    send_command('unbind @c')
+    -- send_command('unbind @c')
     send_command('unbind @r')
     send_command('unbind @w')
     send_command('unbind ^numpad7')
@@ -233,12 +233,12 @@ function init_gear_sets()
         ear2="Nourish. Earring +1", --4
         ring1="Lebeche Ring", --(2)
         back="Perimede Cape", --(4)
-        waist="Witful Belt", --3(3)
+        waist="Shinjutsu-no-Obi +1", --5
         })
 
     sets.precast.FC.Curaga = sets.precast.FC.Cure
     sets.precast.FC.CureSolace = sets.precast.FC.Cure
-    sets.precast.FC.Impact = set_combine(sets.precast.FC, {head=empty, body="Twilight Cloak"})
+    sets.precast.FC.Impact = set_combine(sets.precast.FC, {head=empty, body="Twilight Cloak", waist="Shinjutsu-no-Obi +1"})
     sets.precast.FC.Dispelga = set_combine(sets.precast.FC, {main="Daybreak", sub="Ammurapi Shield"})
 
     -- Precast sets to enhance JAs
@@ -257,7 +257,7 @@ function init_gear_sets()
         neck="Fotia Gorget",
         ear1="Moonshade Earring",
         ear2="Ishvara Earring",
-        ring1="Ayanmo Ring",
+        ring1="Epaminondas's Ring",
         ring2="Shukuyu Ring",
         waist="Fotia Belt",
         back="Relucent Cape",
@@ -287,13 +287,13 @@ function init_gear_sets()
         feet="Kaykaus Boots +1",
         ear2="Mendi. Earring",
         back="Solemnity Cape",
-        waist="Austerity Belt +1",
+        waist="Shinjutsu-no-Obi +1",
         }
 
     -- Cure sets
 
     sets.midcast.CureSolace = {
-        main="Queller Rod", --15(+2)/(-15)
+        main="Raetic Rod +1", --23(+10)
         sub="Sors Shield", --3/(-5)
         ammo="Esper Stone +1", --0/(-5)
         head="Kaykaus Mitra +1", --11(+2)/(-6)
@@ -304,16 +304,13 @@ function init_gear_sets()
         neck="Incanter's Torque",
         ear1="Glorious Earring", -- (+2)/(-5)
         ear2="Meili Earring",
-        ring1="Sirona's Ring",
-        ring2="Haoma's Ring",
+        ring1="Lebeche Ring", --3/(-5)
+        ring2="Menelaus's Ring",
         back=gear.WHM_Cure_Cape, --10
         waist="Bishop's Sash",
-        }
+      }
 
     sets.midcast.CureSolaceWeather = set_combine(sets.midcast.CureSolace, {
-        main="Chatoyant Staff", --10
-        sub="Achaq Grip", --0/(-4)
-        hands="Kaykaus Cuffs +1", --11/(-6)
         ear2="Nourish. Earring +1", --7
         back="Twilight Cape",
         waist="Hachirin-no-Obi",
@@ -324,8 +321,6 @@ function init_gear_sets()
         })
 
     sets.midcast.CureWeather = set_combine(sets.midcast.CureNormal, {
-        main="Chatoyant Staff", --10
-        sub="Achaq Grip", --0/(-4)
         hands="Kaykaus Cuffs +1", --11/(-6)
         ear2="Nourish. Earring +1", --7
         back="Twilight Cape",
@@ -341,14 +336,12 @@ function init_gear_sets()
         })
 
     sets.midcast.CuragaWeather = {
-        main="Chatoyant Staff", --10
-        sub="Achaq Grip", --0/(-4)
         body="Theo. Briault +3", --0(+6)/(-6)
         hands="Kaykaus Cuffs +1", --11/(-6)
         neck="Nuna Gorget +1",
-        back="Twilight Cape",
         ring1={name="Stikini Ring +1", bag="wardrobe3"},
         ring2="Metamor. Ring +1",
+        back="Twilight Cape",
         waist="Hachirin-no-Obi",
         }
 
@@ -365,10 +358,10 @@ function init_gear_sets()
         neck="Orunmila's Torque",
         ear1="Loquacious Earring",
         ear2="Etiolation Earring",
-        ring1="Menelaus's Ring",
-        ring2="Haoma's Ring",
+        ring1="Kishar Ring",
+        ring2="Weather. Ring +1",
         back=gear.WHM_FC_Cape,
-        waist="Witful Belt",
+        waist="Embla Sash",
         }
 
     sets.midcast.Cursna = set_combine(sets.midcast.StatusRemoval, {
@@ -382,8 +375,8 @@ function init_gear_sets()
         neck="Debilis Medallion", --15
         ear1="Beatific Earring",
         ear2="Meili Earring",
-        ring1="Menelaus's Ring", --20
-        ring2="Haoma's Ring", --15
+        ring1="Haoma's Ring", --15
+        ring2="Menelaus's Ring", --20
         back=gear.WHM_FC_Cape, --25
         waist="Bishop's Sash",
         })
@@ -450,6 +443,7 @@ function init_gear_sets()
         main="Vadose Rod",
         sub="Ammurapi Shield",
         ammo="Staunch Tathlum +1",
+        hands="Regal Cuffs",
         ear1="Halasz Earring",
         ring1="Freke Ring",
         ring2="Evanescence Ring",
@@ -541,7 +535,7 @@ function init_gear_sets()
         ammo="Pemphredo Tathlum",
         head="Theophany Cap +3",
         body="Theo. Briault +3",
-        hands="Kaykaus Cuffs +1",
+        hands="Regal Cuffs",
         legs="Chironic Hose",
         feet="Theo. Duckbills +3",
         neck="Erra Pendant",
@@ -667,9 +661,9 @@ function init_gear_sets()
         main="Yagrush",
         head="Aya. Zucchetto +2",
         body="Ayanmo Corazza +2",
-        hands="Raetic Bangles +1",
+        hands=gear.Telchine_STP_hands,
         legs="Piety Pantaln. +3",
-        feet="Battlecast Gaiters",
+        feet=gear.Telchine_STP_feet,
         neck="Combatant's Torque",
         ear1="Cessance Earring",
         ear2="Telos Earring",
@@ -692,7 +686,7 @@ function init_gear_sets()
         }
 
     sets.Obi = {waist="Hachirin-no-Obi"}
-    sets.CP = {back="Mecisto. Mantle"}
+    -- sets.CP = {back="Mecisto. Mantle"}
 
 end
 
@@ -838,12 +832,12 @@ function customize_idle_set(idleSet)
     if player.mpp < 51 then
         idleSet = set_combine(idleSet, sets.latent_refresh)
     end
-    if state.CP.current == 'on' then
-        equip(sets.CP)
-        disable('back')
-    else
-        enable('back')
-    end
+    -- if state.CP.current == 'on' then
+    --     equip(sets.CP)
+    --     disable('back')
+    -- else
+    --     enable('back')
+    -- end
     if state.Auto_Kite.value == true then
        idleSet = set_combine(idleSet, sets.Kiting)
     end

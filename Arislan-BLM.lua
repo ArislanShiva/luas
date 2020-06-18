@@ -42,7 +42,7 @@ end
 -- Setup vars that are user-independent.  state.Buff vars initialized here will automatically be tracked.
 function job_setup()
 
-    state.CP = M(false, "Capacity Points Mode")
+    -- state.CP = M(false, "Capacity Points Mode")
 
     no_swap_gear = S{"Warp Ring", "Dim. Ring (Dem)", "Dim. Ring (Holla)", "Dim. Ring (Mea)",
               "Trizek Ring", "Echad Ring", "Facility Ring", "Capacity Ring"}
@@ -82,7 +82,7 @@ function user_setup()
     send_command('bind !w input /ma "Aspir III" <t>')
     send_command('bind !p input /ma "Shock Spikes" <me>')
     send_command('bind @d gs c toggle DeathMode')
-    send_command('bind @c gs c toggle CP')
+    -- send_command('bind @c gs c toggle CP')
     send_command('bind @w gs c toggle WeaponLock')
     send_command('bind ^numpad0 input /Myrkr')
 
@@ -102,7 +102,7 @@ function user_unload()
     send_command('unbind ^,')
     send_command('unbind !.')
     send_command('unbind @d')
-    send_command('unbind @c')
+    -- send_command('unbind @c')
     send_command('unbind @w')
     send_command('unbind ^numpad0')
 
@@ -166,12 +166,11 @@ function init_gear_sets()
     sets.precast.FC.Cure = set_combine(sets.precast.FC, {
         ear1="Mendi. Earring", --5
         ring1="Lebeche Ring", --(2)
-        waist="Witful Belt", --3/(3)
         })
 
     sets.precast.FC.Curaga = sets.precast.FC.Cure
-    sets.precast.FC.Impact = set_combine(sets.precast.FC, {head=empty, body="Twilight Cloak"})
-    sets.precast.FC.Dispelga = set_combine(sets.precast.FC, {main="Daybreak", sub="Ammurapi Shield"})
+    sets.precast.FC.Impact = set_combine(sets.precast.FC, {head=empty, body="Twilight Cloak", waist="Shinjutsu-no-Obi +1"})
+    sets.precast.FC.Dispelga = set_combine(sets.precast.FC, {main="Daybreak", sub="Ammurapi Shield", waist="Shinjutsu-no-Obi +1"})
     sets.precast.Storm = set_combine(sets.precast.FC, {ring2={name="Stikini Ring +1", bag="wardrobe4"},})
 
     sets.precast.FC.DeathMode = {
@@ -190,7 +189,7 @@ function init_gear_sets()
         waist="Embla Sash",
         }
 
-    sets.precast.FC.Impact.DeathMode = set_combine(sets.precast.FC.DeathMode, {head=empty, body="Twilight Cloak"})
+    sets.precast.FC.Impact.DeathMode = set_combine(sets.precast.FC.DeathMode, {head=empty, body="Twilight Cloak", waist="Shinjutsu-no-Obi +1"})
 
     -- Weaponskill sets
 
@@ -257,7 +256,7 @@ function init_gear_sets()
         ear2="Loquacious Earring",
         ring1="Kishar Ring",
         back=gear.BLM_FC_Cape,
-        waist="Witful Belt",
+        waist="Embla Sash",
         } -- Haste
 
     sets.midcast.Cure = {
@@ -352,6 +351,7 @@ function init_gear_sets()
         sub="Ammurapi Shield",
         ammo="Staunch Tathlum +1",
         head="Amalric Coif +1",
+        hands="Regal Cuffs",
         ear1="Halasz Earring",
         ring1="Freke Ring",
         ring2="Evanescence Ring",
@@ -367,10 +367,10 @@ function init_gear_sets()
         main="Maxentius",
         sub="Ammurapi Shield",
         ammo="Pemphredo Tathlum",
-        head="Merlinic Hood",
-        body="Vanya Robe",
-        hands="Raetic Bangles +1",
-        legs="Jhakri Slops +2",
+        head="Ea Hat +1",
+        body="Ea. Houppe +1",
+        hands="Regal Cuffs",
+        legs="Ea Slops +1",
         feet="Skaoi Boots",
         neck="Erra Pendant",
         ear1="Malignance Earring",
@@ -389,16 +389,16 @@ function init_gear_sets()
         }) -- INT/Magic accuracy
 
     sets.midcast.ElementalEnfeeble = sets.midcast.IntEnfeebles
-    sets.midcast.Dispelga = set_combine(sets.midcast.IntEnfeebles, {main="Daybreak", sub="Ammurapi Shield"})
+    sets.midcast.Dispelga = set_combine(sets.midcast.IntEnfeebles, {main="Daybreak", sub="Ammurapi Shield", waist="Shinjutsu-no-Obi +1"})
 
     sets.midcast['Dark Magic'] = {
         main="Rubicundity",
         sub="Ammurapi Shield",
         ammo="Pemphredo Tathlum",
-        head="Merlinic Hood",
-        body="Jhakri Robe +2",
+        head="Ea Hat +1",
+        body="Ea. Houppe +1",
         hands="Raetic Bangles +1",
-        legs="Jhakri Slops +2",
+        legs="Ea Slops +1",
         feet="Merlinic Crackows",
         neck="Erra Pendant",
         ear1="Malignance Earring",
@@ -556,7 +556,7 @@ function init_gear_sets()
         }
 
     sets.idle.DeathMode = {
-        main=gear.Grioavolr_MB,
+        main=gear.Lathi_MAB,
         sub="Khonsu",
         ammo="Ghastly Tathlum +1",
         head="Pixie Hairpin +1",
@@ -648,7 +648,7 @@ function init_gear_sets()
 
     sets.DarkAffinity = {head="Pixie Hairpin +1",ring2="Archon Ring"}
     sets.Obi = {waist="Hachirin-no-Obi"}
-    sets.CP = {back="Mecisto. Mantle"}
+    -- sets.CP = {back="Mecisto. Mantle"}
 
 end
 
@@ -828,12 +828,12 @@ function customize_idle_set(idleSet)
     if player.hpp <= 25 then
         idleSet = set_combine(idleSet, sets.latent_dt)
     end
-    if state.CP.current == 'on' then
-        equip(sets.CP)
-        disable('back')
-    else
-        enable('back')
-    end
+    -- if state.CP.current == 'on' then
+    --     equip(sets.CP)
+    --     disable('back')
+    -- else
+    --     enable('back')
+    -- end
     if buffactive['Mana Wall'] then
         idleSet = set_combine(idleSet, sets.precast.JA['Mana Wall'])
     end
