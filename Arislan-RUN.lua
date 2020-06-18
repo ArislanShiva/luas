@@ -108,7 +108,7 @@ function user_setup()
 
     state.WeaponSet = M{['description']='Weapon Set', 'Epeolatry', 'Lionheart', 'Aettir', 'Lycurgos'}
     state.AttackMode = M{['description']='Attack', 'Uncapped', 'Capped'}
-    state.CP = M(false, "Capacity Points Mode")
+    -- state.CP = M(false, "Capacity Points Mode")
     state.WeaponLock = M(false, 'Weapon Lock')
 
     state.Runes = M{['description']='Runes', 'Ignis', 'Gelus', 'Flabra', 'Tellus', 'Sulpor', 'Unda', 'Lux', 'Tenebrae'}
@@ -125,7 +125,7 @@ function user_setup()
     send_command('bind ^delete gs c cycle Runes')
     send_command('bind ^f11 gs c cycle MagicalDefenseMode')
     send_command('bind @a gs c cycle AttackMode')
-    send_command('bind @c gs c toggle CP')
+    -- send_command('bind @c gs c toggle CP')
     send_command('bind @e gs c cycleback WeaponSet')
     send_command('bind @r gs c cycle WeaponSet')
     send_command('bind @w gs c toggle WeaponLock')
@@ -146,7 +146,6 @@ function user_setup()
     send_command('bind !p input /ma "Ice Spikes" <me>')
 
     send_command('bind @w gs c toggle WeaponLock')
-    send_command('bind @c gs c toggle CP')
 
     if player.sub_job == 'WAR' then
         send_command('bind ^numpad/ input /ja "Berserk" <me>')
@@ -185,7 +184,7 @@ function user_unload()
     send_command('unbind ^insert')
     send_command('unbind ^delete')
     send_command('unbind @a')
-    send_command('unbind @c')
+    -- send_command('unbind @c')
     send_command('unbind @d')
     send_command('unbind !q')
     send_command('unbind @w')
@@ -237,7 +236,7 @@ function init_gear_sets()
         neck="Moonlight Necklace", --15
         ear1="Cryptic Earring", --4
         ear2="Trux Earring", --5
-        ring1="Supershear Ring", --5
+        ring1="Pernicious Ring", --5
         ring2="Eihwaz Ring", --5
         back=gear.RUN_HPD_Cape, --10
         waist="Kasiri Belt", --3
@@ -268,7 +267,7 @@ function init_gear_sets()
     sets.precast.JA['Lunge'] = {
         ammo="Aurgelmir Orb +1",
         head=gear.Herc_MAB_head,
-        body="Samnuha Coat",
+        body="Carm. Sc. Mail +1",
         hands="Carmine Fin. Ga. +1",
         legs=gear.Herc_MAB_legs,
         feet=gear.Herc_MAB_feet,
@@ -283,7 +282,7 @@ function init_gear_sets()
 
     sets.precast.JA['Swipe'] = sets.precast.JA['Lunge']
     sets.precast.JA['Gambit'] = {hands="Runeist's Mitons +3"}
-    sets.precast.JA['Rayke'] = {feet="Futhark Boots +1"}
+    sets.precast.JA['Rayke'] = {feet="Futhark Boots +3"}
     sets.precast.JA['Elemental Sforzo'] = {body="Futhark Coat +3"}
     sets.precast.JA['Swordplay'] = {hands="Futhark Mitons +3"}
 
@@ -292,7 +291,7 @@ function init_gear_sets()
         legs="Rune. Trousers +3",
         neck="Incanter's Torque",
         ear1="Beatific Earring",
-        --ear2="Saxnot Earring",
+        ear2="Saxnot Earring",
         ring1={name="Stikini Ring +1", bag="wardrobe3"},
         ring2={name="Stikini Ring +1", bag="wardrobe4"},
         --back="Altruistic Cape",
@@ -348,7 +347,7 @@ function init_gear_sets()
 
     sets.precast.WS = {
         ammo="Knobkierrie",
-        head="Lilitu Headpiece",
+        head=gear.Herc_WSD_head,
         body=gear.Herc_WS_body,
         hands="Meg. Gloves +2",
         legs=gear.Herc_WS_legs,
@@ -402,6 +401,12 @@ function init_gear_sets()
         ring1="Regal Ring",
         })
 
+    sets.precast.WS['Resolution'].Safe = set_combine(sets.precast.WS['Resolution'], {
+        head=gear.Adhemar_D_head,
+        body=gear.Adhemar_B_body,
+        feet=gear.Herc_TA_feet,
+        })
+
     sets.precast.WS['Dimidiation'] = set_combine(sets.precast.WS, {
         ammo="Aurgelmir Orb +1",
         body=gear.Adhemar_B_body,
@@ -423,6 +428,11 @@ function init_gear_sets()
     sets.precast.WS['Dimidiation'].Uncapped = set_combine(sets.precast.WS['Dimidiation'], {
         neck="Caro Necklace",
         waist="Grunfeld Rope",
+        })
+
+    sets.precast.WS['Dimidiation'].Safe = set_combine(sets.precast.WS['Dimidiation'], {
+        legs="Lustr. Subligar +1",
+        feet=gear.Herc_TA_feet,
         })
 
     sets.precast.WS['Herculean Slash'] = sets.precast.JA['Lunge']
@@ -450,8 +460,24 @@ function init_gear_sets()
         waist="Sailfi Belt +1",
         })
 
+    sets.precast.WS['Fell Cleave'].Acc = set_combine(sets.precast.WS.Acc, {
+        ear2="Ishvara Earring",
+        back=gear.RUN_WS1_Cape,
+        waist="Sailfi Belt +1",
+        })
+
+    sets.precast.WS['Fell Cleave'].Safe = set_combine(sets.precast.WS, {
+        feet="Futhark Boots +3",
+        })
+
     sets.precast.WS['Steel Cyclone'] = sets.precast.WS['Fell Cleave']
+    sets.precast.WS['Steel Cyclone'].Acc = sets.precast.WS['Fell Cleave'].Acc
+    sets.precast.WS['Steel Cyclone'].Safe = sets.precast.WS['Fell Cleave'].Safe
+
     sets.precast.WS['Upheaval'] = sets.precast.WS['Resolution']
+    sets.precast.WS['Upheaval'].Acc = sets.precast.WS['Resolution'].Acc
+    sets.precast.WS['Upheaval'].Safe = sets.precast.WS['Resolution'].Safe
+
     sets.precast.WS['Shield Break'] = sets.precast.WS['Shockwave']
     sets.precast.WS['Armor Break'] = sets.precast.WS['Shockwave']
     sets.precast.WS['Weapon Break'] = sets.precast.WS['Shockwave']
@@ -545,6 +571,7 @@ function init_gear_sets()
 
     sets.midcast.Flash = sets.Enmity
     sets.midcast.Foil = sets.Enmity
+    sets.midcast.Stun = sets.Enmity
     sets.midcast.Utsusemi = sets.midcast.SpellInterrupt
 
     sets.midcast['Blue Magic'] = {}
@@ -715,7 +742,7 @@ function init_gear_sets()
     sets.engaged.HighAcc = set_combine(sets.engaged.MidAcc, {
         ammo="C. Palug Stone",
         head="Carmine Mask +1",
-        body="Runeist's Coat +3",
+        body="Carm. Sc. Mail +1",
         hands="Runeist's Mitons +3",
         legs="Carmine Cuisses +1",
         ear1="Odr Earring",
@@ -804,7 +831,7 @@ function init_gear_sets()
 
     sets.Embolden = set_combine(sets.midcast.EnhancingDuration, {back="Evasionist's Cape"})
     sets.Obi = {waist="Hachirin-no-Obi"}
-    sets.CP = {back="Mecisto. Mantle"}
+    -- sets.CP = {back="Mecisto. Mantle"}
     --sets.Reive = {neck="Ygnas's Resolve +1"}
 
     sets.Epeolatry = {main="Epeolatry"}
@@ -1134,8 +1161,12 @@ end
 -------------------------------------------------------------------------------------------------------------------
 
 function get_custom_wsmode(spell, action, spellMap)
-    if spell.type == 'WeaponSkill' and state.AttackMode.value == 'Uncapped' then
-        return "Uncapped"
+    if spell.type == 'WeaponSkill' then
+        if state.AttackMode.value == 'Uncapped' and state.DefenseMode.value == 'None' and state.HybridMode.value == 'Normal' then
+            return "Uncapped"
+        elseif state.DefenseMode.value ~= 'None' or state.HybridMode.value == 'DT' then
+            return "Safe"
+        end
     end
 end
 

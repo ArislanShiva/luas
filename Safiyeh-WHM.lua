@@ -96,7 +96,7 @@ function user_setup()
     state.BoostSpell = M{['description']='BoostSpell', 'Boost-STR', 'Boost-INT', 'Boost-AGI', 'Boost-VIT', 'Boost-DEX', 'Boost-MND', 'Boost-CHR'}
 
     state.WeaponLock = M(false, 'Weapon Lock')
-    state.CP = M(false, "Capacity Points Mode")
+    -- state.CP = M(false, "Capacity Points Mode")
 
     -- Additional local binds
     include('Global-Binds.lua') -- OK to remove this line
@@ -119,7 +119,7 @@ function user_setup()
     send_command('bind ^[ input /ja "Divine Seal" <me>')
     send_command('bind ^] input /ja "Divine Caress" <me>')
     send_command('bind !o input /ma "Regen IV" <stpc>')
-    send_command('bind @c gs c toggle CP')
+    -- send_command('bind @c gs c toggle CP')
     send_command('bind @r gs c cycle RegenMode')
     send_command('bind @w gs c toggle WeaponLock')
 
@@ -152,7 +152,7 @@ function user_unload()
     send_command('unbind ^[')
     send_command('unbind ^]')
     send_command('unbind !o')
-    send_command('unbind @c')
+    -- send_command('unbind @c')
     send_command('unbind @r')
     send_command('unbind @w')
     send_command('unbind ^numpad7')
@@ -245,8 +245,8 @@ function init_gear_sets()
         --legs="Vanya Slops",
         --feet="Kaykaus Boots +1",
         ear2="Mendi. Earring",
-        --back="Solemnity Cape",
         waist="Austerity Belt +1",
+        back="Fi Follet Cape +1",
         }
 
     -- Cure sets
@@ -358,7 +358,7 @@ function init_gear_sets()
         ear2="Andoaa Earring",
         ring1={name="Stikini Ring +1", bag="wardrobe3"},
         ring2={name="Stikini Ring +1", bag="wardrobe4"},
-        back="Mending Cape",
+        back="Fi Follet Cape +1",
         waist="Olympus Sash",
         }
 
@@ -612,7 +612,7 @@ function init_gear_sets()
     sets.buff.Doom = {ring1={name="Saida Ring", bag="wardrobe3"}, ring2={name="Saida Ring", bag="wardrobe4"},}
 
     sets.Obi = {waist="Hachirin-no-Obi"}
-    sets.CP = {back="Mecisto. Mantle"}
+    -- sets.CP = {back="Mecisto. Mantle"}
 
 end
 
@@ -765,12 +765,12 @@ function customize_idle_set(idleSet)
     if player.mpp < 51 then
         idleSet = set_combine(idleSet, sets.latent_refresh)
     end
-    if state.CP.current == 'on' then
-        equip(sets.CP)
-        disable('back')
-    else
-        enable('back')
-    end
+    -- if state.CP.current == 'on' then
+    --     equip(sets.CP)
+    --     disable('back')
+    -- else
+    --     enable('back')
+    -- end
 
     return idleSet
 end

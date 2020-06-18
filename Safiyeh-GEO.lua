@@ -53,7 +53,7 @@ function job_setup()
     state.Buff.Entrust = buffactive.Entrust or false
     state.Buff['Blaze of Glory'] = buffactive['Blaze of Glory'] or false
 
-    state.CP = M(false, "Capacity Points Mode")
+    -- state.CP = M(false, "Capacity Points Mode")
 
     state.Auto = M(true, 'Auto Nuke')
     state.Element = M{['description']='Element','Fire','Blizzard','Aero','Stone','Thunder','Water'}
@@ -103,7 +103,7 @@ function user_setup()
     send_command('bind !p input /ja "Entrust" <me>')
     send_command('bind ^, input /ma Sneak <stpc>')
     send_command('bind ^. input /ma Invisible <stpc>')
-    send_command('bind @c gs c toggle CP')
+    -- send_command('bind @c gs c toggle CP')
     send_command('bind @w gs c toggle WeaponLock')
 
     send_command('bind ^numpad7 input /ws "Black Halo" <t>')
@@ -134,7 +134,7 @@ function user_unload()
     send_command('unbind !p')
     send_command('unbind ^,')
     send_command('unbind !.')
-    send_command('unbind @c')
+    -- send_command('unbind @c')
     send_command('unbind @w')
     send_command('unbind ^numpad7')
     send_command('unbind ^numpad8')
@@ -253,7 +253,7 @@ function init_gear_sets()
         main="Idris",
         sub="Chanter's Shield",
         head="Bagua Galero +3",
-        body="Azimuth Coat +1",
+        body="Witching Robe",
         hands="Shrieker's Cuffs",
         legs="Vanya Slops",
         feet=gear.Merl_MAB_feet,
@@ -262,7 +262,7 @@ function init_gear_sets()
         neck="Reti Pendant",
         ring1={name="Stikini Ring +1", bag="wardrobe3"},
         ring2={name="Stikini Ring +1", bag="wardrobe4"},
-        back="Lifestream Cape",
+        back="Fi Follet Cape +1",
         waist="Austerity Belt +1",
         }
 
@@ -316,7 +316,7 @@ function init_gear_sets()
         ear2="Andoaa Earring",
         ring1={name="Stikini Ring +1", bag="wardrobe3"},
         ring2={name="Stikini Ring +1", bag="wardrobe4"},
-        back="Perimede Cape",
+        back="Fi Follet Cape +1",
         waist="Olympus Sash",
         }
 
@@ -595,7 +595,7 @@ function init_gear_sets()
 
     sets.buff.Doom = {ring1={name="Saida Ring", bag="wardrobe3"}, ring2={name="Saida Ring", bag="wardrobe4"},}
     sets.Obi = {waist="Hachirin-no-Obi"}
-    sets.CP = {back="Mecisto. Mantle"}
+    -- sets.CP = {back="Mecisto. Mantle"}
 
 end
 
@@ -756,12 +756,12 @@ function customize_idle_set(idleSet)
     if player.mpp < 51 then
         idleSet = set_combine(idleSet, sets.latent_refresh)
     end
-    if state.CP.current == 'on' then
-        equip(sets.CP)
-        disable('back')
-    else
-        enable('back')
-    end
+    -- if state.CP.current == 'on' then
+    --     equip(sets.CP)
+    --     disable('back')
+    -- else
+    --     enable('back')
+    -- end
     if pet.isvalid then
         if pet.hpp > 73 then
             if newLuopan == 1 then
