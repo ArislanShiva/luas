@@ -94,7 +94,7 @@ function user_setup()
 
     state.MagicBurst = M(false, 'Magic Burst')
     state.AttackMode = M{['description']='Attack', 'Capped', 'Uncapped'}
-    state.CP = M(false, "Capacity Points Mode")
+    -- state.CP = M(false, "Capacity Points Mode")
 
     options.ninja_tool_warning_limit = 10
 
@@ -113,7 +113,7 @@ function user_setup()
     send_command('bind @/ input /ma "Utsusemi: San" <me>')
 
     send_command('bind @a gs c cycle AttackMode')
-    send_command('bind @c gs c toggle CP')
+    -- send_command('bind @c gs c toggle CP')
 
     send_command('bind ^numlock input /ja "Innin" <me>')
     send_command('bind !numlock input /ja "Yonin" <me>')
@@ -154,7 +154,7 @@ function user_unload()
     send_command('unbind ^=')
     send_command('unbind @/')
     send_command('unbind @a')
-    send_command('unbind @c')
+    -- send_command('unbind @c')
     send_command('unbind @t')
     send_command('unbind ^numlock')
     send_command('unbind !numlock')
@@ -201,7 +201,7 @@ function init_gear_sets()
         neck="Moonlight Necklace", --15
         ear1="Cryptic Earring", --4
         ear2="Trux Earring", --5
-        ring1="Supershear Ring", --5
+        ring1="Pernicious Ring", --5
         ring2="Eihwaz Ring", --5
         waist="Kasiri Belt", --3
         }
@@ -260,7 +260,7 @@ function init_gear_sets()
         body=gear.Herc_WS_body,
         hands=gear.Adhemar_B_hands,
         legs="Mochi. Hakama +3",
-        feet=gear.Herc_MWS_feet,
+        feet=gear.Herc_WSD_feet,
         neck="Fotia Gorget",
         ear1="Moonshade Earring",
         ear2="Ishvara Earring",
@@ -278,12 +278,11 @@ function init_gear_sets()
         ear2="Telos Earring",
         })
 
-    sets.precast.WS.Uncapped = set_combine(sets.precast.WS, {})
-
     sets.precast.WS['Blade: Hi'] = set_combine(sets.precast.WS, {
         ammo="Yetshila +1",
         body="Ken. Samue +1",
         hands="Mummu Wrists +2",
+        legs="Zoar Subligar +1",
         feet="Mummu Gamash. +2",
         neck="Ninja Nodowa +1",
         ear2="Odr Earring",
@@ -292,8 +291,6 @@ function init_gear_sets()
         })
 
     sets.precast.WS['Blade: Hi'].Acc = set_combine(sets.precast.WS['Blade: Hi'], {})
-
-    sets.precast.WS['Blade: Hi'].Uncapped = set_combine(sets.precast.WS['Blade: Hi'], {})
 
     sets.precast.WS['Blade: Ten'] = set_combine(sets.precast.WS, {
         neck="Ninja Nodowa +1",
@@ -306,8 +303,6 @@ function init_gear_sets()
         ear2="Telos Earring",
         })
 
-    sets.precast.WS['Blade: Ten'].Uncapped = set_combine(sets.precast.WS['Blade: Ten'], {})
-
     sets.precast.WS['Blade: Shun'] = set_combine(sets.precast.WS, {
         ammo="C. Palug Stone",
         head="Ken. Jinpachi +1",
@@ -316,7 +311,7 @@ function init_gear_sets()
         legs="Jokushu Haidate",
         feet="Ken. Sune-Ate +1",
         ear1="Mache Earring +1",
-        ear2="Odr Earring",
+        ear2="Lugra Earring +1",
         ring1="Gere Ring",
         ring2="Ilabrat Ring",
         back=gear.NIN_WS1_Cape,
@@ -327,19 +322,9 @@ function init_gear_sets()
         legs="Ken. Hakama +1",
         })
 
-    sets.precast.WS['Blade: Shun'].Uncapped = set_combine(sets.precast.WS['Blade: Shun'], {
-        head=gear.Adhemar_B_head,
-        body=gear.Adhemar_B_body,
-        hands=gear.Adhemar_B_hands,
-        legs=gear.Herc_WS_legs,
-        feet=gear.Herc_TA_feet,
-        })
-
     sets.precast.WS['Blade: Ku'] = set_combine(sets.precast.WS['Blade: Shun'], {})
 
     sets.precast.WS['Blade: Ku'].Acc = set_combine(sets.precast.WS['Blade: Ku'], {})
-
-    sets.precast.WS['Blade: Ku'].Uncapped = set_combine(sets.precast.WS['Blade: Ku'], {})
 
     sets.precast.WS['Blade: Kamu'] = set_combine(sets.precast.WS, {
         ring2="Ilabrat Ring",
@@ -350,7 +335,7 @@ function init_gear_sets()
         head="Hachiya Hatsu. +3",
         body="Samnuha Coat",
         hands="Leyline Gloves",
-        legs=gear.Herc_MWS_legs,
+        legs=gear.Herc_WSD_legs,
         feet=gear.Herc_MAB_feet,
         neck="Baetyl Pendant",
         ear1="Crematio Earring",
@@ -777,7 +762,7 @@ function init_gear_sets()
         waist="Gishdubar Sash", --10
         }
 
-    sets.CP = {back="Mecisto. Mantle"}
+    -- sets.CP = {back="Mecisto. Mantle"}
     sets.TreasureHunter = {head="Volte Cap", hands=gear.Herc_TH_hands, waist="Chaac Belt"}
     --sets.Reive = {neck="Ygnas's Resolve +1"}
 
@@ -906,9 +891,8 @@ end
 
 function get_custom_wsmode(spell, action, spellMap)
     local wsmode
-
-    if spell.type == 'WeaponSkill' and state.AttackMode.value == 'Uncapped' then
-        wsmode = 'Uncapped'
+    if state.OffenseMode.value == 'MidAcc' or state.OffenseMode.value == 'HighAcc' then
+        wsmode = 'Acc'
     end
 
     return wsmode
@@ -919,12 +903,12 @@ function customize_idle_set(idleSet)
     if state.Buff.Migawari then
        idleSet = set_combine(idleSet, sets.buff.Migawari)
     end
-    if state.CP.current == 'on' then
-        equip(sets.CP)
-        disable('back')
-    else
-        enable('back')
-    end
+    -- if state.CP.current == 'on' then
+    --     equip(sets.CP)
+    --     disable('back')
+    -- else
+    --     enable('back')
+    -- end
     if state.Auto_Kite.value == true then
         if world.time >= (17*60) or world.time <= (7*60) then
             idleSet = set_combine(idleSet, sets.NightMovement)
