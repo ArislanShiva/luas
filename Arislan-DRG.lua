@@ -56,7 +56,7 @@ function user_setup()
     state.IdleMode:options('Normal', 'DT')
 
     state.AttackMode = M{['description']='Attack', 'Capped', 'Uncapped'}
-    state.CP = M(false, "Capacity Points Mode")
+    -- state.CP = M(false, "Capacity Points Mode")
 
     -- Additional local binds
     include('Global-Binds.lua') -- OK to remove this line
@@ -68,7 +68,7 @@ function user_setup()
     send_command('bind !` input /ja "Spirit Link" <me>')
     send_command('bind @` input /ja "Dismiss" <me>')
     send_command('bind @a gs c cycle AttackMode')
-    send_command('bind @c gs c toggle CP')
+    -- send_command('bind @c gs c toggle CP')
 
     if player.sub_job == 'WAR' then
         send_command('bind !w input /ja "Defender" <me>')
@@ -115,7 +115,7 @@ function user_unload()
     send_command('unbind !`')
     send_command('unbind @`')
     send_command('unbind @a')
-    send_command('unbind @c')
+    -- send_command('unbind @c')
     send_command('unbind ^numpad/')
     send_command('unbind ^numpad*')
     send_command('unbind ^numpad-')
@@ -233,30 +233,20 @@ function init_gear_sets()
 
     sets.precast.WS.Acc = set_combine(sets.precast.WS, {})
 
-    sets.precast.WS.Uncapped = set_combine(sets.precast.WS, {
-        head="Hjarrandi Helm",
-        legs=gear.Valo_WSD_legs,
-        })
-
     sets.precast.WS['Camlann\'s Torment'] = set_combine(sets.precast.WS, {
         neck="Dgn. Collar +1",
         ear2="Ishvara Earring",
         ring2="Epaminondas's Ring",
+        waist="Sailfi Belt +1",
         })
 
     sets.precast.WS['Camlann\'s Torment'].Acc = set_combine(sets.precast.WS['Camlann\'s Torment'], {})
-
-    sets.precast.WS['Camlann\'s Torment'].Uncapped = set_combine(sets.precast.WS['Camlann\'s Torment'], {
-        neck="Fotia Gorget",
-        legs=gear.Valo_WSD_legs,
-        waist="Sailfi Belt +1",
-        })
 
     sets.precast.WS['Drakesbane'] = set_combine(sets.precast.WS, {
         head="Flam. Zucchetto +2",
         body="Hjarrandi Breast.",
         hands="Flamma Manopolas +2",
-        legs="Pelt. Cuissots +1",
+        legs="Zoar Subligar +1",
         neck="Dgn. Collar +1",
         ear2="Brutal Earring",
         ring1="Begrudging Ring",
@@ -268,11 +258,6 @@ function init_gear_sets()
         waist="Ioskeha Belt +1",
         })
 
-    sets.precast.WS['Drakesbane'].Uncapped = set_combine(sets.precast.WS['Drakesbane'], {
-        head="Hjarrandi Helm",
-        legs=gear.Valo_WSD_legs,
-        })
-
     sets.precast.WS['Geirskogul'] = set_combine(sets.precast.WS, {
         head="Lustratio Cap +1",
         legs="Lustr. Subligar +1",
@@ -282,11 +267,6 @@ function init_gear_sets()
         })
 
     sets.precast.WS['Geirskogul'].Acc = set_combine(sets.precast.WS['Geirskogul'], {})
-
-    sets.precast.WS['Geirskogul'].Uncapped = set_combine(sets.precast.WS['Geirskogul'], {
-        head="Hjarrandi Helm",
-        legs=gear.Valo_WSD_legs,
-        })
 
     sets.precast.WS['Impulse Drive'] = set_combine(sets.precast.WS['Camlann\'s Torment'], {
         head="Flam. Zucchetto +2",
@@ -313,12 +293,11 @@ function init_gear_sets()
         legs="Vishap Brais +3",
         back=gear.DRG_WS2_Cape,
         ear2="Ishvara Earring",
-            ring1="Regal Ring",
+        ring1="Regal Ring",
         })
 
     sets.precast.WS['Sonic Thrust'] = sets.precast.WS['Camlann\'s Torment']
     sets.precast.WS['Sonic Thrust'].Acc = sets.precast.WS['Camlann\'s Torment'].Acc
-    sets.precast.WS['Sonic Thrust'].Uncapped = sets.precast.WS['Camlann\'s Torment'].Uncapped
 
     sets.precast.WS['Stardiver'] = set_combine(sets.precast.WS, {
         head="Flam. Zucchetto +2",
@@ -335,14 +314,9 @@ function init_gear_sets()
         feet="Ptero. Greaves +3",
         })
 
-    sets.precast.WS['Stardiver'].Uncapped = set_combine(sets.precast.WS['Stardiver'], {
-        head="Ptero. Armet +3",
-        legs="Sulev. Cuisses +2",
-        })
-
     sets.precast.WS['Raiden Thrust'] = set_combine(sets.precast.WS, {
         ammo="Pemphredo Tathlum",
-        body="Sacro Breastplate",
+        body="Carm. Sc. Mail +1",
         hands="Carmine Fin. Ga. +1",
         ear1="Crematio Earring",
         ear2="Friomisi Earring",
@@ -558,7 +532,7 @@ function init_gear_sets()
         waist="Gishdubar Sash", --10
         }
 
-    sets.CP = {back="Mecisto. Mantle"}
+    -- sets.CP = {back="Mecisto. Mantle"}
     --sets.Reive = {neck="Ygnas's Resolve +1"}
 
 end
@@ -653,14 +627,23 @@ function job_update(cmdParams, eventArgs)
     handle_equipping_gear(player.status)
 end
 
+function get_custom_wsmode(spell, action, spellMap)
+    local wsmode
+    if state.OffenseMode.value == 'MidAcc' or state.OffenseMode.value == 'HighAcc' then
+        wsmode = 'Acc'
+    end
+
+    return wsmode
+end
+
 -- Modify the default idle set after it was constructed.
 function customize_idle_set(idleSet)
-    if state.CP.current == 'on' then
-        equip(sets.CP)
-        disable('back')
-    else
-        enable('back')
-    end
+    -- if state.CP.current == 'on' then
+    --     equip(sets.CP)
+    --     disable('back')
+    -- else
+    --     enable('back')
+    -- end
     if state.Auto_Kite.value == true then
        idleSet = set_combine(idleSet, sets.Kiting)
     end
@@ -704,21 +687,6 @@ function display_current_job_state(eventArgs)
         ..string.char(31,002)..msg)
 
     eventArgs.handled = true
-end
-
-
--------------------------------------------------------------------------------------------------------------------
--- User code that supplements self-commands.
--------------------------------------------------------------------------------------------------------------------
-
-function get_custom_wsmode(spell, action, spellMap)
-    local wsmode
-
-    if spell.type == 'WeaponSkill' and state.AttackMode.value == 'Uncapped' then
-        wsmode = 'Uncapped'
-    end
-
-    return wsmode
 end
 
 -------------------------------------------------------------------------------------------------------------------
