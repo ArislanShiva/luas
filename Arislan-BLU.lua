@@ -202,7 +202,7 @@ function user_setup()
     state.IdleMode:options('Normal', 'DT')--, 'Learning')
 
     state.MagicBurst = M(false, 'Magic Burst')
-    state.CP = M(false, "Capacity Points Mode")
+    -- state.CP = M(false, "Capacity Points Mode")
 
     -- Additional local binds
     include('Global-Binds.lua') -- OK to remove this line
@@ -237,7 +237,7 @@ function user_setup()
         send_command('bind !p input /ma "Mighty Guard" <me>')
     end
 
-    send_command('bind @c gs c toggle CP')
+    -- send_command('bind @c gs c toggle CP')
 
     if player.sub_job == 'WAR' then
         send_command('bind ^numpad/ input /ja "Berserk" <me>')
@@ -282,7 +282,7 @@ function user_unload()
     send_command('bind !u input /ma Stoneskin <me>')
     send_command('unbind !p')
     send_command('unbind ^,')
-    send_command('unbind @c')
+    -- send_command('unbind @c')
     send_command('unbind ^numlock')
     send_command('unbind ^numpad/')
     send_command('unbind ^numpad*')
@@ -329,7 +329,7 @@ function init_gear_sets()
         neck="Unmoving Collar +1", --10
         ear1="Cryptic Earring", --4
         ear2="Trux Earring", --5
-        ring1="Supershear Ring", --5
+        ring1="Pernicious Ring", --5
         ring2="Eihwaz Ring", --5
         waist="Kasiri Belt", --3
         }
@@ -359,7 +359,6 @@ function init_gear_sets()
         ring1="Kishar Ring", --4
         ring2="Weather. Ring +1", --6(4)
         back="Swith Cape +1", --4
-        waist="Witful Belt", --3/(3)
         }
 
     sets.precast.FC['Blue Magic'] = set_combine(sets.precast.FC, {body="Hashishin Mintan +1"})
@@ -379,7 +378,7 @@ function init_gear_sets()
 
     sets.precast.WS = {
         ammo="Aurgelmir Orb +1",
-        head="Lilitu Headpiece",
+        head=gear.Herc_WSD_head,
         body="Assim. Jubbah +3",
         hands="Jhakri Cuffs +2",
         legs="Luhlaza Shalwar +3",
@@ -404,7 +403,7 @@ function init_gear_sets()
         head=gear.Adhemar_B_head,
         body="Abnoba Kaftan",
         hands=gear.Adhemar_B_hands,
-        legs="Samnuha Tights",
+        legs="Zoar Subligar +1",
         feet="Thereoid Greaves",
         neck="Mirage Stole +2",
         ear2="Brutal Earring",
@@ -492,7 +491,6 @@ function init_gear_sets()
     sets.precast.WS['Judgment'].Acc = sets.precast.WS['True Strike'].Acc
 
     sets.precast.WS['Black Halo'] = set_combine(sets.precast.WS['Savage Blade'], {
-        head="Luh. Keffiyeh +3",
         ear2="Regal Earring",
         waist="Sailfi Belt +1",
         })
@@ -506,7 +504,7 @@ function init_gear_sets()
     sets.precast.WS['Realmrazer'].Acc = sets.precast.WS['Requiescat'].Acc
 
     sets.precast.WS['Flash Nova'] = set_combine(sets.precast.WS['Sanguine Blade'], {
-        head="Jhakri Coronal +2",
+        head=gear.Herc_MAB_head,
         ring2="Weather. Ring +1",
         })
 
@@ -727,7 +725,6 @@ function init_gear_sets()
         ear1="Njordr Earring",
         ear2="Enchntr. Earring +1",
         ring2="Weather. Ring +1",
-        waist="Witful Belt",
         }) -- 1 shadow per 50 skill
 
     sets.midcast['Blue Magic']['Carcharian Verve'] = set_combine(sets.midcast['Blue Magic'].Buff, {
@@ -769,7 +766,11 @@ function init_gear_sets()
         feet=gear.Taeon_Phalanx_feet, --3(10)
         })
 
-    sets.midcast.Aquaveil = set_combine(sets.midcast.EnhancingDuration, {head="Amalric Coif +1", waist="Emphatikos Rope"})
+    sets.midcast.Aquaveil = set_combine(sets.midcast.EnhancingDuration, {
+        head="Amalric Coif +1",
+        hands="Regal Cuffs",
+        waist="Emphatikos Rope",
+        })
 
     sets.midcast.Protect = set_combine(sets.midcast.EnhancingDuration, {ring1="Sheltered Ring"})
     sets.midcast.Protectra = sets.midcast.Protect
@@ -1228,7 +1229,7 @@ function init_gear_sets()
         waist="Gishdubar Sash", --10
         }
 
-    sets.CP = {back="Mecisto. Mantle"}
+    -- sets.CP = {back="Mecisto. Mantle"}
     sets.TreasureHunter = {head="Volte Cap", hands=gear.Herc_TH_hands, waist="Chaac Belt"}
     sets.midcast.Dia = sets.TreasureHunter
     sets.midcast.Diaga = sets.TreasureHunter
@@ -1399,17 +1400,26 @@ function job_get_spell_map(spell, default_spell_map)
     end
 end
 
+function get_custom_wsmode(spell, action, spellMap)
+    local wsmode
+    if state.OffenseMode.value == 'MidAcc' or state.OffenseMode.value == 'HighAcc' then
+        wsmode = 'Acc'
+    end
+
+    return wsmode
+end
+
 -- Modify the default idle set after it was constructed.
 function customize_idle_set(idleSet)
     if player.mpp < 51 then
         idleSet = set_combine(idleSet, sets.latent_refresh)
     end
-    if state.CP.current == 'on' then
-        equip(sets.CP)
-        disable('back')
-    else
-        enable('back')
-    end
+    -- if state.CP.current == 'on' then
+    --     equip(sets.CP)
+    --     disable('back')
+    -- else
+    --     enable('back')
+    -- end
     --if state.IdleMode.value == 'Learning' then
     --    equip(sets.Learning)
     --    disable('hands')
