@@ -109,12 +109,13 @@ function user_setup()
         'Quick Etude', 'Swift Etude', 'Vivacious Etude', 'Vital Etude', 'Dextrous Etude', 'Uncanny Etude',
         'Spirited Etude', 'Logical Etude', 'Enchanting Etude', 'Bewitching Etude'}
 
+    state.WeaponSet = M{['description']='Weapon Set', 'Carnwenhan', 'Twashtar', 'Naegling', 'Tauret', 'Free'}
     state.WeaponLock = M(false, 'Weapon Lock')
-    state.CP = M(false, "Capacity Points Mode")
+    -- state.CP = M(false, "Capacity Points Mode")
 
     -- Additional local binds
     include('Global-Binds.lua') -- OK to remove this line
-    include('Global-WHM-Binds.lua') -- OK to remove this line
+    include('Global-GEO-Binds.lua') -- OK to remove this line
 
     send_command('lua l gearinfo')
 
@@ -137,14 +138,15 @@ function user_setup()
 
     send_command('bind @` gs c cycle LullabyMode')
     send_command('bind @w gs c toggle WeaponLock')
-    send_command('bind @c gs c toggle CP')
+    -- send_command('bind @c gs c toggle CP')
+    send_command('bind @e gs c cycleback WeaponSet')
+    send_command('bind @r gs c cycle WeaponSet')
 
     --send_command('bind ^numpad7 input /ws "Savage Blade" <t>')
     send_command('bind ^numpad7 input /ws "Mordant Rime" <t>')
+    send_command('bind ^numpad4 input /ws "Evisceration" <t>')
     send_command('bind ^numpad5 input /ws "Rudra\'s Storm" <t>')
     send_command('bind ^numpad1 input /ws "Aeolian Edge" <t>')
-    send_command('bind ^numpad2 input /ws "Wasp Sting" <t>')
-    send_command('bind ^numpad3 input /ws "Gust Slash" <t>')
 
     select_default_macro_book()
     set_lockstyle()
@@ -174,13 +176,13 @@ function user_unload()
     send_command('unbind ^pagedown')
     send_command('unbind @`')
     send_command('unbind @w')
-    send_command('unbind @c')
+    -- send_command('unbind @c')
+    send_command('unbind @e')
+    send_command('unbind @r')
     send_command('unbind ^numpad7')
     send_command('unbind ^numpad4')
     send_command('unbind ^numpad5')
     send_command('unbind ^numpad1')
-    send_command('unbind ^numpad2')
-    send_command('unbind ^numpad3')
 
     send_command('lua u gearinfo')
 end
@@ -208,7 +210,7 @@ function init_gear_sets()
         ring1="Weather. Ring +1", --5
         ring2="Kishar Ring", --4
         back=gear.BRD_Song_Cape, --10
-        waist="Witful Belt", --3(3)
+        waist="Embla Sash", --5
         }
 
     sets.precast.FC['Enhancing Magic'] = set_combine(sets.precast.FC, {waist="Siegel Sash"})
@@ -230,7 +232,7 @@ function init_gear_sets()
 
     sets.precast.FC.SongPlaceholder = set_combine(sets.precast.FC.BardSong, {range=info.ExtraSongInstrument})
 
-    sets.precast.FC.Dispelga = set_combine(sets.precast.FC, {main="Daybreak", sub="Ammurapi Shield"})
+    sets.precast.FC.Dispelga = set_combine(sets.precast.FC, {main="Daybreak", sub="Ammurapi Shield", waist="Shinjutsu-no-Obi +1"})
 
     -- Precast sets to enhance JAs
 
@@ -249,9 +251,9 @@ function init_gear_sets()
     -- Default set for any weaponskill that isn't any more specifically defined
     sets.precast.WS = {
         range=gear.Linos_WS,
-        head="Bihu Roundlet +3",
+        head=gear.Chironic_WSD_head,
         body="Bihu Jstcorps. +3",
-        hands="Bihu Cuffs +3",
+        hands=gear.Chironic_WSD_hands,
         legs="Bihu Cannions +3",
         feet="Bihu Slippers +3",
         neck="Fotia Gorget",
@@ -259,7 +261,7 @@ function init_gear_sets()
         ear2="Moonshade Earring",
         ring1="Epaminondas's Ring",
         ring2="Ilabrat Ring",
-        back=gear.BRD_WS_Cape,
+        back=gear.BRD_WS1_Cape,
         waist="Fotia Belt",
         }
 
@@ -268,20 +270,24 @@ function init_gear_sets()
         range=gear.Linos_TP,
         head="Lustratio Cap +1",
         body="Ayanmo Corazza +2",
-        legs="Lustr. Subligar +1",
+        hands="Bihu Cuffs +3",
+        legs="Zoar Subligar +1",
         feet="Lustra. Leggings +1",
         ear1="Brutal Earring",
         ring1="Begrudging Ring",
-        back=gear.BRD_TP_Cape,
+        back=gear.BRD_WS2_Cape,
         })
 
     sets.precast.WS['Exenterator'] = set_combine(sets.precast.WS, {
-        body="Ayanmo Corazza +2",
+        range=gear.Linos_TP,
+        body="Bihu Roundlet +3",
+        hands="Bihu Cuffs +3",
         ear1="Brutal Earring",
+        ring1="Shukuyu Ring",
+        back=gear.BRD_WS2_Cape,
         })
 
     sets.precast.WS['Mordant Rime'] = set_combine(sets.precast.WS, {
-        head="Chironic Hat",
         neck="Bard's Charm +1",
         ear2="Regal Earring",
         ring2="Metamor. Ring +1",
@@ -289,19 +295,19 @@ function init_gear_sets()
         })
 
     sets.precast.WS['Rudra\'s Storm'] = set_combine(sets.precast.WS, {
-        head="Lustratio Cap +1",
         legs="Lustr. Subligar +1",
         feet="Lustra. Leggings +1",
         neck="Bard's Charm +1",
         waist="Grunfeld Rope",
+        back=gear.BRD_WS2_Cape,
         })
 
     sets.precast.WS['Savage Blade'] = set_combine(sets.precast.WS, {
-        head="Lustratio Cap +1",
         feet="Lustra. Leggings +1",
         neck="Caro Necklace",
         ring1="Shukuyu Ring",
         waist="Sailfi Belt +1",
+        back=gear.BRD_WS2_Cape,
         })
 
 
@@ -375,7 +381,7 @@ function init_gear_sets()
     -- For Horde Lullaby maxiumum AOE range.
     sets.midcast.SongStringSkill = {
         ear1="Gersemi Earring",
-        ear2="Musical Earring",
+        ear2="Darkside Earring",
         ring2={name="Stikini Ring +1", bag="wardrobe4"},
         }
 
@@ -394,7 +400,7 @@ function init_gear_sets()
         neck="Incanter's Torque",
         ear1="Beatific Earring",
         ear2="Meili Earring",
-        ring1="Sirona's Ring",
+        ring1="Menelaus's Ring",
         ring2="Haoma's Ring",
         back="Solemnity Cape", --7
         waist="Bishop's Sash",
@@ -471,7 +477,7 @@ function init_gear_sets()
         back=gear.BRD_Song_Cape,
         }
 
-    sets.midcast.Dispelga = set_combine(sets.midcast['Enfeebling Magic'], {main="Daybreak", sub="Ammurapi Shield"})
+    sets.midcast.Dispelga = set_combine(sets.midcast['Enfeebling Magic'], {main="Daybreak", sub="Ammurapi Shield", waist="Shinjutsu-no-Obi +1"})
 
     ------------------------------------------------------------------------------------------------
     ----------------------------------------- Idle Sets --------------------------------------------
@@ -563,20 +569,18 @@ function init_gear_sets()
     -- EG: sets.engaged.Dagger.Accuracy.Evasion
 
     sets.engaged = {
-        main="Carnwenhan",
-        sub="Taming Sari",
         range=gear.Linos_TP,
         head="Aya. Zucchetto +2",
         body="Ayanmo Corazza +2",
-        hands="Chironic Gloves",
+        hands=gear.Chironic_QA_hands,
         legs="Aya. Cosciales +2",
-        feet="Chironic Slippers",
+        feet=gear.Chironic_QA_feet,
         neck="Bard's Charm +1",
         ear1="Cessance Earring",
         ear2="Telos Earring",
         ring1={name="Chirich Ring +1", bag="wardrobe3"},
         ring2={name="Chirich Ring +1", bag="wardrobe4"},
-        back=gear.BRD_TP_Cape,
+        back=gear.BRD_STP_Cape,
         waist="Windbuffet Belt +1",
         }
 
@@ -591,14 +595,12 @@ function init_gear_sets()
 
     -- No Magic Haste (74% DW to cap)
     sets.engaged.DW = {
-        main="Carnwenhan",
-        sub="Taming Sari",
         range=gear.Linos_TP,
         head="Aya. Zucchetto +2",
         body="Ayanmo Corazza +2",
-        hands="Chironic Gloves",
+        hands=gear.Chironic_QA_hands,
         legs="Aya. Cosciales +2",
-        feet="Chironic Slippers",
+        feet=gear.Chironic_QA_feet,
         neck="Bard's Charm +1",
         ear1="Eabani Earring", --4
         ear2="Suppanomimi", --5
@@ -632,15 +634,15 @@ function init_gear_sets()
         range=gear.Linos_TP,
         head="Aya. Zucchetto +2",
         body="Ayanmo Corazza +2",
-        hands="Chironic Gloves",
+        hands=gear.Chironic_QA_hands,
         legs="Aya. Cosciales +2",
-        feet="Chironic Slippers",
+        feet=gear.Chironic_QA_feet,
         neck="Bard's Charm +1",
         ear1="Eabani Earring", --4
         ear2="Telos Earring",
         ring1={name="Chirich Ring +1", bag="wardrobe3"},
         ring2={name="Chirich Ring +1", bag="wardrobe4"},
-        back=gear.BRD_TP_Cape,
+        back=gear.BRD_STP_Cape,
         waist="Reiki Yotai", --7
         }
 
@@ -657,7 +659,8 @@ function init_gear_sets()
         head="Aya. Zucchetto +2",
         body="Ashera Harness",
         hands=gear.Telchine_STP_hands,
-        feet="Battlecast Gaiters",
+        feet=gear.Telchine_STP_feet,
+        neck="Bard's Charm +1",
         ring1={name="Chirich Ring +1", bag="wardrobe3"},
         ring2={name="Chirich Ring +1", bag="wardrobe4"},
         back=gear.BRD_STP_Cape,
@@ -709,7 +712,7 @@ function init_gear_sets()
         }
 
     sets.Obi = {waist="Hachirin-no-Obi"}
-    sets.CP = {back="Mecisto. Mantle"}
+    -- sets.CP = {back="Mecisto. Mantle"}
     --sets.Reive = {neck="Ygnas's Resolve +1"}
 
 end
@@ -870,6 +873,15 @@ end
 
 -- Modify the default melee set after it was constructed.
 function customize_melee_set(meleeSet)
+    if state.WeaponSet.value == "Carnwenhan" then
+        equip({main="Carnwenhan",sub="Taming Sari"})
+    elseif state.WeaponSet.value == "Twashtar" then
+        equip({main="Twashtar",sub="Centovente"})
+    elseif state.WeaponSet.value == "Naegling" then
+        equip({main="Naegling",sub="Centovente"})
+    elseif state.WeaponSet.value == "Tauret" then
+        equip({main="Tauret",sub="Twashtar"})
+    end
     if buffactive['Aftermath: Lv.3'] and player.equipment.main == "Carnwenhan" then
         meleeSet = set_combine(meleeSet, sets.engaged.Aftermath)
     end
@@ -877,14 +889,23 @@ function customize_melee_set(meleeSet)
     return meleeSet
 end
 
+function get_custom_wsmode(spell, action, spellMap)
+    local wsmode
+    if state.OffenseMode.value == 'MidAcc' or state.OffenseMode.value == 'HighAcc' then
+        wsmode = 'Acc'
+    end
+
+    return wsmode
+end
+
 -- Modify the default idle set after it was constructed.
 function customize_idle_set(idleSet)
-    if state.CP.current == 'on' then
-        equip(sets.CP)
-        disable('back')
-    else
-        enable('back')
-    end
+    -- if state.CP.current == 'on' then
+    --     equip(sets.CP)
+    --     disable('back')
+    -- else
+    --     enable('back')
+    -- end
     if player.mpp < 51 then
         idleSet = set_combine(idleSet, sets.latent_refresh)
     end
