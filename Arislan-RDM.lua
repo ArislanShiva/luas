@@ -80,7 +80,7 @@ end
 -- Setup vars that are user-independent.  state.Buff vars initialized here will automatically be tracked.
 function job_setup()
 
-    state.CP = M(false, "Capacity Points Mode")
+    -- state.CP = M(false, "Capacity Points Mode")
     state.Buff.Composure = buffactive.Composure or false
     state.Buff.Saboteur = buffactive.Saboteur or false
     state.Buff.Stymie = buffactive.Stymie or false
@@ -124,11 +124,11 @@ function user_setup()
     state.SleepMode = M{['description']='Sleep Mode', 'Normal', 'MaxDuration'}
     state.EnspellMode = M(false, 'Enspell Melee Mode')
     state.NM = M(false, 'NM?')
-    state.CP = M(false, "Capacity Points Mode")
+    -- state.CP = M(false, "Capacity Points Mode")
 
     -- Additional local binds
     include('Global-Binds.lua') -- OK to remove this line
-    include('Global-GEO-Binds.lua') -- OK to remove this line
+    include('Global-WHM-Binds.lua') -- OK to remove this line
 
     send_command('lua l gearinfo')
 
@@ -166,7 +166,9 @@ function user_setup()
     send_command('bind @e gs c cycle EnspellMode')
     send_command('bind @d gs c toggle NM')
     send_command('bind @w gs c toggle WeaponLock')
-    send_command('bind @c gs c toggle CP')
+    -- send_command('bind @c gs c toggle CP')
+    send_command('bind @e gs c cycleback WeaponSet')
+    send_command('bind @r gs c cycle WeaponSet')
 
     send_command('bind ^numpad7 input /ws "Savage Blade" <t>')
     send_command('bind ^numpad9 input /ws "Chant du Cygne" <t>')
@@ -208,7 +210,7 @@ function user_unload()
     send_command('unbind @e')
     send_command('unbind @d')
     send_command('unbind @w')
-    send_command('unbind @c')
+    -- send_command('unbind @c')
     send_command('unbind @r')
     send_command('unbind !insert')
     send_command('unbind !delete')
@@ -266,7 +268,7 @@ function init_gear_sets()
         ring1="Lebeche Ring", --(2)
         ring2="Weather. Ring +1", --5/(4)
         back="Perimede Cape", --(4)
-        waist="Witful Belt", --3/(3)
+        waist="Embla Sash",
         })
 
     sets.precast.FC.Curaga = sets.precast.FC.Cure
@@ -277,15 +279,16 @@ function init_gear_sets()
         ammo="Sapience Orb", --2
         head=empty,
         body="Twilight Cloak",
-        hands="Merlinic Dastanas", --6
+        hands="Gende. Gages +1", --7
         neck="Orunmila's Torque", --5
         ear1="Loquacious Earring", --2
         ear2="Enchntr. Earring +1", --2
         ring1="Kishar Ring", --4
-        waist="Witful Belt", --3/(3)
+        back="Swith Cape +1", --4
+        waist="Shinjutsu-no-Obi +1", --5
         })
 
-    sets.precast.FC.Dispelga = set_combine(sets.precast.FC, {main="Daybreak", sub="Ammurapi Shield"})
+    sets.midcast.FC.Dispelga = set_combine(sets.precast.FC, {main="Daybreak", sub="Ammurapi Shield", waist="Shinjutsu-no-Obi +1"})
     sets.precast.Storm = set_combine(sets.precast.FC, {name="Stikini Ring +1", bag="wardrobe4"})
     sets.precast.FC.Utsusemi = sets.precast.FC.Cure
 
@@ -323,6 +326,7 @@ function init_gear_sets()
         head="Aya. Zucchetto +2",
         body="Ayanmo Corazza +2",
         hands="Malignance Gloves",
+        legs="Zoar Subligar +1",
         feet="Thereoid Greaves",
         ear1="Sherida Earring",
         ring1="Begrudging Ring",
@@ -432,8 +436,8 @@ function init_gear_sets()
         neck="Incanter's Torque",
         ear1="Beatific Earring",
         ear2="Meili Earring",
-        ring1="Sirona's Ring",
-        ring2="Haoma's Ring",
+        ring1="Haoma's Ring",
+        ring2="Menelaus's Ring",
         back=gear.RDM_MND_Cape, --(-10)
         waist="Bishop's Sash",
         }
@@ -465,8 +469,8 @@ function init_gear_sets()
         feet="Vanya Clogs",
         neck="Incanter's Torque",
         ear2="Meili Earring",
-        ring1="Menelaus's Ring",
-        ring2="Haoma's Ring",
+        ring1="Haoma's Ring",
+        ring2="Menelaus's Ring",
         back=gear.RDM_MND_Cape,
         waist="Bishop's Sash",
         }
@@ -476,6 +480,7 @@ function init_gear_sets()
         body="Viti. Tabard +3",
         neck="Debilis Medallion",
         ear1="Beatific Earring",
+        ring2="Menelaus's Ring",
         back="Oretan. Cape +1",
         })
 
@@ -552,6 +557,7 @@ function init_gear_sets()
     sets.midcast.Aquaveil = set_combine(sets.midcast.EnhancingDuration, {
         ammo="Staunch Tathlum +1",
         head="Amalric Coif +1",
+        hands="Regal Cuffs",
         ear1="Halasz Earring",
         ring1="Freke Ring",
         ring2="Evanescence Ring",
@@ -576,7 +582,7 @@ function init_gear_sets()
         ammo="Regal Gem",
         head="Viti. Chapeau +3",
         body="Lethargy Sayon +1",
-        hands="Kaykaus Cuffs +1",
+        hands="Regal Cuffs",
         legs="Chironic Hose",
         feet="Vitiation Boots +3",
         neck="Dls. Torque +2",
@@ -595,6 +601,7 @@ function init_gear_sets()
         ammo=empty,
         head="Atrophy Chapeau +3",
         body="Atrophy Tabard +3",
+        hands="Kaykaus Cuffs +1",
         ring1={name="Stikini Ring +1", bag="wardrobe3"},
         waist="Acuity Belt +1",
         })
@@ -620,6 +627,7 @@ function init_gear_sets()
         range="Ullr",
         ammo=empty,
         body="Atrophy Tabard +3",
+        hands="Kaykaus Cuffs +1",
         ring1={name="Stikini Ring +1", bag="wardrobe3"},
         waist="Acuity Belt +1",
         })
@@ -657,22 +665,22 @@ function init_gear_sets()
     sets.midcast.SleepMaxDuration = set_combine(sets.midcast.Sleep, {
         head="Leth. Chappel +1",
         body="Lethargy Sayon +1",
-        hands="Leth. Gantherots +1",
+        hands="Regal Cuffs",
         legs="Leth. Fuseau +1",
         feet="Leth. Houseaux +1",
         })
 
     sets.midcast.ElementalEnfeeble = sets.midcast.IntEnfeebles
-    sets.midcast.Dispelga = set_combine(sets.midcast.IntEnfeeblesAcc, {main="Daybreak", sub="Ammurapi Shield"})
+    sets.midcast.Dispelga = set_combine(sets.midcast.IntEnfeeblesAcc, {main="Daybreak", sub="Ammurapi Shield", waist="Shinjutsu-no-Obi +1"})
 
     sets.midcast['Dark Magic'] = {
         main="Rubicundity",
         sub="Ammurapi Shield",
         ammo="Pemphredo Tathlum",
         head="Atrophy Chapeau +3",
-        body="Atrophy Tabard +3",
+        body="Carm. Sc. Mail +1",
         hands="Kaykaus Cuffs +1",
-        legs="Jhakri Slops +2",
+        legs="Ea Slops +1",
         feet="Merlinic Crackows",
         neck="Erra Pendant",
         ear1="Malignance Earring",
@@ -736,6 +744,7 @@ function init_gear_sets()
         head=empty,
         body="Twilight Cloak",
         ring1="Archon Ring",
+        waist="Shinjutsu-no-Obi +1",
         })
 
     sets.midcast.Utsusemi = sets.midcast.SpellInterrupt
@@ -795,6 +804,7 @@ function init_gear_sets()
         ammo="Regal Gem",
         head="Viti. Chapeau +3",
         body="Viti. Tabard +3",
+        hands="Regal Cuffs",
         legs="Viti. Tights +3",
         feet="Vitiation Boots +3",
         neck="Dls. Torque +2",
@@ -865,6 +875,7 @@ function init_gear_sets()
     sets.engaged.HighAcc = set_combine(sets.engaged, {
         ammo="Voluspa Tathlum",
         head="Carmine Mask +1",
+        body="Carm. Sc. Mail +1",
         legs="Carmine Cuisses +1",
         ear1="Cessance Earring",
         ear2="Mache Earring +1",
@@ -874,8 +885,8 @@ function init_gear_sets()
 
     -- No Magic Haste (74% DW to cap)
     sets.engaged.DW = {
-        main="Trainee Knife",
-        sub="Qutrub Knife",
+        main="Naegling",
+        sub="Tauret",
         ammo="Aurgelmir Orb +1",
         head="Malignance Chapeau",
         body="Malignance Tabard",
@@ -899,6 +910,7 @@ function init_gear_sets()
     sets.engaged.DW.HighAcc = set_combine(sets.engaged.DW.MidAcc, {
         ammo="Voluspa Tathlum",
         head="Carmine Mask +1",
+        body="Carm. Sc. Mail +1",
         ear1="Cessance Earring",
         ear2="Mache Earring +1",
         })
@@ -928,6 +940,7 @@ function init_gear_sets()
     sets.engaged.DW.HighAcc.LowHaste = set_combine(sets.engaged.DW.MidAcc.LowHaste, {
         ammo="Voluspa Tathlum",
         head="Carmine Mask +1",
+        body="Carm. Sc. Mail +1",
         ear1="Cessance Earring",
         ear2="Mache Earring +1",
         })
@@ -959,6 +972,7 @@ function init_gear_sets()
     sets.engaged.DW.HighAcc.MidHaste = set_combine(sets.engaged.DW.MidAcc.MidHaste, {
         ammo="Voluspa Tathlum",
         head="Carmine Mask +1",
+        body="Carm. Sc. Mail +1",
         ear1="Cessance Earring",
         ear2="Mache Earring +1",
         })
@@ -989,6 +1003,7 @@ function init_gear_sets()
     sets.engaged.DW.HighAcc.HighHaste = set_combine(sets.engaged.DW.MidAcc.HighHaste, {
         ammo="Voluspa Tathlum",
         head="Carmine Mask +1",
+        body="Carm. Sc. Mail +1",
         ear1="Cessance Earring",
         ear2="Mache Earring +1",
         })
@@ -1019,7 +1034,8 @@ function init_gear_sets()
     sets.engaged.DW.HighAcc.MaxHaste = set_combine(sets.engaged.DW.MidAcc.MaxHaste, {
         ammo="Voluspa Tathlum",
         head="Carmine Mask +1",
-        legs="Carmine Cuisses +1", --6
+        body="Carm. Sc. Mail +1",
+        legs="Carmine Cuisses +1",
         ear1="Cessance Earring",
         ear2="Mache Earring +1",
         waist="Olseni Belt",
@@ -1080,7 +1096,7 @@ function init_gear_sets()
         }
 
     sets.Obi = {waist="Hachirin-no-Obi"}
-    sets.CP = {back="Mecisto. Mantle"}
+    -- sets.CP = {back="Mecisto. Mantle"}
 
 end
 
@@ -1245,16 +1261,27 @@ function job_get_spell_map(spell, default_spell_map)
     end
 end
 
+function get_custom_wsmode(spell, action, spellMap)
+    local wsmode
+    if state.OffenseMode.value == 'MidAcc' or state.OffenseMode.value == 'HighAcc' then
+        wsmode = 'Acc'
+    end
+
+    return wsmode
+end
+
 -- Modify the default idle set after it was constructed.
 function customize_idle_set(idleSet)
     if player.mpp < 51 then
         idleSet = set_combine(idleSet, sets.latent_refresh)
-     elseif state.CP.current == 'on' then
-        equip(sets.CP)
-        disable('back')
-    else
-        enable('back')
     end
+    -- if state.CP.current == 'on' then
+    --     equip(sets.CP)
+    --     disable('back')
+    -- else
+    --     enable('back')
+    -- end
+
     if state.Auto_Kite.value == true then
        idleSet = set_combine(idleSet, sets.Kiting)
     end
@@ -1480,7 +1507,7 @@ function set_sleep_timer(spell)
     base = base + self.job_points.rdm.enfeebling_magic_duration
 
     --Enfeebling duration non-augmented gear total
-    gear_mult = 1.20
+    gear_mult = 1.40
     --Enfeebling duration augmented gear total
     aug_mult = 1.25
     --Estoquer/Lethargy Composure set bonus
@@ -1491,7 +1518,7 @@ function set_sleep_timer(spell)
         if buffactive.Stymie then
             base = base + self.job_points.rdm.stymie_effect
         end
-        empy_mult = 1.5 --from sets.midcast.SleepMaxDuration
+        empy_mult = 1.35 --from sets.midcast.SleepMaxDuration
     end
 
     totalDuration = math.floor(base * gear_mult * aug_mult * empy_mult)
