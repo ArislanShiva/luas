@@ -123,7 +123,7 @@ function user_setup()
     state.IdleMode:options('Normal', 'DT', 'Refresh')
 
     state.WeaponSet = M{['description']='Weapon Set', 'Fomalhaut'}
-    state.CP = M(false, "Capacity Points Mode")
+    -- state.CP = M(false, "Capacity Points Mode")
     state.WeaponLock = M(false, 'Weapon Lock')
 
     gear.RAbullet = "Chrono Bullet"
@@ -153,7 +153,7 @@ function user_setup()
     send_command('bind ^[ gs c toggle selectqdtarget')
     send_command('bind ^] gs c toggle usealtqd')
 
-    send_command('bind @c gs c toggle CP')
+    -- send_command('bind @c gs c toggle CP')
     send_command('bind @q gs c cycle QDMode')
     send_command('bind @e gs c cycleback WeaponSet')
     send_command('bind @r gs c cycle WeaponSet')
@@ -204,7 +204,7 @@ function user_unload()
     send_command('unbind ^[')
     send_command('unbind ^]')
     send_command('unbind ^,')
-    send_command('unbind @c')
+    -- send_command('unbind @c')
     send_command('unbind @q')
     send_command('unbind @w')
     send_command('unbind @e')
@@ -553,7 +553,7 @@ function init_gear_sets()
 
     sets.midcast.RA.Critical = set_combine(sets.midcast.RA, {
         head="Mummu Bonnet +2",
-        body="Mummu Jacket +2",
+        body="Meg. Cuirie +2",
         hands="Mummu Wrists +2",
         legs="Mummu Kecks +2",
         feet="Mummu Gamash. +2",
@@ -949,7 +949,7 @@ function init_gear_sets()
     sets.buff.Doom = {ring1={name="Saida Ring", bag="wardrobe3"}, ring2={name="Saida Ring", bag="wardrobe4"},}
 
     sets.Obi = {waist="Hachirin-no-Obi"}
-    sets.CP = {back="Mecisto. Mantle"}
+    -- sets.CP = {back="Mecisto. Mantle"}
     --sets.Reive = {neck="Ygnas's Resolve +1"}
 
     sets.Fomalhaut = {ranged="Fomalhaut"}
@@ -1138,12 +1138,12 @@ end
 
 -- Modify the default idle set after it was constructed.
 function customize_idle_set(idleSet)
-    if state.CP.current == 'on' then
-        equip(sets.CP)
-        disable('back')
-    else
-        enable('back')
-    end
+    -- if state.CP.current == 'on' then
+    --     equip(sets.CP)
+    --     disable('back')
+    -- else
+    --     enable('back')
+    -- end
     return idleSet
 end
 
