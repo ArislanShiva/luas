@@ -79,11 +79,11 @@ function user_setup()
     state.OffenseMode:options('STP', 'Normal', 'LowAcc', 'MidAcc', 'HighAcc')
     state.HybridMode:options('Normal', 'DT')
     state.RangedMode:options('STP', 'Normal', 'Acc', 'HighAcc', 'Critical')
-    state.WeaponskillMode:options('Normal', 'Acc')
+    state.WeaponskillMode:options('Normal', 'Acc', 'Enmity')
     state.IdleMode:options('Normal', 'DT')
 
     state.WeaponSet = M{['description']='Weapon Set', 'Annihilator', 'Fomalhaut', 'Armageddon'}
-    state.CP = M(false, "Capacity Points Mode")
+    -- state.CP = M(false, "Capacity Points Mode")
 
     DefaultAmmo = {['Yoichinoyumi'] = "Chrono Arrow",
                    ['Gandiva'] = "Chrono Arrow",
@@ -138,7 +138,7 @@ function user_setup()
         send_command('bind ^. input /item "Prism Powder" <me>')
     end
 
-    send_command('bind @c gs c toggle CP')
+    -- send_command('bind @c gs c toggle CP')
     send_command('bind @e gs c cycleback WeaponSet')
     send_command('bind @r gs c cycle WeaponSet')
 
@@ -185,7 +185,7 @@ function user_unload()
     send_command('unbind @`')
     send_command('unbind ^,')
     send_command('unbind @f')
-    send_command('unbind @c')
+    -- send_command('unbind @c')
     send_command('unbind @e')
     send_command('unbind @r')
     send_command('unbind ^numlock')
@@ -298,7 +298,7 @@ function init_gear_sets()
         body=gear.Herc_RA_body,
         hands="Meg. Gloves +2",
         legs="Arc. Braccae +3",
-        feet=gear.Herc_MWS_feet,
+        feet=gear.Herc_WSD_feet,
         neck="Fotia Gorget",
         ear1="Ishvara Earring",
         ear2="Moonshade Earring",
@@ -312,8 +312,13 @@ function init_gear_sets()
         feet="Arcadian Socks +3",
         neck="Combatant's Torque",
         ear1="Beyla Earring",
-        ear2="Telos Earring",
         waist="K. Kachina Belt +1",
+        })
+
+    sets.precast.WS.Enmity = set_combine(sets.precast.WS, {
+        hands="Arc. Bracers +3",
+        feet="Arcadian Socks +3",
+        ear1="Beyla Earring",
         })
 
     sets.precast.WS['Apex Arrow'] = sets.precast.WS
@@ -321,8 +326,13 @@ function init_gear_sets()
     sets.precast.WS['Apex Arrow'].Acc = set_combine(sets.precast.WS['Apex Arrow'], {
         feet="Orion Socks +3",
         ear1="Beyla Earring",
-        ear2="Telos Earring",
         waist="K. Kachina Belt +1",
+        })
+
+    sets.precast.WS['Apex Arrow'].Enmity = set_combine(sets.precast.WS['Apex Arrow'], {
+        hands="Arc. Bracers +3",
+        feet="Arcadian Socks +3",
+        ear1="Beyla Earring",
         })
 
     sets.precast.WS['Jishnu\'s Radiance'] = set_combine(sets.precast.WS, {
@@ -346,6 +356,12 @@ function init_gear_sets()
         waist="K. Kachina Belt +1",
         })
 
+    sets.precast.WS['Jishnu\'s Radiance'].Enmity = set_combine(sets.precast.WS['Jishnu\'s Radiance'], {
+        hands="Arc. Bracers +3",
+        feet="Arcadian Socks +3",
+        ear1="Beyla Earring",
+        })
+
     sets.precast.WS["Last Stand"] = set_combine(sets.precast.WS, {
         neck="Scout's Gorget +1",
         })
@@ -359,6 +375,12 @@ function init_gear_sets()
         waist="K. Kachina Belt +1",
         })
 
+    sets.precast.WS['Last Stand'].Enmity = set_combine(sets.precast.WS['Last Stand'], {
+        hands="Arc. Bracers +3",
+        feet="Arcadian Socks +3",
+        ear1="Beyla Earring",
+        })
+
     sets.precast.WS["Coronach"] = set_combine(sets.precast.WS['Last Stand'], {
         neck="Scout's Gorget +1",
         ear1="Sherida Earring",
@@ -370,12 +392,16 @@ function init_gear_sets()
         ear2="Telos Earring",
         })
 
+    sets.precast.WS["Coronach"].Enmity = set_combine(sets.precast.WS['Coronach'], {
+        ear1="Beyla Earring",
+        })
+
     sets.precast.WS["Trueflight"] = {
         head="Orion Beret +3",
-        body="Samnuha Coat",
+        body="Carm. Sc. Mail +1",
         hands="Carmine Fin. Ga. +1",
-        legs=gear.Herc_MWS_legs,
-        feet=gear.Herc_MWS_feet,
+        legs=gear.Herc_WSD_legs,
+        feet=gear.Herc_WSD_feet,
         neck="Scout's Gorget +1",
         ear1="Moonshade Earring",
         ear2="Friomisi Earring",
@@ -391,7 +417,7 @@ function init_gear_sets()
         head=gear.Adhemar_B_head,
         body="Abnoba Kaftan",
         hands="Mummu Wrists +2",
-        legs="Samnuha Tights",
+        legs="Zoar Subligar +1",
         feet=gear.Herc_STP_feet,
         neck="Fotia Gorget",
         ear2="Mache Earring +1",
@@ -446,7 +472,6 @@ function init_gear_sets()
         }
 
     sets.midcast.RA.Acc = set_combine(sets.midcast.RA, {
-        hands="Meg. Gloves +2",
         feet="Orion Socks +3",
         ear1="Beyla Earring",
         ring2="Hajduk Ring +1",
@@ -456,13 +481,12 @@ function init_gear_sets()
         head="Orion Beret +3",
         body="Orion Jerkin +3",
         hands="Orion Bracers +3",
-        legs="Meg. Chausses +2",
         waist="K. Kachina Belt +1",
         })
 
     sets.midcast.RA.Critical = set_combine(sets.midcast.RA, {
         head="Meghanada Visor +2",
-        body="Mummu Jacket +2",
+        body="Meg. Cuirie +2",
         hands="Kobo Kote",
         legs="Mummu Kecks +2",
         feet="Osh. Leggings +1",
@@ -917,7 +941,7 @@ function init_gear_sets()
     sets.FullTP = {ear1="Crematio Earring"}
     sets.Obi = {waist="Hachirin-no-Obi"}
     --sets.Reive = {neck="Ygnas's Resolve +1"}
-    sets.CP = {back="Mecisto. Mantle"}
+    -- sets.CP = {back="Mecisto. Mantle"}
 
     sets.Annihilator = {ranged="Annihilator"}
     sets.Fomalhaut = {ranged="Fomalhaut"}
@@ -1116,13 +1140,28 @@ function update_combat_form()
     end
 end
 
-function customize_idle_set(idleSet)
-    if state.CP.current == 'on' then
-        equip(sets.CP)
-        disable('back')
-    else
-        enable('back')
+function get_custom_wsmode(spell, action, spellMap)
+    local wsmode
+    if (spell.skill == 'Marksmanship' or spell.skill == 'Archery') then
+        if state.RangedMode.value == 'Acc' or state.RangedMode.value == 'HighAcc' then
+            wsmode = 'Acc'
+        end
+    elseif (spell.skill ~= 'Marksmanship' and spell.skill ~= 'Archery') then
+        if state.OffenseMode.value == 'Acc' or state.OffenseMode.value == 'HighAcc' then
+            wsmode = 'Acc'
+        end
     end
+
+    return wsmode
+end
+
+function customize_idle_set(idleSet)
+    -- if state.CP.current == 'on' then
+    --     equip(sets.CP)
+    --     disable('back')
+    -- else
+    --     enable('back')
+    -- end
     if state.Auto_Kite.value == true then
        idleSet = set_combine(idleSet, sets.Kiting)
     end
