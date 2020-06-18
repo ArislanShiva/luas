@@ -233,7 +233,7 @@ function init_gear_sets()
         neck="Unmoving Collar +1", --10
         ear1="Cryptic Earring", --4
         ear2="Trux Earring", --5
-        ring1="Supershear Ring", --5
+        ring1="Pernicious Ring", --5
         ring2="Eihwaz Ring", --5
         back=gear.DNC_WTZ_Cape, --10
         waist="Kasiri Belt", --3
@@ -289,7 +289,7 @@ function init_gear_sets()
     sets.precast.Flourish1['Animated Flourish'] = sets.Enmity
 
     sets.precast.Flourish1['Violent Flourish'] = {
-        ammo="Hydrocera",
+        ammo="Yamarang",
         head="Mummu Bonnet +2",
         body="Horos Casaque +3",
         hands="Mummu Wrists +2",
@@ -351,7 +351,7 @@ function init_gear_sets()
 
     sets.precast.WS = {
         ammo="Aurgelmir Orb +1",
-        head="Lilitu Headpiece",
+        head=gear.Herc_WSD_head,
         body=gear.Herc_WS_body,
         hands="Maxixi Bangles +3",
         legs="Horos Tights +3",
@@ -415,7 +415,7 @@ function init_gear_sets()
 
     sets.precast.WS['Evisceration'] = set_combine(sets.precast.WS, {
         ammo="Charis Feather",
-        head="Lustratio Cap +1",
+        head=gear.Adhemar_B_head,
         body="Abnoba Kaftan",
         hands="Mummu Wrists +2",
         legs="Lustr. Subligar +1",
@@ -457,7 +457,7 @@ function init_gear_sets()
         body="Samnuha Coat",
         hands="Maxixi Bangles +3",
         legs="Horos Tights +3",
-        feet=gear.Herc_MAB_feet,
+        feet=gear.Herc_WSD_feet,
         neck="Baetyl Pendant",
         ear1="Crematio Earring",
         ear2="Friomisi Earring",
@@ -913,7 +913,7 @@ function init_gear_sets()
         waist="Gishdubar Sash", --10
         }
 
-    sets.CP = {back="Mecisto. Mantle"}
+    -- sets.CP = {back="Mecisto. Mantle"}
     --sets.Reive = {neck="Ygnas's Resolve +1"}
 
 end
@@ -1020,11 +1020,10 @@ function update_combat_form()
     end
 end
 
-function get_custom_wsmode(spell, spellMap, defaut_wsmode)
+function get_custom_wsmode(spell, action, spellMap)
     local wsmode
-
-    if state.Buff['Sneak Attack'] then
-        wsmode = 'SA'
+    if state.OffenseMode.value == 'MidAcc' or state.OffenseMode.value == 'HighAcc' then
+        wsmode = 'Acc'
     end
 
     return wsmode
