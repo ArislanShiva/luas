@@ -81,7 +81,7 @@ function job_setup()
     info.default_u_ja_ids = S{201, 202, 203, 205, 207}
 
     state.AttackMode = M{['description']='Attack', 'Capped', 'Uncapped'}
-    state.CP = M(false, "Capacity Points Mode")
+    -- state.CP = M(false, "Capacity Points Mode")
 
     lockstyleset = 1
 end
@@ -95,7 +95,7 @@ function user_setup()
     state.OffenseMode:options('STP', 'Normal', 'LowAcc', 'MidAcc', 'HighAcc')
     state.HybridMode:options('Normal', 'DT')
     state.RangedMode:options('Normal', 'Acc')
-    state.WeaponskillMode:options('Normal', 'Acc')
+    state.WeaponskillMode:options('Normal', 'Acc', 'LowBuff')
     state.IdleMode:options('Normal', 'DT')
 
     -- Additional local binds
@@ -106,8 +106,7 @@ function user_setup()
 
     send_command('bind ^` gs c cycle treasuremode')
     send_command('bind !` input /ja "Flee" <me>')
-    send_command('bind @a gs c cycle AttackMode')
-    send_command('bind @c gs c toggle CP')
+    -- send_command('bind @c gs c toggle CP')
 
     send_command('bind ^numlock input /ja "Assassin\'s Charge" <me>')
 
@@ -151,7 +150,7 @@ function user_unload()
     send_command('unbind !`')
     send_command('unbind ^,')
     send_command('unbind @a')
-    send_command('unbind @c')
+    -- send_command('unbind @c')
     send_command('unbind @r')
     send_command('unbind ^numlock')
     send_command('unbind ^numpad/')
@@ -264,11 +263,11 @@ function init_gear_sets()
 
     sets.precast.WS = {
         ammo="Aurgelmir Orb +1",
-        head="Pill. Bonnet +3",
+        head=gear.Herc_WSD_head,
         body=gear.Herc_WS_body,
         hands="Meg. Gloves +2",
         legs="Plun. Culottes +3",
-        feet="Lustra. Leggings +1",
+        feet=gear.Herc_WSD_feet,
         neck="Fotia Gorget",
         ear1="Ishvara Earring",
         ear2="Moonshade Earring",
@@ -280,15 +279,14 @@ function init_gear_sets()
 
     sets.precast.WS.Acc = set_combine(sets.precast.WS, {
         ammo="Voluspa Tathlum",
-        legs="Meg. Chausses +2",
         ear2="Telos Earring",
         })
 
-    sets.precast.WS.Uncapped = set_combine(sets.precast.WS, {
-        head="Lilitu Headpiece",
-        })
-
-    sets.precast.WS.Critical = {ammo="Yetshila +1", body="Meg. Cuirie +2"}
+    sets.precast.WS.Critical = {
+        ammo="Yetshila +1",
+        head="Pill. Bonnet +3",
+        body="Meg. Cuirie +2",
+        }
 
     sets.precast.WS['Exenterator'] = set_combine(sets.precast.WS, {
         head=gear.Adhemar_B_head,
@@ -304,16 +302,12 @@ function init_gear_sets()
         head="Dampening Tam",
         })
 
-    sets.precast.WS['Exenterator'].Uncapped = set_combine(sets.precast.WS['Exenterator'], {
-
-        })
-
     sets.precast.WS['Evisceration'] = set_combine(sets.precast.WS, {
         ammo="Yetshila +1",
         head=gear.Adhemar_B_head,
         body="Pillager's Vest +3",
         hands="Mummu Wrists +2",
-        legs="Pill. Culottes +3",
+        legs="Zoar Subligar +1",
         feet=gear.Herc_TA_feet,
         ear1="Sherida Earring",
         ear2="Mache Earring +1",
@@ -324,12 +318,7 @@ function init_gear_sets()
 
     sets.precast.WS['Evisceration'].Acc = set_combine(sets.precast.WS['Evisceration'], {
         ammo="Voluspa Tathlum",
-        ring1="Regal Ring",
-        })
-
-    sets.precast.WS['Evisceration'].Uncapped = set_combine(sets.precast.WS['Evisceration'], {
-        ammo="Voluspa Tathlum",
-        hands=gear.Adhemar_B_hands,
+        legs="Pill. Culottes +3",
         ring1="Regal Ring",
         })
 
@@ -347,21 +336,16 @@ function init_gear_sets()
         waist="Grunfeld Rope",
         })
 
-    sets.precast.WS['Rudra\'s Storm'].Uncapped = set_combine(sets.precast.WS['Rudra\'s Storm'], {
-        head="Lilitu Headpiece",
-        })
-
     sets.precast.WS['Mandalic Stab'] = sets.precast.WS["Rudra's Storm"]
     sets.precast.WS['Mandalic Stab'].Acc = sets.precast.WS["Rudra's Storm"].Acc
-    sets.precast.WS['Mandalic Stab'].Uncapped = sets.precast.WS["Rudra's Storm"].Uncapped
 
     sets.precast.WS['Aeolian Edge'] = set_combine(sets.precast.WS, {
         ammo="Seeth. Bomblet +1",
         head=gear.Herc_MAB_head,
         body="Samnuha Coat",
         hands="Leyline Gloves",
-        legs=gear.Herc_MWS_legs,
-        feet=gear.Herc_MAB_feet,
+        legs=gear.Herc_WSD_legs,
+        feet=gear.Herc_WSD_feet,
         neck="Baetyl Pendant",
         ear1="Crematio Earring",
         ear2="Friomisi Earring",
@@ -814,7 +798,7 @@ function init_gear_sets()
         }
 
     --sets.Reive = {neck="Ygnas's Resolve +1"}
-    sets.CP = {back="Mecisto. Mantle"}
+    -- sets.CP = {back="Mecisto. Mantle"}
 
 end
 
@@ -940,10 +924,10 @@ end
 
 function get_custom_wsmode(spell, action, spellMap)
     local wsmode
-
-    if spell.type == 'WeaponSkill' and state.AttackMode.value == 'Uncapped' then
-        wsmode = 'Uncapped'
+    if state.OffenseMode.value == 'MidAcc' or state.OffenseMode.value == 'HighAcc' then
+        wsmode = 'Acc'
     end
+
     --if state.Buff['Sneak Attack'] then
     --    wsmode = 'SA'
     --end
@@ -955,12 +939,12 @@ function get_custom_wsmode(spell, action, spellMap)
 end
 
 function customize_idle_set(idleSet)
-    if state.CP.current == 'on' then
-        equip(sets.CP)
-        disable('back')
-    else
-        enable('back')
-    end
+    -- if state.CP.current == 'on' then
+    --     equip(sets.CP)
+    --     disable('back')
+    -- else
+    --     enable('back')
+    -- end
     if state.Auto_Kite.value == true then
        idleSet = set_combine(idleSet, sets.Kiting)
     end
