@@ -134,7 +134,7 @@ function user_setup()
     state.IdleMode:options('Normal', 'DT', 'Refresh')
 
     state.WeaponSet = M{['description']='Weapon Set', 'DeathPenalty_M', 'DeathPenalty_R', 'Armageddon_M', 'Armageddon_R', 'Fomalhaut_M', 'Fomalhaut_R', 'Ataktos'}
-    state.CP = M(false, "Capacity Points Mode")
+    -- state.CP = M(false, "Capacity Points Mode")
     state.WeaponLock = M(false, 'Weapon Lock')
 
     gear.RAbullet = "Chrono Bullet"
@@ -165,7 +165,7 @@ function user_setup()
     send_command('bind ^pageup gs c toggle selectqdtarget')
     send_command('bind ^pagedown gs c toggle usealtqd')
 
-    send_command('bind @c gs c toggle CP')
+    -- send_command('bind @c gs c toggle CP')
     send_command('bind @q gs c cycle QDMode')
     send_command('bind @e gs c cycleback WeaponSet')
     send_command('bind @r gs c cycle WeaponSet')
@@ -218,7 +218,7 @@ function user_unload()
     send_command('unbind ^pageup')
     send_command('unbind ^pagedown')
     send_command('unbind ^,')
-    send_command('unbind @c')
+    -- send_command('unbind @c')
     send_command('unbind @q')
     send_command('unbind @w')
     send_command('unbind @e')
@@ -358,7 +358,7 @@ function init_gear_sets()
 
     sets.precast.WS.Acc = set_combine(sets.precast.WS, {
         ammo=gear.RAccbullet,
-        feet=gear.Herc_RA_feet,
+        feet="Meg. Jam. +2",
         ear1="Beyla Earring",
         ear2="Telos Earring",
         neck="Iskur Gorget",
@@ -382,7 +382,7 @@ function init_gear_sets()
         head=gear.Herc_MAB_head,
         body="Lanun Frac +3",
         hands="Carmine Fin. Ga. +1",
-        legs=gear.Herc_MWS_legs,
+        legs=gear.Herc_WSD_legs,
         feet="Lanun Bottes +3",
         neck="Comm. Charm +2",
         ear1="Crematio Earring",
@@ -405,7 +405,7 @@ function init_gear_sets()
         head=gear.Adhemar_B_head,
         body="Abnoba Kaftan",
         hands="Mummu Wrists +2",
-        legs="Samnuha Tights",
+        legs="Zoar Subligar +1",
         feet="Mummu Gamash. +2",
         neck="Fotia Gorget",
         ear1="Mache Earring +1",
@@ -423,7 +423,7 @@ function init_gear_sets()
         })
 
     sets.precast.WS['Savage Blade'] = set_combine(sets.precast.WS, {
-        head="Lilitu Headpiece",
+        head=gear.Herc_WSD_head,
         hands="Meg. Gloves +2",
         legs=gear.Herc_WS_legs,
         neck="Comm. Charm +2",
@@ -509,7 +509,7 @@ function init_gear_sets()
         ear1="Crematio Earring",
         ear2="Friomisi Earring",
         ring1="Dingir Ring",
-        ring2={name="Fenrir Ring +1", bag="wardrobe3"},
+        ring2={name="Fenrir Ring +1", bag="wardrobe4"},
         back=gear.COR_WS1_Cape,
         waist="Eschan Stone",
         }
@@ -568,7 +568,6 @@ function init_gear_sets()
 
     sets.midcast.RA.Acc = set_combine(sets.midcast.RA, {
         ammo=gear.RAccbullet,
-        head="Meghanada Visor +2",
         ear1="Beyla Earring",
         ring2="Hajduk Ring +1",
         })
@@ -1056,7 +1055,7 @@ function init_gear_sets()
 
     sets.FullTP = {ear1="Crematio Earring"}
     sets.Obi = {waist="Hachirin-no-Obi"}
-    sets.CP = {back="Mecisto. Mantle"}
+    -- sets.CP = {back="Mecisto. Mantle"}
     --sets.Reive = {neck="Ygnas's Resolve +1"}
 
     sets.TreasureHunter = {head="Volte Cap", hands=gear.Herc_TH_hands, waist="Chaac Belt"}
@@ -1268,14 +1267,29 @@ function update_combat_form()
     end
 end
 
+function get_custom_wsmode(spell, action, spellMap)
+    local wsmode
+    if spell.skill == 'Marksmanship' then
+        if state.RangedMode.value == 'Acc' or state.RangedMode.value == 'HighAcc' then
+            wsmode = 'Acc'
+        end
+    else
+        if state.OffenseMode.value == 'Acc' or state.OffenseMode.value == 'HighAcc' then
+            wsmode = 'Acc'
+        end
+    end
+
+    return wsmode
+end
+
 -- Modify the default idle set after it was constructed.
 function customize_idle_set(idleSet)
-    if state.CP.current == 'on' then
-        equip(sets.CP)
-        disable('back')
-    else
-        enable('back')
-    end
+    -- if state.CP.current == 'on' then
+    --     equip(sets.CP)
+    --     disable('back')
+    -- else
+    --     enable('back')
+    -- end
     if state.Auto_Kite.value == true then
        idleSet = set_combine(idleSet, sets.Kiting)
     end
