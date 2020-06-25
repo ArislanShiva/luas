@@ -106,7 +106,8 @@ function job_setup()
     no_swap_gear = S{"Warp Ring", "Dim. Ring (Dem)", "Dim. Ring (Holla)", "Dim. Ring (Mea)",
               "Trizek Ring", "Echad Ring", "Facility Ring", "Capacity Ring",
               "Dev. Bul. Pouch", "Chr. Bul. Pouch", "Liv. Bul. Pouch"}
-    elemental_ws = S{'Aeolian Edge', 'Leaden Salute', 'Wildfire'}
+    elemental_ws = S{"Aeolian Edge", "Leaden Salute", "Wildfire"}
+    no_shoot_ammo = S{"Animikii Bullet", "Hauksbok Bullet", "Bronze Bullet"}
 
     include('Mote-TreasureHunter')
 
@@ -141,7 +142,7 @@ function user_setup()
     gear.RAccbullet = "Devastating Bullet"
     gear.WSbullet = "Chrono Bullet"
     gear.MAbullet = "Living Bullet"
-    gear.QDbullet = "Hauksbok Bullet"
+    gear.QDbullet = "Living Bullet"
     options.ammo_warning_limit = 10
 
     -- Additional local binds
@@ -1114,12 +1115,15 @@ end
 
 function job_post_precast(spell, action, spellMap, eventArgs)
     if spell.action_type == 'Ranged Attack' then
+        special_ammo_check()
         if flurry == 2 then
             equip(sets.precast.RA.Flurry2)
         elseif flurry == 1 then
             equip(sets.precast.RA.Flurry1)
         end
     elseif spell.type == 'WeaponSkill' then
+        -- Stop if Animikii/Hauksbok equipped
+        special_ammo_check()
         -- Replace TP-bonus gear if not needed.
         if spell.english == 'Leaden Salute' or spell.english == 'Aeolian Edge' and player.tp > 2900 then
             equip(sets.FullTP)
@@ -1570,6 +1574,15 @@ function do_bullet_checks(spell, spellMap, eventArgs)
         state.warned:set()
     elseif available_bullets.count > options.ammo_warning_limit and state.warned then
         state.warned:reset()
+    end
+end
+
+function special_ammo_check()
+    -- Stop if Animikii/Hauksbok equipped
+    if no_shoot_ammo:contains(player.equipment.ammo) then
+        cancel_spell()
+        add_to_chat(123, '** Action Canceled: [ '.. player.equipment.ammo .. ' equipped!! ] **')
+        return
     end
 end
 
