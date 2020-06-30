@@ -142,7 +142,7 @@ function user_setup()
     gear.RAccbullet = "Devastating Bullet"
     gear.WSbullet = "Chrono Bullet"
     gear.MAbullet = "Living Bullet"
-    gear.QDbullet = "Living Bullet"
+    gear.QDbullet = "Hauksbok Bullet"
     options.ammo_warning_limit = 10
 
     -- Additional local binds
@@ -1122,8 +1122,9 @@ function job_post_precast(spell, action, spellMap, eventArgs)
             equip(sets.precast.RA.Flurry1)
         end
     elseif spell.type == 'WeaponSkill' then
-        -- Stop if Animikii/Hauksbok equipped
-        special_ammo_check()
+        if spell.skill == 'Marksmanship' then
+            special_ammo_check()
+        end
         -- Replace TP-bonus gear if not needed.
         if spell.english == 'Leaden Salute' or spell.english == 'Aeolian Edge' and player.tp > 2900 then
             equip(sets.FullTP)
