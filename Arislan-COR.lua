@@ -618,7 +618,7 @@ function init_gear_sets()
     sets.resting = {}
 
     sets.idle = {
-        ammo=gear.MAbullet,
+        ammo=gear.RAbullet,
         head="Malignance Chapeau",
         body="Malignance Tabard",
         hands="Malignance Gloves",
@@ -654,7 +654,6 @@ function init_gear_sets()
         })
 
     sets.idle.Town = set_combine(sets.idle, {
-        ammo=gear.QDbullet,
         head="Lanun Tricorne +3",
         body="Oshosi Vest +1",
         hands="Lanun Gants +3",
@@ -701,6 +700,7 @@ function init_gear_sets()
     -- EG: sets.engaged.Dagger.Accuracy.Evasion
 
     sets.engaged = {
+        ammo=gear.RAbullet,
         head=gear.Adhemar_B_head,
         body=gear.Adhemar_B_body,
         hands=gear.Adhemar_B_hands,
@@ -750,6 +750,7 @@ function init_gear_sets()
 
     -- No Magic Haste (74% DW to cap)
     sets.engaged.DW = {
+        ammo=gear.RAbullet,
         head=gear.Adhemar_B_head,
         body=gear.Adhemar_B_body, --6
         hands="Floral Gauntlets", --5
@@ -796,6 +797,7 @@ function init_gear_sets()
 
     -- 15% Magic Haste (67% DW to cap)
     sets.engaged.DW.LowHaste = {
+        ammo=gear.RAbullet,
         head=gear.Adhemar_B_head,
         body=gear.Adhemar_B_body, --6
         hands="Floral Gauntlets", --5
@@ -841,6 +843,7 @@ function init_gear_sets()
 
     -- 30% Magic Haste (56% DW to cap)
     sets.engaged.DW.MidHaste = {
+        ammo=gear.RAbullet,
         head=gear.Adhemar_B_head,
         body=gear.Adhemar_B_body, --6
         hands=gear.Adhemar_B_hands,
@@ -888,6 +891,7 @@ function init_gear_sets()
 
     -- 35% Magic Haste (51% DW to cap)
     sets.engaged.DW.HighHaste = {
+        ammo=gear.RAbullet,
         head=gear.Adhemar_B_head,
         body=gear.Adhemar_B_body, --6
         hands=gear.Adhemar_B_hands,
@@ -935,6 +939,7 @@ function init_gear_sets()
 
     -- 45% Magic Haste (36% DW to cap)
     sets.engaged.DW.MaxHaste = {
+        ammo=gear.RAbullet,
         head=gear.Adhemar_B_head,
         body=gear.Adhemar_B_body, --6
         hands=gear.Adhemar_B_hands,
