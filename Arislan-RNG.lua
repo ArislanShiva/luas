@@ -123,7 +123,7 @@ function user_setup()
 
     -- Additional local binds
     include('Global-Binds.lua') -- OK to remove this line
-    include('Global-GEO-Binds.lua') -- OK to remove this line
+    include('Global-COR-Binds.lua') -- OK to remove this line
 
     send_command('lua l gearinfo')
 
@@ -1145,6 +1145,7 @@ function get_custom_wsmode(spell, action, spellMap)
     if (spell.skill == 'Marksmanship' or spell.skill == 'Archery') then
         if state.RangedMode.value == 'Acc' or state.RangedMode.value == 'HighAcc' then
             wsmode = 'Acc'
+            add_to_chat(1, 'WS Mode Auto Acc')
         end
     elseif (spell.skill ~= 'Marksmanship' and spell.skill ~= 'Archery') then
         if state.OffenseMode.value == 'Acc' or state.OffenseMode.value == 'HighAcc' then
@@ -1303,11 +1304,21 @@ function check_ammo(spell, action, spellMap, eventArgs)
             end
         end
     elseif spell.type == 'WeaponSkill' then
-        if spell.element == 'None' then
+        -- magical weaponskills
+        if elemental_ws:contains(spell.english) then
+            if player.inventory[MagicAmmo[player.equipment.range]] then
+                equip({ammo=MagicAmmo[player.equipment.range]})
+                add_to_chat(1, 'Magic Ammo')
+            else
+                add_to_chat(3,"Magic ammo unavailable.  Using default ammo.")
+                equip({ammo=DefaultAmmo[player.equipment.range]})
+            end
         --physical weaponskills
-            if state.WeaponskillMode.value == 'Acc' then
+        else
+            if state.RangedMode.value == 'Acc' then
                 if player.inventory[AccAmmo[player.equipment.range]] then
                     equip({ammo=AccAmmo[player.equipment.range]})
+                    add_to_chat(1, 'Acc Ammo')
                 else
                     add_to_chat(3,"Acc ammo unavailable.  Using default ammo.")
                     equip({ammo=DefaultAmmo[player.equipment.range]})
@@ -1319,14 +1330,6 @@ function check_ammo(spell, action, spellMap, eventArgs)
                     add_to_chat(3,"WS ammo unavailable.  Using default ammo.")
                     equip({ammo=DefaultAmmo[player.equipment.range]})
                 end
-            end
-        else
-            -- magical weaponskills
-            if player.inventory[MagicAmmo[player.equipment.range]] then
-                equip({ammo=MagicAmmo[player.equipment.range]})
-            else
-                add_to_chat(3,"Magic ammo unavailable.  Using default ammo.")
-                equip({ammo=DefaultAmmo[player.equipment.range]})
             end
         end
     end
