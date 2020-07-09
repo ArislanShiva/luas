@@ -197,7 +197,7 @@ function init_gear_sets()
         ammo="Sapience Orb", --2
         body="Emet Harness +1", --10
         hands="Kurys Gloves", --9
-        feet="Ahosi Leggings", --7
+        feet="Mochi. Kyahan +3", --8
         neck="Moonlight Necklace", --15
         ear1="Cryptic Earring", --4
         ear2="Trux Earring", --5
@@ -210,8 +210,8 @@ function init_gear_sets()
     sets.precast.JA['Mijin Gakure'] = {legs="Mochi. Hakama +3"}
     sets.precast.JA['Futae'] = {hands="Hattori Tekko +1"}
     sets.precast.JA['Sange'] = {body="Mochi. Chainmail +1"}
-    sets.precast.JA['Innin'] = {head="Mochi. Hatsuburi +1"}
-    sets.precast.JA['Yonin'] = {head="Mochi. Hatsuburi +1"}
+    sets.precast.JA['Innin'] = {head="Mochi. Hatsuburi +3"}
+    sets.precast.JA['Yonin'] = {head="Mochi. Hatsuburi +3"}
 
     sets.precast.Waltz = {
         ammo="Yamarang",
@@ -371,7 +371,7 @@ function init_gear_sets()
 
     sets.midcast.ElementalNinjutsu = {
         ammo="Pemphredo Tathlum",
-        head=gear.Herc_MAB_head,
+        head="Mochi. Hatsuburi +3",
         body="Samnuha Coat",
         hands="Leyline Gloves",
         legs=gear.Herc_MAB_legs,
@@ -410,7 +410,7 @@ function init_gear_sets()
 
     sets.midcast.EnhancingNinjutsu = {
         head="Hachiya Hatsu. +3",
-        feet="Mochi. Kyahan +1",
+        feet="Mochi. Kyahan +3",
         neck="Incanter's Torque",
         ear1="Stealth Earring",
         ring1={name="Stikini Ring +1", bag="wardrobe3"},
@@ -418,6 +418,8 @@ function init_gear_sets()
         back="Astute Cape",
         waist="Cimmerian Sash",
         }
+
+    sets.midcast.Stun = sets.midcast.EnfeeblingNinjutsu
 
     sets.midcast.RA = {
         head="Malignance Chapeau",
@@ -811,12 +813,6 @@ function job_post_midcast(spell, action, spellMap, eventArgs)
         end
         if state.Buff.Futae then
             equip(sets.precast.JA['Futae'])
-            add_to_chat(120, 'Futae GO!')
-        end
-    end
-    if spell.type == 'WeaponSkill' then
-        if state.Buff.Futae then
-            add_to_chat(120, 'Futae GO!')
         end
     end
     if state.Buff.Doom then
@@ -849,11 +845,15 @@ function job_buff_change(buff, gain)
 --        end
 --    end
 
+    if buff == "Migawari" and not gain then
+        add_to_chat(61, "*** MIGAWARI DOWN ***")
+    end
+
     if buff == "doom" then
         if gain then
             equip(sets.buff.Doom)
             send_command('@input /p Doomed.')
-             disable('ring1','ring2','waist')
+            disable('ring1','ring2','waist')
         else
             enable('ring1','ring2','waist')
             handle_equipping_gear(player.status)
