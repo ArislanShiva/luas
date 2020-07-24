@@ -76,7 +76,7 @@ function job_setup()
 
     lugra_ws = S{'Blade: Kamu', 'Blade: Shun', 'Blade: Ten'}
 
-    lockstyleset = 3
+    lockstyleset = 1
 end
 
 -------------------------------------------------------------------------------------------------------------------
@@ -100,7 +100,7 @@ function user_setup()
 
     -- Additional local binds
     include('Global-Binds.lua') -- OK to remove this line
-    include('Global-GEO-Binds.lua') -- OK to remove this line
+    include('Global-COR-Binds.lua') -- OK to remove this line
 
     send_command('lua l gearinfo')
 
@@ -131,6 +131,7 @@ function user_setup()
     send_command('bind ^numpad6 input /ws "Blade: Hi" <t>')
     send_command('bind ^numpad1 input /ws "Blade: Yu" <t>')
     send_command('bind ^numpad2 input /ws "Blade: Chi" <t>')
+    send_command('bind numpad5 input /ws "Blade: To" <t>')
 
     -- Whether a warning has been given for low ninja tools
     state.warned = M(false)
@@ -170,6 +171,7 @@ function user_unload()
     send_command('unbind ^numpad6')
     send_command('unbind ^numpad1')
     send_command('unbind ^numpad2')
+    send_command('unbind numpad5')
 
     send_command('unbind #`')
     send_command('unbind #1')
@@ -246,11 +248,7 @@ function init_gear_sets()
         neck="Magoraga Beads", --10
         })
 
-    sets.precast.RA = {
-        head=gear.Taeon_RA_head, --10/0
-        body=gear.Taeon_RA_body, --10/0
-        legs=gear.Adhemar_D_legs, --10/13
-        }
+    sets.precast.RA = {}
 
     -- Weaponskill sets
     -- Default set for any weaponskill that isn't any more specifically defined
@@ -280,6 +278,7 @@ function init_gear_sets()
 
     sets.precast.WS['Blade: Hi'] = set_combine(sets.precast.WS, {
         ammo="Yetshila +1",
+        head="Blistering Sallet +1",
         body="Ken. Samue +1",
         hands="Mummu Wrists +2",
         legs="Zoar Subligar +1",
@@ -804,7 +803,7 @@ end
 -- Run after the general midcast() is done.
 -- eventArgs is the same one used in job_midcast, in case information needs to be persisted.
 function job_post_midcast(spell, action, spellMap, eventArgs)
-    if default_spell_map == 'ElementalNinjutsu' then
+    if spellMap == 'ElementalNinjutsu' then
         if state.MagicBurst.value then
             equip(sets.magic_burst)
         end
