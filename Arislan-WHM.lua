@@ -139,7 +139,9 @@ function user_setup()
     set_lockstyle()
 
     state.Auto_Kite = M(false, 'Auto_Kite')
+    DW = false
     moving = false
+    update_combat_form()
 end
 
 function user_unload()
@@ -188,8 +190,6 @@ function user_unload()
     send_command('unbind 4')
     send_command('unbind 5')
     send_command('unbind 6')
-
-    send_command('lua u gearinfo')
 end
 
 -- Define sets and vars used by this job file.
@@ -204,15 +204,15 @@ function init_gear_sets()
 
     sets.precast.FC = {
     --  /SCH --3
-        main="Sucellus", --5
+        main="C. Palug Hammer", --7
         sub="Chanter's Shield", --3
-        ammo="Sapience Orb", --2
+        ammo="Impatiens", --(2)
         body="Inyanga Jubbah +2", --14
         hands="Gende. Gages +1", --7
         legs="Kaykaus Tights +1", --7
         feet="Volte Gaiters", --6
         neck="Orunmila's Torque", --5
-        ear1="Loquacious Earring", --2
+        ear1="Malignance Earring", --4
         ear2="Enchntr. Earring +1", --2
         ring1="Kishar Ring", --4
         ring2="Weather. Ring +1", --5
@@ -229,8 +229,6 @@ function init_gear_sets()
         head="Piety Cap +3", --15
         legs="Aya. Cosciales +2", --6
         feet="Kaykaus Boots +1", --7
-        ear1="Mendi. Earring", --5
-        ear2="Nourish. Earring +1", --4
         ring1="Lebeche Ring", --(2)
         back="Perimede Cape", --(4)
         waist="Shinjutsu-no-Obi +1", --5
@@ -259,8 +257,8 @@ function init_gear_sets()
         ear2="Ishvara Earring",
         ring1="Epaminondas's Ring",
         ring2="Shukuyu Ring",
+        back=gear.WHM_WS_Cape,
         waist="Fotia Belt",
-        back="Relucent Cape",
         }
 
     sets.precast.WS['Black Halo'] = set_combine(sets.precast.WS, {
@@ -268,7 +266,9 @@ function init_gear_sets()
         })
 
     sets.precast.WS['Hexa Strike'] = set_combine(sets.precast.WS, {
+        head="Blistering Sallet +1",
         ring2="Begrudging Ring",
+        back=gear.WHM_DA_Cape,
         })
 
     sets.precast.WS['Flash Nova'] = set_combine(sets.precast.WS, {})
@@ -548,15 +548,13 @@ function init_gear_sets()
         }
 
     sets.midcast.IntEnfeebles = set_combine(sets.midcast.MndEnfeebles, {
-        main="Yagrush",
-        sub="Ammurapi Shield",
         waist="Acuity Belt +1",
         })
 
     sets.midcast.Dispelga = set_combine(sets.midcast.IntEnfeebles, {main="Daybreak", sub="Ammurapi Shield"})
 
     sets.midcast.Impact = {
-        main="Maxentius",
+        main="Yagrush",
         sub="Ammurapi Shield",
         head=empty,
         body="Twilight Cloak",
@@ -580,7 +578,7 @@ function init_gear_sets()
 
     -- Idle sets (default idle set not needed since the other three are defined, but leaving for testing purposes)
     sets.idle = {
-        main="Bolelabunga",
+        main="Daybreak",
         sub="Genmei Shield",
         ammo="Homiliary",
         head="Befouled Crown",
@@ -598,7 +596,7 @@ function init_gear_sets()
         }
 
     sets.idle.DT = set_combine(sets.idle, {
-        main="Bolelabunga",
+        main="Daybreak",
         sub="Genmei Shield", --10/0
         ammo="Staunch Tathlum +1", --3/3
         head="Aya. Zucchetto +2", --3/3
@@ -659,18 +657,56 @@ function init_gear_sets()
     -- Basic set for if no TP weapon is defined.
     sets.engaged = {
         main="Yagrush",
-        head="Aya. Zucchetto +2",
+        sub="Ammurapi Shield",
+        head="Blistering Sallet +1",
         body="Ayanmo Corazza +2",
         hands=gear.Telchine_STP_hands,
-        legs="Piety Pantaln. +3",
-        feet=gear.Telchine_STP_feet,
+        legs="Aya. Cosciales +2",
+        feet=gear.Chironic_QA_feet,
         neck="Combatant's Torque",
         ear1="Cessance Earring",
         ear2="Telos Earring",
-        ring1="Hetairoi Ring",
+        ring1={name="Chirich Ring +1", bag="wardrobe3"},
         ring2={name="Chirich Ring +1", bag="wardrobe4"},
-        back="Relucent Cape",
+        back=gear.WHM_DA_Cape,
         waist="Windbuffet Belt +1",
+        }
+
+    sets.engaged.Acc = set_combine(sets.engaged, {
+        feet="Volte Boots",
+        waist="Olseni Belt",
+        })
+
+    sets.engaged.DW = {
+        main="Yagrush",
+        sub="C. Palug Hammer",
+        head="Blistering Sallet +1",
+        body="Ayanmo Corazza +2",
+        hands=gear.Telchine_STP_hands,
+        legs="Aya. Cosciales +2",
+        feet=gear.Chironic_QA_feet,
+        neck="Combatant's Torque",
+        ear1="Cessance Earring",
+        ear2="Suppanomimi", --5
+        ring1={name="Chirich Ring +1", bag="wardrobe3"},
+        ring2={name="Chirich Ring +1", bag="wardrobe4"},
+        back=gear.WHM_DA_Cape,
+        waist="Shetal Stone", --6
+        }
+
+    sets.engaged.DW.Acc = set_combine(sets.engaged.DW, {
+        sub="Sindri",
+        feet="Volte Boots",
+        })
+
+    sets.engaged.Aftermath = {
+        head="Aya. Zucchetto +2",
+        hands=gear.Telchine_STP_hands,
+        legs="Aya. Cosciales +2",
+        feet=gear.Telchine_STP_feet,
+        ring1={name="Chirich Ring +1", bag="wardrobe3"},
+        ring2={name="Chirich Ring +1", bag="wardrobe4"},
+        back=gear.WHM_STP_Cape,
         }
 
     -- Buff sets: Gear that needs to be worn to actively enhance a current player buff.
@@ -780,14 +816,25 @@ end
 -- User code that supplements standard library decisions.
 -------------------------------------------------------------------------------------------------------------------
 
+-- Called by the 'update' self-command, for common needs.
+-- Set eventArgs.handled to true if we don't want automatic equipping of gear.
 function job_handle_equipping_gear(playerStatus, eventArgs)
     check_gear()
+    update_combat_form()
     check_moving()
 end
 
 function job_update(cmdParams, eventArgs)
     handle_equipping_gear(player.status)
     update_sublimation()
+end
+
+function update_combat_form()
+    if DW == true then
+        state.CombatForm:set('DW')
+    elseif DW == false then
+        state.CombatForm:reset()
+    end
 end
 
 -- Custom spell mapping.
@@ -823,6 +870,15 @@ function job_get_spell_map(spell, default_spell_map)
             end
         end
     end
+end
+
+-- Modify the default melee set after it was constructed.
+function customize_melee_set(meleeSet)
+    if buffactive['Aftermath: Lv.3'] and player.equipment.main == "Yagrush" then
+        meleeSet = set_combine(meleeSet, sets.engaged.Aftermath)
+    end
+
+    return meleeSet
 end
 
 function customize_idle_set(idleSet)
@@ -892,6 +948,8 @@ function job_self_command(cmdParams, eventArgs)
     elseif cmdParams[1]:lower() == 'boostspell' then
         send_command('@input /ma '..state.BoostSpell.value..' <me>')
     end
+
+    gearinfo(cmdParams, eventArgs)
 end
 
 function gearinfo(cmdParams, eventArgs)
@@ -967,6 +1025,37 @@ function handle_strategems(cmdParams)
         end
     else
         add_to_chat(123,'No arts has been activated yet.')
+    end
+end
+
+function gearinfo(cmdParams, eventArgs)
+    if cmdParams[1] == 'gearinfo' then
+        if type(tonumber(cmdParams[2])) == 'number' then
+            if tonumber(cmdParams[2]) ~= DW_needed then
+            DW_needed = tonumber(cmdParams[2])
+            DW = true
+            end
+        elseif type(cmdParams[2]) == 'string' then
+            if cmdParams[2] == 'false' then
+                DW_needed = 0
+                DW = false
+            end
+        end
+        if type(tonumber(cmdParams[3])) == 'number' then
+            if tonumber(cmdParams[3]) ~= Haste then
+                Haste = tonumber(cmdParams[3])
+            end
+        end
+        if type(cmdParams[4]) == 'string' then
+            if cmdParams[4] == 'true' then
+                moving = true
+            elseif cmdParams[4] == 'false' then
+                moving = false
+            end
+        end
+        if not midaction() then
+            job_update()
+        end
     end
 end
 
