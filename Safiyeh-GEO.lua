@@ -71,6 +71,8 @@ function job_setup()
         ['Aspirs'] = {'Aspir','Aspir II','Aspir III'},
         }
 
+    lockstyleset = 1
+
 end
 
 -------------------------------------------------------------------------------------------------------------------
@@ -185,7 +187,7 @@ function init_gear_sets()
         ring1="Kishar Ring", --4
         ring2="Weather. Ring +1", --6(4)
         back=gear.GEO_FC_Cape, --10
-        waist="Embla Sash", --5
+        waist="Shinjutsu-no-Obi +1", --5
         }
 
     sets.precast.FC['Enhancing Magic'] = set_combine(sets.precast.FC, {
@@ -199,7 +201,6 @@ function init_gear_sets()
         ear1="Mendi. Earring", --5
         ring1="Lebeche Ring", --(2)
         back="Perimede Cape", --(4)
-        waist="Witful Belt", --3(3)
         })
 
     sets.precast.FC.Curaga = sets.precast.FC.Cure
@@ -230,6 +231,23 @@ function init_gear_sets()
 
     sets.precast.WS['Exudation'] = sets.precast.WS['Hexastrike']
 
+    sets.precast.WS['Flash Nova'] = {
+        main="Daybreak",
+        sub="Ammurapi Shield",
+        head="Bagua Galero +3",
+        body="Amalric Doublet +1",
+        hands="Amalric Gages +1",
+        legs="Amalric Slops +1",
+        feet="Amalric Nails +1",
+        neck="Saevus Pendant +1",
+        ear1="Malignance Earring",
+        ear2="Regal Earring",
+        ring1="Freke Ring",
+        ring2="Metamor. Ring +1",
+        back=gear.GEO_MAB_Cape,
+        waist="Refoccilation Stone",
+        }
+
     ------------------------------------------------------------------------
     ----------------------------- Midcast Sets -----------------------------
     ------------------------------------------------------------------------
@@ -246,24 +264,24 @@ function init_gear_sets()
         ring1="Kishar Ring",
         ring2="Weather. Ring +1",
         back=gear.GEO_FC_Cape,
-        waist="Witful Belt",
+        waist="Shinjutsu-no-Obi +1",
         } -- Haste
 
    sets.midcast.Geomancy = {
         main="Idris",
         sub="Chanter's Shield",
         head="Bagua Galero +3",
-        body="Witching Robe",
+        body="Amalric Doublet +1",
         hands="Shrieker's Cuffs",
         legs="Vanya Slops",
-        feet=gear.Merl_MAB_feet,
+        feet="Amalric Nails +1",
         ear1="Calamitous Earring",
         ear2="Gifted Earring",
         neck="Reti Pendant",
         ring1={name="Stikini Ring +1", bag="wardrobe3"},
         ring2={name="Stikini Ring +1", bag="wardrobe4"},
         back="Fi Follet Cape +1",
-        waist="Austerity Belt +1",
+        waist="Shinjutsu-no-Obi +1",
         }
 
     sets.midcast.Geomancy.Indi = set_combine(sets.midcast.Geomancy, {
@@ -366,8 +384,8 @@ function init_gear_sets()
         legs="Geomancy Pants +3",
         feet="Bagua Sandals +3",
         neck="Bagua Charm +2",
-        ear1="Malignance Earring",
-        ear2="Vor Earring",
+        ear1="Vor Earring",
+        ear2="Regal Earring",
         ring1="Kishar Ring",
         ring2={name="Stikini Ring +1", bag="wardrobe4"},
         back=gear.GEO_FC_Cape,
@@ -393,7 +411,7 @@ function init_gear_sets()
         feet=gear.Merl_MAB_feet,
         neck="Erra Pendant",
         ear1="Malignance Earring",
-        ear2="Digni. Earring",
+        ear2="Regal Earring",
         ring1={name="Stikini Ring +1", bag="wardrobe3"},
         ring2="Metamor. Ring +1",
         back=gear.GEO_MAB_Cape,
@@ -419,10 +437,10 @@ function init_gear_sets()
         main="Daybreak",
         sub="Ammurapi Shield",
         head="Bagua Galero +3",
-        body="Bagua Tunic +3",
+        body="Amalric Doublet +1",
         hands="Amalric Gages +1",
-        legs=gear.Merl_MAB_legs,
-        feet=gear.Merl_MAB_feet,
+        legs="Amalric Slops +1",
+        feet="Amalric Nails +1",
         neck="Saevus Pendant +1",
         ear1="Malignance Earring",
         ear2="Regal Earring",
@@ -433,8 +451,11 @@ function init_gear_sets()
         }
 
     sets.midcast['Elemental Magic'].Resistant = set_combine(sets.midcast['Elemental Magic'], {
+        main="Idris",
+        sub="Ammurapi Shield",
         hands="Bagua Mitaines +3",
-        feet="Bagua Sandals +3",
+        legs=gear.Merl_MAB_legs,
+        feet=gear.Merl_MAB_feet,
         neck="Sanctity Necklace",
         ear2="Digni. Earring",
         waist="Acuity Belt +1",
@@ -479,7 +500,7 @@ function init_gear_sets()
         }
 
     sets.resting = set_combine(sets.idle, {
-        waist="Austerity Belt +1",
+        waist="Shinjutsu-no-Obi +1",
         })
 
     sets.idle.DT = set_combine(sets.idle, {
@@ -907,5 +928,5 @@ function select_default_macro_book()
 end
 
 function set_lockstyle()
-    send_command('wait 2; input /lockstyleset 1')
+    send_command('wait 2; input /lockstyleset ' .. lockstyleset)
 end
