@@ -117,8 +117,6 @@ function user_setup()
     include('Global-Binds.lua') -- OK to remove this line
     include('Global-GEO-Binds.lua') -- OK to remove this line
 
-    send_command('lua l gearinfo')
-
     -- Adjust this if using the Terpander (new +song instrument)
     info.ExtraSongInstrument = 'Daurdabla'
     -- How many extra songs we can keep from Daurdabla/Terpander
@@ -128,7 +126,6 @@ function user_setup()
     send_command('bind !` input /ma "Chocobo Mazurka" <me>')
     send_command('bind !p input /ja "Pianissimo" <me>')
 
-    send_command('bind ^backspace gs c cycle SongTier')
     send_command('bind ^insert gs c cycleback Etude')
     send_command('bind ^delete gs c cycle Etude')
     send_command('bind ^home gs c cycleback Carol')
@@ -145,7 +142,8 @@ function user_setup()
     --send_command('bind ^numpad7 input /ws "Savage Blade" <t>')
     send_command('bind ^numpad7 input /ws "Mordant Rime" <t>')
     send_command('bind ^numpad4 input /ws "Evisceration" <t>')
-    send_command('bind ^numpad5 input /ws "Rudra\'s Storm" <t>')
+    send_command('bind ^numpad5 input //send @others input /ws "Cross Reaper" <t>')
+    --send_command('bind ^numpad5 input /ws "Rudra\'s Storm" <t>')
     send_command('bind ^numpad1 input /ws "Aeolian Edge" <t>')
 
     select_default_macro_book()
@@ -183,8 +181,6 @@ function user_unload()
     send_command('unbind ^numpad4')
     send_command('unbind ^numpad5')
     send_command('unbind ^numpad1')
-
-    send_command('lua u gearinfo')
 end
 
 
@@ -226,7 +222,7 @@ function init_gear_sets()
         body="Brioso Justau. +3", --15
         feet="Bihu Slippers +3", --9
         neck="Loricate Torque +1",
-        ear1="Genmei Earring",
+        ear1="Odnowa Earring +1",
         ring2="Defending Ring",
         })
 
@@ -268,7 +264,7 @@ function init_gear_sets()
     -- Specific weaponskill sets.  Uses the base set if an appropriate WSMod version isn't found.
     sets.precast.WS['Evisceration'] = set_combine(sets.precast.WS, {
         range=gear.Linos_TP,
-        head="Lustratio Cap +1",
+        head="Blistering Sallet +1",
         body="Ayanmo Corazza +2",
         hands="Bihu Cuffs +3",
         legs="Zoar Subligar +1",
@@ -288,7 +284,7 @@ function init_gear_sets()
         })
 
     sets.precast.WS['Mordant Rime'] = set_combine(sets.precast.WS, {
-        neck="Bard's Charm +1",
+        neck="Bard's Charm +2",
         ear2="Regal Earring",
         ring2="Metamor. Ring +1",
         waist="Grunfeld Rope",
@@ -297,7 +293,7 @@ function init_gear_sets()
     sets.precast.WS['Rudra\'s Storm'] = set_combine(sets.precast.WS, {
         legs="Lustr. Subligar +1",
         feet="Lustra. Leggings +1",
-        neck="Bard's Charm +1",
+        neck="Bard's Charm +2",
         waist="Grunfeld Rope",
         back=gear.BRD_WS2_Cape,
         })
@@ -348,7 +344,7 @@ function init_gear_sets()
         legs="Inyanga Shalwar +2",
         feet="Brioso Slippers +3",
         neck="Mnbw. Whistle +1",
-        ear1="Genmei Earring",
+        ear1="Odnowa Earring +1",
         ear2="Etiolation Earring",
         ring1="Moonlight Ring",
         ring2="Defending Ring",
@@ -463,8 +459,8 @@ function init_gear_sets()
     sets.midcast['Enfeebling Magic'] = {
         main="Carnwenhan",
         sub="Ammurapi Shield",
-        head="Brioso Roundlet +3",
-        body="Brioso Justau. +3",
+        head=empty;
+        body="Cohort Cloak +1",
         hands="Brioso Cuffs +3",
         legs="Brioso Cannions +3",
         feet="Brioso Slippers +3",
@@ -474,7 +470,7 @@ function init_gear_sets()
         ring1="Kishar Ring",
         ring2="Metamor. Ring +1",
         waist="Acuity Belt +1",
-        back=gear.BRD_Song_Cape,
+        back="Aurist's Cape +1",
         }
 
     sets.midcast.Dispelga = set_combine(sets.midcast['Enfeebling Magic'], {main="Daybreak", sub="Ammurapi Shield", waist="Shinjutsu-no-Obi +1"})
@@ -484,7 +480,7 @@ function init_gear_sets()
     ------------------------------------------------------------------------------------------------
 
     sets.idle = {
-        main="Sangoma",
+        main="Daybreak",
         sub="Genmei Shield",
         range="Gjallarhorn",
         head="Inyanga Tiara +2",
@@ -508,7 +504,7 @@ function init_gear_sets()
         legs="Brioso Cannions +3", --8/8
         feet="Inyan. Crackows +2", --0/3
         neck="Loricate Torque +1", --6/6
-        ear1="Genmei Earring", --2/0
+        ear1="Odnowa Earring +1", --3/5
         ear2="Etiolation Earring", --0/3
         ring1="Moonlight Ring", --5/5
         ring2="Defending Ring",  --10/10
@@ -538,9 +534,10 @@ function init_gear_sets()
         sub="Genmei Shield",
         range="Gjallarhorn",
         head="Mousai Turban +1",
+        body="Ashera Harness",
         legs="Brioso Cannions +3",
         feet="Brioso Slippers +3",
-        neck="Mnbw. Whistle +1",
+        neck="Bard's Charm +2",
         ear1="Enchntr. Earring +1",
         ear2="Regal Earring",
         back=gear.BRD_Song_Cape,
@@ -569,13 +566,15 @@ function init_gear_sets()
     -- EG: sets.engaged.Dagger.Accuracy.Evasion
 
     sets.engaged = {
+        main="Carnwenhan",
+        sub="Ternion Dagger +1",
         range=gear.Linos_TP,
         head="Aya. Zucchetto +2",
         body="Ayanmo Corazza +2",
-        hands=gear.Chironic_QA_hands,
-        legs="Aya. Cosciales +2",
+        hands="Raetic Bangles +1",
+        legs="Zoar Subligar +1",
         feet=gear.Chironic_QA_feet,
-        neck="Bard's Charm +1",
+        neck="Bard's Charm +2",
         ear1="Cessance Earring",
         ear2="Telos Earring",
         ring1={name="Chirich Ring +1", bag="wardrobe3"},
@@ -585,8 +584,7 @@ function init_gear_sets()
         }
 
     sets.engaged.Acc = set_combine(sets.engaged, {
-        hands="Raetic Bangles +1",
-        ear2="Mache Earring +1",
+        feet="Bihu Slippers +3",
         waist="Kentarch Belt +1",
         })
 
@@ -595,13 +593,15 @@ function init_gear_sets()
 
     -- No Magic Haste (74% DW to cap)
     sets.engaged.DW = {
+        main="Carnwenhan",
+        sub="Ternion Dagger +1",
         range=gear.Linos_TP,
         head="Aya. Zucchetto +2",
         body="Ayanmo Corazza +2",
-        hands=gear.Chironic_QA_hands,
-        legs="Aya. Cosciales +2",
+        hands="Raetic Bangles +1",
+        legs="Zoar Subligar +1",
         feet=gear.Chironic_QA_feet,
-        neck="Bard's Charm +1",
+        neck="Bard's Charm +2",
         ear1="Eabani Earring", --4
         ear2="Suppanomimi", --5
         ring1={name="Chirich Ring +1", bag="wardrobe3"},
@@ -611,7 +611,6 @@ function init_gear_sets()
         } -- 26%
 
     sets.engaged.DW.Acc = set_combine(sets.engaged.DW, {
-        hands="Raetic Bangles +1",
         feet="Bihu Slippers +3",
         })
 
@@ -630,14 +629,14 @@ function init_gear_sets()
     -- 45% Magic Haste (36% DW to cap)
     sets.engaged.DW.MaxHaste = {
         main="Carnwenhan",
-        sub="Taming Sari",
+        sub="Ternion Dagger +1",
         range=gear.Linos_TP,
         head="Aya. Zucchetto +2",
         body="Ayanmo Corazza +2",
-        hands=gear.Chironic_QA_hands,
-        legs="Aya. Cosciales +2",
+        hands="Raetic Bangles +1",
+        legs="Zoar Subligar +1",
         feet=gear.Chironic_QA_feet,
-        neck="Bard's Charm +1",
+        neck="Bard's Charm +2",
         ear1="Eabani Earring", --4
         ear2="Telos Earring",
         ring1={name="Chirich Ring +1", bag="wardrobe3"},
@@ -646,10 +645,11 @@ function init_gear_sets()
         waist="Reiki Yotai", --7
         }
 
-    sets.engaged.DW.MaxHaste.Acc = set_combine(sets.engaged.DW, {
-        hands="Raetic Bangles +1",
+    sets.engaged.DW.MaxHaste.Acc = set_combine(sets.engaged.DW.MaxHaste, {
         feet="Bihu Slippers +3",
-        ear2="Mache Earring +1",
+        ear1="Cessance Earring",
+        back=gear.BRD_DW_Cape,
+        waist="Kentarch Belt +1",
         })
 
     sets.engaged.DW.MaxHastePlus = set_combine(sets.engaged.DW.MaxHaste, {ear1="Cessance Earring", back=gear.BRD_DW_Cape})
@@ -659,8 +659,9 @@ function init_gear_sets()
         head="Aya. Zucchetto +2",
         body="Ashera Harness",
         hands=gear.Telchine_STP_hands,
+        legs="Aya. Cosciales +2",
         feet=gear.Telchine_STP_feet,
-        neck="Bard's Charm +1",
+        neck="Bard's Charm +2",
         ring1={name="Chirich Ring +1", bag="wardrobe3"},
         ring2={name="Chirich Ring +1", bag="wardrobe4"},
         back=gear.BRD_STP_Cape,
@@ -1011,7 +1012,7 @@ function get_lullaby_duration(spell)
     if player.equipment.feet == "Brioso Slippers +2" then mult = mult + 0.13 end
     if player.equipment.feet == "Brioso Slippers +3" then mult = mult + 0.15 end
     if player.equipment.hands == 'Brioso Cuffs +1' then mult = mult + 0.1 end
-    if player.equipment.hands == 'Brioso Cuffs +3' then mult = mult + 0.1 end
+    if player.equipment.hands == 'Brioso Cuffs +2' then mult = mult + 0.1 end
     if player.equipment.hands == 'Brioso Cuffs +3' then mult = mult + 0.2 end
 
     --JP Duration Gift
