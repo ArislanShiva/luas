@@ -109,7 +109,7 @@ end
 
 -- Setup vars that are user-dependent.  Can override this function in a sidecar file.
 function user_setup()
-    state.OffenseMode:options('STP', 'Normal', 'LowAcc', 'MidAcc', 'HighAcc')
+    state.OffenseMode:options('Normal', 'LowAcc', 'MidAcc', 'HighAcc', 'STP')
     state.HybridMode:options('Normal', 'DT')
     state.WeaponskillMode:options('Normal', 'Acc')
     state.IdleMode:options('Normal', 'DT')
@@ -118,8 +118,6 @@ function user_setup()
     include('Global-Binds.lua') -- OK to remove this line
     include('Global-GEO-Binds.lua') -- OK to remove this line
 
-    send_command('lua l gearinfo')
-
     send_command('bind ^- gs c cycleback mainstep')
     send_command('bind ^= gs c cycle mainstep')
     send_command('bind !- gs c cycleback altstep')
@@ -127,7 +125,8 @@ function user_setup()
     send_command('bind ^] gs c toggle usealtstep')
     send_command('bind ![ input /ja "Contradance" <me>')
     send_command('bind ^` input /ja "Saber Dance" <me>')
-    send_command('bind !` input /ja "Chocobo Jig II" <me>')
+    send_command('bind !` input /ja "Fan Dance" <me>')
+    send_command('bind @` input /ja "Chocobo Jig II" <me>')
     send_command('bind @f gs c toggle ClosedPosition')
     send_command('bind ^numlock input /ja "Reverse Flourish" <me>')
 
@@ -182,6 +181,7 @@ function user_unload()
     send_command('unbind ![')
     send_command('unbind ^`')
     send_command('unbind !`')
+    send_command('unbind @`')
     send_command('unbind ^,')
     send_command('unbind @f')
     send_command('unbind @c')
@@ -211,8 +211,6 @@ function user_unload()
     send_command('unbind #8')
     send_command('unbind #9')
     send_command('unbind #0')
-
-    send_command('lua u gearinfo')
 end
 
 
@@ -249,7 +247,7 @@ function init_gear_sets()
         hands="Horos Bangles +3",
         legs="Dashing Subligar", --10
         feet="Maxixi Toeshoes +3", --14
-        neck="Etoile Gorget +1", --7
+        neck="Etoile Gorget +2", --10
         --ear1="Handler's Earring +1",
         ear2="Enchntr. Earring +1",
         ring1="Carb. Ring +1",
@@ -275,7 +273,7 @@ function init_gear_sets()
         hands="Maxixi Bangles +3",
         legs="Mummu Kecks +2",
         feet="Horos T. Shoes +3",
-        neck="Etoile Gorget +1",
+        neck="Etoile Gorget +2",
         ear1="Mache Earring +1",
         ear2="Telos Earring",
         ring1="Regal Ring",
@@ -295,7 +293,7 @@ function init_gear_sets()
         hands="Mummu Wrists +2",
         legs="Mummu Kecks +2",
         feet="Mummu Gamash. +2",
-        neck="Etoile Gorget +1",
+        neck="Etoile Gorget +2",
         ear1="Digni. Earring",
         ear2="Enchntr. Earring +1",
         ring1="Metamor. Ring +1",
@@ -311,7 +309,7 @@ function init_gear_sets()
         hands="Maxixi Bangles +3",
         legs=gear.Herc_WS_legs,
         feet="Maxixi Toeshoes +3",
-        neck="Etoile Gorget +1",
+        neck="Etoile Gorget +2",
         ear1="Cessance Earring",
         ear2="Telos Earring",
         ring1="Regal Ring",
@@ -438,9 +436,9 @@ function init_gear_sets()
 
     sets.precast.WS['Rudra\'s Storm'] = set_combine(sets.precast.WS, {
         ammo="Charis Feather",
-        neck="Etoile Gorget +1",
+        neck="Etoile Gorget +2",
         ear1="Sherida Earring",
-        waist="Artful Belt +1",
+        waist="Kentarch Belt +1",
         })
 
     sets.precast.WS['Rudra\'s Storm'].Acc = set_combine(sets.precast.WS['Rudra\'s Storm'], {
@@ -452,7 +450,7 @@ function init_gear_sets()
         })
 
     sets.precast.WS['Aeolian Edge'] = {
-        ammo="Pemphredo Tathlum",
+        ammo="Ghastly Tathlum +1",
         head=gear.Herc_MAB_head,
         body="Samnuha Coat",
         hands="Maxixi Bangles +3",
@@ -493,7 +491,7 @@ function init_gear_sets()
     sets.idle = {
         ammo="Staunch Tathlum +1",
         head="Turms Cap +1",
-        body="Malignance Tabard",
+        body="Tu. Harness +1",
         hands="Turms Mittens +1",
         legs="Turms Subligar +1",
         feet="Turms Leggings +1",
@@ -522,12 +520,8 @@ function init_gear_sets()
 
     sets.idle.Town = set_combine(sets.idle, {
         ammo="Aurgelmir Orb +1",
-        head=gear.Adhemar_B_head,
-        body="Ashera Harness",
-        hands="Maxixi Bangles +3",
-        legs="Horos Tights +3",
         feet="Horos T. Shoes +3",
-        neck="Etoile Gorget +1",
+        neck="Etoile Gorget +2",
         ear1="Sherida Earring",
         ear2="Telos Earring",
         back=gear.DNC_TP_Cape,
@@ -561,7 +555,7 @@ function init_gear_sets()
         hands=gear.Adhemar_B_hands,
         legs="Samnuha Tights",
         feet=gear.Herc_TA_feet,
-        neck="Etoile Gorget +1",
+        neck="Etoile Gorget +2",
         ear1="Cessance Earring",
         ear2="Brutal Earring",
         ring1="Gere Ring",
@@ -596,7 +590,7 @@ function init_gear_sets()
 
     sets.engaged.STP = set_combine(sets.engaged, {
         head=gear.Herc_STP_head,
-        body="Ashera Harness",
+        body="Tu. Harness +1",
         ring1={name="Chirich Ring +1", bag="wardrobe3"},
         ring2={name="Chirich Ring +1", bag="wardrobe4"},
         })
@@ -707,7 +701,7 @@ function init_gear_sets()
         hands=gear.Adhemar_B_hands,
         legs="Samnuha Tights",
         feet=gear.Herc_TA_feet,
-        neck="Etoile Gorget +1",
+        neck="Etoile Gorget +2",
         ear1="Eabani Earring", --4
         ear2="Suppanomimi", --5
         ring1="Gere Ring",
@@ -755,7 +749,7 @@ function init_gear_sets()
         hands=gear.Adhemar_B_hands,
         legs="Samnuha Tights",
         feet=gear.Herc_TA_feet,
-        neck="Etoile Gorget +1",
+        neck="Etoile Gorget +2",
         ear1="Eabani Earring", --4
         ear2="Brutal Earring",
         ring1="Gere Ring",
@@ -804,7 +798,7 @@ function init_gear_sets()
         hands=gear.Adhemar_B_hands,
         legs="Samnuha Tights",
         feet=gear.Herc_TA_feet,
-        neck="Etoile Gorget +1",
+        neck="Etoile Gorget +2",
         ear1="Sherida Earring",
         ear2="Brutal Earring",
         ring1="Gere Ring",
@@ -841,7 +835,7 @@ function init_gear_sets()
 
     sets.engaged.DW.STP.MaxHaste = set_combine(sets.engaged.DW.MaxHaste, {
         head=gear.Herc_STP_head,
-        body="Ashera Harness",
+        body="Tu. Harness +1",
         ear2="Telos Earring",
         ring1={name="Chirich Ring +1", bag="wardrobe3"},
         ring2={name="Chirich Ring +1", bag="wardrobe4"},
@@ -1192,9 +1186,9 @@ function job_pretarget(spell, action, spellMap, eventArgs)
     if spell.type == 'Step' then
         local allRecasts = windower.ffxi.get_ability_recasts()
         local prestoCooldown = allRecasts[236]
-        local under3FMs = not buffactive['Finishing Move 3'] and not buffactive['Finishing Move 4'] and not buffactive['Finishing Move 5']
+        --local under3FMs = not buffactive['Finishing Move 3'] and not buffactive['Finishing Move 4'] and not buffactive['Finishing Move 5']
 
-        if player.main_job_level >= 77 and prestoCooldown < 1 and under3FMs then
+        if player.main_job_level >= 77 and prestoCooldown < 1 then --and under3FMs then
             cast_delay(1.1)
             send_command('input /ja "Presto" <me>')
         end
