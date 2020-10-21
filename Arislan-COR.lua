@@ -107,7 +107,7 @@ function job_setup()
               "Trizek Ring", "Echad Ring", "Facility Ring", "Capacity Ring",
               "Dev. Bul. Pouch", "Chr. Bul. Pouch", "Liv. Bul. Pouch"}
     elemental_ws = S{"Aeolian Edge", "Leaden Salute", "Wildfire"}
-    no_shoot_ammo = S{"Animikii Bullet", "Hauksbok Bullet", "Bronze Bullet"}
+    no_shoot_ammo = S{"Animikii Bullet", "Hauksbok Bullet"}
 
     include('Mote-TreasureHunter')
 
@@ -128,7 +128,7 @@ end
 
 -- Setup vars that are user-dependent.  Can override this function in a sidecar file.
 function user_setup()
-    state.OffenseMode:options('STP', 'Normal', 'LowAcc', 'MidAcc', 'HighAcc')
+    state.OffenseMode:options('Normal', 'LowAcc', 'MidAcc', 'HighAcc', 'STP')
     state.HybridMode:options('Normal', 'DT')
     state.RangedMode:options('STP', 'Normal', 'Acc', 'HighAcc', 'Critical')
     state.WeaponskillMode:options('Normal', 'Acc')
@@ -142,14 +142,12 @@ function user_setup()
     gear.RAccbullet = "Devastating Bullet"
     gear.WSbullet = "Chrono Bullet"
     gear.MAbullet = "Living Bullet"
-    gear.QDbullet = "Hauksbok Bullet"
+    gear.QDbullet = "Living Bullet"
     options.ammo_warning_limit = 10
 
     -- Additional local binds
     include('Global-Binds.lua') -- OK to remove this line
     include('Global-GEO-Binds.lua') -- OK to remove this line
-
-    send_command('lua l gearinfo')
 
     send_command('bind @t gs c cycle treasuremode')
     send_command('bind ^` input /ja "Double-up" <me>')
@@ -247,8 +245,6 @@ function user_unload()
     send_command('unbind #8')
     send_command('unbind #9')
     send_command('unbind #0')
-
-    send_command('lua u gearinfo')
 end
 
 -- Define sets and vars used by this job file.
@@ -269,7 +265,7 @@ function init_gear_sets()
         legs="Desultor Tassets",
         feet="Malignance Boots", --4/0
         neck="Regal Necklace",
-        ear1="Genmei Earring", --2/0
+        ear1="Odnowa Earring +1", --3/5
         ear2="Etiolation Earring", --0/3
         ring1="Gelatinous Ring +1", --7/(-1)
         ring2="Defending Ring", --10/10
@@ -581,7 +577,7 @@ function init_gear_sets()
 
     sets.midcast.RA.Critical = set_combine(sets.midcast.RA, {
         head="Meghanada Visor +2",
-        body="Meg. Cuirie +2",
+        body="Mummu Jacket +2",
         hands="Mummu Wrists +2",
         legs="Mummu Kecks +2",
         feet="Osh. Leggings +1",
@@ -654,6 +650,7 @@ function init_gear_sets()
         })
 
     sets.idle.Town = set_combine(sets.idle, {
+        ammo=gear.MAbullet,
         head="Lanun Tricorne +3",
         body="Oshosi Vest +1",
         hands="Lanun Gants +3",
@@ -1064,15 +1061,22 @@ function init_gear_sets()
     -- sets.CP = {back="Mecisto. Mantle"}
     --sets.Reive = {neck="Ygnas's Resolve +1"}
 
-    sets.TreasureHunter = {head="Volte Cap", hands=gear.Herc_TH_hands, waist="Chaac Belt"}
+    sets.TreasureHunter = {head="Volte Cap", hands=gear.Herc_TH_hands, feet="Volte Boots", waist="Chaac Belt"}
 
     sets.DeathPenalty_M = {main={name="Rostam", bag="wardrobe3"}, sub="Tauret", ranged="Death Penalty"}
+    sets.DeathPenalty_M.Acc = {main={name="Rostam", bag="wardrobe3"}, sub={name="Rostam", bag="wardrobe"}, ranged="Death Penalty"}
     sets.DeathPenalty_R = {main="Lanun Knife", sub="Tauret", ranged="Death Penalty"}
+    sets.DeathPenalty_R.Acc = {main="Lanun Knife", sub={name="Rostam", bag="wardrobe"}, ranged="Death Penalty"}
     sets.Armageddon_M = {main={name="Rostam", bag="wardrobe3"}, sub="Tauret", ranged="Armageddon"}
-    sets.Armageddon_R = {main="Fettering Blade", sub="Nusku Shield", ranged="Armageddon"}
+    sets.Armageddon_M.Acc = {main={name="Rostam", bag="wardrobe3"}, sub={name="Rostam", bag="wardrobe4"}, ranged="Armageddon"}
+    sets.Armageddon_R = {main="Lanun Knife", sub="Kustawi +1", ranged="Armageddon"}
+    sets.Armageddon_R.Acc = sets.Armageddon_R
     sets.Fomalhaut_M = {main="Naegling", sub="Blurred Knife +1", ranged="Fomalhaut"}
-    sets.Fomalhaut_R = {main="Lanun Knife", sub="Nusku Shield", ranged="Fomalhaut"}
+    sets.Fomalhaut_M.Acc = {main="Naegling", sub="Demers. Degen +1", ranged="Fomalhaut"}
+    sets.Fomalhaut_R = {main="Lanun Knife", sub="Kustawi +1", ranged="Fomalhaut"}
+    sets.Fomalhaut_R.Acc = sets.Fomalhaut_R
     sets.Ataktos = {main="Naegling", sub="Blurred Knife +1", ranged="Ataktos"}
+    sets.Ataktos.Acc = {main="Naegling", sub="Demers. Degen +1", ranged="Ataktos"}
 
 end
 
@@ -1084,7 +1088,7 @@ end
 -- Set eventArgs.handled to true if we don't want any automatic gear equipping to be done.
 -- Set eventArgs.useMidcastGear to true if we want midcast gear equipped on precast.
 function job_precast(spell, action, spellMap, eventArgs)
-    equip(sets[state.WeaponSet.current])
+    --check_weaponset()
     -- Check that proper ammo is available if we're using ranged attacks or similar.
     if spell.action_type == 'Ranged Attack' or spell.type == 'WeaponSkill' or spell.type == 'CorsairShot' then
         do_bullet_checks(spell, spellMap, eventArgs)
@@ -1092,7 +1096,7 @@ function job_precast(spell, action, spellMap, eventArgs)
 
     -- Gear
     if (spell.type == 'CorsairRoll' or spell.english == "Double-Up") then
-        if player.status ~= 'Engaged' then
+        if player.status ~= 'Engaged' and state.WeaponLock.value == false then
             equip(sets.precast.CorsairRoll.Duration)
         end
         if state.LuzafRing.value then
@@ -1197,7 +1201,7 @@ end
 
 -- Set eventArgs.handled to true if we don't want any automatic gear equipping to be done.
 function job_aftercast(spell, action, spellMap, eventArgs)
-    equip(sets[state.WeaponSet.current])
+    --check_weaponset()
     if (spell.type == 'CorsairRoll' or spell.english == "Double-Up") and not spell.interrupted then
         display_roll_info(spell)
     end
@@ -1248,7 +1252,7 @@ function job_state_change(stateField, newValue, oldValue)
         enable('ranged')
     end
 
-    equip(sets[state.WeaponSet.current])
+    check_weaponset()
 end
 
 -------------------------------------------------------------------------------------------------------------------
@@ -1265,7 +1269,7 @@ function job_handle_equipping_gear(playerStatus, eventArgs)
 end
 
 function job_update(cmdParams, eventArgs)
-    equip(sets[state.WeaponSet.current])
+    check_weaponset()
     handle_equipping_gear(player.status)
 end
 
@@ -1630,6 +1634,17 @@ function check_gear()
         disable("waist")
     else
         enable("waist")
+    end
+end
+
+function check_weaponset()
+    if state.OffenseMode.value == 'LowAcc' or state.OffenseMode.value == 'MidAcc' or state.OffenseMode.value == 'HighAcc' then
+        equip(sets[state.WeaponSet.current].Acc)
+    else
+        equip(sets[state.WeaponSet.current])
+    end
+    if not player.sub_job == 'DNC' or not player.sub_job == 'NIN' then
+       equip({sub="Nusku Shield"})
     end
 end
 
