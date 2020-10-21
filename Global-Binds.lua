@@ -57,6 +57,17 @@
     send_command('bind !numpad0 input /ma "Sacrifice" <t>')
     send_command('bind !numpad. input /ma "Esuna" <me>')
 
+    -- Default Status Enfeebling HotKeys
+    send_command('bind ~numpad7 input /ma "Paralyze" <t>')
+    send_command('bind ~numpad8 input /ma "Silence" <t>')
+    send_command('bind ~numpad9 input /ma "Blind" <t>')
+    send_command('bind ~numpad4 input /ma "Poison" <t>')
+    send_command('bind ~numpad5 input /ma "Slow" <t>')
+    send_command('bind ~numpad6 input /ma "Addle" <t>')
+    send_command('bind ~numpad1 input /ma "Distract" <t>')
+    send_command('bind ~numpad2 input /ma "Frazzle" <t>')
+    send_command('bind ~numpad0 input /ma "Dia II" <t>')
+
     -- Default Item HotKeys
     send_command('bind @numpad7 input /item "Remedy" <me>')
     send_command('bind @numpad8 input /item "Echo Drops" <me>')
@@ -64,3 +75,33 @@
     send_command('bind @numpad4 input /item "Antidote" <me>')
     send_command('bind @numpad6 input /item "Remedy" <me>')
     send_command('bind @numpad1 input /item "Holy Water" <me>')
+
+    -- Dual Box Key Binds (Requires Send and Shortcuts)
+    send_command('bind #f1 input //send @others //setkey f1 down;wait 0.1;input //send @others //setkey f1 up')
+    send_command('bind #f2 input //send @others //setkey f2 down;wait 0.1;input //send @others //setkey f2 up')
+    send_command('bind #f3 input //send @others //setkey f3 down;wait 0.1;input //send @others //setkey f3 up')
+    send_command('bind #f4 input //send @others //setkey f4 down;wait 0.1;input //send @others //setkey f4 up')
+    send_command('bind #f5 input //send @others //setkey f5 down;wait 0.1;input //send @others //setkey f5 up')
+    send_command('bind #f6 input //send @others //setkey f6 down;wait 0.1;input //send @others //setkey f6 up')
+    send_command('bind #f7 input //send @others /follow <p1>')
+    send_command('bind #f8 input //send @others /ta <bt>')
+
+    send_command('bind #escape input //send @others //setkey escape down;wait 0.1;input //send @others //setkey escape up')
+    send_command('bind #enter input //send @others //setkey enter down;wait 0.1;input //send @others //setkey enter up')
+    send_command('bind #tab input //send @others //setkey tab down;wait 0.1;input //send @others //setkey tab up')
+
+    send_command('bind #up down input //send @others //setkey up down')
+    send_command('bind #up up input //send @others //setkey up up')
+    send_command('bind #down down input //send @others //setkey down down')
+    send_command('bind #down up input //send @others //setkey down up')
+    send_command('bind #left down input //send @others //setkey left down')
+    send_command('bind #left up input //send @others //setkey left up')
+    send_command('bind #right down input //send @others //setkey right down')
+    send_command('bind #right up input //send @others //setkey right up')
+
+    send_command('bind #- input //send @others /follow <t>')
+    send_command('bind #= input //send @others //setkey numpad7 down;wait 0.2;input //send @others //setkey numpad7 up')
+
+    send_command('bind #f10 input //send @others //gs c cycle defensemode')
+    send_command('bind #f11 input //send @others //gs c cycle castingmode')
+    send_command('bind #f12 input //send @others //gs c cycle idlemode')
