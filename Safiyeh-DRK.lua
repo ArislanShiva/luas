@@ -157,7 +157,7 @@ function init_gear_sets()
         head="Ratri Sallet +1",
         body="Ignominy Cuirass +3",
         hands="Rat. Gadlings +1",
-        legs="Ratri Cuisses +1",
+        legs="Fall. Flanchard +3",
         feet="Sulev. Leggings +2",
         neck="Abyssal Beads +2",
         ear1="Moonshade Earring",
@@ -171,7 +171,6 @@ function init_gear_sets()
     sets.precast.WS.Acc = set_combine(sets.precast.WS, {
         head="Sulevia's Mask +1",
         hands="Odyssean Gauntlets",
-        legs="Sulev. Cuisses +1",
         })
 
     sets.precast.WS['Resolution'] = set_combine(sets.precast.WS, {
@@ -193,6 +192,7 @@ function init_gear_sets()
     sets.precast.WS['Torcleaver'].Acc = set_combine(sets.precast.WS['Torcleaver'], {})
 
     sets.precast.WS['Catastrophe'] = set_combine(sets.precast.WS['Torcleaver'], {
+        legs="Ratri Cuisses +1",
         ear1="Lugra Earring +1",
         waist="Sailfi Belt +1",
         back=gear.DRK_WS3_Cape,
@@ -259,7 +259,7 @@ function init_gear_sets()
         head="Carmine Mask +1",
         body="Hjarrandi Breast.",
         hands="Ratri Gadlings +1",
-        legs="Ratri Cuisses +1",
+        legs="Fall. Flanchard +3",
         feet="Rat. Sollerets +1",
         neck="Erra Pendant",
         ear1="Mani Earring",
@@ -302,6 +302,7 @@ function init_gear_sets()
         feet="Rat. Sollerets +1",
         ear1="Odnowa Earring +1",
         ring2="Gelatinous Ring +1",
+        back="Moonlight Cape",
         })
 
 
@@ -310,7 +311,7 @@ function init_gear_sets()
     ------------------------------------------------------------------------------------------------
 
     sets.idle = {
-        ammo="Seeth. Bomblet +1",
+        ammo="Staunch Tathlum +1",
         head="Hjarrandi Helm",
         body="Hjarrandi Breast.",
         hands="Sulev. Gauntlets +2",
@@ -321,24 +322,27 @@ function init_gear_sets()
         ear2="Etiolation Earring",
         ring1={name="Stikini Ring +1", bag="wardrobe3"},
         ring2={name="Stikini Ring +1", bag="wardrobe4"},
-        back=gear.DRK_DA_Cape,
+        back="Moonlight Cape",
         waist="Sailfi Belt +1",
         }
 
     sets.idle.DT = set_combine(sets.idle, {
+        ammo="Staunch Tathlum +1",
         head="Hjarrandi Helm",
         neck="Loricate Torque +1",
+        back="Moonlight Cape",
         })
 
     sets.idle.Town = set_combine(sets.idle, {
         head="Ratri Sallet +1",
         body="Ignominy Cuirass +3",
         hands="Rat. Gadlings +1",
-        legs="Ig. Flanchard +3",
+        legs="Fall. Flanchard +3",
         feet="Rat. Sollerets +1",
         neck="Abyssal Beads +2",
         ear1="Odnowa Earring +1",
         ear2="Thrud Earring",
+        back=gear.DRK_DA_Cape,
         })
 
     sets.idle.Weak = set_combine(sets.idle, {})
@@ -379,6 +383,7 @@ function init_gear_sets()
     sets.engaged.MidAcc = set_combine(sets.engaged.LowAcc, {})
     sets.engaged.HighAcc = set_combine(sets.engaged.MidAcc, {
         ammo="Seeth. Bomblet +1",
+        hands="Gazu Bracelet +1",
         })
 
     sets.engaged.STP = set_combine(sets.engaged, {
@@ -402,6 +407,7 @@ function init_gear_sets()
     sets.engaged.Apocalypse.MidAcc = set_combine(sets.engaged.Apocalypse, {})
     sets.engaged.Apocalypse.HighAcc = set_combine(sets.engaged.Apocalypse, {
         ammo="Seeth. Bomblet +1",
+        hands="Gazu Bracelet +1",
         })
 
     ------------------------------------------------------------------------------------------------
