@@ -533,7 +533,7 @@ function init_gear_sets()
         body="Malignance Tabard",
         hands="Laksa. Gants +3",
         legs="Malignance Tights",
-        feet="Laksa. Boots +3",
+        feet="Laksa. Bottes +3",
         neck="Comm. Charm +2",
         ear1="Enchntr. Earring +1",
         ear2="Digni. Earring",
@@ -728,6 +728,7 @@ function init_gear_sets()
 
     sets.engaged.HighAcc = set_combine(sets.engaged.MidAcc, {
         head="Carmine Mask +1",
+        hands="Gazu Bracelet +1",
         feet=gear.Herc_STP_feet,
         ear1="Mache Earring +1",
         ear2="Odr Earring",
@@ -779,6 +780,7 @@ function init_gear_sets()
 
     sets.engaged.DW.HighAcc = set_combine(sets.engaged.DW.MidAcc, {
         head="Carmine Mask +1",
+        hands="Gazu Bracelet +1",
         feet=gear.Herc_STP_feet,
         ear1="Mache Earring +1",
         ear2="Odr Earring",
@@ -825,6 +827,7 @@ function init_gear_sets()
 
     sets.engaged.DW.HighAcc.LowHaste = set_combine(sets.engaged.DW.MidAcc.LowHaste, {
         head="Carmine Mask +1",
+        hands="Gazu Bracelet +1",
         feet=gear.Herc_STP_feet,
         ear1="Mache Earring +1",
         ear2="Odr Earring",
@@ -872,6 +875,7 @@ function init_gear_sets()
 
     sets.engaged.DW.HighAcc.MidHaste = set_combine(sets.engaged.DW.MidAcc.MidHaste, {
         head="Carmine Mask +1",
+        hands="Gazu Bracelet +1",
         legs="Carmine Cuisses +1",
         feet=gear.Herc_STP_feet,
         ear1="Mache Earring +1",
@@ -920,6 +924,7 @@ function init_gear_sets()
 
     sets.engaged.DW.HighAcc.HighHaste = set_combine(sets.engaged.DW.MidAcc.HighHaste, {
         head="Carmine Mask +1",
+        hands="Gazu Bracelet +1",
         legs="Carmine Cuisses +1",
         feet=gear.Herc_STP_feet,
         ear1="Mache Earring +1",
@@ -968,6 +973,7 @@ function init_gear_sets()
 
     sets.engaged.DW.HighAcc.MaxHaste = set_combine(sets.engaged.DW.MidAcc.MaxHaste, {
         head="Carmine Mask +1",
+        hands="Gazu Bracelet +1",
         legs="Carmine Cuisses +1",
         feet=gear.Herc_STP_feet,
         ear1="Mache Earring +1",
@@ -1088,7 +1094,6 @@ end
 -- Set eventArgs.handled to true if we don't want any automatic gear equipping to be done.
 -- Set eventArgs.useMidcastGear to true if we want midcast gear equipped on precast.
 function job_precast(spell, action, spellMap, eventArgs)
-    --check_weaponset()
     -- Check that proper ammo is available if we're using ranged attacks or similar.
     if spell.action_type == 'Ranged Attack' or spell.type == 'WeaponSkill' or spell.type == 'CorsairShot' then
         do_bullet_checks(spell, spellMap, eventArgs)
@@ -1201,7 +1206,6 @@ end
 
 -- Set eventArgs.handled to true if we don't want any automatic gear equipping to be done.
 function job_aftercast(spell, action, spellMap, eventArgs)
-    --check_weaponset()
     if (spell.type == 'CorsairRoll' or spell.english == "Double-Up") and not spell.interrupted then
         display_roll_info(spell)
     end

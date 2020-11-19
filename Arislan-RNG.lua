@@ -76,7 +76,7 @@ end
 
 -- Setup vars that are user-dependent.  Can override this function in a sidecar file.
 function user_setup()
-    state.OffenseMode:options('STP', 'Normal', 'LowAcc', 'MidAcc', 'HighAcc')
+    state.OffenseMode:options('Normal', 'LowAcc', 'MidAcc', 'HighAcc', 'STP')
     state.HybridMode:options('Normal', 'DT')
     state.RangedMode:options('STP', 'Normal', 'Acc', 'HighAcc', 'Critical')
     state.WeaponskillMode:options('Normal', 'Acc', 'Enmity')
@@ -123,9 +123,7 @@ function user_setup()
 
     -- Additional local binds
     include('Global-Binds.lua') -- OK to remove this line
-    include('Global-COR-Binds.lua') -- OK to remove this line
-
-    send_command('lua l gearinfo')
+    include('Global-GEO-Binds.lua') -- OK to remove this line
 
     send_command('bind ^` input /ja "Velocity Shot" <me>')
     send_command ('bind @` input /ja "Scavenge" <me>')
@@ -211,8 +209,6 @@ function user_unload()
     send_command('unbind #8')
     send_command('unbind #9')
     send_command('unbind #0')
-
-    send_command('lua u gearinfo')
 end
 
 
@@ -229,7 +225,7 @@ function init_gear_sets()
     sets.precast.JA['Camouflage'] = {body="Orion Jerkin +3"}
     sets.precast.JA['Scavenge'] = {feet="Orion Socks +3"}
     sets.precast.JA['Shadowbind'] = {hands="Orion Bracers +3"}
-    sets.precast.JA['Sharpshot'] = {legs="Orion Braccae +1"}
+    sets.precast.JA['Sharpshot'] = {legs="Orion Braccae +3"}
 
 
     -- Fast cast sets for spells
@@ -244,7 +240,7 @@ function init_gear_sets()
 
     sets.precast.FC = {
         head="Carmine Mask +1", --14
-        body=gear.Taeon_FC_body, --8
+        body=gear.Taeon_FC_body, --9
         hands="Leyline Gloves", --8
         legs="Rawhide Trousers", --5
         feet="Carmine Greaves +1", --8
@@ -264,29 +260,38 @@ function init_gear_sets()
     -- (10% Snapshot, 5% Rapid from Merits)
     sets.precast.RA = {
         head=gear.Taeon_RA_head, --10/0
-        body="Oshosi Vest +1", --14/0
+        body="Amini Caban +1",
         hands="Carmine Fin. Ga. +1", --8/11
-        legs=gear.Adhemar_D_legs, --10/13
+        legs="Orion Braccae +3", --15/0
         feet="Meg. Jam. +2", --10/0
+        neck="Scout's Gorget +2", --4/0
         back=gear.RNG_SNP_Cape, --10/0
-        waist="Yemaya Belt", --0/5
-      } --61/26
+        waist="Impulse Belt", --3/0
+        } --60/11
 
     sets.precast.RA.Flurry1 = set_combine(sets.precast.RA, {
         head="Orion Beret +3", --0/18
-        body="Amini Caban +1",
-        neck="Scout's Gorget +1", --3/0
-        waist="Impulse Belt", --3/0
-        }) --43/39
+        legs=gear.Adhemar_D_legs, --10/13
+        }) --45/42
 
     sets.precast.RA.Flurry2 = set_combine(sets.precast.RA.Flurry1, {
         feet="Arcadian Socks +3", --0/10
         waist="Yemaya Belt", --0/5
-        }) --30/54
+        }) --32/57
 
-    --sets.precast.RA.Gastra = {head="Mummu Bonnet +2"}
-    --sets.precast.RA.Gastra.Flurry1 = set_combine(sets.precast.RA.Gastra, {})
-    --sets.precast.RA.Gastra.Flurry2 = set_combine(sets.precast.RA.Gastra.Flurry1, {})
+    --[[
+    sets.precast.RA.Gastra = {
+        head="Orion Beret +3", --15/0
+        }
+
+    sets.precast.RA.Gastra.Flurry1 = set_combine(sets.precast.RA.Gastra, {
+        feet="Arcadian Socks +3", --0/10
+        })
+
+    sets.precast.RA.Gastra.Flurry2 = set_combine(sets.precast.RA.Gastra.Flurry1, {
+        legs="Pursuer's Pants", --0/19
+        })
+    ]]--
 
 
     ------------------------------------------------------------------------------------------------
@@ -310,7 +315,6 @@ function init_gear_sets()
 
     sets.precast.WS.Acc = set_combine(sets.precast.WS, {
         feet="Arcadian Socks +3",
-        neck="Combatant's Torque",
         ear1="Beyla Earring",
         waist="K. Kachina Belt +1",
         })
@@ -363,7 +367,7 @@ function init_gear_sets()
         })
 
     sets.precast.WS["Last Stand"] = set_combine(sets.precast.WS, {
-        neck="Scout's Gorget +1",
+        neck="Scout's Gorget +2",
         })
 
     sets.precast.WS['Last Stand'].Acc = set_combine(sets.precast.WS['Last Stand'], {
@@ -382,7 +386,7 @@ function init_gear_sets()
         })
 
     sets.precast.WS["Coronach"] = set_combine(sets.precast.WS['Last Stand'], {
-        neck="Scout's Gorget +1",
+        neck="Scout's Gorget +2",
         ear1="Sherida Earring",
         ear2="Mache Earring +1",
         })
@@ -402,7 +406,7 @@ function init_gear_sets()
         hands="Carmine Fin. Ga. +1",
         legs=gear.Herc_WSD_legs,
         feet=gear.Herc_WSD_feet,
-        neck="Scout's Gorget +1",
+        neck="Scout's Gorget +2",
         ear1="Moonshade Earring",
         ear2="Friomisi Earring",
         ring1="Weather. Ring +1",
@@ -462,7 +466,7 @@ function init_gear_sets()
         hands="Malignance Gloves",
         legs="Malignance Tights",
         feet="Malignance Boots",
-        neck="Scout's Gorget +1",
+        neck="Scout's Gorget +2",
         ear1="Enervating Earring",
         ear2="Telos Earring",
         ring1="Regal Ring",
@@ -486,7 +490,7 @@ function init_gear_sets()
 
     sets.midcast.RA.Critical = set_combine(sets.midcast.RA, {
         head="Meghanada Visor +2",
-        body="Meg. Cuirie +2",
+        body="Mummu Jacket +2",
         hands="Kobo Kote",
         legs="Mummu Kecks +2",
         feet="Osh. Leggings +1",
@@ -529,7 +533,7 @@ function init_gear_sets()
         hands="Malignance Gloves",
         legs="Malignance Tights",
         feet="Malignance Boots",
-        neck="Scout's Gorget +1",
+        neck="Scout's Gorget +2",
         neck="Bathy Choker +1",
         ear1="Sanare Earring",
         ear2="Eabani Earring",
@@ -557,7 +561,7 @@ function init_gear_sets()
         hands="Oshosi Gloves +1",
         legs="Arc. Braccae +3",
         feet="Osh. Leggings +1",
-        neck="Scout's Gorget +1",
+        neck="Scout's Gorget +2",
         ear1="Beyla Earring",
         ear2="Telos Earring",
         back=gear.RNG_RA_Cape,
@@ -617,6 +621,7 @@ function init_gear_sets()
 
     sets.engaged.HighAcc = set_combine(sets.engaged.MidAcc, {
         head="Carmine Mask +1",
+        hands="Gazu Bracelet +1",
         feet=gear.Herc_STP_feet,
         ear1="Cessance Earring",
         ear2="Mache Earring +1",
@@ -664,6 +669,7 @@ function init_gear_sets()
 
     sets.engaged.DW.HighAcc = set_combine(sets.engaged.DW.MidAcc, {
         head="Carmine Mask +1",
+        hands="Gazu Bracelet +1",
         feet=gear.Herc_STP_feet,
         ear1="Cessance Earring",
         ear2="Mache Earring +1",
@@ -709,6 +715,7 @@ function init_gear_sets()
 
     sets.engaged.DW.HighAcc.LowHaste = set_combine(sets.engaged.DW.MidAcc.LowHaste, {
         head="Carmine Mask +1",
+        hands="Gazu Bracelet +1",
         feet=gear.Herc_STP_feet,
         ear1="Cessance Earring",
         ear2="Mache Earring +1",
@@ -755,6 +762,7 @@ function init_gear_sets()
 
     sets.engaged.DW.HighAcc.MidHaste = set_combine(sets.engaged.DW.MidAcc.MidHaste, {
         head="Carmine Mask +1",
+        hands="Gazu Bracelet +1",
         legs="Carmine Cuisses +1",
         feet=gear.Herc_STP_feet,
         ear1="Cessance Earring",
@@ -802,6 +810,7 @@ function init_gear_sets()
 
     sets.engaged.DW.HighAcc.HighHaste = set_combine(sets.engaged.DW.MidAcc.HighHaste, {
         head="Carmine Mask +1",
+        hands="Gazu Bracelet +1",
         legs="Carmine Cuisses +1",
         feet=gear.Herc_STP_feet,
         ear1="Cessance Earring",
@@ -848,6 +857,7 @@ function init_gear_sets()
 
     sets.engaged.DW.HighAcc.MaxHaste = set_combine(sets.engaged.DW.MidAcc.MaxHaste, {
         head="Carmine Mask +1",
+        hands="Gazu Bracelet +1",
         legs="Carmine Cuisses +1",
         feet=gear.Herc_STP_feet,
         ear1="Cessance Earring",
@@ -943,10 +953,10 @@ function init_gear_sets()
     --sets.Reive = {neck="Ygnas's Resolve +1"}
     -- sets.CP = {back="Mecisto. Mantle"}
 
-    sets.Annihilator = {ranged="Annihilator"}
-    sets.Fomalhaut = {ranged="Fomalhaut"}
-    sets.Armageddon = {ranged="Armageddon"}
-    --sets.Gastraphetes = {ranged="Gastraphetes"}
+    sets.Annihilator = {main="Perun +1", sub="Blurred Knife +1", ranged="Annihilator"}
+    sets.Fomalhaut = {main="Perun +1", sub="Blurred Knife +1", ranged="Fomalhaut"}
+    sets.Armageddon = {main="Malevolence", sub="Malevolence", ranged="Armageddon"}
+    --sets.Gastraphetes = {main="Malevolence", sub="Malevolence", ranged="Gastraphetes"}
 
 end
 
@@ -957,8 +967,6 @@ end
 -- Set eventArgs.handled to true if we don't want any automatic gear equipping to be done.
 -- Set eventArgs.useMidcastGear to true if we want midcast gear equipped on precast.
 function job_precast(spell, action, spellMap, eventArgs)
-    equip(sets[state.WeaponSet.current])
-
     if spell.action_type == 'Ranged Attack' then
         state.CombatWeapon:set(player.equipment.range)
     end
@@ -980,22 +988,26 @@ end
 
 function job_post_precast(spell, action, spellMap, eventArgs)
     if spell.action_type == 'Ranged Attack' then
---        if state.Buff['Velocity Shot'] then
---            equip( sets.buff['Velocity Shot'])
---        end
-        if spell.action_type == 'Ranged Attack' and state.WeaponSet.current == "Gastraphetes" then
-            if flurry == 2 then
-                equip(sets.precast.RA.Gastra.Flurry2)
-            elseif flurry == 1 then
-                equip(sets.precast.RA.Gastra.Flurry1)
+        if spell.action_type == 'Ranged Attack' then
+            if player.equipment.ranged == "Gastraphetes" then
+                if flurry == 2 then
+                    equip(sets.precast.RA.Gastra.Flurry2)
+                elseif flurry == 1 then
+                    equip(sets.precast.RA.Gastra.Flurry1)
+                else
+                    equip(sets.precast.RA.Gastra)
+                end
             else
-                equip(sets.precast.RA.Gastra)
+                if flurry == 2 then
+                    equip(sets.precast.RA.Flurry2)
+                elseif flurry == 1 then
+                    equip(sets.precast.RA.Flurry1)
+                else
+                    equip(sets.precast.RA)
+                end
             end
-        elseif spell.action_type == 'Ranged Attack' then
-            if flurry == 2 then
-                equip(sets.precast.RA.Flurry2)
-            elseif flurry == 1 then
-                equip(sets.precast.RA.Flurry1)
+            if player.equipment.main == "Perun +1" then
+                equip({waist="Yemaya Belt"})
             end
         end
         -- Replace TP-bonus gear if not needed.
@@ -1046,8 +1058,6 @@ end
 
 
 function job_aftercast(spell, action, spellMap, eventArgs)
-    equip(sets[state.WeaponSet.current])
-
     if spell.english == "Shadowbind" then
         send_command('@timers c "Shadowbind ['..spell.target.name..']" 42 down abilities/00122.png')
     end
@@ -1110,8 +1120,7 @@ function job_state_change(stateField, newValue, oldValue)
     --    enable('ranged')
    -- end
 
-    equip(sets[state.WeaponSet.current])
-
+    check_weaponset()
 end
 
 -------------------------------------------------------------------------------------------------------------------
@@ -1128,7 +1137,7 @@ function job_handle_equipping_gear(playerStatus, eventArgs)
 end
 
 function job_update(cmdParams, eventArgs)
-    equip(sets[state.WeaponSet.current])
+    check_weaponset()
     handle_equipping_gear(player.status)
 end
 
@@ -1308,7 +1317,6 @@ function check_ammo(spell, action, spellMap, eventArgs)
         if elemental_ws:contains(spell.english) then
             if player.inventory[MagicAmmo[player.equipment.range]] then
                 equip({ammo=MagicAmmo[player.equipment.range]})
-                add_to_chat(1, 'Magic Ammo')
             else
                 add_to_chat(3,"Magic ammo unavailable.  Using default ammo.")
                 equip({ammo=DefaultAmmo[player.equipment.range]})
@@ -1318,7 +1326,6 @@ function check_ammo(spell, action, spellMap, eventArgs)
             if state.RangedMode.value == 'Acc' then
                 if player.inventory[AccAmmo[player.equipment.range]] then
                     equip({ammo=AccAmmo[player.equipment.range]})
-                    add_to_chat(1, 'Acc Ammo')
                 else
                     add_to_chat(3,"Acc ammo unavailable.  Using default ammo.")
                     equip({ammo=DefaultAmmo[player.equipment.range]})
@@ -1371,6 +1378,17 @@ function check_gear()
         disable("waist")
     else
         enable("waist")
+    end
+end
+
+function check_weaponset()
+    if state.OffenseMode.value == 'LowAcc' or state.OffenseMode.value == 'MidAcc' or state.OffenseMode.value == 'HighAcc' then
+        equip(sets[state.WeaponSet.current].Acc)
+    else
+        equip(sets[state.WeaponSet.current])
+    end
+    if not player.sub_job == 'DNC' or not player.sub_job == 'NIN' then
+       equip({sub="Nusku Shield"})
     end
 end
 

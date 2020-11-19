@@ -76,8 +76,10 @@ function job_setup()
 
     no_swap_gear = S{"Warp Ring", "Dim. Ring (Dem)", "Dim. Ring (Holla)", "Dim. Ring (Mea)",
               "Trizek Ring", "Echad Ring", "Facility Ring", "Capacity Ring"}
+    elemental_ws = S{"Aeolian Edge"}
 
-    lockstyleset = 1
+
+    lockstyleset = 11
 end
 
 -------------------------------------------------------------------------------------------------------------------
@@ -109,7 +111,7 @@ function user_setup()
         'Quick Etude', 'Swift Etude', 'Vivacious Etude', 'Vital Etude', 'Dextrous Etude', 'Uncanny Etude',
         'Spirited Etude', 'Logical Etude', 'Enchanting Etude', 'Bewitching Etude'}
 
-    state.WeaponSet = M{['description']='Weapon Set', 'Carnwenhan', 'Twashtar', 'Naegling', 'Tauret', 'Free'}
+    state.WeaponSet = M{['description']='Weapon Set', 'Carnwenhan', 'Twashtar', 'Tauret', 'Naegling'}
     state.WeaponLock = M(false, 'Weapon Lock')
     -- state.CP = M(false, "Capacity Points Mode")
 
@@ -142,8 +144,7 @@ function user_setup()
     --send_command('bind ^numpad7 input /ws "Savage Blade" <t>')
     send_command('bind ^numpad7 input /ws "Mordant Rime" <t>')
     send_command('bind ^numpad4 input /ws "Evisceration" <t>')
-    send_command('bind ^numpad5 input //send @others input /ws "Cross Reaper" <t>')
-    --send_command('bind ^numpad5 input /ws "Rudra\'s Storm" <t>')
+    send_command('bind ^numpad5 input /ws "Rudra\'s Storm" <t>')
     send_command('bind ^numpad1 input /ws "Aeolian Edge" <t>')
 
     select_default_macro_book()
@@ -194,11 +195,10 @@ function init_gear_sets()
     -- Fast cast sets for spells
     sets.precast.FC = {
         main="Kali", --7
-        sub="Genmei Shield",
         head="Nahtirah Hat", --10
         body="Inyanga Jubbah +2", --14
-        hands="Gende. Gages +1", --7/5
-        legs="Aya. Cosciales +2", --6
+        hands="Gende. Gages +1", --7
+        legs="Volte Brais", --8
         feet="Volte Gaiters", --6
         neck="Orunmila's Torque", --5
         ear1="Loquac. Earring", --2
@@ -212,7 +212,6 @@ function init_gear_sets()
     sets.precast.FC['Enhancing Magic'] = set_combine(sets.precast.FC, {waist="Siegel Sash"})
 
     sets.precast.FC.Cure = set_combine(sets.precast.FC, {
-        legs="Kaykaus Tights +1", --7
         feet="Kaykaus Boots +1", --0/7
         ear2="Mendi. Earring", --0/5
         })
@@ -298,6 +297,18 @@ function init_gear_sets()
         back=gear.BRD_WS2_Cape,
         })
 
+    sets.precast.WS['Aeolian Edge'] = set_combine(sets.precast.WS, {
+        head=empty;
+        body="Cohort Cloak +1",
+        legs="Kaykaus Tights +1",
+        feet="Volte Gaiters",
+        neck="Baetyl Pendant",
+        ring2="Shiva Ring +1",
+        ear1="Friomisi Earring",
+        back="Argocham. Mantle",
+        waist="Orpheus's Sash",
+        })
+
     sets.precast.WS['Savage Blade'] = set_combine(sets.precast.WS, {
         feet="Lustra. Leggings +1",
         neck="Caro Necklace",
@@ -336,7 +347,6 @@ function init_gear_sets()
     -- For song buffs (duration and AF3 set bonus)
     sets.midcast.SongEnhancing = {
         main="Carnwenhan",
-        sub="Genmei Shield",
         range="Gjallarhorn",
         head="Fili Calot +1",
         body="Fili Hongreline +1",
@@ -480,14 +490,12 @@ function init_gear_sets()
     ------------------------------------------------------------------------------------------------
 
     sets.idle = {
-        main="Daybreak",
-        sub="Genmei Shield",
         range="Gjallarhorn",
         head="Inyanga Tiara +2",
         body="Mou. Manteel +1",
         hands="Raetic Bangles +1",
-        legs="Inyanga Shalwar +2",
-        feet="Inyan. Crackows +2",
+        legs="Volte Brais",
+        legs="Volte Gaiters",
         neck="Bathy Choker +1",
         ear1="Eabani Earring",
         ear2="Sanare Earring",
@@ -513,8 +521,6 @@ function init_gear_sets()
         }
 
     sets.idle.MEva = {
-        main="Daybreak",
-        sub="Ammurapi Shield",
         head="Inyanga Tiara +2", --0/5
         body="Inyanga Jubbah +2", --0/8
         hands="Raetic Bangles +1",
@@ -530,8 +536,6 @@ function init_gear_sets()
         }
 
     sets.idle.Town = set_combine(sets.idle, {
-        main="Carnwenhan",
-        sub="Genmei Shield",
         range="Gjallarhorn",
         head="Mousai Turban +1",
         body="Ashera Harness",
@@ -566,10 +570,8 @@ function init_gear_sets()
     -- EG: sets.engaged.Dagger.Accuracy.Evasion
 
     sets.engaged = {
-        main="Carnwenhan",
-        sub="Ternion Dagger +1",
         range=gear.Linos_TP,
-        head="Aya. Zucchetto +2",
+        head="Volte Tiara",
         body="Ayanmo Corazza +2",
         hands="Raetic Bangles +1",
         legs="Zoar Subligar +1",
@@ -584,6 +586,8 @@ function init_gear_sets()
         }
 
     sets.engaged.Acc = set_combine(sets.engaged, {
+        head="Aya. Zucchetto +2",
+        hands="Gazu Bracelet +1",
         feet="Bihu Slippers +3",
         waist="Kentarch Belt +1",
         })
@@ -593,12 +597,10 @@ function init_gear_sets()
 
     -- No Magic Haste (74% DW to cap)
     sets.engaged.DW = {
-        main="Carnwenhan",
-        sub="Ternion Dagger +1",
         range=gear.Linos_TP,
-        head="Aya. Zucchetto +2",
+        head="Volte Tiara",
         body="Ayanmo Corazza +2",
-        hands="Raetic Bangles +1",
+        hands="Gazu Bracelet +1",
         legs="Zoar Subligar +1",
         feet=gear.Chironic_QA_feet,
         neck="Bard's Charm +2",
@@ -611,6 +613,7 @@ function init_gear_sets()
         } -- 26%
 
     sets.engaged.DW.Acc = set_combine(sets.engaged.DW, {
+        head="Aya. Zucchetto +2",
         feet="Bihu Slippers +3",
         })
 
@@ -628,12 +631,10 @@ function init_gear_sets()
 
     -- 45% Magic Haste (36% DW to cap)
     sets.engaged.DW.MaxHaste = {
-        main="Carnwenhan",
-        sub="Ternion Dagger +1",
         range=gear.Linos_TP,
-        head="Aya. Zucchetto +2",
+        head="Volte Tiara",
         body="Ayanmo Corazza +2",
-        hands="Raetic Bangles +1",
+        hands="Gazu Bracelet +1",
         legs="Zoar Subligar +1",
         feet=gear.Chironic_QA_feet,
         neck="Bard's Charm +2",
@@ -646,6 +647,7 @@ function init_gear_sets()
         }
 
     sets.engaged.DW.MaxHaste.Acc = set_combine(sets.engaged.DW.MaxHaste, {
+        head="Aya. Zucchetto +2",
         feet="Bihu Slippers +3",
         ear1="Cessance Earring",
         back=gear.BRD_DW_Cape,
@@ -656,11 +658,11 @@ function init_gear_sets()
     sets.engaged.DW.Acc.MaxHastePlus = set_combine(sets.engaged.DW.Acc.MaxHaste, {ear1="Cessance Earring", back=gear.BRD_DW_Cape})
 
     sets.engaged.Aftermath = {
-        head="Aya. Zucchetto +2",
+        head="Volte Tiara",
         body="Ashera Harness",
         hands=gear.Telchine_STP_hands,
         legs="Aya. Cosciales +2",
-        feet=gear.Telchine_STP_feet,
+        feet="Volte Spats",
         neck="Bard's Charm +2",
         ring1={name="Chirich Ring +1", bag="wardrobe3"},
         ring2={name="Chirich Ring +1", bag="wardrobe4"},
@@ -716,6 +718,11 @@ function init_gear_sets()
     -- sets.CP = {back="Mecisto. Mantle"}
     --sets.Reive = {neck="Ygnas's Resolve +1"}
 
+    sets.Carnwenhan = {main="Carnwenhan", sub="Ternion Dagger +1"}
+    sets.Twashtar = {main="Twashtar", sub="Taming Sari"}
+    sets.Tauret = {main="Tauret", sub="Ternion Dagger +1"}
+    sets.Naegling = {main="Naegling", sub="Centovente"}
+
 end
 
 
@@ -763,6 +770,29 @@ function job_precast(spell, action, spellMap, eventArgs)
     end
 end
 
+function job_post_precast(spell, action, spellMap, eventArgs)
+    if spell.type == 'WeaponSkill' then
+        if elemental_ws:contains(spell.name) then
+            -- Matching double weather (w/o day conflict).
+            if spell.element == world.weather_element and (get_weather_intensity() == 2 and spell.element ~= elements.weak_to[world.day_element]) then
+                equip({waist="Hachirin-no-Obi"})
+            -- Target distance under 1.7 yalms.
+            elseif spell.target.distance < (1.7 + spell.target.model_size) then
+                equip({waist="Orpheus's Sash"})
+            -- Matching day and weather.
+            elseif spell.element == world.day_element and spell.element == world.weather_element then
+                equip({waist="Hachirin-no-Obi"})
+            -- Target distance under 8 yalms.
+            elseif spell.target.distance < (8 + spell.target.model_size) then
+                equip({waist="Orpheus's Sash"})
+            -- Match day or weather.
+            elseif spell.element == world.day_element or spell.element == world.weather_element then
+                equip({waist="Hachirin-no-Obi"})
+            end
+        end
+    end
+end
+
 -- Set eventArgs.handled to true if we don't want any automatic gear equipping to be done.
 function job_midcast(spell, action, spellMap, eventArgs)
     if spell.type == 'BardSong' then
@@ -789,7 +819,7 @@ end
 
 function job_post_midcast(spell, action, spellMap, eventArgs)
     if spell.type == 'BardSong' then
-        if state.CombatForm.current == 'DW' then
+        if player.status ~= 'Engaged' and state.WeaponLock.value == false and (player.sub_job == 'DNC' or player.sub_job == 'NIN') then
             equip(sets.SongDWDuration)
         end
     end
@@ -832,6 +862,8 @@ function job_state_change(stateField, newValue, oldValue)
     else
         enable('main','sub')
     end
+
+    check_weaponset()
 end
 
 -------------------------------------------------------------------------------------------------------------------
@@ -848,6 +880,7 @@ function job_handle_equipping_gear(playerStatus, eventArgs)
 end
 
 function job_update(cmdParams, eventArgs)
+    check_weaponset()
     handle_equipping_gear(player.status)
 end
 
@@ -874,15 +907,6 @@ end
 
 -- Modify the default melee set after it was constructed.
 function customize_melee_set(meleeSet)
-    if state.WeaponSet.value == "Carnwenhan" then
-        equip({main="Carnwenhan",sub="Taming Sari"})
-    elseif state.WeaponSet.value == "Twashtar" then
-        equip({main="Twashtar",sub="Centovente"})
-    elseif state.WeaponSet.value == "Naegling" then
-        equip({main="Naegling",sub="Centovente"})
-    elseif state.WeaponSet.value == "Tauret" then
-        equip({main="Tauret",sub="Twashtar"})
-    end
     if buffactive['Aftermath: Lv.3'] and player.equipment.main == "Carnwenhan" then
         meleeSet = set_combine(meleeSet, sets.engaged.Aftermath)
     end
@@ -1131,6 +1155,13 @@ function check_gear()
         disable("ring2")
     else
         enable("ring2")
+    end
+end
+
+function check_weaponset()
+    equip(sets[state.WeaponSet.current])
+    if not player.sub_job == 'DNC' or not player.sub_job == 'NIN' then
+       equip({sub="Genmei Shield"})
     end
 end
 
