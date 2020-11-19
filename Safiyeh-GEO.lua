@@ -50,7 +50,6 @@ function job_setup()
     entrust = 0
     newLuopan = 0
 
-    state.Buff.Entrust = buffactive.Entrust or false
     state.Buff['Blaze of Glory'] = buffactive['Blaze of Glory'] or false
 
     -- state.CP = M(false, "Capacity Points Mode")
@@ -90,8 +89,6 @@ function user_setup()
 
     -- Additional local binds
     include('Global-Binds.lua')
-
-    send_command('lua l gearinfo')
 
     send_command('bind ^` input /ja "Full Circle" <me>')
     send_command('bind ^b input /ja "Blaze of Glory" <me>')
@@ -151,8 +148,6 @@ function user_unload()
     send_command('unbind !numpad6')
     send_command('unbind !numpad1')
     send_command('unbind !numpad+')
-
-    send_command('lua u gearinfo')
 end
 
 
@@ -232,8 +227,6 @@ function init_gear_sets()
     sets.precast.WS['Exudation'] = sets.precast.WS['Hexastrike']
 
     sets.precast.WS['Flash Nova'] = {
-        main="Daybreak",
-        sub="Ammurapi Shield",
         head="Bagua Galero +3",
         body="Amalric Doublet +1",
         hands="Amalric Gages +1",
@@ -378,8 +371,8 @@ function init_gear_sets()
     sets.midcast.MndEnfeebles = {
         main="Idris",
         sub="Ammurapi Shield",
-        head="Geo. Galero +3",
-        body="Geomancy Tunic +3",
+        head=empty,
+        body="Cohort Cloak +1",
         hands="Geo. Mitaines +3",
         legs="Geomancy Pants +3",
         feet="Bagua Sandals +3",
@@ -388,16 +381,17 @@ function init_gear_sets()
         ear2="Regal Earring",
         ring1="Kishar Ring",
         ring2={name="Stikini Ring +1", bag="wardrobe4"},
-        back=gear.GEO_FC_Cape,
+        back="Aurist's Cape +1",
         waist="Luminary Sash",
         } -- MND/Magic accuracy
 
     sets.midcast.IntEnfeebles = set_combine(sets.midcast.MndEnfeebles, {
         ring1="Freke Ring",
         ring2="Weather. Ring +1",
-        back=gear.GEO_MAB_Cape,
         waist="Acuity Belt +1",
         }) -- INT/Magic accuracy
+
+    sets.midcast.LockedEnfeebles = {body="Geomancy Tunic +3"}
 
     sets.midcast.Dispelga = set_combine(sets.midcast.IntEnfeebles, {main="Daybreak", sub="Ammurapi Shield"})
 
@@ -414,7 +408,7 @@ function init_gear_sets()
         ear2="Regal Earring",
         ring1={name="Stikini Ring +1", bag="wardrobe3"},
         ring2="Metamor. Ring +1",
-        back=gear.GEO_MAB_Cape,
+        back="Aurist's Cape +1",
         waist="Acuity Belt +1",
         }
 
@@ -422,6 +416,7 @@ function init_gear_sets()
         head="Bagua Galero +3",
         ring1="Evanescence Ring",
         ring2="Archon Ring",
+        ear1="Hirudinea Earring",
         ear2="Mani Earring",
         waist="Fucho-no-Obi",
         })
@@ -434,8 +429,8 @@ function init_gear_sets()
     -- Elemental Magic sets
 
     sets.midcast['Elemental Magic'] = {
-        main="Daybreak",
-        sub="Ammurapi Shield",
+        main="Raetic Staff +1",
+        sub="Enki Strap",
         head="Bagua Galero +3",
         body="Amalric Doublet +1",
         hands="Amalric Gages +1",
@@ -512,7 +507,7 @@ function init_gear_sets()
         feet="Ea Pigaches +1",
         neck="Loricate Torque +1", --6/6
         ear1="Genmei Earring", --2/0
-        ear2="Etiolation Earring", --0/3
+        ear2="Odnowa Earring +1", --3/3
         ring1="Gelatinous Ring +1", --7/(-1)
         ring2="Defending Ring", --10/10
         back=gear.GEO_Idle_Cape, --5/5
@@ -531,7 +526,7 @@ function init_gear_sets()
         feet="Bagua Sandals +3", --0/0/0/5
         neck="Bagua Charm +2",
         ear1="Lugalbanda Earring",
-        ear2="Etiolation Earring", --0/3/0/0
+        ear2="Odnowa Earring +1", --3/3/0/0
         ring1="Gelatinous Ring +1", --7/(-1)/0/0
         ring2="Defending Ring", --10/10/0/0
         back=gear.GEO_Pet_Cape, --0/0/0/15
@@ -589,7 +584,7 @@ function init_gear_sets()
         sub="Genmei Shield",
         head="Jhakri Coronal +2",
         body="Jhakri Robe +2",
-        hands="Jhakri Cuffs +2",
+        hands="Gazu Bracelet +1",
         legs="Jhakri Slops +2",
         feet="Jhakri Pigaches +2",
         ear1="Cessance Earring",
@@ -626,7 +621,7 @@ end
 
 function job_pretarget(spell, spellMap, eventArgs)
     if spell.type == 'Geomancy' then
-        if spell.name:startswith('Indi') and state.Buff.Entrust and spell.target.type == 'SELF' then
+        if spell.name:startswith('Indi') and buffactive.Entrust and spell.target.type == 'SELF' then
             add_to_chat(002, 'Entrust active - Select a party member!')
             cancel_spell()
         end
@@ -665,8 +660,11 @@ function job_post_midcast(spell, action, spellMap, eventArgs)
         if spellMap == 'Refresh' then
             equip(sets.midcast.Refresh)
         end
+    elseif spell.skill == 'Enfeebling Magic' and newLuopan == 1 then
+        -- prevent Cohort Cloak from unequipping head when relic head is locked
+        equip(sets.midcast.LockedEnfeebles)
     elseif spell.skill == 'Geomancy' then
-        if state.Buff.Entrust and spell.english:startswith('Indi-') then
+        if buffactive.Entrust and spell.english:startswith('Indi-') then
             equip({main=gear.Gada_GEO})
                 entrust = 1
         end
@@ -736,6 +734,8 @@ end
 function job_pet_change(petparam, gain)
     if gain == false then
         send_command('@timers d "'..geo_timer..'"')
+        enable('head')
+        newLuopan = 0
     end
 end
 
