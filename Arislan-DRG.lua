@@ -50,7 +50,7 @@ end
 -------------------------------------------------------------------------------------------------------------------
 
 function user_setup()
-    state.OffenseMode:options('STP', 'Normal', 'LowAcc', 'MidAcc', 'HighAcc', 'MaxAcc')
+    state.OffenseMode:options('Normal', 'LowAcc', 'MidAcc', 'HighAcc', 'MaxAcc', 'STP')
     state.WeaponskillMode:options('Normal', 'Acc')
     state.HybridMode:options('Normal', 'DT')
     state.IdleMode:options('Normal', 'DT')
@@ -61,8 +61,6 @@ function user_setup()
     -- Additional local binds
     include('Global-Binds.lua') -- OK to remove this line
     include('Global-GEO-Binds.lua') -- OK to remove this line
-
-    send_command('lua l gearinfo')
 
     send_command('bind ^` input /ja "Call Wyvern" <me>')
     send_command('bind !` input /ja "Spirit Link" <me>')
@@ -113,6 +111,7 @@ end
 function user_unload()
     send_command('unbind ^`')
     send_command('unbind !`')
+    send_command('unbind !w')
     send_command('unbind @`')
     send_command('unbind @a')
     -- send_command('unbind @c')
@@ -143,8 +142,6 @@ function user_unload()
     send_command('unbind #8')
     send_command('unbind #9')
     send_command('unbind #0')
-
-    send_command('lua u gearinfo')
 end
 
 -- Define sets and vars used by this job file.
@@ -243,7 +240,7 @@ function init_gear_sets()
     sets.precast.WS['Camlann\'s Torment'].Acc = set_combine(sets.precast.WS['Camlann\'s Torment'], {})
 
     sets.precast.WS['Drakesbane'] = set_combine(sets.precast.WS, {
-        head="Flam. Zucchetto +2",
+        head="Blistering Sallet +1",
         body="Hjarrandi Breast.",
         hands="Flamma Manopolas +2",
         legs="Zoar Subligar +1",
@@ -269,7 +266,7 @@ function init_gear_sets()
     sets.precast.WS['Geirskogul'].Acc = set_combine(sets.precast.WS['Geirskogul'], {})
 
     sets.precast.WS['Impulse Drive'] = set_combine(sets.precast.WS['Camlann\'s Torment'], {
-        head="Flam. Zucchetto +2",
+        head="Blistering Sallet +1",
         body="Hjarrandi Breast.",
         hands="Flamma Manopolas +2",
         legs="Pelt. Cuissots +1",
@@ -315,7 +312,7 @@ function init_gear_sets()
         })
 
     sets.precast.WS['Raiden Thrust'] = set_combine(sets.precast.WS, {
-        ammo="Pemphredo Tathlum",
+        ammo="Ghastly Tathlum +1",
         body="Carm. Sc. Mail +1",
         hands="Carmine Fin. Ga. +1",
         ear1="Crematio Earring",
@@ -328,7 +325,7 @@ function init_gear_sets()
 
     sets.precast.WS['Leg Sweep'] = set_combine(sets.precast.WS, {
         ammo="Pemphredo Tathlum",
-        head="Flam. Zucchetto +2",
+        head="Blistering Sallet +1",
         body="Flamma Korazin +2",
         hands="Flam. Manopolas +2",
         legs="Flamma Dirs +2",
@@ -467,14 +464,13 @@ function init_gear_sets()
         }
 
     sets.engaged.LowAcc = set_combine(sets.engaged, {
-        neck="Combatant's Torque",
         ear2="Cessance Earring",
         waist="Ioskeha Belt +1",
         })
 
     sets.engaged.MidAcc = set_combine(sets.engaged.LowAcc, {
         ammo="Voluspa Tathlum",
-        neck="Shulmanu Collar",
+        neck="Combatant's Torque",
         ring1="Flamma Ring",
         ear2="Telos Earring",
         })

@@ -75,8 +75,6 @@ function user_setup()
     include('Global-Binds.lua') -- OK to remove this line
     include('Global-GEO-Binds.lua') -- OK to remove this line
 
-    send_command('lua l gearinfo')
-
     send_command('bind ^` input /ma Stun <t>')
     send_command('bind !` gs c toggle MagicBurst')
     send_command('bind !w input /ma "Aspir III" <t>')
@@ -117,8 +115,6 @@ function user_unload()
     send_command('unbind #8')
     send_command('unbind #9')
     send_command('unbind #0')
-
-    send_command('lua u gearinfo')
 end
 
 
@@ -145,7 +141,7 @@ function init_gear_sets()
         head="Amalric Coif +1", --11
         body=gear.Merl_FC_body, --13
         hands="Merlinic Dastanas", --6
-        legs="Psycloth Lappas", --7
+        legs="Volte Brais", --8
         feet="Volte Gaiters", --6
         neck="Orunmila's Torque", --5
         ear1="Malignance Earring", --4
@@ -178,7 +174,7 @@ function init_gear_sets()
         head="Amalric Coif +1", --11
         body="Amalric Doublet +1",
         hands="Merlinic Dastanas", --6
-        legs="Psycloth Lappas", --7
+        legs="Volte Brais", --8
         feet="Volte Gaiters", --6
         neck="Orunmila's Torque", --5
         ear1="Etiolation Earring", --1
@@ -195,7 +191,7 @@ function init_gear_sets()
 
     -- Default set for any weaponskill that isn't any more specifically defined
     sets.precast.WS = {
-        ammo="Floestone",
+        --ammo="Floestone",
         head="Jhakri Coronal +2",
         body="Jhakri Robe +2",
         hands="Jhakri Cuffs +2",
@@ -247,17 +243,7 @@ function init_gear_sets()
 
     ---- Midcast Sets ----
 
-    sets.midcast.FastRecast = {
-        head="Amalric Coif +1",
-        hands="Merlinic Dastanas",
-        legs="Merlinic Shalwar",
-        feet="Volte Gaiters",
-        ear1="Malignance Earring",
-        ear2="Loquacious Earring",
-        ring1="Kishar Ring",
-        back=gear.BLM_FC_Cape,
-        waist="Embla Sash",
-        } -- Haste
+    sets.midcast.FastRecast = sets.precast.FC
 
     sets.midcast.Cure = {
         main="Daybreak", --30
@@ -367,8 +353,8 @@ function init_gear_sets()
         main="Maxentius",
         sub="Ammurapi Shield",
         ammo="Pemphredo Tathlum",
-        head="Ea Hat +1",
-        body="Ea. Houppe +1",
+        head=empty;
+        body="Cohort Cloak +1",
         hands="Regal Cuffs",
         legs="Ea Slops +1",
         feet="Skaoi Boots",
@@ -377,14 +363,13 @@ function init_gear_sets()
         ear2="Vor Earring",
         ring1={name="Stikini Ring +1", bag="wardrobe3"},
         ring2={name="Stikini Ring +1", bag="wardrobe4"},
-        back=gear.BLM_FC_Cape,
+        back="Aurist's Cape +1",
         waist="Luminary Sash",
         } -- MND/Magic accuracy
 
     sets.midcast.IntEnfeebles = set_combine(sets.midcast.MndEnfeebles, {
         main="Maxentius",
         sub="Ammurapi Shield",
-        back=gear.BLM_MAB_Cape,
         waist="Acuity Belt +1",
         }) -- INT/Magic accuracy
 
@@ -454,7 +439,7 @@ function init_gear_sets()
     sets.midcast['Elemental Magic'] = {
         main=gear.Lathi_MAB,
         sub="Enki Strap",
-        ammo="Pemphredo Tathlum",
+        ammo="Ghastly Tathlum +1",
         head="Merlinic Hood",
         body="Amalric Doublet +1",
         hands="Amalric Gages +1",
@@ -480,6 +465,7 @@ function init_gear_sets()
 
     sets.midcast['Elemental Magic'].Resistant = set_combine(sets.midcast['Elemental Magic'], {
         sub="Khonsu",
+        ammo="Pemphredo Tathlum",
         legs="Merlinic Shalwar",
         neck="Sanctity Necklace",
         waist="Sacro Cord",
@@ -487,6 +473,7 @@ function init_gear_sets()
 
     sets.midcast['Elemental Magic'].Spaekona = set_combine(sets.midcast['Elemental Magic'], {
         sub="Khonsu",
+        ammo="Pemphredo Tathlum",
         body="Spaekona's Coat +2",
         legs="Merlinic Shalwar",
         feet="Merlinic Crackows",
@@ -516,13 +503,13 @@ function init_gear_sets()
     -- Idle sets
 
     sets.idle = {
-        main="Bolelabunga",
+        main="Daybreak",
         sub="Genmei Shield",
-        ammo="Pemphredo Tathlum",
+        ammo="Ghastly Tathlum +1",
         head="Befouled Crown",
         body="Jhakri Robe +2",
         hands="Raetic Bangles +1",
-        legs="Assid. Pants +1",
+        legs="Volte Brais",
         feet="Volte Gaiters",
         neck="Bathy Choker +1",
         ear1="Sanare Earring",
@@ -626,9 +613,9 @@ function init_gear_sets()
     sets.engaged = {
         main="Maxentius",
         sub="Ammurapi Shield",
-        head="Volte Cap",
+        head="Blistering Sallet +1",
         body="Jhakri Robe +2",
-        hands="Raetic Bangles +1",
+        hands="Gazu Bracelet +1",
         legs=gear.Telchine_ENH_legs,
         feet="Battlecast Gaiters",
         neck="Combatant's Torque",

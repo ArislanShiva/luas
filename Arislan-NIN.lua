@@ -85,7 +85,7 @@ end
 
 -- Setup vars that are user-dependent.  Can override this function in a sidecar file.
 function user_setup()
-    state.OffenseMode:options('STP', 'Normal', 'LowAcc', 'MidAcc', 'HighAcc')
+    state.OffenseMode:options('Normal', 'LowAcc', 'MidAcc', 'HighAcc', 'STP')
     state.HybridMode:options('Normal', 'DT')
     state.WeaponskillMode:options('Normal', 'Acc')
     state.CastingMode:options('Normal', 'Resistant')
@@ -100,16 +100,16 @@ function user_setup()
 
     -- Additional local binds
     include('Global-Binds.lua') -- OK to remove this line
-    include('Global-COR-Binds.lua') -- OK to remove this line
+    include('Global-GEO-Binds.lua') -- OK to remove this line
 
-    send_command('lua l gearinfo')
-
-    send_command('bind ^` gs c cycle treasuremode')
+    send_command('bind @t gs c cycle treasuremode')
     send_command('bind !` gs c toggle MagicBurst')
     send_command('bind ^- input /ja "Yonin" <me>')
     send_command('bind ^= input /ja "Innin" <me>')
     send_command('bind ^, input /nin "Monomi: Ichi" <me>')
     send_command('bind ^. input /ma "Tonko: Ni" <me>')
+    send_command('bind @, input /ma "Utsusemi: Ichi" <me>')
+    send_command('bind @. input /ma "Utsusemi: Ni" <me>')
     send_command('bind @/ input /ma "Utsusemi: San" <me>')
 
     send_command('bind @a gs c cycle AttackMode')
@@ -184,8 +184,6 @@ function user_unload()
     send_command('unbind #8')
     send_command('unbind #9')
     send_command('unbind #0')
-
-    send_command('lua u gearinfo')
 end
 
 -- Define sets and vars used by this job file.
@@ -211,7 +209,7 @@ function init_gear_sets()
     sets.precast.JA['Provoke'] = sets.Enmity
     sets.precast.JA['Mijin Gakure'] = {legs="Mochi. Hakama +3"}
     sets.precast.JA['Futae'] = {hands="Hattori Tekko +1"}
-    sets.precast.JA['Sange'] = {body="Mochi. Chainmail +1"}
+    sets.precast.JA['Sange'] = {body="Mochi. Chainmail +3"}
     sets.precast.JA['Innin'] = {head="Mochi. Hatsuburi +3"}
     sets.precast.JA['Yonin'] = {head="Mochi. Hatsuburi +3"}
 
@@ -230,7 +228,7 @@ function init_gear_sets()
     sets.precast.FC = {
         ammo="Sapience Orb", --2
         head=gear.Herc_MAB_head, --7
-        body=gear.Taeon_FC_body, --8
+        body=gear.Taeon_FC_body, --9
         hands="Leyline Gloves", --8
         legs="Rawhide Trousers", --5
         feet=gear.Herc_MAB_feet, --2
@@ -244,7 +242,7 @@ function init_gear_sets()
         }
 
     sets.precast.FC.Utsusemi = set_combine(sets.precast.FC, {
-        body="Mochi. Chainmail +1", --10
+        body="Mochi. Chainmail +3", --14
         neck="Magoraga Beads", --10
         })
 
@@ -253,7 +251,7 @@ function init_gear_sets()
     -- Weaponskill sets
     -- Default set for any weaponskill that isn't any more specifically defined
     sets.precast.WS = {
-        ammo="Aurgelmir Orb +1",
+        ammo="Seeth. Bomblet +1",
         head="Hachiya Hatsu. +3",
         body=gear.Herc_WS_body,
         hands=gear.Adhemar_B_hands,
@@ -369,7 +367,7 @@ function init_gear_sets()
     sets.midcast.Utsusemi = set_combine(sets.midcast.SpellInterrupt, {feet="Hattori Kyahan +1", back=gear.NIN_FC_Cape,})
 
     sets.midcast.ElementalNinjutsu = {
-        ammo="Pemphredo Tathlum",
+        ammo="Ghastly Tathlum +1",
         head="Mochi. Hatsuburi +3",
         body="Samnuha Coat",
         hands="Leyline Gloves",
@@ -385,6 +383,7 @@ function init_gear_sets()
         }
 
     sets.midcast.ElementalNinjutsu.Resistant = set_combine(sets.midcast.Ninjutsu, {
+        ammo="Pemphredo Tathlum",
         neck="Sanctity Necklace",
         ring1={name="Stikini Ring +1", bag="wardrobe3"},
         ring2={name="Stikini Ring +1", bag="wardrobe4"},
@@ -513,18 +512,18 @@ function init_gear_sets()
     sets.engaged = {
         ammo="Seki Shuriken",
         head="Ryuo Somen +1", --9
-        body=gear.Adhemar_B_body, --6
+        body="Mochi. Chainmail +3", --9
         hands=gear.Adhemar_B_hands,
         legs="Ken. Hakama +1",
         feet="Hiza. Sune-Ate +2", --8
         neck="Ninja Nodowa +1",
-        ear1="Eabani Earring", --4
+        ear1="Cessance Earring",
         ear2="Suppanomimi", --5
         ring1="Gere Ring",
         ring2="Epona's Ring",
         back=gear.NIN_TP_Cape,
         waist="Reiki Yotai", --7
-        } -- 39%
+      } -- 38%
 
     sets.engaged.LowAcc = set_combine(sets.engaged, {
         hands=gear.Adhemar_A_hands,
@@ -550,18 +549,18 @@ function init_gear_sets()
     sets.engaged.LowHaste = {
         ammo="Seki Shuriken",
         head="Ryuo Somen +1", --9
-        body=gear.Adhemar_B_body, --6
+        body="Mochi. Chainmail +3", --9
         hands=gear.Adhemar_B_hands,
         legs="Ken. Hakama +1",
         feet="Ken. Sune-Ate +1",
         neck="Ninja Nodowa +1",
-        ear1="Eabani Earring", --4
+        ear1="Cessance Earring",
         ear2="Suppanomimi", --5
         ring1="Gere Ring",
         ring2="Epona's Ring",
         back=gear.NIN_TP_Cape,
         waist="Reiki Yotai", --7
-        } -- 31%
+      } -- 30%
 
     sets.engaged.LowAcc.LowHaste = set_combine(sets.engaged.LowHaste, {
         hands=gear.Adhemar_A_hands,
@@ -586,19 +585,19 @@ function init_gear_sets()
     -- 30% Magic Haste (56% DW to cap)
     sets.engaged.MidHaste = {
         ammo="Seki Shuriken",
-        head="Ryuo Somen +1", --9
-        body=gear.Adhemar_B_body, --6
+        head="Ken. Jinpachi +1",
+        body="Mochi. Chainmail +3", --9
         hands=gear.Adhemar_B_hands,
         legs="Ken. Hakama +1",
         feet="Ken. Sune-Ate +1",
         neck="Ninja Nodowa +1",
         ear1="Cessance Earring",
-        ear2="Telos Earring",
+        ear2="Suppanomimi", --5
         ring1="Gere Ring",
         ring2="Epona's Ring",
         back=gear.NIN_TP_Cape,
         waist="Reiki Yotai", --7
-        } -- 22%
+        } -- 21%
 
     sets.engaged.LowAcc.MidHaste = set_combine(sets.engaged.MidHaste, {
         hands=gear.Adhemar_A_hands,
@@ -629,13 +628,13 @@ function init_gear_sets()
         legs="Ken. Hakama +1",
         feet="Ken. Sune-Ate +1",
         neck="Ninja Nodowa +1",
-        ear1="Cessance Earring",
+        ear1="Eabani Earring", --4
         ear2="Suppanomimi", --5
         ring1="Gere Ring",
         ring2="Epona's Ring",
         back=gear.NIN_TP_Cape,
         waist="Reiki Yotai", --7
-        } -- 12%
+      } -- 16%
 
     sets.engaged.LowAcc.HighHaste = set_combine(sets.engaged.HighHaste, {
         hands=gear.Adhemar_A_hands,

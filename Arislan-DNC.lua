@@ -270,7 +270,7 @@ function init_gear_sets()
         ammo="C. Palug Stone",
         head="Maxixi Tiara +3",
         body="Maxixi Casaque +3",
-        hands="Maxixi Bangles +3",
+        hands="Gazu Bracelet +1",
         legs="Mummu Kecks +2",
         feet="Horos T. Shoes +3",
         neck="Etoile Gorget +2",
@@ -306,7 +306,7 @@ function init_gear_sets()
         ammo="C. Palug Stone",
         head="Maxixi Tiara +3",
         body="Maxixi Casaque +3",
-        hands="Maxixi Bangles +3",
+        hands="Gazu Bracelet +1",
         legs=gear.Herc_WS_legs,
         feet="Maxixi Toeshoes +3",
         neck="Etoile Gorget +2",
@@ -326,7 +326,7 @@ function init_gear_sets()
     sets.precast.FC = {
         ammo="Sapience Orb",
         head=gear.Herc_MAB_head, --7
-        body=gear.Taeon_FC_body, --8
+        body=gear.Taeon_FC_body, --9
         hands="Leyline Gloves", --8
         legs="Rawhide Trousers", --5
         feet=gear.Herc_MAB_feet, --2
@@ -580,6 +580,7 @@ function init_gear_sets()
     sets.engaged.HighAcc = set_combine(sets.engaged.MidAcc, {
         ammo="C. Palug Stone",
         body="Maxixi Casaque +3",
+        hands="Gazu Bracelet +1",
         legs="Horos Tights +3",
         feet=gear.Herc_STP_feet,
         ear2="Mache Earring +1",
@@ -631,6 +632,7 @@ function init_gear_sets()
     sets.engaged.DW.HighAcc = set_combine(sets.engaged.DW.MidAcc, {
         ammo="C. Palug Stone",
         body="Maxixi Casaque +3",
+        hands="Gazu Bracelet +1",
         legs="Horos Tights +3",
         feet=gear.Herc_STP_feet,
         ear2="Mache Earring +1",
@@ -679,6 +681,7 @@ function init_gear_sets()
     sets.engaged.DW.HighAcc.LowHaste = set_combine(sets.engaged.DW.MidAcc.LowHaste, {
         ammo="C. Palug Stone",
         body="Maxixi Casaque +3",
+        hands="Gazu Bracelet +1",
         legs="Horos Tights +3",
         feet=gear.Herc_STP_feet,
         ear2="Mache Earring +1",
@@ -727,6 +730,7 @@ function init_gear_sets()
     sets.engaged.DW.HighAcc.MidHaste = set_combine(sets.engaged.DW.MidAcc.MidHaste, {
         ammo="C. Palug Stone",
         body="Maxixi Casaque +3",
+        hands="Gazu Bracelet +1",
         legs="Horos Tights +3",
         feet=gear.Herc_STP_feet,
         ear2="Mache Earring +1",
@@ -775,6 +779,7 @@ function init_gear_sets()
         ammo="C. Palug Stone",
         head="Maxixi Tiara +3", --8
         body="Maxixi Casaque +3",
+        hands="Gazu Bracelet +1",
         legs="Horos Tights +3",
         feet=gear.Herc_STP_feet,
         ear2="Mache Earring +1",
@@ -825,6 +830,7 @@ function init_gear_sets()
         ammo="C. Palug Stone",
         head="Maxixi Tiara +3", --8
         body="Maxixi Casaque +3",
+        hands="Gazu Bracelet +1",
         legs="Horos Tights +3",
         feet=gear.Herc_STP_feet,
         ear2="Mache Earring +1",

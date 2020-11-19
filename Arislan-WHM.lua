@@ -105,8 +105,6 @@ function user_setup()
     include('Global-Binds.lua') -- OK to remove this line
     include('Global-GEO-Binds.lua') -- OK to remove this line
 
-    send_command('lua l gearinfo')
-
     send_command('bind ^` input /ja "Afflatus Solace" <me>')
     send_command('bind !` input /ja "Afflatus Misery" <me>')
     send_command('bind ^- gs c scholar light')
@@ -209,7 +207,7 @@ function init_gear_sets()
         ammo="Impatiens", --(2)
         body="Inyanga Jubbah +2", --14
         hands="Gende. Gages +1", --7
-        legs="Kaykaus Tights +1", --7
+        legs="Volte Brais", --8
         feet="Volte Gaiters", --6
         neck="Orunmila's Torque", --5
         ear1="Malignance Earring", --4
@@ -227,7 +225,6 @@ function init_gear_sets()
     sets.precast.FC.Cure = set_combine(sets.precast.FC, {
         ammo="Impatiens", --(2)
         head="Piety Cap +3", --15
-        legs="Aya. Cosciales +2", --6
         feet="Kaykaus Boots +1", --7
         ring1="Lebeche Ring", --(2)
         back="Perimede Cape", --(4)
@@ -246,7 +243,7 @@ function init_gear_sets()
 
     -- Default set for any weaponskill that isn't any more specifically defined
     sets.precast.WS = {
-        ammo="Floestone",
+        --ammo="Floestone",
         head="Piety Cap +3",
         body="Piety Briault +3",
         hands="Piety Mitts +3",
@@ -271,14 +268,19 @@ function init_gear_sets()
         back=gear.WHM_DA_Cape,
         })
 
-    sets.precast.WS['Flash Nova'] = set_combine(sets.precast.WS, {})
+    sets.precast.WS['Flash Nova'] = set_combine(sets.precast.WS, {
+        ammo="Ghastly Tathlum +1",
+        head=empty;
+        body="Cohort Cloak +1",
+        legs="Kaykaus Tights +1",
+        })
 
     -- Midcast Sets
 
     sets.midcast.FC = sets.precast.FC
 
     sets.midcast.ConserveMP = {
-        main="Sucellus",
+        --main="Sucellus",
         --sub="Thuellaic Ecu +1",
         head="Vanya Hood",
         --body="Vedic Coat",
@@ -301,7 +303,7 @@ function init_gear_sets()
         hands="Theophany Mitts +3", --(+4)/(-7)
         legs="Ebers Pant. +1",
         feet="Kaykaus Boots +1", --11(+2)/(-12)
-        neck="Incanter's Torque",
+        neck="Clr. Torque +2", --10
         ear1="Glorious Earring", -- (+2)/(-5)
         ear2="Meili Earring",
         ring1="Lebeche Ring", --3/(-5)
@@ -329,7 +331,6 @@ function init_gear_sets()
 
     sets.midcast.CuragaNormal = set_combine(sets.midcast.CureNormal, {
         body="Theo. Briault +3", --0(+6)/(-6)
-        neck="Nuna Gorget +1",
         ring1={name="Stikini Ring +1", bag="wardrobe3"},
         ring2="Metamor. Ring +1",
         waist="Luminary Sash",
@@ -338,7 +339,6 @@ function init_gear_sets()
     sets.midcast.CuragaWeather = {
         body="Theo. Briault +3", --0(+6)/(-6)
         hands="Kaykaus Cuffs +1", --11/(-6)
-        neck="Nuna Gorget +1",
         ring1={name="Stikini Ring +1", bag="wardrobe3"},
         ring2="Metamor. Ring +1",
         back="Twilight Cape",
@@ -381,7 +381,7 @@ function init_gear_sets()
         waist="Bishop's Sash",
         })
 
-    sets.midcast.Erase = set_combine(sets.midcast.StatusRemoval, {neck="Cleric's Torque"})
+    sets.midcast.Erase = set_combine(sets.midcast.StatusRemoval, {neck="Clr. Torque +2"})
 
     -- 110 total Enhancing Magic Skill; caps even without Light Arts
     sets.midcast['Enhancing Magic'] = {
@@ -479,7 +479,7 @@ function init_gear_sets()
     sets.midcast['Divine Magic'] = {
         main="Yagrush",
         sub="Ammurapi Shield",
-        ammo="Pemphredo Tathlum",
+        ammo="Ghastly Tathlum +1",
         head="Theophany Cap +3",
         body="Theo. Briault +3",
         hands="Piety Mitts +3",
@@ -490,15 +490,15 @@ function init_gear_sets()
         ear2="Regal Earring",
         ring1={name="Stikini Ring +1", bag="wardrobe3"},
         ring2={name="Stikini Ring +1", bag="wardrobe4"},
-        back=gear.WHM_MND_Cape,
+        back="Aurist's Cape +1",
         waist="Acuity Belt +1",
         }
 
     sets.midcast.Banish = set_combine(sets.midcast['Divine Magic'], {
         main="Daybreak",
         sub="Ammurapi Shield",
-        head="Theophany Cap +3",
-        --body="Vedic Coat",
+        head=empty;
+        body="Cohort Cloak +1",
         hands="Fanatic Gloves",
         legs="Kaykaus Tights +1",
         neck="Sanctity Necklace",
@@ -524,7 +524,7 @@ function init_gear_sets()
         ear2="Mani Earring",
         ring1="Evanescence Ring",
         ring2="Archon Ring",
-        back="Perimede Cape",
+        back="Aurist's Cape +1",
         waist="Fucho-no-Obi",
         }
 
@@ -533,8 +533,8 @@ function init_gear_sets()
         main="Yagrush",
         sub="Ammurapi Shield",
         ammo="Pemphredo Tathlum",
-        head="Theophany Cap +3",
-        body="Theo. Briault +3",
+        head=empty;
+        body="Cohort Cloak +1",
         hands="Regal Cuffs",
         legs="Chironic Hose",
         feet="Theo. Duckbills +3",
@@ -543,7 +543,7 @@ function init_gear_sets()
         ear2="Vor Earring",
         ring1="Kishar Ring",
         ring2={name="Stikini Ring +1", bag="wardrobe4"},
-        back=gear.WHM_MND_Cape,
+        back="Aurist's Cape +1",
         waist="Luminary Sash",
         }
 
@@ -584,7 +584,7 @@ function init_gear_sets()
         head="Befouled Crown",
         body="Piety Briault +3",
         hands="Raetic Bangles +1",
-        legs="Assid. Pants +1",
+        legs="Volte Brais",
         feet="Inyan. Crackows +2",
         neck="Bathy Choker +1",
         ear1="Eabani Earring",
@@ -602,7 +602,7 @@ function init_gear_sets()
         head="Aya. Zucchetto +2", --3/3
         hands="Gende. Gages +1", --4/4
         neck="Loricate Torque +1", --6/6
-        ear1="Genmei Earring", --2/0
+        ear1="Odnowa Earring +1", --3/5
         ring1="Gelatinous Ring +1", --7/(-1)
         ring2="Defending Ring", --10/10
         back="Moonlight Cape", --6/6
@@ -611,7 +611,7 @@ function init_gear_sets()
 
     sets.idle.MEva = set_combine(sets.idle.DT, {
         main="Daybreak",
-        sub="Ammurapi Shield",
+        sub="Genmei Shield",
         ammo="Staunch Tathlum +1",
         head="Inyanga Tiara +2",
         body="Inyanga Jubbah +2",
@@ -634,7 +634,7 @@ function init_gear_sets()
         body="Kaykaus Bliaut +1",
         legs="Kaykaus Tights +1",
         feet="Kaykaus Boots +1",
-        neck="Debilis Medallion",
+        neck="Clr. Torque +2",
         ear1="Glorious Earring",
         ear2="Regal Earring",
         })
@@ -673,6 +673,7 @@ function init_gear_sets()
         }
 
     sets.engaged.Acc = set_combine(sets.engaged, {
+        hands="Gazu Bracelet +1",
         feet="Volte Boots",
         waist="Olseni Belt",
         })
@@ -696,6 +697,7 @@ function init_gear_sets()
 
     sets.engaged.DW.Acc = set_combine(sets.engaged.DW, {
         sub="Sindri",
+        hands="Gazu Bracelet +1",
         feet="Volte Boots",
         })
 

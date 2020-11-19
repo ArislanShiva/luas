@@ -92,17 +92,15 @@ end
 
 -- Setup vars that are user-dependent.  Can override this function in a sidecar file.
 function user_setup()
-    state.OffenseMode:options('STP', 'Normal', 'LowAcc', 'MidAcc', 'HighAcc')
+    state.OffenseMode:options('Normal', 'LowAcc', 'MidAcc', 'HighAcc', 'STP')
     state.HybridMode:options('Normal', 'DT')
     state.RangedMode:options('Normal', 'Acc')
     state.WeaponskillMode:options('Normal', 'Acc', 'LowBuff')
-    state.IdleMode:options('Normal', 'DT')
+    state.IdleMode:options('Normal', 'DT', 'Refresh')
 
     -- Additional local binds
     include('Global-Binds.lua') -- OK to remove this line
     include('Global-GEO-Binds.lua') -- OK to remove this line
-
-    send_command('lua l gearinfo')
 
     send_command('bind ^` gs c cycle treasuremode')
     send_command('bind !` input /ja "Flee" <me>')
@@ -177,8 +175,6 @@ function user_unload()
     send_command('unbind #8')
     send_command('unbind #9')
     send_command('unbind #0')
-
-    send_command('lua u gearinfo')
 end
 
 
@@ -210,8 +206,9 @@ function init_gear_sets()
     ------------------------------------------------------------------------------------------------
 
     -- Precast sets to enhance JAs
-    sets.precast.JA['Collaborator'] = set_combine(sets.TreasureHunter, {head="Skulker's Bonnet +1"})
     sets.precast.JA['Accomplice'] = {head="Skulker's Bonnet +1"}
+    sets.precast.JA['Aura Steal'] = {head="Plun. Bonnet +1"}
+    sets.precast.JA['Collaborator'] = set_combine(sets.TreasureHunter, {head="Skulker's Bonnet +1"})
     sets.precast.JA['Flee'] = {feet="Pill. Poulaines +3"}
     sets.precast.JA['Hide'] = {body="Pillager's Vest +3"}
     sets.precast.JA['Conspirator'] = set_combine(sets.TreasureHunter, {body="Skulker's Vest +1"})
@@ -242,7 +239,7 @@ function init_gear_sets()
     sets.precast.FC = {
         ammo="Sapience Orb",
         head=gear.Herc_MAB_head, --7
-        body=gear.Taeon_FC_body, --8
+        body=gear.Taeon_FC_body, --9
         hands="Leyline Gloves", --8
         legs="Rawhide Trousers", --5
         feet=gear.Herc_MAB_feet, --2
@@ -308,7 +305,7 @@ function init_gear_sets()
         body="Pillager's Vest +3",
         hands="Mummu Wrists +2",
         legs="Zoar Subligar +1",
-        feet=gear.Herc_TA_feet,
+        feet="Plun. Poulaines +3",
         ear1="Sherida Earring",
         ear2="Mache Earring +1",
         ring1="Begrudging Ring",
@@ -326,7 +323,7 @@ function init_gear_sets()
         ammo="Aurgelmir Orb +1",
         neck="Caro Necklace",
         ear1="Sherida Earring",
-        waist="Artful Belt +1",
+        waist="Kentarch Belt +1",
         })
 
     sets.precast.WS['Rudra\'s Storm'].Acc = set_combine(sets.precast.WS['Rudra\'s Storm'], {
@@ -340,7 +337,7 @@ function init_gear_sets()
     sets.precast.WS['Mandalic Stab'].Acc = sets.precast.WS["Rudra's Storm"].Acc
 
     sets.precast.WS['Aeolian Edge'] = set_combine(sets.precast.WS, {
-        ammo="Seeth. Bomblet +1",
+        ammo="Ghastly Tathlum +1",
         head=gear.Herc_MAB_head,
         body="Samnuha Coat",
         hands="Leyline Gloves",
@@ -378,7 +375,7 @@ function init_gear_sets()
     sets.idle = {
         ammo="Staunch Tathlum +1",
         head="Turms Cap +1",
-        body="Malignance Tabard",
+        body="Tu. Harness +1",
         hands="Turms Mittens +1",
         legs="Turms Subligar +1",
         feet="Turms Leggings +1",
@@ -388,7 +385,7 @@ function init_gear_sets()
         ring1={name="Chirich Ring +1", bag="wardrobe3"},
         ring2={name="Chirich Ring +1", bag="wardrobe4"},
         back="Moonlight Cape",
-        waist="Engraved Belt",
+        waist="Kasiri Belt",
         }
 
     sets.idle.DT = set_combine(sets.idle, {
@@ -399,16 +396,21 @@ function init_gear_sets()
         legs="Malignance Tights", --7/7
         feet="Malignance Boots", --4/4
         neck="Warder's Charm +1",
-        ear1="Sanare Earring",
+        ear1="Eabani Earring",
+        ear2="Sanare Earring",
         ring1="Purity Ring", --0/4
         ring2="Defending Ring", --10/10
         back="Moonlight Cape", --6/6
         })
 
+   sets.idle.Refresh = set_combine(sets.idle, {
+        ring1={name="Stikini Ring +1", bag="wardrobe3"},
+        ring2={name="Stikini Ring +1", bag="wardrobe4"},
+        })
+
+
     sets.idle.Town = set_combine(sets.idle, {
         ammo="Aurgelmir Orb +1",
-        body="Pillager's Vest +3",
-        neck="Combatant's Torque",
         ear1="Sherida Earring",
         ear2="Telos Earring",
         back=gear.THF_TP_Cape,
@@ -441,7 +443,7 @@ function init_gear_sets()
         body=gear.Adhemar_B_body,
         hands=gear.Adhemar_A_hands,
         legs="Samnuha Tights",
-        feet=gear.Herc_TA_feet,
+        feet="Plun. Poulaines +3",
         neck="Anu Torque",
         ear1="Sherida Earring",
         ear2="Brutal Earring",
@@ -469,6 +471,7 @@ function init_gear_sets()
 
     sets.engaged.HighAcc = set_combine(sets.engaged.MidAcc, {
         ammo="C. Palug Stone",
+        hands="Gazu Bracelet +1",
         legs="Pill. Culottes +3",
         feet=gear.Herc_STP_feet,
         ear2="Mache Earring +1",
@@ -521,6 +524,7 @@ function init_gear_sets()
 
     sets.engaged.DW.HighAcc = set_combine(sets.engaged.DW.MidAcc, {
         ammo="C. Palug Stone",
+        hands="Gazu Bracelet +1",
         legs="Pill. Culottes +3",
         feet=gear.Herc_STP_feet,
         ear1="Cessance Earring",
@@ -571,6 +575,7 @@ function init_gear_sets()
 
     sets.engaged.DW.HighAcc.LowHaste = set_combine(sets.engaged.DW.MidAcc.LowHaste, {
         ammo="C. Palug Stone",
+        hands="Gazu Bracelet +1",
         legs="Pill. Culottes +3",
         feet=gear.Herc_STP_feet,
         ear2="Telos Earring",
@@ -594,7 +599,7 @@ function init_gear_sets()
         body="Pillager's Vest +3",
         hands=gear.Adhemar_A_hands,
         legs="Samnuha Tights",
-        feet=gear.Herc_TA_feet,
+        feet="Plun. Poulaines +3",
         neck="Erudit. Necklace",
         ear1="Eabani Earring", --4
         ear2="Suppanomimi", --5
@@ -620,6 +625,7 @@ function init_gear_sets()
 
     sets.engaged.DW.HighAcc.MidHaste = set_combine(sets.engaged.DW.MidAcc.MidHaste, {
         ammo="C. Palug Stone",
+        hands="Gazu Bracelet +1",
         legs="Pill. Culottes +3",
         feet=gear.Herc_STP_feet,
         ear2="Telos Earring",
@@ -630,6 +636,7 @@ function init_gear_sets()
 
     sets.engaged.DW.STP.MidHaste = set_combine(sets.engaged.DW.MidHaste, {
         head=gear.Herc_STP_head,
+        body="Tu. Harness +1",
         neck="Anu Torque",
         ear1="Sherida Earring",
         ring1={name="Chirich Ring +1", bag="wardrobe3"},
@@ -644,7 +651,7 @@ function init_gear_sets()
         body="Pillager's Vest +3",
         hands=gear.Adhemar_A_hands,
         legs="Samnuha Tights",
-        feet=gear.Herc_TA_feet,
+        feet="Plun. Poulaines +3",
         neck="Erudit. Necklace",
         ear1="Sherida Earring",
         ear2="Suppanomimi", --5
@@ -670,6 +677,7 @@ function init_gear_sets()
 
     sets.engaged.DW.HighAcc.HighHaste = set_combine(sets.engaged.DW.MidAcc.HighHaste, {
         ammo="C. Palug Stone",
+        hands="Gazu Bracelet +1",
         legs="Pill. Culottes +3",
         feet=gear.Herc_STP_feet,
         ear2="Telos Earring",
@@ -693,7 +701,7 @@ function init_gear_sets()
         body="Pillager's Vest +3",
         hands=gear.Adhemar_A_hands,
         legs="Samnuha Tights",
-        feet=gear.Herc_TA_feet,
+        feet="Plun. Poulaines +3",
         neck="Erudit. Necklace",
         ear1="Sherida Earring",
         ear2="Suppanomimi", --5
@@ -719,6 +727,7 @@ function init_gear_sets()
 
     sets.engaged.DW.HighAcc.MaxHaste = set_combine(sets.engaged.DW.MidAcc.MaxHaste, {
         ammo="C. Palug Stone",
+        hands="Gazu Bracelet +1",
         legs="Pill. Culottes +3",
         feet=gear.Herc_STP_feet,
         ear2="Telos Earring",
@@ -729,6 +738,7 @@ function init_gear_sets()
 
     sets.engaged.DW.STP.MaxHaste = set_combine(sets.engaged.DW.MaxHaste, {
         head=gear.Herc_STP_head,
+        body="Tu. Harness +1",
         neck="Anu Torque",
         ear1="Sherida Earring",
         ring1={name="Chirich Ring +1", bag="wardrobe3"},

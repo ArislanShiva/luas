@@ -109,8 +109,6 @@ function user_setup()
     include('Global-Binds.lua') -- OK to remove this line
     include('Global-GEO-Binds.lua') -- OK to remove this line
 
-    send_command('lua l gearinfo')
-
     send_command('bind ^` input /ja Immanence <me>')
     send_command('bind !` gs c toggle MagicBurst')
     send_command('bind ^- gs c scholar light')
@@ -174,8 +172,6 @@ function user_unload()
     send_command('unbind #8')
     send_command('unbind #9')
     send_command('unbind #0')
-
-    send_command('lua u gearinfo')
 end
 
 
@@ -214,7 +210,7 @@ function init_gear_sets()
         head="Amalric Coif +1", --11
         body=gear.Merl_FC_body, --13
         hands="Acad. Bracers +3", --9
-        legs="Kaykaus Tights +1", --7
+        legs="Volte Brais", --8
         feet="Peda. Loafers +3", --8
         neck="Orunmila's Torque", --5
         ear1="Malignance Earring", --4
@@ -246,7 +242,7 @@ function init_gear_sets()
     ------------------------------------------------------------------------------------------------
 
     sets.precast.WS = {
-        ammo="Floestone",
+        --ammo="Floestone",
         head="Jhakri Coronal +2",
         body="Jhakri Robe +2",
         hands="Jhakri Cuffs +2",
@@ -262,7 +258,7 @@ function init_gear_sets()
         }
 
     sets.precast.WS['Omniscience'] = set_combine(sets.precast.WS, {
-        ammo="Pemphredo Tathlum",
+        ammo="Ghastly Tathlum +1",
         head="Pixie Hairpin +1",
         body="Peda. Gown +3",
         legs="Peda. Pants +3",
@@ -439,25 +435,26 @@ function init_gear_sets()
         main="Maxentius",
         sub="Ammurapi Shield",
         ammo="Pemphredo Tathlum",
-        head="Acad. Mortar. +3",
-        body="Acad. Gown +3",
+        head=empty;
+        body="Cohort Cloak +1",
         hands="Regal Cuffs",
         legs="Acad. Pants +3",
         feet="Acad. Loafers +3",
-        neck="Argute Stole +1",
+        neck="Argute Stole +2",
         ear1="Malignance Earring",
         ear2="Vor Earring",
         ring1="Kishar Ring",
         ring2="Metamor. Ring +1",
-        back=gear.SCH_FC_Cape,
+        back="Aurist's Cape +1",
         waist="Luminary Sash",
         }
 
     sets.midcast.IntEnfeebles = set_combine(sets.midcast.MndEnfeebles, {
         main="Maxentius",
         sub="Ammurapi Shield",
+        head="Acad. Mortar. +3",
+        body="Acad. Gown +3",
         legs="Chironic Hose",
-        back=gear.SCH_MAB_Cape,
         waist="Acuity Belt +1",
         })
 
@@ -473,30 +470,30 @@ function init_gear_sets()
         hands="Acad. Bracers +3",
         legs="Peda. Pants +3",
         feet="Acad. Loafers +3",
-        neck="Argute Stole +1",
+        neck="Argute Stole +2",
         ear1="Malignance Earring",
         ear2="Mani Earring",
         ring1={name="Stikini Ring +1", bag="wardrobe3"},
         ring2={name="Stikini Ring +1", bag="wardrobe4"},
-        back="Perimede Cape",
+        back="Aurist's Cape +1",
         waist="Acuity Belt +1",
         }
 
     sets.midcast.Kaustra = {
         main="Akademos", --10
         sub="Enki Strap",
-        ammo="Pemphredo Tathlum",
+        ammo="Ghastly Tathlum +1",
         head="Pixie Hairpin +1",
         body=gear.Merl_MB_body, --10
         hands="Amalric Gages +1", --(5)
         legs="Mallquis Trews +2", --6
         feet="Merlinic Crackows", --11
-        neck="Argute Stole +1", --8
+        neck="Argute Stole +2", --10
         ear1="Malignance Earring",
         ear2="Regal Earring",
         ring1="Freke Ring",
         ring2="Archon Ring",
-        back=gear.SCH_MAB_Cape,
+        back="Aurist's Cape +1",
         waist="Acuity Belt +1",
         }
 
@@ -518,7 +515,7 @@ function init_gear_sets()
     sets.midcast['Elemental Magic'] = {
         main="Akademos",
         sub="Enki Strap",
-        ammo="Pemphredo Tathlum",
+        ammo="Ghastly Tathlum +1",
         head="Peda. M.Board +3",
         body="Amalric Doublet +1",
         hands="Amalric Gages +1",
@@ -534,6 +531,7 @@ function init_gear_sets()
         }
 
     sets.midcast['Elemental Magic'].Seidr = set_combine(sets.midcast['Elemental Magic'], {
+        ammo="Pemphredo Tathlum",
         head="Merlinic Hood",
         body="Seidr Cotehardie",
         legs="Peda. Pants +3",
@@ -543,8 +541,9 @@ function init_gear_sets()
         })
 
     sets.midcast['Elemental Magic'].Resistant = set_combine(sets.midcast['Elemental Magic'], {
+        ammo="Pemphredo Tathlum",
         head="Merlinic Hood",
-        legs="Peda. Pants +3",
+        legs="Merlinic Shalwar",
         neck="Erra Pendant",
         waist="Sacro Cord",
         })
@@ -562,7 +561,7 @@ function init_gear_sets()
         main="Akademos",
         sub="Enki Strap",
         ammo="Ghastly Tathlum +1",
-        neck="Argute Stole +1",
+        neck="Argute Stole +2",
         waist="Sacro Cord",
         }
 
@@ -586,20 +585,20 @@ function init_gear_sets()
     ------------------------------------------------------------------------------------------------
 
     sets.idle = {
-        main="Akademos",
-        sub="Enki Strap",
+        main="Daybreak",
+        sub="Genmei Shield",
         ammo="Homiliary",
         head="Befouled Crown",
         body="Acad. Gown +3",
         hands="Raetic Bangles +1",
-        legs="Assiduity Pants +1",
+        legs="Volte Brais",
         feet="Volte Gaiters",
         neck="Bathy Choker +1",
         ear1="Sanare Earring",
         ear2="Lugalbanda Earring",
         ring1={name="Stikini Ring +1", bag="wardrobe3"},
         ring2={name="Stikini Ring +1", bag="wardrobe4"},
-        back="Moonlight Cape",
+        back=gear.SCH_FC_Cape,
         waist="Carrier's Sash",
         }
 
@@ -610,7 +609,6 @@ function init_gear_sets()
         head="Volte Cap",
         body="Mallquis Saio +2", --8/8
         hands="Gende. Gages +1", --4/4
-        legs="Peda. Pants +3",
         feet="Volte Gaiters",
         neck="Loricate Torque +1", --6/6
         ear1="Sanare Earring",
@@ -625,12 +623,13 @@ function init_gear_sets()
     sets.idle.Town = set_combine(sets.idle, {
         main="Musa",
         sub="Khonsu",
+        ammo="Ghastly Tathlum +1",
         head="Peda. M.Board +3",
         body="Amalric Doublet +1",
         hands="Regal Cuffs",
         legs="Peda. Pants +3",
         feet="Peda. Loafers +3",
-        neck="Argute Stole +1",
+        neck="Argute Stole +2",
         ear1="Malignance Earring",
         ear2="Regal Earring",
         back=gear.SCH_MAB_Cape,
@@ -656,11 +655,11 @@ function init_gear_sets()
     ------------------------------------------------------------------------------------------------
 
     sets.engaged = {
-        head="Peda. M.Board +3",
+        head="Blistering Sallet +1",
         body="Jhakri Robe +2",
-        hands="Raetic Bangles +1",
+        hands="Gazu Bracelet +1",
         legs="Peda. Pants +3",
-        feet="Peda. Loafers +3",
+        feet=gear.Telchine_STP_feet,
         neck="Combatant's Torque",
         ear1="Cessance Earring",
         ear2="Telos Earring",
@@ -680,9 +679,8 @@ function init_gear_sets()
         head="Peda. M.Board +3", --(4)
         body=gear.Merl_MB_body, --10
         hands="Amalric Gages +1", --(6)
-        legs="Merlinic Shalwar", --2
         feet="Merlinic Crackows", --11
-        neck="Argute Stole +1", --7
+        neck="Argute Stole +2", --10
         ring2="Mujin Band", --(5)
         }
 

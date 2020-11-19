@@ -96,7 +96,7 @@ end
 -------------------------------------------------------------------------------------------------------------------
 
 function user_setup()
-    state.OffenseMode:options('STP', 'Normal', 'LowAcc', 'MidAcc', 'HighAcc')
+    state.OffenseMode:options('Normal', 'LowAcc', 'MidAcc', 'HighAcc', 'STP')
     state.WeaponskillMode:options('Normal', 'Acc')
     state.HybridMode:options('Normal', 'DT')
     state.CastingMode:options('Normal', 'Resistant')
@@ -115,9 +115,7 @@ function user_setup()
 
     -- Additional local binds
     include('Global-Binds.lua') -- OK to remove this line
-    include('Global-GEO-Binds.lua') -- OK to remove this line
-
-    send_command('lua l gearinfo')
+    include('Global-WHM-Binds.lua') -- OK to remove this line
 
     send_command('bind ^` input //gs c rune')
     send_command('bind !` input /ja "Vivacious Pulse" <me>')
@@ -214,8 +212,6 @@ function user_unload()
     send_command('unbind #8')
     send_command('unbind #9')
     send_command('unbind #0')
-
-    send_command('lua u gearinfo')
 end
 
 -- Define sets and vars used by this job file.
@@ -265,7 +261,7 @@ function init_gear_sets()
     sets.precast.JA['Liement'] = {body="Futhark Coat +3"}
 
     sets.precast.JA['Lunge'] = {
-        ammo="Aurgelmir Orb +1",
+        ammo="Ghastly Tathlum +1",
         head=gear.Herc_MAB_head,
         body="Carm. Sc. Mail +1",
         hands="Carmine Fin. Ga. +1",
@@ -303,7 +299,7 @@ function init_gear_sets()
     sets.precast.FC = {
         ammo="Sapience Orb", --2
         head="Rune. Bandeau +3", --14
-        body=gear.Taeon_FC_body, --8
+        body=gear.Taeon_FC_body, --9
         hands="Leyline Gloves", --8
         legs="Aya. Cosciales +2", --6
         feet="Carmine Greaves +1", --8
@@ -373,7 +369,7 @@ function init_gear_sets()
         })
 
     sets.precast.WS['Resolution'] = set_combine(sets.precast.WS, {
-        ammo="Aurgelmir Orb +1",
+        ammo="Seeth. Bomblet +1",
         head="Lustratio Cap +1",
         body="Lustr. Harness +1",
         hands=gear.Adhemar_B_hands,
@@ -386,7 +382,7 @@ function init_gear_sets()
 
     sets.precast.WS['Resolution'].Acc = set_combine(sets.precast.WS['Resolution'], {
         ammo="Voluspa Tathlum",
-        head=gear.Adhemar_B_head,
+        head="Blistering Sallet +1",
         hands=gear.Adhemar_A_hands,
         legs="Meg. Chausses +2",
         feet=gear.Herc_STP_feet,
@@ -394,7 +390,6 @@ function init_gear_sets()
         })
 
     sets.precast.WS['Resolution'].Uncapped = set_combine(sets.precast.WS['Resolution'], {
-        head=gear.Adhemar_B_head,
         body=gear.Adhemar_B_body,
         legs="Meg. Chausses +2",
         feet=gear.Herc_TA_feet,
@@ -402,7 +397,7 @@ function init_gear_sets()
         })
 
     sets.precast.WS['Resolution'].Safe = set_combine(sets.precast.WS['Resolution'], {
-        head=gear.Adhemar_D_head,
+        head="Blistering Sallet +1",
         body=gear.Adhemar_B_body,
         feet=gear.Herc_TA_feet,
         })
@@ -439,7 +434,7 @@ function init_gear_sets()
 
     sets.precast.WS['Shockwave'] = {
         ammo="Pemphredo Tathlum",
-        head="Aya. Zucchetto +2",
+        head="Blistering Sallet +1",
         body="Ayanmo Corazza +2",
         hands="Leyline Gloves",
         legs="Aya. Cosciales +2",
@@ -654,8 +649,8 @@ function init_gear_sets()
         legs="Eri. Leg Guards +1", --7/0
         feet="Turms Leggings +1",
         neck="Futhark Torque +2", --7/7
-        ear1="Genmei Earring", --2/0
-        ear2="Odnowa Earring +1", --0/2
+        ear1="Tuisto Earring",
+        ear2="Odnowa Earring +1", --3/5
         ring1="Gelatinous Ring +1", --7/(-1)
         ring2="Defending Ring", --10/10
         back=gear.RUN_HPD_Cape, --10/0
@@ -671,8 +666,8 @@ function init_gear_sets()
         legs="Eri. Leg Guards +1", --7/0
         feet="Turms Leggings +1",
         neck="Futhark Torque +2", --7/7
-        ear1="Genmei Earring", --2/0
-        ear2="Odnowa Earring +1", --0/2
+        ear1="Tuisto Earring",
+        ear2="Odnowa Earring +1", --3/5
         ring1="Gelatinous Ring +1", --7/(-1)
         ring2="Defending Ring", --10/10
         back=gear.RUN_HPD_Cape, --10/0
@@ -688,12 +683,12 @@ function init_gear_sets()
         legs="Eri. Leg Guards +1", --7/0
         feet="Turms Leggings +1",
         neck="Futhark Torque +2", --7/7
-        ear1={name="Tuisto Earring", priority=6}, --0/1
-        ear2={name="Odnowa Earring +1", priority=5}, --0/2
+        ear1={name="Tuisto Earring", priority=6},
+        ear2={name="Odnowa Earring +1", priority=5}, --3/5
         ring1={name="Moonlight Ring", priority=4}, --5/5
         ring2="Defending Ring", --10/10
         back={name="Moonlight Cape", priority=1}, --6/6
-        waist="Flume Belt +1", --4/0
+        waist="Engraved Belt",
         }
 
     sets.defense.Parry = {
@@ -743,7 +738,7 @@ function init_gear_sets()
         ammo="C. Palug Stone",
         head="Carmine Mask +1",
         body="Carm. Sc. Mail +1",
-        hands="Runeist's Mitons +3",
+        hands="Gazu Bracelet +1",
         legs="Carmine Cuisses +1",
         ear1="Odr Earring",
         ear2="Mache Earring +1",
@@ -763,6 +758,7 @@ function init_gear_sets()
     sets.engaged.Aftermath = {
         head="Aya. Zucchetto +2",
         body="Ashera Harness",
+        feet=gear.Herc_STP_feet,
         neck="Anu Torque",
         ear1="Sherida Earring",
         ear2="Dedition Earring",
@@ -790,18 +786,6 @@ function init_gear_sets()
     sets.engaged.MidAcc.DT = set_combine(sets.engaged.MidAcc, sets.Hybrid)
     sets.engaged.HighAcc.DT = set_combine(sets.engaged.HighAcc, sets.Hybrid)
     sets.engaged.STP.DT = set_combine(sets.engaged.STP, sets.Hybrid)
-
---[[
-    sets.engaged.Aftermath.DT = {
-        head="Aya. Zucchetto +2",
-        feet="Carmine Greaves +1",
-        ear1="Sherida Earring",
-        ear2="Telos Earring",
-        ring1="Moonlight Ring",
-        ring2="Defending Ring",
-        waist="Kentarch Belt +1",
-        }
-]]
 
     sets.engaged.Aftermath.DT = {
         head="Aya. Zucchetto +2",

@@ -284,7 +284,7 @@ function init_gear_sets()
     sets.precast.FC = {
         head="Atrophy Chapeau +3", --16
         body="Viti. Tabard +3", --15
-        legs="Aya. Cosciales +2", --6
+        legs="Volte Brais", --8
         feet="Carmine Greaves +1", --8
         ring2="Weather. Ring +1", --5
         }
@@ -293,7 +293,6 @@ function init_gear_sets()
 
     sets.precast.FC.Cure = set_combine(sets.precast.FC, {
         ammo="Impatiens", --(2)
-        legs="Kaykaus Tights +1", --7
         ring1="Lebeche Ring", --(2)
         ring2="Weather. Ring +1", --5/(4)
         back="Perimede Cape", --(4)
@@ -799,8 +798,8 @@ function init_gear_sets()
         head="Viti. Chapeau +3",
         body="Jhakri Robe +2",
         hands="Raetic Bangles +1",
-        legs="Malignance Tights",
-        feet="Malignance Boots",
+        legs="Volte Brais",
+        feet="Volte Gaiters",
         neck="Bathy Choker +1",
         ear1="Eabani Earring",
         ear2="Sanare Earring",
@@ -904,6 +903,7 @@ function init_gear_sets()
         ammo="Voluspa Tathlum",
         head="Carmine Mask +1",
         body="Carm. Sc. Mail +1",
+        hands="Gazu Bracelet +1",
         legs="Carmine Cuisses +1",
         ear1="Cessance Earring",
         ear2="Mache Earring +1",
@@ -939,6 +939,7 @@ function init_gear_sets()
         ammo="Voluspa Tathlum",
         head="Carmine Mask +1",
         body="Carm. Sc. Mail +1",
+        hands="Gazu Bracelet +1",
         ear1="Cessance Earring",
         ear2="Mache Earring +1",
         })
@@ -969,6 +970,7 @@ function init_gear_sets()
         ammo="Voluspa Tathlum",
         head="Carmine Mask +1",
         body="Carm. Sc. Mail +1",
+        hands="Gazu Bracelet +1",
         ear1="Cessance Earring",
         ear2="Mache Earring +1",
         })
@@ -1001,6 +1003,7 @@ function init_gear_sets()
         ammo="Voluspa Tathlum",
         head="Carmine Mask +1",
         body="Carm. Sc. Mail +1",
+        hands="Gazu Bracelet +1",
         ear1="Cessance Earring",
         ear2="Mache Earring +1",
         })
@@ -1032,6 +1035,7 @@ function init_gear_sets()
         ammo="Voluspa Tathlum",
         head="Carmine Mask +1",
         body="Carm. Sc. Mail +1",
+        hands="Gazu Bracelet +1",
         ear1="Cessance Earring",
         ear2="Mache Earring +1",
         })
@@ -1063,6 +1067,7 @@ function init_gear_sets()
         ammo="Voluspa Tathlum",
         head="Carmine Mask +1",
         body="Carm. Sc. Mail +1",
+        hands="Gazu Bracelet +1",
         legs="Carmine Cuisses +1",
         ear1="Cessance Earring",
         ear2="Mache Earring +1",
@@ -1075,9 +1080,9 @@ function init_gear_sets()
     ------------------------------------------------------------------------------------------------
 
     sets.engaged.Hybrid = {
-        neck="Loricate Torque +1", --6/6
-        ring2="Defending Ring", --10/10
-        }
+       neck="Loricate Torque +1", --6/6
+       ring2="Defending Ring", --10/10
+       }
 
     sets.engaged.DT = set_combine(sets.engaged, sets.engaged.Hybrid)
     sets.engaged.MidAcc.DT = set_combine(sets.engaged.MidAcc, sets.engaged.Hybrid)
