@@ -45,6 +45,9 @@
         send_command('bind ^. input /item "Prism Powder" <me>')
     end
 
+    send_command('bind @, input /ma "Utsusemi: Ichi" <me>')
+    send_command('bind @. input /ma "Utsusemi: Ni" <me>')
+
     -- Default Status Cure HotKeys
     send_command('bind !numpad7 input /ma "Paralyna" <t>')
     send_command('bind !numpad8 input /ma "Silena" <t>')
