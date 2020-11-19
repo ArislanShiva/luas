@@ -281,7 +281,7 @@ function init_gear_sets()
     sets.precast.CorsairRoll["Tactician's Roll"] = set_combine(sets.precast.CorsairRoll, {body="Chasseur's Frac +1"})
     sets.precast.CorsairRoll["Allies' Roll"] = set_combine(sets.precast.CorsairRoll, {hands="Chasseur's Gants +1"})
 
-    sets.precast.LuzafRing = set_combine(sets.precast.CorsairRoll, {ring1="Luzaf's Ring"})
+    sets.precast.LuzafRing = {ring1="Luzaf's Ring"}
     sets.precast.FoldDoubleBust = {hands="Lanun Gants +3"}
 
     sets.precast.Waltz = {
@@ -1099,16 +1099,6 @@ function job_precast(spell, action, spellMap, eventArgs)
         do_bullet_checks(spell, spellMap, eventArgs)
     end
 
-    -- Gear
-    if (spell.type == 'CorsairRoll' or spell.english == "Double-Up") then
-        if player.status ~= 'Engaged' and state.WeaponLock.value == false then
-            equip(sets.precast.CorsairRoll.Duration)
-        end
-        if state.LuzafRing.value then
-            equip(sets.precast.LuzafRing)
-        end
-    end
-
     if spell.english == 'Fold' and buffactive['Bust'] == 2 then
         if sets.precast.FoldDoubleBust then
             equip(sets.precast.FoldDoubleBust)
@@ -1128,6 +1118,14 @@ function job_precast(spell, action, spellMap, eventArgs)
 end
 
 function job_post_precast(spell, action, spellMap, eventArgs)
+    if (spell.type == 'CorsairRoll' or spell.english == "Double-Up") then
+        if player.status ~= 'Engaged' and state.WeaponLock.value == false then
+            equip(sets.precast.CorsairRoll.Duration)
+        end
+        if state.LuzafRing.value then
+            equip(sets.precast.LuzafRing)
+        end
+    end
     if spell.action_type == 'Ranged Attack' then
         special_ammo_check()
         if flurry == 2 then
