@@ -1084,6 +1084,8 @@ function init_gear_sets()
     sets.Ataktos = {main="Naegling", sub="Blurred Knife +1", ranged="Ataktos"}
     sets.Ataktos.Acc = {main="Naegling", sub="Demers. Degen +1", ranged="Ataktos"}
 
+    sets.DefaultShield = {sub="Nusku Shield"}
+
 end
 
 
@@ -1210,6 +1212,9 @@ function job_aftercast(spell, action, spellMap, eventArgs)
     if spell.english == "Light Shot" then
         send_command('@timers c "Light Shot ['..spell.target.name..']" 60 down abilities/00195.png')
     end
+    if player.status ~= 'Engaged' and state.WeaponLock.value == false then
+        check_weaponset()
+    end
 end
 
 function job_buff_change(buff,gain)
@@ -1271,7 +1276,6 @@ function job_handle_equipping_gear(playerStatus, eventArgs)
 end
 
 function job_update(cmdParams, eventArgs)
-    check_weaponset()
     handle_equipping_gear(player.status)
 end
 
@@ -1281,6 +1285,13 @@ function update_combat_form()
     elseif DW == false then
         state.CombatForm:reset()
     end
+end
+
+-- Modify the default melee set after it was constructed.
+function customize_melee_set(meleeSet)
+    check_weaponset()
+
+    return meleeSet
 end
 
 function get_custom_wsmode(spell, action, spellMap)
@@ -1645,8 +1656,8 @@ function check_weaponset()
     else
         equip(sets[state.WeaponSet.current])
     end
-    if not player.sub_job == 'DNC' or not player.sub_job == 'NIN' then
-       equip({sub="Nusku Shield"})
+    if player.sub_job ~= 'NIN' and player.sub_job ~= 'DNC' then
+        equip(sets.DefaultShield)
     end
 end
 

@@ -958,6 +958,8 @@ function init_gear_sets()
     sets.Armageddon = {main="Malevolence", sub="Malevolence", ranged="Armageddon"}
     --sets.Gastraphetes = {main="Malevolence", sub="Malevolence", ranged="Gastraphetes"}
 
+    sets.DefaultShield = {sub="Nusku Shield"}
+
 end
 
 -------------------------------------------------------------------------------------------------------------------
@@ -1061,6 +1063,9 @@ function job_aftercast(spell, action, spellMap, eventArgs)
     if spell.english == "Shadowbind" then
         send_command('@timers c "Shadowbind ['..spell.target.name..']" 42 down abilities/00122.png')
     end
+    if player.status ~= 'Engaged' and state.WeaponLock.value == false then
+        check_weaponset()
+    end
 end
 
 -------------------------------------------------------------------------------------------------------------------
@@ -1137,7 +1142,6 @@ function job_handle_equipping_gear(playerStatus, eventArgs)
 end
 
 function job_update(cmdParams, eventArgs)
-    check_weaponset()
     handle_equipping_gear(player.status)
 end
 
@@ -1147,6 +1151,17 @@ function update_combat_form()
     elseif DW == false then
         state.CombatForm:reset()
     end
+end
+
+-- Modify the default melee set after it was constructed.
+function customize_melee_set(meleeSet)
+    if buffactive['Aftermath: Lv.3'] and player.equipment.main == "Carnwenhan" then
+        meleeSet = set_combine(meleeSet, sets.engaged.Aftermath)
+    end
+
+    check_weaponset()
+
+    return meleeSet
 end
 
 function get_custom_wsmode(spell, action, spellMap)
@@ -1387,8 +1402,8 @@ function check_weaponset()
     else
         equip(sets[state.WeaponSet.current])
     end
-    if not player.sub_job == 'DNC' or not player.sub_job == 'NIN' then
-       equip({sub="Nusku Shield"})
+    if player.sub_job ~= 'NIN' and player.sub_job ~= 'DNC' then
+       equip(sets.DefaultShield)
     end
 end
 

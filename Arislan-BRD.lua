@@ -117,7 +117,7 @@ function user_setup()
 
     -- Additional local binds
     include('Global-Binds.lua') -- OK to remove this line
-    include('Global-GEO-Binds.lua') -- OK to remove this line
+    include('Global-WHM-Binds.lua') -- OK to remove this line
 
     -- Adjust this if using the Terpander (new +song instrument)
     info.ExtraSongInstrument = 'Daurdabla'
@@ -723,6 +723,8 @@ function init_gear_sets()
     sets.Tauret = {main="Tauret", sub="Ternion Dagger +1"}
     sets.Naegling = {main="Naegling", sub="Centovente"}
 
+    sets.DefaultShield = {sub="Genmei Shield"}
+
 end
 
 
@@ -829,6 +831,9 @@ function job_aftercast(spell, action, spellMap, eventArgs)
     if spell.english:contains('Lullaby') and not spell.interrupted then
         get_lullaby_duration(spell)
     end
+    if player.status ~= 'Engaged' and state.WeaponLock.value == false then
+        check_weaponset()
+    end
 end
 
 function job_buff_change(buff,gain)
@@ -880,7 +885,6 @@ function job_handle_equipping_gear(playerStatus, eventArgs)
 end
 
 function job_update(cmdParams, eventArgs)
-    check_weaponset()
     handle_equipping_gear(player.status)
 end
 
@@ -910,6 +914,8 @@ function customize_melee_set(meleeSet)
     if buffactive['Aftermath: Lv.3'] and player.equipment.main == "Carnwenhan" then
         meleeSet = set_combine(meleeSet, sets.engaged.Aftermath)
     end
+
+    check_weaponset()
 
     return meleeSet
 end
@@ -1160,8 +1166,8 @@ end
 
 function check_weaponset()
     equip(sets[state.WeaponSet.current])
-    if not player.sub_job == 'DNC' or not player.sub_job == 'NIN' then
-       equip({sub="Genmei Shield"})
+    if player.sub_job ~= 'NIN' and player.sub_job ~= 'DNC' then
+       equip(sets.DefaultShield)
     end
 end
 
