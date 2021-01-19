@@ -80,7 +80,7 @@ function job_setup()
     -- Unblinkable JA IDs for actions that always have TH: Quick/Box/Stutter Step, Desperate/Violent Flourish
     info.default_u_ja_ids = S{201, 202, 203, 205, 207}
 
-    state.AttackMode = M{['description']='Attack', 'Capped', 'Uncapped'}
+    state.Ambush = M(false, 'Ambush')
     -- state.CP = M(false, "Capacity Points Mode")
 
     lockstyleset = 1
@@ -104,6 +104,8 @@ function user_setup()
 
     send_command('bind ^` gs c cycle treasuremode')
     send_command('bind !` input /ja "Flee" <me>')
+    send_command('bind numpad0 gs c toggle Ambush')
+
     -- send_command('bind @c gs c toggle CP')
 
     send_command('bind ^numlock input /ja "Assassin\'s Charge" <me>')
@@ -147,7 +149,7 @@ function user_unload()
     send_command('unbind ^`')
     send_command('unbind !`')
     send_command('unbind ^,')
-    send_command('unbind @a')
+    send_command('unbind numpad0')
     -- send_command('unbind @c')
     send_command('unbind @r')
     send_command('unbind ^numlock')
@@ -207,15 +209,15 @@ function init_gear_sets()
 
     -- Precast sets to enhance JAs
     sets.precast.JA['Accomplice'] = {head="Skulker's Bonnet +1"}
-    sets.precast.JA['Aura Steal'] = {head="Plun. Bonnet +1"}
+    sets.precast.JA['Aura Steal'] = {head="Plun. Bonnet +3"}
     sets.precast.JA['Collaborator'] = set_combine(sets.TreasureHunter, {head="Skulker's Bonnet +1"})
     sets.precast.JA['Flee'] = {feet="Pill. Poulaines +3"}
     sets.precast.JA['Hide'] = {body="Pillager's Vest +3"}
     sets.precast.JA['Conspirator'] = set_combine(sets.TreasureHunter, {body="Skulker's Vest +1"})
 
     sets.precast.JA['Steal'] = {
-        ammo="Barathrum", --3
-        --head="Asn. Bonnet +2",
+        ammo="Barathrum",
+        head="Plun. Bonnet +3",
         hands="Pillager's Armlets +1",
         feet="Pill. Poulaines +3",
         }
@@ -286,7 +288,7 @@ function init_gear_sets()
         }
 
     sets.precast.WS['Exenterator'] = set_combine(sets.precast.WS, {
-        head=gear.Adhemar_B_head,
+        head="Plun. Bonnet +3",
         body=gear.Adhemar_B_body,
         legs="Meg. Chausses +2",
         feet="Meg. Jam. +2",
@@ -301,7 +303,7 @@ function init_gear_sets()
 
     sets.precast.WS['Evisceration'] = set_combine(sets.precast.WS, {
         ammo="Yetshila +1",
-        head=gear.Adhemar_B_head,
+        head="Plun. Bonnet +3",
         body="Pillager's Vest +3",
         hands="Mummu Wrists +2",
         legs="Zoar Subligar +1",
@@ -321,7 +323,7 @@ function init_gear_sets()
 
     sets.precast.WS['Rudra\'s Storm'] = set_combine(sets.precast.WS, {
         ammo="Aurgelmir Orb +1",
-        neck="Caro Necklace",
+        neck="Asn. Gorget +2",
         ear1="Sherida Earring",
         waist="Kentarch Belt +1",
         })
@@ -411,6 +413,7 @@ function init_gear_sets()
 
     sets.idle.Town = set_combine(sets.idle, {
         ammo="Aurgelmir Orb +1",
+        neck="Asn. Gorget +2",
         ear1="Sherida Earring",
         ear2="Telos Earring",
         back=gear.THF_TP_Cape,
@@ -439,12 +442,12 @@ function init_gear_sets()
     sets.engaged = {
         ammo="Aurgelmir Orb +1",
         ammo="Yamarang",
-        head=gear.Adhemar_B_head,
+        head="Plun. Bonnet +3",
         body=gear.Adhemar_B_body,
         hands=gear.Adhemar_A_hands,
         legs="Samnuha Tights",
         feet="Plun. Poulaines +3",
-        neck="Anu Torque",
+        neck="Asn. Gorget +2",
         ear1="Sherida Earring",
         ear2="Brutal Earring",
         ring1="Gere Ring",
@@ -454,8 +457,6 @@ function init_gear_sets()
         }
 
     sets.engaged.LowAcc = set_combine(sets.engaged, {
-        head="Skulker's Bonnet +1",
-        neck="Combatant's Torque",
         ring1={name="Chirich Ring +1", bag="wardrobe3"},
         ear2="Telos Earring",
         })
@@ -494,12 +495,12 @@ function init_gear_sets()
     sets.engaged.DW = {
         ammo="Aurgelmir Orb +1",
         ammo="Yamarang",
-        head=gear.Adhemar_B_head,
+        head="Plun. Bonnet +3",
         body=gear.Adhemar_B_body, -- 6
         hands=gear.Adhemar_A_hands,
         legs="Samnuha Tights",
         feet=gear.Taeon_DW_feet, --9
-        neck="Erudit. Necklace",
+        neck="Asn. Gorget +2",
         ear1="Eabani Earring", --4
         ear2="Suppanomimi", --5
         ring1="Gere Ring",
@@ -509,8 +510,6 @@ function init_gear_sets()
         } -- 41%
 
     sets.engaged.DW.LowAcc = set_combine(sets.engaged.DW, {
-        head="Skulker's Bonnet +1",
-        neck="Combatant's Torque",
         ring1={name="Chirich Ring +1", bag="wardrobe3"},
         })
 
@@ -545,12 +544,12 @@ function init_gear_sets()
     sets.engaged.DW.LowHaste = {
         ammo="Aurgelmir Orb +1",
         ammo="Yamarang",
-        head=gear.Adhemar_B_head,
+        head="Plun. Bonnet +3",
         body=gear.Adhemar_B_body, -- 6
         hands=gear.Adhemar_A_hands,
         legs="Samnuha Tights",
         feet=gear.Taeon_DW_feet, --9
-        neck="Erudit. Necklace",
+        neck="Asn. Gorget +2",
         ear1="Cessance Earring",
         ear2="Suppanomimi", --5
         ring1="Gere Ring",
@@ -560,8 +559,6 @@ function init_gear_sets()
         } -- 37%
 
     sets.engaged.DW.LowAcc.LowHaste = set_combine(sets.engaged.DW.LowHaste, {
-        head="Skulker's Bonnet +1",
-        neck="Combatant's Torque",
         ring1={name="Chirich Ring +1", bag="wardrobe3"},
         })
 
@@ -595,12 +592,12 @@ function init_gear_sets()
     sets.engaged.DW.MidHaste = {
         ammo="Aurgelmir Orb +1",
         ammo="Yamarang",
-        head=gear.Adhemar_B_head,
+        head="Plun. Bonnet +3",
         body="Pillager's Vest +3",
         hands=gear.Adhemar_A_hands,
         legs="Samnuha Tights",
         feet="Plun. Poulaines +3",
-        neck="Erudit. Necklace",
+        neck="Asn. Gorget +2",
         ear1="Eabani Earring", --4
         ear2="Suppanomimi", --5
         ring1="Gere Ring",
@@ -610,8 +607,6 @@ function init_gear_sets()
         } -- 26%
 
     sets.engaged.DW.LowAcc.MidHaste = set_combine(sets.engaged.DW.MidHaste, {
-        head="Skulker's Bonnet +1",
-        neck="Combatant's Torque",
         ring1={name="Chirich Ring +1", bag="wardrobe3"},
         })
 
@@ -647,12 +642,12 @@ function init_gear_sets()
     sets.engaged.DW.HighHaste = {
         ammo="Aurgelmir Orb +1",
         ammo="Yamarang",
-        head=gear.Adhemar_B_head,
+        head="Plun. Bonnet +3",
         body="Pillager's Vest +3",
         hands=gear.Adhemar_A_hands,
         legs="Samnuha Tights",
         feet="Plun. Poulaines +3",
-        neck="Erudit. Necklace",
+        neck="Asn. Gorget +2",
         ear1="Sherida Earring",
         ear2="Suppanomimi", --5
         ring1="Gere Ring",
@@ -662,7 +657,6 @@ function init_gear_sets()
         } -- 22%
 
     sets.engaged.DW.LowAcc.HighHaste = set_combine(sets.engaged.DW.HighHaste, {
-        head="Skulker's Bonnet +1",
         neck="Combatant's Torque",
         ring1={name="Chirich Ring +1", bag="wardrobe3"},
         })
@@ -697,12 +691,12 @@ function init_gear_sets()
     -- 45% Magic Haste (36% DW to cap)
     sets.engaged.DW.MaxHaste = {
         ammo="Aurgelmir Orb +1",
-        head=gear.Adhemar_B_head,
+        head="Plun. Bonnet +3",
         body="Pillager's Vest +3",
         hands=gear.Adhemar_A_hands,
         legs="Samnuha Tights",
         feet="Plun. Poulaines +3",
-        neck="Erudit. Necklace",
+        neck="Asn. Gorget +2",
         ear1="Sherida Earring",
         ear2="Suppanomimi", --5
         ring1="Gere Ring",
@@ -712,8 +706,6 @@ function init_gear_sets()
         } -- 5%
 
     sets.engaged.DW.LowAcc.MaxHaste = set_combine(sets.engaged.DW.MaxHaste, {
-        head="Skulker's Bonnet +1",
-        neck="Combatant's Torque",
         ring1={name="Chirich Ring +1", bag="wardrobe3"},
         waist="Kentarch Belt +1",
         })
@@ -799,6 +791,8 @@ function init_gear_sets()
     ------------------------------------------------------------------------------------------------
     ---------------------------------------- Special Sets ------------------------------------------
     ------------------------------------------------------------------------------------------------
+
+    sets.buff['Ambush'] = {body="Plunderer's Vest +3"}
 
     sets.buff.Doom = {
         neck="Nicander's Necklace", --20
@@ -963,6 +957,9 @@ function customize_idle_set(idleSet)
 end
 
 function customize_melee_set(meleeSet)
+    if state.Ambush.value == true then
+        meleeSet = set_combine(meleeSet, sets.buff['Ambush'])
+    end
     if state.TreasureMode.value == 'Fulltime' then
         meleeSet = set_combine(meleeSet, sets.TreasureHunter)
     end
