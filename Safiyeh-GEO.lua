@@ -171,7 +171,7 @@ function init_gear_sets()
         ranged="Dunna", --3
         main="Sucellus", --5
         sub="Chanter's Shield", --3
-        head="Amalric Coif", --10
+        head="Amalric Coif +1", --11
         body=gear.Merl_MB_body, --6
         hands=gear.Merl_FC_hands, --7
         legs="Geomancy Pants +3", --15
@@ -249,7 +249,7 @@ function init_gear_sets()
     sets.midcast.FastRecast = {
         main="Sucellus",
         sub="Chanter's Shield",
-        head="Amalric Coif",
+        head="Amalric Coif +1",
         hands=gear.Merl_FC_hands,
         legs="Geomancy Pants +3",
         ear1="Malignance Earring",
@@ -348,7 +348,7 @@ function init_gear_sets()
         })
 
     sets.midcast.Refresh = set_combine(sets.midcast.EnhancingDuration, {
-        head="Amalric Coif",
+        head="Amalric Coif +1",
         })
 
     sets.midcast.Stoneskin = set_combine(sets.midcast.EnhancingDuration, {
@@ -359,7 +359,7 @@ function init_gear_sets()
     sets.midcast.Aquaveil = set_combine(sets.midcast.EnhancingDuration, {
         main="Vadose Rod",
         sub="Ammurapi Shield",
-        head="Amalric Coif",
+        head="Amalric Coif +1",
         })
 
     sets.midcast.Protect = set_combine(sets.midcast.EnhancingDuration, {ring2="Sheltered Ring"})
@@ -484,7 +484,7 @@ function init_gear_sets()
         body="Geomancy Tunic +3",
         hands="Bagua Mitaines +3",
         legs="Assid. Pants +1",
-        feet=gear.Merl_Idle_feet,
+        feet="Volte Gaiters",
         neck="Bathy Choker +1",
         ear1="Lugalbanda Earring",
         ear2="Etiolation Earring",
@@ -602,9 +602,9 @@ function init_gear_sets()
     sets.magic_burst = {
         head="Ea Hat +1", --7/(7)
         body="Ea Houppe. +1", --9/(9)
-        hands="Amalric Gages +1", --(6)
+        hands="Ea Cuffs +1", --6/(6)
         legs="Ea Slops +1", --8/(8)
-        feet="Ea Pigaches +1", --5/(6)
+        feet="Bagua Sandals +3",
         neck="Mizu. Kubikazari", --10
         ring2="Mujin Band", --(5)
         }
