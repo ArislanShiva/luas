@@ -115,7 +115,7 @@ function user_setup()
 
     -- Additional local binds
     include('Global-Binds.lua') -- OK to remove this line
-    include('Global-WHM-Binds.lua') -- OK to remove this line
+    include('Global-GEO-Binds.lua') -- OK to remove this line
 
     send_command('bind ^` input //gs c rune')
     send_command('bind !` input /ja "Vivacious Pulse" <me>')
@@ -562,6 +562,24 @@ function init_gear_sets()
         ring1={name="Stikini Ring +1", bag="wardrobe3"},
         ring2={name="Stikini Ring +1", bag="wardrobe4"},
         waist="Bishop's Sash",
+        }
+
+    sets.midcast['Enfeebling Magic'] = {
+        main="Lycurgos",
+        sub="Khonsu",
+        ammo="Pemphredo Tathlum",
+        head="Blistering Sallet +1",
+        body="Ayanmo Corazza +2",
+        hands="Aya. Manopolas +2",
+        legs="Aya. Cosciales +2",
+        feet="Aya. Gambieras +2",
+        neck="Erra Pendant",
+        ear1="Digni. Earring",
+        ear2="Vor Earring",
+        ring1="Metamor. Ring +1",
+        ring2="Weather. Ring +1",
+        back="Evasionist's Cape",
+        waist="Acuity Belt +1",
         }
 
     sets.midcast.Flash = sets.Enmity
