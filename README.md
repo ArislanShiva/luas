@@ -15,11 +15,11 @@ Feel free to modify and share to your hearts' content.
 
 ### Status Icons files
 
-I presently maintain [Jeanpaul's Status Icons mod](http://ffxidats.caarrie.com/index.php?action=downloads;sa=view;down=1353).  I tend to update these immediately after game patches, when necessary.
+StatusIcons.zip is the currently maintained version of [Jeanpaul's Status Icons mod](http://ffxidats.caarrie.com/index.php?action=downloads;sa=view;down=1353).  Updates regularly take place immediately after game patches, if necessary.
 
 ### GearInfo UI update
 
-I also created a skin for sebyg666's addon [GearInfo](https://github.com/sebyg666/GearInfo) that increases legibility and decreases screen real estate required.
+UI_Updates.rar is a skin for sebyg666's addon [GearInfo](https://github.com/sebyg666/GearInfo) that increases legibility and decreases the addon's screen real estate.
 
 ---
 
