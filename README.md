@@ -3,15 +3,15 @@
 
 ### Gearswap files
 
-Job luas are modified from [Mote's job files](https://github.com/Kinematics/GearSwap-Jobs) -- he definitely deserves a ton of credit for not only the luas, but his awesome gearswap libraries.
+Job luas are modified from [Mote's job files](https://github.com/Kinematics/GearSwap-Jobs) -- he deserves a ton of credit for his job luas and awesome libraries.
 
 If you're new to Mote's, I highly recommend reading the [Kinematics wiki](https://github.com/Kinematics/GearSwap-Jobs/wiki) to find out how all the core functions and logic work.
 
 All of these luas make use of sebyg666's addon [GearInfo](https://github.com/sebyg666/GearInfo).  You will need to sideload that to your Windower4 installation for haste detection and auto movement gear swapping to work.
 
-Sorry, I only have luas for jobs that I personally play.
+Sorry, I only have luas for jobs that I personally play.  And my luas are tailored to my own personal play style and preferences.
 
-Feel free to use and modify to your hearts' content.  If you redistribute/share, I only ask that you give credit to Mote.
+Feel free to modify and share to your hearts' content.
 
 ### Status Icons files
 
