@@ -17,7 +17,9 @@ Feel free to use and modify to your hearts' content.  If you redistribute/share,
 
 I presently maintain [Jeanpaul's Status Icons mod](http://ffxidats.caarrie.com/index.php?action=downloads;sa=view;down=1353).  I tend to update these immediately after game patches, when necessary.
 
-### Status Icons files
+### GearInfo UI update
+
+I also created a skin for sebyg666's addon [GearInfo](https://github.com/sebyg666/GearInfo) that increases legibility and decreases screen real estate required.
 
 
 ##### Disclaimer:
