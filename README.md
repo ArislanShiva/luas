@@ -13,7 +13,7 @@ All 'global' files are optional -- they contain keybinds and [send](https://docs
 
 Sorry, I only have luas for jobs that I personally play.  And my luas are tailored to my own personal play style and preferences.
 
-Feel free to modify and share to your hearts' content.
+Feel free to modify and share to your hearts' content, but please give credit to Mote and myself.
 
 ### Status Icons files
 
