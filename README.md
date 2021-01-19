@@ -9,6 +9,8 @@ If you're new to Mote's, I highly recommend reading the [Kinematics wiki](https:
 
 All of these luas make use of sebyg666's addon [GearInfo](https://github.com/sebyg666/GearInfo).  You will need to sideload that to your Windower4 installation for haste detection and auto movement gear swapping to work.
 
+All 'global' files are optional.
+
 Sorry, I only have luas for jobs that I personally play.  And my luas are tailored to my own personal play style and preferences.
 
 Feel free to modify and share to your hearts' content.
