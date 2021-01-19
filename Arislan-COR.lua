@@ -316,21 +316,24 @@ function init_gear_sets()
         head=gear.Taeon_RA_head, --10/0
         body="Oshosi Vest +1", --14/0
         hands="Carmine Fin. Ga. +1", --8/11
-        legs=gear.Adhemar_D_legs, --9/10
+        legs=gear.Adhemar_D_legs, --10/13
         feet="Meg. Jam. +2", --10/0
         back=gear.COR_SNP_Cape, --10/0
         waist="Yemaya Belt", --0/5
-        } --61/26
+        } --62/29
+
+    sets.precast.RA.Flurry = set_combine(sets.precast.RA, {body="Laksa. Frac +3",})
+    sets.precast.RA.Flurry2 = set_combine(sets.precast.RA, {head="Chasseur's Tricorne +1",body="Laksa. Frac +3",feet="Pursuer's Gaiters"})
 
     sets.precast.RA.Flurry1 = set_combine(sets.precast.RA, {
         body="Laksa. Frac +3", --0/20
-        }) --47/46
+        }) --48/49
 
     sets.precast.RA.Flurry2 = set_combine(sets.precast.RA.Flurry1, {
         head="Chass. Tricorne +1", --0/14
         feet="Pursuer's Gaiters", --0/10
-        waist="Impulse Belt", --3/0
-        }) --30/65
+        neck="Comm. Charm +2", --4/0
+        }) --32/73
 
 
     ------------------------------------------------------------------------------------------------
@@ -387,7 +390,7 @@ function init_gear_sets()
         ring1="Dingir Ring",
         ring2="Epaminondas's Ring",
         back=gear.COR_WS1_Cape,
-        waist="Eschan Stone",
+        waist="Skrymir Cord +1",
         }
 
     sets.precast.WS['Hot Shot'] = sets.precast.WS['Wildfire']
@@ -508,7 +511,7 @@ function init_gear_sets()
         ring1="Dingir Ring",
         ring2={name="Fenrir Ring +1", bag="wardrobe4"},
         back=gear.COR_WS1_Cape,
-        waist="Eschan Stone",
+        waist="Skrymir Cord +1",
         }
 
     sets.midcast.CorsairShot.STP = {
@@ -659,7 +662,7 @@ function init_gear_sets()
         neck="Comm. Charm +2",
         ear1="Beyla Earring",
         ear2="Telos Earring",
-        waist="K. Kachina Belt +1",
+        waist="Skrymir Cord +1",
         })
 
 
@@ -1073,12 +1076,12 @@ function init_gear_sets()
     sets.DeathPenalty_M.Acc = {main={name="Rostam", bag="wardrobe3"}, sub={name="Rostam", bag="wardrobe"}, ranged="Death Penalty"}
     sets.DeathPenalty_R = {main="Lanun Knife", sub="Tauret", ranged="Death Penalty"}
     sets.DeathPenalty_R.Acc = {main="Lanun Knife", sub={name="Rostam", bag="wardrobe"}, ranged="Death Penalty"}
-    sets.Armageddon_M = {main={name="Rostam", bag="wardrobe3"}, sub="Tauret", ranged="Armageddon"}
+    sets.Armageddon_M = {main="Naegling", sub="Tauret", ranged="Armageddon"}
     sets.Armageddon_M.Acc = {main={name="Rostam", bag="wardrobe3"}, sub={name="Rostam", bag="wardrobe4"}, ranged="Armageddon"}
     sets.Armageddon_R = {main="Lanun Knife", sub="Kustawi +1", ranged="Armageddon"}
     sets.Armageddon_R.Acc = sets.Armageddon_R
     sets.Fomalhaut_M = {main="Naegling", sub="Blurred Knife +1", ranged="Fomalhaut"}
-    sets.Fomalhaut_M.Acc = {main="Naegling", sub="Demers. Degen +1", ranged="Fomalhaut"}
+    sets.Fomalhaut_M.Acc = {main={name="Rostam", bag="wardrobe3"}, sub="Kustawi +1", ranged="Fomalhaut"}
     sets.Fomalhaut_R = {main="Lanun Knife", sub="Kustawi +1", ranged="Fomalhaut"}
     sets.Fomalhaut_R.Acc = sets.Fomalhaut_R
     sets.Ataktos = {main="Naegling", sub="Blurred Knife +1", ranged="Ataktos"}

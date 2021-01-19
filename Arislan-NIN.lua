@@ -281,7 +281,7 @@ function init_gear_sets()
         hands="Mummu Wrists +2",
         legs="Zoar Subligar +1",
         feet="Mummu Gamash. +2",
-        neck="Ninja Nodowa +1",
+        neck="Ninja Nodowa +2",
         ear2="Odr Earring",
         ring1="Mummu Ring",
         back=gear.NIN_WS2_Cape,
@@ -290,7 +290,7 @@ function init_gear_sets()
     sets.precast.WS['Blade: Hi'].Acc = set_combine(sets.precast.WS['Blade: Hi'], {})
 
     sets.precast.WS['Blade: Ten'] = set_combine(sets.precast.WS, {
-        neck="Ninja Nodowa +1",
+        neck="Ninja Nodowa +2",
         back=gear.NIN_WS2_Cape,
         waist="Sailfi Belt +1",
         })
@@ -478,7 +478,7 @@ function init_gear_sets()
         hands="Ken. Tekko +1",
         legs="Mochi. Hakama +3",
         feet="Ken. Sune-Ate +1",
-        neck="Ninja Nodowa +1",
+        neck="Ninja Nodowa +2",
         ear1="Cessance Earring",
         ear2="Telos Earring",
         back=gear.NIN_TP_Cape,
@@ -516,7 +516,7 @@ function init_gear_sets()
         hands=gear.Adhemar_B_hands,
         legs="Ken. Hakama +1",
         feet="Hiza. Sune-Ate +2", --8
-        neck="Ninja Nodowa +1",
+        neck="Ninja Nodowa +2",
         ear1="Cessance Earring",
         ear2="Suppanomimi", --5
         ring1="Gere Ring",
@@ -553,7 +553,7 @@ function init_gear_sets()
         hands=gear.Adhemar_B_hands,
         legs="Ken. Hakama +1",
         feet="Ken. Sune-Ate +1",
-        neck="Ninja Nodowa +1",
+        neck="Ninja Nodowa +2",
         ear1="Cessance Earring",
         ear2="Suppanomimi", --5
         ring1="Gere Ring",
@@ -590,7 +590,7 @@ function init_gear_sets()
         hands=gear.Adhemar_B_hands,
         legs="Ken. Hakama +1",
         feet="Ken. Sune-Ate +1",
-        neck="Ninja Nodowa +1",
+        neck="Ninja Nodowa +2",
         ear1="Cessance Earring",
         ear2="Suppanomimi", --5
         ring1="Gere Ring",
@@ -627,7 +627,7 @@ function init_gear_sets()
         hands=gear.Adhemar_B_hands,
         legs="Ken. Hakama +1",
         feet="Ken. Sune-Ate +1",
-        neck="Ninja Nodowa +1",
+        neck="Ninja Nodowa +2",
         ear1="Eabani Earring", --4
         ear2="Suppanomimi", --5
         ring1="Gere Ring",
@@ -665,7 +665,7 @@ function init_gear_sets()
         hands=gear.Adhemar_B_hands,
         legs="Ken. Hakama +1",
         feet="Ken. Sune-Ate +1",
-        neck="Ninja Nodowa +1",
+        neck="Ninja Nodowa +2",
         ear1="Cessance Earring",
         ear2="Telos Earring",
         ring1="Gere Ring",

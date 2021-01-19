@@ -415,7 +415,10 @@ function init_gear_sets()
         waist="Eschan Stone",
         }
 
-    sets.precast.WS["Wildfire"] = set_combine(sets.precast.WS["Trueflight"], {ring1="Regal Ring"})
+    sets.precast.WS["Wildfire"] = set_combine(sets.precast.WS["Trueflight"], {
+        ring1="Regal Ring",
+        waist="Skrymir Cord +1",
+        })
 
     sets.precast.WS['Evisceration'] = {
         head=gear.Adhemar_B_head,
@@ -955,7 +958,7 @@ function init_gear_sets()
 
     sets.Annihilator = {main="Perun +1", sub="Blurred Knife +1", ranged="Annihilator"}
     sets.Fomalhaut = {main="Perun +1", sub="Blurred Knife +1", ranged="Fomalhaut"}
-    sets.Armageddon = {main="Malevolence", sub="Malevolence", ranged="Armageddon"}
+    sets.Armageddon = {main="Perun +1", sub="Malevolence", ranged="Armageddon"}
     --sets.Gastraphetes = {main="Malevolence", sub="Malevolence", ranged="Gastraphetes"}
 
     sets.DefaultShield = {sub="Nusku Shield"}

@@ -350,7 +350,7 @@ function init_gear_sets()
     sets.midcast.Shellra = sets.midcast.Protect
 
     sets.midcast.MndEnfeebles = {
-        main="Maxentius",
+        main="Daybreak",
         sub="Ammurapi Shield",
         ammo="Pemphredo Tathlum",
         head=empty;

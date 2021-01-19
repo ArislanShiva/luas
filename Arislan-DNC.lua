@@ -246,7 +246,7 @@ function init_gear_sets()
         body="Maxixi Casaque +3", --19(8)
         hands="Horos Bangles +3",
         legs="Dashing Subligar", --10
-        feet="Maxixi Toeshoes +3", --14
+        feet="Maxixi Toe Shoes +3", --14
         neck="Etoile Gorget +2", --10
         --ear1="Handler's Earring +1",
         ear2="Enchntr. Earring +1",
@@ -264,7 +264,7 @@ function init_gear_sets()
 
     sets.precast.Waltz['Healing Waltz'] = {}
     sets.precast.Samba = {head="Maxixi Tiara +3", back=gear.DNC_TP_Cape}
-    sets.precast.Jig = {legs="Horos Tights +3", feet="Maxixi Toeshoes +3"}
+    sets.precast.Jig = {legs="Horos Tights +3", feet="Maxixi Toe Shoes +3"}
 
     sets.precast.Step = {
         ammo="C. Palug Stone",
@@ -282,7 +282,7 @@ function init_gear_sets()
         back=gear.DNC_TP_Cape
         }
 
-    sets.precast.Step['Feather Step'] = set_combine(sets.precast.Step, {feet="Macu. Toeshoes +1"})
+    sets.precast.Step['Feather Step'] = set_combine(sets.precast.Step, {feet="Macu. Toe Shoes +1"})
     sets.precast.Flourish1 = {}
     sets.precast.Flourish1['Animated Flourish'] = sets.Enmity
 
@@ -308,7 +308,7 @@ function init_gear_sets()
         body="Maxixi Casaque +3",
         hands="Gazu Bracelet +1",
         legs=gear.Herc_WS_legs,
-        feet="Maxixi Toeshoes +3",
+        feet="Maxixi Toe Shoes +3",
         neck="Etoile Gorget +2",
         ear1="Cessance Earring",
         ear2="Telos Earring",
@@ -430,7 +430,7 @@ function init_gear_sets()
         head="Dampening Tam",
         body="Horos Casaque +3",
         legs="Meg. Chausses +2",
-        feet="Maxixi Toeshoes +3",
+        feet="Maxixi Toe Shoes +3",
         ring1="Regal Ring",
         })
 

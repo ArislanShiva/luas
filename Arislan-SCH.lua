@@ -432,7 +432,7 @@ function init_gear_sets()
 
     -- Custom spell classes
     sets.midcast.MndEnfeebles = {
-        main="Maxentius",
+        main="Daybreak",
         sub="Ammurapi Shield",
         ammo="Pemphredo Tathlum",
         head=empty;
@@ -562,7 +562,7 @@ function init_gear_sets()
         sub="Enki Strap",
         ammo="Ghastly Tathlum +1",
         neck="Argute Stole +2",
-        waist="Sacro Cord",
+        waist="Skrymir Cord +1",
         }
 
     sets.midcast.DarkHelix = set_combine(sets.midcast.Helix, {
