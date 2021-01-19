@@ -127,6 +127,7 @@ function user_setup()
     state.BarStatus = M{['description']='BarStatus', 'Baramnesia', 'Barvirus', 'Barparalyze', 'Barsilence', 'Barpetrify', 'Barpoison', 'Barblind', 'Barsleep'}
     state.GainSpell = M{['description']='GainSpell', 'Gain-STR', 'Gain-INT', 'Gain-AGI', 'Gain-VIT', 'Gain-DEX', 'Gain-MND', 'Gain-CHR'}
 
+    state.WeaponSet = M{['description']='Weapon Set', 'CroceaDark', 'CroceaLight', 'Almace', 'Naegling', 'Tauret', 'Idle'}
     state.WeaponLock = M(false, 'Weapon Lock')
     state.MagicBurst = M(false, 'Magic Burst')
     state.SleepMode = M{['description']='Sleep Mode', 'Normal', 'MaxDuration'}
@@ -225,9 +226,7 @@ function user_unload()
     send_command('unbind !o')
     send_command('unbind !p')
     send_command('unbind @s')
-    send_command('unbind @e')
     send_command('unbind @d')
-    send_command('unbind @w')
     send_command('unbind @t')
 
     send_command('unbind ~numpad7')
@@ -241,7 +240,9 @@ function user_unload()
     send_command('unbind ~numpad3')
     send_command('unbind ~numpad0')
 
+    send_command('unbind @w')
     -- send_command('unbind @c')
+    send_command('unbind @e')
     send_command('unbind @r')
     send_command('unbind !insert')
     send_command('unbind !delete')
@@ -665,7 +666,7 @@ function init_gear_sets()
         })
 
     sets.midcast.SkillEnfeebles = set_combine(sets.midcast.MndEnfeebles, {
-        main=gear.Grioavolr_MND,
+        main="Contemplator +1",
         sub="Mephitis Grip",
         head="Viti. Chapeau +3",
         body="Atrophy Tabard +3",
@@ -792,8 +793,6 @@ function init_gear_sets()
     ------------------------------------------------------------------------------------------------
 
     sets.idle = {
-        main="Daybreak",
-        sub="Sacro Bulwark",
         ammo="Homiliary",
         head="Viti. Chapeau +3",
         body="Jhakri Robe +2",
@@ -810,8 +809,6 @@ function init_gear_sets()
         }
 
     sets.idle.DT = set_combine(sets.idle, {
-        main="Daybreak",
-        sub="Sacro Bulwark", --10/10
         head="Malignance Chapeau", --6/6
         body="Malignance Tabard", --9/9
         hands="Malignance Gloves", --5/5
@@ -875,8 +872,6 @@ function init_gear_sets()
     -- EG: sets.engaged.Dagger.Accuracy.Evasion
 
     sets.engaged = {
-        main="Naegling",
-        sub="Genmei Shield",
         ammo="Aurgelmir Orb +1",
         head="Malignance Chapeau",
         body="Malignance Tabard",
@@ -913,8 +908,6 @@ function init_gear_sets()
 
     -- No Magic Haste (74% DW to cap)
     sets.engaged.DW = {
-        main="Naegling",
-        sub="Thibron",
         ammo="Aurgelmir Orb +1",
         head="Malignance Chapeau",
         body="Malignance Tabard",
@@ -1133,6 +1126,13 @@ function init_gear_sets()
 
     sets.TreasureHunter = {head="Volte Cap", feet="Volte Boots", waist="Chaac Belt"}
 
+    sets.CroceaDark = {main="Crocea Mors", sub="Ternion Dagger +1"}
+    sets.CroceaLight = {main="Crocea Mors", sub="Daybreak"}
+    sets.Almace = {main="Almace", sub="Ternion Dagger +1"}
+    sets.Naegling = {main="Naegling", sub="Thibron"}
+    sets.Tauret = {main="Tauret", sub="Ternion Dagger +1"}
+    sets.Idle = {main="Daybreak", sub="Sacro Bulwark"}
+
 end
 
 -------------------------------------------------------------------------------------------------------------------
@@ -1219,6 +1219,9 @@ function job_aftercast(spell, action, spellMap, eventArgs)
     if spell.english:contains('Sleep') and not spell.interrupted then
         set_sleep_timer(spell)
     end
+    if player.status ~= 'Engaged' and state.WeaponLock.value == false then
+        check_weaponset()
+    end
 end
 
 -------------------------------------------------------------------------------------------------------------------
@@ -1245,6 +1248,8 @@ function job_state_change(stateField, newValue, oldValue)
     else
         enable('main','sub','range')
     end
+
+    check_weaponset()
 end
 
 -------------------------------------------------------------------------------------------------------------------
@@ -1348,6 +1353,15 @@ function customize_melee_set(meleeSet)
     if state.TreasureMode.value == 'Fulltime' then
         meleeSet = set_combine(meleeSet, sets.TreasureHunter)
     end
+
+    check_weaponset()
+
+    return meleeSet
+end
+
+-- Modify the default melee set after it was constructed.
+function customize_melee_set(meleeSet)
+
 
     return meleeSet
 end
@@ -1618,6 +1632,13 @@ function check_gear()
         disable("ring2")
     else
         enable("ring2")
+    end
+end
+
+function check_weaponset()
+    equip(sets[state.WeaponSet.current])
+    if player.sub_job ~= 'NIN' and player.sub_job ~= 'DNC' then
+       equip(sets.DefaultShield)
     end
 end
 

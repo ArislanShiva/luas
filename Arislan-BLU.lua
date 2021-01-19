@@ -201,6 +201,8 @@ function user_setup()
     state.PhysicalDefenseMode:options('PDT', 'MDT')
     state.IdleMode:options('Normal', 'DT')--, 'Learning')
 
+    state.WeaponSet = M{['description']='Weapon Set', 'Almace', 'Naegling', 'Maxentius', 'Nuking'}
+    state.WeaponLock = M(false, 'Weapon Lock')
     state.MagicBurst = M(false, 'Magic Burst')
     -- state.CP = M(false, "Capacity Points Mode")
 
@@ -211,6 +213,10 @@ function user_setup()
     send_command('lua l azureSets')
 
     send_command('bind @t gs c cycle treasuremode')
+    send_command('bind @w gs c toggle WeaponLock')
+    -- send_command('bind @c gs c toggle CP')
+    send_command('bind @e gs c cycleback WeaponSet')
+    send_command('bind @r gs c cycle WeaponSet')
     send_command('bind !` gs c toggle MagicBurst')
     send_command('bind ^- input /ja "Chain Affinity" <me>')
     send_command('bind ^[ input /ja "Efflux" <me>')
@@ -281,7 +287,10 @@ function user_unload()
     send_command('bind !u input /ma Stoneskin <me>')
     send_command('unbind !p')
     send_command('unbind ^,')
+    send_command('unbind @w')
     -- send_command('unbind @c')
+    send_command('unbind @e')
+    send_command('unbind @r')
     send_command('unbind ^numlock')
     send_command('unbind ^numpad/')
     send_command('unbind ^numpad*')
@@ -1238,6 +1247,11 @@ function init_gear_sets()
     sets.midcast.Bio = sets.TreasureHunter
     --sets.Reive = {neck="Ygnas's Resolve +1"}
 
+    sets.Almace = {main="Almace", sub="Sequence"}
+    sets.Naegling = {main="Naegling", sub="Thibron"}
+    sets.Maxentius = {main="Maxentius", sub="Thibron"}
+    sets.Nuking = {main="Maxentius", sub="Naegling"}
+
 end
 
 
@@ -1329,6 +1343,9 @@ function job_aftercast(spell, action, spellMap, eventArgs)
             send_command('@timers c "Entomb ['..spell.target.name..']" 60 down spells/00547.png')
         end
     end
+    if player.status ~= 'Engaged' and state.WeaponLock.value == false then
+        check_weaponset()
+    end
 end
 
 -------------------------------------------------------------------------------------------------------------------
@@ -1362,6 +1379,16 @@ function job_buff_change(buff,gain)
 
 end
 
+-- Handle notifications of general user state change.
+function job_state_change(stateField, newValue, oldValue)
+    if state.WeaponLock.value == true then
+        disable('main','sub')
+    else
+        enable('main','sub')
+    end
+
+    check_weaponset()
+end
 
 -------------------------------------------------------------------------------------------------------------------
 -- User code that supplements standard library decisions.
@@ -1400,6 +1427,14 @@ function job_get_spell_map(spell, default_spell_map)
             end
         end
     end
+end
+
+-- Modify the default melee set after it was constructed.
+function customize_melee_set(meleeSet)
+
+    check_weaponset()
+
+    return meleeSet
 end
 
 function get_custom_wsmode(spell, action, spellMap)
@@ -1605,6 +1640,13 @@ function check_gear()
         disable("ring2")
     else
         enable("ring2")
+    end
+end
+
+function check_weaponset()
+    equip(sets[state.WeaponSet.current])
+    if player.sub_job ~= 'NIN' and player.sub_job ~= 'DNC' then
+       equip(sets.DefaultShield)
     end
 end
 
