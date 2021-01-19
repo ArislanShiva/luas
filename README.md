@@ -21,6 +21,7 @@ I presently maintain [Jeanpaul's Status Icons mod](http://ffxidats.caarrie.com/i
 
 I also created a skin for sebyg666's addon [GearInfo](https://github.com/sebyg666/GearInfo) that increases legibility and decreases screen real estate required.
 
+---
 
 ##### Disclaimer:
 These files are provided as-is.  By using them, you understand that I am not responsible for any issues that they may cause your game or to your account standing with Square-Enix.
