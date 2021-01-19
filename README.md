@@ -28,4 +28,4 @@ UI_Updates.rar is a skin for sebyg666's addon [GearInfo](https://github.com/seby
 ##### Disclaimer:
 These files are provided as-is.  By using them, you understand that I am not responsible for any issues that they may cause your game or to your account standing with Square-Enix.
 
-For my safety and yours, **please do _NOT_ message me in game** asking for support!
+For my safety and yours, **please do _NOT_ message me in game asking for support!**
