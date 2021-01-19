@@ -41,6 +41,7 @@ function user_setup()
     state.WeaponSet = M{['description']='Weapon Set', 'Caladbolg', 'Apocalypse'}
 
     state.MagicBurst = M(false, 'Magic Burst')
+    state.Critical = M(false, 'Critical Aftermath TP')
     state.CP = M(false, "Capacity Points Mode")
 
     -- Additional local binds
@@ -48,6 +49,7 @@ function user_setup()
     include('Global-BRD-Binds.lua') -- OK to remove this line
 
     send_command('bind !` gs c toggle MagicBurst')
+    send_command('bind @a gs c toggle Critical')
     --send_command('bind @c gs c toggle CP')
     send_command('bind @e gs c cycleback WeaponSet')
     send_command('bind @r gs c cycle WeaponSet')
@@ -93,6 +95,7 @@ function user_unload()
     send_command('unbind !w')
     send_command('bind !e input /ma "Haste" <stpc>')
     send_command('unbind !p')
+    send_command('unbind @a')
     send_command('unbind @c')
     send_command('unbind @e')
     send_command('unbind @r')
@@ -312,7 +315,7 @@ function init_gear_sets()
 
     sets.idle = {
         ammo="Staunch Tathlum +1",
-        head="Hjarrandi Helm",
+        head="Volte Salade",
         body="Hjarrandi Breast.",
         hands="Sulev. Gauntlets +2",
         legs="Sulev. Cuisses +2",
@@ -327,14 +330,17 @@ function init_gear_sets()
         }
 
     sets.idle.DT = set_combine(sets.idle, {
-        ammo="Staunch Tathlum +1",
-        head="Hjarrandi Helm",
-        neck="Loricate Torque +1",
-        back="Moonlight Cape",
+        ammo="Staunch Tathlum +1", --3/3
+        head="Hjarrandi Helm", --10/10
+        body="Hjarrandi Breast.", --12/12
+        neck="Loricate Torque +1", --6/6
+        ear1="Odnowa Earring +1", --3/5
+        ring1="Defending Ring", --10/10
+        back="Moonlight Cape", --6/6
         })
 
     sets.idle.Town = set_combine(sets.idle, {
-        head="Ratri Sallet +1",
+        head="Volte Salade",
         body="Ignominy Cuirass +3",
         hands="Rat. Gadlings +1",
         legs="Fall. Flanchard +3",
@@ -342,6 +348,8 @@ function init_gear_sets()
         neck="Abyssal Beads +2",
         ear1="Odnowa Earring +1",
         ear2="Thrud Earring",
+        ring1={name="Chirich Ring +1", bag="wardrobe3"},
+        ring2={name="Chirich Ring +1", bag="wardrobe4"},
         back=gear.DRK_DA_Cape,
         })
 
@@ -389,22 +397,43 @@ function init_gear_sets()
     sets.engaged.STP = set_combine(sets.engaged, {
         hands="Flam. Manopolas +2",
         legs=gear.Ody_DA_legs,
-        ring1="Petrov Ring",
+        ring1={name="Chirich Ring +1", bag="wardrobe3"},
+        ring2={name="Chirich Ring +1", bag="wardrobe4"},
         })
 
     sets.engaged.Caladbolg = set_combine(sets.engaged, {})
     sets.engaged.Caladbolg.LowAcc = set_combine(sets.engaged.Apocalypse, {})
-    sets.engaged.Caladbolg.MidAcc = set_combine(sets.engaged.Apocalypse, {})
+    sets.engaged.Caladbolg.MidAcc = set_combine(sets.engaged.Apocalypse, {
+        ring1={name="Chirich Ring +1", bag="wardrobe3"},
+        ring2={name="Chirich Ring +1", bag="wardrobe4"},
+        })
+
     sets.engaged.Caladbolg.HighAcc = set_combine(sets.engaged.Apocalypse, {
         ammo="Seeth. Bomblet +1",
         })
+
+    sets.engaged.Caladbolg.Aftermath = {
+        ammo="Yetshila +1", --2/6
+        --head="Blistering Sallet +1", --10/0
+        body="Hjarrandi Breast.", --13/0
+        hands="Flam. Manopolas +2", --8/0,
+        --legs="Zoar Subligar +1", --5/0
+        --feet="Valorous Greaves", --0/4
+        neck="Abyssal Beads +2", --4/0
+        ring1="Hetairoi Ring", --1/0
+        --back=gear.DRK_Crit_Cape, --10/0
+        }
 
     sets.engaged.Apocalypse = set_combine(sets.engaged, {
         ring1="Petrov Ring",
         })
 
     sets.engaged.Apocalypse.LowAcc = set_combine(sets.engaged.Apocalypse, {})
-    sets.engaged.Apocalypse.MidAcc = set_combine(sets.engaged.Apocalypse, {})
+    sets.engaged.Apocalypse.MidAcc = set_combine(sets.engaged.Apocalypse, {
+        ring1={name="Chirich Ring +1", bag="wardrobe3"},
+        ring2={name="Chirich Ring +1", bag="wardrobe4"},
+        })
+
     sets.engaged.Apocalypse.HighAcc = set_combine(sets.engaged.Apocalypse, {
         ammo="Seeth. Bomblet +1",
         hands="Gazu Bracelet +1",
@@ -450,14 +479,14 @@ end
 -- Run after the default precast() is done.
 -- eventArgs is the same one used in job_precast, in case information needs to be persisted.
 function job_precast(spell, action, spellMap, eventArgs)
-    equip(sets[state.WeaponSet.current])
+
 end
 
 
 -- Run after the default midcast() is done.
 -- eventArgs is the same one used in job_midcast, in case information needs to be persisted.
 function job_aftercast(spell, action, spellMap, eventArgs)
-    equip(sets[state.WeaponSet.current])
+
 end
 
 -------------------------------------------------------------------------------------------------------------------
@@ -481,6 +510,8 @@ function job_state_change(field, new_value, old_value)
         send_command('bind ^numpad1 input /ws "Infernal Scythe" <t>')
         send_command('bind ^numpad0 input /ws "Entropy" <t>')
     end
+
+    check_weaponset()
 end
 
 -- Called when a player gains or loses a buff.
@@ -524,7 +555,6 @@ function job_handle_equipping_gear(playerStatus, eventArgs)
 end
 
 function job_update(cmdParams, eventArgs)
-    equip(sets[state.WeaponSet.current])
     handle_equipping_gear(player.status)
     get_combat_weapon()
 end
@@ -566,6 +596,11 @@ end
 
 -- Modify the default melee set after it was constructed.
 function customize_melee_set(meleeSet)
+    if buffactive['Aftermath: Lv.3'] and player.equipment.main == "Caladbolg"
+        and state.Critical.value then
+
+        meleeSet = set_combine(meleeSet, sets.engaged.Caladbolg.Aftermath)
+    end
 
     return meleeSet
 end
@@ -697,6 +732,10 @@ function check_gear()
     else
         enable("ring2")
     end
+end
+
+function check_weaponset()
+    equip(sets[state.WeaponSet.current])
 end
 
 windower.register_event('zone change',
