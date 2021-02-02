@@ -313,26 +313,23 @@ function init_gear_sets()
     -- (10% Snapshot from JP Gifts)
     sets.precast.RA = {
         ammo=gear.RAbullet,
-        head=gear.Taeon_RA_head, --10/0
+        head="Chasseur's Tricorne +1",, --0/14
         body="Oshosi Vest +1", --14/0
-        hands="Carmine Fin. Ga. +1", --8/11
+        hands="Lanun Gants +3", --13/0
         legs=gear.Adhemar_D_legs, --10/13
         feet="Meg. Jam. +2", --10/0
+        neck="Comm. Charm +2", --4/0
         back=gear.COR_SNP_Cape, --10/0
         waist="Yemaya Belt", --0/5
-        } --62/29
-
-    sets.precast.RA.Flurry = set_combine(sets.precast.RA, {body="Laksa. Frac +3",})
-    sets.precast.RA.Flurry2 = set_combine(sets.precast.RA, {head="Chasseur's Tricorne +1",body="Laksa. Frac +3",feet="Pursuer's Gaiters"})
+        } --61/32
 
     sets.precast.RA.Flurry1 = set_combine(sets.precast.RA, {
         body="Laksa. Frac +3", --0/20
-        }) --48/49
+        }) --47/52
 
     sets.precast.RA.Flurry2 = set_combine(sets.precast.RA.Flurry1, {
-        head="Chass. Tricorne +1", --0/14
+        hands="Carmine Fin. Ga. +1", --8/11
         feet="Pursuer's Gaiters", --0/10
-        neck="Comm. Charm +2", --4/0
         }) --32/73
 
 
