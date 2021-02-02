@@ -141,7 +141,7 @@ function user_setup()
     end
 
     send_command('bind !o input /ma "Regen IV" <stpc>')
-    send_command('bind !p input /ma "Ice Spikes" <me>')
+    send_command('bind !p input /ma "Shock Spikes" <me>')
 
     send_command('bind @w gs c toggle WeaponLock')
 
@@ -221,44 +221,35 @@ function init_gear_sets()
     ---------------------------------------- Precast Sets ------------------------------------------
     ------------------------------------------------------------------------------------------------
 
-    -- Enmity sets
     sets.Enmity = {
-        ammo="Aqreqaq Bomblet", --2
-        head="Halitus Helm", --8
-        body="Emet Harness +1", --10
-        hands="Kurys Gloves", --9
-        legs="Eri. Leg Guards +1", --7
-        feet="Ahosi Leggings",--7
-        neck="Moonlight Necklace", --15
-        ear1="Cryptic Earring", --4
-        ear2="Trux Earring", --5
-        ring1="Pernicious Ring", --5
-        ring2="Eihwaz Ring", --5
-        back=gear.RUN_HPD_Cape, --10
-        waist="Kasiri Belt", --3
-        }
-
-    sets.Enmity.HP = {
-        ammo="Aqreqaq Bomblet", --2
+        ammo={name="Aqreqaq Bomblet", priority=1}, --2
         head="Halitus Helm", --8
         body="Emet Harness +1", --10
         hands="Kurys Gloves", --9
         legs="Eri. Leg Guards +1", --11
         feet="Ahosi Leggings",--7
-        neck={name="Unmoving Collar +1", priority=1}, --10
+        neck={name="Unmoving Collar +1", priority=5}, --10
+        --neck="Moonlight Necklace", --15
         ear1={name="Tuisto Earring", priority=4},
-        ear2={name="Odnowa Earring +1", priority=3},
-        ring1={name="Moonlight Ring", priority=2},
+        --ear1="Cryptic Earring", --4
+        ear2="Trux Earring",
+        ring1={name="Pernicious Ring", priority=2}, --5
         ring2="Eihwaz Ring", --5
         back=gear.RUN_HPD_Cape, --10
         waist="Kasiri Belt", --3
         }
 
-    sets.precast.JA['Vallation'] = {body="Runeist's Coat +3", legs="Futhark Trousers +3", back=gear.RUN_HPD_Cape,}
+    sets.precast.JA['Vallation'] = set_combine(sets.Enmity, {
+        body="Runeist's Coat +3",
+        legs="Futhark Trousers +3",
+        back=gear.RUN_HPD_Cape,
+        })
+
     sets.precast.JA['Valiance'] = sets.precast.JA['Vallation']
-    sets.precast.JA['Pflug'] = {feet="Runeist's Boots +3"}
-    sets.precast.JA['Battuta'] = {head="Fu. Bandeau +3"}
-    sets.precast.JA['Liement'] = {body="Futhark Coat +3"}
+
+    sets.precast.JA['Pflug'] = set_combine(sets.Enmity, {feet="Runeist's Boots +3"})
+    sets.precast.JA['Battuta'] = set_combine(sets.Enmity, {head="Fu. Bandeau +3"})
+    sets.precast.JA['Liement'] = set_combine(sets.Enmity, {body="Futhark Coat +3"})
 
     sets.precast.JA['Lunge'] = {
         ammo="Ghastly Tathlum +1",
@@ -277,65 +268,60 @@ function init_gear_sets()
         }
 
     sets.precast.JA['Swipe'] = sets.precast.JA['Lunge']
-    sets.precast.JA['Gambit'] = {hands="Runeist's Mitons +3"}
-    sets.precast.JA['Rayke'] = {feet="Futhark Boots +3"}
-    sets.precast.JA['Elemental Sforzo'] = {body="Futhark Coat +3"}
-    sets.precast.JA['Swordplay'] = {hands="Futhark Mitons +3"}
+    sets.precast.JA['Gambit'] = set_combine(sets.Enmity, {hands="Runeist's Mitons +3"})
+    sets.precast.JA['Rayke'] = set_combine(sets.Enmity, {feet="Futhark Boots +3"})
+    sets.precast.JA['Elemental Sforzo'] = set_combine(sets.Enmity, {body="Futhark Coat +3"})
+    sets.precast.JA['Swordplay'] = set_combine(sets.Enmity, {hands="Futhark Mitons +3"})
 
     sets.precast.JA['Vivacious Pulse'] = {
-        head="Erilaz Galea +1",
+        ammo={name="Aqreqaq Bomblet", priority=1},
+        head={name="Runeist's Bandeau +3", priority=3},
+        body={name="Runeist's Coat +3", priority=5},
         legs="Rune. Trousers +3",
+        feet={name="Turms Leggings +1", priority=2},
         neck="Incanter's Torque",
-        ear1="Beatific Earring",
+        ear1={name="Tuisto Earring", priority=4},
         ear2="Saxnot Earring",
         ring1={name="Stikini Ring +1", bag="wardrobe3"},
         ring2={name="Stikini Ring +1", bag="wardrobe4"},
         --back="Altruistic Cape",
+        back=gear.RUN_HPD_Cape,
         waist="Bishop's Sash",
         }
 
+    sets.precast.JA['Vivacious Pulse'].Status = {head="Erilaz Galea +1",}
 
     -- Fast cast sets for spells
     sets.precast.FC = {
         ammo="Sapience Orb", --2
-        head="Rune. Bandeau +3", --14
+        head={name="Rune. Bandeau +3", priority=3},
         body=gear.Taeon_FC_body, --9
         hands="Leyline Gloves", --8
         legs="Aya. Cosciales +2", --6
         feet="Carmine Greaves +1", --8
         neck="Orunmila's Torque", --5
-        ear1="Tuisto Earring",
-        ear2="Odnowa Earring +1",
-        ring1="Moonlight Ring",
+        ear1={name="Tuisto Earring", priority=5},
+        ear2={name="Odnowa Earring +1", priority=4},
+        ring1={name="Moonlight Ring", priority=2},
         ring2="Weather. Ring +1", --6(4)
         back=gear.RUN_FC_Cape, --10
-        waist="Oneiros Belt",
+        waist={name="Oneiros Belt", priority=1}
         }
 
     sets.precast.FC.HP = set_combine(sets.precast.FC, {
-        ammo="Aqreqaq Bomblet",
-        head={name="Rune. Bandeau +3", priority=6},
-        body={name="Runeist's Coat +3", priority=2},
-        neck={name="Unmoving Collar +1", priority=1}, --10
-        ear1={name="Tuisto Earring", priority=5},
-        ear2={name="Odnowa Earring +1", priority=4},
-        ring1={name="Moonlight Ring", priority=3},
-        waist="Oneiros Belt",
+        ammo={name="Aqreqaq Bomblet", priority=1},
+        head={name="Rune. Bandeau +3", priority=4},
+        body={name="Runeist's Coat +3", priority=8},
+        neck={name="Unmoving Collar +1", priority=3}, --10
+        ear1={name="Tuisto Earring", priority=7},
+        ear2={name="Odnowa Earring +1", priority=6},
+        ring1={name="Moonlight Ring", priority=5},
+        waist={name="Oneiros Belt", priority=2}
         })
 
     sets.precast.FC['Enhancing Magic'] = set_combine(sets.precast.FC, {
         legs="Futhark Trousers +3",
         })
-
-    sets.precast.FC.Cure = set_combine(sets.precast.FC, {ammo="Impatiens", ear2="Mendi. Earring"})
-
-    sets.precast.FC.Utsusemi = set_combine(sets.precast.FC, {
-        ammo="Impatiens",
-        body="Passion Jacket",
-        ring1="Lebeche Ring",
-        waist="Audumbla Sash",
-        })
-
 
     ------------------------------------------------------------------------------------------------
     ------------------------------------- Weapon Skill Sets ----------------------------------------
@@ -486,32 +472,35 @@ function init_gear_sets()
 
     sets.midcast.SpellInterrupt = {
         ammo="Staunch Tathlum +1", --11
+        head={name="Runeist's Bandeau +3", priority=2},
         body=gear.Taeon_Phalanx_body, --10
         hands=gear.Taeon_Phalanx_hands, --10
         legs=gear.Taeon_Phalanx_legs, --10
         feet=gear.Taeon_Phalanx_feet, --10
         neck="Moonlight Necklace", --15
-        ear1="Halasz Earring", --5
-        ring1="Evanescence Ring", --5
+        ear1={name="Tuisto Earring", priority=3},
+        ear2="Halasz Earring", --5
+        ring1={name="Moonlight Ring", priority=1},
+        ring2="Evanescence Ring", --5
         back=gear.RUN_FC_Cape, --10
         waist="Audumbla Sash", --10
         } -- +10% from merit points
 
     sets.midcast.Cure = {
-        sub="Mensch Strap +1",
+        sub="Refined Grip +1",
         ammo="Staunch Tathlum +1",
-        head="Fu. Bandeau +3",
+        head={name="Runeist's Bandeau +3", priority=2},
         body="Vrikodara Jupon", -- 13
-        hands="Buremte Gloves", --(13)
+        hands={name="Regal Gauntlets", priority=4},
         legs="Aya. Cosciales +2",
         feet="Skaoi Boots", --7
-        neck="Phalaina Locket", -- 4(4)
-        ear1="Roundel Earring", -- 5
+        neck="Sacro Gorget", -- 10
+        ear1={name="Tuisto Earring", priority=3},
         ear2="Mendi. Earring", -- 5
         ring1="Lebeche Ring", -- 3
-        ring2="Defending Ring",
+        ring2="Menelaus's Ring", --5
         back="Solemnity Cape", -- 7
-        waist="Gishdubar Sash", --(10)
+        waist={name="Oneiros Belt", priority=1}
         }
 
     sets.midcast['Enhancing Magic'] = {
@@ -520,6 +509,7 @@ function init_gear_sets()
         body="Manasa Chasuble",
         hands="Runeist's Mitons +3",
         legs="Carmine Cuisses +1",
+        feet={name="Turms Leggings +1", priority=2},
         neck="Incanter's Torque",
         ear1="Mimir Earring",
         ear2="Andoaa Earring",
@@ -555,14 +545,14 @@ function init_gear_sets()
     sets.midcast.Protect = set_combine(sets.midcast['Enhancing Magic'], {ring2="Sheltered Ring"})
     sets.midcast.Shell = sets.midcast.Protect
 
-    sets.midcast['Divine Magic'] = {
+    sets.midcast['Divine Magic'] = set_combine(sets.Enmity, {
         ammo="Yamarang",
         legs="Rune. Trousers +3",
         neck="Incanter's Torque",
         ring1={name="Stikini Ring +1", bag="wardrobe3"},
         ring2={name="Stikini Ring +1", bag="wardrobe4"},
         waist="Bishop's Sash",
-        }
+        })
 
     sets.midcast['Enfeebling Magic'] = {
         main="Lycurgos",
@@ -590,7 +580,7 @@ function init_gear_sets()
     sets.midcast['Blue Magic'] = {}
     sets.midcast['Blue Magic'].Enmity = sets.Enmity
     sets.midcast['Blue Magic'].Cure = sets.midcast.Cure
-    sets.midcast['Blue Magic'].Buff = sets.midcast['Enhancing Magic']
+    sets.midcast['Blue Magic'].Buff = {}
 
 
     ------------------------------------------------------------------------------------------------
@@ -851,9 +841,13 @@ function job_precast(spell, action, spellMap, eventArgs)
     equip(sets[state.WeaponSet.current])
 
     if buffactive['terror'] or buffactive['petrification'] or buffactive['stun'] or buffactive['sleep'] then
-        add_to_chat(167, 'Stopped due to status.')
+        add_to_chat(167, 'Action stopped due to status.')
         eventArgs.cancel = true
         return
+    end
+    if spell.english == 'Ignis' or spell.english == "Gelus" or spell.english == "Flabra" or spell.english == "Tellus"
+    or spell.english == "Sulpor" or spell.english == "Unda" or spell.english == "Lux" or spell.english == "Tenebrae" then
+        equip(sets.Enmity)
     end
     if state.DefenseMode.value == 'Physical' and state.PhysicalDefenseMode.current == 'HP' then
         currentSpell = spell.english
@@ -861,13 +855,8 @@ function job_precast(spell, action, spellMap, eventArgs)
         if spell.action_type == 'Magic' then
             equip(sets.precast.FC.HP)
         elseif spell.action_type == 'Ability' then
-            equip(sets.Enmity.HP)
-            equip(sets.precast.JA[currentSpell])
-        end
-    else
-        if spell.action_type == 'Ability' then
             equip(sets.Enmity)
-            equip(sets.precast.JA[spell])
+            equip(sets.precast.JA[currentSpell])
         end
     end
     if spell.english == 'Lunge' then
@@ -902,13 +891,22 @@ function job_precast(spell, action, spellMap, eventArgs)
     end
 end
 
+function job_post_precast(spell, action, spellMap, eventArgs)
+    if spell.english == 'Vivacious Pulse' then
+        if buffactive['poison'] or buffactive['paralysis'] or buffactive['blindness'] or buffactive['silence']
+        or buffactive['curse'] or buffactive['bane'] or buffactive['doom'] or buffactive['disease'] or buffactive['plague'] then
+             equip(sets.precast.JA['Vivacious Pulse'].Status)
+        end
+    end
+end
+
 function job_midcast(spell, action, spellMap, eventArgs)
     if state.DefenseMode.value == 'Physical' and state.PhysicalDefenseMode.current == 'HP' and spell.english ~= "Phalanx" then
         eventArgs.handled = true
         if spell.action_type == 'Magic' then
             if spell.english == 'Flash' or spell.english == 'Foil' or spell.english == 'Stun'
                 or blue_magic_maps.Enmity:contains(spell.english) then
-                equip(sets.Enmity.HP)
+                equip(sets.Enmity)
             elseif spell.skill == 'Enhancing Magic' then
                 equip(sets.midcast.EnhancingDuration)
             end
@@ -924,16 +922,14 @@ function job_post_midcast(spell, action, spellMap, eventArgs)
             equip(sets.Obi)
         end
     end
-    if state.DefenseMode.value == 'None' then
-        if spell.skill == 'Enhancing Magic' and classes.NoSkillSpells:contains(spell.english) then
-            equip(sets.midcast.EnhancingDuration)
-            if spellMap == 'Refresh' then
-                equip(sets.midcast.Refresh)
-            end
+    if spell.skill == 'Enhancing Magic' and classes.NoSkillSpells:contains(spell.english) then
+        equip(sets.midcast.EnhancingDuration)
+        if spellMap == 'Refresh' then
+            equip(sets.midcast.Refresh)
         end
-        if spell.english == 'Phalanx' and buffactive['Embolden'] then
-            equip(sets.midcast.EnhancingDuration)
-        end
+    end
+    if spell.english == 'Phalanx' and buffactive['Embolden'] then
+        equip(sets.midcast.EnhancingDuration)
     end
 end
 
