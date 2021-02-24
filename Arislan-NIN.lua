@@ -92,8 +92,9 @@ function user_setup()
     state.IdleMode:options('Normal', 'DT')
     state.PhysicalDefenseMode:options('PDT', 'Evasion')
 
+    state.WeaponSet = M{['description']='Weapon Set', 'Kikoku', 'Heishi', 'Hitaki', 'Tanking'}
+    state.WeaponLock = M(false, 'Weapon Lock')
     state.MagicBurst = M(false, 'Magic Burst')
-    state.AttackMode = M{['description']='Attack', 'Capped', 'Uncapped'}
     -- state.CP = M(false, "Capacity Points Mode")
 
     options.ninja_tool_warning_limit = 10
@@ -112,8 +113,10 @@ function user_setup()
     send_command('bind @. input /ma "Utsusemi: Ni" <me>')
     send_command('bind @/ input /ma "Utsusemi: San" <me>')
 
-    send_command('bind @a gs c cycle AttackMode')
+    send_command('bind @w gs c toggle WeaponLock')
     -- send_command('bind @c gs c toggle CP')
+    send_command('bind @e gs c cycleback WeaponSet')
+    send_command('bind @r gs c cycle WeaponSet')
 
     send_command('bind ^numlock input /ja "Innin" <me>')
     send_command('bind !numlock input /ja "Yonin" <me>')
@@ -125,13 +128,12 @@ function user_setup()
         send_command('bind ^numpad- input /ja "Aggressor" <me>')
     end
 
-    send_command('bind ^numpad7 input /ws "Blade: Kamu" <t>')
+    send_command('bind ^numpad7 input /ws "Blade: Metsu" <t>')
     send_command('bind ^numpad8 input /ws "Blade: Shun" <t>')
     send_command('bind ^numpad4 input /ws "Blade: Ten" <t>')
     send_command('bind ^numpad6 input /ws "Blade: Hi" <t>')
     send_command('bind ^numpad1 input /ws "Blade: Yu" <t>')
     send_command('bind ^numpad2 input /ws "Blade: Chi" <t>')
-    send_command('bind numpad5 input /ws "Blade: To" <t>')
 
     -- Whether a warning has been given for low ninja tools
     state.warned = M(false)
@@ -154,8 +156,10 @@ function user_unload()
     send_command('unbind ^-')
     send_command('unbind ^=')
     send_command('unbind @/')
-    send_command('unbind @a')
+    send_command('unbind @w')
     -- send_command('unbind @c')
+    send_command('unbind @e')
+    send_command('unbind @r')
     send_command('unbind @t')
     send_command('unbind ^numlock')
     send_command('unbind !numlock')
@@ -171,7 +175,6 @@ function user_unload()
     send_command('unbind ^numpad6')
     send_command('unbind ^numpad1')
     send_command('unbind ^numpad2')
-    send_command('unbind numpad5')
 
     send_command('unbind #`')
     send_command('unbind #1')
@@ -243,7 +246,6 @@ function init_gear_sets()
 
     sets.precast.FC.Utsusemi = set_combine(sets.precast.FC, {
         body="Mochi. Chainmail +3", --14
-        neck="Magoraga Beads", --10
         })
 
     sets.precast.RA = {}
@@ -276,18 +278,30 @@ function init_gear_sets()
 
     sets.precast.WS['Blade: Hi'] = set_combine(sets.precast.WS, {
         ammo="Yetshila +1",
-        head="Blistering Sallet +1",
+        head=gear.Adhemar_B_head,
         body="Ken. Samue +1",
         hands="Mummu Wrists +2",
-        legs="Zoar Subligar +1",
         feet="Mummu Gamash. +2",
         neck="Ninja Nodowa +2",
-        ear2="Odr Earring",
-        ring1="Mummu Ring",
+        ear1="Odr Earring",
+        ear2="Lugra Earring +1",
+        ring2="Gere Ring",
         back=gear.NIN_WS2_Cape,
         })
 
     sets.precast.WS['Blade: Hi'].Acc = set_combine(sets.precast.WS['Blade: Hi'], {})
+
+    sets.precast.WS['Blade: Metsu'] = set_combine(sets.precast.WS, {
+        ammo="Aurgelmir Orb +1",
+        neck="Ninja Nodowa +2",
+        ear1="Odr Earring",
+        ear2="Lugra Earring +1",
+        waist="Sailfi Belt +1",
+        back=gear.NIN_WS3_Cape,
+        })
+
+    sets.precast.WS['Blade: Metsu'].Acc = set_combine(sets.precast.WS['Blade: Metsu'], {})
+
 
     sets.precast.WS['Blade: Ten'] = set_combine(sets.precast.WS, {
         neck="Ninja Nodowa +2",
@@ -357,7 +371,8 @@ function init_gear_sets()
         legs=gear.Taeon_Phalanx_legs, --10
         feet=gear.Taeon_Phalanx_feet, --10
         neck="Moonlight Necklace", --15
-        ear2="Halasz Earring", --5
+        ear1="Halasz Earring", --5
+        ear2="Magnetic Earring", --8
         ring1="Evanescence Ring", --5
         back=gear.NIN_FC_Cape, --10
         waist="Audumbla Sash", --10
@@ -766,6 +781,11 @@ function init_gear_sets()
     sets.TreasureHunter = {head="Volte Cap", hands=gear.Herc_TH_hands, waist="Chaac Belt"}
     --sets.Reive = {neck="Ygnas's Resolve +1"}
 
+    sets.Kikoku = {main="Kikoku", sub="Ternion Dagger +1"}
+    sets.Heishi = {main="Heishi Shorinken", sub="Ternion Dagger +1"}
+    sets.Hitaki = {main="Heishi Shorinken", sub="Hitaki"}
+    sets.Tanking = {main="Fudo Masamune", sub="Ternion Dagger +1"}
+
 end
 
 -------------------------------------------------------------------------------------------------------------------
@@ -824,6 +844,9 @@ function job_aftercast(spell, action, spellMap, eventArgs)
     if not spell.interrupted and spell.english == "Migawari: Ichi" then
         state.Buff.Migawari = true
     end
+    if player.status ~= 'Engaged' and state.WeaponLock.value == false then
+        check_weaponset()
+    end
 end
 
 -------------------------------------------------------------------------------------------------------------------
@@ -858,6 +881,17 @@ function job_buff_change(buff, gain)
         end
     end
 
+end
+
+-- Handle notifications of general user state change.
+function job_state_change(stateField, newValue, oldValue)
+    if state.WeaponLock.value == true then
+        disable('main','sub')
+    else
+        enable('main','sub')
+    end
+
+    check_weaponset()
 end
 
 -------------------------------------------------------------------------------------------------------------------
@@ -930,6 +964,8 @@ function customize_melee_set(meleeSet)
     if state.Buff.Sange then
         meleeSet = set_combine(meleeSet, sets.buff.Sange)
     end
+
+    check_weaponset()
 
     return meleeSet
 end
@@ -1117,6 +1153,13 @@ function check_gear()
         disable("ring2")
     else
         enable("ring2")
+    end
+end
+
+function check_weaponset()
+    equip(sets[state.WeaponSet.current])
+    if player.sub_job ~= 'NIN' and player.sub_job ~= 'DNC' then
+       equip(sets.DefaultShield)
     end
 end
 
