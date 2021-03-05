@@ -186,7 +186,7 @@ function user_setup()
     send_command('bind ^numpad1 input /ws "Aeolian Edge" <t>')
     send_command('bind ^numpad2 input /ws "Evisceration" <t>')
 
-    send_command('bind numpad0 input /ra <t>')
+    send_command('bind %numpad0 input /ra <t>')
 
     select_default_macro_book()
     set_lockstyle()
@@ -313,7 +313,7 @@ function init_gear_sets()
     -- (10% Snapshot from JP Gifts)
     sets.precast.RA = {
         ammo=gear.RAbullet,
-        head="Chasseur's Tricorne +1",, --0/14
+        head="Chasseur's Tricorne +1", --0/14
         body="Oshosi Vest +1", --14/0
         hands="Lanun Gants +3", --13/0
         legs=gear.Adhemar_D_legs, --10/13
@@ -451,7 +451,6 @@ function init_gear_sets()
     sets.precast.WS['Swift Blade'].Acc = set_combine(sets.precast.WS['Swift Blade'], {
         head="Meghanada Visor +2",
         hands=gear.Adhemar_A_hands,
-        feet=gear.Herc_STP_feet,
         ear2="Telos Earring",
         })
 
@@ -464,7 +463,6 @@ function init_gear_sets()
 
     sets.precast.WS['Requiescat'].Acc = set_combine(sets.precast.WS['Requiescat'], {
         head="Meghanada Visor +2",
-        feet=gear.Herc_STP_feet,
         ear1="Cessance Earring",
         })
 
@@ -480,9 +478,18 @@ function init_gear_sets()
     sets.midcast.FastRecast = sets.precast.FC
 
     sets.midcast.SpellInterrupt = {
+        body=gear.Taeon_Phalanx_body, --10
+        hands="Rawhide Gloves", --15
         legs="Carmine Cuisses +1", --20
-        ring1="Evanescence Ring", --5
+        feet=gear.Taeon_Phalanx_feet, --10
+        neck="Loricate Torque +1", --5
+        ear1="Halasz Earring", --5
+        ear2="Magnetic Earring", --8
+        ring2="Evanescence Ring", --5
+        waist="Rumination Sash", --10
         }
+
+    sets.midcast.Utsusemi = sets.midcast.SpellInterrupt
 
     sets.midcast.Cure = {
         neck="Incanter's Torque",
@@ -587,7 +594,6 @@ function init_gear_sets()
         })
 
     sets.midcast.RA.STP = set_combine(sets.midcast.RA, {
-        feet=gear.Adhemar_D_feet,
         ear1="Dedition Earring",
         ring1={name="Chirich Ring +1", bag="wardrobe3"},
         ring2={name="Chirich Ring +1", bag="wardrobe4"},
@@ -604,6 +610,11 @@ function init_gear_sets()
     sets.TripleShotCritical = {
         head="Meghanada Visor +2",
         waist="K. Kachina Belt +1",
+        }
+
+    sets.TrueShot = {
+        body="Nisroch Jerkin",
+        legs="Osh. Trousers +1",
         }
 
 
@@ -729,7 +740,6 @@ function init_gear_sets()
     sets.engaged.HighAcc = set_combine(sets.engaged.MidAcc, {
         head="Carmine Mask +1",
         hands="Gazu Bracelet +1",
-        feet=gear.Herc_STP_feet,
         ear1="Mache Earring +1",
         ear2="Odr Earring",
         ring2={name="Chirich Ring +1", bag="wardrobe4"},
@@ -781,7 +791,6 @@ function init_gear_sets()
     sets.engaged.DW.HighAcc = set_combine(sets.engaged.DW.MidAcc, {
         head="Carmine Mask +1",
         hands="Gazu Bracelet +1",
-        feet=gear.Herc_STP_feet,
         ear1="Mache Earring +1",
         ear2="Odr Earring",
         ring2={name="Chirich Ring +1", bag="wardrobe4"},
@@ -828,7 +837,6 @@ function init_gear_sets()
     sets.engaged.DW.HighAcc.LowHaste = set_combine(sets.engaged.DW.MidAcc.LowHaste, {
         head="Carmine Mask +1",
         hands="Gazu Bracelet +1",
-        feet=gear.Herc_STP_feet,
         ear1="Mache Earring +1",
         ear2="Odr Earring",
         ring2={name="Chirich Ring +1", bag="wardrobe4"},
@@ -877,7 +885,6 @@ function init_gear_sets()
         head="Carmine Mask +1",
         hands="Gazu Bracelet +1",
         legs="Carmine Cuisses +1",
-        feet=gear.Herc_STP_feet,
         ear1="Mache Earring +1",
         ear2="Odr Earring",
         ring2={name="Chirich Ring +1", bag="wardrobe4"},
@@ -926,7 +933,6 @@ function init_gear_sets()
         head="Carmine Mask +1",
         hands="Gazu Bracelet +1",
         legs="Carmine Cuisses +1",
-        feet=gear.Herc_STP_feet,
         ear1="Mache Earring +1",
         ear2="Odr Earring",
         ring2={name="Chirich Ring +1", bag="wardrobe4"},
@@ -975,7 +981,6 @@ function init_gear_sets()
         head="Carmine Mask +1",
         hands="Gazu Bracelet +1",
         legs="Carmine Cuisses +1",
-        feet=gear.Herc_STP_feet,
         ear1="Mache Earring +1",
         ear2="Odr Earring",
         ring2={name="Chirich Ring +1", bag="wardrobe4"},
@@ -1077,7 +1082,7 @@ function init_gear_sets()
     sets.Armageddon_M.Acc = {main={name="Rostam", bag="wardrobe3"}, sub={name="Rostam", bag="wardrobe4"}, ranged="Armageddon"}
     sets.Armageddon_R = {main="Lanun Knife", sub="Kustawi +1", ranged="Armageddon"}
     sets.Armageddon_R.Acc = sets.Armageddon_R
-    sets.Fomalhaut_M = {main="Naegling", sub="Blurred Knife +1", ranged="Fomalhaut"}
+    sets.Fomalhaut_M = {main={name="Rostam", bag="wardrobe3"}, sub="Blurred Knife +1", ranged="Fomalhaut"}
     sets.Fomalhaut_M.Acc = {main={name="Rostam", bag="wardrobe3"}, sub="Kustawi +1", ranged="Fomalhaut"}
     sets.Fomalhaut_R = {main="Lanun Knife", sub="Kustawi +1", ranged="Fomalhaut"}
     sets.Fomalhaut_R.Acc = sets.Fomalhaut_R
@@ -1197,9 +1202,15 @@ function job_post_midcast(spell, action, spellMap, eventArgs)
             equip(sets.TripleShot)
             if buffactive['Aftermath: Lv.3'] and player.equipment.ranged == "Armageddon" then
                 equip(sets.TripleShotCritical)
+                if (spell.target.distance < (7 + spell.target.model_size)) and (spell.target.distance > (5 + spell.target.model_size)) then
+                    equip(sets.TrueShot)
+                end
             end
         elseif buffactive['Aftermath: Lv.3'] and player.equipment.ranged == "Armageddon" then
             equip(sets.midcast.RA.Critical)
+            if (spell.target.distance < (7 + spell.target.model_size)) and (spell.target.distance > (5 + spell.target.model_size)) then
+                equip(sets.TrueShot)
+            end
         end
     end
 end
@@ -1241,7 +1252,7 @@ function job_buff_change(buff,gain)
     if buff == "doom" then
         if gain then
             equip(sets.buff.Doom)
-            send_command('@input /p Doomed.')
+            --send_command('@input /p Doomed.')
             disable('ring1','ring2','waist')
         else
             enable('ring1','ring2','waist')
