@@ -175,7 +175,7 @@ function init_gear_sets()
         body=gear.Merl_MB_body, --6
         hands=gear.Merl_FC_hands, --7
         legs="Geomancy Pants +3", --15
-        feet="Regal Pumps +1", --7
+        feet="Volte Gaiters", --6
         neck="Baetyl Pendant", --4
         ear1="Malignance Earring", --4
         ear2="Etiolation Earring", --1
@@ -360,6 +360,7 @@ function init_gear_sets()
         main="Vadose Rod",
         sub="Ammurapi Shield",
         head="Amalric Coif +1",
+        ear2="Magnetic Earring",
         })
 
     sets.midcast.Protect = set_combine(sets.midcast.EnhancingDuration, {ring2="Sheltered Ring"})
@@ -480,10 +481,10 @@ function init_gear_sets()
     sets.idle = {
         main="Bolelabunga",
         sub="Genmei Shield",
-        head="Befouled Crown",
+        head="Volte Beret",
         body="Geomancy Tunic +3",
         hands="Bagua Mitaines +3",
-        legs="Assid. Pants +1",
+        legs="Volte Brais",
         feet="Volte Gaiters",
         neck="Bathy Choker +1",
         ear1="Lugalbanda Earring",
@@ -500,11 +501,8 @@ function init_gear_sets()
 
     sets.idle.DT = set_combine(sets.idle, {
         sub="Genmei Shield", --10/0
-        head="Ea Hat +1",
         body="Mallquis Saio +2", --8/8
         hands="Geo. Mitaines +3", --3/0
-        legs="Ea Slops +1",
-        feet="Ea Pigaches +1",
         neck="Loricate Torque +1", --6/6
         ear1="Genmei Earring", --2/0
         ear2="Odnowa Earring +1", --3/3
