@@ -445,12 +445,18 @@ function init_gear_sets()
     sets.midcast.FastRecast = sets.precast.FC
 
     sets.midcast.SpellInterrupt = {
-        sub="Sacro Bulwark", --7
-        ammo="Impatiens", --10
+        ammo="Staunch Tathlum +1", --11
+        --body="Ros. Jaseran +1", --25
+        hands=gear.Chironic_WSD_hands, --20
         legs="Carmine Cuisses +1", --20
-        ring1="Evanescence Ring", --5
+        neck="Loricate Torque +1", --5
+        ear1="Halasz Earring", --5
+        ear2="Magnetic Earring", --8
+        ring2="Evanescence Ring", --5
         waist="Rumination Sash", --10
         }
+
+    sets.midcast.Utsusemi = sets.midcast.SpellInterrupt
 
     sets.midcast.Cure = {
         main="Daybreak", --30

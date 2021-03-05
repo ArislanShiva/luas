@@ -117,7 +117,7 @@ function user_setup()
 
     -- Additional local binds
     include('Global-Binds.lua') -- OK to remove this line
-    include('Global-WHM-Binds.lua') -- OK to remove this line
+    include('Global-GEO-Binds.lua') -- OK to remove this line
 
     -- Adjust this if using the Terpander (new +song instrument)
     info.ExtraSongInstrument = 'Daurdabla'
@@ -195,7 +195,7 @@ function init_gear_sets()
     -- Fast cast sets for spells
     sets.precast.FC = {
         main="Kali", --7
-        head="Nahtirah Hat", --10
+        head="Volte Beret", --6
         body="Inyanga Jubbah +2", --14
         hands="Gende. Gages +1", --7
         legs="Volte Brais", --8
@@ -325,6 +325,20 @@ function init_gear_sets()
     -- General set for recast times.
     sets.midcast.FastRecast = sets.precast.FC
 
+    sets.midcast.SpellInterrupt = {
+        ammo="Staunch Tathlum +1", --11
+        --body="Ros. Jaseran +1", --25
+        hands=gear.Chironic_WSD_hands, --20
+        --legs="Querkening Brais" --15
+        neck="Loricate Torque +1", --5
+        ear1="Halasz Earring", --5
+        ear2="Magnetic Earring", --8
+        ring2="Evanescence Ring", --5
+        waist="Rumination Sash", --10
+        }
+
+    sets.midcast.Utsusemi = sets.midcast.SpellInterrupt
+
     -- Gear to enhance certain classes of songs.
     sets.midcast.Ballad = {legs="Fili Rhingrave +1"}
     sets.midcast.Carol = {hands="Mousai Gages +1"}
@@ -332,9 +346,9 @@ function init_gear_sets()
     sets.midcast.HonorMarch = {range="Marsyas", hands="Fili Manchettes +1"}
     sets.midcast.Lullaby = {body="Fili Hongreline +1", hands="Brioso Cuffs +3"}
     sets.midcast.Madrigal = {head="Fili Calot +1"}
-    --sets.midcast.Mambo = {feet="Mousai Crackows"}
+    sets.midcast.Mambo = {feet="Mou. Crackows +1"}
     sets.midcast.March = {hands="Fili Manchettes +1"}
-    sets.midcast.Minne = {legs="Mousai Seraweels"}
+    sets.midcast.Minne = {legs="Mou. Seraweels +1"}
     sets.midcast.Minuet = {body="Fili Hongreline +1"}
     sets.midcast.Paeon = {head="Brioso Roundlet +3"}
     sets.midcast.Threnody = {body="Mou. Manteel +1"}
@@ -491,7 +505,7 @@ function init_gear_sets()
 
     sets.idle = {
         range="Gjallarhorn",
-        head="Inyanga Tiara +2",
+        head="Volte Beret",
         body="Mou. Manteel +1",
         hands="Raetic Bangles +1",
         legs="Volte Brais",
@@ -539,8 +553,8 @@ function init_gear_sets()
         range="Gjallarhorn",
         head="Mousai Turban +1",
         body="Ashera Harness",
-        legs="Brioso Cannions +3",
-        feet="Brioso Slippers +3",
+        legs="Mou. Seraweels +1",
+        feet="Mou. Crackows +1",
         neck="Bard's Charm +2",
         ear1="Enchntr. Earring +1",
         ear2="Regal Earring",

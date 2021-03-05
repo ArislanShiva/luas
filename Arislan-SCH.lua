@@ -417,6 +417,7 @@ function init_gear_sets()
         head="Amalric Coif +1",
         hands="Regal Cuffs",
         ear1="Halasz Earring",
+        ear2="Magnetic Earring",
         ring1="Freke Ring",
         waist="Emphatikos Rope",
         })
@@ -588,7 +589,7 @@ function init_gear_sets()
         main="Daybreak",
         sub="Genmei Shield",
         ammo="Homiliary",
-        head="Befouled Crown",
+        head="Volte Beret",
         body="Acad. Gown +3",
         hands="Raetic Bangles +1",
         legs="Volte Brais",
@@ -606,7 +607,7 @@ function init_gear_sets()
         main="Daybreak",
         sub="Genmei Shield", --10/0
         ammo="Staunch Tathlum +1", --3/3
-        head="Volte Cap",
+        head="Volte Beret",
         body="Mallquis Saio +2", --8/8
         hands="Gende. Gages +1", --4/4
         feet="Volte Gaiters",

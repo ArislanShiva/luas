@@ -424,7 +424,6 @@ function init_gear_sets()
         head="Dampening Tam",
         body=gear.Adhemar_B_body,
         hands=gear.Adhemar_A_hands,
-        feet=gear.Herc_STP_feet,
         ear2="Mache Earring +1",
         })
 
@@ -440,7 +439,6 @@ function init_gear_sets()
 
     sets.precast.WS['Savage Blade'].Acc = set_combine(sets.precast.WS['Savage Blade'], {
         ammo="Voluspa Tathlum",
-        feet=gear.Herc_STP_feet,
         ear2="Telos Earring",
         waist="Grunfeld Rope",
         })
@@ -463,7 +461,6 @@ function init_gear_sets()
     sets.precast.WS['Requiescat'].Acc = set_combine(sets.precast.WS['Requiescat'], {
         ammo="Voluspa Tathlum",
         head="Dampening Tam",
-        feet=gear.Herc_STP_feet,
         ear1="Cessance Earring",
         ear2="Telos Earring",
         })
@@ -472,7 +469,6 @@ function init_gear_sets()
 
     sets.precast.WS['Expiacion'].Acc = set_combine(sets.precast.WS['Expiacion'], {
         body=gear.Adhemar_B_body,
-        feet=gear.Herc_STP_feet,
         ear2="Telos Earring",
         })
 
@@ -503,7 +499,6 @@ function init_gear_sets()
         })
 
     sets.precast.WS['Black Halo'].Acc = set_combine(sets.precast.WS['Black Halo'], {
-        feet=gear.Herc_STP_feet,
         ear2="Telos Earring",
         })
 
@@ -522,10 +517,19 @@ function init_gear_sets()
     sets.midcast.FastRecast = sets.precast.FC
 
     sets.midcast.SpellInterrupt = {
-        ammo="Impatiens", --10
-        ring1="Evanescence Ring", --5
+        ammo="Staunch Tathlum +1", --11
+        body=gear.Taeon_Phalanx_body, --10
+        hands=gear.Taeon_Phalanx_hands, --10
+        legs="Carmine Cuisses +1", --20
+        feet=gear.Taeon_Phalanx_feet, --10
+        neck="Loricate Torque +1", --5
+        ear1="Halasz Earring", --5
+        ear2="Magnetic Earring", --8
+        ring2="Evanescence Ring", --5
         waist="Rumination Sash", --10
         }
+
+    sets.midcast.Utsusemi = sets.midcast.SpellInterrupt
 
     sets.midcast['Blue Magic'] = {
         ammo="Mavi Tathlum",
@@ -560,7 +564,6 @@ function init_gear_sets()
         head="Carmine Mask +1",
         hands="Gazu Bracelet +1",
         legs="Carmine Cuisses +1",
-        feet=gear.Herc_STP_feet,
         neck="Mirage Stole +2",
         ear2="Telos Earring",
         back="Cornflower Cape",
@@ -710,7 +713,6 @@ function init_gear_sets()
         }
 
     sets.midcast['Blue Magic'].HealingSelf = set_combine(sets.midcast['Blue Magic'].Healing, {
-        hands="Buremte Gloves", -- (13)
         legs="Gyve Trousers", -- 10
         neck="Phalaina Locket", -- 4(4)
         ring2="Asklepian Ring", -- (3)
@@ -905,7 +907,6 @@ function init_gear_sets()
         head="Carmine Mask +1",
         hands="Gazu Bracelet +1",
         legs="Carmine Cuisses +1",
-        feet=gear.Herc_STP_feet,
         neck="Mirage Stole +2",
         ear2="Mache Earring +1",
         ring1={name="Chirich Ring +1", bag="wardrobe3"},
@@ -960,7 +961,6 @@ function init_gear_sets()
     sets.engaged.DW.HighAcc = set_combine(sets.engaged.DW.MidAcc, {
         head="Carmine Mask +1",
         hands="Gazu Bracelet +1",
-        feet=gear.Herc_STP_feet,
         ear1="Cessance Earring",
         ear2="Mache Earring +1",
         ring1={name="Chirich Ring +1", bag="wardrobe3"},
@@ -1006,7 +1006,6 @@ function init_gear_sets()
     sets.engaged.DW.HighAcc.LowHaste = set_combine(sets.engaged.DW.MidAcc.LowHaste, {
         head="Carmine Mask +1",
         hands="Gazu Bracelet +1",
-        feet=gear.Herc_STP_feet,
         ear1="Cessance Earring",
         ear2="Mache Earring +1",
         ring1={name="Chirich Ring +1", bag="wardrobe3"},
@@ -1054,7 +1053,6 @@ function init_gear_sets()
         head="Carmine Mask +1",
         hands="Gazu Bracelet +1",
         legs="Carmine Cuisses +1",
-        feet=gear.Herc_STP_feet,
         ear1="Cessance Earring",
         ear2="Mache Earring +1",
         ring1={name="Chirich Ring +1", bag="wardrobe3"},
@@ -1102,7 +1100,6 @@ function init_gear_sets()
         head="Carmine Mask +1",
         hands="Gazu Bracelet +1",
         legs="Carmine Cuisses +1",
-        feet=gear.Herc_STP_feet,
         ear1="Cessance Earring",
         ear2="Mache Earring +1",
         ring1={name="Chirich Ring +1", bag="wardrobe3"},
@@ -1148,7 +1145,6 @@ function init_gear_sets()
         head="Carmine Mask +1",
         hands="Gazu Bracelet +1",
         legs="Carmine Cuisses +1",
-        feet=gear.Herc_STP_feet,
         ear2="Mache Earring +1",
         ring1={name="Chirich Ring +1", bag="wardrobe3"},
         waist="Olseni Belt",

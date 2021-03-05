@@ -506,7 +506,7 @@ function init_gear_sets()
         main="Daybreak",
         sub="Genmei Shield",
         ammo="Ghastly Tathlum +1",
-        head="Befouled Crown",
+        head="Volte Beret",
         body="Jhakri Robe +2",
         hands="Raetic Bangles +1",
         legs="Volte Brais",
@@ -524,7 +524,7 @@ function init_gear_sets()
         main="Daybreak",
         sub="Genmei Shield", --10/0
         ammo="Staunch Tathlum +1", --3/3
-        head="Volte Cap",
+        head="Volte Beret",
         body="Mallquis Saio +2", --8/8
         hands="Raetic Bangles +1",
         feet="Volte Gaiters",

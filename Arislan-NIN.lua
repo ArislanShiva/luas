@@ -272,7 +272,6 @@ function init_gear_sets()
         ammo="Voluspa Tathlum",
         hands=gear.Adhemar_A_hands,
         legs=gear.Herc_WS_legs,
-        feet=gear.Herc_STP_feet,
         ear2="Telos Earring",
         })
 

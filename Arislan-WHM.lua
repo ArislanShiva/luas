@@ -205,16 +205,17 @@ function init_gear_sets()
         main="C. Palug Hammer", --7
         sub="Chanter's Shield", --3
         ammo="Impatiens", --(2)
+        head="Volte Beret", --6
         body="Inyanga Jubbah +2", --14
         hands="Gende. Gages +1", --7
         legs="Volte Brais", --8
         feet="Volte Gaiters", --6
-        neck="Orunmila's Torque", --5
+        neck="Clr. Torque +2", --10
         ear1="Malignance Earring", --4
         ear2="Enchntr. Earring +1", --2
-        ring1="Kishar Ring", --4
-        ring2="Weather. Ring +1", --5
-        back=gear.WHM_FC_Cape, --10
+        ring1="Lebeche Ring", --(2)
+        ring2="Weather. Ring +1", --6(4)
+        back="Perimede Cape", --(4)
         waist="Embla Sash", --5
         }
 
@@ -227,6 +228,7 @@ function init_gear_sets()
         head="Piety Cap +3", --15
         feet="Kaykaus Boots +1", --7
         ring1="Lebeche Ring", --(2)
+        ring2="Weather. Ring +1", --6(4)
         back="Perimede Cape", --(4)
         waist="Shinjutsu-no-Obi +1", --5
         })
@@ -297,19 +299,19 @@ function init_gear_sets()
     sets.midcast.CureSolace = {
         main="Raetic Rod +1", --23(+10)
         sub="Sors Shield", --3/(-5)
-        ammo="Esper Stone +1", --0/(-5)
+        ammo="Pemphredo Tathlum ",
         head="Kaykaus Mitra +1", --11(+2)/(-6)
         body="Ebers Bliaud +1",
         hands="Theophany Mitts +3", --(+4)/(-7)
         legs="Ebers Pant. +1",
         feet="Kaykaus Boots +1", --11(+2)/(-12)
-        neck="Clr. Torque +2", --10
+        neck="Clr. Torque +2", --10/(-25)
         ear1="Glorious Earring", -- (+2)/(-5)
-        ear2="Meili Earring",
+        ear2="Magnetic Earring",
         ring1="Lebeche Ring", --3/(-5)
-        ring2="Menelaus's Ring",
+        ring2="Weather. Ring +1",
         back=gear.WHM_Cure_Cape, --10
-        waist="Bishop's Sash",
+        waist="Shinjutsu-no-Obi +1",
       }
 
     sets.midcast.CureSolaceWeather = set_combine(sets.midcast.CureSolace, {
@@ -445,6 +447,7 @@ function init_gear_sets()
         ammo="Staunch Tathlum +1",
         hands="Regal Cuffs",
         ear1="Halasz Earring",
+        ear2="Magnetic Earring",
         ring1="Freke Ring",
         ring2="Evanescence Ring",
         waist="Emphatikos Rope",
@@ -581,9 +584,9 @@ function init_gear_sets()
         main="Daybreak",
         sub="Genmei Shield",
         ammo="Homiliary",
-        head="Befouled Crown",
+        head="Volte Beret",
         body="Piety Briault +3",
-        hands="Raetic Bangles +1",
+        --hands="Raetic Bangles +1",
         legs="Volte Brais",
         feet="Inyan. Crackows +2",
         neck="Bathy Choker +1",
@@ -615,7 +618,7 @@ function init_gear_sets()
         ammo="Staunch Tathlum +1",
         head="Inyanga Tiara +2",
         body="Inyanga Jubbah +2",
-        hands="Raetic Bangles +1",
+        --hands="Raetic Bangles +1",
         legs="Inyanga Shalwar +2",
         feet="Inyan. Crackows +2",
         neck="Warder's Charm +1",

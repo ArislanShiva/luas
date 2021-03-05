@@ -104,7 +104,7 @@ function user_setup()
 
     send_command('bind ^` gs c cycle treasuremode')
     send_command('bind !` input /ja "Flee" <me>')
-    send_command('bind numpad0 gs c toggle Ambush')
+    send_command('bind %numpad0 gs c toggle Ambush')
 
     -- send_command('bind @c gs c toggle CP')
 
@@ -330,7 +330,6 @@ function init_gear_sets()
 
     sets.precast.WS['Rudra\'s Storm'].Acc = set_combine(sets.precast.WS['Rudra\'s Storm'], {
         ammo="Voluspa Tathlum",
-        feet=gear.Herc_STP_feet,
         ear2="Telos Earring",
         waist="Grunfeld Rope",
         })
@@ -354,6 +353,12 @@ function init_gear_sets()
         waist="Orpheus's Sash",
         })
 
+    sets.precast.WS['Asuran Fists'] = set_combine(sets.precast.WS['Exenterator'], {
+        hands=gear.Adhemar_B_hands,
+        feet="Plun. Poulaines +3",
+        ring2="Gere Ring"
+        })
+
     ------------------------------------------------------------------------------------------------
     ---------------------------------------- Midcast Sets ------------------------------------------
     ------------------------------------------------------------------------------------------------
@@ -361,8 +366,15 @@ function init_gear_sets()
     sets.midcast.FastRecast = sets.precast.FC
 
     sets.midcast.SpellInterrupt = {
-        ammo="Impatiens", --10
-        ring1="Evanescence Ring", --5
+        ammo="Staunch Tathlum +1", --11
+        body=gear.Taeon_Phalanx_body, --10
+        hands="Rawhide Gloves", --15
+        legs=gear.Taeon_Phalanx_legs, --10
+        feet=gear.Taeon_Phalanx_feet, --10
+        neck="Loricate Torque +1", --5
+        ear1="Halasz Earring", --5
+        ear2="Magnetic Earring", --8
+        ring2="Evanescence Ring", --5
         }
 
     sets.midcast.Utsusemi = sets.midcast.SpellInterrupt
@@ -474,7 +486,6 @@ function init_gear_sets()
         ammo="C. Palug Stone",
         hands="Gazu Bracelet +1",
         legs="Pill. Culottes +3",
-        feet=gear.Herc_STP_feet,
         ear2="Mache Earring +1",
         ring1="Regal Ring",
         ring2={name="Chirich Ring +1", bag="wardrobe4"},
@@ -525,7 +536,6 @@ function init_gear_sets()
         ammo="C. Palug Stone",
         hands="Gazu Bracelet +1",
         legs="Pill. Culottes +3",
-        feet=gear.Herc_STP_feet,
         ear1="Cessance Earring",
         ear2="Telos Earring",
         ring1="Regal Ring",
@@ -574,7 +584,6 @@ function init_gear_sets()
         ammo="C. Palug Stone",
         hands="Gazu Bracelet +1",
         legs="Pill. Culottes +3",
-        feet=gear.Herc_STP_feet,
         ear2="Telos Earring",
         ring1="Regal Ring",
         ring2={name="Chirich Ring +1", bag="wardrobe4"},
@@ -622,7 +631,6 @@ function init_gear_sets()
         ammo="C. Palug Stone",
         hands="Gazu Bracelet +1",
         legs="Pill. Culottes +3",
-        feet=gear.Herc_STP_feet,
         ear2="Telos Earring",
         ring1="Regal Ring",
         ring2={name="Chirich Ring +1", bag="wardrobe4"},
@@ -673,7 +681,6 @@ function init_gear_sets()
         ammo="C. Palug Stone",
         hands="Gazu Bracelet +1",
         legs="Pill. Culottes +3",
-        feet=gear.Herc_STP_feet,
         ear2="Telos Earring",
         ring1="Regal Ring",
         ring2={name="Chirich Ring +1", bag="wardrobe4"},
@@ -721,7 +728,6 @@ function init_gear_sets()
         ammo="C. Palug Stone",
         hands="Gazu Bracelet +1",
         legs="Pill. Culottes +3",
-        feet=gear.Herc_STP_feet,
         ear2="Telos Earring",
         ring1="Regal Ring",
         ring2={name="Chirich Ring +1", bag="wardrobe4"},
