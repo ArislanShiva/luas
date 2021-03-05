@@ -425,7 +425,6 @@ function init_gear_sets()
         body="Abnoba Kaftan",
         hands="Mummu Wrists +2",
         legs="Zoar Subligar +1",
-        feet=gear.Herc_STP_feet,
         neck="Fotia Gorget",
         ear2="Mache Earring +1",
         ring1="Begrudging Ring",
@@ -454,8 +453,14 @@ function init_gear_sets()
     sets.midcast.FastRecast = sets.precast.FC
 
     sets.midcast.SpellInterrupt = {
+        body=gear.Taeon_Phalanx_body, --10
+        hands="Rawhide Gloves", --15
         legs="Carmine Cuisses +1", --20
-        ring1="Evanescence Ring", --5
+        feet=gear.Taeon_Phalanx_feet, --10
+        neck="Loricate Torque +1", --5
+        ear1="Halasz Earring", --5
+        ear2="Magnetic Earring", --8
+        ring2="Evanescence Ring", --5
         waist="Rumination Sash", --10
         }
 
@@ -520,6 +525,11 @@ function init_gear_sets()
     sets.DoubleShot.Critical = {
         head="Meghanada Visor +2",
         waist="K. Kachina Belt +1",
+        }
+
+    sets.TrueShot = {
+        body="Nisroch Jerkin",
+        legs="Osh. Trousers +1",
         }
 
 
@@ -625,7 +635,6 @@ function init_gear_sets()
     sets.engaged.HighAcc = set_combine(sets.engaged.MidAcc, {
         head="Carmine Mask +1",
         hands="Gazu Bracelet +1",
-        feet=gear.Herc_STP_feet,
         ear1="Cessance Earring",
         ear2="Mache Earring +1",
         ring2={name="Chirich Ring +1", bag="wardrobe4"},
@@ -673,7 +682,6 @@ function init_gear_sets()
     sets.engaged.DW.HighAcc = set_combine(sets.engaged.DW.MidAcc, {
         head="Carmine Mask +1",
         hands="Gazu Bracelet +1",
-        feet=gear.Herc_STP_feet,
         ear1="Cessance Earring",
         ear2="Mache Earring +1",
         ring1="Regal Ring",
@@ -719,7 +727,6 @@ function init_gear_sets()
     sets.engaged.DW.HighAcc.LowHaste = set_combine(sets.engaged.DW.MidAcc.LowHaste, {
         head="Carmine Mask +1",
         hands="Gazu Bracelet +1",
-        feet=gear.Herc_STP_feet,
         ear1="Cessance Earring",
         ear2="Mache Earring +1",
         ring1="Regal Ring",
@@ -767,7 +774,6 @@ function init_gear_sets()
         head="Carmine Mask +1",
         hands="Gazu Bracelet +1",
         legs="Carmine Cuisses +1",
-        feet=gear.Herc_STP_feet,
         ear1="Cessance Earring",
         ear2="Mache Earring +1",
         ring1="Regal Ring",
@@ -815,7 +821,6 @@ function init_gear_sets()
         head="Carmine Mask +1",
         hands="Gazu Bracelet +1",
         legs="Carmine Cuisses +1",
-        feet=gear.Herc_STP_feet,
         ear1="Cessance Earring",
         ear2="Mache Earring +1",
         ring1="Regal Ring",
@@ -862,7 +867,6 @@ function init_gear_sets()
         head="Carmine Mask +1",
         hands="Gazu Bracelet +1",
         legs="Carmine Cuisses +1",
-        feet=gear.Herc_STP_feet,
         ear1="Cessance Earring",
         ear2="Mache Earring +1",
         ring1="Regal Ring",
@@ -1015,6 +1019,7 @@ function job_post_precast(spell, action, spellMap, eventArgs)
                 equip({waist="Yemaya Belt"})
             end
         end
+    elseif spell.action_type == 'Weapon Skill' then
         -- Replace TP-bonus gear if not needed.
         if spell.english == 'Trueflight' or spell.english == 'Aeolian Edge' and player.tp > 2900 then
             equip(sets.FullTP)
@@ -1048,9 +1053,15 @@ function job_post_midcast(spell, action, spellMap, eventArgs)
             equip(sets.DoubleShot)
             if buffactive['Aftermath: Lv.3'] and player.equipment.ranged == "Armageddon" then
                 equip(sets.DoubleShotCritical)
+                if (spell.target.distance < (7 + spell.target.model_size)) and (spell.target.distance > (5 + spell.target.model_size)) then
+                    equip(sets.TrueShot)
+                end
             end
         elseif buffactive['Aftermath: Lv.3'] and player.equipment.ranged == "Armageddon" then
             equip(sets.midcast.RA.Critical)
+            if (spell.target.distance < (7 + spell.target.model_size)) and (spell.target.distance > (5 + spell.target.model_size)) then
+                equip(sets.TrueShot)
+            end
         end
         if state.Buff.Barrage then
             equip(sets.buff.Barrage)
