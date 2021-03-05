@@ -48,6 +48,15 @@
     send_command('bind @, input /ma "Utsusemi: Ichi" <me>')
     send_command('bind @. input /ma "Utsusemi: Ni" <me>')
 
+    -- Default Enhancing HotKeys
+    send_command('bind !e input /ma "Haste" <stpc>')
+    send_command('bind !r input /ma "Refresh" <stpc>')
+    send_command('bind !t input /ma "Blink" <me>')
+    send_command('bind !y input /ma "Phalanx" <me>')
+    send_command('bind !u input /ma "Stoneskin" <me>')
+    send_command('bind !i input /ma "Aquaveil" <me>')
+    send_command('bind !o input /ma "Cure IV" <stpc>')
+
     -- Default Status Cure HotKeys
     send_command('bind !numpad7 input /ma "Paralyna" <t>')
     send_command('bind !numpad8 input /ma "Silena" <t>')
