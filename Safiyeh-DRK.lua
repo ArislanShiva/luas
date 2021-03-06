@@ -131,7 +131,7 @@ function init_gear_sets()
     sets.precast.JA['Diabolic Eye'] = {hands="Fall. Fin. Gaunt. +1"}
     sets.precast.JA['Last Resort'] = {feet="Fallen's Sollerets +1", back=gear.DRK_DA_Cape,}
     sets.precast.JA['Nether Void'] = {legs="Heath. Flanchard +1"}
-    sets.precast.JA['Souleater'] = {head="Ig. Burgonet +2"}
+    sets.precast.JA['Souleater'] = {head="Ig. Burgonet +3"}
     sets.precast.JA['Weapon Bash'] = {hands="Ig. Gauntlets +2"}
 
     sets.precast.FC = {
@@ -286,7 +286,7 @@ function init_gear_sets()
     sets.midcast.Aspir = sets.midcast.Drain
 
     sets.midcast.Absorb = set_combine(sets.midcast['Dark Magic'], {
-        head="Ig. Burgonet +2",
+        head="Ig. Burgonet +3",
         hands="Pavor Gauntlets",
         ring1="Kishar Ring",
         back="Chuparrosa Mantle",

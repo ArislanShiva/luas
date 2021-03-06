@@ -140,7 +140,7 @@ function init_gear_sets()
     ------------------------------------------------------------------------------------------------
 
     sets.precast.WS = {
-        ammo="Knobkierrie",
+        ammo="Aurgelmir Orb +1",
         head=gear.Adhemar_B_head,
         body=gear.Herc_WS_body,
         hands=gear.Adhemar_B_hands,
@@ -194,8 +194,8 @@ function init_gear_sets()
     ------------------------------------------------------------------------------------------------
 
     sets.engaged = {
-        ammo="Ginsen",
-        head=gear.Adhemar_B_head,
+        ammo="Aurgelmir Orb +1",
+        head=gear.Herc_STP_head,
         body=gear.Adhemar_B_body,
         hands=gear.Adhemar_B_hands,
         legs="Samnuha Tights",
@@ -271,6 +271,15 @@ end
 
 function job_handle_equipping_gear(playerStatus, eventArgs)
     check_gear()
+end
+
+function get_custom_wsmode(spell, action, spellMap)
+    local wsmode
+    if state.OffenseMode.value == 'MidAcc' or state.OffenseMode.value == 'HighAcc' then
+        wsmode = 'Acc'
+    end
+
+    return wsmode
 end
 
 -- Modify the default idle set after it was constructed.

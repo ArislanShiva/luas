@@ -1019,7 +1019,7 @@ function job_post_precast(spell, action, spellMap, eventArgs)
                 equip({waist="Yemaya Belt"})
             end
         end
-    elseif spell.action_type == 'Weapon Skill' then
+      elseif spell.type == 'WeaponSkill' then
         -- Replace TP-bonus gear if not needed.
         if spell.english == 'Trueflight' or spell.english == 'Aeolian Edge' and player.tp > 2900 then
             equip(sets.FullTP)
