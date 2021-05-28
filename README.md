@@ -1,6 +1,9 @@
 # Arislan's FFXI Repository
 
 
+** These files are no longer updated nor supported **
+
+
 ### Gearswap files
 
 Job luas are modified from [Mote's job files](https://github.com/Kinematics/GearSwap-Jobs) -- he deserves a ton of credit for his job luas and awesome libraries.
