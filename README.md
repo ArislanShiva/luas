@@ -1,7 +1,9 @@
-# Arislan's FFXI Repository
+# THIS PROJECT WILL NO LONGER SUPPORTED.
 
 
-** These files are no longer updated nor supported **
+
+
+## Arislan's FFXI Repository
 
 
 ### Gearswap files
