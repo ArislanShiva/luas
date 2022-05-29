@@ -1172,7 +1172,7 @@ end
 -- eventArgs is the same one used in job_midcast, in case information needs to be persisted.
 function job_post_midcast(spell, action, spellMap, eventArgs)
     if spell.skill == 'Enhancing Magic' then
-        if classes.NoSkillSpells:contains(spell.english) then
+        if classes.NoSkillSpells:contains(spellMap) then
             equip(sets.midcast.EnhancingDuration)
             if spellMap == 'Refresh' then
                 equip(sets.midcast.Refresh)
