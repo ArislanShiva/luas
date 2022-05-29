@@ -97,6 +97,9 @@ function job_setup()
     skill_spells = S{
         'Temper', 'Temper II', 'Enfire', 'Enfire II', 'Enblizzard', 'Enblizzard II', 'Enaero', 'Enaero II',
         'Enstone', 'Enstone II', 'Enthunder', 'Enthunder II', 'Enwater', 'Enwater II'}
+		
+	no_skill_spells_list = S{'Haste', 'Haste II', 'Refresh', 'Refresh II', 'Refresh III', 'Regen', 'Protect', 'Protectra', 'Shell', 'Shellra',
+        'Raise', 'Reraise', 'Sneak', 'Invisible', 'Deodorize'}
 
     include('Mote-TreasureHunter')
 
@@ -1172,7 +1175,7 @@ end
 -- eventArgs is the same one used in job_midcast, in case information needs to be persisted.
 function job_post_midcast(spell, action, spellMap, eventArgs)
     if spell.skill == 'Enhancing Magic' then
-        if classes.NoSkillSpells:contains(spellMap) then
+        if no_skill_spells_list:contains(spell.english) or classes.NoSkillSpells:contains(spellMap) then
             equip(sets.midcast.EnhancingDuration)
             if spellMap == 'Refresh' then
                 equip(sets.midcast.Refresh)
