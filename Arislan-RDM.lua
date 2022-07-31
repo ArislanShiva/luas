@@ -418,7 +418,7 @@ function init_gear_sets()
         ring1="Weather. Ring +1",
         })
 
-    sets.precast.WS['Aeolian Edge'] = set_combine(sets.precast.WS['Seraph Dlade'], {
+    sets.precast.WS['Aeolian Edge'] = set_combine(sets.precast.WS['Seraph Blade'], {
         head="Merlinic Hood",
         ear2="Moonshade Earring",
         ring1="Shiva Ring +1",
