@@ -16,9 +16,10 @@
     send_command('bind #7 input //send @others /ma "Dia II" <t>')
     send_command('bind #8 input //send @others /ma "Silence" <t>')
     send_command('bind #9 input //send @others /ma "Paralyze" <t>')
-    send_command('bind #0 input //send @others /ma "Cure" <p1>')
+    send_command('bind #0 input //send @others /ma "Dispelga" <t>')
     --send_command('bind #7 input //send @others /ma "Dispelga" <t>')
     --send_command('bind #8 input //send @others /ma "Sleepga" <t>')
+    --send_command('bind #9 input //send @others /ma "Stonega" <t>')
     --send_command('bind #0 input //send @others /ma "Stun" <t>')
 
     send_command('bind #q input //send @others //gs c nuke')
@@ -29,6 +30,7 @@
     send_command('bind #y input //send @others /ma "Phalanx" <me>')
     send_command('bind #u input //send @others /ma "Stoneskin" <me>')
     send_command('bind #i input //send @others /ma "Aquaveil" <me>')
+    --send_command('bind #o input //send @others /ma "Curaga III" <me>')
     send_command('bind #o input //send @others /ma "Cure IV" <t>')
     send_command('bind #p input //send @others /ja "Entrust" <me>')
 
