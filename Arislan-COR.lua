@@ -129,9 +129,9 @@ end
 -- Setup vars that are user-dependent.  Can override this function in a sidecar file.
 function user_setup()
     state.OffenseMode:options('Normal', 'LowAcc', 'MidAcc', 'HighAcc', 'STP')
-    state.HybridMode:options('Normal', 'Partial', 'Full')
+    state.HybridMode:options('Normal', 'Malignance', 'Nyame')
     state.RangedMode:options('Normal', 'Acc', 'HighAcc', 'Critical', 'STP')
-    state.WeaponskillMode:options('Normal', 'Acc')
+    state.WeaponskillMode:options('Normal', 'HighBuff')
     state.IdleMode:options('Normal', 'DT')
 
     state.Gun = M{['description']='Gun', 'DeathPenalty', 'Armageddon', 'Fomalhaut', 'Ataktos'}
@@ -282,9 +282,9 @@ function init_gear_sets()
 
     sets.precast.CorsairRoll.Duration = {main={name="Rostam", bag="wardrobe"}, range="Compensator"}
     sets.precast.CorsairRoll.LowerDelay = {back="Gunslinger's Cape"}
-    sets.precast.CorsairRoll["Caster's Roll"] = set_combine(sets.precast.CorsairRoll, {legs="Chas. Culottes +2"})
+    sets.precast.CorsairRoll["Caster's Roll"] = set_combine(sets.precast.CorsairRoll, {legs="Chas. Culottes +3"})
     sets.precast.CorsairRoll["Courser's Roll"] = set_combine(sets.precast.CorsairRoll, {feet="Chass. Bottes +2"})
-    sets.precast.CorsairRoll["Blitzer's Roll"] = set_combine(sets.precast.CorsairRoll, {head="Chass. Tricorne +1"})
+    sets.precast.CorsairRoll["Blitzer's Roll"] = set_combine(sets.precast.CorsairRoll, {head="Chass. Tricorne +2"})
     sets.precast.CorsairRoll["Tactician's Roll"] = set_combine(sets.precast.CorsairRoll, {body="Chasseur's Frac +2"})
     sets.precast.CorsairRoll["Allies' Roll"] = set_combine(sets.precast.CorsairRoll, {hands="Chasseur's Gants +3"})
 
@@ -320,7 +320,7 @@ function init_gear_sets()
     -- (10% Snapshot from JP Gifts)
     sets.precast.RA = {
         ammo=gear.RAbullet,
-        head="Chasseur's Tricorne +1", --0/14
+        head="Chass. Tricorne +2", --0/16
         body="Oshosi Vest +1", --14/0
         hands="Carmine Fin. Ga. +1", --8/11
         legs=gear.Adhemar_D_legs, --10/13
@@ -361,26 +361,21 @@ function init_gear_sets()
         waist="Fotia Belt",
         }
 
-    sets.precast.WS.Acc = set_combine(sets.precast.WS, {
-        ammo=gear.RAccbullet,
-        feet="Meg. Jam. +2",
-        ear1="Beyla Earring",
-        ear2="Telos Earring",
-        neck="Iskur Gorget",
-        ring2="Hajduk Ring +1",
-        waist="K. Kachina Belt +1",
-        })
+    sets.HighBuffMelee = {
+        --body="Ikenga's Vest",
+        ring1="Sroda Ring",
+        }
+
+    sets.HighBuffRanged = {
+        body="Ikenga's Vest",
+        legs="Ikenga's Trousers",
+        ring1="Sroda Ring",
+        }
+
+    sets.precast.WS.PDL = set_combine(sets.precast.WS, sets.HighBuffRanged)
 
     sets.precast.WS['Last Stand'] = sets.precast.WS
-
-    sets.precast.WS['Last Stand'].Acc = set_combine(sets.precast.WS['Last Stand'], {
-        ammo=gear.RAccbullet,
-        neck="Iskur Gorget",
-        ear1="Beyla Earring",
-        ear2="Telos Earring",
-        ring2="Hajduk Ring +1",
-        waist="K. Kachina Belt +1",
-        })
+    sets.precast.WS['Last Stand'].HighBuff = set_combine(sets.precast.WS['Last Stand'], sets.HighBuffRanged)
 
     sets.precast.WS['Wildfire'] = {
         ammo=gear.MAbullet,
@@ -421,27 +416,19 @@ function init_gear_sets()
         waist="Fotia Belt",
         }
 
-    sets.precast.WS['Evisceration'].Acc = set_combine(sets.precast.WS['Evisceration'], {
-        head="Meghanada Visor +2",
-        body=gear.Adhemar_B_body,
-        legs=gear.Herc_WS_legs,
-        })
+    sets.precast.WS['Evisceration'].HighBuff = set_combine(sets.precast.WS['Evisceration'], sets.HighBuffMelee)
 
     sets.precast.WS['Savage Blade'] = set_combine(sets.precast.WS, {
-        head=gear.Herc_WSD_head,
-        hands="Meg. Gloves +2",
-        --neck="Comm. Charm +2",
+        head="Nyame Helm",
+        body="Nyame Mail",
         neck="Rep. Plat. Medal",
-        ring1="Regal Ring",
+        ring1="Epaminondas's Ring",
         ring2="Cornelia's Ring",
         back=gear.COR_WS2_Cape,
         waist="Sailfi Belt +1",
         })
 
-    sets.precast.WS['Savage Blade'].Acc = set_combine(sets.precast.WS['Savage Blade'], {
-        body="Meg. Cuirie +2",
-        ear2="Telos Earring",
-        })
+    sets.precast.WS['Savage Blade'].HighBuff = set_combine(sets.precast.WS['Savage Blade'], sets.HighBuffMelee)
 
     sets.precast.WS['Requiescat'] = set_combine(sets.precast.WS['Swift Blade'], {
         hands="Meg. Gloves +2",
@@ -450,10 +437,7 @@ function init_gear_sets()
         ring2="Rufescent Ring",
         }) --MND
 
-    sets.precast.WS['Requiescat'].Acc = set_combine(sets.precast.WS['Requiescat'], {
-        head="Meghanada Visor +2",
-        ear1="Cessance Earring",
-        })
+    sets.precast.WS['Requiescat'].HighBuff = set_combine(sets.precast.WS['Requiescat'], sets.HighBuffMelee)
 
     sets.precast.WS['Aeolian Edge'] = set_combine(sets.precast.WS['Wildfire'], {
         ammo=gear.QDbullet,
@@ -461,6 +445,7 @@ function init_gear_sets()
         })
 
     sets.precast.WS['Circle Blade'] = sets.precast.WS['Savage Blade']
+    sets.precast.WS['Circle Blade'].HighBuff = set_combine(sets.precast.WS['Circle Blade'], sets.HighBuffMelee)
 
     sets.precast.WS['Burning Blade'] = set_combine(sets.precast.WS['Wildfire'], {
         ammo=gear.QDbullet,
@@ -486,17 +471,6 @@ function init_gear_sets()
 
     sets.midcast.Utsusemi = sets.midcast.SpellInterrupt
 
-    sets.midcast.Cure = {
-        neck="Incanter's Torque",
-        ear1="Roundel Earring",
-        ear2="Mendi. Earring",
-        ring1="Lebeche Ring",
-        ring2="Haoma's Ring",
-        waist="Bishop's Sash",
-        }
-
-    sets.midcast.Utsusemi = sets.midcast.SpellInterrupt
-
     sets.midcast.CorsairShot = {
         ammo=gear.QDbullet,
         head=gear.Herc_MAB_head,
@@ -518,7 +492,7 @@ function init_gear_sets()
         head="Malignance Chapeau",
         body="Malignance Tabard",
         hands="Malignance Gloves",
-        legs="Chas. Culottes +2",
+        legs="Chas. Culottes +3",
         feet="Chass. Bottes +2",
         neck="Iskur Gorget",
         ear1="Dedition Earring",
@@ -534,7 +508,7 @@ function init_gear_sets()
         head="Laksa. Tricorne +3",
         body="Malignance Tabard",
         hands="Chasseur's Gants +3",
-        legs="Chas. Culottes +2",
+        legs="Chas. Culottes +3",
         feet="Laksa. Bottes +3",
         neck="Comm. Charm +2",
         ear1="Crep. Earring",
@@ -554,7 +528,7 @@ function init_gear_sets()
         head="Ikenga's Hat",
         body="Ikenga's Vest",
         hands="Malignance Gloves",
-        legs="Chas. Culottes +2",
+        legs="Chas. Culottes +3",
         feet="Malignance Boots",
         neck="Iskur Gorget",
         ear1="Crep. Earring",
@@ -636,7 +610,7 @@ function init_gear_sets()
         head="Nyame Helm",
         body="Nyame Mail",
         hands="Raetic Bangles +1",
-        legs="Nyame Flanchard",
+        legs="Chas. Culottes +3",
         feet="Nyame Sollerets",
         neck="Bathy Choker +1",
         ear1="Sanare Earring",
@@ -651,7 +625,7 @@ function init_gear_sets()
         head="Nyame Helm", --7/7
         body="Nyame Mail", --9/9
         hands="Raetic Bangles +1",
-        legs="Nyame Flanchard", --8/8
+        legs="Chas. Culottes +3", --12/12
         feet="Nyame Sollerets", --7/7,
         neck="Warder's Charm +1",
         ring2="Defending Ring", --10/10
@@ -659,20 +633,12 @@ function init_gear_sets()
         waist="Plat. Mog. Belt", --3/3
         })
 
-    sets.idle.Refresh = set_combine(sets.idle, {
-        head=gear.Herc_Idle_head,
-        --body="Mekosu. Harness",
-        legs="Rawhide Trousers",
-        ring1={name="Stikini Ring +1", bag="wardrobe5"},
-        ring2={name="Stikini Ring +1", bag="wardrobe6"},
-        })
-
     sets.idle.Town = set_combine(sets.idle, {
         ammo=gear.MAbullet,
         head="Lanun Tricorne +3",
         body="Oshosi Vest +1",
         hands="Chasseur's Gants +3",
-        legs="Osh. Trousers +1",
+        legs="Chas. Culottes +3",
         feet="Lanun Bottes +3",
         neck="Comm. Charm +2",
         ear1="Crep. Earring",
@@ -1000,105 +966,105 @@ function init_gear_sets()
     ---------------------------------------- Hybrid Sets -------------------------------------------
     ------------------------------------------------------------------------------------------------
 
-    sets.engaged.PartialHybrid = {
+    sets.engaged.MalignanceHybrid = {
         head="Malignance Chapeau", --6/6
         body="Malignance Tabard", --9/9
         hands="Malignance Gloves", --5/5
-        legs="Chas. Culottes +2", --11/11
-        feet="Malignance Boots", --4/4
+        legs="Chas. Culottes +3", --12/12
+        --feet="Malignance Boots", --4/4
         }
 
-    sets.engaged.FullHybrid = {
+    sets.engaged.NyameHybrid = {
         head="Nyame Helm", --7/7
         body="Nyame Mail", --9/9
         hands="Nyame Gauntlets",  --7/7
-        legs="Chas. Culottes +2", --11/11
+        legs="Chas. Culottes +3", --12/12
         feet="Nyame Sollerets", --7/7
         }
 
-    sets.engaged.Partial = set_combine(sets.engaged, sets.engaged.PartialHybrid)
-    sets.engaged.LowAcc.Partial = set_combine(sets.engaged.LowAcc, sets.engaged.PartialHybrid)
-    sets.engaged.MidAcc.Partial = set_combine(sets.engaged.MidAcc, sets.engaged.PartialHybrid)
-    sets.engaged.HighAcc.Partial = set_combine(sets.engaged.HighAcc, sets.engaged.PartialHybrid)
-    sets.engaged.STP.Partial = set_combine(sets.engaged.STP, sets.engaged.PartialHybrid)
+    sets.engaged.Malignance = set_combine(sets.engaged, sets.engaged.MalignanceHybrid)
+    sets.engaged.LowAcc.Malignance = set_combine(sets.engaged.LowAcc, sets.engaged.MalignanceHybrid)
+    sets.engaged.MidAcc.Malignance = set_combine(sets.engaged.MidAcc, sets.engaged.MalignanceHybrid)
+    sets.engaged.HighAcc.Malignance = set_combine(sets.engaged.HighAcc, sets.engaged.MalignanceHybrid)
+    sets.engaged.STP.Malignance = set_combine(sets.engaged.STP, sets.engaged.MalignanceHybrid)
 
-    sets.engaged.DW.Partial = set_combine(sets.engaged.DW, sets.engaged.PartialHybrid)
-    sets.engaged.DW.LowAcc.Partial = set_combine(sets.engaged.DW.LowAcc, sets.engaged.PartialHybrid)
-    sets.engaged.DW.MidAcc.Partial = set_combine(sets.engaged.DW.MidAcc, sets.engaged.PartialHybrid)
-    sets.engaged.DW.HighAcc.Partial = set_combine(sets.engaged.DW.HighAcc, sets.engaged.PartialHybrid)
-    sets.engaged.DW.STP.Partial = set_combine(sets.engaged.DW.STP, sets.engaged.PartialHybrid)
+    sets.engaged.DW.Malignance = set_combine(sets.engaged.DW, sets.engaged.MalignanceHybrid)
+    sets.engaged.DW.LowAcc.Malignance = set_combine(sets.engaged.DW.LowAcc, sets.engaged.MalignanceHybrid)
+    sets.engaged.DW.MidAcc.Malignance = set_combine(sets.engaged.DW.MidAcc, sets.engaged.MalignanceHybrid)
+    sets.engaged.DW.HighAcc.Malignance = set_combine(sets.engaged.DW.HighAcc, sets.engaged.MalignanceHybrid)
+    sets.engaged.DW.STP.Malignance = set_combine(sets.engaged.DW.STP, sets.engaged.MalignanceHybrid)
 
-    sets.engaged.DW.Partial.LowHaste = set_combine(sets.engaged.DW.LowHaste, sets.engaged.PartialHybrid)
-    sets.engaged.DW.LowAcc.Partial.LowHaste = set_combine(sets.engaged.DW.LowAcc.LowHaste, sets.engaged.PartialHybrid)
-    sets.engaged.DW.MidAcc.Partial.LowHaste = set_combine(sets.engaged.DW.MidAcc.LowHaste, sets.engaged.PartialHybrid)
-    sets.engaged.DW.HighAcc.Partial.LowHaste = set_combine(sets.engaged.DW.HighAcc.LowHaste, sets.engaged.PartialHybrid)
-    sets.engaged.DW.STP.Partial.LowHaste = set_combine(sets.engaged.DW.STP.LowHaste, sets.engaged.PartialHybrid)
+    sets.engaged.DW.Malignance.LowHaste = set_combine(sets.engaged.DW.LowHaste, sets.engaged.MalignanceHybrid)
+    sets.engaged.DW.LowAcc.Malignance.LowHaste = set_combine(sets.engaged.DW.LowAcc.LowHaste, sets.engaged.MalignanceHybrid)
+    sets.engaged.DW.MidAcc.Malignance.LowHaste = set_combine(sets.engaged.DW.MidAcc.LowHaste, sets.engaged.MalignanceHybrid)
+    sets.engaged.DW.HighAcc.Malignance.LowHaste = set_combine(sets.engaged.DW.HighAcc.LowHaste, sets.engaged.MalignanceHybrid)
+    sets.engaged.DW.STP.Malignance.LowHaste = set_combine(sets.engaged.DW.STP.LowHaste, sets.engaged.MalignanceHybrid)
 
-    sets.engaged.DW.Partial.MidHaste = set_combine(sets.engaged.DW.MidHaste, sets.engaged.PartialHybrid)
-    sets.engaged.DW.LowAcc.Partial.MidHaste = set_combine(sets.engaged.DW.LowAcc.MidHaste, sets.engaged.PartialHybrid)
-    sets.engaged.DW.MidAcc.Partial.MidHaste = set_combine(sets.engaged.DW.MidAcc.MidHaste, sets.engaged.PartialHybrid)
-    sets.engaged.DW.HighAcc.Partial.MidHaste = set_combine(sets.engaged.DW.HighAcc.MidHaste, sets.engaged.PartialHybrid)
-    sets.engaged.DW.STP.Partial.MidHaste = set_combine(sets.engaged.DW.STP.MidHaste, sets.engaged.PartialHybrid)
+    sets.engaged.DW.Malignance.MidHaste = set_combine(sets.engaged.DW.MidHaste, sets.engaged.MalignanceHybrid)
+    sets.engaged.DW.LowAcc.Malignance.MidHaste = set_combine(sets.engaged.DW.LowAcc.MidHaste, sets.engaged.MalignanceHybrid)
+    sets.engaged.DW.MidAcc.Malignance.MidHaste = set_combine(sets.engaged.DW.MidAcc.MidHaste, sets.engaged.MalignanceHybrid)
+    sets.engaged.DW.HighAcc.Malignance.MidHaste = set_combine(sets.engaged.DW.HighAcc.MidHaste, sets.engaged.MalignanceHybrid)
+    sets.engaged.DW.STP.Malignance.MidHaste = set_combine(sets.engaged.DW.STP.MidHaste, sets.engaged.MalignanceHybrid)
 
-    sets.engaged.DW.Partial.HighHaste = set_combine(sets.engaged.DW.HighHaste, sets.engaged.PartialHybrid)
-    sets.engaged.DW.LowAcc.Partial.HighHaste = set_combine(sets.engaged.DW.LowAcc.HighHaste, sets.engaged.PartialHybrid)
-    sets.engaged.DW.MidAcc.Partial.HighHaste = set_combine(sets.engaged.DW.MidAcc.HighHaste, sets.engaged.PartialHybrid)
-    sets.engaged.DW.HighAcc.Partial.HighHaste = set_combine(sets.engaged.DW.HighAcc.HighHaste, sets.engaged.PartialHybrid)
-    sets.engaged.DW.STP.Partial.HighHaste = set_combine(sets.engaged.DW.HighHaste.STP, sets.engaged.PartialHybrid)
+    sets.engaged.DW.Malignance.HighHaste = set_combine(sets.engaged.DW.HighHaste, sets.engaged.MalignanceHybrid)
+    sets.engaged.DW.LowAcc.Malignance.HighHaste = set_combine(sets.engaged.DW.LowAcc.HighHaste, sets.engaged.MalignanceHybrid)
+    sets.engaged.DW.MidAcc.Malignance.HighHaste = set_combine(sets.engaged.DW.MidAcc.HighHaste, sets.engaged.MalignanceHybrid)
+    sets.engaged.DW.HighAcc.Malignance.HighHaste = set_combine(sets.engaged.DW.HighAcc.HighHaste, sets.engaged.MalignanceHybrid)
+    sets.engaged.DW.STP.Malignance.HighHaste = set_combine(sets.engaged.DW.HighHaste.STP, sets.engaged.MalignanceHybrid)
 
-    sets.engaged.DW.Partial.MaxHaste = set_combine(sets.engaged.DW.MaxHaste, sets.engaged.PartialHybrid)
-    sets.engaged.DW.LowAcc.Partial.MaxHaste = set_combine(sets.engaged.DW.LowAcc.MaxHaste, sets.engaged.PartialHybrid)
-    sets.engaged.DW.MidAcc.Partial.MaxHaste = set_combine(sets.engaged.DW.MidAcc.MaxHaste, sets.engaged.PartialHybrid)
-    sets.engaged.DW.HighAcc.Partial.MaxHaste = set_combine(sets.engaged.DW.HighAcc.MaxHaste, sets.engaged.PartialHybrid)
-    sets.engaged.DW.STP.Partial.MaxHaste = set_combine(sets.engaged.DW.STP.MaxHaste, sets.engaged.PartialHybrid)
+    sets.engaged.DW.Malignance.MaxHaste = set_combine(sets.engaged.DW.MaxHaste, sets.engaged.MalignanceHybrid)
+    sets.engaged.DW.LowAcc.Malignance.MaxHaste = set_combine(sets.engaged.DW.LowAcc.MaxHaste, sets.engaged.MalignanceHybrid)
+    sets.engaged.DW.MidAcc.Malignance.MaxHaste = set_combine(sets.engaged.DW.MidAcc.MaxHaste, sets.engaged.MalignanceHybrid)
+    sets.engaged.DW.HighAcc.Malignance.MaxHaste = set_combine(sets.engaged.DW.HighAcc.MaxHaste, sets.engaged.MalignanceHybrid)
+    sets.engaged.DW.STP.Malignance.MaxHaste = set_combine(sets.engaged.DW.STP.MaxHaste, sets.engaged.MalignanceHybrid)
 
-    sets.engaged.DW.Partial.MaxHastePlus = set_combine(sets.engaged.DW.MaxHastePlus, sets.engaged.PartialHybrid)
-    sets.engaged.DW.LowAcc.Partial.MaxHastePlus = set_combine(sets.engaged.DW.LowAcc.MaxHastePlus, sets.engaged.PartialHybrid)
-    sets.engaged.DW.MidAcc.Partial.MaxHastePlus = set_combine(sets.engaged.DW.MidAcc.MaxHastePlus, sets.engaged.PartialHybrid)
-    sets.engaged.DW.HighAcc.Partial.MaxHastePlus = set_combine(sets.engaged.DW.HighAcc.MaxHastePlus, sets.engaged.PartialHybrid)
-    sets.engaged.DW.STP.Partial.MaxHastePlus = set_combine(sets.engaged.DW.STP.MaxHastePlus, sets.engaged.PartialHybrid)
+    sets.engaged.DW.Malignance.MaxHastePlus = set_combine(sets.engaged.DW.MaxHastePlus, sets.engaged.MalignanceHybrid)
+    sets.engaged.DW.LowAcc.Malignance.MaxHastePlus = set_combine(sets.engaged.DW.LowAcc.MaxHastePlus, sets.engaged.MalignanceHybrid)
+    sets.engaged.DW.MidAcc.Malignance.MaxHastePlus = set_combine(sets.engaged.DW.MidAcc.MaxHastePlus, sets.engaged.MalignanceHybrid)
+    sets.engaged.DW.HighAcc.Malignance.MaxHastePlus = set_combine(sets.engaged.DW.HighAcc.MaxHastePlus, sets.engaged.MalignanceHybrid)
+    sets.engaged.DW.STP.Malignance.MaxHastePlus = set_combine(sets.engaged.DW.STP.MaxHastePlus, sets.engaged.MalignanceHybrid)
 
-    sets.engaged.Full = set_combine(sets.engaged, sets.engaged.FullHybrid)
-    sets.engaged.LowAcc.Full = set_combine(sets.engaged.LowAcc, sets.engaged.FullHybrid)
-    sets.engaged.MidAcc.Full = set_combine(sets.engaged.MidAcc, sets.engaged.FullHybrid)
-    sets.engaged.HighAcc.Full = set_combine(sets.engaged.HighAcc, sets.engaged.FullHybrid)
-    sets.engaged.STP.Full = set_combine(sets.engaged.STP, sets.engaged.FullHybrid)
+    sets.engaged.Nyame = set_combine(sets.engaged, sets.engaged.NyameHybrid)
+    sets.engaged.LowAcc.Nyame = set_combine(sets.engaged.LowAcc, sets.engaged.NyameHybrid)
+    sets.engaged.MidAcc.Nyame = set_combine(sets.engaged.MidAcc, sets.engaged.NyameHybrid)
+    sets.engaged.HighAcc.Nyame = set_combine(sets.engaged.HighAcc, sets.engaged.NyameHybrid)
+    sets.engaged.STP.Nyame = set_combine(sets.engaged.STP, sets.engaged.NyameHybrid)
 
-    sets.engaged.DW.Full = set_combine(sets.engaged.DW, sets.engaged.FullHybrid)
-    sets.engaged.DW.LowAcc.Full = set_combine(sets.engaged.DW.LowAcc, sets.engaged.FullHybrid)
-    sets.engaged.DW.MidAcc.Full = set_combine(sets.engaged.DW.MidAcc, sets.engaged.FullHybrid)
-    sets.engaged.DW.HighAcc.Full = set_combine(sets.engaged.DW.HighAcc, sets.engaged.FullHybrid)
-    sets.engaged.DW.STP.Full = set_combine(sets.engaged.DW.STP, sets.engaged.FullHybrid)
+    sets.engaged.DW.Nyame = set_combine(sets.engaged.DW, sets.engaged.NyameHybrid)
+    sets.engaged.DW.LowAcc.Nyame = set_combine(sets.engaged.DW.LowAcc, sets.engaged.NyameHybrid)
+    sets.engaged.DW.MidAcc.Nyame = set_combine(sets.engaged.DW.MidAcc, sets.engaged.NyameHybrid)
+    sets.engaged.DW.HighAcc.Nyame = set_combine(sets.engaged.DW.HighAcc, sets.engaged.NyameHybrid)
+    sets.engaged.DW.STP.Nyame = set_combine(sets.engaged.DW.STP, sets.engaged.NyameHybrid)
 
-    sets.engaged.DW.Full.LowHaste = set_combine(sets.engaged.DW.LowHaste, sets.engaged.FullHybrid)
-    sets.engaged.DW.LowAcc.Full.LowHaste = set_combine(sets.engaged.DW.LowAcc.LowHaste, sets.engaged.FullHybrid)
-    sets.engaged.DW.MidAcc.Full.LowHaste = set_combine(sets.engaged.DW.MidAcc.LowHaste, sets.engaged.FullHybrid)
-    sets.engaged.DW.HighAcc.Full.LowHaste = set_combine(sets.engaged.DW.HighAcc.LowHaste, sets.engaged.FullHybrid)
-    sets.engaged.DW.STP.Full.LowHaste = set_combine(sets.engaged.DW.STP.LowHaste, sets.engaged.FullHybrid)
+    sets.engaged.DW.Nyame.LowHaste = set_combine(sets.engaged.DW.LowHaste, sets.engaged.NyameHybrid)
+    sets.engaged.DW.LowAcc.Nyame.LowHaste = set_combine(sets.engaged.DW.LowAcc.LowHaste, sets.engaged.NyameHybrid)
+    sets.engaged.DW.MidAcc.Nyame.LowHaste = set_combine(sets.engaged.DW.MidAcc.LowHaste, sets.engaged.NyameHybrid)
+    sets.engaged.DW.HighAcc.Nyame.LowHaste = set_combine(sets.engaged.DW.HighAcc.LowHaste, sets.engaged.NyameHybrid)
+    sets.engaged.DW.STP.Nyame.LowHaste = set_combine(sets.engaged.DW.STP.LowHaste, sets.engaged.NyameHybrid)
 
-    sets.engaged.DW.Full.MidHaste = set_combine(sets.engaged.DW.MidHaste, sets.engaged.FullHybrid)
-    sets.engaged.DW.LowAcc.Full.MidHaste = set_combine(sets.engaged.DW.LowAcc.MidHaste, sets.engaged.FullHybrid)
-    sets.engaged.DW.MidAcc.Full.MidHaste = set_combine(sets.engaged.DW.MidAcc.MidHaste, sets.engaged.FullHybrid)
-    sets.engaged.DW.HighAcc.Full.MidHaste = set_combine(sets.engaged.DW.HighAcc.MidHaste, sets.engaged.FullHybrid)
-    sets.engaged.DW.STP.Full.MidHaste = set_combine(sets.engaged.DW.STP.MidHaste, sets.engaged.FullHybrid)
+    sets.engaged.DW.Nyame.MidHaste = set_combine(sets.engaged.DW.MidHaste, sets.engaged.NyameHybrid)
+    sets.engaged.DW.LowAcc.Nyame.MidHaste = set_combine(sets.engaged.DW.LowAcc.MidHaste, sets.engaged.NyameHybrid)
+    sets.engaged.DW.MidAcc.Nyame.MidHaste = set_combine(sets.engaged.DW.MidAcc.MidHaste, sets.engaged.NyameHybrid)
+    sets.engaged.DW.HighAcc.Nyame.MidHaste = set_combine(sets.engaged.DW.HighAcc.MidHaste, sets.engaged.NyameHybrid)
+    sets.engaged.DW.STP.Nyame.MidHaste = set_combine(sets.engaged.DW.STP.MidHaste, sets.engaged.NyameHybrid)
 
-    sets.engaged.DW.Full.HighHaste = set_combine(sets.engaged.DW.HighHaste, sets.engaged.FullHybrid)
-    sets.engaged.DW.LowAcc.Full.HighHaste = set_combine(sets.engaged.DW.LowAcc.HighHaste, sets.engaged.FullHybrid)
-    sets.engaged.DW.MidAcc.Full.HighHaste = set_combine(sets.engaged.DW.MidAcc.HighHaste, sets.engaged.FullHybrid)
-    sets.engaged.DW.HighAcc.Full.HighHaste = set_combine(sets.engaged.DW.HighAcc.HighHaste, sets.engaged.FullHybrid)
-    sets.engaged.DW.STP.Full.HighHaste = set_combine(sets.engaged.DW.HighHaste.STP, sets.engaged.FullHybrid)
+    sets.engaged.DW.Nyame.HighHaste = set_combine(sets.engaged.DW.HighHaste, sets.engaged.NyameHybrid)
+    sets.engaged.DW.LowAcc.Nyame.HighHaste = set_combine(sets.engaged.DW.LowAcc.HighHaste, sets.engaged.NyameHybrid)
+    sets.engaged.DW.MidAcc.Nyame.HighHaste = set_combine(sets.engaged.DW.MidAcc.HighHaste, sets.engaged.NyameHybrid)
+    sets.engaged.DW.HighAcc.Nyame.HighHaste = set_combine(sets.engaged.DW.HighAcc.HighHaste, sets.engaged.NyameHybrid)
+    sets.engaged.DW.STP.Nyame.HighHaste = set_combine(sets.engaged.DW.HighHaste.STP, sets.engaged.NyameHybrid)
 
-    sets.engaged.DW.Full.MaxHaste = set_combine(sets.engaged.DW.MaxHaste, sets.engaged.FullHybrid)
-    sets.engaged.DW.LowAcc.Full.MaxHaste = set_combine(sets.engaged.DW.LowAcc.MaxHaste, sets.engaged.FullHybrid)
-    sets.engaged.DW.MidAcc.Full.MaxHaste = set_combine(sets.engaged.DW.MidAcc.MaxHaste, sets.engaged.FullHybrid)
-    sets.engaged.DW.HighAcc.Full.MaxHaste = set_combine(sets.engaged.DW.HighAcc.MaxHaste, sets.engaged.FullHybrid)
-    sets.engaged.DW.STP.Full.MaxHaste = set_combine(sets.engaged.DW.STP.MaxHaste, sets.engaged.FullHybrid)
+    sets.engaged.DW.Nyame.MaxHaste = set_combine(sets.engaged.DW.MaxHaste, sets.engaged.NyameHybrid)
+    sets.engaged.DW.LowAcc.Nyame.MaxHaste = set_combine(sets.engaged.DW.LowAcc.MaxHaste, sets.engaged.NyameHybrid)
+    sets.engaged.DW.MidAcc.Nyame.MaxHaste = set_combine(sets.engaged.DW.MidAcc.MaxHaste, sets.engaged.NyameHybrid)
+    sets.engaged.DW.HighAcc.Nyame.MaxHaste = set_combine(sets.engaged.DW.HighAcc.MaxHaste, sets.engaged.NyameHybrid)
+    sets.engaged.DW.STP.Nyame.MaxHaste = set_combine(sets.engaged.DW.STP.MaxHaste, sets.engaged.NyameHybrid)
 
-    sets.engaged.DW.Full.MaxHastePlus = set_combine(sets.engaged.DW.MaxHastePlus, sets.engaged.FullHybrid)
-    sets.engaged.DW.LowAcc.Full.MaxHastePlus = set_combine(sets.engaged.DW.LowAcc.MaxHastePlus, sets.engaged.FullHybrid)
-    sets.engaged.DW.MidAcc.Full.MaxHastePlus = set_combine(sets.engaged.DW.MidAcc.MaxHastePlus, sets.engaged.FullHybrid)
-    sets.engaged.DW.HighAcc.Full.MaxHastePlus = set_combine(sets.engaged.DW.HighAcc.MaxHastePlus, sets.engaged.FullHybrid)
-    sets.engaged.DW.STP.Full.MaxHastePlus = set_combine(sets.engaged.DW.STP.MaxHastePlus, sets.engaged.FullHybrid)
+    sets.engaged.DW.Nyame.MaxHastePlus = set_combine(sets.engaged.DW.MaxHastePlus, sets.engaged.NyameHybrid)
+    sets.engaged.DW.LowAcc.Nyame.MaxHastePlus = set_combine(sets.engaged.DW.LowAcc.MaxHastePlus, sets.engaged.NyameHybrid)
+    sets.engaged.DW.MidAcc.Nyame.MaxHastePlus = set_combine(sets.engaged.DW.MidAcc.MaxHastePlus, sets.engaged.NyameHybrid)
+    sets.engaged.DW.HighAcc.Nyame.MaxHastePlus = set_combine(sets.engaged.DW.HighAcc.MaxHastePlus, sets.engaged.NyameHybrid)
+    sets.engaged.DW.STP.Nyame.MaxHastePlus = set_combine(sets.engaged.DW.STP.MaxHastePlus, sets.engaged.NyameHybrid)
 
 
     ------------------------------------------------------------------------------------------------
@@ -1685,6 +1651,14 @@ function th_action_check(category, param)
     end
 end
 
+function update_offense_mode()
+    if (player.sub_job == 'NIN' and player.sub_job_level > 9) or (player.sub_job == 'DNC' and player.sub_job_level > 19) then
+        state.CombatForm:set('DW')
+    else
+        state.CombatForm:reset()
+    end
+end
+
 function check_moving()
     if state.DefenseMode.value == 'None'  and state.Kiting.value == false then
         if state.Auto_Kite.value == false and moving then
@@ -1720,7 +1694,9 @@ function check_weaponset()
         equip(sets[state.Gun.current])
         equip(sets[state.WeaponSet.current])
     --end
-    if player.sub_job ~= 'NIN' and player.sub_job ~= 'DNC' then
+    if (player.sub_job ~= 'NIN' and player.sub_job ~= 'DNC') then
+        equip(sets.DefaultShield)
+    elseif player.sub_job == 'NIN' and player.sub_job_level < 10 or player.sub_job == 'DNC' and player.sub_job_level < 20 then
         equip(sets.DefaultShield)
     end
 end
