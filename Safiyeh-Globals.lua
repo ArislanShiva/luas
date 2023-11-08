@@ -21,9 +21,9 @@ function define_global_sets()
     gear.Merl_MAB_legs = {name="Merlinic Shalwar", augments={'Mag. Acc.+24 "Mag.Atk.Bns."+24','Magic burst dmg.+11%','Mag. Acc.+14','"Mag.Atk.Bns."+14',}}
     gear.Merl_MAB_feet = {name="Merlinic Crackows", augments={'Mag. Acc.+24 "Mag.Atk.Bns."+24','INT+15','"Mag.Atk.Bns."+13',}}
 
+    gear.Ody_WS_head = {name="Odyssean Helm", augments={'Mag. Acc.+18','Accuracy+6','Weapon skill damage +9%','Accuracy+10 Attack+10','Mag. Acc.+10 "Mag.Atk.Bns."+10',}}
+    gear.Ody_WS_hands = {name="Odyssean Gauntlets", augments={'Attack+20','VIT+5','Weapon skill damage +7%','Accuracy+15 Attack+15','Mag. Acc.+7 "Mag.Atk.Bns."+7',}}
     gear.Ody_DA_legs = {name="Odyssean Cuisses", augments={'Accuracy+16 Attack+16','"Dbl.Atk."+4','Accuracy+9','Attack+9',}}
-
-    --gear.Ody_FC_legs = {name="Odyssean Cuisses", augments={'Accuracy+29','"Fast Cast"+5','Attack+13',}}
     gear.Ody_FC_feet = {name="Odyssean Greaves", augments={'Attack+5','"Fast Cast"+6','Accuracy+10',}}
 
     gear.COR_DW_Cape = {name="Camulus's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','Accuracy+10','"Dual Wield"+10',}} --*
