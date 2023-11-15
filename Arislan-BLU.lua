@@ -199,7 +199,7 @@ function user_setup()
     state.WeaponskillMode:options('Normal', 'Acc')
     state.CastingMode:options('Normal', 'Resistant')
     state.PhysicalDefenseMode:options('PDT', 'MDT')
-    state.IdleMode:options('Normal', 'DT')--, 'Learning')
+    state.IdleMode:options('Normal', 'DT', 'Eva')--, 'Learning')
 
     state.WeaponSet = M{['description']='Weapon Set', 'Almace', 'Naegling', 'Maxentius', 'Nuking'}
     state.WeaponLock = M(false, 'Weapon Lock')
@@ -365,7 +365,7 @@ function init_gear_sets()
         ear2="Enchntr. Earring +1", --2
         ring1="Kishar Ring", --4
         ring2="Weather. Ring +1", --6(4)
-        back="Swith Cape +1", --4
+        back=gear.BLU_FC_Cape, --10
         }
 
     sets.precast.FC['Blue Magic'] = set_combine(sets.precast.FC, {body="Hashishin Mintan +1"})
@@ -472,7 +472,6 @@ function init_gear_sets()
         ear1="Moonshade Earring",
         ear2="Regal Earring",
         ring1="Cornelia's Ring",
-        --ring1="Epaminondas's Ring",
         ring2="Archon Ring",
         back=gear.BLU_MAB_Cape,
         waist="Sacro Cord",
@@ -627,7 +626,7 @@ function init_gear_sets()
         })
 
     sets.midcast['Blue Magic'].MagicalLight = set_combine(sets.midcast['Blue Magic'].Magical, {
-        ring2="Weather. Ring +1"
+        ring2="Weather. Ring +1",
         })
 
     sets.midcast['Blue Magic'].MagicalMnd = set_combine(sets.midcast['Blue Magic'].Magical, {
@@ -727,7 +726,6 @@ function init_gear_sets()
         hands="Hashi. Bazu. +1",
         ear1="Njordr Earring",
         ear2="Enchntr. Earring +1",
-        ring2="Weather. Ring +1",
         }) -- 1 shadow per 50 skill
 
     sets.midcast['Blue Magic']['Carcharian Verve'] = set_combine(sets.midcast['Blue Magic'].Buff, {
@@ -763,6 +761,7 @@ function init_gear_sets()
     sets.midcast.Stoneskin = set_combine(sets.midcast.EnhancingDuration, {waist="Siegel Sash"})
 
     sets.midcast.Phalanx = set_combine(sets.midcast.EnhancingDuration, {
+        main="Sakpata's Sword",
         body=gear.Taeon_Phalanx_body, --3(10)
         hands=gear.Taeon_Phalanx_hands, --3(10)
         legs=gear.Taeon_Phalanx_legs, --3(10)
@@ -827,6 +826,14 @@ function init_gear_sets()
         waist="Plat. Mog. Belt", --3/3
         })
 
+    sets.idle.Eva = set_combine(sets.idle.DT, {
+        neck="Bathy Choker +1",
+        ear2="Infused Earring",
+        ring2="Defending Ring", --10/10
+        back=gear.BLU_FC_Cape,
+        waist="Kasiri Belt",
+        })
+
     sets.idle.Town = set_combine(sets.idle, {
         ammo="Aurgelmir Orb +1",
         head="Luh. Keffiyeh +3",
@@ -836,7 +843,7 @@ function init_gear_sets()
         feet="Luhlaza Charuqs +3",
         neck="Mirage Stole +2",
         ear1="Eabani Earring",
-        ear2="Telos Earring",
+        ear2="Hashi. Earring +1",
         back=gear.BLU_WS1_Cape,
         waist="Windbuffet Belt +1",
         })
@@ -1231,7 +1238,7 @@ function init_gear_sets()
     sets.Almace = {main="Almace", sub="Sequence"}
     sets.Naegling = {main="Naegling", sub="Thibron"}
     sets.Maxentius = {main="Maxentius", sub="Thibron"}
-    sets.Nuking = {main="Maxentius", sub="Bunzi's Rod"}
+    sets.Nuking = {main="Sakpata's Sword", sub="Bunzi's Rod"}
 
 end
 
@@ -1412,7 +1419,6 @@ end
 
 -- Modify the default melee set after it was constructed.
 function customize_melee_set(meleeSet)
-
     check_weaponset()
 
     return meleeSet
@@ -1625,6 +1631,8 @@ function check_gear()
 end
 
 function check_weaponset()
+    equip(sets[state.WeaponSet.current])
+
     if (player.sub_job ~= 'NIN' and player.sub_job ~= 'DNC') then
         equip(sets.DefaultShield)
     elseif player.sub_job == 'NIN' and player.sub_job_level < 10 or player.sub_job == 'DNC' and player.sub_job_level < 20 then
