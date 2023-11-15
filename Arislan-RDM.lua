@@ -299,7 +299,7 @@ function init_gear_sets()
         ear1="Magnetic Earring", --4
         ear2="Leth. Earring +1", --8
         ring1="Kishar Ring", --4
-        ring2="Weather. Ring +1", --5
+        ring2="Weather. Ring +1", --6(4)
         waist="Emphatikos Rope", --(12)
         }
 
@@ -308,7 +308,6 @@ function init_gear_sets()
     sets.precast.FC.Cure = set_combine(sets.precast.FC, {
         ammo="Impatiens", --(2)
         ring1="Lebeche Ring", --(2)
-        ring2="Weather. Ring +1", --5/(4)
         back="Perimede Cape", --(4)
         waist="Embla Sash", --5
         })
@@ -412,7 +411,7 @@ function init_gear_sets()
     sets.precast.WS['Sanguine Blade'] = {
         ammo="Ghastly Tathlum +1",
         head="Pixie Hairpin +1",
-        body="Lethargy Sayon +2",
+        body="Lethargy Sayon +3",
         hands="Jhakri Cuffs +2",
         legs="Nyame Flanchard",
         feet="Leth. Houseaux +3",
@@ -631,7 +630,7 @@ function init_gear_sets()
         sub="Ammurapi Shield",
         ammo="Regal Gem",
         head="Viti. Chapeau +3",
-        body="Lethargy Sayon +2",
+        body="Lethargy Sayon +3",
         hands="Regal Cuffs",
         legs="Chironic Hose",
         feet="Vitiation Boots +3",
@@ -650,7 +649,6 @@ function init_gear_sets()
         range="Ullr",
         ammo=empty,
         head="Viti. Chapeau +3",
-        body="Atrophy Tabard +3",
         hands="Kaykaus Cuffs +1",
         ear1="Regal Earring",
         ring1={name="Stikini Ring +1", bag="wardrobe5"},
@@ -659,7 +657,7 @@ function init_gear_sets()
 
     sets.midcast.MndEnfeeblesEffect = set_combine(sets.midcast.MndEnfeebles, {
         ammo="Regal Gem",
-        body="Lethargy Sayon +2",
+        body="Lethargy Sayon +3",
         feet="Vitiation Boots +3",
         neck="Dls. Torque +2",
         })
@@ -675,7 +673,6 @@ function init_gear_sets()
         sub="Ammurapi Shield",
         range="Ullr",
         ammo=empty,
-        body="Atrophy Tabard +3",
         hands="Kaykaus Cuffs +1",
         ring1={name="Stikini Ring +1", bag="wardrobe5"},
         waist="Acuity Belt +1",
@@ -683,7 +680,7 @@ function init_gear_sets()
 
     sets.midcast.IntEnfeeblesEffect = set_combine(sets.midcast.IntEnfeebles, {
         ammo="Regal Gem",
-        body="Lethargy Sayon +2",
+        body="Lethargy Sayon +3",
         feet="Vitiation Boots +3",
         neck="Dls. Torque +2",
         })
@@ -712,7 +709,7 @@ function init_gear_sets()
 
     sets.midcast.SleepMaxDuration = set_combine(sets.midcast.Sleep, {
         head="Leth. Chappel +2",
-        body="Lethargy Sayon +2",
+        body="Lethargy Sayon +3",
         hands="Regal Cuffs",
         legs="Leth. Fuseau +2",
         feet="Leth. Houseaux +3",
@@ -758,17 +755,17 @@ function init_gear_sets()
         sub="Enki Strap",
         ammo="Ghastly Tathlum +1",
         head="Leth. Chappel +2",
-        body="Amalric Doublet +1",
+        body="Lethargy Sayon +3",
         hands="Amalric Gages +1",
         legs="Amalric Slops +1",
-        feet="Amalric Nails +1",
+        feet="Leth. Houseaux +3",
         neck="Sibyl Scarf",
         ear1="Malignance Earring",
         ear2="Regal Earring",
         ring1="Freke Ring",
         ring2="Metamor. Ring +1",
         back=gear.RDM_INT_Cape,
-        waist="Refoccilation Stone",
+        waist="Acuity Belt +1",
         }
 
     sets.midcast['Elemental Magic'].Seidr = set_combine(sets.midcast['Elemental Magic'], {
@@ -776,7 +773,6 @@ function init_gear_sets()
         body="Seidr Cotehardie",
         legs="Merlinic Shalwar",
         feet="Merlinic Crackows",
-        waist="Acuity Belt +1",
         })
 
     sets.midcast['Elemental Magic'].Resistant = set_combine(sets.midcast['Elemental Magic'], {
@@ -785,7 +781,6 @@ function init_gear_sets()
         legs="Merlinic Shalwar",
         feet="Merlinic Crackows",
         neck="Erra Pendant",
-        waist="Sacro Cord",
         })
 
     sets.midcast.Impact = set_combine(sets.midcast['Elemental Magic'], {
@@ -817,7 +812,7 @@ function init_gear_sets()
     sets.idle = {
         ammo="Homiliary",
         head="Viti. Chapeau +3",
-        body="Lethargy Sayon +2",
+        body="Lethargy Sayon +3",
         hands="Volte Gloves",
         legs="Volte Brais",
         feet="Volte Gaiters",
@@ -832,7 +827,7 @@ function init_gear_sets()
 
     sets.idle.DT = set_combine(sets.idle, {
         head="Nyame Helm", --7/7
-        body="Lethargy Sayon +2", --13/13
+        body="Lethargy Sayon +3", --14/14
         hands="Leth. Ganth. +2", --10/10
         legs="Nyame Flanchard", --8/8
         neck="Warder's Charm +1",
@@ -1159,6 +1154,8 @@ function init_gear_sets()
     sets.Naegling = {main="Naegling", sub="Thibron"}
     sets.Tauret = {main="Tauret", sub="Gleti's Knife"}
     sets.Idle = {main="Daybreak", sub="Sacro Bulwark"}
+
+    sets.DefaultShield = {sub="Sacro Bulwark"}
 
 end
 
@@ -1671,11 +1668,12 @@ function check_gear()
 end
 
 function check_weaponset()
-    equip(sets[state.WeaponSet.current])
     if (player.sub_job ~= 'NIN' and player.sub_job ~= 'DNC') then
-        equip(sets.DefaultShield)
+        equip(set_combine(sets[state.WeaponSet.current], sets.DefaultShield))
     elseif player.sub_job == 'NIN' and player.sub_job_level < 10 or player.sub_job == 'DNC' and player.sub_job_level < 20 then
-        equip(sets.DefaultShield)
+        equip(set_combine(sets[state.WeaponSet.current], sets.DefaultShield))
+    else
+        equip(sets[state.WeaponSet.current])
     end
 end
 
